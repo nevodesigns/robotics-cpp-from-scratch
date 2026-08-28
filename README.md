@@ -1,0 +1,173 @@
+# Robotics C++ From Scratch
+
+> Robotics, taught in one language, from never having compiled anything to
+> shipping a control station and a real time controller.
+
+No Python detour. No framework magic. No lesson that does not compile in
+continuous integration on the machine you actually own.
+
+## Status
+
+This repository is at milestone M0: the machinery, proven end to end on a small
+vertical slice of the curriculum. The numbers below are produced by the tooling
+in this repository, not written by hand.
+
+```
+12 lessons   31 atlas entries   4 phases represented   0 audit issues
+```
+
+Every lesson here builds and passes its tests on the toolchains it claims.
+
+## Which machine do you have
+
+This table is the contract. It is what the curriculum promises and what
+continuous integration proves on every change.
+
+| Toolchain | Compiler | CMake | Qt from apt | ROS 2 | Support |
+|---|---|---|---|---|---|
+| Ubuntu 24.04 LTS | GCC 13 | 3.28 | 6.4 | Jazzy, until 2029 | Primary |
+| Ubuntu 22.04 LTS | GCC 11 | 3.22 | 6.2 | Humble, until 2027 | Primary |
+| Windows 11 | MSVC 2022 | bundled | installer | not supported | Everything except the ROS 2 module |
+| WSL2 on Windows | same as Ubuntu | same | same | Humble or Jazzy | The route into Linux robotics from Windows |
+| macOS | AppleClang | brew | brew | not supported | Best effort, never a blocking lane |
+
+## Why C++17
+
+The curriculum is written in C++17, and that is a teaching decision rather than
+a compatibility one.
+
+C++17 is complete enough that nothing here has to be written in an old style to
+accommodate it. Structured bindings, `std::optional`, `std::string_view`,
+`std::filesystem` and class template deduction are all available, so the code
+you read is modern C++, never the C with classes that still fills search results.
+
+What C++17 lacks is the small set of facilities that arrived in C++20 and C++23,
+and that gap is the most valuable thing in the curriculum. Rather than raise the
+compiler requirement, `librc/include/rc/core/compat.hpp` provides them:
+
+| You write | Standardised as | In |
+|---|---|---|
+| `rc::span` | `std::span` | C++20 |
+| `rc::format` | `std::format` | C++20 |
+| `rc::expected` | `std::expected` | C++23 |
+
+Each is a few dozen readable lines. You use them, you read them, and you
+understand exactly what they are, because a span really is just a pointer and a
+count. When you later move to C++20, you delete that header and change one
+include. You will not be meeting `std::span` as magic, because you will already
+have written it.
+
+That is the bridge: C++17 first so the modern facilities can be built rather
+than assumed, and a documented path onto C++20 and C++23 the moment a project
+needs it. Rule L017 keeps lessons on the baseline, and rule L018 keeps discarded
+style, `NULL`, `malloc`, `printf`, `using namespace std`, out of the lessons
+entirely.
+
+Ubuntu 22.04 with GCC 11 sets the floor, and C++17 is fully supported there, so
+the two supported Ubuntu releases compile the same code with no version gates.
+
+ROS 2 is an optional module, not the spine. Everything before it transfers to
+industrial work that never touches ROS.
+
+## Start
+
+```bash
+git clone https://github.com/nwokolo/robotics-cpp-from-scratch.git
+cd robotics-cpp-from-scratch
+cmake --preset default
+cmake --build build/default --target rcpp
+./build/default/bin/rcpp doctor
+```
+
+`rcpp doctor` checks your machine and prints the exact command that fixes
+anything missing, for your operating system. When it says you are ready:
+
+```bash
+./build/default/bin/rcpp start
+```
+
+On Ubuntu, everything the first phases need is one command:
+
+```bash
+sudo apt update && sudo apt install -y build-essential cmake ninja-build git gdb qt6-base-dev
+```
+
+## How a lesson works
+
+Every lesson ships a test suite that fails. You make it pass.
+
+```
+phases/14-control/01-pid-from-scratch/
+  lesson.json     what the lesson claims: platforms, prerequisites, tier
+  docs/en.md      the explanation
+  exercise/       your code, which starts out failing
+  reference/      the worked implementation
+  tests/          one suite, run against both
+  quiz.json       six questions
+```
+
+```bash
+./build/default/bin/rcpp verify 14-01
+```
+
+That builds your version and runs it against the same tests continuous
+integration runs against the reference. Green means finished. Nothing else does.
+
+When something breaks and the error means nothing to you:
+
+```bash
+cmake --build build/default 2>&1 | ./build/default/bin/rcpp explain
+```
+
+The Failure Atlas holds catalogued errors with the symptom, the cause, the fix,
+and the lesson that explains why it happened. It exists because a learner who
+hits a wall at eleven at night and finds a precise answer stays, and one who
+finds a forum thread from 2013 quits.
+
+## The tool
+
+`rcpp` is one C++ program. This curriculum teaches one language, and that
+includes its own tooling, so you can read every line of `tools/rcpp/` and
+contribute to it by phase 05.
+
+| Command | What it does |
+|---|---|
+| `rcpp doctor` | Checks this machine, prints the exact fix for anything missing |
+| `rcpp start` | Says which lesson to open first |
+| `rcpp list` | Lists every phase and lesson found on disk |
+| `rcpp verify <id>` | Builds your exercise and runs the lesson's real tests |
+| `rcpp explain` | Looks an error up in the Failure Atlas |
+| `rcpp audit` | Enforces the lesson contract, which is what CI runs |
+| `rcpp catalog` | Writes the whole curriculum as JSON |
+
+## What is here now
+
+| Phase | Lessons | Ends with |
+|---|---|---|
+| 00 Toolchain and First Motion | 4 | A simulated robot driving a quarter circle |
+| 01 C++ Core I | 4 | A median filter that rejects a sensor spike |
+| 09 Qt Core | 2 | A battery monitor with hysteresis, announcing through signals |
+| 14 Control | 2 | A PID controller with anti windup, guarded by a watchdog |
+
+These four phases are deliberately far apart. A vertical slice through the whole
+curriculum proves the machinery carries a beginner lesson and a control lesson
+equally well. Filling in between them is milestone M1.
+
+The full map, and the reasoning behind every architectural decision, is in
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+## Rules this repository keeps
+
+- **One language.** C++ everywhere, including the tooling. The auditor rejects
+  anything else under `phases/`.
+- **Everything claimed is checked.** If a rule is written in
+  [docs/CONTRACT.md](docs/CONTRACT.md) it has a numbered check in `rcpp audit`.
+  If it has no check, it is not a rule.
+- **Every hardware lesson has a software fallback.** Nobody is blocked for
+  lacking a robot.
+- **Build it, then use it.** You write PID, the pose model and the filters by
+  hand before any library appears.
+
+## Licence
+
+MIT. See [LICENSE](LICENSE).
