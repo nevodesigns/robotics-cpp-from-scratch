@@ -1,0 +1,78 @@
+{
+  "lesson": "00-02-the-build-model",
+  "title": "The Build Model: Declaration, Definition, Linker",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Building a C++ program takes two separate steps. What are they?",
+      "options": [
+        "Compiling each source file, then linking the results into one program",
+        "Downloading dependencies, then compiling",
+        "Checking syntax, then checking logic",
+        "Compiling, then running the tests"
+      ],
+      "correct": 0,
+      "explanation": "The compiler handles one translation unit at a time. The linker then connects every call to the code that implements it."
+    },
+    {
+      "stage": "check",
+      "question": "What is the difference between a declaration and a definition?",
+      "options": [
+        "A declaration promises a function exists, a definition supplies its body",
+        "A declaration is in a header, a definition is in a header too",
+        "A declaration is for variables, a definition is for functions",
+        "There is no difference, the two words mean the same thing"
+      ],
+      "correct": 0,
+      "explanation": "A declaration gives the compiler the name and shape. A definition gives the actual code, and the linker needs exactly one of those."
+    },
+    {
+      "stage": "check",
+      "question": "You see: undefined reference to celsius_from_raw(int). Which step failed?",
+      "options": [
+        "Linking, because no definition of that function was found",
+        "Compiling, because the header was missing",
+        "Running, because the function crashed",
+        "Configuration, because CMake could not find the file"
+      ],
+      "correct": 0,
+      "explanation": "The compiler accepted the call on the strength of the declaration. The linker then found no body to connect it to."
+    },
+    {
+      "stage": "check",
+      "question": "Why do function bodies usually not belong in a header?",
+      "options": [
+        "Every file that includes it gets its own copy, so the linker sees duplicates",
+        "Headers are compiled more slowly than source files",
+        "The compiler refuses to read function bodies in headers",
+        "Headers cannot contain more than one function"
+      ],
+      "correct": 0,
+      "explanation": "Including a header copies its text in. If two translation units each get a definition, the linker reports a duplicate symbol, unless the function is marked inline."
+    },
+    {
+      "stage": "post",
+      "question": "Why should is_overheating call celsius_from_raw instead of repeating 0.0625?",
+      "options": [
+        "So a change to the sensor scale needs exactly one edit, not two",
+        "Because calling a function is faster than multiplying",
+        "Because the compiler cannot multiply inside a boolean function",
+        "Because repeating a number is a compile error"
+      ],
+      "correct": 0,
+      "explanation": "Duplicated constants drift apart over time. One source of truth means one place to fix when the hardware changes."
+    },
+    {
+      "stage": "post",
+      "question": "You define the same function in two .cpp files. What does the linker say?",
+      "options": [
+        "It reports a duplicate or multiple definition",
+        "It reports an undefined reference",
+        "It silently picks the first one",
+        "Nothing, this is allowed"
+      ],
+      "correct": 0,
+      "explanation": "The rule is exactly one definition. Zero gives an undefined reference, two or more gives a duplicate symbol."
+    }
+  ]
+}
