@@ -43,6 +43,7 @@ usage: rcpp <command> [options]
   explain [text]  look an error up in the Failure Atlas, or pipe it in on stdin
   audit           enforce the lesson contract, this is what CI runs
   catalog         write the whole curriculum as JSON
+  platforms       the toolchains claimed, and the CI matrix generated from them
   readme          check, or fix, the generated counts in README.md
 
 examples
@@ -77,6 +78,7 @@ int main(int argc, char** argv) {
   if (command == "readme") return cmd_readme(args);
   if (command == "next") return cmd_next(args);
   if (command == "status") return cmd_status(args);
+  if (command == "platforms") return cmd_platforms(args);
 
   std::cerr << "rcpp: unknown command: " << command << "\n\n";
   usage();

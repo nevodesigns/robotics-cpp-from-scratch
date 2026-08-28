@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "_comment": "The toolchains this curriculum supports. This file is the single source of truth: rcpp audit checks every lesson's platform claims against it, and the continuous integration matrix is generated from it, so a claim and a lane cannot drift apart. A lesson that needs Qt may only claim a toolchain whose lane installs Qt, otherwise it would be silently skipped there and a skip looks exactly like a pass.",
+  "toolchains": [
+    {
+      "id": "ubuntu-22.04-gcc11",
+      "name": "ubuntu-22.04 gcc-11",
+      "runner": "ubuntu-22.04",
+      "cc": "gcc-11",
+      "cxx": "g++-11",
+      "qt": true,
+      "note": "The floor. C++17 is complete here, which is why the curriculum targets it."
+    },
+    {
+      "id": "ubuntu-24.04-gcc13",
+      "name": "ubuntu-24.04 gcc-13",
+      "runner": "ubuntu-24.04",
+      "cc": "gcc-13",
+      "cxx": "g++-13",
+      "qt": true,
+      "note": "The other supported LTS."
+    },
+    {
+      "id": "ubuntu-22.04-clang14",
+      "name": "ubuntu-22.04 clang-14",
+      "runner": "ubuntu-22.04",
+      "cc": "clang-14",
+      "cxx": "clang++-14",
+      "qt": true,
+      "note": "A second front end, which catches what one compiler accepts by accident."
+    },
+    {
+      "id": "windows-msvc2022",
+      "name": "windows msvc-2022",
+      "runner": "windows-2022",
+      "cc": "",
+      "cxx": "",
+      "qt": false,
+      "note": "Qt is not installed on this lane yet, so no Qt lesson may claim it."
+    }
+  ]
+}

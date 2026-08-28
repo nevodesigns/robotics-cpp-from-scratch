@@ -29,11 +29,42 @@ struct Finding {
   std::string message;
 };
 
-const std::vector<std::string>& known_platforms() {
-  static const std::vector<std::string> platforms = {
-      "ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "windows-msvc2022",
-      "ubuntu-22.04-clang14", "ubuntu-24.04-clang18", "macos-clang"};
-  return platforms;
+// The toolchains and what each provides, read from platforms.json so that the
+// auditor and the continuous integration matrix cannot disagree about them.
+struct Toolchain {
+  std::string id;
+  bool has_qt = false;
+};
+
+std::vector<Toolchain> load_toolchains(const fs::path& repo_root, std::vector<Finding>& out) {
+  std::vector<Toolchain> toolchains;
+  const auto text = read_file(repo_root / "platforms.json");
+  if (!text) {
+    out.push_back({"L019", "platforms.json", "missing, and it is the source of truth for toolchains"});
+    return toolchains;
+  }
+  const json::ParseResult parsed = json::parse(*text);
+  if (!parsed.ok) {
+    out.push_back({"L019", "platforms.json",
+                   "line " + std::to_string(parsed.line) + ": " + parsed.error});
+    return toolchains;
+  }
+  for (const json::Value& entry : parsed.value.at("toolchains").as_array()) {
+    Toolchain toolchain;
+    toolchain.id = entry.at("id").as_string_or("");
+    toolchain.has_qt = entry.at("qt").as_bool(false);
+    if (toolchain.id.empty())
+      out.push_back({"L019", "platforms.json", "a toolchain entry has no id"});
+    else
+      toolchains.push_back(toolchain);
+  }
+  return toolchains;
+}
+
+const Toolchain* find_toolchain(const std::vector<Toolchain>& toolchains, const std::string& id) {
+  for (const Toolchain& toolchain : toolchains)
+    if (toolchain.id == id) return &toolchain;
+  return nullptr;
 }
 
 const std::vector<std::string>& required_sections() {
@@ -83,15 +114,8 @@ void check_manifest(const Lesson& lesson, std::vector<Finding>& out) {
   if (lesson.id != std::string(expected_prefix) + lesson.dir_slug.substr(3))
     out.push_back({"L004", where, "id should be " + std::string(expected_prefix) + lesson.dir_slug.substr(3)});
 
-  if (lesson.platforms.empty()) {
+  if (lesson.platforms.empty())
     out.push_back({"L011", where, "platforms must list at least one toolchain"});
-  } else {
-    for (const std::string& p : lesson.platforms) {
-      const auto& known = known_platforms();
-      if (std::find(known.begin(), known.end(), p) == known.end())
-        out.push_back({"L011", where, "unknown platform id: " + p});
-    }
-  }
 
   if (lesson.hardware_tier < 0 || lesson.hardware_tier > 3)
     out.push_back({"L003", where, "hardware_tier must be 0, 1, 2 or 3"});
@@ -304,6 +328,33 @@ void check_no_discarded_style(const Lesson& lesson, std::vector<Finding>& out) {
   }
 }
 
+// L019: a platform claim must be backed by a lane that can actually prove it.
+//
+// The gap this closes is subtle and dangerous. A Qt lesson claiming a toolchain
+// whose lane has no Qt is not built there at all: rc_add_lesson skips it,
+// continuous integration reports success, and the claim looks satisfied while
+// nothing was ever compiled. A silent skip is indistinguishable from a pass,
+// which is the worst failure mode a checker can have.
+void check_platform_claims(const Lesson& lesson, const std::vector<Toolchain>& toolchains,
+                           std::vector<Finding>& out) {
+  if (toolchains.empty()) return;   // already reported against platforms.json
+
+  for (const std::string& claimed : lesson.platforms) {
+    const Toolchain* toolchain = find_toolchain(toolchains, claimed);
+    if (toolchain == nullptr) {
+      out.push_back({"L019", lesson.rel_path,
+                     "claims " + claimed + ", which platforms.json does not define"});
+      continue;
+    }
+    if (!lesson.qt_modules.empty() && !toolchain->has_qt) {
+      out.push_back({"L019", lesson.rel_path,
+                     "needs Qt but claims " + claimed +
+                         ", whose lane has no Qt. The lesson would be skipped there, "
+                         "and a skip is indistinguishable from a pass"});
+    }
+  }
+}
+
 void check_one_language(const Lesson& lesson, std::vector<Finding>& out) {
   for (const auto& entry : fs::recursive_directory_iterator(lesson.path)) {
     if (!entry.is_regular_file()) continue;
@@ -403,6 +454,7 @@ int cmd_audit(const Args& args) {
   const Atlas atlas = load_atlas(*root);
 
   std::vector<Finding> findings;
+  const std::vector<Toolchain> toolchains = load_toolchains(*root, findings);
   for (const std::string& e : catalog.load_errors) findings.push_back({"L001", "phases", e});
   for (const std::string& e : atlas.load_errors) findings.push_back({"L013", "atlas", e});
 
@@ -413,6 +465,7 @@ int cmd_audit(const Args& args) {
     check_quiz(*lesson, findings);
     check_one_language(*lesson, findings);
     check_cxx17_baseline(*lesson, findings);
+    check_platform_claims(*lesson, toolchains, findings);
     check_no_discarded_style(*lesson, findings);
   }
   check_graph(catalog, findings);

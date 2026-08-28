@@ -14,6 +14,7 @@ add_executable(rcpp
   cmd_catalog.cpp
   cmd_readme.cpp
   cmd_next.cpp
+  cmd_platforms.cpp
   progress.cpp
 )
 

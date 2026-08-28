@@ -22,6 +22,7 @@ endif()
 option(RC_SANITIZE_ADDRESS "Build lesson tests with the address and undefined behaviour sanitizers" OFF)
 option(RC_SANITIZE_THREAD  "Build lesson tests with the thread sanitizer" OFF)
 option(RC_BUILD_LESSONS    "Build the curriculum itself, not only the tooling" ON)
+option(RC_STRICT_CLAIMS    "Fail rather than skip when a lesson claims this toolchain but a dependency is missing. Used by CI." OFF)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(RcPlatform)

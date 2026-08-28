@@ -10,6 +10,24 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # The toolchain matrix is generated from platforms.json by the repository's own
+  # tool, so a lane and a lesson's platform claim cannot drift apart. Rule L019
+  # checks the same file from the other direction.
+  setup:
+    name: toolchains
+    runs-on: ubuntu-22.04
+    outputs:
+      matrix: ${{ steps.derive.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: build the tool
+        run: |
+          sudo apt-get update && sudo apt-get install -y ninja-build
+          cmake -S . -B build -G Ninja -DRC_BUILD_LESSONS=OFF
+          cmake --build build --target rcpp
+      - id: derive
+        run: echo "matrix=$(./build/bin/rcpp platforms --matrix)" >> "$GITHUB_OUTPUT"
+
   # The contract lane is fast and blocking. It runs the same auditor a
   # contributor runs locally, so a failure here is never a surprise.
   contract:
@@ -19,6 +37,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: build the tool
         run: |
+          sudo apt-get update && sudo apt-get install -y ninja-build
           cmake -S . -B build -G Ninja -DRC_BUILD_LESSONS=OFF
           cmake --build build --target rcpp
       - name: audit the lesson contract
@@ -36,33 +55,11 @@ jobs:
   # lessons claim. This is the number the README reports.
   build:
     name: ${{ matrix.name }}
+    needs: setup
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - name: ubuntu-22.04 gcc-11
-            os: ubuntu-22.04
-            cc: gcc-11
-            cxx: g++-11
-            platform_id: ubuntu-22.04-gcc11
-            qt: true
-          - name: ubuntu-24.04 gcc-13
-            os: ubuntu-24.04
-            cc: gcc-13
-            cxx: g++-13
-            platform_id: ubuntu-24.04-gcc13
-            qt: true
-          - name: ubuntu-22.04 clang-14
-            os: ubuntu-22.04
-            cc: clang-14
-            cxx: clang++-14
-            platform_id: ubuntu-22.04-clang14
-            qt: true
-          - name: windows msvc-2022
-            os: windows-2022
-            platform_id: windows-msvc2022
-            qt: false
+      matrix: ${{ fromJSON(needs.setup.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
 
@@ -83,7 +80,11 @@ jobs:
         env:
           CC: ${{ matrix.cc }}
           CXX: ${{ matrix.cxx }}
-        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DRC_PLATFORM_ID=${{ matrix.platform_id }}
+        run: >
+          cmake -S . -B build -G Ninja
+          -DCMAKE_BUILD_TYPE=Debug
+          -DRC_PLATFORM_ID=${{ matrix.platform_id }}
+          -DRC_STRICT_CLAIMS=ON
 
       - name: build every reference implementation
         run: cmake --build build

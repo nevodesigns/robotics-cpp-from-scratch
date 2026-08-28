@@ -22,6 +22,7 @@ int cmd_start(const Args& args);
 int cmd_readme(const Args& args);
 int cmd_next(const Args& args);
 int cmd_status(const Args& args);
+int cmd_platforms(const Args& args);
 
 bool has_flag(const Args& args, const std::string& flag);
 std::string flag_value(const Args& args, const std::string& flag, const std::string& fallback);

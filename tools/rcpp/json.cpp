@@ -221,8 +221,13 @@ std::string escape(const std::string& raw) {
 }
 
 std::string Value::dump(int indent, int depth) const {
-  const std::string pad(static_cast<std::size_t>(indent * (depth + 1)), ' ');
-  const std::string pad_close(static_cast<std::size_t>(indent * depth), ' ');
+  // An indent of zero means fully compact, with no newlines at all. A GitHub
+  // Actions job output has to fit on one line, so this is not merely a
+  // formatting preference.
+  const bool compact = indent <= 0;
+  const std::string newline = compact ? "" : "\n";
+  const std::string pad = compact ? "" : std::string(static_cast<std::size_t>(indent * (depth + 1)), ' ');
+  const std::string pad_close = compact ? "" : std::string(static_cast<std::size_t>(indent * depth), ' ');
   std::ostringstream out;
   switch (kind_) {
     case Kind::Null: return "null";
@@ -237,23 +242,24 @@ std::string Value::dump(int indent, int depth) const {
     case Kind::String: return "\"" + escape(string_) + "\"";
     case Kind::Array: {
       if (array_.empty()) return "[]";
-      out << "[\n";
+      out << "[" << newline;
       for (std::size_t i = 0; i < array_.size(); ++i) {
         out << pad << array_[i].dump(indent, depth + 1);
         if (i + 1 < array_.size()) out << ",";
-        out << "\n";
+        out << newline;
       }
       out << pad_close << "]";
       return out.str();
     }
     case Kind::Object: {
       if (object_.empty()) return "{}";
-      out << "{\n";
+      out << "{" << newline;
       std::size_t i = 0;
       for (const auto& [key, value] : object_) {
-        out << pad << "\"" << escape(key) << "\": " << value.dump(indent, depth + 1);
+        out << pad << "\"" << escape(key) << "\":" << (compact ? "" : " ")
+            << value.dump(indent, depth + 1);
         if (++i < object_.size()) out << ",";
-        out << "\n";
+        out << newline;
       }
       out << pad_close << "}";
       return out.str();

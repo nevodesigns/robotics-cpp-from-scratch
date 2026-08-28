@@ -63,6 +63,17 @@ function(rc_add_lesson)
   if(qt_modules)
     find_package(Qt6 QUIET COMPONENTS ${qt_modules})
     if(NOT Qt6_FOUND)
+      # A learner without Qt should still be able to build everything else, so
+      # locally this is a skip. In continuous integration it must be an error:
+      # the lesson claims this toolchain, and a lesson that is silently skipped
+      # reports success without a single line having been compiled. A skip that
+      # looks like a pass is the worst outcome a gate can produce.
+      if(RC_STRICT_CLAIMS)
+        message(FATAL_ERROR
+          "lesson ${lesson_id} claims ${RC_PLATFORM} and needs Qt6 (${qt_modules}), "
+          "which was not found. Either install Qt on this lane or remove the claim "
+          "from lesson.json. See rule L019.")
+      endif()
       message(STATUS "lesson ${lesson_id}: skipped, Qt6 (${qt_modules}) was not found")
       return()
     endif()

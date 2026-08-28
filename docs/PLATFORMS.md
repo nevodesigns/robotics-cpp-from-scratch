@@ -6,6 +6,13 @@ the differences are handled.
 
 ## The matrix
 
+Defined once, in [`platforms.json`](../platforms.json). See it with:
+
+```bash
+./build/default/bin/rcpp platforms
+```
+
+
 | Identifier | Operating system | Compiler | CMake | Qt from apt | ROS 2 |
 |---|---|---|---|---|---|
 | `ubuntu-22.04-gcc11` | Ubuntu 22.04 LTS | GCC 11 | 3.22 | 6.2 | Humble |
@@ -83,8 +90,14 @@ twenty lessons.
 
 ## Adding a toolchain
 
-1. Add the identifier to `known_platforms()` in `tools/rcpp/cmd_audit.cpp`.
+1. Add it to `platforms.json`, including whether its lane installs Qt. The
+   continuous integration matrix is generated from that entry, so no workflow
+   edit is needed.
 2. Teach `rc_detect_platform` in `cmake/RcPlatform.cmake` to recognise it.
 3. Add a configure preset in `CMakePresets.json`.
-4. Add the lane to `.github/workflows/ci.yml`.
-5. Only then add the identifier to any lesson, once it actually builds.
+4. Only then add the identifier to any lesson, once it has actually been built
+   and tested there.
+
+Step four is the discipline. A platform badge that has not been proven is worth
+less than no badge, and rule L019 plus `RC_STRICT_CLAIMS` make an unproven claim
+fail loudly rather than pass quietly.

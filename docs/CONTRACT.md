@@ -47,6 +47,7 @@ phases/NN-phase-slug/NN-lesson-slug/
 | L016 | No em dash appears anywhere in the repository |
 | L017 | The lesson is C++17: `cxx_standard` is 17, and no C++20 or C++23 facility is used directly instead of its `rc::` equivalent |
 | L018 | No discarded style: `NULL`, `malloc`, `printf`, `strcpy`, `typedef`, `using namespace std` and friends |
+| L019 | Every platform a lesson claims is defined in `platforms.json`, and a lesson needing Qt only claims a toolchain whose lane installs Qt |
 
 ## The six required sections
 
@@ -84,9 +85,19 @@ by product of authoring rather than as a separate heroic project.
 }
 ```
 
-Known toolchain identifiers: `ubuntu-22.04-gcc11`, `ubuntu-24.04-gcc13`,
-`windows-msvc2022`, `ubuntu-22.04-clang14`, `ubuntu-24.04-clang18`,
-`macos-clang`.
+Toolchain identifiers are defined in [`platforms.json`](../platforms.json), which
+is the single source of truth. `rcpp audit` checks lesson claims against it and
+the continuous integration matrix is generated from it by
+`rcpp platforms --matrix`, so a lane and a claim cannot drift apart.
+
+**Why that matters more than it looks.** A Qt lesson claiming a toolchain whose
+lane has no Qt is not built there at all: `rc_add_lesson` skips it, the lane goes
+green, and the claim appears satisfied without a single line having been
+compiled. A silent skip is indistinguishable from a pass, which is the worst
+failure a gate can have. Rule L019 catches it in the manifest, and
+`-DRC_STRICT_CLAIMS=ON`, which CI sets, turns the skip itself into a hard error.
+Locally the skip remains, so a learner without Qt can still build everything
+else.
 
 Hardware tiers: 0 software only, 1 simulated, 2 cheap hardware under sixty
 dollars, 3 a real robot. Tiers 2 and 3 must ship a fallback.
