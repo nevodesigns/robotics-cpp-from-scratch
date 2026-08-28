@@ -1,0 +1,78 @@
+{
+  "lesson": "01-02-control-flow-and-limits",
+  "title": "Control Flow: Deciding and Repeating",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does a rate limiter do to a motor command?",
+      "options": [
+        "Stops it changing faster than a set amount per time step",
+        "Caps the maximum speed the motor can reach",
+        "Turns the motor off when the current is too high",
+        "Smooths out sensor noise before it reaches the motor"
+      ],
+      "correct": 0,
+      "explanation": "A rate limiter constrains the rate of change, not the final value. The command still reaches full, it just takes a moment to get there."
+    },
+    {
+      "stage": "check",
+      "question": "What does if (x = 5) do?",
+      "options": [
+        "Sets x to 5 and then treats the result as true",
+        "Compares x with 5",
+        "Fails to compile",
+        "Sets x to 5 only when the condition is already true"
+      ],
+      "correct": 0,
+      "explanation": "A single equals sign assigns. The value of the assignment is 5, which is non zero, so the branch always runs."
+    },
+    {
+      "stage": "check",
+      "question": "Why does rate_limit return target exactly when the remaining change is small?",
+      "options": [
+        "Otherwise it steps past the target and oscillates around it forever",
+        "Because returning current would be slower",
+        "Because doubles cannot represent small differences",
+        "To avoid dividing by max_step"
+      ],
+      "correct": 0,
+      "explanation": "Always moving by max_step overshoots when less than a full step remains, then corrects the other way. That is a vibrating actuator."
+    },
+    {
+      "stage": "check",
+      "question": "Why must steps_to_reach check max_step before entering its loop?",
+      "options": [
+        "A step of zero or less never reaches the target, so the loop would never end",
+        "Because negative numbers cannot be compared",
+        "To avoid dividing by zero",
+        "Because the loop counter would overflow immediately"
+      ],
+      "correct": 0,
+      "explanation": "The exit condition depends on values the caller supplies. If those values make progress impossible, the loop runs forever unless it is guarded."
+    },
+    {
+      "stage": "post",
+      "question": "Why do loops over arrays start at zero and stop below the count?",
+      "options": [
+        "Positions start at zero, so 0 to count minus 1 visits exactly every element",
+        "Because zero is faster to initialise",
+        "Because C++ forbids starting a loop at one",
+        "Because the last element is always empty"
+      ],
+      "correct": 0,
+      "explanation": "An array of five holds positions 0 through 4. Running to count reads one past the end, which may not crash and may return a plausible wrong value."
+    },
+    {
+      "stage": "post",
+      "question": "Where does a rate limiter belong in a real control system?",
+      "options": [
+        "Between the controller output and the actuator command",
+        "Before the sensor is read",
+        "Inside the sensor driver",
+        "Only in the user interface"
+      ],
+      "correct": 0,
+      "explanation": "The controller decides what it wants, the limiter decides what the hardware can survive, and the actuator receives the result. Phase 14 wires exactly this."
+    }
+  ]
+}
