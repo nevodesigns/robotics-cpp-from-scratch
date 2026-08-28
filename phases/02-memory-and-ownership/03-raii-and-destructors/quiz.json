@@ -1,0 +1,78 @@
+{
+  "lesson": "02-03-raii-and-destructors",
+  "title": "RAII: Attaching Cleanup to the Object Instead of the Code Path",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "When does a destructor run?",
+      "options": [
+        "Automatically, when the object's lifetime ends, on every path out",
+        "When you call it explicitly",
+        "When the program exits",
+        "When the garbage collector decides to"
+      ],
+      "correct": 0,
+      "explanation": "The compiler emits the call on every exit path, including early returns and exceptions unwinding the stack. That guarantee is what makes the pattern work."
+    },
+    {
+      "stage": "check",
+      "question": "Why is a resource handle usually not copyable?",
+      "options": [
+        "Two copies would each release the same resource, and a double release is worse than a leak",
+        "Because copying is slow",
+        "Because the compiler cannot copy classes with destructors",
+        "Because resources are always large"
+      ],
+      "correct": 0,
+      "explanation": "A double close can shut a descriptor that another part of the program has since opened for something else, producing a bug nowhere near its cause."
+    },
+    {
+      "stage": "check",
+      "question": "What does = delete on the copy constructor do?",
+      "options": [
+        "Makes the compiler reject any attempt to copy, at the line that attempts it",
+        "Frees the object's memory when it is copied",
+        "Marks the constructor as private",
+        "Deletes the object after it is copied"
+      ],
+      "correct": 0,
+      "explanation": "It is enforcement rather than convention, and it reports the problem where the mistake is written rather than where the damage happens."
+    },
+    {
+      "stage": "check",
+      "question": "Why does close() set the id to nothing before calling fake_close?",
+      "options": [
+        "So a second call, including the one from the destructor, has nothing left to do",
+        "Because fake_close requires it",
+        "To make the function faster",
+        "Because the id is const"
+      ],
+      "correct": 0,
+      "explanation": "Marking the handle empty first makes close idempotent, so calling it early and then letting the destructor run cannot release the same device twice."
+    },
+    {
+      "stage": "post",
+      "question": "Which of these is NOT an example of this pattern in the standard library?",
+      "options": [
+        "std::move",
+        "std::vector",
+        "std::unique_ptr",
+        "std::lock_guard"
+      ],
+      "correct": 0,
+      "explanation": "std::move is a cast that expresses intent and owns nothing. The other three acquire something in their constructor and release it in their destructor."
+    },
+    {
+      "stage": "post",
+      "question": "How does this compare with Python's with statement or C#'s using?",
+      "options": [
+        "Those require the caller to remember the block, RAII puts the guarantee in the type",
+        "They are identical in every respect",
+        "They are safer because they are explicit",
+        "They also run on exceptions, which RAII does not"
+      ],
+      "correct": 0,
+      "explanation": "A caller who forgets the block gets no cleanup in those languages. With RAII the default behaviour is already correct."
+    }
+  ]
+}
