@@ -124,6 +124,15 @@ function(rc_add_lesson)
       LABELS "${variant};phase${RC_CURRENT_PHASE}"
       TIMEOUT 60
     )
+
+    # A Qt test must not require a display. Setting the platform on the test
+    # itself means it runs the same way on a laptop, over SSH, and on a
+    # continuous integration machine that has no screen at all, without the
+    # learner having to know that.
+    if(qt_modules)
+      set_property(TEST "${lesson_id}.${variant}" APPEND PROPERTY
+        ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+    endif()
   endforeach()
 
   # The learner's copy is allowed to fail. The worked implementation is not, so
