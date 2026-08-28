@@ -1,0 +1,78 @@
+{
+  "lesson": "14-01-pid-from-scratch",
+  "title": "PID From Scratch",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the error in a control loop?",
+      "options": [
+        "The setpoint minus the measurement",
+        "The difference between two consecutive measurements",
+        "How far the output is from its limit",
+        "The time between updates"
+      ],
+      "correct": 0,
+      "explanation": "Error is what you want minus what you have. Every term of a PID controller is a different response to that one number."
+    },
+    {
+      "stage": "check",
+      "question": "Why does a proportional only controller settle short of the target?",
+      "options": [
+        "It only produces a command while error remains, so some error must remain to hold position",
+        "Because the gain is always too small",
+        "Because it ignores the measurement",
+        "Because the output saturates"
+      ],
+      "correct": 0,
+      "explanation": "Holding the robot at speed needs a non zero command, and proportional can only produce one from a non zero error. That leftover is steady state error."
+    },
+    {
+      "stage": "check",
+      "question": "What is integral windup?",
+      "options": [
+        "The integral growing without bound while the output is already saturated",
+        "The integral term oscillating around zero",
+        "The derivative term spiking when the setpoint changes",
+        "The integral being reset too often"
+      ],
+      "correct": 0,
+      "explanation": "When the machine cannot deliver what is asked, error never clears and the accumulator keeps climbing, then takes a long time to unwind."
+    },
+    {
+      "stage": "check",
+      "question": "Why compute derivative from the measurement rather than from the error?",
+      "options": [
+        "A setpoint change makes error jump instantly, which spikes the output for one step",
+        "Because the error is not available in time",
+        "Because measurement is more accurate than setpoint",
+        "Because it makes the maths simpler"
+      ],
+      "correct": 0,
+      "explanation": "The measurement moves smoothly because it is physical. The error can jump the instant an operator changes the target, and the derivative of a jump is enormous."
+    },
+    {
+      "stage": "post",
+      "question": "What is the anti windup rule the reference uses?",
+      "options": [
+        "Stop accumulating when the output is saturated and the error pushes further into saturation",
+        "Reset the integral every time the output saturates",
+        "Clamp the integral to plus or minus one",
+        "Divide the integral by the time step"
+      ],
+      "correct": 0,
+      "explanation": "Accumulation is only paused in the direction that cannot help. Error pushing back towards the usable range still accumulates, so recovery stays quick."
+    },
+    {
+      "stage": "post",
+      "question": "What is the usual order for tuning a PID controller on real hardware?",
+      "options": [
+        "Raise proportional until it just oscillates and back off, add derivative to damp, then add integral to remove the offset",
+        "Set integral first, then proportional, then derivative",
+        "Set all three to the same value and scale together",
+        "Compute all three from the plant model and never adjust them"
+      ],
+      "correct": 0,
+      "explanation": "Tuning is physical. Proportional sets the responsiveness, derivative damps the overshoot it causes, and integral cleans up what is left."
+    }
+  ]
+}
