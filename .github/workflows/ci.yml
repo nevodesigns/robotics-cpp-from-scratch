@@ -1,0 +1,151 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # The contract lane is fast and blocking. It runs the same auditor a
+  # contributor runs locally, so a failure here is never a surprise.
+  contract:
+    name: contract
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: build the tool
+        run: |
+          cmake -S . -B build -G Ninja -DRC_BUILD_LESSONS=OFF
+          cmake --build build --target rcpp
+      - name: audit the lesson contract
+        run: ./build/bin/rcpp audit
+      - name: publish the catalog
+        run: ./build/bin/rcpp catalog --stdout > catalog.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: catalog
+          path: catalog.json
+
+  # Every reference implementation must build and pass on every toolchain the
+  # lessons claim. This is the number the README reports.
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: ubuntu-22.04 gcc-11
+            os: ubuntu-22.04
+            cc: gcc-11
+            cxx: g++-11
+            platform_id: ubuntu-22.04-gcc11
+            qt: true
+          - name: ubuntu-24.04 gcc-13
+            os: ubuntu-24.04
+            cc: gcc-13
+            cxx: g++-13
+            platform_id: ubuntu-24.04-gcc13
+            qt: true
+          - name: windows msvc-2022
+            os: windows-2022
+            platform_id: windows-msvc2022
+            qt: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install the toolchain
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build ${{ matrix.cxx }}
+      - name: install Qt from apt
+        if: runner.os == 'Linux' && matrix.qt
+        run: sudo apt-get install -y qt6-base-dev
+
+      - uses: ilammy/msvc-dev-cmd@v1
+        if: runner.os == 'Windows'
+
+      - name: configure
+        shell: bash
+        env:
+          CC: ${{ matrix.cc }}
+          CXX: ${{ matrix.cxx }}
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DRC_PLATFORM_ID=${{ matrix.platform_id }}
+
+      - name: build every reference implementation
+        run: cmake --build build
+
+      - name: run the gate
+        shell: bash
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: ctest --test-dir build -L reference --output-on-failure
+
+      - name: report what was proven
+        shell: bash
+        run: |
+          count=$(ctest --test-dir build -L reference -N | grep -c "Test *#" || true)
+          echo "::notice::${{ matrix.platform_id }} built and passed ${count} lesson reference suites"
+
+  # Undefined behaviour and memory errors are exactly the class of bug this
+  # curriculum teaches people to find, so the repository has to be clean of them.
+  sanitize:
+    name: sanitizers
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build qt6-base-dev
+      - name: configure with address and undefined behaviour sanitizers
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DRC_SANITIZE_ADDRESS=ON
+      - run: cmake --build build
+      - name: run the gate under the sanitizers
+        env:
+          QT_QPA_PLATFORM: offscreen
+          ASAN_OPTIONS: detect_leaks=1
+        run: ctest --test-dir build -L reference --output-on-failure
+
+  # A learner's exercise is allowed to fail, but never to crash. A segmentation
+  # fault teaches nothing, so every exercise must exit with a readable report.
+  exercises-fail-cleanly:
+    name: exercises fail cleanly
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build qt6-base-dev
+      - run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
+      - name: every exercise that compiles must fail with a report, not a crash
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          status=0
+          for target in $(cmake --build build --target help 2>/dev/null | grep -o 'lesson_[a-z0-9_]*_exercise' | sort -u); do
+            if ! cmake --build build --target "$target" > /dev/null 2>&1; then
+              echo "skip $target, it does not compile on purpose"
+              continue
+            fi
+            binary=$(find build -name "$target" -type f -perm -u+x | head -1)
+            [ -z "$binary" ] && continue
+            "$binary" > /dev/null 2>&1
+            code=$?
+            # 0 means the shipped exercise already passes, which is a bug in the
+            # lesson. Anything above 128 is a signal, which means it crashed.
+            if [ "$code" -eq 0 ]; then
+              echo "::error::$target passes as shipped, so it teaches nothing"
+              status=1
+            elif [ "$code" -gt 128 ]; then
+              echo "::error::$target crashed with signal $((code - 128)) instead of reporting a failure"
+              status=1
+            else
+              echo "ok $target failed cleanly with exit $code"
+            fi
+          done
+          exit $status
