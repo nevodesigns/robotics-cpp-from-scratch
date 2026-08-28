@@ -1,0 +1,78 @@
+{
+  "lesson": "10-01-painting-the-robot-path",
+  "title": "Painting: Watching the Robot You Wrote in Phase 00 Drive",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "When should a widget do its drawing?",
+      "options": [
+        "Inside paintEvent, which Qt calls when the pixels are needed",
+        "Whenever the data changes, from any function",
+        "Once, in the constructor",
+        "In a timer running at the screen refresh rate"
+      ],
+      "correct": 0,
+      "explanation": "Qt asks the widget to draw itself. Painting anywhere else either does nothing or flickers, and it is the first thing to check when a custom widget misbehaves."
+    },
+    {
+      "stage": "check",
+      "question": "What does update() do?",
+      "options": [
+        "Asks for a repaint soon, collapsing several requests into one",
+        "Paints the widget immediately",
+        "Recomputes the widget's layout",
+        "Forces every widget in the window to redraw"
+      ],
+      "correct": 0,
+      "explanation": "Requests coalesce, so a control loop running at a kilohertz can call update freely without producing a thousand repaints a second."
+    },
+    {
+      "stage": "check",
+      "question": "Why does mapping a pose to a pixel involve subtracting from the widget height?",
+      "options": [
+        "The robot's y grows upward and the widget's y grows downward",
+        "Because the margin is measured from the bottom",
+        "To centre the path vertically",
+        "Because pixel coordinates cannot be negative"
+      ],
+      "correct": 0,
+      "explanation": "The flip converts a distance above the bottom into a distance below the top. Leaving it out draws a mirror image that looks plausible enough to miss."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the mapping use one scale for both axes rather than fitting each separately?",
+      "options": [
+        "So the shape is not distorted when the window is not square",
+        "Because two scales would be slower",
+        "Because Qt only accepts a single scale",
+        "To keep the margin equal on all sides"
+      ],
+      "correct": 0,
+      "explanation": "Fitting each axis independently would stretch a circular path into an ellipse, which misrepresents what the robot actually did."
+    },
+    {
+      "stage": "post",
+      "question": "How can a widget be tested without a screen?",
+      "options": [
+        "Render it into a QImage and inspect the pixels, with the offscreen platform plugin",
+        "Take a screenshot of the desktop",
+        "Widgets cannot be tested without a display",
+        "Compare the source code against a known good version"
+      ],
+      "correct": 0,
+      "explanation": "render draws into any paint device, so the test can ask real questions of the result and run on a machine with no display at all."
+    },
+    {
+      "stage": "post",
+      "question": "Why does this lesson not claim support on Windows?",
+      "options": [
+        "This repository's continuous integration does not build Qt there, and an unproven claim is worth less than none",
+        "Qt Widgets do not work on Windows",
+        "Because QPainter is Linux only",
+        "Because the offscreen platform plugin is unavailable there"
+      ],
+      "correct": 0,
+      "explanation": "The code would very likely work. The rule is that a platform is claimed only when it is proven, so the claim would be added at the same time as the CI lane that verifies it."
+    }
+  ]
+}
