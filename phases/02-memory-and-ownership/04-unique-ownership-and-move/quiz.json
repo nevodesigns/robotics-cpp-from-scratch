@@ -1,0 +1,78 @@
+{
+  "lesson": "02-04-unique-ownership-and-move",
+  "title": "unique_ptr and Move: Handing Ownership Over",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the difference between copying and moving?",
+      "options": [
+        "A copy makes a second independent object, a move transfers what the object holds and leaves the source empty",
+        "A move is a faster copy",
+        "A move destroys the source object",
+        "There is no difference for class types"
+      ],
+      "correct": 0,
+      "explanation": "For a resource, moving is the right operation: there is still exactly one device or file or lock, and only the owner changed."
+    },
+    {
+      "stage": "check",
+      "question": "What does std::move actually do?",
+      "options": [
+        "Nothing at run time, it is a cast saying this object may be taken from",
+        "It copies the object to a new location",
+        "It destroys the original object",
+        "It allocates a new object and frees the old one"
+      ],
+      "correct": 0,
+      "explanation": "The transfer is performed by the type's move constructor or move assignment. The name is misleading and worth saying out loud once."
+    },
+    {
+      "stage": "check",
+      "question": "What may you do with an object after moving from it?",
+      "options": [
+        "Assign a new value to it, or let it be destroyed",
+        "Nothing at all, touching it is undefined behaviour",
+        "Anything, it is unchanged",
+        "Only read from it"
+      ],
+      "correct": 0,
+      "explanation": "It is valid but empty, and its destructor will still run. Its value is not something to rely on, but it is safe to reassign or destroy."
+    },
+    {
+      "stage": "check",
+      "question": "What does a parameter of type std::unique_ptr<Device> tell a reader?",
+      "options": [
+        "The function is taking ownership: give it to me, it is mine now",
+        "The function will look at the device without keeping it",
+        "The device might be null",
+        "The function will make a copy of the device"
+      ],
+      "correct": 0,
+      "explanation": "Ownership appears in the signature and the compiler enforces it, so a reader knows who owns what without reading the body."
+    },
+    {
+      "stage": "post",
+      "question": "Why does take move the pointer out of the vector before erasing that slot?",
+      "options": [
+        "Erasing would destroy the device it is trying to hand over",
+        "Because erase invalidates the id",
+        "Because vectors cannot hold unique_ptr",
+        "To keep the vector sorted"
+      ],
+      "correct": 0,
+      "explanation": "The vector owns the device until the ownership is moved out. Erasing first would run the destructor and leave nothing to return."
+    },
+    {
+      "stage": "post",
+      "question": "Why does find return a raw Device* rather than a unique_ptr?",
+      "options": [
+        "The caller is looking without taking, and a raw pointer says exactly that",
+        "Because unique_ptr cannot be returned",
+        "Because raw pointers are faster",
+        "Because the device might not exist"
+      ],
+      "correct": 0,
+      "explanation": "Returning a unique_ptr would mean handing over ownership. A non owning raw pointer is the correct spelling of look but do not keep."
+    }
+  ]
+}

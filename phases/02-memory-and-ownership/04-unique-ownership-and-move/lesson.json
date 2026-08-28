@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "02-04-unique-ownership-and-move",
+  "title": "unique_ptr and Move: Handing Ownership Over",
+  "type": "build",
+  "minutes": 105,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "hardware_tier": 0,
+  "requires": ["02-03-raii-and-destructors"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "artifact": { "module": "rc::io", "note": "the registry pattern every driver collection in this curriculum uses" },
+  "breaks_first": ["E-MEM-0007", "E-CPP-0010", "E-MEM-0004"]
+}
