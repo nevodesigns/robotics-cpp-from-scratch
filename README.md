@@ -13,7 +13,7 @@ vertical slice of the curriculum. The numbers below are produced by the tooling
 in this repository, not written by hand.
 
 ```
-12 lessons   31 atlas entries   4 phases represented   0 audit issues
+12 lessons   32 atlas entries   4 phases represented   0 audit issues
 ```
 
 Every lesson here builds and passes its tests on the toolchains it claims.
