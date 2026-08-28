@@ -4,7 +4,7 @@
   "title": "The Build Model: Declaration, Definition, Linker",
   "type": "build",
   "minutes": 75,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "windows-msvc2022"],
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
   "hardware_tier": 0,
   "requires": ["00-01-your-first-program"],
   "cxx_standard": 17,

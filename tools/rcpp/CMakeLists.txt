@@ -12,6 +12,7 @@ add_executable(rcpp
   cmd_verify.cpp
   cmd_explain.cpp
   cmd_catalog.cpp
+  cmd_readme.cpp
 )
 
 target_compile_features(rcpp PRIVATE cxx_std_17)

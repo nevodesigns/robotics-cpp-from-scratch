@@ -12,6 +12,15 @@ ctest --test-dir build/default -L reference --output-on-failure
 All four must pass. The last one is the gate, and it enforces every rule in
 [CONTRACT.md](CONTRACT.md).
 
+The counts in the README are generated. After adding a lesson or an atlas entry:
+
+```bash
+./build/default/bin/rcpp readme --fix
+```
+
+Continuous integration runs `rcpp readme` without `--fix` and fails if a person
+typed a number that disagrees with what is on disk.
+
 ## Adding a lesson
 
 ```bash

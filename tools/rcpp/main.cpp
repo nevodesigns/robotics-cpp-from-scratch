@@ -41,6 +41,7 @@ usage: rcpp <command> [options]
   explain [text]  look an error up in the Failure Atlas, or pipe it in on stdin
   audit           enforce the lesson contract, this is what CI runs
   catalog         write the whole curriculum as JSON
+  readme          check, or fix, the generated counts in README.md
 
 examples
 
@@ -48,6 +49,7 @@ examples
   rcpp verify 00-01
   cmake --build build 2>&1 | rcpp explain
   rcpp audit --json
+  rcpp readme --check
 )";
   return 0;
 }
@@ -70,6 +72,7 @@ int main(int argc, char** argv) {
   if (command == "explain") return cmd_explain(args);
   if (command == "audit") return cmd_audit(args);
   if (command == "catalog") return cmd_catalog(args);
+  if (command == "readme") return cmd_readme(args);
 
   std::cerr << "rcpp: unknown command: " << command << "\n\n";
   usage();

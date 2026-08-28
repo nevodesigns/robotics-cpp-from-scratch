@@ -4,7 +4,7 @@
   "title": "References: Copies, Aliases, and the Angle Bug",
   "type": "build",
   "minutes": 90,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "windows-msvc2022"],
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
   "hardware_tier": 0,
   "requires": ["01-02-control-flow-and-limits"],
   "cxx_standard": 17,
