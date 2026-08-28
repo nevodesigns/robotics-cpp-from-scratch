@@ -1,0 +1,78 @@
+{
+  "lesson": "02-06-shared-ownership-and-cycles",
+  "title": "Shared Ownership, and the Cycle That Never Releases",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "When does a shared_ptr destroy the object it holds?",
+      "options": [
+        "When the last shared_ptr referring to it is destroyed, that is, when the count reaches zero",
+        "When the first shared_ptr goes out of scope",
+        "When the program exits",
+        "When you call reset on any of them"
+      ],
+      "correct": 0,
+      "explanation": "The object lives exactly as long as the last handle. That is what shared ownership means, and it is why no single owner has to be identified."
+    },
+    {
+      "stage": "check",
+      "question": "Why does a parent and child that both hold shared_ptr to each other leak?",
+      "options": [
+        "Each keeps the other's count above zero, so neither ever reaches zero",
+        "Because shared_ptr cannot be stored in a vector",
+        "Because the destructors run in the wrong order",
+        "Because the parent is destroyed first"
+      ],
+      "correct": 0,
+      "explanation": "Reference counting cannot collect cycles. That is a property of counting rather than an implementation gap, and it is why tracing collectors exist in other languages."
+    },
+    {
+      "stage": "check",
+      "question": "What does weak_ptr contribute to the reference count?",
+      "options": [
+        "Nothing, it observes without owning",
+        "One, like a shared_ptr",
+        "It decrements the count",
+        "It depends on whether the object is still alive"
+      ],
+      "correct": 0,
+      "explanation": "A weak link records the relationship without keeping the target alive, which is exactly what breaks the cycle."
+    },
+    {
+      "stage": "check",
+      "question": "Why must you call lock() rather than dereferencing a weak_ptr?",
+      "options": [
+        "The object may already be gone, and lock forces the caller to handle that",
+        "Because weak_ptr stores an index rather than an address",
+        "To increment the count permanently",
+        "Because dereferencing is only allowed on raw pointers"
+      ],
+      "correct": 0,
+      "explanation": "lock returns a shared_ptr when the object still exists and null when it does not. The compulsory check is the feature, not an inconvenience."
+    },
+    {
+      "stage": "post",
+      "question": "What is the rule for a structure with links in two directions?",
+      "options": [
+        "One direction owns, the other observes",
+        "Both directions should own, for symmetry",
+        "Neither direction should own, use raw pointers everywhere",
+        "The direction with more objects should own"
+      ],
+      "correct": 0,
+      "explanation": "Children are owned by their parent, and the link back upward is weak. Applying that consistently removes cycles by construction."
+    },
+    {
+      "stage": "post",
+      "question": "When is shared_ptr genuinely the right choice?",
+      "options": [
+        "When the lifetime cannot be tied to one owner, such as a cache entry or an object shared between threads",
+        "Whenever an object is used in more than one place",
+        "Whenever unique_ptr produces a compile error",
+        "Whenever an object is allocated on the heap"
+      ],
+      "correct": 0,
+      "explanation": "If you can name the owner, unique_ptr with non owning references is faster and documents the design. Reaching for shared_ptr to silence a compile error is how cycles arrive."
+    }
+  ]
+}
