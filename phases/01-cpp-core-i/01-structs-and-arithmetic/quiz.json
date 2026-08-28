@@ -1,0 +1,78 @@
+{
+  "lesson": "01-01-structs-and-arithmetic",
+  "title": "Structs: Giving a Group of Numbers One Name",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why group x, y and theta into a struct instead of passing three numbers?",
+      "options": [
+        "They travel as one value with named parts, so they cannot be reordered by accident",
+        "Structs make the program run faster",
+        "C++ functions cannot take more than two arguments",
+        "Because doubles cannot be passed individually"
+      ],
+      "correct": 0,
+      "explanation": "Loose numbers in the same order are easy to swap and the compiler cannot help. A named type makes the group one thing with labelled parts."
+    },
+    {
+      "stage": "check",
+      "question": "What does writing = 0.0 after a struct member achieve?",
+      "options": [
+        "Every new instance starts at a known value instead of leftover memory",
+        "It makes the member read only",
+        "It reserves memory for the member",
+        "Nothing, it is only a comment for readers"
+      ],
+      "correct": 0,
+      "explanation": "A default member initialiser means the type is born valid. Without it, reading an uninitialised member is undefined behaviour."
+    },
+    {
+      "stage": "check",
+      "question": "Why does distance ignore theta?",
+      "options": [
+        "Two robots on the same spot facing opposite ways are still zero metres apart",
+        "Because theta is always zero in practice",
+        "Because mixing angles and metres would overflow",
+        "Because std::hypot only accepts two arguments"
+      ],
+      "correct": 0,
+      "explanation": "Distance is about position. Heading is a separate question, and mixing the two into one number would produce something with no physical meaning."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the reference use std::hypot instead of sqrt(dx*dx + dy*dy)?",
+      "options": [
+        "It gives the same answer without overflowing on very large differences",
+        "It is the only way to compute a square root in C++",
+        "It is required when the arguments are doubles",
+        "It automatically ignores the heading"
+      ],
+      "correct": 0,
+      "explanation": "Squaring a very large difference can overflow before the square root is taken. hypot computes the same value while avoiding that."
+    },
+    {
+      "stage": "post",
+      "question": "Why does midpoint set theta to zero rather than averaging the two headings?",
+      "options": [
+        "Averaging angles is wrong when they wrap, so the function does not claim to do it",
+        "Because zero is the most common heading",
+        "Because averaging two doubles is undefined",
+        "Because the tests do not check theta"
+      ],
+      "correct": 0,
+      "explanation": "The average of 179 degrees and minus 179 degrees is zero, which points the opposite way from both. Refusing to answer is better than answering wrongly."
+    },
+    {
+      "stage": "post",
+      "question": "What does the ROS 2 Pose message add compared with this struct?",
+      "options": [
+        "A three dimensional position and an orientation held as a quaternion",
+        "Automatic unit conversion between metres and feet",
+        "A built in distance function",
+        "Nothing, it is exactly the same"
+      ],
+      "correct": 0,
+      "explanation": "ROS poses describe three dimensions, so orientation needs more than one angle. Phase 06 explains why a quaternion is used for that."
+    }
+  ]
+}

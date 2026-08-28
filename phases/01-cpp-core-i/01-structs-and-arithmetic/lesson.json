@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "01-01-structs-and-arithmetic",
+  "title": "Structs: Giving a Group of Numbers One Name",
+  "type": "build",
+  "minutes": 75,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "windows-msvc2022"],
+  "hardware_tier": 0,
+  "requires": ["00-04-first-motion"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "artifact": { "module": "rc::math", "note": "the Pose type and its distance helpers" },
+  "breaks_first": ["E-CPP-0005", "E-CPP-0006", "E-NUM-0003"]
+}
