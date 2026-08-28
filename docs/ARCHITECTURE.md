@@ -107,7 +107,7 @@ runs, shows or moves.
 |---|---|---|
 | 00 Toolchain and First Motion | 14 | A robot driving in a Qt window |
 | 01 C++ Core I, values and flow | 18 | A telemetry log parser |
-| 02 C++ Core II, memory and ownership | 16 | A leak free device handle |
+| 02 Memory and ownership | 16 | A leak free device handle |
 | 03 C++ Core III, classes and templates | 18 | A generic ring buffer |
 | 04 Build systems and tooling | 14 | Your own installable package |
 | 05 Testing, fakes and verification | 12 | A fake device with replay |
