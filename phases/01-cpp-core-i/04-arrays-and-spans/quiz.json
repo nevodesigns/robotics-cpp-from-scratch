@@ -1,0 +1,78 @@
+{
+  "lesson": "01-04-arrays-and-spans",
+  "title": "Arrays and Spans: Many Readings at Once",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What happens when you read readings[5] from an array of five doubles?",
+      "options": [
+        "It reads whatever bytes follow the array, with no error reported",
+        "The program stops with an index out of range error",
+        "It returns zero",
+        "It wraps around and returns readings[0]"
+      ],
+      "correct": 0,
+      "explanation": "C++ does not check array bounds. Reading past the end is undefined behaviour and often returns a plausible looking wrong value."
+    },
+    {
+      "stage": "check",
+      "question": "What is a span made of?",
+      "options": [
+        "A pointer to the first element and a count, with no ownership",
+        "A copy of the data it was created from",
+        "A growable buffer like a vector",
+        "A reference counted handle to shared memory"
+      ],
+      "correct": 0,
+      "explanation": "A span is a view. It owns nothing, copies nothing, and becomes dangerous the moment the data it points at goes away."
+    },
+    {
+      "stage": "check",
+      "question": "Why does median copy the samples before sorting?",
+      "options": [
+        "The span is a read only view, so sorting it would reorder the caller's data",
+        "Because std::sort cannot work on doubles",
+        "To make the function faster",
+        "Because spans cannot be iterated"
+      ],
+      "correct": 0,
+      "explanation": "A function taking a read only view must not have side effects on the caller's array. Copying into a vector keeps the promise the signature makes."
+    },
+    {
+      "stage": "check",
+      "question": "Five readings are 1.00, 1.02, 0.98, 1.01 and 4.70. Which filter handles the spike better?",
+      "options": [
+        "The median, because one wild value does not move the middle",
+        "The mean, because it uses all the data",
+        "Both handle it equally",
+        "Neither, a spike always corrupts the output"
+      ],
+      "correct": 0,
+      "explanation": "The mean is dragged upward by the outlier. The median only cares about ordering, so a single spike leaves the middle value untouched."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the moving average use a shorter window at the start of the stream?",
+      "options": [
+        "There is no data before the first reading, and padding with zeros would bias the output",
+        "To make the output vector shorter",
+        "Because the window must always be odd",
+        "To avoid dividing by zero"
+      ],
+      "correct": 0,
+      "explanation": "Averaging over what actually exists is honest. Padding with zeros would pull the first few outputs towards zero for no physical reason."
+    },
+    {
+      "stage": "post",
+      "question": "What is the danger of returning a span from a function?",
+      "options": [
+        "It may point at data that was destroyed when the function returned",
+        "Spans cannot be returned at all",
+        "The caller receives a copy, which defeats the purpose",
+        "It forces the caller to sort the data"
+      ],
+      "correct": 0,
+      "explanation": "A span does not keep its data alive. Returning one that views a local vector leaves the caller with a view of destroyed memory."
+    }
+  ]
+}

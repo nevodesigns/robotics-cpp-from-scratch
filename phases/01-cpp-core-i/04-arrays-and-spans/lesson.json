@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "01-04-arrays-and-spans",
+  "title": "Arrays and Spans: Many Readings at Once",
+  "type": "build",
+  "minutes": 90,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "windows-msvc2022"],
+  "hardware_tier": 0,
+  "requires": ["01-03-references-and-angles"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "artifact": { "module": "rc::core", "note": "the moving average and median filters" },
+  "breaks_first": ["E-CPP-0007", "E-MEM-0001", "E-CPP-0009"]
+}
