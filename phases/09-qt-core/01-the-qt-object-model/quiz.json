@@ -1,0 +1,78 @@
+{
+  "lesson": "09-01-the-qt-object-model",
+  "title": "The Qt Object Model: Signals and Slots",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why should a battery monitor emit a signal instead of calling the screen directly?",
+      "options": [
+        "So the monitor does not depend on the screen, the logger, or anything else",
+        "Because signals are faster than function calls",
+        "Because Qt forbids calling functions between classes",
+        "So the warning can be delayed until the screen is ready"
+      ],
+      "correct": 0,
+      "explanation": "Emitting inverts the dependency. The monitor announces, listeners subscribe, and the monitor stays testable and reusable on a robot with no screen."
+    },
+    {
+      "stage": "check",
+      "question": "What does the moc tool do?",
+      "options": [
+        "It reads headers containing Q_OBJECT and generates the signal and connection code",
+        "It compiles QML into C++",
+        "It links Qt libraries into your program",
+        "It checks that your signals have matching slots"
+      ],
+      "correct": 0,
+      "explanation": "moc is the meta object compiler. It writes the bodies of your signals and the metadata that lets connect find them at runtime."
+    },
+    {
+      "stage": "check",
+      "question": "Three things are needed for a Qt class to work. Which is NOT one of them?",
+      "options": [
+        "The class must be allocated with new rather than on the stack",
+        "It must inherit from QObject",
+        "It must contain the Q_OBJECT macro",
+        "Its header must be known to the build system so moc sees it"
+      ],
+      "correct": 0,
+      "explanation": "Stack allocation is fine, and often preferable. What moc needs is the inheritance, the macro, and a header it is actually given."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the monitor use two thresholds rather than one?",
+      "options": [
+        "A reading sitting on a single threshold would emit a storm of warnings as it flickers",
+        "Because battery percentages are never exact",
+        "So the signal can carry two values",
+        "Because Qt requires a matched pair of signals"
+      ],
+      "correct": 0,
+      "explanation": "That gap is hysteresis. It converts a noisy crossing into a single, meaningful state change, and every real threshold detector has one."
+    },
+    {
+      "stage": "post",
+      "question": "You get undefined reference to vtable for BatteryMonitor. What is wrong?",
+      "options": [
+        "moc did not run for that class, because of a missing Q_OBJECT or a header the target does not know about",
+        "You forgot to call connect",
+        "Qt is not installed",
+        "The signal has the wrong argument type"
+      ],
+      "correct": 0,
+      "explanation": "Without moc, the generated virtual functions and signal bodies do not exist, so the linker has nothing to point the vtable at."
+    },
+    {
+      "stage": "post",
+      "question": "What is the equivalent of signals and slots in ROS 2?",
+      "options": [
+        "Topics, which are publish and subscribe by another mechanism",
+        "Services, which are request and response",
+        "Parameters, which store configuration",
+        "Actions, which manage long running goals"
+      ],
+      "correct": 0,
+      "explanation": "A publisher announces on a topic and subscribers receive. The transport is completely different, the decoupling idea is the same one you just used."
+    }
+  ]
+}

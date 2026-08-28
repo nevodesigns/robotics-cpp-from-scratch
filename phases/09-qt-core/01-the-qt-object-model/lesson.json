@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "09-01-the-qt-object-model",
+  "title": "The Qt Object Model: Signals and Slots",
+  "type": "build",
+  "minutes": 90,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "windows-msvc2022"],
+  "hardware_tier": 0,
+  "requires": ["01-03-references-and-angles"],
+  "cxx_standard": 17,
+  "qt": { "modules": ["Core"], "min_version": "6.2" },
+  "ros2": null,
+  "artifact": { "module": "rc::qt", "note": "the first component of the control station" },
+  "breaks_first": ["E-QT-0001", "E-QT-0002", "E-CPP-0006"]
+}
