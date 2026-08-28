@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "09-02-what-moc-generates",
+  "title": "What moc Generates, and the Error When It Does Not",
+  "type": "build",
+  "minutes": 75,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "windows-msvc2022"],
+  "hardware_tier": 0,
+  "requires": ["09-01-the-qt-object-model"],
+  "cxx_standard": 17,
+  "qt": { "modules": ["Core"], "min_version": "6.2" },
+  "ros2": null,
+  "artifact": { "module": "rc::qt", "note": "a correctly declared Qt type you can copy from" },
+  "breaks_first": ["E-QT-0005", "E-QT-0001", "E-QT-0003", "E-CMAKE-0001"]
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "09-02-what-moc-generates",
+  "title": "What moc Generates, and the Error When It Does Not",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does a missing Q_OBJECT show up at link time rather than compile time?",
+      "options": [
+        "The macro declares things without defining them, and only the linker notices a missing definition",
+        "Because the compiler ignores Qt headers",
+        "Because moc runs after linking",
+        "Because Q_OBJECT is only checked in release builds"
+      ],
+      "correct": 0,
+      "explanation": "Declarations satisfy the compiler. The definitions live in moc's generated file, and their absence is a linker problem."
+    },
+    {
+      "stage": "check",
+      "question": "What does moc write for each signal you declare?",
+      "options": [
+        "A real function body that packages the arguments and calls every connection",
+        "Nothing, signals are handled entirely by the compiler",
+        "A slot with a matching name",
+        "A thread that waits for the signal to be emitted"
+      ],
+      "correct": 0,
+      "explanation": "A signal is an ordinary member function whose body moc supplies. That is why an unmoc'd signal is an undefined reference."
+    },
+    {
+      "stage": "check",
+      "question": "Which is NOT one of the three causes of the vtable error?",
+      "options": [
+        "The signal was connected to a slot with a different name",
+        "The class is missing Q_OBJECT",
+        "moc never saw the header because it is not part of a target",
+        "Q_OBJECT was added without reconfiguring the build"
+      ],
+      "correct": 0,
+      "explanation": "A mismatched connection is a runtime problem that makes connect return false. The vtable error is always about moc not generating code."
+    },
+    {
+      "stage": "check",
+      "question": "How do the tests prove moc actually ran, rather than just that the code compiled?",
+      "options": [
+        "They ask the meta object for the class name and for the signal by signature",
+        "They measure how long the build took",
+        "They check that a moc file exists on disk",
+        "They call the signal directly and catch the error"
+      ],
+      "correct": 0,
+      "explanation": "moc stores names and signatures as text in the meta object, so a class can be interrogated at runtime about what was generated for it."
+    },
+    {
+      "stage": "post",
+      "question": "Why does this repository list lesson headers as target sources in CMake?",
+      "options": [
+        "AUTOMOC only processes headers that belong to a target",
+        "To make the build faster",
+        "Because CMake refuses to build a target without headers",
+        "So the headers get installed alongside the binaries"
+      ],
+      "correct": 0,
+      "explanation": "AUTOMOC scans the target's sources. A header holding Q_OBJECT that is not listed is never handed to moc, and the lesson fails to link."
+    },
+    {
+      "stage": "post",
+      "question": "You add Q_OBJECT, rebuild, and the same error appears. What is the most likely reason?",
+      "options": [
+        "The build system is still working from its previous decision, so reconfigure",
+        "Q_OBJECT must go at the end of the class",
+        "Qt needs to be reinstalled",
+        "The class also needs a virtual destructor"
+      ],
+      "correct": 0,
+      "explanation": "Which files get moc'd is decided at configure time. Adding the macro after that decision needs a reconfigure before it takes effect."
+    }
+  ]
+}
