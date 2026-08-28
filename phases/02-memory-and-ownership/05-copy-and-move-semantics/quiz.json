@@ -1,0 +1,78 @@
+{
+  "lesson": "02-05-copy-and-move-semantics",
+  "title": "Copy and Move: Writing the Five Operations Once, So You Never Have To Again",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does the compiler generated copy constructor do with a raw pointer member?",
+      "options": [
+        "Copies the address, so both objects point at the same memory",
+        "Copies the memory the pointer refers to",
+        "Sets the pointer to null in the copy",
+        "Refuses to compile"
+      ],
+      "correct": 0,
+      "explanation": "It copies each member, and a pointer member is an address. Two owners then both release it, which corrupts the heap and usually crashes somewhere unrelated."
+    },
+    {
+      "stage": "check",
+      "question": "What is the rule of zero?",
+      "options": [
+        "If every member manages itself, write none of the five operations and let the compiler generate them",
+        "Never allocate memory in a class",
+        "Always write all five operations explicitly",
+        "Never use raw pointers"
+      ],
+      "correct": 0,
+      "explanation": "With members like vector, string and unique_ptr the generated versions are already correct, and correct for free. That is the shape most classes should have."
+    },
+    {
+      "stage": "check",
+      "question": "Why is copy assignment harder than copy construction?",
+      "options": [
+        "The target already owns something, and the source might be the target itself",
+        "Because it returns a reference",
+        "Because it cannot allocate memory",
+        "Because it runs after the destructor"
+      ],
+      "correct": 0,
+      "explanation": "Releasing before reading breaks under self assignment. Copy and swap avoids both problems by building the copy before anything is modified."
+    },
+    {
+      "stage": "check",
+      "question": "Why must a move constructor clear the source?",
+      "options": [
+        "The source's destructor still runs, and it must not release what was taken",
+        "Because the source is no longer accessible",
+        "To make the move faster",
+        "Because the compiler requires it"
+      ],
+      "correct": 0,
+      "explanation": "Taking the pointer is only half the job. Leaving the source holding the same address means two objects release it."
+    },
+    {
+      "stage": "post",
+      "question": "What happens when a class declares a destructor and nothing else?",
+      "options": [
+        "The move operations are suppressed, so it silently falls back to copying",
+        "The copy operations are suppressed",
+        "Nothing changes",
+        "The class becomes non copyable"
+      ],
+      "correct": 0,
+      "explanation": "Declaring a destructor stops the compiler generating moves. It is a performance cliff with no diagnostic, and it is the usual reason a class that looks fine is slow."
+    },
+    {
+      "stage": "post",
+      "question": "Why should move operations be marked noexcept?",
+      "options": [
+        "std::vector only moves its elements while growing if their move promises not to throw, and copies them otherwise",
+        "Because moves cannot throw anyway",
+        "Because the compiler requires it for move assignment",
+        "It only affects compile time"
+      ],
+      "correct": 0,
+      "explanation": "Vector must leave the old contents intact if reallocation fails, so without the promise it copies. The missing keyword is a silent, measurable slowdown."
+    }
+  ]
+}

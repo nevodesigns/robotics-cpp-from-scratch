@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "02-05-copy-and-move-semantics",
+  "title": "Copy and Move: Writing the Five Operations Once, So You Never Have To Again",
+  "type": "build",
+  "minutes": 120,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "hardware_tier": 0,
+  "requires": ["02-04-unique-ownership-and-move"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "artifact": { "module": "rc::core", "note": "a correct owning buffer, and the reason you will not write another" },
+  "breaks_first": ["E-MEM-0008", "E-MEM-0002", "E-CPP-0010"]
+}
