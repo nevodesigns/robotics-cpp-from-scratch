@@ -1,0 +1,78 @@
+{
+  "lesson": "01-03-references-and-angles",
+  "title": "References: Copies, Aliases, and the Angle Bug",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A function takes Pose p by value and sets p.x to zero. What does the caller see?",
+      "options": [
+        "Nothing changed, because the function modified a copy",
+        "The caller's pose has x set to zero",
+        "A compile error",
+        "The caller's pose is left uninitialised"
+      ],
+      "correct": 0,
+      "explanation": "Passing by value copies the argument. The function changes its own copy, which is discarded when it returns."
+    },
+    {
+      "stage": "check",
+      "question": "What does const Pose& mean as a parameter type?",
+      "options": [
+        "An alias to the caller's object that the function is not allowed to change",
+        "A copy that cannot be changed",
+        "A pointer that may be null",
+        "A reference that is copied only if it is modified"
+      ],
+      "correct": 0,
+      "explanation": "The ampersand avoids the copy and const stops the function modifying it, which is the default choice for read only struct parameters."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the shortest turn from 179 degrees to minus 179 degrees only two degrees?",
+      "options": [
+        "Because headings wrap, so the two directions are almost the same way round",
+        "Because negative angles are measured differently",
+        "Because 179 and minus 179 are the same number",
+        "Because the robot can only turn anticlockwise"
+      ],
+      "correct": 0,
+      "explanation": "A full turn brings you back to where you started, so the useful answer is the smaller of the two ways round, which is two degrees."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the fmod version of wrap_angle need an extra check for negative results?",
+      "options": [
+        "fmod keeps the sign of its left operand, so a negative input gives a negative remainder",
+        "fmod cannot accept negative numbers at all",
+        "Because pi is irrational",
+        "To avoid dividing by zero"
+      ],
+      "correct": 0,
+      "explanation": "fmod truncates towards zero rather than wrapping, so negative inputs land outside the intended range and need one more turn added."
+    },
+    {
+      "stage": "post",
+      "question": "When should a function take a plain reference rather than a const reference?",
+      "options": [
+        "When it is meant to modify the caller's object, and its name says so",
+        "Whenever the argument is larger than eight bytes",
+        "Only when the argument might be null",
+        "Never, const references are always correct"
+      ],
+      "correct": 0,
+      "explanation": "A non const reference is how a function changes the caller's data. The name should make that obvious, as in steer_towards or normalize_in_place."
+    },
+    {
+      "stage": "post",
+      "question": "Why do three dimensional robotics libraries use quaternions instead of raw angles?",
+      "options": [
+        "Wrapping and gimbal lock make three separate angles unreliable to combine",
+        "Quaternions are faster to compute",
+        "Because angles cannot be stored as doubles",
+        "Because ROS 2 does not support angles"
+      ],
+      "correct": 0,
+      "explanation": "Composing rotations from three angles has singularities and wrap problems. Phase 06 builds quaternions from nothing and shows what they solve."
+    }
+  ]
+}
