@@ -1,0 +1,78 @@
+{
+  "lesson": "03-01-classes-and-invariants",
+  "title": "Classes: A Thing That Cannot Be Wrong",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is an invariant?",
+      "options": [
+        "Something that is true about an object from creation until destruction",
+        "A member that never changes value",
+        "A function that cannot be overridden",
+        "A constant defined inside a class"
+      ],
+      "correct": 0,
+      "explanation": "The purpose of a class is to make its invariants impossible to break, using private data and a complete set of operations that each maintain them."
+    },
+    {
+      "stage": "check",
+      "question": "Why does making the members private actually help?",
+      "options": [
+        "If the only way to change the object maintains the invariants, they hold after every possible sequence of calls",
+        "Private members use less memory",
+        "It makes the class faster to compile",
+        "It prevents the object from being copied"
+      ],
+      "correct": 0,
+      "explanation": "The guarantee comes from there being no other route, rather than from everybody remembering to update two fields together."
+    },
+    {
+      "stage": "check",
+      "question": "What does const on a member function promise?",
+      "options": [
+        "That the function does not modify the object, checked by the compiler",
+        "That the return value cannot be changed",
+        "That the function cannot be called twice",
+        "That the function has no side effects of any kind"
+      ],
+      "correct": 0,
+      "explanation": "It also means the object can be passed as a const reference and still be asked questions, which is why an unmarked reading function is annoying to use."
+    },
+    {
+      "stage": "check",
+      "question": "Why does Welford's method keep precision where a running total loses it?",
+      "options": [
+        "No quantity ever holds the sum, so the digits are not spent on a large constant offset",
+        "It uses long double internally",
+        "It divides earlier, which rounds less",
+        "It stores every reading and recomputes"
+      ],
+      "correct": 0,
+      "explanation": "Readings around a million, varying by a hundredth, exhaust a double's significant digits on the constant part. Welford's works in corrections, which stay the size of the variation."
+    },
+    {
+      "stage": "post",
+      "question": "A variance comes out negative. What does that tell you?",
+      "options": [
+        "The computation lost precision, since a variance can never be negative",
+        "The readings were negative",
+        "There were fewer than two readings",
+        "The mean was computed incorrectly but the variance is fine"
+      ],
+      "correct": 0,
+      "explanation": "It is mathematically impossible, so it is a reliable signal that a running total lost the small variations. It is worth asserting on in real code."
+    },
+    {
+      "stage": "post",
+      "question": "When is this class the right tool rather than std::accumulate?",
+      "options": [
+        "When readings arrive one at a time and cannot all be kept, which is most of robotics",
+        "When the data is already in a vector",
+        "When only the mean is needed",
+        "When the readings are integers"
+      ],
+      "correct": 0,
+      "explanation": "The standard algorithms need the whole set at once. An online algorithm folds in one reading at a time and keeps a fixed amount of state forever."
+    }
+  ]
+}

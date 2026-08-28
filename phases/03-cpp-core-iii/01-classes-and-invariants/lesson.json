@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "03-01-classes-and-invariants",
+  "title": "Classes: A Thing That Cannot Be Wrong",
+  "type": "build",
+  "minutes": 105,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "hardware_tier": 0,
+  "requires": ["02-06-shared-ownership-and-cycles"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "artifact": { "module": "rc::core", "note": "running statistics, used by every sensor lesson that follows" },
+  "breaks_first": ["E-CPP-0011", "E-NUM-0010", "E-CPP-0006"]
+}
