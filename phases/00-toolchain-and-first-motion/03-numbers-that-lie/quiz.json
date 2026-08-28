@@ -1,0 +1,78 @@
+{
+  "lesson": "00-03-numbers-that-lie",
+  "title": "Numbers That Lie: Integer Division and Overflow",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "In C++, what is the value of 2000 / 4095?",
+      "options": [
+        "0, because both operands are whole numbers and the remainder is discarded",
+        "0.488, because C++ always computes the exact value",
+        "1, because the result is rounded to nearest",
+        "It is a compile error"
+      ],
+      "correct": 0,
+      "explanation": "When both operands are whole numbers the division is whole number division. The fraction is thrown away, not rounded."
+    },
+    {
+      "stage": "check",
+      "question": "Which of these correctly converts a raw count to volts?",
+      "options": [
+        "(raw * 3.3) / 4095.0",
+        "(raw / 4095) * 3.3",
+        "raw / 4095 * 3.3",
+        "(raw / 4095.0) / 3.3"
+      ],
+      "correct": 0,
+      "explanation": "Multiplying first keeps the value large enough to survive, and 4095.0 makes the division fractional. The others either divide too early or apply the scale backwards."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the reference add whole / 2 before dividing in percent_of?",
+      "options": [
+        "To round to the nearest whole number instead of always rounding down",
+        "To avoid dividing by zero",
+        "To prevent the multiplication from overflowing",
+        "Because percentages must always be even"
+      ],
+      "correct": 0,
+      "explanation": "Whole number division truncates towards zero. Adding half the divisor before dividing turns truncation into rounding to nearest."
+    },
+    {
+      "stage": "check",
+      "question": "Why do the tests use RC_CHECK_NEAR rather than RC_CHECK_EQ for voltages?",
+      "options": [
+        "Fractional numbers are stored in binary and rarely land on an exact value",
+        "RC_CHECK_EQ does not work with doubles at all",
+        "NEAR is faster to evaluate",
+        "Because voltages are always approximate in hardware"
+      ],
+      "correct": 0,
+      "explanation": "Values like 0.1 have no exact binary representation, so computed doubles are compared with a stated tolerance rather than for exact equality."
+    },
+    {
+      "stage": "post",
+      "question": "An encoder count stored in a 16 bit value goes from 65535 to 0. What happened?",
+      "options": [
+        "The value overflowed its type and wrapped around to the bottom",
+        "The sensor was disconnected",
+        "The compiler optimised the variable away",
+        "The value was rounded to the nearest multiple of 1024"
+      ],
+      "correct": 0,
+      "explanation": "Whole number types wrap rather than saturate. Code that reads position from a counter has to expect and handle that wrap."
+    },
+    {
+      "stage": "post",
+      "question": "Your conversion reports the wrong value. Where is the bug most likely to be?",
+      "options": [
+        "One or two steps before the wrong number appears, in a value you assumed was fine",
+        "In the compiler, which needs updating",
+        "In the final line that prints the value",
+        "In the test, which is probably too strict"
+      ],
+      "correct": 0,
+      "explanation": "Numeric bugs surface downstream of where they happen. Printing the intermediate values is how you find the step that actually lied."
+    }
+  ]
+}
