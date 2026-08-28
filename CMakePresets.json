@@ -1,0 +1,85 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 22, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "ubuntu-22-gcc11",
+      "displayName": "Ubuntu 22.04, GCC 11",
+      "description": "The floor toolchain. No std::format, no std::expected, rc/core/compat.hpp covers both.",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/ubuntu-22-gcc11",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "gcc-11",
+        "CMAKE_CXX_COMPILER": "g++-11",
+        "RC_PLATFORM_ID": "ubuntu-22.04-gcc11"
+      }
+    },
+    {
+      "name": "ubuntu-24-gcc13",
+      "displayName": "Ubuntu 24.04, GCC 13",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/ubuntu-24-gcc13",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "gcc-13",
+        "CMAKE_CXX_COMPILER": "g++-13",
+        "RC_PLATFORM_ID": "ubuntu-24.04-gcc13"
+      }
+    },
+    {
+      "name": "windows-msvc",
+      "displayName": "Windows, Visual Studio 2022",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/windows-msvc",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "RC_PLATFORM_ID": "windows-msvc2022"
+      }
+    },
+    {
+      "name": "default",
+      "displayName": "Whatever compiler this machine has",
+      "description": "Detects the toolchain identifier instead of pinning one. Use this locally.",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/default",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+    },
+    {
+      "name": "asan",
+      "inherits": "default",
+      "displayName": "Address and undefined behaviour sanitizers",
+      "binaryDir": "${sourceDir}/build/asan",
+      "cacheVariables": { "RC_SANITIZE_ADDRESS": "ON" }
+    },
+    {
+      "name": "tsan",
+      "inherits": "default",
+      "displayName": "Thread sanitizer",
+      "binaryDir": "${sourceDir}/build/tsan",
+      "cacheVariables": { "RC_SANITIZE_THREAD": "ON" }
+    }
+  ],
+  "buildPresets": [
+    { "name": "ubuntu-22-gcc11", "configurePreset": "ubuntu-22-gcc11" },
+    { "name": "ubuntu-24-gcc13", "configurePreset": "ubuntu-24-gcc13" },
+    { "name": "windows-msvc", "configurePreset": "windows-msvc" },
+    { "name": "default", "configurePreset": "default" },
+    { "name": "asan", "configurePreset": "asan" },
+    { "name": "tsan", "configurePreset": "tsan" }
+  ],
+  "testPresets": [
+    {
+      "name": "reference",
+      "configurePreset": "default",
+      "description": "The gate. Every worked implementation must pass on every claimed toolchain.",
+      "filter": { "include": { "label": "reference" } },
+      "output": { "outputOnFailure": true }
+    },
+    {
+      "name": "default",
+      "configurePreset": "default",
+      "output": { "outputOnFailure": true }
+    }
+  ]
+}
