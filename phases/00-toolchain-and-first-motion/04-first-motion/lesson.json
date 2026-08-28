@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "00-04-first-motion",
+  "title": "First Motion: Driving a Robot in a Straight Line",
+  "type": "build",
+  "minutes": 90,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "windows-msvc2022"],
+  "hardware_tier": 1,
+  "requires": ["00-03-numbers-that-lie"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "artifact": { "module": "rc::sim", "note": "the differential drive model reused by every later phase" },
+  "breaks_first": ["E-NUM-0004", "E-CPP-0004", "E-NUM-0003"]
+}

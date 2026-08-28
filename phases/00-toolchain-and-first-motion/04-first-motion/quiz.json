@@ -1,0 +1,78 @@
+{
+  "lesson": "00-04-first-motion",
+  "title": "First Motion: Driving a Robot in a Straight Line",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What three numbers make up a pose?",
+      "options": [
+        "Position along x, position along y, and the heading angle",
+        "Left wheel speed, right wheel speed, and time",
+        "Distance, speed, and acceleration",
+        "Latitude, longitude, and altitude"
+      ],
+      "correct": 0,
+      "explanation": "A pose is where the robot is and which way it faces. For a robot on a flat floor that is x, y and theta."
+    },
+    {
+      "stage": "check",
+      "question": "Both wheels turn at 1.0 metres per second. What does the robot do?",
+      "options": [
+        "Drives straight forward at 1.0 metres per second",
+        "Spins in place",
+        "Curves to the left",
+        "Stays still because the speeds cancel"
+      ],
+      "correct": 0,
+      "explanation": "Forward speed is the average of the two, which is 1.0. Turn rate comes from the difference, which is zero, so there is no rotation."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the turn rate divided by the wheel base rather than multiplied?",
+      "options": [
+        "Wheels further apart turn more slowly for the same speed difference",
+        "Because the wheel base is always smaller than one",
+        "To convert metres into radians",
+        "To keep the result positive"
+      ],
+      "correct": 0,
+      "explanation": "A wide robot needs a bigger speed difference to achieve the same turn rate, so the base appears in the denominator."
+    },
+    {
+      "stage": "check",
+      "question": "The robot faces along the y axis and drives forward, but your code moves it along x. What is wrong?",
+      "options": [
+        "Sine and cosine are swapped",
+        "The time step is too large",
+        "The wheel base is wrong",
+        "The angle was not wrapped"
+      ],
+      "correct": 0,
+      "explanation": "Cosine of theta gives the x component of a direction and sine gives the y component. Swapping them rotates all motion by ninety degrees."
+    },
+    {
+      "stage": "post",
+      "question": "Why must the heading be wrapped back into minus pi to pi?",
+      "options": [
+        "Otherwise it grows without limit and headings can no longer be compared",
+        "Because sine and cosine reject large inputs",
+        "Because the robot cannot physically turn more than once",
+        "To stop the value overflowing its type"
+      ],
+      "correct": 0,
+      "explanation": "The angle still points the right way, but comparing 401.2 radians with 0.1 radians gives a nonsense difference. Wrapping keeps headings comparable."
+    },
+    {
+      "stage": "post",
+      "question": "This model assumes the robot travels in a straight line during each time step. Why is that acceptable?",
+      "options": [
+        "With small enough time steps the error is tiny, and it is what real robots use",
+        "Because robots only ever drive in straight lines",
+        "Because the arc version is impossible to compute",
+        "Because the error cancels out over time"
+      ],
+      "correct": 0,
+      "explanation": "It is a deliberate approximation. The error shrinks with the time step, and lesson 13 measures it against the exact arc form."
+    }
+  ]
+}
