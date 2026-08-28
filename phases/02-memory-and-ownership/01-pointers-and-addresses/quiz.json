@@ -1,0 +1,78 @@
+{
+  "lesson": "02-01-pointers-and-addresses",
+  "title": "Pointers: Talking About Where Something Is",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does a pointer actually hold?",
+      "options": [
+        "The address of some object, that is, where it lives in memory",
+        "A copy of the object it refers to",
+        "The size of the object it refers to",
+        "A reference count for the object"
+      ],
+      "correct": 0,
+      "explanation": "A pointer is a variable holding an address. It says where something is, and nothing about how long it will stay there."
+    },
+    {
+      "stage": "check",
+      "question": "In an expression, what does the star in *p mean?",
+      "options": [
+        "The value living at the address p holds",
+        "The address of p",
+        "Multiplication by p",
+        "That p may be null"
+      ],
+      "correct": 0,
+      "explanation": "In a type, the star means pointer to. In an expression it dereferences, giving the object at that address. The same symbol doing two jobs is a genuine wart."
+    },
+    {
+      "stage": "check",
+      "question": "Why return nullptr rather than an index of minus one for not found?",
+      "options": [
+        "nullptr is a value the language itself understands as nothing, so it needs no convention",
+        "Because indexes cannot be negative",
+        "Because pointers are faster than integers",
+        "Because minus one is a valid index in C++"
+      ],
+      "correct": 0,
+      "explanation": "Every codebase invents a different sentinel index and somebody eventually forgets to check it. nullptr means nothing found in a way the compiler and the reader both recognise."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the reference guard against a null array before looping?",
+      "options": [
+        "Reading through a null pointer is undefined behaviour, and a null array with a positive count is a caller mistake",
+        "Because looping over zero elements is a compile error",
+        "To make the function faster",
+        "Because the count might overflow"
+      ],
+      "correct": 0,
+      "explanation": "A function that is handed nonsense should answer honestly rather than read memory it was never given. Guarding costs one comparison."
+    },
+    {
+      "stage": "post",
+      "question": "What is the one rule that makes pointers safe?",
+      "options": [
+        "A pointer is only as valid as the thing it points at",
+        "A pointer must always be const",
+        "A pointer must never be null",
+        "A pointer must always be freed"
+      ],
+      "correct": 0,
+      "explanation": "An address keeps nothing alive. Whenever you hold a pointer you must be able to say what keeps its target alive and for how long."
+    },
+    {
+      "stage": "post",
+      "question": "When is a raw pointer still the right tool in modern C++?",
+      "options": [
+        "Talking to hardware or C libraries, and referring to something that obviously outlives the reference",
+        "Whenever you want to avoid copying a large object",
+        "Whenever a value might be missing",
+        "Whenever you allocate memory"
+      ],
+      "correct": 0,
+      "explanation": "For avoiding copies use a reference, for a possibly missing value use std::optional, and for ownership use the types in lesson 02-04. Raw pointers keep the two roles listed."
+    }
+  ]
+}
