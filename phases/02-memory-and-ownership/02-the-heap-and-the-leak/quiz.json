@@ -1,0 +1,78 @@
+{
+  "lesson": "02-02-the-heap-and-the-leak",
+  "title": "The Heap, and Why Every Manual Delete Is Eventually Wrong",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the difference between the stack and the heap?",
+      "options": [
+        "Stack objects are destroyed automatically when their scope ends, heap objects must be given back explicitly",
+        "The stack is faster but holds only numbers",
+        "The heap is destroyed automatically, the stack is not",
+        "There is no difference, they are two names for the same memory"
+      ],
+      "correct": 0,
+      "explanation": "The stack unwinds automatically as functions return. The heap serves objects whose size is unknown until runtime or that must outlive their creator, and it requires an explicit release."
+    },
+    {
+      "stage": "check",
+      "question": "Why is a manual delete at the bottom of a function fragile?",
+      "options": [
+        "The cleanup is attached to a place in the text, so every new way out must remember it",
+        "Because delete is slow",
+        "Because the compiler may reorder it",
+        "Because delete can only be called once per program"
+      ],
+      "correct": 0,
+      "explanation": "Leaks arrive when somebody adds an early return or a throw and never looks at the bottom of the function. The problem is structural rather than carelessness."
+    },
+    {
+      "stage": "check",
+      "question": "What must new[] be paired with?",
+      "options": [
+        "delete[]",
+        "delete",
+        "free",
+        "Either delete or delete[], they are equivalent"
+      ],
+      "correct": 0,
+      "explanation": "The bracket forms must match. Mixing them is undefined behaviour and frequently does not crash immediately, which makes it harder to find than if it did."
+    },
+    {
+      "stage": "check",
+      "question": "In the reference, why was the early return turned into a break?",
+      "options": [
+        "It leaves the loop but not the function, so there is still exactly one place that gives the memory back",
+        "Because return is not allowed inside a loop",
+        "Because break is faster than return",
+        "To avoid copying the return value"
+      ],
+      "correct": 0,
+      "explanation": "One way out means one delete. It is the cheapest possible fix and it survives somebody adding a third exit condition later."
+    },
+    {
+      "stage": "post",
+      "question": "How do the tests prove nothing leaked, without any tooling?",
+      "options": [
+        "They count allocations and frees by replacing operator new and operator delete",
+        "They measure how much memory the process is using",
+        "They run each test twice and compare the timing",
+        "They rely on the compiler warning about it"
+      ],
+      "correct": 0,
+      "explanation": "Counting is deterministic and identical on every platform. Arrays and single objects are counted separately, so a mismatched new and delete pair is caught too."
+    },
+    {
+      "stage": "post",
+      "question": "How much bare new and delete should appear in production C++?",
+      "options": [
+        "Almost none: std::vector when the size varies, and an owning smart pointer when an object must outlive its creator",
+        "As much as necessary, since it is the only way to use the heap",
+        "Only inside classes",
+        "Only in code that talks to hardware"
+      ],
+      "correct": 0,
+      "explanation": "Both give the memory back on every path automatically. That is the conclusion of the argument in this lesson rather than a rule handed down."
+    }
+  ]
+}
