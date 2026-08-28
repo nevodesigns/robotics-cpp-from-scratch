@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cctype>
+#include <map>
 
 namespace rcpp {
 namespace {
@@ -18,15 +19,36 @@ bool leading_number(const std::string& name, int& out) {
 
 std::string phase_title_from_slug(const std::string& slug) {
   const std::size_t dash = slug.find('-');
-  std::string words = dash == std::string::npos ? slug : slug.substr(dash + 1);
-  std::replace(words.begin(), words.end(), '-', ' ');
-  bool new_word = true;
-  for (char& c : words) {
-    if (new_word && std::isalpha(static_cast<unsigned char>(c)))
-      c = static_cast<char>(std::toupper(static_cast<unsigned char>(c)));
-    new_word = (c == ' ');
+  const std::string body = dash == std::string::npos ? slug : slug.substr(dash + 1);
+
+  // A phase title is read by a learner, so it is worth spelling properly.
+  // Words that are acronyms or that should stay lowercase are listed rather
+  // than guessed at, because there are few of them and guessing reads worse
+  // than a short table.
+  static const std::map<std::string, std::string> spellings = {
+      {"cpp", "C++"},   {"qt", "Qt"},     {"raii", "RAII"}, {"ros", "ROS 2"},
+      {"i", "I"},       {"ii", "II"},     {"iii", "III"},   {"iv", "IV"},
+      {"and", "and"},   {"the", "the"},   {"of", "of"},     {"for", "for"},
+      {"in", "in"},     {"to", "to"},     {"a", "a"},       {"with", "with"},
+  };
+
+  std::string title;
+  bool first_word = true;
+  for (const std::string& raw : split(body, '-')) {
+    if (raw.empty()) continue;
+    if (!title.empty()) title += ' ';
+
+    const auto known = spellings.find(raw);
+    if (known != spellings.end() && !(first_word && known->second == raw)) {
+      title += known->second;
+    } else {
+      std::string word = raw;
+      word[0] = static_cast<char>(std::toupper(static_cast<unsigned char>(word[0])));
+      title += word;
+    }
+    first_word = false;
   }
-  return words;
+  return title;
 }
 
 std::string Lesson::target_name() const {

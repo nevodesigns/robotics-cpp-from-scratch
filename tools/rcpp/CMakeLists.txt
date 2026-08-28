@@ -13,6 +13,8 @@ add_executable(rcpp
   cmd_explain.cpp
   cmd_catalog.cpp
   cmd_readme.cpp
+  cmd_next.cpp
+  progress.cpp
 )
 
 target_compile_features(rcpp PRIVATE cxx_std_17)

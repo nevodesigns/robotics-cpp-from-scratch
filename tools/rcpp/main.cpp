@@ -36,6 +36,8 @@ usage: rcpp <command> [options]
 
   doctor          check this machine and print the exact fix for anything missing
   start           show which lesson to open first
+  next            show what is unlocked now, from what you have passed
+  status          show how far you have got, phase by phase
   list            list every phase and lesson found on disk
   verify <id>     build your exercise and run the lesson's real test suite
   explain [text]  look an error up in the Failure Atlas, or pipe it in on stdin
@@ -73,6 +75,8 @@ int main(int argc, char** argv) {
   if (command == "audit") return cmd_audit(args);
   if (command == "catalog") return cmd_catalog(args);
   if (command == "readme") return cmd_readme(args);
+  if (command == "next") return cmd_next(args);
+  if (command == "status") return cmd_status(args);
 
   std::cerr << "rcpp: unknown command: " << command << "\n\n";
   usage();

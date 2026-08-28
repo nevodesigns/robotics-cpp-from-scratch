@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "catalog.hpp"
+#include "progress.hpp"
 #include "commands.hpp"
 #include "util.hpp"
 
@@ -85,7 +86,18 @@ int cmd_verify(const Args& args) {
   const int test_status = shell("ctest --test-dir " + quote(build_dir) + filter + " --output-on-failure");
 
   if (test_status == 0) {
-    std::cout << style::pass("\nPassed.") << " Your implementation satisfies the same tests the reference does.\n\n";
+    std::cout << style::pass("\nPassed.")
+              << " Your implementation satisfies the same tests the reference does.\n";
+
+    // Progress is only ever recorded here, after the real suite passed against
+    // the learner's own code. There is no command that marks a lesson done by
+    // assertion, because the tests are what decide.
+    if (!all && !reference && lesson != nullptr) {
+      if (record_pass(*root, lesson->id)) {
+        std::cout << "  " << style::dim("recorded, run rcpp next for what this unlocks") << "\n";
+      }
+    }
+    std::cout << "\n";
     return 0;
   }
   std::cout << style::fail("\nNot passing yet.") << " Read the first failing check above, it names the exact expectation.\n\n";

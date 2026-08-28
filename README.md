@@ -116,6 +116,17 @@ phases/14-control/01-pid-from-scratch/
 That builds your version and runs it against the same tests continuous
 integration runs against the reference. Green means finished. Nothing else does.
 
+Passing records progress, and progress drives the course:
+
+```bash
+./build/default/bin/rcpp next      # what is unlocked now
+./build/default/bin/rcpp status    # how far you have got
+```
+
+Progress is recorded in one place only, by `rcpp verify`, and only when the real
+suite passed against your own code. There is no command that marks a lesson done
+by asserting it, because the tests are what decide.
+
 When something breaks and the error means nothing to you:
 
 ```bash
@@ -137,6 +148,8 @@ contribute to it by phase 05.
 |---|---|
 | `rcpp doctor` | Checks this machine, prints the exact fix for anything missing |
 | `rcpp start` | Says which lesson to open first |
+| `rcpp next` | Shows what is unlocked now, from what you have actually passed |
+| `rcpp status` | Shows how far you have got, phase by phase |
 | `rcpp list` | Lists every phase and lesson found on disk |
 | `rcpp verify <id>` | Builds your exercise and runs the lesson's real tests |
 | `rcpp explain` | Looks an error up in the Failure Atlas |
