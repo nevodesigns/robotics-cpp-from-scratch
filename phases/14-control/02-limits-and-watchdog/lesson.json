@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "14-02-limits-and-watchdog",
+  "title": "Limits and the Watchdog: Failing Into a Safe State",
+  "type": "build",
+  "minutes": 105,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "windows-msvc2022"],
+  "hardware_tier": 1,
+  "requires": ["14-01-pid-from-scratch"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "artifact": { "module": "rc::control", "note": "the watchdog every capstone is required to use" },
+  "breaks_first": ["E-CTRL-0003", "E-CTRL-0004", "E-NUM-0005"]
+}

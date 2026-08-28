@@ -1,0 +1,78 @@
+{
+  "lesson": "14-02-limits-and-watchdog",
+  "title": "Limits and the Watchdog: Failing Into a Safe State",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Your control program stops running while the motor command is 0.9. What happens?",
+      "options": [
+        "The motor keeps running at 0.9 until something physical stops it",
+        "The motor stops, because no new command arrives",
+        "The motor ramps down slowly on its own",
+        "The operating system resets the motor to zero"
+      ],
+      "correct": 0,
+      "explanation": "Nothing tells the actuator that the sender died. The last command it received stays in effect, which is why commands need an expiry."
+    },
+    {
+      "stage": "check",
+      "question": "What does feeding a watchdog mean?",
+      "options": [
+        "Recording that a fresh command arrived, which pushes the expiry deadline out",
+        "Setting the output to the safe value",
+        "Increasing the timeout",
+        "Restarting the control loop"
+      ],
+      "correct": 0,
+      "explanation": "Each feed says the sender is still alive. If feeding stops, the deadline passes and the guard forces the safe value."
+    },
+    {
+      "stage": "check",
+      "question": "Why must a watchdog that has never been fed report expired?",
+      "options": [
+        "Otherwise it hides the worst case, where commands never arrived at all",
+        "Because zero is not a valid time",
+        "To make the first feed take effect immediately",
+        "Because the timeout has not been set yet"
+      ],
+      "correct": 0,
+      "explanation": "Starting in a trusting state means a robot whose command source never started would run on stale defaults with nothing objecting."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the safe value have no default in this design?",
+      "options": [
+        "The safe state depends on the machine, and a silent default hides a safety decision",
+        "Because zero is unsafe for all machines",
+        "Because C++ does not allow default arguments in constructors",
+        "To force the caller to write more code"
+      ],
+      "correct": 0,
+      "explanation": "Zero is safe for a wheel and dangerous for an arm holding a load. Requiring the value makes the engineer make that decision knowingly."
+    },
+    {
+      "stage": "post",
+      "question": "What can a software watchdog inside your control program NOT protect against?",
+      "options": [
+        "Its own process being killed",
+        "A stalled control loop",
+        "A thread that stops calling update",
+        "A command source that never starts"
+      ],
+      "correct": 0,
+      "explanation": "It disappears with the process it lives in. That is why a hardware watchdog in the drive and a wired emergency stop sit outside it."
+    },
+    {
+      "stage": "post",
+      "question": "Why is an emergency stop wired so that a broken wire stops the machine?",
+      "options": [
+        "So a failure in the safety circuit itself results in a stop rather than an unnoticed loss of protection",
+        "Because it uses less current",
+        "So the stop button can be pressed remotely",
+        "Because normally open contacts are more expensive"
+      ],
+      "correct": 0,
+      "explanation": "The principle is that the failure of the protection must itself be safe. Phase 19 covers this and the standards that require it."
+    }
+  ]
+}
