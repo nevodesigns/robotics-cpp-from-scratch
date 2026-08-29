@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "03-04-algorithms-over-loops",
+  "title": "Algorithms: The Loops You Should Not Write",
+  "type": "build",
+  "minutes": 105,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "hardware_tier": 0,
+  "requires": ["03-03-containers-and-their-costs"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "artifact": { "module": "rc::core", "note": "the reading batch helpers, written the way the library intends" },
+  "breaks_first": ["E-CPP-0018", "E-NUM-0011", "E-CPP-0019"]
+}

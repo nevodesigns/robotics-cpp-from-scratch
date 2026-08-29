@@ -1,0 +1,78 @@
+{
+  "lesson": "03-04-algorithms-over-loops",
+  "title": "Algorithms: The Loops You Should Not Write",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does end() point at?",
+      "options": [
+        "One position past the last element",
+        "The last element",
+        "The first element",
+        "Nothing, it is always null"
+      ],
+      "correct": 0,
+      "explanation": "That is why begin() to end() visits every element exactly once, and why a search returning end() means not found rather than pointing at something."
+    },
+    {
+      "stage": "check",
+      "question": "What does std::remove_if do to a container's size?",
+      "options": [
+        "Nothing. It shuffles the keepers to the front and returns the new end",
+        "It shrinks the container to fit",
+        "It sets the removed elements to a default value",
+        "It reallocates the container"
+      ],
+      "correct": 0,
+      "explanation": "It only has iterators, and iterators cannot resize a container. The erase call is what actually shortens it, and calling remove_if alone reports no error."
+    },
+    {
+      "stage": "check",
+      "question": "What is wrong with std::accumulate(begin, end, 0) over temperatures?",
+      "options": [
+        "The starting value makes every addition integer, so each step truncates",
+        "It cannot accumulate structs",
+        "It starts from the wrong end",
+        "Nothing, 0 is the correct starting value"
+      ],
+      "correct": 0,
+      "explanation": "The type of the initial value is the type of the accumulator. Writing 0.0 instead of 0 is the whole fix, and the compiler accepts either without complaint."
+    },
+    {
+      "stage": "check",
+      "question": "Why must a comparator for std::sort be false for equal elements?",
+      "options": [
+        "Otherwise an element counts as before itself and the sort walks off the end of the range",
+        "Because sorting would be unstable",
+        "Because equal elements would be removed",
+        "So the sort can run in parallel"
+      ],
+      "correct": 0,
+      "explanation": "The partition step hunts a pivot that cannot exist, and the result is a heap buffer overflow deep inside the standard library, which is the crash triaged in lesson 04-02."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a named algorithm usually better than the equivalent loop?",
+      "options": [
+        "It states what is being done, and the bounds are not yours to get wrong",
+        "It always runs faster",
+        "It uses less memory",
+        "It works on containers that loops cannot handle"
+      ],
+      "correct": 0,
+      "explanation": "The name carries the intent, and the off by one that a hand written loop invites simply cannot be written."
+    },
+    {
+      "stage": "post",
+      "question": "After std::find_if, what must happen before reading the result?",
+      "options": [
+        "Compare it against end(), because dereferencing end() is undefined behaviour",
+        "Check that the container is not empty",
+        "Convert it to an index",
+        "Nothing, the result is always valid"
+      ],
+      "correct": 0,
+      "explanation": "It is exactly the null pointer check in different clothing: the not found answer is a value that must never be dereferenced."
+    }
+  ]
+}
