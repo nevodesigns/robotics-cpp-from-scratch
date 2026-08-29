@@ -147,9 +147,18 @@ jobs:
               continue
             fi
             binary=$(find build -name "$target" -type f -perm -u+x | head -1)
-            [ -z "$binary" ] && continue
-            "$binary" > /dev/null 2>&1
-            code=$?
+            # Written as a full if rather than [ -z ... ] && continue, because
+            # the short form evaluates to false whenever the binary does exist,
+            # and this step runs under errexit, which then kills it silently.
+            if [ -z "$binary" ]; then
+              continue
+            fi
+            # A failing exercise is the expected outcome here, so its non zero
+            # exit must not reach errexit. Capturing it with || is what keeps
+            # the loop alive; without this the step dies on the first lesson
+            # and reports nothing at all.
+            code=0
+            "$binary" > /dev/null 2>&1 || code=$?
             # 0 means the shipped exercise already passes, which is a bug in the
             # lesson. Anything above 128 is a signal, which means it crashed.
             if [ "$code" -eq 0 ]; then
