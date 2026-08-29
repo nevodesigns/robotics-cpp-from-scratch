@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "14-03-closing-the-loop",
+  "title": "Closing the Loop: Driving the Robot to a Target",
+  "type": "build",
+  "minutes": 120,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "hardware_tier": 1,
+  "requires": ["14-02-limits-and-watchdog", "00-04-first-motion", "01-03-references-and-angles"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "artifact": { "module": "rc::control", "note": "the waypoint driver, and the first system built from several phases at once" },
+  "breaks_first": ["E-NUM-0006", "E-CTRL-0003", "E-CTRL-0005"]
+}

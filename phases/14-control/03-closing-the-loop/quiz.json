@@ -1,0 +1,78 @@
+{
+  "lesson": "14-03-closing-the-loop",
+  "title": "Closing the Loop: Driving the Robot to a Target",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does the controller control heading rather than position directly?",
+      "options": [
+        "A differential drive cannot move sideways, so commanding x and y asks for motion it cannot perform",
+        "Because position is harder to measure",
+        "Because heading errors are always smaller",
+        "Because a PID can only control one value"
+      ],
+      "correct": 0,
+      "explanation": "The machine can turn to face a target and drive forward. Controlling heading and choosing a forward speed expresses exactly what it can do."
+    },
+    {
+      "stage": "check",
+      "question": "How do you get wheel speeds from a forward speed and a turn rate?",
+      "options": [
+        "Add and subtract half the turn rate times the wheel base from the forward speed",
+        "Multiply the forward speed by the turn rate",
+        "Divide the forward speed by the wheel base",
+        "Set one wheel to the forward speed and the other to the turn rate"
+      ],
+      "correct": 0,
+      "explanation": "It is the model from lesson 00-04 rearranged. Forward is the average of the wheels and turn is their difference over the base, so going back is half the difference either side of the average."
+    },
+    {
+      "stage": "check",
+      "question": "What happens if the heading error is not wrapped?",
+      "options": [
+        "A target just behind produces an error of nearly a full turn, and the robot spins the long way round",
+        "The error becomes negative",
+        "The PID output saturates permanently",
+        "Nothing, atan2 already wraps its result"
+      ],
+      "correct": 0,
+      "explanation": "atan2 returns a wrapped angle, but subtracting the robot's heading from it can leave the difference outside the range, so the difference has to be wrapped too."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the forward speed fade with aim rather than switching on and off?",
+      "options": [
+        "A switch produces a step change in the command, which is what the rate limiter exists to prevent",
+        "Because fading is easier to compute",
+        "Because the PID cannot handle a step input",
+        "Because switching would exceed the wheel limit"
+      ],
+      "correct": 0,
+      "explanation": "A step in the actuator command is exactly the lurch that lesson 14-02 was about. Fading keeps the behaviour continuous and the hardware happy."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the watchdog checked before any control arithmetic?",
+      "options": [
+        "The safe state should not depend on the rest of the function being correct",
+        "Because the arithmetic is slow",
+        "Because the PID must not be updated twice",
+        "Because the watchdog needs the current time first"
+      ],
+      "correct": 0,
+      "explanation": "Putting the stop first means a bug anywhere below it cannot prevent the robot from stopping. Safety checks belong at the top for that reason."
+    },
+    {
+      "stage": "post",
+      "question": "A test that stops the moment the robot first arrives would miss which problem?",
+      "options": [
+        "Overshooting, where the robot passes the target and has to come back",
+        "Turning the wrong way",
+        "Exceeding the wheel speed limit",
+        "Failing to move at all"
+      ],
+      "correct": 0,
+      "explanation": "That is why the test keeps driving for several seconds after arrival and requires the robot to stay put. A follower that overshoots passes the naive version."
+    }
+  ]
+}
