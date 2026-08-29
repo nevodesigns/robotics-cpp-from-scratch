@@ -1,0 +1,78 @@
+{
+  "lesson": "04-01-what-a-build-system-does",
+  "title": "What a Build System Actually Does",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is a build system fundamentally doing?",
+      "options": [
+        "Visiting a graph of targets in dependency order, skipping the ones that are up to date",
+        "Compiling every source file in alphabetical order",
+        "Watching files and recompiling whatever changes",
+        "Translating C++ into machine code"
+      ],
+      "correct": 0,
+      "explanation": "A graph, an order, and a rule for staleness. The compiler does the translating; the build system decides what to translate and when."
+    },
+    {
+      "stage": "check",
+      "question": "What is a topological order?",
+      "options": [
+        "One where every target appears after everything it depends on",
+        "Alphabetical order of target names",
+        "The order the targets were declared in",
+        "Smallest targets first"
+      ],
+      "correct": 0,
+      "explanation": "You cannot link before compiling. The order exists so that whenever a target is reached, everything it needs is already built."
+    },
+    {
+      "stage": "check",
+      "question": "A pass over the graph takes no target and some remain. What does that mean?",
+      "options": [
+        "Every remaining target is waiting on another remaining target, which is a cycle",
+        "The graph is finished",
+        "A target has no inputs",
+        "The build is up to date"
+      ],
+      "correct": 0,
+      "explanation": "No valid order exists, so the build system must refuse and name the targets rather than loop or pick arbitrarily."
+    },
+    {
+      "stage": "check",
+      "question": "Which staleness rule is the one people forget?",
+      "options": [
+        "A target is stale when a target it depends on is stale",
+        "A target is stale when its output is missing",
+        "A target is stale when an input is newer than its output",
+        "A target is stale when it has no inputs"
+      ],
+      "correct": 0,
+      "explanation": "Without it, changing a shared header rebuilds the objects but relinks nothing, and the program is quietly assembled from mismatched pieces."
+    },
+    {
+      "stage": "post",
+      "question": "Why does adding a source file sometimes have no effect until you configure again?",
+      "options": [
+        "The graph is worked out at configure time, so building only executes the graph already written down",
+        "Because the compiler caches source files",
+        "Because timestamps are only read once",
+        "Because new files default to being excluded"
+      ],
+      "correct": 0,
+      "explanation": "Configure decides the graph, build executes it. Editing a file already in the graph is picked up automatically; changing the shape of the graph is not."
+    },
+    {
+      "stage": "post",
+      "question": "The build reports that there is no work to do, and you are sure there should be. What is most likely?",
+      "options": [
+        "Nothing the graph knows about changed, so doing nothing is the correct answer",
+        "The build system is broken",
+        "The output files need deleting first",
+        "The compiler is caching results incorrectly"
+      ],
+      "correct": 0,
+      "explanation": "It is a disagreement about what changed. Either the edit was somewhere the graph does not track, or the graph needs reconfiguring to learn about it."
+    }
+  ]
+}
