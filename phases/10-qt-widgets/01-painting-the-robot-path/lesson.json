@@ -4,12 +4,32 @@
   "title": "Painting: Watching the Robot You Wrote in Phase 00 Drive",
   "type": "build",
   "minutes": 105,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 1,
-  "requires": ["09-01-the-qt-object-model", "00-04-first-motion"],
+  "requires": [
+    "09-01-the-qt-object-model",
+    "00-04-first-motion"
+  ],
   "cxx_standard": 17,
-  "qt": { "modules": ["Widgets"], "min_version": "6.2" },
+  "qt": {
+    "modules": [
+      "Widgets"
+    ],
+    "min_version": "6.2"
+  },
   "ros2": null,
-  "artifact": { "module": "rc::qt", "note": "the path view every later tool reuses" },
-  "breaks_first": ["E-QT-0004", "E-QT-0006", "E-NUM-0004"]
+  "artifact": {
+    "module": "rc::qt",
+    "note": "the path view every later tool reuses"
+  },
+  "breaks_first": [
+    "E-QT-0004",
+    "E-QT-0006",
+    "E-NUM-0004"
+  ]
 }

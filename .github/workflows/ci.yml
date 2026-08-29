@@ -78,6 +78,17 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
         if: runner.os == 'Windows'
 
+      # Windows has no apt, so Qt comes from the official archive. Pinned to a
+      # version rather than floating, because a curriculum that claims a
+      # toolchain should claim a specific one.
+      - name: install Qt on Windows
+        if: runner.os == 'Windows' && matrix.qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.5.3'
+          arch: win64_msvc2019_64
+          cache: true
+
       - name: configure
         shell: bash
         env:

@@ -35,8 +35,8 @@
       "runner": "windows-2022",
       "cc": "",
       "cxx": "",
-      "qt": false,
-      "note": "Qt is not installed on this lane yet, so no Qt lesson may claim it."
+      "qt": true,
+      "note": "Qt is installed on this lane from the official archive, so Qt lessons may claim it."
     }
   ]
 }
