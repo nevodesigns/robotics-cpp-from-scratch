@@ -1,0 +1,78 @@
+{
+  "lesson": "06-02-rotations-and-their-limits",
+  "title": "Rotations: Matrices, Order, and the Angle That Vanishes",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "How should you read the columns of a rotation matrix?",
+      "options": [
+        "Each column is where one axis ends up",
+        "Each column is one of the three angles",
+        "Each column is a scale factor for that axis",
+        "The columns have no individual meaning"
+      ],
+      "correct": 0,
+      "explanation": "That reading makes the signs checkable by hand: apply the matrix to a unit axis and you should get the corresponding column back."
+    },
+    {
+      "stage": "check",
+      "question": "What makes a matrix a rotation rather than any other matrix?",
+      "options": [
+        "Every column has length one and every pair of columns is perpendicular",
+        "Its determinant is not zero",
+        "It contains only sines and cosines",
+        "It is square"
+      ],
+      "correct": 0,
+      "explanation": "Being orthonormal is exactly the statement that lengths and angles survive the transform, which is what turning something means, and it is the property drift destroys."
+    },
+    {
+      "stage": "check",
+      "question": "Rx(90) then Ry(90) compared with Ry(90) then Rx(90):",
+      "options": [
+        "They give different orientations, because rotation does not commute",
+        "They give the same orientation",
+        "They differ only in sign",
+        "The second is invalid"
+      ],
+      "correct": 0,
+      "explanation": "Try it with a book. This is why every convention has to state its order, and why using a different one silently gives wrong answers everywhere."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the transpose of a rotation also its inverse?",
+      "options": [
+        "Because the columns are orthonormal, which is precisely that condition",
+        "Because rotations are symmetric",
+        "Because the determinant is one",
+        "It is a coincidence that holds only for small angles"
+      ],
+      "correct": 0,
+      "explanation": "It also gives a free diagnostic: if transposing no longer undoes the matrix, the matrix has stopped being a rotation."
+    },
+    {
+      "stage": "post",
+      "question": "At pitch of ninety degrees, adding the same amount to roll and yaw changes the matrix by about 1e-16. Why?",
+      "options": [
+        "The roll and yaw axes have been turned onto each other, so only their difference matters",
+        "The arithmetic overflows at that angle",
+        "Because cosine of ninety degrees is zero and the terms cancel by accident",
+        "Because the tolerance in the test is too loose"
+      ],
+      "correct": 0,
+      "explanation": "Two of the three numbers have collapsed into one. It is structural: three numbers cannot cover every orientation smoothly, and no axis order avoids it."
+    },
+    {
+      "stage": "post",
+      "question": "Why must long running code renormalise its rotation matrices?",
+      "options": [
+        "Rounding accumulates until the matrix stops keeping lengths and starts scaling and shearing",
+        "Because matrices lose precision when stored",
+        "To keep the determinant positive",
+        "Because compilers reorder floating point operations"
+      ],
+      "correct": 0,
+      "explanation": "The measured drift after a hundred thousand compositions is small, growing, and one directional. It never recovers on its own."
+    }
+  ]
+}
