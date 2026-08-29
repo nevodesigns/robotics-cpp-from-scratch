@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "01-05-strings-and-text",
+  "title": "Strings: Text That Owns Itself, and Views That Do Not",
+  "type": "build",
+  "minutes": 90,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "hardware_tier": 0,
+  "requires": ["01-04-arrays-and-spans"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "artifact": { "module": "rc::core", "note": "the text helpers the config parser and the sensor log both use" },
+  "breaks_first": ["E-CPP-0020", "E-MEM-0001", "E-CPP-0007"]
+}
