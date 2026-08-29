@@ -1,0 +1,78 @@
+{
+  "lesson": "05-02-fakes-and-replay",
+  "title": "Fakes and Replay: Testing Code That Talks to Hardware",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why can code that names a concrete device not be tested properly?",
+      "options": [
+        "It only runs where that device is, and the device will not fail on demand",
+        "Because device drivers are always written in C",
+        "Because hardware access requires administrator permissions",
+        "Because devices are too slow for tests"
+      ],
+      "correct": 0,
+      "explanation": "Three problems at once: nobody without the device can run it, the readings are never repeatable, and the interesting failures happen on the device's schedule rather than yours."
+    },
+    {
+      "stage": "check",
+      "question": "What is the difference between a fake and a mock?",
+      "options": [
+        "A fake is a working implementation with a shortcut, a mock records how it was called",
+        "A fake is for hardware, a mock is for software",
+        "A mock is faster than a fake",
+        "There is no difference"
+      ],
+      "correct": 0,
+      "explanation": "Fakes make tests read like descriptions of behaviour. Mock heavy suites describe implementation, and break when the implementation changes even though the behaviour did not."
+    },
+    {
+      "stage": "check",
+      "question": "Why does SensorSource need a virtual destructor?",
+      "options": [
+        "Deleting a derived object through a base pointer without one is undefined behaviour",
+        "Because it has pure virtual functions",
+        "To allow the class to be copied",
+        "Because unique_ptr requires it"
+      ],
+      "correct": 0,
+      "explanation": "The derived part is never destroyed, so anything it owns leaks quietly. It is the most common mistake with an interface."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the monitor count consecutive failures separately from total failures?",
+      "options": [
+        "A sensor that drops one reading an hour is healthy, one that drops five in a row is not",
+        "Because the total is expensive to compute",
+        "So the mean can be corrected afterwards",
+        "Because consecutive failures are more accurate"
+      ],
+      "correct": 0,
+      "explanation": "Treating every dropout as a fault produces a robot that stops constantly. The run length is what distinguishes noise from a device that has actually gone."
+    },
+    {
+      "stage": "post",
+      "question": "What is the value of replaying a recorded trace rather than generating values?",
+      "options": [
+        "Every test afterwards is a reproduction of something a real device actually did",
+        "It runs faster than generating numbers",
+        "It removes the need for an interface",
+        "It guarantees the code works on hardware"
+      ],
+      "correct": 0,
+      "explanation": "Recorded data carries the oddities real devices produce and invented data does not. It also turns needing a LiDAR into needing a file."
+    },
+    {
+      "stage": "post",
+      "question": "A test passes with the fake and fails on real hardware. What is the most likely reason?",
+      "options": [
+        "The fake is more cooperative than the device: never late, never out of range, never gone mid read",
+        "The interface is wrong",
+        "The hardware is faulty",
+        "The test was written incorrectly"
+      ],
+      "correct": 0,
+      "explanation": "A fake only exhibits what it was told to. Every difference you discover on hardware is worth adding to the fake so it is covered from then on."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "05-02-fakes-and-replay",
+  "title": "Fakes and Replay: Testing Code That Talks to Hardware",
+  "type": "build",
+  "minutes": 120,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "hardware_tier": 0,
+  "requires": ["05-01-building-the-test-framework", "03-03-containers-and-their-costs"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "artifact": { "module": "rc::io", "note": "the fake device pattern every driver lesson depends on" },
+  "breaks_first": ["E-TEST-0001", "E-CPP-0017", "E-CTRL-0003"]
+}
