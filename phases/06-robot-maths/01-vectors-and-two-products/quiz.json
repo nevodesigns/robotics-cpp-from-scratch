@@ -1,0 +1,78 @@
+{
+  "lesson": "06-01-vectors-and-two-products",
+  "title": "Vectors: The Dot Product, the Cross Product, and Cross Track Error",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is a distance from the path not enough to steer a robot back onto it?",
+      "options": [
+        "It does not say which side the robot is on, and turning either way reduces a distance",
+        "Distances are too slow to compute",
+        "Because the path may be curved",
+        "Because distance is always positive in floating point"
+      ],
+      "correct": 0,
+      "explanation": "The controller needs a signed quantity. That sign is what the cross product supplies, and it is why cross track error is signed rather than a magnitude."
+    },
+    {
+      "stage": "check",
+      "question": "What does the sign of the dot product tell you?",
+      "options": [
+        "Whether the two directions broadly agree, so whether a target is ahead or behind",
+        "Which side of the path the robot is on",
+        "How far apart the vectors are",
+        "Whether the vectors are the same length"
+      ],
+      "correct": 0,
+      "explanation": "Positive means they point the same way, negative means opposed. That single test answers is this in front of me, which is worth the whole operation."
+    },
+    {
+      "stage": "check",
+      "question": "What does the two dimensional cross product give you?",
+      "options": [
+        "One signed number: zero when parallel, positive when the second is turned anticlockwise",
+        "A third vector perpendicular to both",
+        "The distance between the vectors",
+        "The angle in degrees"
+      ],
+      "correct": 0,
+      "explanation": "In two dimensions it collapses to a single number, the signed area of the parallelogram the vectors span, and its sign answers which way."
+    },
+    {
+      "stage": "check",
+      "question": "Why compute an angle with atan2 of the cross and the dot rather than acos?",
+      "options": [
+        "acos loses small angles entirely, can leave its domain and return NaN, and has no sign",
+        "atan2 is faster",
+        "acos only works on unit vectors",
+        "atan2 returns degrees, which is more useful"
+      ],
+      "correct": 0,
+      "explanation": "Measured on a real machine, acos returns exactly zero for a true angle of 1e-8. atan2 returns it correctly, is well conditioned everywhere, and answers a signed angle already in range."
+    },
+    {
+      "stage": "post",
+      "question": "Why divide the cross product by the length of the path segment?",
+      "options": [
+        "The cross product is an area, and dividing by the base turns it into a height",
+        "To normalise the sign",
+        "To convert radians to metres",
+        "Because the cross product is otherwise too large to store"
+      ],
+      "correct": 0,
+      "explanation": "The perpendicular distance is the height of the parallelogram. The sign survives the division, which is what keeps the answer signed."
+    },
+    {
+      "stage": "post",
+      "question": "What should normalising a zero vector return?",
+      "options": [
+        "The zero vector, decided deliberately, because there is no direction to give",
+        "A vector of length one pointing along x",
+        "NaN, which correctly signals the problem",
+        "It should throw an exception"
+      ],
+      "correct": 0,
+      "explanation": "Dividing by a length of zero fills the result with NaN, which spreads silently through everything downstream. Answering deliberately is what stops that."
+    }
+  ]
+}
