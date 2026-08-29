@@ -1,5 +1,7 @@
 # Robotics C++ From Scratch
 
+[![ci](https://github.com/nevodesigns/robotics-cpp-from-scratch/actions/workflows/ci.yml/badge.svg)](https://github.com/nevodesigns/robotics-cpp-from-scratch/actions/workflows/ci.yml)
+
 > Robotics, taught in one language, from never having compiled anything to
 > shipping a control station and a real time controller.
 
@@ -18,7 +20,10 @@ in this repository, not written by hand.
 ```
 <!-- COUNTS:END -->
 
-Every lesson here builds and passes its tests on the toolchains it claims.
+Every lesson here builds and passes its tests on the toolchains it claims, and
+that is checked by machine on every push rather than asserted. The badge above
+covers four toolchains, the address and undefined behaviour sanitizers, and a
+lane that proves every shipped exercise still fails without crashing.
 
 ## Which machine do you have
 
@@ -29,8 +34,8 @@ continuous integration proves on every change.
 |---|---|---|---|---|---|
 | Ubuntu 24.04 LTS | GCC 13 | 3.28 | 6.4 | Jazzy, until 2029 | Primary |
 | Ubuntu 22.04 LTS | GCC 11 | 3.22 | 6.2 | Humble, until 2027 | Primary |
-| Ubuntu 22.04 LTS | Clang 14 | 3.22 | 6.2 | Humble, until 2027 | Proven in CI |
-| Windows 11 | MSVC 2022 | bundled | installer | not supported | Everything except the ROS 2 module |
+| Ubuntu 22.04 LTS | Clang 14 | 3.22 | 6.2 | Humble, until 2027 | Primary |
+| Windows 11 | MSVC 2022 | bundled | installer | not supported | Everything except Qt and the ROS 2 module |
 | WSL2 on Windows | same as Ubuntu | same | same | Humble or Jazzy | The route into Linux robotics from Windows |
 | macOS | AppleClang | brew | brew | not supported | Best effort, never a blocking lane |
 
