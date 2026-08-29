@@ -4,12 +4,26 @@
   "title": "What a Build System Actually Does",
   "type": "build",
   "minutes": 120,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["03-02-errors-that-are-not-exceptional"],
+  "requires": [
+    "03-03-containers-and-their-costs"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
-  "artifact": { "module": "rc::core", "note": "a build graph, and the end of CMake being magic" },
-  "breaks_first": ["E-BUILD-0002", "E-CMAKE-0001", "E-CPP-0012"]
+  "artifact": {
+    "module": "rc::core",
+    "note": "a build graph, and the end of CMake being magic"
+  },
+  "breaks_first": [
+    "E-BUILD-0002",
+    "E-CMAKE-0001",
+    "E-CPP-0012"
+  ]
 }

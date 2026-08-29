@@ -49,6 +49,7 @@ phases/NN-phase-slug/NN-lesson-slug/
 | L018 | No discarded style: `NULL`, `malloc`, `printf`, `strcpy`, `typedef`, `using namespace std` and friends |
 | L019 | Every platform a lesson claims is defined in `platforms.json`, and a lesson needing Qt only claims a toolchain whose lane installs Qt |
 | L020 | A lesson that cites another lesson by number cites one that exists. Promises to a phase are fine, a promise to a specific lesson is a claim |
+| L021 | A lesson only uses a facility that it or one of its prerequisites declares in `teaches`, so nothing is met before it is taught |
 
 ## The six required sections
 
@@ -60,6 +61,29 @@ phases/NN-phase-slug/NN-lesson-slug/
 | Use It | The same job through the production library, with the trade off named |
 | What Breaks First | The three failures a newcomer will actually hit, each linked to an atlas entry |
 | Ship It | What graduates into `librc` and where it is used again |
+
+## Nothing is met before it is taught
+
+The floor learner has never programmed. That promise is only kept if a lesson
+never uses something no earlier lesson explained, and a prerequisite graph that
+does not check this is decoration.
+
+So a lesson declares what it introduces:
+
+```json
+"teaches": ["std::string", "std::string_view"]
+```
+
+Rule L021 scans each lesson's `exercise/` and `reference/` for a small
+vocabulary of tracked facilities and requires each one to be declared by that
+lesson or by something in its prerequisite chain, however deep. Tests are
+exempt, because they are written by the author rather than completed by the
+learner.
+
+The vocabulary is deliberately short. Every entry has one obvious owning lesson,
+so the rule stays quiet unless something is genuinely out of order. It was added
+after an audit by hand found `std::string` first used in lesson 02-06 and taught
+nowhere, and it caught a second case on its first run.
 
 **What Breaks First is the section that makes this curriculum different.**
 Writing it forces the author to name the real failures, and each one must

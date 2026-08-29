@@ -4,12 +4,29 @@
   "title": "Enums: Making the Impossible Unrepresentable",
   "type": "build",
   "minutes": 90,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["01-05-strings-and-text"],
+  "requires": [
+    "01-05-strings-and-text"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
-  "artifact": { "module": "rc::control", "note": "the robot state machine every later phase reports through" },
-  "breaks_first": ["E-CPP-0021", "E-CPP-0022", "E-CPP-0002"]
+  "artifact": {
+    "module": "rc::control",
+    "note": "the robot state machine every later phase reports through"
+  },
+  "breaks_first": [
+    "E-CPP-0021",
+    "E-CPP-0022",
+    "E-CPP-0002"
+  ],
+  "teaches": [
+    "enum class"
+  ]
 }

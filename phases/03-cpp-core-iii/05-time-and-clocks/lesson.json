@@ -26,5 +26,8 @@
     "E-TIME-0001",
     "E-TIME-0002",
     "E-NUM-0002"
+  ],
+  "teaches": [
+    "std::chrono"
   ]
 }

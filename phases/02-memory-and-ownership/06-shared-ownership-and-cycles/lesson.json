@@ -4,12 +4,30 @@
   "title": "Shared Ownership, and the Cycle That Never Releases",
   "type": "build",
   "minutes": 105,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["02-05-copy-and-move-semantics"],
+  "requires": [
+    "02-05-copy-and-move-semantics"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
-  "artifact": { "module": "rc::core", "note": "the subsystem tree, with the ownership direction decided" },
-  "breaks_first": ["E-MEM-0009", "E-MEM-0003", "E-MEM-0007"]
+  "artifact": {
+    "module": "rc::core",
+    "note": "the subsystem tree, with the ownership direction decided"
+  },
+  "breaks_first": [
+    "E-MEM-0009",
+    "E-MEM-0003",
+    "E-MEM-0007"
+  ],
+  "teaches": [
+    "std::shared_ptr",
+    "std::weak_ptr"
+  ]
 }

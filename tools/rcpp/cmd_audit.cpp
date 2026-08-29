@@ -312,6 +312,88 @@ bool contains_code_token(const std::string& code, const std::string& needle) {
   return false;
 }
 
+// L021: a lesson may not use a facility that nothing has taught yet.
+//
+// This is the rule that keeps the curriculum honest for somebody who has never
+// programmed. It was written after an audit by hand found std::string first
+// appearing in lesson 02-06 and taught nowhere, and enum class first appearing
+// in 03-02 for the same reason. A prerequisite graph that does not check this
+// is decoration.
+//
+// The vocabulary is deliberately small. Every entry is a facility with one
+// obvious owning lesson, so the check stays quiet unless something is genuinely
+// out of order.
+struct Facility {
+  const char* token;
+  const char* name;
+};
+
+const std::vector<Facility>& tracked_facilities() {
+  static const std::vector<Facility> facilities = {
+      {"std::string_view", "std::string_view"},
+      {"std::string", "std::string"},
+      {"enum class", "enum class"},
+      {"virtual", "virtual"},
+      {"std::unique_ptr", "std::unique_ptr"},
+      {"std::shared_ptr", "std::shared_ptr"},
+      {"std::weak_ptr", "std::weak_ptr"},
+      {"std::optional", "std::optional"},
+      {"rc::expected", "rc::expected"},
+      {"rc::span", "rc::span"},
+      {"std::map", "std::map"},
+      {"std::chrono", "std::chrono"},
+  };
+  return facilities;
+}
+
+// Everything this lesson teaches, plus everything every prerequisite teaches,
+// however deep. A lesson may use what it introduces itself.
+std::set<std::string> facilities_available(const Lesson& lesson, const Catalog& catalog) {
+  std::set<std::string> available;
+  std::set<std::string> seen;
+
+  std::function<void(const Lesson&)> gather = [&](const Lesson& current) {
+    if (!seen.insert(current.id).second) return;
+    for (const std::string& taught : current.raw.at("teaches").string_list())
+      available.insert(taught);
+    for (const std::string& needed : current.requires_ids) {
+      const Lesson* earlier = catalog.find(needed);
+      if (earlier != nullptr) gather(*earlier);
+    }
+  };
+  gather(lesson);
+  return available;
+}
+
+void check_facility_order(const Lesson& lesson, const Catalog& catalog,
+                          std::vector<Finding>& out) {
+  const std::set<std::string> available = facilities_available(lesson, catalog);
+
+  for (const auto& entry : fs::recursive_directory_iterator(lesson.path)) {
+    if (!entry.is_regular_file()) continue;
+    const std::string ext = entry.path().extension().string();
+    if (ext != ".cpp" && ext != ".hpp" && ext != ".h") continue;
+
+    // Tests may use anything: they are written by the author, not the learner.
+    // Only the code a learner reads and completes is held to the ordering.
+    const std::string relative = fs::relative(entry.path(), lesson.path).string();
+    if (starts_with(relative, "tests")) continue;
+
+    const auto text = read_file(entry.path());
+    if (!text) continue;
+    const std::string code = code_only(*text);
+
+    for (const Facility& facility : tracked_facilities()) {
+      if (!contains_code_token(code, facility.token)) continue;
+      if (available.count(facility.name) > 0) continue;
+      out.push_back({"L021", lesson.rel_path,
+                     relative + " uses " + facility.name +
+                         ", which no lesson in its prerequisite chain teaches. Add it to the "
+                         "teaching lesson's teaches list, or add that lesson as a prerequisite"});
+    }
+  }
+}
+
 // L020: a lesson that cites another lesson by number must cite one that exists.
 //
 // Forward promises are part of how a curriculum reads, and a promise to a phase
@@ -568,6 +650,7 @@ int cmd_audit(const Args& args) {
     check_cxx17_baseline(*lesson, findings);
     check_platform_claims(*lesson, toolchains, findings);
     check_cross_references(*lesson, catalog, findings);
+    check_facility_order(*lesson, catalog, findings);
     check_no_discarded_style(*lesson, findings);
   }
   check_graph(catalog, findings);

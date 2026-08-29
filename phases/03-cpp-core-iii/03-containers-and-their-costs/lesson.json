@@ -4,12 +4,29 @@
   "title": "Containers: Choosing One, and What It Costs",
   "type": "build",
   "minutes": 120,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["03-02-errors-that-are-not-exceptional"],
+  "requires": [
+    "03-02-errors-that-are-not-exceptional"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
-  "artifact": { "module": "rc::core", "note": "the bounded sensor log every later phase records into" },
-  "breaks_first": ["E-CPP-0016", "E-CPP-0007", "E-MEM-0001"]
+  "artifact": {
+    "module": "rc::core",
+    "note": "the bounded sensor log every later phase records into"
+  },
+  "breaks_first": [
+    "E-CPP-0016",
+    "E-CPP-0007",
+    "E-MEM-0001"
+  ],
+  "teaches": [
+    "std::map"
+  ]
 }
