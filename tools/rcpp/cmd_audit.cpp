@@ -240,6 +240,78 @@ void check_quiz(const Lesson& lesson, std::vector<Finding>& out) {
   }
 }
 
+// Looking at code rather than at text.
+//
+// Rules L017 and L018 search for things that must not appear in a lesson. A
+// plain substring search finds them in comments and in prose too, so a lesson
+// that explains why the register keyword was removed gets reported for using
+// it. A rule that cries wolf is a rule people learn to ignore, so the search
+// removes comments and string literals first, then requires a whole token.
+std::string code_only(const std::string& text) {
+  std::string out;
+  out.reserve(text.size());
+
+  enum class In { Code, LineComment, BlockComment, String, Char };
+  In state = In::Code;
+
+  for (std::size_t i = 0; i < text.size(); ++i) {
+    const char c = text[i];
+    const char next = (i + 1 < text.size()) ? text[i + 1] : '\0';
+
+    switch (state) {
+      case In::Code:
+        if (c == '/' && next == '/') { state = In::LineComment; ++i; out += "  "; }
+        else if (c == '/' && next == '*') { state = In::BlockComment; ++i; out += "  "; }
+        else if (c == '"') { state = In::String; out += ' '; }
+        else if (c == '\'') { state = In::Char; out += ' '; }
+        else out += c;
+        break;
+      case In::LineComment:
+        if (c == '\n') { state = In::Code; out += '\n'; }
+        else out += ' ';
+        break;
+      case In::BlockComment:
+        if (c == '*' && next == '/') { state = In::Code; ++i; out += "  "; }
+        else out += (c == '\n') ? '\n' : ' ';
+        break;
+      case In::String:
+        if (c == '\\') { ++i; out += "  "; }
+        else if (c == '"') { state = In::Code; out += ' '; }
+        else out += ' ';
+        break;
+      case In::Char:
+        if (c == '\\') { ++i; out += "  "; }
+        else if (c == '\'') { state = In::Code; out += ' '; }
+        else out += ' ';
+        break;
+    }
+  }
+  return out;
+}
+
+bool identifier_char(char c) {
+  return std::isalnum(static_cast<unsigned char>(c)) != 0 || c == '_';
+}
+
+// A whole token match for identifier-like needles, so NULL does not match
+// NULLABLE and register does not match registered. Anything with punctuation in
+// it, such as malloc( or std::span, is matched as a plain substring.
+bool contains_code_token(const std::string& code, const std::string& needle) {
+  if (needle.empty()) return false;
+  const bool identifier_like = identifier_char(needle.front()) && identifier_char(needle.back());
+
+  std::size_t at = code.find(needle);
+  while (at != std::string::npos) {
+    if (!identifier_like) return true;
+    const bool left_ok = (at == 0) || !identifier_char(code[at - 1]);
+    const std::size_t after = at + needle.size();
+    const bool right_ok = (after >= code.size()) || !identifier_char(code[after]);
+    if (left_ok && right_ok) return true;
+    at = code.find(needle, at + 1);
+  }
+  return false;
+}
+
 // L017: the curriculum is written in C++17, and that is a teaching decision
 // rather than an accident. Facilities from C++20 and C++23 are reached through
 // rc/core/compat.hpp, which the learner reads and understands, so a lesson that
@@ -273,9 +345,10 @@ void check_cxx17_baseline(const Lesson& lesson, std::vector<Finding>& out) {
     if (ext != ".cpp" && ext != ".hpp" && ext != ".h") continue;
     const auto text = read_file(entry.path());
     if (!text) continue;
+    const std::string code = code_only(*text);
     const std::string where = fs::relative(entry.path(), lesson.path).string();
     for (const Later& later : later_facilities) {
-      if (contains(*text, later.token)) {
+      if (contains_code_token(code, later.token)) {
         out.push_back({"L017", lesson.rel_path,
                        where + " uses " + later.token + ", which is " + later.standard +
                            ". This curriculum is C++17: use " + later.instead});
@@ -306,8 +379,8 @@ void check_no_discarded_style(const Lesson& lesson, std::vector<Finding>& out) {
       {"sprintf(", "rc::format"},
       {"printf(", "std::cout, or rc::format"},
       {"using namespace std;", "the std:: prefix, written out"},
-      {"typedef ", "using, which reads left to right"},
-      {"register ", "nothing, the keyword was removed"},
+      {"typedef", "using, which reads left to right"},
+      {"register", "nothing, the keyword was removed"},
       {"throw()", "noexcept"},
   };
 
@@ -317,9 +390,10 @@ void check_no_discarded_style(const Lesson& lesson, std::vector<Finding>& out) {
     if (ext != ".cpp" && ext != ".hpp" && ext != ".h") continue;
     const auto text = read_file(entry.path());
     if (!text) continue;
+    const std::string code = code_only(*text);
     const std::string where = fs::relative(entry.path(), lesson.path).string();
     for (const Discarded& old : discarded) {
-      if (contains(*text, old.token)) {
+      if (contains_code_token(code, old.token)) {
         out.push_back({"L018", lesson.rel_path,
                        where + " uses " + old.token + ", which modern C++ has left behind: use " +
                            old.instead});
