@@ -4,12 +4,26 @@
   "title": "Pointers: Talking About Where Something Is",
   "type": "build",
   "minutes": 90,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["01-04-arrays-and-spans"],
+  "requires": [
+    "01-06-enums-and-states"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
-  "artifact": { "module": "rc::core", "note": "the search helpers that answer with nothing when there is nothing" },
-  "breaks_first": ["E-MEM-0003", "E-CPP-0006", "E-MEM-0001"]
+  "artifact": {
+    "module": "rc::core",
+    "note": "the search helpers that answer with nothing when there is nothing"
+  },
+  "breaks_first": [
+    "E-MEM-0003",
+    "E-CPP-0006",
+    "E-MEM-0001"
+  ]
 }
