@@ -37,7 +37,6 @@ continuous integration proves on every change.
 | Ubuntu 22.04 LTS | Clang 14 | 3.22 | 6.2 | Humble, until 2027 | Primary |
 | Windows 11 | MSVC 2022 | bundled | 6.5 in CI | not supported | Everything except the ROS 2 module |
 | WSL2 on Windows | same as Ubuntu | same | same | Humble or Jazzy | The route into Linux robotics from Windows |
-| macOS | AppleClang | brew | brew | not supported | Best effort, never a blocking lane |
 
 ## Why C++17
 

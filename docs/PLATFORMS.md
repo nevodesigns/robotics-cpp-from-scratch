@@ -17,10 +17,12 @@ Defined once, in [`platforms.json`](../platforms.json). See it with:
 |---|---|---|---|---|---|
 | `ubuntu-22.04-gcc11` | Ubuntu 22.04 LTS | GCC 11 | 3.22 | 6.2 | Humble |
 | `ubuntu-24.04-gcc13` | Ubuntu 24.04 LTS | GCC 13 | 3.28 | 6.4 | Jazzy |
-| `windows-msvc2022` | Windows 11 | MSVC 2022 | bundled | installer | none |
+| `windows-msvc2022` | Windows 11 | MSVC 2022 | bundled | 6.5 in CI | none |
 | `ubuntu-22.04-clang14` | Ubuntu 22.04 LTS | Clang 14 | 3.22 | 6.2 | Humble |
-| `ubuntu-24.04-clang18` | Ubuntu 24.04 LTS | Clang 18 | 3.28 | 6.4 | Jazzy |
-| `macos-clang` | macOS | AppleClang | brew | brew | none |
+
+Toolchains not in this table are not claimed. Clang 18 and macOS were listed in
+an earlier draft and were removed, because nothing verifies them and a platform
+badge that has not been proven is worth less than no badge.
 
 A lesson lists the identifiers it supports in `lesson.json`, and CI builds
 exactly that set. A lesson claiming a toolchain it does not build on fails the
@@ -67,7 +69,10 @@ lesson in phase 12 rather than a footnote.
 
 ## Windows
 
-Phases 00 through 16 and phase 19 support Windows fully with MSVC 2022.
+Windows is a first class platform for everything except ROS 2, and that is
+verified on every push rather than assumed. The lane installs Qt 6.5.3 from the
+official archive, since there is no apt, and it builds and passes every lesson
+including the widget painting one, whose tests render offscreen with no display.
 
 ROS 2 is not supported on Windows by this curriculum. It can be built there, but
 the experience is materially worse and the documentation assumes Linux. Windows
