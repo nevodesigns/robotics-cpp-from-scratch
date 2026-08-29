@@ -1,0 +1,78 @@
+{
+  "lesson": "03-05-time-and-clocks",
+  "title": "Time: Where dt Comes From, and Which Clock to Ask",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Which clock should be used to measure how long something took?",
+      "options": [
+        "steady_clock, because it never goes backwards and never jumps",
+        "system_clock, because it is the actual time",
+        "Either, they behave the same way",
+        "Whichever has the finer resolution"
+      ],
+      "correct": 0,
+      "explanation": "system_clock can be set by an administrator or stepped by a time synchronisation daemon. Elapsed time measured with it can come out negative."
+    },
+    {
+      "stage": "check",
+      "question": "What is system_clock actually for?",
+      "options": [
+        "Recording when something happened, for a log or a timestamp a person reads",
+        "Measuring intervals precisely",
+        "Nothing, it is obsolete",
+        "Timing loops that run for more than a second"
+      ],
+      "correct": 0,
+      "explanation": "A robot uses both clocks in the same program: the steady one for durations, the wall clock for saying when. Swapping their jobs is the bug."
+    },
+    {
+      "stage": "check",
+      "question": "What does the chrono library give you that a double named timeout does not?",
+      "options": [
+        "The units live in the type, so seconds cannot be passed where milliseconds are expected",
+        "Better precision",
+        "Automatic thread safety",
+        "A smaller memory footprint"
+      ],
+      "correct": 0,
+      "explanation": "Confusing milliseconds with seconds is a thousandfold error. With a plain number the units live in a comment, and the mistake is silent."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the first tick report a dt of zero rather than the clock's reading?",
+      "options": [
+        "There is no previous reading to subtract, and the clock's origin is arbitrary",
+        "Because the first interval is always too short to matter",
+        "To make the controller start smoothly",
+        "Because the clock has not been initialised yet"
+      ],
+      "correct": 0,
+      "explanation": "A steady clock counts from a point that means nothing on its own. Reporting it would make a controller integrate a value unrelated to the loop."
+    },
+    {
+      "stage": "post",
+      "question": "Why must the clock be injected rather than read directly inside the timer?",
+      "options": [
+        "Otherwise testing two seconds of behaviour takes two seconds, and a backwards step cannot be arranged at all",
+        "Because steady_clock is slow to call",
+        "To support multiple threads",
+        "Because the standard forbids calling now in a class"
+      ],
+      "correct": 0,
+      "explanation": "With an injected clock the suite covers hours of behaviour in microseconds and can arrange a clock step on demand. It is the same seam as the fake sensor."
+    },
+    {
+      "stage": "post",
+      "question": "A loop stalls and dt arrives as three seconds. What should a controller do?",
+      "options": [
+        "Clamp it to a maximum and record that it happened, rather than integrating it",
+        "Integrate it, since that is the time that really passed",
+        "Treat it as zero",
+        "Stop the robot immediately"
+      ],
+      "correct": 0,
+      "explanation": "Integrating a stall produces one large sudden correction, which on hardware is a lurch. Clamping must be a deliberate decision, which is why it is reported rather than done silently."
+    }
+  ]
+}

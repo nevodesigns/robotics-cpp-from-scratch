@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "03-05-time-and-clocks",
+  "title": "Time: Where dt Comes From, and Which Clock to Ask",
+  "type": "build",
+  "minutes": 105,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "hardware_tier": 0,
+  "requires": ["03-04-algorithms-over-loops"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "artifact": { "module": "rc::core", "note": "the injectable clock every timed lesson from here uses" },
+  "breaks_first": ["E-TIME-0001", "E-TIME-0002", "E-NUM-0002"]
+}
