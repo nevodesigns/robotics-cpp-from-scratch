@@ -81,6 +81,26 @@ Test it against the real error:
 cmake --build build/default 2>&1 | ./build/default/bin/rcpp explain
 ```
 
+## Where things live
+
+```
+CMakeLists.txt          the super project: every lesson is a build target
+CMakePresets.json       one preset per supported toolchain, plus the sanitizers
+platforms.json          the toolchains, and what each lane provides
+cmake/RcLesson.cmake    rc_add_lesson(), which every lesson calls with one line
+cmake/RcPlatform.cmake  maps this compiler to a toolchain identifier
+librc/                  the library the learner accretes across the curriculum
+tools/rcpp/             the tool that carries the repository, written in C++
+atlas/errors/           the Failure Atlas, one file per catalogued error
+phases/NN-slug/NN-slug/ the curriculum
+docs/                   CONTRACT, PLATFORMS, CONTRIBUTING, ARCHITECTURE
+```
+
+Read [CONTRACT.md](CONTRACT.md) before adding anything. It is the enforced
+contract, and `rcpp audit` is the enforcement. The rule behind the rules is that
+those two are the same set: a rule written down without a numbered check will
+drift, and the drift stays invisible because the badge stays green.
+
 ## House rules
 
 - **C++ only under `phases/`.** No Python, no shell scripts, no Node. If
@@ -94,6 +114,10 @@ cmake --build build/default 2>&1 | ./build/default/bin/rcpp explain
   `added the watchdog lesson`, `fixed the float comparison in the rate limiter`.
 - **One lesson per commit.** A pull request adding five lessons has five commits.
 - **Never commit generated files.** `build/` and `catalog.json` are ignored.
+- **The reference implementation always passes**, on every toolchain the lesson
+  claims. That is the gate.
+- **The exercise always fails, and never crashes.** A learner must see a sentence
+  naming what is wrong, so use `RC_REQUIRE` before indexing or dereferencing.
 
 ## What a good lesson looks like
 
