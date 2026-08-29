@@ -108,8 +108,13 @@ Check probe_qt(const Host& host) {
   check.id = "qt6";
   check.label = "Qt 6 development files";
   check.level = Level::RequiredLater;
-  if (host.os == "linux")
-    check.fix = apt_install("qt6-base-dev qt6-declarative-dev");
+  if (host.os == "linux") {
+    // libgl1-mesa-dev is not optional. Qt6 Widgets depends on Qt6 Gui, which
+    // needs OpenGL development files, and qt6-base-dev does not pull them in on
+    // Ubuntu 22.04. Leaving it out makes find_package report Qt as missing,
+    // which sends people looking in entirely the wrong place.
+    check.fix = apt_install("qt6-base-dev qt6-declarative-dev libgl1-mesa-dev");
+  }
   else if (host.os == "windows")
     check.fix = "install Qt 6 with the official open source installer, then add it to CMAKE_PREFIX_PATH";
   else
@@ -119,6 +124,14 @@ Check probe_qt(const Host& host) {
     const CommandResult version = run("qmake6 -query QT_VERSION");
     check.ok = true;
     check.detail = "Qt " + trim(version.output);
+
+    // Qt being present is not enough for the widget lessons. Say so now rather
+    // than letting find_package report a confusing absence later.
+    if (host.os == "linux" && !fs::exists("/usr/include/GL/gl.h")) {
+      check.ok = false;
+      check.detail = "Qt " + trim(version.output) +
+                     ", but the OpenGL development headers are missing, which Qt6 Widgets needs";
+    }
     return check;
   }
   if (fs::exists("/usr/lib/x86_64-linux-gnu/cmake/Qt6")) {

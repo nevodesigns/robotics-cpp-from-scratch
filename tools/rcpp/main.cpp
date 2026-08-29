@@ -44,6 +44,7 @@ usage: rcpp <command> [options]
   audit           enforce the lesson contract, this is what CI runs
   catalog         write the whole curriculum as JSON
   platforms       the toolchains claimed, and the CI matrix generated from them
+  targets         build target names for lessons, for any generator
   readme          check, or fix, the generated counts in README.md
 
 examples
@@ -79,6 +80,7 @@ int main(int argc, char** argv) {
   if (command == "next") return cmd_next(args);
   if (command == "status") return cmd_status(args);
   if (command == "platforms") return cmd_platforms(args);
+  if (command == "targets") return cmd_targets(args);
 
   std::cerr << "rcpp: unknown command: " << command << "\n\n";
   usage();

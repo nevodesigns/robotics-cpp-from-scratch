@@ -92,7 +92,7 @@ anything missing, for your operating system. When it says you are ready:
 On Ubuntu, everything the first phases need is one command:
 
 ```bash
-sudo apt update && sudo apt install -y build-essential cmake ninja-build git gdb qt6-base-dev
+sudo apt update && sudo apt install -y build-essential cmake ninja-build git gdb qt6-base-dev libgl1-mesa-dev
 ```
 
 ## How a lesson works

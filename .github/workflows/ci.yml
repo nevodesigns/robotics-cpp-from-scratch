@@ -70,7 +70,10 @@ jobs:
           sudo apt-get install -y ninja-build ${{ matrix.cxx }}
       - name: install Qt from apt
         if: runner.os == 'Linux' && matrix.qt
-        run: sudo apt-get install -y qt6-base-dev
+        # libgl1-mesa-dev is not optional. Qt6 Widgets depends on Qt6 Gui, which
+        # needs OpenGL development files, and qt6-base-dev does not pull them in
+        # on Ubuntu 22.04. Without it find_package reports Qt6 as missing.
+        run: sudo apt-get install -y qt6-base-dev libgl1-mesa-dev
 
       - uses: ilammy/msvc-dev-cmd@v1
         if: runner.os == 'Windows'
@@ -110,7 +113,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           sudo apt-get update
-          sudo apt-get install -y ninja-build qt6-base-dev
+          sudo apt-get install -y ninja-build qt6-base-dev libgl1-mesa-dev
       - name: configure with address and undefined behaviour sanitizers
         run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DRC_SANITIZE_ADDRESS=ON
       - run: cmake --build build
@@ -129,14 +132,16 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           sudo apt-get update
-          sudo apt-get install -y ninja-build qt6-base-dev
+          sudo apt-get install -y ninja-build qt6-base-dev libgl1-mesa-dev
       - run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
+      - name: build the tool, which supplies the target list
+        run: cmake --build build --target rcpp
       - name: every exercise that compiles must fail with a report, not a crash
         env:
           QT_QPA_PLATFORM: offscreen
         run: |
           status=0
-          for target in $(cmake --build build --target help 2>/dev/null | grep -o 'lesson_[a-z0-9_]*_exercise' | sort -u); do
+          for target in $(./build/bin/rcpp targets --exercises); do
             if ! cmake --build build --target "$target" > /dev/null 2>&1; then
               echo "skip $target, it does not compile on purpose"
               continue
