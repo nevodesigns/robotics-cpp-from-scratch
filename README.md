@@ -75,7 +75,7 @@ industrial work that never touches ROS.
 ## Start
 
 ```bash
-git clone https://github.com/nwokolo/robotics-cpp-from-scratch.git
+git clone https://github.com/nevodesigns/robotics-cpp-from-scratch.git
 cd robotics-cpp-from-scratch
 cmake --preset default
 cmake --build build/default --target rcpp
