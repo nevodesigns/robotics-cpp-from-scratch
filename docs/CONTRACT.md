@@ -48,6 +48,7 @@ phases/NN-phase-slug/NN-lesson-slug/
 | L017 | The lesson is C++17: `cxx_standard` is 17, and no C++20 or C++23 facility is used directly instead of its `rc::` equivalent |
 | L018 | No discarded style: `NULL`, `malloc`, `printf`, `strcpy`, `typedef`, `using namespace std` and friends |
 | L019 | Every platform a lesson claims is defined in `platforms.json`, and a lesson needing Qt only claims a toolchain whose lane installs Qt |
+| L020 | A lesson that cites another lesson by number cites one that exists. Promises to a phase are fine, a promise to a specific lesson is a claim |
 
 ## The six required sections
 

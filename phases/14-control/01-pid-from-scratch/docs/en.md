@@ -109,7 +109,8 @@ What varies between them is the tuning, and tuning is a physical activity, not a
 mathematical one: start with everything at zero, raise proportional until it
 responds briskly and just begins to oscillate, back it off, add derivative to
 damp the overshoot, then add just enough integral to remove the remaining offset.
-Doing that on real hardware is lesson 14-04.
+Doing that on real hardware comes later in this phase, once there is hardware to
+do it on.
 
 ## What Breaks First
 

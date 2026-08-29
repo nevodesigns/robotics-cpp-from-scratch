@@ -137,8 +137,8 @@ right. The naive running total fails it, which is the point.
 ## Use It
 
 The standard library gives you `std::accumulate` and `std::minmax_element` for
-data you already hold, and lesson 03-03 uses them. They need the whole set at
-once.
+data you already hold, and a later lesson in this phase uses them. They need the
+whole set at once.
 
 This class is for the other case, which is most of robotics: readings arriving
 one at a time, forever, with no room to keep them all. That is called an online

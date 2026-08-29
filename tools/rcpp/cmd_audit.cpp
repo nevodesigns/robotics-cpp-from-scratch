@@ -312,6 +312,33 @@ bool contains_code_token(const std::string& code, const std::string& needle) {
   return false;
 }
 
+// L020: a lesson that cites another lesson by number must cite one that exists.
+//
+// Forward promises are part of how a curriculum reads, and a promise to a phase
+// is fine because a phase is a plan. A promise to lesson 14-04 is a specific
+// claim, and a learner who goes looking for it and finds nothing learns that the
+// cross references cannot be trusted.
+void check_cross_references(const Lesson& lesson, const Catalog& catalog,
+                            std::vector<Finding>& out) {
+  const auto text = read_file(lesson.path / "docs" / "en.md");
+  if (!text) return;
+
+  static const std::regex reference("lesson ([0-9]{2}-[0-9]{2})", std::regex::ECMAScript);
+  auto begin = std::sregex_iterator(text->begin(), text->end(), reference);
+  const auto end = std::sregex_iterator();
+
+  std::set<std::string> seen;
+  for (auto it = begin; it != end; ++it) {
+    const std::string cited = (*it)[1].str();
+    if (!seen.insert(cited).second) continue;
+    if (catalog.find(cited) == nullptr) {
+      out.push_back({"L020", lesson.rel_path,
+                     "cites lesson " + cited + ", which does not exist. Refer to the phase "
+                     "instead until the lesson is written"});
+    }
+  }
+}
+
 // L017: the curriculum is written in C++17, and that is a teaching decision
 // rather than an accident. Facilities from C++20 and C++23 are reached through
 // rc/core/compat.hpp, which the learner reads and understands, so a lesson that
@@ -540,6 +567,7 @@ int cmd_audit(const Args& args) {
     check_one_language(*lesson, findings);
     check_cxx17_baseline(*lesson, findings);
     check_platform_claims(*lesson, toolchains, findings);
+    check_cross_references(*lesson, catalog, findings);
     check_no_discarded_style(*lesson, findings);
   }
   check_graph(catalog, findings);
