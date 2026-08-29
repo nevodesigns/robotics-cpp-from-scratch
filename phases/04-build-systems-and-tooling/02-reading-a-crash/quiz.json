@@ -1,0 +1,78 @@
+{
+  "lesson": "04-02-reading-a-crash",
+  "title": "Reading a Crash: Finding Your Own Frame",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A backtrace shows nine frames, eight of them inside /usr/include. Where do you look first?",
+      "options": [
+        "The first frame in a file you wrote, however far down it is",
+        "Frame zero, since that is where it stopped",
+        "The last frame, which is always main",
+        "Whichever frame mentions your function name"
+      ],
+      "correct": 0,
+      "explanation": "Library frames are almost always where a correct library reacted to something you handed it. Starting at frame zero here means reading the standard library for an hour."
+    },
+    {
+      "stage": "check",
+      "question": "What does frame zero represent?",
+      "options": [
+        "Where execution was when it stopped",
+        "Where the program started",
+        "The function that allocated the memory",
+        "The oldest frame on the stack"
+      ],
+      "correct": 0,
+      "explanation": "Frames run most recent first. Frame one called frame zero, and so on outward to main."
+    },
+    {
+      "stage": "check",
+      "question": "What is the difference between a debugger backtrace and a sanitizer one?",
+      "options": [
+        "The debugger writes at before the file, the sanitizer puts the location last",
+        "The debugger has no line numbers",
+        "The sanitizer numbers its frames backwards",
+        "They are completely different formats"
+      ],
+      "correct": 0,
+      "explanation": "Both give an index, an address, a function after the word in, and a file with a line. That near identity is why one small parser handles both."
+    },
+    {
+      "stage": "check",
+      "question": "A heap buffer overflow crashes inside std::sort. What is the most likely cause?",
+      "options": [
+        "The comparator is not a strict weak ordering, so the sort runs off the end",
+        "The vector was too small to sort",
+        "A bug in the standard library",
+        "The elements are not copyable"
+      ],
+      "correct": 0,
+      "explanation": "A comparator that reports an element as less than itself makes the sort look for a pivot that cannot exist. The crash is in the library and the defect is in the argument."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the reference keep frames that have no file or line?",
+      "options": [
+        "Dropping them would renumber everything after and make the report harder to follow",
+        "Because they are often the cause",
+        "So the frame count matches the stack depth exactly",
+        "Because the parser cannot tell whether a file is missing"
+      ],
+      "correct": 0,
+      "explanation": "A frame with no debug information still occupies a position. Keeping it preserves the correspondence with what the tool printed."
+    },
+    {
+      "stage": "post",
+      "question": "Why check for a use after free before checking for an overflow?",
+      "options": [
+        "A use after free report also names a heap address, so an overflow check would match it first",
+        "Because use after free is more serious",
+        "Because overflows never mention addresses",
+        "The order does not matter"
+      ],
+      "correct": 0,
+      "explanation": "Classification by substring has to run most specific first, which is a general rule for this kind of matching rather than a quirk of these two."
+    }
+  ]
+}
