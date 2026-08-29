@@ -1,0 +1,78 @@
+{
+  "lesson": "03-02-errors-that-are-not-exceptional",
+  "title": "Errors That Are Not Exceptional",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A configuration file contains max_speed = fast. What should the parser do?",
+      "options": [
+        "Return either the setting or the reason there is none, in a form the caller cannot ignore",
+        "Return a sensible default and carry on",
+        "Print a message and call exit",
+        "Throw, so the problem cannot be missed"
+      ],
+      "correct": 0,
+      "explanation": "A default means the robot runs at a speed nobody chose. Exiting takes the machine down for a typo. Returning the failure lets the caller decide with full context."
+    },
+    {
+      "stage": "check",
+      "question": "Which kind of failure should be handled with an assertion rather than a return value?",
+      "options": [
+        "A bug, such as indexing past the end of an array",
+        "A file that is missing",
+        "A serial port that is busy",
+        "Input that does not parse"
+      ],
+      "correct": 0,
+      "explanation": "A bug is not to be handled, it is to be fixed, so it should fail loudly in testing. The other three are expected failures that a correct program meets in normal operation."
+    },
+    {
+      "stage": "check",
+      "question": "When is std::optional the right return type rather than expected?",
+      "options": [
+        "When something may simply be absent and the reason adds nothing",
+        "Whenever the function can fail",
+        "Only when the value is a number",
+        "When the caller is going to ignore the result"
+      ],
+      "correct": 0,
+      "explanation": "Looking up a setting that was never configured has one obvious reason. Parsing has five, and an operator needs to know which, so that one returns expected."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the reference check both in.fail() and in.eof() after reading a number?",
+      "options": [
+        "Without the eof check, 1.5kg parses as 1.5 and the rest is silently discarded",
+        "Because eof is set before fail",
+        "To detect an empty string",
+        "Because streams throw on failure otherwise"
+      ],
+      "correct": 0,
+      "explanation": "The failure check catches text that is not a number at all. The end of input check catches text that begins with one and continues."
+    },
+    {
+      "stage": "post",
+      "question": "Why do many robotics and embedded codebases build with exceptions disabled?",
+      "options": [
+        "Throwing allocates and unwinds with no stateable bound, which a loop with a deadline cannot accept",
+        "Because exceptions are slower in every case",
+        "Because C++ exceptions do not work on ARM",
+        "Because error codes are easier to read"
+      ],
+      "correct": 0,
+      "explanation": "The objection is the unbounded worst case rather than the average cost. Some safety standards effectively require it, and a returned error is also handled where the context still exists."
+    },
+    {
+      "stage": "post",
+      "question": "What remains a good use of throwing, even in this style?",
+      "options": [
+        "A constructor that cannot produce a valid object",
+        "A file that does not exist",
+        "A value that fails validation",
+        "A device that is already in use"
+      ],
+      "correct": 0,
+      "explanation": "A constructor has no return value, so throwing is the only way to refuse to create an object that would break its own invariants. The other three are ordinary outcomes."
+    }
+  ]
+}

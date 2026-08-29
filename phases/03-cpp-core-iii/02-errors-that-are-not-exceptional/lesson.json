@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "03-02-errors-that-are-not-exceptional",
+  "title": "Errors That Are Not Exceptional",
+  "type": "build",
+  "minutes": 120,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "hardware_tier": 0,
+  "requires": ["03-01-classes-and-invariants"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "artifact": { "module": "rc::core", "note": "the configuration parser, and the error style used from here on" },
+  "breaks_first": ["E-CPP-0012", "E-CPP-0013", "E-MEM-0003"]
+}
