@@ -1,0 +1,78 @@
+{
+  "lesson": "01-06-enums-and-states",
+  "title": "Enums: Making the Impossible Unrepresentable",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is an int a poor type for a robot with four states?",
+      "options": [
+        "It can hold four billion values, and the type asserts something false about the program",
+        "Integers are slower to compare than enums",
+        "An int cannot be used in a switch",
+        "Because states must be strings for logging"
+      ],
+      "correct": 0,
+      "explanation": "Only a comment says which four values mean anything, and comments do not compile. A type that can hold exactly the four cannot be given a fifth."
+    },
+    {
+      "stage": "check",
+      "question": "What does enum class give you that a plain enum does not?",
+      "options": [
+        "Scoped names and no accidental conversion to a number",
+        "Faster comparisons",
+        "The ability to add values at runtime",
+        "Automatic conversion to a string"
+      ],
+      "correct": 0,
+      "explanation": "A plain enum converts to int freely, which lets through comparing against a raw number and passing a state where a count was expected."
+    },
+    {
+      "stage": "check",
+      "question": "Why leave the default label off a switch over an enum?",
+      "options": [
+        "So the compiler warns when a value is added and this switch has not been updated",
+        "Because default is not allowed with enum class",
+        "To make the switch faster",
+        "Because every case is always handled anyway"
+      ],
+      "correct": 0,
+      "explanation": "Adding default silences that warning forever, trading a message today for a bug later. Put the fallback after the switch instead."
+    },
+    {
+      "stage": "check",
+      "question": "Why does a faulted robot ignore every event except a reset?",
+      "options": [
+        "Recovery must be a decision somebody makes, not something a stale command can cause",
+        "Because a faulted robot cannot receive events",
+        "To keep the transition table smaller",
+        "Because faults clear themselves after a timeout"
+      ],
+      "correct": 0,
+      "explanation": "It is the watchdog principle from lesson 14-02: the safe state is the one you stay in until a human deliberately leaves it."
+    },
+    {
+      "stage": "post",
+      "question": "Why is one enum better than three booleans for a state?",
+      "options": [
+        "Three booleans give eight combinations and most of them are nonsense that nothing prevents",
+        "Booleans use more memory",
+        "Booleans cannot be switched on",
+        "There is no difference, it is a style choice"
+      ],
+      "correct": 0,
+      "explanation": "is_moving and is_stopped can both be true at once. A single enum plus one transition function cannot represent a contradiction."
+    },
+    {
+      "stage": "post",
+      "question": "Where else in this curriculum have you already met this pattern?",
+      "options": [
+        "ConfigError, TickQuality and ReadError, each a closed set of possibilities",
+        "Only in this lesson",
+        "In the test framework's macros",
+        "In the build system's dependency graph"
+      ],
+      "correct": 0,
+      "explanation": "A closed set of reasons something failed is the same idea as a closed set of states, and it is everywhere in robot code once you see it."
+    }
+  ]
+}
