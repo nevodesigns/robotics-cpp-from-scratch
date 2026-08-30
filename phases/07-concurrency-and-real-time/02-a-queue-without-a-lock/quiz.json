@@ -1,0 +1,78 @@
+{
+  "lesson": "07-02-a-queue-without-a-lock",
+  "title": "A Queue Without a Lock, and What Acquire and Release Actually Mean",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is a mutex the wrong tool between a sensor thread and a control loop with a deadline?",
+      "options": [
+        "How long you wait depends on what the holder is doing, which is unbounded",
+        "Mutexes cannot be used between two threads",
+        "A mutex copies the data twice",
+        "Because mutexes require dynamic allocation"
+      ],
+      "correct": 0,
+      "explanation": "The holder might be descheduled halfway through while still holding it. A deadline cares about the worst case, and a mutex cannot promise one."
+    },
+    {
+      "stage": "check",
+      "question": "Why does restricting the queue to one producer and one consumer make it simple?",
+      "options": [
+        "Each index is written by exactly one thread, so no index is ever contended",
+        "It halves the memory needed",
+        "It removes the need for atomics entirely",
+        "It allows the compiler to inline everything"
+      ],
+      "correct": 0,
+      "explanation": "That restriction is the design rather than a compromise, and it is also the shape robotics needs: one sensor thread producing, one control thread consuming."
+    },
+    {
+      "stage": "check",
+      "question": "Why keep one slot of the buffer permanently empty?",
+      "options": [
+        "So that head equal to tail means empty unambiguously, with no extra shared state",
+        "To leave room for the largest reading",
+        "Because the modulus requires an odd size",
+        "To make the buffer cache aligned"
+      ],
+      "correct": 0,
+      "explanation": "The alternative is a separate count, which is another shared variable and therefore another ordering problem. One wasted element is cheaper."
+    },
+    {
+      "stage": "check",
+      "question": "What does storing the index with release ordering guarantee?",
+      "options": [
+        "Everything written before it is visible to a thread that acquires that same variable",
+        "That the store itself is not torn",
+        "That no other thread writes the index at the same time",
+        "That the store happens immediately"
+      ],
+      "correct": 0,
+      "explanation": "The atomic alone only protects the index. Release and acquire are what carry the reading it points at across to the other thread."
+    },
+    {
+      "stage": "post",
+      "question": "Measured on a real machine, how did the lock free queue compare with a mutex queue?",
+      "options": [
+        "Median about three times better and the 99th percentile about nine times, with the worst case not reliably better",
+        "Better by about ninety times in every measure",
+        "Identical in every measure",
+        "Worse in the median but better in the worst case"
+      ],
+      "correct": 0,
+      "explanation": "The worst case is dominated by the operating system descheduling the thread, which no data structure can prevent. The common claim of bounded latency did not survive measurement."
+    },
+    {
+      "stage": "post",
+      "question": "What does lock free actually promise?",
+      "options": [
+        "No thread is blocked because another thread holding a lock was descheduled",
+        "A bounded worst case latency",
+        "That every operation is wait free",
+        "That the structure is faster in every case"
+      ],
+      "correct": 0,
+      "explanation": "It is a smaller claim than usually made for it. A real bound needs a kernel that will not deschedule the thread arbitrarily, which is a later lesson."
+    }
+  ]
+}
