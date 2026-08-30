@@ -18,6 +18,11 @@ bool is_consistent(const Reading& r) {
   return r.y == r.x * 2.0 && r.theta == r.x * 3.0;
 }
 
+// At file scope rather than inside the test. A constexpr local used in a lambda
+// needs no capture under GCC and Clang, and MSVC rejects it as C3493. File
+// scope removes the question on every compiler.
+constexpr long kPublicationsEach = 20000;
+
 }  // namespace
 
 RC_TEST("a published reading can be read back") {
@@ -118,16 +123,15 @@ RC_TEST("every publication is counted under contention") {
   // made in the lesson about why testing cannot find races.
   LatestReading shared;
   std::vector<std::thread> writers;
-  constexpr long kEach = 20000;
 
   for (int i = 0; i < 4; ++i) {
     writers.emplace_back([&shared] {
-      for (long n = 0; n < kEach; ++n) shared.publish(consistent(1.0));
+      for (long n = 0; n < kPublicationsEach; ++n) shared.publish(consistent(1.0));
     });
   }
   for (std::thread& t : writers) t.join();
 
-  RC_CHECK_EQ(shared.count(), 4 * kEach);
+  RC_CHECK_EQ(shared.count(), 4 * kPublicationsEach);
 }
 
 RC_TEST("a stop flag starts unset") {
