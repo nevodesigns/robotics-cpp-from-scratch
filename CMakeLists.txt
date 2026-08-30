@@ -36,6 +36,11 @@ if(RC_PLATFORM STREQUAL "unknown")
     "Lessons will be skipped. Pass -DRC_PLATFORM_ID=... to force one.")
 endif()
 
+# Threads are needed from phase 07 onward. Linking them everywhere is harmless
+# for the lessons that do not use them and removes a per lesson decision.
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
 enable_testing()
 
 add_subdirectory(librc)

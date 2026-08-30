@@ -105,7 +105,7 @@ function(rc_add_lesson)
       add_executable(${target} ${test_sources} ${variant_sources})
     endif()
     target_include_directories(${target} PRIVATE "${lesson_dir}/${variant}")
-    target_link_libraries(${target} PRIVATE rc::core)
+    target_link_libraries(${target} PRIVATE rc::core Threads::Threads)
     target_compile_features(${target} PRIVATE cxx_std_17)
 
     if(qt_modules)
