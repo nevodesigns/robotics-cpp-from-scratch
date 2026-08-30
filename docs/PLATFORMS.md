@@ -93,6 +93,29 @@ Because that clock is a certainty rather than a risk, phase 17 sits behind a thi
 distro migration is then one adapter and a container tag, not a rewrite of
 twenty lessons.
 
+## The thread sanitizer needs a workaround on recent kernels
+
+The `tsan` preset exists and is the right tool for threaded code, but on Linux
+kernels from about 6.6 onward it refuses to start:
+
+```text
+FATAL: ThreadSanitizer: unexpected memory mapping
+```
+
+Disable address space randomisation for that process only:
+
+```bash
+cmake --preset tsan && cmake --build build/tsan
+setarch $(uname -m) -R ctest --test-dir build/tsan
+```
+
+Confirmed on Ubuntu 22.04 with kernel 6.8 and GCC 11. Do not turn randomisation
+off machine wide to work around it. Details and reasoning in `E-TSAN-0001`.
+
+This is worth knowing rather than discovering: lesson 07-01 measured two genuine
+data races that its tests caught zero times out of five, and the thread
+sanitizer reported both immediately. A tool that will not start finds nothing.
+
 ## Adding a toolchain
 
 1. Add it to `platforms.json`, including whether its lane installs Qt. The
