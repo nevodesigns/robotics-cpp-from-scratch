@@ -23,6 +23,7 @@
 #ifndef RC_TEST_LEAK_CHECK_HPP
 #define RC_TEST_LEAK_CHECK_HPP
 
+#include <atomic>
 #include <cstddef>
 #include <cstdlib>
 #include <new>
@@ -30,13 +31,18 @@
 namespace rc {
 namespace test {
 
-inline std::size_t& live_blocks() {
-  static std::size_t count = 0;
+// Atomic because a test may allocate on more than one thread, and the counters
+// are touched from every one of them. They were plain integers until the thread
+// sanitizer reported the race in lesson 07-02, where a threaded test includes
+// this header: the harness that proves other code is correct was itself the
+// only racy thing in the binary.
+inline std::atomic<std::size_t>& live_blocks() {
+  static std::atomic<std::size_t> count{0};
   return count;
 }
 
-inline std::size_t& live_arrays() {
-  static std::size_t count = 0;
+inline std::atomic<std::size_t>& live_arrays() {
+  static std::atomic<std::size_t> count{0};
   return count;
 }
 
