@@ -394,6 +394,43 @@ void check_facility_order(const Lesson& lesson, const Catalog& catalog,
   }
 }
 
+// L022: a constexpr constant in a lesson's tests belongs at file scope.
+//
+// A constexpr local used inside a lambda needs no capture under GCC and Clang,
+// because using it for its value is not an odr-use, and MSVC rejects it as
+// C3493. This rule is stricter than the language requires: it asks for file
+// scope whether or not a lambda is involved, because detecting the lambda case
+// properly needs a parser and the fix is harmless either way.
+//
+// It exists because this repository made the identical mistake twice, in two
+// lessons, after writing the atlas entry for it. The Windows lane caught both,
+// five minutes and a red build at a time.
+void check_test_constants(const Lesson& lesson, std::vector<Finding>& out) {
+  const fs::path tests = lesson.path / "tests";
+  if (!fs::is_directory(tests)) return;
+
+  for (const auto& entry : fs::directory_iterator(tests)) {
+    if (!entry.is_regular_file() || entry.path().extension() != ".cpp") continue;
+    const auto text = read_file(entry.path());
+    if (!text) continue;
+
+    const std::string code = code_only(*text);
+    int line_number = 0;
+    for (const std::string& line : split(code, '\n')) {
+      ++line_number;
+      const std::size_t first = line.find_first_not_of(" \t");
+      if (first == std::string::npos || first == 0) continue;   // file scope, fine
+      if (line.compare(first, 10, "constexpr ") != 0) continue;
+
+      out.push_back({"L022", lesson.rel_path,
+                     entry.path().filename().string() + ":" + std::to_string(line_number) +
+                         " declares a constexpr inside a function. Move it to file scope: a "
+                         "local one used in a lambda is rejected by MSVC as C3493. See "
+                         "E-CPP-0023"});
+    }
+  }
+}
+
 // L020: a lesson that cites another lesson by number must cite one that exists.
 //
 // Forward promises are part of how a curriculum reads, and a promise to a phase
@@ -651,6 +688,7 @@ int cmd_audit(const Args& args) {
     check_platform_claims(*lesson, toolchains, findings);
     check_cross_references(*lesson, catalog, findings);
     check_facility_order(*lesson, catalog, findings);
+    check_test_constants(*lesson, findings);
     check_no_discarded_style(*lesson, findings);
   }
   check_graph(catalog, findings);

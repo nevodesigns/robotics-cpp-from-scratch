@@ -20,6 +20,11 @@ constexpr long kExchanged = 200000;
 // rather than reporting a failure, which is worse than useless to a learner.
 constexpr long kMaxSpins = 50000000;
 
+// At file scope, not inside the test. A constexpr local used in a lambda needs
+// no capture under GCC and Clang and is rejected by MSVC as C3493, which is
+// E-CPP-0023 and which this file got wrong once already.
+constexpr long kSmallQueueExchangedQueueExchanged = 20000;
+
 }  // namespace
 
 RC_TEST("a new queue is empty and knows its capacity") {
@@ -174,12 +179,11 @@ RC_TEST("a small queue still exchanges everything, with both threads waiting oft
   // A capacity of two forces the producer to wait for the consumer constantly,
   // which exercises the full and empty boundaries far harder than a large one.
   SpscQueue queue(2);
-  constexpr long kSmall = 20000;
 
   std::atomic<bool> gave_up{false};
 
   std::thread producer([&queue, &gave_up] {
-    for (long n = 0; n < kSmall; ++n) {
+    for (long n = 0; n < kSmallQueueExchanged; ++n) {
       long spins = 0;
       while (!queue.push(numbered(n))) {
         if (++spins > kMaxSpins) { gave_up.store(true); return; }
@@ -192,7 +196,7 @@ RC_TEST("a small queue still exchanges everything, with both threads waiting oft
   bool ordered = true;
   std::thread consumer([&queue, &received, &ordered, &gave_up] {
     long spins = 0;
-    while (received < kSmall) {
+    while (received < kSmallQueueExchanged) {
       Reading got;
       if (!queue.pop(got)) {
         if (gave_up.load() || ++spins > kMaxSpins) { gave_up.store(true); return; }
@@ -208,6 +212,6 @@ RC_TEST("a small queue still exchanges everything, with both threads waiting oft
   producer.join();
   consumer.join();
   RC_CHECK(!gave_up.load());
-  RC_CHECK_EQ(received, kSmall);
+  RC_CHECK_EQ(received, kSmallQueueExchanged);
   RC_CHECK(ordered);
 }

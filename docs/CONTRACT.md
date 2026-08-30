@@ -50,6 +50,7 @@ phases/NN-phase-slug/NN-lesson-slug/
 | L019 | Every platform a lesson claims is defined in `platforms.json`, and a lesson needing Qt only claims a toolchain whose lane installs Qt |
 | L020 | A lesson that cites another lesson by number cites one that exists. Promises to a phase are fine, a promise to a specific lesson is a claim |
 | L021 | A lesson only uses a facility that it or one of its prerequisites declares in `teaches`, so nothing is met before it is taught |
+| L022 | Constants in a lesson's tests are declared at file scope, since a local `constexpr` used in a lambda is rejected by MSVC |
 
 ## The six required sections
 
