@@ -1,0 +1,78 @@
+{
+  "lesson": "06-04-transforms-and-frames",
+  "title": "Transforms: Where Is the Gripper, in Which Frame, and How Do You Know",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does a transform describe?",
+      "options": [
+        "Where one frame sits relative to another: a rotation and a translation",
+        "How fast a joint is moving",
+        "The shape of a robot link",
+        "A position in the world frame only"
+      ],
+      "correct": 0,
+      "explanation": "Turn by the rotation, then move by the translation. Chaining them is how a camera reading becomes something an arm can act on."
+    },
+    {
+      "stage": "check",
+      "question": "How does transforming a direction differ from transforming a point?",
+      "options": [
+        "A direction is only rotated, because moving a frame does not change which way north is",
+        "A direction is only translated",
+        "There is no difference",
+        "A direction must be normalised first"
+      ],
+      "correct": 0,
+      "explanation": "Using the wrong one gives an answer wrong by exactly the translation: small, plausible, persistent, and able to survive review for months."
+    },
+    {
+      "stage": "check",
+      "question": "What does the naming rule T_world_base times T_base_gripper let you check?",
+      "options": [
+        "That the adjacent names match and cancel, which turns a geometry question into a spelling check",
+        "That the rotations are unit quaternions",
+        "That the translations are in metres",
+        "That the transforms were measured at the same time"
+      ],
+      "correct": 0,
+      "explanation": "If the inner names disagree the composition is wrong, and you can see it by reading rather than by reasoning about geometry."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the inverse translation not simply the negation?",
+      "options": [
+        "The original is expressed in the original frame, and the inverse needs it in the rotated one",
+        "Because negation loses precision",
+        "Because the translation might be zero",
+        "Because quaternions cannot be negated"
+      ],
+      "correct": 0,
+      "explanation": "It has to be rotated by the undone rotation. The negation only version is exactly right when the rotation is the identity, which is why it survives a suite that never rotates."
+    },
+    {
+      "stage": "post",
+      "question": "When composing, why is the inner translation rotated before being added?",
+      "options": [
+        "It is expressed in the inner frame and has to be brought into the outer one first",
+        "To keep the result a unit vector",
+        "Because addition is not commutative",
+        "To avoid overflow"
+      ],
+      "correct": 0,
+      "explanation": "A quarter turn followed by two metres along the inner x axis is two metres along the outer y axis. Adding before rotating puts it in the wrong place."
+    },
+    {
+      "stage": "post",
+      "question": "What does a transform tree such as tf2 add beyond composition?",
+      "options": [
+        "Timestamps, so where the gripper was and where it is are different questions",
+        "Automatic unit conversion",
+        "Faster matrix multiplication",
+        "Guaranteed unit quaternions"
+      ],
+      "correct": 0,
+      "explanation": "During motion those two questions have different answers, and a tree that ignores time silently answers the wrong one."
+    }
+  ]
+}
