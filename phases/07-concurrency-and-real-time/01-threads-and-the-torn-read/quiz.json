@@ -1,0 +1,78 @@
+{
+  "lesson": "07-01-threads-and-the-torn-read",
+  "title": "Threads: The Half Written Value Nobody Sees Coming",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Two threads access the same memory, one of them writing, with no synchronisation. What is that?",
+      "options": [
+        "A data race, which is undefined behaviour rather than merely a stale value",
+        "A race condition that at worst gives a slightly old reading",
+        "Safe, as long as the value is a single variable",
+        "A deadlock"
+      ],
+      "correct": 0,
+      "explanation": "The distinction matters because it licenses the compiler to assume it cannot happen, and to keep the value in a register so a thread never sees the other's write at all."
+    },
+    {
+      "stage": "check",
+      "question": "Why can a pose be seen half written?",
+      "options": [
+        "Three doubles are three separate stores, and a reader can arrive between any two",
+        "Because doubles are not aligned",
+        "Because the compiler reorders the fields",
+        "Because a pose is passed by reference"
+      ],
+      "correct": 0,
+      "explanation": "The value assembled from two different writes describes a position the robot was never in, which is worse than a stale reading."
+    },
+    {
+      "stage": "check",
+      "question": "Does volatile fix sharing between threads?",
+      "options": [
+        "No. It stops the compiler eliding accesses but gives no atomicity and no ordering",
+        "Yes, that is exactly what it is for",
+        "Yes, but only for single variables",
+        "Only when combined with a mutex"
+      ],
+      "correct": 0,
+      "explanation": "It is the most common wrong fix in robotics code, inherited from embedded C where it means something different. A volatile pose still tears."
+    },
+    {
+      "stage": "check",
+      "question": "Why must the read take the lock as well as the write?",
+      "options": [
+        "One unguarded reader is enough to bring the tearing straight back",
+        "Reads are slower than writes",
+        "Because lock_guard requires it",
+        "It does not, only writers need to lock"
+      ],
+      "correct": 0,
+      "explanation": "A mutex only helps when every access takes it. Guarding half the accesses guards nothing."
+    },
+    {
+      "stage": "post",
+      "question": "Two of this lesson's tests failed against the unsynchronised code five times out of five, and two failed zero times out of five. What does that show?",
+      "options": [
+        "A race that does not reproduce is still a race, so testing alone cannot find them",
+        "The last two tests are wrong and should be deleted",
+        "The unsynchronised code is correct for those two cases",
+        "Races only happen under heavy load"
+      ],
+      "correct": 0,
+      "explanation": "Both undetected races were genuinely present, and the thread sanitizer reported them immediately. It will reproduce on the robot, at temperature, in front of a customer."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a mutex the wrong tool on a path with a deadline?",
+      "options": [
+        "A thread that cannot take the lock waits for as long as the holder takes, which is unbounded",
+        "Mutexes are slow in absolute terms",
+        "Mutexes cannot be used from more than two threads",
+        "Because they require dynamic allocation"
+      ],
+      "correct": 0,
+      "explanation": "The worst case is what a deadline cares about, and priority inversion makes it worse: a low priority thread holding a lock can block a high priority one."
+    }
+  ]
+}
