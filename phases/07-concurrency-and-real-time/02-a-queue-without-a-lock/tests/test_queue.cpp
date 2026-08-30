@@ -23,7 +23,7 @@ constexpr long kMaxSpins = 50000000;
 // At file scope, not inside the test. A constexpr local used in a lambda needs
 // no capture under GCC and Clang and is rejected by MSVC as C3493, which is
 // E-CPP-0023 and which this file got wrong once already.
-constexpr long kSmallQueueExchangedQueueExchanged = 20000;
+constexpr long kSmallQueueExchanged = 20000;
 
 }  // namespace
 
