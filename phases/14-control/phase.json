@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "title": "Control",
+  "ends_with": "A robot that drives itself to a target, from four phases at once"
+}

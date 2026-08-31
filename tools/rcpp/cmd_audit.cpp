@@ -486,6 +486,36 @@ void check_artifact_module(const Lesson& lesson, const fs::path& root,
   }
 }
 
+// L024: every phase describes itself, so the README can be generated.
+//
+// The phase table in the README was maintained by hand and it drifted: phase 07
+// was listed with two lessons after a third had been added, and phase 08 was
+// missing entirely with five lessons on disk. The counts printed beside that
+// table were generated from the filesystem and stayed correct throughout, which
+// is the whole argument.
+//
+// The title and the ending are editorial rather than derivable. A directory
+// name gives "Cpp Core I" where a reader wants "C++ Core I", and nothing on
+// disk knows what a learner has when a phase is finished. So they are written
+// down once, in the phase, and read from there.
+void check_phase_manifests(const Catalog& catalog, std::vector<Finding>& out) {
+  for (const Phase& phase : catalog.phases) {
+    const std::string where = "phases/" + phase.slug;
+    const fs::path manifest = catalog.root / "phases" / phase.slug / "phase.json";
+
+    if (!fs::exists(manifest)) {
+      out.push_back({"L024", where,
+                     "missing phase.json. It holds the title as a reader wants it spelled "
+                     "and what a learner has when the phase is finished, and the README "
+                     "table is generated from both"});
+      continue;
+    }
+    if (phase.ends_with.empty())
+      out.push_back({"L024", where, "phase.json has no ends_with, so the README table "
+                                    "would have an empty cell for this phase"});
+  }
+}
+
 // L020: a lesson that cites another lesson by number must cite one that exists.
 //
 // Forward promises are part of how a curriculum reads, and a promise to a phase
@@ -748,6 +778,7 @@ int cmd_audit(const Args& args) {
     check_artifact_module(*lesson, *root, findings);
   }
   check_graph(catalog, findings);
+  check_phase_manifests(catalog, findings);
   check_atlas_links(catalog, atlas, findings);
   check_em_dash(*root, findings);
 

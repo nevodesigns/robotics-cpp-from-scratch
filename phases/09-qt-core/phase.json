@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "title": "Qt Core",
+  "ends_with": "A battery monitor with hysteresis, announcing through signals"
+}

@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "title": "Concurrency and Real Time",
+  "ends_with": "A measured latency histogram of your own control loop"
+}

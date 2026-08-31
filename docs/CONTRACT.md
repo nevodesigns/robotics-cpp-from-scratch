@@ -52,6 +52,7 @@ phases/NN-phase-slug/NN-lesson-slug/
 | L021 | A lesson only uses a facility that it or one of its prerequisites declares in `teaches`, so nothing is met before it is taught |
 | L022 | Constants in a lesson's tests are declared at file scope, since a local `constexpr` used in a lambda is rejected by MSVC |
 | L023 | A lesson that declares an artifact module names one that exists in `librc`, so the line about where the work goes is true of the repository and not only of the plan |
+| L024 | Every phase has a `phase.json` giving its title and what it ends with, so the README's phase table is generated rather than typed |
 
 ## The six required sections
 

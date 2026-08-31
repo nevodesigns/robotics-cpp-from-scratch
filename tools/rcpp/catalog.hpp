@@ -39,8 +39,9 @@ struct Lesson {
 
 struct Phase {
   int num = 0;
-  std::string slug;   // 07-concurrency-and-real-time
-  std::string title;  // Concurrency and Real Time
+  std::string slug;      // 07-concurrency-and-real-time
+  std::string title;     // Concurrency and Real Time
+  std::string ends_with; // what a learner has when the phase is finished
   std::vector<Lesson> lessons;
 };
 

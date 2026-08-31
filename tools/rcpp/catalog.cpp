@@ -108,6 +108,24 @@ Catalog load_catalog(const fs::path& repo_root) {
     phase.slug = phase_slug;
     phase.title = phase_title_from_slug(phase_slug);
 
+    // phase.json carries the two things a directory name cannot: how the title
+    // is actually spelled, and what a learner has when the phase is finished.
+    // Both are editorial, and both were previously typed into the README by
+    // hand, where they drifted.
+    const auto phase_text = read_file(phase_path / "phase.json");
+    if (phase_text) {
+      const json::ParseResult parsed = json::parse(*phase_text);
+      if (!parsed.ok) {
+        catalog.load_errors.push_back("phase.json line " + std::to_string(parsed.line) +
+                                      ": " + parsed.error + " in " + phase_slug);
+      } else {
+        if (parsed.value.at("title").is_string())
+          phase.title = parsed.value.at("title").as_string();
+        if (parsed.value.at("ends_with").is_string())
+          phase.ends_with = parsed.value.at("ends_with").as_string();
+      }
+    }
+
     std::vector<fs::path> lesson_dirs;
     for (const auto& entry : fs::directory_iterator(phase_path))
       if (entry.is_directory()) lesson_dirs.push_back(entry.path());
