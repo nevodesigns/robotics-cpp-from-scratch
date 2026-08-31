@@ -1,0 +1,78 @@
+{
+  "lesson": "08-02-framing-a-stream",
+  "title": "Framing: A Stream Has No Messages In It",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A serial read returns 7. What does that tell you about how many messages arrived?",
+      "options": [
+        "Nothing, seven is a number of bytes and the stream promises order and nothing else",
+        "That one message of seven bytes arrived",
+        "That at least one message arrived",
+        "That the message was truncated"
+      ],
+      "correct": 0,
+      "explanation": "It might be half a message, two messages, one byte, or a message with noise in front of it. None of those is an error, and every one of them will happen."
+    },
+    {
+      "stage": "check",
+      "question": "Why does a delimiter such as a newline stop working for binary data?",
+      "options": [
+        "Binary payloads contain every byte value, including the delimiter, so it has to be escaped",
+        "Binary data cannot contain newlines",
+        "Delimiters are slower to scan for",
+        "The delimiter would be stripped by the driver"
+      ],
+      "correct": 0,
+      "explanation": "Once you are escaping, you have written half of COBS and the length of a message depends on its contents, which a length prefix avoids entirely."
+    },
+    {
+      "stage": "check",
+      "question": "Why is a corrupted length field worse than a corrupted payload byte?",
+      "options": [
+        "It puts the parser out of step with the stream, rather than producing one bad message",
+        "It cannot be detected by a checksum",
+        "It causes the sender to retransmit",
+        "It is not worse, both lose one message"
+      ],
+      "correct": 0,
+      "explanation": "One bad byte costs one message. A bad length costs the parser's place in the stream, which is why there is a start byte to resynchronise to."
+    },
+    {
+      "stage": "check",
+      "question": "Storage is sixteen bytes and a frame claims a payload of two hundred. What should the parser do?",
+      "options": [
+        "Count it, discard it, and go back to hunting for a start byte",
+        "Read two hundred bytes into the sixteen byte buffer",
+        "Truncate the payload to sixteen bytes and deliver it",
+        "Stop parsing and report a fatal error"
+      ],
+      "correct": 0,
+      "explanation": "A frame that does not fit is not a frame you understood, so truncating delivers a message that was never sent. The length is a claim from outside that indexes your memory, which is why this gets written up as a security advisory."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the parser take one byte at a time rather than a buffer?",
+      "options": [
+        "It cannot be handed a whole message by accident, so the awkward splits are not special cases, and it is the shape an interrupt handler needs",
+        "It is faster",
+        "A buffer would require allocation",
+        "Because reads always return one byte"
+      ],
+      "correct": 0,
+      "explanation": "A byte at a time and a thousand at a time go down the same path, which is what lets the tests split the input at every position and find the same frame."
+    },
+    {
+      "stage": "post",
+      "question": "After resynchronising, the parser produces one garbage frame before recovering. Is the framing wrong?",
+      "options": [
+        "No. A start byte can appear inside a payload, so a false lock is possible and a checksum is what catches it",
+        "Yes, the start byte should have been escaped",
+        "Yes, the parser should scan backwards",
+        "No, and a checksum would not help either"
+      ],
+      "correct": 0,
+      "explanation": "Framing narrows the problem rather than closing it. Knowing which part of the design is doing which job is the difference between fixing this and adding another start byte."
+    }
+  ]
+}
