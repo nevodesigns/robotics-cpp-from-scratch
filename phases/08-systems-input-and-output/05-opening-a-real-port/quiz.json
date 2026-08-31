@@ -1,0 +1,78 @@
+{
+  "lesson": "08-05-opening-a-real-port",
+  "title": "Opening a Real Port: The Twenty Lines That Decide Everything",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A port is opened with nothing but O_RDWR and a device sends a four byte payload. Measured, what arrives?",
+      "options": [
+        "The first byte only, because the length field is 0x04 and four is the end of file character",
+        "All of it, since the port has not been told to change anything",
+        "Nothing at all, since the port was not configured",
+        "All of it, but slowly"
+      ],
+      "correct": 0,
+      "explanation": "The message that fails is decided by how long it is, and nothing in the sending code mentions its length. Three is Ctrl-C, seventeen is XON, nineteen is XOFF, which is why this presents as a device that works except sometimes."
+    },
+    {
+      "stage": "check",
+      "question": "What does cfmakeraw actually turn off?",
+      "options": [
+        "Line buffering, echo, carriage return rewriting, flow control characters and the signal characters, all of which exist for text typed by a person",
+        "Only the echo",
+        "Hardware flow control",
+        "The baud rate conversion"
+      ],
+      "correct": 0,
+      "explanation": "A terminal exists to carry text a person is editing. Every one of those behaviours destroys binary data, and which data it destroys depends on the byte values a message happens to contain."
+    },
+    {
+      "stage": "check",
+      "question": "Why open with O_NOCTTY and O_NONBLOCK?",
+      "options": [
+        "Each prevents a hang: the first stops a byte from the device signalling your process, the second stops the open waiting for a carrier that will never come",
+        "Both are needed for binary data",
+        "They make reads faster",
+        "They are required by POSIX"
+      ],
+      "correct": 0,
+      "explanation": "Without O_NOCTTY a Ctrl-C byte arriving on the wire can stop your program. Without O_NONBLOCK the open waits for a modem signal a microcontroller does not assert."
+    },
+    {
+      "stage": "check",
+      "question": "tcsetattr returned zero. What have you been told?",
+      "options": [
+        "That it applied at least one of the settings, not that it applied the one you cared about",
+        "That every setting was applied",
+        "That the device accepted the baud rate",
+        "That the port is now in raw mode"
+      ],
+      "correct": 0,
+      "explanation": "A rate the hardware cannot do is not an error, it is a different rate applied silently, and the symptom is a link where every frame fails its checksum. Read the settings back and check the ones that matter."
+    },
+    {
+      "stage": "post",
+      "question": "VMIN is set to one and VTIME to zero. What happens on a link whose device has stopped talking?",
+      "options": [
+        "The read waits for a byte that is not coming, and the control loop waits with it",
+        "The read returns zero after a short delay",
+        "The read returns an error",
+        "Nothing changes, VMIN only affects the buffer size"
+      ],
+      "correct": 0,
+      "explanation": "Zero and zero is the only combination that returns whatever is there this instant, including nothing. Any other row of that table lets a silent device hold a loop that has a deadline."
+    },
+    {
+      "stage": "post",
+      "question": "This lesson's Windows implementation is compiled on every build and its error paths are run, but no port is opened. Why is that stated rather than glossed over?",
+      "options": [
+        "A silent gap in what is tested is worse than a stated one, because a reader assumes coverage that does not exist",
+        "Because Windows serial ports are unreliable",
+        "Because the code is known to be wrong",
+        "Because the tests would be too slow"
+      ],
+      "correct": 0,
+      "explanation": "A virtual COM port needs a driver that continuous integration cannot install. A USB serial adapter with its TX wired to its RX closes the gap for about ten dollars, and until somebody does that the limit belongs written down."
+    }
+  ]
+}

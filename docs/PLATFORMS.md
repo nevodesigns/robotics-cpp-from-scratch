@@ -83,6 +83,29 @@ learners who reach phase 17 use WSL2, which is a first class supported path:
 - The Ubuntu inside WSL2 is a supported toolchain, so everything else is
   unchanged.
 
+## What the Windows lane does not cover
+
+One gap, and it belongs written down rather than left to be assumed.
+
+Lesson 08-05 opens a real serial port, and on Linux and macOS the tests open a
+pseudo terminal to do it. That is not a mock: it is a real terminal device that
+`termios` configures with exactly the calls a serial port is configured with, so
+the whole implementation runs, including the open flags, `cfmakeraw`, the VMIN
+and VTIME settings, the read back check, every error path and a complete `Link`
+carrying framed messages across it.
+
+Windows has no equivalent that continuous integration can reach. A virtual COM
+port needs a driver installed, which the lane cannot do. So on Windows the
+implementation is **compiled on every push and its error paths are run, and no
+port is opened**.
+
+That means the Win32 half of `rc::io::SerialPort` is reviewed and compiled
+rather than exercised, and it is the only place in this repository where the two
+platforms are not verified to the same standard. Anyone can close the gap for
+about ten dollars: connect a USB serial adapter's TX pin to its RX pin and run
+the lesson's own test suite against that COM port, where everything sent comes
+straight back.
+
 ## ROS 2 and the migration that is coming
 
 ROS 2 releases pair with exactly one Ubuntu LTS. Humble ends in May 2027 and
