@@ -29,6 +29,31 @@ std::vector<std::string> missing_prerequisites(const Lesson& lesson, const Progr
   return missing;
 }
 
+// A blocked lesson and the reason it is blocked, on one line. Counting blocked
+// lessons tells a learner that something is in the way without telling them
+// what, which is the least useful thing a course tool can say.
+void print_blocked(const std::vector<const Lesson*>& blocked, const Progress& progress,
+                   std::size_t how_many) {
+  std::size_t shown = 0;
+  for (const Lesson* lesson : blocked) {
+    if (shown++ >= how_many) break;
+    const std::vector<std::string> missing = missing_prerequisites(*lesson, progress);
+
+    std::string waiting;
+    for (std::size_t i = 0; i < missing.size(); ++i) {
+      if (i > 0) waiting += ", ";
+      waiting += missing[i];
+    }
+
+    std::cout << "  " << style::dim(lesson->id) << "  " << lesson->title << "\n"
+              << "      " << style::warn("waiting on") << " " << waiting << "\n\n";
+  }
+
+  if (blocked.size() > shown)
+    std::cout << style::dim("  and " + std::to_string(blocked.size() - shown) +
+                            " more, run rcpp next --blocked to see them all\n\n");
+}
+
 }  // namespace
 
 int cmd_next(const Args& args) {
@@ -54,10 +79,23 @@ int cmd_next(const Args& args) {
   }
 
   if (ready.empty()) {
-    std::cout << "\n" << style::warn("Nothing is unlocked.") << "\n"
-              << "  Every remaining lesson is waiting on a prerequisite, which should not\n"
-              << "  happen and means the graph or your progress file is inconsistent.\n\n";
+    std::cout << "\n" << style::warn("Nothing is unlocked.") << "\n\n"
+              << "  Every remaining lesson is waiting on a prerequisite, which means the\n"
+              << "  graph or your progress file is inconsistent. What each one wants:\n\n";
+    print_blocked(blocked, progress, blocked.size());
     return 1;
+  }
+
+  // Asked for directly, this is the whole list rather than a count.
+  if (has_flag(args, "--blocked")) {
+    if (blocked.empty()) {
+      std::cout << "\n" << style::pass("Nothing is blocked.") << "\n"
+                << "  Every lesson you have not passed is available now.\n\n";
+      return 0;
+    }
+    std::cout << "\n" << style::bold("Blocked") << "\n\n";
+    print_blocked(blocked, progress, blocked.size());
+    return 0;
   }
 
   std::cout << "\n" << style::bold("Next") << "\n\n";
@@ -76,7 +114,8 @@ int cmd_next(const Args& args) {
 
   if (!blocked.empty()) {
     std::cout << style::dim("  " + std::to_string(blocked.size()) +
-                            " further lesson(s) unlock as you go.\n\n");
+                            " further lesson(s) unlock as you go, rcpp next --blocked\n"
+                            "  shows what each one is waiting on.\n\n");
   }
   return 0;
 }

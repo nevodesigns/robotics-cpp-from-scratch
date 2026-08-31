@@ -53,6 +53,8 @@ examples
   rcpp verify 00-01
   cmake --build build 2>&1 | rcpp explain
   rcpp audit --json
+  rcpp next --blocked
+  rcpp explain E-RT-0001
   rcpp readme --check
 )";
   return 0;
