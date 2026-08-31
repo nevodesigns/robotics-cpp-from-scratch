@@ -431,6 +431,51 @@ void check_test_constants(const Lesson& lesson, std::vector<Finding>& out) {
   }
 }
 
+// L023: a lesson that says its work joins a module must join a module that
+// exists.
+//
+// Every build lesson ends by naming where its artifact goes, and that line is a
+// promise about the repository rather than about the intent. Nine lessons
+// promised rc::io, rc::qt and rc::rt while none of the three had a single
+// header, so a learner following the trail found nothing and the curriculum's
+// central claim, that you accrete one library you wrote and understand, was
+// quietly untrue for a third of the modules named.
+//
+// The check is deliberately shallow. It asks whether the directory exists and
+// holds a header, not whether the lesson's own type is in it, because naming
+// the artifact is a design decision and the shape it takes when it graduates is
+// often better than the shape the lesson needed.
+void check_artifact_module(const Lesson& lesson, const fs::path& root,
+                           std::vector<Finding>& out) {
+  const json::Value& artifact = lesson.raw.at("artifact");
+  if (!artifact.is_object()) return;
+
+  const json::Value& module = artifact.at("module");
+  if (!module.is_string()) return;
+
+  const std::string name = module.as_string();
+  if (!starts_with(name, "rc::")) {
+    out.push_back({"L023", lesson.rel_path,
+                   "declares artifact module " + name + ", which is not an rc:: module"});
+    return;
+  }
+
+  const std::string dir_name = name.substr(4);
+  const fs::path dir = root / "librc" / "include" / "rc" / dir_name;
+
+  bool has_header = false;
+  if (fs::is_directory(dir)) {
+    for (const auto& entry : fs::directory_iterator(dir))
+      if (entry.is_regular_file() && entry.path().extension() == ".hpp") { has_header = true; break; }
+  }
+
+  if (!has_header) {
+    out.push_back({"L023", lesson.rel_path,
+                   "declares artifact module " + name + ", but librc/include/rc/" + dir_name +
+                       " holds no header. Graduate the implementation, or drop the claim"});
+  }
+}
+
 // L020: a lesson that cites another lesson by number must cite one that exists.
 //
 // Forward promises are part of how a curriculum reads, and a promise to a phase
@@ -690,6 +735,7 @@ int cmd_audit(const Args& args) {
     check_facility_order(*lesson, catalog, findings);
     check_test_constants(*lesson, findings);
     check_no_discarded_style(*lesson, findings);
+    check_artifact_module(*lesson, *root, findings);
   }
   check_graph(catalog, findings);
   check_atlas_links(catalog, atlas, findings);
