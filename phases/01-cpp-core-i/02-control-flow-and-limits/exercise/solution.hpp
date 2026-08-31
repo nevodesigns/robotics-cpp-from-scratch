@@ -26,7 +26,7 @@ inline double rate_limit(double current, double target, double max_step) {
 inline int steps_to_reach(double current, double target, double max_step) {
   // TODO: a loop, with a guard before it.
   // Careful: do not compare the two doubles with !=. Ask whether the remaining
-  // distance is small enough instead, for the reason lesson 00-03 gave you.
+  // distance is small enough instead, for the reason lesson 00-04 gave you.
   (void)current;
   (void)target;
   (void)max_step;

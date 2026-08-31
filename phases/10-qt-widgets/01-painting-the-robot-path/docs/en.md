@@ -19,7 +19,7 @@ machine went. It is the fastest debugging instrument in the field, because a
 wrong turn is obvious in a picture and invisible in a column of numbers.
 
 This lesson builds it, and it drives it with `rc::sim::step`, the function you
-wrote in lesson 00-04, imported unchanged.
+wrote in lesson 00-05, imported unchanged.
 
 ## The Concept
 

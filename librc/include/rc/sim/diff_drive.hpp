@@ -1,6 +1,6 @@
 // rc/sim/diff_drive.hpp
 //
-// The differential drive model, graduated from lesson 00-04.
+// The differential drive model, graduated from lesson 00-05.
 //
 // This is the first artifact in the curriculum that a later phase depends on.
 // The learner writes it in phase 00 as their first piece of real robotics

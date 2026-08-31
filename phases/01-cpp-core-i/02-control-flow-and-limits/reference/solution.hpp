@@ -26,7 +26,7 @@ inline int steps_to_reach(double current, double target, double max_step) {
   // needs this check every time.
   if (max_step <= 0.0) return std::fabs(target - current) <= 1e-9 ? 0 : -1;
 
-  // Comparing two computed doubles with != is the trap lesson 00-03 warns about.
+  // Comparing two computed doubles with != is the trap lesson 00-04 warns about.
   // Adding 0.1 ten times does not produce exactly 1.0, so an exact comparison
   // would report eleven steps for a journey that plainly takes ten. Asking
   // whether the remaining distance is small enough is the correct question.

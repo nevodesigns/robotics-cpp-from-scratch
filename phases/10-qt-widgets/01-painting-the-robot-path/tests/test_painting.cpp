@@ -15,7 +15,7 @@
 namespace {
 
 std::vector<rc::sim::Pose> quarter_circle() {
-  // The same drive as lesson 00-04, through the same function, now graduated
+  // The same drive as lesson 00-05, through the same function, now graduated
   // into rc::sim. Nothing about it was changed to make it drawable.
   return rc::sim::drive(rc::sim::Pose{}, 0.55, 0.75, 0.30, 0.05, 47);
 }

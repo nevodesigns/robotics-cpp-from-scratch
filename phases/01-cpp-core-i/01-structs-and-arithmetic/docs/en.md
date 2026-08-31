@@ -10,7 +10,7 @@
 
 ## The Problem
 
-In lesson 00-04 you passed a pose around as one value. Imagine you had not. Every
+In lesson 00-05 you passed a pose around as one value. Imagine you had not. Every
 function would take three separate numbers:
 
 ```cpp
@@ -72,7 +72,7 @@ Open `exercise/solution.hpp`. Implement:
   positions. Set its heading to zero, and the tests will tell you if you forget.
 - `translate(const Pose& start, double forward)`, the pose you reach by driving
   `forward` metres along the direction `start` already faces. This one reuses the
-  cosine and sine idea from lesson 00-04.
+  cosine and sine idea from lesson 00-05.
 
 Then:
 

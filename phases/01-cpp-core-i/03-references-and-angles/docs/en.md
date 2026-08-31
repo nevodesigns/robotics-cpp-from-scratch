@@ -79,7 +79,7 @@ double shortest_turn(double from, double to) {
 }
 ```
 
-And the wrap itself, which you met in lesson 00-04:
+And the wrap itself, which you met in lesson 00-05:
 
 ```cpp
 double wrap_angle(double radians) {

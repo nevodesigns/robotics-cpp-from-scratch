@@ -24,7 +24,7 @@
         "Set one wheel to the forward speed and the other to the turn rate"
       ],
       "correct": 0,
-      "explanation": "It is the model from lesson 00-04 rearranged. Forward is the average of the wheels and turn is their difference over the base, so going back is half the difference either side of the average."
+      "explanation": "It is the model from lesson 00-05 rearranged. Forward is the average of the wheels and turn is their difference over the base, so going back is half the difference either side of the average."
     },
     {
       "stage": "check",

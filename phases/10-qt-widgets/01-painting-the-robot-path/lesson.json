@@ -13,7 +13,7 @@
   "hardware_tier": 1,
   "requires": [
     "09-01-the-qt-object-model",
-    "00-04-first-motion"
+    "00-05-first-motion"
   ],
   "cxx_standard": 17,
   "qt": {

@@ -33,7 +33,7 @@ inline double heading_error(const rc::sim::Pose& pose, const rc::sim::Pose& targ
   return 0.0;
 }
 
-// The inverse of the model you wrote in lesson 00-04. Given a forward speed and
+// The inverse of the model you wrote in lesson 00-05. Given a forward speed and
 // a turn rate, what must each wheel do?
 inline WheelSpeeds to_wheel_speeds(double forward, double turn, double wheel_base) {
   // TODO: forward speed is the average of the wheels and turn rate is their

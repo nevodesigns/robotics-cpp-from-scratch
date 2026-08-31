@@ -103,7 +103,7 @@ The difference is one character and it decides the type of every addition. With
 41 instead of 42.0. The compiler is content, because integer addition is a
 perfectly reasonable thing to ask for.
 
-This is the same family as lesson 00-03. The arithmetic is doing exactly what
+This is the same family as lesson 00-04. The arithmetic is doing exactly what
 you wrote, and what you wrote is not what you meant.
 
 ### Trap three: sort needs a strict weak ordering
