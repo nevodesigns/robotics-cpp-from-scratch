@@ -1,0 +1,78 @@
+{
+  "lesson": "08-01-bytes-on-the-wire",
+  "title": "Bytes on the Wire: What a Struct Is Not",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does sending a struct with reinterpret_cast work between two copies of your own program and fail against a device?",
+      "options": [
+        "Both copies were built by the same compiler, which made the same padding and byte order decisions",
+        "The device is slower and drops bytes",
+        "reinterpret_cast is only valid within one process",
+        "The struct is copied twice on the way out"
+      ],
+      "correct": 0,
+      "explanation": "The test that would have caught it is the one you did not write, because both ends of your test agreed about everything that was never written down."
+    },
+    {
+      "stage": "check",
+      "question": "A struct holds a uint8_t, a double and a uint16_t. Eleven bytes of data. What does sizeof report and why?",
+      "options": [
+        "Twenty four, because the double must sit at an address that is a multiple of eight and the compiler pads to arrange it",
+        "Eleven, since sizeof is the sum of the members",
+        "Sixteen, always, because structs round up to a power of two",
+        "It is unspecified and cannot be measured"
+      ],
+      "correct": 0,
+      "explanation": "Reordering the fields gives sixteen for the same data. The number is a decision your compiler made for your processor, and the device made a different one."
+    },
+    {
+      "stage": "check",
+      "question": "Why write bytes with shifts rather than copying the memory of the value?",
+      "options": [
+        "A shift is arithmetic on a number and means the same thing everywhere, while the memory layout is whatever this processor's byte order is",
+        "Shifting is faster",
+        "memcpy cannot be used on integers",
+        "Shifting avoids undefined behaviour that memcpy would cause"
+      ],
+      "correct": 0,
+      "explanation": "Code written with shifts has no endianness at all. It produces the bytes the protocol asked for wherever it is compiled, which is the property you want."
+    },
+    {
+      "stage": "check",
+      "question": "Why is memcpy the way to get at the bits of a float, rather than casting a pointer?",
+      "options": [
+        "The cast breaks the aliasing rules and can be misaligned, which faults on some ARM cores, and memcpy compiles to the same instruction",
+        "memcpy is faster than a cast",
+        "A float cannot be pointed at",
+        "The cast rounds the value"
+      ],
+      "correct": 0,
+      "explanation": "The cast usually works, until a release build with optimisation on, which is the worst possible moment to discover it. memcpy costs nothing but knowing to write it."
+    },
+    {
+      "stage": "post",
+      "question": "Your decoder round trips every value correctly in tests and still reads garbage from the device. What did the tests not check?",
+      "options": [
+        "The actual bytes, since an encoder and decoder that are both backwards agree with each other perfectly",
+        "That the values were large enough",
+        "That the buffer was big enough",
+        "That the device was connected"
+      ],
+      "correct": 0,
+      "explanation": "A round trip tests that two halves of your own code agree. Only pinning the bytes tests that they agree with the specification."
+    },
+    {
+      "stage": "post",
+      "question": "Why must a buffer be uint8_t rather than char?",
+      "options": [
+        "char is signed on some platforms and unsigned on others, so a byte above 127 reads as a negative number on one and not the other",
+        "char is only one byte on some platforms",
+        "uint8_t is faster to index",
+        "char cannot hold binary data"
+      ],
+      "correct": 0,
+      "explanation": "The disagreement lives in the type rather than in the logic, so reading the logic will not find it. A checksum over the same bytes gets two different answers."
+    }
+  ]
+}

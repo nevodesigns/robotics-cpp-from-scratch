@@ -342,6 +342,16 @@ const std::vector<Facility>& tracked_facilities() {
       {"rc::span", "rc::span"},
       {"std::map", "std::map"},
       {"std::chrono", "std::chrono"},
+
+      // One facility under several spellings. The fixed width integers arrive
+      // together, in the lesson that explains why a wire format cannot use int,
+      // and listing them separately would say six times what is true once.
+      {"std::uint8_t", "fixed width integers"},
+      {"std::uint16_t", "fixed width integers"},
+      {"std::uint32_t", "fixed width integers"},
+      {"std::int8_t", "fixed width integers"},
+      {"std::int16_t", "fixed width integers"},
+      {"std::int32_t", "fixed width integers"},
   };
   return facilities;
 }
