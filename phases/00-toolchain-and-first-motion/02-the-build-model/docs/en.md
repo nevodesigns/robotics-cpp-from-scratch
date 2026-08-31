@@ -101,7 +101,7 @@ Now write the missing definition in `exercise/solution.cpp`. The functions:
 ## Use It
 
 Every build system you will ever meet is automating these same two steps. CMake,
-which lesson 00-03 introduces, decides which files get compiled and which object
+which lesson 04-01 introduces, decides which files get compiled and which object
 files get linked together. When a real project fails to link, the question is
 always the same one you just answered: which definition is missing, and which
 file was supposed to hold it.
