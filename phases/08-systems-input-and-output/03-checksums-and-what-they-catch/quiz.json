@@ -1,0 +1,78 @@
+{
+  "lesson": "08-03-checksums-and-what-they-catch",
+  "title": "Checksums: What They Catch, Measured",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Measured over every single flipped bit, how do a sum, an exclusive or, CRC-8 and CRC-16 compare?",
+      "options": [
+        "All four catch every one, so a single bit flip is no reason to choose between them",
+        "Only the CRCs catch them",
+        "Only CRC-16 catches them all",
+        "The sum catches the fewest"
+      ],
+      "correct": 0,
+      "explanation": "The argument for a CRC has to be made on something other than single bit errors, which is where most of the folklore about it stops."
+    },
+    {
+      "stage": "check",
+      "question": "Two bytes of a message are swapped and no bits change. What fraction does a sum catch?",
+      "options": [
+        "None, and this is arithmetic rather than luck, because addition is commutative",
+        "About half",
+        "All of them, since the positions differ",
+        "It depends on the values"
+      ],
+      "correct": 0,
+      "explanation": "No width of sum fixes it. It is a property of the arithmetic, and it is exactly what a parser locked onto a false start byte produces: correct bytes in the wrong places."
+    },
+    {
+      "stage": "check",
+      "question": "Over three million messages, CRC-16 missed zero two byte bursts and about forty five three byte bursts. Why the difference?",
+      "options": [
+        "A CRC of width n detects every burst of n bits or fewer by construction, and above that width it is down to chance at one in two to the n",
+        "Three byte bursts are more likely to look like valid data",
+        "The polynomial is only defined for short bursts",
+        "It is measurement noise, the two rows are the same"
+      ],
+      "correct": 0,
+      "explanation": "Below the width it is a guarantee, above it every scheme of that width performs the same, which is why sum, exclusive or and CRC-8 all missed about one in 256 of the longer bursts."
+    },
+    {
+      "stage": "check",
+      "question": "Your CRC-8 round trips perfectly against your own decoder. What does that prove?",
+      "options": [
+        "Nothing about agreeing with anyone else, since every wrong variant is self consistent too",
+        "That the polynomial is correct",
+        "That the starting value is correct",
+        "That the implementation is standard"
+      ],
+      "correct": 0,
+      "explanation": "The published check value is what settles it: CRC-8 over the nine bytes 123456789 is 0xF4. Without that you have a checksum that talks to itself."
+    },
+    {
+      "stage": "post",
+      "question": "A link is rejecting a steady two percent of frames on their checksum. What is that telling you?",
+      "options": [
+        "Something physical, such as a cable, a ground or a baud rate, and it is saying so before anything else notices",
+        "That the checksum is too weak",
+        "That the sender is faulty and should be replaced",
+        "Nothing useful, some loss is normal"
+      ],
+      "correct": 0,
+      "explanation": "Counting the failures and reporting the count turns the checksum into a diagnostic instead of only a filter, which is most of its value in the field."
+    },
+    {
+      "stage": "post",
+      "question": "You need one wrong message accepted every few hours rather than every few minutes on a busy link. What decides that?",
+      "options": [
+        "The width of the checksum, since above its width every scheme of that width is one in two to the n",
+        "The choice of polynomial",
+        "Whether the bits are reflected",
+        "The starting value"
+      ],
+      "correct": 0,
+      "explanation": "Eight bits is one in 256 and sixteen is one in 65536. Choose the width from the residual risk you will accept, then choose a standard polynomial of that width so the other end can be told which by name."
+    }
+  ]
+}

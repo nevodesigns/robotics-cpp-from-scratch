@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "id": "08-03-checksums-and-what-they-catch",
+  "title": "Checksums: What They Catch, Measured",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "08-02-framing-a-stream"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::io",
+    "note": "the integrity check on every frame in this curriculum"
+  },
+  "breaks_first": [
+    "E-IO-0005",
+    "E-IO-0006",
+    "E-IO-0007"
+  ]
+}
