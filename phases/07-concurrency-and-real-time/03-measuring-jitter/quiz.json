@@ -1,0 +1,78 @@
+{
+  "lesson": "07-03-measuring-jitter",
+  "title": "Jitter: Measuring the Loop You Are About to Trust",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A control loop averages exactly its thousand microsecond period. What has that told you?",
+      "options": [
+        "Almost nothing about whether it ever misses a deadline",
+        "That it never misses a deadline",
+        "That its worst case is close to a thousand microseconds",
+        "That the scheduler is treating it fairly"
+      ],
+      "correct": 0,
+      "explanation": "A loop can be early or on time ninety nine times and four milliseconds late on the hundredth, and still average perfectly. The average is the one summary that cannot see a tail."
+    },
+    {
+      "stage": "check",
+      "question": "What is the difference between the interval and the lateness of a cycle?",
+      "options": [
+        "The interval is the time since the previous run, the lateness is that minus the period it was meant to be",
+        "They are two names for the same measurement",
+        "The interval is measured from the start of the loop, the lateness from the previous cycle",
+        "Lateness is the interval expressed as a percentage"
+      ],
+      "correct": 0,
+      "explanation": "Lateness is the quantity a controller cares about, because it is the amount by which the time it integrated over differs from the time it assumed."
+    },
+    {
+      "stage": "check",
+      "question": "Why a fixed array of counters rather than keeping every sample?",
+      "options": [
+        "Keeping every sample allocates without bound inside the loop being measured, which changes what is measured",
+        "An array of counters is more accurate",
+        "Samples cannot be stored in a vector",
+        "It uses less memory, and nothing else follows from it"
+      ],
+      "correct": 0,
+      "explanation": "The instrument has to be cheaper than the thing it measures. Recording into a histogram is an index calculation and an increment, with no allocation however long it runs."
+    },
+    {
+      "stage": "check",
+      "question": "A sample lands beyond the last bucket. Clamping the index to the last bucket keeps the access in bounds. What does it cost?",
+      "options": [
+        "The worst case now reads as the top of the range no matter how far past it the sample was",
+        "Nothing, it is the standard approach",
+        "One sample is lost from the count",
+        "The median becomes wrong"
+      ],
+      "correct": 0,
+      "explanation": "The histogram understates the outlier in proportion to how bad it was, so it fails hardest where the answer matters most. Count overflows separately and keep the true worst value. See E-RT-0001."
+    },
+    {
+      "stage": "post",
+      "question": "A loop specification says the 99.9th percentile is under 200 microseconds and nothing exceeds 500. Why is that better than an average?",
+      "options": [
+        "It constrains the tail, which is the part that misses deadlines",
+        "It is a stricter number",
+        "Percentiles are easier to measure than averages",
+        "It avoids floating point"
+      ],
+      "correct": 0,
+      "explanation": "A specification written as an average is not a specification, because the tail is unconstrained and the tail is the entire question."
+    },
+    {
+      "stage": "post",
+      "question": "Your loop's tail is hundreds of microseconds. Which cause should you rule out first?",
+      "options": [
+        "Your own code, an allocation or a lock or a log line inside the loop",
+        "The kernel scheduler",
+        "Processor frequency scaling",
+        "Page faults on first touch"
+      ],
+      "correct": 0,
+      "explanation": "All four cause tails, and the kernel is the interesting answer, which is exactly why it is the wrong one to reach for first. The cheapest thing to check is what the loop itself does."
+    }
+  ]
+}

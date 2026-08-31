@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "id": "07-03-measuring-jitter",
+  "title": "Jitter: Measuring the Loop You Are About to Trust",
+  "type": "build",
+  "minutes": 120,
+  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "hardware_tier": 0,
+  "requires": ["07-02-a-queue-without-a-lock"],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": { "module": "rc::rt", "note": "the histogram every timing claim in this curriculum is measured with" },
+  "breaks_first": ["E-RT-0001", "E-NUM-0011", "E-CPP-0007"]
+}
