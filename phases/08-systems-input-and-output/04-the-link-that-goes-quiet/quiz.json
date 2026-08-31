@@ -1,0 +1,78 @@
+{
+  "lesson": "08-04-the-link-that-goes-quiet",
+  "title": "The Link That Goes Quiet: Reads That Return Nothing, Writes That Do Not Finish",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A non blocking read returns zero. What has happened?",
+      "options": [
+        "Nothing had arrived yet, which on a link polled faster than it talks is most calls",
+        "The device disconnected",
+        "The read failed",
+        "The stream reached its end"
+      ],
+      "correct": 0,
+      "explanation": "Three returns, three meanings: positive is data, zero is silence, negative is an error. Collapsing zero into the error case gives a link that reports failure on an idle bus."
+    },
+    {
+      "stage": "check",
+      "question": "write returns fewer bytes than you passed it. What goes out if you ignore that?",
+      "options": [
+        "A truncated frame, which desynchronises the far end rather than simply being lost",
+        "Nothing, the write is retried automatically",
+        "The whole frame, since the count is advisory",
+        "A frame with a bad checksum, which the far end will reject cleanly"
+      ],
+      "correct": 0,
+      "explanation": "A frame that is simply missing costs one message. One that is truncated costs the receiver its place in the stream, which is the failure the framing lesson was about."
+    },
+    {
+      "stage": "check",
+      "question": "Why must a staleness clock be fed by valid messages rather than by bytes read?",
+      "options": [
+        "A crashed device holding its line, or a motor inducing noise, produces bytes all day and no information",
+        "Reading the byte count is slower",
+        "Bytes arrive out of order",
+        "The byte count overflows"
+      ],
+      "correct": 0,
+      "explanation": "A watchdog fed by bytes reports a dead link as healthy, and reports it most confidently when the noise is worst. Only a framed, checksummed, decoded message is evidence that somebody is there."
+    },
+    {
+      "stage": "check",
+      "question": "One read returns two complete frames. What must the link do with the second?",
+      "options": [
+        "Keep the unparsed bytes and continue from them on the next poll, since the read already took them out of the port",
+        "Read them again on the next poll",
+        "Deliver both messages from a single poll",
+        "Discard them, the sender will retransmit"
+      ],
+      "correct": 0,
+      "explanation": "Bytes taken from the port are gone from it. Returning early without keeping the remainder loses every message after the first in a chunk, which on a busy link looks like a device that has halved its rate."
+    },
+    {
+      "stage": "post",
+      "question": "Discards are high, frames received is zero. What does that pattern say?",
+      "options": [
+        "The baud rate is wrong, or nothing is connected",
+        "A bad ground or a noisy cable",
+        "The device is alive and has stopped sending",
+        "The port never opened"
+      ],
+      "correct": 0,
+      "explanation": "Frames arriving with checksums failing is the cable. Frames and checksums fine with nothing recent is a device that has stopped talking. Four numbers separate four faults that a single ok or failed cannot."
+    },
+    {
+      "stage": "post",
+      "question": "Why does poll take the time as an argument instead of reading a clock?",
+      "options": [
+        "A test can then make an hour pass instantly, so the staleness policy is checked rather than hoped about",
+        "Reading a clock is too slow inside a loop",
+        "The clock is not available on every platform",
+        "It keeps the function const"
+      ],
+      "correct": 0,
+      "explanation": "The same seam as LoopMonitor in 07-03 and rate_limit in 01-02. A timeout you cannot test is a timeout you find out about in the field."
+    }
+  ]
+}
