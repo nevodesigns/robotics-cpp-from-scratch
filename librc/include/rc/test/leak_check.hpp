@@ -62,33 +62,40 @@ struct LeakCheck {
 }  // namespace test
 }  // namespace rc
 
-inline void* operator new(std::size_t size) {
+// Not inline, and deliberately so. A replacement allocation function must not
+// be inline: the standard says so, and Clang says it too, once per function per
+// translation unit. The consequence is that this header belongs in exactly one
+// translation unit per binary, which is what a test file already is. Two files
+// in one test including it will not link, and that failure is the correct
+// answer rather than a limitation, because two copies of the counters would
+// report leaks that are not there.
+void* operator new(std::size_t size) {
   ++rc::test::live_blocks();
   void* memory = std::malloc(size == 0 ? 1 : size);
   if (memory == nullptr) throw std::bad_alloc();
   return memory;
 }
 
-inline void* operator new[](std::size_t size) {
+void* operator new[](std::size_t size) {
   ++rc::test::live_arrays();
   void* memory = std::malloc(size == 0 ? 1 : size);
   if (memory == nullptr) throw std::bad_alloc();
   return memory;
 }
 
-inline void operator delete(void* memory) noexcept {
+void operator delete(void* memory) noexcept {
   if (memory != nullptr) --rc::test::live_blocks();
   std::free(memory);
 }
 
-inline void operator delete[](void* memory) noexcept {
+void operator delete[](void* memory) noexcept {
   if (memory != nullptr) --rc::test::live_arrays();
   std::free(memory);
 }
 
 // The sized forms. A compiler is allowed to call either, so both must keep the
 // counts straight or the harness reports leaks that are not there.
-inline void operator delete(void* memory, std::size_t) noexcept { operator delete(memory); }
-inline void operator delete[](void* memory, std::size_t) noexcept { operator delete[](memory); }
+void operator delete(void* memory, std::size_t) noexcept { operator delete(memory); }
+void operator delete[](void* memory, std::size_t) noexcept { operator delete[](memory); }
 
 #endif  // RC_TEST_LEAK_CHECK_HPP
