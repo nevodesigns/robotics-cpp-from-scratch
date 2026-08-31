@@ -1,6 +1,7 @@
 #include "atlas.hpp"
 
 #include <algorithm>
+#include <cstddef>
 #include <regex>
 #include <sstream>
 
@@ -55,18 +56,52 @@ const AtlasEntry* Atlas::find(const std::string& id) const {
 }
 
 std::vector<const AtlasEntry*> Atlas::match(const std::string& error_text) const {
-  std::vector<const AtlasEntry*> hits;
-  for (const AtlasEntry& e : entries) {
+  // Ranked by how much of the error text each entry actually accounted for.
+  // Some patterns are necessarily broad: "expected .* to be within" matches
+  // every near comparison in the curriculum. Unranked, an entry that matched a
+  // whole sentence is printed after one that matched four generic words,
+  // because the order was alphabetical by filename. The learner reads the
+  // first entry, so the first entry has to be the specific one.
+  struct Hit {
+    const AtlasEntry* entry;
+    std::size_t matched;
+    std::size_t order;
+  };
+  std::vector<Hit> hits;
+
+  for (std::size_t i = 0; i < entries.size(); ++i) {
+    const AtlasEntry& e = entries[i];
+    std::size_t longest = 0;
+    bool any = false;
+
+    // Every pattern is tried, not just the first that matches, because the
+    // longest match is what decides the rank.
     for (const std::string& pattern : e.patterns) {
       try {
         const std::regex re(pattern, std::regex::ECMAScript | std::regex::icase);
-        if (std::regex_search(error_text, re)) { hits.push_back(&e); break; }
+        std::smatch found;
+        if (std::regex_search(error_text, found, re)) {
+          any = true;
+          const std::size_t length = static_cast<std::size_t>(found.length(0));
+          if (length > longest) longest = length;
+        }
       } catch (const std::regex_error&) {
         // A malformed pattern is reported by audit, not by explain.
       }
     }
+
+    if (any) hits.push_back(Hit{&e, longest, i});
   }
-  return hits;
+
+  std::sort(hits.begin(), hits.end(), [](const Hit& a, const Hit& b) {
+    if (a.matched != b.matched) return a.matched > b.matched;
+    return a.order < b.order;   // file order breaks a tie, so output is stable
+  });
+
+  std::vector<const AtlasEntry*> ranked;
+  ranked.reserve(hits.size());
+  for (const Hit& hit : hits) ranked.push_back(hit.entry);
+  return ranked;
 }
 
 Atlas load_atlas(const fs::path& repo_root) {

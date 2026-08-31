@@ -4,6 +4,8 @@
 // the lesson that explains why it happened. This is the command that keeps a
 // beginner in the curriculum at eleven at night.
 
+#include <algorithm>
+#include <cctype>
 #include <iostream>
 #include <sstream>
 
@@ -13,6 +15,17 @@
 #include "util.hpp"
 
 namespace rcpp {
+namespace {
+
+// Ids are written upper case in the lessons, and typed however the learner
+// happens to type them.
+std::string upper(const std::string& text) {
+  std::string out = text;
+  for (char& c : out) c = static_cast<char>(std::toupper(static_cast<unsigned char>(c)));
+  return out;
+}
+
+}  // namespace
 
 int cmd_explain(const Args& args) {
   const auto root = find_repo_root();
@@ -46,7 +59,16 @@ int cmd_explain(const Args& args) {
   }
 
   const Atlas atlas = load_atlas(*root);
-  const auto hits = atlas.match(text);
+  auto hits = atlas.match(text);
+
+  // Every lesson's What Breaks First section names entries by id, so a learner
+  // reads "See E-RT-0001" and types exactly that. Searching the error text for
+  // it found nothing, because an id is not something a compiler ever prints.
+  const AtlasEntry* by_id = atlas.find(upper(trim(text)));
+  if (by_id) {
+    hits.erase(std::remove(hits.begin(), hits.end(), by_id), hits.end());
+    hits.insert(hits.begin(), by_id);
+  }
 
   if (hits.empty()) {
     std::cout << "\n" << style::warn("No catalogued match.") << "\n\n"
