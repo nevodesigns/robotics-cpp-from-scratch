@@ -1,0 +1,78 @@
+{
+  "lesson": "05-03-the-test-that-catches-it",
+  "title": "Writing the Test That Catches It",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the question to ask of every check you write?",
+      "options": [
+        "What would have to be wrong for this to fail",
+        "Does this cover a line that was not covered",
+        "Is this the fastest way to assert it",
+        "Does this match the implementation"
+      ],
+      "correct": 0,
+      "explanation": "If the answer is nothing you can think of, the check could never have failed and is not a test. Matching the implementation is the subtler version of the same problem: the check follows the code wherever it goes, including into a bug."
+    },
+    {
+      "stage": "check",
+      "question": "A checks_pass that simply returns false rejects all six broken implementations. Why is that not a solution?",
+      "options": [
+        "It also rejects the correct one, and a suite that rejects correct code is worse than no suite",
+        "It is too slow",
+        "It does not report which implementation failed",
+        "It would pass, but for the wrong reason"
+      ],
+      "correct": 0,
+      "explanation": "The next real failure is not believed, because the suite has taught everybody that a red result means the test is wrong. A suite is judged from both sides at once."
+    },
+    {
+      "stage": "check",
+      "question": "One implementation is wrong only when the remaining distance equals the step size exactly. What finds it?",
+      "options": [
+        "A check that asks for that case by name, since sampling lands on a single point with probability near zero",
+        "A loop over a hundred evenly spaced starting positions",
+        "Random input generation, given enough runs",
+        "A check that the step is never exceeded"
+      ],
+      "correct": 0,
+      "explanation": "Measured: the hundred and one position sweep misses it, and so does every other property in the suite. Only the two checks written for that boundary catch it."
+    },
+    {
+      "stage": "check",
+      "question": "Where do the boundaries worth testing come from?",
+      "options": [
+        "Every comparison in the implementation decides something, and each produces three cases: below, exactly, and above",
+        "The extremes of the input type",
+        "Whatever the coverage report highlights",
+        "The values in the specification's examples"
+      ],
+      "correct": 0,
+      "explanation": "Two of the three are usually obvious and the third is the one that ships. The cheap habit is that whenever a test uses a value near a limit, add one at the limit."
+    },
+    {
+      "stage": "post",
+      "question": "A suite written entirely with the target above the current value misses which fault?",
+      "options": [
+        "A limiter that only ever adds, which runs away from any target below it",
+        "A limiter that does not limit",
+        "A limiter that will not stay where it arrived",
+        "A limiter that ignores a step of zero"
+      ],
+      "correct": 0,
+      "explanation": "Direction is a dimension of the input that is easy not to notice, because the first example anybody writes moves upward and every one after it is copied from that."
+    },
+    {
+      "stage": "post",
+      "question": "Two checks in this lesson each catch only the same single fault. Are they redundant?",
+      "options": [
+        "Given these six implementations, yes, and a seventh that broke one direction and not the other would separate them",
+        "Yes, and one should be deleted",
+        "No, redundancy is impossible in a test suite",
+        "No, because they exercise different lines"
+      ],
+      "correct": 0,
+      "explanation": "Removing a check and finding nothing slips through says it is redundant against the faults you have, not that it is worthless. A check that catches no fault at all is the one to question."
+    }
+  ]
+}
