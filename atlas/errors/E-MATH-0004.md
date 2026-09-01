@@ -1,50 +1,64 @@
 id: E-MATH-0004
-title: A frame composed the wrong way, or an inverse that only negates
-match: expected this to be true: near_vec
-match: expected .*translation.* to be
+title: A chain of transforms composed the wrong way round
+match: the chain agrees with the closed form
+match: turning the second joint moves only what is beyond it
 platforms: linux, windows
-teaches: 06-04-transforms-and-frames
+teaches: 13-01-where-the-tool-is
 ---
 
 ## Symptom
 
-An arm reaches confidently to entirely the wrong place. A camera detection lands
-somewhere plausible but wrong. Nothing crashes, nothing warns, and the number
-looks like a position.
+An arm whose tool ends up somewhere reasonable and wrong. It moves when the
+joints move, the distances are about right, and the position does not match
+where the machine actually is.
 
-Or an inverse works perfectly in testing and fails the moment something rotates.
+The tell is that the **home configuration is usually correct**. With every angle
+at zero the rotations are all identity, so the order does not matter and the
+answer comes out right, which is exactly the configuration everybody checks
+first.
 
 ## Cause
 
-Two shapes, both common enough to name together.
+The composition runs the wrong direction:
 
-The composition ran in the wrong direction, or two transforms were chained whose
-frames do not meet. Composing T_world_base with T_gripper_camera is meaningless,
-but nothing in the type system objects.
+```cpp
+base_here = compose(joint.parent_to_joint, base_here);   // the bug
+```
 
-Or the inverse negated the translation without rotating it. The original
-translation is expressed in the original frame, and the inverse needs it in the
-rotated one. The negation only version is exactly correct whenever the rotation
-is the identity, so it passes any test written with pure translations and waits
-for the first real rotation.
+Composition is not commutative, and the result of the wrong order is not
+nonsense. It is a perfectly good transform between two frames, which happen to
+be two frames nobody asked about.
 
 ## Fix
 
-Name every transform for its two frames, destination first, and check that
-adjacent names cancel:
+Use the naming rule from lesson 06-04 and let it do the checking. Name every
+transform for the two frames it relates, destination first:
 
+```text
+base_1 composed with 1_2   ->   base_2       the inner subscripts cancel
+1_2   composed with base_1 ->   nothing that has a name
 ```
-T_world_base * T_base_gripper = T_world_gripper
-```
-
-That turns a geometry question into a spelling check.
-
-For the inverse, rotate the negated translation by the undone rotation:
 
 ```cpp
-const Quat undo = conjugate(t.rotation);
-return Transform{undo, rotate(undo, scale(t.translation, -1.0))};
+base_here = compose(base_here, joints[i].parent_to_joint);
+base_here = compose(base_here, joint_motion(joints[i], angle));
 ```
 
-Test it with a transform that actually rotates. A suite that only translates
-cannot tell the two implementations apart.
+Written that way the mistake is visible on the line rather than in the result,
+because the adjacent subscripts do not match.
+
+**Test it against something derived independently.** A planar two link arm has a
+closed form:
+
+```text
+x = l1 cos(q1) + l2 cos(q1 + q2)
+y = l1 sin(q1) + l2 sin(q1 + q2)
+```
+
+Compare the chain against that across a grid of configurations rather than at a
+handful of points. Measured in lesson 13-01: 3721 configurations, worst
+disagreement 2.8e-16 metres. That is a check the machinery cannot pass by being
+consistently wrong, which a round trip through itself would.
+
+And avoid checking only the home configuration, for the reason above: it is the
+one configuration where this bug does not show.

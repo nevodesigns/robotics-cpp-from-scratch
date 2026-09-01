@@ -1,0 +1,78 @@
+{
+  "lesson": "13-01-where-the-tool-is",
+  "title": "Where the Tool Is: Forward Kinematics as Composition",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is forward kinematics, in terms of what you already have?",
+      "options": [
+        "Composing each joint's fixed geometry and current rotation, in order from the base outward",
+        "Solving a system of equations for the joint angles",
+        "Trigonometry specific to the arm's shape",
+        "Integrating the joint velocities"
+      ],
+      "correct": 0,
+      "explanation": "It is the transform from lesson 06-04 applied twice per joint, and nothing else. Solving for the angles is the other direction and is a different problem."
+    },
+    {
+      "stage": "check",
+      "question": "Why must a joint's fixed geometry be applied before its rotation?",
+      "options": [
+        "The axis is written in the joint's own frame, and that frame does not exist until the fixed transform has placed it",
+        "The rotation would otherwise be applied twice",
+        "Translation and rotation cannot be composed in the other order",
+        "It is a convention with no consequence"
+      ],
+      "correct": 0,
+      "explanation": "Turning first turns about that axis as expressed in the parent's frame, which is a different axis whenever the fixed geometry contains a rotation. A straight arm hides it, because then the two frames are aligned."
+    },
+    {
+      "stage": "check",
+      "question": "An arm composed the wrong way round is checked at its home configuration and looks correct. Why?",
+      "options": [
+        "With every angle at zero the rotations are all identity, so the order does not matter",
+        "The home configuration is not affected by composition",
+        "The errors cancel at zero",
+        "It is a coincidence of that arm's geometry"
+      ],
+      "correct": 0,
+      "explanation": "Which is the configuration everybody checks first, and the one that proves the least. A grid of configurations against an independent answer is what settles it."
+    },
+    {
+      "stage": "check",
+      "question": "How do you check the chain against something other than itself?",
+      "options": [
+        "A planar two link arm has a closed form, so the machinery can be compared against a formula derived without it",
+        "Round trip a pose through the chain and its inverse",
+        "Compare two runs with the same angles",
+        "Check that the tool moves when a joint moves"
+      ],
+      "correct": 0,
+      "explanation": "Measured at 3721 configurations the worst disagreement is 2.8e-16 metres. A round trip through the chain itself would pass even if the chain were consistently wrong."
+    },
+    {
+      "stage": "post",
+      "question": "Fewer angles are supplied than the chain has joints. What should happen?",
+      "options": [
+        "The missing joints are held at zero and the caller can ask whether the count matched",
+        "The remaining values are read from the array anyway",
+        "The chain returns an identity transform",
+        "The program stops"
+      ],
+      "correct": 0,
+      "explanation": "Holding them at zero is a defensible answer; reading past the end is not an answer at all. Being able to ask is what stops a plausible pose from being silently wrong."
+    },
+    {
+      "stage": "post",
+      "question": "Six joints means five quaternion compositions. Does the rotation need renormalising?",
+      "options": [
+        "Measured, no: the norm stays at 1.0 to fifteen places over a six joint chain",
+        "Yes, after every composition",
+        "Yes, but only for chains longer than ten joints",
+        "It cannot be measured"
+      ],
+      "correct": 0,
+      "explanation": "The drift lesson 06-02 measured comes from repeatedly updating one rotation over thousands of steps, which is a different situation from composing a handful of them once."
+    }
+  ]
+}

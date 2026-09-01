@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "title": "Kinematics and Dynamics",
+  "ends_with": "An arm whose tool position you can compute, and check against a closed form"
+}
