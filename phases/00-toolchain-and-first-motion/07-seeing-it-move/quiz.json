@@ -1,0 +1,78 @@
+{
+  "lesson": "00-07-seeing-it-move",
+  "title": "Seeing It Move: A Picture Made of Numbers",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "The final pose of a trajectory is correct to four decimal places. What can a picture of the whole path still tell you?",
+      "options": [
+        "The route it took, which can be wildly wrong while the endpoint is right",
+        "Nothing, since the numbers already agree",
+        "Only how long it took",
+        "Whether the tolerance was chosen well"
+      ],
+      "correct": 0,
+      "explanation": "Two paths that end in the same place can look nothing alike, and a number at the end cannot separate them. That is what the picture is for."
+    },
+    {
+      "stage": "check",
+      "question": "Why does a row number have to be subtracted from the height rather than used directly?",
+      "options": [
+        "A robot's y grows upward and a screen's rows grow downward, so without the flip the picture is a mirror image",
+        "Because rows are counted from one",
+        "To leave room for the axis labels",
+        "Because the scale is negative"
+      ],
+      "correct": 0,
+      "explanation": "A mirror image of a plausible path is another plausible path, which is why this survives so long. Test it with a direction: a point higher up the field must get a smaller row number."
+    },
+    {
+      "stage": "check",
+      "question": "Why one scale for both axes rather than stretching each to fill the grid?",
+      "options": [
+        "With different scales the shape of the path is a fact about the window rather than about the robot",
+        "It is faster to compute",
+        "Stretching would move the origin",
+        "The grid is always square"
+      ],
+      "correct": 0,
+      "explanation": "The empty space left on one side is correct: it is what tells you the path is taller than it is wide. A circle drawn as an oval means no shape in the picture can be trusted."
+    },
+    {
+      "stage": "check",
+      "question": "A robot drives in a perfectly straight line and the plot comes out blank, with no error. What happened?",
+      "options": [
+        "The extent on one axis is zero, the scale divided by it, and every coordinate became infinity and fell outside the grid",
+        "The path was too short to draw",
+        "The characters were written outside the terminal",
+        "The bounds were never initialised"
+      ],
+      "correct": 0,
+      "explanation": "Dividing by zero gives infinity rather than an error, and the range check that was there to keep the drawing safe then skips every point. The check does its job perfectly and the picture is blank."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the plot allow for a character being twice as tall as it is wide?",
+      "options": [
+        "Otherwise a metre across and a metre up are drawn at different sizes, and a circle comes out squashed even though one scale was used",
+        "To fit more of the path on screen",
+        "Because terminals vary between systems",
+        "It only matters for very large paths"
+      ],
+      "correct": 0,
+      "explanation": "In a window with square pixels the factor is one. The idea is the same: a picture is only evidence if the two axes mean the same thing."
+    },
+    {
+      "stage": "post",
+      "question": "This lesson draws in a terminal rather than in a window. Why is that the right choice for the end of phase 00?",
+      "options": [
+        "It needs nothing installed, so nobody is blocked at the moment the phase pays off",
+        "Terminals draw faster than windows",
+        "A window would need more code",
+        "The picture is more accurate"
+      ],
+      "correct": 0,
+      "explanation": "The arithmetic here is the same arithmetic the Qt plotter uses in phase 10. What changes there is the surface it is drawn on, not the idea, and by then installing Qt is a reasonable thing to ask."
+    }
+  ]
+}

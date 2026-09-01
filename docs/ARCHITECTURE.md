@@ -105,7 +105,7 @@ runs, shows or moves.
 
 | Phase | Lessons | Ends with |
 |---|---|---|
-| 00 Toolchain and First Motion | 14 | A robot driving in a Qt window |
+| 00 Toolchain and First Motion | 14 | A robot driving, drawn in the terminal |
 | 01 C++ Core I, values and flow | 18 | A telemetry log parser |
 | 02 Memory and ownership | 16 | A leak free device handle |
 | 03 C++ Core III, classes and templates | 18 | A generic ring buffer |
@@ -133,6 +133,16 @@ Three ordering choices worth defending:
 - **Qt arrives at phase 09, not at the end.** A GUI is the cheapest way to see
   what your code is doing. Once the learner has a plotter, every later phase gets
   a visual debugger for free. Putting Qt last wastes it.
+- **Nothing is installed before something is seen.** Phase 00 originally ended
+  in a Qt window, which put an installation between a beginner and the first
+  moment their own work becomes visible. That is the worst possible place for a
+  hurdle: a learner who has never programmed, six lessons in, meeting apt or the
+  Qt installer and `CMAKE_PREFIX_PATH`. So phase 00 ends by drawing the
+  trajectory in the terminal instead, which needs a compiler and nothing else
+  and works identically on all four supported toolchains. The arithmetic is the
+  same arithmetic the Qt plotter uses in phase 10; only the surface changes, and
+  by phase 09 installing Qt is a reasonable thing to ask of somebody who has
+  built eight phases of work.
 - **Testing comes before maths.** Every later lesson ships a failing suite as its
   primary interface, so testing cannot be an advanced topic.
 - **ROS 2 sits late and stays optional.** Everything before it transfers to the

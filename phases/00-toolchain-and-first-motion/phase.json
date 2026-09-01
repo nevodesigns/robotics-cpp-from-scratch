@@ -1,5 +1,5 @@
 {
   "schema": 1,
   "title": "Toolchain and First Motion",
-  "ends_with": "A simulated robot driving a quarter circle"
+  "ends_with": "Your robot's quarter circle, drawn, with nothing installed but a compiler"
 }
