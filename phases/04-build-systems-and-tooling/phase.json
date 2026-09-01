@@ -1,5 +1,5 @@
 {
   "schema": 1,
   "title": "Build Systems and Tooling",
-  "ends_with": "A crash triage tool, built on real captured backtraces"
+  "ends_with": "A library of your own, installed, and consumed by a project that has never seen its source"
 }

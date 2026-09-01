@@ -105,6 +105,13 @@ function(rc_add_lesson)
       add_executable(${target} ${test_sources} ${variant_sources})
     endif()
     target_include_directories(${target} PRIVATE "${lesson_dir}/${variant}")
+
+    # Where the lesson lives on disk, for the few tests that need more than
+    # their own source: a fixtures directory of recorded data, or, in lesson
+    # 04-03, a project to hand to CMake and build.
+    target_compile_definitions(${target} PRIVATE
+      RC_LESSON_DIR="${lesson_dir}"
+      RC_LESSON_VARIANT_DIR="${lesson_dir}/${variant}")
     target_link_libraries(${target} PRIVATE rc::core Threads::Threads)
     target_compile_features(${target} PRIVATE cxx_std_17)
 

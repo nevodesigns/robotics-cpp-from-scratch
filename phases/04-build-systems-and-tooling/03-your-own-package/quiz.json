@@ -1,0 +1,78 @@
+{
+  "lesson": "04-03-your-own-package",
+  "title": "Your Own Package: Code Somebody Else Can Use",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does an exported target need its include directory described twice?",
+      "options": [
+        "There are two places the headers live: the source tree while this project builds, and the install prefix afterwards",
+        "Once for the compiler and once for the linker",
+        "Once for debug and once for release",
+        "To support both Windows and Linux paths"
+      ],
+      "correct": 0,
+      "explanation": "BUILD_INTERFACE applies during this build and is dropped on export. INSTALL_INTERFACE applies only in the exported package and is relative to wherever it landed."
+    },
+    {
+      "stage": "check",
+      "question": "A package uses BUILD_INTERFACE and no INSTALL_INTERFACE. What happens?",
+      "options": [
+        "It installs cleanly, find_package succeeds, and the consumer's compiler cannot find the header",
+        "CMake refuses it at configure time",
+        "The consumer links against the build tree",
+        "Nothing, the second is optional"
+      ],
+      "correct": 0,
+      "explanation": "The exported target carries no include directory at all, which is a valid thing for a target to say and is not what was meant. On the machine that built it the consumer often picks the headers up from the shared source tree, which is why it ships."
+    },
+    {
+      "stage": "check",
+      "question": "find_package reports a package as version unknown and refuses it. What is missing?",
+      "options": [
+        "The version file beside the config file, which is generated separately from the version in project()",
+        "The VERSION argument to project()",
+        "The NAMESPACE on the export",
+        "A call to include(GNUInstallDirs)"
+      ],
+      "correct": 0,
+      "explanation": "The version in project() is what the version file is generated from, and generating it is a separate step. Dropping the version from the request is the fix everybody applies and it leaves the package unusable by anyone who does ask."
+    },
+    {
+      "stage": "check",
+      "question": "Why install the target into an EXPORT set with a NAMESPACE?",
+      "options": [
+        "It is what makes steplib::steplib exist for a consumer, and a namespaced name fails at configure time rather than becoming a confusing link error",
+        "It shortens the target name",
+        "Namespaces are required for header only libraries",
+        "It avoids installing the headers twice"
+      ],
+      "correct": 0,
+      "explanation": "A plain name that is not found is treated as a library to look for at link time. A name containing a double colon must be a CMake target, so a missing package is reported where the mistake is."
+    },
+    {
+      "stage": "post",
+      "question": "How do you test a package in a way that cannot pass by accident?",
+      "options": [
+        "Install it to a temporary prefix, delete the source tree, then build a consumer against what is left",
+        "Build the consumer as a subdirectory of the package",
+        "Check that every installed file exists",
+        "Run find_package twice"
+      ],
+      "correct": 0,
+      "explanation": "Deleting the source is the part that matters. A package that only works while its source tree is present passes every test on the machine that made it and fails for the first person who installs it elsewhere."
+    },
+    {
+      "stage": "post",
+      "question": "The consumer's CMakeLists mentions no include directory and no language standard. Why is that the goal?",
+      "options": [
+        "Both arrive with the target, and having to state them means the package did not carry them",
+        "The consumer inherits them from the parent project",
+        "They are only needed for compiled libraries",
+        "CMake infers them from the header"
+      ],
+      "correct": 0,
+      "explanation": "INTERFACE requirements exist so a consumer does not have to be told how to use the thing it just linked. A consumer that repeats them is working around a package that is incomplete."
+    }
+  ]
+}
