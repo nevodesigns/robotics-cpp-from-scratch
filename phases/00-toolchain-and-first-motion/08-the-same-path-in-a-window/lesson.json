@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "id": "00-08-the-same-path-in-a-window",
+  "title": "The Same Path, in a Window",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is optional and nothing later depends on it. Lesson 00-07 draws the same path with the same arithmetic in a terminal and needs nothing installed, so a learner without Qt has already had the payoff and can go straight to phase 01. Run rcpp doctor for the install command when you do want the window.",
+  "requires": [
+    "00-07-seeing-it-move"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Widgets"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sim",
+    "note": "one mapping that serves a terminal and a window, differing only by the shape of a cell"
+  },
+  "breaks_first": [
+    "E-PLOT-0002",
+    "E-PLOT-0001",
+    "E-PLOT-0003"
+  ]
+}

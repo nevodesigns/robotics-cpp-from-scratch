@@ -11,6 +11,7 @@
     "windows-msvc2022"
   ],
   "hardware_tier": 0,
+  "fallback": "As with 09-01, this phase is about Qt itself and there is no counterpart that avoids it. Run rcpp doctor for the install command. The idea underneath, that a tool generates code you never see and the linker is where its absence shows up, is the same idea lesson 00-02 taught without any of it.",
   "requires": [
     "09-01-the-qt-object-model"
   ],

@@ -544,6 +544,30 @@ void check_pattern_alphabet(const Atlas& atlas, std::vector<Finding>& out) {
   }
 }
 
+// L026: a lesson that needs Qt says what a learner without Qt should do.
+//
+// Qt is optional in this curriculum and its absence is silent: rc_add_lesson
+// skips the lesson when find_package cannot see it, so the target simply does
+// not exist and the learner meets "unknown target" rather than an explanation.
+//
+// The fallback is a sentence, not a mechanism, and it is always answerable.
+// From phase 09 onward the honest answer is that this is where Qt becomes
+// required and here is how to install it. Before then it has to be better than
+// that, because a beginner should never be stopped by an installation, and the
+// terminal counterpart is the answer.
+//
+// The same shape as L014, which asks the question about hardware.
+void check_qt_fallback(const Lesson& lesson, std::vector<Finding>& out) {
+  if (lesson.qt_modules.empty()) return;
+  if (lesson.raw.at("fallback").is_string() &&
+      !trim(lesson.raw.at("fallback").as_string()).empty()) {
+    return;
+  }
+  out.push_back({"L026", lesson.rel_path,
+                 "needs Qt and declares no fallback. Add a fallback saying what a learner "
+                 "without Qt does, since the lesson is silently skipped when Qt is absent"});
+}
+
 // L020: a lesson that cites another lesson by number must cite one that exists.
 //
 // Forward promises are part of how a curriculum reads, and a promise to a phase
@@ -804,6 +828,7 @@ int cmd_audit(const Args& args) {
     check_test_constants(*lesson, findings);
     check_no_discarded_style(*lesson, findings);
     check_artifact_module(*lesson, *root, findings);
+    check_qt_fallback(*lesson, findings);
   }
   check_graph(catalog, findings);
   check_phase_manifests(catalog, findings);

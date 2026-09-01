@@ -30,8 +30,21 @@ skipped by the bounds check that was there to keep the drawing safe.
 
 The bounds check does its job perfectly and the picture is blank.
 
-A single point has the same problem in both directions at once, and so does any
-path that has not moved yet, which is every path on its first frame.
+Which case actually needs the guard is narrower than it looks, and worth
+knowing, because the obvious test does not catch it.
+
+Taking the **smaller** of the two candidate scales is already a partial guard.
+An axis with no extent produces infinity, and infinity is never the smaller of
+two numbers, so a path that is straight along one axis is saved by the other
+axis without any guard at all. Remove the guard and that test still passes.
+
+What defeats it is a path where **every** axis is degenerate: a single point, or
+any path that has not moved yet, which is every path on its first frame. Then
+both candidates are infinity, the smaller of them is infinity, and every
+coordinate follows.
+
+So the test that catches this is the single point, not the straight line. Both
+are worth having, and only one of them fails when the guard is missing.
 
 ## Fix
 
@@ -58,6 +71,10 @@ Worth testing both degenerate shapes explicitly, since neither appears in a
 normal path and both appear on day one of using the plot for real:
 
 ```cpp
-RC_CHECK(std::isfinite(scale_to_fit(single_point_bounds, columns, rows)));
-RC_CHECK(std::isfinite(scale_to_fit(straight_line_bounds, columns, rows)));
+RC_CHECK(std::isfinite(scale_to_fit(single_point_bounds, columns, rows)));   // this one
+RC_CHECK(std::isfinite(scale_to_fit(straight_line_bounds, columns, rows)));  // and this
 ```
+
+The first is the one that fails without the guard. The second passes either way,
+and is worth keeping because it is the case a reader expects to be the dangerous
+one, and a comment saying it is not is cheaper than someone rediscovering it.

@@ -134,7 +134,7 @@ Check probe_qt(const Host& host) {
     }
     return check;
   }
-  if (fs::exists("/usr/lib/x86_64-linux-gnu/cmake/Qt6")) {
+  if (qt6_present()) {
     check.ok = true;
     check.detail = "found the Qt6 CMake package";
     return check;

@@ -11,6 +11,7 @@
     "windows-msvc2022"
   ],
   "hardware_tier": 0,
+  "fallback": "Phase 09 is where Qt stops being optional, so the answer here is to install it: rcpp doctor prints the exact command for this machine. Everything before this phase, including the whole of phase 00, runs with a compiler and nothing else, and the eight phases of work behind you are unaffected either way.",
   "requires": [
     "01-03-references-and-angles"
   ],

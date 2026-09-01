@@ -133,16 +133,29 @@ Three ordering choices worth defending:
 - **Qt arrives at phase 09, not at the end.** A GUI is the cheapest way to see
   what your code is doing. Once the learner has a plotter, every later phase gets
   a visual debugger for free. Putting Qt last wastes it.
-- **Nothing is installed before something is seen.** Phase 00 originally ended
-  in a Qt window, which put an installation between a beginner and the first
-  moment their own work becomes visible. That is the worst possible place for a
-  hurdle: a learner who has never programmed, six lessons in, meeting apt or the
-  Qt installer and `CMAKE_PREFIX_PATH`. So phase 00 ends by drawing the
-  trajectory in the terminal instead, which needs a compiler and nothing else
-  and works identically on all four supported toolchains. The arithmetic is the
-  same arithmetic the Qt plotter uses in phase 10; only the surface changes, and
-  by phase 09 installing Qt is a reasonable thing to ask of somebody who has
-  built eight phases of work.
+- **Nothing is installed before something is seen, and then the window too.**
+  Phase 00 originally ended only in a Qt window, which put an installation
+  between a beginner and the first moment their own work becomes visible. That
+  is the worst possible place for a hurdle: a learner who has never programmed,
+  six lessons in, meeting apt or the Qt installer and `CMAKE_PREFIX_PATH`.
+
+  So the phase ends **twice**. Lesson 00-07 draws the trajectory in the
+  terminal, needs a compiler and nothing else, and is required. Lesson 00-08
+  draws the same path in a Qt window, is explicitly optional, and states in its
+  own first paragraph that skipping it costs nothing later.
+
+  Having both is worth more than either. The window is the payoff people expect
+  and it should be there for anyone who can run it. The terminal version is what
+  guarantees nobody is stopped. And the pair makes a point neither could alone:
+  the two surfaces run the **same** mapping, differing by one argument for the
+  shape of a cell, which is how a learner discovers that arithmetic written at
+  the right altitude does not know what a picture is made of.
+
+  This is the general policy for Qt in this curriculum, not a special case for
+  phase 00. A lesson that needs Qt has a counterpart or a stated fallback that
+  does not, and rule L026 checks that the fallback exists, because Qt's absence
+  is otherwise silent: the lesson is skipped at configure time and the learner
+  meets an unknown target rather than an explanation.
 - **Testing comes before maths.** Every later lesson ships a failing suite as its
   primary interface, so testing cannot be an advanced topic.
 - **ROS 2 sits late and stays optional.** Everything before it transfers to the

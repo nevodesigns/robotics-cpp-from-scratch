@@ -109,6 +109,80 @@ inline int row_for(double y, const PlotBounds& bounds, double scale, int rows) {
   return (rows - 1) - static_cast<int>(from_bottom + 0.5);
 }
 
+// ---------------------------------------------------------------------------
+// The general form, from lesson 00-08.
+//
+// A terminal and a window differ in one thing that matters to a mapping: the
+// shape of a cell. Making that a parameter is what lets one function serve
+// both, and the terminal functions above are this one with the aspect of a
+// character and no margin.
+//
+// Named for the general case rather than taking the plain names the lesson
+// uses. Both forms live in this namespace and every caller passes an rc::sim
+// type, so argument dependent lookup would find a library `place` beside a
+// learner's own `place` and refuse to choose. The lesson keeps the short name,
+// because that is the one a beginner reads.
+// ---------------------------------------------------------------------------
+
+// Where a pose lands on a surface, in that surface's own units.
+//
+// Named across and down rather than x and y on purpose. Down is the direction
+// the number grows, which is the opposite of the robot's y, and calling it y
+// invites exactly the mistake this whole family of functions exists to avoid.
+struct Point {
+  double across = 0.0;
+  double down = 0.0;
+};
+
+// One mapping for both surfaces.
+//
+// The terminal and the window differ in exactly one thing that matters here:
+// the shape of a cell. A terminal character is about twice as tall as it is
+// wide, so aspect is 2. A pixel is square, so aspect is 1. Everything else,
+// the fitting, the centring and the flip, is identical, and discovering that is
+// the point of this lesson.
+inline double scale_for_surface(const PlotBounds& bounds, double across, double down,
+                            double aspect, double margin) {
+  const double usable_across = across - 2.0 * margin;
+  const double usable_down = down - 2.0 * margin;
+  if (usable_across <= 0.0 || usable_down <= 0.0) return 0.0;
+
+  const double width = bounds_width(bounds);
+  const double height = bounds_height(bounds);
+
+  // An axis with no extent does not constrain the scale, and dividing by it
+  // gives infinity. The same guard as the terminal version, for the same
+  // reason: without it a straight path draws nothing at all.
+  const double by_across = width > 1e-12 ? usable_across / (width * aspect) : usable_across;
+  const double by_down = height > 1e-12 ? usable_down / height : usable_down;
+
+  // One scale, the tighter fit. Two would stretch the path to fill the surface
+  // and the shape of it would stop being evidence about the robot.
+  return by_across < by_down ? by_across : by_down;
+}
+
+inline Point place_on_surface(const Pose& pose, const PlotBounds& bounds,
+                   double across, double down, double aspect, double margin) {
+  const double scale = scale_for_surface(bounds, across, down, aspect, margin);
+
+  const double drawn_across = bounds_width(bounds) * scale * aspect;
+  const double drawn_down = bounds_height(bounds) * scale;
+
+  // Centre whatever room is left over after fitting, so the path sits in the
+  // middle rather than against one corner.
+  const double offset_across = margin + (across - 2.0 * margin - drawn_across) / 2.0;
+  const double offset_down = margin + (down - 2.0 * margin - drawn_down) / 2.0;
+
+  Point point;
+  point.across = offset_across + (pose.x - bounds.min_x) * scale * aspect;
+
+  // The flip, in the general form. The distance above the bottom of the path
+  // becomes a distance below the top of the surface, and it is the same line
+  // whether the surface is made of characters or of pixels.
+  point.down = down - offset_down - (pose.y - bounds.min_y) * scale;
+  return point;
+}
+
 }  // namespace sim
 }  // namespace rc
 

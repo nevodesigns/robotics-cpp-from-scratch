@@ -26,6 +26,13 @@ struct CommandResult {
 CommandResult run(const std::string& command);
 
 bool on_path(const std::string& program);
+
+// Whether a Qt 6 development installation can be found at all. Deliberately
+// cheap and deliberately not the whole story: doctor asks the fuller question,
+// including whether the OpenGL headers Qt6 Widgets needs are present. This is
+// the version verify needs, to tell "you have not written it yet" apart from
+// "this lesson could not be built on this machine".
+bool qt6_present();
 std::string first_line(const std::string& text);
 std::string trim(const std::string& text);
 std::vector<std::string> split(const std::string& text, char separator);

@@ -65,6 +65,21 @@ bool on_path(const std::string& program) {
   return r.ran && r.exit_code == 0 && !trim(r.output).empty();
 }
 
+bool qt6_present() {
+  if (on_path("qmake6")) return true;
+  if (on_path("qmake")) return true;
+
+  // The package directory, for a Linux install where qmake6 is not on the path
+  // because only the development package was installed.
+  for (const char* dir : {"/usr/lib/x86_64-linux-gnu/cmake/Qt6",
+                          "/usr/lib/aarch64-linux-gnu/cmake/Qt6",
+                          "/usr/lib/cmake/Qt6",
+                          "/usr/local/lib/cmake/Qt6"}) {
+    if (fs::exists(dir)) return true;
+  }
+  return false;
+}
+
 std::string first_line(const std::string& text) {
   const std::size_t nl = text.find('\n');
   return trim(nl == std::string::npos ? text : text.substr(0, nl));

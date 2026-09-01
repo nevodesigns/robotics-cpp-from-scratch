@@ -76,6 +76,20 @@ int cmd_verify(const Args& args) {
   const std::string suffix = reference ? "_reference" : "_exercise";
   const std::string target = all ? "" : (" --target " + lesson->target_name() + suffix);
   if (shell("cmake --build " + quote(build_dir) + target) != 0) {
+    // A lesson needing Qt on a machine without it is not a failed attempt, it
+    // is a lesson that was never built, and the build system says so in a way
+    // nobody can act on: unknown target. Saying which it is costs one check.
+    if (lesson != nullptr && !lesson->qt_modules.empty() && !qt6_present()) {
+      std::cerr << "\n" << style::warn("This lesson needs Qt, which is not installed here.")
+                << "\n\n"
+                << "  It was skipped when the build was configured, which is why the\n"
+                << "  target does not exist rather than failing to compile.\n\n"
+                << "  " << style::bold("rcpp doctor") << " prints the exact command for this machine.\n"
+                << "  Or skip it: every lesson that needs Qt has a counterpart that does not,\n"
+                << "  and nothing later depends on having done this one.\n\n";
+      return 1;
+    }
+
     std::cerr << style::fail("\nIt did not build yet.")
               << " That is normal at the start of a lesson.\n"
               << "  Paste the first error into: " << style::bold("rcpp explain") << "\n";

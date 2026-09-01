@@ -11,6 +11,7 @@
     "windows-msvc2022"
   ],
   "hardware_tier": 1,
+  "fallback": "Lesson 00-07 draws the same path with the same arithmetic in a terminal, and needs nothing installed. What this lesson adds is the widget the drawing happens in. Without Qt, do 00-07 and come back.",
   "requires": [
     "09-01-the-qt-object-model",
     "00-05-first-motion"

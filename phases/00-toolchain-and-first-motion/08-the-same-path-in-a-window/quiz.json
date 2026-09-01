@@ -1,0 +1,78 @@
+{
+  "lesson": "00-08-the-same-path-in-a-window",
+  "title": "The Same Path, in a Window",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What actually differs between drawing a path in a terminal and drawing it in a window?",
+      "options": [
+        "The shape of one cell, and the size of the surface, both of which are already arguments",
+        "Everything, since one prints characters and the other paints pixels",
+        "The coordinate system is upside down in only one of them",
+        "The window needs the path stored differently"
+      ],
+      "correct": 0,
+      "explanation": "Fitting, centring and flipping are identical. When a second surface costs one new argument, the first version was written at the right altitude."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the aspect 2 for a terminal and 1 for a window?",
+      "options": [
+        "A character cell is about twice as tall as it is wide, so a metre across costs twice as many columns as a metre up costs rows, while a pixel is square",
+        "Terminals have half the resolution",
+        "The window has a margin and the terminal does not",
+        "Characters are drawn at twice the scale"
+      ],
+      "correct": 0,
+      "explanation": "Both numbers describe round. What round looks like depends on what the surface is made of, which is exactly the thing worth passing in rather than baking in."
+    },
+    {
+      "stage": "check",
+      "question": "The mapping returns across and down rather than x and y. Why does the naming matter?",
+      "options": [
+        "Down is the direction the number grows, which is the opposite of the robot's y, and calling it y invites the mistake the flip exists to prevent",
+        "It avoids a name collision with the Pose",
+        "Qt requires those names",
+        "It makes the struct smaller"
+      ],
+      "correct": 0,
+      "explanation": "This family of functions has enough coordinate systems in it already without a name that means two different things."
+    },
+    {
+      "stage": "check",
+      "question": "Sixty columns of terminal fit a path into fifty nine steps, but four hundred pixels fit into four hundred. Why?",
+      "options": [
+        "A character grid is indexed by cell, so the span is between the first centre and the last, while a window is continuous",
+        "The window reserves a pixel for the border",
+        "Terminals count from one",
+        "It is a rounding convention with no reason behind it"
+      ],
+      "correct": 0,
+      "explanation": "This is what an off by one looks like when it does not crash anything: a picture very slightly too big, for years. The tests pin both answers so the difference is visible rather than absorbed."
+    },
+    {
+      "stage": "post",
+      "question": "Most of the tests in this lesson draw nothing at all. Why is that possible?",
+      "options": [
+        "The arithmetic is separate from the drawing, so it can be checked without a window, a screen or an event loop",
+        "Because Qt cannot be tested",
+        "Because the drawing is too slow to test",
+        "The rendering tests were left for phase 10"
+      ],
+      "correct": 0,
+      "explanation": "Of the forty or so lines in the widget, the only one doing any thinking calls the function you wrote. That ratio is what a good boundary between arithmetic and a user interface looks like."
+    },
+    {
+      "stage": "post",
+      "question": "This lesson is marked optional. What does a learner without Qt lose?",
+      "options": [
+        "Nothing that anything later depends on, since 00-07 already drew the path with the same arithmetic",
+        "The whole of phase 00's payoff",
+        "The graduated mapping, which later lessons need",
+        "The ability to draw at all until phase 10"
+      ],
+      "correct": 0,
+      "explanation": "That is why the terminal version is the required one and this is the bonus. An installation should never stand between a beginner and their first payoff."
+    }
+  ]
+}

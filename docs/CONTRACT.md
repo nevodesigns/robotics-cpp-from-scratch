@@ -54,6 +54,7 @@ phases/NN-phase-slug/NN-lesson-slug/
 | L023 | A lesson that declares an artifact module names one that exists in `librc`, so the line about where the work goes is true of the repository and not only of the plan |
 | L024 | Every phase has a `phase.json` giving its title and what it ends with, so the README's phase table is generated rather than typed |
 | L025 | Atlas match patterns are ASCII, since build output is normalised to ASCII quotes before matching and a typographic quote would never match |
+| L026 | A lesson that needs Qt declares a `fallback`, because Qt's absence silently skips the lesson and a learner is owed a sentence about what to do instead |
 
 ## The six required sections
 
