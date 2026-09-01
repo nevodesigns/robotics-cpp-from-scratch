@@ -11,7 +11,7 @@
 #include <QWidget>
 
 #include <rc/sim/diff_drive.hpp>
-#include <rc/sim/plot.hpp>
+#include <rc/plot/path.hpp>
 
 #include <vector>
 
@@ -32,14 +32,14 @@ struct Point {
 // wide, so aspect is 2. A pixel is square, so aspect is 1. Everything else,
 // the fitting, the centring and the flip, is identical, and discovering that is
 // the point of this lesson.
-inline double surface_scale(const rc::sim::PlotBounds& bounds, double across, double down,
+inline double surface_scale(const rc::plot::PlotBounds& bounds, double across, double down,
                             double aspect, double margin) {
   const double usable_across = across - 2.0 * margin;
   const double usable_down = down - 2.0 * margin;
   if (usable_across <= 0.0 || usable_down <= 0.0) return 0.0;
 
-  const double width = rc::sim::bounds_width(bounds);
-  const double height = rc::sim::bounds_height(bounds);
+  const double width = rc::plot::bounds_width(bounds);
+  const double height = rc::plot::bounds_height(bounds);
 
   // An axis with no extent does not constrain the scale, and dividing by it
   // gives infinity. The same guard as the terminal version, for the same
@@ -52,12 +52,12 @@ inline double surface_scale(const rc::sim::PlotBounds& bounds, double across, do
   return by_across < by_down ? by_across : by_down;
 }
 
-inline Point place(const rc::sim::Pose& pose, const rc::sim::PlotBounds& bounds,
+inline Point place(const rc::sim::Pose& pose, const rc::plot::PlotBounds& bounds,
                    double across, double down, double aspect, double margin) {
   const double scale = surface_scale(bounds, across, down, aspect, margin);
 
-  const double drawn_across = rc::sim::bounds_width(bounds) * scale * aspect;
-  const double drawn_down = rc::sim::bounds_height(bounds) * scale;
+  const double drawn_across = rc::plot::bounds_width(bounds) * scale * aspect;
+  const double drawn_down = rc::plot::bounds_height(bounds) * scale;
 
   // Centre whatever room is left over after fitting, so the path sits in the
   // middle rather than against one corner.
@@ -104,8 +104,8 @@ class PathWindow : public QWidget {
     painter.fillRect(rect(), background_);
     if (path_.size() < 2) return;
 
-    rc::sim::PlotBounds bounds;
-    for (const rc::sim::Pose& pose : path_) bounds = rc::sim::include(bounds, pose);
+    rc::plot::PlotBounds bounds;
+    for (const rc::sim::Pose& pose : path_) bounds = rc::plot::include(bounds, pose);
 
     const double across = static_cast<double>(width());
     const double down = static_cast<double>(height());

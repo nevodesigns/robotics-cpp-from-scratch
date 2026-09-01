@@ -1,0 +1,78 @@
+{
+  "lesson": "10-02-a-value-over-time",
+  "title": "A Value Over Time: The Chart That Lies About Steady Signals",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A battery reading is steady to within two microvolts. Drawn on an axis fitted to it, what does the chart show?",
+      "options": [
+        "Violent oscillation filling the whole height, because the scale expanded until the last digit of the reading filled it",
+        "A flat line, since the signal is flat",
+        "Nothing, since the span is too small to draw",
+        "A slow drift"
+      ],
+      "correct": 0,
+      "explanation": "Measured: more than fifteen rows of twenty. A change of one part in ten million is drawn exactly as large as a change of one volt, and people respond by filtering a signal that was never noisy."
+    },
+    {
+      "stage": "check",
+      "question": "Why is padding the range by a fraction not a fix for that?",
+      "options": [
+        "A fraction of nearly nothing is nearly nothing, so the span stays collapsed",
+        "Padding is applied before the range is computed",
+        "Padding only affects the time axis",
+        "It is a fix, but a slow one"
+      ],
+      "correct": 0,
+      "explanation": "Padding and widening a flat axis are different decisions and belong in different functions, so a reader can see which one a caller asked for."
+    },
+    {
+      "stage": "check",
+      "question": "A rolling window keeps the last five hundred samples. What is wrong with that?",
+      "options": [
+        "Five hundred samples is fifty seconds at ten hertz and half a second at a thousand, so the x axis means something different on every run",
+        "Five hundred is too few for a chart",
+        "It uses unbounded memory",
+        "Nothing, if the rate is known"
+      ],
+      "correct": 0,
+      "explanation": "Drop by age, which is the policy, and keep a capacity as a separate guard, which is what stops a faster than expected signal growing the buffer without limit."
+    },
+    {
+      "stage": "check",
+      "question": "Why draw the time axis from the window rather than from the samples that arrived?",
+      "options": [
+        "A gap in the data is then drawn as a gap, instead of being spread evenly and hidden",
+        "It is faster to compute",
+        "The samples may be out of order",
+        "The window is easier to label"
+      ],
+      "correct": 0,
+      "explanation": "A missing four seconds is often the most important thing on the chart. Passing the mapping a time rather than an index is also what makes the wrong version hard to write."
+    },
+    {
+      "stage": "post",
+      "question": "How should a minimum span be chosen?",
+      "options": [
+        "From what counts as a change in the signal, which the chart cannot know and its author can",
+        "As a fixed fraction of the reading",
+        "As the smallest value the sensor can resolve",
+        "Large enough that no signal ever fills the chart"
+      ],
+      "correct": 0,
+      "explanation": "For a battery, a tenth of a volt is a change worth seeing and a microvolt is not. A minimum so large that a genuine event disappears has traded one lie for another."
+    },
+    {
+      "stage": "post",
+      "question": "Which pair of checks keeps an axis rule honest?",
+      "options": [
+        "A steady signal must not fill the chart, and a real change must still be visible on the same rule",
+        "The span must be positive, and the range must contain every sample",
+        "The chart must redraw at a fixed rate, and the axis must be labelled",
+        "The range must be padded, and the padding must be symmetric"
+      ],
+      "correct": 0,
+      "explanation": "Either one alone is easy to satisfy wrongly. Together they pin the rule between the two ways it can be wrong."
+    }
+  ]
+}

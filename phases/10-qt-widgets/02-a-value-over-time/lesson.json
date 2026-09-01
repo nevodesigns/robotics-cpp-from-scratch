@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "id": "00-07-seeing-it-move",
-  "title": "Seeing It Move: A Picture Made of Numbers",
+  "id": "10-02-a-value-over-time",
+  "title": "A Value Over Time: The Chart That Lies About Steady Signals",
   "type": "build",
-  "minutes": 90,
+  "minutes": 120,
   "platforms": [
     "ubuntu-22.04-gcc11",
     "ubuntu-24.04-gcc13",
@@ -12,7 +12,8 @@
   ],
   "hardware_tier": 0,
   "requires": [
-    "00-06-when-the-answer-is-wrong"
+    "03-05-time-and-clocks",
+    "00-07-seeing-it-move"
   ],
   "cxx_standard": 17,
   "qt": null,
@@ -20,11 +21,11 @@
   "teaches": [],
   "artifact": {
     "module": "rc::plot",
-    "note": "the mapping from a trajectory to a picture, reused by the Qt plotter in phase 10"
+    "note": "the rolling series and value axis every chart in this curriculum draws from"
   },
   "breaks_first": [
-    "E-PLOT-0001",
-    "E-PLOT-0002",
+    "E-PLOT-0004",
+    "E-PLOT-0005",
     "E-PLOT-0003"
   ]
 }

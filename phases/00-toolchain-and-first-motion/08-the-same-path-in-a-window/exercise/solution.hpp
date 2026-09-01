@@ -11,7 +11,7 @@
 #include <QWidget>
 
 #include <rc/sim/diff_drive.hpp>
-#include <rc/sim/plot.hpp>
+#include <rc/plot/path.hpp>
 
 #include <vector>
 
@@ -32,7 +32,7 @@ struct Point {
 // wide, so aspect is 2. A pixel is square, so aspect is 1. Everything else,
 // the fitting, the centring and the flip, is identical, and discovering that is
 // the point of this lesson.
-inline double surface_scale(const rc::sim::PlotBounds& bounds, double across, double down,
+inline double surface_scale(const rc::plot::PlotBounds& bounds, double across, double down,
                             double aspect, double margin) {
   // TODO: how many surface units one metre becomes, so the whole path fits
   // inside the margin.
@@ -59,7 +59,7 @@ inline double surface_scale(const rc::sim::PlotBounds& bounds, double across, do
   return 0.0;
 }
 
-inline Point place(const rc::sim::Pose& pose, const rc::sim::PlotBounds& bounds,
+inline Point place(const rc::sim::Pose& pose, const rc::plot::PlotBounds& bounds,
                    double across, double down, double aspect, double margin) {
   // TODO: where this pose lands.
   //
@@ -109,8 +109,8 @@ class PathWindow : public QWidget {
     painter.fillRect(rect(), background_);
     if (path_.size() < 2) return;
 
-    rc::sim::PlotBounds bounds;
-    for (const rc::sim::Pose& pose : path_) bounds = rc::sim::include(bounds, pose);
+    rc::plot::PlotBounds bounds;
+    for (const rc::sim::Pose& pose : path_) bounds = rc::plot::include(bounds, pose);
 
     const double across = static_cast<double>(width());
     const double down = static_cast<double>(height());

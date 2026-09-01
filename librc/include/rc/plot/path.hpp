@@ -1,4 +1,4 @@
-// rc/sim/plot.hpp
+// rc/plot/path.hpp
 //
 // The mapping from lesson 00-07, graduated.
 //
@@ -17,15 +17,15 @@
 // Phase 10 draws the same mapping into a window. What changes there is the
 // surface and the aspect factor, which is one for square pixels.
 
-#ifndef RC_SIM_PLOT_HPP
-#define RC_SIM_PLOT_HPP
+#ifndef RC_PLOT_PATH_HPP
+#define RC_PLOT_PATH_HPP
 
 #include <cmath>
 
 #include <rc/sim/diff_drive.hpp>
 
 namespace rc {
-namespace sim {
+namespace plot {
 
 // A terminal character is roughly twice as tall as it is wide. Ignoring that
 // draws every circle as an ellipse, and it is the reason a plot of a robot
@@ -48,7 +48,7 @@ struct PlotBounds {
 // The first pose seeds it rather than being compared against zero. Starting
 // from zero silently includes the origin in every plot, so a path that never
 // goes near it is drawn small and pushed into a corner.
-inline PlotBounds include(PlotBounds bounds, const Pose& pose) {
+inline PlotBounds include(PlotBounds bounds, const rc::sim::Pose& pose) {
   if (bounds.empty) {
     bounds.empty = false;
     bounds.min_x = bounds.max_x = pose.x;
@@ -161,7 +161,7 @@ inline double scale_for_surface(const PlotBounds& bounds, double across, double 
   return by_across < by_down ? by_across : by_down;
 }
 
-inline Point place_on_surface(const Pose& pose, const PlotBounds& bounds,
+inline Point place_on_surface(const rc::sim::Pose& pose, const PlotBounds& bounds,
                    double across, double down, double aspect, double margin) {
   const double scale = scale_for_surface(bounds, across, down, aspect, margin);
 
@@ -183,7 +183,7 @@ inline Point place_on_surface(const Pose& pose, const PlotBounds& bounds,
   return point;
 }
 
-}  // namespace sim
+}  // namespace plot
 }  // namespace rc
 
-#endif  // RC_SIM_PLOT_HPP
+#endif  // RC_PLOT_PATH_HPP

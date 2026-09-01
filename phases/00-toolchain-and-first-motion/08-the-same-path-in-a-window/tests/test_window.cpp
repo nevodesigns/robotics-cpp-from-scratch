@@ -9,7 +9,7 @@
 #include <QSize>
 
 #include <rc/sim/diff_drive.hpp>
-#include <rc/sim/plot.hpp>
+#include <rc/plot/path.hpp>
 
 #include <cmath>
 #include <vector>
@@ -19,7 +19,7 @@
 namespace {
 
 using rc::sim::Pose;
-using rc::sim::PlotBounds;
+using rc::plot::PlotBounds;
 
 constexpr double kTerminalAspect = 2.0;
 constexpr double kPixelAspect = 1.0;
@@ -34,7 +34,7 @@ Pose at(double x, double y) {
 
 PlotBounds bounds_of(const std::vector<Pose>& path) {
   PlotBounds bounds;
-  for (const Pose& pose : path) bounds = rc::sim::include(bounds, pose);
+  for (const Pose& pose : path) bounds = rc::plot::include(bounds, pose);
   return bounds;
 }
 
@@ -117,7 +117,7 @@ RC_TEST("with the terminal's cell shape, the mapping agrees with lesson 00-07") 
   // right and one that is right.
   const double general =
       surface_scale(bounds, columns - 1.0, rows - 1.0, kTerminalAspect, 0.0);
-  const double terminal = rc::sim::scale_to_fit(bounds, 60, 20);
+  const double terminal = rc::plot::scale_to_fit(bounds, 60, 20);
 
   RC_CHECK_NEAR(general, terminal, 1e-9);
 
@@ -152,8 +152,8 @@ RC_TEST("a circle is round in pixels, which is a different number from round in 
 
 RC_TEST("a point higher up the field is drawn nearer the top, on any surface") {
   PlotBounds bounds;
-  bounds = rc::sim::include(bounds, at(0.0, 0.0));
-  bounds = rc::sim::include(bounds, at(1.0, 1.0));
+  bounds = rc::plot::include(bounds, at(0.0, 0.0));
+  bounds = rc::plot::include(bounds, at(1.0, 1.0));
 
   const Point low = place(at(0.0, 0.0), bounds, 400.0, 300.0, kPixelAspect, 10.0);
   const Point high = place(at(1.0, 1.0), bounds, 400.0, 300.0, kPixelAspect, 10.0);
@@ -180,8 +180,8 @@ RC_TEST("the path is centred in whatever room is left over") {
   // A wide surface and a tall path: the empty space belongs on both sides
   // equally, not all on one.
   PlotBounds bounds;
-  bounds = rc::sim::include(bounds, at(0.0, 0.0));
-  bounds = rc::sim::include(bounds, at(0.2, 1.0));
+  bounds = rc::plot::include(bounds, at(0.0, 0.0));
+  bounds = rc::plot::include(bounds, at(0.2, 1.0));
 
   const Point low = place(at(0.0, 0.0), bounds, 400.0, 200.0, kPixelAspect, 0.0);
   const Point high = place(at(0.2, 1.0), bounds, 400.0, 200.0, kPixelAspect, 0.0);
@@ -193,8 +193,8 @@ RC_TEST("the path is centred in whatever room is left over") {
 
 RC_TEST("a straight path still produces finite coordinates") {
   PlotBounds bounds;
-  bounds = rc::sim::include(bounds, at(0.0, 5.0));
-  bounds = rc::sim::include(bounds, at(4.0, 5.0));
+  bounds = rc::plot::include(bounds, at(0.0, 5.0));
+  bounds = rc::plot::include(bounds, at(4.0, 5.0));
 
   const Point point = place(at(2.0, 5.0), bounds, 400.0, 300.0, kPixelAspect, 10.0);
   RC_CHECK(std::isfinite(point.across));
@@ -208,7 +208,7 @@ RC_TEST("a path that has not moved yet produces finite coordinates") {
   // What defeats that is a path where *every* axis is degenerate, which is
   // every path on its first frame, before anything has moved.
   PlotBounds bounds;
-  bounds = rc::sim::include(bounds, at(2.0, 3.0));
+  bounds = rc::plot::include(bounds, at(2.0, 3.0));
 
   const double scale = surface_scale(bounds, 400.0, 300.0, kPixelAspect, 10.0);
   RC_REQUIRE(std::isfinite(scale));
@@ -227,8 +227,8 @@ RC_TEST("a window given a path that has not moved draws without crashing") {
 
 RC_TEST("a surface smaller than its own margins does not produce nonsense") {
   PlotBounds bounds;
-  bounds = rc::sim::include(bounds, at(0.0, 0.0));
-  bounds = rc::sim::include(bounds, at(1.0, 1.0));
+  bounds = rc::plot::include(bounds, at(0.0, 0.0));
+  bounds = rc::plot::include(bounds, at(1.0, 1.0));
 
   const double scale = surface_scale(bounds, 10.0, 10.0, kPixelAspect, 20.0);
   RC_CHECK(std::isfinite(scale));

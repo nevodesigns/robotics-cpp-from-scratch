@@ -25,7 +25,7 @@
   "ros2": null,
   "teaches": [],
   "artifact": {
-    "module": "rc::sim",
+    "module": "rc::plot",
     "note": "one mapping that serves a terminal and a window, differing only by the shape of a cell"
   },
   "breaks_first": [
