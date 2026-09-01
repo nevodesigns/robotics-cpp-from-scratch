@@ -1,5 +1,5 @@
 {
   "schema": 1,
   "title": "Control",
-  "ends_with": "A robot that drives itself to a target, from four phases at once"
+  "ends_with": "A loop you can tune, with four measured numbers rather than a feeling"
 }

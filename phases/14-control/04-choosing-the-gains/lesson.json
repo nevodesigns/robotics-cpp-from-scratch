@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "14-04-choosing-the-gains",
+  "title": "Choosing the Gains: What Each One Costs, Measured",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 1,
+  "requires": [
+    "14-03-closing-the-loop",
+    "10-02-a-value-over-time"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::control",
+    "note": "the four numbers that say whether a loop is tuned, and the plant to try gains against"
+  },
+  "breaks_first": [
+    "E-CTRL-0006",
+    "E-CTRL-0007",
+    "E-CTRL-0008"
+  ]
+}

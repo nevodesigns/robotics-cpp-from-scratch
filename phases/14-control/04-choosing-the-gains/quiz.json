@@ -1,0 +1,78 @@
+{
+  "lesson": "14-04-choosing-the-gains",
+  "title": "Choosing the Gains: What Each One Costs, Measured",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Raising the proportional gain from 2 to 20 on the same loop. What happens, measured?",
+      "options": [
+        "The rise time falls from 0.86 to 0.24 seconds and the overshoot rises from 51 to 81 percent",
+        "Both the rise time and the overshoot improve",
+        "The rise time improves and nothing else changes",
+        "The loop becomes more accurate at the target"
+      ],
+      "correct": 0,
+      "explanation": "More proportional gain is a trade rather than an improvement. At twenty it is fast and never stops ringing."
+    },
+    {
+      "stage": "check",
+      "question": "What does derivative gain buy and what does it cost?",
+      "options": [
+        "It removes the overshoot and slows the rise, and it is what makes an aggressive loop settle at all",
+        "It removes the steady state error at no cost",
+        "It makes the rise faster and the overshoot larger",
+        "It has no effect until the loop is at the target"
+      ],
+      "correct": 0,
+      "explanation": "Measured: P 20 alone never settles, and P 20 with a derivative of 8 settles in 1.21 seconds with no overshoot, having given up about half a second of rise time."
+    },
+    {
+      "stage": "check",
+      "question": "A loop with no steady load is given an integral term. What happens?",
+      "options": [
+        "It gets worse: overshoot appears where there was none and settling takes five times longer",
+        "Nothing, since there is no steady state error for it to act on",
+        "The rise time improves",
+        "It becomes more robust to disturbance"
+      ],
+      "correct": 0,
+      "explanation": "The term accumulates on the way to the target, so it still holds a value when the error reaches zero and keeps pushing until an error of the opposite sign cancels it. That is what the overshoot is."
+    },
+    {
+      "stage": "check",
+      "question": "A joint with a five newton load and a proportional gain of twenty stops 0.25 short. Why exactly that?",
+      "options": [
+        "Proportional output exists only while there is error, so it stops at the error that produces the force the load needs: the load over the gain",
+        "The derivative term is opposing it",
+        "The output limits were reached",
+        "The measurement is biased by the load"
+      ],
+      "correct": 0,
+      "explanation": "Five over twenty is 0.25, and no amount of derivative gain changes it, because the derivative term is zero once the thing has stopped moving."
+    },
+    {
+      "stage": "post",
+      "question": "Why is settling time the last exit from the band rather than the first entry?",
+      "options": [
+        "An oscillating response passes through the band on its way past the target, so the first entry is near the start with all the ringing still to come",
+        "The first entry is harder to compute",
+        "The band is only valid after the peak",
+        "They give the same answer for any real response"
+      ],
+      "correct": 0,
+      "explanation": "The worse a loop rings, the earlier the wrong version reports it as settled, and the error is in the flattering direction, which is the direction nobody questions."
+    },
+    {
+      "stage": "post",
+      "question": "How do you decide whether a loop needs an integral term at all?",
+      "options": [
+        "Run it with P and D only and look at where it stops: if it stops on the target, there is nothing for an integral term to do",
+        "Always add one, then tune it down",
+        "Add one if the rise time is too slow",
+        "Add one whenever the plant has damping"
+      ],
+      "correct": 0,
+      "explanation": "The question is about the machine rather than the controller: is there something needing a constant force just to hold still. One experiment answers it."
+    }
+  ]
+}
