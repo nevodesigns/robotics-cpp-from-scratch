@@ -22,6 +22,7 @@
   ],
   "artifact": {
     "module": "rc::io",
+    "header": "rc/io/bytes.hpp",
     "note": "the encoder every protocol in this curriculum is built on"
   },
   "breaks_first": [

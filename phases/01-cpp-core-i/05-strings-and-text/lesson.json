@@ -19,6 +19,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::core",
+    "header": "rc/core/text.hpp",
     "note": "the text helpers the config parser and the sensor log both use"
   },
   "breaks_first": [

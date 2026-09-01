@@ -4,13 +4,28 @@
   "title": "Rotations: Matrices, Order, and the Angle That Vanishes",
   "type": "build",
   "minutes": 120,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["06-01-vectors-and-two-products"],
+  "requires": [
+    "06-01-vectors-and-two-products"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
   "teaches": [],
-  "artifact": { "module": "rc::math", "note": "the rotation type, and the measured reason for the next lesson" },
-  "breaks_first": ["E-MATH-0001", "E-MATH-0002", "E-NUM-0004"]
+  "artifact": {
+    "module": "rc::math",
+    "header": "rc/math/rotation.hpp",
+    "note": "the rotation type, and the measured reason for the next lesson"
+  },
+  "breaks_first": [
+    "E-MATH-0001",
+    "E-MATH-0002",
+    "E-NUM-0004"
+  ]
 }

@@ -19,6 +19,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::core",
+    "header": "rc/core/find.hpp",
     "note": "the search helpers that answer with nothing when there is nothing"
   },
   "breaks_first": [

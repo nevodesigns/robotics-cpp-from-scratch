@@ -4,13 +4,28 @@
   "title": "Threads: The Half Written Value Nobody Sees Coming",
   "type": "build",
   "minutes": 120,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["03-05-time-and-clocks"],
+  "requires": [
+    "03-05-time-and-clocks"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
   "teaches": [],
-  "artifact": { "module": "rc::rt", "note": "the latest value slot every sensor thread publishes through" },
-  "breaks_first": ["E-THREAD-0001", "E-THREAD-0002", "E-CPP-0017"]
+  "artifact": {
+    "module": "rc::rt",
+    "header": "rc/rt/latest.hpp",
+    "note": "the latest value slot every sensor thread publishes through"
+  },
+  "breaks_first": [
+    "E-THREAD-0001",
+    "E-THREAD-0002",
+    "E-CPP-0017"
+  ]
 }

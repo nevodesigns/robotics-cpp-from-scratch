@@ -4,12 +4,27 @@
   "title": "The Heap, and Why Every Manual Delete Is Eventually Wrong",
   "type": "build",
   "minutes": 90,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["02-01-pointers-and-addresses"],
+  "requires": [
+    "02-01-pointers-and-addresses"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
-  "artifact": { "module": "rc::core", "note": "the leak counting harness reused by every later memory lesson" },
-  "breaks_first": ["E-MEM-0004", "E-MEM-0005", "E-MEM-0002"]
+  "artifact": {
+    "module": "rc::test",
+    "header": "rc/test/leak_check.hpp",
+    "note": "the leak counting harness reused by every later memory lesson"
+  },
+  "breaks_first": [
+    "E-MEM-0004",
+    "E-MEM-0005",
+    "E-MEM-0002"
+  ]
 }

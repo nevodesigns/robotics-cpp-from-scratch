@@ -19,6 +19,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::core",
+    "header": "rc/core/filters.hpp",
     "note": "the moving average and median filters"
   },
   "breaks_first": [

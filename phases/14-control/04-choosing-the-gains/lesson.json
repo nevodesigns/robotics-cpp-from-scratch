@@ -21,6 +21,7 @@
   "teaches": [],
   "artifact": {
     "module": "rc::control",
+    "header": "rc/control/tuning.hpp",
     "note": "the four numbers that say whether a loop is tuned, and the plant to try gains against"
   },
   "breaks_first": [

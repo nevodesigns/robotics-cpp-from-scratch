@@ -25,6 +25,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::qt",
+    "header": "rc/qt/watermark.hpp",
     "note": "a correctly declared Qt type you can copy from"
   },
   "breaks_first": [

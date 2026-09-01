@@ -27,6 +27,7 @@
   "teaches": [],
   "artifact": {
     "module": "rc::qt",
+    "header": "rc/qt/live_plot.hpp",
     "note": "the live chart every later phase watches a signal with"
   },
   "breaks_first": [

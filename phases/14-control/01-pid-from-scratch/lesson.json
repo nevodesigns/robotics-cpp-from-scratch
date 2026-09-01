@@ -20,6 +20,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::control",
+    "header": "rc/control/pid.hpp",
     "note": "the PID controller used by every later phase"
   },
   "breaks_first": [

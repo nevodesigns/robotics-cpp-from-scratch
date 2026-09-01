@@ -4,13 +4,29 @@
   "title": "The Link That Goes Quiet: Reads That Return Nothing, Writes That Do Not Finish",
   "type": "build",
   "minutes": 150,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["08-03-checksums-and-what-they-catch", "03-05-time-and-clocks"],
+  "requires": [
+    "08-03-checksums-and-what-they-catch",
+    "03-05-time-and-clocks"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
   "teaches": [],
-  "artifact": { "module": "rc::io", "note": "the link every device in this curriculum is spoken to through" },
-  "breaks_first": ["E-IO-0008", "E-IO-0009", "E-IO-0010"]
+  "artifact": {
+    "module": "rc::io",
+    "header": "rc/io/link.hpp",
+    "note": "the link every device in this curriculum is spoken to through"
+  },
+  "breaks_first": [
+    "E-IO-0008",
+    "E-IO-0009",
+    "E-IO-0010"
+  ]
 }

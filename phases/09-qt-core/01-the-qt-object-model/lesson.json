@@ -25,6 +25,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::qt",
+    "header": "rc/qt/watermark.hpp",
     "note": "the first component of the control station"
   },
   "breaks_first": [

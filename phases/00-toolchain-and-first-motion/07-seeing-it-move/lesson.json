@@ -20,6 +20,7 @@
   "teaches": [],
   "artifact": {
     "module": "rc::plot",
+    "header": "rc/plot/path.hpp",
     "note": "the mapping from a trajectory to a picture, reused by the Qt plotter in phase 10"
   },
   "breaks_first": [

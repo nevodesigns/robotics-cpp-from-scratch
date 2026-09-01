@@ -19,6 +19,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::core",
+    "header": "rc/core/subsystem.hpp",
     "note": "the subsystem tree, with the ownership direction decided"
   },
   "breaks_first": [

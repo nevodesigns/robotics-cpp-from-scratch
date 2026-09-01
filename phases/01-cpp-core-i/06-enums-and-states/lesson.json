@@ -19,6 +19,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::control",
+    "header": "rc/control/state.hpp",
     "note": "the robot state machine every later phase reports through"
   },
   "breaks_first": [

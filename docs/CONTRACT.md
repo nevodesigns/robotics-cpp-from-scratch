@@ -51,7 +51,7 @@ phases/NN-phase-slug/NN-lesson-slug/
 | L020 | A lesson that cites another lesson by number cites one that exists. Promises to a phase are fine, a promise to a specific lesson is a claim |
 | L021 | A lesson only uses a facility that it or one of its prerequisites declares in `teaches`, so nothing is met before it is taught |
 | L022 | Constants in a lesson's tests are declared at file scope, since a local `constexpr` used in a lambda is rejected by MSVC |
-| L023 | A lesson that declares an artifact module names one that exists in `librc`, so the line about where the work goes is true of the repository and not only of the plan |
+| L023 | A lesson that declares an artifact names the `librc` header it graduates into, and that header exists, so the line about where the work goes is true of the repository and not only of the plan |
 | L024 | Every phase has a `phase.json` giving its title and what it ends with, so the README's phase table is generated rather than typed |
 | L025 | Atlas match patterns are ASCII, since build output is normalised to ASCII quotes before matching and a typographic quote would never match |
 | L026 | A lesson that needs Qt declares a `fallback`, because Qt's absence silently skips the lesson and a learner is owed a sentence about what to do instead |
@@ -110,7 +110,11 @@ by product of authoring rather than as a separate heroic project.
   "cxx_standard": 17,
   "qt": { "modules": ["Core"], "min_version": "6.2" },
   "ros2": null,
-  "artifact": { "module": "rc::control", "note": "what this lesson leaves behind" },
+  "artifact": {
+    "module": "rc::control",
+    "header": "rc/control/pid.hpp",
+    "note": "what this lesson leaves behind"
+  },
   "breaks_first": ["E-CTRL-0001", "E-CTRL-0002", "E-NUM-0003"]
 }
 ```

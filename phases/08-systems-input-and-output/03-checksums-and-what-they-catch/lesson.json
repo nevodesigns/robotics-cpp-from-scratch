@@ -20,6 +20,7 @@
   "teaches": [],
   "artifact": {
     "module": "rc::io",
+    "header": "rc/io/checksum.hpp",
     "note": "the integrity check on every frame in this curriculum"
   },
   "breaks_first": [

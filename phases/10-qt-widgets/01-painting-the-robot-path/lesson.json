@@ -26,6 +26,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::qt",
+    "header": "rc/qt/path_view.hpp",
     "note": "the path view every later tool reuses"
   },
   "breaks_first": [

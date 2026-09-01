@@ -4,14 +4,30 @@
   "title": "Opening a Real Port: The Twenty Lines That Decide Everything",
   "type": "build",
   "minutes": 150,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 2,
   "fallback": "No hardware is needed. On Linux and macOS the tests open a pseudo terminal, which is a real terminal that termios configures exactly as it configures a serial port, so the whole implementation is exercised. On Windows the code is compiled and its error paths are run, but no port is opened, because a virtual COM port needs a driver. With a USB serial adapter and a wire between its TX and RX pins the same tests run against real hardware for about ten dollars.",
-  "requires": ["08-04-the-link-that-goes-quiet", "02-03-raii-and-destructors"],
+  "requires": [
+    "08-04-the-link-that-goes-quiet",
+    "02-03-raii-and-destructors"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
   "teaches": [],
-  "artifact": { "module": "rc::io", "note": "the port behind every device this curriculum talks to" },
-  "breaks_first": ["E-IO-0011", "E-IO-0012", "E-IO-0013"]
+  "artifact": {
+    "module": "rc::io",
+    "header": "rc/io/serial.hpp",
+    "note": "the port behind every device this curriculum talks to"
+  },
+  "breaks_first": [
+    "E-IO-0011",
+    "E-IO-0012",
+    "E-IO-0013"
+  ]
 }

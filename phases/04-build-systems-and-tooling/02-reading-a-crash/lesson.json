@@ -4,12 +4,27 @@
   "title": "Reading a Crash: Finding Your Own Frame",
   "type": "build",
   "minutes": 120,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["04-01-what-a-build-system-does"],
+  "requires": [
+    "04-01-what-a-build-system-does"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
-  "artifact": { "module": "rc::core", "note": "a crash triage tool, and the habit of reading the first frame that is yours" },
-  "breaks_first": ["E-CPP-0007", "E-MEM-0001", "E-DEBUG-0001"]
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/backtrace.hpp",
+    "note": "a crash triage tool, and the habit of reading the first frame that is yours"
+  },
+  "breaks_first": [
+    "E-CPP-0007",
+    "E-MEM-0001",
+    "E-DEBUG-0001"
+  ]
 }

@@ -4,12 +4,28 @@
   "title": "Control Flow: Deciding and Repeating",
   "type": "build",
   "minutes": 75,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["01-01-structs-and-arithmetic"],
+  "requires": [
+    "01-01-structs-and-arithmetic"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
-  "artifact": { "module": "rc::control", "note": "clamp and the first rate limiter" },
-  "breaks_first": ["E-CPP-0002", "E-CPP-0007", "E-NUM-0005", "E-NUM-0003"]
+  "artifact": {
+    "module": "rc::control",
+    "header": "rc/control/limits.hpp",
+    "note": "clamp and the first rate limiter"
+  },
+  "breaks_first": [
+    "E-CPP-0002",
+    "E-CPP-0007",
+    "E-NUM-0005",
+    "E-NUM-0003"
+  ]
 }

@@ -20,6 +20,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::io",
+    "header": "rc/io/sensor.hpp",
     "note": "the fake device pattern every driver lesson depends on"
   },
   "breaks_first": [

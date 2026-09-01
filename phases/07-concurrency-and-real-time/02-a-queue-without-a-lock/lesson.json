@@ -4,13 +4,28 @@
   "title": "A Queue Without a Lock, and What Acquire and Release Actually Mean",
   "type": "build",
   "minutes": 135,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["07-01-threads-and-the-torn-read"],
+  "requires": [
+    "07-01-threads-and-the-torn-read"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
   "teaches": [],
-  "artifact": { "module": "rc::rt", "note": "the queue on the deadline path in every later phase" },
-  "breaks_first": ["E-THREAD-0003", "E-THREAD-0004", "E-CPP-0007"]
+  "artifact": {
+    "module": "rc::rt",
+    "header": "rc/rt/spsc_queue.hpp",
+    "note": "the queue on the deadline path in every later phase"
+  },
+  "breaks_first": [
+    "E-THREAD-0003",
+    "E-THREAD-0004",
+    "E-CPP-0007"
+  ]
 }

@@ -21,6 +21,7 @@
   "teaches": [],
   "artifact": {
     "module": "rc::plot",
+    "header": "rc/plot/series.hpp",
     "note": "the rolling series and value axis every chart in this curriculum draws from"
   },
   "breaks_first": [

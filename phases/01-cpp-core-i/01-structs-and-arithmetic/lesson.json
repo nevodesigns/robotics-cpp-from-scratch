@@ -4,12 +4,27 @@
   "title": "Structs: Giving a Group of Numbers One Name",
   "type": "build",
   "minutes": 75,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["00-05-first-motion"],
+  "requires": [
+    "00-05-first-motion"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
-  "artifact": { "module": "rc::math", "note": "the Pose type and its distance helpers" },
-  "breaks_first": ["E-CPP-0005", "E-CPP-0006", "E-NUM-0003"]
+  "artifact": {
+    "module": "rc::math",
+    "header": "rc/math/pose.hpp",
+    "note": "the Pose type and its distance helpers"
+  },
+  "breaks_first": [
+    "E-CPP-0005",
+    "E-CPP-0006",
+    "E-NUM-0003"
+  ]
 }

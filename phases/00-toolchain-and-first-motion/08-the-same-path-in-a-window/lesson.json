@@ -26,6 +26,7 @@
   "teaches": [],
   "artifact": {
     "module": "rc::plot",
+    "header": "rc/plot/path.hpp",
     "note": "one mapping that serves a terminal and a window, differing only by the shape of a cell"
   },
   "breaks_first": [

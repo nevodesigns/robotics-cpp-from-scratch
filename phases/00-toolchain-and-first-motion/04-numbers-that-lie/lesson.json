@@ -4,12 +4,28 @@
   "title": "Numbers That Lie: Integer Division and Overflow",
   "type": "build",
   "minutes": 75,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["00-01-your-first-program"],
+  "requires": [
+    "00-01-your-first-program"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
-  "artifact": { "module": "rc::core", "note": "a sensor conversion that survives real inputs" },
-  "breaks_first": ["E-NUM-0001", "E-NUM-0002", "E-NUM-0003", "E-NUM-0007"]
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/convert.hpp",
+    "note": "a sensor conversion that survives real inputs"
+  },
+  "breaks_first": [
+    "E-NUM-0001",
+    "E-NUM-0002",
+    "E-NUM-0003",
+    "E-NUM-0007"
+  ]
 }

@@ -20,6 +20,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::core",
+    "header": "rc/core/clock.hpp",
     "note": "the injectable clock every timed lesson from here uses"
   },
   "breaks_first": [

@@ -21,6 +21,7 @@
   "teaches": [],
   "artifact": {
     "module": "rc::sim",
+    "header": "rc/sim/checks.hpp",
     "note": "the checks that say whether a trajectory is believable"
   },
   "breaks_first": [

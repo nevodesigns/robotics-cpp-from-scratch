@@ -19,6 +19,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::core",
+    "header": "rc/core/build_graph.hpp",
     "note": "a build graph, and the end of CMake being magic"
   },
   "breaks_first": [

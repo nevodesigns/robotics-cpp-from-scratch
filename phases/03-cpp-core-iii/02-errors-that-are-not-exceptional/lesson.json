@@ -19,6 +19,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::core",
+    "header": "rc/core/config.hpp",
     "note": "the configuration parser, and the error style used from here on"
   },
   "breaks_first": [

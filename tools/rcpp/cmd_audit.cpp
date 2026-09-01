@@ -451,10 +451,16 @@ void check_test_constants(const Lesson& lesson, std::vector<Finding>& out) {
 // central claim, that you accrete one library you wrote and understand, was
 // quietly untrue for a third of the modules named.
 //
-// The check is deliberately shallow. It asks whether the directory exists and
-// holds a header, not whether the lesson's own type is in it, because naming
-// the artifact is a design decision and the shape it takes when it graduates is
-// often better than the shape the lesson needed.
+// The check asks for a header by name, and that the header exists. It does not
+// ask whether the lesson's own type is inside it, because naming the artifact is
+// a design decision and the shape a thing takes when it graduates is often
+// better than the shape the lesson needed.
+//
+// Asking only whether the module held any header was the earlier version of
+// this rule, and it missed eighteen lessons. rc::math held vectors and
+// quaternions, so every lesson naming rc::math passed, including the one that
+// promised a transform nobody had written. A promise about a directory is not a
+// promise.
 void check_artifact_module(const Lesson& lesson, const fs::path& root,
                            std::vector<Finding>& out) {
   const json::Value& artifact = lesson.raw.at("artifact");
@@ -471,18 +477,32 @@ void check_artifact_module(const Lesson& lesson, const fs::path& root,
   }
 
   const std::string dir_name = name.substr(4);
-  const fs::path dir = root / "librc" / "include" / "rc" / dir_name;
-
-  bool has_header = false;
-  if (fs::is_directory(dir)) {
-    for (const auto& entry : fs::directory_iterator(dir))
-      if (entry.is_regular_file() && entry.path().extension() == ".hpp") { has_header = true; break; }
-  }
-
-  if (!has_header) {
+  if (!fs::is_directory(root / "librc" / "include" / "rc" / dir_name)) {
     out.push_back({"L023", lesson.rel_path,
                    "declares artifact module " + name + ", but librc/include/rc/" + dir_name +
-                       " holds no header. Graduate the implementation, or drop the claim"});
+                       " does not exist. Graduate the implementation, or drop the claim"});
+    return;
+  }
+
+  const json::Value& header = artifact.at("header");
+  if (!header.is_string() || trim(header.as_string()).empty()) {
+    out.push_back({"L023", lesson.rel_path,
+                   "declares an artifact and no header. Name the header the work graduates "
+                   "into, so the promise is about a file rather than about a directory"});
+    return;
+  }
+
+  const std::string header_path = header.as_string();
+  if (!starts_with(header_path, "rc/" + dir_name + "/")) {
+    out.push_back({"L023", lesson.rel_path,
+                   "declares header " + header_path + ", which is not in module " + name});
+    return;
+  }
+
+  if (!fs::exists(root / "librc" / "include" / header_path)) {
+    out.push_back({"L023", lesson.rel_path,
+                   "declares artifact header " + header_path +
+                       ", which does not exist. Graduate the implementation, or drop the claim"});
   }
 }
 

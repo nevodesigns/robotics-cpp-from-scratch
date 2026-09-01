@@ -4,13 +4,28 @@
   "title": "Transforms: Where Is the Gripper, in Which Frame, and How Do You Know",
   "type": "build",
   "minutes": 120,
-  "platforms": ["ubuntu-22.04-gcc11", "ubuntu-24.04-gcc13", "ubuntu-22.04-clang14", "windows-msvc2022"],
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
   "hardware_tier": 0,
-  "requires": ["06-03-quaternions"],
+  "requires": [
+    "06-03-quaternions"
+  ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
   "teaches": [],
-  "artifact": { "module": "rc::math", "note": "the transform type the whole kinematics phase is built on" },
-  "breaks_first": ["E-MATH-0004", "E-MATH-0005", "E-MATH-0003"]
+  "artifact": {
+    "module": "rc::math",
+    "header": "rc/math/transform.hpp",
+    "note": "the transform type the whole kinematics phase is built on"
+  },
+  "breaks_first": [
+    "E-MATH-0004",
+    "E-MATH-0005",
+    "E-MATH-0003"
+  ]
 }

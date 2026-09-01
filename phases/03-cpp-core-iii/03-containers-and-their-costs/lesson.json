@@ -19,6 +19,7 @@
   "ros2": null,
   "artifact": {
     "module": "rc::core",
+    "header": "rc/core/log.hpp",
     "note": "the bounded sensor log every later phase records into"
   },
   "breaks_first": [
