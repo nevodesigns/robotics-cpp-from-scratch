@@ -1,0 +1,78 @@
+{
+  "lesson": "13-02-what-angles-put-it-there",
+  "title": "What Angles Put It There: Two Answers, or None",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "How many joint configurations put a planar two link arm's tool on a reachable point?",
+      "options": [
+        "Two, almost always, and the arithmetic prefers neither",
+        "One, which is why it can be solved",
+        "Infinitely many",
+        "It depends on the link lengths"
+      ],
+      "correct": 0,
+      "explanation": "Elbow up and elbow down are both correct. An inverse problem returns a set, and picking from it is a separate decision that belongs to the caller."
+    },
+    {
+      "stage": "check",
+      "question": "Why does returning only one solution cause trouble later?",
+      "options": [
+        "The choice of posture is then made by the sign convention of acos, which knows nothing about the table, the base or the operator",
+        "The other solution is needed to check the first",
+        "It halves the reachable workspace",
+        "It makes the arm slower"
+      ],
+      "correct": 0,
+      "explanation": "The tool always arrives. The route is sometimes indefensible, and nothing in the code chose it. A six axis arm has up to eight answers and the lesson is the same."
+    },
+    {
+      "stage": "check",
+      "question": "A target computed from the arm's own forward kinematics at full extension gives an acos argument of 1 + 7e-16. How often does that matter?",
+      "options": [
+        "Measured over a hundred thousand fully extended configurations, more than half exceeded one",
+        "Rarely, only for exact boundary values that are typed in",
+        "Never, since acos accepts values slightly above one",
+        "Only when the link lengths are equal"
+      ],
+      "correct": 0,
+      "explanation": "Reaching the edge of the workspace is an ordinary thing for an arm to do, so this is the common case there rather than an unlucky one, and acos of anything above one is not a number."
+    },
+    {
+      "stage": "check",
+      "question": "There are two boundaries to check, not one. What is the second?",
+      "options": [
+        "A hole near the base, inside the difference of the link lengths, that the arm cannot fold into",
+        "The maximum joint speed",
+        "The angle at which the arm hits itself",
+        "The point where the two solutions coincide"
+      ],
+      "correct": 0,
+      "explanation": "A 0.5 and 0.3 arm cannot reach anything nearer than 0.2 to its own shoulder, and targets near the base look innocuous."
+    },
+    {
+      "stage": "post",
+      "question": "Lesson 05-03 warned that a round trip proves little. Why is round tripping through the forward kinematics fair here?",
+      "options": [
+        "The forward kinematics was independently checked against a closed form in 13-01, so it can be trusted to say where a solution lands",
+        "Because both directions were written by the same person",
+        "Because the errors are too small to matter",
+        "Round trips are always valid for inverse problems"
+      ],
+      "correct": 0,
+      "explanation": "Round tripping two halves that were never independently checked proves only that they agree. One half here has an external check behind it, which is what makes the other half's round trip evidence."
+    },
+    {
+      "stage": "post",
+      "question": "Near the workspace edge, a target moving 0.0099 m moves the elbow 0.2944 rad. Is the solver wrong?",
+      "options": [
+        "No. It is correct at both points, and that amplification is a singularity, which is a planning problem",
+        "Yes, the clamp has distorted the answer",
+        "Yes, it has picked the wrong one of the two solutions",
+        "No, and it has no practical consequence"
+      ],
+      "correct": 0,
+      "explanation": "Recognising it matters so that it is not treated as a defect. It is also exactly where the two solutions have merged, which the solver reports."
+    }
+  ]
+}
