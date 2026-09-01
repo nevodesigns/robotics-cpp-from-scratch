@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "13-03-reaching-without-a-formula",
+  "title": "Reaching Without a Formula: The Jacobian, Measured",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 1,
+  "requires": [
+    "13-02-what-angles-put-it-there"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::kin",
+    "header": "rc/kin/reach.hpp",
+    "note": "the numerical solver that works on an arm nobody wrote a formula for"
+  },
+  "breaks_first": [
+    "E-KIN-0003",
+    "E-KIN-0004",
+    "E-KIN-0002"
+  ]
+}

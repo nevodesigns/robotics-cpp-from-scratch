@@ -1,0 +1,78 @@
+{
+  "lesson": "13-03-reaching-without-a-formula",
+  "title": "Reaching Without a Formula: The Jacobian, Measured",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "How do you get the Jacobian of an arm nobody has derived a formula for?",
+      "options": [
+        "Measure it: nudge each joint, see how the tool moved, divide by the nudge",
+        "Derive it symbolically from the link parameters",
+        "It cannot be obtained without a formula",
+        "Invert the forward kinematics"
+      ],
+      "correct": 0,
+      "explanation": "Which is why a numerical solver does not care what shape the arm is, including one whose geometry came out of a file this morning."
+    },
+    {
+      "stage": "check",
+      "question": "Measured against an exact derivative, which finite difference step was most accurate?",
+      "options": [
+        "About 1e-6, with 1e-14 being worse than 1e-1",
+        "The smallest one tried, 1e-14",
+        "The largest one tried, 1e-1",
+        "They were all within an order of magnitude"
+      ],
+      "correct": 0,
+      "explanation": "Truncation error falls as the step shrinks and rounding error rises, so there is a best step in the middle. Making it smaller past that point makes the answer worse."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the Jacobian transpose method need no matrix inverse?",
+      "options": [
+        "Each joint moves by the dot product of its own column with the error, which is how much moving it would help",
+        "The Jacobian of a serial arm is always orthogonal",
+        "It solves the system by elimination instead",
+        "It uses the inverse of the transpose, which is cheaper"
+      ],
+      "correct": 0,
+      "explanation": "It is the simplest method that works and it is not the fastest. What it buys is that every line of it can be read."
+    },
+    {
+      "stage": "check",
+      "question": "A target outside the workspace is given to an iterative solver with no iteration cap. What happens?",
+      "options": [
+        "It never returns: the error stops going down and nothing in the arithmetic notices",
+        "It returns the nearest reachable point",
+        "It returns an error",
+        "It oscillates and then converges"
+      ],
+      "correct": 0,
+      "explanation": "There is no exception, no special value and no signal. The loop is still doing its job, and its job has no end."
+    },
+    {
+      "stage": "post",
+      "question": "The solver runs out of iterations. What should it return?",
+      "options": [
+        "The best angles it found, the error it reached, the iteration count, and the fact that it did not converge",
+        "An empty result, since the answer is not valid",
+        "The angles, since they are the best available",
+        "The starting angles, unchanged"
+      ],
+      "correct": 0,
+      "explanation": "The angles are useful as a starting point or something to show on a screen. What they are not is a command, and only the flag separates them from one."
+    },
+    {
+      "stage": "post",
+      "question": "Approaching the workspace edge, convergence went 390 then 1281 then 5236 iterations, then failed. What is that?",
+      "options": [
+        "The singularity from lesson 13-02, seen from the solver's side: the columns line up and the direction outward stops existing",
+        "Accumulated rounding error in the Jacobian",
+        "The iteration cap being reached by chance",
+        "A sign that the gain is too small"
+      ],
+      "correct": 0,
+      "explanation": "The same geometry that made the closed form's two answers merge is what makes the numerical method stall. Convergence slowing sharply is how it announces itself before it stops working."
+    }
+  ]
+}
