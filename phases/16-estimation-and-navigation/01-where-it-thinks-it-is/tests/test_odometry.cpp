@@ -18,7 +18,11 @@ using rc::sim::Pose;
 constexpr double kPi = 3.14159265358979323846;
 constexpr double kBase = 0.30;
 constexpr double kDistance = 100.0;
-constexpr double kStep = 0.005;
+// One centimetre of commanded travel per update. Fine enough that the numbers
+// below are about the errors being studied rather than about the integration,
+// and coarse enough that the whole suite runs in well under a second on the
+// slowest toolchain this curriculum claims.
+constexpr double kStep = 0.01;
 
 Pose at(double x, double y, double theta) {
   Pose p;
@@ -74,7 +78,7 @@ Drift run(bool turning, double true_base, double believed_base, double radius_er
 Drift average(bool turning, double tb, double bb, double re, double h0, double slip) {
   if (slip <= 0.0) return run(turning, tb, bb, re, h0, 0.0, 1);
   Drift total;
-  const int trials = 20;
+  const int trials = 8;
   for (int k = 0; k < trials; ++k) {
     const Drift one = run(turning, tb, bb, re, h0, slip, 7 + static_cast<unsigned>(k));
     total.position += one.position;
@@ -134,7 +138,9 @@ RC_TEST("integrating a curve in chunks loses about the length of a chunk") {
     return odometry.pose();
   };
 
-  const Pose truth = quarter_circle(2000000);
+  // Fine enough to serve as the truth: its own error is about a hundredth of
+  // the smallest error measured below.
+  const Pose truth = quarter_circle(100000);
   std::cout << "\n  a quarter circle of radius 1 m\n\n    "
             << std::left << std::setw(14) << "steps" << std::setw(18) << "step length m"
             << "error m\n";
@@ -223,6 +229,8 @@ RC_TEST("which error costs what, and it depends on the path") {
   double base_turning = -1.0;
   double heading_straight = -1.0;
   double heading_turning = -1.0;
+  double radius_straight = -1.0;
+  double slip_straight = -1.0;
 
   for (const Case& c : cases) {
     const Drift straight =
@@ -242,6 +250,10 @@ RC_TEST("which error costs what, and it depends on the path") {
       heading_straight = straight.position;
       heading_turning = turning.position;
     }
+    if (std::string(c.name).find("radius") != std::string::npos)
+      radius_straight = straight.position;
+    if (std::string(c.name).find("slip") != std::string::npos)
+      slip_straight = straight.position;
   }
   std::cout << "\n";
 
@@ -256,6 +268,14 @@ RC_TEST("which error costs what, and it depends on the path") {
   RC_REQUIRE(heading_straight >= 0.0);
   RC_CHECK(heading_straight > 1.0);
   RC_CHECK(heading_turning < heading_straight / 5.0);
+
+  // These four are quoted in the lesson and in E-NAV-0002. Pinning them loosely
+  // means a change to the model that invalidates the prose fails here rather
+  // than leaving two documents disagreeing with the code.
+  RC_CHECK_NEAR(radius_straight, 1.00, 0.05);
+  RC_CHECK_NEAR(base_turning, 1.06, 0.10);
+  RC_CHECK_NEAR(heading_straight, 1.75, 0.05);
+  RC_CHECK_NEAR(slip_straight, 2.22, 0.30);
 }
 
 RC_TEST("a heading error costs distance times its tangent, which is a number you can use") {

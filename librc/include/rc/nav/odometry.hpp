@@ -9,8 +9,8 @@
 //
 // Which error costs what depends on the path, which is the finding worth
 // carrying. Measured over a hundred metres on the same robot: a wheel base one
-// percent wrong costs nothing at all driving straight and over a metre with
-// turns in it, because the base only ever divides the difference between the
+// percent wrong costs nothing at all driving straight and 1.06 metres with turns
+// in it, because the base only ever divides the difference between the
 // wheels. A heading one degree wrong costs 1.75 metres straight and almost
 // nothing around a closed loop. A calibration run that only drives one kind of
 // path cannot see the errors the other kind exposes.

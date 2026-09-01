@@ -57,10 +57,10 @@ changing only what it drives:
 
 | error | driving straight | with turns |
 |---|---|---|
-| wheel radius 1% out | 1.0000 m | 1.1235 m |
-| **wheel base 1% out** | **0.0000 m** | **1.0580 m** |
+| wheel radius 1% out | 1.0000 m | 1.1237 m |
+| **wheel base 1% out** | **0.0000 m** | **1.0581 m** |
 | initial heading 1 degree out | 1.7453 m | 0.1115 m |
-| wheel slip, 1% typical | 1.5107 m | 0.9051 m |
+| wheel slip, 1% typical | 2.2220 m | 0.8802 m |
 
 Read the second row twice. A wheel base that is one percent wrong costs
 **nothing at all** driving straight. Not "a little": nothing, exactly, because
@@ -97,10 +97,10 @@ circle of one metre radius:
 
 | steps | step length | error |
 |---|---|---|
-| 8 | 0.1963 m | 0.138914 m |
-| 32 | 0.0491 m | 0.034711 m |
-| 128 | 0.0123 m | 0.008677 m |
-| 1000 | 0.0016 m | 0.001110 m |
+| 8 | 0.1963 m | 0.138903 m |
+| 32 | 0.0491 m | 0.034700 m |
+| 128 | 0.0123 m | 0.008666 m |
+| 1000 | 0.0016 m | 0.001100 m |
 
 Halve the step, halve the error, and the error is roughly the length of one step.
 
