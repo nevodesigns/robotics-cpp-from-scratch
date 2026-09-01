@@ -1,0 +1,78 @@
+{
+  "lesson": "16-01-where-it-thinks-it-is",
+  "title": "Where It Thinks It Is: Odometry, and Which Error Costs What",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A robot's odometry is perfect at startup and poor an hour later, and restarting fixes it. What is happening?",
+      "options": [
+        "Every error that enters the estimate stays in, because nothing ever corrects it",
+        "A counter is overflowing",
+        "The encoders are degrading as they warm up",
+        "Memory is leaking into the pose"
+      ],
+      "correct": 0,
+      "explanation": "That is not a defect to fix, it is what dead reckoning is. The defect is treating an estimate whose error grows as though it were a measurement whose error does not."
+    },
+    {
+      "stage": "check",
+      "question": "A wheel base that is one percent wrong costs how much over a hundred metres driven straight?",
+      "options": [
+        "Nothing at all, because the base only ever divides the difference between the wheels",
+        "One metre, the same as any one percent error",
+        "About 1.75 metres",
+        "It depends on the wheel radius"
+      ],
+      "correct": 0,
+      "explanation": "Driving straight that difference is zero. Drive the same distance with turns in it and the same error costs over a metre, which is why a straight line calibration says nothing about the wheel base."
+    },
+    {
+      "stage": "check",
+      "question": "A heading that starts one degree wrong costs 1.75 m over a straight hundred metres and 0.11 m around a closed square. Why the difference?",
+      "options": [
+        "On a straight run the offset is distance times its tangent and grows; around a loop it largely cancels on the way back",
+        "The square is shorter",
+        "Turning corrects the heading",
+        "The measurement is noisier on the square"
+      ],
+      "correct": 0,
+      "explanation": "Which is the mirror image of the wheel base result, and together they are the reason to calibrate each parameter on the path that exposes it."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the position step use the heading held at the start of the step?",
+      "options": [
+        "Either convention is a straight line where the robot drove an arc, and the point is to pick one and integrate often",
+        "The new heading would be undefined",
+        "It is required for the wrap to work",
+        "Using the new heading doubles the turn"
+      ],
+      "correct": 0,
+      "explanation": "Measured on a quarter circle, the error is close to the length of one step and halves when the step does, which is an argument for updating often rather than for a cleverer formula."
+    },
+    {
+      "stage": "post",
+      "question": "What is the most useful thing to report alongside a dead reckoned pose?",
+      "options": [
+        "How far it has driven since the last correction, since the error grows with distance rather than with the clock",
+        "The time since startup",
+        "The number of encoder ticks",
+        "The current wheel speeds"
+      ],
+      "correct": 0,
+      "explanation": "A robot parked for an hour has drifted by nothing. A number on a screen saying forty metres since the last fix turns a mysterious failure into an obvious one."
+    },
+    {
+      "stage": "post",
+      "question": "Why must the test path differ from the calibration path?",
+      "options": [
+        "Testing on the path you fitted the parameters to only confirms the fitting, not the parameters",
+        "To exercise more of the workspace",
+        "Because calibration paths are shorter",
+        "It does not need to differ if the calibration was careful"
+      ],
+      "correct": 0,
+      "explanation": "The wheel base row is the proof: it is invisible on a straight line and costs a metre with turns. A calibration and a test that both drive straight will agree with each other and with nothing else."
+    }
+  ]
+}
