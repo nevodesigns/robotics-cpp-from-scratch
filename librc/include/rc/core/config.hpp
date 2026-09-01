@@ -10,6 +10,7 @@
 #ifndef RC_CORE_CONFIG_HPP
 #define RC_CORE_CONFIG_HPP
 
+#include <cstddef>
 #include <optional>
 #include <sstream>
 #include <string>

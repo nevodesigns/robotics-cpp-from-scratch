@@ -10,6 +10,7 @@
 #define RC_CORE_FILTERS
 
 #include <algorithm>
+#include <cstddef>
 #include <vector>
 #include <rc/core/compat.hpp>
 

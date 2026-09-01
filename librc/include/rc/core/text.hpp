@@ -9,6 +9,7 @@
 #ifndef RC_CORE_TEXT_HPP
 #define RC_CORE_TEXT_HPP
 
+#include <cstddef>
 #include <string>
 #include <string_view>
 #include <vector>

@@ -12,6 +12,7 @@
 #define RC_CORE_BACKTRACE_HPP
 
 #include <cctype>
+#include <cstddef>
 #include <sstream>
 #include <string>
 #include <vector>

@@ -11,6 +11,7 @@
 #define RC_CORE_BATCH_HPP
 
 #include <algorithm>
+#include <iterator>
 #include <numeric>
 #include <optional>
 #include <vector>

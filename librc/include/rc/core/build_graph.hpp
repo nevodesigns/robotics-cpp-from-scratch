@@ -11,6 +11,7 @@
 #ifndef RC_CORE_BUILD_GRAPH_HPP
 #define RC_CORE_BUILD_GRAPH_HPP
 
+#include <cstddef>
 #include <map>
 #include <set>
 #include <string>
