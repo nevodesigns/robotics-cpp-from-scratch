@@ -1,0 +1,78 @@
+{
+  "lesson": "10-03-a-live-plotter",
+  "title": "A Live Plotter: The Data Rate Is Not the Frame Rate",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A widget calls update() every time a sample arrives, from a sensor at one kilohertz. What happens?",
+      "options": [
+        "The event loop spends its time preparing pictures nobody sees, and the application stops responding",
+        "The chart updates a thousand times a second and looks smooth",
+        "Qt ignores the extra calls entirely, so nothing happens",
+        "The chart falls behind the data"
+      ],
+      "correct": 0,
+      "explanation": "A screen shows about sixty frames a second. Nine hundred and forty of those pictures are made and thrown away, while the click that just arrived waits."
+    },
+    {
+      "stage": "check",
+      "question": "What should addSample do instead?",
+      "options": [
+        "Record the sample and mark the picture out of date, and nothing else",
+        "Call repaint() so the drawing is not deferred",
+        "Call update() only every tenth sample",
+        "Draw directly into an image buffer"
+      ],
+      "correct": 0,
+      "explanation": "Something running at the frame rate then asks for the repaint. Every tenth sample is still the data rate setting the pace, just a slower version of the same mistake."
+    },
+    {
+      "stage": "check",
+      "question": "Why does refresh return early when nothing changed?",
+      "options": [
+        "A frame timer fires whether or not data arrived, and repainting regardless burns a core redrawing an identical picture",
+        "Qt refuses repeated update calls",
+        "It avoids a flicker",
+        "It is only needed while debugging"
+      ],
+      "correct": 0,
+      "explanation": "The stale flag is what turns the timer from a schedule into a permission. Leaving it out is the second version of the same mistake."
+    },
+    {
+      "stage": "check",
+      "question": "What is the difference between update() and repaint()?",
+      "options": [
+        "update asks the event loop to paint when it next can and merges requests, repaint paints immediately and merges nothing",
+        "update is for widgets and repaint is for windows",
+        "repaint is the modern spelling of update",
+        "update redraws only the changed region"
+      ],
+      "correct": 0,
+      "explanation": "repaint is the right call in approximately no situation that arises in normal code, and it turns this problem from bad to unrecoverable."
+    },
+    {
+      "stage": "post",
+      "question": "This widget has a signal and lesson 00-08's window did not. What does that change?",
+      "options": [
+        "Q_OBJECT is load bearing here: without it the signal has no definition and the build fails at the link",
+        "The widget now needs an event loop",
+        "The widget can no longer be rendered offscreen",
+        "Nothing, Q_OBJECT is always required"
+      ],
+      "correct": 0,
+      "explanation": "Removing the macro from the 00-08 window changed nothing observable, which is why that lesson does not claim it as a trap and this one does."
+    },
+    {
+      "stage": "post",
+      "question": "How much of lesson 10-02's arithmetic had to change for the widget?",
+      "options": [
+        "None of it, which is the reason the arithmetic and the surface were separated in the first place",
+        "The axis rules, since pixels differ from characters",
+        "The rolling window, since a widget cannot erase from a vector",
+        "The flip, which is inverted in a window"
+      ],
+      "correct": 0,
+      "explanation": "That is what leaves this lesson free to be about the one thing that is genuinely new, which is how often to draw."
+    }
+  ]
+}

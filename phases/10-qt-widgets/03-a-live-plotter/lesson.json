@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "id": "10-03-a-live-plotter",
+  "title": "A Live Plotter: The Data Rate Is Not the Frame Rate",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "Lesson 10-02 builds the same chart with the same arithmetic and prints it to a terminal, needing nothing installed. What this lesson adds is the widget and the separation between the rate data arrives at and the rate a screen is redrawn at. Without Qt, do 10-02: it is the half that decides whether a chart tells the truth.",
+  "requires": [
+    "10-02-a-value-over-time",
+    "10-01-painting-the-robot-path"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Widgets"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "note": "the live chart every later phase watches a signal with"
+  },
+  "breaks_first": [
+    "E-QT-0009",
+    "E-QT-0001",
+    "E-PLOT-0005"
+  ]
+}
