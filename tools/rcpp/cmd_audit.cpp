@@ -516,6 +516,34 @@ void check_phase_manifests(const Catalog& catalog, std::vector<Finding>& out) {
   }
 }
 
+// L025: an atlas match pattern is written in ASCII.
+//
+// GCC quotes names with typographic marks in a UTF-8 locale, so text arriving
+// from a real build is normalised to ASCII quotes before it is matched. A
+// pattern containing a typographic quote therefore cannot match anything, ever,
+// and it fails silently: explain simply returns nothing.
+//
+// The rule exists because seventeen patterns in this atlas used ASCII quotes
+// against text that did not, which went unnoticed until somebody piped a real
+// build into explain, which is the use the help text advertises.
+void check_pattern_alphabet(const Atlas& atlas, std::vector<Finding>& out) {
+  static const char* kTypographic[] = {"\xE2\x80\x98", "\xE2\x80\x99",
+                                       "\xE2\x80\x9C", "\xE2\x80\x9D"};
+
+  for (const AtlasEntry& entry : atlas.entries) {
+    for (const std::string& pattern : entry.patterns) {
+      for (const char* mark : kTypographic) {
+        if (pattern.find(mark) == std::string::npos) continue;
+        out.push_back({"L025", "atlas/errors/" + entry.id + ".md",
+                       "a match pattern contains a typographic quote. Build output is "
+                       "normalised to ASCII quotes before matching, so this pattern can "
+                       "never match. Write ' and \" instead"});
+        break;
+      }
+    }
+  }
+}
+
 // L020: a lesson that cites another lesson by number must cite one that exists.
 //
 // Forward promises are part of how a curriculum reads, and a promise to a phase
@@ -780,6 +808,7 @@ int cmd_audit(const Args& args) {
   check_graph(catalog, findings);
   check_phase_manifests(catalog, findings);
   check_atlas_links(catalog, atlas, findings);
+  check_pattern_alphabet(atlas, findings);
   check_em_dash(*root, findings);
 
   if (as_json) {

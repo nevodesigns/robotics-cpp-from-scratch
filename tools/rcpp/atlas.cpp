@@ -1,6 +1,7 @@
 #include "atlas.hpp"
 
 #include <algorithm>
+#include <cstring>
 #include <cstddef>
 #include <regex>
 #include <sstream>
@@ -49,13 +50,53 @@ void parse_entry(const std::string& text, AtlasEntry& entry) {
 
 }  // namespace
 
+namespace {
+
+// GCC quotes names with typographic marks in a UTF-8 locale: the bytes are
+// U+2018 and U+2019, not the ASCII apostrophe. Patterns in the atlas are
+// written with ASCII quotes, because that is what a person types, so text
+// arriving from a real build has to be brought to the same alphabet or none of
+// the seventeen patterns containing a quote can ever match.
+//
+// This was found by piping a real build into rcpp explain, which is the use the
+// help text advertises, and getting nothing back.
+std::string normalise_quotes(const std::string& text) {
+  static const struct { const char* from; char to; } kMarks[] = {
+      {"\xE2\x80\x98", '\''},   // U+2018 left single quotation mark
+      {"\xE2\x80\x99", '\''},   // U+2019 right single quotation mark
+      {"\xE2\x80\x9C", '"'},    // U+201C left double quotation mark
+      {"\xE2\x80\x9D", '"'},    // U+201D right double quotation mark
+  };
+
+  std::string out;
+  out.reserve(text.size());
+  for (std::size_t i = 0; i < text.size();) {
+    bool replaced = false;
+    for (const auto& mark : kMarks) {
+      const std::size_t width = std::strlen(mark.from);
+      if (text.compare(i, width, mark.from) == 0) {
+        out += mark.to;
+        i += width;
+        replaced = true;
+        break;
+      }
+    }
+    if (!replaced) out += text[i++];
+  }
+  return out;
+}
+
+}  // namespace
+
 const AtlasEntry* Atlas::find(const std::string& id) const {
   for (const AtlasEntry& e : entries)
     if (e.id == id) return &e;
   return nullptr;
 }
 
-std::vector<const AtlasEntry*> Atlas::match(const std::string& error_text) const {
+std::vector<const AtlasEntry*> Atlas::match(const std::string& raw_error_text) const {
+  const std::string error_text = normalise_quotes(raw_error_text);
+
   // Ranked by how much of the error text each entry actually accounted for.
   // Some patterns are necessarily broad: "expected .* to be within" matches
   // every near comparison in the curriculum. Unranked, an entry that matched a

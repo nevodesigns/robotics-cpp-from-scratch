@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "id": "00-03-reading-what-the-compiler-tells-you",
+  "title": "Reading What the Compiler Tells You",
+  "type": "build",
+  "minutes": 75,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-02-the-build-model"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": null,
+  "breaks_first": [
+    "E-CPP-0025",
+    "E-CPP-0001",
+    "E-CPP-0026"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "00-03-reading-what-the-compiler-tells-you",
+  "title": "Reading What the Compiler Tells You",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A build produces six errors. How many mistakes are in the file?",
+      "options": [
+        "Fewer than six, and possibly one, because the compiler carries on after a mistake and reports what follows against a misunderstanding",
+        "Exactly six",
+        "At least six",
+        "There is no way to tell without reading all of them"
+      ],
+      "correct": 0,
+      "explanation": "Measured in this lesson: four mistakes produce six errors on both GCC and Clang, and fixing the first removes three of them."
+    },
+    {
+      "stage": "check",
+      "question": "Three errors say a name is not a member of std. What is the most likely cause?",
+      "options": [
+        "One missing include, used in three places",
+        "Three different names spelled wrongly",
+        "The standard library is not installed",
+        "The wrong C++ standard was selected"
+      ],
+      "correct": 0,
+      "explanation": "The standard library is a set of headers rather than one thing you get automatically, and a header is usually used more than once, which is why this produces the most errors per line of cause."
+    },
+    {
+      "stage": "check",
+      "question": "What is on the note: lines under an error?",
+      "options": [
+        "Frequently the answer, such as which header to include or where a function was declared",
+        "Extra warnings that can be ignored",
+        "Information for compiler authors",
+        "A repeat of the error in different words"
+      ],
+      "correct": 0,
+      "explanation": "GCC will print the exact include you forgot. The line gets skipped constantly because it does not say error and sits in the middle of a wall of text."
+    },
+    {
+      "stage": "check",
+      "question": "The compiler says a semicolon is expected, and the line it names looks correct. Where is the mistake?",
+      "options": [
+        "At the caret, or in the statement above it, which did not end",
+        "Always exactly one line above",
+        "Always on the line named",
+        "In a header, since the file itself is fine"
+      ],
+      "correct": 0,
+      "explanation": "Measured on GCC 11 and Clang 14, three cases in four now name the right line and print the missing character under a caret. The one that still lands late on GCC is a declaration whose next line starts another declaration."
+    },
+    {
+      "stage": "post",
+      "question": "You have twelve errors. Which do you fix first?",
+      "options": [
+        "The first one, then rebuild before reading anything else",
+        "The easiest looking one, to reduce the count",
+        "The last one, since it is the most recent",
+        "All the ones that mention the same file"
+      ],
+      "correct": 0,
+      "explanation": "The easy looking ones near the bottom are the most likely to be consequences of the hard looking one at the top, so fixing them is often work on a problem that does not exist."
+    },
+    {
+      "stage": "post",
+      "question": "Every error names a header from the standard library that you have never opened. What now?",
+      "options": [
+        "Scroll up to the in file included from line, which names the line of yours that started it",
+        "Reinstall the compiler",
+        "Report a bug against the standard library",
+        "Delete the include and write the code yourself"
+      ],
+      "correct": 0,
+      "explanation": "Errors reported inside a header are almost always caused by the file that included it. See E-CPP-0003."
+    }
+  ]
+}
