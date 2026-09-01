@@ -47,7 +47,15 @@ Drift run(bool turning, double true_base, double believed_base, double radius_er
   Odometry estimate(believed_base, at(0.0, 0.0, initial_heading_error));
 
   std::mt19937 rng(seed);
-  std::normal_distribution<double> wander(0.0, slip);
+
+  // Constructed only when there is slip to draw. std::normal_distribution
+  // requires a standard deviation greater than zero, and passing zero is a
+  // precondition violation rather than a request for no noise: libstdc++
+  // happens to return the mean, and the MSVC implementation does not return at
+  // all, which presents as a test that times out on one platform and passes on
+  // the other two.
+  const bool noisy = slip > 0.0;
+  std::normal_distribution<double> wander(0.0, noisy ? slip : 1.0);
 
   const int steps = static_cast<int>(kDistance / kStep);
   const int quarter = steps / 4;
@@ -63,8 +71,8 @@ Drift run(bool turning, double true_base, double believed_base, double radius_er
 
     // A wheel that slips turns without the ground moving under it, so the
     // encoder is not wrong: it is answering a different question.
-    const double left_ground = left * (1.0 - std::fabs(wander(rng)));
-    const double right_ground = right * (1.0 - std::fabs(wander(rng)));
+    const double left_ground = noisy ? left * (1.0 - std::fabs(wander(rng))) : left;
+    const double right_ground = noisy ? right * (1.0 - std::fabs(wander(rng))) : right;
 
     truth.update(left_ground, right_ground);
     estimate.update(left * radius_error, right * radius_error);
