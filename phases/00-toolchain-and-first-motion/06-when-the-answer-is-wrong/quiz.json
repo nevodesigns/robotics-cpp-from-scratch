@@ -1,0 +1,78 @@
+{
+  "lesson": "00-06-when-the-answer-is-wrong",
+  "title": "It Compiled, and the Answer Is Wrong",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A calculation returns a number that is exactly half what it should be. What is the most useful next thought?",
+      "options": [
+        "Something was averaged, or applied twice, so look for the factor rather than reading the whole function",
+        "The compiler optimised it incorrectly",
+        "A rounding error accumulated",
+        "The input was wrong"
+      ],
+      "correct": 0,
+      "explanation": "A wrong number is wrong in a way, and the way is a short list. Turning it wrong into out by a factor of two is a hypothesis, and a hypothesis can be tested in a minute."
+    },
+    {
+      "stage": "check",
+      "question": "Both wheels turn at the same speed and the heading changes. What does that tell you before you read any code?",
+      "options": [
+        "The turn rate is wrong, and the geometry of the position update is not the suspect",
+        "The tolerance is too small",
+        "The simulation ran for too long",
+        "Nothing, since the heading may legitimately drift"
+      ],
+      "correct": 0,
+      "explanation": "It cannot change, by the definition of the model. Each property that holds removes a region of the code from suspicion, which is most of the search done without reading a line."
+    },
+    {
+      "stage": "check",
+      "question": "Five hundred steps give a wrong answer. What is worth checking first?",
+      "options": [
+        "One step, since correct at one and wrong at five hundred means the error accumulates rather than being in the geometry",
+        "Whether the loop count is right",
+        "The last step, since that is where the answer appears",
+        "Every step, printed to a file"
+      ],
+      "correct": 0,
+      "explanation": "Halve the input, not the code. The smallest input that still fails is the cheapest thing you will ever debug, and if one step is already wrong you can compute the right answer by hand."
+    },
+    {
+      "stage": "check",
+      "question": "A heading of 3.14159 and one of -3.14159 are compared by subtraction. What happens?",
+      "options": [
+        "The difference reads as a full turn, so two identical directions are reported as different",
+        "The comparison is correct, since the numbers differ",
+        "The result is not a number",
+        "The sign is lost"
+      ],
+      "correct": 0,
+      "explanation": "A false report of a bug is worse than a missed one, because you go looking for something that is not there. Take the difference through atan2 of its sine and cosine, which throws the whole turns away."
+    },
+    {
+      "stage": "post",
+      "question": "Why do the tests in this lesson feed the checks trajectories that are deliberately wrong?",
+      "options": [
+        "A check that cannot fail is not a check, and one that always returns true passes every test built from correct data",
+        "To measure how fast the checks run",
+        "To show what a wrong trajectory looks like",
+        "Because the correct trajectories were not available"
+      ],
+      "correct": 0,
+      "explanation": "Three of the traps in this lesson were confirmed by writing the bug into the reference, and one of them is caught only by these tests."
+    },
+    {
+      "stage": "post",
+      "question": "You decide to print values. Where do you print first?",
+      "options": [
+        "At the boundary, the inputs and the result, since half the time the input was already wrong",
+        "In the middle of the calculation, where the bug is",
+        "Everywhere, then read it afterwards",
+        "Only on the step that fails"
+      ],
+      "correct": 0,
+      "explanation": "And print the value you are not suspicious of, because that is where it will be."
+    }
+  ]
+}
