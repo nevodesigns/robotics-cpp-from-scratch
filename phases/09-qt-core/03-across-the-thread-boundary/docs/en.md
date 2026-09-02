@@ -95,25 +95,30 @@ a plain struct, no Q_DECLARE_METATYPE, no qRegisterMetaType
 
 A connection made with the function pointer syntax registers the type itself.
 
-**The obsolete advice hides the real hazard**, which is what the failure looks
-like when it does happen. Some types still fail, typically ones Qt records under
-a name it cannot resolve, such as a typedef:
+**The obsolete advice hides the real hazard**, and the hazard is worse than a
+missing call. Whether a given type registers itself is not a property you can
+reason about from the code in front of you. The same signal, carrying
+`Qt::HANDLE`, which is a typedef for `void*`:
 
-```text
-a signal carrying Qt::HANDLE
-  -> 0 of 100 delivered
+| | delivered |
+|---|---|
+| Linux, Qt 6.2.4 | **0 of 100**, with `Cannot queue arguments of type 'Qt::HANDLE'` |
+| Windows, Qt 6.5.3 | **100 of 100**, silently fine |
 
-QObject::connect: Cannot queue arguments of type 'Qt::HANDLE'
-```
+Same source. `connect` returned true on both. Nothing in the program can tell
+which of the two happened, and the only evidence in the failing case is one line
+on the console.
 
-`connect` returned true. The signal was emitted a hundred times. Every delivery
-was discarded, and the only evidence is one line on the console that nothing in
-the program can see.
+That table is the lesson, and it took a red Windows lane to find it: the test
+originally asserted the failure, because the failure was what this machine
+showed.
 
-So the durable rule is not "always register". It is:
+So the durable rule is not "always register", and it is not "Qt 6 handles it".
+It is:
 
 **A connection that was made is not a connection that delivers.** Assert that
-something arrived, once, in a test, for every signal that crosses a thread.
+something arrived, once, in a test, for every signal that crosses a thread. It
+is two lines and it is the only thing in this section that is true everywhere.
 
 ## Build It
 

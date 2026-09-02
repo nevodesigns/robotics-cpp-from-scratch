@@ -192,36 +192,51 @@ RC_TEST("two sensors on two threads both reach one log") {
   RC_CHECK_EQ(log.consumed_on(), this_thread());
 }
 
-RC_TEST("an argument type Qt cannot queue is dropped in silence") {
-  // Not a defect in Qt and not a rare corner: it is what the failure looks
-  // like. The connection succeeds. The signal is emitted. Every delivery is
-  // discarded, and the only evidence is one line on the console that nothing
-  // in the program can see.
+RC_TEST("a connection that was made is not a connection that delivers") {
+  // The point of this test is what it does *not* assert.
   //
-  // Which is the durable lesson here, now that Qt 6 registers ordinary types by
-  // itself: a connection that was made is not a connection that delivers, and
-  // the only way to know is to check that something arrived.
+  // Qt::HANDLE is a typedef for void*, and whether the meta object system will
+  // queue it depends on the Qt version and the platform. Measured: on Linux
+  // with Qt 6.2.4 this delivers 0 of 100 and prints
+  //
+  //   QObject::connect: Cannot queue arguments of type 'Qt::HANDLE'
+  //
+  // and on Windows with Qt 6.5.3 the same code delivers 100 of 100.
+  //
+  // That difference is the lesson rather than a problem with it. connect
+  // returned true in both cases. Nothing in the program can tell which of the
+  // two happened, and reasoning about whether a type "should" register is not a
+  // substitute for looking at whether anything arrived.
   RawSender sender;
   RawSink sink;
   QThread thread;
   sender.moveToThread(&thread);
   thread.start();
 
-  RC_REQUIRE(static_cast<bool>(
-      QObject::connect(&sender, &RawSender::raw, &sink, &RawSink::take)));
+  const bool connected = static_cast<bool>(
+      QObject::connect(&sender, &RawSender::raw, &sink, &RawSink::take));
 
   QMetaObject::invokeMethod(&sender, "send", Qt::QueuedConnection, Q_ARG(int, 100));
 
   QElapsedTimer clock;
   clock.start();
-  while (clock.elapsed() < 300) QCoreApplication::processEvents(QEventLoop::AllEvents, 5);
+  while (sink.received < 100 && clock.elapsed() < 1000)
+    QCoreApplication::processEvents(QEventLoop::AllEvents, 5);
 
   thread.quit();
   thread.wait();
 
-  std::cout << "  a signal carrying Qt::HANDLE delivered " << sink.received
-            << " of 100 across a thread boundary\n";
-  RC_CHECK_EQ(sink.received, 0);
+  std::cout << "  a signal carrying Qt::HANDLE: connect said "
+            << (connected ? "yes" : "no") << ", and " << sink.received
+            << " of 100 arrived\n";
+
+  // connect succeeds either way, which is the whole difficulty.
+  RC_CHECK(connected);
+
+  // And the delivery is all or nothing: either the type can be queued and every
+  // reading arrives, or it cannot and none does. There is no partial case to
+  // reason about, and no way to find out but to look.
+  RC_CHECK(sink.received == 0 || sink.received == 100);
 }
 
 int main(int argc, char** argv) {
