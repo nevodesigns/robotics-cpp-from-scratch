@@ -1,0 +1,78 @@
+{
+  "lesson": "16-02-two-guesses-are-better",
+  "title": "Two Guesses Are Better: Combining Estimates That Disagree",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Two independent estimates of the same quantity are combined. How certain is the result?",
+      "options": [
+        "More certain than either of them, always, however poor one of them is",
+        "As certain as the better of the two",
+        "Somewhere between the two",
+        "It depends which is closer to the truth"
+      ],
+      "correct": 0,
+      "explanation": "Which is why a poor second sensor is worth having, as long as you are honest about how poor it is. Combining a good estimate with a hopeless one leaves the value almost unchanged and the certainty slightly improved."
+    },
+    {
+      "stage": "check",
+      "question": "What is the gain, in words?",
+      "options": [
+        "The prior's share of the total uncertainty, so a prior you are sure of barely moves",
+        "How far the measurement is from the prediction",
+        "The ratio of the two values",
+        "A constant chosen by tuning"
+      ],
+      "correct": 0,
+      "explanation": "Nine times as uncertain as the measurement puts the answer nine tenths of the way across. Taking the share from the wrong side inverts the whole filter."
+    },
+    {
+      "stage": "check",
+      "question": "Why must the prediction step increase the variance?",
+      "options": [
+        "Every correction reduces it, so without something increasing it the filter becomes certain and stops listening",
+        "To keep the arithmetic stable",
+        "Because motion is measured in different units",
+        "It does not need to, if the measurements are frequent"
+      ],
+      "correct": 0,
+      "explanation": "The gain falls with the prior variance, so a variance near zero means the estimate does not move. The filter has concluded it is certain, and nothing can talk it out of that."
+    },
+    {
+      "stage": "check",
+      "question": "Believing the odometry ten times worse than it is, and believing the sensor ten times better, gave identical results. Why?",
+      "options": [
+        "The gain depends only on the ratio of the two variances, so scaling both changes nothing",
+        "Both errors happened to cancel",
+        "The measurements dominate in either case",
+        "It is a coincidence of these particular numbers"
+      ],
+      "correct": 0,
+      "explanation": "Which means there is one quantity to get right rather than two, and that tuning both knobs is how filter tuning turns into folklore."
+    },
+    {
+      "stage": "post",
+      "question": "Measured, what does believing the wrong uncertainties cost?",
+      "options": [
+        "Roughly double the error, in either direction, while still beating both inputs",
+        "Nothing measurable",
+        "The filter diverges",
+        "It becomes worse than dead reckoning alone"
+      ],
+      "correct": 0,
+      "explanation": "0.0237 metres believing the truth against 0.048 and 0.053 believing wrongly, with dead reckoning alone at 0.058. Forgiving, and most of the value is gone, which is why nothing looks broken."
+    },
+    {
+      "stage": "post",
+      "question": "A sensor is described as accurate to five centimetres. What variance does the filter want?",
+      "options": [
+        "0.0025, the square of 0.05",
+        "0.05, the accuracy as stated",
+        "0.5, ten times the accuracy",
+        "It depends on the update rate"
+      ],
+      "correct": 0,
+      "explanation": "Passing the standard deviation where a variance belongs is wrong by a factor of twenty here, and it is silent. Naming the parameter measurement_variance rather than noise is most of the cure."
+    }
+  ]
+}
