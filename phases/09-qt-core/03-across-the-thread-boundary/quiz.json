@@ -1,0 +1,78 @@
+{
+  "lesson": "09-03-across-the-thread-boundary",
+  "title": "Across the Thread Boundary: What a Queued Connection Actually Does",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A signal is emitted on a worker thread and its slot belongs to an object on the main thread. With Qt's default connection, where does the slot run?",
+      "options": [
+        "On the main thread, because the argument is copied and posted to the receiver's event loop",
+        "On the worker thread, immediately, like any function call",
+        "On whichever thread is idle",
+        "On a thread Qt creates for the purpose"
+      ],
+      "correct": 0,
+      "explanation": "AutoConnection decides at emit time: same thread is a direct call, different threads is a queued delivery. That is how a widget can be updated from data that arrived somewhere else without ever being touched from there."
+    },
+    {
+      "stage": "check",
+      "question": "What does Qt::DirectConnection do across a thread boundary?",
+      "options": [
+        "Runs the slot on the emitting thread, so the receiver's members are touched from the wrong place",
+        "Refuses to connect",
+        "Behaves the same as AutoConnection",
+        "Blocks the emitter until the receiver has run the slot"
+      ],
+      "correct": 0,
+      "explanation": "For a widget that is undefined behaviour rather than a race to reason about, and it usually works, which is why it survives to production."
+    },
+    {
+      "stage": "check",
+      "question": "connect returns true and the slot never runs. What is the most likely reason?",
+      "options": [
+        "A queued connection cannot copy the argument type, so every delivery is dropped with one line on the console",
+        "The signal was never emitted",
+        "The receiver was destroyed",
+        "The connection type was wrong"
+      ],
+      "correct": 0,
+      "explanation": "connect returning true means the signatures matched, not that anything will arrive. Measured, a signal carrying Qt::HANDLE delivered zero of a hundred, and the program had no way to see the warning."
+    },
+    {
+      "stage": "check",
+      "question": "On Qt 6, does a plain struct need qRegisterMetaType to cross a queued connection?",
+      "options": [
+        "No: measured, five hundred of five hundred arrive with no registration at all, because the function pointer syntax registers the type",
+        "Yes, always, as on Qt 5",
+        "Only if it contains pointers",
+        "Only when the receiver is a widget"
+      ],
+      "correct": 0,
+      "explanation": "Which matters because the obsolete advice hides the real hazard. The types that still fail are ones recorded under a name Qt cannot resolve, such as a typedef, and they fail silently."
+    },
+    {
+      "stage": "post",
+      "question": "The worker has finished producing and the log has received nothing. The receiver's event loop has not run. What happened to the readings?",
+      "options": [
+        "They are waiting as posted events, and arrive as soon as the loop runs",
+        "They were dropped, since there was nobody to receive them",
+        "They were delivered directly, bypassing the loop",
+        "The emit blocked until the loop ran"
+      ],
+      "correct": 0,
+      "explanation": "Which is the shape of a great many bugs that present as a dead sensor. The data is neither lost nor received."
+    },
+    {
+      "stage": "post",
+      "question": "What decides which thread an object's slots run on?",
+      "options": [
+        "The object's own thread affinity, set by moveToThread, independent of any connection",
+        "The thread that created the connection",
+        "The thread that owns the sender",
+        "The connection type alone"
+      ],
+      "correct": 0,
+      "explanation": "Affinity belongs to the object. Neither object in a connection has to be told about the other's thread, which is what makes the pattern compose."
+    }
+  ]
+}

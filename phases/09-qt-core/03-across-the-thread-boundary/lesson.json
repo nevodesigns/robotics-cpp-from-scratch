@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "id": "09-03-across-the-thread-boundary",
+  "title": "Across the Thread Boundary: What a Queued Connection Actually Does",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This phase is where Qt stops being optional, and this lesson in particular is about a Qt mechanism with no counterpart outside it. Run rcpp doctor for the install command. The problem it solves is the one lesson 07-01 measured, and the lock free queue from 07-02 is the shape underneath Qt's answer, so a learner without Qt has already met the idea in the form that needs no library.",
+  "requires": [
+    "09-02-what-moc-generates",
+    "07-01-threads-and-the-torn-read"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Core"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/worker.hpp",
+    "note": "the sensor thread every later tool reads from without touching a widget"
+  },
+  "breaks_first": [
+    "E-QT-0011",
+    "E-QT-0010",
+    "E-THREAD-0001"
+  ]
+}
