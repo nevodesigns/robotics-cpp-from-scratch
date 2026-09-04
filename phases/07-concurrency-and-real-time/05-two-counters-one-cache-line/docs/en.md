@@ -117,16 +117,23 @@ machine can only ever add time, so the minimum is the closest any run came to
 measuring the thing itself, and a single sample measures whatever else the
 machine happened to be doing.
 
-Even so, the suite **reports the queue table and does not assert it**. Nine
-repeats made it stable on a quiet desktop and it still failed about one build in
-three on a shared runner with two virtual cores and a sanitizer attached. A gate
-that fails when nothing is wrong teaches people to rerun the build, which is
-worse than not gating at all, so what the queue is gated on is that it is still
-a queue.
+Even so, **none of the timing in this lesson is asserted**. Every table here is
+reported and checked by a person, and the tests gate only on what does not
+depend on what else the machine is doing: that `Padded` really is a line wide
+and a line apart in a vector, and that the queue is still a queue.
 
-The counter measurements above are asserted, because a factor of three survives
-a busy runner and a factor of one and a bit does not. Knowing which of your
-measurements can carry a gate is part of making them.
+That was not the original plan. The queue table failed about one build in three
+on a shared runner with two virtual cores and a sanitizer attached, and then the
+counter table, which had held on three lanes, **inverted** on a Windows runner.
+
+A shared virtual machine cannot measure cache behaviour. It has neighbours, its
+cores are not yours, and its scheduler moves your threads between them. That is
+not a flaw in the measurement, it is a fact about where it was taken, and it is
+the reason real-time work is measured on the target rather than on a build
+server. Reproduce these numbers on hardware you can see.
+
+A gate that fails when nothing is wrong teaches people to rerun the build, which
+is worse than not gating at all.
 
 The reason is that there were two ways the line kept moving:
 
@@ -195,9 +202,9 @@ help, from a measurement that was correct.
 
 **Take the minimum of several runs**, not the average, and say how many.
 
-**Know which measurements can carry a gate.** A factor of three survives a busy
-shared machine; a factor of one and a bit does not, and asserting it anyway
-produces a test that fails when nothing is wrong.
+**Know which measurements can carry a gate.** A cache measurement on a shared
+virtual machine is not one of them, whatever its size on your desktop. Gate on
+layout and behaviour; report timing and read it.
 
 ## What Breaks First
 

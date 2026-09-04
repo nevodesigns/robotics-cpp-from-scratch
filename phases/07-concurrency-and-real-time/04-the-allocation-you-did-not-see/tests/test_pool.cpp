@@ -37,16 +37,20 @@ rc::rt::Histogram time_body(int iterations, Body body) {
   return histogram;
 }
 
-// The shortest string that makes this toolchain allocate. Found rather than
-// assumed, because it is an implementation detail and differs between
-// libraries: 15 on libstdc++ and the Microsoft library, 22 on libc++.
-std::size_t small_string_limit() {
+// The longest string this toolchain keeps inside the string object, or -1 if
+// there is no such length because every string allocates.
+//
+// Found rather than assumed. It is 15 on libstdc++ and on the Microsoft library
+// in a release build, 22 on libc++, and there is no window at all in a
+// Microsoft debug build, where each string gets a bookkeeping object of its own
+// whatever its length.
+int small_string_limit() {
   for (std::size_t length = 1; length < 128; ++length) {
     AllocationCount count;
     std::string subject(length, 'x');
-    if (count.total() > 0) return length - 1;
+    if (count.total() > 0) return static_cast<int>(length) - 1;
     // Touching it keeps the optimiser from deleting the string entirely.
-    if (subject.size() == 12345) return length;
+    if (subject.size() == 12345) return static_cast<int>(length);
   }
   return 127;
 }
@@ -159,7 +163,20 @@ RC_TEST("what a loop body costs, and what it allocates") {
 }
 
 RC_TEST("where the small string ends, on this toolchain") {
-  const std::size_t limit = small_string_limit();
+  const int limit = small_string_limit();
+
+  if (limit < 0) {
+    std::cout << "\n    this library keeps no string inside the object: even a\n";
+    std::cout << "    single character allocates, because each string is given\n";
+    std::cout << "    a bookkeeping object of its own. That is what a Microsoft\n";
+    std::cout << "    debug build does, and it is the same source that is\n";
+    std::cout << "    allocation free elsewhere\n";
+    AllocationCount count;
+    std::string one(1, 'x');
+    RC_CHECK(count.total() >= 1);
+    if (one.size() == 999999) return;
+    return;
+  }
 
   std::cout << "\n    the longest string this library keeps inside the object: "
             << limit << " characters\n";
@@ -168,13 +185,13 @@ RC_TEST("where the small string ends, on this toolchain") {
   std::size_t at_limit = 0, past_limit = 0;
   {
     AllocationCount count;
-    std::string inside(limit, 'x');
+    std::string inside(static_cast<std::size_t>(limit), 'x');
     at_limit = count.total();
     if (inside.size() == 999999) return;
   }
   {
     AllocationCount count;
-    std::string outside(limit + 1, 'x');
+    std::string outside(static_cast<std::size_t>(limit) + 1, 'x');
     past_limit = count.total();
     if (outside.size() == 999999) return;
   }
