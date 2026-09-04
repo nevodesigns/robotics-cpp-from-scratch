@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "15-02-precise-and-wrong",
+  "title": "Precise and Wrong: What Averaging Cannot Fix",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 1,
+  "requires": [
+    "15-01-every-filter-is-a-delay",
+    "03-02-errors-that-are-not-exceptional"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/calibration.hpp",
+    "note": "the straight line from what a sensor reports to what is true, fitted and checked"
+  },
+  "breaks_first": [
+    "E-SENSE-0004",
+    "E-SENSE-0005",
+    "E-SENSE-0006",
+    "E-SENSE-0007"
+  ]
+}

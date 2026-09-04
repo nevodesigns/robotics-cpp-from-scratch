@@ -1,0 +1,78 @@
+{
+  "lesson": "15-02-precise-and-wrong",
+  "title": "Precise and Wrong: What Averaging Cannot Fix",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A sensor's readings scatter by 5 cm and sit 27 cm away from the truth. You average a million of them. What do you get?",
+      "options": [
+        "A very steady reading that is still 27 cm wrong",
+        "A reading accurate to well under a millimetre",
+        "A reading accurate to about 5 cm",
+        "The same answer as one reading"
+      ],
+      "correct": 0,
+      "explanation": "Measured: 10.3132 from one reading, 10.2700 from a million, against a truth of 10. Past about a hundred samples nothing further happens, because there is nothing left to average away."
+    },
+    {
+      "stage": "check",
+      "question": "You zero a rangefinder at 10 m and it is exact there. In use it reads 15 cm long at 0 m and 15 cm short at 20 m. What is wrong?",
+      "options": [
+        "A scale error that an offset was asked to fix, so one reference could never have caught it",
+        "The zeroing was done carelessly and should be repeated",
+        "The sensor is not linear and needs a curve",
+        "Noise, which needs a longer filter"
+      ],
+      "correct": 0,
+      "explanation": "Wrong at both ends by the same amount in opposite directions is the signature of a scale error. Wrong by the same amount everywhere is an offset; wrong in the same direction at both ends is a bend."
+    },
+    {
+      "stage": "check",
+      "question": "Your five calibration references all happen to read the same raw value. The least squares fit divides by zero. Why is the resulting nan worse than a wrong number?",
+      "options": [
+        "Because every comparison against a nan is false, so a check written as a list of values to reject passes it through",
+        "Because a nan crashes the program at the point it is produced",
+        "Because it prints as -nan, which is confusing",
+        "Because the numerator is also zero"
+      ],
+      "correct": 0,
+      "explanation": "(v < 0.0 || v > 100.0) lets the nan through; !(v >= 0.0 && v <= 100.0) catches it. The two say the same thing in English. Phrase the condition as what you require, then negate it."
+    },
+    {
+      "stage": "check",
+      "question": "The datasheet says the sensor reads 0.985 x + 0.42. You store those two numbers as your calibration. What happens?",
+      "options": [
+        "Every reading is about twice as wrong as no calibration at all, in numbers that still look plausible",
+        "The readings are exactly correct",
+        "The readings are unchanged",
+        "The readings are wrong by a constant that is easy to spot"
+      ],
+      "correct": 0,
+      "explanation": "That line is what the sensor does. The correction is its inverse, 1.0152 raw - 0.4264. Applying the sensor's own line applies the error a second time. Measured: 20 m reads 20.238 instead of 20.120."
+    },
+    {
+      "stage": "post",
+      "question": "Two references or a hundred and twenty eight, on a sensor that is genuinely straight. Does the count matter?",
+      "options": [
+        "Yes: the references have their own error, and the fit averages it down. Four times the references, half the error",
+        "No: two points determine a line exactly",
+        "Yes, but only up to about ten references",
+        "Yes: more references make the fit worse by overfitting"
+      ],
+      "correct": 0,
+      "explanation": "Measured rms error of the resulting calibration: 0.0372 m from two references, 0.0192 from eight, 0.0098 from thirty two, 0.0052 from a hundred and twenty eight. The same square root law as the filter in 15-01."
+    },
+    {
+      "stage": "post",
+      "question": "Your fit's rms residual is about the size of the sensor's noise. What have you learned?",
+      "options": [
+        "That the line is as good as the data given, which does not prove the sensor is straight: a bend smaller than the noise leaves no trace",
+        "That the sensor is linear",
+        "That the calibration is correct to within the noise at every distance",
+        "That more references would not help"
+      ],
+      "correct": 0,
+      "explanation": "The same bend measured 11 percent above the straight sensor's residual at 5 cm of noise and 490 percent above it at 5 mm. The residual finds what the noise does not hide, and the bend is there either way."
+    }
+  ]
+}
