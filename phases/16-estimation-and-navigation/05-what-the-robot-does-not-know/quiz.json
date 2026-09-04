@@ -1,0 +1,78 @@
+{
+  "lesson": "16-05-what-the-robot-does-not-know",
+  "title": "What the Robot Does Not Know: A Map With Three Answers",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A map cell holds a probability, updated by multiplying in each observation. A sensor right seven times in ten sees it occupied forty four times. What can change it back?",
+      "options": [
+        "Nothing: one minus p has fallen below what a double holds beside 1.0, so p is exactly 1 and every later update multiplies zero",
+        "Forty four contrary observations",
+        "About twice as many contrary observations",
+        "One contrary observation, since the update is symmetric"
+      ],
+      "correct": 0,
+      "explanation": "Measured: 1 - p is 1.887e-15 at 40 observations and recovers in 41 misses, 1.110e-16 at 43 and recovers in 44, and exactly 0 at 44 and never recovers. Forty four observations is under two seconds of a 30 Hz scanner."
+    },
+    {
+      "stage": "check",
+      "question": "Cells hold clamped log odds instead. A cell is confirmed occupied two thousand times. How many contrary observations bring it back?",
+      "options": [
+        "Five, the same as after ten confirmations: the clamp bounds how sure a cell may become, so it bounds how long it takes to change its mind",
+        "Two thousand, since the arithmetic is symmetric",
+        "About forty, once the log odds pass the threshold",
+        "It depends on the sensor's reliability"
+      ],
+      "correct": 0,
+      "explanation": "Measured with the clamp at plus and minus four. A wall standing after two hundred scans of a parked van came down six scans after it drove away."
+    },
+    {
+      "stage": "check",
+      "question": "Why must a map have three answers rather than two?",
+      "options": [
+        "A grid with two has to call unlooked-at ground something, and free sends the robot into a stairwell while occupied keeps it parked",
+        "So the display has a third colour",
+        "So probabilities can be represented",
+        "To distinguish walls from furniture"
+      ],
+      "correct": 0,
+      "explanation": "The absence of evidence is its own state, and it is the state most of the world is in at any moment. Log odds at zero is unknown, and evidence that cancels returns to unknown rather than to whichever reading arrived last."
+    },
+    {
+      "stage": "check",
+      "question": "A range reading runs out to the sensor's maximum without returning. What should the update do with the far end of that ray?",
+      "options": [
+        "Nothing: the reading says the space was empty and says nothing about its far end",
+        "Mark it occupied, since the beam stopped there",
+        "Mark it free, along with the rest of the ray",
+        "Mark it occupied with half the usual weight"
+      ],
+      "correct": 0,
+      "explanation": "Marking it occupied paints a ring of phantom wall at exactly max range around every place the robot has ever stood. The opposite mistake, marking the whole ray free including a real endpoint, erases the obstacle the reading just found."
+    },
+    {
+      "stage": "post",
+      "question": "With 10 cm cells and the origin at the centre of the map, a cast to int is used instead of std::floor. What goes wrong?",
+      "options": [
+        "Every cell on the negative side shifts by one, and the cell at the origin becomes 20 cm wide while every other one is 10",
+        "Nothing, a cast rounds to the nearest cell",
+        "Points outside the grid are silently clamped",
+        "Only points exactly on a cell boundary are affected"
+      ],
+      "correct": 0,
+      "explanation": "Truncation goes toward zero, so -0.05 and +0.05 land in the same cell. It hides because the first test map usually puts the origin at a corner, where every coordinate is positive and the two agree exactly."
+    },
+    {
+      "stage": "post",
+      "question": "What should the clamp value be chosen from?",
+      "options": [
+        "How quickly the world you work in changes, since it decides how long a wall survives after it is removed",
+        "How reliable the sensor is",
+        "The size of the grid",
+        "The planner's replanning rate"
+      ],
+      "correct": 0,
+      "explanation": "The sensor's reliability is already in the per-observation step. The clamp is a statement about the world: a warehouse with pallets moving hourly wants a tight one, a surveyed pipe rack can afford a loose one."
+    }
+  ]
+}

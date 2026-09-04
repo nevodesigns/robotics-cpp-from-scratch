@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "16-05-what-the-robot-does-not-know",
+  "title": "What the Robot Does Not Know: A Map With Three Answers",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 1,
+  "requires": [
+    "16-04-how-far-ahead-to-look",
+    "01-04-arrays-and-spans"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::nav",
+    "header": "rc/nav/grid.hpp",
+    "note": "a map that can be told it was wrong, and that says so when it does not know"
+  },
+  "breaks_first": [
+    "E-NAV-0011",
+    "E-NAV-0012",
+    "E-NAV-0013"
+  ]
+}
