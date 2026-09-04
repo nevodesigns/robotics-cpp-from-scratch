@@ -49,11 +49,11 @@ class SensorSource {
 The real driver implements it by talking to a port. A fake implements it by
 answering from a list. The code under test cannot tell, and does not need to.
 
-This is the first genuinely useful thing runtime polymorphism buys you in this
-curriculum, and it is worth noticing that the reason is testability rather than
-elegance. The virtual destructor is not decoration: deleting a derived object
-through a base pointer without one is undefined behaviour, and it is the single
-most common mistake with interfaces.
+The same shape as the clock in lesson 03-05, where `virtual` was introduced,
+and for the same reason: what an interface buys here is testability rather than
+elegance. The virtual destructor is not decoration either. Deleting a derived
+object through a base pointer without one is undefined behaviour, and it is the
+single most common mistake with interfaces.
 
 ### A fake is not a mock
 

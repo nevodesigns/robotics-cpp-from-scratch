@@ -564,6 +564,28 @@ void check_pattern_alphabet(const Atlas& atlas, std::vector<Finding>& out) {
   }
 }
 
+// L027: a lesson may not require one that comes after it.
+//
+// The lesson identifiers are ordered, and a learner works through them in that
+// order. A requirement pointing forward is a learner who arrives at a lesson
+// they cannot start, told to go and do something two phases away and come back,
+// which is the one thing a curriculum with a stated order must not do.
+//
+// It is easy to write by accident, because a requirement is often meant as a
+// conceptual note rather than an order: 03-05 required 05-02 for two months
+// without using a single thing from it. So the rule asks about the order and
+// nothing else, and a genuine forward dependency means one of the two lessons
+// is in the wrong place.
+void check_requirement_order(const Lesson& lesson, std::vector<Finding>& out) {
+  for (const std::string& required : lesson.requires_ids) {
+    if (required <= lesson.id) continue;
+    out.push_back({"L027", lesson.rel_path,
+                   "requires " + required +
+                       ", which comes after it. A learner reaching this lesson in order "
+                       "cannot start it. Move one of the two, or drop the requirement"});
+  }
+}
+
 // L026: a lesson that needs Qt says what a learner without Qt should do.
 //
 // Qt is optional in this curriculum and its absence is silent: rc_add_lesson
@@ -849,6 +871,7 @@ int cmd_audit(const Args& args) {
     check_no_discarded_style(*lesson, findings);
     check_artifact_module(*lesson, *root, findings);
     check_qt_fallback(*lesson, findings);
+    check_requirement_order(*lesson, findings);
   }
   check_graph(catalog, findings);
   check_phase_manifests(catalog, findings);

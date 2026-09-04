@@ -12,8 +12,7 @@
   ],
   "hardware_tier": 0,
   "requires": [
-    "03-04-algorithms-over-loops",
-    "05-02-fakes-and-replay"
+    "03-04-algorithms-over-loops"
   ],
   "cxx_standard": 17,
   "qt": null,
@@ -29,6 +28,7 @@
     "E-NUM-0002"
   ],
   "teaches": [
-    "std::chrono"
+    "std::chrono",
+    "virtual"
   ]
 }

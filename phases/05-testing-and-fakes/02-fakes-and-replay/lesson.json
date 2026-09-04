@@ -13,7 +13,8 @@
   "hardware_tier": 0,
   "requires": [
     "05-01-building-the-test-framework",
-    "03-03-containers-and-their-costs"
+    "03-03-containers-and-their-costs",
+    "03-05-time-and-clocks"
   ],
   "cxx_standard": 17,
   "qt": null,
@@ -28,7 +29,5 @@
     "E-CPP-0017",
     "E-CTRL-0003"
   ],
-  "teaches": [
-    "virtual"
-  ]
+  "teaches": []
 }

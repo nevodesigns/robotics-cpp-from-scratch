@@ -86,7 +86,8 @@ A controller that calls `steady_clock::now()` inside itself cannot be tested. To
 check what a watchdog does after two seconds you would have to wait two seconds,
 and to check what happens at a leap you would have to arrange one.
 
-So time comes in through an interface, exactly as the sensor did in lesson 05-02:
+So time comes in through an **interface**: a class that promises what can be
+asked of it and says nothing about how the answer is found.
 
 ```cpp
 class Clock {
@@ -96,10 +97,26 @@ class Clock {
 };
 ```
 
-The real one asks `steady_clock`. The test one returns whatever the test says,
+This is the first place in the curriculum that needs `virtual`, so it is worth
+saying what the two lines do.
+
+`virtual Nanoseconds now() const = 0` declares a function that every kind of
+clock must provide and that this class does not implement. The `= 0` is what
+makes it a promise rather than a default: a `Clock` cannot be created, only a
+real clock or a test clock can. Calling `now()` through a `Clock*` then reaches
+whichever one is actually there, decided while the program is running rather
+than while it is compiling.
+
+`virtual ~Clock() = default` is not decoration. Deleting a derived object
+through a pointer to the base, with no virtual destructor, does not run the
+derived destructor: whatever it owned is leaked and whatever it was going to
+release is not released. The compiler will not mention it. Lesson 02-03 built
+the destructor that has to run; this is the line that makes sure it does.
+
+The real clock asks `steady_clock`. The test one returns whatever the test says,
 and can be advanced by an hour instantly. Every timing test in this curriculum
 from here on runs in microseconds of real time and covers behaviour spanning
-hours.
+hours, and lesson 05-02 uses the same shape for a sensor.
 
 ### What to do when dt is nonsense
 
