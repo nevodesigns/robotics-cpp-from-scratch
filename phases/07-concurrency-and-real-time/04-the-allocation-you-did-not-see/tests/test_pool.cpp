@@ -137,19 +137,25 @@ RC_TEST("what a loop body costs, and what it allocates") {
   std::cout << "\n    reserve on a vector of strings reserves the vector and\n";
   std::cout << "    not the strings\n";
 
+  // True on every library: nothing on the stack goes to the heap, and putting
+  // doubles into a vector that already has room for them allocates nothing.
   RC_CHECK_EQ(fixed_array, static_cast<std::size_t>(0));
   RC_CHECK_EQ(reserved_doubles, static_cast<std::size_t>(0));
-  RC_CHECK_EQ(short_strings, static_cast<std::size_t>(0));
 
-  // Sixty four allocations from a loop that looks preallocated, once per
-  // string, because the vector reserved room for sixty four string objects and
-  // each of those then went to the heap for its characters.
-  RC_CHECK_EQ(reserved_strings, static_cast<std::size_t>(64));
+  // At least one allocation per string, from a loop with reserve written in it.
+  RC_CHECK(reserved_strings >= 64);
 
-  // And growth is logarithmic rather than free: a handful of reallocations,
-  // each copying everything written so far.
+  // And shorter strings cost strictly less, which is the whole of the small
+  // string optimisation. How much less is a property of the library:
+  // libstdc++ makes this row zero, and the Microsoft library in a debug build
+  // does not, because there every string allocates whatever its length. That
+  // is not a footnote, it is the reason this is measured rather than recited.
+  RC_CHECK(short_strings < reserved_strings);
+
+  // Growth is logarithmic rather than free: a handful of reallocations, each
+  // copying everything written so far.
   RC_CHECK(grown > 5);
-  RC_CHECK(grown < 30);
+  RC_CHECK(grown < 40);
 }
 
 RC_TEST("where the small string ends, on this toolchain") {
@@ -159,25 +165,30 @@ RC_TEST("where the small string ends, on this toolchain") {
             << limit << " characters\n";
   std::cout << "    sizeof(std::string) = " << sizeof(std::string) << "\n";
 
+  std::size_t at_limit = 0, past_limit = 0;
   {
     AllocationCount count;
     std::string inside(limit, 'x');
-    RC_CHECK_EQ(count.total(), static_cast<std::size_t>(0));
+    at_limit = count.total();
     if (inside.size() == 999999) return;
   }
   {
     AllocationCount count;
     std::string outside(limit + 1, 'x');
-    RC_CHECK_EQ(count.total(), static_cast<std::size_t>(1));
+    past_limit = count.total();
     if (outside.size() == 999999) return;
   }
 
-  std::cout << "\n    which is not a number to memorise. It is 15 on two of the\n";
-  std::cout << "    libraries this curriculum builds against and 22 on the\n";
-  std::cout << "    third, so a loop that is allocation free on your machine\n";
-  std::cout << "    may not be on the robot's\n";
+  std::cout << "\n    which is not a number to memorise. It is 15 on libstdc++\n";
+  std::cout << "    and on the Microsoft library in a release build, 22 on\n";
+  std::cout << "    libc++, and 0 in a Microsoft debug build, where every\n";
+  std::cout << "    string allocates whatever its length. A loop that is\n";
+  std::cout << "    allocation free on your machine may not be on the robot's,\n";
+  std::cout << "    and may not be in a different build of the same program\n";
 
-  RC_CHECK(limit >= 10);
+  // The boundary the search found is a real boundary, whatever its value.
+  RC_CHECK_EQ(at_limit, static_cast<std::size_t>(0));
+  RC_CHECK(past_limit >= 1);
   RC_CHECK(limit <= 40);
 }
 

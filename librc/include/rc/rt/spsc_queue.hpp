@@ -21,6 +21,8 @@
 #define RC_RT_SPSC_QUEUE_HPP
 
 #include <atomic>
+
+#include <rc/rt/cache_line.hpp>
 #include <cstddef>
 #include <vector>
 
@@ -43,29 +45,39 @@ class SpscQueue {
   bool push(const T& value) {
     // The producer owns tail_, so nobody else writes it and a relaxed read is
     // safe.
-    const std::size_t tail = tail_.load(std::memory_order_relaxed);
+    const std::size_t tail = tail_.value.load(std::memory_order_relaxed);
     const std::size_t next = advance(tail);
 
-    // head_ belongs to the consumer, so acquire, to see its most recent release.
-    if (next == head_.load(std::memory_order_acquire)) return false;
+    // head_ belongs to the consumer, and reading it costs the consumer its
+    // cache line, so consult the cached copy first and only go and look when
+    // that says there is no room. Lesson 07-05 measured this: the caching and
+    // the padding below are each worth nothing on their own and about eighty
+    // percent together.
+    if (next == cached_head_) {
+      cached_head_ = head_.value.load(std::memory_order_acquire);
+      if (next == cached_head_) return false;
+    }
 
     buffer_[tail] = value;
 
     // Release publishes the write above. With relaxed here the index would
     // still be atomic and the value it points at might not be visible yet,
     // which is the torn read of lesson 07-01 arriving by a subtler route.
-    tail_.store(next, std::memory_order_release);
+    tail_.value.store(next, std::memory_order_release);
     return true;
   }
 
   bool pop(T& out) {
-    const std::size_t head = head_.load(std::memory_order_relaxed);
+    const std::size_t head = head_.value.load(std::memory_order_relaxed);
 
     // Acquire pairs with the producer's release and makes its write visible.
-    if (head == tail_.load(std::memory_order_acquire)) return false;
+    if (head == cached_tail_) {
+      cached_tail_ = tail_.value.load(std::memory_order_acquire);
+      if (head == cached_tail_) return false;
+    }
 
     out = buffer_[head];
-    head_.store(advance(head), std::memory_order_release);
+    head_.value.store(advance(head), std::memory_order_release);
     return true;
   }
 
@@ -74,8 +86,8 @@ class SpscQueue {
   // the queue is running; wrong as a basis for deciding whether push or pop
   // will succeed, which is what their return values are for.
   std::size_t size() const {
-    const std::size_t tail = tail_.load(std::memory_order_acquire);
-    const std::size_t head = head_.load(std::memory_order_acquire);
+    const std::size_t tail = tail_.value.load(std::memory_order_acquire);
+    const std::size_t head = head_.value.load(std::memory_order_acquire);
     return (tail + buffer_.size() - head) % buffer_.size();
   }
 
@@ -90,8 +102,14 @@ class SpscQueue {
 
   std::size_t capacity_ = 1;
   std::vector<T> buffer_;
-  std::atomic<std::size_t> head_{0};
-  std::atomic<std::size_t> tail_{0};
+  // Each index on its own cache line, with the cached copy of the opposite
+  // index beside the one its owner writes. The producer touches tail_ and
+  // cached_head_, the consumer touches head_ and cached_tail_, and the two sets
+  // never share a line. See lesson 07-05 and rc/rt/cache_line.hpp.
+  Padded<std::atomic<std::size_t>> head_;
+  std::size_t cached_tail_ = 0;   // consumer only
+  Padded<std::atomic<std::size_t>> tail_;
+  std::size_t cached_head_ = 0;   // producer only
 };
 
 }  // namespace rt

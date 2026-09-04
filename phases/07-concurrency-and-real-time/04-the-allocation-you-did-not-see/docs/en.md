@@ -78,6 +78,10 @@ Rarely a call to `new`. Here is one pass of each of five loop bodies:
 | the same, with strings that fit inside the object | 0 |
 | an unreserved vector grown to 4096 | 13 |
 
+(Measured on libstdc++. The suite prints whatever it finds where it runs, and
+the numbers on a Microsoft debug build are different for the reason two sections
+down.)
+
 **`reserve` reserves the vector and not the strings.** Room for sixty four
 string objects was made once; each of those then went to the heap for its
 characters, every tick, from code that has `reserve` written in it and looks
@@ -88,8 +92,16 @@ finished.
 Whether a string allocates depends on its length, and the limit is an
 implementation detail:
 
-- **15 characters** on libstdc++ and on the Microsoft library,
-- **22** on libc++.
+- **15 characters** on libstdc++ and on the Microsoft library in a release
+  build,
+- **22** on libc++,
+- **0** in a Microsoft debug build, where every string allocates whatever its
+  length, because the debug library gives each container a small bookkeeping
+  object of its own.
+
+That last row is not a footnote. It means the table above is different on
+Windows, in the same build configuration this suite runs in, from source nobody
+changed.
 
 `std::function` has a boundary of the same kind. A lambda capturing one double
 fits inside it on every library this curriculum builds against; three doubles

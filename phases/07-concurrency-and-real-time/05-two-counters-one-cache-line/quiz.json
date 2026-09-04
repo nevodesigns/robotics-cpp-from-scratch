@@ -1,0 +1,78 @@
+{
+  "lesson": "07-05-two-counters-one-cache-line",
+  "title": "Two Counters, One Cache Line: Sharing You Did Not Ask For",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Two threads increment two different atomic counters. The counters are moved from 8 bytes apart to 64. What happens?",
+      "options": [
+        "It gets about six times faster, and nothing changes at 16 bytes because that is still one line",
+        "Nothing, since the counters were already separate variables",
+        "It gets slower, because the data no longer fits in one line",
+        "It gets about twice as fast, in proportion to the distance"
+      ],
+      "correct": 0,
+      "explanation": "Measured: 159.0 ms at 8 bytes, 139.1 at 16, 27.1 at 64, 27.8 at 128. Caches move lines, not bytes, so two variables in one line are one thing to the hardware."
+    },
+    {
+      "stage": "check",
+      "question": "Four threads each increment their own slot of a std::vector<std::atomic<long>>. Why is that slow?",
+      "options": [
+        "Every slot is 8 bytes, so all four live in one line and four cores fight over it for the whole run",
+        "std::vector adds indirection to every access",
+        "The atomics use a lock internally",
+        "It is not slow; per-thread slots are the standard fix"
+      ],
+      "correct": 0,
+      "explanation": "Measured at 162.1 ms packed against 34.8 with one slot per line, and 7.6 for a local on the stack published once at the end. A per-thread array is the most natural thing to write and it is the bug."
+    },
+    {
+      "stage": "check",
+      "question": "Why put alignas on the type rather than a char array at the end of the struct?",
+      "options": [
+        "A trailing array gives the struct a size of 64 and no alignment, so in a vector the first element can start part way through a line",
+        "A char array wastes more memory",
+        "alignas is faster",
+        "There is no difference; both give sizeof 64"
+      ],
+      "correct": 0,
+      "explanation": "sizeof says how far apart two elements are and nothing about where the first one starts. Both matter, and the test checks the distance between two elements of a real vector rather than reading the declaration."
+    },
+    {
+      "stage": "check",
+      "question": "A queue's two indices are moved onto separate cache lines and throughput barely changes. Why?",
+      "options": [
+        "The producer still reads the consumer's index on every push, so the line still moves; padding removed one of two reasons",
+        "The padding did not take effect",
+        "The queue was not the bottleneck",
+        "Separate lines are slower for small queues"
+      ],
+      "correct": 0,
+      "explanation": "Over four runs, padding alone was worth 1 to 6 percent and caching the other index alone was worth -8 to +14. The two together were worth 76, 77, 83 and 95 percent."
+    },
+    {
+      "stage": "post",
+      "question": "What general rule comes out of that super-additive result?",
+      "options": [
+        "When an obviously correct fix produces no measurable improvement, something else is usually producing the same effect, so measure combinations rather than changes",
+        "Always apply optimisations one at a time and keep the ones that measure",
+        "Cache effects cannot be measured reliably",
+        "Padding should always be combined with locks"
+      ],
+      "correct": 0,
+      "explanation": "Removing one of two causes leaves the symptom exactly where it was, and the natural conclusion, that the fix was wrong, is the wrong conclusion."
+    },
+    {
+      "stage": "post",
+      "question": "Should every shared variable be padded to a cache line?",
+      "options": [
+        "No: a padded counter is 64 bytes instead of 8, so pad the few written by more than one thread and nothing else",
+        "Yes, memory is cheap and correctness matters more",
+        "Yes, the compiler removes the padding when it is unnecessary",
+        "No, padding never helps in practice"
+      ],
+      "correct": 0,
+      "explanation": "For a handful of per-thread values the memory is nothing; for a million objects it is eight times the memory and a different problem. Not sharing the line at all, by accumulating in a local, is better still where it is available."
+    }
+  ]
+}
