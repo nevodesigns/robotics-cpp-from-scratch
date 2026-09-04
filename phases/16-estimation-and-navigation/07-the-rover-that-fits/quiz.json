@@ -1,0 +1,78 @@
+{
+  "lesson": "16-07-the-rover-that-fits",
+  "title": "The Rover That Fits: Width, Clearance and Replanning",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A grid planner returns the shortest route through a room with a 0.40 m gap straight ahead and a 1.50 m gap off to the side. Which does it take, and why?",
+      "options": [
+        "The narrow one, because a search over cells plans for a point and a narrow gap is usually the direct way",
+        "The wide one, because A* prefers open space",
+        "Whichever has fewer cells to expand",
+        "It depends on the heuristic"
+      ],
+      "correct": 0,
+      "explanation": "Measured: the point route was 6.900 m and cleared 0.200 m. The route for a 0.25 m robot was 8.060 m and cleared 0.316 m. The shortest route is shortest because it goes through the gap the robot does not fit through."
+    },
+    {
+      "stage": "check",
+      "question": "Why grow the obstacles by the robot's radius rather than checking the robot's footprint at each step of the search?",
+      "options": [
+        "It moves the geometry into the map once instead of into every step of the search for ever",
+        "It is more accurate",
+        "It allows diagonal movement",
+        "It is the only way to handle unknown cells"
+      ],
+      "correct": 0,
+      "explanation": "It also gives the right answer when the robot fits nowhere: a radius of 0.50 m on that map returned no route at all, rather than a route it could not drive."
+    },
+    {
+      "stage": "check",
+      "question": "The inflation uses a disc rather than a square, and rounds the radius up to whole cells. What do those two choices do?",
+      "options": [
+        "The disc avoids over-blocking diagonals by root two and closing gaps the robot fits through; rounding up keeps the map from claiming the robot fits when it does not",
+        "Both are performance optimisations",
+        "The disc is more conservative and rounding up is less so",
+        "Neither matters at a 10 cm resolution"
+      ],
+      "correct": 0,
+      "explanation": "Rounding up makes inflation conservative by up to one cell, which belongs in the margin rather than being a surprise. Unknown also grows as unknown rather than as occupied, since a cell beside unseen ground is not known to be blocked."
+    },
+    {
+      "stage": "check",
+      "question": "A route planned with a 0.25 m inflation clears 0.316 m at its tightest. The robot drives it with a 1 m lookahead and a pose 100 ms old. How close does the robot get?",
+      "options": [
+        "0.068 m: the follower's corner cut comes out of the same margin the inflation provided",
+        "0.316 m, since it is following the route",
+        "About 0.25 m, its own radius",
+        "More than 0.316 m, since the follower smooths the route"
+      ],
+      "correct": 0,
+      "explanation": "At a 0.30 m lookahead it cleared 0.337 and at 0.60 it cleared 0.255. How much the robot clears is decided by the follower, not by the plan."
+    },
+    {
+      "stage": "post",
+      "question": "What should the inflation radius actually be set from?",
+      "options": [
+        "The robot's radius plus about 0.27 of the lookahead plus speed times the estimator's latency plus half a cell",
+        "The robot's radius, which is what inflation is for",
+        "The robot's radius doubled, as a safety factor",
+        "Whatever leaves a route through the narrowest gap"
+      ],
+      "correct": 0,
+      "explanation": "Every term is measurable and three were measured in earlier lessons. It runs the other way too: shortening the lookahead or reducing the estimator's latency buys clearance directly, so a robot that cannot fit down an aisle at speed may fit down it slowly."
+    },
+    {
+      "stage": "post",
+      "question": "A pallet is put down on the route after it was planned. The map is updated correctly. Why does the robot still drive into it?",
+      "options": [
+        "A plan is a photograph of a map and holds no reference to it, so nothing asked the question again",
+        "The map update was too slow",
+        "The follower ignores the map",
+        "The pallet was marked unknown rather than occupied"
+      ],
+      "correct": 0,
+      "explanation": "Checking the remaining route against the inflated map is a walk down a few hundred cells against a search that expands tens of thousands, which is what makes checking affordable every tick and replanning only on demand."
+    }
+  ]
+}

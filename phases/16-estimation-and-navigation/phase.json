@@ -1,5 +1,5 @@
 {
   "schema": 1,
   "title": "Estimation and Navigation",
-  "ends_with": "An honest account of where the robot thinks it is, and how wrong that is by now"
+  "ends_with": "A rover that plans a route through what it has actually seen, drives it, fits down it, and notices when the room changes"
 }
