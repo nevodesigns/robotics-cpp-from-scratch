@@ -1,0 +1,78 @@
+{
+  "lesson": "16-03-the-measurement-that-arrives-late",
+  "title": "The Measurement That Arrives Late: Fusing What Is Already Old",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A camera fix is 300 ms old by the time your filter sees it. You fuse it as though it described the present. What happens to the estimate?",
+      "options": [
+        "It is dragged back into the measurement's past, and trails the truth by roughly the distance travelled during the delay",
+        "It is unaffected, because the filter averages many fixes",
+        "It becomes noisier but stays centred on the truth",
+        "It improves, since any absolute fix beats dead reckoning"
+      ],
+      "correct": 0,
+      "explanation": "Measured at 1 m/s: 0.0325 m error with a current fix, 0.2930 m with one 300 ms old. At 600 ms it was 0.5920 m, worse than the 0.4478 m of dead reckoning alone."
+    },
+    {
+      "stage": "check",
+      "question": "What does projecting the measurement forward before fusing require, and what does it cost?",
+      "options": [
+        "The motion accumulated since the moment it describes, which the filter already has: a ring of doubles as deep as the longest latency",
+        "A second filter running in parallel",
+        "Re-running the whole filter from the start",
+        "Nothing, since the timestamp alone is enough"
+      ],
+      "correct": 0,
+      "explanation": "Projected forward, the error went from 0.0325 m at no latency to 0.0494 m at 600 ms, against 0.5920 m for the naive fusion."
+    },
+    {
+      "stage": "check",
+      "question": "You rewind the filter to the measurement's moment, correct there, and replay the motion since. Why was that measured as worse than projecting forward at 300 ms?",
+      "options": [
+        "It replays the motion but not the corrections, so a rewind reaching further back than the fix interval discards the corrections in between",
+        "Rewinding loses the variance",
+        "It is not worse; the measurement must be mistaken",
+        "Floating point error accumulates over the replay"
+      ],
+      "correct": 0,
+      "explanation": "Up to 80 ms it matched the projection exactly. From 150 ms it was worse, and fixes arrived every 100 ms. Rewinding is the textbook answer and it is exact only if you replay everything, corrections included."
+    },
+    {
+      "stage": "check",
+      "question": "Across fix ages from 0 to 600 ms the actual error went from 0.0325 m to 0.5920 m. What did the filter report as its own deviation?",
+      "options": [
+        "0.0376 m in every case: a variance is a statement about the model, not about the answer",
+        "It grew with the latency, tracking the actual error",
+        "It grew, but understated the error by about half",
+        "It became infinite once the filter diverged"
+      ],
+      "correct": 0,
+      "explanation": "Nothing was wrong with the arithmetic. It was answering a different question: given these variances and this motion model, how uncertain should I be? Late measurements are not in that question."
+    },
+    {
+      "stage": "post",
+      "question": "An innovation monitor watches the residuals. At a steady 1 m/s it reported 0.921, 0.923, 0.927 and 0.935 for fix ages of 0, 80, 300 and 600 ms. Why did it see nothing?",
+      "options": [
+        "The estimate had been dragged into the measurement's past, so the two agreed with each other while both disagreed with the world",
+        "The monitor needs more samples to converge",
+        "The residuals were too small to measure",
+        "The normalisation divided the error away"
+      ],
+      "correct": 0,
+      "explanation": "An innovation compares the measurement against the prediction, and both were wrong in the same way. Under stop and go the same runs gave 0.921, 1.182, 2.679 and 4.386."
+    },
+    {
+      "stage": "post",
+      "question": "What follows for how you run an acceptance test?",
+      "options": [
+        "It must include acceleration, stops and turns, since a consistency check is blind to any error that does not change",
+        "It should be run at the robot's maximum speed for the longest possible time",
+        "It should hold every condition constant so the numbers are repeatable",
+        "It should be repeated until the monitor converges to exactly 1.0"
+      ],
+      "correct": 0,
+      "explanation": "A steady state hides every error proportional to a rate of change, and that goes well beyond estimation. The monitor is also a change detector, so compare it against its own healthy baseline rather than against a theoretical 1.0: these runs sat at 0.921 when everything was right."
+    }
+  ]
+}

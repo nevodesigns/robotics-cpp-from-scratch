@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "16-03-the-measurement-that-arrives-late",
+  "title": "The Measurement That Arrives Late: Fusing What Is Already Old",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 1,
+  "requires": [
+    "16-02-two-guesses-are-better",
+    "15-03-late-is-wrong"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::nav",
+    "header": "rc/nav/delayed.hpp",
+    "note": "a measurement moved to the present, and the check that says whether the filter is telling the truth"
+  },
+  "breaks_first": [
+    "E-NAV-0005",
+    "E-NAV-0006",
+    "E-NAV-0007"
+  ]
+}
