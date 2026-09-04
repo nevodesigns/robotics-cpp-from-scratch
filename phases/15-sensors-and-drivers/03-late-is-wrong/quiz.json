@@ -1,0 +1,78 @@
+{
+  "lesson": "15-03-late-is-wrong",
+  "title": "Late Is Wrong: The Reading and When It Was Taken",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A sensor reading arrives 20 ms after the moment it describes. Your code treats it as current. How wrong is the robot's position?",
+      "options": [
+        "Speed times 20 ms, exactly: 2 cm at 1 m/s and nothing at all standing still",
+        "20 ms of the sensor's own noise",
+        "It depends on the controller gains",
+        "Nothing, if the loop runs faster than 50 Hz"
+      ],
+      "correct": 0,
+      "explanation": "Measured across six speeds, the error matched speed times latency to within a nanometre every time. The zero at rest is why this passes every bench test."
+    },
+    {
+      "stage": "check",
+      "question": "The loop from 14-04 settles in 1.2 s. Its measurement is made 0.06 s old, then 0.24 s old. What happens?",
+      "options": [
+        "0.06 s costs nothing at all; 0.24 s overshoots by 98 percent and it never settles",
+        "Both degrade it by about the same proportion",
+        "Both are fine, since the loop is much slower than either",
+        "0.06 s already destabilises it"
+      ],
+      "correct": 0,
+      "explanation": "The failure arrives suddenly rather than gradually, in the same place the filter lag of 15-01 did: about a fifth of the settling time."
+    },
+    {
+      "stage": "check",
+      "question": "A filter of 128 samples and a bus that is 63 samples late impose the same 0.126 s of lag. How do their effects on the loop compare?",
+      "options": [
+        "Almost identically: 2.8 percent overshoot against 3.6 percent, and the same settling time",
+        "The filter is far worse, because it also distorts the signal",
+        "The bus delay is far worse, because it is a pure delay",
+        "They cannot be compared, as one is a filter"
+      ],
+      "correct": 0,
+      "explanation": "The loop cannot tell where the lag came from. The difference between them is that the filter's window is a number in your code and the bus's latency is written down nowhere."
+    },
+    {
+      "stage": "check",
+      "question": "The latency jitters between 4 and 36 ms, giving 2.2 cm rms of position error at 1 m/s. You smooth the readings over 16 samples. What do you measure?",
+      "options": [
+        "3.5 cm: worse, because the filter adds its own 15 ms of lag to the bus's 20",
+        "About 0.6 cm, the noise divided by four",
+        "About 2.2 cm, unchanged",
+        "About 1.1 cm, the noise halved"
+      ],
+      "correct": 0,
+      "explanation": "It is not zero mean noise on the value, it is the value being about the wrong moment, and the average of a set of wrong moments is an older wrong moment."
+    },
+    {
+      "stage": "post",
+      "question": "You carry a reading forward using a speed estimate that is 25 percent wrong. How much of the 2 cm error is left?",
+      "options": [
+        "25 percent of it, 5 mm: the leftover is the original error times how wrong the rate was",
+        "All of it, since the correction needs the true speed",
+        "None, the timestamp is what matters",
+        "More than 2 cm, because a wrong correction is worse than none"
+      ],
+      "correct": 0,
+      "explanation": "There is no threshold below which compensating stops being worth doing. A rate estimate half wrong still removes half the problem."
+    },
+    {
+      "stage": "post",
+      "question": "Your position error scatters by 2 cm. How do you tell latency jitter from sensor noise before changing anything?",
+      "options": [
+        "Measure the scatter parked and again at 1 m/s: noise is the same in both, latency error grows with speed and vanishes at rest",
+        "Filter it and see whether the scatter falls as one over the square root of the window",
+        "Compare it against the sensor's datasheet figure",
+        "Check whether the readings are normally distributed"
+      ],
+      "correct": 0,
+      "explanation": "The filtering test is worth knowing about but is not decisive here, since smoothing this error made it worse rather than leaving it unchanged."
+    }
+  ]
+}

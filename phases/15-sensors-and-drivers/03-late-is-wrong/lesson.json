@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "15-03-late-is-wrong",
+  "title": "Late Is Wrong: The Reading and When It Was Taken",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 1,
+  "requires": [
+    "15-01-every-filter-is-a-delay",
+    "03-05-time-and-clocks"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sensor",
+    "header": "rc/sensor/stamped.hpp",
+    "note": "a reading carried with the moment it describes, rather than the moment it arrived"
+  },
+  "breaks_first": [
+    "E-SENSE-0008",
+    "E-SENSE-0009",
+    "E-SENSE-0010"
+  ]
+}
