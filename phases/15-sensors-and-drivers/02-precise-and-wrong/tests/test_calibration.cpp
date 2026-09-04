@@ -117,20 +117,41 @@ RC_TEST("a fit that cannot be done says so rather than dividing") {
 }
 
 RC_TEST("the nan that refusal exists to prevent") {
-  // What from_samples would have returned had it divided anyway: five points
-  // that all read the same value give a denominator of exactly zero, and a
-  // numerator of exactly zero with it.
-  const double denominator = 5.0 * (5.0 * 49.0) - 35.0 * 35.0;
-  RC_CHECK_EQ(denominator, 0.0);
+  // What from_samples would have returned had it divided anyway. The sums are
+  // accumulated from the same arrays the fit would have seen, rather than
+  // written as literals: MSVC folds a constant division by zero at compile time
+  // and refuses to build it, with error C2124, which is a reasonable thing for
+  // a compiler to do and also means the only portable way to reach this value
+  // is to compute it the way the program actually would.
+  std::vector<double> raw, truth;
+  for (int i = 0; i < 5; ++i) {
+    raw.push_back(7.0);
+    truth.push_back(7.0 + i);
+  }
 
-  const double scale = 0.0 / denominator;
+  double sum_r = 0.0, sum_t = 0.0, sum_rr = 0.0, sum_rt = 0.0;
+  for (std::size_t i = 0; i < raw.size(); ++i) {
+    sum_r += raw[i];
+    sum_t += truth[i];
+    sum_rr += raw[i] * raw[i];
+    sum_rt += raw[i] * truth[i];
+  }
+
+  const double denominator = 5.0 * sum_rr - sum_r * sum_r;
+  const double numerator = 5.0 * sum_rt - sum_r * sum_t;
+  RC_CHECK_EQ(denominator, 0.0);
+  RC_CHECK_EQ(numerator, 0.0);
+
+  // Zero over zero is a nan rather than an infinity, which matters: an infinity
+  // at least compares larger than everything.
+  const double scale = numerator / denominator;
   RC_CHECK(std::isnan(scale));
 
   // And here is why that matters more than a wrong number would. These two
   // range checks are the same sentence in English. They are not the same
   // sentence in C++, because every comparison against a nan is false.
   const double reading = scale * 7.0;
-  RC_CHECK(!(reading < 0.0 || reading > 100.0));   // lets the nan straight through
+  RC_CHECK(!(reading < 0.0 || reading > 100.0));    // lets the nan straight through
   RC_CHECK(!(reading >= 0.0 && reading <= 100.0));  // catches it
 
   // A nan in a controller is not a large number, it is the end of the loop:

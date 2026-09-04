@@ -43,6 +43,11 @@ if (!(value >= 0.0 && value <= 100.0)) reject(value);  // catches it
 From there it spreads. Adding to a nan, multiplying it by zero, and accumulating
 it into an integrator all give a nan, and nothing brings the value back.
 
+Worth knowing while reproducing this: MSVC will not compile a division by zero
+it can fold at compile time, and reports `error C2124: divide or mod by zero`
+where GCC and Clang accept the same line. Accumulate the sums from real data
+rather than writing the constants out, which is what the program does anyway.
+
 ## Fix
 
 Refuse the fit rather than performing it.
