@@ -24,6 +24,14 @@ constexpr std::size_t kCacheLine = 64;
 // alignas on the type rather than on a member, so that the padding survives
 // being put in an array: a vector of these has one per line, which is the whole
 // point and is exactly what a vector of the bare type does not give you.
+// MSVC warns, at /W4, that it padded the structure because of the alignment
+// specifier. That is exactly what was asked for, so the warning is turned off
+// here rather than worked around: C4324 is the compiler confirming the request,
+// and the alternative spellings that avoid it are the ones E-RT-0007 is about.
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4324)
+#endif
 template <class T>
 struct alignas(kCacheLine) Padded {
   T value{};
@@ -33,6 +41,9 @@ struct alignas(kCacheLine) Padded {
   T* operator->() { return &value; }
   const T* operator->() const { return &value; }
 };
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 // The queue from lesson 07-02, with the two things this lesson is about.
 //
@@ -41,10 +52,10 @@ struct alignas(kCacheLine) Padded {
 // measured on one machine that is worth a little over twice the throughput.
 //
 // Two changes, and the measurement is emphatic that they are worth far more
-// together than apart. Over four runs of four million items through a 1024 slot
-// queue, padding alone was worth between 1 and 6 percent and caching alone
-// between minus 8 and plus 14, both inside the noise. The two together were
-// worth 76, 77, 83 and 95.
+// together than apart. Over several runs of a million items through a 1024 slot
+// queue, padding alone was worth between 1 and 21 percent and caching alone
+// between minus 8 and plus 14, both hovering around the noise. The two together
+// were worth between 74 and 218.
 //
 // Padding without caching still reads the other side's line on every single
 // operation. Caching without padding still shares a line, so the cached copy is

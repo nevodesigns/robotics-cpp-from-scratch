@@ -26,15 +26,15 @@ line containing them, and when another core writes anywhere in that line, this
 core's copy is thrown away.
 
 So two variables in one line are one variable as far as the hardware is
-concerned, whatever your program thinks. Two atomic counters, two threads, four
-million increments each:
+concerned, whatever your program thinks. Two atomic counters, two threads, one
+and a half million increments each, best of five runs:
 
 | bytes between them | ms | relative |
 |---|---|---|
-| 8 | 159.0 | 1.00 |
-| 16 | 139.1 | 0.88 |
-| **64** | **27.1** | **0.17** |
-| 128 | 27.8 | 0.18 |
+| 8 | 48.8 | 1.00 |
+| 16 | 55.2 | 1.13 |
+| **64** | **15.2** | **0.31** |
+| 128 | 9.5 | 0.20 |
 
 Nothing changes between 8 and 16, because both are inside one line. Crossing the
 boundary changes everything, and going further buys nothing more. It is a cliff,
@@ -52,15 +52,15 @@ std::vector<std::atomic<long>> counts(threads);
 which is the obvious, correct-looking way to give every thread its own slot, and
 which puts eight slots in one line.
 
-| four threads, four million increments each | ms | relative |
+| four threads, 1.5 million increments each | ms | relative |
 |---|---|---|
-| a vector of atomics, one per thread | 162.1 | 1.00 |
-| the same, one slot per cache line | 34.8 | 0.21 |
-| a local on the stack, published once | 7.6 | 0.05 |
+| a vector of atomics, one per thread | 60.5 | 1.00 |
+| the same, one slot per cache line | 10.2 | 0.17 |
+| a local on the stack, published once | 2.9 | 0.05 |
 
 Read the last row before the middle one. **Not sharing at all beats sharing
-carefully**, by five times again, and it is usually available: accumulate into a
-local and write the result once when the thread finishes. The stack is per
+carefully**, by three times again, and it is usually available: accumulate into
+a local and write the result once when the thread finishes. The stack is per
 thread by construction.
 
 Padding is for the values that genuinely have to be shared while they change.
@@ -100,15 +100,23 @@ Now the queue from lesson 07-02. Its two indices are adjacent, so the obvious
 change is to separate them. The other obvious change is to stop reading the
 other thread's index on every operation and keep a cached copy.
 
-Both are right. Over four runs of four million items through a 1024 slot queue:
+Both are right. Over several runs of a million items through a 1024 slot queue:
 
 | change | worth |
 |---|---|
-| a line apart, index read every time | 1 to 6 percent |
+| a line apart, index read every time | 1 to 21 percent |
 | adjacent, index cached | -8 to +14 percent |
-| **both** | **76, 77, 83 and 95 percent** |
+| **both** | **74 to 218 percent** |
 
-Each alone is inside the run-to-run noise. Together they roughly double it.
+Each alone hovers around the run-to-run noise. Together they at least double it
+and sometimes do a great deal better.
+
+A word on how those were measured, because it matters here. Each figure is the
+**smallest** of several runs rather than the mean of them. Noise on a shared
+machine can only ever add time, so the minimum is the closest any run came to
+measuring the thing itself, and a single sample measures whatever else the
+machine happened to be doing. The queue needed nine repeats to stop the gate
+failing about one run in six; the counters needed five.
 
 The reason is that there were two ways the line kept moving:
 
@@ -174,6 +182,9 @@ for a million objects it is a different problem.
 
 **Measure combinations.** This lesson would have concluded that padding does not
 help, from a measurement that was correct.
+
+**Take the minimum of several runs**, not the average, and say how many. A
+benchmark that fails one run in six is a benchmark nobody believes.
 
 ## What Breaks First
 
