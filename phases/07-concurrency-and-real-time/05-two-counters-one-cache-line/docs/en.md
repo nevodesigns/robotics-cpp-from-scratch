@@ -115,8 +115,18 @@ A word on how those were measured, because it matters here. Each figure is the
 **smallest** of several runs rather than the mean of them. Noise on a shared
 machine can only ever add time, so the minimum is the closest any run came to
 measuring the thing itself, and a single sample measures whatever else the
-machine happened to be doing. The queue needed nine repeats to stop the gate
-failing about one run in six; the counters needed five.
+machine happened to be doing.
+
+Even so, the suite **reports the queue table and does not assert it**. Nine
+repeats made it stable on a quiet desktop and it still failed about one build in
+three on a shared runner with two virtual cores and a sanitizer attached. A gate
+that fails when nothing is wrong teaches people to rerun the build, which is
+worse than not gating at all, so what the queue is gated on is that it is still
+a queue.
+
+The counter measurements above are asserted, because a factor of three survives
+a busy runner and a factor of one and a bit does not. Knowing which of your
+measurements can carry a gate is part of making them.
 
 The reason is that there were two ways the line kept moving:
 
@@ -183,8 +193,11 @@ for a million objects it is a different problem.
 **Measure combinations.** This lesson would have concluded that padding does not
 help, from a measurement that was correct.
 
-**Take the minimum of several runs**, not the average, and say how many. A
-benchmark that fails one run in six is a benchmark nobody believes.
+**Take the minimum of several runs**, not the average, and say how many.
+
+**Know which measurements can carry a gate.** A factor of three survives a busy
+shared machine; a factor of one and a bit does not, and asserting it anyway
+produces a test that fails when nothing is wrong.
 
 ## What Breaks First
 
