@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "06-06-integration-and-the-energy-that-leaks",
+  "title": "Integration: The Simulation That Gains Energy",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "06-05-the-derivative-you-compute",
+    "00-05-first-motion"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::math",
+    "header": "rc/math/integrate.hpp",
+    "note": "three ways to advance a second order system, and the reason the least accurate one is the one to use"
+  },
+  "breaks_first": [
+    "E-NUM-0014",
+    "E-NUM-0015",
+    "E-NUM-0016"
+  ]
+}

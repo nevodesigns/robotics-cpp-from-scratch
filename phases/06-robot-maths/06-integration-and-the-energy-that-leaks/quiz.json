@@ -1,0 +1,78 @@
+{
+  "lesson": "06-06-integration-and-the-energy-that-leaks",
+  "title": "Integration: The Simulation That Gains Energy",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A mass on a spring is simulated with explicit Euler for ten minutes at a hundredth of a second per step. What is its energy at the end?",
+      "options": [
+        "About twenty six billion times what it started with",
+        "Slightly less, from rounding",
+        "About the same, with a small drift",
+        "Zero, since the errors average out"
+      ],
+      "correct": 0,
+      "explanation": "Explicit Euler does not merely have error, it adds energy every step and the addition compounds. Halving the step halves the rate and does not stop it, which is why the symptom looks like something that just needs tuning."
+    },
+    {
+      "stage": "check",
+      "question": "What is the difference between explicit and semi-implicit Euler?",
+      "options": [
+        "One line: the velocity is advanced first and the position then uses the new velocity rather than the old one",
+        "Semi-implicit solves an equation at each step",
+        "Semi-implicit uses a smaller step internally",
+        "Semi-implicit evaluates the acceleration twice"
+      ],
+      "correct": 0,
+      "explanation": "Same two multiplications, same cost, same first-order accuracy. The energy stays between 0.991 and 1.009 of where it started across the whole ten minutes, and never leaves."
+    },
+    {
+      "stage": "check",
+      "question": "Over one second at dt = 0.02, explicit Euler's error is 1.596e-02 and semi-implicit's is 1.831e-02. What does that tell you?",
+      "options": [
+        "That a short accuracy test picks the wrong method, because accuracy and stability are different properties",
+        "That explicit Euler is the better choice",
+        "That the test is wrong, since semi-implicit is more accurate",
+        "That the step is too large for either"
+      ],
+      "correct": 0,
+      "explanation": "The more accurate of the two over one second is the one that gains twenty six billion times its energy over ten minutes. Watch a conserved quantity over the horizon you will actually run."
+    },
+    {
+      "stage": "check",
+      "question": "Halving the step divides Runge Kutta's error by how much, and how should it be compared against Euler?",
+      "options": [
+        "By sixteen, and at equal calls to the acceleration rather than at equal step",
+        "By four, and at equal step",
+        "By sixteen, and at equal step",
+        "By two, like the Euler methods"
+      ],
+      "correct": 0,
+      "explanation": "Measured at 16.00 to 16.11 across four halvings. At the same four acceleration calls, RK4 at 0.02 s gave 3.937e-08 against Euler at 0.005 s at 4.121e-03."
+    },
+    {
+      "stage": "post",
+      "question": "You check an integrator against the same integrator run with a much smaller step. The measured error stops falling and then rises. Why?",
+      "options": [
+        "Every step rounds, so the reference's own error has a floor and then grows with the number of steps",
+        "The method has reached its order of accuracy",
+        "The smaller step is below the machine epsilon",
+        "The comparison is measuring the difference of two correct answers"
+      ],
+      "correct": 0,
+      "explanation": "The best reference measured took ten thousand steps at 3.886e-16; ten million steps was 3.392e-14, about ninety times worse. It is the same V as the numerical derivative, from the same two errors pulling opposite ways."
+    },
+    {
+      "stage": "post",
+      "question": "What should an integrator be tested against?",
+      "options": [
+        "A closed form where one exists, and otherwise a different method, with the reference's own floor established first",
+        "The same method at the smallest step that finishes in time",
+        "The average of several methods",
+        "Real measurements from the robot"
+      ],
+      "correct": 0,
+      "explanation": "One method agreeing with itself is mostly evidence that it is consistent. You cannot measure an error smaller than your reference's own, and a reference is a measuring instrument with a resolution like any other."
+    }
+  ]
+}
