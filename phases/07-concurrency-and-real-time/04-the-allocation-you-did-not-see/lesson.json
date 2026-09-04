@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "07-04-the-allocation-you-did-not-see",
+  "title": "The Allocation You Did Not See: Count It, Do Not Time It",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "07-03-measuring-jitter",
+    "02-02-the-heap-and-the-leak"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::rt",
+    "header": "rc/rt/pool.hpp",
+    "note": "fixed storage handed out and taken back, so a loop can be proved not to allocate"
+  },
+  "breaks_first": [
+    "E-RT-0002",
+    "E-RT-0003",
+    "E-RT-0004"
+  ]
+}

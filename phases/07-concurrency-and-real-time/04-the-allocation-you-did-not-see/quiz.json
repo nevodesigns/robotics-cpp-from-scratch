@@ -1,0 +1,78 @@
+{
+  "lesson": "07-04-the-allocation-you-did-not-see",
+  "title": "The Allocation You Did Not See: Count It, Do Not Time It",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A loop body that touches only stack was timed a hundred thousand times: median 0.250 us, worst 60.376 us. What does the worst case measure?",
+      "options": [
+        "The operating system: a scheduling event, a page fault, an interrupt",
+        "A hidden allocation in the body",
+        "The timer's own resolution",
+        "Cache misses on the stack buffer"
+      ],
+      "correct": 0,
+      "explanation": "The body that allocates had a worst case of 36 us, lower than the body that cannot. No timing threshold separates an allocation from the machine being busy."
+    },
+    {
+      "stage": "check",
+      "question": "How do you find out whether a loop allocates?",
+      "options": [
+        "Count allocations and assert the count is zero, which is deterministic and identical on every toolchain",
+        "Time the loop and look for outliers",
+        "Run a profiler and look at the malloc column",
+        "Read the code carefully"
+      ],
+      "correct": 0,
+      "explanation": "It is also a different question from a leak: a loop that allocates and frees a hundred blocks a tick leaks nothing, and the live-block counters come back to where they started."
+    },
+    {
+      "stage": "check",
+      "question": "A vector<string> is reserved to 64 and refilled each tick with 20-character strings. How many allocations per tick?",
+      "options": [
+        "64: reserve made room for 64 string objects, and each then went to the heap for its characters",
+        "0, since the vector was reserved",
+        "1, for the vector's buffer",
+        "13, from the vector's growth"
+      ],
+      "correct": 0,
+      "explanation": "The same loop with strings short enough to live inside the string object allocates nothing at all. reserve reserves the container, not the things inside it."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the lesson's test search for the small-string limit rather than assuming it?",
+      "options": [
+        "It is 15 characters on two of the libraries this curriculum builds against and 22 on the third, so a loop that is allocation free on a laptop may not be on the robot",
+        "Because it changes with the string's contents",
+        "Because it depends on the optimisation level",
+        "Because the standard leaves it unspecified between runs"
+      ],
+      "correct": 0,
+      "explanation": "std::function has a boundary of the same kind: a lambda capturing one double fits inside it everywhere, three doubles does not on every library."
+    },
+    {
+      "stage": "post",
+      "question": "A fixed-capacity pool is asked for a slot and has none. What should it do?",
+      "options": [
+        "Return nothing, count the refusal, and let the caller decide, because growing gives up the only property it had",
+        "Allocate one more slot, since running out is rare",
+        "Block until a slot is returned",
+        "Reuse the oldest slot in use"
+      ],
+      "correct": 0,
+      "explanation": "It would grow at the worst possible moment, which is when the system is already late. The count of refusals is what tells you the pool was sized for last year's worst case."
+    },
+    {
+      "stage": "post",
+      "question": "Why does releasing the same slot twice matter more than it looks?",
+      "options": [
+        "The free list then holds one index twice, so two later callers are handed the same object and the damage appears somewhere else entirely",
+        "It leaks the slot permanently",
+        "It corrupts the heap",
+        "It only matters if the pool is nearly full"
+      ],
+      "correct": 0,
+      "explanation": "Refusing it and counting it turns a bug that shows up as impossible data in another subsystem into a number at the place the mistake was made."
+    }
+  ]
+}

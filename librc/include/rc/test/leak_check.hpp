@@ -46,6 +46,23 @@ inline std::atomic<std::size_t>& live_arrays() {
   return count;
 }
 
+// Every allocation ever made, rather than the ones still outstanding.
+//
+// Leaks and allocations are different questions. A control loop that allocates
+// and frees a hundred blocks every tick leaks nothing and is still unfit to run
+// at 500 Hz, and the live counts above cannot see it: they come back to where
+// they started. Lesson 07-04 is about the second question, and it needs a
+// number that only goes up.
+inline std::atomic<std::size_t>& total_blocks() {
+  static std::atomic<std::size_t> count{0};
+  return count;
+}
+
+inline std::atomic<std::size_t>& total_arrays() {
+  static std::atomic<std::size_t> count{0};
+  return count;
+}
+
 // Records the counts on creation so a test can ask whether they came back.
 struct LeakCheck {
   std::size_t blocks_before = live_blocks();
@@ -57,6 +74,25 @@ struct LeakCheck {
 
   std::size_t leaked_blocks() const { return live_blocks() - blocks_before; }
   std::size_t leaked_arrays() const { return live_arrays() - arrays_before; }
+};
+
+// Records the running totals on creation so a test can ask how many
+// allocations a piece of code made, which is a thing you assert rather than
+// time: on a general purpose operating system the scheduler's own worst case is
+// a hundred times the cost of an allocation, so a stopwatch cannot find one.
+struct AllocationCount {
+  std::size_t blocks_before = total_blocks();
+  std::size_t arrays_before = total_arrays();
+
+  void reset() {
+    blocks_before = total_blocks();
+    arrays_before = total_arrays();
+  }
+
+  std::size_t blocks() const { return total_blocks() - blocks_before; }
+  std::size_t arrays() const { return total_arrays() - arrays_before; }
+  std::size_t total() const { return blocks() + arrays(); }
+  bool none() const { return total() == 0; }
 };
 
 }  // namespace test
@@ -71,6 +107,7 @@ struct LeakCheck {
 // report leaks that are not there.
 void* operator new(std::size_t size) {
   ++rc::test::live_blocks();
+  ++rc::test::total_blocks();
   void* memory = std::malloc(size == 0 ? 1 : size);
   if (memory == nullptr) throw std::bad_alloc();
   return memory;
@@ -78,6 +115,7 @@ void* operator new(std::size_t size) {
 
 void* operator new[](std::size_t size) {
   ++rc::test::live_arrays();
+  ++rc::test::total_arrays();
   void* memory = std::malloc(size == 0 ? 1 : size);
   if (memory == nullptr) throw std::bad_alloc();
   return memory;
