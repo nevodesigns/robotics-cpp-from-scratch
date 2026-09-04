@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "16-06-a-path-through-what-you-know",
+  "title": "A Path Through What You Know: Search, and What It Costs to Be Wrong",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 1,
+  "requires": [
+    "16-05-what-the-robot-does-not-know",
+    "03-03-containers-and-their-costs"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::nav",
+    "header": "rc/nav/plan.hpp",
+    "note": "a search over the map, and the three numbers that decide whether its answer means anything"
+  },
+  "breaks_first": [
+    "E-NAV-0014",
+    "E-NAV-0015",
+    "E-NAV-0016"
+  ]
+}
