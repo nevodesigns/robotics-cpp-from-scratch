@@ -1,0 +1,78 @@
+{
+  "lesson": "05-04-inputs-you-did-not-think-of",
+  "title": "Inputs You Did Not Think Of: Properties, Generators and Shrinking",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Nine careful examples are written for a parser: empty, non-numeric, trailing rubbish, leading zeros, a large round number. The parser has no overflow check. How many of the nine fail?",
+      "options": [
+        "None: the person who thinks of the cases is the person who wrote the code",
+        "One, the large round number",
+        "Two, the empty string and the large number",
+        "All of the numeric ones"
+      ],
+      "correct": 0,
+      "explanation": "The value that catches it is 18446744073709551616, which is not exotic. It is simply longer than anybody types into a test by hand. Generated inputs found it in 1.6 values on average."
+    },
+    {
+      "stage": "check",
+      "question": "Which property catches a parser that silently wraps a too-large number?",
+      "options": [
+        "That an accepted value prints back as the text it was given, once leading zeros are discounted",
+        "That the value survives being printed and read again",
+        "That the value is less than the maximum of the type",
+        "That parsing the same text twice gives the same answer"
+      ],
+      "correct": 0,
+      "explanation": "The round trip through the value is true even when the parser has wrapped, because the wrapped value is a perfectly good number and round trips as itself. Choosing the property is most of the work."
+    },
+    {
+      "stage": "check",
+      "question": "Three generators hunt the same fault. One over any printable byte finds it in 0 of 20 seeds; one over digits up to forty finds it in all 20; one over digits up to ten finds it in 0. What is the difference between the two that failed?",
+      "options": [
+        "The wide one will not reach it in any run you have time for; the narrow one cannot reach it at all, at any number of trials",
+        "Nothing: both simply need more trials",
+        "The wide one is testing the wrong function",
+        "The narrow one is too slow to run enough values"
+      ],
+      "correct": 0,
+      "explanation": "The largest number nine digits can spell is nowhere near the largest the parser can hold. That generator would report the parser correct for ever, on any machine. From the outside both look the same: a green tick and a large trial count."
+    },
+    {
+      "stage": "check",
+      "question": "A property has never failed. How do you find out whether it can?",
+      "options": [
+        "Break the code on purpose and watch it fail, the same discipline as any other test",
+        "Increase the number of trials until it does",
+        "Compare its coverage against the example tests",
+        "Check that the generator is uniformly distributed"
+      ],
+      "correct": 0,
+      "explanation": "A property written carelessly can be satisfied by the code doing nothing. The tell is that it passes on the broken version and the fixed one: it does not change when the code does."
+    },
+    {
+      "stage": "post",
+      "question": "A generated test fails on the build server. What must the report contain for it to be evidence?",
+      "options": [
+        "The seed, so the same values can be asked for again",
+        "The full list of values tried",
+        "The line number of the failure",
+        "The number of trials before it failed"
+      ],
+      "correct": 0,
+      "explanation": "A generator seeded from the clock finds a bug, prints a failure and takes the evidence with it. That is worse than no test, because it teaches people the suite is flaky."
+    },
+    {
+      "stage": "post",
+      "question": "Failures from the aimed generator averaged 29.17 characters. After shrinking they were all exactly 20. What is the one thing a shrinker must never do?",
+      "options": [
+        "Return a value that passes: everything it hands back has to have failed on the way",
+        "Change the length of the input",
+        "Take more than a few steps",
+        "Return a value the generator could not have produced"
+      ],
+      "correct": 0,
+      "explanation": "Twenty digits is the shortest number that parser gets wrong, and the shrinker finds that without being told. A shrunk counterexample is usually enough to see the bug without a debugger."
+    }
+  ]
+}

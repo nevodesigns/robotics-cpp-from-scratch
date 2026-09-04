@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "05-04-inputs-you-did-not-think-of",
+  "title": "Inputs You Did Not Think Of: Properties, Generators and Shrinking",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "05-03-the-test-that-catches-it",
+    "01-05-strings-and-text"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::test",
+    "header": "rc/test/generate.hpp",
+    "note": "a seeded source of inputs, a property to hold them to, and a shrinker that makes the failure readable"
+  },
+  "breaks_first": [
+    "E-TEST-0005",
+    "E-TEST-0006",
+    "E-TEST-0007"
+  ]
+}
