@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "16-04-how-far-ahead-to-look",
+  "title": "How Far Ahead to Look: The Lookahead Is a Gain",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 1,
+  "requires": [
+    "16-03-the-measurement-that-arrives-late",
+    "06-01-vectors-and-two-products"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::nav",
+    "header": "rc/nav/pursuit.hpp",
+    "note": "following a path by aiming at a point on it, and what choosing that point decides"
+  },
+  "breaks_first": [
+    "E-NAV-0008",
+    "E-NAV-0009",
+    "E-NAV-0010"
+  ]
+}

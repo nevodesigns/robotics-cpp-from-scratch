@@ -1,0 +1,78 @@
+{
+  "lesson": "16-04-how-far-ahead-to-look",
+  "title": "How Far Ahead to Look: The Lookahead Is a Gain",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Steering by a perfect pose, is there any reason to use a long lookahead?",
+      "options": [
+        "No: shorter tracks better at every value measured, and the corner cut grows in proportion to it",
+        "Yes, a long lookahead is smoother and equally accurate",
+        "Yes, a short lookahead always oscillates",
+        "It makes no difference either way"
+      ],
+      "correct": 0,
+      "explanation": "Measured on a right angle: 0.0176 m worst error at 0.10 m of lookahead, 1.3536 m at 5.00 m. The reason to lengthen it is that no follower ever steers by a perfect pose."
+    },
+    {
+      "stage": "check",
+      "question": "The pose estimate is 100 ms behind and the robot drives at 1 m/s. Lookaheads of 0.05, 0.10, 0.20 and 0.40 m are tried. Which work?",
+      "options": [
+        "0.20 and 0.40: everything at or below speed times latency loses the path entirely",
+        "All of them, with the shorter ones tracking better",
+        "Only 0.40, since latency needs a large margin",
+        "All of them fail, since the estimate is late"
+      ],
+      "correct": 0,
+      "explanation": "The threshold moved exactly with speed: at 0.5 m/s the first working lookahead was 0.10, at 2 m/s it was 0.40, and at 4 m/s none of the four worked."
+    },
+    {
+      "stage": "check",
+      "question": "With 2 cm of pose noise and no latency, a lookahead of 0.10 m tracked slightly better than 0.80 m. Where did the noise show up?",
+      "options": [
+        "In the steering: the churn was 3.58 against 0.075, about fifty times as much movement for the same corner",
+        "In the tracking error, which was much worse",
+        "Nowhere, since the follower averages it out",
+        "In the corner cut, which grew"
+      ],
+      "correct": 0,
+      "explanation": "Noise is paid for in the actuator and latency in the path. Telling them apart matters because they have different fixes and only one of them loses the robot."
+    },
+    {
+      "stage": "check",
+      "question": "The planner clears an obstacle by 20 cm and the robot clips it, while reporting 3 cm rms tracking error. What happened?",
+      "options": [
+        "The lookahead cut the corner by about 27 percent of itself, and cross track error is not a clearance figure",
+        "The follower's tracking error report is wrong",
+        "The estimate was late, so the robot was not where it thought",
+        "The path was too finely sampled"
+      ],
+      "correct": 0,
+      "explanation": "Measured, the corner cut was 0.266 to 0.271 of the lookahead across two decades of it. If the requirement is about obstacles, the acceptance test has to measure distance to obstacles."
+    },
+    {
+      "stage": "post",
+      "question": "Why must the target search never look back before the last target it found?",
+      "options": [
+        "On a path that returns near itself, an earlier point is also more than a lookahead away and comes first in the array",
+        "It would be too slow to search the whole path",
+        "The path may be modified while driving",
+        "Points behind the robot have negative curvature"
+      ],
+      "correct": 0,
+      "explanation": "Measured on a 20 m path with two parallel legs 0.6 m apart: searching from the start, the robot never turned once and drove 80 m in a straight line before the test gave up."
+    },
+    {
+      "stage": "post",
+      "question": "What does an acceptance path for a follower need that a straight line does not have?",
+      "options": [
+        "A corner, a section that comes back near itself, and a speed change",
+        "Enough length to reach steady state",
+        "Waypoints spaced closely enough to be smooth",
+        "A start and end at the same point"
+      ],
+      "correct": 0,
+      "explanation": "Each of those exposes a different failure in this lesson: the corner shows the cut, the returning leg shows the target search, and the speed change shows a fixed lookahead that is only correct at the speed it was tuned at."
+    }
+  ]
+}
