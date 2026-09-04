@@ -1,0 +1,78 @@
+{
+  "lesson": "15-01-every-filter-is-a-delay",
+  "title": "Every Filter Is a Delay: What Smoothing Costs the Loop",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A moving average over N samples reduces uncorrelated noise by how much, and costs what?",
+      "options": [
+        "Noise falls as one over the square root of N, and it delays the signal by half the window",
+        "Noise falls as one over N, at no cost in delay",
+        "Noise falls as one over N, delaying by the whole window",
+        "Both scale with N, so the trade is neutral"
+      ],
+      "correct": 0,
+      "explanation": "Both were measured against the theory in this lesson: 16 samples leaves 0.246 of the noise against a predicted 0.250, and lags by 7 samples against a predicted 7.5."
+    },
+    {
+      "stage": "check",
+      "question": "Why divide by the number of readings held rather than by the window size?",
+      "options": [
+        "Before the window is full they differ, and dividing by the window reports a fraction of the truth and climbs to it",
+        "It is faster",
+        "The window size may change",
+        "It avoids overflow"
+      ],
+      "correct": 0,
+      "explanation": "At 500 Hz with a window of 64 that is an eighth of a second of a sensor reading low: short enough to miss in testing, long enough for a robot parked at a wall to start driving at it."
+    },
+    {
+      "stage": "check",
+      "question": "A loop settling in 1.2 seconds is given filters of 64 and then 256 samples. What happens?",
+      "options": [
+        "64 settles in 1.18 s with 0.3 percent overshoot; 256 overshoots by 103 percent and never settles",
+        "Both are stable, the second merely slower",
+        "Both are unstable, the second more so",
+        "The second is smoother and therefore better"
+      ],
+      "correct": 0,
+      "explanation": "The failure is not gradual. The filter that ruins it is the one whose lag is about a fifth of the settling time, because a delay in the feedback path is what destroys a loop."
+    },
+    {
+      "stage": "check",
+      "question": "The same loop with no filter at all never settles either. Why?",
+      "options": [
+        "The derivative term differentiates the noise, and a millimetre of jitter between samples two milliseconds apart is half a metre per second",
+        "The proportional gain is too high without smoothing",
+        "The integral term winds up on the noise",
+        "It settles, but outside the measured band"
+      ],
+      "correct": 0,
+      "explanation": "Measured, it spends seven times the command effort and never settles. Too little filtering and too much are both unstable, and the window between them is wide but not infinite."
+    },
+    {
+      "stage": "post",
+      "question": "Going from a window of 64 to 256 buys what, for what?",
+      "options": [
+        "Another factor of two in noise, for four times the lag, which is why long filters are rarely worth it",
+        "A factor of four in noise for a factor of four in lag, a fair trade",
+        "Nothing at all",
+        "A factor of four in noise for twice the lag"
+      ],
+      "correct": 0,
+      "explanation": "The noise reduction slows down as the square root while the lag grows linearly. That curve is the whole argument for keeping windows short."
+    },
+    {
+      "stage": "post",
+      "question": "The noise needs more smoothing than the loop can afford in lag. What is the answer?",
+      "options": [
+        "Not a longer average: a better trade for the same delay, a better sensor, or smoothing only what is displayed rather than what is fed back",
+        "Lengthen the filter and reduce the derivative gain to compensate",
+        "Lengthen the filter and accept the overshoot",
+        "Sample faster and keep the same window"
+      ],
+      "correct": 0,
+      "explanation": "Sampling faster with the same window count does shorten the lag in seconds, and is worth knowing, but it does not change the trade between noise and delay at a given rate."
+    }
+  ]
+}

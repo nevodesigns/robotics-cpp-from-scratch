@@ -20,6 +20,7 @@
 
 #include <csetjmp>
 #include <csignal>
+#include <cstddef>
 #if !defined(_WIN32)
 #  include <setjmp.h>   // sigsetjmp and siglongjmp, which are POSIX rather than standard
 #endif

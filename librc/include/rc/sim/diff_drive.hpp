@@ -15,6 +15,7 @@
 #define RC_SIM_DIFF_DRIVE_HPP
 
 #include <cmath>
+#include <cstddef>
 #include <vector>
 
 namespace rc {
