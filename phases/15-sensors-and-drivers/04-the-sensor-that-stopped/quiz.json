@@ -1,0 +1,78 @@
+{
+  "lesson": "15-04-the-sensor-that-stopped",
+  "title": "The Sensor That Stopped: A Channel That Says What It Knows",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A driver calibrates, filters over 16 samples, and then rejects readings outside 0 to 30 m. A dropout reports zero counts. What happens?",
+      "options": [
+        "Nothing is ever rejected, and sixteen outputs carry the bad reading",
+        "The dropout is rejected, as intended",
+        "The dropout is rejected one sample late",
+        "The filter removes it, so the check is unnecessary"
+      ],
+      "correct": 0,
+      "explanation": "Calibrated the dropout is -0.43 m, which any check catches. Averaged with fifteen good readings of 5 m it is 4.66 m, which is an ordinary distance. The filter made it plausible before the check could see it."
+    },
+    {
+      "stage": "check",
+      "question": "Does it matter whether you calibrate before filtering or after?",
+      "options": [
+        "Mathematically no, they differ by 1.8e-15, but calibrate first so the range check is in metres",
+        "Yes, calibrating first is significantly more accurate",
+        "Yes, filtering first is significantly more accurate",
+        "No, and the order of the range check does not matter either"
+      ],
+      "correct": 0,
+      "explanation": "A straight line through an average is the average of a straight line. The order that is forced is the check, and it is forced by measurement rather than by algebra."
+    },
+    {
+      "stage": "check",
+      "question": "A device freezes and its driver keeps returning the last value. Your staleness check uses a timestamp taken when the reading reaches your code. What does it report?",
+      "options": [
+        "ok, for ever: freshness computed from a stamp you wrote yourself is a statement about your own liveness",
+        "stale, one sampling period later",
+        "stale, once the buffer empties",
+        "stuck, since the value stops changing"
+      ],
+      "correct": 0,
+      "explanation": "The channel stamped with the device's own time went stale one period after the freeze. The one stamped on arrival stayed ok for the whole run."
+    },
+    {
+      "stage": "check",
+      "question": "You add a stuck detector that fires after five identical readings. On which sensor does it report a healthy parked device as stuck?",
+      "options": [
+        "One whose noise is below its resolution: it then repeats for ever while working perfectly",
+        "Any sensor, if the robot is stationary long enough",
+        "One with high noise, where repeats are common",
+        "None, five is a safe threshold"
+      ],
+      "correct": 0,
+      "explanation": "Measured over 100000 parked samples: at 50 times the resolution the longest natural run was 3, at equal to it 11, and at a tenth of it the sensor repeated for all 100000. The threshold has to come from the sensor."
+    },
+    {
+      "stage": "post",
+      "question": "Your channel carries a filtered reading stamped at the moment its newest sample was taken. Why is carrying it forward by that age not enough?",
+      "options": [
+        "An average is centred half a window earlier than its newest sample, so the filter's lag has to be added to the transport's",
+        "The timestamp is wrong and should be the moment of the oldest sample",
+        "Carrying forward cannot correct a filtered value at all",
+        "It is enough, since the filter adds no delay"
+      ],
+      "correct": 0,
+      "explanation": "Measured end to end: carried forward by its age, 0.0199 m; carried forward by the lag the channel reports, 0.0123 m. Only the channel knows both halves."
+    },
+    {
+      "stage": "post",
+      "question": "What does a driver owe its caller besides the number?",
+      "options": [
+        "Whether the reading can be trusted, when it was taken, and how much lag it added",
+        "The raw counts alongside the calibrated value",
+        "The sensor's datasheet accuracy figure",
+        "Nothing else, if the number is correct"
+      ],
+      "correct": 0,
+      "explanation": "A driver that returns a bare number forces every caller to guess at the difference between ok, stale, stuck and no data, and they guess ok. The lag matters because the loop downstream is spending from a budget."
+    }
+  ]
+}

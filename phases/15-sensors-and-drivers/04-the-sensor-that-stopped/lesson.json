@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "15-04-the-sensor-that-stopped",
+  "title": "The Sensor That Stopped: A Channel That Says What It Knows",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 1,
+  "requires": [
+    "15-02-precise-and-wrong",
+    "15-03-late-is-wrong"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sensor",
+    "header": "rc/sensor/channel.hpp",
+    "note": "the three corrections in one place, in the order that matters, reporting its own cost"
+  },
+  "breaks_first": [
+    "E-SENSE-0011",
+    "E-SENSE-0012",
+    "E-SENSE-0013"
+  ]
+}
