@@ -1,0 +1,78 @@
+{
+  "lesson": "10-04-the-same-chart-twice-the-pixels",
+  "title": "The Same Chart, Twice the Pixels: Logical and Device Coordinates",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "An image is created 200 by 120 for a 100 by 60 chart on a screen with a device pixel ratio of 2, and the ratio is never set on the image. What gets drawn?",
+      "options": [
+        "A quarter-size chart in the top left corner, with three quarters of the image empty",
+        "The chart, correctly, since the image is the right size",
+        "A chart stretched to fill the image",
+        "Nothing, since the coordinates are out of range"
+      ],
+      "correct": 0,
+      "explanation": "Measured: 397 pixels of ink in a box 0,0..100,60 instead of 797 filling 0,0..199,119. The painter treats its coordinates as device pixels unless the image says otherwise."
+    },
+    {
+      "stage": "check",
+      "question": "Why does this bug reach users rather than being caught in review?",
+      "options": [
+        "At a ratio of 1 the correct and incorrect versions are pixel for pixel identical",
+        "The compiler cannot warn about it",
+        "It only happens on Windows",
+        "Qt changed the default between versions"
+      ],
+      "correct": 0,
+      "explanation": "The person who writes it has a ratio of 1 and so does the test machine. The fault appears only on the screens somebody paid more for. Rendering the same drawing at 1 and at 2 and comparing bounding boxes is four lines of test."
+    },
+    {
+      "stage": "check",
+      "question": "On a surface at ratio 2, how many device rows does a line inked with setWidth(0), setWidth(1) and setWidth(2) occupy?",
+      "options": [
+        "1, 2 and 4: a pen of width zero is cosmetic and means the thinnest line the device can draw",
+        "0, 1 and 2: width zero draws nothing",
+        "1, 1 and 2: widths are in device pixels",
+        "2, 2 and 4: everything is doubled"
+      ],
+      "correct": 0,
+      "explanation": "setWidth(1) means one logical unit. A grid tuned to be unobtrusive at a ratio of 1 is twice as heavy at 2, while the text beside it stays the same weight."
+    },
+    {
+      "stage": "check",
+      "question": "A line is drawn at logical x = 75 on a surface at ratio 2, and found in the rendered image at column 150. What is wrong with using 150 as the chart position?",
+      "options": [
+        "It is off the end of a chart 100 units wide, and anything looking up the sample there clamps or indexes past the array",
+        "Nothing, 150 is the device position and that is what a hit test wants",
+        "It is only wrong by rounding",
+        "It should be 300, since the ratio applies twice"
+      ],
+      "correct": 0,
+      "explanation": "The error is exactly the ratio, which is exactly zero on a machine where the ratio is 1. Convert at the boundary in one function, and keep everything above it logical."
+    },
+    {
+      "stage": "post",
+      "question": "A colleague fixes the quarter-size chart by multiplying every coordinate by the ratio before painting. What breaks?",
+      "options": [
+        "Every hit test, layout calculation and stored geometry, because now half the program is in one unit and half in the other",
+        "Nothing, it is an equivalent fix",
+        "Only the pen widths",
+        "The image size, which is now doubled twice"
+      ],
+      "correct": 0,
+      "explanation": "Setting the ratio is what lets everything above that line stay in the units the layout is in. That is the point of having a ratio at all."
+    },
+    {
+      "stage": "post",
+      "question": "Which lines should use a cosmetic pen and which a real logical width?",
+      "options": [
+        "Hairlines for rules and gridlines, whose job is to be visible and not noticed; a logical width for anything that should look the same size on every screen",
+        "Cosmetic for everything, since it is always one pixel",
+        "Logical for everything, since it scales",
+        "It makes no difference at ratios above 1"
+      ],
+      "correct": 0,
+      "explanation": "setWidth(1) is what you get by not choosing: too thin to be a deliberate thickness and too thick to be a hairline. A cosmetic pen also ignores the painter's transform, which is what a grid wants and never what a drawn object wants."
+    }
+  ]
+}

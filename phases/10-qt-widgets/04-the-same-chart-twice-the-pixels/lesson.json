@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "id": "10-04-the-same-chart-twice-the-pixels",
+  "title": "The Same Chart, Twice the Pixels: Logical and Device Coordinates",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about the difference between the pixels you paint in and the pixels a screen has, so it needs a painter. Lesson 10-02 draws the same chart into a terminal, where there is exactly one kind of pixel and the question does not arise. Without Qt, do 10-02 and come back: what is here is the reason a chart that is correct on a laptop is drawn at quarter size on a better screen.",
+  "requires": [
+    "10-01-painting-the-robot-path",
+    "10-03-a-live-plotter"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Gui"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/surface.hpp",
+    "note": "the two kinds of pixel kept apart, so a chart is the same chart on any screen"
+  },
+  "breaks_first": [
+    "E-QT-0012",
+    "E-QT-0013",
+    "E-QT-0014"
+  ]
+}
