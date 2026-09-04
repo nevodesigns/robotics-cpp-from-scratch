@@ -1,0 +1,78 @@
+{
+  "lesson": "06-05-the-derivative-you-compute",
+  "title": "The Derivative You Compute Is Not the Derivative",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A numerical derivative is not accurate enough, so the step is reduced from 1e-8 to 1e-16. What happens?",
+      "options": [
+        "It gets a hundred million times worse and ends with no correct digits at all",
+        "It gets more accurate, up to the limit of the type",
+        "It stays about the same",
+        "It becomes exact"
+      ],
+      "correct": 0,
+      "explanation": "Measured on sin(x)e^(0.3x) at x = 1.2, where the true derivative is 0.920: the forward difference error was 1.388e-08 at a step of 1e-8 and 9.202e-01 at 1e-16. Subtracting two nearly equal doubles throws away the digits they had in common."
+    },
+    {
+      "stage": "check",
+      "question": "Why is a central difference worth the extra function call?",
+      "options": [
+        "The errors on the two sides cancel rather than add: 2.055e-12 against 1.388e-08 at each method's own best step",
+        "It needs a smaller step, so it is more precise",
+        "It works for functions that are not smooth",
+        "It avoids the subtraction entirely"
+      ],
+      "correct": 0,
+      "explanation": "Their best steps are also different: the square root of the machine epsilon for a forward difference and its cube root for a central one, both confirmed by sweeping."
+    },
+    {
+      "stage": "check",
+      "question": "A fixed step of 1e-6 is used to differentiate x*x at x = 1e12. What comes back?",
+      "options": [
+        "Exactly zero, because 1e-6 is smaller than the gap between doubles there and x + h == x",
+        "Two trillion, correct to about 1e-12",
+        "Two trillion, correct to about four percent",
+        "Infinity, from dividing by zero"
+      ],
+      "correct": 0,
+      "explanation": "Doubles are spaced proportionally: the gap is 2.2e-16 near 1.0 and 1.2e-4 near 1e12. Scaling the step to the value, with a floor of 1, keeps the relative error near 1e-12 across the whole range."
+    },
+    {
+      "stage": "check",
+      "question": "A position sensor is accurate to 1 mm and is read at 500 Hz. What noise does the differenced velocity have?",
+      "options": [
+        "About 0.7 m/s, which is sigma times the square root of two divided by the interval",
+        "About 1 mm/s, the same as the position",
+        "About 0.5 m/s, sigma divided by the interval",
+        "None, since the noise averages out between samples"
+      ],
+      "correct": 0,
+      "explanation": "Measured 0.7049 against 0.7071 predicted. That is not a defect in the sensor and not a bug in the arithmetic; it is what differencing does."
+    },
+    {
+      "stage": "post",
+      "question": "You need a quieter velocity. Difference over 256 samples, or difference over 1 and average the result over 256?",
+      "options": [
+        "Difference over 256: the noise falls as N rather than as its square root, for the same delay",
+        "Average the result: filtering is what noise reduction is for",
+        "They are equivalent, since both average 256 samples",
+        "Neither helps, since the noise is in the position"
+      ],
+      "correct": 0,
+      "explanation": "Measured: differencing over 256 samples divided the noise by 254.9. Averaging over the same window would divide it by 16. Both cost N times dt over 2 of lag."
+    },
+    {
+      "stage": "post",
+      "question": "For a function you can call, a smaller step is better until floating point stops you. For measurements it is always worse. Why does that matter?",
+      "options": [
+        "They are two different problems that use the same three symbols, and the habits from one are wrong in the other",
+        "It does not matter, since both are solved by a central difference",
+        "Because measurements are not differentiable",
+        "Because measurements need a larger epsilon"
+      ],
+      "correct": 0,
+      "explanation": "Where a wide enough interval is not affordable, the answer is not a longer difference at all: an estimator that fuses position with a motion model produces a velocity without amplifying anything."
+    }
+  ]
+}

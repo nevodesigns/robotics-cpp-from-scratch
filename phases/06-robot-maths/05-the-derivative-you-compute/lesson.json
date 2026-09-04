@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "06-05-the-derivative-you-compute",
+  "title": "The Derivative You Compute Is Not the Derivative",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "06-01-vectors-and-two-products",
+    "00-04-numbers-that-lie"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::math",
+    "header": "rc/math/derivative.hpp",
+    "note": "a slope taken from a function, and a rate taken from measurements, which are two different problems"
+  },
+  "breaks_first": [
+    "E-NUM-0008",
+    "E-NUM-0009",
+    "E-MATH-0006"
+  ]
+}
