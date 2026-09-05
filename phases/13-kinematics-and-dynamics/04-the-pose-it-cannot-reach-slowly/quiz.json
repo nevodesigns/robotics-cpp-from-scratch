@@ -1,0 +1,78 @@
+{
+  "lesson": "13-04-the-pose-it-cannot-reach-slowly",
+  "title": "The Pose It Cannot Reach Slowly: Singularities and What They Cost",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A 0.5 and 0.4 metre arm is asked to move its tool outward at 0.1 m/s. At half reach the elbow turns at 0.27 rad/s. What does it need a tenth of a millimetre from full extension?",
+      "options": [
+        "15 rad/s, about 140 revolutions a minute, and ten times that again a tenth of the distance closer",
+        "About 0.5 rad/s, a little more",
+        "Nothing: the tool cannot move at all",
+        "About 2 rad/s"
+      ],
+      "correct": 0,
+      "explanation": "The determinant of this arm's Jacobian is l1 l2 sin(q2) exactly, so it depends on the elbow and nothing else and is zero with the arm straight. The rate goes up as the determinant goes down."
+    },
+    {
+      "stage": "check",
+      "question": "At exactly full extension, what can the tool do?",
+      "options": [
+        "Move sideways but not outward, at any joint speed: the arm has lost a direction",
+        "Nothing at all",
+        "Everything, but slowly",
+        "Move outward only, since the arm is aligned with that direction"
+      ],
+      "correct": 0,
+      "explanation": "That is what a singularity is. It is not that the numbers get large, it is that one direction becomes unreachable, and approaching it the cost of moving that way grows without bound."
+    },
+    {
+      "stage": "check",
+      "question": "The elbow up and elbow down solutions are 3.96 radians apart at half reach. How far apart are they a hundredth of a millimetre from full extension?",
+      "options": [
+        "0.019 radians, so which one a solver picks is decided by a rounding error",
+        "Still about 4 radians: the postures are always distinct",
+        "Exactly zero, so the solver reports a failure",
+        "About 0.5 radians"
+      ],
+      "correct": 0,
+      "explanation": "Both answers remain exactly correct, so nothing in the solver has anything to complain about, and the arm swings through half its workspace to satisfy a request that moved the tool by a millimetre."
+    },
+    {
+      "stage": "check",
+      "question": "Damped least squares is added, with lambda 0.01, at that near-singular pose. What happens to the requested 0.1 m/s?",
+      "options": [
+        "It delivers 0.027 m/s at a quarter of the joint rate: damping costs speed and rate together",
+        "It delivers 0.1 m/s with bounded joint rates",
+        "It delivers 0.1 m/s but in the wrong direction",
+        "It refuses, since the matrix is still singular"
+      ],
+      "correct": 0,
+      "explanation": "The matrix inverted is J J' + lambda squared I, which cannot be singular, so there is always an answer. The answer is not the motion you asked for, and that is the correct behaviour."
+    },
+    {
+      "stage": "post",
+      "question": "Should damping be switched on only near singularities?",
+      "options": [
+        "No: at half reach with lambda 0.01 the tool still moves at over 99 percent of the speed asked, so leaving it on removes a mode",
+        "Yes, it costs too much elsewhere",
+        "Yes, otherwise the arm never reaches full speed",
+        "It makes no difference either way"
+      ],
+      "correct": 0,
+      "explanation": "What does need reporting is the shortfall: J q against v is the number that tells a path follower it is falling behind rather than tracking."
+    },
+    {
+      "stage": "post",
+      "question": "The tool is falling behind near full extension because of damping. What should slow down?",
+      "options": [
+        "The whole path in time, since slowing one direction and not the others distorts the shape being drawn",
+        "Only the direction that is limited",
+        "The joint that is turning fastest",
+        "Nothing: the follower should accept the error"
+      ],
+      "correct": 0,
+      "explanation": "A time scaling preserves the shape, and it is what a trajectory generator does with this information. Choose lambda from the joint rate you can afford, which is on the arm's data sheet, rather than by feel."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "13-04-the-pose-it-cannot-reach-slowly",
+  "title": "The Pose It Cannot Reach Slowly: Singularities and What They Cost",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "13-03-reaching-without-a-formula",
+    "06-05-the-derivative-you-compute"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::kin",
+    "header": "rc/kin/singularity.hpp",
+    "note": "how far a pose is from the place where the arm cannot move slowly, and what to do about it"
+  },
+  "breaks_first": [
+    "E-KIN-0005",
+    "E-KIN-0006",
+    "E-KIN-0007"
+  ]
+}
