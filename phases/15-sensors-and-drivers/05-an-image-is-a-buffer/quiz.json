@@ -1,0 +1,78 @@
+{
+  "lesson": "15-05-an-image-is-a-buffer",
+  "title": "An Image Is a Buffer With Opinions: Stride, Channels and Saturation",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A camera gives you a frame 13 pixels wide. What is the distance from the start of one row to the start of the next?",
+      "options": [
+        "Usually 16, because rows are padded so each begins at an address the hardware likes",
+        "13, the width",
+        "13 times the bytes per pixel, always",
+        "Whatever you allocate it to be"
+      ],
+      "correct": 0,
+      "explanation": "Every capture library reports it: bytesPerLine, linesize, step, rowPitch. It can change between frames when a format or resolution changes."
+    },
+    {
+      "stage": "check",
+      "question": "A vertical line at column 10 is read from that frame using the width in place of the stride. What comes back?",
+      "options": [
+        "A diagonal: the line walks three columns left per row, with seven of eight rows wrong and the first one right",
+        "The line, shifted three columns left on every row",
+        "Nothing, since the indices go out of range",
+        "The line, correct, since the padding is at the end"
+      ],
+      "correct": 0,
+      "explanation": "The first row being right is the whole difficulty. A test on one row passes, and so does a test on a frame whose width happens to be a multiple of four."
+    },
+    {
+      "stage": "check",
+      "question": "The bytes 32, 64, 200, 255 are read once as B,G,R,A and once as R,G,B,A. What is the difference?",
+      "options": [
+        "A mostly red pixel and a mostly blue one, with nothing reporting an error because all four bytes were valid either way",
+        "The alpha channel is wrong in one of them",
+        "One of them is out of range",
+        "They differ only in the green channel"
+      ],
+      "correct": 0,
+      "explanation": "Green and alpha sit in the same place in both, and so does grey. A test on a grey card or a white balance check passes under both conventions, which is how it survives to the field."
+    },
+    {
+      "stage": "check",
+      "question": "Every pixel of an image has 100 added to it with a plain cast back to uint8_t. What happens to a pixel of 200?",
+      "options": [
+        "It becomes 44: the brightest parts of the picture come out black, which looks like a sensor fault",
+        "It becomes 255, clamped",
+        "It becomes 300, stored in the next byte",
+        "It is undefined behaviour and the sanitizer catches it"
+      ],
+      "correct": 0,
+      "explanation": "Conversion to an unsigned type is defined to wrap, so no sanitizer will say anything. Everything up to 155 is fine, which is most of a normal picture."
+    },
+    {
+      "stage": "post",
+      "question": "What is the general rule that covers brightness, frame differences, blurs and gains?",
+      "options": [
+        "The pixel is the storage, not the arithmetic: compute in int or float, decide what to do with anything out of range, and cast once on the way back",
+        "Always use saturating arithmetic on pixels",
+        "Always use floating point for images",
+        "Clamp the input rather than the output"
+      ],
+      "correct": 0,
+      "explanation": "Nine pixels of 200 in a blur add to 1800, which is seven times what fits, and a - b on unsigned pixels is enormous wherever b is larger."
+    },
+    {
+      "stage": "post",
+      "question": "What should a test image contain to find all three of this lesson's faults?",
+      "options": [
+        "A width that needs padding, a pixel that is clearly red, and values at 0, 1, 254 and 255",
+        "A representative photograph at the camera's native resolution",
+        "A grey card at several exposures",
+        "The largest frame the camera can produce"
+      ],
+      "correct": 0,
+      "explanation": "640 by 480 hides the stride, a grey pixel hides the channel order, and a mid-grey image hides the saturation. Each fault needs one specific property in the picture."
+    }
+  ]
+}

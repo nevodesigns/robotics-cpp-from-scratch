@@ -1,5 +1,5 @@
 {
   "schema": 1,
-  "title": "Sensors and Drivers",
-  "ends_with": "A noisy sensor made usable, with the cost of making it so measured rather than guessed"
+  "title": "Sensors, Drivers and Vision",
+  "ends_with": "A noisy sensor made usable, with the cost of making it so measured rather than guessed, and a camera frame read the way it was actually laid out"
 }
