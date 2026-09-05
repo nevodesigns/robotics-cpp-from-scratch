@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "id": "09-04-who-deletes-this",
+  "title": "Who Deletes This: Ownership, deleteLater and the Loop That Has to Run",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about how Qt decides when an object is destroyed, so it needs Qt. Lesson 02-06 asks the same question in plain C++ with shared_ptr and weak_ptr, and the shape of the answer is the same: somebody owns the object, everybody else holds something that can tell them it has gone. Without Qt, do 02-06, and come back here when Qt is installed.",
+  "requires": [
+    "09-03-across-the-thread-boundary",
+    "02-06-shared-ownership-and-cycles"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Core"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/lifetime.hpp",
+    "note": "the three things you need to destroy a Qt object at the right time, on the right thread, and know that it happened"
+  },
+  "breaks_first": [
+    "E-QT-0015",
+    "E-QT-0016",
+    "E-QT-0017"
+  ]
+}

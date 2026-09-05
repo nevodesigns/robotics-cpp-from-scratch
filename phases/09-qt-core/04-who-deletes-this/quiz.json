@@ -1,0 +1,78 @@
+{
+  "lesson": "09-04-who-deletes-this",
+  "title": "Who Deletes This: Ownership, deleteLater and the Loop That Has to Run",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A test calls deleteLater on an object and then QCoreApplication::processEvents. Is the object destroyed?",
+      "options": [
+        "No: deferred deletions are held back from processEvents on purpose, and only sendPostedEvents with DeferredDelete runs them",
+        "Yes, that is what processEvents is for",
+        "Yes, but only if the object has no parent",
+        "No, because deleteLater needs a running QThread"
+      ],
+      "correct": 0,
+      "explanation": "The reason for holding them back is good: an object must not be destroyed while a nested loop is still executing inside one of its own member functions. In an application the main loop returns to the top and runs them, which is why this looks like a test problem."
+    },
+    {
+      "stage": "check",
+      "question": "What can you hold to a QObject that somebody else owns, so that you can tell whether it still exists?",
+      "options": [
+        "A QPointer, which is told when its object is destroyed and becomes null",
+        "A raw pointer, checked against nullptr",
+        "A shared_ptr to the same object",
+        "The parent's children() list, searched each time"
+      ],
+      "correct": 0,
+      "explanation": "A raw pointer to a destroyed QObject holds an address that used to mean something, and asking it anything is undefined behaviour. It is the same idea as the weak_ptr in lesson 02-06, arrived at from the other direction."
+    },
+    {
+      "stage": "check",
+      "question": "A child is reparented from one object to another, and the first parent is deleted. What happens to the child?",
+      "options": [
+        "It survives: setParent moved the responsibility, so the old parent has nothing to delete",
+        "It is deleted, since it was constructed with the first parent",
+        "It is deleted twice",
+        "It becomes parentless and leaks"
+      ],
+      "correct": 0,
+      "explanation": "Who deletes this is a question whose answer can change at runtime, and the holder of a raw pointer is not told either way."
+    },
+    {
+      "stage": "check",
+      "question": "An object was created on a worker thread. The main thread wants it gone. What should it do?",
+      "options": [
+        "Call deleteLater, so the deletion is posted to the worker's loop and that thread performs it",
+        "Call delete, since the main thread is the owner of the program",
+        "Move it to the main thread first, then delete it",
+        "Quit the worker thread and then delete it"
+      ],
+      "correct": 0,
+      "explanation": "A QObject's destructor takes it out of its thread's event queue and unhooks its connections, both of which that thread owns. Deleting from elsewhere is a race that usually appears to work. This is the one place deleteLater is not a convenience."
+    },
+    {
+      "stage": "post",
+      "question": "Why must a shutdown ask the object to delete itself before quitting its thread?",
+      "options": [
+        "Quitting first can leave the deletion posted to a loop that will never run again, which is a leak rather than a crash and harder to see",
+        "Because quit() destroys the event queue",
+        "Because deleteLater fails on a stopped thread",
+        "It makes no difference which order they happen in"
+      ],
+      "correct": 0,
+      "explanation": "Ask, then quit, then wait. And give worker objects no parent across a thread boundary, or the parent will try to delete them from its own thread on the way out."
+    },
+    {
+      "stage": "post",
+      "question": "Why is deleting a heap child early safe, while giving a stack object a parent is not?",
+      "options": [
+        "A child removes itself from its parent's list when it is destroyed, but a stack object's destructor runs at the closing brace whatever Qt believes, and the parent then deletes it again",
+        "Stack objects cannot be QObjects",
+        "The parent copies its children, so the stack object is duplicated",
+        "Neither is safe"
+      ],
+      "correct": 0,
+      "explanation": "Measured: deleting a child directly leaves the parent with zero children and no double delete. The difference is entirely about who runs the destructor and when."
+    }
+  ]
+}

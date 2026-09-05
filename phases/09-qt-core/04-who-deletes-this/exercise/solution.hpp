@@ -1,0 +1,84 @@
+#ifndef LESSON_SOLUTION_HPP
+#define LESSON_SOLUTION_HPP
+
+#include <QtCore/QCoreApplication>
+#include <QtCore/QEvent>
+#include <QtCore/QObject>
+#include <QtCore/QPointer>
+#include <QtCore/QThread>
+
+// Run the deletions that deleteLater has posted.
+//
+// deleteLater does not delete anything. It posts an event, and that event is
+// only acted on when an event loop gets to it, which is exactly the thing a
+// test usually does not have.
+//
+// And processEvents does not do it. Deferred deletions are held back from
+// processEvents deliberately, so that an object cannot be destroyed while a
+// nested loop is still inside a function belonging to it. The consequence is
+// that a test which calls processEvents and expects the object gone finds it
+// still there, with no error anywhere.
+//
+// Measured: after deleteLater, one alive. After processEvents, one alive. After
+// this, none.
+inline void drain_deferred_deletes(QObject* only = nullptr) {
+  // TODO 1: run them.
+  //
+  // QCoreApplication::sendPostedEvents, with QEvent::DeferredDelete as the type
+  // and `only` as the receiver, which may be null to mean all of them.
+  (void)only;
+}
+
+// Destroy an object from whichever thread it belongs to.
+//
+// A QObject may only be deleted by the thread it lives in, because its
+// destructor touches the connection lists and the event queue that thread owns.
+// Deleting one from elsewhere is a race that usually looks like nothing at all
+// until the day it looks like a crash inside Qt.
+//
+// If this is that thread, delete it now, which is simple and immediate. If it
+// is not, post the deletion to the thread that owns it, which is what
+// deleteLater is for and the one place it is not optional.
+inline void delete_from_its_own_thread(QObject* object) {
+  // TODO 2: destroy it, from wherever it belongs.
+  //
+  // A null pointer is nothing to do.
+  //
+  // Compare object->thread() against QThread::currentThread(). If they are the
+  // same, delete it now: this thread owns it and the deletion is immediate,
+  // with no event loop needed.
+  //
+  // If they differ, call deleteLater instead, which posts the deletion to the
+  // thread that owns the object. That thread's own loop performs it, which is
+  // the only correct answer: a QObject's destructor touches the connection
+  // lists and the event queue belonging to its thread.
+  (void)object;
+}
+
+// Whether a pointer still refers to something.
+//
+// A raw pointer to a destroyed QObject is dangling and there is no way to ask
+// it anything. A QPointer is told when its object is destroyed and becomes
+// null, which is the only way to hold a reference to something you do not own
+// and still be able to check.
+//
+// It is the same idea as the weak_ptr in lesson 02-06, arrived at from the
+// other direction: there, ownership is shared and a weak reference does not
+// keep the object alive. Here, ownership belongs to a parent and a QPointer
+// does not pretend otherwise.
+template <class T>
+bool still_alive(const QPointer<T>& pointer) {
+  // TODO 3: say whether it still refers to something.
+  //
+  // One line. A QPointer is told when its object is destroyed and becomes null,
+  // so the question is whether it is null.
+  //
+  // A raw pointer cannot answer this at all: it holds an address that used to
+  // mean something, and asking it anything is undefined behaviour. This is the
+  // same idea as the weak_ptr in lesson 02-06, arrived at from the other
+  // direction.
+  (void)pointer;
+  return true;
+}
+
+#endif  // LESSON_SOLUTION_HPP
