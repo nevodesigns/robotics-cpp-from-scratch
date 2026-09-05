@@ -1,0 +1,78 @@
+{
+  "lesson": "14-05-the-loop-that-only-reacts",
+  "title": "The Loop That Only Reacts Is Always Behind: Feedforward",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A PD loop that settles perfectly on a stationary target is given a target moving at 0.5 m/s. What happens to the error?",
+      "options": [
+        "It settles at a constant value and stays there for as long as the motion lasts",
+        "It decays to zero, more slowly than for a step",
+        "It grows without bound",
+        "It oscillates around zero"
+      ],
+      "correct": 0,
+      "explanation": "Measured at 0.234 m, constant. A feedback loop is a machine for reacting to being wrong, so following a moving target it must be wrong continuously, because the error is the only thing producing the command."
+    },
+    {
+      "stage": "check",
+      "question": "That 0.234 m has two causes. What are they?",
+      "options": [
+        "The plant needing force to move at all, 0.035 m, and the derivative term opposing steady motion, 0.200 m",
+        "The proportional gain being too low, and the derivative gain being too high",
+        "The plant's inertia and its damping",
+        "Sensor lag and actuator lag"
+      ],
+      "correct": 0,
+      "explanation": "A derivative taken on the measurement contributes minus kd times v during any steady motion, which the proportional term must also overcome from an error. It is the larger of the two here."
+    },
+    {
+      "stage": "check",
+      "question": "Feedforward for the plant is added. What does the error become?",
+      "options": [
+        "0.199 m: exactly the plant's share removed, and the derivative's share untouched",
+        "0.001 m: both causes removed",
+        "0.035 m: the derivative's share removed",
+        "Unchanged, since feedback still dominates"
+      ],
+      "correct": 0,
+      "explanation": "Each fix removes exactly its own cause and neither removes the other. Taking the derivative on the error instead gives 0.034, and doing both gives 0.001."
+    },
+    {
+      "stage": "check",
+      "question": "Why not simply take the derivative on the error, which removes the larger share?",
+      "options": [
+        "A step of setpoint moves the error by the whole step in one sample: measured, 4020 N against 20 N on a one metre step",
+        "It is mathematically incorrect",
+        "It makes the loop unstable at any gain",
+        "It cannot be computed without the setpoint's velocity"
+      ],
+      "correct": 0,
+      "explanation": "Neither is wrong. They are right about different inputs, and the combination to reach for is feedforward with the derivative left on the measurement."
+    },
+    {
+      "stage": "post",
+      "question": "The damping coefficient is unknown. Is feedforward still worth implementing?",
+      "options": [
+        "Yes: leaving that term out entirely was still sixteen times better than no feedforward, and the penalty is proportional and symmetric",
+        "No, a wrong model is worse than none",
+        "Only if the load is also unknown",
+        "Only with an integrator to correct it"
+      ],
+      "correct": 0,
+      "explanation": "Measured errors of 0.014 with the damping term absent, 0.001 with it right, and 0.016 with it doubled, against 0.234 with no feedforward at all. There is no cliff."
+    },
+    {
+      "stage": "post",
+      "question": "Where should the actuator limit be applied?",
+      "options": [
+        "Once, to the total, at the end: clamping the feedback then adding exceeds the limit, and clamping both separately discards authority",
+        "To the feedback only, since feedforward is known to be feasible",
+        "To each part separately, so both stay in range",
+        "Before the feedforward is computed"
+      ],
+      "correct": 0,
+      "explanation": "A feedforward that reaches the limit on its own is a useful signal rather than a fault: the profile is asking for more than the machine has, before any error has occurred."
+    }
+  ]
+}

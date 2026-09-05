@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "14-05-the-loop-that-only-reacts",
+  "title": "The Loop That Only Reacts Is Always Behind: Feedforward",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "14-04-choosing-the-gains",
+    "06-06-integration-and-the-energy-that-leaks"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::control",
+    "header": "rc/control/feedforward.hpp",
+    "note": "what the plant needs before the error is even measured, and the error that is left when nobody tells it"
+  },
+  "breaks_first": [
+    "E-CTRL-0009",
+    "E-CTRL-0010",
+    "E-CTRL-0011"
+  ]
+}
