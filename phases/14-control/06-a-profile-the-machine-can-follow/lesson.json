@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "14-06-a-profile-the-machine-can-follow",
+  "title": "A Profile the Machine Can Follow: Where the Setpoint Comes From",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "14-05-the-loop-that-only-reacts",
+    "13-04-the-pose-it-cannot-reach-slowly"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::control",
+    "header": "rc/control/profile.hpp",
+    "note": "a setpoint that moves at a speed the machine has, with the velocity and acceleration the feedforward needs"
+  },
+  "breaks_first": [
+    "E-CTRL-0012",
+    "E-CTRL-0013",
+    "E-CTRL-0014"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "14-06-a-profile-the-machine-can-follow",
+  "title": "A Profile the Machine Can Follow: Where the Setpoint Comes From",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A one metre move is commanded as a step, and again through a trapezoidal profile with feedforward. What happens to the peak command?",
+      "options": [
+        "20.2 N for the step and 1.4 N for the profile, because a step asks for an infinite velocity",
+        "About the same, since the same distance is covered",
+        "Higher for the profile, since it also feeds forward",
+        "It depends only on the gains"
+      ],
+      "correct": 0,
+      "explanation": "The peak for a step is set by the gain rather than by anything about the machine or the move. The gains are not the problem: a step turns every commanded move into a disturbance."
+    },
+    {
+      "stage": "check",
+      "question": "With a top speed of 0.5 m/s and an acceleration of 1 m/s^2, what is the shortest move that reaches the top speed?",
+      "options": [
+        "0.25 m, which is top speed squared over the acceleration, and it is an exact boundary",
+        "0.5 m, the top speed times one second",
+        "1.0 m, from the acceleration",
+        "It depends on the distance travelled while cruising"
+      ],
+      "correct": 0,
+      "explanation": "That is what speeding up and slowing down again costs. Just below it there is no cruise phase and the profile is a triangle whose peak is sqrt(acceleration times distance)."
+    },
+    {
+      "stage": "check",
+      "question": "A planner assumes three phases and is given a 0.10 m move. What does it do?",
+      "options": [
+        "Computes a cruise time of -0.3 s, arrives at exactly 0.10 m with zero velocity, and drops the commanded velocity by 0.3 m/s between two adjacent instants",
+        "Divides by zero and crashes",
+        "Overshoots the target and comes back",
+        "Refuses the move"
+      ],
+      "correct": 0,
+      "explanation": "An endpoint test passes. The fault is entirely in the middle: an instantaneous 0.3 m/s change is an infinite acceleration, and precisely the thing a profile exists to prevent."
+    },
+    {
+      "stage": "check",
+      "question": "What test catches that, when an endpoint test does not?",
+      "options": [
+        "Sampling the commanded velocity finely and asserting no two adjacent samples differ by more than the profile's own acceleration times the interval",
+        "Checking the total duration against a formula",
+        "Checking that the position is monotonic",
+        "Running the profile through the control loop and watching the error"
+      ],
+      "correct": 0,
+      "explanation": "Anything larger is an acceleration the profile never promised. One loop, and it also needs a move shorter than top speed squared over the acceleration, which is most of the moves a robot actually makes."
+    },
+    {
+      "stage": "post",
+      "question": "A singularity limits how fast one direction of a path can be driven. What should slow down?",
+      "options": [
+        "The whole profile in time: stretching by a factor divides every velocity by it and every acceleration by its square, preserving the shape exactly",
+        "Only the limited direction",
+        "The acceleration limit only",
+        "Nothing; the loop should absorb it"
+      ],
+      "correct": 0,
+      "explanation": "The shape of a path is the relationship between its axes at each instant. Scale one and it becomes a different path with the same endpoints. For several axes, take the longest time any of them needs and stretch them all to it."
+    },
+    {
+      "stage": "post",
+      "question": "scaled_to is asked for a duration shorter than the profile's own. What should it return?",
+      "options": [
+        "The profile unchanged: the machine cannot do it, and handing back something it cannot follow moves the failure downstream",
+        "A profile at the requested duration, with higher limits",
+        "A profile with the acceleration raised and the top speed kept",
+        "An empty profile"
+      ],
+      "correct": 0,
+      "explanation": "The other two cases to get right are a move of zero, where the direction is undefined, and a move backwards, which is the same profile with every sign turned round."
+    }
+  ]
+}
