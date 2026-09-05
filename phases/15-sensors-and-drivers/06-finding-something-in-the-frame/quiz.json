@@ -1,0 +1,78 @@
+{
+  "lesson": "15-06-finding-something-in-the-frame",
+  "title": "Finding Something in the Frame: Thresholds, Blobs and Where a Thing Is",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A marker at 200 sits on a background at 40 and is found with a fixed threshold of 128. The lights come up by 120. What does the threshold find?",
+      "options": [
+        "The whole frame, 200 pixels of it, because the background is now 160",
+        "The marker, which is now saturated at 255",
+        "Nothing, because the marker has clipped",
+        "About half the frame"
+      ],
+      "correct": 0,
+      "explanation": "It worked exactly at three lower exposures first, which is how it ships. The 'marker' is then the whole picture, whose centre is the middle of the frame, which is where the robot goes."
+    },
+    {
+      "stage": "check",
+      "question": "What does Otsu's method choose, and what does it cost?",
+      "options": [
+        "The threshold that puts the most variance between the two groups it makes, in one pass over 256 histogram buckets",
+        "The mean of the image, in one pass over every pixel",
+        "The midpoint between the darkest and brightest pixel",
+        "The threshold that produces the fewest blobs"
+      ],
+      "correct": 0,
+      "explanation": "256 numbers rather than a million, so it costs nothing next to reading the frame, and it found exactly the marker at every exposure."
+    },
+    {
+      "stage": "check",
+      "question": "A diagonal chain of five pixels is passed to a blob finder. How many blobs is it?",
+      "options": [
+        "Five under four connectivity and one under eight, and nothing about the picture says which is meant",
+        "One, since they are all touching",
+        "Five, since they share no edges",
+        "It depends on the threshold"
+      ],
+      "correct": 0,
+      "explanation": "A crack in a surface wants one answer and two markers that happen to touch at a corner want the other. A solid shape is one blob under both, which is why a test on a square cannot tell them apart."
+    },
+    {
+      "stage": "check",
+      "question": "An L shape six pixels tall has a centre of mass at 2.36, 4.64 and a bounding box centre at 3.50, 3.50. Which should a gripper aim at?",
+      "options": [
+        "The centre of mass: it is where the thing is, while the box centre is where the space it occupies is",
+        "The box centre, which is more stable",
+        "Either, since they are 1.61 pixels apart",
+        "The midpoint of the two"
+      ],
+      "correct": 0,
+      "explanation": "1.61 pixels is a quarter of that object. They agree exactly on a rectangle, which is what a test on a square marker shows and why one is not enough."
+    },
+    {
+      "stage": "post",
+      "question": "The lens is covered, so every pixel is 90. What does an automatic threshold followed by a blob finder report?",
+      "options": [
+        "One blob covering all 200 pixels of the frame, centred in the middle of the picture",
+        "No blobs, since there is no marker",
+        "An error, since the threshold cannot be computed",
+        "Many small blobs from the sensor noise"
+      ],
+      "correct": 0,
+      "explanation": "With no two groups to separate, the best split is at the bottom of the range and every pixel is above it. The failure is not that it finds nothing but that it finds everything, and it looks exactly like a marker straight ahead."
+    },
+    {
+      "stage": "post",
+      "question": "What is the cheapest check that catches the covered lens, the failed light and the runaway exposure at once?",
+      "options": [
+        "What fraction of the frame the blob covers: more than half is the room, not the marker",
+        "Whether the threshold is above a fixed minimum",
+        "Whether more than one blob was found",
+        "Comparing against the previous frame"
+      ],
+      "correct": 0,
+      "explanation": "One division. A size range in pixels catches the other end, where a single hot pixel is also a perfectly good blob, and a size range is not an optimisation: it is part of saying what you are looking for."
+    }
+  ]
+}
