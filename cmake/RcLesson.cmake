@@ -157,5 +157,39 @@ function(rc_add_lesson)
   # it carries the label CI gates on.
   set_tests_properties("${lesson_id}.reference" PROPERTIES LABELS "reference;gate")
 
+  # Code that must not compile.
+  #
+  # Some guarantees are only visible as a compiler error: a unit system that
+  # refuses to add metres to seconds, a deleted copy constructor, a template
+  # that rejects the wrong type. A test can only assert what runs, so a lesson
+  # that wants to prove one of those ships the offending snippet in checks/ and
+  # the build tries to compile it and expects to fail.
+  #
+  # The test is a nested build of one excluded target, marked WILL_FAIL, so a
+  # snippet that starts compiling is a failure rather than a silent loss of the
+  # guarantee. Serial, because a nested build takes the generator's lock.
+  file(GLOB check_sources CONFIGURE_DEPENDS "${lesson_dir}/checks/*.cpp")
+  foreach(check ${check_sources})
+    get_filename_component(check_name "${check}" NAME_WE)
+    set(check_target "${target_base}_rejects_${check_name}")
+
+    add_executable(${check_target} EXCLUDE_FROM_ALL "${check}")
+    target_include_directories(${check_target} PRIVATE "${lesson_dir}/reference")
+    target_compile_definitions(${check_target} PRIVATE
+      RC_LESSON_DIR="${lesson_dir}"
+      RC_LESSON_VARIANT_DIR="${lesson_dir}/reference")
+    target_link_libraries(${check_target} PRIVATE rc::core)
+    target_compile_features(${check_target} PRIVATE cxx_std_17)
+
+    add_test(NAME "${lesson_id}.rejects.${check_name}"
+      COMMAND ${CMAKE_COMMAND} --build "${CMAKE_BINARY_DIR}" --target ${check_target})
+    set_tests_properties("${lesson_id}.rejects.${check_name}" PROPERTIES
+      WILL_FAIL TRUE
+      RUN_SERIAL TRUE
+      LABELS "reference;gate;phase${RC_CURRENT_PHASE}"
+      TIMEOUT 120
+    )
+  endforeach()
+
   set_property(GLOBAL APPEND PROPERTY RC_REGISTERED_LESSONS "${lesson_id}")
 endfunction()

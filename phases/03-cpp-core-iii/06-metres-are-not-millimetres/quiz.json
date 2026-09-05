@@ -1,0 +1,78 @@
+{
+  "lesson": "03-06-metres-are-not-millimetres",
+  "title": "Metres Are Not Millimetres: Making the Compiler Check the Units",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does a double record about the quantity it holds?",
+      "options": [
+        "Nothing: metres and millimetres, radians and degrees, seconds and milliseconds are all the same type",
+        "Its magnitude and its unit",
+        "Its unit, through the variable's name",
+        "Its precision, which implies the unit"
+      ],
+      "correct": 0,
+      "explanation": "A comment saying millimetres, a name like distance_mm, and a factor of a thousand written wherever somebody noticed one was needed are all promises nothing checks."
+    },
+    {
+      "stage": "check",
+      "question": "Quantity is a template over a Tag with no members, never instantiated. What is the tag for?",
+      "options": [
+        "To make Quantity<MetreTag> and Quantity<SecondTag> different types, so the arithmetic defined between two of the same tag refuses the rest",
+        "To store the unit's name for printing",
+        "To carry the conversion factor to SI",
+        "To let the quantity be specialised per unit"
+      ],
+      "correct": 0,
+      "explanation": "It costs nothing at runtime: sizeof is one double, it is trivially copyable, and every operation is a function that disappears."
+    },
+    {
+      "stage": "check",
+      "question": "Which operation on two quantities of the same kind returns a plain number rather than a quantity?",
+      "options": [
+        "Division: a length over a length is a ratio, which has no unit",
+        "Multiplication, which cancels the units",
+        "Subtraction, since the units cancel",
+        "None of them"
+      ],
+      "correct": 0,
+      "explanation": "Multiplication of two lengths is an area, which this system has no name for, so it is left undefined and a check in checks/ proves it does not compile."
+    },
+    {
+      "stage": "check",
+      "question": "Everything a type system promises is a thing that does not compile, and there is no RC_CHECK for that. How does this lesson test its refusals?",
+      "options": [
+        "Snippets in checks/ are compiled by the build and the tests are marked WILL_FAIL, so a snippet that starts compiling is a test failure",
+        "By reading the compiler's output for expected diagnostics",
+        "With static_assert in the test file",
+        "It does not; the refusals are documented instead"
+      ],
+      "correct": 0,
+      "explanation": "Keep each snippet to one refusal, since a file that fails for two reasons still passes when one of them stops working. And compile them against the finished implementation, or they pass for the wrong reason."
+    },
+    {
+      "stage": "post",
+      "question": "A person's height and a wavelength of light are both Metres, and adding them compiles. Is that a hole in the design?",
+      "options": [
+        "No: a unit type checks that two quantities are of the same kind, not that they are of the same thing",
+        "Yes, the tags should distinguish scales",
+        "Yes, the constructor should range check",
+        "No, because the result is still a valid length"
+      ],
+      "correct": 0,
+      "explanation": "The same applies to frames, to ranges, to sign conventions and to sensibleness. degrees(370.0) is a perfectly good Radians and nothing here wraps it, because wrapping is a decision about meaning."
+    },
+    {
+      "stage": "post",
+      "question": "Frame confusion is a real risk in a particular program. What does this design suggest?",
+      "options": [
+        "More tags: Quantity<WorldMetreTag> and Quantity<BodyMetreTag> are two empty structs and one conversion that has to be called",
+        "A runtime frame field checked on every operation",
+        "Naming conventions, since types cannot express frames",
+        "Nothing; frames are outside what a unit system can do"
+      ],
+      "correct": 0,
+      "explanation": "A type can only enforce a distinction you actually made in the type. Deciding which distinctions are worth making is design, and it is the part the compiler cannot do."
+    }
+  ]
+}
