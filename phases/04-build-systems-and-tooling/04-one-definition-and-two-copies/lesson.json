@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "04-04-one-definition-and-two-copies",
+  "title": "One Definition, and the Two Copies You Did Not Ask For",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "04-01-what-a-build-system-does",
+    "03-06-metres-are-not-millimetres"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/registry.hpp",
+    "note": "one thing per binary, however many translation units include the header that says so"
+  },
+  "breaks_first": [
+    "E-LNK-0003",
+    "E-LNK-0004",
+    "E-LNK-0005"
+  ]
+}

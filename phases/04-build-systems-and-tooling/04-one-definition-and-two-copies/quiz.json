@@ -1,0 +1,78 @@
+{
+  "lesson": "04-04-one-definition-and-two-copies",
+  "title": "One Definition, and the Two Copies You Did Not Ask For",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A header defines a function without inline and two files include it. What happens?",
+      "options": [
+        "The link fails: one entity with two definitions, and the compiler never sees the problem because each file on its own is correct",
+        "It compiles and one definition is chosen",
+        "The second include is skipped by the include guard",
+        "It works, since the definitions are identical"
+      ],
+      "correct": 0,
+      "explanation": "A header is text copied into every file that includes it. Only the linker, which sees them all, can object, which is why adding the header to one more file breaks a build that was fine."
+    },
+    {
+      "stage": "check",
+      "question": "A counter behind a static function in a header is bumped twice from one file and once from another. What do the two files see?",
+      "options": [
+        "2 and 1: three bumps happened and no counter says three, with nothing failing to link and nothing warning",
+        "3 and 3, since static means one shared copy",
+        "3 and 0, since the first file owns it",
+        "A link error about a duplicate symbol"
+      ],
+      "correct": 0,
+      "explanation": "static says give this file its own, so the linker has no shared entity to complain about. Both files are perfectly consistent with themselves, which is what makes it hard to see."
+    },
+    {
+      "stage": "check",
+      "question": "Which of the three answers to one definition is the dangerous one?",
+      "options": [
+        "static, because it links",
+        "nothing, because the message is confusing",
+        "inline, because it silently merges different definitions",
+        "They are equally risky"
+      ],
+      "correct": 0,
+      "explanation": "A link error is loud and gets fixed in minutes. One copy per file ships."
+    },
+    {
+      "stage": "check",
+      "question": "What is the header-only way to have exactly one of something?",
+      "options": [
+        "A function-local static inside an inline function: the inline makes the function one entity, so the standard guarantees its local static is one object",
+        "A static variable at namespace scope",
+        "A const variable at namespace scope",
+        "A global initialised in main"
+      ],
+      "correct": 0,
+      "explanation": "A member function defined inside a class is already inline, which is why header-only classes work without anybody writing the keyword. C++17's inline variables do the same for data."
+    },
+    {
+      "stage": "post",
+      "question": "A registry looks up entries by comparing const char* names with ==. When does that fail?",
+      "options": [
+        "Whenever two identical literals are not pooled into one object, which depends on the compiler, the linker and the build settings",
+        "Never, since identical literals are always the same object",
+        "Only for names built at runtime",
+        "Only across shared library boundaries"
+      ],
+      "correct": 0,
+      "explanation": "Most compilers pool them within a translation unit and many across a binary, so it appears to work until a build setting changes. The test hands in a name spelled out character by character so it cannot pass by luck."
+    },
+    {
+      "stage": "post",
+      "question": "What does it take to test for this whole class of fault?",
+      "options": [
+        "A second translation unit that includes the same header and reports what it sees",
+        "A larger test suite in the same file",
+        "Running the tests with optimisation as well as without",
+        "A static analyser"
+      ],
+      "correct": 0,
+      "explanation": "The entire class is invisible from one file. Four lines of a second .cpp find all of it, and the same reasoning is why librc compiles every header twice and links the pair."
+    }
+  ]
+}
