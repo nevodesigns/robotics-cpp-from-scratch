@@ -1,0 +1,78 @@
+{
+  "lesson": "13-05-the-angle-it-cannot-hold",
+  "title": "The Angle It Cannot Hold: Joint Limits and the Reachable Set",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "An arm's shoulder can turn from -0.6 to 2.2 rad and its elbow from -2.4 to 2.4. Compared with the workspace its links alone allow, how much can it still reach?",
+      "options": [
+        "About 55 percent, and the part it loses is not all around the outside",
+        "About 95 percent: limits only shave the extremes off",
+        "All of it, more slowly, since it can always fold a different way",
+        "About 20 percent, since two limits multiply"
+      ],
+      "correct": 0,
+      "explanation": "Measured on a 1 cm grid, 13878 of 25140 geometrically reachable cells survive. The lost region includes ordinary points in the middle of the reach, which is why refused targets look scattered rather than edge-like."
+    },
+    {
+      "stage": "check",
+      "question": "A shoulder is limited to [-0.6, 2.2] rad. The solver returns -6.10 rad. Can the arm hold that pose?",
+      "options": [
+        "Yes: -6.10 and 0.183 are the same direction, and 0.183 is inside the range",
+        "No: -6.10 is below -0.6",
+        "Only if the joint is allowed to turn more than once",
+        "It depends on which way the arm turns to get there"
+      ],
+      "correct": 0,
+      "explanation": "An angle is a direction, not a quantity. -6.10 plus one full turn is 0.183. The comparison has to happen after the turns come off, and a solver that builds angles from a difference of two atan2 calls produces values across roughly (-2pi, 2pi) as a matter of course."
+    },
+    {
+      "stage": "check",
+      "question": "That same shoulder is asked to point at -3.0 rad, which is genuinely illegal. Clamping the number gives -0.6. What does clamping it as an angle give, and why?",
+      "options": [
+        "2.2, because measured as an angle the far end is 1.08 rad away and -0.6 is 2.4 rad away",
+        "-0.6, the same answer: clamping is clamping",
+        "0.0, the midpoint of the range",
+        "-3.0 unchanged, since neither end is close"
+      ],
+      "correct": 0,
+      "explanation": "Going the other way round the circle is shorter. A number clamp cannot see that, because it compares magnitudes rather than directions, and on six illegal directions it picked the further end three times."
+    },
+    {
+      "stage": "check",
+      "question": "The solver returns the elbow-up answer, the limits refuse it, and the code clamps both joint angles into range. How far can the tool end up from the target on a 0.9 m arm?",
+      "options": [
+        "Up to about 0.73 m, and usually the target was reachable by the other elbow",
+        "At most the amount each joint was clamped by, in radians times the link length",
+        "Close: clamping only moves the joint as far as it has to",
+        "It cannot be measured, because the pose is invalid"
+      ],
+      "correct": 0,
+      "explanation": "The two joint angles are not independent. Moving the shoulder and leaving the elbow where the old solution put it answers a question nobody asked. On the four measured targets the clamped error ran from 0.14 to 0.73 m, and on three of them the other branch was exact."
+    },
+    {
+      "stage": "post",
+      "question": "nearest_reachable scans only the elbow, not both joints. Why is that not an approximation?",
+      "options": [
+        "For a fixed elbow the tool sits at a fixed radius, so the best shoulder is the target's bearing minus the arm's own offset, clamped as an angle",
+        "It is an approximation, traded for speed",
+        "Because the shoulder limit is wider than the elbow limit",
+        "Because the elbow contributes more to the tool position than the shoulder does"
+      ],
+      "correct": 0,
+      "explanation": "The shoulder is solved rather than searched, so it is exact for every elbow sample. Against a 601 by 601 grid over both joints, on eight targets, the scan was never worse and used 16008 evaluations against 2889608."
+    },
+    {
+      "stage": "post",
+      "question": "Your solver reports it got within 4 mm of a target the arm cannot reach. What must the test check before you believe it?",
+      "options": [
+        "That the pose it returned is legal and actually lands 4 mm away",
+        "That 4 mm is under the tolerance the application needs",
+        "That the same target fails on a second machine",
+        "That the scan used enough steps"
+      ],
+      "correct": 0,
+      "explanation": "A function that reports a distance it did not achieve is worse than one that fails, because nothing downstream can tell. A stub returning distance 0 passed four of this lesson's checks until the suite recomputed the distance from the returned joint angles."
+    }
+  ]
+}

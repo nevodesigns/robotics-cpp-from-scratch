@@ -1,5 +1,5 @@
 {
   "schema": 1,
   "title": "Kinematics and Dynamics",
-  "ends_with": "An arm asked its question in both directions, exactly where a formula exists and numerically where one does not"
+  "ends_with": "An arm asked its question in both directions, and told apart the pose it cannot reach from the one it cannot hold"
 }
