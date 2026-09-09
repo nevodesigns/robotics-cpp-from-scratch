@@ -73,7 +73,12 @@ jobs:
         # libgl1-mesa-dev is not optional. Qt6 Widgets depends on Qt6 Gui, which
         # needs OpenGL development files, and qt6-base-dev does not pull them in
         # on Ubuntu 22.04. Without it find_package reports Qt6 as missing.
-        run: sudo apt-get install -y qt6-base-dev libgl1-mesa-dev
+        run: >
+          sudo apt-get install -y qt6-base-dev libgl1-mesa-dev
+          qt6-declarative-dev
+          qml6-module-qtqml qml6-module-qtqml-models qml6-module-qtqml-workerscript
+          qml6-module-qtquick qml6-module-qtquick-window qml6-module-qtquick-templates
+          qml6-module-qtquick-controls qml6-module-qtquick-layouts
 
       - uses: ilammy/msvc-dev-cmd@v1
         if: runner.os == 'Windows'
@@ -124,7 +129,11 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           sudo apt-get update
-          sudo apt-get install -y ninja-build qt6-base-dev libgl1-mesa-dev
+          sudo apt-get install -y ninja-build qt6-base-dev libgl1-mesa-dev \
+            qt6-declarative-dev \
+            qml6-module-qtqml qml6-module-qtqml-models qml6-module-qtqml-workerscript \
+            qml6-module-qtquick qml6-module-qtquick-window qml6-module-qtquick-templates \
+            qml6-module-qtquick-controls qml6-module-qtquick-layouts
       - name: configure with address and undefined behaviour sanitizers
         run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DRC_SANITIZE_ADDRESS=ON
       - run: cmake --build build
@@ -143,7 +152,11 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           sudo apt-get update
-          sudo apt-get install -y ninja-build qt6-base-dev libgl1-mesa-dev
+          sudo apt-get install -y ninja-build qt6-base-dev libgl1-mesa-dev \
+            qt6-declarative-dev \
+            qml6-module-qtqml qml6-module-qtqml-models qml6-module-qtqml-workerscript \
+            qml6-module-qtquick qml6-module-qtquick-window qml6-module-qtquick-templates \
+            qml6-module-qtquick-controls qml6-module-qtquick-layouts
       - run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
       - name: build the tool, which supplies the target list
         run: cmake --build build --target rcpp

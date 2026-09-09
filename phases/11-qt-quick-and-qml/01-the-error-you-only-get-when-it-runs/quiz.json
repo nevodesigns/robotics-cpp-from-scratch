@@ -1,0 +1,78 @@
+{
+  "lesson": "11-01-the-error-you-only-get-when-it-runs",
+  "title": "The Error You Only Get When It Runs: What QML Checks, and When",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A QML file contains Item { widht: 100 }, a typo on the property name. When do you find out?",
+      "options": [
+        "When the file loads: QML can read that the property does not exist, so it refuses, at line 2 column 8",
+        "When you build: moc checks QML property names",
+        "Never: unknown properties are ignored",
+        "When the item is first drawn"
+      ],
+      "correct": 0,
+      "explanation": "An unknown property on a known type is visible in the document, so QML refuses the load and reports a line and a column. What it cannot check by reading is what a binding computes."
+    },
+    {
+      "stage": "check",
+      "question": "A binding reads robto.speed, misspelling a context property named robot. What happens?",
+      "options": [
+        "The file loads, the property keeps its default of 0, and the only trace is a warning nothing is connected to",
+        "The load fails with an error naming the line",
+        "The binding is skipped and the property is left unset, which QML reports as an error at first use",
+        "It resolves to an empty object, so the property becomes an empty string"
+      ],
+      "correct": 0,
+      "explanation": "Whether a name resolves is not knowable by reading the file, only by running the binding. So the object is created, the interface draws, and the width is zero. QQmlEngine emits a warnings signal, and nothing is connected to it unless you connect it."
+    },
+    {
+      "stage": "check",
+      "question": "Item { width: 0/0 } loads. How many errors and warnings does Qt report?",
+      "options": [
+        "None of either: the width is 0 and nothing anywhere says so",
+        "One warning about a division by zero",
+        "One error, because NaN is not a valid width",
+        "One warning, but only in a debug build"
+      ],
+      "correct": 0,
+      "explanation": "0/0 is NaN in JavaScript, and NaN assigned to a real property becomes zero. That is legal by every definition QML has, so there is no channel to report it on. This is the tier a test has to catch, because nothing else can."
+    },
+    {
+      "stage": "check",
+      "question": "You load a QML file with QQmlApplicationEngine and rootObjects() comes back empty. What have you been told?",
+      "options": [
+        "One bit, when QQmlComponent::errors() would have given a url, a description, a line and a column",
+        "Everything available: QML reports failures as a boolean",
+        "That the file is missing, since a present file always produces a root object",
+        "That the file loaded but the root type was not a visual item"
+      ],
+      "correct": 0,
+      "explanation": "QQmlComponent is the primitive underneath, and it keeps the full error list. Checking rootObjects().isEmpty() discards a line number that the engine already computed."
+    },
+    {
+      "stage": "post",
+      "question": "Summarise when QML checks a mistake.",
+      "options": [
+        "It checks what it can read in the document, and runs everything else",
+        "It checks everything at load, so a file that loads is correct",
+        "It checks nothing until the property is first read",
+        "It checks types at build time through moc, and names at load time"
+      ],
+      "correct": 0,
+      "explanation": "A string literal where a number goes is refused at load. A binding that computes a string where a number goes is not, because the document does not say what the binding will produce. That one sentence predicts all twelve cases in this lesson."
+    },
+    {
+      "stage": "post",
+      "question": "Your QmlHost loads a component that returns no root object, and component.errors() is empty. What should load() return?",
+      "options": [
+        "A failure carrying one problem saying the component produced no root object",
+        "An empty error list, which accurately reflects what Qt reported",
+        "Success with a null pointer, so the caller can decide",
+        "A failure with no detail, since there is nothing truthful to add"
+      ],
+      "correct": 0,
+      "explanation": "A caller handed an empty list of reasons has been told nothing, and will print an empty message. Saying that much is honest and actionable, and it is a case that happens."
+    }
+  ]
+}

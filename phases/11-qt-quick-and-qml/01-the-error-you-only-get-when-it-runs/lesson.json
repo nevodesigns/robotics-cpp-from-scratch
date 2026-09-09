@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "11-01-the-error-you-only-get-when-it-runs",
+  "title": "The Error You Only Get When It Runs: What QML Checks, and When",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 1,
+  "fallback": "This lesson is about when a language checks your work, and QML is the example rather than the point. Lesson 00-03 asks the same question of the C++ compiler and needs nothing installed. Without Qt, do 00-03 and come back.",
+  "requires": [
+    "09-01-the-qt-object-model",
+    "05-04-inputs-you-did-not-think-of"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Gui",
+      "Qml"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/qml_host.hpp",
+    "note": "loads a QML file and reports what went wrong, including the failures QML only whispers about"
+  },
+  "breaks_first": [
+    "E-QT-0018",
+    "E-QT-0019",
+    "E-QT-0020"
+  ]
+}

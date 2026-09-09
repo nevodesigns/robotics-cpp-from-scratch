@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "title": "Qt Quick and QML",
+  "ends_with": "A QML interface whose failures are visible from a test rather than from a console nobody is watching"
+}
