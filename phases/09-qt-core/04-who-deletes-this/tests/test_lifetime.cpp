@@ -6,6 +6,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QObject>
 #include <QtCore/QPointer>
+#include <QtCore/QSemaphore>
 #include <QtCore/QThread>
 
 #include <atomic>
@@ -184,11 +185,32 @@ RC_TEST("an object is destroyed by the thread it lives in") {
   RC_CHECK(made->thread() == &thread);
   RC_CHECK(made->thread() != QThread::currentThread());
 
+  // Hold the worker's event loop inside a task, so that what happens next is
+  // decided by this test rather than by which thread the scheduler ran first.
+  //
+  // Without this the check below is a race. deleteLater posts an event to a
+  // loop that is running right now, and that loop is free to process it before
+  // this thread reaches the next line. It usually does not on Linux and it did
+  // on Windows, which is lesson 05-05 arriving in the suite that teaches it.
+  QSemaphore inside_the_loop;
+  QSemaphore release_the_loop;
+  QMetaObject::invokeMethod(&maker, [&] {
+    inside_the_loop.release();
+    release_the_loop.acquire();
+  }, Qt::QueuedConnection);
+  inside_the_loop.acquire();
+
   // From here, deleting it directly would touch the connection lists and event
   // queue that the other thread owns. So the deletion is posted to that thread
   // instead, and this one carries on.
   delete_from_its_own_thread(made);
-  RC_CHECK(still_alive(watching));   // nothing has happened yet
+
+  // Still here, and now for a reason rather than by luck: the loop that would
+  // perform the deletion is blocked in the task above and cannot reach it.
+  RC_CHECK(still_alive(watching));
+  RC_CHECK_EQ(alive, 1);
+
+  release_the_loop.release();
 
   // The worker's own loop is what performs it.
   thread.quit();
