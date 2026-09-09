@@ -218,6 +218,25 @@ function(rc_add_lesson)
     target_link_libraries(${check_target} PRIVATE rc::core)
     target_compile_features(${check_target} PRIVATE cxx_std_17)
 
+    # Warnings are errors here, and only here.
+    #
+    # Some guarantees are a hard type error and hold whatever the flags say: a
+    # unit system that refuses to add metres to seconds does that on any
+    # setting. Others are a diagnostic, and a diagnostic is only a guarantee
+    # when it stops the build. Comparing a signed loop counter against an
+    # unsigned size is the second kind.
+    #
+    # The lesson targets deliberately do not carry this. A learner should see
+    # their own warnings and decide, and a curriculum that fails their build on
+    # a warning in lesson four teaches them to switch it off. A checks/ snippet
+    # is not their code, it is an assertion about what a compiler will not let
+    # them do, so it is compiled the way a project that means it would.
+    if(MSVC)
+      target_compile_options(${check_target} PRIVATE /W4 /WX)
+    else()
+      target_compile_options(${check_target} PRIVATE -Wall -Wextra -Werror)
+    endif()
+
     add_test(NAME "${lesson_id}.rejects.${check_name}"
       COMMAND ${CMAKE_COMMAND} --build "${CMAKE_BINARY_DIR}" --target ${check_target})
     set_tests_properties("${lesson_id}.rejects.${check_name}" PROPERTIES

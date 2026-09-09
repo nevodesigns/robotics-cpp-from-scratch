@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "01-07-the-loop-that-never-ends",
+  "title": "The Loop That Never Ends: Sizes Are Unsigned, and Arithmetic Does Not Care",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-04-arrays-and-spans"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/index.hpp",
+    "note": "a signed size and a last index that is -1 when there is nothing there, so a countdown ends"
+  },
+  "breaks_first": [
+    "E-CPP-0028",
+    "E-CPP-0029",
+    "E-CPP-0030"
+  ]
+}
