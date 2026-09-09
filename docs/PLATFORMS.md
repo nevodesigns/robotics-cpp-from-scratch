@@ -63,6 +63,42 @@ upgrade path is proven rather than assumed.
 Anything newer than 6.2 appears only behind a `QT_VERSION_CHECK` guard, and the
 guard is explained where it is used.
 
+One case is worth naming, because it is the first thing a Qt Quick lesson
+reaches for. `QQmlApplicationEngine::objectCreationFailed` arrived in Qt 6.4, so
+on the 6.2 baseline the portable way to detect a QML file that did not load is
+`objectCreated` with a null object, or an empty `rootObjects()` after `load`.
+
+### Qt Quick needs a runtime as well as a toolkit
+
+`qt6-declarative-dev` supplies the headers and the libraries, which is enough to
+compile and link a program that uses `QQmlApplicationEngine`. It is not enough to
+run one. The QML modules themselves are separate packages, and without them a
+Qt Quick program builds cleanly, starts, and then reports
+
+```
+QQmlApplicationEngine failed to load component
+qrc:/main.qml: module "QtQuick" is not installed
+```
+
+with an empty `rootObjects()` and no build time warning of any kind. On Ubuntu
+22.04 and 24.04:
+
+```
+sudo apt install qml6-module-qtqml qml6-module-qtqml-models \
+                 qml6-module-qtqml-workerscript qml6-module-qtquick \
+                 qml6-module-qtquick-window qml6-module-qtquick-templates \
+                 qml6-module-qtquick-controls qml6-module-qtquick-layouts
+```
+
+`qtqml-workerscript` is on that list because QtQuick 6.2 imports it and nothing
+says so until the import fails. `qtquick-templates` is what QtQuick.Controls is
+built on. Neither is something a learner would think to install.
+
+Ubuntu 22.04 ships no standalone Qt 6 `qml` runtime binary. `/usr/bin/qml` is a
+qtchooser stub that answers `could not find a Qt installation of ''`, which is
+not the error it looks like. The curriculum does not use it: every Qt lesson
+builds an executable, and that is the path the tests exercise.
+
 Qt is licensed under the LGPL for open source use. What that means for a binary
 you distribute, in particular dynamic linking and the right to relink, is a
 lesson in phase 12 rather than a footnote.
