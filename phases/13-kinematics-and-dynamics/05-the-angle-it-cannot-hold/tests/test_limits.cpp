@@ -347,5 +347,10 @@ RC_TEST("a target it can reach gets reached, and one it cannot gets reported") {
   // filter, not a replacement for the first.
   const auto too_far = legal_solutions(2.0, 0.0, kFirst, kSecond, limits);
   RC_CHECK(!too_far.has_value());
-  RC_CHECK(too_far.error() == rc::kin::ReachError::TooFar);
+  if (!too_far.has_value()) {
+    // Guarded, because RC_CHECK records a failure and carries on. Asking an
+    // expected for an error it does not hold is an assertion failure in a debug
+    // build, and a crash is not a test report.
+    RC_CHECK(too_far.error() == rc::kin::ReachError::TooFar);
+  }
 }
