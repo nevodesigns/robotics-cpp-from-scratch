@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "11-02-the-value-that-never-changed",
+  "title": "The Value That Never Changed: What QML Can Follow Across the Boundary",
+  "type": "build",
+  "minutes": 135,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 1,
+  "fallback": "The question here is how one side of a boundary learns that the other side changed, and QML is one answer to it. Lesson 09-01 asks the same question with signals and slots in plain C++ and needs no QML runtime. Without Qt Quick, do 09-01 and come back.",
+  "requires": [
+    "11-01-the-error-you-only-get-when-it-runs",
+    "09-02-what-moc-generates"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Gui",
+      "Qml"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/bindable.hpp",
+    "note": "asks the meta object which properties QML can follow, and is honest about the one bug it cannot see"
+  },
+  "breaks_first": [
+    "E-QT-0021",
+    "E-QT-0022",
+    "E-QT-0023"
+  ]
+}

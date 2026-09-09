@@ -1,0 +1,78 @@
+{
+  "lesson": "11-02-the-value-that-never-changed",
+  "title": "The Value That Never Changed: What QML Can Follow Across the Boundary",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A QML binding reads source.speed. C++ changes speed from 1.0 to 7.5. What does the panel show, if the property is declared READ and WRITE with no NOTIFY?",
+      "options": [
+        "1.0, for as long as the panel exists, with no error and no warning",
+        "7.5, because QML re-reads the property when it repaints",
+        "1.0, and QML warns that the property is not notifiable",
+        "Nothing: the binding fails and the property is undefined"
+      ],
+      "correct": 0,
+      "explanation": "A binding is not a poll. It reads once, subscribes to whatever signal the property nominates, and waits. With nothing to subscribe to it waits forever. Measured: one binding evaluation instead of two, and zero warnings."
+    },
+    {
+      "stage": "check",
+      "question": "Which of these does a meta object check like every_property_is_trackable actually catch?",
+      "options": [
+        "A property declared without NOTIFY, and not a setter that declares NOTIFY and forgets to emit it",
+        "All three ways of breaking the binding, since moc sees the whole class",
+        "Only CONSTANT properties that are then modified",
+        "None: the meta object has no information about signals"
+      ],
+      "correct": 0,
+      "explanation": "The meta object holds the declaration, not the function body. Across four classes, one correct and three broken, the check clears three, and two of those three are broken. Knowing that boundary is the point, since that is where the confidence comes from."
+    },
+    {
+      "stage": "check",
+      "question": "A setter emits its NOTIFY signal every call without comparing first. The same value is written 1000 times. How many times does QML re-run a binding that reads it?",
+      "options": [
+        "About 1000, against 2 for a setter that compares first",
+        "Twice: QML deduplicates identical values",
+        "Once, at construction",
+        "About 1000 either way, since the guard only saves the assignment"
+      ],
+      "correct": 0,
+      "explanation": "Measured at 1002 unguarded against 2 guarded. Both panels show the right number; one did five hundred times the work. A telemetry field written at 100 Hz with an unchanged value is the ordinary case in robotics."
+    },
+    {
+      "stage": "check",
+      "question": "Why does inspect_properties start at meta.propertyOffset() rather than at 0?",
+      "options": [
+        "To skip the properties inherited from QObject, which a panel does not bind to",
+        "Because index 0 is always objectName and is not a real property",
+        "Because properties before the offset belong to moc and are not readable",
+        "To skip the properties the class declares, leaving only inherited ones"
+      ],
+      "correct": 0,
+      "explanation": "propertyCount includes everything up the inheritance chain. Starting at the offset gives exactly what this class declared, which is what the answer is about and what keeps it readable."
+    },
+    {
+      "stage": "post",
+      "question": "You replace a context property object after the panel has already been created. What happens to bindings that read it?",
+      "options": [
+        "They re-evaluate and pick up the new object, which is why that alone is not proof the new object is connected",
+        "Nothing: bindings capture the old object permanently",
+        "They break, and QML warns that the context changed",
+        "They re-evaluate only after the next repaint"
+      ],
+      "correct": 0,
+      "explanation": "Measured going from 0.00 to 42.00 on replacement. That happens whatever the object does about NOTIFY, so a test that stops there would pass against a source QML cannot follow. Mutating the new object afterwards is what proves the connection."
+    },
+    {
+      "stage": "post",
+      "question": "What is the smallest test that would have caught all three ways of losing the value?",
+      "options": [
+        "Change the value in C++, then read it back through a loaded QML binding and compare",
+        "Assert that every property is trackable according to the meta object",
+        "Check that the QML file loads with no errors and no warnings",
+        "Assert that the C++ getter returns the value that was set"
+      ],
+      "correct": 0,
+      "explanation": "Four lines, and it is the only check that covers the declaration and the setter together. The static check is worth keeping because it is cheaper and names the property, but it is not sufficient and the lesson measures exactly how insufficient."
+    }
+  ]
+}
