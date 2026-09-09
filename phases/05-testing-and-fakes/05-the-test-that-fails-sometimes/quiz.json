@@ -1,0 +1,78 @@
+{
+  "lesson": "05-05-the-test-that-fails-sometimes",
+  "title": "The Test That Fails Sometimes: Measuring Flakiness Instead of Rerunning",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A test fails on the build server and passes when it is run again. What has that told you?",
+      "options": [
+        "Almost nothing: one failure in a thousand and one in three look identical from a red run followed by a green one",
+        "That the failure was a fluke and the code is fine",
+        "That the build server is misconfigured",
+        "That the test needs a longer timeout"
+      ],
+      "correct": 0,
+      "explanation": "A flaky test is not a test that is wrong, it is a test whose result is a random variable, and rerunning takes one more sample and throws it away. The rate is the number that decides which kind of hunt to start."
+    },
+    {
+      "stage": "check",
+      "question": "The same small piece of work was timed 400 times: fastest 38.39 us, median 39.50, mean 42.31, 99th percentile 95.00, worst 105.53. What shape is that?",
+      "options": [
+        "A floor and no ceiling: nothing can make the work faster than it is and many things can make it slower",
+        "A normal distribution centred on the mean",
+        "Two clusters, one fast and one slow",
+        "Uniform between the fastest and the worst"
+      ],
+      "correct": 0,
+      "explanation": "The median is one microsecond above the floor and the worst is nearly three times it. A threshold placed anywhere near the middle of that is a coin toss."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the smallest of several samples the statistic to use for a benchmark?",
+      "options": [
+        "Noise can add time and never remove it, so the minimum is the closest any run came to measuring the thing itself",
+        "It is the least affected by outliers in both directions",
+        "It matches what users experience",
+        "It converges faster than the mean"
+      ],
+      "correct": 0,
+      "explanation": "A mean measures whatever else the machine was doing, and a single sample measures whether it happened to be doing it just then."
+    },
+    {
+      "stage": "check",
+      "question": "The same work, in blocks of 200 through one run, measured medians of 41.21, 45.23, 48.79 and 48.79, with the fastest sample rising from 38.38 to 47.47. What does that mean for a threshold?",
+      "options": [
+        "A threshold calibrated in a warm up measures a machine that no longer exists, and taking the smallest of several cannot undo a systematic shift",
+        "The threshold should be set from the last block rather than the first",
+        "The measurement is too noisy to be useful",
+        "The work is doing more each time round"
+      ],
+      "correct": 0,
+      "explanation": "The fastest sample rising with the median is what says it is the machine changing state, not noise. The only safe assertion about a benchmark is a comparison measured now, never a time measured then."
+    },
+    {
+      "stage": "post",
+      "question": "Two ways of doing something are compared by measuring 200 samples of one and then 200 of the other. What is wrong with that?",
+      "options": [
+        "It compares one method's minute against the other's, and the machine drifts between them",
+        "200 samples is too few",
+        "The second method benefits from a warmed cache, which is fair",
+        "Nothing, as long as the same threshold is used"
+      ],
+      "correct": 0,
+      "explanation": "The first version of this lesson's own test did exactly that and reported the opposite of the truth. Measure them interleaved, in the same loop."
+    },
+    {
+      "stage": "post",
+      "question": "A test starts a worker and needs to check the result. Sleep, or wait?",
+      "options": [
+        "Wait for the condition with a generous deadline: measured, 0.55 ms against a five second deadline, and the deadline exists only so a hang becomes a failure",
+        "Sleep long enough for the slowest machine you support",
+        "Sleep briefly and retry the whole test if it fails",
+        "Join the thread, since that is what join is for"
+      ],
+      "correct": 0,
+      "explanation": "A fixed sleep is wrong in both directions at once: too short and it fails on a busy machine, too long and every run pays for it. A machine four times slower needs a sleep four times longer and there is no number that is both."
+    }
+  ]
+}
