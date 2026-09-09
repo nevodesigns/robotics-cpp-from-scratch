@@ -86,6 +86,41 @@ function(rc_add_lesson)
     message(FATAL_ERROR "rc_add_lesson: ${lesson_id} has no tests, every lesson ships a test suite")
   endif()
 
+  # Does anything in this lesson declare a meta object?
+  #
+  # AUTOMOC on a target with nothing to moc generates an empty
+  # mocs_compilation.cpp, and MSVC refuses to compile it with
+  #
+  #   fatal error C1083: Cannot open compiler generated file: ''
+  #
+  # Every Qt lesson up to phase 11 declared a QObject subclass, so this went
+  # unnoticed until a Qt lesson arrived whose artifact is a plain RAII class.
+  # The three Linux lanes compile the empty file happily, which is why only the
+  # Windows lane caught it.
+  #
+  # Decided once for the whole lesson rather than per variant, so that a
+  # reference declaring Q_OBJECT still gets moc while the exercise stub that
+  # has not written it yet builds the same way.
+  #
+  # Content is read at configure time, so a lesson that gains its first
+  # Q_OBJECT needs cmake run again. Adding or removing a file already triggers
+  # that through CONFIGURE_DEPENDS; editing one does not.
+  set(lesson_needs_moc FALSE)
+  file(GLOB moc_candidates CONFIGURE_DEPENDS
+    "${lesson_dir}/tests/*.cpp"
+    "${lesson_dir}/tests/*.hpp"
+    "${lesson_dir}/reference/*.cpp"
+    "${lesson_dir}/reference/*.hpp"
+    "${lesson_dir}/exercise/*.cpp"
+    "${lesson_dir}/exercise/*.hpp")
+  foreach(candidate ${moc_candidates})
+    file(STRINGS "${candidate}" moc_markers REGEX "Q_OBJECT|Q_GADGET|Q_NAMESPACE")
+    if(moc_markers)
+      set(lesson_needs_moc TRUE)
+      break()
+    endif()
+  endforeach()
+
   foreach(variant exercise reference)
     # Headers are listed as sources on purpose. Qt's AUTOMOC only processes a
     # header that belongs to the target, and a lesson that declares Q_OBJECT in
@@ -116,7 +151,9 @@ function(rc_add_lesson)
     target_compile_features(${target} PRIVATE cxx_std_17)
 
     if(qt_modules)
-      set_target_properties(${target} PROPERTIES AUTOMOC ON)
+      if(lesson_needs_moc)
+        set_target_properties(${target} PROPERTIES AUTOMOC ON)
+      endif()
       foreach(module ${qt_modules})
         target_link_libraries(${target} PRIVATE Qt6::${module})
       endforeach()
