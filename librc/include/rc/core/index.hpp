@@ -22,16 +22,20 @@
 //
 // What the compiler does about it, measured under -Wall -Wextra:
 //
-//   int i < v.size()              gcc warns, clang warns   (sign-compare)
-//   -1 < v.size()                 gcc warns, clang warns   (sign-compare)
-//   the same, -1 written const    gcc warns, clang silent
-//   unsigned countdown, i >= 0    gcc warns, clang silent  (type-limits)
-//   v[v.size() - 1]               nothing, from either
-//   int n = v.size()              nothing, from either
+//                                 gcc     clang   MSVC
+//   int i < v.size()              warns   warns   silent
+//   -1 < v.size()                 warns   warns   silent
+//   the same, -1 written const    warns   silent  silent
+//   unsigned countdown, i >= 0    warns   silent  silent
+//   v[v.size() - 1]               silent  silent  silent
+//   int n = v.size()              silent  silent  silent
 //
-// So the diagnostics cover the comparisons, cover them inconsistently between
-// compilers, and say nothing whatever about the arithmetic. size() - 1 is the
-// dangerous one and it is the one nothing mentions.
+// gcc and clang at -Wall -Wextra -Werror, MSVC at /W4 /WX. No row is caught by
+// all three, and the arithmetic is caught by none of them. size() - 1 is the
+// dangerous one and it is the one nothing anywhere mentions.
+//
+// So these functions are not a convenience over a diagnostic that would have
+// saved you. There is no such diagnostic.
 //
 // C++20 has std::ssize. This is the same thing for the C++17 baseline, named
 // the same so the day the curriculum moves the change is one line.

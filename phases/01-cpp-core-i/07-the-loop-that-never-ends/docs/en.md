@@ -92,31 +92,44 @@ is rather than the smallest.
 This is the part worth remembering, because it decides how much you can lean on
 the toolchain. Measured under `-Wall -Wextra`:
 
-| | gcc | clang | warning |
-|---|---|---|---|
-| `int i < v.size()` | refuses | refuses | `-Wsign-compare` |
-| `-1 < v.size()` | refuses | refuses | `-Wsign-compare` |
-| the same, with the -1 `const` | refuses | **accepts** | `-Wsign-compare` |
-| unsigned countdown, `i >= 0` | refuses | **accepts** | `-Wtype-limits` |
-| `v[v.size() - 1]` | accepts | accepts | none |
-| `int n = v.size()` | accepts | accepts | none |
+| | gcc | clang | MSVC | diagnostic |
+|---|---|---|---|---|
+| `int i < v.size()` | warns | warns | **silent** | `-Wsign-compare` |
+| `-1 < v.size()` | warns | warns | **silent** | `-Wsign-compare` |
+| the same, with the -1 `const` | warns | **silent** | **silent** | `-Wsign-compare` |
+| unsigned countdown, `i >= 0` | warns | **silent** | **silent** | `-Wtype-limits` |
+| `v[v.size() - 1]` | silent | silent | silent | none |
+| `int n = v.size()` | silent | silent | silent | none |
+
+gcc and clang were measured locally at `-Wall -Wextra -Werror`. MSVC was
+measured in this repository's Windows lane at `/W4 /WX`, where both of the top
+two rows compiled and linked without complaint.
 
 Three things follow.
 
-**The comparisons are covered.** Both compilers object to mixing signed and
-unsigned in a comparison, and this lesson ships two of those in `checks/` as
-code that must not compile.
+**No row is covered by all three.** Not one. The best case, a signed loop
+counter compared against a size, is caught by gcc and clang and sails through
+MSVC.
 
-**The coverage is uneven, and it moves.** gcc reports the countdown condition
-and clang does not. Worse, look at rows two and three: writing the sentinel as
-`const int missing = -1` instead of `int missing = -1` makes clang fold it to a
-known value and stop warning, while gcc still refuses. Adding `const` to a
-variable removed a diagnostic. That was found by this lesson's own
-must-not-compile check failing on the clang lane and passing on gcc.
+**The coverage moves under your feet.** Look at rows two and three. Writing the
+sentinel as `const int missing = -1` instead of `int missing = -1` makes clang
+fold it to a known value and stop warning, while gcc still objects. **Adding
+`const` to a variable removed a diagnostic.**
 
-If you build on one compiler you are relying on a net with a known hole in it,
-and that is a large part of why this curriculum builds every lesson on gcc,
-clang and MSVC on every push.
+Both of those uneven rows were found the hard way. This lesson originally
+shipped rows one and two in `checks/` as code that must not compile. The clang
+lane failed on the `const` version, and when that was fixed the Windows lane
+compiled both. They are not in `checks/` any more, because a must-not-compile
+check has to hold on every toolchain the curriculum claims, and these hold on
+one and a half of three.
+
+**The arithmetic is not covered at all, anywhere.** `size() - 1` produces no
+diagnostic from any of the three, and it is the dangerous one. So is
+`int n = v.size()`.
+
+The conclusion is not that warnings are useless. It is that they are a bonus and
+not a floor, and that a habit which never writes `size() - 1` protects you on
+every compiler while a warning flag protects you on some of them.
 
 **The arithmetic is not covered at all.** `size() - 1` produces no diagnostic
 from anything, and it is the dangerous one. So is `int n = v.size()`, which is a
@@ -160,8 +173,7 @@ rcpp verify 01-07
 
 The suite prints what an empty size does to subtraction, runs the broken
 countdown against a cap to show it does not stop, watches the comparison flip,
-and walks a real vector in both directions. Two snippets in `checks/` are
-compiled and expected to fail.
+and walks a real vector in both directions.
 
 ## Use It
 
@@ -181,8 +193,8 @@ for (auto it = readings.rbegin(); it != readings.rend(); ++it)
 **Do not silence a sign warning with a cast.** `(std::size_t)found < size()`
 makes the message go away and keeps the bug.
 
-**Build on more than one compiler.** The table above is the argument, and it
-cost nothing to find out.
+**Build on more than one compiler**, and do not treat the warnings as a floor.
+The table above is the argument: no row in it is caught by all three.
 
 ## What Breaks First
 
