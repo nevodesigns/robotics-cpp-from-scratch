@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "01-08-close-enough",
+  "title": "Close Enough: Choosing a Tolerance That Means Something",
+  "type": "build",
+  "minutes": 105,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-04-numbers-that-lie",
+    "01-04-arrays-and-spans"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/approx.hpp",
+    "note": "a comparison that means the same thing at every magnitude, and a sum that does not lose the small numbers"
+  },
+  "breaks_first": [
+    "E-NUM-0020",
+    "E-NUM-0021",
+    "E-NUM-0022"
+  ]
+}

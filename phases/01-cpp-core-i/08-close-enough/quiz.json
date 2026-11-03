@@ -1,0 +1,78 @@
+{
+  "lesson": "01-08-close-enough",
+  "title": "Close Enough: Choosing a Tolerance That Means Something",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "You compare two doubles with an absolute tolerance of 1e-9. Roughly how many distinct representable doubles does that tolerance cover at magnitude 1, and at magnitude 1e9?",
+      "options": [
+        "About 4.5 million at magnitude 1, and less than one at 1e9",
+        "The same number at both: a tolerance is a tolerance",
+        "About a thousand at magnitude 1, and about a million at 1e9",
+        "One at magnitude 1, and about 4.5 million at 1e9"
+      ],
+      "correct": 0,
+      "explanation": "Doubles are not spread evenly. The gap between neighbours is 2.2e-16 near 1 and 1.2e-7 near 1e9, so a fixed distance means two completely different things. Both ends are wrong: loose at the bottom, unsatisfiable at the top."
+    },
+    {
+      "stage": "check",
+      "question": "At magnitude 1e9 the gap between neighbouring doubles is 1.19e-7. What does a tolerance of 1e-9 mean there?",
+      "options": [
+        "No two distinct doubles can satisfy it, so a loop waiting for agreement can only stop on an identical bit pattern",
+        "It is very strict but achievable with enough iterations",
+        "It rounds up to the gap, so it behaves as 1.19e-7",
+        "It is undefined behaviour"
+      ],
+      "correct": 0,
+      "explanation": "There is nothing between a value and its neighbour. A tolerance smaller than that gap is not strict, it is impossible, and that is the difference between a slow algorithm and one that cannot terminate."
+    },
+    {
+      "stage": "check",
+      "question": "Why does nearly_equal need an absolute tolerance as well as a relative one?",
+      "options": [
+        "Near zero there is no magnitude to be relative to, so 1e-18 and 2e-18 come out a hundred percent apart",
+        "To make it faster, by skipping the multiply in the common case",
+        "Because relative tolerances do not work on negative numbers",
+        "To handle infinity and NaN"
+      ],
+      "correct": 0,
+      "explanation": "Relative alone cannot reach zero and absolute alone cannot reach 1e9, so the comparison passes if either does. The absolute one is a floor for the neighbourhood of zero and is there for nothing else."
+    },
+    {
+      "stage": "check",
+      "question": "A loop does t += 0.1 and stops when t < 10.0 becomes false. How many steps does it take?",
+      "options": [
+        "101, because a hundred additions of 0.1 reach 9.99999999999998046",
+        "100, exactly as arithmetic says",
+        "It never stops",
+        "99, because the accumulated value overshoots"
+      ],
+      "correct": 0,
+      "explanation": "The accumulated clock lands just under ten, so the condition is still true and the loop takes one more step. Writing t != 10.0 instead never terminates at all. Deriving t from an integer step index and multiplying is exact: 100 * 0.1 is exactly 10.0."
+    },
+    {
+      "stage": "post",
+      "question": "You add 1.0 to a running total of 1e16, a hundred thousand times. How much does the total change?",
+      "options": [
+        "Not at all: the gap between doubles at 1e16 is 2.0, so every addition is discarded",
+        "By 100000, as expected",
+        "By about 50000, since half the additions round up",
+        "By 100000 but with accumulated rounding error of a few units"
+      ],
+      "correct": 0,
+      "explanation": "The sum comes out bit for bit equal to 1e16, an error of exactly -100000. Not rounded, discarded. Sorting smallest first gives the exact answer, and so does kahan_sum without reordering anything."
+    },
+    {
+      "stage": "post",
+      "question": "In kahan_sum, why must (next - total) - adjusted keep its parentheses?",
+      "options": [
+        "Algebraically it is zero, and in floating point it is the part that did not fit, so reassociating it throws the correction away",
+        "For readability only",
+        "Because subtraction is not commutative",
+        "To avoid integer overflow in the intermediate"
+      ],
+      "correct": 0,
+      "explanation": "Floating point addition is not associative, which is both why the algorithm is needed and how it works. An optimiser permitted to reassociate the expression, which -ffast-math permits, computes zero and silently reduces the function to plain addition."
+    }
+  ]
+}
