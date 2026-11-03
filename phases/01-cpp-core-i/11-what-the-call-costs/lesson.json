@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "id": "01-11-what-the-call-costs",
+  "title": "What the Call Costs: Passing, Returning, and the Copy You Did Not Write",
+  "type": "build",
+  "minutes": 105,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-04-arrays-and-spans",
+    "01-05-strings-and-text"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": null,
+  "breaks_first": [
+    "E-CPP-0037",
+    "E-CPP-0038",
+    "E-CPP-0039"
+  ]
+}
