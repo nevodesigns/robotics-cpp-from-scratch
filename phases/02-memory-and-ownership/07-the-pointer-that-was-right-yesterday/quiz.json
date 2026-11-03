@@ -1,0 +1,78 @@
+{
+  "lesson": "02-07-the-pointer-that-was-right-yesterday",
+  "title": "The Pointer That Was Right Yesterday: Invalidation, and Borrowing From Something That Moves",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "You hold a pointer to samples.back(), then push_back one more reading. What happened to your pointer?",
+      "options": [
+        "It may now refer to freed memory, because the vector may have moved its buffer to make room",
+        "Nothing: a vector keeps its elements in place and only the size changed",
+        "It now points at the new element",
+        "It is fine as long as you do not write through it"
+      ],
+      "correct": 0,
+      "explanation": "Measured with three readings and no slack: capacity went from 3 to 6 and the buffer moved. Everything borrowed from the old buffer refers to memory that has been handed back, and nothing warns."
+    },
+    {
+      "stage": "check",
+      "question": "Twenty push_backs into an empty vector caused how many reallocations, and why does that number matter?",
+      "options": [
+        "Six, and it matters because the other fourteen insertions left every borrowed pointer valid, which is how the bug survives testing",
+        "Twenty, one per insertion, so the bug is easy to find",
+        "One, at the first insertion only",
+        "None, because vectors allocate their full capacity up front"
+      ],
+      "correct": 0,
+      "explanation": "Capacities went 1, 2, 4, 8, 16, 32. Most insertions are harmless, which is exactly why a borrowed pointer passes a test suite and fails when a sample buffer gets one element longer."
+    },
+    {
+      "stage": "check",
+      "question": "You reserve room, then erase an element from the middle. What happens to a pointer you saved to a later element?",
+      "options": [
+        "It stays valid and points at a different reading, and no sanitizer reports anything",
+        "It dangles, and the address sanitizer reports a use after free",
+        "It is unaffected, because erase only changes the size",
+        "The vector reallocates, so it dangles"
+      ],
+      "correct": 0,
+      "explanation": "Measured: the storage was identical and the address that held 30 then held 40. Nothing was freed, so there is no use after free to detect. A live pointer to the wrong reading is worse than a dangling one that crashes."
+    },
+    {
+      "stage": "check",
+      "question": "Does storing an index instead of a pointer protect you from an erase?",
+      "options": [
+        "No: an index into a vector is invalidated by an erase exactly as a pointer is, and for the same reason",
+        "Yes, that is the standard fix for all invalidation",
+        "Yes, as long as the index is below the erase point",
+        "Only if the vector was reserved first"
+      ],
+      "correct": 0,
+      "explanation": "An index survives reallocation, which is E-MEM-0011, and not an erase, which shifts everything down. For an erase the answer is to look the element up by identity rather than by position."
+    },
+    {
+      "stage": "post",
+      "question": "Why does same_storage compare the capacity as well as the address?",
+      "options": [
+        "An allocator may hand a freed buffer straight back for the next request, so two different buffers can share an address",
+        "Because the address is not stable between runs",
+        "To make the comparison faster",
+        "Because data() returns null for an empty vector"
+      ],
+      "correct": 0,
+      "explanation": "A vector that reallocated can land at the address it just released, which makes an address-only check report no change after every pointer it handed out was invalidated. Comparing capacity catches it, and predicting with would_reallocate avoids depending on allocator behaviour at all."
+    },
+    {
+      "stage": "post",
+      "question": "Which of std::vector, std::deque and std::list moved their first element over 100 insertions?",
+      "options": [
+        "Only the vector, and it is still the one to reach for first",
+        "All three, since all of them grow",
+        "None, since all three guarantee stable references",
+        "The deque and the list, because they allocate per element"
+      ],
+      "correct": 0,
+      "explanation": "Measured: vector moved, deque and list did not. The other two buy element stability with a pointer chase per element, which phase 07 measures the cost of. Reserve a vector first, and reach for the others when you genuinely need stable addresses."
+    }
+  ]
+}
