@@ -189,7 +189,9 @@ curriculum proves the machinery carries a beginner lesson and a control lesson
 equally well. Filling in between them is milestone M1.
 
 The full map, and the reasoning behind every architectural decision, is in
-[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Where the build has actually got
+to, phase by phase, along with the toolchain and platform facts that were
+expensive to establish, is in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## Rules this repository keeps
 
