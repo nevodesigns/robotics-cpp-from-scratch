@@ -12,14 +12,13 @@
   ],
   "hardware_tier": 0,
   "requires": [
+    "01-10-the-fault-that-never-fired",
     "05-02-fakes-and-replay"
   ],
   "cxx_standard": 17,
   "qt": null,
   "ros2": null,
-  "teaches": [
-    "fixed width integers"
-  ],
+  "teaches": [],
   "artifact": {
     "module": "rc::io",
     "header": "rc/io/bytes.hpp",
