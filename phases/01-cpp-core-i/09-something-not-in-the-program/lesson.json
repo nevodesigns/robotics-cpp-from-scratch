@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "01-09-something-not-in-the-program",
+  "title": "Something Not In the Program: Undefined Behaviour, and Checking Before Instead of After",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-07-the-loop-that-never-ends"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/checked.hpp",
+    "note": "asks whether an integer operation would overflow, before performing it, which is the only moment the question can be asked"
+  },
+  "breaks_first": [
+    "E-CPP-0031",
+    "E-CPP-0032",
+    "E-CPP-0033"
+  ]
+}
