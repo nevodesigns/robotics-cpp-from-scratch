@@ -14,6 +14,35 @@
 
 namespace rcpp {
 
+bool reject_unknown(const Args& args, std::initializer_list<const char*> known,
+                    const char* command) {
+  for (std::size_t i = 0; i < args.size(); ++i) {
+    const std::string_view word = args[i];
+    if (word == "--") break;
+    if (word.size() < 2 || word[0] != '-') continue;
+
+    const std::size_t equals = word.find('=');
+    const std::string_view name =
+        equals == std::string_view::npos ? word : word.substr(0, equals);
+    if (name == "-h" || name == "--help") continue;
+
+    const char* closest = nullptr;
+    std::size_t best = 3;  // only suggest something within two edits
+    bool known_option = false;
+    for (const char* candidate : known) {
+      if (name == candidate) { known_option = true; break; }
+      const std::size_t distance = edit_distance(name, candidate);
+      if (distance < best) { best = distance; closest = candidate; }
+    }
+    if (known_option) continue;
+
+    std::cerr << "rcpp " << command << ": unknown option " << name << "\n";
+    if (closest != nullptr) std::cerr << "  did you mean " << closest << "?\n";
+    return false;
+  }
+  return true;
+}
+
 bool read_option(const Args& args, const char* name, std::string& into, const char* command) {
   const rc::core::Option found = args.option(name);
   if (!found.present) return true;

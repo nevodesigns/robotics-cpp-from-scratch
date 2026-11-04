@@ -65,6 +65,7 @@ int cmd_next(const Args& args) {
   // is both defects of lesson 01-13 in one line: the fallback stood in for a
   // user who misspelled the flag or left its value off, and atoi then turned
   // anything unparseable into 0, which std::max quietly raised to 1.
+  if (!reject_unknown(args, {"--count", "--blocked"}, "next")) return 2;
   int how_many = 3;
   if (!read_count(args, "--count", how_many, "next")) return 2;
 
@@ -124,7 +125,8 @@ int cmd_next(const Args& args) {
   return 0;
 }
 
-int cmd_status(const Args&) {
+int cmd_status(const Args& args) {
+  if (!reject_unknown(args, {}, "status")) return 2;
   const auto root = find_repo_root();
   if (!root) { std::cerr << "rcpp status: run this from inside the repository\n"; return 2; }
 

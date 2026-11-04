@@ -7,6 +7,7 @@
 #include <filesystem>
 #include <optional>
 #include <string>
+#include <string_view>
 #include <vector>
 
 namespace rcpp {
@@ -38,6 +39,12 @@ std::string trim(const std::string& text);
 std::vector<std::string> split(const std::string& text, char separator);
 bool starts_with(const std::string& text, const std::string& prefix);
 bool contains(const std::string& haystack, const std::string& needle);
+
+// How many single character insertions, deletions or substitutions turn one
+// string into the other. Used to suggest the option a user probably meant,
+// because a misspelled flag is the one argument mistake no return type can
+// catch: --phse is simply not an option this tool has.
+std::size_t edit_distance(std::string_view a, std::string_view b);
 
 // Walks upward from the current directory looking for the repository root,
 // which is the directory holding both CMakeLists.txt and phases/.

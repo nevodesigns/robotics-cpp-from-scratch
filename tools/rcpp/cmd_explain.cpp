@@ -35,6 +35,7 @@ int cmd_explain(const Args& args) {
   }
 
   std::string text;
+  if (!reject_unknown(args, {"--file"}, "explain")) return 2;
   std::string file;
   if (!read_option(args, "--file", file, "explain")) return 2;
   if (!file.empty()) {

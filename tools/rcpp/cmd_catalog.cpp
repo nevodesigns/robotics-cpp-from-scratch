@@ -79,6 +79,7 @@ int cmd_catalog(const Args& args) {
   doc.emplace("phases", json::Value(std::move(phases)));
   const std::string text = json::Value(std::move(doc)).dump();
 
+  if (!reject_unknown(args, {"--out", "--stdout"}, "catalog")) return 2;
   std::string out;
   if (!read_option(args, "--out", out, "catalog")) return 2;
   if (out.empty() || args.has("--stdout")) {
@@ -97,6 +98,7 @@ int cmd_list(const Args& args) {
   const auto root = find_repo_root();
   if (!root) { std::cerr << "rcpp list: run this from inside the repository\n"; return 2; }
   const Catalog catalog = load_catalog(*root);
+  if (!reject_unknown(args, {"--phase"}, "list")) return 2;
   std::string phase_filter;
   if (!read_option(args, "--phase", phase_filter, "list")) return 2;
 
@@ -119,7 +121,8 @@ int cmd_list(const Args& args) {
   return 0;
 }
 
-int cmd_start(const Args&) {
+int cmd_start(const Args& args) {
+  if (!reject_unknown(args, {}, "start")) return 2;
   const auto root = find_repo_root();
   if (!root) { std::cerr << "rcpp start: run this from inside the repository\n"; return 2; }
   const Catalog catalog = load_catalog(*root);

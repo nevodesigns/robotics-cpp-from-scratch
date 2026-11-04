@@ -37,6 +37,7 @@ int cmd_verify(const Args& args) {
   }
 
   const Catalog catalog = load_catalog(*root);
+  if (!reject_unknown(args, {"--reference", "--all", "--build-dir"}, "verify")) return 2;
   const bool reference = args.has("--reference");
   const bool all = args.has("--all");
   std::string build_dir_option = "build/verify";

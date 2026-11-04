@@ -434,10 +434,25 @@ The third was not in the plan and was found while reading the two loops that
 collected non-flag arguments by hand. Neither skipped an option's value, so
 the flag order mattered when it should not have. `positionals()` does skip it.
 
-The misspelling case is unchanged and still silent: `rcpp list --phse 01`
-lists all 102, because an unrecognised option is not something a return type
-can catch. `E-CPP-0056` says so, and rejecting unknown dashed arguments is
-the fix, not yet done.
+The misspelling case is now caught too, by the other half of what
+`E-CPP-0056` prescribes: every command declares the options it knows and
+refuses anything else, with a suggestion from an edit distance in
+`tools/rcpp/util.cpp`.
+
+```
+$ rcpp list --phse 01
+rcpp list: unknown option --phse
+  did you mean --phase?
+```
+
+`rcpp next --cont`, `rcpp audit --jsn` and `rcpp verify --refrence` all answer
+the same way. A bare `--` stops the checking, and `-h` and `--help` are always
+allowed. A value that itself began with a dash would be mistaken for an
+option, which no option in this tool takes.
+
+All four invocations continuous integration makes, `platforms --matrix`,
+`audit`, `readme` and `catalog --stdout`, were checked against the new lists
+before the change was pushed.
 
 **Keep filling the front of the book.** Phases 00 to 03 hold 40 of a planned
 66 and are the first thing somebody who has never programmed walks through.

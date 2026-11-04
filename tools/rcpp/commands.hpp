@@ -5,6 +5,7 @@
 #ifndef RCPP_COMMANDS_HPP
 #define RCPP_COMMANDS_HPP
 
+#include <initializer_list>
 #include <string>
 #include <vector>
 
@@ -53,6 +54,21 @@ bool read_option(const Args& args, const char* name, std::string& into, const ch
 // 01-13 it returns 0 for "abc" and for the empty string, 3 for "3.9", and is
 // undefined for a value too large for an int.
 bool read_count(const Args& args, const char* name, int& into, const char* command);
+
+// Refuses any dashed argument the command does not know, and suggests the
+// closest one it does.
+//
+// This is the argument mistake that no return type can catch, which
+// `E-CPP-0056` says plainly: a misspelled option is simply not an option the
+// tool has, so `read_option` cannot distinguish it from one that was never
+// given. Measured before this existed, `rcpp list --phse 01` listed all 102
+// lessons and said nothing.
+//
+// Everything after a bare `--` is left alone, and `-h` and `--help` are
+// always allowed. A value that itself begins with a dash would be mistaken
+// for an option here, which no option in this tool takes.
+bool reject_unknown(const Args& args, std::initializer_list<const char*> known,
+                    const char* command);
 
 }  // namespace rcpp
 

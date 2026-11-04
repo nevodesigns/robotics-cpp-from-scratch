@@ -113,6 +113,7 @@ int cmd_readme(const Args& args) {
   const Catalog catalog = load_catalog(*root);
   const Atlas atlas = load_atlas(*root);
 
+  if (!reject_unknown(args, {"--fix"}, "readme")) return 2;
   const bool fix = args.has("--fix");
   std::string updated = *readme;
   bool changed = false;

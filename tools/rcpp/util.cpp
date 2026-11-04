@@ -108,6 +108,29 @@ bool contains(const std::string& haystack, const std::string& needle) {
   return haystack.find(needle) != std::string::npos;
 }
 
+std::size_t edit_distance(std::string_view a, std::string_view b) {
+  // One row at a time rather than the whole table, because the only thing
+  // needed from the previous row is the row itself.
+  std::vector<std::size_t> previous(b.size() + 1);
+  std::vector<std::size_t> current(b.size() + 1);
+  for (std::size_t j = 0; j <= b.size(); ++j) previous[j] = j;
+
+  for (std::size_t i = 1; i <= a.size(); ++i) {
+    current[0] = i;
+    for (std::size_t j = 1; j <= b.size(); ++j) {
+      const std::size_t substitute = previous[j - 1] + (a[i - 1] == b[j - 1] ? 0u : 1u);
+      const std::size_t remove = previous[j] + 1;
+      const std::size_t insert = current[j - 1] + 1;
+      std::size_t best = substitute;
+      if (remove < best) best = remove;
+      if (insert < best) best = insert;
+      current[j] = best;
+    }
+    previous = current;
+  }
+  return previous[b.size()];
+}
+
 std::optional<fs::path> find_repo_root() {
   std::error_code ec;
   fs::path here = fs::current_path(ec);

@@ -34,6 +34,7 @@ int cmd_platforms(const Args& args) {
 
   const json::Array& toolchains = parsed.value.at("toolchains").as_array();
 
+  if (!reject_unknown(args, {"--matrix"}, "platforms")) return 2;
   if (args.has("--matrix")) {
     json::Array include;
     for (const json::Value& toolchain : toolchains) {

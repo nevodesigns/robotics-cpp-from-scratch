@@ -24,6 +24,7 @@ int cmd_targets(const Args& args) {
   const auto root = find_repo_root();
   if (!root) { std::cerr << "rcpp targets: run this from inside the repository\n"; return 2; }
 
+  if (!reject_unknown(args, {"--exercises", "--references", "--platform"}, "targets")) return 2;
   const bool want_exercises = args.has("--exercises");
   const bool want_references = args.has("--references");
   if (!want_exercises && !want_references) {

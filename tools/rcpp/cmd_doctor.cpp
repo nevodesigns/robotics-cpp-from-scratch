@@ -194,6 +194,7 @@ std::string level_tag(Level level) {
 }  // namespace
 
 int cmd_doctor(const Args& args) {
+  if (!reject_unknown(args, {"--json"}, "doctor")) return 2;
   const bool as_json = args.has("--json");
   const Host host = detect_host();
 
