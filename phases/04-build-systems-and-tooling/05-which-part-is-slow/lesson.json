@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "04-05-which-part-is-slow",
+  "title": "Which Part Is Slow: Attributing Time Inside One Loop",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "02-03-raii-and-destructors",
+    "03-05-time-and-clocks",
+    "03-08-making-it-iterable"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/sections.hpp",
+    "note": "attributes time to named parts of one loop iteration, and reports what it could not account for"
+  },
+  "breaks_first": [
+    "E-DEBUG-0003",
+    "E-DEBUG-0004",
+    "E-DEBUG-0005"
+  ]
+}

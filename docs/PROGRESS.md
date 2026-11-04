@@ -12,15 +12,15 @@ disagree. Last updated 3 November 2026.
 
 | | |
 |---|---|
-| lessons built | 95 of 320 planned, 30 percent |
+| lessons built | 96 of 320 planned, 30 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 196 |
-| Failure Atlas entries | 233 |
-| librc headers | 86 across 13 modules |
+| hours of material | 198 |
+| Failure Atlas entries | 236 |
+| librc headers | 87 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 112, green on every claimed toolchain |
-| commits | 189 |
+| reference tests | 113, green on every claimed toolchain |
+| commits | 190 |
 
 ## Phase by phase
 
@@ -33,7 +33,7 @@ disagree. Last updated 3 November 2026.
 | 01 C++ Core I, values and flow | 12 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 8 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 8 | 18 | An injectable clock, so dt has a provenance |
-| 04 Build systems and tooling | 4 | 14 | A library of your own, installed, consumed by a project that never saw its source |
+| 04 Build systems and tooling | 5 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 5 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 6 | 16 | Where the gripper is, in the world frame, and how you know |
 | 07 Concurrency and real time | 5 | 16 | A measured latency histogram of your own control loop |
@@ -126,11 +126,11 @@ twice.
 
 ## librc
 
-86 headers. Modules and counts:
+87 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
-| `rc::core` | 25 |
+| `rc::core` | 26 |
 | `rc::control` | 8 |
 | `rc::io` | 8 |
 | `rc::math` | 8 |
@@ -156,7 +156,7 @@ twice.
 `E-CPP` 48, `E-QT` 23, `E-NUM` 22, `E-NAV` 19, `E-CTRL` 14, `E-IO` 16,
 `E-MEM` 13, `E-SENSE` 13, `E-KIN` 10, `E-TEST` 10, `E-RT` 7, `E-MATH` 6,
 `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-THREAD` 4, `E-BUILD` 2,
-`E-DEBUG` 2, `E-TIME` 2, `E-TSAN` 1.
+`E-DEBUG` 5, `E-TIME` 2, `E-TSAN` 1.
 
 L025 requires every `match:` pattern to be ASCII, because build output is
 normalised to ASCII quotes before matching, so a pattern with a typographic
@@ -245,6 +245,10 @@ version is the intuitive one.
 - **Erasing from a vector leaves every pointer valid and pointing at a
   different element.** Nothing is freed, so no sanitiser reports it, which makes
   it worse than the dangling case that crashes. 02-07.
+- **A loop's named sections came to 880 of 1000 microseconds.** The missing
+  twelve percent was code nobody had thought to name, which is the usual place
+  for a surprise, and a nested section makes the remainder go negative rather
+  than the shares exceeding a hundred percent silently. 04-05.
 - **Checking every field of a log line catches one bad line in three.** A row
   cut short parses as a valid shorter row, and a decimal comma in a comma
   separated file splits into an extra column of perfectly good numbers. Only
@@ -271,7 +275,7 @@ version is the intuitive one.
 not been revised against what the lessons turned out to need, and some phases
 may want a different count rather than the planned one.
 
-**Hardware tiers 2 and 3 are almost untouched.** 94 of the 95 lessons are tier
+**Hardware tiers 2 and 3 are almost untouched.** 95 of the 96 lessons are tier
 0 or 1. The plan requires every tier 2 or 3 lesson to ship a simulated
 fallback, and that has not been exercised.
 
