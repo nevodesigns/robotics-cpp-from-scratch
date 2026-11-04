@@ -13,8 +13,9 @@
   "hardware_tier": 1,
   "fallback": "This lesson is about when a language checks your work, and QML is the example rather than the point. Lesson 00-03 asks the same question of the C++ compiler and needs nothing installed. Without Qt, do 00-03 and come back.",
   "requires": [
-    "09-01-the-qt-object-model",
-    "05-04-inputs-you-did-not-think-of"
+    "02-08-behaviour-as-a-value",
+    "05-04-inputs-you-did-not-think-of",
+    "09-01-the-qt-object-model"
   ],
   "cxx_standard": 17,
   "qt": {

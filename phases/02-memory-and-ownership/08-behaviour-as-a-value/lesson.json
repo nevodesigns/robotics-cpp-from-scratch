@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "02-08-behaviour-as-a-value",
+  "title": "Behaviour as a Value: What a Lambda Captures, and For How Long",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-11-what-the-call-costs",
+    "02-02-the-heap-and-the-leak",
+    "02-07-the-pointer-that-was-right-yesterday"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [
+    "lambdas"
+  ],
+  "artifact": null,
+  "breaks_first": [
+    "E-CPP-0043",
+    "E-CPP-0044",
+    "E-CPP-0045"
+  ]
+}

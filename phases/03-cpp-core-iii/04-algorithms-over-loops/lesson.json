@@ -12,6 +12,7 @@
   ],
   "hardware_tier": 0,
   "requires": [
+    "02-08-behaviour-as-a-value",
     "03-03-containers-and-their-costs"
   ],
   "cxx_standard": 17,

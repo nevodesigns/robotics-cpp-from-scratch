@@ -352,6 +352,24 @@ const std::vector<Facility>& tracked_facilities() {
       {"std::int8_t", "fixed width integers"},
       {"std::int16_t", "fixed width integers"},
       {"std::int32_t", "fixed width integers"},
+
+      // Lambdas, under the spellings that cannot be mistaken for anything
+      // else. A token with punctuation in it is matched as a plain substring,
+      // so "[](" on its own would also match operator[](, which several
+      // lessons declare. Requiring a space or an open bracket in front catches
+      // a captureless lambda in an argument list without catching an index
+      // operator, and the capture forms below are unambiguous already.
+      //
+      // This deliberately does not catch every lambda. A captureless one at
+      // the very start of a line with no indentation would slip through. It
+      // catches the ones this curriculum actually writes, which was enough to
+      // find that 03-04 and 11-01 had been using them since before anything
+      // taught them.
+      {" [](", "lambdas"},
+      {"([](", "lambdas"},
+      {"[&]", "lambdas"},
+      {"[=]", "lambdas"},
+      {"[this]", "lambdas"},
   };
   return facilities;
 }

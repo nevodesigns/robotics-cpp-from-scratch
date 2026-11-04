@@ -1,0 +1,78 @@
+{
+  "lesson": "02-08-behaviour-as-a-value",
+  "title": "Behaviour as a Value: What a Lambda Captures, and For How Long",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Two lambdas are made while limit is 1.0. Then limit becomes 100.0. Asked whether 50 exceeds the limit, what does each say?",
+      "options": [
+        "[limit] says true, answering against its own copy of 1.0; [&limit] says false, reading 100.0 at the call",
+        "Both say false: the limit is 100 by the time either is called",
+        "Both say true: a capture is taken when the lambda is created",
+        "[limit] fails to compile, because limit is not const"
+      ],
+      "correct": 0,
+      "explanation": "A by value capture is a decision taken once. A by reference capture is a question asked every call. Neither is wrong; they are different things, and one character separates them."
+    },
+    {
+      "stage": "check",
+      "question": "Does returning a lambda that captured a local by reference produce a compiler diagnostic?",
+      "options": [
+        "No: measured with -Wall -Wextra -Werror, gcc and clang both accepted it",
+        "Yes, both refuse it, as they do for returning a reference to a local",
+        "Only clang warns, through -Wreturn-stack-address",
+        "Yes, it is a hard error in C++17"
+      ],
+      "correct": 0,
+      "explanation": "Returning a reference to a local directly is refused by both, and lesson 01-11 keeps that in checks/. Hide the same reference inside a capture list and the diagnostic disappears. The address sanitizer does find it at runtime, which is why the lane exists."
+    },
+    {
+      "stage": "check",
+      "question": "What is sizeof a lambda that captures nothing, and why?",
+      "options": [
+        "1 byte: it is a class with no members, and an empty class still needs a distinct address",
+        "0 bytes: there is nothing to store",
+        "8 bytes: it holds a pointer to its own code",
+        "32 bytes, the same as a std::function"
+      ],
+      "correct": 0,
+      "explanation": "A lambda is a class the compiler writes, with one member per capture. Measured: nothing is 1 byte, one double is 8, one reference is 8, and a whole captured std::vector is 24, which is sizeof(std::vector<double>)."
+    },
+    {
+      "stage": "check",
+      "question": "Are two character for character identical lambda expressions the same type?",
+      "options": [
+        "No: the compiler writes a new class for every lambda expression in the program",
+        "Yes, if they capture the same things",
+        "Yes, since they have the same signature",
+        "Only within the same function"
+      ],
+      "correct": 0,
+      "explanation": "Which is why you store one with auto: the type has no name you could write down. It is also why putting one into a std::function is a conversion rather than a copy."
+    },
+    {
+      "stage": "post",
+      "question": "A std::function holding a lambda that captures 17 bytes allocated once, while one capturing 8 bytes allocated none. What allocated, and when?",
+      "options": [
+        "std::function, when it was assigned, because what it holds did not fit in its internal buffer",
+        "The lambda, when it was created",
+        "The lambda, on every call",
+        "std::function, on every call"
+      ],
+      "correct": 0,
+      "explanation": "The lambda never allocates: 64 bytes of captures is a 64 byte object on the stack, and calling it directly cost 0. The allocation comes from type erasure needing somewhere to keep an object whose size is not known until runtime, and it happens at assignment, so build the callback outside the loop."
+    },
+    {
+      "stage": "post",
+      "question": "Capturing a std::vector by value in a lambda that is then stored in a std::function cost 3 allocations. Why three?",
+      "options": [
+        "The vector's buffer was copied into the lambda, and then the lambda was too big to live inside the std::function",
+        "One per element, for the first three elements",
+        "std::function always allocates three times",
+        "The vector was copied three times, once per capture"
+      ],
+      "correct": 0,
+      "explanation": "Two costs for one capture list. Against 0 allocations for the callable that captured a single double. Capture a pointer to the data rather than the data, after answering the lifetime question that raises."
+    }
+  ]
+}
