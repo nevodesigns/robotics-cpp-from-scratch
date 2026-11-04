@@ -12,15 +12,15 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 
 | | |
 |---|---|
-| lessons built | 104 of 320 planned, 33 percent |
+| lessons built | 105 of 320 planned, 33 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 214 |
-| Failure Atlas entries | 260 |
-| librc headers | 93 across 13 modules |
+| hours of material | 216 |
+| Failure Atlas entries | 263 |
+| librc headers | 94 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 137, green on every claimed toolchain |
-| commits | 205 |
+| reference tests | 138, green on every claimed toolchain |
+| commits | 207 |
 
 ## Phase by phase
 
@@ -33,7 +33,7 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 | 01 C++ Core I, values and flow | 13 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 9 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
-| 04 Build systems and tooling | 6 | 14 | A library of your own, installed, consumed by a project that never saw its source |
+| 04 Build systems and tooling | 7 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 6 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 6 | 16 | Where the gripper is, in the world frame, and how you know |
 | 07 Concurrency and real time | 5 | 16 | A measured latency histogram of your own control loop |
@@ -126,7 +126,7 @@ twice.
 
 ## librc
 
-93 headers. Modules and counts:
+94 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
@@ -138,7 +138,7 @@ twice.
 | `rc::nav` | 7 |
 | `rc::kin` | 5 |
 | `rc::rt` | 5 |
-| `rc::test` | 5 |
+| `rc::test` | 6 |
 | `rc::plot` | 2 |
 | `rc::sensor` | 2 |
 | `rc::sim` | 2 |
@@ -150,13 +150,13 @@ twice.
 
 ## Failure Atlas
 
-260 entries under `atlas/errors/`, each with a `match:` pattern that
+263 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 60, `E-NUM` 24, `E-QT` 23, `E-NAV` 19, `E-MEM` 16, `E-IO` 16,
-`E-CTRL` 14, `E-TEST` 13, `E-SENSE` 13, `E-KIN` 10, `E-DEBUG` 8, `E-RT` 7,
+`E-CPP` 60, `E-NUM` 24, `E-QT` 23, `E-NAV` 19, `E-MEM` 17, `E-IO` 16,
+`E-CTRL` 14, `E-SENSE` 13, `E-TEST` 13, `E-DEBUG` 10, `E-KIN` 10, `E-RT` 7,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-THREAD` 4,
-`E-BUILD` 2, `E-TIME` 2, `E-TSAN` 1.
+`E-BUILD` 3, `E-TIME` 2, `E-TSAN` 1.
 
 L025 requires every `match:` pattern to be ASCII, because build output is
 normalised to ASCII quotes before matching, so a pattern with a typographic
@@ -229,6 +229,29 @@ version is the intuitive one.
   06-06.
 - **Padding and index caching in an SPSC queue are worth nothing alone and
   about 80 percent together.** 07-05.
+- **My own sanitizer lane was never instrumented, for a whole session.** The
+  option is `RC_SANITIZE_ADDRESS` and I was passing `RC_SANITIZE`, which CMake
+  accepts in silence as a variable nothing reads. Continuous integration used
+  the correct option throughout, so coverage was always real and only my local
+  claim was false. The tell was a measurement that refused to move: 02-09's
+  heap test reported the same 16 of 32 in both lanes, where genuine
+  instrumentation gives 0 of 32. Ask the build graph, not the command line.
+  04-07.
+- **The two sanitizers overlap and neither is a superset.** Address is blind
+  to signed overflow; undefined reported a read past the end of a block when
+  the size was known at compile time and nothing at all when it was not. Of
+  five common defects the pair this curriculum builds with finds three, and
+  the two it misses are the two measured most carefully elsewhere, which is
+  not a coincidence. 04-07.
+- **Undefined cost more than address here**, 4.1x against 1.8x on an
+  arithmetic-heavy loop, the reverse of the usual assumption. One workload, so
+  the useful conclusion is that both are cheap enough for every push and
+  neither is cheap enough to ship. 04-07.
+- **`#if defined(__has_feature) && __has_feature(x)` does not compile on
+  gcc.** The && does not protect the right hand side: the preprocessor parses
+  the whole expression first, and an unknown identifier followed by a
+  parenthesis is a syntax error rather than zero. The tests have to be
+  nested. 04-07.
 - **A crash loses buffered output, and the line you never saw is not the line
   it stopped at.** Four lines printed before a deliberate segmentation fault,
   into a pipe: the printf and the cout arrived, the cerr arrived, and the cout

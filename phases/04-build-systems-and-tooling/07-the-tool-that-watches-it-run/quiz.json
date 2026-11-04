@@ -1,0 +1,78 @@
+{
+  "lesson": "04-07-the-tool-that-watches-it-run",
+  "title": "The Tool That Watches It Run: Sanitizers, and What Each One Will Not Tell You",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "The same signed overflow was run three ways. Plain printed -1293967296. Which sanitizer reported it?",
+      "options": [
+        "The undefined behaviour sanitizer; the address sanitizer printed the same wrong number and said nothing",
+        "The address sanitizer, since overflow corrupts memory",
+        "Both, since overflow is undefined and undefined behaviour is memory unsafe",
+        "Neither; overflow is only detectable at compile time"
+      ],
+      "correct": 0,
+      "explanation": "The two sanitizers are not interchangeable and neither is a superset. Address is blind to arithmetic; undefined is largely blind to memory layout."
+    },
+    {
+      "stage": "check",
+      "question": "A read past the end of a new[] block was tested twice: once with the size known at compile time and once with it known only at runtime. What did the undefined behaviour sanitizer do?",
+      "options": [
+        "Reported it in the first case through its object-size check, and reported nothing in the second",
+        "Reported both, since the read is undefined either way",
+        "Reported neither; bounds are the address sanitizer's job alone",
+        "Crashed in both cases without a diagnostic"
+      ],
+      "correct": 0,
+      "explanation": "The address sanitizer caught both, because it uses redzones around every allocation rather than reasoning about declared object sizes. So undefined finds some of these and must not be relied on for them."
+    },
+    {
+      "stage": "check",
+      "question": "Lesson 02-09's heap test reports 16 of 32 bytes coming back from a freed block without a sanitizer, and 0 of 32 with the address sanitizer. What does that mean for the test?",
+      "options": [
+        "It must say which build it is in, because both numbers are correct and neither is a fact about C++",
+        "The sanitizer is faulty and the measurement should be trusted from the plain build",
+        "The test should be excluded from the sanitizer lane",
+        "The pattern was never written, so both numbers are meaningless"
+      ],
+      "correct": 0,
+      "explanation": "The address sanitizer replaces the allocator: freed blocks go into a quarantine and memory is poisoned. A measurement is of a program plus the thing measuring it."
+    },
+    {
+      "stage": "check",
+      "question": "Why is #if defined(__has_feature) && __has_feature(address_sanitizer) wrong?",
+      "options": [
+        "The preprocessor parses the whole expression before evaluating it, and an unknown identifier followed by a parenthesis is a syntax error rather than zero",
+        "__has_feature is not a macro, so defined() always reports false for it",
+        "&& is not permitted in a #if expression",
+        "It is correct, but only on clang"
+      ],
+      "correct": 0,
+      "explanation": "gcc refuses it with \"missing binary operator before token (\". An unknown bare identifier becomes 0, which is why #if UNDEFINED_MACRO is legal; an unknown identifier with parentheses is not. The tests have to be nested."
+    },
+    {
+      "stage": "post",
+      "question": "A sanitizer lane stayed green through changes that should have tripped it, and a measurement that should have differed under instrumentation came out identical. What is the most likely cause?",
+      "options": [
+        "The build was never instrumented: a misspelled -D option is accepted silently by CMake as a variable nothing reads",
+        "The sanitizer only reports in release builds",
+        "The tests were excluded from that lane by a label filter",
+        "Sanitizer reports go to stdout and were swallowed by the log"
+      ],
+      "correct": 0,
+      "explanation": "This happened in this repository for a whole session: RC_SANITIZE instead of RC_SANITIZE_ADDRESS. Ask the build graph what flags it used, or have the suite print what it was compiled with, which is what this lesson's header is for."
+    },
+    {
+      "stage": "post",
+      "question": "Of five common defects, this curriculum's sanitizer lane finds three. Which two does it miss, and what follows?",
+      "options": [
+        "An uninitialised read and a data race; a defect no tool reports is one you have to design against instead",
+        "A heap overflow and a use after free; both need the thread sanitizer",
+        "Signed overflow and a data race; both need a release build",
+        "None; the lane finds all five, which is why it is run on every push"
+      ],
+      "correct": 0,
+      "explanation": "That is not a coincidence. 02-09 answered the uninitialised read by making the storage loud and 03-11 by pushing it into a constant expression, and phase 07 handles races. A sanitizer also only reports what the test actually ran, so the lane is worth exactly as much as the suite's coverage."
+    }
+  ]
+}
