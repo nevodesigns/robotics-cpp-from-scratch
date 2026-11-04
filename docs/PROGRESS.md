@@ -12,15 +12,15 @@ disagree. Last updated 3 November 2026.
 
 | | |
 |---|---|
-| lessons built | 91 of 320 planned, 28 percent |
+| lessons built | 92 of 320 planned, 29 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 188 |
-| Failure Atlas entries | 221 |
-| librc headers | 83 across 13 modules |
+| hours of material | 190 |
+| Failure Atlas entries | 224 |
+| librc headers | 84 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 102, green on every claimed toolchain |
-| commits | 185 |
+| reference tests | 105, green on every claimed toolchain |
+| commits | 186 |
 
 ## Phase by phase
 
@@ -32,7 +32,7 @@ disagree. Last updated 3 November 2026.
 | 00 Toolchain and First Motion | 8 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 11 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 7 | 16 | A subsystem tree that releases completely, with no cycles |
-| 03 C++ Core III, classes and templates | 6 | 18 | An injectable clock, so dt has a provenance |
+| 03 C++ Core III, classes and templates | 7 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 4 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 5 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 6 | 16 | Where the gripper is, in the world frame, and how you know |
@@ -54,7 +54,7 @@ disagree. Last updated 3 November 2026.
 
 **Where the gap is.** The front of the book is the thinnest part relative to
 how early a learner meets it. Phases 00 to 03 are the first thing somebody who
-has never programmed walks through, and they hold 32 of a planned 66. Everything
+has never programmed walks through, and they hold 33 of a planned 66. Everything
 after phase 13 is material such a learner cannot reach yet. Finishing the front
 is worth more than extending the back.
 
@@ -123,11 +123,11 @@ twice.
 
 ## librc
 
-83 headers. Modules and counts:
+84 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
-| `rc::core` | 22 |
+| `rc::core` | 23 |
 | `rc::control` | 8 |
 | `rc::io` | 8 |
 | `rc::math` | 8 |
@@ -150,7 +150,7 @@ twice.
 218 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 39, `E-QT` 23, `E-NUM` 22, `E-NAV` 19, `E-CTRL` 14, `E-IO` 13,
+`E-CPP` 42, `E-QT` 23, `E-NUM` 22, `E-NAV` 19, `E-CTRL` 14, `E-IO` 13,
 `E-MEM` 13, `E-SENSE` 13, `E-KIN` 10, `E-TEST` 10, `E-RT` 7, `E-MATH` 6,
 `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-THREAD` 4, `E-BUILD` 2,
 `E-DEBUG` 2, `E-TIME` 2, `E-TSAN` 1.
@@ -242,6 +242,11 @@ version is the intuitive one.
 - **Erasing from a vector leaves every pointer valid and pointing at a
   different element.** Nothing is freed, so no sanitiser reports it, which makes
   it worse than the dangling case that crashes. 02-07.
+- **A static_assert does not shorten a template error on clang.** Constraining
+  a template took gcc from 113 lines to 5 and took clang from 224 up to 254,
+  because clang reports the assertion and instantiates the rest anyway. What it
+  reliably fixes on both is the first error line, which is the one that gets
+  read. 03-07.
 
 ## Not done
 
@@ -251,7 +256,7 @@ version is the intuitive one.
 not been revised against what the lessons turned out to need, and some phases
 may want a different count rather than the planned one.
 
-**Hardware tiers 2 and 3 are almost untouched.** 90 of the 91 lessons are tier
+**Hardware tiers 2 and 3 are almost untouched.** 91 of the 92 lessons are tier
 0 or 1. The plan requires every tier 2 or 3 lesson to ship a simulated
 fallback, and that has not been exercised.
 

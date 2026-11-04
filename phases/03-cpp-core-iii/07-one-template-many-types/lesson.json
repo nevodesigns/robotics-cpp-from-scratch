@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "03-07-one-template-many-types",
+  "title": "One Template, Many Types: A Ring Buffer That Works for Anything",
+  "type": "build",
+  "minutes": 135,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "02-02-the-heap-and-the-leak",
+    "03-01-classes-and-invariants"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [
+    "templates"
+  ],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/ring.hpp",
+    "note": "the fixed capacity history buffer the rest of the curriculum keeps its last N readings in"
+  },
+  "breaks_first": [
+    "E-CPP-0040",
+    "E-CPP-0041",
+    "E-CPP-0042"
+  ]
+}
