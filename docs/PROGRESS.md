@@ -12,15 +12,15 @@ disagree. Last updated 4 November 2026.
 
 | | |
 |---|---|
-| lessons built | 101 of 320 planned, 32 percent |
+| lessons built | 102 of 320 planned, 32 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 208 |
-| Failure Atlas entries | 251 |
-| librc headers | 90 across 13 modules |
+| hours of material | 210 |
+| Failure Atlas entries | 254 |
+| librc headers | 91 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 125, green on every claimed toolchain |
-| commits | 198 |
+| reference tests | 129, green on every claimed toolchain |
+| commits | 199 |
 
 ## Phase by phase
 
@@ -30,7 +30,7 @@ disagree. Last updated 4 November 2026.
 | Phase | Built | Planned | Ends with |
 |---|---|---|---|
 | 00 Toolchain and First Motion | 8 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
-| 01 C++ Core I, values and flow | 12 | 18 | A drive state machine that cannot represent nonsense |
+| 01 C++ Core I, values and flow | 13 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 9 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 10 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 6 | 14 | A library of your own, installed, consumed by a project that never saw its source |
@@ -54,7 +54,7 @@ disagree. Last updated 4 November 2026.
 
 **Where the gap is.** The front of the book is the thinnest part relative to
 how early a learner meets it. Phases 00 to 03 are the first thing somebody who
-has never programmed walks through, and they hold 39 of a planned 66. Everything
+has never programmed walks through, and they hold 40 of a planned 66. Everything
 after phase 13 is material such a learner cannot reach yet. Finishing the front
 is worth more than extending the back.
 
@@ -126,11 +126,11 @@ twice.
 
 ## librc
 
-90 headers. Modules and counts:
+91 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
-| `rc::core` | 28 |
+| `rc::core` | 29 |
 | `rc::control` | 8 |
 | `rc::io` | 8 |
 | `rc::math` | 8 |
@@ -150,10 +150,10 @@ twice.
 
 ## Failure Atlas
 
-251 entries under `atlas/errors/`, each with a `match:` pattern that
+254 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 54, `E-QT` 23, `E-NUM` 22, `E-NAV` 19, `E-MEM` 16, `E-IO` 16,
+`E-CPP` 56, `E-QT` 23, `E-NUM` 23, `E-NAV` 19, `E-MEM` 16, `E-IO` 16,
 `E-CTRL` 14, `E-TEST` 13, `E-SENSE` 13, `E-KIN` 10, `E-DEBUG` 8, `E-RT` 7,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-THREAD` 4,
 `E-BUILD` 2, `E-TIME` 2, `E-TSAN` 1.
@@ -229,6 +229,20 @@ version is the intuitive one.
   06-06.
 - **Padding and index caching in an SPSC queue are worth nothing alone and
   about 80 percent together.** 07-05.
+- **`atoi` got three of five user-typed strings wrong, in three different
+  ways**: 0 for two things that are not numbers, indistinguishable from a
+  deliberate 0, and 3 for "3.9", a real number read as a different one. On a
+  20 digit number it is undefined rather than wrong, and returned -1, turning
+  a mistyped speed limit into a negative speed. 01-13.
+- **A missing command line argument is not an out of bounds read.** The
+  standard guarantees `argv[argc]` is null, so reading `argv[1]` with no
+  arguments is valid and yields a null that looks like a value. Worse than a
+  wild pointer, which crashes where the mistake is. 01-13.
+- **A lookup with a fallback destroys information at the return statement.**
+  Absent, misspelled, and given-with-no-value all come back as the default,
+  and only the first of those should. This repository's own
+  `tools/rcpp/main.cpp` has that shape, which is where the lesson came from.
+  01-13.
 - **A sliced copy is not broken, it is smaller.** The same object read 21.5
   through a `const LooseSensor&` and 0 by value, because `sizeof(LooseSensor)`
   is 8 and `sizeof(LooseThermometer)` is 16, so dispatch correctly picked the

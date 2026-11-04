@@ -1,0 +1,78 @@
+{
+  "lesson": "01-13-the-argument-that-was-not-there",
+  "title": "The Argument That Was Not There: Reading a Command Line Without Lying About It",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A program is run with no arguments, so argc is 1, and it reads argv[1] anyway. What does it get?",
+      "options": [
+        "A null pointer, because the standard guarantees argv[argc] is null, so the read is valid and the value is not",
+        "Whatever happens to be past the end of the array, which is out of bounds",
+        "An empty string, because the shell always supplies one",
+        "A compile error, since argc is not a constant"
+      ],
+      "correct": 0,
+      "explanation": "The read is perfectly valid and that is what makes it dangerous: a wild pointer usually crashes where the mistake is, and a null that looks like a value travels. Constructing a std::string from it is undefined behaviour."
+    },
+    {
+      "stage": "check",
+      "question": "std::atoi was given five strings: 42, abc, the empty string, 3.9 and 7abc. It returned 42, 0, 0, 3 and 7. How many of those five answers are correct?",
+      "options": [
+        "One, and the three wrong ones are wrong in three different ways",
+        "Two, since 3.9 truncating to 3 is the documented behaviour",
+        "Four, since only the empty string is a real error",
+        "All five, since atoi is defined for every input"
+      ],
+      "correct": 0,
+      "explanation": "0 for things that are not numbers is indistinguishable from a user who typed 0. 3 for 3.9 is a real number read as a different one. 7 for 7abc silently ignores the rest. Only 42 is right."
+    },
+    {
+      "stage": "check",
+      "question": "What does std::atoi do with a value too large for an int, such as 99999999999999999999?",
+      "options": [
+        "It is undefined behaviour; measured here it returned -1, turning a mistyped limit into a negative one",
+        "It returns INT_MAX, which is the documented saturation behaviour",
+        "It returns 0 like any other input it cannot read",
+        "It sets errno to ERANGE and returns 0"
+      ],
+      "correct": 0,
+      "explanation": "strtol on the same string returned LONG_MAX and set ERANGE, which is why strtol with all four checks, or rc::core::parse_number, is the answer rather than atoi."
+    },
+    {
+      "stage": "check",
+      "question": "Why does a lookup returning a value with a fallback for not-found lose information no matter how its body is written?",
+      "options": [
+        "Four situations share one return channel: option absent, option misspelled, option given with no value, and option given properly",
+        "Because string fallbacks cannot represent an empty value",
+        "Because the fallback has to be computed before the lookup runs",
+        "It does not; the fallback is sufficient if it is chosen carefully"
+      ],
+      "correct": 0,
+      "explanation": "A user who did not ask should get the default. A user who asked and typed it wrong should be told. One return value cannot do both, and the information is destroyed at the return statement."
+    },
+    {
+      "stage": "post",
+      "question": "Why do Option and Arguments::Number deliberately have no conversion to bool or double?",
+      "options": [
+        "A conversion would have to pick one of the three answers to stand for all of them, invisibly, at every call site",
+        "Because implicit conversions are banned by the C++ standard for structs",
+        "To keep sizeof(Option) small enough to pass in a register",
+        "Because string_view cannot be converted to bool either"
+      ],
+      "correct": 0,
+      "explanation": "If Option converted to bool, the author would have to decide whether it meant present, present-with-a-value, or present-with-a-non-empty-value. Every choice is wrong at some call site and the choice would be invisible. The lesson's checks/ directory proves both conversions fail to compile."
+    },
+    {
+      "stage": "post",
+      "question": "A tool is given --sped 0.9 when it expects --speed. Which of these actually catches it?",
+      "options": [
+        "Rejecting any unrecognised argument that starts with a dash, since no return type can know what the user meant",
+        "Returning a three-outcome Option instead of a fallback",
+        "Using parse_number instead of atoi on the value",
+        "Checking argc before indexing argv"
+      ],
+      "correct": 0,
+      "explanation": "The richer return type catches a missing value but not a misspelled name, because --sped is simply an option the tool does not have. Walk the arguments once, compare each dashed one against the known list, and fail on the leftovers. Printing the resolved settings before starting is the cheap second half."
+    }
+  ]
+}
