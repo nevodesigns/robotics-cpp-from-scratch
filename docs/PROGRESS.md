@@ -12,15 +12,15 @@ disagree. Last updated 4 November 2026.
 
 | | |
 |---|---|
-| lessons built | 100 of 320 planned, 31 percent |
+| lessons built | 101 of 320 planned, 32 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 206 |
-| Failure Atlas entries | 248 |
+| hours of material | 208 |
+| Failure Atlas entries | 251 |
 | librc headers | 90 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 121, green on every claimed toolchain |
-| commits | 197 |
+| reference tests | 125, green on every claimed toolchain |
+| commits | 198 |
 
 ## Phase by phase
 
@@ -32,7 +32,7 @@ disagree. Last updated 4 November 2026.
 | 00 Toolchain and First Motion | 8 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 12 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 9 | 16 | A subsystem tree that releases completely, with no cycles |
-| 03 C++ Core III, classes and templates | 9 | 18 | An injectable clock, so dt has a provenance |
+| 03 C++ Core III, classes and templates | 10 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 6 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 6 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 6 | 16 | Where the gripper is, in the world frame, and how you know |
@@ -54,7 +54,7 @@ disagree. Last updated 4 November 2026.
 
 **Where the gap is.** The front of the book is the thinnest part relative to
 how early a learner meets it. Phases 00 to 03 are the first thing somebody who
-has never programmed walks through, and they hold 38 of a planned 66. Everything
+has never programmed walks through, and they hold 39 of a planned 66. Everything
 after phase 13 is material such a learner cannot reach yet. Finishing the front
 is worth more than extending the back.
 
@@ -150,10 +150,10 @@ twice.
 
 ## Failure Atlas
 
-248 entries under `atlas/errors/`, each with a `match:` pattern that
+251 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 51, `E-QT` 23, `E-NUM` 22, `E-NAV` 19, `E-MEM` 16, `E-IO` 16,
+`E-CPP` 54, `E-QT` 23, `E-NUM` 22, `E-NAV` 19, `E-MEM` 16, `E-IO` 16,
 `E-CTRL` 14, `E-TEST` 13, `E-SENSE` 13, `E-KIN` 10, `E-DEBUG` 8, `E-RT` 7,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-THREAD` 4,
 `E-BUILD` 2, `E-TIME` 2, `E-TSAN` 1.
@@ -229,6 +229,21 @@ version is the intuitive one.
   06-06.
 - **Padding and index caching in an SPSC queue are worth nothing alone and
   about 80 percent together.** 07-05.
+- **A sliced copy is not broken, it is smaller.** The same object read 21.5
+  through a `const LooseSensor&` and 0 by value, because `sizeof(LooseSensor)`
+  is 8 and `sizeof(LooseThermometer)` is 16, so dispatch correctly picked the
+  base implementation on a copy that really was a base. Silent on gcc, on
+  clang, and on clang under `-Weverything`. 03-10.
+- **One virtual function costs one pointer per object**, 16 bytes to 24 for
+  identical data, which is why no value type in librc has one and the three
+  interfaces that do are the only ones. 03-10.
+- **The virtual destructor trap cannot be tested, only required.** Deleting
+  through a non virtual base destructor leaked 2 allocations against 0,
+  measured standalone, because the suite cannot run it: it is undefined
+  behaviour and the sanitizer lane stops with new-delete-type-mismatch. gcc
+  and clang warn only when the base already has another virtual function, and
+  are silent for the handle-shaped bases this actually bites. The answer is a
+  `static_assert` per interface. 03-10.
 - **The same unwritten `int` read 1405118043 at -O0 and 0 at -O2.** Not a
   compiler bug: the read is undefined, so there was no correct answer to give,
   which is the whole mechanism behind works-in-debug-fails-in-release. 02-09.

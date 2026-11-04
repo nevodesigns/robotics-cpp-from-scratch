@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "03-10-the-destructor-that-did-not-run",
+  "title": "The Destructor That Did Not Run: Inheritance, Virtual Dispatch and the Two Lines Every Interface Needs",
+  "type": "build",
+  "minutes": 125,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "02-02-the-heap-and-the-leak",
+    "02-03-raii-and-destructors",
+    "03-01-classes-and-invariants",
+    "03-05-time-and-clocks"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [
+    "virtual"
+  ],
+  "artifact": null,
+  "breaks_first": [
+    "E-CPP-0052",
+    "E-CPP-0053",
+    "E-CPP-0054"
+  ]
+}

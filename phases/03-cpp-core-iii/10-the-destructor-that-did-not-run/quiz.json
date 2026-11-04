@@ -1,0 +1,78 @@
+{
+  "lesson": "03-10-the-destructor-that-did-not-run",
+  "title": "The Destructor That Did Not Run: Inheritance, Virtual Dispatch and the Two Lines Every Interface Needs",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A Thermometer owning one heap string is created with new, held as a Sensor*, and deleted. The base destructor is not virtual. What happens?",
+      "options": [
+        "Only the Sensor destructor runs, the string and its buffer are abandoned, and the whole thing is undefined behaviour",
+        "Both destructors run, because delete knows the real type from the allocation",
+        "The program crashes immediately, which is how you find the bug",
+        "The compiler refuses to compile the delete"
+      ],
+      "correct": 0,
+      "explanation": "Measured in the lesson with replaced global operator new and delete: 2 allocations still live with a non-virtual base destructor, 0 with a virtual one. Two, because the string object and its buffer are both lost."
+    },
+    {
+      "stage": "check",
+      "question": "The same object read 21.5 through a const LooseSensor& and 0 through a LooseSensor taken by value. Why did the second one not fail or warn?",
+      "options": [
+        "The copy really is a LooseSensor, so virtual dispatch correctly picked the base implementation; the derived part was never copied",
+        "Virtual dispatch does not work on copies",
+        "The by-value parameter was const, which disabled the override",
+        "The compiler optimised the call away and returned a default"
+      ],
+      "correct": 0,
+      "explanation": "sizeof(LooseSensor) is 8 and sizeof(LooseThermometer) is 16. The copy is eight bytes and the rest has nowhere to go. That is slicing: legal, silent on gcc and clang, and silent even under clang's -Weverything."
+    },
+    {
+      "stage": "check",
+      "question": "Why does this lesson's test suite assert std::has_virtual_destructor<Sensor> instead of demonstrating the leak?",
+      "options": [
+        "Performing the delete is undefined behaviour, so the address sanitizer stops the program rather than yielding a measurement",
+        "Because the leak is too small to measure reliably",
+        "Because has_virtual_destructor is faster than running the destructor",
+        "Because the leak only happens on Windows"
+      ],
+      "correct": 0,
+      "explanation": "This is the one trap in the lesson that cannot be tested at runtime. The answer is not to test for it but to require it, with one static_assert per interface next to the declaration."
+    },
+    {
+      "stage": "check",
+      "question": "A base declares double read() const and a derived defines double read() without const, with no override keyword. What have you got?",
+      "options": [
+        "A new, non-virtual function that hides the base one, so the answer depends on whether the caller holds a base or a derived reference",
+        "A compile error, because the signatures do not match",
+        "A correct override, because const is not part of the signature",
+        "A correct override, but one that cannot be called through a base pointer"
+      ],
+      "correct": 0,
+      "explanation": "Overriding needs the name, parameter types, constness and reference qualification to agree exactly. Dropping const is the most common near miss because it reads correctly in both places. Writing override turns it into an error at the declaration."
+    },
+    {
+      "stage": "post",
+      "question": "gcc warns about deleting through a non-virtual base destructor in one case and not another. Which case is silent on both gcc and clang?",
+      "options": [
+        "A base with no virtual functions at all, such as a handle or a resource wrapper",
+        "A base with at least one other virtual function",
+        "An abstract base with pure virtual functions",
+        "Neither; both compilers always warn"
+      ],
+      "correct": 0,
+      "explanation": "Nothing marks such a class as polymorphic, so the compiler has no reason to suspect it is a base. That is exactly the shape this bug tends to take, which is why the static_assert is worth more than the warning."
+    },
+    {
+      "stage": "post",
+      "question": "Why does no value type in librc, including rc::math::Pose, have a virtual destructor?",
+      "options": [
+        "One virtual function costs one hidden pointer per object, so a million readings would pay eight megabytes for dispatch they never use",
+        "Value types cannot have virtual functions in C++17",
+        "Because adding one would make them non-copyable",
+        "Because the sanitizer reports virtual destructors on value types"
+      ],
+      "correct": 0,
+      "explanation": "Measured in the lesson: sizeof went from 16 to 24 on a 64 bit platform when one virtual function was added, and the cost is per object rather than per class. An interface is for things you swap; a value is not one."
+    }
+  ]
+}
