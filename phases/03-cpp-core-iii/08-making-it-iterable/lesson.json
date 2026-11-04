@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "03-08-making-it-iterable",
+  "title": "Making It Iterable: What range-for Needs, and What the Algorithms Need",
+  "type": "build",
+  "minutes": 135,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "03-04-algorithms-over-loops",
+    "03-07-one-template-many-types"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/index_iterator.hpp",
+    "note": "one iterator that makes any container with operator[] and size() work with range-for and the standard algorithms"
+  },
+  "breaks_first": [
+    "E-CPP-0046",
+    "E-CPP-0047",
+    "E-CPP-0048"
+  ]
+}

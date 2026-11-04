@@ -47,6 +47,8 @@
 #include <cstddef>
 #include <type_traits>
 
+#include <rc/core/index_iterator.hpp>
+
 namespace rc {
 namespace core {
 
@@ -60,6 +62,12 @@ class Ring {
                 "no coherent behaviour, so pick a capacity.");
 
  public:
+  // What it holds. Anything generic looks this up rather than being told, so a
+  // container without it cannot be used with an iterator, an algorithm or a
+  // template that needs to name the element type. Lesson 03-08 is where that
+  // first bites.
+  using value_type = T;
+
   static constexpr std::size_t capacity() { return Capacity; }
 
   std::size_t size() const { return count_; }
@@ -101,6 +109,13 @@ class Ring {
   // Precondition for both: the ring is not empty.
   const T& oldest() const { return storage_[first_]; }
   const T& newest() const { return storage_[slot(count_ - 1)]; }
+
+  // Range-for and the whole of <algorithm>, from lesson 03-08. These walk in
+  // logical order, oldest first, because IndexIterator goes through
+  // operator[] and not through storage_, which after a wrap is a different
+  // order entirely.
+  IndexIterator<Ring> begin() const { return IndexIterator<Ring>(this, 0); }
+  IndexIterator<Ring> end() const { return IndexIterator<Ring>(this, count_); }
 
  private:
   T storage_[Capacity] = {};
