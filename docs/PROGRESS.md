@@ -279,6 +279,31 @@ version is the intuitive one.
   reliably fixes on both is the first error line, which is the one that gets
   read. 03-07.
 
+## Known warnings
+
+The Debug configurations that CI builds are warning clean. An optimised build
+is not, and both remaining warnings were investigated and are false positives
+in gcc rather than defects here. Recorded so the next person does not repeat
+the investigation.
+
+**51 of `-Wmismatched-new-delete`**, from `rc/test/leak_check.hpp`, in the six
+lessons that both include it and use raw `new[]` and `delete[]`. gcc traces a
+`delete[]` into the replaced `operator delete[]`, sees `std::free`, and pairs
+it with the `new[]` at the call site without modelling that `operator new[]`
+was replaced too and allocates with `std::malloc`. The pairing in the learner
+code is correct.
+
+It cannot be suppressed with `#pragma GCC diagnostic`, which was tried: the
+diagnostic is emitted in a late pass after inlining, where lexical pragmas no
+longer apply. A global `-Wno-` flag would hide it for learner code as well,
+which is the wrong trade in the phase 02 lessons that teach the pairing. A
+genuine mismatch is caught at runtime by the address sanitizer as
+`alloc-dealloc-mismatch`, verified, and the sanitizer lane runs on every push.
+
+**1 of `-Wstringop-overread`**, inside `<bits/stl_algobase.h>` on gcc 11,
+reached through `std::vector::insert` inlined into a test in 08-04. A known
+libstdc++ issue on that version rather than anything in this repository.
+
 ## Not done
 
 **Phase 12 and phases 17 to 21 are unbuilt**, 80 lessons.
