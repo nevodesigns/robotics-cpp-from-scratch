@@ -1,0 +1,78 @@
+{
+  "lesson": "03-09-declare-nothing-or-everything",
+  "title": "Declare Nothing, or Declare Everything: What One Destructor Costs",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A struct holds a std::vector<double> and nothing else. Somebody adds ~X() = default; which does nothing. What changes?",
+      "options": [
+        "The implicit move constructor is suppressed, so every move of it is now a copy",
+        "Nothing: a defaulted destructor is the same as not declaring one",
+        "The copy constructor is suppressed and the class becomes move only",
+        "It becomes trivially destructible"
+      ],
+      "correct": 0,
+      "explanation": "Measured: the buffer travelled on a move before the line was added and was copied afterwards. The destructor is written = default, does nothing whatever, and is as close to not being there as the language allows."
+    },
+    {
+      "stage": "check",
+      "question": "What did that one line cost when pushing 64 rows of 64 doubles into a vector?",
+      "options": [
+        "198 allocations where there had been 71, because every reallocation copies the rows instead of moving them",
+        "Nothing measurable: the destructor is empty so it is optimised away",
+        "One extra allocation per row, so 64 more",
+        "It got faster, since a defaulted destructor is trivial"
+      ],
+      "correct": 0,
+      "explanation": "127 extra allocations from a line that does nothing. Every time the outer vector runs out of room it relocates the rows, and copying one allocates a new buffer where moving one would have stolen the existing one."
+    },
+    {
+      "stage": "check",
+      "question": "std::is_move_constructible returns true for a class with no move constructor at all. Why?",
+      "options": [
+        "It asks whether a T can be built from an rvalue T, and a copy constructor can do that",
+        "It is a compiler bug in libstdc++",
+        "Because the class is still destructible",
+        "It returns true only for trivially copyable types"
+      ],
+      "correct": 0,
+      "explanation": "Binding a const T& to an rvalue is perfectly legal, so the trait is satisfied by copying. It answered yes for all three classes in the lesson, two of which have no move constructor. The nothrow variant matched the observed behaviour on every row."
+    },
+    {
+      "stage": "check",
+      "question": "Why is is_nothrow_move_constructible the right question rather than a stricter one picked arbitrarily?",
+      "options": [
+        "It is the condition the standard library itself branches on when a vector reallocates",
+        "Because noexcept functions are faster",
+        "It is not: any move trait would do",
+        "Because throwing moves are undefined behaviour"
+      ],
+      "correct": 0,
+      "explanation": "A vector reallocating has already allocated the new buffer and is part way through relocating. If a move could throw it could not put the elements back, so it copies and keeps the strong exception guarantee. A class that is move constructible and not nothrow move constructible is copied by every container it enters."
+    },
+    {
+      "stage": "post",
+      "question": "Declaring all five as = default restored the behaviour exactly. So why is the advice to declare nothing?",
+      "options": [
+        "Six lines that have to stay correct as the class changes, against nothing to keep in step",
+        "Because = default is slower than an implicit operation",
+        "Because declaring all five is not actually equivalent",
+        "It is not: declaring all five is the recommended style"
+      ],
+      "correct": 0,
+      "explanation": "Measured identical on the trait, the buffer travel and the 71 allocations. The class that declared nothing adjusts automatically when a member is added; the one with six defaults has five more places that can drift from the member list, which is every bug 02-05 wrote the operations by hand to meet."
+    },
+    {
+      "stage": "post",
+      "question": "Declaring a move constructor suppresses the implicit copy, and declaring a destructor suppresses the implicit move. Why does only one of those get reported?",
+      "options": [
+        "Losing the copy is refused at the call site, because the caller tries to use what was taken away; losing the move takes away something the compiler was going to do for you, and nothing complains",
+        "Both are reported, with -Wdeprecated-copy",
+        "Only the move case is reported, by the sanitizers",
+        "Neither is reported; the lesson measures both as silent"
+      ],
+      "correct": 0,
+      "explanation": "That asymmetry is why the destructor case needs a static_assert. The copy case is in the lesson's checks directory as code that must not compile; the destructor case compiles perfectly and just gets slower."
+    }
+  ]
+}
