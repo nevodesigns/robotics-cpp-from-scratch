@@ -64,11 +64,19 @@ A trait is not a number. Pushing 64 rows, each holding 64 doubles, into a
 | `~X() = default;` declared | **198** |
 | all five declared | 71 |
 
-**127 extra allocations from a line that does nothing.**
+**127 extra allocations from a line that does nothing**, 2.79 times as many.
 
 Every time the outer vector runs out of room it has to relocate its rows.
 Moving one steals its buffer and allocates nothing. Copying one allocates a new
 buffer for every row it relocates, every time it grows.
+
+Those are libstdc++ numbers. The suite prints them and asserts only the
+direction, because the ratio belongs to the standard library rather than to the
+language: on the Microsoft debug library the gap was larger in absolute terms,
+**254 extra allocations**, and the ratio smaller, because its baseline is
+inflated by bookkeeping that happens whether the rows move or copy. The first
+version of this test asserted a factor of two and the Windows lane refused it,
+which is the same thing lesson 07-04 learned from the same library.
 
 ### The trait everybody checks is useless here
 
@@ -185,7 +193,8 @@ fail.
 as `noexcept` does not make it safe, it makes a throw terminate the program.
 
 **Count the allocations when you want to be sure.** Four lines with
-`rc::test::AllocationCount`, and it turns a trait into 71 against 198.
+`rc::test::AllocationCount`, and it turns a trait into 71 against 198. Assert
+the direction rather than the ratio: the ratio is your standard library's.
 
 ## What Breaks First
 

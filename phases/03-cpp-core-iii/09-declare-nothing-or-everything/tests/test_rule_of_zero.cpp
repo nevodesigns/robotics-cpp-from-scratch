@@ -102,16 +102,30 @@ RC_TEST("what the destructor costs when the container grows") {
   row("all five declared", restored);
   std::cout << "\n";
 
+  std::cout << "  one defaulted destructor, " << (burdened - quiet)
+            << " extra allocations, from a line that does nothing\n";
+  std::cout << "  which is " << std::fixed << std::setprecision(2)
+            << (static_cast<double>(burdened) / static_cast<double>(quiet))
+            << " times as many\n\n";
+
   // Every reallocation of the outer vector has to relocate the rows. Moving
   // one steals its buffer and allocates nothing; copying one allocates a new
   // buffer for every row it relocates.
+  //
+  // The direction is the claim and it holds everywhere. The ratio does not:
+  // it depends on the growth factor the standard library picked and on how
+  // much the library allocates on its own account. Measured on libstdc++ the
+  // counts were 71 and 198, a factor of 2.8. On the Microsoft debug library
+  // the difference was larger in absolute terms, 254 extra allocations, and
+  // the ratio smaller, because its baseline is inflated by bookkeeping that
+  // happens whether the rows move or copy. So the numbers are printed and the
+  // relation is asserted, which is the same lesson 07-04 learned from the
+  // same library.
   RC_CHECK(burdened > quiet);
   RC_CHECK(restored == quiet);
 
-  // Not a rounding difference. The ratio is the thing.
-  RC_CHECK(burdened > quiet * 2);
-  std::cout << "  one defaulted destructor, " << (burdened - quiet)
-            << " extra allocations, from a line that does nothing\n\n";
+  // And the gap is not a rounding error on any of them.
+  RC_CHECK(burdened - quiet > 32u);
 }
 
 RC_TEST("a vector only moves its elements when moving cannot throw") {

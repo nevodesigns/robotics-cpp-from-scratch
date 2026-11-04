@@ -20,7 +20,7 @@ disagree. Last updated 3 November 2026.
 | librc headers | 87 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 116, green on every claimed toolchain |
-| commits | 191 |
+| commits | 192 |
 
 ## Phase by phase
 
@@ -248,9 +248,10 @@ version is the intuitive one.
 - **One defaulted destructor cost 127 extra allocations.** Declaring
   `~X() = default;` on a struct holding a vector suppresses the implicit move
   constructor, so growing a container of 64 of them took 198 allocations
-  instead of 71. `std::is_move_constructible` reports yes either way, because
-  copying satisfies it; the nothrow variant is the one the library branches on.
-  03-09.
+  instead of 71 on libstdc++, and 254 extra on the Microsoft debug library
+  whose baseline is higher. `std::is_move_constructible` reports yes either
+  way, because copying satisfies it; the nothrow variant is the one the
+  library branches on. 03-09.
 - **A loop's named sections came to 880 of 1000 microseconds.** The missing
   twelve percent was code nobody had thought to name, which is the usual place
   for a surprise, and a nested section makes the remainder go negative rather
