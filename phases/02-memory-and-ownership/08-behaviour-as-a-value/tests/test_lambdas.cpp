@@ -25,7 +25,15 @@ template <std::size_t Bytes>
 std::size_t allocations_to_store() {
   const Payload<Bytes> payload;
   rc::test::AllocationCount counted;
-  std::function<std::size_t()> stored = [payload]() { return sizeof(payload); };
+  // The body reads a byte of the payload rather than only taking its sizeof.
+  // sizeof is unevaluated, so a lambda whose body is only sizeof(payload) does
+  // not require the capture to exist, which clang says out loud as
+  // -Wunused-lambda-capture. Both compilers kept the capture and the numbers
+  // below were the same either way, but a measurement of what a capture costs
+  // must not rest on a capture the compiler is entitled to drop.
+  std::function<std::size_t()> stored = [payload]() {
+    return sizeof(payload) + static_cast<unsigned char>(payload.filler[0]);
+  };
   const std::size_t used = counted.total();
   (void)stored();
   return used;
@@ -189,7 +197,9 @@ RC_TEST("a std::function allocates when what it holds will not fit inside it") {
   // The same big lambda called directly, with no std::function anywhere.
   rc::test::AllocationCount counted;
   const Payload<64> payload;
-  const auto direct = [payload]() { return sizeof(payload); };
+  const auto direct = [payload]() {
+    return sizeof(payload) + static_cast<unsigned char>(payload.filler[0]);
+  };
   (void)direct();
   const std::size_t calling_it_directly = counted.total();
 
