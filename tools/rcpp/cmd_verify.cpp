@@ -17,6 +17,18 @@ namespace {
 
 int shell(const std::string& command) {
   std::cout << style::dim("  $ " + command) << "\n";
+
+  // Flush before handing the terminal to somebody else.
+  //
+  // std::system lets the child inherit this process's stdout and write to it
+  // directly, while our own output is sitting in a buffer, because stdout is
+  // block buffered whenever it is not a terminal. Without this line a learner
+  // who redirects rcpp to a log, or reads it from a continuous integration
+  // page, sees cmake and ctest speak before the header that says what is
+  // being verified. Lesson 00-09 is about exactly this and the tool had the
+  // defect.
+  std::cout << std::flush;
+
   const int status = std::system(command.c_str());
 #if defined(_WIN32)
   return status;
