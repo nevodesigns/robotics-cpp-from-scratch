@@ -12,15 +12,15 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 
 | | |
 |---|---|
-| lessons built | 103 of 320 planned, 32 percent |
+| lessons built | 104 of 320 planned, 33 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 212 |
-| Failure Atlas entries | 257 |
-| librc headers | 92 across 13 modules |
+| hours of material | 214 |
+| Failure Atlas entries | 260 |
+| librc headers | 93 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 133, green on every claimed toolchain |
-| commits | 202 |
+| reference tests | 137, green on every claimed toolchain |
+| commits | 205 |
 
 ## Phase by phase
 
@@ -29,7 +29,7 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 
 | Phase | Built | Planned | Ends with |
 |---|---|---|---|
-| 00 Toolchain and First Motion | 8 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
+| 00 Toolchain and First Motion | 9 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 13 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 9 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
@@ -54,7 +54,7 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 
 **Where the gap is.** The front of the book is the thinnest part relative to
 how early a learner meets it. Phases 00 to 03 are the first thing somebody who
-has never programmed walks through, and they hold 41 of a planned 66. Everything
+has never programmed walks through, and they hold 42 of a planned 66. Everything
 after phase 13 is material such a learner cannot reach yet. Finishing the front
 is worth more than extending the back.
 
@@ -126,11 +126,11 @@ twice.
 
 ## librc
 
-92 headers. Modules and counts:
+93 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
-| `rc::core` | 30 |
+| `rc::core` | 31 |
 | `rc::control` | 8 |
 | `rc::io` | 8 |
 | `rc::math` | 8 |
@@ -150,10 +150,10 @@ twice.
 
 ## Failure Atlas
 
-257 entries under `atlas/errors/`, each with a `match:` pattern that
+260 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 59, `E-QT` 23, `E-NUM` 23, `E-NAV` 19, `E-MEM` 16, `E-IO` 16,
+`E-CPP` 60, `E-NUM` 24, `E-QT` 23, `E-NAV` 19, `E-MEM` 16, `E-IO` 16,
 `E-CTRL` 14, `E-TEST` 13, `E-SENSE` 13, `E-KIN` 10, `E-DEBUG` 8, `E-RT` 7,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-THREAD` 4,
 `E-BUILD` 2, `E-TIME` 2, `E-TSAN` 1.
@@ -229,6 +229,22 @@ version is the intuitive one.
   06-06.
 - **Padding and index caching in an SPSC queue are worth nothing alone and
   about 80 percent together.** 07-05.
+- **A crash loses buffered output, and the line you never saw is not the line
+  it stopped at.** Four lines printed before a deliberate segmentation fault,
+  into a pipe: the printf and the cout arrived, the cerr arrived, and the cout
+  after it was lost. The first two survived only because writing to std::cerr
+  flushed them, since cerr is tied to cout. With no cerr at all both buffered
+  lines were lost and the output stopped two statements early. 00-09.
+- **The stdout and stderr reordering everyone warns about does not apply to
+  iostreams.** With printf and fprintf(stderr) into a pipe, stderr arrived
+  first and stdout afterwards in a block. With std::cout and std::cerr the
+  order was kept, because of that tie. Rule L018 forbids printf, and this is
+  the measured reason rather than a style preference. 00-09.
+- **An exit status of 256 reports success.** Only the low eight bits of main's
+  return value survive, measured: 256 arrived as 0, 257 as 1, -1 as 255. So
+  `return failures;` is wrong at exactly 256 failures, and a status above 128
+  means the program probably did not choose to stop, 139 being 128 plus
+  SIGSEGV. 00-09.
 - **The benchmark measured nothing at -O2 and the test failed.** A guard of
   `if (total < 0) std::cout << "";` reads like it keeps the work and does not,
   so the optimiser deleted both loops and each reported 0.0 us. A volatile
@@ -481,9 +497,21 @@ not built, from the same survey: a non allocating fixed capacity container,
 which phase 07 needs and four lessons approximate by hand, and the stack,
 where locals live and what happens at the end of it.
 
-Phase 00 is the thinnest relative to how early it is met, at 8 of 14, and its
-remaining gaps have not been surveyed as carefully as those in phases 01 to
-03. That survey is the next thing worth doing before choosing another lesson.
+Phase 00 has now been surveyed, and 00-09 came out of it. Two things worth
+recording from that survey, because both were guesses that turned out wrong.
+
+Nothing appeared to teach writing a function, which would have been the
+largest hole in the repository. 00-01 does teach it, briefly and adequately:
+name, parameters, return type, return. Checking that before building saved a
+lesson nobody needed.
+
+Loops and conditionals are taught at 01-02, after phase 00 uses them in 00-05
+and 00-07. That is an ordering oddity rather than a gap, and it follows from
+the brief that something must move in the first hour.
+
+What phase 00 still lacks, in rough order: keeping a result, which means
+writing a file, where 01-12 only reads one; and reading somebody else's code,
+which nothing in the repository covers at any point.
 
 **Phase 12 and phases 17 to 21 remain entirely unbuilt**, 80 lessons. ROS 2
 Humble is installed on this machine, so phase 17 is not blocked.

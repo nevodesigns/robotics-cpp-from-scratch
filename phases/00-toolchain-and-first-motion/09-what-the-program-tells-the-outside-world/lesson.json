@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "00-09-what-the-program-tells-the-outside-world",
+  "title": "What the Program Tells the Outside World: Two Streams and One Number",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-01-your-first-program",
+    "00-04-numbers-that-lie",
+    "00-06-when-the-answer-is-wrong"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/exit_status.hpp",
+    "note": "turns a count of problems into a status a shell can actually read, because only the low eight bits of main's return value survive"
+  },
+  "breaks_first": [
+    "E-CPP-0060",
+    "E-NUM-0024",
+    "E-DEBUG-0009"
+  ]
+}
