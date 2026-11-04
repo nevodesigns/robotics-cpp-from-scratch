@@ -24,14 +24,15 @@ int cmd_targets(const Args& args) {
   const auto root = find_repo_root();
   if (!root) { std::cerr << "rcpp targets: run this from inside the repository\n"; return 2; }
 
-  const bool want_exercises = has_flag(args, "--exercises");
-  const bool want_references = has_flag(args, "--references");
+  const bool want_exercises = args.has("--exercises");
+  const bool want_references = args.has("--references");
   if (!want_exercises && !want_references) {
     std::cerr << "usage: rcpp targets --exercises | --references [--platform ID]\n";
     return 2;
   }
 
-  const std::string platform = flag_value(args, "--platform", "");
+  std::string platform;
+  if (!read_option(args, "--platform", platform, "targets")) return 2;
   const Catalog catalog = load_catalog(*root);
 
   for (const auto* lesson : catalog.all()) {

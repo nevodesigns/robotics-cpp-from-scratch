@@ -866,7 +866,7 @@ int cmd_audit(const Args& args) {
     std::cerr << "rcpp audit: run this from inside the repository\n";
     return 2;
   }
-  const bool as_json = has_flag(args, "--json");
+  const bool as_json = args.has("--json");
   const Catalog catalog = load_catalog(*root);
   const Atlas atlas = load_atlas(*root);
 

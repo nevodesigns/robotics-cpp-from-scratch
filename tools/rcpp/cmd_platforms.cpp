@@ -34,7 +34,7 @@ int cmd_platforms(const Args& args) {
 
   const json::Array& toolchains = parsed.value.at("toolchains").as_array();
 
-  if (has_flag(args, "--matrix")) {
+  if (args.has("--matrix")) {
     json::Array include;
     for (const json::Value& toolchain : toolchains) {
       json::Object entry;

@@ -37,13 +37,18 @@ int cmd_verify(const Args& args) {
   }
 
   const Catalog catalog = load_catalog(*root);
-  const bool reference = has_flag(args, "--reference");
-  const bool all = has_flag(args, "--all");
-  const fs::path build_dir = *root / flag_value(args, "--build-dir", "build/verify");
+  const bool reference = args.has("--reference");
+  const bool all = args.has("--all");
+  std::string build_dir_option = "build/verify";
+  if (!read_option(args, "--build-dir", build_dir_option, "verify")) return 2;
+  const fs::path build_dir = *root / build_dir_option;
 
-  std::string wanted;
-  for (const std::string& a : args)
-    if (!starts_with(a, "--")) { wanted = a; break; }
+  // positionals() skips an option's value, which the loop this replaced did
+  // not: "rcpp verify --build-dir /tmp/x 00-01-your-first-program" used to
+  // take /tmp/x as the lesson id, so the flag order mattered when it should
+  // not have.
+  const std::vector<std::string_view> rest = args.positionals();
+  const std::string wanted = rest.empty() ? std::string() : std::string(rest[0]);
 
   if (!all && wanted.empty()) {
     std::cerr << "usage: rcpp verify <lesson-id> [--reference] [--build-dir DIR]\n"

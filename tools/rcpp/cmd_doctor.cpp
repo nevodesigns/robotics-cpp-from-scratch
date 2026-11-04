@@ -194,7 +194,7 @@ std::string level_tag(Level level) {
 }  // namespace
 
 int cmd_doctor(const Args& args) {
-  const bool as_json = has_flag(args, "--json");
+  const bool as_json = args.has("--json");
   const Host host = detect_host();
 
   std::vector<Check> checks;

@@ -5,7 +5,6 @@
 // and explains errors. It is written in C++ for the same reason the lessons are:
 // this curriculum teaches one language, and that includes its own tools.
 
-#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -15,16 +14,42 @@
 
 namespace rcpp {
 
-bool has_flag(const Args& args, const std::string& flag) {
-  return std::find(args.begin(), args.end(), flag) != args.end();
+bool read_option(const Args& args, const char* name, std::string& into, const char* command) {
+  const rc::core::Option found = args.option(name);
+  if (!found.present) return true;
+  if (!found.has_value) {
+    std::cerr << "rcpp " << command << ": " << name << " needs a value\n";
+    return false;
+  }
+  into.assign(found.value.begin(), found.value.end());
+  return true;
 }
 
-std::string flag_value(const Args& args, const std::string& flag, const std::string& fallback) {
-  for (std::size_t i = 0; i < args.size(); ++i) {
-    if (args[i] == flag && i + 1 < args.size()) return args[i + 1];
-    if (starts_with(args[i], flag + "=")) return args[i].substr(flag.size() + 1);
+bool read_count(const Args& args, const char* name, int& into, const char* command) {
+  // option() first, so "given with nothing after it" is reported as the
+  // missing value it is rather than as an unparseable number. number()
+  // folds those two together, which is right for its own signature and not
+  // specific enough for a message a user has to act on.
+  const rc::core::Option given = args.option(name);
+  if (given.present && !given.has_value) {
+    std::cerr << "rcpp " << command << ": " << name << " needs a value\n";
+    return false;
   }
-  return fallback;
+
+  const Args::Number found = args.number(name);
+  if (!found.present) return true;
+  if (!found.ok) {
+    std::cerr << "rcpp " << command << ": " << name << " needs a whole number\n";
+    return false;
+  }
+  const double value = found.value;
+  if (value < 1.0 || value != static_cast<double>(static_cast<int>(value))) {
+    std::cerr << "rcpp " << command << ": " << name
+              << " must be a whole number of at least 1\n";
+    return false;
+  }
+  into = static_cast<int>(value);
+  return true;
 }
 
 namespace {
@@ -67,8 +92,11 @@ int main(int argc, char** argv) {
   using namespace rcpp;
   if (argc < 2) return usage();
 
+  // argv + 1 so that program() is the subcommand and the arguments start
+  // after it. Arguments stops at argc and at a null entry, whichever comes
+  // first, so a short argv cannot walk off the end.
   const std::string command = argv[1];
-  Args args(argv + 2, argv + argc);
+  const Args args(argc - 1, argv + 1);
 
   if (command == "-h" || command == "--help" || command == "help") return usage();
   if (command == "doctor") return cmd_doctor(args);

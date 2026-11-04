@@ -79,8 +79,9 @@ int cmd_catalog(const Args& args) {
   doc.emplace("phases", json::Value(std::move(phases)));
   const std::string text = json::Value(std::move(doc)).dump();
 
-  const std::string out = flag_value(args, "--out", "");
-  if (out.empty() || has_flag(args, "--stdout")) {
+  std::string out;
+  if (!read_option(args, "--out", out, "catalog")) return 2;
+  if (out.empty() || args.has("--stdout")) {
     std::cout << text << "\n";
     return 0;
   }
@@ -96,7 +97,8 @@ int cmd_list(const Args& args) {
   const auto root = find_repo_root();
   if (!root) { std::cerr << "rcpp list: run this from inside the repository\n"; return 2; }
   const Catalog catalog = load_catalog(*root);
-  const std::string phase_filter = flag_value(args, "--phase", "");
+  std::string phase_filter;
+  if (!read_option(args, "--phase", phase_filter, "list")) return 2;
 
   for (const Phase& phase : catalog.phases) {
     if (!phase_filter.empty() && std::to_string(phase.num) != phase_filter &&

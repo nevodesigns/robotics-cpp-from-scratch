@@ -4,7 +4,6 @@
 // I do now, using the prerequisite graph and what has actually been passed.
 // status shows how far the learner has got.
 
-#include <algorithm>
 #include <iostream>
 #include <vector>
 
@@ -62,7 +61,12 @@ int cmd_next(const Args& args) {
 
   const Catalog catalog = load_catalog(*root);
   const Progress progress = load_progress(*root);
-  const int how_many = std::max(1, std::atoi(flag_value(args, "--count", "3").c_str()));
+  // Was std::max(1, std::atoi(flag_value(args, "--count", "3").c_str())), which
+  // is both defects of lesson 01-13 in one line: the fallback stood in for a
+  // user who misspelled the flag or left its value off, and atoi then turned
+  // anything unparseable into 0, which std::max quietly raised to 1.
+  int how_many = 3;
+  if (!read_count(args, "--count", how_many, "next")) return 2;
 
   std::vector<const Lesson*> ready;
   std::vector<const Lesson*> blocked;
@@ -87,7 +91,7 @@ int cmd_next(const Args& args) {
   }
 
   // Asked for directly, this is the whole list rather than a count.
-  if (has_flag(args, "--blocked")) {
+  if (args.has("--blocked")) {
     if (blocked.empty()) {
       std::cout << "\n" << style::pass("Nothing is blocked.") << "\n"
                 << "  Every lesson you have not passed is available now.\n\n";

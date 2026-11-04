@@ -415,10 +415,29 @@ require.
 
 ## Next, in the order it should be done
 
-**Migrate `tools/rcpp/main.cpp` to `rc::core::Arguments`.** `has_flag` and
-`flag_value` are the hand-rolled version of the header 01-13 just graduated,
-and `flag_value` has the defect `E-CPP-0056` describes. Seven files reference
-`Args`. The lesson's Ship It section promises this.
+**Done.** `tools/rcpp` now reads its command line with
+`rc::core::Arguments`, which makes the tool the first consumer of `librc`.
+`has_flag` and `flag_value` are gone, replaced by `args.has()` and two
+helpers, `read_option` and `read_count`, that report the case the old pair
+could not: the user asked and left the value off.
+
+Three live defects were measured before the change and again after.
+
+| | before | after |
+|---|---|---|
+| `rcpp list --phase` with no value | 102 lessons, silently | exit 2, `--phase needs a value` |
+| `rcpp next --count abc` | 1 lesson, silently | exit 2, `--count needs a whole number` |
+| `rcpp next --count 0` or `2.9` | 1 and 3 lessons | exit 2, `must be a whole number of at least 1` |
+| `rcpp verify --build-dir DIR <id>` | took DIR as the lesson id | resolves the id, order no longer matters |
+
+The third was not in the plan and was found while reading the two loops that
+collected non-flag arguments by hand. Neither skipped an option's value, so
+the flag order mattered when it should not have. `positionals()` does skip it.
+
+The misspelling case is unchanged and still silent: `rcpp list --phse 01`
+lists all 102, because an unrecognised option is not something a return type
+can catch. `E-CPP-0056` says so, and rejecting unknown dashed arguments is
+the fix, not yet done.
 
 **Keep filling the front of the book.** Phases 00 to 03 hold 40 of a planned
 66 and are the first thing somebody who has never programmed walks through.

@@ -35,15 +35,15 @@ int cmd_explain(const Args& args) {
   }
 
   std::string text;
-  const std::string file = flag_value(args, "--file", "");
+  std::string file;
+  if (!read_option(args, "--file", file, "explain")) return 2;
   if (!file.empty()) {
     const auto contents = read_file(file);
     if (!contents) { std::cerr << "rcpp explain: cannot read " << file << "\n"; return 2; }
     text = *contents;
   } else {
     std::ostringstream joined;
-    for (const std::string& a : args)
-      if (!starts_with(a, "--")) joined << a << " ";
+    for (const std::string_view word : args.positionals()) joined << word << " ";
     text = trim(joined.str());
     if (text.empty()) {
       std::cout << style::dim("Paste the error, then press Ctrl+D:\n");
