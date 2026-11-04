@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "03-11-the-error-you-get-before-it-runs",
+  "title": "The Error You Get Before It Runs: constexpr, and What the Compiler Refuses to Compute",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-10-the-fault-that-never-fired",
+    "02-08-behaviour-as-a-value",
+    "02-09-the-value-that-was-never-written",
+    "03-07-one-template-many-types"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/table.hpp",
+    "note": "builds a lookup table at compile time, so the program starts with it already filled in"
+  },
+  "breaks_first": [
+    "E-CPP-0057",
+    "E-CPP-0058",
+    "E-CPP-0059"
+  ]
+}

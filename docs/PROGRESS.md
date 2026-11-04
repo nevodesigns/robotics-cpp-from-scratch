@@ -12,15 +12,15 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 
 | | |
 |---|---|
-| lessons built | 102 of 320 planned, 32 percent |
+| lessons built | 103 of 320 planned, 32 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 210 |
-| Failure Atlas entries | 254 |
-| librc headers | 91 across 13 modules |
+| hours of material | 212 |
+| Failure Atlas entries | 257 |
+| librc headers | 92 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 129, green on every claimed toolchain |
-| commits | 199 |
+| reference tests | 133, green on every claimed toolchain |
+| commits | 202 |
 
 ## Phase by phase
 
@@ -32,7 +32,7 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 | 00 Toolchain and First Motion | 8 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 13 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 9 | 16 | A subsystem tree that releases completely, with no cycles |
-| 03 C++ Core III, classes and templates | 10 | 18 | An injectable clock, so dt has a provenance |
+| 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 6 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 6 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 6 | 16 | Where the gripper is, in the world frame, and how you know |
@@ -54,7 +54,7 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 
 **Where the gap is.** The front of the book is the thinnest part relative to
 how early a learner meets it. Phases 00 to 03 are the first thing somebody who
-has never programmed walks through, and they hold 40 of a planned 66. Everything
+has never programmed walks through, and they hold 41 of a planned 66. Everything
 after phase 13 is material such a learner cannot reach yet. Finishing the front
 is worth more than extending the back.
 
@@ -126,11 +126,11 @@ twice.
 
 ## librc
 
-91 headers. Modules and counts:
+92 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
-| `rc::core` | 29 |
+| `rc::core` | 30 |
 | `rc::control` | 8 |
 | `rc::io` | 8 |
 | `rc::math` | 8 |
@@ -150,10 +150,10 @@ twice.
 
 ## Failure Atlas
 
-254 entries under `atlas/errors/`, each with a `match:` pattern that
+257 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 56, `E-QT` 23, `E-NUM` 23, `E-NAV` 19, `E-MEM` 16, `E-IO` 16,
+`E-CPP` 59, `E-QT` 23, `E-NUM` 23, `E-NAV` 19, `E-MEM` 16, `E-IO` 16,
 `E-CTRL` 14, `E-TEST` 13, `E-SENSE` 13, `E-KIN` 10, `E-DEBUG` 8, `E-RT` 7,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-THREAD` 4,
 `E-BUILD` 2, `E-TIME` 2, `E-TSAN` 1.
@@ -229,6 +229,23 @@ version is the intuitive one.
   06-06.
 - **Padding and index caching in an SPSC queue are worth nothing alone and
   about 80 percent together.** 07-05.
+- **The benchmark measured nothing at -O2 and the test failed.** A guard of
+  `if (total < 0) std::cout << "";` reads like it keeps the work and does not,
+  so the optimiser deleted both loops and each reported 0.0 us. A volatile
+  store fixed it. With the work restored the table beat the loop 6.9x at -O0
+  and 20.7x at -O2 on gcc, 8.7x and 7.6x on clang, so the direction is
+  asserted and the ratio is not. 03-11.
+- **An agreement test passed with both sides stubbed to return 0.** Checking
+  that two implementations agree says nothing when both are equally broken:
+  agreement is evidence that neither is uniquely wrong, not that either is
+  right. Anchor to known answers first, then compare. 03-11.
+- **Undefined behaviour is not a constant expression**, which makes compile
+  time evaluation a correctness tool before a speed one. The unwritten read
+  that no compiler warned about and no sanitizer caught in 02-09 is a hard
+  compile error on both compilers inside a constant expression. 03-11.
+- **L022 caught a constexpr inside a function for the fifth time in this
+  repository**, four of them after the atlas entry for it was written. That is
+  the argument for a rule in the tool over a note in a document. 03-11.
 - **`atoi` got three of five user-typed strings wrong, in three different
   ways**: 0 for two things that are not numbers, indistinguishable from a
   deliberate 0, and 3 for "3.9", a real number read as a different one. On a
