@@ -1,0 +1,78 @@
+{
+  "lesson": "04-06-the-check-that-was-not-in-the-release-build",
+  "title": "The Check That Was Not in the Release Build: assert, NDEBUG, and What to Use Instead",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A release build defines NDEBUG. What does assert(++count > 0) do there?",
+      "options": [
+        "Nothing at all: the expression is not evaluated, so count is not incremented either",
+        "Checks the condition but skips the abort",
+        "Increments count and skips the comparison",
+        "Aborts, since NDEBUG only removes the message"
+      ],
+      "correct": 0,
+      "explanation": "Measured in one translation unit by including <cassert> twice with different NDEBUG states: the counter read 1 before and still read 1 after. Not a cheaper check, no check, and any side effect inside it silently stops happening."
+    },
+    {
+      "stage": "check",
+      "question": "When is assert the right tool?",
+      "options": [
+        "For things you believe cannot happen: verified while developing, free afterwards, and knowingly absent from the build you ship",
+        "For any precondition, since release builds are tested too",
+        "Never: it should always be replaced",
+        "For things that can happen but are rare"
+      ],
+      "correct": 0,
+      "explanation": "That trade is what assert is for, and it is a good one for a bounds check in a hot loop. The defect is using it for things that should not happen and must still be noticed on the machine, where the only build that checks is the one that never leaves your desk."
+    },
+    {
+      "stage": "check",
+      "question": "Why does RC_EXPECT report and return false rather than aborting, as assert does?",
+      "options": [
+        "A moving machine does not become safer by stopping its own control loop, and only the caller knows whether to clamp, retry or stop",
+        "Because aborting is undefined behaviour",
+        "To keep the macro shorter",
+        "Because the handler cannot abort"
+      ],
+      "correct": 0,
+      "explanation": "Reporting and deciding are different jobs and assert conflates them. abort_on_failure exists and is a deliberate choice. Measured: a request of 9.0 against a limit of 2.0 returned 2.0, reported once, and the loop carried on."
+    },
+    {
+      "stage": "check",
+      "question": "Why must a check macro name its condition exactly once?",
+      "options": [
+        "Anything written at the call site runs again, and only on the failing path, so a pop or a read is lost exactly when something is already wrong",
+        "Because the compiler rejects duplicate evaluation",
+        "To keep the stringised form accurate",
+        "It does not matter if the condition is const"
+      ],
+      "correct": 0,
+      "explanation": "The same hazard as the classic MAX macro. Measured on RC_EXPECT, a counting function inside it ran once when the condition held and once when it did not. Stringising with #condition is not an evaluation."
+    },
+    {
+      "stage": "post",
+      "question": "The installed handler lives in a function local static inside an inline function. Why that, rather than a global?",
+      "options": [
+        "It is one object across every translation unit that includes the header, which lesson 04-04 established",
+        "Because statics are faster to access",
+        "To make it thread safe",
+        "So it can be const"
+      ],
+      "correct": 0,
+      "explanation": "A plain global in a header would be one object per translation unit, so installing a handler in one file would leave the others reporting somewhere else. This is the same one definition question 04-04 measured."
+    },
+    {
+      "stage": "post",
+      "question": "set_check_handler is given a null pointer. What should it do?",
+      "options": [
+        "Substitute the silent handler, because a null one would crash on the first failure",
+        "Store it, so failures are free",
+        "Abort immediately, since a null handler is a programming error",
+        "Leave the previous handler in place silently"
+      ],
+      "correct": 0,
+      "explanation": "A null handler turns a reporting mechanism into a worse version of the thing it replaced: the first violation becomes a crash rather than a report. The suite installs nullptr and expects a check to fail quietly."
+    }
+  ]
+}

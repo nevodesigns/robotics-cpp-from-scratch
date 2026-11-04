@@ -155,6 +155,28 @@ inline void run_one_case(const Case& c) {
   }
 }
 
+// Runs one case behind a jump target, answering the signal that stopped it or
+// zero if it finished.
+//
+// setjmp lives in its own frame on purpose. A longjmp leaves every local of
+// the function that called setjmp with an indeterminate value unless it was
+// declared volatile, so the frame holding it is kept empty of anything worth
+// preserving. That removes the question rather than answering it one variable
+// at a time.
+//
+// Before this was split out, building the curriculum with optimisation on
+// produced 98 warnings that run_all's counter might be clobbered. The Debug
+// lanes never showed it, which is the kind of thing that waits until somebody
+// builds a release.
+inline int run_case_catching_crash(const Case& c) {
+  crash_signal() = 0;
+  if (RC_SETJMP(crash_jump()) == 0) {
+    run_one_case(c);
+    return 0;
+  }
+  return static_cast<int>(crash_signal());
+}
+
 inline int run_all() {
   int passed = 0;
   for (const Case& c : registry()) {
@@ -162,15 +184,11 @@ inline int run_all() {
     const std::string name = c.name;
     current_test() = &name;
 
-    crash_signal() = 0;
     auto previous_fpe = std::signal(SIGFPE, rc_test_crash_handler);
     auto previous_segv = std::signal(SIGSEGV, rc_test_crash_handler);
 
-    if (RC_SETJMP(crash_jump()) == 0) {
-      run_one_case(c);
-    } else {
-      record("unknown", 0, describe_crash(static_cast<int>(crash_signal())));
-    }
+    const int stopped_by = run_case_catching_crash(c);
+    if (stopped_by != 0) record("unknown", 0, describe_crash(stopped_by));
 
     std::signal(SIGFPE, previous_fpe);
     std::signal(SIGSEGV, previous_segv);
