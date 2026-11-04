@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "05-07-the-line-nobody-ran",
+  "title": "The Line Nobody Ran: Coverage as a Floor, Not a Score",
+  "type": "build",
+  "minutes": 115,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-05-strings-and-text",
+    "04-07-the-tool-that-watches-it-run",
+    "05-01-building-the-test-framework",
+    "05-03-the-test-that-catches-it"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::test",
+    "header": "rc/test/coverage.hpp",
+    "note": "reads a gcov report and counts the lines the suite never ran, including the two markers and the one suffix that are easy to miscount by hand"
+  },
+  "breaks_first": [
+    "E-TEST-0014",
+    "E-TEST-0015",
+    "E-DEBUG-0011"
+  ]
+}

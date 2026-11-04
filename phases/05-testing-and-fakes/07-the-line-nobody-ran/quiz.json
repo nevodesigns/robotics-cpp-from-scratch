@@ -1,0 +1,78 @@
+{
+  "lesson": "05-07-the-line-nobody-ran",
+  "title": "The Line Nobody Ran: Coverage as a Floor, Not a Score",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A program calls five functions and asserts nothing at all. One of them has a deliberate defect. What does gcov report?",
+      "options": [
+        "100 percent of 5 lines, 0 never run, and the defect survives untouched",
+        "Zero percent, because no assertions ran",
+        "100 percent, but it flags the function whose result was discarded",
+        "It refuses to report on a program with no assertions"
+      ],
+      "correct": 0,
+      "explanation": "Coverage answers one question: did this line run. It does not ask whether anything checked the result. A line that never ran certainly is not tested; a line that ran may or may not be."
+    },
+    {
+      "stage": "check",
+      "question": "In a .gcov file, which count fields mean the line is code that never ran?",
+      "options": [
+        "Both ##### and =====; the second means the block holding the line was never entered",
+        "Only #####; ===== marks a line that is not code",
+        "##### and -, since a dash means no count was recorded",
+        "Only =====; ##### marks a compiler-generated line"
+      ],
+      "correct": 0,
+      "explanation": "Counting only ##### reported 5 never-run lines on a real file where the answer was 7. Both markers mean not covered."
+    },
+    {
+      "stage": "check",
+      "question": "After counting both never-run markers, a hand count still said 56 executable lines where gcov said 64. What was missing?",
+      "options": [
+        "The digits* form, which is code that ran but not in every instance, and is still code",
+        "The header lines numbered 0, which are executable",
+        "Lines marked with a dash, which gcov counts as executable",
+        "Blank lines, which gcov counts but the hand count skipped"
+      ],
+      "correct": 0,
+      "explanation": "digits* appears with templates and inlining. Leaving it out of the executable count gave 87.50 percent instead of 89.06. Two of the three wrong attempts were wrong in the flattering direction."
+    },
+    {
+      "stage": "check",
+      "question": "Why does percent_covered return 100 for a file with no executable lines, and what should a caller do about it?",
+      "options": [
+        "It is true and useless, so print the executable count beside the percentage: 100 percent of 0 and of 600 are the same number and not the same claim",
+        "It should return 0, since nothing was tested",
+        "It should return an error, since the file was not parsed",
+        "Nothing; a file with no code needs no coverage so the number is correct and sufficient"
+      ],
+      "correct": 0,
+      "explanation": "The parser keeps ok separate from the counts for the same reason: valid output about a file with no code is a different fact from text that was never a gcov report, and confusing them would report perfect coverage of a file it failed to read."
+    },
+    {
+      "stage": "post",
+      "question": "On a line of the form return a && b, exercised with one input, gcov reported three numbers. Which is the one most often quoted, and which is the most informative?",
+      "options": [
+        "Lines executed 100 percent is quoted; taken at least once 50 percent is informative, since half the branch outcomes never happened",
+        "Branches executed 100 percent is quoted; lines executed is informative",
+        "All three agreed at 100 percent, so the question does not arise",
+        "Taken at least once is quoted; it is also the least informative"
+      ],
+      "correct": 0,
+      "explanation": "Lines executed 100 percent of 2, branches executed 100 percent of 6, taken at least once 50 percent of 6. Branches executed only means the branch instruction ran; taken at least once means both outcomes occurred."
+    },
+    {
+      "stage": "post",
+      "question": "Which of these can coverage never report on, even in principle?",
+      "options": [
+        "The line that should exist and does not: a missing bounds check or timeout has no line to be uncovered",
+        "A line in a header that was included but never compiled",
+        "A line executed only in a release build",
+        "A line inside a template that was never instantiated"
+      ],
+      "correct": 0,
+      "explanation": "That is the largest blind spot and the one with no tool in it. Coverage can only report on code that was written, which is why a review and a specification sit at the bottom of the instrument list with nothing automated beneath them."
+    }
+  ]
+}

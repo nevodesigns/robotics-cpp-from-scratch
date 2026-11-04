@@ -12,15 +12,15 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 
 | | |
 |---|---|
-| lessons built | 105 of 320 planned, 33 percent |
+| lessons built | 106 of 320 planned, 33 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 216 |
-| Failure Atlas entries | 263 |
-| librc headers | 94 across 13 modules |
+| hours of material | 218 |
+| Failure Atlas entries | 266 |
+| librc headers | 95 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 138, green on every claimed toolchain |
-| commits | 207 |
+| reference tests | 139, green on every claimed toolchain |
+| commits | 209 |
 
 ## Phase by phase
 
@@ -34,7 +34,7 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 | 02 Memory and ownership | 9 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 7 | 14 | A library of your own, installed, consumed by a project that never saw its source |
-| 05 Testing, fakes and verification | 6 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
+| 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 6 | 16 | Where the gripper is, in the world frame, and how you know |
 | 07 Concurrency and real time | 5 | 16 | A measured latency histogram of your own control loop |
 | 08 Systems input and output | 5 | 14 | A framed and checked conversation with a device, over a port you opened |
@@ -126,7 +126,7 @@ twice.
 
 ## librc
 
-94 headers. Modules and counts:
+95 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
@@ -138,7 +138,7 @@ twice.
 | `rc::nav` | 7 |
 | `rc::kin` | 5 |
 | `rc::rt` | 5 |
-| `rc::test` | 6 |
+| `rc::test` | 7 |
 | `rc::plot` | 2 |
 | `rc::sensor` | 2 |
 | `rc::sim` | 2 |
@@ -150,11 +150,11 @@ twice.
 
 ## Failure Atlas
 
-263 entries under `atlas/errors/`, each with a `match:` pattern that
+266 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
 `E-CPP` 60, `E-NUM` 24, `E-QT` 23, `E-NAV` 19, `E-MEM` 17, `E-IO` 16,
-`E-CTRL` 14, `E-SENSE` 13, `E-TEST` 13, `E-DEBUG` 10, `E-KIN` 10, `E-RT` 7,
+`E-TEST` 15, `E-CTRL` 14, `E-SENSE` 13, `E-DEBUG` 11, `E-KIN` 10, `E-RT` 7,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-THREAD` 4,
 `E-BUILD` 3, `E-TIME` 2, `E-TSAN` 1.
 
@@ -229,6 +229,21 @@ version is the intuitive one.
   06-06.
 - **Padding and index caching in an SPSC queue are worth nothing alone and
   about 80 percent together.** 07-05.
+- **Coverage is a floor, not a score, and a suite that asserts nothing proves
+  it.** A program calling five functions and asserting nothing reported 100
+  percent of 5 lines with 0 never run, while a deliberate `>` for `>=`
+  survived. On `return a && b`: lines 100 percent, branches executed 100
+  percent, taken at least once 50 percent. 05-07.
+- **Counting a gcov file by hand took three attempts**, and two of the wrong
+  answers flattered the result. `#####` alone gave 5 never-run lines where the
+  answer was 7; adding `=====` fixed that and still disagreed on the total
+  because the `digits*` form was not counted as code. The third attempt agreed
+  with gcov exactly, and the parser now matches it on four real files. 05-07.
+- **01-13's own suite covers 89.06 percent of its artifact**, with 7 lines
+  never run, among them the `--name=value` branch of a private lookup and its
+  not-found return: reachable, unexercised, because every call in the suite
+  used the other spelling. The useful output of a coverage run is the list,
+  not the percentage. 05-07.
 - **My own sanitizer lane was never instrumented, for a whole session.** The
   option is `RC_SANITIZE_ADDRESS` and I was passing `RC_SANITIZE`, which CMake
   accepts in silence as a variable nothing reads. Continuous integration used
