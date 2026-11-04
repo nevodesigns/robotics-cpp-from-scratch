@@ -471,17 +471,19 @@ All four invocations continuous integration makes, `platforms --matrix`,
 `audit`, `readme` and `catalog --stdout`, were checked against the new lists
 before the change was pushed.
 
-**Keep filling the front of the book.** Phases 00 to 03 hold 40 of a planned
+**Keep filling the front of the book.** Phases 00 to 03 hold 41 of a planned
 66 and are the first thing somebody who has never programmed walks through.
 Phase 00 is 8 of 14, phase 01 is 13 of 18, phase 02 is 9 of 16, phase 03 is
-10 of 18.
+11 of 18.
 
-Gaps identified while choosing this session's lessons, not yet built:
-`constexpr` and compile-time evaluation, which no lesson teaches although
-audit rule L022 is about where a `constexpr` may be declared; a non
-allocating fixed capacity container, which phase 07 needs and four lessons
-approximate by hand; and the stack, where locals live and what happens at the
-end of it.
+`constexpr` is done, as 03-11, and the `rcpp` migration above is done. Still
+not built, from the same survey: a non allocating fixed capacity container,
+which phase 07 needs and four lessons approximate by hand, and the stack,
+where locals live and what happens at the end of it.
+
+Phase 00 is the thinnest relative to how early it is met, at 8 of 14, and its
+remaining gaps have not been surveyed as carefully as those in phases 01 to
+03. That survey is the next thing worth doing before choosing another lesson.
 
 **Phase 12 and phases 17 to 21 remain entirely unbuilt**, 80 lessons. ROS 2
 Humble is installed on this machine, so phase 17 is not blocked.
