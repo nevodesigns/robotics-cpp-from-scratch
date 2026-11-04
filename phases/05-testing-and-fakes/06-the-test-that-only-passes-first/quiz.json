@@ -1,0 +1,78 @@
+{
+  "lesson": "05-06-the-test-that-only-passes-first",
+  "title": "The Test That Only Passes First: Shared State Between Tests",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A test fails in the suite and passes when run on its own. Where is the defect most likely to be?",
+      "options": [
+        "In a test that ran earlier and changed something the failing test depends on",
+        "In the failing test, since that is the one reporting",
+        "In the test framework, which must be reporting the wrong name",
+        "Nowhere: a test that passes alone is a passing test"
+      ],
+      "correct": 0,
+      "explanation": "The failing test is the victim, not the culprit. Something outside it survived the test before it, and the one that reports is simply the one downstream of the leak."
+    },
+    {
+      "stage": "check",
+      "question": "Two probes share one double. The first dirties it, the second expects the default. Forwards they score 1 of 2. What do they score backwards, and why?",
+      "options": [
+        "2 of 2, because the one expecting the default now runs before anything has dirtied it",
+        "1 of 2, because the same probe is still broken whichever way they run",
+        "0 of 2, because reversing the order breaks both of them",
+        "2 of 2, because running a suite backwards resets the values it touches"
+      ],
+      "correct": 0,
+      "explanation": "Measured in this lesson: 1 forwards and 2 backwards. Leaked state flows forward, so reversing moves the victim in front of the culprit and it passes."
+    },
+    {
+      "stage": "check",
+      "question": "Why does Restore put the value back in a destructor rather than on the last line of the test?",
+      "options": [
+        "An early return, a failed check, a break or a throw all skip a line at the end, and none of them skip a destructor",
+        "A destructor runs faster than an assignment at the end of a function",
+        "Because the last line of a test is reserved for the assertion",
+        "So the value can be restored more than once if the test needs it"
+      ],
+      "correct": 0,
+      "explanation": "This is lesson 02-03's point applied to tests. The paths that most need the cleanup are exactly the paths that do not reach the bottom of the function."
+    },
+    {
+      "stage": "check",
+      "question": "Restore declares a destructor, which lesson 03-09 said suppresses the implicit move and is usually worth avoiding. Why is it right here?",
+      "options": [
+        "A guard that could be moved could restore twice or not at all, so copy and move are deleted deliberately",
+        "Scope guards are exempt because they are small",
+        "The rule of zero applies only to types that own memory",
+        "Templates cannot have implicit move operations anyway"
+      ],
+      "correct": 0,
+      "explanation": "The rule of zero is a default, not a law. Knowing a rule includes knowing the cases where it stops applying, and a one-shot guard is one of them."
+    },
+    {
+      "stage": "post",
+      "question": "The first version of run_in_both_orders had no reset between its two passes. With a known leaky pair it reported 1 forwards and 0 backwards, and the test asserting order dependence still passed. What was wrong?",
+      "options": [
+        "The backwards pass inherited the dirty value from the forwards pass, so both probes failed, and the counts were untrue even though they differed",
+        "Nothing: 1 and 0 differ, so the detection was correct",
+        "The loop ran off the end of the vector when counting down",
+        "The reset should have been called once, after both passes"
+      ],
+      "correct": 0,
+      "explanation": "A tool for finding shared state had shared state between its own two passes. The assertion held for the wrong reason, and only printing the numbers and reading them caught it."
+    },
+    {
+      "stage": "post",
+      "question": "Running a suite in both orders and getting equal counts proves what?",
+      "options": [
+        "That these two orders agree, which is weaker than no leak and much stronger than one order",
+        "That the suite has no shared state between its tests",
+        "Nothing at all, since two orders out of n! is negligible",
+        "That the tests can safely be run in parallel"
+      ],
+      "correct": 0,
+      "explanation": "Only every permutation would be a proof and there are too many. Reversing catches the common case because leaks flow forward, for the cost of running the suite twice."
+    }
+  ]
+}
