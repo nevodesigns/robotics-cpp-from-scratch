@@ -12,15 +12,15 @@ disagree. Last updated 4 November 2026.
 
 | | |
 |---|---|
-| lessons built | 99 of 320 planned, 31 percent |
+| lessons built | 100 of 320 planned, 31 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 204 |
-| Failure Atlas entries | 245 |
-| librc headers | 89 across 13 modules |
+| hours of material | 206 |
+| Failure Atlas entries | 248 |
+| librc headers | 90 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 118, green on every claimed toolchain |
-| commits | 195 |
+| reference tests | 121, green on every claimed toolchain |
+| commits | 197 |
 
 ## Phase by phase
 
@@ -31,7 +31,7 @@ disagree. Last updated 4 November 2026.
 |---|---|---|---|
 | 00 Toolchain and First Motion | 8 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 12 | 18 | A drive state machine that cannot represent nonsense |
-| 02 Memory and ownership | 8 | 16 | A subsystem tree that releases completely, with no cycles |
+| 02 Memory and ownership | 9 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 9 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 6 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 6 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
@@ -54,7 +54,7 @@ disagree. Last updated 4 November 2026.
 
 **Where the gap is.** The front of the book is the thinnest part relative to
 how early a learner meets it. Phases 00 to 03 are the first thing somebody who
-has never programmed walks through, and they hold 37 of a planned 66. Everything
+has never programmed walks through, and they hold 38 of a planned 66. Everything
 after phase 13 is material such a learner cannot reach yet. Finishing the front
 is worth more than extending the back.
 
@@ -126,11 +126,11 @@ twice.
 
 ## librc
 
-89 headers. Modules and counts:
+90 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
-| `rc::core` | 27 |
+| `rc::core` | 28 |
 | `rc::control` | 8 |
 | `rc::io` | 8 |
 | `rc::math` | 8 |
@@ -150,11 +150,11 @@ twice.
 
 ## Failure Atlas
 
-245 entries under `atlas/errors/`, each with a `match:` pattern that
+248 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 51, `E-QT` 23, `E-NUM` 22, `E-NAV` 19, `E-IO` 16, `E-CTRL` 14,
-`E-MEM` 13, `E-SENSE` 13, `E-TEST` 13, `E-KIN` 10, `E-DEBUG` 8, `E-RT` 7,
+`E-CPP` 51, `E-QT` 23, `E-NUM` 22, `E-NAV` 19, `E-MEM` 16, `E-IO` 16,
+`E-CTRL` 14, `E-TEST` 13, `E-SENSE` 13, `E-KIN` 10, `E-DEBUG` 8, `E-RT` 7,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-THREAD` 4,
 `E-BUILD` 2, `E-TIME` 2, `E-TSAN` 1.
 
@@ -229,6 +229,26 @@ version is the intuitive one.
   06-06.
 - **Padding and index caching in an SPSC queue are worth nothing alone and
   about 80 percent together.** 07-05.
+- **The same unwritten `int` read 1405118043 at -O0 and 0 at -O2.** Not a
+  compiler bug: the read is undefined, so there was no correct answer to give,
+  which is the whole mechanism behind works-in-debug-fails-in-release. 02-09.
+- **A fresh heap block looked zeroed only because nothing had run yet.** A
+  program whose first act is the allocation sees 32 of 32 bytes zero; the same
+  code inside a suite that has already allocated sees 27. Of a freed and
+  reclaimed 32 byte block, 16 bytes came back verbatim and 16 held the
+  allocator's own bookkeeping. 02-09.
+- **Neither the compilers nor the sanitizer lane catch the case that matters.**
+  A struct member read inside a function it was passed to is silent on gcc and
+  clang at both optimisation levels, and `-fsanitize=address,undefined` runs it
+  clean and prints the garbage. The memory sanitizer is clang only, cannot be
+  combined with the address sanitizer, needs an instrumented standard library,
+  and here caught a trivial local while missing the struct member. The gap is
+  why `rc/core/init.hpp` exists. 02-09.
+- **The compiler warns about the safe construct, not the dangerous one.**
+  `Pose p = {1.5};` is completely defined and warns on both gcc and clang as
+  `-Wmissing-field-initializers`; give the members default initialisers and the
+  identical brace is silent. `Pose p;` followed by a read across a call
+  boundary warns on neither. 02-09.
 - **An order dependence detector contaminated itself.** Written without a
   reset between its two passes, `run_in_both_orders` ran its backwards pass on
   what the forwards pass left behind, and a known leaky pair scored 1 forwards

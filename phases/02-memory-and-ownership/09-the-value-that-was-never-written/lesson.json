@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "02-09-the-value-that-was-never-written",
+  "title": "The Value That Was Never Written: Uninitialised Memory, and Proving a Function Filled Its Output",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-01-structs-and-arithmetic",
+    "02-01-pointers-and-addresses",
+    "02-02-the-heap-and-the-leak"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/init.hpp",
+    "note": "fills storage with a pattern that is loud when read, and counts how much of it a function failed to write"
+  },
+  "breaks_first": [
+    "E-MEM-0014",
+    "E-MEM-0015",
+    "E-MEM-0016"
+  ]
+}
