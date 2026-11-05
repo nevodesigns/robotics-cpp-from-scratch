@@ -71,12 +71,12 @@ struct RigOptions {
 };
 
 struct Report {
-  long produced = 0;       // readings the producer made
-  long delivered = 0;      // readings the consumer took
-  long dropped = 0;        // readings the full queue refused
-  long missed_slots = 0;   // cycles the producer's pacer had to drop
-  long wakeups = 0;        // times the consumer's loop went round
-  long overflows = 0;      // latencies beyond the histogram's range
+  long long produced = 0;       // readings the producer made
+  long long delivered = 0;      // readings the consumer took
+  long long dropped = 0;        // readings the full queue refused
+  long long missed_slots = 0;   // cycles the producer's pacer had to drop
+  long long wakeups = 0;        // times the consumer's loop went round
+  long long overflows = 0;      // latencies beyond the histogram's range
   double p50_us = 0.0;
   double p99_us = 0.0;
   double max_us = 0.0;

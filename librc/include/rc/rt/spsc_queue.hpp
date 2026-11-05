@@ -29,6 +29,15 @@
 namespace rc {
 namespace rt {
 
+// MSVC warns, at /W4, that this class was padded because of the alignment specifier on the
+// Padded members. That is exactly what was asked for, so the warning is turned off around the
+// whole class and not worked around, as in cache_line.hpp. It is reported where a SpscQueue<T> is
+// instantiated, and the header gate compiles with warnings as errors, so a header that
+// instantiates one, such as rc/rt/latency_rig.hpp, would otherwise fail the Windows build.
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4324)
+#endif
 template <class T>
 class SpscQueue {
  public:
@@ -111,6 +120,10 @@ class SpscQueue {
   Padded<std::atomic<std::size_t>> tail_;
   std::size_t cached_head_ = 0;   // producer only
 };
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 }  // namespace rt
 }  // namespace rc

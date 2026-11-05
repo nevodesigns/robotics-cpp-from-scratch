@@ -31,7 +31,7 @@ RigOptions options_for(WaitStyle style) {
 }
 
 // Cycles in a 300 ms run at 200 Hz.
-const long kExpectedSlots = 60;
+const long long kExpectedSlots = 60;
 
 }  // namespace
 
@@ -43,11 +43,11 @@ RC_TEST("every reading is delivered or dropped, and every slot is a reading or a
 
     RC_CHECK(report.delivered > 0);
     RC_CHECK_EQ(report.produced, report.delivered + report.dropped);
-    RC_CHECK_EQ(report.dropped, 0L);
+    RC_CHECK_EQ(report.dropped, 0LL);
 
     // Slots: the producer is paced on a grid, so produced plus dropped slots is the run's length.
-    const long slots = report.produced + report.missed_slots;
-    RC_CHECK(std::labs(slots - kExpectedSlots) <= 3);
+    const long long slots = report.produced + report.missed_slots;
+    RC_CHECK(std::llabs(slots - kExpectedSlots) <= 3);
   }
 }
 
@@ -114,21 +114,24 @@ RC_TEST("polling is bounded by its interval and sleeping by its readings, whatev
 
 RC_TEST("a consumer too slow for the producer loses readings, counts them, and never slows the producer") {
   RigOptions options = options_for(WaitStyle::kSpin);
-  options.queue_capacity = 4;
-  options.consumer_work_us = 20000;  // 20 ms of work per reading against a 5 ms producer
+  options.queue_capacity = 2;
+  options.consumer_work_us = 60000;  // 60 ms of work per reading against a 5 ms producer
 
   const Report report = run_rig(options);
 
-  std::cout << "  a 5 ms producer against a consumer taking 20 ms a reading, queue of 4:\n";
+  std::cout << "  a 5 ms producer against a consumer taking 60 ms a reading, queue of 2:\n";
   std::cout << "    produced " << report.produced << ", delivered " << report.delivered << ", dropped "
             << report.dropped << ", slots missed by the producer " << report.missed_slots << "\n\n";
 
-  RC_CHECK(report.dropped > 10);
-  RC_CHECK(report.delivered >= 5);
+  // The thresholds are deliberately loose. A coarse timer, such as the 15.6 ms default on Windows, makes
+  // a 5 ms producer produce about a third as many readings, and the consumer is so much slower than
+  // even that that most are still dropped.
+  RC_CHECK(report.dropped > 8);
+  RC_CHECK(report.delivered >= 3);
   RC_CHECK_EQ(report.produced, report.delivered + report.dropped);
 
   // The producer kept its rate: a slow consumer is the consumer's problem and not the producer's.
-  RC_CHECK(std::labs((report.produced + report.missed_slots) - kExpectedSlots) <= 3);
+  RC_CHECK(std::llabs((report.produced + report.missed_slots) - kExpectedSlots) <= 3);
 }
 
 RC_TEST("a stop request ends the run promptly, with the books still balanced") {
@@ -150,7 +153,7 @@ RC_TEST("a stop request ends the run promptly, with the books still balanced") {
             << report.produced << " produced, " << report.delivered << " delivered\n\n";
 
   RC_CHECK(took.count() < 1500);
-  RC_CHECK(report.produced >= 5);
+  RC_CHECK(report.produced >= 2);
   RC_CHECK(report.produced < 100);
   RC_CHECK_EQ(report.produced, report.delivered + report.dropped);
 }

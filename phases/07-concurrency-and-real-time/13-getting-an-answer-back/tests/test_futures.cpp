@@ -178,7 +178,10 @@ RC_TEST("std::async with the futures discarded runs one after another, and kept 
 
   RC_CHECK_EQ(discarded.peak.load(), 1);
   RC_CHECK_EQ(pooled.peak.load(), 4);
-  RC_CHECK_EQ(kept.peak.load(), 4);
+  // std::async is the library's to schedule: MSVC runs it on a thread pool that may not have four
+  // threads going within 100 ms. Parallel at all is what the comparison needs. The pool of our own
+  // below is exactly four, because it starts exactly four threads.
+  RC_CHECK(kept.peak.load() >= 2);
 }
 
 RC_TEST("ready_within gives up at its limit and answers yes once the task is done") {

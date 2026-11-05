@@ -78,12 +78,12 @@ struct RigOptions {
 };
 
 struct Report {
-  long produced = 0;       // readings the producer made
-  long delivered = 0;      // readings the consumer took
-  long dropped = 0;        // readings the full queue refused
-  long missed_slots = 0;   // cycles the producer's pacer had to drop
-  long wakeups = 0;        // times the consumer's loop went round
-  long overflows = 0;      // latencies beyond the histogram's range
+  long long produced = 0;       // readings the producer made
+  long long delivered = 0;      // readings the consumer took
+  long long dropped = 0;        // readings the full queue refused
+  long long missed_slots = 0;   // cycles the producer's pacer had to drop
+  long long wakeups = 0;        // times the consumer's loop went round
+  long long overflows = 0;      // latencies beyond the histogram's range
   double p50_us = 0.0;
   double p99_us = 0.0;
   double max_us = 0.0;
@@ -98,6 +98,12 @@ inline long long now_ns() {
       .count();
 }
 
+// run_rig instantiates a SpscQueue, whose padded members MSVC reports as C4324. The padding is the
+// point of the queue, so the warning is turned off for this function, as it is for the class.
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4324)
+#endif
 // Runs the producer and the consumer for the length of the run, or until stop is requested, and says
 // what happened. Everything produced is accounted for in the report.
 inline Report run_rig(const RigOptions& options, const StopToken& outside = StopToken()) {
@@ -189,6 +195,9 @@ inline Report run_rig(const RigOptions& options, const StopToken& outside = Stop
   report.max_us = latency.worst();
   return report;
 }
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 }  // namespace rt
 }  // namespace rc
