@@ -18,14 +18,14 @@ November and is kept as it was, because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 111 of 320 planned, 35 percent |
+| lessons built | 112 of 320 planned, 35 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 227 |
-| Failure Atlas entries | 281 |
+| hours of material | 229 |
+| Failure Atlas entries | 284 |
 | librc headers | 99 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 148, green on every claimed toolchain |
+| reference tests | 151, green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -36,7 +36,7 @@ November and is kept as it was, because it records the reasoning of that day.
 |---|---|---|---|
 | 00 Toolchain and First Motion | 9 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 16 | 18 | A drive state machine that cannot represent nonsense |
-| 02 Memory and ownership | 10 | 16 | A subsystem tree that releases completely, with no cycles |
+| 02 Memory and ownership | 11 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
@@ -59,7 +59,7 @@ November and is kept as it was, because it records the reasoning of that day.
 
 **Where the gap is.** The front of the book is the thinnest part relative to
 how early a learner meets it. Phases 00 to 03 are the first thing somebody who
-has never programmed walks through, and they hold 46 of a planned 66. Everything
+has never programmed walks through, and they hold 47 of a planned 66. Everything
 after phase 13 is material such a learner cannot reach yet. Finishing the front
 is worth more than extending the back.
 
@@ -158,10 +158,10 @@ twice.
 
 ## Failure Atlas
 
-281 entries under `atlas/errors/`, each with a `match:` pattern that
+284 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 64, `E-NUM` 28, `E-QT` 23, `E-NAV` 19, `E-MEM` 19, `E-IO` 18,
+`E-CPP` 67, `E-NUM` 28, `E-QT` 23, `E-NAV` 19, `E-MEM` 19, `E-IO` 18,
 `E-TEST` 15, `E-CTRL` 14, `E-DEBUG` 13, `E-SENSE` 13, `E-KIN` 10, `E-RT` 7,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-BUILD` 4,
 `E-THREAD` 4, `E-TIME` 2, `E-TSAN` 1.
@@ -565,9 +565,9 @@ All four invocations continuous integration makes, `platforms --matrix`,
 `audit`, `readme` and `catalog --stdout`, were checked against the new lists
 before the change was pushed.
 
-**Keep filling the front of the book.** Phases 00 to 03 hold 46 of a planned
+**Keep filling the front of the book.** Phases 00 to 03 hold 47 of a planned
 66 and are the first thing somebody who has never programmed walks through.
-Phase 00 is 9 of 14, phase 01 is 16 of 18, phase 02 is 10 of 16, phase 03 is
+Phase 00 is 9 of 14, phase 01 is 16 of 18, phase 02 is 11 of 16, phase 03 is
 11 of 18.
 
 `constexpr` is done as 03-11, the `rcpp` migration is done, and the stack is
@@ -608,8 +608,19 @@ prose and a construct can be explained under a title that does not name it, so
 every candidate below needs the check that sank three earlier premises: read
 the pages before building anything. Candidates, by how many lessons use them:
 `inline` (78 lessons, first discussed at 04-04), `size_t` (50, first at 01-07),
-`explicit` (26, first at 06-06), `auto` (9, from 03-03, never discussed), and
-`namespace` and `static` (first discussed at 04-04).
+`auto` (9, from 03-03, never discussed), and `namespace` and `static` (first
+discussed at 04-04). `explicit`, checked next, turned out to be one symptom of a
+larger hole, below.
+
+`explicit` led somewhere better. Reading the pages showed that "constructor" is
+used from 01-13 and 02-03 onward and is **defined nowhere**: 03-01, "Classes",
+teaches `class`, private data, `const` methods and invariants and does not
+contain the word, writing only `RunningStatistics() = default;`. So the member
+initialiser list, `explicit`, default member initialisers, and the rule that
+declaring a constructor withdraws the default one were all met in code and
+explained in no page. It is done as **02-11**, in phase 02 because 02-03 cannot
+be understood without it, and the page says so. The lesson found by following one
+construct's symptom to its cause is a better lesson than the one the scan named.
 
 `inline`, the largest by count, was checked by reading 00-01, 00-02 and 04-04 and
 turned out to be a contradiction and not a missing lesson. 00-02 teaches that a

@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 111 of 320 planned |
+| lessons | 112 of 320 planned |
 | phases opened | 16 of 22, none complete to plan |
-| hours of material | 227 |
-| Failure Atlas entries | 281 |
+| hours of material | 229 |
+| Failure Atlas entries | 284 |
 | librc headers | 99 across 13 modules |
-| reference tests | 148 |
-| exercises | 111, of which 4 are declared not to compile |
+| reference tests | 151 |
+| exercises | 112, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   148/148, 0 warnings      clang 14  148/148, 0 warnings
-asan     148/148, 0 warnings      gate      111 of 111 reported
-audit    111 lessons, 281 atlas entries, 0 issues
+gcc 11   151/151, 0 warnings      clang 14  151/151, 0 warnings
+asan     151/151, 0 warnings      gate      112 of 112 reported
+audit    112 lessons, 284 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -138,7 +138,7 @@ written before any lesson existed and has not been revised.
 |---|---|---|---|
 | 00 Toolchain and First Motion | 9 | 14 | 64% |
 | 01 C++ Core I | 16 | 18 | 88% |
-| 02 Memory and Ownership | 10 | 16 | 62% |
+| 02 Memory and Ownership | 11 | 16 | 68% |
 | 03 C++ Core III | 11 | 18 | 61% |
 | 04 Build Systems and Tooling | 8 | 14 | 57% |
 | 05 Testing and Fakes | 7 | 12 | 58% |
@@ -212,6 +212,9 @@ reasoning in their own messages, and `git log` is the record.
 | commit | what it did |
 |---|---|
 | `3b4e139` | 01-15, a number that changed type, graduated `rc/core/narrow.hpp` |
+| `60c13a3` | explained `inline` in 00-01 and 00-02, where the contradiction was |
+| `a35ba02` | explained the conditional operator in 01-02, with a test tied to `clamp` |
+| `946014d` | 01-16, the loop variable is a copy, which explains range-for |
 | `1c826eb` | 01-14, the result you meant to keep, graduated `rc/core/save.hpp` |
 | `f352407` | made the documentation say what the code does, and added rule L028 for the platform line |
 | `55d8916` | stopped asserting a stack layout the sanitizer does not have |
@@ -310,6 +313,17 @@ tool, every time. That is the argument for a rule over a note.
 asserted on text that had already changed, so a commit went out still calling
 `constexpr` unbuilt. *Caught by:* reading the file after the script failed.
 Fixed in `1af47a7`.
+
+**A scan that named the wrong lesson, in 02-11.** The construct scan listed
+`explicit` as a candidate, 26 lessons using it with a prose mention only at 03-06.
+Reading the pages to check it showed `explicit` was one symptom. The word
+"constructor" is used from 01-13 and 02-03 and defined in no page, and the lesson
+on classes, 03-01, does not contain it. The scan finds where a construct is used
+before it is explained; it does not find what the construct belongs to. *Caught
+by:* reading 03-01 to see where `explicit` would have been taught, and finding
+that the thing it sits inside was missing too. The method that works is the one
+used: let the scan point, read the pages, and follow the symptom to its cause
+before naming the lesson.
 
 **A size written from memory, in 01-16.** The header comment said what indexing
 a vector of bool returns is 8 bytes. The suite printed 16 on its first run: a

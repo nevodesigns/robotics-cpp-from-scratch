@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "id": "02-11-how-an-object-starts",
+  "title": "How an Object Starts: Constructors, the Initialiser List, and the Word explicit",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-01-structs-and-arithmetic",
+    "02-03-raii-and-destructors",
+    "02-05-copy-and-move-semantics"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": null,
+  "breaks_first": [
+    "E-CPP-0065",
+    "E-CPP-0066",
+    "E-CPP-0067"
+  ]
+}

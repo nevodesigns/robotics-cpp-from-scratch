@@ -1,0 +1,78 @@
+{
+  "lesson": "02-11-how-an-object-starts",
+  "title": "How an Object Starts: Constructors, the Initialiser List, and the Word explicit",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the difference between setting a member in the constructor's initialiser list and assigning it in the constructor's body?",
+      "options": [
+        "None, they compile to the same thing in every case",
+        "In the list the member is built once with its value; in the body it is first built blank and then overwritten, so the work is done twice",
+        "The list is only for const members",
+        "The body runs first, then the list"
+      ],
+      "correct": 1,
+      "explanation": "By the time the body runs every member already exists. Measured with a type that counts its own construction: the list built 0 blank and 2 copies with 0 overwrites; the body built 2 blank, 0 copies and overwrote 2."
+    },
+    {
+      "stage": "check",
+      "question": "A class lists its members second_, first_ in the constructor's list, but declares first_ before second_. Which is built first?",
+      "options": [
+        "second_, since it is listed first",
+        "first_, since members are built in the order they are declared, and gcc and clang warn that the list says otherwise",
+        "Whichever is cheaper to build",
+        "It is undefined"
+      ],
+      "correct": 1,
+      "explanation": "Measured: first then second, whatever the list said. The -Wreorder warning is right, because the list is lying about what happens, and it matters when one member's initialiser uses another."
+    },
+    {
+      "stage": "check",
+      "question": "A function takes a Loose, a class with a constructor from a double that is not explicit. It is called with the bare number 7. What happens?",
+      "options": [
+        "It does not compile, since 7 is not a Loose",
+        "It compiles, and the 7 is silently turned into a Loose",
+        "It compiles with a warning on every compiler",
+        "It compiles only with a cast"
+      ],
+      "correct": 1,
+      "explanation": "A constructor callable with one value is also an implicit conversion from that value's type. Marked explicit, the same call is refused by both compilers, and so is the copy form Meters m = 5.0."
+    },
+    {
+      "stage": "check",
+      "question": "A class declares only explicit Meters(double). What does the line Meters m; do?",
+      "options": [
+        "Makes a Meters holding zero",
+        "Makes a Meters holding whatever was in memory",
+        "Does not compile, since declaring any constructor removes the default one",
+        "Compiles, and m is unusable until assigned"
+      ],
+      "correct": 2,
+      "explanation": "gcc: no matching function for call to Meters::Meters(). clang: no matching constructor for initialization. That is the design when a distance with no value would be a lie that looks like a reading."
+    },
+    {
+      "stage": "post",
+      "question": "When is it right to write Ramp() = default; for a class that also has other constructors?",
+      "options": [
+        "Always, so the class can be used in containers",
+        "When 'has not been given a value' is a state that makes sense, and every member has a default where it is declared",
+        "Never, since = default leaves members uninitialised",
+        "Only for classes with no members"
+      ],
+      "correct": 1,
+      "explanation": "= default asks for the constructor the compiler withdrew. It is only worth asking for when the blank state is meaningful, such as a ramp that is not going anywhere, and default member initialisers keep it from leaving members unset, which is lesson 02-09."
+    },
+    {
+      "stage": "post",
+      "question": "Why is std::vector<int> v = 5; refused by the compiler?",
+      "options": [
+        "Because 5 is too small a size",
+        "Because vector's constructor taking a size is explicit, and 'a vector equal to 5' is not something anybody means",
+        "Because int vectors cannot be copy initialised",
+        "Because the standard forbids = for containers"
+      ],
+      "correct": 1,
+      "explanation": "The standard library marks that constructor explicit on purpose. std::vector<int> v(5) says what is meant, and the = form, which would read as 'a vector equal to 5', does not compile."
+    }
+  ]
+}
