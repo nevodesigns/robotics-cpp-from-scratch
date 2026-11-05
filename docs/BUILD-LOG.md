@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 115 of 320 planned |
+| lessons | 116 of 320 planned |
 | phases opened | 16 of 22, one (phase 01) complete to plan |
-| hours of material | 234 |
-| Failure Atlas entries | 293 |
-| librc headers | 99 across 13 modules |
-| reference tests | 157 |
-| exercises | 115, of which 4 are declared not to compile |
+| hours of material | 236 |
+| Failure Atlas entries | 297 |
+| librc headers | 100 across 13 modules |
+| reference tests | 158 |
+| exercises | 116, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   157/157, 0 warnings      clang 14  157/157, 0 warnings
-asan     157/157, 0 warnings      gate      115 of 115 reported
-audit    115 lessons, 293 atlas entries, 0 issues
+gcc 11   160/160, 0 warnings      clang 14  160/160, 0 warnings
+asan     160/160, 0 warnings      gate      116 of 116 reported
+audit    116 lessons, 297 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -143,7 +143,7 @@ written before any lesson existed and has not been revised.
 | 04 Build Systems and Tooling | 8 | 14 | 57% |
 | 05 Testing and Fakes | 7 | 12 | 58% |
 | 06 Robot Maths | 6 | 16 | 37% |
-| 07 Concurrency and Real Time | 5 | 16 | 31% |
+| 07 Concurrency and Real Time | 6 | 16 | 37% |
 | 08 Systems Input and Output | 5 | 14 | 35% |
 | 09 Qt Core | 4 | 14 | 28% |
 | 10 Qt Widgets | 4 | 14 | 28% |
@@ -212,6 +212,7 @@ reasoning in their own messages, and `git log` is the record.
 | commit | what it did |
 |---|---|
 | `3b4e139` | 01-15, a number that changed type, graduated `rc/core/narrow.hpp` |
+| `8629c26` | 01-18, the comment said otherwise, which teaches reading code and completes phase 01 |
 | `0c84439` | 02-12, the word that means three things, which explains static |
 | `d239a03` | 01-17, two functions one name, which explains namespaces and the ban on using namespace std |
 | `567fada` | pointed 03-01 at 02-11, which now defines the constructor it uses |
@@ -317,6 +318,23 @@ tool, every time. That is the argument for a rule over a note.
 asserted on text that had already changed, so a commit went out still calling
 `constexpr` unbuilt. *Caught by:* reading the file after the script failed.
 Fixed in `1af47a7`.
+
+**A sanitizer report that was the tool and not the code, in 07-06.** The first
+thread sanitizer run on the lesson's suite reported 11 warnings, among them a
+"double lock" inside a plain `lock_guard`. The code was correct. A twelve line
+program with a waiter and a producer reproduced it on gcc 11 for `wait_until` with
+a `steady_clock` deadline, 2 warnings, and not for `wait()` or `system_clock`, and
+clang 14 reported none for any of them, so the cause is GCC 11's runtime not
+intercepting `pthread_cond_clockwait`. *Caught by:* checking that the stack was a
+simple lock in a producer before believing it, then reproducing it without the
+lesson. The lesson says so, with `E-TSAN-0002`, because a learner following 07-01's
+advice to run under the sanitizer would lose a day to it.
+
+**A test name that described the wrong mechanism, in 07-06.** The test "one takes it
+and the other goes back to sleep" was written from the `notify_all` experiment, but
+the queue uses `notify_one`, so the losing consumer is never woken and the printed
+count of sleeps stayed at 2. *Caught by:* the printed table disagreeing with the
+test's own name. The name and the comment now say what happens.
 
 **A least change that was not, in 01-18.** The first reference fix for `percent`
 rounded to the nearest percent as well as correcting the divisor, and the test was

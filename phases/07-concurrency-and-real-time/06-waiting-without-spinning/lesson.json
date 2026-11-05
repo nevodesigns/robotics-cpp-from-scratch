@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "07-06-waiting-without-spinning",
+  "title": "Waiting Without Spinning: Condition Variables, the Lost Wakeup, and Stopping a Thread That Is Asleep",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "07-01-threads-and-the-torn-read",
+    "07-02-a-queue-without-a-lock",
+    "03-07-one-template-many-types"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::rt",
+    "header": "rc/rt/blocking_queue.hpp",
+    "note": "a queue a consumer can sleep on with a deadline, that wakes every waiter on close and drains before it ends"
+  },
+  "breaks_first": [
+    "E-THREAD-0005",
+    "E-THREAD-0006",
+    "E-THREAD-0007"
+  ]
+}
