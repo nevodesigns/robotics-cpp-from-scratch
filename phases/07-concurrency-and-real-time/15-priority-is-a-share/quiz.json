@@ -1,0 +1,78 @@
+{
+  "lesson": "07-15-priority-is-a-share",
+  "title": "Priority Is a Share, and Inversion Is a Bug: Why the Highest Priority Task Waited for the Middle One",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Two CPU-bound processes share one core, one at nice 0 and one at nice 19. How much of the core does the nice 19 process get, measured?",
+      "options": [
+        "About half",
+        "About 1.6 percent: it did 24 million iterations against 1448",
+        "About 20 percent",
+        "None at all"
+      ],
+      "correct": 1,
+      "explanation": "A lower priority is a share, and the shares are very unequal. The kernel's weights, 1024 and 15, predicted it: 15 over 1039 is 1.4 percent."
+    },
+    {
+      "stage": "check",
+      "question": "Low holds a lock, High wants it, Medium wants only the CPU. Without inheritance, who finishes first and why?",
+      "options": [
+        "High, since it has the highest priority",
+        "Medium, at tick 12, before High at tick 16: Medium outranks Low and runs for ten ticks while Low cannot finish the work that releases the lock",
+        "Low",
+        "They finish together"
+      ],
+      "correct": 1,
+      "explanation": "High waited 15 ticks after it woke. A task that outranks nothing in the picture finishing before the highest priority one is the signature of inversion."
+    },
+    {
+      "stage": "check",
+      "question": "The same scenario with inheritance. How long does High wait, and what does Medium pay?",
+      "options": [
+        "High waits 5 ticks, and Medium finishes 4 ticks later, at 16 instead of 12",
+        "High waits 15 ticks, and Medium is unaffected",
+        "High waits 0 ticks",
+        "High waits 5 ticks and Medium finishes earlier"
+      ],
+      "correct": 0,
+      "explanation": "The lock holder runs at the priority of whoever waits for it, finishes, and releases. Medium pays four ticks, which is the cost of inheritance and the point."
+    },
+    {
+      "stage": "check",
+      "question": "High waits for a lock Medium holds, Medium waits for a lock Low holds, and a busy task N (priority 3) sits between Medium (2) and High (4). What does inheriting only one step do?",
+      "options": [
+        "Works the same as transitive inheritance",
+        "Gives Low only Medium's priority, 2, which N (3) still beats, so the inversion survives: Low must inherit High's 4 through Medium",
+        "Makes N run first",
+        "Deadlocks"
+      ],
+      "correct": 1,
+      "explanation": "Tested directly: an answer that looked one step passed the classic scenario and failed exactly the chain scenario. Without inheritance High finished at tick 15 after N at 11; through the chain, High at 5 and N at 15."
+    },
+    {
+      "stage": "post",
+      "question": "An unprivileged program calls sched_setscheduler(SCHED_FIFO, 10). What happens, measured?",
+      "options": [
+        "It succeeds",
+        "It is refused, Operation not permitted, and nice(-5) is refused too: raising priority needs a privilege, and the call fails quietly if its result is not read",
+        "It succeeds only on Windows",
+        "It crashes"
+      ],
+      "correct": 1,
+      "explanation": "Real time priorities need root, CAP_SYS_NICE or a raised RLIMIT_RTPRIO, set up where the robot is installed. A program that depends on one must check the result and make the fallback visible."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the priority inheritance simulation deterministic and not a test of real threads?",
+      "options": [
+        "Real threads cannot have priorities",
+        "Real priorities need privilege the suite cannot assume, and the scheduler's choices cannot be forced or repeated portably, so a simulation makes every tick exact and runs identically on all four toolchains",
+        "Simulation is faster to write",
+        "Because Windows has no mutexes"
+      ],
+      "correct": 1,
+      "explanation": "The measured facts about real nice values are recorded as measurements, and the arithmetic that predicted them is what the suite tests. The inversion itself is shown tick by tick."
+    }
+  ]
+}

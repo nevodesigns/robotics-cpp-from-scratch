@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "07-15-priority-is-a-share",
+  "title": "Priority Is a Share, and Inversion Is a Bug: Why the Highest Priority Task Waited for the Middle One",
+  "type": "build",
+  "minutes": 115,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "07-09-two-locks-neither-moves",
+    "07-08-a-loop-that-holds-its-rate"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::rt",
+    "header": "rc/rt/priority_sim.hpp",
+    "note": "a tick by tick fixed priority scheduler with locks that runs a lock holder at the highest priority of anything waiting for it, through the whole chain of waiters, plus the share of a core a nice value gets"
+  },
+  "breaks_first": [
+    "E-RT-0009",
+    "E-RT-0010",
+    "E-RT-0011"
+  ]
+}
