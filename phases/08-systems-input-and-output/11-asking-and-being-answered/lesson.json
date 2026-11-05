@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "08-11-asking-and-being-answered",
+  "title": "Asking and Being Answered: Which Question Is This the Answer To",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "08-10-a-reader-thread-of-its-own"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::io",
+    "header": "rc/io/request.hpp",
+    "note": "the request that knows which answer is its own, and the device that does not do it twice"
+  },
+  "breaks_first": [
+    "E-IO-0034",
+    "E-IO-0035",
+    "E-IO-0036"
+  ]
+}

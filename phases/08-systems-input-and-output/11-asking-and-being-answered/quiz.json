@@ -1,0 +1,78 @@
+{
+  "lesson": "08-11-asking-and-being-answered",
+  "title": "Asking and Being Answered: Which Question Is This the Answer To",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A requester sends a command and takes the next response that arrives as the answer. The link sometimes delivers a response late. What happens?",
+      "options": [
+        "Nothing, a late response is dropped",
+        "A late response can be taken as the answer to a later request, and the real answer then shifts onto the one after, until a timeout resynchronises them",
+        "The checksum rejects it",
+        "The device retries automatically"
+      ],
+      "correct": 1,
+      "explanation": "Measured, 49 of 200 answers were wrong. Every message was valid, so no error is raised anywhere."
+    },
+    {
+      "stage": "check",
+      "question": "With ids, no answer was wrong, yet the device ended at 227 instead of 200. Why?",
+      "options": [
+        "The ids were wrong",
+        "A resend is a repeated command: the answer was what was lost, the device had already done it, and it did it again, 27 times",
+        "The device cannot count",
+        "The late responses added to the position"
+      ],
+      "correct": 1,
+      "explanation": "The overshoot equals the number of resends exactly. Matching ids is the requester's half; the device has a half too."
+    },
+    {
+      "stage": "check",
+      "question": "What does the ReplyCache do when a request arrives with the id of the last one answered?",
+      "options": [
+        "Executes it again to be safe",
+        "Replays the answer it gave before and does not repeat the act",
+        "Ignores it",
+        "Asks the requester to confirm"
+      ],
+      "correct": 1,
+      "explanation": "The requester cannot tell whether the request or its answer was lost. The device can tell it has seen this id, and replaying is what makes a resend harmless."
+    },
+    {
+      "stage": "check",
+      "question": "Why does a retry keep the same id?",
+      "options": [
+        "To save a byte",
+        "The id is how the device recognises a repeat, so a fresh one makes a resend look like a different command and the cache stops working",
+        "Ids are expensive to generate",
+        "The protocol forbids new ids"
+      ],
+      "correct": 1,
+      "explanation": "A retry is the same request sent again. A new id says it is a different one."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a failed send not allowed to start the request or use up an id?",
+      "options": [
+        "It would make the ids irregular",
+        "The request never went out, so waiting out its timeouts is waiting for an answer to nothing, and the next id would skip a number for no reason",
+        "Failed sends are impossible",
+        "The id belongs to the port"
+      ],
+      "correct": 1,
+      "explanation": "State should describe what happened on the wire. A request that was never sent is not Waiting."
+    },
+    {
+      "stage": "post",
+      "question": "A command is \"move to 200\" instead of \"move by one\". Does the device need a ReplyCache?",
+      "options": [
+        "Yes, always",
+        "Not for correctness: repeating an absolute move leaves the device in the same place, so the retry is harmless",
+        "No, because ids are enough",
+        "Only on Windows"
+      ],
+      "correct": 1,
+      "explanation": "A command that is safe to repeat is idempotent. Designing commands that way is cheaper than remembering answers, and is the better fix where the protocol allows it."
+    }
+  ]
+}
