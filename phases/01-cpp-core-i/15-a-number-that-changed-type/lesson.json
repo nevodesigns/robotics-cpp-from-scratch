@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "01-15-a-number-that-changed-type",
+  "title": "A Number That Changed Type on the Way: Casts, Truncation, and What Fits",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-04-numbers-that-lie",
+    "01-07-the-loop-that-never-ends",
+    "01-09-something-not-in-the-program"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/narrow.hpp",
+    "note": "converts a double or a wide integer to an int and says when it does not fit, floors and rounds the way a map needs, and says whether a float can hold an integer"
+  },
+  "breaks_first": [
+    "E-NUM-0026",
+    "E-NUM-0027",
+    "E-NUM-0028"
+  ]
+}

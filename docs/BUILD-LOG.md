@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 109 of 320 planned |
+| lessons | 110 of 320 planned |
 | phases opened | 16 of 22, none complete to plan |
-| hours of material | 223 |
-| Failure Atlas entries | 275 |
-| librc headers | 98 across 13 modules |
-| reference tests | 144 |
-| exercises | 109, of which 4 are declared not to compile |
+| hours of material | 225 |
+| Failure Atlas entries | 278 |
+| librc headers | 99 across 13 modules |
+| reference tests | 146 |
+| exercises | 110, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   144/144, 0 warnings      clang 14  144/144, 0 warnings
-asan     144/144, 0 warnings      gate      109 of 109 reported
-audit    109 lessons, 275 atlas entries, 0 issues
+gcc 11   146/146, 0 warnings      clang 14  146/146, 0 warnings
+asan     146/146, 0 warnings      gate      110 of 110 reported
+audit    110 lessons, 278 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -137,7 +137,7 @@ written before any lesson existed and has not been revised.
 | phase | built | planned | |
 |---|---|---|---|
 | 00 Toolchain and First Motion | 9 | 14 | 64% |
-| 01 C++ Core I | 14 | 18 | 77% |
+| 01 C++ Core I | 15 | 18 | 83% |
 | 02 Memory and Ownership | 10 | 16 | 62% |
 | 03 C++ Core III | 11 | 18 | 61% |
 | 04 Build Systems and Tooling | 8 | 14 | 57% |
@@ -181,7 +181,12 @@ sanitizers, referenced by ten lessons and run by a CI job, taught by none
 (05-07); warnings, where `PROGRESS.md` already held the measurements (04-08);
 the stack, named in no lesson between 02-01's pointers and 02-02's heap
 (02-10); and the file a program leaves behind, where 01-12 taught reading one
-and nothing taught writing one (01-14).
+and nothing taught writing one (01-14); and conversions between number types,
+where `static_cast` appeared in 41 lessons and no page said what a cast does
+(01-15). The last one was found by a scan and not by noticing: read every
+lesson's code in curriculum order for C++ constructs, record the first lesson
+that uses each and the first whose page discusses it, and look at the gaps.
+The remaining candidates are in PROGRESS.md under "Next".
 
 **The same method said no three times, which is worth as much.** Checking
 before building showed that functions *are* taught, briefly and adequately, in
@@ -202,6 +207,7 @@ reasoning in their own messages, and `git log` is the record.
 
 | commit | what it did |
 |---|---|
+| `1c826eb` | 01-14, the result you meant to keep, graduated `rc/core/save.hpp` |
 | `f352407` | made the documentation say what the code does, and added rule L028 for the platform line |
 | `55d8916` | stopped asserting a stack layout the sanitizer does not have |
 | `dfdf55c` | 02-10, the stack, graduated `rc/core/recursion.hpp` |
@@ -299,6 +305,16 @@ tool, every time. That is the argument for a rule over a note.
 asserted on text that had already changed, so a commit went out still calling
 `constexpr` unbuilt. *Caught by:* reading the file after the script failed.
 Fixed in `1af47a7`.
+
+**A sanitizer claim I had only half measured, in 01-15.** The first draft of
+the lesson's header said the default `-fsanitize=undefined` reported none of
+five out of range casts. I had run that on gcc and run the separate
+float-cast-overflow option on clang, and written the two together as one
+finding. Rerunning each option on each compiler showed gcc's default reports
+nothing and clang's reports it. *Caught by:* writing out the full grid of
+compiler against option before writing the prose, when the sentence needed two
+results from each side. A claim about two compilers needs a result from each
+compiler for each thing it names.
 
 **A refusal test a stub could pass, in 01-14.** The first draft asserted that a
 save which could not proceed returned failure and left the old file as it was.

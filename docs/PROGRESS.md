@@ -18,14 +18,14 @@ November and is kept as it was, because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 109 of 320 planned, 34 percent |
+| lessons built | 110 of 320 planned, 34 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 223 |
-| Failure Atlas entries | 275 |
-| librc headers | 98 across 13 modules |
+| hours of material | 225 |
+| Failure Atlas entries | 278 |
+| librc headers | 99 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 144, green on every claimed toolchain |
+| reference tests | 146, green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -35,7 +35,7 @@ November and is kept as it was, because it records the reasoning of that day.
 | Phase | Built | Planned | Ends with |
 |---|---|---|---|
 | 00 Toolchain and First Motion | 9 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
-| 01 C++ Core I, values and flow | 14 | 18 | A drive state machine that cannot represent nonsense |
+| 01 C++ Core I, values and flow | 15 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 10 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
@@ -59,7 +59,7 @@ November and is kept as it was, because it records the reasoning of that day.
 
 **Where the gap is.** The front of the book is the thinnest part relative to
 how early a learner meets it. Phases 00 to 03 are the first thing somebody who
-has never programmed walks through, and they hold 44 of a planned 66. Everything
+has never programmed walks through, and they hold 45 of a planned 66. Everything
 after phase 13 is material such a learner cannot reach yet. Finishing the front
 is worth more than extending the back.
 
@@ -134,11 +134,11 @@ twice.
 
 ## librc
 
-98 headers. Modules and counts:
+99 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
-| `rc::core` | 33 |
+| `rc::core` | 34 |
 | `rc::control` | 8 |
 | `rc::io` | 8 |
 | `rc::math` | 8 |
@@ -158,10 +158,10 @@ twice.
 
 ## Failure Atlas
 
-275 entries under `atlas/errors/`, each with a `match:` pattern that
+278 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 62, `E-NUM` 25, `E-QT` 23, `E-NAV` 19, `E-MEM` 18, `E-IO` 18,
+`E-CPP` 62, `E-NUM` 28, `E-QT` 23, `E-NAV` 19, `E-MEM` 18, `E-IO` 18,
 `E-TEST` 15, `E-CTRL` 14, `E-DEBUG` 13, `E-SENSE` 13, `E-KIN` 10, `E-RT` 7,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-BUILD` 4,
 `E-THREAD` 4, `E-TIME` 2, `E-TSAN` 1.
@@ -565,9 +565,9 @@ All four invocations continuous integration makes, `platforms --matrix`,
 `audit`, `readme` and `catalog --stdout`, were checked against the new lists
 before the change was pushed.
 
-**Keep filling the front of the book.** Phases 00 to 03 hold 44 of a planned
+**Keep filling the front of the book.** Phases 00 to 03 hold 45 of a planned
 66 and are the first thing somebody who has never programmed walks through.
-Phase 00 is 9 of 14, phase 01 is 14 of 18, phase 02 is 10 of 16, phase 03 is
+Phase 00 is 9 of 14, phase 01 is 15 of 18, phase 02 is 10 of 16, phase 03 is
 11 of 18.
 
 `constexpr` is done as 03-11, the `rcpp` migration is done, and the stack is
@@ -593,8 +593,25 @@ the brief that something must move in the first hour.
 Keeping a result, which means writing a file, is done as **01-14**. It is in
 phase 01 and not phase 00 because writing a file needs `std::string` from 01-05
 and is the other half of 01-12, and rule L027 does not let a phase 00 lesson
-require either. What is still missing from the front is reading somebody else's
-code, which nothing in the repository covers at any point.
+require either. Conversions between number types are done as **01-15**, found by a mechanical
+scan rather than a guess: `static_cast` appears in 41 lessons from 00-07
+onwards and no page explained what a cast does.
+
+What is still missing from the front is reading somebody else's code, which
+nothing in the repository covers at any point.
+
+**The scan, and what it has not yet been followed up on.** Scan each lesson's
+`reference/` and `exercise/` code in curriculum order for C++ constructs, find
+the first lesson that uses each, then find the first lesson whose page
+discusses it. A large gap is a hole. It is crude, because it reads headings and
+prose and a construct can be explained under a title that does not name it, so
+every candidate below needs the check that sank three earlier premises: read
+the pages before building anything. Candidates, by how many lessons use them:
+`inline` (78 lessons, first discussed at 04-04), `size_t` (50, first at 01-07),
+`?:` the conditional operator (34, never discussed), `explicit` (26, first at
+06-06), range-for (20 lessons from 00-08, first discussed at 03-08, which is
+about making a type iterable and not about the loop), `auto` (9, from 03-03,
+never discussed), and `namespace` and `static` (first discussed at 04-04).
 
 01-14 found a hole in its own first draft, worth recording. The first test
 asserted that a save which could not proceed refused and left the old file
