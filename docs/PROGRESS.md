@@ -611,6 +611,15 @@ the pages before building anything. Candidates, by how many lessons use them:
 `explicit` (26, first at 06-06), `auto` (9, from 03-03, never discussed), and
 `namespace` and `static` (first discussed at 04-04).
 
+`inline`, the largest by count, was checked by reading 00-01, 00-02 and 04-04 and
+turned out to be a contradiction and not a missing lesson. 00-02 teaches that a
+function body belongs in one `.cpp` file, while every file a learner edits from
+00-01 on is a header full of bodies marked `inline`. 04-04 explains the exception
+in full, many lessons later. The fix was a sentence in 00-01 and a subsection in
+00-02 saying what the word is for, why the lessons are header only, and that
+this is a choice about the curriculum and not a rule about C++, with 04-04
+named as the place the cost is measured. No new lesson was warranted.
+
 The conditional operator `?:` was the smallest of them, used in 34 lessons and
 never explained, and did not warrant a lesson. It is a subsection of 01-02's
 "Deciding", with a test in that suite tied to the learner's `clamp`: it picks one

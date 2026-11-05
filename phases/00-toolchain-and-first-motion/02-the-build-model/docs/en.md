@@ -74,6 +74,33 @@ Define the same function in two `.cpp` files and the linker complains about a
 duplicate symbol instead. Both errors come from the same rule seen from opposite
 sides: exactly one definition, no more and no fewer.
 
+### The exception every lesson file uses
+
+Look again at `solution.hpp` from lesson 00-01. It is a header, and it holds a
+whole function body. That looks like it breaks the rule above, and it does not,
+because of the word at the front:
+
+```cpp
+inline int battery_percent(int millivolts) { ... }
+```
+
+`inline` changes what the linker is told to expect. Instead of **exactly one**
+definition, it allows the same definition to appear in **every** file that
+includes the header, and the linker keeps one. Without the word, a header holding
+a body that two `.cpp` files include gives you the duplicate symbol error from the
+paragraph above, and that is `E-LNK-0002`.
+
+The lessons are written this way for a plain reason: the same test file is built
+against your version and against the reference just by changing which folder it
+includes from, and that is easiest when each version is a single header. It is a
+choice about this curriculum and not a rule about C++. A project of any size
+puts the declaration in a header and the body in a `.cpp`, which is exactly the
+shape of this lesson's exercise.
+
+What `inline` costs and guarantees when it is used on purpose, including the
+trap where `static` looks like the same thing and is not, is lesson 04-04.
+For now: when you write a function body in a header, start it with `inline`.
+
 ## Build It
 
 `exercise/solution.hpp` declares two functions. `exercise/solution.cpp` defines

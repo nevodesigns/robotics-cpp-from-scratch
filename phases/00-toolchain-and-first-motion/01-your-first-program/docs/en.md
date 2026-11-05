@@ -66,6 +66,10 @@ Open `exercise/solution.hpp`. It contains one function with its body missing.
 You are writing `battery_percent`, which converts a battery reading in
 millivolts into a percentage from 0 to 100.
 
+The function starts with the word `inline`. Leave it there and treat it as part
+of the spelling for now: lesson 00-02 says what it is for, and why every file you
+edit in this curriculum has it.
+
 The rules, exactly:
 
 - 3000 millivolts or less is 0 percent. A reading below the empty point is still

@@ -189,7 +189,8 @@ that uses each and the first whose page discusses it, and look at the gaps.
 The next hole from the same scan was range-for, used in twenty lessons and
 explained in none (01-16), checked by reading 01-02 and 01-04 before building.
 The conditional operator, the smallest of them, became a subsection of 01-02
-rather than a lesson. The remaining candidates are in PROGRESS.md under "Next".
+rather than a lesson. `inline`, the largest by count, was a contradiction between
+00-02 and every file the learner edits, fixed in the two pages that needed it. The remaining candidates are in PROGRESS.md under "Next".
 
 **The same method said no three times, which is worth as much.** Checking
 before building showed that functions *are* taught, briefly and adequately, in
