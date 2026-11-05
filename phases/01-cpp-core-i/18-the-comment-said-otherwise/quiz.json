@@ -1,0 +1,78 @@
+{
+  "lesson": "01-18-the-comment-said-otherwise",
+  "title": "The Comment Said Otherwise: Reading Code You Did Not Write",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "You are about to change a function whose comment says what it does. What is the right way to treat that comment?",
+      "options": [
+        "As a fact, since the author wrote it deliberately",
+        "As a claim to be checked against the code, because nothing keeps the two in step",
+        "As noise, to be ignored and deleted",
+        "As a specification you must not question"
+      ],
+      "correct": 1,
+      "explanation": "Measured on five functions: the comment was wrong in 12 of 25 cases, and exactly right for one of the five. Code changes more often than the comment above it."
+    },
+    {
+      "stage": "check",
+      "question": "smooth is commented as an average with a factor of 0.2 that moves the estimate 20 percent towards each reading, and the code has alpha = 0.8 applied to the reading. What does smooth(10, 20) return?",
+      "options": [
+        "12, as the comment says",
+        "18, since the code moves 80 percent of the way",
+        "15, the midpoint",
+        "20"
+      ],
+      "correct": 1,
+      "explanation": "estimate * (1 - 0.8) + reading * 0.8 = 2 + 16 = 18. The comment predicted 12. Five of the six cases disagreed, and tracing one by hand is how you find out."
+    },
+    {
+      "stage": "check",
+      "question": "percent(raw) is raw * 100 / 1024 and its comment says 0 to 1023 maps to 0 to 100. What does percent(1023) return?",
+      "options": [
+        "100",
+        "99, because it divides by the number of values rather than the full scale and integer division truncates",
+        "101",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "1023 * 100 / 1024 is 99.9, truncated to 99. The full scale is 1023, one less than the number of values, so nothing ever reads 100."
+    },
+    {
+      "stage": "check",
+      "question": "last_mean is commented 'mean of the last n readings, or of all of them if fewer', and it divides the sum by n. Given readings 2 and 4 with n of 4, what does it return?",
+      "options": [
+        "3, as the comment says",
+        "1.5, because the sum is 6 and it divides by 4",
+        "6",
+        "It crashes"
+      ],
+      "correct": 1,
+      "explanation": "The loop correctly sums only what exists; the divisor is the count asked for, not the count got. When there are n or more readings the two agree, which is why tests with plenty of data pass."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the suite include is_stale, whose comment is exactly right?",
+      "options": [
+        "To pad the list",
+        "As a control: reading code is not distrusting it, it is finding out which comment is the wrong one",
+        "Because it has a bug the others lack",
+        "To show that booleans work"
+      ],
+      "correct": 1,
+      "explanation": "0 of 4 disagreed. A reader who distrusted everything would waste time on it, and one who trusted everything would be wrong about 12 cases in 25. The only way to tell is to trace."
+    },
+    {
+      "stage": "post",
+      "question": "percent_exact divides by 1023 and nothing else. Why is rounding to the nearest percent left out of the fix?",
+      "options": [
+        "Rounding is not possible with integers",
+        "It is a second, larger change: it moves 560 of 1024 answers, where dividing by 1023 moves 49, and it should be decided on its own",
+        "Rounding would make it slower",
+        "Rounding gives the wrong answer at 1023"
+      ],
+      "correct": 1,
+      "explanation": "Change the least you can, and run the pin again. A fix that also changes what every caller has been getting makes it impossible to tell which change broke a result."
+    }
+  ]
+}

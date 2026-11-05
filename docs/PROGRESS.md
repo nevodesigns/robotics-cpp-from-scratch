@@ -18,14 +18,14 @@ November and is kept as it was, because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 114 of 320 planned, 36 percent |
+| lessons built | 115 of 320 planned, 36 percent |
 | phases opened | 16 of 22 |
-| phases finished to plan | 0 |
-| hours of material | 232 |
-| Failure Atlas entries | 290 |
+| phases finished to plan | 1 (phase 01) |
+| hours of material | 234 |
+| Failure Atlas entries | 293 |
 | librc headers | 99 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 156, green on every claimed toolchain |
+| reference tests | 157, green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -35,7 +35,7 @@ November and is kept as it was, because it records the reasoning of that day.
 | Phase | Built | Planned | Ends with |
 |---|---|---|---|
 | 00 Toolchain and First Motion | 9 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
-| 01 C++ Core I, values and flow | 17 | 18 | A drive state machine that cannot represent nonsense |
+| 01 C++ Core I, values and flow | 18 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 12 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
@@ -59,7 +59,7 @@ November and is kept as it was, because it records the reasoning of that day.
 
 **Where the gap is.** The front of the book is the thinnest part relative to
 how early a learner meets it. Phases 00 to 03 are the first thing somebody who
-has never programmed walks through, and they hold 49 of a planned 66. Everything
+has never programmed walks through, and they hold 50 of a planned 66. Everything
 after phase 13 is material such a learner cannot reach yet. Finishing the front
 is worth more than extending the back.
 
@@ -158,11 +158,11 @@ twice.
 
 ## Failure Atlas
 
-290 entries under `atlas/errors/`, each with a `match:` pattern that
+293 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 72, `E-NUM` 28, `E-QT` 23, `E-NAV` 19, `E-MEM` 19, `E-IO` 18,
-`E-TEST` 15, `E-CTRL` 14, `E-DEBUG` 13, `E-SENSE` 13, `E-KIN` 10, `E-RT` 7,
+`E-CPP` 72, `E-NUM` 30, `E-QT` 23, `E-NAV` 19, `E-MEM` 19, `E-IO` 18,
+`E-TEST` 15, `E-CTRL` 14, `E-DEBUG` 14, `E-SENSE` 13, `E-KIN` 10, `E-RT` 7,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 6, `E-PLOT` 5, `E-BUILD` 4,
 `E-THREAD` 4, `E-TIME` 2, `E-TSAN` 1.
 
@@ -524,6 +524,51 @@ sentence in 01-13 wrong until the suite printed the row. The clang lane found
 a capture in 02-08 that the measurement depended on and the language did not
 require.
 
+## Where to go from here
+
+Written 5 November 2026, after 01-18. This supersedes the order below where they
+differ, and the rest of that section is kept because its reasoning still holds.
+
+**The front of the book is at a stopping point.** Phase 01 is complete to its
+planned 18. The construct scan that drove the last twelve lessons is finished: every
+construct it flagged was checked by reading the pages, and every one turned out to
+be a real gap, now closed (conversions 01-15, range-for 01-16, namespaces 01-17,
+the reading method 01-18, constructors 02-11, `static` 02-12, `inline` and `?:` as
+page fixes). `auto` is partly covered by 01-16 and has no lesson of its own, which
+is the one open item and a small one.
+
+What remains in phases 00 to 03 is **depth and not holes**: 00 is 9 of 14, 02 is
+12 of 16, 03 is 11 of 18. Those are worth finishing eventually and are not blocking
+anything, because no later lesson depends on a construct that is still unexplained.
+
+**So the next work is the thin middle, in this order, with reasons.**
+
+1. **Phase 07, concurrency and real time, 5 of 16.** Everything after it depends on
+   it: Qt workers (09), device I/O (08), middleware and ROS 2 (17) all assume the
+   learner can reason about threads, locks and timing. It has the torn read, a lock
+   free queue, jitter, allocation and false sharing, and none of the basics a
+   learner needs first: a mutex and what it protects, a condition variable, a
+   deadlock, a timed loop that holds its rate. That is a gap to confirm by reading
+   the five pages before building anything, as every gap above was confirmed.
+2. **Phase 08, systems input and output, 5 of 14,** because the capstone for the
+   phase is a real conversation with a device and the fake-device path is ready.
+3. **Then phases 13 to 16 up to their planned counts,** which are what milestone M3
+   describes, a rover navigating with the learner's own estimator and planner. 16-07
+   already ends a rover that plans, drives, fits and replans, so M3 is nearer than
+   M2 is.
+4. **Phase 12 and phases 17 to 21 last.** ROS 2 Humble is installed on this machine,
+   so phase 17 is not blocked, but it assumes 07 and 08.
+
+**Method for every item above:** read the existing pages first, find the specific
+claim that is missing or contradicted, measure on gcc and clang before writing any
+number, tie every test to the learner's code so an all zero stub fails, run the
+exercise and read its pass count, and say plainly in the lesson what it does not
+cover.
+
+**Things not to do:** do not revise the planned lesson counts yet. The plan has
+survived this far and the counts that are wrong will announce themselves when a
+phase runs out of holes before it runs out of planned lessons.
+
 ## Next, in the order it should be done
 
 **Done.** `tools/rcpp` now reads its command line with
@@ -565,9 +610,9 @@ All four invocations continuous integration makes, `platforms --matrix`,
 `audit`, `readme` and `catalog --stdout`, were checked against the new lists
 before the change was pushed.
 
-**Keep filling the front of the book.** Phases 00 to 03 hold 49 of a planned
+**Keep filling the front of the book.** Phases 00 to 03 hold 50 of a planned
 66 and are the first thing somebody who has never programmed walks through.
-Phase 00 is 9 of 14, phase 01 is 17 of 18, phase 02 is 12 of 16, phase 03 is
+Phase 00 is 9 of 14, phase 01 is 18 of 18, phase 02 is 12 of 16, phase 03 is
 11 of 18.
 
 `constexpr` is done as 03-11, the `rcpp` migration is done, and the stack is
@@ -621,6 +666,16 @@ counter of live objects has to count copies. Measured: a Wheel with a static
 count was 8 bytes against 16 with the count in each object, a static data member
 declared and never defined fails to link, and a counter that only the ordinary
 constructor increments drifts down by one per copy.
+
+The last lesson, **01-18**, was the one the scan could not find because it is not a
+construct: nothing taught reading code someone else wrote. It gives five functions
+with comments, 25 cases, and a table of guesses to fill in before running. Measured,
+a reader who trusted every comment predicted wrongly in 12 of the 25, and the
+control function, whose comment was exactly right, in none. It completes phase 01
+and is the first phase finished to plan. The change it asks for is dividing by 1023
+and nothing else, which moves 49 of 1024 answers; rounding as well moves 560, and
+my own first draft did that and called it the least change until the lesson's own
+output said otherwise.
 
 `namespace` was checked next and confirmed. `std::` is in code from 00-03 and
 `rc::core` is in the Ship It line of six lessons, rule L018 bans
@@ -678,9 +733,10 @@ Humble is installed on this machine, so phase 17 is not blocked.
 
 **Phase 12 and phases 17 to 21 are unbuilt**, 80 lessons.
 
-**No phase is finished to its planned count.** The plan in ARCHITECTURE.md has
-not been revised against what the lessons turned out to need, and some phases
-may want a different count rather than the planned one.
+**One phase is finished to its planned count**, phase 01 at 18 of 18. No other
+is. The plan in ARCHITECTURE.md has not been revised against what the lessons
+turned out to need, and some phases may want a different count rather than the
+planned one.
 
 **Hardware tiers 2 and 3 are almost untouched.** 107 of the 108 lessons are tier
 0 or 1: 85 software only, 22 simulated. The one tier 2 lesson is 08-05, which

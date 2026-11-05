@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 114 of 320 planned |
-| phases opened | 16 of 22, none complete to plan |
-| hours of material | 232 |
-| Failure Atlas entries | 290 |
+| lessons | 115 of 320 planned |
+| phases opened | 16 of 22, one (phase 01) complete to plan |
+| hours of material | 234 |
+| Failure Atlas entries | 293 |
 | librc headers | 99 across 13 modules |
-| reference tests | 156 |
-| exercises | 114, of which 4 are declared not to compile |
+| reference tests | 157 |
+| exercises | 115, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   156/156, 0 warnings      clang 14  156/156, 0 warnings
-asan     156/156, 0 warnings      gate      114 of 114 reported
-audit    114 lessons, 290 atlas entries, 0 issues
+gcc 11   157/157, 0 warnings      clang 14  157/157, 0 warnings
+asan     157/157, 0 warnings      gate      115 of 115 reported
+audit    115 lessons, 293 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -137,7 +137,7 @@ written before any lesson existed and has not been revised.
 | phase | built | planned | |
 |---|---|---|---|
 | 00 Toolchain and First Motion | 9 | 14 | 64% |
-| 01 C++ Core I | 17 | 18 | 94% |
+| 01 C++ Core I | 18 | 18 | 100% |
 | 02 Memory and Ownership | 12 | 16 | 75% |
 | 03 C++ Core III | 11 | 18 | 61% |
 | 04 Build Systems and Tooling | 8 | 14 | 57% |
@@ -212,6 +212,7 @@ reasoning in their own messages, and `git log` is the record.
 | commit | what it did |
 |---|---|
 | `3b4e139` | 01-15, a number that changed type, graduated `rc/core/narrow.hpp` |
+| `0c84439` | 02-12, the word that means three things, which explains static |
 | `d239a03` | 01-17, two functions one name, which explains namespaces and the ban on using namespace std |
 | `567fada` | pointed 03-01 at 02-11, which now defines the constructor it uses |
 | `5e7997c` | 02-11, how an object starts, which defines the constructor |
@@ -316,6 +317,20 @@ tool, every time. That is the argument for a rule over a note.
 asserted on text that had already changed, so a commit went out still calling
 `constexpr` unbuilt. *Caught by:* reading the file after the script failed.
 Fixed in `1af47a7`.
+
+**A least change that was not, in 01-18.** The first reference fix for `percent`
+rounded to the nearest percent as well as correcting the divisor, and the test was
+named "a fix that keeps the old answers where they were right". The suite's own
+table printed 560 of 1024 answers differing. The honest minimal change, the divisor
+alone, moved 49. *Caught by:* the table the lesson prints, which I read before
+writing the page. The test now caps the difference at 100 and names rounding as a
+second decision.
+
+**Files written to the wrong directory, in 01-18.** A command meant to run inside
+the new lesson directory ran in its parent, so a `lesson.json` was written into the
+phase folder, where the configure step then failed on it. *Caught by:* the configure
+error and `git status`, and removed by name before it was staged. Every command that
+writes a lesson's files now begins with an explicit `cd` into it and prints `pwd`.
 
 **Experiment files written into the repository, in 01-17.** A scratch directory I
 had used earlier no longer existed, so a `cd` into it failed, and the next
@@ -436,10 +451,10 @@ ROS 2 Humble is installed on this machine, so phase 17 is not blocked. Phase
 18 and 20 need a simulator and a cross toolchain that have not been checked
 for.
 
-**No phase is complete to plan**, and the plan's counts have not been revised
-since before the first lesson existed. A better definition of done is that
-every phase delivers the ending it promises, which the front of the book
-already does in places.
+**One phase is complete to plan**, phase 01 at 18 of 18, reached by 01-18. No
+other is, and the plan's counts have not been revised since before the first
+lesson existed. A better definition of done is that every phase delivers the
+ending it promises, which the front of the book already does in places.
 
 **A learner's solutions live in files this repository also edits.** They write
 into `exercise/solution.hpp`; a `git pull` after that lesson is revised will
