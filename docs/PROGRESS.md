@@ -12,14 +12,14 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 
 | | |
 |---|---|
-| lessons built | 106 of 320 planned, 33 percent |
+| lessons built | 107 of 320 planned, 33 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 218 |
-| Failure Atlas entries | 266 |
-| librc headers | 95 across 13 modules |
+| hours of material | 219 |
+| Failure Atlas entries | 269 |
+| librc headers | 96 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 139, green on every claimed toolchain |
+| reference tests | 141, green on every claimed toolchain |
 | commits | 209 |
 
 ## Phase by phase
@@ -33,7 +33,7 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 | 01 C++ Core I, values and flow | 13 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 9 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
-| 04 Build systems and tooling | 7 | 14 | A library of your own, installed, consumed by a project that never saw its source |
+| 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 6 | 16 | Where the gripper is, in the world frame, and how you know |
 | 07 Concurrency and real time | 5 | 16 | A measured latency histogram of your own control loop |
@@ -126,7 +126,7 @@ twice.
 
 ## librc
 
-95 headers. Modules and counts:
+96 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
@@ -138,7 +138,7 @@ twice.
 | `rc::nav` | 7 |
 | `rc::kin` | 5 |
 | `rc::rt` | 5 |
-| `rc::test` | 7 |
+| `rc::test` | 8 |
 | `rc::plot` | 2 |
 | `rc::sensor` | 2 |
 | `rc::sim` | 2 |
@@ -150,13 +150,13 @@ twice.
 
 ## Failure Atlas
 
-266 entries under `atlas/errors/`, each with a `match:` pattern that
+269 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 60, `E-NUM` 24, `E-QT` 23, `E-NAV` 19, `E-MEM` 17, `E-IO` 16,
-`E-TEST` 15, `E-CTRL` 14, `E-SENSE` 13, `E-DEBUG` 11, `E-KIN` 10, `E-RT` 7,
-`E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-THREAD` 4,
-`E-BUILD` 3, `E-TIME` 2, `E-TSAN` 1.
+`E-CPP` 61, `E-NUM` 24, `E-QT` 23, `E-NAV` 19, `E-MEM` 17, `E-IO` 16,
+`E-TEST` 15, `E-CTRL` 14, `E-SENSE` 13, `E-DEBUG` 12, `E-KIN` 10, `E-RT` 7,
+`E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-BUILD` 4,
+`E-THREAD` 4, `E-TIME` 2, `E-TSAN` 1.
 
 L025 requires every `match:` pattern to be ASCII, because build output is
 normalised to ASCII quotes before matching, so a pattern with a typographic
@@ -267,6 +267,17 @@ version is the intuitive one.
   the whole expression first, and an unknown identifier followed by a
   parenthesis is a syntax error rather than zero. The tests have to be
   nested. 04-07.
+- **Ninety eight warnings came from one defect.** A warning is reported per
+  translation unit, so a defect in a header is counted once per includer.
+  Measured: one bad comparison, three translation units, 3 warning lines at 1
+  distinct site. Count sites to size the work, lines to size the noise. The
+  same source is not even comparable between compilers: gcc gave 4 lines at 3
+  sites where clang gave 3 at 3. 04-08.
+- **The exercise gate had a path that reported nothing and failed nothing.** A
+  target that built but whose executable could not be found hit a bare
+  `continue`, so the gate could exit 0 for work it had not done. Found by
+  counting its output, 105 lines for 106 lessons, not by reading it. It now
+  reports and fails, and checks that every listed target produced a line.
 - **A crash loses buffered output, and the line you never saw is not the line
   it stopped at.** Four lines printed before a deliberate segmentation fault,
   into a pipe: the printf and the cout arrived, the cerr arrived, and the cout

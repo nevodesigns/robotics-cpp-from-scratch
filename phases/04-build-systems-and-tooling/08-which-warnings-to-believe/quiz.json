@@ -1,0 +1,78 @@
+{
+  "lesson": "04-08-which-warnings-to-believe",
+  "title": "Which Warnings to Believe: The Compiler's Opinions, Counted and Judged",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A build reports 98 warnings, all the same message from the same header. What is the most likely number of defects?",
+      "options": [
+        "One, because a warning is reported per translation unit and a header is compiled once per file that includes it",
+        "Ninety eight, since each line is a separate place in the code",
+        "Somewhere near 98, minus duplicates from the same line",
+        "It cannot be estimated without reading all 98"
+      ],
+      "correct": 0,
+      "explanation": "Measured: one bad comparison in one header, three source files including it, gave 3 warning lines at 1 distinct site. This repository's own 98 of -Wclobbered came from a single setjmp structure."
+    },
+    {
+      "stage": "check",
+      "question": "The same source file gave gcc 4 warning lines and clang 3. Why?",
+      "options": [
+        "gcc reports a partially braced struct once per missing member, clang once per brace",
+        "clang stops after three warnings by default",
+        "gcc counts notes as warnings and clang does not",
+        "The file had a compiler-specific #ifdef in it"
+      ],
+      "correct": 0,
+      "explanation": "Both reported 3 distinct sites. So a count is not even comparable between compilers, which is another reason to count sites rather than lines."
+    },
+    {
+      "stage": "check",
+      "question": "51 warnings of -Wmismatched-new-delete were investigated and found to be false. Why did a #pragma GCC diagnostic fail to suppress them?",
+      "options": [
+        "It is emitted in a late pass after inlining, where the lexical region the pragma describes no longer exists",
+        "The pragma was in the wrong file",
+        "Pragmas cannot suppress warnings that mention operator delete",
+        "It did suppress them, but only in debug builds"
+      ],
+      "correct": 0,
+      "explanation": "The pragma was tried and reverted, because leaving it would have implied a suppression that was not happening. gcc was failing to model that both global operators had been replaced; the address sanitizer independently confirmed the pairing was correct."
+    },
+    {
+      "stage": "check",
+      "question": "Pose p = {1.5}; warns as -Wmissing-field-initializers. What is the warning actually asking for?",
+      "options": [
+        "Default member initialisers in the type, which silence the identical brace on both compilers",
+        "The remaining members written out explicitly at every call site",
+        "A cast, because 1.5 is a double and the members may not be",
+        "Nothing; the line is undefined behaviour and must be rewritten"
+      ],
+      "correct": 0,
+      "explanation": "The line is completely defined: unmentioned members are value initialised. The warning means the compiler cannot tell whether you meant it, so the answer belongs in the type, permanently, rather than at the call site."
+    },
+    {
+      "stage": "post",
+      "question": "-Wdelete-non-virtual-dtor is silent for which case, and why does that matter?",
+      "options": [
+        "A base with no virtual functions at all, which is the shape a handle or resource wrapper has and exactly the case that bites",
+        "A base with a protected destructor, which is already safe",
+        "An abstract base, since it cannot be instantiated",
+        "It is never silent; it warns on every non-virtual destructor"
+      ],
+      "correct": 0,
+      "explanation": "Nothing marks such a class as polymorphic, so the compiler has no reason to suspect it is a base. Measured silent on both gcc and clang, which is why lesson 03-10's answer is a static_assert rather than a warning."
+    },
+    {
+      "stage": "post",
+      "question": "Why does this curriculum compile checks/ with -Werror but not the lesson targets?",
+      "options": [
+        "A learner's first warning should be a message they can read and decide about; a course that fails the build on a warning in lesson four teaches them to switch warnings off",
+        "The lesson targets would not compile with -Werror",
+        "-Werror is unavailable on one of the four toolchains",
+        "checks/ files are the only ones that produce warnings"
+      ],
+      "correct": 0,
+      "explanation": "A checks/ snippet is not the learner's code, it is an assertion about what a compiler will refuse, so it is compiled the way a project that means it would. A real project should turn -Werror on, and what makes that bearable is counting sites and keeping a written ledger of the warnings already dismissed."
+    }
+  ]
+}
