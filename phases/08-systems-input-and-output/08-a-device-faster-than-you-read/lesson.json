@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "08-08-a-device-faster-than-you-read",
+  "title": "A Device Faster Than You Read: Losses You Can Count and Budget For",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "08-07-rescan-instead-of-giving-up"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::io",
+    "header": "rc/io/sequence.hpp",
+    "note": "the counter that says how many messages never arrived, and the arithmetic that says how long you may stop reading"
+  },
+  "breaks_first": [
+    "E-IO-0025",
+    "E-IO-0026",
+    "E-IO-0027"
+  ]
+}

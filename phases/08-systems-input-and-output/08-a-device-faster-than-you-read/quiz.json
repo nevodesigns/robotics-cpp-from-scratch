@@ -1,0 +1,78 @@
+{
+  "lesson": "08-08-a-device-faster-than-you-read",
+  "title": "A Device Faster Than You Read: Losses You Can Count and Budget For",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A device sends into a serial buffer that is full because the program was busy. What happens to the bytes that arrive?",
+      "options": [
+        "The device is told to wait",
+        "The new bytes are dropped, with no error returned to the program",
+        "The oldest bytes are dropped and the program is told",
+        "The driver grows the buffer"
+      ],
+      "correct": 1,
+      "explanation": "The driver has no way to make the device wait on a plain serial line, and nothing in the read path reports the loss. Missing messages are found by counting them."
+    },
+    {
+      "stage": "check",
+      "question": "At 115200 baud, how many bytes a second can the line carry?",
+      "options": [
+        "14400, since a byte is eight bits",
+        "11520, since each byte also costs a start bit and a stop bit on the wire",
+        "115200",
+        "5760"
+      ],
+      "correct": 1,
+      "explanation": "Ten bits a byte for eight data bits, no parity and one stop bit. Using eight overstates the rate by a quarter."
+    },
+    {
+      "stage": "check",
+      "question": "A reader that came round every 700 ms lost nothing and one at 800 ms lost 726 of 10100 frames. What is the stall budget, and what does the result show about it?",
+      "options": [
+        "It is a slope: the loss grows gently with the period",
+        "0.745 seconds, the 4096 byte buffer divided by 5500 bytes a second, and the loss is a cliff at that value",
+        "It depends on the checksum",
+        "There is no budget; the loss is random"
+      ],
+      "correct": 1,
+      "explanation": "A buffer is full or it is not. Below the budget nothing is lost, and past it the loss is the excess times the rate, which is why it appears suddenly when something gets slow."
+    },
+    {
+      "stage": "check",
+      "question": "Why is a sequence number subtracted in the counter's own width rather than in int?",
+      "options": [
+        "It is faster",
+        "A uint8_t is promoted to int first, so 2 minus 254 is -252 and not 4, and a loss across the wrap is not counted",
+        "int cannot hold 255",
+        "The compiler requires it"
+      ],
+      "correct": 1,
+      "explanation": "The wrap is the reason the counter is unsigned. The arithmetic must wrap the same way, and a test on an unbroken stream never shows the difference."
+    },
+    {
+      "stage": "post",
+      "question": "After a two second stall the sixteen bit counter said 6290 frames were lost and the eight bit one said 1170. Why?",
+      "options": [
+        "The eight bit counter lost fewer frames",
+        "About 629 frames were lost per stall, and an eight bit counter reports only that modulo 256, which is 117, or nothing when the remainder is 128 or more",
+        "The eight bit counter ignores long stalls on purpose",
+        "A bug in the tracker"
+      ],
+      "correct": 1,
+      "explanation": "A counter of N bits can see a gap of at most 2^(N-1) - 1, and a full turn looks like nothing. The figure it gives is small and plausible, which is what makes it dangerous."
+    },
+    {
+      "stage": "post",
+      "question": "A duplicate arrives, and then the next message in order. Why must the duplicate not move the tracker's expectation?",
+      "options": [
+        "It would be faster",
+        "If it did, the next message in order would look like a jump ahead and be counted as a loss that never happened",
+        "Duplicates are an error",
+        "It would change the received count"
+      ],
+      "correct": 1,
+      "explanation": "A repeat and a late arrival are information about the stream, not progress along it. The expectation moves only forward."
+    }
+  ]
+}
