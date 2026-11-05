@@ -1,0 +1,78 @@
+{
+  "lesson": "07-14-asking-work-to-stop",
+  "title": "Asking Work to Stop: A Flag Cannot Wake a Sleeper, and a Callback Must Not Outlive What It Captured",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A worker polls a stop flag between 10 ms sleeps. How long after the request does it stop, measured?",
+      "options": [
+        "Under a microsecond",
+        "A median of 3.27 ms and a worst of about 9.3 ms: it notices only when it next wakes, so the delay is up to the whole interval",
+        "Exactly 10 ms",
+        "Immediately, since the flag is atomic"
+      ],
+      "correct": 1,
+      "explanation": "A wait the request itself wakes had a median of 72 us. Polling is not wrong, it is slow in proportion to its sleep."
+    },
+    {
+      "stage": "check",
+      "question": "stop.request_stop() sets a flag. A consumer is asleep inside queue.pop_for with a 1500 ms wait. What happens?",
+      "options": [
+        "It wakes and exits at once",
+        "Nothing: a flag is something to look at and a sleeping thread is not looking, so it sleeps until an item arrives or the wait ends",
+        "The queue closes itself",
+        "The thread is killed"
+      ],
+      "correct": 1,
+      "explanation": "A StopCallback that calls queue.close() is the answer. Measured: three consumers asleep, request_stop(), all three returned closed within 0 ms."
+    },
+    {
+      "stage": "check",
+      "question": "A loop checks a stop flag every 64 iterations, and the request is made at iteration 100. At which iteration does it stop, counted?",
+      "options": [
+        "100",
+        "128, the next multiple of 64 at or after the request",
+        "64",
+        "It never stops"
+      ],
+      "correct": 1,
+      "explanation": "How often a loop looks is how fast it stops. Checked every 1: 100. Every 1000: 1000. Every 100000: 100000. A loop that never looks cannot be stopped, which is what cooperative means."
+    },
+    {
+      "stage": "check",
+      "question": "A StopCallback is registered after request_stop() has already been called. What happens?",
+      "options": [
+        "It never runs, since the request is over",
+        "It runs at once, where it is constructed, so registering late cannot miss the request",
+        "It throws",
+        "It runs on the next request"
+      ],
+      "correct": 1,
+      "explanation": "The constructor checks the stopped flag under the same lock the requester copies the list under, so the action runs exactly once whichever side got there first."
+    },
+    {
+      "stage": "post",
+      "question": "Why does ~StopCallback lock the run mutex after removing its entry?",
+      "options": [
+        "To make the list thread safe",
+        "To wait for a request that is running callbacks now, so what the action captured is not destroyed while the action is still using it",
+        "To notify the requester",
+        "To count callbacks"
+      ],
+      "correct": 1,
+      "explanation": "Measured, forced: a callback held open, its owner destroyed on another thread. The destructor waited, and the callback finished before it did."
+    },
+    {
+      "stage": "post",
+      "question": "The requester takes the run mutex before copying the callback list. What would go wrong if it copied first?",
+      "options": [
+        "Nothing",
+        "A destructor could erase its entry, find nothing running, and return, while the requester held a copy of the list that still included it and then ran it against memory that is gone",
+        "The list would be copied twice",
+        "The callbacks would run in the wrong order"
+      ],
+      "correct": 1,
+      "explanation": "Taking the lock first means a destructor either finds the list without its entry or waits for the run. There is no moment where a callback is about to run and its owner has gone."
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "07-14-asking-work-to-stop",
+  "title": "Asking Work to Stop: A Flag Cannot Wake a Sleeper, and a Callback Must Not Outlive What It Captured",
+  "type": "build",
+  "minutes": 115,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "07-06-waiting-without-spinning",
+    "07-07-a-thread-is-a-promise-to-join",
+    "07-13-getting-an-answer-back",
+    "02-08-behaviour-as-a-value"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::rt",
+    "header": "rc/rt/stop.hpp",
+    "note": "a stop source, token and callback built by hand since C++17 has none, so a request wakes threads asleep on a queue or a wait, runs at once if late, and whose destructor waits for a callback in progress"
+  },
+  "breaks_first": [
+    "E-THREAD-0022",
+    "E-THREAD-0023",
+    "E-THREAD-0024"
+  ]
+}
