@@ -1,0 +1,78 @@
+{
+  "lesson": "08-09-the-newest-reading-or-all-of-them",
+  "title": "The Newest Reading or All of Them: Acting on the Past",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A 500 Hz device is read by a 100 Hz loop that takes one message per tick. What happens to the queue?",
+      "options": [
+        "It stays empty because the loop is fast enough",
+        "It grows to the size of the driver's buffer and stays there, so the loop acts on old data",
+        "The device slows down to match",
+        "The oldest messages are dropped automatically"
+      ],
+      "correct": 1,
+      "explanation": "Each tick removes one and the device adds five. Nothing tells the device to slow down, and nothing reports the growth."
+    },
+    {
+      "stage": "check",
+      "question": "The loop acted on data 3741 ms old at worst. Where does that number come from?",
+      "options": [
+        "A bug in the timestamps",
+        "4096 bytes is 372 frames, and 372 frames drained at 100 a second takes 3.72 seconds",
+        "The device's clock drifts",
+        "The checksum takes time to compute"
+      ],
+      "correct": 1,
+      "explanation": "The full buffer keeps what it holds, so the head of the queue is 372 frames deep and the loop drains it at its own rate."
+    },
+    {
+      "stage": "check",
+      "question": "Handling every waiting message, at 3 ms each in a 10 ms tick, still fell behind. Why?",
+      "options": [
+        "It handled 300 a second against 500 sent, so it fell behind more slowly",
+        "Handling every message is always wrong",
+        "The buffer is too small",
+        "The ticks were not regular"
+      ],
+      "correct": 0,
+      "explanation": "Mean age fell from 2472 ms to 962 ms and the worst case to 1245 ms, which is 372 frames at 300 a second. Better and not fixed."
+    },
+    {
+      "stage": "check",
+      "question": "Why does drain_latest take a limit?",
+      "options": [
+        "To save memory",
+        "A device that sends as fast as the loop reads means nothing is ever waiting, so an unbounded drain never returns and the loop misses its deadline",
+        "Links cannot hold more than 64 messages",
+        "To make the function faster"
+      ],
+      "correct": 1,
+      "explanation": "The loop has a deadline and a call that lasts as long as the device chooses cannot be inside it. The `more` flag says it stopped at the limit."
+    },
+    {
+      "stage": "post",
+      "question": "A loop integrates encoder increments using the newest of each drain, and the distance comes out 99 percent short. What kind of message is an increment?",
+      "options": [
+        "A state, so the newest is enough",
+        "A change, so each one has to be added and a skipped one is lost; carrying a running total would turn it into a state",
+        "Neither",
+        "It depends on the baud rate"
+      ],
+      "correct": 1,
+      "explanation": "The newest is a policy for states. For changes the sum is what matters, and 990 of 1000 was thrown away unused."
+    },
+    {
+      "stage": "post",
+      "question": "The newest message is copied out of the link instead of being kept as a view. Why?",
+      "options": [
+        "Views are slow",
+        "The link's message is only valid until the next poll, and the drain polls again before it returns",
+        "The checksum would fail",
+        "The message is encrypted"
+      ],
+      "correct": 1,
+      "explanation": "A view kept across a poll points at bytes the link has already overwritten. The copy must also check its size, or a large message writes past the destination."
+    }
+  ]
+}
