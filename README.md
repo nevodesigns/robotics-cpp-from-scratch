@@ -191,7 +191,10 @@ equally well. Filling in between them is milestone M1.
 The full map, and the reasoning behind every architectural decision, is in
 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Where the build has actually got
 to, phase by phase, along with the toolchain and platform facts that were
-expensive to establish, is in [docs/PROGRESS.md](docs/PROGRESS.md).
+expensive to establish, is in [docs/PROGRESS.md](docs/PROGRESS.md), and the
+long form of the same thing, with the runbook, the commit by commit record and
+every mistake made while building, is in
+[docs/BUILD-LOG.md](docs/BUILD-LOG.md).
 
 ## Rules this repository keeps
 
