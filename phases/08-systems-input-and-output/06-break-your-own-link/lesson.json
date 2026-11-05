@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "08-06-break-your-own-link",
+  "title": "Break Your Own Link: What One Fault Costs",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "08-04-the-link-that-goes-quiet"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::io",
+    "header": "rc/io/fault_port.hpp",
+    "note": "the port that breaks on purpose, used by every later lesson in this phase to prove a link survives"
+  },
+  "breaks_first": [
+    "E-IO-0019",
+    "E-IO-0020",
+    "E-IO-0021"
+  ]
+}

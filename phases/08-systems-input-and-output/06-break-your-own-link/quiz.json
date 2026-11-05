@@ -1,0 +1,78 @@
+{
+  "lesson": "08-06-break-your-own-link",
+  "title": "Break Your Own Link: What One Fault Costs",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A link loses one byte in a hundred from the middle of its frames. Before measuring, how many messages is each lost byte likely to cost?",
+      "options": [
+        "One, the message the byte belonged to",
+        "Nearly two, because the parser takes the bytes it was promised from the start of the next frame",
+        "None, since the checksum repairs it",
+        "It depends on the baud rate"
+      ],
+      "correct": 1,
+      "explanation": "The parser was told a length and waits for that many bytes. When one is missing it takes the shortfall from the next frame, so two frames are damaged by one lost byte."
+    },
+    {
+      "stage": "check",
+      "question": "Why is a flipped bit cheaper than a dropped byte?",
+      "options": [
+        "A flipped bit is always corrected by the checksum",
+        "The frame keeps its length, so the checksum rejects exactly that frame and the stream stays in step",
+        "Flipped bits are rarer",
+        "The parser ignores them"
+      ],
+      "correct": 1,
+      "explanation": "Measured, a flip cost 1.01 to 1.07 frames and a drop cost 1.72 to 1.89. The difference is whether the length the parser was promised is still true."
+    },
+    {
+      "stage": "check",
+      "question": "Why are the fault rates given in parts per million as integers rather than as a fraction?",
+      "options": [
+        "Integers are faster",
+        "The standard fixes the random engines but not the distributions, so a floating point decision can differ between compilers; an integer comparison cannot",
+        "Fractions cannot be less than one",
+        "It is the convention for serial ports"
+      ],
+      "correct": 1,
+      "explanation": "A test asserts a number measured on one machine. That only holds on the others if the same seed gives the same faults everywhere, which needs an owned generator and an integer comparison."
+    },
+    {
+      "stage": "check",
+      "question": "At one dropped byte in a hundred, 873 misaligned frames failed the checksum and 3 passed it with the wrong content. What predicts the 3?",
+      "options": [
+        "A bug in the checksum",
+        "A misaligned frame is arbitrary data to an eight bit check, which it matches one time in 256, and 876 divided by 256 is 3.4",
+        "Three bytes were flipped",
+        "The parser dropped them deliberately"
+      ],
+      "correct": 1,
+      "explanation": "Luck, and a calculable amount of it. A wider check makes it rarer by a factor you can compute, which is the next lesson."
+    },
+    {
+      "stage": "post",
+      "question": "A test injects only bit flips and finds the eight bit CRC never lets a wrong frame through. What is wrong with the conclusion?",
+      "options": [
+        "Nothing, the CRC is perfect",
+        "CRC-8 detects every single bit error by construction, so the test could never find the failure; dropped bytes make misaligned frames that pass about one in 256",
+        "Flips are too rare to count",
+        "The test should flip two bits"
+      ],
+      "correct": 1,
+      "explanation": "The fault the test chose is the one the check is guaranteed to catch. The fault that gets through is a different kind of damage, and only a test that injects it can see it."
+    },
+    {
+      "stage": "post",
+      "question": "A seed of zero is given to a xorshift generator and a test injecting faults passes with none injected. Why?",
+      "options": [
+        "Zero is an invalid rate",
+        "The state of a xorshift generator stays at zero for ever, so it never produces a fault",
+        "Zero means random",
+        "The port ignored the seed"
+      ],
+      "correct": 1,
+      "explanation": "Xor and shift of zero is zero. A seed of zero must become something else, or the test passes for the wrong reason."
+    }
+  ]
+}
