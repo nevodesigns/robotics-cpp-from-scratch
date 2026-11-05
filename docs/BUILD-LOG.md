@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 108 of 320 planned |
+| lessons | 109 of 320 planned |
 | phases opened | 16 of 22, none complete to plan |
-| hours of material | 221 |
-| Failure Atlas entries | 272 |
-| librc headers | 97 across 13 modules |
-| reference tests | 143 |
-| exercises | 108, of which 4 are declared not to compile |
+| hours of material | 223 |
+| Failure Atlas entries | 275 |
+| librc headers | 98 across 13 modules |
+| reference tests | 144 |
+| exercises | 109, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   143/143, 0 warnings      clang 14  143/143, 0 warnings
-asan     143/143, 0 warnings      gate      108 of 108 reported
-audit    108 lessons, 272 atlas entries, 0 issues
+gcc 11   144/144, 0 warnings      clang 14  144/144, 0 warnings
+asan     144/144, 0 warnings      gate      109 of 109 reported
+audit    109 lessons, 275 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -137,7 +137,7 @@ written before any lesson existed and has not been revised.
 | phase | built | planned | |
 |---|---|---|---|
 | 00 Toolchain and First Motion | 9 | 14 | 64% |
-| 01 C++ Core I | 13 | 18 | 72% |
+| 01 C++ Core I | 14 | 18 | 77% |
 | 02 Memory and Ownership | 10 | 16 | 62% |
 | 03 C++ Core III | 11 | 18 | 61% |
 | 04 Build Systems and Tooling | 8 | 14 | 57% |
@@ -179,8 +179,9 @@ codes, which this repository's own exercise gate depends on (00-09);
 sanitizers, referenced by ten lessons and run by a CI job, taught by none
 (04-07); coverage, invoked as a word in four documents and never measured
 (05-07); warnings, where `PROGRESS.md` already held the measurements (04-08);
-and the stack, named in no lesson between 02-01's pointers and 02-02's heap
-(02-10).
+the stack, named in no lesson between 02-01's pointers and 02-02's heap
+(02-10); and the file a program leaves behind, where 01-12 taught reading one
+and nothing taught writing one (01-14).
 
 **The same method said no three times, which is worth as much.** Checking
 before building showed that functions *are* taught, briefly and adequately, in
@@ -194,11 +195,14 @@ rather than the thing.
 ## The commits, most recent first
 
 Only the stretch from `3c15c10` onwards is annotated here, because that is the
-work whose reasoning is not yet anywhere else. Earlier commits carry their
+work whose reasoning is not yet anywhere else. This table lags by one commit,
+since a commit cannot name its own hash: the newest row is the one before the
+latest `git log` entry. Earlier commits carry their
 reasoning in their own messages, and `git log` is the record.
 
 | commit | what it did |
 |---|---|
+| `f352407` | made the documentation say what the code does, and added rule L028 for the platform line |
 | `55d8916` | stopped asserting a stack layout the sanitizer does not have |
 | `dfdf55c` | 02-10, the stack, graduated `rc/core/recursion.hpp` |
 | `f54449c` | 04-08, judging compiler warnings, graduated `rc/test/warnings.hpp` |
@@ -296,6 +300,14 @@ asserted on text that had already changed, so a commit went out still calling
 `constexpr` unbuilt. *Caught by:* reading the file after the script failed.
 Fixed in `1af47a7`.
 
+**A refusal test a stub could pass, in 01-14.** The first draft asserted that a
+save which could not proceed returned failure and left the old file as it was.
+The exercise stub reports failure and never touches a file, so it satisfied
+every line, and the exercise scored 1 of 8 with nothing written. *Caught by:*
+building the exercise and reading the pass count, as the earlier cases of this
+mistake were. The test now also unblocks the same folder and requires the save
+to succeed. A refusal proves nothing from a function that cannot say yes.
+
 **Documentation that said what the code no longer did, in six places.**
 Found by reading the whole repository cold after a crash, not by any gate.
 `CONTRACT.md` stopped at rule L026 while the auditor enforced L027, which is
@@ -366,6 +378,7 @@ conflict. Nothing in the repository addresses this yet. The cheap answer is
 that a learner works on their own branch and rebases; the thorough one is a
 convention where their answers live outside the shipped tree.
 
-**Phase 00 still lacks** a lesson on keeping a result, which means writing a
-file, where 01-12 only reads one. And nothing anywhere covers reading somebody
-else's code.
+**The front still lacks** a lesson on reading somebody else's code, which
+nothing anywhere covers. Writing a file is done as 01-14. It sits in phase 01
+and not phase 00, because it needs `std::string` and is the other half of 01-12,
+and rule L027 does not let an earlier phase require a later lesson.

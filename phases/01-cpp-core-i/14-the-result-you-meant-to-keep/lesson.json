@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "01-14-the-result-you-meant-to-keep",
+  "title": "The Result You Meant to Keep: Writing a File That Is Whole or Not There",
+  "type": "build",
+  "minutes": 115,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-05-strings-and-text",
+    "01-08-close-enough",
+    "01-12-readings-from-somewhere-else"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/save.hpp",
+    "note": "saves a file so it is either all there or the old one is untouched, and writes a number as text that reads back as the same number"
+  },
+  "breaks_first": [
+    "E-IO-0017",
+    "E-IO-0018",
+    "E-NUM-0025"
+  ]
+}
