@@ -11,8 +11,9 @@ disagree.
 [BUILD-LOG.md](BUILD-LOG.md) is the long version: the runbook, the commit by
 commit record, every mistake made while building and what caught it.
 
-Last updated 5 November 2026. The recovery point near the end was written on 4
-November and is kept as it was, because it records the reasoning of that day.
+Last updated 5 November 2026. The recovery point near the end, "Where this left off",
+has one written on 5 November for reading first on 11 November, and the one from 4
+November below it, kept as it was because it records the reasoning of that day.
 
 ## Snapshot
 
@@ -218,6 +219,21 @@ intermittent: 7 of 25 runs on 07-09's first draft. Clang 14 does intercept
 `pthread_cond_clockwait`, so it is clean for `E-TSAN-0002` and not for this. Poll a
 plain `try_lock` against a `steady_clock` deadline in tests (0 of 30 under each), and
 do not move production timeouts to `system_clock`. `E-TSAN-0003`.
+
+**Clang 14's thread sanitizer needs address randomisation off on this kernel.** A
+binary built with `-fsanitize=thread` aborts at startup with `FATAL: ThreadSanitizer:
+unexpected memory mapping`. Run it as `setarch -R ./binary`, which is in
+[PLATFORMS.md](PLATFORMS.md) already. 08-10's reader is clean under it, 8 of 8, and gcc
+11's thread sanitizer was not used for it because of `E-TSAN-0002`.
+
+**`perf` is installed and records nothing useful here.** `perf record -g` on a test
+binary produced no report. To find where a slow test spends its time, reason from the loop
+or time halves of the suite, which is how 08-13's 56 seconds was found. Standard output
+through a pipe is block buffered, so `while read` timestamps on it are all the same.
+
+**The machine has 12 hardware threads and ordinary load.** A busy test run was checked
+with sixteen `while :; do :; done` loops and 08-10's six real thread tests passed every
+time, which is the standard for a timing test in this repository.
 
 **sudo needs a password and there is no tty.** There is an X11 session on
 `DISPLAY=:1` and `zenity` is installed, and it is the only askpass helper
@@ -501,6 +517,94 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Written 5 November 2026, to be read first on 11 November
+
+Everything described here is committed and pushed. The last commit is `660e6ef`, and it
+is green on all eight continuous integration jobs. `rcpp audit` reports 135 lessons, 355
+atlas entries and 0 issues, and every reference test passes on gcc 11, clang 14 and the
+address sanitizer, 180 of 180.
+
+**What this session did, in order.**
+
+1. Finished **phase 07** by fixing the one thing CI had found: the Windows build of the
+   latency rig. `long` is 32 bits on MSVC so the counters became `long long`, and C4324
+   (padding because of `alignas`) is silenced around `SpscQueue` in the header. Three
+   suites whose bounds assumed a fine timer were loosened to ones a coarse timer meets.
+2. Removed the AI co-author trailer from every commit, at the person's instruction, by
+   rewriting 24 commits with `git filter-branch --msg-filter` and force pushing. The
+   trees are identical, only 24 messages and the hashes of those commits changed, and the
+   22 hashes quoted in BUILD-LOG were corrected. The GitHub API lists one contributor. The
+   contributors box on the repository page is cached and can show the old list for a
+   while. A bundle of the old history is at `/tmp/claude-1000/-home-nwokolo-robotics-cpp-from-scratch/1c9db904-4d8e-4c03-9e1b-f5616ca0d391/scratchpad/backup-before-rewrite.bundle`
+   and will not survive a reboot.
+3. Built **phase 08, 06 to 14, nine lessons**, taking it from 5 to 14 of 14. Each is one
+   commit and graduates one header into `librc/include/rc/io/`:
+
+| lesson | what it is | header |
+|---|---|---|
+| 08-06 | a port that breaks on purpose, and what one fault costs | `fault_port.hpp` |
+| 08-07 | a parser that rescans instead of throwing the next frame away | `rescan.hpp` |
+| 08-08 | a device faster than you read: the stall budget and sequence numbers | `sequence.hpp` |
+| 08-09 | the newest reading or all of them: a bounded drain | `drain.hpp` |
+| 08-10 | a reader thread that nothing else can hold up | `reader.hpp` |
+| 08-11 | requests matched to answers by id, and a device that does not repeat | `request.hpp` |
+| 08-12 | the device's clock: wrap, drift, restart | `timesync.hpp` |
+| 08-13 | the cable comes out: backoff, what not to retry, what starts over | `reconnect.hpp` |
+| 08-14 | the whole conversation in one object, over a simulated device | `session.hpp`, `sim_device.hpp` |
+
+   The measured finding behind each is in the phase 08 block under "Where to go from
+   here", item 2. Nine lessons, 27 atlas entries (`E-IO-0019` to `E-IO-0045`), ten headers.
+4. Brought the counts and the commit table up to date in PROGRESS.md, BUILD-LOG.md and the
+   generated block of README.md, and logged eleven mistakes in BUILD-LOG with what caught
+   each.
+
+**Where it stands.** 135 of 320 lessons, 42 percent. Phases 01, 07 and 08 are finished to
+plan. Phase 12 and phases 17 to 21 are empty.
+
+**What to do first on 11 November.**
+
+1. `git pull`, `git log --oneline -5`, and `gh run list --limit 3`. Expect `660e6ef` or
+   later, green.
+2. `cmake --preset default && cmake --build build/default && ./build/bin/rcpp audit`.
+   Expect 135 lessons and 0 issues. If a build directory is missing, `cmake --preset
+   default`, `clang`, `asan` recreate them.
+3. Pick the next phase from "Where to go from here". The reasoned order is item 3, phases
+   13 to 16 up to their planned counts, which is milestone M3. Phase 09's capstone, a
+   sensor on its own thread reaching the interface, can now use `rc::io::LinkReader` from
+   08-10 and `rc::io::Session` from 08-14. Phase 17 assumes 07 and 08 and both are done.
+
+**Rules that were set or confirmed this session, and are easy to forget.**
+
+- **No AI attribution anywhere.** No `Co-Authored-By`, no "Generated with" line, in commits,
+  pull requests or files. The person said so directly. Earlier commits had the trailer and
+  it has been removed from history, so do not add it back.
+- **Commit subjects in the past tense, one lesson per commit, no em dashes anywhere** (rule
+  L016).
+- **Push does not need a clean tree.** Do not use `git stash -u` to get a clean tree before
+  a push: it lost an empty `docs/` directory of an unpushed lesson, which the audit then
+  reported as a missing page.
+- **CI cancels the run in progress when a new commit is pushed.** A run that is cancelled
+  verified nothing. When a lesson is risky on Windows or on the slow lanes, let the run
+  finish before the next push, and read `gh run view <id> --json jobs`.
+- **Read `ctest` timings on the sanitizer build before pushing.** The gate kills a test at
+  60 seconds. A reference that takes 56 seconds in a Debug build passes locally and fails
+  on gcc 11 and the sanitizer lane. All fourteen phase 08 references take under four
+  seconds. Lesson 08-13 was killed by this once.
+- **An exercise fails cleanly.** Run each exercise under `timeout` and read its pass count:
+  an all zero stub must score 0 of N and must not hang, so every loop in a suite that waits
+  on the learner's code is bounded by a count. Build the exercise with clang as well, since
+  a stub with private fields it does not use produces warnings a learner will see.
+- **Write the symptom as a program before shipping an atlas entry.** `E-IO-0025` first
+  described a symptom that does not occur.
+- **Do not use `pkill -f` with text that is in your own command line**, it kills the shell.
+
+**What is not known.** Nothing in phase 08 has run on real hardware. The tier 2 evidence for
+08-05 and 08-14 is a pseudo terminal. The injected faults are independent, where real noise
+comes in bursts. The Windows build of 08-14 skips the pseudo terminal test, and the Windows
+`SerialPort` is compiled and reviewed and has never opened a port in CI.
+
+### Written 4 November 2026, as a recovery point
 
 Written 4 November 2026, as a recovery point. Everything below is committed
 and pushed, and every commit named here is green on all eight continuous
