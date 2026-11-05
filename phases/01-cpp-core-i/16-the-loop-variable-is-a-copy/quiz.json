@@ -1,0 +1,78 @@
+{
+  "lesson": "01-16-the-loop-variable-is-a-copy",
+  "title": "The Loop Variable Is a Copy: Range-for, and What the Declaration Decides",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "for (double v : values) v *= 2; is run over five readings that sum to 15. What do they sum to afterwards?",
+      "options": [
+        "30, since every v was doubled",
+        "15, since v is a copy of each reading and the doubled copy is thrown away",
+        "0, since v is destroyed at the end of each pass",
+        "It does not compile, since v is modified"
+      ],
+      "correct": 1,
+      "explanation": "Measured: 15. The loop variable is declared by value, so it is a copy. Writing double& makes it the reading itself, and the sum becomes 30."
+    },
+    {
+      "stage": "check",
+      "question": "A thousand Readings are visited with each of for (Reading r : ...), for (const Reading& r : ...), for (auto r : ...) and for (const auto& r : ...). How many copies does each make?",
+      "options": [
+        "1000, 0, 0, 0, since auto avoids copies",
+        "1000, 0, 1000, 0, since auto does not add a reference",
+        "0 for all four, since the compiler removes unnecessary copies",
+        "1000 for all four, since a range for always copies"
+      ],
+      "correct": 1,
+      "explanation": "auto asks the compiler to write the type, and the type it writes has no reference in it unless you add one. Only the declarations with an & copy nothing."
+    },
+    {
+      "stage": "check",
+      "question": "A function must return a pointer to the first reading above a limit. Its loop is for (Reading r : readings) and it returns &r. What is wrong?",
+      "options": [
+        "Nothing, &r is the address of the reading",
+        "It does not compile, since r is not a pointer",
+        "The pointer is to r, a copy that stops existing when the function returns, so it must be for (const Reading& r : readings)",
+        "It returns nullptr, since r is const"
+      ],
+      "correct": 2,
+      "explanation": "Measured from inside the loop: the address of a by value loop variable is different from the element's. The suite checks the returned pointer equals the address of the right element in the vector."
+    },
+    {
+      "stage": "check",
+      "question": "In for (int x : Holder().items()), Holder() is a temporary and items() returns a reference into it. What happens?",
+      "options": [
+        "The Holder lives until the end of the loop, so it is safe",
+        "The Holder is destroyed before the body runs, so the loop reads something already gone, which summed to 2882482050 with no error in a normal build",
+        "It does not compile, since a temporary cannot be iterated",
+        "The loop runs zero times"
+      ],
+      "correct": 1,
+      "explanation": "Measured: the count of destroyed holders was 1 when the body first ran. The address sanitizer reports stack-use-after-scope. Returning a copy by value is safe, because the copy is kept alive for the loop. C++23 changed the rule; this curriculum is on C++17."
+    },
+    {
+      "stage": "post",
+      "question": "for (auto& flag : flags) will not compile when flags is a std::vector<bool>. Why?",
+      "options": [
+        "Because vector<bool> cannot be iterated",
+        "Because vector<bool> packs flags into bits, so there is no bool to refer to and indexing hands back a temporary stand-in that a plain reference cannot bind to",
+        "Because auto cannot be deduced for bool",
+        "Because flags is const"
+      ],
+      "correct": 1,
+      "explanation": "The stand-in is 16 bytes on gcc 11, a pointer and a mask. for (auto flag : flags) works because it copies the stand-in, and writing to the flags is an index loop. Both compilers refuse the reference, which checks/ proves."
+    },
+    {
+      "stage": "post",
+      "question": "Which loop variable is the right default when the loop only reads each element of a container of large structs?",
+      "options": [
+        "Declared by value, since it is the simplest",
+        "const auto&, which copies nothing and cannot change the element",
+        "auto&&, since it is the most general",
+        "Declared by pointer"
+      ],
+      "correct": 1,
+      "explanation": "Read with const auto&, change with auto&, and copy only something as cheap as a number. A double is fine by value; a struct holding a string or a vector is not."
+    }
+  ]
+}

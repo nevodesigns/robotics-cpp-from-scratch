@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "id": "01-16-the-loop-variable-is-a-copy",
+  "title": "The Loop Variable Is a Copy: Range-for, and What the Declaration Decides",
+  "type": "build",
+  "minutes": 105,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-02-control-flow-and-limits",
+    "01-04-arrays-and-spans",
+    "01-11-what-the-call-costs"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": null,
+  "breaks_first": [
+    "E-CPP-0063",
+    "E-CPP-0064",
+    "E-MEM-0019"
+  ]
+}

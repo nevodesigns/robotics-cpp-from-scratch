@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 110 of 320 planned |
+| lessons | 111 of 320 planned |
 | phases opened | 16 of 22, none complete to plan |
-| hours of material | 225 |
-| Failure Atlas entries | 278 |
+| hours of material | 227 |
+| Failure Atlas entries | 281 |
 | librc headers | 99 across 13 modules |
-| reference tests | 146 |
-| exercises | 110, of which 4 are declared not to compile |
+| reference tests | 148 |
+| exercises | 111, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   146/146, 0 warnings      clang 14  146/146, 0 warnings
-asan     146/146, 0 warnings      gate      110 of 110 reported
-audit    110 lessons, 278 atlas entries, 0 issues
+gcc 11   148/148, 0 warnings      clang 14  148/148, 0 warnings
+asan     148/148, 0 warnings      gate      111 of 111 reported
+audit    111 lessons, 281 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -137,7 +137,7 @@ written before any lesson existed and has not been revised.
 | phase | built | planned | |
 |---|---|---|---|
 | 00 Toolchain and First Motion | 9 | 14 | 64% |
-| 01 C++ Core I | 15 | 18 | 83% |
+| 01 C++ Core I | 16 | 18 | 88% |
 | 02 Memory and Ownership | 10 | 16 | 62% |
 | 03 C++ Core III | 11 | 18 | 61% |
 | 04 Build Systems and Tooling | 8 | 14 | 57% |
@@ -186,6 +186,8 @@ where `static_cast` appeared in 41 lessons and no page said what a cast does
 (01-15). The last one was found by a scan and not by noticing: read every
 lesson's code in curriculum order for C++ constructs, record the first lesson
 that uses each and the first whose page discusses it, and look at the gaps.
+The next hole from the same scan was range-for, used in twenty lessons and
+explained in none (01-16), checked by reading 01-02 and 01-04 before building.
 The remaining candidates are in PROGRESS.md under "Next".
 
 **The same method said no three times, which is worth as much.** Checking
@@ -207,6 +209,7 @@ reasoning in their own messages, and `git log` is the record.
 
 | commit | what it did |
 |---|---|
+| `3b4e139` | 01-15, a number that changed type, graduated `rc/core/narrow.hpp` |
 | `1c826eb` | 01-14, the result you meant to keep, graduated `rc/core/save.hpp` |
 | `f352407` | made the documentation say what the code does, and added rule L028 for the platform line |
 | `55d8916` | stopped asserting a stack layout the sanitizer does not have |
@@ -305,6 +308,29 @@ tool, every time. That is the argument for a rule over a note.
 asserted on text that had already changed, so a commit went out still calling
 `constexpr` unbuilt. *Caught by:* reading the file after the script failed.
 Fixed in `1af47a7`.
+
+**A size written from memory, in 01-16.** The header comment said what indexing
+a vector of bool returns is 8 bytes. The suite printed 16 on its first run: a
+pointer and a mask. *Caught by:* the suite printing the number the comment
+claimed, which is the reason every figure is printed by the lesson that quotes
+it. The comment now says 16, says what the 16 is, and says the size is the
+library's choice so only "not a bool's" is asserted.
+
+**A test an empty stub passed, again, in 01-16.** "Nothing to visit is a normal
+answer" asserted zero, zero and null, which is what the exercise stubs return,
+so the exercise scored 1 of 6 before anything was written. *Caught by:*
+building the exercise and reading the pass count, the third time that has found
+this. It now also asks about a single reading. The pattern is stable enough to
+state as a rule: a test whose right answers are all zero cannot tell a function
+from its stub, so it must be paired with one whose right answer is not.
+
+**A bug that clang flagged and gcc did not, in 01-16.** The bug the lesson is
+about, `for (double v : values) v *= factor;`, produced a clang 14 warning in
+the suite's own helper, breaking the zero warning rule. Measured properly it is
+conditional: with nothing after the multiplication clang warns and gcc 11 does
+not, and with a read afterwards neither does. The lesson reports that, not
+"nothing warns", and the helper reads the copy once so it stays quiet. *Caught
+by:* the clang lane, which is the reason it is in the matrix.
 
 **A sanitizer claim I had only half measured, in 01-15.** The first draft of
 the lesson's header said the default `-fsanitize=undefined` reported none of
