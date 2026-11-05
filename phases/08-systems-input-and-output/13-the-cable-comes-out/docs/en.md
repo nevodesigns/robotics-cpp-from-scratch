@@ -46,6 +46,12 @@ number to choose. See `E-IO-0040`.
 tempting version, `initial * pow(factor, attempt)`, overflows to infinity for a long
 enough absence. The test calls it with a million failures in a row.
 
+A constant wait, a factor of one, never reaches the cap, so that loop would run once
+for every failure so far, and `delay` is called on every failure. The first version of
+this lesson did exactly that, and the test that tries every policy for a minute took
+55.9 seconds, long enough to be killed by the gate's sixty second limit on two lanes.
+A constant wait is now answered at once, and the same test takes 0.09 seconds.
+
 ### What not to try again
 
 Not every failure is about the cable.

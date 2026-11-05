@@ -32,6 +32,9 @@ struct BackoffPolicy {
     //   - multiply one step at a time and stop when you reach the cap. Computing
     //     initial times factor to the power of attempt overflows to infinity for a
     //     long enough absence
+    //   - a factor of exactly one never reaches the cap, so that loop would run
+    //     once for every failure so far, and this is called on every failure.
+    //     Answer a constant wait at once
     //   - the answer is never more than cap, even for the first attempt
     (void)attempt;
     return 0.0;

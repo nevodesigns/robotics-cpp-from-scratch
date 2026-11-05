@@ -52,6 +52,11 @@ struct BackoffPolicy {
     const double start = initial < 0.001 ? 0.001 : initial;
     const double grow = factor < 1.0 ? 1.0 : factor;
 
+    // A wait that does not grow never reaches the cap, so the loop below would
+    // run once for every failure so far, and this is called on every failure:
+    // fifty thousand of them is more than a billion steps. It is answered at once.
+    if (grow == 1.0) return start < cap ? start : cap;
+
     // Multiplied up one step at a time and stopped at the cap, rather than
     // computed as initial times factor to the power of attempt, which overflows
     // to infinity for a long enough absence and then compares as nothing.
