@@ -4,7 +4,7 @@
 
 **Type:** Build
 **Time:** about 120 minutes
-**Platforms:** Ubuntu 22.04, Ubuntu 24.04, Windows
+**Platforms:** Ubuntu 22.04 (GCC 11, Clang 14), Ubuntu 24.04, Windows
 **Hardware:** none, which is the entire point
 **Prerequisites:** 05-01, 03-03
 
@@ -78,8 +78,9 @@ The best fake is one that answers with numbers a real device actually produced.
 Record a session once, keep the trace, and every test afterwards is a
 reproduction of a real one.
 
-That is why this repository keeps a `fixtures/` directory, and why rule L014
-requires any lesson at hardware tier two or three to ship a fallback. A recorded
+That is why rule L014 requires any lesson at hardware tier two or three to ship
+a fallback, which is either a `fixtures/` directory of recorded data inside the
+lesson or a `fallback` field saying what to do instead. A recorded
 trace turns "you need a LiDAR" into "you need a file".
 
 ### The failures have to be reachable

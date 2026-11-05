@@ -8,7 +8,7 @@
 
 **Type:** Build
 **Time:** about 110 minutes
-**Platforms:** Ubuntu 22.04, Ubuntu 24.04, Windows
+**Platforms:** Ubuntu 22.04 (GCC 11, Clang 14), Ubuntu 24.04, Windows
 **Hardware:** simulated
 **Prerequisites:** 01-06, 02-02, 02-09, 04-02
 

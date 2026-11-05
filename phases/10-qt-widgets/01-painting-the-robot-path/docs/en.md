@@ -4,7 +4,7 @@
 
 **Type:** Build
 **Time:** about 105 minutes
-**Platforms:** Ubuntu 22.04, Ubuntu 24.04. Not claimed on Windows, because this repository's continuous integration does not build Qt there and an unproven claim is worth less than no claim.
+**Platforms:** Ubuntu 22.04 (GCC 11, Clang 14), Ubuntu 24.04, Windows
 **Qt:** 6.2 or newer, Widgets
 **Hardware:** none, the robot is simulated
 **Prerequisites:** 09-01, 00-04

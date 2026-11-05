@@ -30,7 +30,7 @@ phases/NN-phase-slug/NN-lesson-slug/
 | Rule | What it checks |
 |---|---|
 | L001 | Phase and lesson directories are named `NN-slug` |
-| L002 | `lesson.json` exists and is valid JSON |
+| L002 | `lesson.json` exists and is valid JSON. A missing or unparseable manifest is reported under this rule; a directory not named `NN-slug` is L001 |
 | L003 | `lesson.json` has id, title, a valid type, positive minutes, and a hardware tier from 0 to 3 |
 | L004 | The id matches the lesson's position on disk, and no id is used twice |
 | L005 | `docs/en.md` exists, opens with a level one heading, and carries a one line motto as a block quote near the top |
@@ -55,6 +55,8 @@ phases/NN-phase-slug/NN-lesson-slug/
 | L024 | Every phase has a `phase.json` giving its title and what it ends with, so the README's phase table is generated rather than typed |
 | L025 | Atlas match patterns are ASCII, since build output is normalised to ASCII quotes before matching and a typographic quote would never match |
 | L026 | A lesson that needs Qt declares a `fallback`, because Qt's absence silently skips the lesson and a learner is owed a sentence about what to do instead |
+| L027 | A lesson may not require one that sorts after it, since a learner working in order could not start it |
+| L028 | The `**Platforms:**` line in `docs/en.md` names every toolchain `lesson.json` claims and no toolchain it does not, so the page a learner reads and the lane CI builds are the same set |
 
 ## The six required sections
 

@@ -121,6 +121,57 @@ void check_manifest(const Lesson& lesson, std::vector<Finding>& out) {
     out.push_back({"L003", where, "hardware_tier must be 0, 1, 2 or 3"});
 }
 
+// L028: the Platforms line a learner reads must say what lesson.json claims.
+//
+// The page is the promise a learner reads before spending an evening, and
+// lesson.json is what continuous integration builds. They were typed twice, and
+// they drifted: when the clang lane was added, no page mentioned it, and one
+// page went on saying a lesson was not claimed on Windows long after the claim
+// was made and proven. A toolchain that is claimed must be named, and one that
+// is not claimed must not be.
+//
+// It checks naming, not truthfulness of the surrounding sentence, which is why
+// a page that wants to say more than the names should say it on another line.
+void check_platform_line(const Lesson& lesson, const std::vector<std::string>& lines,
+                         std::vector<Finding>& out) {
+  const std::string* line = nullptr;
+  for (const std::string& candidate : lines)
+    if (starts_with(candidate, "**Platforms:**")) { line = &candidate; break; }
+  if (line == nullptr) {
+    out.push_back({"L028", lesson.rel_path, "docs/en.md has no **Platforms:** line"});
+    return;
+  }
+
+  struct Name { const char* id; const char* token; };
+  static const Name names[] = {
+      {"ubuntu-22.04-gcc11", "22.04"},
+      {"ubuntu-24.04-gcc13", "24.04"},
+      {"ubuntu-22.04-clang14", "Clang 14"},
+      {"windows-msvc2022", "Windows"},
+  };
+  auto claims = [&](const char* id) {
+    for (const std::string& platform : lesson.platforms)
+      if (platform == id) return true;
+    return false;
+  };
+
+  for (const Name& name : names) {
+    const bool claimed = claims(name.id);
+    const bool named = contains(*line, name.token);
+    // 22.04 is shared by two lanes, so it is only "unclaimed" when neither is.
+    const bool shared_unclaimed =
+        std::string(name.token) == "22.04" && (claims("ubuntu-22.04-gcc11") || claims("ubuntu-22.04-clang14"));
+    if (claimed && !named)
+      out.push_back({"L028", lesson.rel_path,
+                     std::string("lesson.json claims ") + name.id +
+                         " but the Platforms line does not name " + name.token});
+    if (!claimed && named && !shared_unclaimed)
+      out.push_back({"L028", lesson.rel_path,
+                     std::string("the Platforms line names ") + name.token +
+                         " but lesson.json does not claim " + name.id});
+  }
+}
+
 void check_docs(const Lesson& lesson, std::vector<Finding>& out) {
   const fs::path doc = lesson.path / "docs" / "en.md";
   const auto text = read_file(doc);
@@ -140,6 +191,8 @@ void check_docs(const Lesson& lesson, std::vector<Finding>& out) {
   for (const std::string& section : required_sections())
     if (!contains(*text, "\n" + section))
       out.push_back({"L006", lesson.rel_path, "docs/en.md is missing the section: " + section});
+
+  check_platform_line(lesson, lines, out);
 }
 
 void check_layout(const Lesson& lesson, std::vector<Finding>& out) {
@@ -873,7 +926,10 @@ int cmd_audit(const Args& args) {
 
   std::vector<Finding> findings;
   const std::vector<Toolchain> toolchains = load_toolchains(*root, findings);
-  for (const std::string& e : catalog.load_errors) findings.push_back({"L001", "phases", e});
+  // A lesson.json that is missing or does not parse is L002. Everything else the
+  // loader refuses, a badly named directory above all, is L001.
+  for (const std::string& e : catalog.load_errors)
+    findings.push_back({contains(e, "lesson.json") ? "L002" : "L001", "phases", e});
   for (const std::string& e : atlas.load_errors) findings.push_back({"L013", "atlas", e});
 
   for (const auto* lesson : catalog.all()) {

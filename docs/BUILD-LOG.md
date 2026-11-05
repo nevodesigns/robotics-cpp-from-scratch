@@ -10,7 +10,8 @@ current counts. This is the long one. Where the two disagree, `rcpp audit` and
 the generated block in `README.md` are authoritative, because they are read
 from disk rather than typed.
 
-Last verified 5 November 2026 at commit `55d8916`.
+Last verified 5 November 2026, after the documentation pass described under
+"Every mistake" below.
 
 ## Where everything is
 
@@ -119,7 +120,7 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 | librc headers | 97 across 13 modules |
 | reference tests | 143 |
 | exercises | 108, of which 4 are declared not to compile |
-| commits | 212, first on 28 August 2026 |
+| commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
@@ -294,6 +295,20 @@ tool, every time. That is the argument for a rule over a note.
 asserted on text that had already changed, so a commit went out still calling
 `constexpr` unbuilt. *Caught by:* reading the file after the script failed.
 Fixed in `1af47a7`.
+
+**Documentation that said what the code no longer did, in six places.**
+Found by reading the whole repository cold after a crash, not by any gate.
+`CONTRACT.md` stopped at rule L026 while the auditor enforced L027, which is
+the exact drift decision D10 exists to prevent. L002 was documented and the
+auditor reported the same failure as L001. All 108 lesson pages listed their
+platforms without the clang lane added months earlier, and one still said the
+lesson was not claimed on Windows after the claim was made and proven in CI.
+`PROGRESS.md` had stale counts, `README.md` still described milestone M0 with
+108 lessons built, and `05-02` described a root `fixtures/` directory that
+git never stored because it was empty. *Caught by:* checking each document
+against the code and the disk rather than trusting that a green audit meant
+the prose was current. The platform case is now rule L028, because the first
+fix for drift should be a rule and not a note. (this pass)
 
 **Three premises that were simply wrong**, each disproved before any lesson
 was written: that functions were untaught, that `find_package` was untaught,
