@@ -36,6 +36,51 @@ for and, `||` for or, `!` for not. The single most expensive typing mistake in
 this language lives here: `=` assigns, `==` compares. Writing `if (x = 5)` sets
 `x` to five and then treats five as true. It compiles.
 
+### Choosing a value on one line
+
+When the decision is only which value to use, there is a form that fits on one
+line:
+
+```cpp
+const double limited = speed > limit ? limit : speed;
+```
+
+`condition ? when_true : when_false`. It is an expression, so it has a value and
+can sit anywhere a value can, which an `if` cannot. It is for choosing a value.
+For doing something, use `if`.
+
+Three things the suite measures, because each is a place it goes wrong.
+
+**Only one side is evaluated.** That makes it a guard:
+
+```cpp
+const int per_step = steps == 0 ? 0 : distance / steps;
+```
+
+When `steps` is zero the division is never performed. Measured with a function
+that counts its calls: `flag ? expensive() : expensive()` called it once.
+
+**It binds more loosely than `<<`.** This is the one that surprises:
+
+```cpp
+out << "ok: " << flag ? "yes" : "no";       // not what it looks like
+```
+
+The `?` takes everything to its left as the condition, so this asks whether
+`out << "ok: " << flag` worked and throws the answer away. Measured, the stream
+held `ok: 1`, with `flag` printed as a number and the words never written. With
+the parentheses it held `ok: yes`. gcc 11 warned about it as `-Wparentheses`;
+clang 14 said nothing.
+
+**Both sides become one type.** In `flag ? 1 : 2.5` the `1` is an int and the
+`2.5` is a double, and the expression has to have a single type, so the int is
+converted. Measured, it is 8 bytes, a double, where `1` alone is 4. Lesson 01-15
+is about what that kind of conversion does.
+
+One level is a convenience. Nested, it is the hardest thing in this lesson to
+read, and `clamp` written as a nested one is correct and worse than the two `if`
+lines above. If you need a second `?`, use an `if`.
+
 ### Clamping
 
 Forcing a value into a range is so common it has a name:

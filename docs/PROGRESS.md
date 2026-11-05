@@ -608,9 +608,15 @@ prose and a construct can be explained under a title that does not name it, so
 every candidate below needs the check that sank three earlier premises: read
 the pages before building anything. Candidates, by how many lessons use them:
 `inline` (78 lessons, first discussed at 04-04), `size_t` (50, first at 01-07),
-`?:` the conditional operator (34, never discussed), `explicit` (26, first at
-06-06), `auto` (9, from 03-03, never discussed), and `namespace` and `static`
-(first discussed at 04-04).
+`explicit` (26, first at 06-06), `auto` (9, from 03-03, never discussed), and
+`namespace` and `static` (first discussed at 04-04).
+
+The conditional operator `?:` was the smallest of them, used in 34 lessons and
+never explained, and did not warrant a lesson. It is a subsection of 01-02's
+"Deciding", with a test in that suite tied to the learner's `clamp`: it picks one
+side, binds more loosely than `<<` so `out << "ok: " << flag ? ...` leaves
+`ok: 1` in the stream (gcc 11 warns, clang 14 does not), and gives both sides one
+type. A gap this size is a paragraph and a test, not a lesson.
 
 Range-for was checked first by reading 01-02 and 01-04, which confirmed it: 01-02
 teaches only the three part loop, and 01-04's own code is written with a range
