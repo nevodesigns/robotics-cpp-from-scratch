@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "07-10-how-many-workers",
+  "title": "How Many Workers: A Thread Pool, and Why the Answer Is Not the Number of Cores",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "07-06-waiting-without-spinning",
+    "07-07-a-thread-is-a-promise-to-join",
+    "02-08-behaviour-as-a-value"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::rt",
+    "header": "rc/rt/worker_pool.hpp",
+    "note": "a fixed set of joined workers draining a blocking queue, which counts a task that throws instead of losing the worker, runs everything accepted before it shuts down, and refuses work after"
+  },
+  "breaks_first": [
+    "E-THREAD-0014",
+    "E-THREAD-0015",
+    "E-THREAD-0016"
+  ]
+}

@@ -54,3 +54,21 @@ cmake -S . -B build/clang-tsan -G Ninja -DCMAKE_CXX_COMPILER=clang++-14 \
 or use a newer GCC, where the interceptor exists. A report whose stack passes through
 a `wait_until` and a plain `lock_guard` is the signature of this problem: check it
 with a twelve line program like the one in the table before spending a day on it.
+
+## It also invents a lock-order cycle
+
+The stale record does not stop at "double lock". Measured on lesson 07-10's worker pool
+under GCC 11's sanitizer, 69 reports: 61 data races, 6 double locks, and **2 reports of
+`lock-order-inversion (potential deadlock)`**, with a cycle between the queue's mutex
+and the pool's.
+
+That one looks serious and is the same false positive. The report says a worker took the
+pool's mutex while holding the queue's. The worker had returned from `pop_for`, which
+releases the queue's lock, but GCC 11's runtime never saw the lock handed back inside the
+timed wait, so its list of what the thread holds went stale and an edge was invented. In
+the code the only place both are held is `submit`, always pool then queue.
+
+How to tell: read the code for any path that takes the two locks in the other order, and
+run clang 14's sanitizer, which models the wait. Here it reported nothing in 15 runs. A
+report of a lock-order cycle that passes through a timed condition variable wait on
+GCC 11 is this problem until shown otherwise.

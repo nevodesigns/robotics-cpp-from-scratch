@@ -18,14 +18,14 @@ November and is kept as it was, because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 119 of 320 planned, 37 percent |
+| lessons built | 120 of 320 planned, 38 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 1 (phase 01) |
-| hours of material | 241 |
-| Failure Atlas entries | 307 |
-| librc headers | 103 across 13 modules |
+| hours of material | 243 |
+| Failure Atlas entries | 310 |
+| librc headers | 104 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 161, green on every claimed toolchain |
+| reference tests | 162, green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -41,7 +41,7 @@ November and is kept as it was, because it records the reasoning of that day.
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 6 | 16 | Where the gripper is, in the world frame, and how you know |
-| 07 Concurrency and real time | 9 | 16 | A measured latency histogram of your own control loop |
+| 07 Concurrency and real time | 10 | 16 | A measured latency histogram of your own control loop |
 | 08 Systems input and output | 5 | 14 | A framed and checked conversation with a device, over a port you opened |
 | 09 Qt Core | 4 | 14 | A sensor on its own thread, reaching the interface without ever touching it |
 | 10 Qt Widgets | 4 | 14 | A live chart of any signal, in a window and in a terminal, that does not lie about a steady one |
@@ -134,7 +134,7 @@ twice.
 
 ## librc
 
-103 headers. Modules and counts:
+104 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
@@ -145,7 +145,7 @@ twice.
 | `rc::qt` | 8 |
 | `rc::nav` | 7 |
 | `rc::kin` | 5 |
-| `rc::rt` | 9 |
+| `rc::rt` | 10 |
 | `rc::test` | 8 |
 | `rc::plot` | 2 |
 | `rc::sensor` | 2 |
@@ -158,13 +158,13 @@ twice.
 
 ## Failure Atlas
 
-307 entries under `atlas/errors/`, each with a `match:` pattern that
+310 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
 `E-CPP` 72, `E-NUM` 30, `E-QT` 23, `E-NAV` 19, `E-MEM` 19, `E-IO` 18,
 `E-TEST` 15, `E-CTRL` 14, `E-DEBUG` 14, `E-SENSE` 13, `E-KIN` 10, `E-RT` 8,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 6, `E-PLOT` 5, `E-BUILD` 4,
-`E-THREAD` 13, `E-TIME` 4, `E-TSAN` 3.
+`E-THREAD` 16, `E-TIME` 4, `E-TSAN` 3.
 
 L025 requires every `match:` pattern to be ASCII, because build output is
 normalised to ASCII quotes before matching, so a pattern with a typographic
@@ -566,8 +566,10 @@ anything, because no later lesson depends on a construct that is still unexplain
 
 **So the next work is the thin middle, in this order, with reasons.**
 
-1. **Phase 07, concurrency and real time, 9 of 16 (was 5).** The basics listed below
-   are done: 07-06, waiting without spinning; 07-07, a thread is a promise to join (a
+1. **Phase 07, concurrency and real time, 10 of 16 (was 5).** The basics listed below
+   are done, and so is the pool that composes them (07-10, how many workers: 48
+   computing tasks sped up 7x on 6 cores with 2 threads each and stopped there, 48
+   waiting tasks reached 44.6x, and a pool beat a thread per task 5.4 ms to 122 ms): 07-06, waiting without spinning; 07-07, a thread is a promise to join (a
    `std::thread` destroyed without `join` calls `std::terminate`, so does one whose
    body throws, and `detach` outlives its locals); 07-08, a loop that holds its rate
    (sleeping a period after the work ran at 82.6 Hz for a wanted 100, even
@@ -578,7 +580,9 @@ anything, because no later lesson depends on a construct that is still unexplain
    order alone). What the phase still lacks, to be confirmed by reading pages before
    building: a worker pool and work distribution, shared state patterns (a read
    mostly value, a double buffer), priorities and what the scheduler does to them,
-   and a stress harness for finding races. The original reasoning follows.
+   and a stress harness for finding races. The pool's own first draft had a race
+   between submit and shutdown that the suite passed, found by reading and not by
+   running, which argues for that harness. The original reasoning follows.
    **Phase 07, concurrency and real time, 5 of 16.** Everything after it depends on
    it: Qt workers (09), device I/O (08), middleware and ROS 2 (17) all assume the
    learner can reason about threads, locks and timing. It has the torn read, a lock

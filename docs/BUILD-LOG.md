@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 119 of 320 planned |
+| lessons | 120 of 320 planned |
 | phases opened | 16 of 22, one (phase 01) complete to plan |
-| hours of material | 241 |
-| Failure Atlas entries | 307 |
-| librc headers | 103 across 13 modules |
-| reference tests | 161 |
-| exercises | 119, of which 4 are declared not to compile |
+| hours of material | 243 |
+| Failure Atlas entries | 310 |
+| librc headers | 104 across 13 modules |
+| reference tests | 162 |
+| exercises | 120, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   163/163, 0 warnings      clang 14  163/163, 0 warnings
-asan     163/163, 0 warnings      gate      119 of 119 reported
-audit    119 lessons, 307 atlas entries, 0 issues
+gcc 11   164/164, 0 warnings      clang 14  164/164, 0 warnings
+asan     164/164, 0 warnings      gate      120 of 120 reported
+audit    120 lessons, 310 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -143,7 +143,7 @@ written before any lesson existed and has not been revised.
 | 04 Build Systems and Tooling | 8 | 14 | 57% |
 | 05 Testing and Fakes | 7 | 12 | 58% |
 | 06 Robot Maths | 6 | 16 | 37% |
-| 07 Concurrency and Real Time | 9 | 16 | 56% |
+| 07 Concurrency and Real Time | 10 | 16 | 62% |
 | 08 Systems Input and Output | 5 | 14 | 35% |
 | 09 Qt Core | 4 | 14 | 28% |
 | 10 Qt Widgets | 4 | 14 | 28% |
@@ -212,6 +212,7 @@ reasoning in their own messages, and `git log` is the record.
 | commit | what it did |
 |---|---|
 | `3b4e139` | 01-15, a number that changed type, graduated `rc/core/narrow.hpp` |
+| `b2089bd` | 07-09, two locks neither moves, graduated `rc/rt/level_mutex.hpp` |
 | `b402d54` | 07-08, a loop that holds its rate, graduated `rc/rt/pacer.hpp` |
 | `8f2bd37` | 07-07, a thread is a promise to join, graduated `rc/rt/scoped_thread.hpp` |
 | `dcac0ff` | 07-06, waiting without spinning, graduated `rc/rt/blocking_queue.hpp` |
@@ -321,6 +322,31 @@ tool, every time. That is the argument for a rule over a note.
 asserted on text that had already changed, so a commit went out still calling
 `constexpr` unbuilt. *Caught by:* reading the file after the script failed.
 Fixed in `1af47a7`.
+
+**An experiment that reported the impossible, in 07-10.** The first speedup table for
+the worker pool showed 15.8 times and 20.7 times on a machine with 12 hardware
+threads. The "CPU-bound" task spun until a wall clock deadline, so an oversubscribed
+task finished on time without having been given the CPU: it measured a duration, not
+a quantity of work. *Caught by:* a speedup larger than the core count, which cannot
+happen for real computation. Redone with a calibrated number of loop iterations it
+plateaued near 7, which `lscpu` explained as 6 cores with 2 threads each. A result
+that is better than the hardware allows is a bug in the experiment.
+
+**A race the suite passed, in 07-10.** `submit` counted a task and pushed it as two
+steps with the lock released between them, so `shutdown` could close the queue in the
+gap and strand the task, counted as outstanding for ever. The window is a few
+instructions and the first test run was clean. *Caught by:* reading `submit` against
+`shutdown` before writing the tests. The decision and the push are now one step under
+the lock. A race that tests cannot find has to be found by reasoning, which is what
+07-09's level check and the stress harness still to be built are for.
+
+**A sanitizer cycle report that was invented, in 07-10.** GCC 11's thread sanitizer
+reported two `lock-order-inversion (potential deadlock)` on the pool, in a lesson
+about deadlock. Reading the code found no path taking the two locks in the other
+order, and clang 14's, which models the timed wait, reported nothing in 15 runs. The
+GCC 11 record of held locks goes stale across `pthread_cond_clockwait`, and it
+fabricates edges. Added to `E-TSAN-0002` so a cycle report through a timed wait is
+checked against the code, not believed.
 
 **My own experiment deadlocked, in 07-09.** The first version of the deadlock
 experiment hung for five minutes, in the "same order" case. Both threads waited for

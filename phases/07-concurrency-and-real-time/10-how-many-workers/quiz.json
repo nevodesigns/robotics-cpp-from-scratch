@@ -1,0 +1,78 @@
+{
+  "lesson": "07-10-how-many-workers",
+  "title": "How Many Workers: A Thread Pool, and Why the Answer Is Not the Number of Cores",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "On a machine whose hardware_concurrency() is 12, how much faster do 12 workers make a job of many CPU-bound tasks than 1 worker, measured?",
+      "options": [
+        "12 times",
+        "About 7 times: the machine has 6 cores with 2 threads each, and workers beyond that gave nothing",
+        "About 3 times",
+        "2 times, since only 2 threads help"
+      ],
+      "correct": 1,
+      "explanation": "Measured 6.6 to 7.7 times at 12 workers, and 7.2 to 7.4 at 48. The two threads of a core share execution units, so hardware threads are worth about 20 percent beyond the cores, not a core each."
+    },
+    {
+      "stage": "check",
+      "question": "The same 48 tasks each wait 20 ms instead of computing, as a task blocked on a device does. How does the speedup scale with workers?",
+      "options": [
+        "It stops at the core count, as before",
+        "It keeps scaling far past the core count: 44.6 times with 48 workers, because a waiting task uses no core",
+        "It gets worse past 4 workers",
+        "It is the same as for computation"
+      ],
+      "correct": 1,
+      "explanation": "Computation scales to the cores and stops; waiting scales to the number of things waited on. A pool sized once and used for both is wrong for one of them."
+    },
+    {
+      "stage": "check",
+      "question": "4000 trivial tasks: a thread started and joined for each, against a pool of 4. What did the measurement give?",
+      "options": [
+        "About the same",
+        "About 122 ms against 5.4 ms: starting a thread costs tens of microseconds, which is nothing for a long task and most of the time for a tiny one",
+        "The pool was slower because of the queue",
+        "122 ms for the pool"
+      ],
+      "correct": 1,
+      "explanation": "A thread costs roughly thirty microseconds to start and stop. That is what a pool is for besides the count: it pays that once."
+    },
+    {
+      "stage": "check",
+      "question": "Ten tasks on two workers, three of which throw. What does the pool report, and what about the workers?",
+      "options": [
+        "The process ends, as an escaping exception always does",
+        "10 completed and 3 failed, and the workers carry on: the exception is caught per task at the one place tasks run",
+        "7 completed, and two workers are lost",
+        "Nothing, the exceptions are swallowed silently"
+      ],
+      "correct": 1,
+      "explanation": "Five further tasks submitted afterwards all ran. The failed count is what keeps a pool that swallows exceptions from hiding bugs."
+    },
+    {
+      "stage": "post",
+      "question": "Why does submit push the task while still holding the pool's lock?",
+      "options": [
+        "Because queue_.push requires it",
+        "So that shutdown cannot close the queue between the decision to accept and the push, which would strand the task in a queue nobody reads, counted as outstanding for ever",
+        "To make push faster",
+        "To keep tasks in order"
+      ],
+      "correct": 1,
+      "explanation": "The race window is a few instructions and the suite passes with the bug in. It was found in this lesson's own first draft by reading submit against shutdown. The lock order is pool then queue, in submit only."
+    },
+    {
+      "stage": "post",
+      "question": "Under GCC 11's thread sanitizer this pool's suite reported 69 problems, two of them lock-order-inversion. Under clang 14's it reported none in 15 runs. Which should you believe?",
+      "options": [
+        "GCC's, since more reports means more thorough",
+        "Clang's, after checking the code: GCC 11's runtime does not see the lock handed back inside a timed condition variable wait, so its record of held locks goes stale and it invents edges; no code path takes the two locks in the other order",
+        "Neither, sanitizers are unreliable",
+        "Both, so the pool is broken"
+      ],
+      "correct": 1,
+      "explanation": "The tool limitation is E-TSAN-0002 and it also fabricates lock-order cycles. A cycle report passing through a timed wait on GCC 11 is that problem until the code shows a real reversed order."
+    }
+  ]
+}
