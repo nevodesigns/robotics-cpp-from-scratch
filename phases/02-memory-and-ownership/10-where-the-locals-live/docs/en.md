@@ -47,9 +47,29 @@ A local one call deeper sat at a **lower** address than its caller's, by 48
 bytes.
 
 The stack grows **downwards**, so "deeper" means numerically smaller, which is
-the opposite of what the word suggests. That is a property of the processor,
-the same on every toolchain this curriculum claims, so the suite does assert
-it.
+the opposite of what the word suggests. That is a property of the processor
+rather than of one operating system.
+
+And it is not true under the address sanitizer, which is how this lesson found
+out that it had overreached.
+
+With `detect_stack_use_after_return` enabled, which is the default in this
+curriculum's sanitizer lane, the sanitizer moves locals **off the stack** into
+a heap allocated "fake stack", so that it can detect a pointer to a local
+outliving the call that owned it. That region is not the stack and does not
+grow the same way:
+
+| | steps downwards | apparent frame |
+| --- | --- | --- |
+| no sanitizer | **4 of 4** | 64 bytes |
+| address sanitizer | **0 of 4** | **-896 bytes** |
+
+The first draft of the suite asserted the direction unconditionally. It passed
+on this machine and failed in continuous integration, which is exactly the
+mistake lesson 04-07's own header warns about: the instrumentation is not a
+passive observer. The suite now asks `rc::test::address_sanitizer_on()` and
+asserts the layout only where the layout is real, printing both numbers either
+way.
 
 ### How much room
 

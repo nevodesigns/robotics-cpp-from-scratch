@@ -1,4 +1,5 @@
 #include <rc/test/rc_test.hpp>
+#include <rc/test/sanitizer.hpp>
 
 #include <cstdint>
 #include <iostream>
@@ -37,8 +38,8 @@ RC_TEST("a local is nowhere near the heap, and deeper means lower") {
   RC_CHECK(static_cast<const void*>(&here) != static_cast<const void*>(heap));
   delete heap;
 
-  // The direction, which is a property of the processor and is the same on
-  // every toolchain this curriculum claims: deeper calls get lower addresses.
+  // The direction. On a real stack, deeper calls get lower addresses, and
+  // that is a property of the processor rather than of one operating system.
   std::vector<const unsigned char*> seen;
   note_local_addresses(4, seen);
   RC_CHECK(seen.size() == 5u);
@@ -46,17 +47,42 @@ RC_TEST("a local is nowhere near the heap, and deeper means lower") {
   int downwards = 0;
   for (std::size_t i = 1; i < seen.size(); ++i)
     if (seen[i] < seen[i - 1]) ++downwards;
-  RC_CHECK(downwards == 4);
 
   const long frame = seen[0] - seen[1];
   std::cout << "  five locals, one per call, each deeper than the last:\n";
-  std::cout << "    all " << downwards << " steps went downwards\n";
-  std::cout << "    one frame of this function is " << frame << " bytes\n\n";
-  // The frame size is not a curiosity: it is the divisor. A measured frame
-  // and a known stack limit give the depth you can afford, which is what
-  // ties this test to the work the lesson asks for.
-  RC_CHECK(frame > 0);
-  RC_CHECK(depth_that_fits(8L * 1024 * 1024, static_cast<int>(frame)) > 1000);
+  std::cout << "    steps that went downwards    " << downwards << " of 4\n";
+  std::cout << "    apparent frame of this call  " << frame << " bytes\n\n";
+
+  if (rc::test::address_sanitizer_on()) {
+    // Not the real stack, so nothing above is asserted here.
+    //
+    // This is lesson 04-07 arriving uninvited. With
+    // detect_stack_use_after_return enabled, which it is by default in this
+    // curriculum's sanitizer lane, the address sanitizer moves locals off the
+    // stack into a heap allocated fake stack so it can detect a pointer to a
+    // local outliving its call. That region is not the stack and does not
+    // grow the same way.
+    //
+    // Measured: 0 of 4 steps downwards and an apparent frame of -896 bytes,
+    // against 4 of 4 and 64 bytes without it. The first draft of this test
+    // asserted the direction unconditionally, passed on this machine, and
+    // failed in the sanitizer lane, which is precisely the mistake 04-07's
+    // own header warns about.
+    std::cout << "  the address sanitizer is on, so these locals are not on\n";
+    std::cout << "  the stack at all. detect_stack_use_after_return moves\n";
+    std::cout << "  them to a heap allocated fake stack, which does not grow\n";
+    std::cout << "  the same way, so nothing above is asserted in this build.\n\n";
+    std::cout << "  without the sanitizer: 4 of 4 downwards, 64 byte frame.\n";
+    std::cout << "  with it: 0 of 4, and an apparent frame of -896.\n\n";
+  } else {
+    RC_CHECK(downwards == 4);
+
+    // The frame size is not a curiosity: it is the divisor. A measured frame
+    // and a known stack limit give the depth you can afford, which is what
+    // ties this test to the work the lesson asks for.
+    RC_CHECK(frame > 0);
+    RC_CHECK(depth_that_fits(8L * 1024 * 1024, static_cast<int>(frame)) > 1000);
+  }
 
   std::cout << "  measured standalone with a smaller function: 48 bytes a\n";
   std::cout << "  frame, and a recursion with 64 byte frames reached 130860\n";

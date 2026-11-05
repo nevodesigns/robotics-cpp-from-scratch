@@ -267,6 +267,14 @@ version is the intuitive one.
   the whole expression first, and an unknown identifier followed by a
   parenthesis is a syntax error rather than zero. The tests have to be
   nested. 04-07.
+- **The address sanitizer moves locals off the stack entirely.** With
+  detect_stack_use_after_return, which the sanitizer lane has on by default,
+  locals go to a heap allocated fake stack so a pointer outliving its call can
+  be caught. Measured: 4 of 4 steps downwards and a 64 byte frame without it,
+  0 of 4 and an apparent -896 with it. 02-10's first draft asserted the
+  growth direction unconditionally, passed locally and failed in CI, which is
+  the mistake 04-07's own header warns about. The suite now asserts the
+  layout only where the layout is real. 02-10.
 - **A recursion with 64 byte frames died at depth 130860**, signal 11, status
   139, with no message and no last line of output. 8 MiB over 130860 is 64
   bytes a frame, so the depth you can afford is the limit divided by the
