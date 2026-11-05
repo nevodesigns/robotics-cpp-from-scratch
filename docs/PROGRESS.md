@@ -18,14 +18,14 @@ November and is kept as it was, because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 126 of 320 planned, 39 percent |
+| lessons built | 135 of 320 planned, 42 percent |
 | phases opened | 16 of 22 |
-| phases finished to plan | 2 (phases 01 and 07) |
-| hours of material | 255 |
-| Failure Atlas entries | 328 |
-| librc headers | 110 across 13 modules |
+| phases finished to plan | 3 (phases 01, 07 and 08) |
+| hours of material | 280 |
+| Failure Atlas entries | 355 |
+| librc headers | 120 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 169, green on every claimed toolchain |
+| reference tests | 180, green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -42,7 +42,7 @@ November and is kept as it was, because it records the reasoning of that day.
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 6 | 16 | Where the gripper is, in the world frame, and how you know |
 | 07 Concurrency and real time | 16 | 16 | A measured latency histogram of your own control loop |
-| 08 Systems input and output | 5 | 14 | A framed and checked conversation with a device, over a port you opened |
+| 08 Systems input and output | 14 | 14 | A framed and checked conversation with a device, over a port you opened |
 | 09 Qt Core | 4 | 14 | A sensor on its own thread, reaching the interface without ever touching it |
 | 10 Qt Widgets | 4 | 14 | A live chart of any signal, in a window and in a terminal, that does not lie about a steady one |
 | 11 Qt Quick and QML | 2 | 12 | A QML interface whose failures are visible from a test rather than a console nobody watches |
@@ -599,13 +599,45 @@ anything, because no later lesson depends on a construct that is still unexplain
    What phase 07 does not cover, honestly: memory orders beyond acquire and release, a
    lock free multi-producer queue, a real time kernel and `PREEMPT_RT`, and measuring on a
    robot's own hardware. The first two are deep and the last two need hardware.
-2. **Phase 08, systems input and output, 5 of 14, is next.** Its capstone is a real
-   conversation with a device and the fake-device path is ready. It builds directly on
-   phase 07: a link that goes quiet needs a deadline (07-06), a reader thread needs to
-   be stopped (07-14), and a sensor stream needs its latency measured (07-16). The pages
-   to read first are 08-01 to 08-05, and the gaps to look for are blocking against
-   non-blocking reads, a device that sends faster than it is read, and what a short write
-   means.
+2. **Phase 08, systems input and output: DONE, 14 of 14 (it was 5).** The third phase
+   finished to plan, and the second one built from the gaps the first five left. Every
+   lesson rests on a number the suite prints:
+   - 08-06 break your own link: a dropped byte costs 1.72 to 1.89 frames, a flipped bit
+     1.01 to 1.07, and at one dropped byte in a hundred 3 wrong frames passed an eight
+     bit checksum, 876 divided by 256 predicting 3.4.
+   - 08-07 rescan instead of giving up: giving up the start byte alone made a dropped
+     byte cost 1.00 frames instead of 1.89; CRC-16 let 0 wrong frames through where CRC-8
+     let 13.
+   - 08-08 a device faster than you read: a 4096 byte buffer at 5500 bytes a second lasts
+     0.745 s, 700 ms lost nothing, 800 ms lost 726 against 691 predicted; an eight bit
+     counter said 1170 of 6290 lost.
+   - 08-09 the newest reading or all of them: one message a tick acted on data 2472 ms old
+     on average, draining and acting on the newest made it 1 ms; the newest of a stream of
+     changes kept 10 of 1000.
+   - 08-10 a reader thread of its own: a 900 ms stall lost 628 of 1000 frames on the main
+     thread and none on a reader thread, whose longest gap was 0.8 ms; clang's thread
+     sanitizer is clean on it.
+   - 08-11 asking and being answered: taking the next response gave 49 wrong answers of
+     200; ids gave 0 and left the device at 227 instead of 200; a reply cache made it 200.
+   - 08-12 the device's own clock: the first offset used for ever was 185.3 ms out after
+     an hour, a fitted map 0.84 ms; a restart the map was not told about was 5011 ms out.
+   - 08-13 the cable comes out: a millisecond retry made 53267 tries in a minute, doubling
+     to a cap made 38; a kept parser lost a frame and a kept counter counted 91 phantom
+     losses.
+   - 08-14 a conversation with a device: a request that polled the link itself lost 38
+     telemetry frames in fifty, a session 0; over a hostile minute the device did exactly
+     the 177 moves that were answered, and 301 lost frames were in no counter.
+   Ten `rc::io` headers were added to the eight that existed: `fault_port`, `rescan`,
+   `sequence`, `drain`, `reader`, `request`, `timesync`, `reconnect`, `sim_device` and
+   `session`. `sim_device.hpp` is the other end of a link and is what the later phases
+   test their drivers against.
+   What phase 08 does not cover, honestly: flow control, which is off throughout; RS-485
+   direction control; other buses such as CAN, SPI and I2C; real hardware, since the only
+   tier 2 evidence is a pseudo terminal; and bursty noise, since the injected faults are
+   independent. One thing found while building it is a property of the test setup and not
+   of the code: a reference that takes 56 seconds in a Debug build passes locally and is
+   killed by the gate's 60 second limit on the two slowest lanes, so every lesson's time
+   is now read from `ctest` on the sanitizer build before it is pushed.
 3. **Then phases 13 to 16 up to their planned counts,** which are what milestone M3
    describes, a rover navigating with the learner's own estimator and planner. 16-07
    already ends a rover that plans, drives, fits and replans, so M3 is nearer than
@@ -787,15 +819,16 @@ Humble is installed on this machine, so phase 17 is not blocked.
 
 **Phase 12 and phases 17 to 21 are unbuilt**, 80 lessons.
 
-**Two phases are finished to their planned counts**, phase 01 at 18 of 18 and phase 07 at
-16 of 16. No other is. The plan in ARCHITECTURE.md has not been revised against what the lessons
+**Three phases are finished to their planned counts**, phase 01 at 18 of 18, phase 07 at
+16 of 16 and phase 08 at 14 of 14. No other is. The plan in ARCHITECTURE.md has not been revised against what the lessons
 turned out to need, and some phases may want a different count rather than the
 planned one.
 
-**Hardware tiers 2 and 3 are almost untouched.** 107 of the 108 lessons are tier
-0 or 1: 85 software only, 22 simulated. The one tier 2 lesson is 08-05, which
-ships a pseudo terminal fallback, so the rule that every tier 2 or 3 lesson
-ships a simulated fallback has been exercised exactly once.
+**Hardware tiers 2 and 3 are almost untouched.** 133 of the 135 lessons are tier
+0 or 1: 111 software only, 22 simulated. The two tier 2 lessons are 08-05 and 08-14,
+and both ship a pseudo terminal fallback, so the rule that every tier 2 or 3 lesson
+ships a simulated fallback has been exercised twice. Neither has been run on real
+hardware.
 
 **Phase 20 will want a cross compilation toolchain** for the target board,
 which is an apt install rather than hardware.

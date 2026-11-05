@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 126 of 320 planned |
-| phases opened | 16 of 22, two (phases 01 and 07) complete to plan |
-| hours of material | 255 |
-| Failure Atlas entries | 328 |
-| librc headers | 110 across 13 modules |
-| reference tests | 169 |
-| exercises | 126, of which 4 are declared not to compile |
+| lessons | 135 of 320 planned |
+| phases opened | 16 of 22, three (phases 01, 07 and 08) complete to plan |
+| hours of material | 280 |
+| Failure Atlas entries | 355 |
+| librc headers | 120 across 13 modules |
+| reference tests | 180 |
+| exercises | 135, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   171/171, 0 warnings      clang 14  171/171, 0 warnings
-asan     171/171, 0 warnings      gate      126 of 126 reported
-audit    126 lessons, 328 atlas entries, 0 issues
+gcc 11   180/180, 0 warnings      clang 14  180/180, 0 warnings
+asan     180/180, 0 warnings      gate      135 of 135 reported
+audit    135 lessons, 355 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -144,7 +144,7 @@ written before any lesson existed and has not been revised.
 | 05 Testing and Fakes | 7 | 12 | 58% |
 | 06 Robot Maths | 6 | 16 | 37% |
 | 07 Concurrency and Real Time | 16 | 16 | 100% |
-| 08 Systems Input and Output | 5 | 14 | 35% |
+| 08 Systems Input and Output | 14 | 14 | 100% |
 | 09 Qt Core | 4 | 14 | 28% |
 | 10 Qt Widgets | 4 | 14 | 28% |
 | 11 Qt Quick and QML | 2 | 12 | 16% |
@@ -211,28 +211,38 @@ reasoning in their own messages, and `git log` is the record.
 
 | commit | what it did |
 |---|---|
-| `3b4e139` | 01-15, a number that changed type, graduated `rc/core/narrow.hpp` |
-| `0e1d090` | 07-16, the loop measured, the phase capstone, graduated `rc/rt/latency_rig.hpp` |
-| `b97b5de` | 07-15, priority is a share, graduated `rc/rt/priority_sim.hpp` |
-| `cf6fadb` | 07-14, asking work to stop, graduated `rc/rt/stop.hpp` |
-| `91df2b9` | 07-13, getting an answer back, graduated `rc/rt/submit_future.hpp` |
-| `708d62d` | 07-12, many readers one writer, graduated `rc/rt/seqlock.hpp` |
-| `44092fa` | 07-11, the race the tests passed, graduated `rc/test/race.hpp` |
-| `2afb2e9` | 07-10, how many workers, graduated `rc/rt/worker_pool.hpp` |
-| `b2089bd` | 07-09, two locks neither moves, graduated `rc/rt/level_mutex.hpp` |
-| `b402d54` | 07-08, a loop that holds its rate, graduated `rc/rt/pacer.hpp` |
-| `8f2bd37` | 07-07, a thread is a promise to join, graduated `rc/rt/scoped_thread.hpp` |
-| `dcac0ff` | 07-06, waiting without spinning, graduated `rc/rt/blocking_queue.hpp` |
-| `8629c26` | 01-18, the comment said otherwise, which teaches reading code and completes phase 01 |
-| `0c84439` | 02-12, the word that means three things, which explains static |
-| `d239a03` | 01-17, two functions one name, which explains namespaces and the ban on using namespace std |
-| `567fada` | pointed 03-01 at 02-11, which now defines the constructor it uses |
-| `5e7997c` | 02-11, how an object starts, which defines the constructor |
-| `60c13a3` | explained `inline` in 00-01 and 00-02, where the contradiction was |
-| `a35ba02` | explained the conditional operator in 01-02, with a test tied to `clamp` |
-| `946014d` | 01-16, the loop variable is a copy, which explains range-for |
-| `1c826eb` | 01-14, the result you meant to keep, graduated `rc/core/save.hpp` |
-| `f352407` | made the documentation say what the code does, and added rule L028 for the platform line |
+| `86e029a` | fixed 08-13 taking 56 seconds: a constant backoff never reached its cap, so the delay loop ran once per failure |
+| `2be33f8` | 08-13, the cable comes out, graduated `rc/io/reconnect.hpp` |
+| `5522df8` | 08-12, the device's own clock, graduated `rc/io/timesync.hpp` |
+| `a66e386` | 08-11, asking and being answered, graduated `rc/io/request.hpp` |
+| `43eea35` | 08-10, a reader thread of its own, graduated `rc/io/reader.hpp` |
+| `83e12ad` | 08-09, the newest reading or all of them, graduated `rc/io/drain.hpp` |
+| `24a1536` | 08-08, a device faster than you read, graduated `rc/io/sequence.hpp` |
+| `9645f9d` | 08-07, rescan instead of giving up, graduated `rc/io/rescan.hpp` |
+| `16a64d7` | 08-06, break your own link, graduated `rc/io/fault_port.hpp` |
+| `82b70fb` | the Windows build of the latency rig: 64 bit counters, C4324 around SpscQueue, timer tolerant bounds |
+| `a4782f4` | 01-15, a number that changed type, graduated `rc/core/narrow.hpp` |
+| `3a09517` | 07-16, the loop measured, the phase capstone, graduated `rc/rt/latency_rig.hpp` |
+| `a8aebe6` | 07-15, priority is a share, graduated `rc/rt/priority_sim.hpp` |
+| `2cfa425` | 07-14, asking work to stop, graduated `rc/rt/stop.hpp` |
+| `d145f0a` | 07-13, getting an answer back, graduated `rc/rt/submit_future.hpp` |
+| `8862b4e` | 07-12, many readers one writer, graduated `rc/rt/seqlock.hpp` |
+| `dbcaa99` | 07-11, the race the tests passed, graduated `rc/test/race.hpp` |
+| `b516322` | 07-10, how many workers, graduated `rc/rt/worker_pool.hpp` |
+| `5391477` | 07-09, two locks neither moves, graduated `rc/rt/level_mutex.hpp` |
+| `4f349dc` | 07-08, a loop that holds its rate, graduated `rc/rt/pacer.hpp` |
+| `9deba5a` | 07-07, a thread is a promise to join, graduated `rc/rt/scoped_thread.hpp` |
+| `c13bcff` | 07-06, waiting without spinning, graduated `rc/rt/blocking_queue.hpp` |
+| `e1ebca8` | 01-18, the comment said otherwise, which teaches reading code and completes phase 01 |
+| `8b6b3c7` | 02-12, the word that means three things, which explains static |
+| `e802fa3` | 01-17, two functions one name, which explains namespaces and the ban on using namespace std |
+| `8d9275a` | pointed 03-01 at 02-11, which now defines the constructor it uses |
+| `258b454` | 02-11, how an object starts, which defines the constructor |
+| `c7df7c1` | explained `inline` in 00-01 and 00-02, where the contradiction was |
+| `c1afc62` | explained the conditional operator in 01-02, with a test tied to `clamp` |
+| `9aaa143` | 01-16, the loop variable is a copy, which explains range-for |
+| `ef405bf` | 01-14, the result you meant to keep, graduated `rc/core/save.hpp` |
+| `0cacd4a` | made the documentation say what the code does, and added rule L028 for the platform line |
 | `55d8916` | stopped asserting a stack layout the sanitizer does not have |
 | `dfdf55c` | 02-10, the stack, graduated `rc/core/recursion.hpp` |
 | `f54449c` | 04-08, judging compiler warnings, graduated `rc/test/warnings.hpp` |
@@ -555,6 +565,75 @@ fix for drift should be a rule and not a note. (this pass)
 was written: that functions were untaught, that `find_package` was untaught,
 and that a fixed capacity container was unbuilt. *Caught by:* checking first.
 
+**An exercise that hung, in 08-06.** The stub `FaultPort` returned zero from every read, and a
+test loop written as `while (device.pending() > 0)` waited for a port that would never
+drain. The reference passed and the stub did not fail, it spun. *Caught by:* running the
+exercise under `timeout`, which I do for every lesson because "an exercise fails cleanly
+and never hangs" is a rule. Every loop in a suite that waits on the learner's code is now
+bounded by a count.
+
+**A mechanism asserted and not measured, in 08-06.** The first text said wrong frames got
+through because "the parser rescued a false start from inside the wreckage". It was a
+plausible story and nobody had looked. The checksum counters gave the real one: 873
+misaligned frames rejected and 3 accepted, and 876 divided by 256 is 3.4. *Caught by:*
+printing the number the story predicted and comparing it.
+
+**An atlas entry for a symptom that did not occur, in 08-08.** `E-IO-0025` first said an
+`int` subtraction on a wrapping sequence number makes every 256th message look late. A
+twelve line program showed an in-order stream is never affected, because the expected
+number is always equal to the one received: the bug shows only when a loss straddles the
+wrap, and then 0 were counted lost and 252 were called late. *Caught by:* writing the
+symptom as a program before shipping the entry, which is the same rule as for a claim
+about a wrong answer.
+
+**A test that asked for more room than it gave, in 08-10.** The reader's default queue held
+256 messages and two tests sent 300 and 1000, so 6 of 8 passed and the failure read as a
+thread bug. It was the test. *Caught by:* reading the dropped count, which was exactly the
+overflow. The suites now say in a comment why a queue is the size it is.
+
+**An O(n) loop in a function called per failure, in 08-13.** `BackoffPolicy::delay` multiplied
+up to the cap one step at a time, and a constant wait never reaches the cap, so a call after
+53267 failures did 53267 steps. The lesson's table test took 55.9 seconds in a Debug build
+and passed locally because I had only looked at the last line of its output. The gate
+kills a test at 60 seconds and the two slowest lanes did, gcc 11 and the sanitizers, while
+clang, gcc 13 and Windows passed. Answering a constant wait at once made it 0.09 seconds.
+*Caught by:* continuous integration, which is the only thing that runs the slow lanes.
+The method now is to read `ctest` timings on the sanitizer build before a push, and all
+fourteen phase 08 references take under four seconds.
+
+**A fixture that was wrong by one frame interval, in 08-14.** The clean conversation placed
+the newest frame 10 ms from where it was sent, every time, and nothing about the device was
+wrong: the test took the first frame to be at one interval and the device sends it at
+zero. The reboot test measured a frame left over from before the cable came out and
+reported 35 seconds. *Caught by:* the error being a constant equal to a round number, which
+is a fixture and never noise, and then by only judging frames that arrived after the
+reconnect.
+
+**A sign that read backwards, in 08-12.** `drift_ppm` came out negative for a device that
+was fast, because the slope is host seconds per device second. *Caught by:* the test
+asserting the figure and failing at minus 49.9. The definition is now (1 over slope minus
+one) and the comment says which way it points.
+
+**A stub that passed a test, in 08-14.** The nothing connected test passed with an empty
+`Session` because the stub already reported disconnected. *Caught by:* reading the pass
+count of the exercise. The test now also plugs the device in and requires the session to
+find it.
+
+**A shell command that killed the shell.** `pkill -f` with a pattern that also appears in
+the command line of the call itself matched the shell running it. *Caught by:* the exit
+code 144 and a missing output. Patterns for killing a process are now a name, not a quoted
+string that the command line contains.
+
+**An empty directory lost to a stash.** `git stash -u` followed by `git stash pop` brought
+the files of a new lesson back and not its empty `docs/` directory, which `rcpp audit`
+reported as a missing page, L005. *Caught by:* the audit, and the fix was to stop stashing
+to push: `git push` sends commits and does not mind an unclean tree.
+
+**Hashes in the documents after a history rewrite.** Removing the co-author trailer from 24
+commits changed their hashes, and 22 of them were quoted in this file. *Caught by:* grepping
+the documents for seven character hashes and checking each against `git cat-file`, which
+found them before anyone followed one.
+
 ## Measurements worth keeping
 
 The full list is in [PROGRESS.md](PROGRESS.md) under "Measurements that
@@ -596,8 +675,8 @@ ROS 2 Humble is installed on this machine, so phase 17 is not blocked. Phase
 18 and 20 need a simulator and a cross toolchain that have not been checked
 for.
 
-**Two phases are complete to plan**, phase 01 at 18 of 18, reached by 01-18, and phase 07
-at 16 of 16, reached by 07-16. No other is, and the plan's counts have not been revised since before the first
+**Three phases are complete to plan**, phase 01 at 18 of 18, reached by 01-18, phase 07 at
+16 of 16, reached by 07-16, and phase 08 at 14 of 14, reached by 08-14. No other is, and the plan's counts have not been revised since before the first
 lesson existed. A better definition of done is that every phase delivers the
 ending it promises, which the front of the book already does in places.
 
