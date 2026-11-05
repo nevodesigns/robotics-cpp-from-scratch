@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 116 of 320 planned |
+| lessons | 117 of 320 planned |
 | phases opened | 16 of 22, one (phase 01) complete to plan |
-| hours of material | 236 |
-| Failure Atlas entries | 297 |
-| librc headers | 100 across 13 modules |
-| reference tests | 158 |
-| exercises | 116, of which 4 are declared not to compile |
+| hours of material | 238 |
+| Failure Atlas entries | 300 |
+| librc headers | 101 across 13 modules |
+| reference tests | 159 |
+| exercises | 117, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   160/160, 0 warnings      clang 14  160/160, 0 warnings
-asan     160/160, 0 warnings      gate      116 of 116 reported
-audit    116 lessons, 297 atlas entries, 0 issues
+gcc 11   161/161, 0 warnings      clang 14  161/161, 0 warnings
+asan     161/161, 0 warnings      gate      117 of 117 reported
+audit    117 lessons, 300 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -143,7 +143,7 @@ written before any lesson existed and has not been revised.
 | 04 Build Systems and Tooling | 8 | 14 | 57% |
 | 05 Testing and Fakes | 7 | 12 | 58% |
 | 06 Robot Maths | 6 | 16 | 37% |
-| 07 Concurrency and Real Time | 6 | 16 | 37% |
+| 07 Concurrency and Real Time | 7 | 16 | 43% |
 | 08 Systems Input and Output | 5 | 14 | 35% |
 | 09 Qt Core | 4 | 14 | 28% |
 | 10 Qt Widgets | 4 | 14 | 28% |
@@ -212,6 +212,7 @@ reasoning in their own messages, and `git log` is the record.
 | commit | what it did |
 |---|---|
 | `3b4e139` | 01-15, a number that changed type, graduated `rc/core/narrow.hpp` |
+| `dcac0ff` | 07-06, waiting without spinning, graduated `rc/rt/blocking_queue.hpp` |
 | `8629c26` | 01-18, the comment said otherwise, which teaches reading code and completes phase 01 |
 | `0c84439` | 02-12, the word that means three things, which explains static |
 | `d239a03` | 01-17, two functions one name, which explains namespaces and the ban on using namespace std |
@@ -318,6 +319,16 @@ tool, every time. That is the argument for a rule over a note.
 asserted on text that had already changed, so a commit went out still calling
 `constexpr` unbuilt. *Caught by:* reading the file after the script failed.
 Fixed in `1af47a7`.
+
+**A sanitizer that missed the bug it exists for, in 07-07.** A detached thread read a
+local of a function that had returned. The plain build exited 0 and printed 1 where
+42 belonged; the address sanitizer with its default options exited 0 and printed
+200000001, and reported nothing. With `detect_stack_use_after_return=1`, gcc and
+clang both reported `stack-use-after-return` at the right line, and the thread
+sanitizer reported a data race. *Caught by:* running the experiment under each tool
+rather than assuming the sanitizer lane would catch it, which is lesson 02-10's
+point arriving a second time. The lesson tells the reader to run threaded code with
+that option set as well as under the thread sanitizer.
 
 **A sanitizer report that was the tool and not the code, in 07-06.** The first
 thread sanitizer run on the lesson's suite reported 11 warnings, among them a

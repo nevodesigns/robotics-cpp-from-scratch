@@ -18,14 +18,14 @@ November and is kept as it was, because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 116 of 320 planned, 36 percent |
+| lessons built | 117 of 320 planned, 37 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 1 (phase 01) |
-| hours of material | 236 |
-| Failure Atlas entries | 297 |
-| librc headers | 100 across 13 modules |
+| hours of material | 238 |
+| Failure Atlas entries | 300 |
+| librc headers | 101 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 158, green on every claimed toolchain |
+| reference tests | 159, green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -41,7 +41,7 @@ November and is kept as it was, because it records the reasoning of that day.
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 6 | 16 | Where the gripper is, in the world frame, and how you know |
-| 07 Concurrency and real time | 6 | 16 | A measured latency histogram of your own control loop |
+| 07 Concurrency and real time | 7 | 16 | A measured latency histogram of your own control loop |
 | 08 Systems input and output | 5 | 14 | A framed and checked conversation with a device, over a port you opened |
 | 09 Qt Core | 4 | 14 | A sensor on its own thread, reaching the interface without ever touching it |
 | 10 Qt Widgets | 4 | 14 | A live chart of any signal, in a window and in a terminal, that does not lie about a steady one |
@@ -134,7 +134,7 @@ twice.
 
 ## librc
 
-100 headers. Modules and counts:
+101 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
@@ -145,7 +145,7 @@ twice.
 | `rc::qt` | 8 |
 | `rc::nav` | 7 |
 | `rc::kin` | 5 |
-| `rc::rt` | 6 |
+| `rc::rt` | 7 |
 | `rc::test` | 8 |
 | `rc::plot` | 2 |
 | `rc::sensor` | 2 |
@@ -158,13 +158,13 @@ twice.
 
 ## Failure Atlas
 
-297 entries under `atlas/errors/`, each with a `match:` pattern that
+300 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
 `E-CPP` 72, `E-NUM` 30, `E-QT` 23, `E-NAV` 19, `E-MEM` 19, `E-IO` 18,
 `E-TEST` 15, `E-CTRL` 14, `E-DEBUG` 14, `E-SENSE` 13, `E-KIN` 10, `E-RT` 7,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 6, `E-PLOT` 5, `E-BUILD` 4,
-`E-THREAD` 7, `E-TIME` 2, `E-TSAN` 2.
+`E-THREAD` 10, `E-TIME` 2, `E-TSAN` 2.
 
 L025 requires every `match:` pattern to be ASCII, because build output is
 normalised to ASCII quotes before matching, so a pattern with a typographic
@@ -555,11 +555,11 @@ anything, because no later lesson depends on a construct that is still unexplain
 
 **So the next work is the thin middle, in this order, with reasons.**
 
-1. **Phase 07, concurrency and real time, 6 of 16 (was 5).** 07-06 is built:
-   waiting without spinning, the first of the basics below. Still to do, in this
-   order after reading the pages: a thread's life (a `std::thread` destroyed
-   without `join` calls `std::terminate`, a thread that throws does too, and
-   `detach` outlives its locals), a loop that holds its rate (`sleep_for` drifts by
+1. **Phase 07, concurrency and real time, 7 of 16 (was 5).** Built so far, from the
+   basics below: 07-06, waiting without spinning, and 07-07, a thread is a promise
+   to join (a `std::thread` destroyed without `join` calls `std::terminate`, so does
+   one whose body throws, and `detach` outlives its locals). Still to do, in this
+   order after reading the pages: a loop that holds its rate (`sleep_for` drifts by
    the work done each cycle and `sleep_until` does not), and two locks taken in
    opposite orders. The original reasoning follows.
    **Phase 07, concurrency and real time, 5 of 16.** Everything after it depends on
