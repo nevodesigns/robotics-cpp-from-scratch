@@ -1,0 +1,78 @@
+{
+  "lesson": "02-12-the-word-that-means-three-things",
+  "title": "The Word That Means Three Things: static in a Function, static in a Class, and the Counter That Forgot Copies",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does static do to a variable declared inside a function?",
+      "options": [
+        "Makes it constant",
+        "Makes it outlive the call: it is built the first time control reaches it, once, and keeps its value between calls",
+        "Makes it visible to other files",
+        "Makes it stored on the stack"
+      ],
+      "correct": 1,
+      "explanation": "Three calls to a function with static int next = 1; return next++; gave 1, 2, 3. The price is that the function now has a memory."
+    },
+    {
+      "stage": "check",
+      "question": "A global object, then two static locals reached in the order B, A. In what order are they built and destroyed?",
+      "options": [
+        "Built in the order they are written, destroyed in the same order",
+        "The global before main, then B and A each when its function is first called; destroyed after main, A then B, then the global",
+        "All built before main, destroyed in a random order",
+        "Built when main returns, destroyed immediately"
+      ],
+      "correct": 1,
+      "explanation": "Measured on gcc 11 and clang 14. A static local is built when first reached, once, and everything is destroyed in the reverse of the order it was built."
+    },
+    {
+      "stage": "check",
+      "question": "A Wheel with a double radius_ and a static int count is 8 bytes. The same class with an int count kept in each object is 16. Why?",
+      "options": [
+        "Static members are compressed",
+        "A static member belongs to the class and not to any object, so it takes no space in the object",
+        "The compiler optimises static members away",
+        "Static members are stored in the double"
+      ],
+      "correct": 1,
+      "explanation": "One count for the whole class, wherever it lives, not one per wheel. That is also why a static member function has no this."
+    },
+    {
+      "stage": "check",
+      "question": "A counter is incremented in a class's constructor and decremented in its destructor. One object is copied and both are destroyed. What does the counter read afterwards?",
+      "options": [
+        "0, since each object was counted in and out",
+        "-1, because the copy was destroyed but never counted in, since the compiler's copy constructor does not touch the counter",
+        "1, since the copy keeps the count",
+        "It depends on the optimiser"
+      ],
+      "correct": 1,
+      "explanation": "A copy is a new object that the ordinary constructor never ran for. The counter drifts down by one for every copy, so the copy constructor has to count too."
+    },
+    {
+      "stage": "post",
+      "question": "A class declares static int live_; and nothing else, and a static function returns live_. It compiles. What happens at the link step?",
+      "options": [
+        "It links, and live_ is zero",
+        "It fails: undefined reference to Wheel::live_, because a declaration inside the class is a promise and not a variable",
+        "It links with a warning",
+        "It fails to compile, not link"
+      ],
+      "correct": 1,
+      "explanation": "Measured on gcc and clang. In C++17, inline static int live_ = 0; declares and defines it in one line. Before that, exactly one .cpp file needed int Wheel::live_ = 0;."
+    },
+    {
+      "stage": "post",
+      "question": "Why can a static member function not use a member like radius_?",
+      "options": [
+        "Because radius_ is private",
+        "Because a static member function can be called with no object, so it has no this, and radius_ is part of an object",
+        "Because static functions cannot read anything",
+        "Because radius_ is a double"
+      ],
+      "correct": 1,
+      "explanation": "Whose radius? There is no wheel. Both compilers refuse it, which checks/ proves. An ordinary member function may use a static member, because the class-wide counter exists whichever object is asking."
+    }
+  ]
+}

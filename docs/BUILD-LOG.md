@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 113 of 320 planned |
+| lessons | 114 of 320 planned |
 | phases opened | 16 of 22, none complete to plan |
-| hours of material | 230 |
-| Failure Atlas entries | 287 |
+| hours of material | 232 |
+| Failure Atlas entries | 290 |
 | librc headers | 99 across 13 modules |
-| reference tests | 154 |
-| exercises | 113, of which 4 are declared not to compile |
+| reference tests | 156 |
+| exercises | 114, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   154/154, 0 warnings      clang 14  154/154, 0 warnings
-asan     154/154, 0 warnings      gate      113 of 113 reported
-audit    113 lessons, 287 atlas entries, 0 issues
+gcc 11   156/156, 0 warnings      clang 14  156/156, 0 warnings
+asan     156/156, 0 warnings      gate      114 of 114 reported
+audit    114 lessons, 290 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -138,7 +138,7 @@ written before any lesson existed and has not been revised.
 |---|---|---|---|
 | 00 Toolchain and First Motion | 9 | 14 | 64% |
 | 01 C++ Core I | 17 | 18 | 94% |
-| 02 Memory and Ownership | 11 | 16 | 68% |
+| 02 Memory and Ownership | 12 | 16 | 75% |
 | 03 C++ Core III | 11 | 18 | 61% |
 | 04 Build Systems and Tooling | 8 | 14 | 57% |
 | 05 Testing and Fakes | 7 | 12 | 58% |
@@ -212,6 +212,7 @@ reasoning in their own messages, and `git log` is the record.
 | commit | what it did |
 |---|---|
 | `3b4e139` | 01-15, a number that changed type, graduated `rc/core/narrow.hpp` |
+| `d239a03` | 01-17, two functions one name, which explains namespaces and the ban on using namespace std |
 | `567fada` | pointed 03-01 at 02-11, which now defines the constructor it uses |
 | `5e7997c` | 02-11, how an object starts, which defines the constructor |
 | `60c13a3` | explained `inline` in 00-01 and 00-02, where the contradiction was |

@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "id": "02-12-the-word-that-means-three-things",
+  "title": "The Word That Means Three Things: static in a Function, static in a Class, and the Counter That Forgot Copies",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "02-03-raii-and-destructors",
+    "02-05-copy-and-move-semantics",
+    "02-11-how-an-object-starts"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": null,
+  "breaks_first": [
+    "E-CPP-0071",
+    "E-LNK-0006",
+    "E-CPP-0072"
+  ]
+}
