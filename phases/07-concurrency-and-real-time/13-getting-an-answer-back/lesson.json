@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "07-13-getting-an-answer-back",
+  "title": "Getting an Answer Back: Futures, the std::async That Was Not Parallel, and a Failure the Caller Has to Handle",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "07-10-how-many-workers",
+    "03-07-one-template-many-types",
+    "02-08-behaviour-as-a-value"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::rt",
+    "header": "rc/rt/submit_future.hpp",
+    "note": "runs a callable on the worker pool and returns a future for its result, with an exception delivered through get() and a refused task reported as broken_promise, and a ready_within that never blocks past its limit"
+  },
+  "breaks_first": [
+    "E-THREAD-0020",
+    "E-THREAD-0021",
+    "E-CPP-0073"
+  ]
+}

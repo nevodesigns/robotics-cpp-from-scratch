@@ -1,0 +1,78 @@
+{
+  "lesson": "07-13-getting-an-answer-back",
+  "title": "Getting an Answer Back: Futures, the std::async That Was Not Parallel, and a Failure the Caller Has to Handle",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Four tasks are started with std::async(std::launch::async, f) in a loop and the returned futures are not stored. Each waits up to 100 ms for the others. How long does the loop take, measured?",
+      "options": [
+        "About 100 ms, since they run in parallel",
+        "About 400 ms: each future is destroyed at the end of its statement and its destructor waits for the task, so they run one after another",
+        "Zero, since they are in the background",
+        "About 200 ms"
+      ],
+      "correct": 1,
+      "explanation": "Peak running at once was 1 with the futures discarded and 4 with them kept. Both gcc 11 and clang 14 warn about the discard as nodiscard, and the warning is the right one."
+    },
+    {
+      "stage": "check",
+      "question": "A task submitted through submit_future throws runtime_error(\"sensor lost\"). What does the caller see, and what does the pool report?",
+      "options": [
+        "The pool reports failed 1 and the caller sees nothing",
+        "get() throws the same exception in the caller, and the pool reports failed 0, because the future caught the exception and kept it for the caller",
+        "The process ends",
+        "get() returns zero"
+      ],
+      "correct": 1,
+      "explanation": "Measured: completed 2, failed 0. A plain task's failure is counted by the pool, lesson 07-10; a task behind a future delivers its failure to whoever holds the future."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the std::packaged_task held in a std::shared_ptr and the lambda given to the pool copies the pointer?",
+      "options": [
+        "For speed",
+        "packaged_task is move-only and the pool's task type is std::function, which requires its target to be copy-constructible: measured, both compilers refuse it directly",
+        "shared_ptr makes the task run twice",
+        "To make the future thread safe"
+      ],
+      "correct": 1,
+      "explanation": "There is still one task. Every copy of the lambda holds the same pointer. C++23's move_only_function removes the need; this curriculum is on C++17."
+    },
+    {
+      "stage": "check",
+      "question": "A task is submitted to a pool that has already shut down. What does get() do?",
+      "options": [
+        "Waits for ever",
+        "Throws std::future_error with the code broken_promise: the refused task is destroyed unrun, and the future is told",
+        "Returns a default value",
+        "Runs the task on the calling thread"
+      ],
+      "correct": 1,
+      "explanation": "Measured: 'std::future_error: Broken promise'. A task dropped without running is reported to the person waiting, which keeps a refusal from becoming a hang."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the suite use ready_within before get()?",
+      "options": [
+        "get() is slow",
+        "get() waits for ever on a task that never finishes, and wait_for never blocks longer than the limit you chose; measured, it gave up at 40 ms on a held task and said yes once it was released",
+        "ready_within returns the value",
+        "Because get() can only be called once"
+      ],
+      "correct": 1,
+      "explanation": "Every wait in this curriculum has a deadline. A control path that waits for ever on a producer that has died has stopped controlling."
+    },
+    {
+      "stage": "post",
+      "question": "What is the default launch policy of std::async, as measured here, and what does the standard allow?",
+      "options": [
+        "It always runs on a new thread",
+        "On gcc 11 it ran on another thread, and the standard allows deferred, which runs on the thread that asks for the answer, so code must say std::launch::async when parallel is the point",
+        "It always runs on the calling thread",
+        "It is undefined behaviour"
+      ],
+      "correct": 1,
+      "explanation": "std::launch::deferred ran on the calling thread, measured. The default is the library's choice, and a choice a program should not depend on."
+    }
+  ]
+}
