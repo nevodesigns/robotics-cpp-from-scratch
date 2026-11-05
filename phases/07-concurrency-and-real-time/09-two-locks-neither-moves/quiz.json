@@ -1,0 +1,78 @@
+{
+  "lesson": "07-09-two-locks-neither-moves",
+  "title": "Two Locks, Neither Moves: Deadlock, and Finding It Without Waiting for the Hang",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Thread 1 locks A then B. Thread 2 locks B then A. When can this hang?",
+      "options": [
+        "Never, since each lock is released eventually",
+        "When thread 1 holds A and thread 2 holds B at the same moment, so each waits for the other for ever",
+        "Only on a single core",
+        "Only if both use the same mutex"
+      ],
+      "correct": 1,
+      "explanation": "A cycle of lock orders is needed. Measured with the overlap forced: at least one thread gave up every time. With the same order in both threads none did."
+    },
+    {
+      "stage": "check",
+      "question": "The same opposite-order code ran in two threads with 100 microseconds of unrelated work between passes, three runs of 4000 passes. How many deadlocks, and what does that tell you?",
+      "options": [
+        "Thousands in each run, so it is easy to find",
+        "None in all three runs, while other gaps showed hundreds or thousands, so a run that does not deadlock proves nothing",
+        "Exactly one in each run",
+        "None, which proves the code is safe"
+      ],
+      "correct": 1,
+      "explanation": "With no gap: 129, 3739, 3387. With 100 us: 0, 0, 0. With 1000 us: 0, 3, 16. The same bug appeared and vanished with the timing, which is why testing cannot be relied on to find it."
+    },
+    {
+      "stage": "check",
+      "question": "Two threads run one after the other, never overlapping: the first takes level 1 then level 2, the second takes level 2 then level 1. What does the level check report?",
+      "options": [
+        "Nothing, since they never ran together and no deadlock was possible",
+        "One violation from the second thread, because the order is the bug whether or not the timing ever lined up",
+        "A deadlock",
+        "Two violations"
+      ],
+      "correct": 1,
+      "explanation": "A deadlock needs a cycle of orders, and the cycle is visible on one thread. Measured: the first thread was clean and the second was refused, with nothing deadlocked and no timing involved."
+    },
+    {
+      "stage": "check",
+      "question": "A thread locks a LevelMutex it already holds. What happens, compared with a plain std::mutex?",
+      "options": [
+        "The same: it hangs",
+        "It is refused and counted as a violation, where a plain mutex locked twice by one thread is undefined behaviour and in practice a hang",
+        "It succeeds, since mutexes are recursive",
+        "It throws bad_alloc"
+      ],
+      "correct": 1,
+      "explanation": "The same level twice is refused, including the same mutex, because locking what you already hold is a cycle of length one. A refusal takes nothing and so cannot block."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the suite poll try_lock against a steady_clock deadline instead of using std::timed_mutex::try_lock_for?",
+      "options": [
+        "try_lock_for is slow",
+        "Under both gcc 11's and clang 14's thread sanitizers, a try_lock_for that succeeds is reported as 'unlock of an unlocked mutex': 15 of 15 runs measured, because pthread_mutex_clocklock is not intercepted. The program is correct and the tool cannot see it",
+        "try_lock_for is not in C++17",
+        "Because timed_mutex deadlocks"
+      ],
+      "correct": 1,
+      "explanation": "A plain try_lock is seen by both sanitizers: 0 of 30 runs reported. Production timeouts should not move to system_clock to quieten a tool, since that jumps when the clock is adjusted."
+    },
+    {
+      "stage": "post",
+      "question": "What does a level on a mutex NOT protect you from?",
+      "options": [
+        "Two threads taking two of these mutexes in opposite orders",
+        "The same mutex locked twice on one thread",
+        "A lock order that goes through a callback or a condition variable the check does not know about",
+        "Taking locks in decreasing level order"
+      ],
+      "correct": 2,
+      "explanation": "It finds the cycles made of these mutexes, and finds them early. A dependency that runs through something it cannot see is outside it, which is why locks are held briefly and nothing unknown is called while one is held."
+    }
+  ]
+}

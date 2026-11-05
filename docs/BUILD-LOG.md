@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 118 of 320 planned |
+| lessons | 119 of 320 planned |
 | phases opened | 16 of 22, one (phase 01) complete to plan |
-| hours of material | 239 |
-| Failure Atlas entries | 303 |
-| librc headers | 102 across 13 modules |
-| reference tests | 160 |
-| exercises | 118, of which 4 are declared not to compile |
+| hours of material | 241 |
+| Failure Atlas entries | 307 |
+| librc headers | 103 across 13 modules |
+| reference tests | 161 |
+| exercises | 119, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   162/162, 0 warnings      clang 14  162/162, 0 warnings
-asan     162/162, 0 warnings      gate      118 of 118 reported
-audit    118 lessons, 303 atlas entries, 0 issues
+gcc 11   163/163, 0 warnings      clang 14  163/163, 0 warnings
+asan     163/163, 0 warnings      gate      119 of 119 reported
+audit    119 lessons, 307 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -143,7 +143,7 @@ written before any lesson existed and has not been revised.
 | 04 Build Systems and Tooling | 8 | 14 | 57% |
 | 05 Testing and Fakes | 7 | 12 | 58% |
 | 06 Robot Maths | 6 | 16 | 37% |
-| 07 Concurrency and Real Time | 8 | 16 | 50% |
+| 07 Concurrency and Real Time | 9 | 16 | 56% |
 | 08 Systems Input and Output | 5 | 14 | 35% |
 | 09 Qt Core | 4 | 14 | 28% |
 | 10 Qt Widgets | 4 | 14 | 28% |
@@ -212,6 +212,7 @@ reasoning in their own messages, and `git log` is the record.
 | commit | what it did |
 |---|---|
 | `3b4e139` | 01-15, a number that changed type, graduated `rc/core/narrow.hpp` |
+| `b402d54` | 07-08, a loop that holds its rate, graduated `rc/rt/pacer.hpp` |
 | `8f2bd37` | 07-07, a thread is a promise to join, graduated `rc/rt/scoped_thread.hpp` |
 | `dcac0ff` | 07-06, waiting without spinning, graduated `rc/rt/blocking_queue.hpp` |
 | `8629c26` | 01-18, the comment said otherwise, which teaches reading code and completes phase 01 |
@@ -320,6 +321,33 @@ tool, every time. That is the argument for a rule over a note.
 asserted on text that had already changed, so a commit went out still calling
 `constexpr` unbuilt. *Caught by:* reading the file after the script failed.
 Fixed in `1af47a7`.
+
+**My own experiment deadlocked, in 07-09.** The first version of the deadlock
+experiment hung for five minutes, in the "same order" case. Both threads waited for
+the other to have taken its first lock before going on, but both wanted the same
+first lock, so only one could take it and the handshake could never complete. A
+harness built to demonstrate a deadlock contained one. *Caught by:* the command
+exceeding its timeout, which was stopped by name. A handshake is only valid between
+threads that want different things first, and the same-order case needs none.
+
+**A guess about frequency that the measurement overturned, in 07-09.** I expected an
+unforced opposite-order deadlock to be rare in a tight loop. It was not: thousands in
+6000 passes. Then the realistic version, with unrelated work between passes, was
+erratic and not monotonic: 3739 deadlocks in one run and 0 at 100 us in all three, then
+3 and 16 at 1000 us. That erratic pattern is the finding the lesson is built on,
+because it is why a clean run proves nothing. *Caught by:* measuring the version real
+code looks like as well as the tight loop. And the forced case gave "1 of 2" in two
+runs of three, not "2 of 2", since the first thread to give up lets the other through;
+the test asserts at least one.
+
+**Another intermittent sanitizer report that was the tool, in 07-09.** Clang's thread
+sanitizer reported "unlock of an unlocked mutex" in 7 of 25 runs, only when a
+`try_lock_for` succeeded. A twelve line program reproduced it in 15 of 15 runs under
+both gcc 11's and clang 14's sanitizers, and 0 of 15 for a `system_clock` deadline: the
+runtimes do not intercept `pthread_mutex_clocklock`. *Caught by:* running the suite 25
+times instead of three, and by capturing the report instead of dismissing a one in three
+flake. The test now polls a plain `try_lock`, which reported in 0 of 30 under each. It is
+`E-TSAN-0003`, the sibling of 07-06's `E-TSAN-0002`.
 
 **The repair that was also wrong, measured, in 07-08.** The obvious fix for a loop
 that runs slow, sleeping for the period minus the work, looked right and was not.

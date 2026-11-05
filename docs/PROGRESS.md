@@ -18,14 +18,14 @@ November and is kept as it was, because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 118 of 320 planned, 37 percent |
+| lessons built | 119 of 320 planned, 37 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 1 (phase 01) |
-| hours of material | 239 |
-| Failure Atlas entries | 303 |
-| librc headers | 102 across 13 modules |
+| hours of material | 241 |
+| Failure Atlas entries | 307 |
+| librc headers | 103 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 160, green on every claimed toolchain |
+| reference tests | 161, green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -41,7 +41,7 @@ November and is kept as it was, because it records the reasoning of that day.
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 6 | 16 | Where the gripper is, in the world frame, and how you know |
-| 07 Concurrency and real time | 8 | 16 | A measured latency histogram of your own control loop |
+| 07 Concurrency and real time | 9 | 16 | A measured latency histogram of your own control loop |
 | 08 Systems input and output | 5 | 14 | A framed and checked conversation with a device, over a port you opened |
 | 09 Qt Core | 4 | 14 | A sensor on its own thread, reaching the interface without ever touching it |
 | 10 Qt Widgets | 4 | 14 | A live chart of any signal, in a window and in a terminal, that does not lie about a steady one |
@@ -134,7 +134,7 @@ twice.
 
 ## librc
 
-102 headers. Modules and counts:
+103 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
@@ -145,7 +145,7 @@ twice.
 | `rc::qt` | 8 |
 | `rc::nav` | 7 |
 | `rc::kin` | 5 |
-| `rc::rt` | 8 |
+| `rc::rt` | 9 |
 | `rc::test` | 8 |
 | `rc::plot` | 2 |
 | `rc::sensor` | 2 |
@@ -158,13 +158,13 @@ twice.
 
 ## Failure Atlas
 
-303 entries under `atlas/errors/`, each with a `match:` pattern that
+307 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
 `E-CPP` 72, `E-NUM` 30, `E-QT` 23, `E-NAV` 19, `E-MEM` 19, `E-IO` 18,
 `E-TEST` 15, `E-CTRL` 14, `E-DEBUG` 14, `E-SENSE` 13, `E-KIN` 10, `E-RT` 8,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 6, `E-PLOT` 5, `E-BUILD` 4,
-`E-THREAD` 10, `E-TIME` 4, `E-TSAN` 2.
+`E-THREAD` 13, `E-TIME` 4, `E-TSAN` 3.
 
 L025 requires every `match:` pattern to be ASCII, because build output is
 normalised to ASCII quotes before matching, so a pattern with a typographic
@@ -207,6 +207,17 @@ line program, 2 warnings on gcc 11 and 0 on clang 14, and none for `wait()` or a
 program with `system_clock`, which makes a timeout jump when the clock is
 adjusted. The `tsan` preset uses the default compiler, so it has this problem.
 `E-TSAN-0002`.
+
+**Neither gcc 11's nor clang 14's thread sanitizer sees `timed_mutex::try_lock_for`.**
+It is `try_lock_until` on a `steady_clock` deadline, which calls
+`pthread_mutex_clocklock`, and neither runtime intercepts it, so a lock taken that
+way is invisible and the matching `unlock` is reported as `unlock of an unlocked
+mutex`. 15 of 15 runs on a twelve line program under each; 0 of 15 for a
+`system_clock` deadline. It fires only when the timed acquisition succeeds, so it is
+intermittent: 7 of 25 runs on 07-09's first draft. Clang 14 does intercept
+`pthread_cond_clockwait`, so it is clean for `E-TSAN-0002` and not for this. Poll a
+plain `try_lock` against a `steady_clock` deadline in tests (0 of 30 under each), and
+do not move production timeouts to `system_clock`. `E-TSAN-0003`.
 
 **sudo needs a password and there is no tty.** There is an X11 session on
 `DISPLAY=:1` and `zenity` is installed, and it is the only askpass helper
@@ -555,16 +566,19 @@ anything, because no later lesson depends on a construct that is still unexplain
 
 **So the next work is the thin middle, in this order, with reasons.**
 
-1. **Phase 07, concurrency and real time, 8 of 16 (was 5).** Built so far, from the
-   basics below: 07-06, waiting without spinning; 07-07, a thread is a promise to
-   join (a `std::thread` destroyed without `join` calls `std::terminate`, so does one
-   whose body throws, and `detach` outlives its locals); and 07-08, a loop that holds
-   its rate (sleeping a period after the work ran at 82.6 Hz for a wanted 100, even
+1. **Phase 07, concurrency and real time, 9 of 16 (was 5).** The basics listed below
+   are done: 07-06, waiting without spinning; 07-07, a thread is a promise to join (a
+   `std::thread` destroyed without `join` calls `std::terminate`, so does one whose
+   body throws, and `detach` outlives its locals); 07-08, a loop that holds its rate
+   (sleeping a period after the work ran at 82.6 Hz for a wanted 100, even
    `sleep_for(period - work)` drifted 105 to 110 us a cycle, and a plain fixed
-   deadline caught up after a stall with a burst). Still to do from this list, after
-   reading the pages: two locks taken in opposite orders. Beyond it, the phase still
-   lacks thread pools and work distribution, shared state patterns (a read mostly
-   value, a double buffer), and priorities. The original reasoning follows.
+   deadline caught up after a stall with a burst); and 07-09, two locks neither moves
+   (the same opposite-order code deadlocked 3739 times in one run and 0 times in
+   three runs at the next setting, so a lock-order level check finds it from the
+   order alone). What the phase still lacks, to be confirmed by reading pages before
+   building: a worker pool and work distribution, shared state patterns (a read
+   mostly value, a double buffer), priorities and what the scheduler does to them,
+   and a stress harness for finding races. The original reasoning follows.
    **Phase 07, concurrency and real time, 5 of 16.** Everything after it depends on
    it: Qt workers (09), device I/O (08), middleware and ROS 2 (17) all assume the
    learner can reason about threads, locks and timing. It has the torn read, a lock

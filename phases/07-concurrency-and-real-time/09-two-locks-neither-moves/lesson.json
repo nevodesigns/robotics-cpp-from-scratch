@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "07-09-two-locks-neither-moves",
+  "title": "Two Locks, Neither Moves: Deadlock, and Finding It Without Waiting for the Hang",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "07-01-threads-and-the-torn-read",
+    "07-07-a-thread-is-a-promise-to-join",
+    "02-03-raii-and-destructors"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::rt",
+    "header": "rc/rt/level_mutex.hpp",
+    "note": "a mutex with a level that refuses and counts any lock taken out of order on a thread, so a lock-order cycle is reported the first time it is attempted, with no deadlock and no timing needed"
+  },
+  "breaks_first": [
+    "E-THREAD-0011",
+    "E-THREAD-0012",
+    "E-THREAD-0013"
+  ]
+}
