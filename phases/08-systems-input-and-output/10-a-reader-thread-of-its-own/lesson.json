@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "08-10-a-reader-thread-of-its-own",
+  "title": "A Reader Thread of Its Own: Nothing Else Can Hold the Reading",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "08-09-the-newest-reading-or-all-of-them",
+    "07-02-a-queue-without-a-lock",
+    "07-07-a-thread-is-a-promise-to-join",
+    "07-12-many-readers-one-writer",
+    "07-14-asking-work-to-stop"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::io",
+    "header": "rc/io/reader.hpp",
+    "note": "the thread that does nothing but read, so the budget can only be spent by its own code"
+  },
+  "breaks_first": [
+    "E-IO-0031",
+    "E-IO-0032",
+    "E-IO-0033"
+  ]
+}
