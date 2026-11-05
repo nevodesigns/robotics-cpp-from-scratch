@@ -6,7 +6,7 @@
 **Time:** about 105 minutes
 **Platforms:** Ubuntu 22.04 (GCC 11, Clang 14), Ubuntu 24.04, Windows
 **Hardware:** none
-**Prerequisites:** 02-06
+**Prerequisites:** 02-06, 02-11
 
 ## The Problem
 
@@ -57,6 +57,11 @@ class RunningStatistics {
   double mean_ = 0.0;
 };
 ```
+
+The reference solution's `RunningStatistics() = default;` is a constructor: the
+function that runs when an object is made, here asking for the no-argument one.
+How objects start, and the list, `explicit` and default member values that go
+with it, is lesson 02-11, which this lesson assumes.
 
 **A complete set of operations.** If the only way to change the object is
 `add()`, and `add()` maintains every invariant, then the invariant holds after

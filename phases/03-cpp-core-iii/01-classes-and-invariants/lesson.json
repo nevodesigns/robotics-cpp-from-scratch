@@ -12,7 +12,8 @@
   ],
   "hardware_tier": 0,
   "requires": [
-    "02-06-shared-ownership-and-cycles"
+    "02-06-shared-ownership-and-cycles",
+    "02-11-how-an-object-starts"
   ],
   "cxx_standard": 17,
   "qt": null,
