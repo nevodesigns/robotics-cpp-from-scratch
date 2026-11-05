@@ -1,0 +1,78 @@
+{
+  "lesson": "01-17-two-functions-one-name",
+  "title": "Two Functions, One Name: Namespaces, the Two Colons, and Why using namespace std Is Not Written Here",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What do the two colons in std::vector and rc::core::Arguments mean?",
+      "options": [
+        "They separate a type from its value",
+        "They say 'the one in there': std and rc::core are namespaces, named places where names live, so two people can both write a function called limit",
+        "They call a function at compile time",
+        "They mark a name as private"
+      ],
+      "correct": 1,
+      "explanation": "A namespace is a named place for names. The prefix says which place, which is the whole point: drive::limit and arm::limit are different functions that never meet."
+    },
+    {
+      "stage": "check",
+      "question": "The global clamp(double, double, double) from lesson 01-02 exists, and a program adds using namespace std; and calls clamp(5, 0, 3) with plain ints. What happens, measured on gcc 11 and clang 14?",
+      "options": [
+        "The global clamp still runs, since it was declared first",
+        "The call is refused as ambiguous",
+        "std::clamp runs instead, returning an int, and the global one is never called, with no warning",
+        "It does not compile, since int is not double"
+      ],
+      "correct": 2,
+      "explanation": "The ints fit std::clamp exactly and the global one only after converting, so the better match wins. The suite shows the same with a namespace of its own."
+    },
+    {
+      "stage": "check",
+      "question": "using namespace drive; using namespace arm; then limit(1.0), where both namespaces have limit(double). What happens?",
+      "options": [
+        "drive::limit runs, since it was named first",
+        "arm::limit runs, since it was named last",
+        "The compiler refuses, because both fit equally well and the call is ambiguous",
+        "The two functions are combined"
+      ],
+      "correct": 2,
+      "explanation": "Both candidates fit equally, so neither wins. This is the loud and good outcome, at the line that is wrong, and the fix is to write the prefix."
+    },
+    {
+      "stage": "check",
+      "question": "distance(v.begin(), v.end()) compiles with no std:: for a std::vector, and fails for an int array. Why?",
+      "options": [
+        "The array version has a bug in the compiler",
+        "The compiler also looks in the namespaces of a call's arguments, and a vector's iterators belong to std while an int pointer belongs to nothing",
+        "Arrays have no distance",
+        "The vector version is wrong and happens to compile"
+      ],
+      "correct": 1,
+      "explanation": "This is argument dependent lookup. The name was found through the type of its arguments and not by name, so it worked for one container and not the next. Writing std::distance works for both."
+    },
+    {
+      "stage": "post",
+      "question": "drive::limit calls ::clamp(...) with a leading ::. What does the :: buy?",
+      "options": [
+        "Faster code",
+        "It names the global clamp and nothing else, so a using-directive somewhere else cannot redirect the call to a different function",
+        "It makes the call compile-time",
+        "Nothing, it is optional decoration"
+      ],
+      "correct": 1,
+      "explanation": "The suite puts using namespace general in scope, whose int clamp would hijack an unqualified call, and checks that drive::limit still reaches the global one exactly once."
+    },
+    {
+      "stage": "post",
+      "question": "Which is the right way to avoid typing a long prefix repeatedly, such as std::filesystem?",
+      "options": [
+        "using namespace std::filesystem; at the top of the header",
+        "A namespace alias, namespace fs = std::filesystem;, which shortens the prefix without importing any names",
+        "Renaming the functions you use",
+        "Copying the functions into your own namespace"
+      ],
+      "correct": 1,
+      "explanation": "An alias makes a short name for the prefix and brings in nothing, so it cannot cause an ambiguity or hijack a call. A using-directive for a namespace you do not own is the one to avoid, and in a header it reaches every file that includes it."
+    }
+  ]
+}

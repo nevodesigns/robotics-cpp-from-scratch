@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "id": "01-17-two-functions-one-name",
+  "title": "Two Functions, One Name: Namespaces, the Two Colons, and Why using namespace std Is Not Written Here",
+  "type": "build",
+  "minutes": 95,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-02-control-flow-and-limits",
+    "01-04-arrays-and-spans"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": null,
+  "breaks_first": [
+    "E-CPP-0068",
+    "E-CPP-0069",
+    "E-CPP-0070"
+  ]
+}

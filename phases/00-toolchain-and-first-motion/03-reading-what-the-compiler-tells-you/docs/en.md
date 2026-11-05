@@ -80,6 +80,10 @@ note: 'std::sqrt' is defined in header '<cmath>';
 The second line is the entire fix, and it is skipped constantly, because it does
 not say `error` and it sits in the middle of a wall of text.
 
+The `std::` in front of `sqrt` says which `sqrt`: the one the standard library
+keeps in its namespace, `std`. Treat it as part of the name for now. Lesson 01-17
+says what a namespace is, and why this curriculum always writes the prefix.
+
 `note:` lines tell you which header you forgot, where a function was declared
 and how many arguments it wanted, and which of several overloads was being
 considered. When an error is confusing, the note under it is where to look next.

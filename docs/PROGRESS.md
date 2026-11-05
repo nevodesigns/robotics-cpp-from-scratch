@@ -18,14 +18,14 @@ November and is kept as it was, because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 112 of 320 planned, 35 percent |
+| lessons built | 113 of 320 planned, 35 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 229 |
-| Failure Atlas entries | 284 |
+| hours of material | 230 |
+| Failure Atlas entries | 287 |
 | librc headers | 99 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 151, green on every claimed toolchain |
+| reference tests | 154, green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -35,7 +35,7 @@ November and is kept as it was, because it records the reasoning of that day.
 | Phase | Built | Planned | Ends with |
 |---|---|---|---|
 | 00 Toolchain and First Motion | 9 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
-| 01 C++ Core I, values and flow | 16 | 18 | A drive state machine that cannot represent nonsense |
+| 01 C++ Core I, values and flow | 17 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 11 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
@@ -59,7 +59,7 @@ November and is kept as it was, because it records the reasoning of that day.
 
 **Where the gap is.** The front of the book is the thinnest part relative to
 how early a learner meets it. Phases 00 to 03 are the first thing somebody who
-has never programmed walks through, and they hold 47 of a planned 66. Everything
+has never programmed walks through, and they hold 48 of a planned 66. Everything
 after phase 13 is material such a learner cannot reach yet. Finishing the front
 is worth more than extending the back.
 
@@ -158,10 +158,10 @@ twice.
 
 ## Failure Atlas
 
-284 entries under `atlas/errors/`, each with a `match:` pattern that
+287 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 67, `E-NUM` 28, `E-QT` 23, `E-NAV` 19, `E-MEM` 19, `E-IO` 18,
+`E-CPP` 70, `E-NUM` 28, `E-QT` 23, `E-NAV` 19, `E-MEM` 19, `E-IO` 18,
 `E-TEST` 15, `E-CTRL` 14, `E-DEBUG` 13, `E-SENSE` 13, `E-KIN` 10, `E-RT` 7,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-BUILD` 4,
 `E-THREAD` 4, `E-TIME` 2, `E-TSAN` 1.
@@ -565,9 +565,9 @@ All four invocations continuous integration makes, `platforms --matrix`,
 `audit`, `readme` and `catalog --stdout`, were checked against the new lists
 before the change was pushed.
 
-**Keep filling the front of the book.** Phases 00 to 03 hold 47 of a planned
+**Keep filling the front of the book.** Phases 00 to 03 hold 48 of a planned
 66 and are the first thing somebody who has never programmed walks through.
-Phase 00 is 9 of 14, phase 01 is 16 of 18, phase 02 is 11 of 16, phase 03 is
+Phase 00 is 9 of 14, phase 01 is 17 of 18, phase 02 is 11 of 16, phase 03 is
 11 of 18.
 
 `constexpr` is done as 03-11, the `rcpp` migration is done, and the stack is
@@ -608,9 +608,19 @@ prose and a construct can be explained under a title that does not name it, so
 every candidate below needs the check that sank three earlier premises: read
 the pages before building anything. Candidates, by how many lessons use them:
 `inline` (78 lessons, first discussed at 04-04), `size_t` (50, first at 01-07),
-`auto` (9, from 03-03, never discussed), and `namespace` and `static` (first
-discussed at 04-04). `explicit`, checked next, turned out to be one symptom of a
+`auto` (9, from 03-03, never discussed), and function-local `static` (first used
+at 02-03, discussed at 04-04, where it appears inside an inline function). `explicit`, checked next, turned out to be one symptom of a
 larger hole, below.
+
+`namespace` was checked next and confirmed. `std::` is in code from 00-03 and
+`rc::core` is in the Ship It line of six lessons, rule L018 bans
+`using namespace std;` in every lesson, and no page says what the two colons are or
+why the ban exists. It is done as **01-17**, with the measurement that makes the
+ban concrete and not stylistic: with `using namespace std;` in scope, a call
+`clamp(5, 0, 3)` stopped reaching the global `clamp` that lesson 01-02 teaches and
+ran `std::clamp` instead, returning an int where it had returned a double, with no
+warning on gcc 11 or clang 14. 00-03 now has a sentence pointing at it where
+`std::sqrt` first appears.
 
 `explicit` led somewhere better. Reading the pages showed that "constructor" is
 used from 01-13 and 02-03 onward and is **defined nowhere**: 03-01, "Classes",

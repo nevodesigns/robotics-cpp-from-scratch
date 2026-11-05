@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 112 of 320 planned |
+| lessons | 113 of 320 planned |
 | phases opened | 16 of 22, none complete to plan |
-| hours of material | 229 |
-| Failure Atlas entries | 284 |
+| hours of material | 230 |
+| Failure Atlas entries | 287 |
 | librc headers | 99 across 13 modules |
-| reference tests | 151 |
-| exercises | 112, of which 4 are declared not to compile |
+| reference tests | 154 |
+| exercises | 113, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   151/151, 0 warnings      clang 14  151/151, 0 warnings
-asan     151/151, 0 warnings      gate      112 of 112 reported
-audit    112 lessons, 284 atlas entries, 0 issues
+gcc 11   154/154, 0 warnings      clang 14  154/154, 0 warnings
+asan     154/154, 0 warnings      gate      113 of 113 reported
+audit    113 lessons, 287 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -137,7 +137,7 @@ written before any lesson existed and has not been revised.
 | phase | built | planned | |
 |---|---|---|---|
 | 00 Toolchain and First Motion | 9 | 14 | 64% |
-| 01 C++ Core I | 16 | 18 | 88% |
+| 01 C++ Core I | 17 | 18 | 94% |
 | 02 Memory and Ownership | 11 | 16 | 68% |
 | 03 C++ Core III | 11 | 18 | 61% |
 | 04 Build Systems and Tooling | 8 | 14 | 57% |
@@ -212,6 +212,8 @@ reasoning in their own messages, and `git log` is the record.
 | commit | what it did |
 |---|---|
 | `3b4e139` | 01-15, a number that changed type, graduated `rc/core/narrow.hpp` |
+| `567fada` | pointed 03-01 at 02-11, which now defines the constructor it uses |
+| `5e7997c` | 02-11, how an object starts, which defines the constructor |
 | `60c13a3` | explained `inline` in 00-01 and 00-02, where the contradiction was |
 | `a35ba02` | explained the conditional operator in 01-02, with a test tied to `clamp` |
 | `946014d` | 01-16, the loop variable is a copy, which explains range-for |
@@ -313,6 +315,14 @@ tool, every time. That is the argument for a rule over a note.
 asserted on text that had already changed, so a commit went out still calling
 `constexpr` unbuilt. *Caught by:* reading the file after the script failed.
 Fixed in `1af47a7`.
+
+**Experiment files written into the repository, in 01-17.** A scratch directory I
+had used earlier no longer existed, so a `cd` into it failed, and the next
+commands wrote their test programs and binaries into the repository root. They
+were never staged, because `git status` showed eight untracked files first, and
+they were deleted by name. *Caught by:* checking `git status` before doing
+anything else after an error. The scratch files now go to the session's scratchpad
+directory and are created with `mkdir -p` in the same command that uses them.
 
 **A scan that named the wrong lesson, in 02-11.** The construct scan listed
 `explicit` as a candidate, 26 lessons using it with a prose mention only at 03-06.
