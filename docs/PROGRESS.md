@@ -12,14 +12,14 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 
 | | |
 |---|---|
-| lessons built | 107 of 320 planned, 33 percent |
+| lessons built | 108 of 320 planned, 34 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 0 |
-| hours of material | 219 |
-| Failure Atlas entries | 269 |
-| librc headers | 96 across 13 modules |
+| hours of material | 221 |
+| Failure Atlas entries | 272 |
+| librc headers | 97 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 141, green on every claimed toolchain |
+| reference tests | 143, green on every claimed toolchain |
 | commits | 209 |
 
 ## Phase by phase
@@ -31,7 +31,7 @@ disagree. Last updated 4 November 2026, with a recovery point at the end.
 |---|---|---|---|
 | 00 Toolchain and First Motion | 9 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 13 | 18 | A drive state machine that cannot represent nonsense |
-| 02 Memory and ownership | 9 | 16 | A subsystem tree that releases completely, with no cycles |
+| 02 Memory and ownership | 10 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
@@ -126,11 +126,11 @@ twice.
 
 ## librc
 
-96 headers. Modules and counts:
+97 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
-| `rc::core` | 31 |
+| `rc::core` | 32 |
 | `rc::control` | 8 |
 | `rc::io` | 8 |
 | `rc::math` | 8 |
@@ -150,11 +150,11 @@ twice.
 
 ## Failure Atlas
 
-269 entries under `atlas/errors/`, each with a `match:` pattern that
+272 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 61, `E-NUM` 24, `E-QT` 23, `E-NAV` 19, `E-MEM` 17, `E-IO` 16,
-`E-TEST` 15, `E-CTRL` 14, `E-SENSE` 13, `E-DEBUG` 12, `E-KIN` 10, `E-RT` 7,
+`E-CPP` 62, `E-NUM` 24, `E-QT` 23, `E-NAV` 19, `E-MEM` 18, `E-IO` 16,
+`E-TEST` 15, `E-CTRL` 14, `E-DEBUG` 13, `E-SENSE` 13, `E-KIN` 10, `E-RT` 7,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 5, `E-PLOT` 5, `E-BUILD` 4,
 `E-THREAD` 4, `E-TIME` 2, `E-TSAN` 1.
 
@@ -267,6 +267,19 @@ version is the intuitive one.
   the whole expression first, and an unknown identifier followed by a
   parenthesis is a syntax error rather than zero. The tests have to be
   nested. 04-07.
+- **A recursion with 64 byte frames died at depth 130860**, signal 11, status
+  139, with no message and no last line of output. 8 MiB over 130860 is 64
+  bytes a frame, so the depth you can afford is the limit divided by the
+  frame. The Windows default stack of 1 MiB gives an eighth of the room.
+  02-10.
+- **A large local costs its space on paths that never run it.** A 15625 KiB
+  array declared in main crashed a branch that only used a vector and never
+  touched the array; moving the array into its own function made that branch
+  survive. The frame is allocated on entry, not at the declaration. 02-10.
+- **Both compilers accept a variable length array in silence** under
+  -Wall -Wextra. It is a C99 extension, not C++, and -Wvla or
+  -pedantic-errors rejects it on both. Not a checks/ case for that reason.
+  02-10.
 - **Ninety eight warnings came from one defect.** A warning is reported per
   translation unit, so a defect in a header is counted once per includer.
   Measured: one bad comparison, three translation units, 3 warning lines at 1
@@ -541,10 +554,13 @@ before the change was pushed.
 Phase 00 is 8 of 14, phase 01 is 13 of 18, phase 02 is 9 of 16, phase 03 is
 11 of 18.
 
-`constexpr` is done, as 03-11, and the `rcpp` migration above is done. Still
-not built, from the same survey: a non allocating fixed capacity container,
-which phase 07 needs and four lessons approximate by hand, and the stack,
-where locals live and what happens at the end of it.
+`constexpr` is done as 03-11, the `rcpp` migration is done, and the stack is
+done as 02-10.
+
+One item on that list was wrong and is withdrawn. A non allocating fixed
+capacity container is substantially already built: `rc/core/ring.hpp` takes
+its capacity as a template parameter and allocates nothing. The survey that
+listed it as a gap had looked for the name rather than the thing.
 
 Phase 00 has now been surveyed, and 00-09 came out of it. Two things worth
 recording from that survey, because both were guesses that turned out wrong.

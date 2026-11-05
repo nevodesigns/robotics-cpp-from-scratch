@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "02-10-where-the-locals-live",
+  "title": "Where the Locals Live: The Stack, Its Size, and the Recursion That Ends the Program",
+  "type": "build",
+  "minutes": 115,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-09-what-the-program-tells-the-outside-world",
+    "02-01-pointers-and-addresses",
+    "02-02-the-heap-and-the-leak",
+    "02-03-raii-and-destructors"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/recursion.hpp",
+    "note": "a depth limit a recursive function can report against, so deep input ends in an answer rather than a signal"
+  },
+  "breaks_first": [
+    "E-MEM-0018",
+    "E-CPP-0062",
+    "E-DEBUG-0013"
+  ]
+}
