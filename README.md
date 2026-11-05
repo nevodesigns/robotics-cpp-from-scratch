@@ -11,8 +11,8 @@ continuous integration on the machine you actually own.
 ## Status
 
 This repository is past milestone M0, the machinery proven end to end, and is
-working towards M1: phases 00 to 05 complete. Phase 01 is complete to its
-planned count and no other is yet, and the later phases are thinner than the
+working towards M1: phases 00 to 05 complete. Phases 01 and 07 are complete
+to their planned counts and no other is yet, and the later phases are thinner than the
 early ones. The numbers below are
 produced by the tooling in this repository, not written by hand.
 

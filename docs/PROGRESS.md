@@ -18,14 +18,14 @@ November and is kept as it was, because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 121 of 320 planned, 38 percent |
+| lessons built | 126 of 320 planned, 39 percent |
 | phases opened | 16 of 22 |
-| phases finished to plan | 1 (phase 01) |
-| hours of material | 245 |
-| Failure Atlas entries | 313 |
-| librc headers | 105 across 13 modules |
+| phases finished to plan | 2 (phases 01 and 07) |
+| hours of material | 255 |
+| Failure Atlas entries | 328 |
+| librc headers | 110 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 163, green on every claimed toolchain |
+| reference tests | 169, green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -41,7 +41,7 @@ November and is kept as it was, because it records the reasoning of that day.
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 6 | 16 | Where the gripper is, in the world frame, and how you know |
-| 07 Concurrency and real time | 11 | 16 | A measured latency histogram of your own control loop |
+| 07 Concurrency and real time | 16 | 16 | A measured latency histogram of your own control loop |
 | 08 Systems input and output | 5 | 14 | A framed and checked conversation with a device, over a port you opened |
 | 09 Qt Core | 4 | 14 | A sensor on its own thread, reaching the interface without ever touching it |
 | 10 Qt Widgets | 4 | 14 | A live chart of any signal, in a window and in a terminal, that does not lie about a steady one |
@@ -134,7 +134,7 @@ twice.
 
 ## librc
 
-105 headers. Modules and counts:
+110 headers. Modules and counts:
 
 | Module | Headers |
 |---|---|
@@ -145,7 +145,7 @@ twice.
 | `rc::qt` | 8 |
 | `rc::nav` | 7 |
 | `rc::kin` | 5 |
-| `rc::rt` | 10 |
+| `rc::rt` | 15 |
 | `rc::test` | 9 |
 | `rc::plot` | 2 |
 | `rc::sensor` | 2 |
@@ -158,13 +158,13 @@ twice.
 
 ## Failure Atlas
 
-313 entries under `atlas/errors/`, each with a `match:` pattern that
+328 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 72, `E-NUM` 30, `E-QT` 23, `E-NAV` 19, `E-MEM` 19, `E-IO` 18,
-`E-TEST` 17, `E-CTRL` 14, `E-DEBUG` 14, `E-SENSE` 13, `E-KIN` 10, `E-RT` 8,
+`E-CPP` 73, `E-NUM` 30, `E-QT` 23, `E-NAV` 19, `E-MEM` 19, `E-IO` 18,
+`E-TEST` 17, `E-CTRL` 14, `E-DEBUG` 14, `E-SENSE` 13, `E-KIN` 10, `E-RT` 14,
 `E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 6, `E-PLOT` 5, `E-BUILD` 4,
-`E-THREAD` 17, `E-TIME` 4, `E-TSAN` 3.
+`E-THREAD` 24, `E-TIME` 4, `E-TSAN` 4.
 
 L025 requires every `match:` pattern to be ASCII, because build output is
 normalised to ASCII quotes before matching, so a pattern with a typographic
@@ -566,31 +566,46 @@ anything, because no later lesson depends on a construct that is still unexplain
 
 **So the next work is the thin middle, in this order, with reasons.**
 
-1. **Phase 07, concurrency and real time, 11 of 16 (was 5).** 07-11 now builds the stress and forcing tools the pool's missed race argued for (a plain run found the bug in about 0.07 percent of trials, so 100 trials pass with it in 93 percent of the time; a hook at the gap found it 300 of 300). Earlier: The basics listed below
-   are done, and so is the pool that composes them (07-10, how many workers: 48
-   computing tasks sped up 7x on 6 cores with 2 threads each and stopped there, 48
-   waiting tasks reached 44.6x, and a pool beat a thread per task 5.4 ms to 122 ms): 07-06, waiting without spinning; 07-07, a thread is a promise to join (a
-   `std::thread` destroyed without `join` calls `std::terminate`, so does one whose
-   body throws, and `detach` outlives its locals); 07-08, a loop that holds its rate
-   (sleeping a period after the work ran at 82.6 Hz for a wanted 100, even
-   `sleep_for(period - work)` drifted 105 to 110 us a cycle, and a plain fixed
-   deadline caught up after a stall with a burst); and 07-09, two locks neither moves
-   (the same opposite-order code deadlocked 3739 times in one run and 0 times in
-   three runs at the next setting, so a lock-order level check finds it from the
-   order alone). What the phase still lacks, to be confirmed by reading pages before
-   building: a worker pool and work distribution, shared state patterns (a read
-   mostly value, a double buffer), priorities and what the scheduler does to them,
-   and priorities. The pool's own first draft had a race between submit and shutdown
-   that the suite passed, found by reading and not by running, which is why 07-11 exists. The original reasoning follows.
-   **Phase 07, concurrency and real time, 5 of 16.** Everything after it depends on
-   it: Qt workers (09), device I/O (08), middleware and ROS 2 (17) all assume the
-   learner can reason about threads, locks and timing. It has the torn read, a lock
-   free queue, jitter, allocation and false sharing, and none of the basics a
-   learner needs first: a mutex and what it protects, a condition variable, a
-   deadlock, a timed loop that holds its rate. That is a gap to confirm by reading
-   the five pages before building anything, as every gap above was confirmed.
-2. **Phase 08, systems input and output, 5 of 14,** because the capstone for the
-   phase is a real conversation with a device and the fake-device path is ready.
+1. **Phase 07, concurrency and real time: DONE, 16 of 16 (it was 5).** The second phase
+   finished to plan. What was built, and the finding each lesson rests on, all measured:
+   - 07-06 waiting without spinning: a spinning consumer used 100.05 ms of CPU in 100,
+     a condition variable 0.04 ms; a notification nobody heard is lost.
+   - 07-07 a thread is a promise to join: an unjoined thread, a throwing body and a throw
+     before the join all abort with status 134; a detached thread read a dead local.
+   - 07-08 a loop that holds its rate: sleeping after the work ran at 82.6 Hz for a wanted
+     100, and even `sleep_for(period - work)` drifted 105 to 110 us a cycle.
+   - 07-09 two locks neither moves: the same code deadlocked 3739 times in one run and 0
+     in three runs at the next setting, so a level check finds it from the order alone.
+   - 07-10 how many workers: computing speedup stopped near 7x on 6 cores with 2 threads
+     each, waiting tasks reached 44.6x, a pool beat a thread per task 5.4 ms to 122 ms.
+   - 07-11 the race the tests passed: a plain run found a race in 0.07 percent of trials,
+     so 100 trials pass with it in 93 percent of the time; a hook at the gap found it 300
+     of 300.
+   - 07-12 many readers one writer: the mutex got slower as readers were added,
+     `shared_mutex` starved the writer to 92 writes of 14000, a seqlock scaled; a seqlock
+     built on `memcpy` is a data race that clang's sanitizer finds and gcc 11's misses.
+   - 07-13 getting an answer back: a discarded `std::async` future makes it serial, 400 ms
+     against 100; an exception comes out of `get()` and the pool is not told.
+   - 07-14 asking work to stop: a flag polled between 10 ms sleeps took a median 3.3 ms
+     to stop a worker, a wait the request wakes took 72 us.
+   - 07-15 priority is a share: nice 19 against nice 0 got 1.6 percent of a core; priority
+     inversion made the highest task wait 15 ticks, and inheritance has to be transitive.
+   - 07-16 the loop measured: a spinner was a thousand times faster at the median and used
+     a whole core; the suite asserts the conservation laws and not the machine's numbers.
+   Seven `rc::rt` headers were added to the five that existed, and `rc::test` gained
+   `race.hpp`. Two sanitizer tool limits were found and recorded as facts about this
+   machine (`E-TSAN-0002`, `E-TSAN-0003`) and a third about gcc 11 missing a seqlock race
+   (`E-TSAN-0004`).
+   What phase 07 does not cover, honestly: memory orders beyond acquire and release, a
+   lock free multi-producer queue, a real time kernel and `PREEMPT_RT`, and measuring on a
+   robot's own hardware. The first two are deep and the last two need hardware.
+2. **Phase 08, systems input and output, 5 of 14, is next.** Its capstone is a real
+   conversation with a device and the fake-device path is ready. It builds directly on
+   phase 07: a link that goes quiet needs a deadline (07-06), a reader thread needs to
+   be stopped (07-14), and a sensor stream needs its latency measured (07-16). The pages
+   to read first are 08-01 to 08-05, and the gaps to look for are blocking against
+   non-blocking reads, a device that sends faster than it is read, and what a short write
+   means.
 3. **Then phases 13 to 16 up to their planned counts,** which are what milestone M3
    describes, a rover navigating with the learner's own estimator and planner. 16-07
    already ends a rover that plans, drives, fits and replans, so M3 is nearer than
@@ -772,8 +787,8 @@ Humble is installed on this machine, so phase 17 is not blocked.
 
 **Phase 12 and phases 17 to 21 are unbuilt**, 80 lessons.
 
-**One phase is finished to its planned count**, phase 01 at 18 of 18. No other
-is. The plan in ARCHITECTURE.md has not been revised against what the lessons
+**Two phases are finished to their planned counts**, phase 01 at 18 of 18 and phase 07 at
+16 of 16. No other is. The plan in ARCHITECTURE.md has not been revised against what the lessons
 turned out to need, and some phases may want a different count rather than the
 planned one.
 

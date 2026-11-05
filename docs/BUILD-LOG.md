@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 121 of 320 planned |
-| phases opened | 16 of 22, one (phase 01) complete to plan |
-| hours of material | 245 |
-| Failure Atlas entries | 313 |
-| librc headers | 105 across 13 modules |
-| reference tests | 163 |
-| exercises | 121, of which 4 are declared not to compile |
+| lessons | 126 of 320 planned |
+| phases opened | 16 of 22, two (phases 01 and 07) complete to plan |
+| hours of material | 255 |
+| Failure Atlas entries | 328 |
+| librc headers | 110 across 13 modules |
+| reference tests | 169 |
+| exercises | 126, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   165/165, 0 warnings      clang 14  165/165, 0 warnings
-asan     165/165, 0 warnings      gate      121 of 121 reported
-audit    121 lessons, 313 atlas entries, 0 issues
+gcc 11   171/171, 0 warnings      clang 14  171/171, 0 warnings
+asan     171/171, 0 warnings      gate      126 of 126 reported
+audit    126 lessons, 328 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -143,7 +143,7 @@ written before any lesson existed and has not been revised.
 | 04 Build Systems and Tooling | 8 | 14 | 57% |
 | 05 Testing and Fakes | 7 | 12 | 58% |
 | 06 Robot Maths | 6 | 16 | 37% |
-| 07 Concurrency and Real Time | 11 | 16 | 69% |
+| 07 Concurrency and Real Time | 16 | 16 | 100% |
 | 08 Systems Input and Output | 5 | 14 | 35% |
 | 09 Qt Core | 4 | 14 | 28% |
 | 10 Qt Widgets | 4 | 14 | 28% |
@@ -212,6 +212,12 @@ reasoning in their own messages, and `git log` is the record.
 | commit | what it did |
 |---|---|
 | `3b4e139` | 01-15, a number that changed type, graduated `rc/core/narrow.hpp` |
+| `0e1d090` | 07-16, the loop measured, the phase capstone, graduated `rc/rt/latency_rig.hpp` |
+| `b97b5de` | 07-15, priority is a share, graduated `rc/rt/priority_sim.hpp` |
+| `cf6fadb` | 07-14, asking work to stop, graduated `rc/rt/stop.hpp` |
+| `91df2b9` | 07-13, getting an answer back, graduated `rc/rt/submit_future.hpp` |
+| `708d62d` | 07-12, many readers one writer, graduated `rc/rt/seqlock.hpp` |
+| `44092fa` | 07-11, the race the tests passed, graduated `rc/test/race.hpp` |
 | `2afb2e9` | 07-10, how many workers, graduated `rc/rt/worker_pool.hpp` |
 | `b2089bd` | 07-09, two locks neither moves, graduated `rc/rt/level_mutex.hpp` |
 | `b402d54` | 07-08, a loop that holds its rate, graduated `rc/rt/pacer.hpp` |
@@ -323,6 +329,35 @@ tool, every time. That is the argument for a rule over a note.
 asserted on text that had already changed, so a commit went out still calling
 `constexpr` unbuilt. *Caught by:* reading the file after the script failed.
 Fixed in `1af47a7`.
+
+**A count the scheduler decides, asserted, in 07-16.** The first suite asserted that a
+spinning consumer went round more than 100 times per reading. It passed 15 of 15 runs
+on a quiet machine and failed 3 of 10 with twelve busy loops competing, because a
+spinning thread is descheduled like any other and goes round far less. *Caught by:*
+running the suite under load, which I did because the phase's own lessons on jitter and
+flakiness say a timing test must survive a busy machine. It is now printed and not
+asserted, and the bounds that remain are ones a slower machine can only tighten: 0 of 12
+quiet and 0 of 20 loaded. The rule is the repo's own, never gate on an absolute time,
+and it extends to any count the scheduler influences.
+
+**A sanitizer that missed a real race, in 07-12.** A seqlock copying its data with
+`memcpy` produced 0 torn reads in 200000 writes and was reported as a data race by
+clang 14's thread sanitizer, 20 times in 5 runs, and not at all by gcc 11's, which does
+not model the fences. Both agreed on the version holding the data as atomic words. A
+clean report from the tool that cannot see the bug proved nothing, which is
+`E-TSAN-0004`. *Caught by:* running both sanitizers and reading the disagreement as a
+finding instead of picking the quiet one.
+
+**A claim about a plausible wrong answer, tested, in 07-15.** The lesson says inheriting
+only one step fails the chain scenario while passing the classic one. That is a claim
+about what a learner might write, so a direct-only version was compiled against the
+suite: 4 of 5 passed and exactly the transitivity test failed. A lesson that says a wrong
+answer fails should have shown a wrong answer failing.
+
+**A namespace slip, in 07-13.** The graduated `WorkerPool` is in `rc::rt` where 07-10's
+had been a global class inside the lesson, so the next lesson's file did not compile. The
+fix was the using-declaration that lesson 01-17 measured the safety of. A lesson that
+builds on a graduated header has to name it the way the library does.
 
 **A measurement that reported a bug in the fixed code, in 07-11.** The first
 `stranded()` counted any task accepted and not yet processed, so for the fixed intake,
@@ -561,8 +596,8 @@ ROS 2 Humble is installed on this machine, so phase 17 is not blocked. Phase
 18 and 20 need a simulator and a cross toolchain that have not been checked
 for.
 
-**One phase is complete to plan**, phase 01 at 18 of 18, reached by 01-18. No
-other is, and the plan's counts have not been revised since before the first
+**Two phases are complete to plan**, phase 01 at 18 of 18, reached by 01-18, and phase 07
+at 16 of 16, reached by 07-16. No other is, and the plan's counts have not been revised since before the first
 lesson existed. A better definition of done is that every phase delivers the
 ending it promises, which the front of the book already does in places.
 
