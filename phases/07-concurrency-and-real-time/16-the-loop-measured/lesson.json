@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "id": "07-16-the-loop-measured",
+  "title": "The Loop, Measured: Three Ways to Wait, and What Each Costs in Latency and CPU",
+  "type": "build",
+  "minutes": 130,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "07-02-a-queue-without-a-lock",
+    "07-03-measuring-jitter",
+    "07-06-waiting-without-spinning",
+    "07-07-a-thread-is-a-promise-to-join",
+    "07-08-a-loop-that-holds-its-rate",
+    "07-14-asking-work-to-stop"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::rt",
+    "header": "rc/rt/latency_rig.hpp",
+    "note": "a paced producer, a queue, a consumer and a stop token wired into one rig that reports the latency distribution from stamp to taken, with every reading accounted for as delivered or dropped"
+  },
+  "breaks_first": [
+    "E-RT-0012",
+    "E-RT-0013",
+    "E-RT-0014"
+  ]
+}
