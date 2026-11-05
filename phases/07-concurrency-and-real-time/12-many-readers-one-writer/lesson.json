@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "07-12-many-readers-one-writer",
+  "title": "Many Readers, One Writer: Why the Mutex Gets Slower and shared_mutex Starves the Writer",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "07-01-threads-and-the-torn-read",
+    "07-02-a-queue-without-a-lock",
+    "07-11-the-race-the-tests-passed",
+    "03-07-one-template-many-types"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::rt",
+    "header": "rc/rt/seqlock.hpp",
+    "note": "a value one thread writes and any number read without a lock, held as atomic words so it is legal C++, with a count of the reads that had to be retried"
+  },
+  "breaks_first": [
+    "E-THREAD-0018",
+    "E-THREAD-0019",
+    "E-TSAN-0004"
+  ]
+}
