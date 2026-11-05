@@ -1,0 +1,78 @@
+{
+  "lesson": "08-07-rescan-instead-of-giving-up",
+  "title": "Rescan Instead of Giving Up: Getting the Next Frame Back",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A byte goes missing from the middle of a frame and the checksum fails. What does the parser from lesson 08-02 do with the bytes it took?",
+      "options": [
+        "Keeps them for the next attempt",
+        "Throws them all away, including the start of the next real frame it reached into to make up the length",
+        "Repairs the frame from the checksum",
+        "Asks the device to send it again"
+      ],
+      "correct": 1,
+      "explanation": "The length was a promise the missing byte broke, so the parser reached into the next frame to keep it. Discarding the candidate discards that frame's start as well."
+    },
+    {
+      "stage": "check",
+      "question": "On a failed checksum the rescanning parser gives up the start byte alone. Why not the whole candidate?",
+      "options": [
+        "It saves memory",
+        "A failed checksum says the bytes do not form a frame from this start byte, and says nothing about whether one starts later inside them",
+        "The start byte is the only part that can be wrong",
+        "It is faster to discard one byte"
+      ],
+      "correct": 1,
+      "explanation": "The next real frame may begin inside the bytes just read. Searching again from the next byte finds it, and the cost when it is not there is one comparison."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the parser need next() as well as push()?",
+      "options": [
+        "To reset itself",
+        "A rescan can leave a second whole frame in the window, and without a way to look again with no new byte it waits for one, which on a quiet device is a long time",
+        "To count frames",
+        "push() cannot return a frame"
+      ],
+      "correct": 1,
+      "explanation": "A false claim can contain two real frames. The first is returned by push(); the second must be collected by next(), or it is delivered late."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the length byte checked before it is used, in a parser that holds bytes?",
+      "options": [
+        "It comes off a wire, and it decides how many bytes to wait for, so a claim larger than the window would wait for bytes there is no room to keep",
+        "It is always zero",
+        "The compiler requires it",
+        "Lengths are signed"
+      ],
+      "correct": 0,
+      "explanation": "A claim is not a fact. Checked against the window and against the size of the check, it is counted as malformed and the start byte is given up."
+    },
+    {
+      "stage": "post",
+      "question": "Rescanning delivered 44737 frames against 40747 for the old parser, and 13 wrong frames against 11. What explains the extra wrong ones?",
+      "options": [
+        "A bug in the rescan",
+        "It examines more candidate frames, and each is another one in 256 chance for an eight bit checksum to pass by luck",
+        "Rescanning corrupts the window",
+        "The old parser hid them"
+      ],
+      "correct": 1,
+      "explanation": "Recovering frames means trying more alignments, and more alignments means more chances for a misaligned one to match. The cure is a wider check, not less scanning."
+    },
+    {
+      "stage": "post",
+      "question": "CRC-16 let 0 wrong frames through where CRC-8 let 13. What did it cost?",
+      "options": [
+        "Nothing",
+        "One more byte on every frame, which is ten percent more on a ten byte frame, and it makes a wrong pass 256 times rarer rather than impossible",
+        "It halves the baud rate",
+        "It needs a faster processor"
+      ],
+      "correct": 1,
+      "explanation": "Wider is rarer, never zero. Whether the byte is worth it depends on how many frames a second the link carries and how noisy it is."
+    }
+  ]
+}
