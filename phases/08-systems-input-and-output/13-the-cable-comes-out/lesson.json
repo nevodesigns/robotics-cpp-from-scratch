@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "08-13-the-cable-comes-out",
+  "title": "The Cable Comes Out: Reconnecting Without a Restart",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "08-12-the-devices-own-clock",
+    "08-05-opening-a-real-port",
+    "02-03-raii-and-destructors"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::io",
+    "header": "rc/io/reconnect.hpp",
+    "note": "the port that survives the cable coming out, and says when everything above it has to start again"
+  },
+  "breaks_first": [
+    "E-IO-0040",
+    "E-IO-0041",
+    "E-IO-0042"
+  ]
+}
