@@ -1,0 +1,78 @@
+{
+  "lesson": "08-12-the-devices-own-clock",
+  "title": "The Device's Own Clock: Ticks That Wrap and Drift",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A device stamps messages in milliseconds on sixteen bits. Two stamps 10 ms apart are 65531 and 5. What does a subtraction written as an int give?",
+      "options": [
+        "10",
+        "-65526, because the unsigned values are promoted to int before the subtraction",
+        "65536",
+        "It does not compile"
+      ],
+      "correct": 1,
+      "explanation": "The difference has to be taken in the counter's own width, so it wraps the way the counter does. Taken in int it is a duration of minus a minute."
+    },
+    {
+      "stage": "check",
+      "question": "Using the first message's clock offset for ever was 185 ms wrong after an hour. Why does it grow?",
+      "options": [
+        "The link gets slower",
+        "The device's oscillator runs a little fast or slow, 50 ppm here, so the offset between the two clocks changes steadily",
+        "The wrap accumulates error",
+        "The host clock stops"
+      ],
+      "correct": 1,
+      "explanation": "50 parts per million over 3600 seconds is 180 ms. An offset is a measurement of one instant, not a constant."
+    },
+    {
+      "stage": "check",
+      "question": "Why does ClockMap keep the least delayed sample in each bucket rather than the average?",
+      "options": [
+        "It is cheaper",
+        "An arrival time is the send time plus a delay that is never negative, so the least delayed sample is the closest to the truth and the line must lie under the rest",
+        "The average would overflow",
+        "Averages are not defined for times"
+      ],
+      "correct": 1,
+      "explanation": "Jitter only adds. Averaging would put the delay into the estimate, and the minimum finds the floor."
+    },
+    {
+      "stage": "check",
+      "question": "The map's error was measured against the send time plus 2 ms. Why not the send time itself?",
+      "options": [
+        "A mistake in the test",
+        "The least delay cannot be separated from the clock offset without a second clock, so it is the part nobody on one side of the link can know",
+        "2 ms is the clock resolution",
+        "The device clock is rounded"
+      ],
+      "correct": 1,
+      "explanation": "For fusing two sensors that share the host the constant cancels. For absolute time it does not, and the lesson names it instead of hiding it."
+    },
+    {
+      "stage": "post",
+      "question": "A device resets and the map is not told. Why is every timestamp wrong by the time the device was off, for ten minutes?",
+      "options": [
+        "The device sends bad stamps",
+        "The unwrapped timeline carries on without the downtime, so every old bucket is that far out, and the fit averages them with the new ones until they leave the window",
+        "The unwrapper crashes",
+        "The checksum fails"
+      ],
+      "correct": 1,
+      "explanation": "Measured, 5011 ms for a five second reset, and 3.5 ms when the map was reset on the restart."
+    },
+    {
+      "stage": "post",
+      "question": "How does the unwrapper tell a device reset from a message that arrived late?",
+      "options": [
+        "It cannot tell the difference",
+        "A link delivers in order, so a stamp that goes backwards is a reset; and a silence of more than half a turn looks like one, which is the counter's limit",
+        "By the checksum",
+        "By the baud rate"
+      ],
+      "correct": 1,
+      "explanation": "A counter can see a gap just under half its range. Past that, a gap and a restart cannot be told apart, which is why a boot counter in the message is the better design."
+    }
+  ]
+}

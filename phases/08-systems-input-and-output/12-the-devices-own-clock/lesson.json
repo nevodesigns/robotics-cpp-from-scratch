@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "08-12-the-devices-own-clock",
+  "title": "The Device's Own Clock: Ticks That Wrap and Drift",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "08-11-asking-and-being-answered",
+    "03-05-time-and-clocks"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::io",
+    "header": "rc/io/timesync.hpp",
+    "note": "the map from a device's clock to the host's, with the wrap and the drift taken out"
+  },
+  "breaks_first": [
+    "E-IO-0037",
+    "E-IO-0038",
+    "E-IO-0039"
+  ]
+}
