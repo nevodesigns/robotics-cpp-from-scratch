@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 120 of 320 planned |
+| lessons | 121 of 320 planned |
 | phases opened | 16 of 22, one (phase 01) complete to plan |
-| hours of material | 243 |
-| Failure Atlas entries | 310 |
-| librc headers | 104 across 13 modules |
-| reference tests | 162 |
-| exercises | 120, of which 4 are declared not to compile |
+| hours of material | 245 |
+| Failure Atlas entries | 313 |
+| librc headers | 105 across 13 modules |
+| reference tests | 163 |
+| exercises | 121, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   164/164, 0 warnings      clang 14  164/164, 0 warnings
-asan     164/164, 0 warnings      gate      120 of 120 reported
-audit    120 lessons, 310 atlas entries, 0 issues
+gcc 11   165/165, 0 warnings      clang 14  165/165, 0 warnings
+asan     165/165, 0 warnings      gate      121 of 121 reported
+audit    121 lessons, 313 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -143,7 +143,7 @@ written before any lesson existed and has not been revised.
 | 04 Build Systems and Tooling | 8 | 14 | 57% |
 | 05 Testing and Fakes | 7 | 12 | 58% |
 | 06 Robot Maths | 6 | 16 | 37% |
-| 07 Concurrency and Real Time | 10 | 16 | 62% |
+| 07 Concurrency and Real Time | 11 | 16 | 69% |
 | 08 Systems Input and Output | 5 | 14 | 35% |
 | 09 Qt Core | 4 | 14 | 28% |
 | 10 Qt Widgets | 4 | 14 | 28% |
@@ -212,6 +212,7 @@ reasoning in their own messages, and `git log` is the record.
 | commit | what it did |
 |---|---|
 | `3b4e139` | 01-15, a number that changed type, graduated `rc/core/narrow.hpp` |
+| `2afb2e9` | 07-10, how many workers, graduated `rc/rt/worker_pool.hpp` |
 | `b2089bd` | 07-09, two locks neither moves, graduated `rc/rt/level_mutex.hpp` |
 | `b402d54` | 07-08, a loop that holds its rate, graduated `rc/rt/pacer.hpp` |
 | `8f2bd37` | 07-07, a thread is a promise to join, graduated `rc/rt/scoped_thread.hpp` |
@@ -322,6 +323,21 @@ tool, every time. That is the argument for a rule over a note.
 asserted on text that had already changed, so a commit went out still calling
 `constexpr` unbuilt. *Caught by:* reading the file after the script failed.
 Fixed in `1af47a7`.
+
+**A measurement that reported a bug in the fixed code, in 07-11.** The first
+`stranded()` counted any task accepted and not yet processed, so for the fixed intake,
+where the hook at the nonexistent gap never fires and shutdown never runs, it reported 1
+and the matrix showed a bug in the repair. A task that is merely waiting is not stranded;
+one still queued after shutdown has already run is. *Caught by:* the suite failing on
+the very row that was meant to show the fix working, which is the reason the matrix
+prints whether each hook fired as well as the result. The definition of the measurement
+had to be as precise as the bug.
+
+**Two tests an all-zero stub passed, again, in 07-11.** "A race point does nothing with
+nothing installed" is true of a function that does nothing, and the stress comparison
+never touched the learner's hooks, so the exercise scored 2 of 6. *Caught by:* building
+the exercise and reading the pass count, as before. The first now also requires a hook
+to run and then stop, and the second sets the forced result beside the unforced one.
 
 **An experiment that reported the impossible, in 07-10.** The first speedup table for
 the worker pool showed 15.8 times and 20.7 times on a machine with 12 hardware

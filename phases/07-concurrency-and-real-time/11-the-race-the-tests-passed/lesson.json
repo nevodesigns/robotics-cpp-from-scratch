@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "07-11-the-race-the-tests-passed",
+  "title": "The Race the Tests Passed: Forcing an Interleaving Instead of Hoping for One",
+  "type": "build",
+  "minutes": 105,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "07-10-how-many-workers",
+    "07-09-two-locks-neither-moves",
+    "02-08-behaviour-as-a-value"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::test",
+    "header": "rc/test/race.hpp",
+    "note": "named points in code where a test can run an action, so a race is forced on one thread and every interleaving of a few steps can be tried, with one atomic load of cost when nothing is installed"
+  },
+  "breaks_first": [
+    "E-TEST-0016",
+    "E-THREAD-0017",
+    "E-TEST-0017"
+  ]
+}
