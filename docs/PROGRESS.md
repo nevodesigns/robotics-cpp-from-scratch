@@ -19,11 +19,11 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 152 of 320 planned, 47 percent |
+| lessons built | 155 of 320 planned, 48 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 3 (phases 01, 07 and 08) |
 | hours of material | 305 |
-| Failure Atlas entries | 406 |
+| Failure Atlas entries | 415 |
 | librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
@@ -35,7 +35,7 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | Phase | Built | Planned | Ends with |
 |---|---|---|---|
-| 00 Toolchain and First Motion | 9 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
+| 00 Toolchain and First Motion | 12 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 18 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 13 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
@@ -517,6 +517,17 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Written 6 November 2026, phase 00 in order
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 00-10 a program that asks | `>>` alone read 12abc as 12, 3,5 as 3 and 9.5.1 as 9.5; ten reads after one bad answer succeeded 0 times; asking an empty input stopped after 1 attempt | `rc/core/ask.hpp` |
+| 00-11 a name made from the content | one changed character flipped a mean of 32.4 of 64 hash bits (16 to 44); two versions of a hundred files with one edited needed 101 contents, not 200 | `rc/core/content_id.hpp` |
+| 00-12 dice you can replay | a remainder put 0.604 of draws below 1,294,967,296 where 0.433 is fair; seed 0 must be replaced; the twelve-uniform bell had 0.190 percent beyond 3 sigma against 0.270 | `rc/core/random.hpp` |
+
+155 of 320 lessons. Phase 00 is at 12 of 14. Two more are planned there, then 02 (3 left), 03 (7), 04 (6), 05 (5) and 06 (9).
+00-10 hit a CI stall: the clang-14 job sat for 32 minutes in "install Qt from apt", the other seven jobs were green, and the next push superseded it. A stall in an install step is not a code failure.
 
 ### Written 6 November 2026, before the laptop was shut
 

@@ -213,6 +213,9 @@ reasoning in their own messages, and `git log` is the record.
 |---|---|
 | `8d1f820` | 14-09, two loops one inside the other, graduated `rc/control/cascade.hpp` |
 | `d48020d` | 13-09, straight in space or in the joints, graduated `rc/kin/path.hpp` |
+| `0c6d6b9` | 00-12, dice you can replay, graduated `rc/core/random.hpp` |
+| `a03d1f5` | 00-11, a name made from the content, graduated `rc/core/content_id.hpp` |
+| `57b1b21` | 00-10, a program that asks, graduated `rc/core/ask.hpp` |
 | `2655e34` | 13-10, where the arm works well, graduated `rc/kin/workspace.hpp` |
 | `33561f1` | 14-10, the speed you cannot measure, graduated `rc/control/observer.hpp` |
 | `bd6e93a` | 02-13, what a struct looks like in memory, graduated `rc/core/layout.hpp` |
@@ -742,3 +745,11 @@ and rule L027 does not let an earlier phase require a later lesson.
 address sanitizer raised a runtime error: the test printed `offsets[0]` of an empty vector before the
 `RC_REQUIRE_EQ` that guards it. Fixed with a bounds-checked accessor for the print. The habit is to run the
 exercise, and not only the reference, under asan for every new lesson.
+
+**A test that a refuse-everything stub passed, in 00-10.** The table of refused inputs ("12abc", "3,5", and so on) passed for a stub that refused
+every input, since it only checked for refusals. It now also requires a plain 12 to be accepted. The check for a stub is whether any test passes
+without the feature: run the exercise and read the pass count.
+
+**A typedef, in 00-11.** Rule L018 caught `typedef`; the lesson uses `using Id = unsigned long long;`.
+
+**An unused private field warning in a stub, in 00-12,** under clang. Added `(void)state_;`. This is the fifth time (08-11, 08-13, 08-14, 15-07): build the stub with clang as well as gcc.
