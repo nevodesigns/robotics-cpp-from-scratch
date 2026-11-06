@@ -1,0 +1,78 @@
+{
+  "lesson": "02-16-a-handle-the-library-gave-you",
+  "title": "A Handle the Library Gave You: Making a C Open and Close Pair Release Itself",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A C library gives you a pointer from an open function and wants its own close function called on it once. Why is delete wrong?",
+      "options": [
+        "It is slower",
+        "The library allocated and manages it, and only its own close releases it properly",
+        "It is fine",
+        "It needs a cast"
+      ],
+      "correct": 1,
+      "explanation": "A unique_ptr can be told what to call instead of delete."
+    },
+    {
+      "stage": "check",
+      "question": "100 attempts open one device and fail to open the second. How many devices were left open with raw handles, and with the owner?",
+      "options": [
+        "0 and 100",
+        "100 with raw handles and 0 with the owner",
+        "100 both",
+        "0 both"
+      ],
+      "correct": 1,
+      "explanation": "The early return skips the close of the first."
+    },
+    {
+      "stage": "check",
+      "question": "How does a unique_ptr get the library's close called?",
+      "options": [
+        "It guesses",
+        "A small class with a call operator is given as its second template argument, and it calls that instead of delete",
+        "By inheritance",
+        "It cannot"
+      ],
+      "correct": 1,
+      "explanation": "The closer also checks for null."
+    },
+    {
+      "stage": "check",
+      "question": "A device failed to open and its owner goes out of scope. How many bad closes?",
+      "options": [
+        "1",
+        "0: unique_ptr does not call the deleter for a null pointer, and the closer checks too",
+        "2",
+        "It depends on the library"
+      ],
+      "correct": 1,
+      "explanation": "The test counted 0 bad closes and 0 closes."
+    },
+    {
+      "stage": "post",
+      "question": "Two devices: one is handed over with std::move and one replaced by an assignment. What does the log show?",
+      "options": [
+        "opened 2, closed 1",
+        "opened 2, closed 2, bad closes 0: the assignment closed the device it overwrote",
+        "opened 2, closed 3",
+        "opened 1, closed 1"
+      ],
+      "correct": 1,
+      "explanation": "The one moved from is empty afterwards."
+    },
+    {
+      "stage": "post",
+      "question": "What does the owner cost compared with the raw pointer?",
+      "options": [
+        "Twice as much",
+        "Nothing: sizeof was 8 for both, because a closer with no data takes no space",
+        "16 bytes",
+        "A heap allocation"
+      ],
+      "correct": 1,
+      "explanation": "A deleter that carries data would add to the size."
+    }
+  ]
+}
