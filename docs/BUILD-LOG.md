@@ -113,20 +113,20 @@ Verified at `55d8916`, every figure from a command rather than from memory.
 
 | | |
 |---|---|
-| lessons | 135 of 320 planned |
+| lessons | 145 of 320 planned |
 | phases opened | 16 of 22, three (phases 01, 07 and 08) complete to plan |
-| hours of material | 280 |
-| Failure Atlas entries | 355 |
-| librc headers | 120 across 13 modules |
-| reference tests | 180 |
-| exercises | 135, of which 4 are declared not to compile |
+| hours of material | 305 |
+| Failure Atlas entries | 385 |
+| librc headers | 130 across 13 modules |
+| reference tests | 190 |
+| exercises | 145, of which 4 are declared not to compile |
 | commits | first on 28 August 2026, count with `git rev-list --count HEAD` |
 | continuous integration | eight jobs, all green |
 
 ```
-gcc 11   180/180, 0 warnings      clang 14  180/180, 0 warnings
-asan     180/180, 0 warnings      gate      135 of 135 reported
-audit    135 lessons, 355 atlas entries, 0 issues
+gcc 11   190/190, 0 warnings      clang 14  190/190, 0 warnings
+asan     190/190, 0 warnings      gate      145 of 145 reported
+audit    145 lessons, 385 atlas entries, 0 issues
 ```
 
 ## Phase by phase
@@ -149,10 +149,10 @@ written before any lesson existed and has not been revised.
 | 10 Qt Widgets | 4 | 14 | 28% |
 | 11 Qt Quick and QML | 2 | 12 | 16% |
 | 12 Qt for Robot Systems | 0 | 12 | 0% |
-| 13 Kinematics and Dynamics | 5 | 16 | 31% |
-| 14 Control | 6 | 14 | 42% |
-| 15 Sensors, Drivers and Vision | 6 | 16 | 37% |
-| 16 Estimation and Navigation | 7 | 16 | 43% |
+| 13 Kinematics and Dynamics | 9 | 16 | 56% |
+| 14 Control | 9 | 14 | 64% |
+| 15 Sensors, Drivers and Vision | 8 | 16 | 50% |
+| 16 Estimation and Navigation | 8 | 16 | 50% |
 | 17 Middleware, then ROS 2 | 0 | 20 | 0% |
 | 18 Simulation and HIL | 0 | 12 | 0% |
 | 19 Safety and Field Engineering | 0 | 14 | 0% |
@@ -211,6 +211,16 @@ reasoning in their own messages, and `git log` is the record.
 
 | commit | what it did |
 |---|---|
+| `8d1f820` | 14-09, two loops one inside the other, graduated `rc/control/cascade.hpp` |
+| `d48020d` | 13-09, straight in space or in the joints, graduated `rc/kin/path.hpp` |
+| `3deb60e` | 15-08, counts not volts, graduated `rc/sensor/quantizer.hpp` |
+| `0db8cc9` | 13-08, what the tool can push, graduated `rc/kin/force.hpp` |
+| `03ab5da` | 16-08, two compasses and the angle that wraps, graduated `rc/nav/heading.hpp` |
+| `e378af3` | 14-08, stuck then slipping, graduated `rc/control/friction.hpp` |
+| `d90c27a` | 15-07, the sensor that is sometimes wildly wrong, graduated `rc/core/outlier.hpp` |
+| `e2acb92` | 14-07, the delay in the loop, graduated `rc/control/delay.hpp` |
+| `fdae8f6` | 13-07, what it takes to move it, graduated `rc/kin/dynamics.hpp` |
+| `cdff639` | 13-06, what it takes to hold it there, graduated `rc/kin/gravity.hpp` |
 | `86e029a` | fixed 08-13 taking 56 seconds: a constant backoff never reached its cap, so the delay loop ran once per failure |
 | `2be33f8` | 08-13, the cable comes out, graduated `rc/io/reconnect.hpp` |
 | `5522df8` | 08-12, the device's own clock, graduated `rc/io/timesync.hpp` |
@@ -633,6 +643,36 @@ to push: `git push` sends commits and does not mind an unclean tree.
 commits changed their hashes, and 22 of them were quoted in this file. *Caught by:* grepping
 the documents for seven character hashes and checking each against `git cat-file`, which
 found them before anyone followed one.
+
+**A lambda in a reference, in 13-06.** `heaviest_payload` used a lambda for the per joint helper and the audit refused it
+under L021, since no lesson in 13's chain teaches lambdas. *Caught by:* the audit. It is a free function now, and the same
+temptation came up in 14-07 and was avoided, so a helper that is called twice is written as a function from the start.
+
+**A requirement on a lesson that comes later, in 13-06.** The first manifest required 14-05, for the idea of feedforward, and
+rule L027 rejects a lesson that requires one sorting after it. *Caught by:* the audit. The page now says phase 14 builds on it
+instead of naming a lesson the learner has not reached.
+
+**A figure from a prototype that was wrong in the suite, in 15-07 and 16-08.** The prototype said a Hampel filter would reject
+about three readings in a thousand and that a plain angle difference gave a worst error of 6 radians. The suite printed 61 in
+2000 and 3.139. The first is because nine readings estimate a spread poorly. The second is because the error is measured as
+the short way round and so cannot exceed pi. *Caught by:* writing the printed number into the page and not the remembered one.
+It is the same rule as before, say what the suite prints.
+
+**A stub that passed a test, in 15-07.** The median was written as zero for the exercise and the spike test, which compared a
+mean computed in the test with a median that was zero, passed. *Caught by:* reading the exercise pass count, 1 of 8. The test
+now uses a baseline of 5 and requires the filter to report 5.
+
+**An exact comparison of a sum, in 15-08.** A thousand copies of one value added and divided by a thousand is not the value to
+the last bit. *Caught by:* the test failing with two numbers that printed the same. It compares to 1e-12 and says why.
+
+**A prototype that looked finished and was luck, in the particle filter for 16-09.** One seed converged to the true pose in
+under two seconds and the table looked good. Thirty seeds said otherwise: 4 right, 12 on the mirror image and 14 elsewhere at
+500 particles. *Caught by:* running the seeds before writing a page. The lesson was not shipped, and it is recorded in
+PROGRESS as the largest open item in phase 16.
+
+**A test that took the wrong number of crossings for a limit, in 14-08.** The stopping time of a sliding mass was asserted to be
+under a second and is 2 ln 2, 1.386 s. *Caught by:* the assertion failing, and replaced with the closed form, which is a better
+test than a bound.
 
 ## Measurements worth keeping
 

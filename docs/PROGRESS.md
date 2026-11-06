@@ -19,14 +19,14 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 135 of 320 planned, 42 percent |
+| lessons built | 145 of 320 planned, 45 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 3 (phases 01, 07 and 08) |
-| hours of material | 280 |
-| Failure Atlas entries | 355 |
-| librc headers | 120 across 13 modules |
+| hours of material | 305 |
+| Failure Atlas entries | 385 |
+| librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
-| reference tests | 180, green on every claimed toolchain |
+| reference tests | 190, green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -48,10 +48,10 @@ November below it, kept as it was because it records the reasoning of that day.
 | 10 Qt Widgets | 4 | 14 | A live chart of any signal, in a window and in a terminal, that does not lie about a steady one |
 | 11 Qt Quick and QML | 2 | 12 | A QML interface whose failures are visible from a test rather than a console nobody watches |
 | 12 Qt for robot systems | 0 | 12 | not started |
-| 13 Kinematics and dynamics | 5 | 16 | An arm asked in both directions, telling apart the pose it cannot reach from the one it cannot hold |
-| 14 Control | 6 | 14 | A loop you can tune, with four measured numbers rather than a feeling |
-| 15 Sensors, drivers and vision | 6 | 16 | A noisy sensor made usable, with the cost measured rather than guessed |
-| 16 Estimation and navigation | 7 | 16 | A rover that plans through what it has seen, drives it, fits down it, and notices when the room changes |
+| 13 Kinematics and dynamics | 9 | 16 | An arm asked in both directions, telling apart the pose it cannot reach from the one it cannot hold |
+| 14 Control | 9 | 14 | A loop you can tune, with four measured numbers rather than a feeling |
+| 15 Sensors, drivers and vision | 8 | 16 | A noisy sensor made usable, with the cost measured rather than guessed |
+| 16 Estimation and navigation | 8 | 16 | A rover that plans through what it has seen, drives it, fits down it, and notices when the room changes |
 | 17 Middleware, then ROS 2 | 0 | 20 | not started |
 | 18 Simulation and hardware in the loop | 0 | 12 | not started |
 | 19 Safety and field engineering | 0 | 14 | not started |
@@ -518,6 +518,53 @@ libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
 
+### Written 6 November 2026, after ten lessons in phases 13 to 16
+
+Last updated as of `8d1f820`. The commits before it, down to `cdff639`, were each green on all
+eight CI jobs when their run completed. Every one of the ten lessons below has a reference that
+passes on gcc 11, clang 14 and the address sanitizer, an exercise that scores 0 on all three, a
+clean audit, and a header that compiles alone and twice.
+
+The person said to build and finish the repository by my own judgement. The order chosen was the
+recommended one in "Where to go from here": phases 13 to 16, the ones that make up milestone M3. Each
+lesson was picked as the largest hole left by what was already there, and each rests on numbers its own
+suite prints.
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 13-06 what it takes to hold it there | a proportional gain alone sagged the tool 326.6 mm stretched out and gravity feedforward made it 0.0000; an upright arm fell at a gain of 10 and held at 50 | `rc/kin/gravity.hpp` |
+| 13-07 what it takes to move it | the shoulder inertia is 4.0 times smaller folded than stretched; inverse dynamics took a fast move from 281.9 mm worst error to 6.1; a wrong velocity term made a free swing gain 26.6 J | `rc/kin/dynamics.hpp` |
+| 13-08 what the tool can push | along a nearly straight arm 720.1 N against 20.0 N across, and 81 times slower to move: the direction it cannot move in is the one it pushes hardest | `rc/kin/force.hpp` |
+| 13-09 straight in space or in the joints | a joint move strays from the line by up to 121.1 mm; a tool move radially to full reach needs 4.2 times the joint speed; a line between two reachable points can pass through the hole | `rc/kin/path.hpp` |
+| 14-07 the delay in the loop | the largest stable gain falls as the square of the delay (6627, 1852, 490, 125 for 5, 10, 20, 40 ms) and the phase margin predicts it to within 4.5 percent | `rc/control/delay.hpp` |
+| 14-08 stuck then slipping | an integral on a sticking joint hunts, 0.0397 peak to peak at a gain of 20; freezing it inside a band of 0.01 stops it and a band of 0.08 costs 0.0367 of accuracy | `rc/control/friction.hpp` |
+| 14-09 two loops one inside the other | a cascade did not overshoot where a PID overshot 14.2 percent, held the speed to 3.04 against a limit of 3, and took a load with a worst error of 0.0051 against 0.0208 | `rc/control/cascade.hpp` |
+| 15-07 the sensor that is sometimes wildly wrong | spikes took the rms error to 7.681, a mean of nine to 2.519, a median 0.092 and a Hampel filter 0.053; a median fails at more than half its window | `rc/core/outlier.hpp` |
+| 15-08 counts not volts | averaging a steady voltage through a ten bit converter gains nothing, 0.2817 of a step for 1, 100 and 1000 readings; noise of a step makes it work | `rc/sensor/quantizer.hpp` |
+| 16-08 two compasses and the angle that wraps | subtracting angles gave a worst heading error of 3.139 rad, half a turn, where the short way round gave 0.162 | `rc/nav/heading.hpp` |
+
+Phase 13 is at 9 of 16, 14 at 9 of 14, 15 at 8 of 16 and 16 at 8 of 16. 145 of 320 lessons, 45
+percent. Phases 01, 07 and 08 remain the only ones finished to plan.
+
+**Tried and not shipped: a particle filter for localisation (planned as 16-09).** A prototype with a
+likelihood field and a symmetric corridor locked onto the true pose or its mirror image at random, and over 30
+seeds ended on the right pose 4 times with 100 particles, 4 with 500 and 5 with 2000, with 16, 12 and 4 on the
+mirror image. A first single seed run had converged and was luck. A lesson on it needs resampling noise
+injected and measured properly, and a claim like "more particles converge" is not what the numbers say, so it was
+left rather than shipped with a wrong claim. It is the largest open item in phase 16.
+
+**What to do next.** Phases 13 to 16 are all still short of their planned counts, with 7, 5, 8 and 8 lessons to
+go. Ideas already scoped in conversation: cascade and friction are done, so 14 wants a state space or observer
+lesson, quantisation of time (sampling rate) and a safety limit lesson; 15 wants a camera lesson and a driver for
+an IMU; 16 wants the particle filter above, loop closure and map merging; 13 wants a trajectory with via points and
+a workspace analysis. After them, phases 09 to 12 (Qt) and 17 to 21 are empty or thin.
+
+**Rules, confirmed again.** Let a CI run finish before the next push, since a push cancels the run in progress:
+three runs were cancelled this way and the next push covered them. No attribution in commits. Read the exercise
+pass count and build the exercise with clang as well as gcc. Do not claim a number from a prototype: two of the
+claims in this stretch, a worst error of 6 and a three in a thousand rejection rate, were wrong when the suite
+printed the real figures, 3.139 and 61 in 2000.
+
 ### Written 5 November 2026, to be read first on 11 November
 
 Everything described here is committed and pushed. The last commit is `660e6ef`, and it
@@ -928,8 +975,8 @@ Humble is installed on this machine, so phase 17 is not blocked.
 turned out to need, and some phases may want a different count rather than the
 planned one.
 
-**Hardware tiers 2 and 3 are almost untouched.** 133 of the 135 lessons are tier
-0 or 1: 111 software only, 22 simulated. The two tier 2 lessons are 08-05 and 08-14,
+**Hardware tiers 2 and 3 are almost untouched.** 143 of the 145 lessons are tier
+0 or 1: 121 software only, 22 simulated. The two tier 2 lessons are 08-05 and 08-14,
 and both ship a pseudo terminal fallback, so the rule that every tier 2 or 3 lesson
 ships a simulated fallback has been exercised twice. Neither has been run on real
 hardware.
