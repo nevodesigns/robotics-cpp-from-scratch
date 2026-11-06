@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "00-12-dice-you-can-replay",
+  "title": "Dice You Can Replay: Seeded Random Numbers, and the Three Ways a Quick Version Is Wrong",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-01-your-first-program",
+    "00-04-numbers-that-lie"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/random.hpp",
+    "note": "a seeded generator with a fair below(n), a uniform number and a bell shaped one"
+  },
+  "breaks_first": [
+    "E-CPP-0080",
+    "E-CPP-0081",
+    "E-CPP-0082"
+  ]
+}

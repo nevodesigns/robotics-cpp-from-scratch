@@ -1,0 +1,78 @@
+{
+  "lesson": "00-12-dice-you-can-replay",
+  "title": "Dice You Can Replay: Seeded Random Numbers, and the Three Ways a Quick Version Is Wrong",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A test that uses random numbers fails once in fifty runs. What makes the failure possible to investigate?",
+      "options": [
+        "Running it fifty times",
+        "A generator started from a seed the test prints, so the same numbers can be produced again",
+        "A faster computer",
+        "Removing the random numbers"
+      ],
+      "correct": 1,
+      "explanation": "Seed 12345 gave the same largest draw, 0.999863 at draw 32, both times."
+    },
+    {
+      "stage": "check",
+      "question": "Why does a seed of zero break xorshift?",
+      "options": [
+        "Zero is too small",
+        "Zero shifted and xored with itself is zero, so the state never leaves it",
+        "It overflows",
+        "It does not break it"
+      ],
+      "correct": 1,
+      "explanation": "The constructor swaps a zero seed for a fixed non-zero one."
+    },
+    {
+      "stage": "check",
+      "question": "Why is next() % n not fair?",
+      "options": [
+        "The remainder is slow",
+        "Unless n divides the range exactly, the smaller remainders arise one more time than the rest: with n of 3,000,000,000, 0.604 of draws fell below 1,294,967,296 where 0.433 is fair",
+        "It is always fair",
+        "It repeats"
+      ],
+      "correct": 1,
+      "explanation": "below(n) discards the few draws below a threshold to remove the imbalance."
+    },
+    {
+      "stage": "check",
+      "question": "How does gaussian() make a bell shape?",
+      "options": [
+        "It uses the sine function",
+        "It adds twelve uniform numbers and takes away 6, which gives mean 0 and variance 1",
+        "It squares a uniform number",
+        "It takes the median"
+      ],
+      "correct": 1,
+      "explanation": "Mean -0.0009 and spread 0.9997 over 400000 draws."
+    },
+    {
+      "stage": "post",
+      "question": "How do the tails of that bell shape compare with a true one's?",
+      "options": [
+        "Identical",
+        "Thinner: 0.190 percent beyond three sigma where a true bell curve has 0.270, and the largest of 400000 draws was 4.35",
+        "Thicker",
+        "It has no tails"
+      ],
+      "correct": 1,
+      "explanation": "Fine for noise on a simulated sensor, not for a study of rare events."
+    },
+    {
+      "stage": "post",
+      "question": "Why is this generator not for anything secret?",
+      "options": [
+        "It is too slow",
+        "Its next number can be worked out from the last, so someone who sees some output can predict the rest",
+        "It uses too much memory",
+        "It only makes whole numbers"
+      ],
+      "correct": 1,
+      "explanation": "It is for simulation and tests, and its virtue is that every line can be read."
+    }
+  ]
+}
