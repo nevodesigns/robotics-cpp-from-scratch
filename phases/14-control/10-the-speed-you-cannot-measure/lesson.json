@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "14-10-the-speed-you-cannot-measure",
+  "title": "The Speed You Cannot Measure: Estimating It From Position and a Model",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "14-04-choosing-the-gains"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::control",
+    "header": "rc/control/observer.hpp",
+    "note": "a position and speed observer with gains from one bandwidth number, using the commanded acceleration"
+  },
+  "breaks_first": [
+    "E-CTRL-0024",
+    "E-CTRL-0025",
+    "E-CTRL-0026"
+  ]
+}
