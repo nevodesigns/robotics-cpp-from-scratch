@@ -37,21 +37,21 @@ November below it, kept as it was because it records the reasoning of that day.
 |---|---|---|---|
 | 00 Toolchain and First Motion | 9 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 18 | 18 | A drive state machine that cannot represent nonsense |
-| 02 Memory and ownership | 12 | 16 | A subsystem tree that releases completely, with no cycles |
+| 02 Memory and ownership | 13 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
-| 06 Robot maths, by hand then Eigen | 6 | 16 | Where the gripper is, in the world frame, and how you know |
+| 06 Robot maths, by hand then Eigen | 7 | 16 | Where the gripper is, in the world frame, and how you know |
 | 07 Concurrency and real time | 16 | 16 | A measured latency histogram of your own control loop |
 | 08 Systems input and output | 14 | 14 | A framed and checked conversation with a device, over a port you opened |
 | 09 Qt Core | 4 | 14 | A sensor on its own thread, reaching the interface without ever touching it |
 | 10 Qt Widgets | 4 | 14 | A live chart of any signal, in a window and in a terminal, that does not lie about a steady one |
 | 11 Qt Quick and QML | 2 | 12 | A QML interface whose failures are visible from a test rather than a console nobody watches |
 | 12 Qt for robot systems | 0 | 12 | not started |
-| 13 Kinematics and dynamics | 9 | 16 | An arm asked in both directions, telling apart the pose it cannot reach from the one it cannot hold |
-| 14 Control | 9 | 14 | A loop you can tune, with four measured numbers rather than a feeling |
-| 15 Sensors, drivers and vision | 8 | 16 | A noisy sensor made usable, with the cost measured rather than guessed |
-| 16 Estimation and navigation | 8 | 16 | A rover that plans through what it has seen, drives it, fits down it, and notices when the room changes |
+| 13 Kinematics and dynamics | 10 | 16 | An arm asked in both directions, telling apart the pose it cannot reach from the one it cannot hold |
+| 14 Control | 10 | 14 | A loop you can tune, with four measured numbers rather than a feeling |
+| 15 Sensors, drivers and vision | 10 | 16 | A noisy sensor made usable, with the cost measured rather than guessed |
+| 16 Estimation and navigation | 9 | 16 | A rover that plans through what it has seen, drives it, fits down it, and notices when the room changes |
 | 17 Middleware, then ROS 2 | 0 | 20 | not started |
 | 18 Simulation and hardware in the loop | 0 | 12 | not started |
 | 19 Safety and field engineering | 0 | 14 | not started |
