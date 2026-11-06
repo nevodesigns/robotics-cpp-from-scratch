@@ -19,11 +19,11 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 155 of 320 planned, 48 percent |
+| lessons built | 157 of 320 planned, 49 percent |
 | phases opened | 16 of 22 |
-| phases finished to plan | 3 (phases 01, 07 and 08) |
+| phases finished to plan | 4 (phases 00, 01, 07 and 08) |
 | hours of material | 305 |
-| Failure Atlas entries | 415 |
+| Failure Atlas entries | 421 |
 | librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
@@ -35,7 +35,7 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | Phase | Built | Planned | Ends with |
 |---|---|---|---|
-| 00 Toolchain and First Motion | 12 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
+| 00 Toolchain and First Motion | 14 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 18 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 13 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
@@ -517,6 +517,16 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Written 6 November 2026, phase 00 finished to plan
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 00-13 how big a step | on a quarter circle the 00-05 step missed by 111.110 mm in 10 steps and halves with each doubling, needing 1111 steps for a millimetre; the midpoint step divides by four and needs 13; the exact arc is exact in 1 | `rc/sim/arc.hpp` |
+| 00-14 the first tool | a word for the right speed gave status 2, a message naming the value and the problem, and 0 characters on the output; a straight drive marked exactly 1 row | `rc/core/drive_tool.hpp` |
+
+157 of 320 lessons. **Phase 00 is at 14 of 14, finished to plan** (four phases now: 00, 01, 07, 08). Next in order: phase 02 (3 left), 03 (7), 04 (6), 05 (5), 06 (9).
+00-13: the exercise stub looked like a hang because a step-count search ran to 100000 and was quadratic; capped at 3000. Two of its tests also passed for an empty stub and were tightened.
 
 ### Written 6 November 2026, phase 00 in order
 
