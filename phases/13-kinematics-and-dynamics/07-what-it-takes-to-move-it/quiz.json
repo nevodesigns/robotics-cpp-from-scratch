@@ -1,0 +1,78 @@
+{
+  "lesson": "13-07-what-it-takes-to-move-it",
+  "title": "What It Takes to Move It: Inertia That Changes and Joints That Pull on Each Other",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A two link arm's shoulder is accelerated with the elbow stretched out and then with it folded flat. Does it take the same torque for the same acceleration?",
+      "options": [
+        "Yes, the shoulder inertia is a constant of the motor",
+        "No: folded flat the arm is 4.0 times easier to swing, because the second link's mass is nearer the shoulder",
+        "Yes, only the weight changes",
+        "No, but only because of friction"
+      ],
+      "correct": 1,
+      "explanation": "Measured, 1.176 kg m^2 stretched and 0.296 folded. A mass near the axis is easy to swing, and folding the elbow brings it near."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the mass matrix depend on the elbow angle but not on the shoulder angle?",
+      "options": [
+        "The shoulder motor is lighter",
+        "Turning the whole arm does not change how its parts are arranged, so it cannot change how hard they are to move",
+        "It was a simplification in the lesson",
+        "The shoulder angle is measured from the vertical"
+      ],
+      "correct": 1,
+      "explanation": "Inertia depends on the arrangement of the masses about each axis. Only the elbow changes the arrangement."
+    },
+    {
+      "stage": "check",
+      "question": "With gains of 60 and 12 the shoulder overshot by 1.9 percent stretched out and not at all folded, settling 0.22 s later. Why?",
+      "options": [
+        "The gains were different at each pose",
+        "Damping goes as kd over twice the square root of kp times the inertia, so the same gains give a different damping at a different inertia",
+        "A simulation error",
+        "The payload moved"
+      ],
+      "correct": 1,
+      "explanation": "Lightly damped where the arm is heavy and over damped where it is light. The remedy is to schedule the gains or take the inertia out with the inverse dynamics."
+    },
+    {
+      "stage": "check",
+      "question": "Why can the velocity terms of a dynamics model not be tested by holding the arm still?",
+      "options": [
+        "The arm cannot be held still",
+        "They are proportional to velocity and so are zero at rest: a wrong sign or a missing term is invisible to every static test and to a slow move",
+        "They are too small to measure",
+        "They are tested by the weight"
+      ],
+      "correct": 1,
+      "explanation": "Which is why the energy test is there. A free swing keeps its energy only if every term agrees."
+    },
+    {
+      "stage": "post",
+      "question": "A free swing with the velocity terms' signs wrong drifted by 26.6 J in a system that started with 10.5 J. What does that show?",
+      "options": [
+        "The simulation is unstable",
+        "The model creates energy from nothing, which no real arm does, so conservation of energy catches a sign error that no static test can",
+        "Friction is missing",
+        "The payload is too heavy"
+      ],
+      "correct": 1,
+      "explanation": "With no torque and no friction the total must stay constant. The correct model drifted by 1.5e-06 J."
+    },
+    {
+      "stage": "post",
+      "question": "Gravity feedforward tracked a fast move to 281.9 mm worst, and adding the inverse dynamics made it 6.1 mm. What remains for the feedback?",
+      "options": [
+        "Nothing; it is not needed",
+        "Only what the model gets wrong, which on a real arm is friction, backlash and the errors in the link masses, so the 6.1 mm is the best case",
+        "The weight",
+        "The trajectory"
+      ],
+      "correct": 1,
+      "explanation": "The simulation is the arm exactly as modelled. On hardware the feedforward is worth less and the feedback worth more."
+    }
+  ]
+}

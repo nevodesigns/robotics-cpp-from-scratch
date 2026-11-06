@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "13-07-what-it-takes-to-move-it",
+  "title": "What It Takes to Move It: Inertia That Changes and Joints That Pull on Each Other",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "13-06-what-it-takes-to-hold-it-there"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::kin",
+    "header": "rc/kin/dynamics.hpp",
+    "note": "the mass matrix and the torque to produce a motion, which is what a controller tuned at one pose is missing at another"
+  },
+  "breaks_first": [
+    "E-KIN-0014",
+    "E-KIN-0015",
+    "E-KIN-0016"
+  ]
+}
