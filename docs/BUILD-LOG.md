@@ -213,6 +213,8 @@ reasoning in their own messages, and `git log` is the record.
 |---|---|
 | `8d1f820` | 14-09, two loops one inside the other, graduated `rc/control/cascade.hpp` |
 | `d48020d` | 13-09, straight in space or in the joints, graduated `rc/kin/path.hpp` |
+| `014620d` | 02-15, how many copies, graduated `rc/core/tally.hpp` |
+| `5bc769b` | 02-14, a loop that never allocates, graduated `rc/core/pool.hpp` |
 | `363bca0` | 00-14, the first tool, graduated `rc/core/drive_tool.hpp` |
 | `c88bce8` | 00-13, how big a step, graduated `rc/sim/arc.hpp` |
 | `0c6d6b9` | 00-12, dice you can replay, graduated `rc/core/random.hpp` |
@@ -757,3 +759,5 @@ without the feature: run the exercise and read the pass count.
 **An unused private field warning in a stub, in 00-12,** under clang. Added `(void)state_;`. This is the fifth time (08-11, 08-13, 08-14, 15-07): build the stub with clang as well as gcc.
 
 **A search that was quadratic, in 00-13.** The stub made a loop over step counts run to 100000, each count driving that many steps, and the exercise looked hung. A loop in a test that a stub can run to its limit needs a limit a stub can survive: 3000. Check `time` on the exercise run, not only its result.
+
+**A test that an empty stub passed, in 02-14 and 02-15.** A loop that counted allocations passed for a pool that lent nothing, because zero allocations is also what doing nothing does, and a returned vector with zero copies passed for a type that counted nothing. Each now also requires the work to have been done: the cycles completed, 30 packets made.

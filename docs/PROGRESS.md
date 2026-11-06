@@ -19,11 +19,11 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 157 of 320 planned, 49 percent |
+| lessons built | 159 of 320 planned, 50 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 4 (phases 00, 01, 07 and 08) |
 | hours of material | 305 |
-| Failure Atlas entries | 421 |
+| Failure Atlas entries | 427 |
 | librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
@@ -37,7 +37,7 @@ November below it, kept as it was because it records the reasoning of that day.
 |---|---|---|---|
 | 00 Toolchain and First Motion | 14 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 18 | 18 | A drive state machine that cannot represent nonsense |
-| 02 Memory and ownership | 13 | 16 | A subsystem tree that releases completely, with no cycles |
+| 02 Memory and ownership | 15 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
@@ -517,6 +517,16 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Written 6 November 2026, phase 02 in order
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 02-14 a loop that never allocates | 100000 lend and take back cycles made 0 heap allocations through a pool and 100000 through new; a null, a foreign, a mid-slot and a doubled return are all refused, and 64 lends still gave 64 different messages | `rc/core/pool.hpp` |
+| 02-15 how many copies | 100 push_backs: 0 copies and 227 moves with a noexcept move, 127 copies without it (libstdc++); reserve cut the moves to 100 and emplace_back made 0; a vector of 50 by value copied 50 | `rc/core/tally.hpp` |
+
+159 of 320 lessons, 50 percent. Phase 02 is at 15 of 16. Next in order: 02 (1 left), 03 (7), 04 (6), 05 (5), 06 (9).
+02-15's growth counts are libstdc++'s; the suite compares and does not hard code them, since MSVC and libc++ grow by other factors.
 
 ### Written 6 November 2026, phase 00 finished to plan
 
