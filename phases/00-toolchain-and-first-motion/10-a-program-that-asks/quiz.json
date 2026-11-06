@@ -1,0 +1,78 @@
+{
+  "lesson": "00-10-a-program-that-asks",
+  "title": "A Program That Asks: Reading a Number a Person Typed, and the Four Ways It Goes Wrong",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A person types 12abc and the program reads it with in >> value. What happens?",
+      "options": [
+        "It fails",
+        "It succeeds with 12 and leaves abc in the stream, so a mistake is accepted without a word",
+        "It reads 12abc as text",
+        "It crashes"
+      ],
+      "correct": 1,
+      "explanation": "The suite prints 12abc, 3,5, 7 8 and 9.5.1 read as 12, 3, 7 and 9.5."
+    },
+    {
+      "stage": "check",
+      "question": "After a failed read, why do later reads fail even when the person types good numbers?",
+      "options": [
+        "The keyboard is stuck",
+        "The stream is in a failed state until cleared, and the bad text is still in it",
+        "The numbers are too big",
+        "Reads only work once"
+      ],
+      "correct": 1,
+      "explanation": "Ten reads of abc then three sevens with no clean up: 0 succeeded."
+    },
+    {
+      "stage": "check",
+      "question": "What two lines clean up after a failed read?",
+      "options": [
+        "in.close() and in.open()",
+        "in.clear() for the failed state and in.ignore(..., '\\n') for the bad line",
+        "in.reset() twice",
+        "None, it recovers by itself"
+      ],
+      "correct": 1,
+      "explanation": "In that order: clearing first, then discarding the line."
+    },
+    {
+      "stage": "check",
+      "question": "Why is 400 for a limit of 100 reported differently from abc?",
+      "options": [
+        "They are the same problem",
+        "It is a valid number that is no use as an answer, and a person needs to be told which of the two it was",
+        "400 is not a number",
+        "The range is ignored"
+      ],
+      "correct": 1,
+      "explanation": "The limits themselves, 0 and 100, are accepted."
+    },
+    {
+      "stage": "post",
+      "question": "A script runs a program that asks until satisfied, and the input file ends. What happens with no bound and no end of input check?",
+      "options": [
+        "It stops by itself",
+        "Every read fails, the loop answers by asking again, and the program hangs, though it works when tried by hand",
+        "It reads zero",
+        "It asks once more"
+      ],
+      "correct": 1,
+      "explanation": "Asking an empty input up to 1000 times used 1 attempt, because ask stops at the end of the input."
+    },
+    {
+      "stage": "post",
+      "question": "Why do the tests feed the functions from text in memory?",
+      "options": [
+        "It is faster to write",
+        "Nothing waits for a keyboard, so the suite runs in a script and always finishes; the same trick tests anything that asks",
+        "Keyboards are banned",
+        "It hides bugs"
+      ],
+      "correct": 1,
+      "explanation": "A test that needs a person at a keyboard cannot run on a build server."
+    }
+  ]
+}
