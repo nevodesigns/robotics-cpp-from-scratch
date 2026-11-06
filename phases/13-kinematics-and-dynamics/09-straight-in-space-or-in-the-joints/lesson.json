@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "13-09-straight-in-space-or-in-the-joints",
+  "title": "Straight in Space or Straight in the Joints: Two Ways to Move and What Each Costs",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "13-04-the-pose-it-cannot-reach-slowly",
+    "13-05-the-angle-it-cannot-hold"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::kin",
+    "header": "rc/kin/path.hpp",
+    "note": "a move in joint space, a move in tool space, and the two numbers that say what each cost"
+  },
+  "breaks_first": [
+    "E-KIN-0020",
+    "E-KIN-0021",
+    "E-KIN-0022"
+  ]
+}

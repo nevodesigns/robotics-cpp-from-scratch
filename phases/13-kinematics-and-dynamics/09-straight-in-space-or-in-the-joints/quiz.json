@@ -1,0 +1,78 @@
+{
+  "lesson": "13-09-straight-in-space-or-in-the-joints",
+  "title": "Straight in Space or Straight in the Joints: Two Ways to Move and What Each Costs",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Both joints of an arm go from where they are to where they are going, in a straight line in angle, arriving together. What path does the tool take?",
+      "options": [
+        "A straight line between the ends",
+        "A curve: the tool's position is a trigonometric function of the angles, so a straight line in angle is not straight in space, and it strayed by up to 121 mm",
+        "A circle",
+        "It depends on the speed"
+      ],
+      "correct": 1,
+      "explanation": "The ends are exactly right, which is why a check of the start and the finish passes it, and the middle is off by centimetres."
+    },
+    {
+      "stage": "check",
+      "question": "Why does cartesian_path hold one branch throughout?",
+      "options": [
+        "It is faster",
+        "A solver that picks either branch at each point can switch from one to the other between neighbouring points, which the arm cannot do, so the choice is made once and kept",
+        "Only one branch exists",
+        "The other is always unreachable"
+      ],
+      "correct": 1,
+      "explanation": "The test checks the elbow never changes sign and no joint jumps by more than 0.3 radians between neighbours."
+    },
+    {
+      "stage": "check",
+      "question": "Both ends of a move are reachable and the straight line between them is not. How?",
+      "options": [
+        "A bug in the solver",
+        "The workspace is a ring: the arm cannot reach inside the difference of its links, so a line between two points in the ring can pass through the hole round the base",
+        "The line is too long",
+        "The points were wrong"
+      ],
+      "correct": 1,
+      "explanation": "A line from (0.30, 0.05) to (-0.30, 0.05) entered the hole at point 72 of 200. The path reports where it stopped."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the path stop at the first unreachable point and not skip it?",
+      "options": [
+        "To save time",
+        "The points beyond may be reachable again and the arm cannot get from one side of the hole to the other, so carrying on would hide a gap it cannot cross",
+        "Skipping is not allowed in C++",
+        "The solver only handles one point"
+      ],
+      "correct": 1,
+      "explanation": "It returns the poses before the gap, complete = false, and the index, so the planner can decide what to do."
+    },
+    {
+      "stage": "post",
+      "question": "Moving the tool radially out to full reach in two seconds needed 3.39 rad/s of a joint, against 0.82 for the joint move. Why?",
+      "options": [
+        "The tool is heavier there",
+        "Near full extension the Jacobian is nearly singular, so an even tool speed needs the elbow to turn faster and faster",
+        "The controller is slower",
+        "A rounding error"
+      ],
+      "correct": 1,
+      "explanation": "It is lesson 13-04's singularity, met along a path. A Cartesian move near full extension is always slow, and it is the tool that slows."
+    },
+    {
+      "stage": "post",
+      "question": "A joint goes from 3.1 to -3.1 radians. How far did it turn for the purpose of its speed?",
+      "options": [
+        "6.2 radians",
+        "0.083 radians, the short way round, since an angle is a direction on a circle",
+        "3.1 radians",
+        "Zero"
+      ],
+      "correct": 1,
+      "explanation": "peak_joint_speed takes the difference with atan2 of sine and cosine so that the speed is the real one."
+    }
+  ]
+}
