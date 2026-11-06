@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "14-08-stuck-then-slipping",
+  "title": "Stuck, Then Slipping: Friction and the Limit Cycle",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "14-04-choosing-the-gains"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::control",
+    "header": "rc/control/friction.hpp",
+    "note": "a plant that sticks, and the test for a loop that hunts instead of settling"
+  },
+  "breaks_first": [
+    "E-CTRL-0018",
+    "E-CTRL-0019",
+    "E-CTRL-0020"
+  ]
+}
