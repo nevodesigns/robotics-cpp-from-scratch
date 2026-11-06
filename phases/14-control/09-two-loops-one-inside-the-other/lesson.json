@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "14-09-two-loops-one-inside-the-other",
+  "title": "Two Loops, One Inside the Other: Cascade Control and a Speed Limit You Do Not Have to Enforce",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "14-04-choosing-the-gains",
+    "14-07-the-delay-in-the-loop"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::control",
+    "header": "rc/control/cascade.hpp",
+    "note": "a position loop around a speed loop, with the speed limit built in and the integral held when the motor saturates"
+  },
+  "breaks_first": [
+    "E-CTRL-0021",
+    "E-CTRL-0022",
+    "E-CTRL-0023"
+  ]
+}
