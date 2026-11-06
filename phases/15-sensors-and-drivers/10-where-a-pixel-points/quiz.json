@@ -1,0 +1,78 @@
+{
+  "lesson": "15-10-where-a-pixel-points",
+  "title": "Where a Pixel Points: The Camera as a Function, and What Its Lens Does to Straight Lines",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A pixel is found for an object. What does it tell you about where the object is?",
+      "options": [
+        "Its position in the world",
+        "Which way to look: every point along a line from the camera lands on the same pixel, so how far along it is not in the picture",
+        "Its distance",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "A pixel is a direction. The distance has to come from the size of something, a second camera, or the floor."
+    },
+    {
+      "stage": "check",
+      "question": "A point two metres behind the camera is projected by dividing by its depth. What happens?",
+      "options": [
+        "It is off the picture",
+        "The depth is negative and the division gives a perfectly good pixel: the mirror image of the point two metres in front, which is why projection says the point is not visible",
+        "It divides by zero",
+        "It is at the centre"
+      ],
+      "correct": 1,
+      "explanation": "A point behind the lens does not appear mirrored, it does not appear. The flag exists so the pixel cannot be mistaken for one."
+    },
+    {
+      "stage": "check",
+      "question": "Ignoring a lens with k1 of -0.25 put a point near the corner of a 640 by 480 picture 56 pixels from where it was. Why is it invisible near the middle?",
+      "options": [
+        "The lens is flat in the middle",
+        "The bend goes as the radius to the third and fifth powers, so it is 0.1 of a pixel at a radius of 0.1 and 55.8 pixels at 0.8",
+        "The sensor is smaller in the middle",
+        "It is not invisible"
+      ],
+      "correct": 1,
+      "explanation": "At two metres that corner is 22.3 cm of floor. A calibration at the centre of the picture finds almost no distortion."
+    },
+    {
+      "stage": "check",
+      "question": "Why does undoing the lens need iteration?",
+      "options": [
+        "The formula is too long",
+        "The bend depends on the radius of the point being looked for, so the answer is needed to work out the answer; it is guessed, corrected and repeated",
+        "To save memory",
+        "Pixels are discrete"
+      ],
+      "correct": 1,
+      "explanation": "One pass left the corner 14.5 px out, five 0.083, twenty 3.5e-10."
+    },
+    {
+      "stage": "post",
+      "question": "A lens correction is made by applying the lens model with k1 and k2 negated. How far out is the corner?",
+      "options": [
+        "Exactly right",
+        "18.9 pixels: negating the coefficients looks like an inverse and is not",
+        "0.1 pixel",
+        "It cannot be measured"
+      ],
+      "correct": 1,
+      "explanation": "The inverse of a polynomial scale is not the same polynomial with its signs reversed."
+    },
+    {
+      "stage": "post",
+      "question": "A target 0.2 m wide is measured one pixel too wide. The distance error was 1 cm at 1 m and 0.909 m at 10 m. Why?",
+      "options": [
+        "The camera is worse far away",
+        "The target gets smaller as it recedes and a pixel does not, so a pixel is a bigger fraction of it, and the error goes as the square of the distance",
+        "Lens distortion",
+        "The focal length changes"
+      ],
+      "correct": 1,
+      "explanation": "At 10 m the target is 10 pixels wide, and one pixel is ten percent of it."
+    }
+  ]
+}
