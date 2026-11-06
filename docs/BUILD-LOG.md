@@ -213,6 +213,7 @@ reasoning in their own messages, and `git log` is the record.
 |---|---|
 | `8d1f820` | 14-09, two loops one inside the other, graduated `rc/control/cascade.hpp` |
 | `d48020d` | 13-09, straight in space or in the joints, graduated `rc/kin/path.hpp` |
+| `11d1368` | 02-16, a handle the library gave you, graduated `rc/core/handle.hpp` |
 | `014620d` | 02-15, how many copies, graduated `rc/core/tally.hpp` |
 | `5bc769b` | 02-14, a loop that never allocates, graduated `rc/core/pool.hpp` |
 | `363bca0` | 00-14, the first tool, graduated `rc/core/drive_tool.hpp` |
@@ -761,3 +762,5 @@ without the feature: run the exercise and read the pass count.
 **A search that was quadratic, in 00-13.** The stub made a loop over step counts run to 100000, each count driving that many steps, and the exercise looked hung. A loop in a test that a stub can run to its limit needs a limit a stub can survive: 3000. Check `time` on the exercise run, not only its result.
 
 **A test that an empty stub passed, in 02-14 and 02-15.** A loop that counted allocations passed for a pool that lent nothing, because zero allocations is also what doing nothing does, and a returned vector with zero copies passed for a type that counted nothing. Each now also requires the work to have been done: the cycles completed, 30 packets made.
+
+**A demonstration of a leak that the leak sanitizer would fail, in 02-16.** The raw version of the function leaks on purpose, to measure it. Under asan that fails the run. The test now stores each leaked pointer and closes them after taking the measurement, which a real program could not do.

@@ -19,11 +19,11 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 159 of 320 planned, 50 percent |
+| lessons built | 160 of 320 planned, 50 percent |
 | phases opened | 16 of 22 |
-| phases finished to plan | 4 (phases 00, 01, 07 and 08) |
+| phases finished to plan | 5 (phases 00, 01, 02, 07 and 08) |
 | hours of material | 305 |
-| Failure Atlas entries | 427 |
+| Failure Atlas entries | 430 |
 | librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
@@ -37,7 +37,7 @@ November below it, kept as it was because it records the reasoning of that day.
 |---|---|---|---|
 | 00 Toolchain and First Motion | 14 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 18 | 18 | A drive state machine that cannot represent nonsense |
-| 02 Memory and ownership | 15 | 16 | A subsystem tree that releases completely, with no cycles |
+| 02 Memory and ownership | 16 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
@@ -517,6 +517,15 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Written 6 November 2026, phase 02 finished to plan
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 02-16 a handle the library gave you | 100 attempts where the second device could not be opened left 100 open with raw handles and 0 with a unique_ptr and the library's own close; an exception closed once, a failed open made 0 bad closes, and the owner is 8 bytes like the raw pointer | `rc/core/handle.hpp` |
+
+160 of 320 lessons, 50 percent. **Phase 02 is at 16 of 16, finished to plan** (five phases: 00, 01, 02, 07, 08). Next in order: 03 (7 left), 04 (6), 05 (5), 06 (9).
+The 02-16 test keeps a deliberately leaking raw version, so it records the pointers it leaks and closes them afterwards: the leak sanitizer would otherwise fail the run for the very thing being shown.
 
 ### Written 6 November 2026, phase 02 in order
 
