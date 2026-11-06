@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "13-10-where-the-arm-works-well",
+  "title": "Where the Arm Works Well: Reachable Area, Usable Area and the Joint Limits That Cut Both",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "13-04-the-pose-it-cannot-reach-slowly",
+    "13-05-the-angle-it-cannot-hold"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::kin",
+    "header": "rc/kin/workspace.hpp",
+    "note": "the reachable and usable area of a planar arm by walking a grid, with joint limits"
+  },
+  "breaks_first": [
+    "E-KIN-0023",
+    "E-KIN-0024",
+    "E-KIN-0025"
+  ]
+}
