@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "00-14-the-first-tool",
+  "title": "The First Tool: Asking, Checking, Driving, Drawing and Saying How It Ended",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-07-seeing-it-move",
+    "00-09-what-the-program-tells-the-outside-world",
+    "00-10-a-program-that-asks",
+    "00-13-how-big-a-step"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/drive_tool.hpp",
+    "note": "the whole of phase 00 as one testable function: three checked numbers in, a drawn path and a status out"
+  },
+  "breaks_first": [
+    "E-CPP-0083",
+    "E-CPP-0084",
+    "E-PLOT-0006"
+  ]
+}
