@@ -1,0 +1,78 @@
+{
+  "lesson": "16-09-three-numbers-from-two-moves",
+  "title": "Three Numbers From Two Moves: Calibrating the Odometry You Believed",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A robot with a left wheel 1.2 percent big, a right wheel 0.6 percent small and a wheel base 2 percent wide drives a 16 metre square on odometry that believes the drawing. How far out does it finish?",
+      "options": [
+        "About a centimetre",
+        "About 250 cm, and 46 degrees out in heading: the three errors add and every straight line is a curve",
+        "About 10 cm",
+        "It finishes exactly, because the errors cancel"
+      ],
+      "correct": 1,
+      "explanation": "The same in the same direction every time, so averaging does not help. Individually they were 132, 75 and 35 cm."
+    },
+    {
+      "stage": "check",
+      "question": "Why does it take two moves and not one to find three numbers?",
+      "options": [
+        "One move is enough with enough accuracy",
+        "A straight drive gives two things, the average wheel scale and the difference between the wheels, but only a spin depends on the wheelbase",
+        "Two is a convention",
+        "The second move checks the first"
+      ],
+      "correct": 1,
+      "explanation": "Three unknowns, and a straight drive tells two of them. The spin is the only move whose rotation depends on how far apart the wheels are."
+    },
+    {
+      "stage": "check",
+      "question": "Why are the three numbers found in order: the mean scale, then the wheelbase, then the difference?",
+      "options": [
+        "It is alphabetical",
+        "Each needs the one before: the wheelbase from the spin needs the mean scale, and the difference from the veer needs the real wheelbase",
+        "The order does not matter",
+        "To make the algebra shorter"
+      ],
+      "correct": 1,
+      "explanation": "Solving them in another order has an unknown on the right of every equation."
+    },
+    {
+      "stage": "check",
+      "question": "Why can the robot not measure its own straight drive?",
+      "options": [
+        "It has no sensors",
+        "How far it went is the thing it is wrong about: the encoders say what they say, so the measurement has to come from outside, a tape or a camera",
+        "It moves too fast",
+        "The encoders are digital"
+      ],
+      "correct": 1,
+      "explanation": "Which is why a calibration is as good as the tape and the protractor."
+    },
+    {
+      "stage": "post",
+      "question": "Twenty calibrations with a tape good to 3 mm and a protractor good to 0.2 degrees gave each scale to about 0.06 percent rms, and the square closed to 2.3 cm. What limits it?",
+      "options": [
+        "The algebra",
+        "The noise in the measurements, which goes into the three numbers; longer test moves make a fixed error a smaller fraction",
+        "The speed of the robot",
+        "The wheel base"
+      ],
+      "correct": 1,
+      "explanation": "A hundred times better than 249.9 cm, and what remains is measurement noise."
+    },
+    {
+      "stage": "post",
+      "question": "A robot is calibrated on a dry floor and then drives on a wet one. What is wrong with the calibration?",
+      "options": [
+        "Nothing",
+        "It finds errors that are the same every time; a wheel that slips is a different robot each run, so the calibration is no help and the position needs correcting from outside",
+        "It overcorrects",
+        "The wheelbase changes"
+      ],
+      "correct": 1,
+      "explanation": "Calibration removes the systematic errors. What is random, or changes with the surface, is what a correction from outside is for."
+    }
+  ]
+}
