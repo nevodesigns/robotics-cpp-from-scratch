@@ -19,11 +19,11 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 145 of 320 planned, 45 percent |
+| lessons built | 150 of 320 planned, 47 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 3 (phases 01, 07 and 08) |
 | hours of material | 305 |
-| Failure Atlas entries | 385 |
+| Failure Atlas entries | 400 |
 | librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
@@ -517,6 +517,30 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Added later on 6 November 2026, five more lessons
+
+After the ten above: 15-09, 15-10, 16-09, 06-07 and 02-13, each committed one to a commit, each with a clean
+audit (150 lessons, 400 atlas entries, 0 issues), a reference passing on gcc, clang and the address sanitizer,
+and an exercise that scores 0. The CI run for 15-10 finished green. 06-07 and 02-13 are committed locally and
+were pushed after that.
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 15-09 speed from counts | at 0.05 rev/s one sample is 435.9 percent out, a window of 50 is 20.0 and edge timing 1.6; at 50 rev/s edge timing is 54.1 and the window 0.0; switching at 1500 counts a second gives 1.6, 1.6, 0.3, 0.0 | `rc/sensor/velocity.hpp` |
+| 15-10 where a pixel points | k1 of -0.25 and k2 of 0.05 moved a corner point 55.8 px, 22.3 cm at two metres; undistorting was 14.5 px out after one pass and 3.5e-10 after twenty; a pixel of width is 0.010 m at 1 m and 0.909 m at 10 m | `rc/vision/camera.hpp` |
+| 16-09 three numbers from two moves | a 4 m square ended 249.9 cm and 46.4 degrees out; a straight drive then a spin found all three within 0.16 percent and closed the square to 2.3 cm | `rc/nav/calibrate.hpp` |
+| 06-07 solving a system | no pivoting gave (0, 1) for (1, 1); Hilbert errors 6.1e-13 at n = 4 to 3.2e-04 at n = 10; at degree 12 the normal equations erred by 1.00 and QR by 2.09e-08 | `rc/math/linear.hpp` |
+| 02-13 what a struct looks like in memory | a byte, a double and a byte is 24 bytes as written and 16 with the double first; a 29 byte record is 48 and 32; largest alignment first was smallest in 400 of 400 random structs against every permutation | `rc/core/layout.hpp` |
+
+150 of 320 lessons, 47 percent. Phase 15 is at 10 of 16, 16 at 9 of 16, 06 has 7 and 02 has 13. The particle filter
+above is still the largest open item.
+
+**Found while checking 02-13 under the sanitizer.** The exercise stub, not the reference, raised a UBSan error:
+the test printed `offsets[0]` of an empty vector before its guard. A stub must fail without undefined behaviour, so
+print lines now go through a bounds-checked accessor. This is the second time (see 06-07), so check the stub
+under asan for every new lesson. Also: a reference that uses a lambda needs the lesson that teaches it in
+`requires` (rule L021), and a lesson cannot require a later one (L027).
 
 ### Written 6 November 2026, after ten lessons in phases 13 to 16
 

@@ -213,6 +213,11 @@ reasoning in their own messages, and `git log` is the record.
 |---|---|
 | `8d1f820` | 14-09, two loops one inside the other, graduated `rc/control/cascade.hpp` |
 | `d48020d` | 13-09, straight in space or in the joints, graduated `rc/kin/path.hpp` |
+| `bd6e93a` | 02-13, what a struct looks like in memory, graduated `rc/core/layout.hpp` |
+| `2523980` | 06-07, solving a system, graduated `rc/math/linear.hpp` |
+| `ecf8b38` | 15-10, where a pixel points, graduated `rc/vision/camera.hpp` |
+| `4e94aab` | 16-09, three numbers from two moves, graduated `rc/nav/calibrate.hpp` |
+| `df81952` | 15-09, speed from counts, graduated `rc/sensor/velocity.hpp` |
 | `3deb60e` | 15-08, counts not volts, graduated `rc/sensor/quantizer.hpp` |
 | `0db8cc9` | 13-08, what the tool can push, graduated `rc/kin/force.hpp` |
 | `03ab5da` | 16-08, two compasses and the angle that wraps, graduated `rc/nav/heading.hpp` |
@@ -730,3 +735,8 @@ convention where their answers live outside the shipped tree.
 nothing anywhere covers. Writing a file is done as 01-14. It sits in phase 01
 and not phase 00, because it needs `std::string` and is the other half of 01-12,
 and rule L027 does not let an earlier phase require a later lesson.
+
+**A stub that read past the end, in 02-13.** The reference passed everywhere, and the exercise stub under the
+address sanitizer raised a runtime error: the test printed `offsets[0]` of an empty vector before the
+`RC_REQUIRE_EQ` that guards it. Fixed with a bounds-checked accessor for the print. The habit is to run the
+exercise, and not only the reference, under asan for every new lesson.
