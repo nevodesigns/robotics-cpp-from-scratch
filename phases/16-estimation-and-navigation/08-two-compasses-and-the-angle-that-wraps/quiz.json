@@ -1,0 +1,78 @@
+{
+  "lesson": "16-08-two-compasses-and-the-angle-that-wraps",
+  "title": "Two Compasses and the Angle That Wraps: Fusing a Gyro and a Compass",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A heading estimate is 3.1 radians and a compass reads -3.1. What is the correction a filter should apply?",
+      "options": [
+        "A pull of -6.2 towards the compass",
+        "A small pull of about +0.083 across the back of the circle, the short way round",
+        "No correction",
+        "A pull of 3.1"
+      ],
+      "correct": 1,
+      "explanation": "3.1 and -3.1 are 0.083 apart. A filter that subtracts takes the 6.2 at its word and turns the whole way round."
+    },
+    {
+      "stage": "check",
+      "question": "At a gain of 0.1 the plain difference gave a worst error of 3.139 radians and the short way round 0.162. What is 3.139?",
+      "options": [
+        "A rounding error",
+        "Half a turn, as wrong as a heading can be: the robot pointing straight away from where it thinks",
+        "Three degrees",
+        "The drift of the gyro"
+      ],
+      "correct": 1,
+      "explanation": "The plain difference pulls the estimate the long way round at every crossing of the back of the circle."
+    },
+    {
+      "stage": "check",
+      "question": "The mean of the angles 3.1 and -3.1, added and halved, is zero. What is wrong with it?",
+      "options": [
+        "Nothing, it is the average",
+        "It points the opposite way from both: angles are directions, so they are averaged as unit vectors, which gives 3.142",
+        "It should be 6.2",
+        "It is correct only for small angles"
+      ],
+      "correct": 1,
+      "explanation": "The arithmetic mean treats an angle as a quantity on a line. The direction of the sum of the unit vectors is the right mean."
+    },
+    {
+      "stage": "check",
+      "question": "When is the circular mean undefined?",
+      "options": [
+        "Never",
+        "When the unit vectors cancel, as for 0 and pi, so there is no mean direction and returning a zero would look like a heading",
+        "When there are more than two angles",
+        "When an angle is negative"
+      ],
+      "correct": 1,
+      "explanation": "The resultant has length zero and atan2 of zero and zero is not an answer. The function says so with a flag."
+    },
+    {
+      "stage": "post",
+      "question": "The rms error fell as the gain rose from 0.005 to 0.1 and then rose again at 0.5. Why?",
+      "options": [
+        "A bug at high gain",
+        "A small gain trusts the gyro and lets its bias in, and a large one trusts the compass and lets its noise in, so the best is in between",
+        "The compass drifts",
+        "The sampling rate changed"
+      ],
+      "correct": 1,
+      "explanation": "0.609, 0.189, 0.048, 0.091. The best gain depends on the two sensors' errors, which is what the filter has to be told."
+    },
+    {
+      "stage": "post",
+      "question": "Why does wrap_pi subtract the whole number of turns at once instead of looping or using atan2 of sine and cosine?",
+      "options": [
+        "It is shorter",
+        "A loop never finishes for a very big angle and atan2 of sin and cos loses digits as the angle grows, where floor of (angle + pi) over a turn is exact for any size",
+        "Loops are not allowed",
+        "atan2 is slow"
+      ],
+      "correct": 1,
+      "explanation": "The test wraps angles forty and a thousand turns round and gets them back to within 1e-8."
+    }
+  ]
+}
