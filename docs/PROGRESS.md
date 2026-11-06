@@ -19,11 +19,11 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 150 of 320 planned, 47 percent |
+| lessons built | 152 of 320 planned, 47 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 3 (phases 01, 07 and 08) |
 | hours of material | 305 |
-| Failure Atlas entries | 400 |
+| Failure Atlas entries | 406 |
 | librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
@@ -517,6 +517,16 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Added on 6 November 2026, after the person said go ahead
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 14-10 the speed you cannot measure | a difference of two readings gave 1.422 rad/s rms error and an observer 0.006; ignoring the acceleration gave 0.543 against 0.0017; an unmodelled push left 0.0395 against 2 d / w = 0.0400 | `rc/control/observer.hpp` |
+| 13-10 where the arm works well | reachable 2.5129 m^2 against the ring's 2.5133; half the best manipulability keeps 2.1763 m^2 (86.6 percent) and 0.9 keeps 43.6; a shoulder in the top half keeps 70.0 percent; a one way elbow loses nothing | `rc/kin/workspace.hpp` |
+
+152 of 320 lessons. Phase 13 is at 10 of 16 and phase 14 at 10 of 14. The person asked for no lesson to start until they said so, because of a usage limit; each
+lesson since waited for the CI run before the next push.
 
 ### Added later on 6 November 2026, five more lessons
 

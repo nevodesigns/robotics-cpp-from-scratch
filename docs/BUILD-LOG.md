@@ -213,6 +213,8 @@ reasoning in their own messages, and `git log` is the record.
 |---|---|
 | `8d1f820` | 14-09, two loops one inside the other, graduated `rc/control/cascade.hpp` |
 | `d48020d` | 13-09, straight in space or in the joints, graduated `rc/kin/path.hpp` |
+| `2655e34` | 13-10, where the arm works well, graduated `rc/kin/workspace.hpp` |
+| `33561f1` | 14-10, the speed you cannot measure, graduated `rc/control/observer.hpp` |
 | `bd6e93a` | 02-13, what a struct looks like in memory, graduated `rc/core/layout.hpp` |
 | `2523980` | 06-07, solving a system, graduated `rc/math/linear.hpp` |
 | `ecf8b38` | 15-10, where a pixel points, graduated `rc/vision/camera.hpp` |
