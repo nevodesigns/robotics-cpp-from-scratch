@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "02-15-how-many-copies",
+  "title": "How Many Copies: Counting What a Vector Does, and the One Word That Keeps It From Copying",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "02-04-unique-ownership-and-move",
+    "02-05-copy-and-move-semantics"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/tally.hpp",
+    "note": "a type that counts its own copies, moves and destructions, and three ways to fill a vector of it"
+  },
+  "breaks_first": [
+    "E-MEM-0026",
+    "E-MEM-0027",
+    "E-MEM-0028"
+  ]
+}

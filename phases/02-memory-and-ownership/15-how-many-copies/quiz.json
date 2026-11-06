@@ -1,0 +1,78 @@
+{
+  "lesson": "02-15-how-many-copies",
+  "title": "How Many Copies: Counting What a Vector Does, and the One Word That Keeps It From Copying",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A program stores a few thousand objects and is slower than the arithmetic says it should be. Nothing leaks. Where might the cost be?",
+      "options": [
+        "In the output",
+        "Copies that are not on any line of the source: in parameters, in a vector growing and in returns",
+        "In the heap size",
+        "In the compiler"
+      ],
+      "correct": 1,
+      "explanation": "A type that counts its own copies and moves makes them visible."
+    },
+    {
+      "stage": "check",
+      "question": "What does a vector do when it grows, and the move constructor is not marked noexcept?",
+      "options": [
+        "Moves the elements anyway",
+        "Copies every element, since a move that might throw half way cannot be undone",
+        "Refuses to grow",
+        "Skips the elements"
+      ],
+      "correct": 1,
+      "explanation": "100 push_backs: 0 copies with noexcept, 127 without."
+    },
+    {
+      "stage": "check",
+      "question": "What does reserve(n) change about filling a vector with push_back of temporaries?",
+      "options": [
+        "Nothing",
+        "It removes the moves of growth, leaving one move per temporary, 100 for 100 packets",
+        "It removes all the moves",
+        "It adds copies"
+      ],
+      "correct": 1,
+      "explanation": "The growth part depends on the library, so a test checks that it goes and not its size."
+    },
+    {
+      "stage": "check",
+      "question": "What does emplace_back(i) do differently from push_back(Packet(i))?",
+      "options": [
+        "It is slower",
+        "It builds the object where it will live, so there is no temporary to move: 0 copies and 0 moves",
+        "It copies twice",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "It passes the arguments on to the constructor."
+    },
+    {
+      "stage": "post",
+      "question": "A vector of 50 is passed to a function by value from a variable. How many copies?",
+      "options": [
+        "0",
+        "50: a parameter by value is a new vector and every element is copied",
+        "1",
+        "25"
+      ],
+      "correct": 1,
+      "explanation": "By const reference it was 0, and from std::move 0 copies and 0 element moves."
+    },
+    {
+      "stage": "post",
+      "question": "A test finds 0 copies and 0 moves for a returned vector. What should a careful reader remember?",
+      "options": [
+        "The code is perfect",
+        "The compiler can remove copies and moves altogether, so zero may be its work and not the code's",
+        "Returns never copy",
+        "The count is wrong"
+      ],
+      "correct": 1,
+      "explanation": "Counts show what happened, not what the code guarantees."
+    }
+  ]
+}
