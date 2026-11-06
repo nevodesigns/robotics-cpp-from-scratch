@@ -1,0 +1,78 @@
+{
+  "lesson": "15-07-the-sensor-that-is-sometimes-wildly-wrong",
+  "title": "The Sensor That Is Sometimes Wildly Wrong: Outliers, the Median, and What Each Costs",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A sensor reads 5 and, once, 105. A mean of nine readings is taken. By how much does the mean move?",
+      "options": [
+        "Not at all",
+        "By 100 divided by 9, which is 11.1, for the next nine readings",
+        "By 100",
+        "By 5"
+      ],
+      "correct": 1,
+      "explanation": "A mean moves by the size of a bad reading over the number of readings, so the worse the reading the further it moves."
+    },
+    {
+      "stage": "check",
+      "question": "Why does a median not move at all for the same spike?",
+      "options": [
+        "It ignores the largest value on purpose",
+        "It is the middle of the sorted window, so it counts which side of the middle a reading falls and not how far",
+        "It averages the middle three",
+        "It rounds"
+      ],
+      "correct": 1,
+      "explanation": "A spike is one value above the middle, and moving it further above changes nothing about where the middle is."
+    },
+    {
+      "stage": "check",
+      "question": "A median of nine passed a burst of five bad readings but outvoted a burst of four. Why?",
+      "options": [
+        "Five is a bug",
+        "The bad readings become the middle once they are more than half of the window: the limit is (9 - 1) / 2 = 4",
+        "The sorting is unstable",
+        "Nine is too small to be accurate"
+      ],
+      "correct": 1,
+      "explanation": "To survive a burst of b the window needs 2b + 1 readings, and it costs b samples of delay."
+    },
+    {
+      "stage": "check",
+      "question": "On the sine, a Hampel filter had an rms error of 0.053 and a median of nine had 0.092. Which is better?",
+      "options": [
+        "The Hampel filter, always",
+        "Neither is better: Hampel removed the spikes and left the noise as it found it with no delay, while the median also averaged the noise but came out four samples late",
+        "The median, always",
+        "They are the same"
+      ],
+      "correct": 1,
+      "explanation": "Allowing for its delay the median was at 0.025, below the noise. Which is right depends on whether the noise or the spikes are the problem."
+    },
+    {
+      "stage": "post",
+      "question": "A Hampel filter held back a real step for 4 readings. Why can it not do better?",
+      "options": [
+        "A bug in the threshold",
+        "On the first reading of a step, a step and a spike are the same thing, and only the readings after it say which: it waits for half the window to agree",
+        "The window is too small",
+        "Steps cannot be filtered"
+      ],
+      "correct": 1,
+      "explanation": "The same four as the breakdown point, because they are one fact. If a step must be seen faster, the answer is a second sensor."
+    },
+    {
+      "stage": "post",
+      "question": "A very quiet sensor reads exactly the same for a window and then changes by a real 0.003. A Hampel filter with no floor rejects it. Why?",
+      "options": [
+        "0.003 is too small to be real",
+        "The window's spread is exactly zero, so the threshold is zero, and every change however small is infinitely far from it; a floor at the sensor's resolution fixes it",
+        "The median is wrong",
+        "Rounding error"
+      ],
+      "correct": 1,
+      "explanation": "The floor is the one thing the window cannot know, the least the sensor can resolve, and the caller does."
+    }
+  ]
+}
