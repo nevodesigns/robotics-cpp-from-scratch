@@ -1,0 +1,78 @@
+{
+  "lesson": "02-14-a-loop-that-never-allocates",
+  "title": "A Loop That Never Allocates: A Fixed Pool, and What It Costs to Lend and Take Back",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A control loop makes a message with new each pass and frees it at the end of the pass. It does not leak. What is the problem?",
+      "options": [
+        "None",
+        "It still allocates, and how long the heap takes depends on everything that ran before, so the loop's time is not under its control",
+        "It uses too much memory",
+        "It is not thread safe"
+      ],
+      "correct": 1,
+      "explanation": "A leak check passes and the loop can still miss its deadline."
+    },
+    {
+      "stage": "check",
+      "question": "How many heap allocations did 100000 lend and take back cycles make through the pool, and through new?",
+      "options": [
+        "100000 and 0",
+        "0 through the pool and 100000 through new",
+        "100000 both",
+        "0 both"
+      ],
+      "correct": 1,
+      "explanation": "The count is of every allocation the program makes."
+    },
+    {
+      "stage": "check",
+      "question": "The pool has all sixty-four messages out and is asked for a sixty-fifth. What should it do?",
+      "options": [
+        "Wrap round and lend the oldest",
+        "Return nullptr, and let the caller decide what to do",
+        "Allocate another",
+        "Crash"
+      ],
+      "correct": 1,
+      "explanation": "A pool that wraps round lends a message someone is still using."
+    },
+    {
+      "stage": "check",
+      "question": "Why is a second release of the same message refused?",
+      "options": [
+        "It is slow",
+        "The slot would be on the free stack twice and be lent to two users",
+        "The pointer is null",
+        "It is allowed"
+      ],
+      "correct": 1,
+      "explanation": "After the refused double release, 64 lends still gave 64 different messages."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the most recently returned slot the next one lent?",
+      "options": [
+        "Chance",
+        "It is on top of the stack, and it was used a moment ago, so its memory is the most likely to be in the cache",
+        "It is the oldest",
+        "The pool sorts them"
+      ],
+      "correct": 1,
+      "explanation": "The suite checks that the same slot came back, clean."
+    },
+    {
+      "stage": "post",
+      "question": "What is a pool NOT a solution to?",
+      "options": [
+        "Allocation time",
+        "A message used after it was released: a raw pointer to a slot can still be used by a caller who has given it back",
+        "Heap fragmentation",
+        "Leaks"
+      ],
+      "correct": 1,
+      "explanation": "Wrap the lend in an object that returns it, as lesson 02-03 did."
+    }
+  ]
+}
