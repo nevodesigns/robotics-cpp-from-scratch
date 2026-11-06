@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "00-13-how-big-a-step",
+  "title": "How Big a Step: The Error in One Step of Motion, and Two Ways to Take It Down",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-05-first-motion"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sim",
+    "header": "rc/sim/arc.hpp",
+    "note": "a midpoint step and an exact arc step for the differential drive, and a driver to compare them"
+  },
+  "breaks_first": [
+    "E-NUM-0031",
+    "E-NUM-0032",
+    "E-NUM-0033"
+  ]
+}

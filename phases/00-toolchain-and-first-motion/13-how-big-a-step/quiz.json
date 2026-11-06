@@ -1,0 +1,78 @@
+{
+  "lesson": "00-13-how-big-a-step",
+  "title": "How Big a Step: The Error in One Step of Motion, and Two Ways to Take It Down",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A robot drives a circle using the step of lesson 00-05, which points along the heading at the start of each step. What happens?",
+      "options": [
+        "It follows the circle exactly",
+        "It runs a little wide at every step, always the same way, so the errors add up",
+        "It runs too short",
+        "It spins"
+      ],
+      "correct": 1,
+      "explanation": "The radius from the centre was bigger than 1 at every step count."
+    },
+    {
+      "stage": "check",
+      "question": "The 00-05 step missed a quarter circle by 111.110 mm in 10 steps. What does it miss by in 20?",
+      "options": [
+        "111 mm",
+        "55.541 mm: twice the steps, half the error",
+        "27.8 mm",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "It needed 1111 steps to be within a millimetre."
+    },
+    {
+      "stage": "check",
+      "question": "Which heading does the midpoint step use to move?",
+      "options": [
+        "The one at the start",
+        "The one at the end",
+        "The one halfway through the step, since the start is too early and the end too late by equal amounts",
+        "The average of the wheel speeds"
+      ],
+      "correct": 2,
+      "explanation": "Twice the steps then gives a quarter of the error, and 13 steps were enough for a millimetre."
+    },
+    {
+      "stage": "check",
+      "question": "With 10 steps the 00-05 step missed by 111.110 mm. How did the midpoint step do?",
+      "options": [
+        "The same",
+        "1.455 mm",
+        "50 mm",
+        "It failed"
+      ],
+      "correct": 1,
+      "explanation": "The cost is one extra addition per step."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the exact arc step have to treat going straight separately?",
+      "options": [
+        "Straight lines are faster",
+        "The radius is forward divided by the turn, so a zero turn is a division by zero, and a tiny one is the difference of two nearly equal numbers",
+        "Circles cannot be straight",
+        "It does not"
+      ],
+      "correct": 1,
+      "explanation": "Below a turn of 1e-9 it moves forward along the heading."
+    },
+    {
+      "stage": "post",
+      "question": "When is the exact arc not the right choice?",
+      "options": [
+        "Never",
+        "When the wheel speeds change during the step, which a real robot's do every control cycle, so the step has to be short anyway",
+        "When the robot is large",
+        "When the circle is small"
+      ],
+      "correct": 1,
+      "explanation": "Then the midpoint step is about as good, and it extends to cases with no circle formula."
+    }
+  ]
+}
