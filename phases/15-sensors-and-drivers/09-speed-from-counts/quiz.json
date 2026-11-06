@@ -1,0 +1,78 @@
+{
+  "lesson": "15-09-speed-from-counts",
+  "title": "Speed From Counts: Differencing an Encoder at Every Speed It Turns",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "An encoder of 1000 counts a revolution turns at 0.05 revolutions a second and its speed is taken as the difference of successive counts at 1 kHz. What does it read?",
+      "options": [
+        "A steady 50 counts a second",
+        "1000 counts a second for one sample and zero for the other nineteen, an rms error of more than four times the speed",
+        "50 counts a second, a little noisy",
+        "Zero"
+      ],
+      "correct": 1,
+      "explanation": "A sample can only hold a whole number of counts. At 50 counts a second that is one count every 20 samples."
+    },
+    {
+      "stage": "check",
+      "question": "A window of 50 samples read 0.5 rev/s to within 2 percent. What did it cost?",
+      "options": [
+        "Nothing",
+        "Delay: it reports the average speed over the window, which is the speed half a window ago, 25 ms",
+        "Accuracy at high speed",
+        "A larger encoder"
+      ],
+      "correct": 1,
+      "explanation": "A speed that doubled at sample 200 reached the halfway value 24 samples later."
+    },
+    {
+      "stage": "check",
+      "question": "The time between counts read 0.05 rev/s to 1.6 percent and 50 rev/s to 54.1 percent. Why?",
+      "options": [
+        "The encoder is worse at high speed",
+        "A clock tick is a tiny part of a long gap and a large part of a short one: ten microseconds against twenty milliseconds, and against twenty microseconds",
+        "The sample rate is too low",
+        "The window is too long"
+      ],
+      "correct": 1,
+      "explanation": "The resolution of edge timing is a clock tick, so it is best when the gaps are long."
+    },
+    {
+      "stage": "check",
+      "question": "An encoder stops. What should the edge timing estimate do, and why?",
+      "options": [
+        "Hold the last speed",
+        "Fall: a stopped encoder produces no edges, so the speed can only be lower than the last gap says, at most one count over the time since the last edge",
+        "Go to zero at once",
+        "Report an error"
+      ],
+      "correct": 1,
+      "explanation": "500 counts a second read 10 a tenth of a second after the last edge and 1 after a second."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the first edge after a reversal not used for a speed?",
+      "options": [
+        "It is always noisy",
+        "It is the same position crossed the other way, so the time since the previous edge says nothing about how fast it is going back",
+        "Direction is not measured",
+        "It is too late"
+      ],
+      "correct": 1,
+      "explanation": "The estimate is zero until a second edge in the new direction, and then it is signed the other way."
+    },
+    {
+      "stage": "post",
+      "question": "How does the combined estimate get within 2 percent at every speed?",
+      "options": [
+        "It averages all three",
+        "It takes the edge timing when it exists and is below 1500 counts a second, and the window otherwise, each where it is good",
+        "It uses a longer window",
+        "It filters the result"
+      ],
+      "correct": 1,
+      "explanation": "1.6, 1.6, 0.3 and 0.0 percent, against 435.9 and 54.1 for the worst of the others."
+    }
+  ]
+}
