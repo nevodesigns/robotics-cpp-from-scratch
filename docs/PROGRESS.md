@@ -518,6 +518,25 @@ libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
 
+### Written 6 November 2026, before the laptop was shut
+
+152 of 320 lessons, 47 percent, 406 atlas entries, audit clean, every CI run green up to `c449068`. The last lessons were 14-10 and 13-10.
+
+**Change of order, to be followed from the next session.** The person pointed out that the plan was to build in order from phase 00, and that
+phases 13 to 16 had been built ahead of it. From here, work in order and leave 13 to 16 where they are. What is left before phase 07:
+
+| phase | built | planned | left |
+|---|---|---|---|
+| 00 | 9 | 14 | 5 |
+| 02 | 13 | 16 | 3 |
+| 03 | 11 | 18 | 7 |
+| 04 | 8 | 14 | 6 |
+| 05 | 7 | 12 | 5 |
+| 06 | 7 | 16 | 9 |
+
+35 lessons, starting with 00-10. Same pipeline as before: reference, stub, tests, atlas entries, docs, quiz, audit, clang and asan on the stub, readme --fix, one commit per lesson,
+wait for CI before each push, and no attribution in any commit. The person gives the go-ahead for each session because of a usage limit.
+
 ### Added on 6 November 2026, after the person said go ahead
 
 | lesson | the finding it rests on | header |
