@@ -214,6 +214,8 @@ reasoning in their own messages, and `git log` is the record.
 | `8d1f820` | 14-09, two loops one inside the other, graduated `rc/control/cascade.hpp` |
 | `d48020d` | 13-09, straight in space or in the joints, graduated `rc/kin/path.hpp` |
 | `11d1368` | 02-16, a handle the library gave you, graduated `rc/core/handle.hpp` |
+| `3f94429` | 03-15, a number written down and read back, graduated `rc/core/number_text.hpp` |
+| `59ece80` | 03-14, the function that did not override, graduated `rc/control/controller.hpp` |
 | `cfce4f9` | 03-13, one of several kinds, graduated `rc/core/command.hpp` |
 | `9dc7101` | fixed 03-12 on MSVC |
 | `3732754` | 03-12, what a throw does on the way out, graduated `rc/core/checked_int.hpp` |

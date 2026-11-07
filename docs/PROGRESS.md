@@ -19,11 +19,11 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 162 of 320 planned, 51 percent |
+| lessons built | 164 of 320 planned, 51 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 5 (phases 00, 01, 02, 07 and 08) |
 | hours of material | 305 |
-| Failure Atlas entries | 436 |
+| Failure Atlas entries | 442 |
 | librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
@@ -38,7 +38,7 @@ November below it, kept as it was because it records the reasoning of that day.
 | 00 Toolchain and First Motion | 14 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 18 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 16 | 16 | A subsystem tree that releases completely, with no cycles |
-| 03 C++ Core III, classes and templates | 13 | 18 | An injectable clock, so dt has a provenance |
+| 03 C++ Core III, classes and templates | 15 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 7 | 16 | Where the gripper is, in the world frame, and how you know |
@@ -517,6 +517,16 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Written 7 November 2026, phase 03 continued
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 03-14 the function that did not override | gain 5, error 2: 10 on the type itself and 0 through a base reference when const was missing, and `override` makes it a build error (a checks/ snippet); a virtual call in a base constructor got the base's answer; a controller passed by value gave 0 where by reference gave 6 | `rc/control/controller.hpp` |
+| 03-15 a number written down and read back | of 20000 readings, 0 read back exactly through a six digit stream, 5627 through std::to_string and all 20000 through the shortest text that reads back; to_string wrote 3.5e-9 as 0.000000; shortest averaged 5.8 characters against 15.7 | `rc/core/number_text.hpp` |
+
+164 of 320 lessons. Phase 03 is at 15 of 18. Next in order: 03 (3 left), 04 (6), 05 (5), 06 (9).
+03-15 used `snprintf` first, and rule L018 refused it as printf; the lesson uses `std::ostringstream` with `std::setprecision`.
 
 ### Written 7 November 2026, phase 03 in order
 
