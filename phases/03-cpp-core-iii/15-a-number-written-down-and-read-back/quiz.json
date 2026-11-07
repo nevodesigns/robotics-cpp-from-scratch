@@ -1,0 +1,78 @@
+{
+  "lesson": "03-15-a-number-written-down-and-read-back",
+  "title": "A Number Written Down and Read Back: Why a Log or a Config Loses Digits, and the Shortest Text That Does Not",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A run is logged with std::cout << value and the log is used to replay it. What goes wrong?",
+      "options": [
+        "Nothing",
+        "A stream writes six significant digits, so the number that is read back is a different one",
+        "It is too slow",
+        "The log is too big"
+      ],
+      "correct": 1,
+      "explanation": "Of 20000 readings, 0 read back exactly through a stream."
+    },
+    {
+      "stage": "check",
+      "question": "How many of 20000 readings of mixed size read back exactly after std::to_string, and after shortest_text?",
+      "options": [
+        "0 and 5627",
+        "5627 and 20000: to_string writes large numbers in full, so some survive",
+        "20000 both",
+        "0 both"
+      ],
+      "correct": 1,
+      "explanation": "Six digits through a stream gave 0."
+    },
+    {
+      "stage": "check",
+      "question": "What does std::to_string(3.5e-9) give?",
+      "options": [
+        "3.5e-09",
+        "0.000000: it always writes six places after the point",
+        "3.5",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "A time step that small is read back as zero."
+    },
+    {
+      "stage": "check",
+      "question": "How does shortest_text find the shortest text?",
+      "options": [
+        "It always uses 17 digits",
+        "It tries 1 significant digit, then 2, up to 17, and stops at the first text that reads back as the same double",
+        "It rounds",
+        "It uses the stream"
+      ],
+      "correct": 1,
+      "explanation": "Readings to two decimal places averaged 5.8 characters against 15.7 at 17 digits."
+    },
+    {
+      "stage": "post",
+      "question": "0.1 + 0.2 and 0.3 are different doubles. How does each look in a six digit log, and in shortest_text?",
+      "options": [
+        "Both 0.3 in a log, and 0.30000000000000004 and 0.3 in shortest_text",
+        "Different in both",
+        "The same in both",
+        "0.3 and 0.2 respectively"
+      ],
+      "correct": 0,
+      "explanation": "A log with six digits cannot say they differ."
+    },
+    {
+      "stage": "post",
+      "question": "Why does parse_number refuse nan, inf and 1e999 as well as 1.5x?",
+      "options": [
+        "It is slow",
+        "strtod accepts those words and overflow as numbers, and a configuration never means them, so they would break a division later",
+        "They are valid numbers",
+        "The standard forbids them"
+      ],
+      "correct": 1,
+      "explanation": "All ten bad texts were refused and each left the output alone."
+    }
+  ]
+}

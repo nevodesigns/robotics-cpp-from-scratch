@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "03-15-a-number-written-down-and-read-back",
+  "title": "A Number Written Down and Read Back: Why a Log or a Config Loses Digits, and the Shortest Text That Does Not",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-04-numbers-that-lie",
+    "01-05-strings-and-text",
+    "03-02-errors-that-are-not-exceptional"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/number_text.hpp",
+    "note": "the shortest text that reads back as exactly the same double, and a parse that refuses anything else on the line"
+  },
+  "breaks_first": [
+    "E-NUM-0034",
+    "E-NUM-0035",
+    "E-NUM-0036"
+  ]
+}
