@@ -19,11 +19,11 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 164 of 320 planned, 51 percent |
+| lessons built | 167 of 320 planned, 52 percent |
 | phases opened | 16 of 22 |
-| phases finished to plan | 5 (phases 00, 01, 02, 07 and 08) |
+| phases finished to plan | 6 (phases 00, 01, 02, 03, 07 and 08) |
 | hours of material | 305 |
-| Failure Atlas entries | 442 |
+| Failure Atlas entries | 451 |
 | librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
@@ -38,7 +38,7 @@ November below it, kept as it was because it records the reasoning of that day.
 | 00 Toolchain and First Motion | 14 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 18 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 16 | 16 | A subsystem tree that releases completely, with no cycles |
-| 03 C++ Core III, classes and templates | 15 | 18 | An injectable clock, so dt has a provenance |
+| 03 C++ Core III, classes and templates | 18 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 7 | 16 | Where the gripper is, in the world frame, and how you know |
@@ -517,6 +517,17 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Written 7 November 2026, phase 03 finished to plan
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 03-16 what comes next | a plain priority_queue gave 9 first of 5, 1, 9, 3; eight ties came out 0 2 6 5 7 4 1 3 from a queue comparing only the time (libstdc++, not promised); erasing the front of a vector moved 4000000 elements and pop_front on a deque 0 | `rc/core/event_queue.hpp` |
+| 03-17 which function got called | a string literal chose the bool overload (flag: ok) over a std::string one; a default argument on a virtual function came from the base (3) though the derived function ran, where 0 was meant; 0 chose int and nullptr the pointer | `rc/core/reporter.hpp` |
+| 03-18 a loop you can run in a millisecond | 1001 sensor ticks and 101 logger ticks in ten seconds; 600001 ticks of a 1 kHz loop with time never going backwards; a 0.1 s tick up to 0.3 s ran 4 times in integer nanoseconds and 3 as doubles; ties at one instant by registration order | `rc/core/scheduler.hpp` |
+
+167 of 320 lessons, 52 percent. **Phase 03 is at 18 of 18, finished to plan** (six phases: 00, 01, 02, 03, 07, 08). Next in order: 04 (6 left), 05 (5), 06 (9).
+**03-18 found its own bug.** The first scheduler broke ties by queue order and at 100 ms ran the logger before the sensor, since a repeating task queues its next tick after finishing the last. The test for ties caught it; the fix breaks ties by registration order.
 
 ### Written 7 November 2026, phase 03 continued
 

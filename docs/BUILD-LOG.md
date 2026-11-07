@@ -214,6 +214,9 @@ reasoning in their own messages, and `git log` is the record.
 | `8d1f820` | 14-09, two loops one inside the other, graduated `rc/control/cascade.hpp` |
 | `d48020d` | 13-09, straight in space or in the joints, graduated `rc/kin/path.hpp` |
 | `11d1368` | 02-16, a handle the library gave you, graduated `rc/core/handle.hpp` |
+| `3c9cbc6` | 03-18, a loop you can run in a millisecond, graduated `rc/core/scheduler.hpp` |
+| `0521ed9` | 03-17, which function got called, graduated `rc/core/reporter.hpp` |
+| `03ffba1` | 03-16, what comes next, graduated `rc/core/event_queue.hpp` |
 | `3f94429` | 03-15, a number written down and read back, graduated `rc/core/number_text.hpp` |
 | `59ece80` | 03-14, the function that did not override, graduated `rc/control/controller.hpp` |
 | `cfce4f9` | 03-13, one of several kinds, graduated `rc/core/command.hpp` |
@@ -771,3 +774,7 @@ without the feature: run the exercise and read the pass count.
 **A demonstration of a leak that the leak sanitizer would fail, in 02-16.** The raw version of the function leaks on purpose, to measure it. Under asan that fails the run. The test now stores each leaked pointer and closes them after taking the measurement, which a real program could not do.
 
 **A claim about a library type that held on one library, in 03-12.** "Catching a std::invalid_argument by value gives std::exception as its message" is libstdc++. On MSVC the copy of a std::exception keeps its message, and the gate failed on the Windows job only. The lesson was fixed in the next commit and the claim is now stated per library. The behaviour that is the same everywhere is the lost type.
+
+**A tie-break that favoured the slower task, in 03-18.** The scheduler used the queue's own sequence number, assigned when an event is queued. A repeating task queues its next tick as it finishes the last, so at a shared instant the task with the older queued event ran first: the logger before the sensor. The ordering test failed on the first run. Ties now go by the task's registration order.
+
+**A regular expression in an atlas match, in 03-16 and 03-17.** A `match:` line is a regular expression, so an unbalanced parenthesis (`expected std::string(which`) fails the audit. Write the match without brackets.
