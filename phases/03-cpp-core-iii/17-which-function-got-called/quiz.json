@@ -1,0 +1,78 @@
+{
+  "lesson": "03-17-which-function-got-called",
+  "title": "Which Function Got Called: A String Literal That Chose bool, and a Default Argument That Came From the Wrong Class",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A class has report(bool) and report(const std::string&). What does report(\"transmission failed\") call?",
+      "options": [
+        "The string one",
+        "The bool one: a pointer converts to bool with a built-in conversion, which beats the constructor that would make a string",
+        "Neither, it is ambiguous",
+        "The one declared last"
+      ],
+      "correct": 1,
+      "explanation": "The log said flag: ok."
+    },
+    {
+      "stage": "check",
+      "question": "How is that fixed?",
+      "options": [
+        "Cast every call",
+        "Add an overload for const char* that forwards to the string one",
+        "Remove the bool overload only",
+        "Use a macro"
+      ],
+      "correct": 1,
+      "explanation": "Then the literal matched exactly, and flags and strings still went to their own."
+    },
+    {
+      "stage": "check",
+      "question": "A virtual function has a default argument, and a derived class overrides it with another default. Called through a base reference, which default is used?",
+      "options": [
+        "The derived one",
+        "The base's: defaults are filled in at compile time from the reference's type, while the function is chosen at run time from the object",
+        "Neither",
+        "Both"
+      ],
+      "correct": 1,
+      "explanation": "A quiet sink gave retries 0 on itself and 3 through the base."
+    },
+    {
+      "stage": "check",
+      "question": "What is the sturdier way to give a virtual function a default?",
+      "options": [
+        "A second default",
+        "A virtual function of its own that returns it, with a non-virtual function that fills it in",
+        "A global",
+        "A macro"
+      ],
+      "correct": 1,
+      "explanation": "Through a base reference the quiet sink then gave 0, a plain one 3, and an explicit 7 won."
+    },
+    {
+      "stage": "post",
+      "question": "f(int) and f(const char*) exist. What does f(0) call, and f(nullptr)?",
+      "options": [
+        "The pointer, then the pointer",
+        "The int, then the pointer: 0 is an int that merely converts to a null pointer",
+        "The pointer, then the int",
+        "Both ambiguous"
+      ],
+      "correct": 1,
+      "explanation": "Write nullptr when a null pointer is meant."
+    },
+    {
+      "stage": "post",
+      "question": "What is a sturdier design than relying on these overload rules at all?",
+      "options": [
+        "More overloads",
+        "Give the flag version its own name, such as report_ok, so a call says which is meant",
+        "Fewer functions",
+        "Macros"
+      ],
+      "correct": 1,
+      "explanation": "Overloads on types that convert into each other are where these surprises live."
+    }
+  ]
+}
