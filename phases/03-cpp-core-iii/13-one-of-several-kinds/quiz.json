@@ -1,0 +1,78 @@
+{
+  "lesson": "03-13-one-of-several-kinds",
+  "title": "One of Several Kinds: A Command That Can Only Be What It Says, and a Compiler That Checks You Handled Them All",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A command struct has a kind number and a field for everything any kind needs. What can it hold that makes no sense?",
+      "options": [
+        "Nothing",
+        "A stop with wheel speeds left in it, a drive whose speeds were never set, and a kind that is none of the three",
+        "Only a negative speed",
+        "A very large struct"
+      ],
+      "correct": 1,
+      "explanation": "Nothing says which fields belong to which kind."
+    },
+    {
+      "stage": "check",
+      "question": "What does a default-constructed std::variant<Stop, Drive, SetLimit> hold?",
+      "options": [
+        "Nothing",
+        "The first alternative, Stop, which is why Stop must be constructible without arguments",
+        "A random one",
+        "The largest one"
+      ],
+      "correct": 1,
+      "explanation": "The test saw index 0."
+    },
+    {
+      "stage": "check",
+      "question": "The command holds a Drive. What do get_if<SetLimit>(&c) and get<SetLimit>(c) do?",
+      "options": [
+        "Both return garbage",
+        "get_if gives nullptr and get throws std::bad_variant_access",
+        "Both throw",
+        "Both give nullptr"
+      ],
+      "correct": 1,
+      "explanation": "One is a polite question and one is asking as if sure."
+    },
+    {
+      "stage": "check",
+      "question": "A fourth kind is added to the variant and the visitor is not changed. What happens?",
+      "options": [
+        "It builds and does nothing",
+        "It does not compile: there is no function for the new kind",
+        "It crashes at runtime",
+        "The new kind is ignored with a warning"
+      ],
+      "correct": 1,
+      "explanation": "The lesson's checks/ snippet is expected to fail to compile, and it does."
+    },
+    {
+      "stage": "post",
+      "question": "Driving at 0.8 and -0.4 and then setting a limit of 0.5, what are the wheel speeds?",
+      "options": [
+        "0.8 and -0.4",
+        "0.5 and -0.4: the limit clamps what is happening now, not only the next drive",
+        "0.5 and -0.5",
+        "0 and 0"
+      ],
+      "correct": 1,
+      "explanation": "A drive of 3 and -3 afterwards gave 0.5 and -0.5."
+    },
+    {
+      "stage": "post",
+      "question": "What is sizeof a variant, compared with its alternatives?",
+      "options": [
+        "The sum of all of them",
+        "The largest alternative plus a tag: 24 against Drive's 16 on the machine measured",
+        "The smallest",
+        "Always 8"
+      ],
+      "correct": 1,
+      "explanation": "The three added up came to 25."
+    }
+  ]
+}

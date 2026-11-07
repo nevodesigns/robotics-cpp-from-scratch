@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "03-13-one-of-several-kinds",
+  "title": "One of Several Kinds: A Command That Can Only Be What It Says, and a Compiler That Checks You Handled Them All",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-05-strings-and-text",
+    "01-06-enums-and-states",
+    "03-01-classes-and-invariants"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/command.hpp",
+    "note": "a command that is exactly one of stop, drive or set limit, a parser for it, and an apply that the compiler checks handles every kind"
+  },
+  "breaks_first": [
+    "E-CPP-0088",
+    "E-CPP-0089",
+    "E-CPP-0090"
+  ]
+}
