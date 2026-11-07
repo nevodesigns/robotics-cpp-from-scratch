@@ -1,0 +1,78 @@
+{
+  "lesson": "03-12-what-a-throw-does-on-the-way-out",
+  "title": "What a Throw Does on the Way Out: Catching by Reference, Rethrowing, and the Destructors That Run",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A function throws std::invalid_argument(\"bad value 12abc\") and the caller writes catch (std::exception e). What does e.what() give?",
+      "options": [
+        "bad value 12abc",
+        "std::exception: the derived part and its message are cut off by catching by value",
+        "nothing",
+        "a crash"
+      ],
+      "correct": 1,
+      "explanation": "Caught by reference it gave the specific message."
+    },
+    {
+      "stage": "check",
+      "question": "What is the right way to write a handler for a specific exception?",
+      "options": [
+        "By value",
+        "By const reference, most specific handler first",
+        "With a pointer",
+        "With catch(...) only"
+      ],
+      "correct": 1,
+      "explanation": "By value slices the exception."
+    },
+    {
+      "stage": "check",
+      "question": "What is the difference between throw e; and throw; inside a handler?",
+      "options": [
+        "None",
+        "throw e; throws a copy made from the declared type of e, throw; rethrows the very object with its own type",
+        "throw; is slower",
+        "throw e; is safer"
+      ],
+      "correct": 1,
+      "explanation": "throw e; gave cut down to exception, throw; gave still invalid_argument."
+    },
+    {
+      "stage": "check",
+      "question": "What does parse_all do before rethrowing?",
+      "options": [
+        "Nothing",
+        "It records which item failed, then uses a bare throw; so the caller still sees the original type",
+        "It swallows the error",
+        "It changes the message"
+      ],
+      "correct": 1,
+      "explanation": "The caller learns both where and what."
+    },
+    {
+      "stage": "post",
+      "question": "Three guards A, B, C are alive when a throw happens. In what order do things happen?",
+      "options": [
+        "handler, then drop A, B, C",
+        "drop C, drop B, drop A, then the handler: reverse order of construction, before the handler starts",
+        "drop A, B, C, then the handler",
+        "only the handler"
+      ],
+      "correct": 1,
+      "explanation": "That is why cleanup belongs in a destructor."
+    },
+    {
+      "stage": "post",
+      "question": "A function releases a motor on the line after a call that can throw. What happens when it throws?",
+      "options": [
+        "The release runs",
+        "The release is skipped, since a throw leaves at once and only destructors run on the way out",
+        "The program restarts",
+        "The release runs twice"
+      ],
+      "correct": 1,
+      "explanation": "Put the release in a destructor so the unwinding does it."
+    }
+  ]
+}

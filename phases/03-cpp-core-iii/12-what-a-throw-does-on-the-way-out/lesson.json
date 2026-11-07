@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "03-12-what-a-throw-does-on-the-way-out",
+  "title": "What a Throw Does on the Way Out: Catching by Reference, Rethrowing, and the Destructors That Run",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-05-strings-and-text",
+    "03-01-classes-and-invariants",
+    "03-02-errors-that-are-not-exceptional"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/checked_int.hpp",
+    "note": "a parse that throws two different errors, a catcher that keeps them apart, and a loop that records where it failed and rethrows the original"
+  },
+  "breaks_first": [
+    "E-CPP-0085",
+    "E-CPP-0086",
+    "E-CPP-0087"
+  ]
+}
