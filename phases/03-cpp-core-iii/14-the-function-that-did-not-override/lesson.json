@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "03-14-the-function-that-did-not-override",
+  "title": "The Function That Did Not Override: One Missing const, a Virtual Call in a Constructor and a Copy That Forgot What It Was",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "03-05-time-and-clocks",
+    "03-10-the-destructor-that-did-not-run"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::control",
+    "header": "rc/control/controller.hpp",
+    "note": "a controller base class, a proportional one and a saturating wrapper, all written with override"
+  },
+  "breaks_first": [
+    "E-CPP-0091",
+    "E-CPP-0092",
+    "E-CPP-0093"
+  ]
+}

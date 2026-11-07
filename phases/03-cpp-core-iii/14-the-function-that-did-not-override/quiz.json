@@ -1,0 +1,78 @@
+{
+  "lesson": "03-14-the-function-that-did-not-override",
+  "title": "The Function That Did Not Override: One Missing const, a Virtual Call in a Constructor and a Copy That Forgot What It Was",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A new controller passes its own test and does nothing in the robot, which holds it as a reference to the base class. What is a likely cause?",
+      "options": [
+        "The robot is broken",
+        "Its function differs from the base's by a missing const, so it is a new function and the base version runs",
+        "The gain is zero",
+        "It is too fast"
+      ],
+      "correct": 1,
+      "explanation": "Called directly it gave 10, through the base it gave 0."
+    },
+    {
+      "stage": "check",
+      "question": "What does override after a function do?",
+      "options": [
+        "Makes it faster",
+        "Asks the compiler to confirm that it replaces a base function exactly, and it fails the build if it does not",
+        "Makes it virtual",
+        "Hides the base function"
+      ],
+      "correct": 1,
+      "explanation": "The lesson's checks/ snippet fails with 'marked override, but does not override'."
+    },
+    {
+      "stage": "check",
+      "question": "A base constructor calls a virtual function. Which version runs?",
+      "options": [
+        "The most derived",
+        "The base's own: the derived part is not built yet, so the object is a base object",
+        "Neither",
+        "Both"
+      ],
+      "correct": 1,
+      "explanation": "The base constructor was told base, and afterwards the object said special."
+    },
+    {
+      "stage": "check",
+      "question": "What should be done instead of a virtual call in a constructor?",
+      "options": [
+        "Nothing",
+        "Pass what the base needs as an argument, or have the caller call an init function once the object is built",
+        "Call it twice",
+        "Use a macro"
+      ],
+      "correct": 1,
+      "explanation": "Destructors have the same rule."
+    },
+    {
+      "stage": "post",
+      "question": "A function takes a Controller by value and is passed a Proportional with gain 3. For error 2, what does it return?",
+      "options": [
+        "6",
+        "0: only the base part is copied, so the base version runs",
+        "3",
+        "2"
+      ],
+      "correct": 1,
+      "explanation": "By reference it was 6."
+    },
+    {
+      "stage": "post",
+      "question": "Why does Saturated keep a reference to the controller it wraps, and what is the risk?",
+      "options": [
+        "To copy it",
+        "So it can wrap any controller without slicing; the wrapped one must outlive it, or the reference dangles",
+        "To save memory",
+        "There is no risk"
+      ],
+      "correct": 1,
+      "explanation": "Lesson 02-07 is about the dangling reference."
+    }
+  ]
+}
