@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "03-16-what-comes-next",
+  "title": "What Comes Next: A Queue That Gives the Earliest First, Ties in Order, and a Window That Drops From the Front",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "03-03-containers-and-their-costs",
+    "03-04-algorithms-over-loops"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/event_queue.hpp",
+    "note": "an event queue that pops the earliest time first with ties in arrival order, and a bounded window with a running mean"
+  },
+  "breaks_first": [
+    "E-CPP-0094",
+    "E-CPP-0095",
+    "E-CPP-0096"
+  ]
+}

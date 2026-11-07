@@ -1,0 +1,78 @@
+{
+  "lesson": "03-16-what-comes-next",
+  "title": "What Comes Next: A Queue That Gives the Earliest First, Ties in Order, and a Window That Drops From the Front",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A std::priority_queue<int> is given 5, 1, 9 and 3. What does top() return?",
+      "options": [
+        "1",
+        "9: it is a max-heap, so the greatest comes first",
+        "5",
+        "3"
+      ],
+      "correct": 1,
+      "explanation": "A schedule wants the earliest, so it must compare the other way round."
+    },
+    {
+      "stage": "check",
+      "question": "Eight events are scheduled at the same time. A priority_queue compares only the time. In what order do they come out?",
+      "options": [
+        "The order they were scheduled",
+        "An order the standard does not promise, which was 0 2 6 5 7 4 1 3 on libstdc++",
+        "Reverse order",
+        "Random each run"
+      ],
+      "correct": 1,
+      "explanation": "Each event gets a sequence number, compared after the time."
+    },
+    {
+      "stage": "check",
+      "question": "What makes the event queue give ties in the order they were scheduled?",
+      "options": [
+        "A bigger queue",
+        "A sequence number given at scheduling and compared after the time",
+        "A sort at the end",
+        "A lock"
+      ],
+      "correct": 1,
+      "explanation": "Ten thousand events over 500 times came out sorted with ties in order."
+    },
+    {
+      "stage": "check",
+      "question": "A window of 1000 is kept over 5000 readings by erasing the front of a vector. How many elements are moved, and by pop_front on a deque?",
+      "options": [
+        "0 and 4000000",
+        "4000000 and 0",
+        "1000 and 1000",
+        "5000 and 0"
+      ],
+      "correct": 1,
+      "explanation": "A vector is contiguous: removing the first moves all the rest."
+    },
+    {
+      "stage": "post",
+      "question": "Why does Window keep a running sum?",
+      "options": [
+        "To be faster than a deque",
+        "Adding the new reading and removing the one that left costs one step, where a pass over the window for every reading costs as much as the erase",
+        "Floating point needs it",
+        "The mean must be an integer"
+      ],
+      "correct": 1,
+      "explanation": "After a thousand readings of 7.0 the mean was within 1e-9 of 7."
+    },
+    {
+      "stage": "post",
+      "question": "Why can you not cancel an event once it is in the queue?",
+      "options": [
+        "It is a bug",
+        "A priority queue only gives its top, so a simulation marks an event cancelled and skips it when it comes out",
+        "The sequence number forbids it",
+        "You can"
+      ],
+      "correct": 1,
+      "explanation": "That is a limit of the container, stated in the lesson."
+    }
+  ]
+}
