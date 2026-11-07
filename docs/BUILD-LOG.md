@@ -214,6 +214,9 @@ reasoning in their own messages, and `git log` is the record.
 | `8d1f820` | 14-09, two loops one inside the other, graduated `rc/control/cascade.hpp` |
 | `d48020d` | 13-09, straight in space or in the joints, graduated `rc/kin/path.hpp` |
 | `11d1368` | 02-16, a handle the library gave you, graduated `rc/core/handle.hpp` |
+| `cfce4f9` | 03-13, one of several kinds, graduated `rc/core/command.hpp` |
+| `9dc7101` | fixed 03-12 on MSVC |
+| `3732754` | 03-12, what a throw does on the way out, graduated `rc/core/checked_int.hpp` |
 | `014620d` | 02-15, how many copies, graduated `rc/core/tally.hpp` |
 | `5bc769b` | 02-14, a loop that never allocates, graduated `rc/core/pool.hpp` |
 | `363bca0` | 00-14, the first tool, graduated `rc/core/drive_tool.hpp` |
@@ -764,3 +767,5 @@ without the feature: run the exercise and read the pass count.
 **A test that an empty stub passed, in 02-14 and 02-15.** A loop that counted allocations passed for a pool that lent nothing, because zero allocations is also what doing nothing does, and a returned vector with zero copies passed for a type that counted nothing. Each now also requires the work to have been done: the cycles completed, 30 packets made.
 
 **A demonstration of a leak that the leak sanitizer would fail, in 02-16.** The raw version of the function leaks on purpose, to measure it. Under asan that fails the run. The test now stores each leaked pointer and closes them after taking the measurement, which a real program could not do.
+
+**A claim about a library type that held on one library, in 03-12.** "Catching a std::invalid_argument by value gives std::exception as its message" is libstdc++. On MSVC the copy of a std::exception keeps its message, and the gate failed on the Windows job only. The lesson was fixed in the next commit and the claim is now stated per library. The behaviour that is the same everywhere is the lost type.

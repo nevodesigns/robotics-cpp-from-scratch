@@ -19,11 +19,11 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 160 of 320 planned, 50 percent |
+| lessons built | 162 of 320 planned, 51 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 5 (phases 00, 01, 02, 07 and 08) |
 | hours of material | 305 |
-| Failure Atlas entries | 430 |
+| Failure Atlas entries | 436 |
 | librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
@@ -38,7 +38,7 @@ November below it, kept as it was because it records the reasoning of that day.
 | 00 Toolchain and First Motion | 14 | 14 | A quarter circle drawn in the terminal with nothing installed, and in a window if you want it |
 | 01 C++ Core I, values and flow | 18 | 18 | A drive state machine that cannot represent nonsense |
 | 02 Memory and ownership | 16 | 16 | A subsystem tree that releases completely, with no cycles |
-| 03 C++ Core III, classes and templates | 11 | 18 | An injectable clock, so dt has a provenance |
+| 03 C++ Core III, classes and templates | 13 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 8 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 7 | 16 | Where the gripper is, in the world frame, and how you know |
@@ -517,6 +517,16 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Written 7 November 2026, phase 03 in order
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 03-12 what a throw does on the way out | caught by value an invalid_argument was no longer one (and on libstdc++ its message became "std::exception"); `throw e;` cut the type to exception and `throw;` kept it; destructors ran drop C, drop B, drop A before the handler | `rc/core/checked_int.hpp` |
+| 03-13 one of several kinds | a default variant holds its first alternative, get_if gave nullptr and get threw; a fourth kind added to the variant and not the visitor does not compile (a checks/ snippet); a limit of 0.5 after driving 0.8 and -0.4 left 0.5 and -0.4 | `rc/core/command.hpp` |
+
+162 of 320 lessons. Phase 03 is at 13 of 18. Next in order: 03 (5 left), 04 (6), 05 (5), 06 (9).
+**03-12 failed on MSVC and was fixed.** The first test asserted that a by-value catch loses the message. MSVC's copy of a std::exception keeps its message text, so only libstdc++ loses it; the type is lost everywhere. The test now asserts the type and prints the message. A claim about a standard library type's behaviour needs a check against every claimed library, and MSVC is the one most likely to differ.
 
 ### Written 6 November 2026, phase 02 finished to plan
 
