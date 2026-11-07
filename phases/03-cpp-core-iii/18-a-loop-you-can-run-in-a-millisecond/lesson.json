@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "03-18-a-loop-you-can-run-in-a-millisecond",
+  "title": "A Loop You Can Run in a Millisecond: A Scheduler on a Test Clock, and Why Its Time Is an Integer",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "02-08-behaviour-as-a-value",
+    "03-05-time-and-clocks",
+    "03-16-what-comes-next"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/scheduler.hpp",
+    "note": "periodic and one-shot tasks run in time order on a test clock, with integer nanoseconds so ticks land exactly"
+  },
+  "breaks_first": [
+    "E-TIME-0005",
+    "E-TIME-0006",
+    "E-TIME-0007"
+  ]
+}

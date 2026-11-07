@@ -1,0 +1,78 @@
+{
+  "lesson": "03-18-a-loop-you-can-run-in-a-millisecond",
+  "title": "A Loop You Can Run in a Millisecond: A Scheduler on a Test Clock, and Why Its Time Is an Integer",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A loop is tested by running it for ten seconds and waiting. What does a scheduler on a test clock change?",
+      "options": [
+        "Nothing",
+        "It takes the next event, sets the clock to its time and runs it, so ten seconds of events run without waiting",
+        "It makes the loop faster on the robot",
+        "It removes the need for tests"
+      ],
+      "correct": 1,
+      "explanation": "Ten minutes of a 1 kHz loop was 600001 ticks and no waiting."
+    },
+    {
+      "stage": "check",
+      "question": "A 100 Hz sensor and a 10 Hz logger run for ten seconds, with the start and end both ticks. How many times does each run?",
+      "options": [
+        "1000 and 100",
+        "1001 and 101",
+        "1000 and 101",
+        "1001 and 100"
+      ],
+      "correct": 1,
+      "explanation": "1102 events in all."
+    },
+    {
+      "stage": "check",
+      "question": "Why does a tick every 0.1 s up to 0.3 s run 4 times with integer nanoseconds and 3 times with doubles added up?",
+      "options": [
+        "Doubles are slower",
+        "0.1 is not exact in binary, and three of them make 0.30000000000000004, which is later than 0.3, so the last tick is lost",
+        "Integers round up",
+        "It is a bug in the loop"
+      ],
+      "correct": 1,
+      "explanation": "Time is kept as int64 nanoseconds, as in lesson 03-05."
+    },
+    {
+      "stage": "check",
+      "question": "The sensor and the logger are both due at 100 ms. The first version of the scheduler ran the logger first. Why?",
+      "options": [
+        "The logger is slower",
+        "Ties were broken by queue order, and a repeating task queues its next tick as it finishes the last, so the slower task's older event won",
+        "Alphabetical order",
+        "The clock was ahead"
+      ],
+      "correct": 1,
+      "explanation": "The fix is to break ties by registration order."
+    },
+    {
+      "stage": "post",
+      "question": "A task registers another task while the scheduler is calling it. What must the scheduler have done first?",
+      "options": [
+        "Nothing",
+        "Copied the entry's period and task out of the vector, because adding an entry can move the vector and the function being run",
+        "Locked the list",
+        "Slept"
+      ],
+      "correct": 1,
+      "explanation": "A task at +5 ms ran in the same run, and one at +500 ms waited."
+    },
+    {
+      "stage": "post",
+      "question": "Which problem can a scheduler on a test clock not show?",
+      "options": [
+        "A tick lost to rounding",
+        "A race between two threads, or a task that overruns its period, since tasks take no time and run one at a time",
+        "The order of tasks",
+        "How many events there are"
+      ],
+      "correct": 1,
+      "explanation": "It models when things happen, not how they overlap."
+    }
+  ]
+}
