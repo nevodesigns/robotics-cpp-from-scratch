@@ -34,7 +34,7 @@ catch (const std::out_of_range& e) { ... }
 
 Most specific first, and by const reference. Catching by value makes a new `std::exception` by copying the base part of what was thrown, and everything that made it specific is cut off.
 
-Thrown `invalid_argument("the specific message")`: caught by value gave **"std::exception"**, and by reference gave **"the specific message"**. See `E-CPP-0085`.
+Thrown `invalid_argument("the specific message")`: caught by value, the handler held something that was no longer an `invalid_argument`, on every toolchain tried. On libstdc++ its message had become **"std::exception"** too; MSVC kept the text and still lost the type. Caught by reference, both survived. See `E-CPP-0085`.
 
 ### Rethrow with nothing after it
 

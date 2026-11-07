@@ -4,7 +4,7 @@
 //
 // A parse that throws two different types, std::invalid_argument for text that is not a number and std::out_of_range for one that is no use,
 // lets a caller handle them differently. Catching by reference keeps what makes the error specific: the same invalid_argument caught by value
-// gave "std::exception" and by reference gave "the specific message". Rethrowing with a bare `throw;` kept the type, where `throw e;` cut it down to
+// was no longer an invalid_argument on any toolchain, and on libstdc++ its message became "std::exception" too; by reference it kept both. Rethrowing with a bare `throw;` kept the type, where `throw e;` cut it down to
 // std::exception. On the way out of a throw, destructors ran in reverse order (drop C, drop B, drop A) before the handler did.
 
 #ifndef RC_CORE_CHECKED_INT_HPP

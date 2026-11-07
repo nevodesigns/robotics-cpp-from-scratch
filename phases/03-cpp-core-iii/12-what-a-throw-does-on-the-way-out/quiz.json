@@ -4,15 +4,15 @@
   "questions": [
     {
       "stage": "pre",
-      "question": "A function throws std::invalid_argument(\"bad value 12abc\") and the caller writes catch (std::exception e). What does e.what() give?",
+      "question": "A function throws std::invalid_argument(\"bad value 12abc\") and the caller writes catch (std::exception e). What does the handler hold?",
       "options": [
-        "bad value 12abc",
-        "std::exception: the derived part and its message are cut off by catching by value",
-        "nothing",
-        "a crash"
+        "The original exception",
+        "A std::exception copied from the base part: it is no longer an invalid_argument, and on some libraries the message is gone too",
+        "Nothing",
+        "A crash"
       ],
       "correct": 1,
-      "explanation": "Caught by reference it gave the specific message."
+      "explanation": "Caught by reference it kept both the type and the message."
     },
     {
       "stage": "check",

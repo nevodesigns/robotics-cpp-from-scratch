@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <typeinfo>
 #include <vector>
 
 #include "solution.hpp"
@@ -29,12 +30,18 @@ struct Guard {
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wcatch-value"
 #endif
-std::string caught_by_value() {
-  std::string result;
+struct Caught {
+  std::string message;
+  bool still_derived = false;   // is what the handler holds still an invalid_argument?
+};
+
+Caught caught_by_value() {
+  Caught result;
   try {
     throw std::invalid_argument("the specific message");
   } catch (std::exception e) {
-    result = e.what();
+    result.message = e.what();
+    result.still_derived = typeid(e) == typeid(std::invalid_argument);
   }
   return result;
 }
@@ -43,12 +50,13 @@ std::string caught_by_value() {
 #pragma GCC diagnostic pop
 #endif
 
-std::string caught_by_reference() {
-  std::string result;
+Caught caught_by_reference() {
+  Caught result;
   try {
     throw std::invalid_argument("the specific message");
   } catch (const std::exception& e) {
-    result = e.what();
+    result.message = e.what();
+    result.still_derived = typeid(e) == typeid(std::invalid_argument);
   }
   return result;
 }
@@ -156,12 +164,17 @@ RC_TEST("on the way out of a throw, destructors run in reverse order, before the
 }
 
 RC_TEST("catching by value cuts the exception down to its base, and by reference does not") {
-  const std::string by_value = caught_by_value();
-  const std::string by_reference = caught_by_reference();
-  std::cout << "  thrown invalid_argument(\"the specific message\"): caught by value gives \"" << by_value
-            << "\", by reference \"" << by_reference << "\"\n\n";
-  RC_CHECK_EQ(by_reference, std::string("the specific message"));
-  RC_CHECK(by_value != by_reference);
+  const Caught by_value = caught_by_value();
+  const Caught by_reference = caught_by_reference();
+  std::cout << "  thrown invalid_argument(\"the specific message\"):\n"
+            << "    caught by value      message \"" << by_value.message << "\", still an invalid_argument: "
+            << (by_value.still_derived ? "yes" : "no") << "\n"
+            << "    caught by reference  message \"" << by_reference.message << "\", still an invalid_argument: "
+            << (by_reference.still_derived ? "yes" : "no") << "\n"
+            << "  (whether the message survives depends on the library; the type does not)\n\n";
+  RC_CHECK(by_reference.still_derived);
+  RC_CHECK_EQ(by_reference.message, std::string("the specific message"));
+  RC_CHECK(!by_value.still_derived);
 
   // And the handler written in the exercise keeps what makes the error specific.
   int value = 0;
