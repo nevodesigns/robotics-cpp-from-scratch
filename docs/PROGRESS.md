@@ -19,11 +19,11 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 174 of 320 planned, 54 percent |
+| lessons built | 178 of 320 planned, 56 percent |
 | phases opened | 16 of 22 |
-| phases finished to plan | 7 (phases 00, 01, 02, 03, 04, 07 and 08) |
+| phases finished to plan | 8 (phases 00 to 05, 07 and 08) |
 | hours of material | 305 |
-| Failure Atlas entries | 472 |
+| Failure Atlas entries | 484 |
 | librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
@@ -40,7 +40,7 @@ November below it, kept as it was because it records the reasoning of that day.
 | 02 Memory and ownership | 16 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 18 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 14 | 14 | A library of your own, installed, consumed by a project that never saw its source |
-| 05 Testing, fakes and verification | 8 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
+| 05 Testing, fakes and verification | 12 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 7 | 16 | Where the gripper is, in the world frame, and how you know |
 | 07 Concurrency and real time | 16 | 16 | A measured latency histogram of your own control loop |
 | 08 Systems input and output | 14 | 14 | A framed and checked conversation with a device, over a port you opened |
@@ -522,6 +522,18 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Written 10 November 2026, phase 05 finished to plan
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 05-09 the bound you picked | the average of 100 noisy readings had a spread of 0.0997; a bound of one spread failed 3176 of 10000 runs, three spreads 26, six spreads 0; a bias of 0.3 was seen 0.1 percent of the time with 100 readings and 2000 of 2000 with 1600 | `rc/test/tolerance.hpp` |
+| 05-10 checking how not what | a test of the recorded calls broke for 5 of 5 harmless changes, a test of the fake's state for 0; both caught 3 of 3 bugs and only the state said 4 speeds were ignored | `rc/test/sim_motor.hpp` |
+| 05-11 the expected output that changed | 4 of 4 log lines differed between runs as written and 0 after the time and address were replaced; the difference of a real change named the one speed line | `rc/test/golden.hpp` |
+| 05-12 six faults and a matrix | 0 of 6 faults got past 3 checks and the clean run passed all 3; 3 of 6 faults had a single witness, removing the response check hid 2, and loosening it left 4 of 6 on one check | `rc/test/matrix.hpp` |
+
+178 of 320 lessons, 56 percent. **Phase 05 is at 12 of 12, finished to plan** (eight phases: 00 to 05, 07, 08). Next in order: 06 (9 left).
+Three things learnt on the way. A harness `RC_REQUIRE` jumps out of a test without running destructors, so a stub that fails there while a vector is alive leaks under the address sanitizer: check with `if (!ok) return;` when the test holds containers. Indexing with a value the code under test returned crashes a stub; use a guarded accessor. And a folder name over 48 characters failed the MSVC job on a path limit (rule L029).
 
 ### Written 10 November 2026, phase 05 begun
 

@@ -214,6 +214,11 @@ reasoning in their own messages, and `git log` is the record.
 | `8d1f820` | 14-09, two loops one inside the other, graduated `rc/control/cascade.hpp` |
 | `d48020d` | 13-09, straight in space or in the joints, graduated `rc/kin/path.hpp` |
 | `11d1368` | 02-16, a handle the library gave you, graduated `rc/core/handle.hpp` |
+| `9d0ff2c` | 05-12, six faults and a matrix, graduated `rc/test/matrix.hpp` |
+| `2b823e0` | 05-11, the expected output that changed, graduated `rc/test/golden.hpp` |
+| `3b977d9` | 05-10, checking how and not what, graduated `rc/test/sim_motor.hpp` |
+| `32b39f3` | 05-09, the bound you picked, graduated `rc/test/tolerance.hpp` |
+| `0394efe` | 05-08, the test that broke, graduated `rc/test/response.hpp`, with 04-14 renamed and rule L029 |
 | `58af7a8` | 04-14, the header that changed, graduated `rc/core/smoother.hpp` |
 | `d25297c` | 04-13, two things need different versions, graduated `rc/core/resolve.hpp` |
 | `e38b98c` | 04-12, where did this value come from, graduated `rc/core/layered_config.hpp` |
@@ -792,3 +797,7 @@ without the feature: run the exercise and read the pass count.
 **A quiz answer key off by one, in 04-10.** The correct index of one question was 0 where the right option was second. Check `correct` against the option text, not by position in the head.
 
 **A path that was too long for Windows, in 04-14.** The lesson folder was named `14-the-header-that-changed-and-took-everything-with-it` (54 characters). Every other job passed. MSVC failed with `fatal error C1083: Cannot open compiler generated file: '': Invalid argument` on a test file that compiled elsewhere, because the object file path contains the folder name twice and exceeded 260 characters on the runner. The folder, the lesson id and the atlas links were renamed to `04-14-the-header-that-changed`, 05-08 was shortened from 45 to 22 characters, and rule L029 now refuses a folder name over 48 characters (47 had built). Long titles belong in lesson.json and the page, not the folder.
+
+**A harness jump that leaked, in 05-12.** The first test file used `RC_REQUIRE` with vectors alive. A stub that failed the requirement left the function by `longjmp`, which does not run destructors, and the address sanitizer reported a leak for the stub alone. The tests now check and return early. A second stub crash came from indexing with a value the stub had returned (999), so printing a name goes through a guarded accessor.
+
+**A claim about seed 1, in 05-09.** The docs said a bound "looked fine on the first run". The test now checks that seed 1 passes the bound of 0.1, so the story is a measurement: the first run passes and 3176 of 10000 fail.
