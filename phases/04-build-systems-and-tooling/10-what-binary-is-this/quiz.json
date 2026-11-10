@@ -1,0 +1,78 @@
+{
+  "lesson": "04-10-what-binary-is-this",
+  "title": "What Binary Is This: Which Compiler, How Optimised, What Sanitizer, and Which Numbers May Be Compared",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A loop is timed at 300 microseconds on a laptop and 40 on the robot, running the same source. What is the most likely difference?",
+      "options": [
+        "The source",
+        "The build: a debug build, assertions on and no optimisation, can be several times slower than a release build of the same code",
+        "The compiler's name",
+        "The date"
+      ],
+      "correct": 1,
+      "explanation": "Nothing in the program says which kind of build it is."
+    },
+    {
+      "stage": "check",
+      "question": "Why does current_build check for clang before gcc?",
+      "options": [
+        "Clang is newer",
+        "Clang also defines __GNUC__, so testing gcc first would call a clang build gcc",
+        "gcc is not supported",
+        "It is alphabetical"
+      ],
+      "correct": 1,
+      "explanation": "Clang defines the macros of the compiler it imitates."
+    },
+    {
+      "stage": "check",
+      "question": "The suite's sanitizer build described itself as gcc-11 c++17 debug address 64bit little. How was address found?",
+      "options": [
+        "From a command line",
+        "Through the compiler's macro __SANITIZE_ADDRESS__ in gcc, or __has_feature in clang",
+        "By asking the operating system",
+        "It was typed in"
+      ],
+      "correct": 1,
+      "explanation": "The default build read none."
+    },
+    {
+      "stage": "check",
+      "question": "Which of these pairs of builds are comparable for speed?",
+      "options": [
+        "A release build and an address sanitizer build of the same compiler",
+        "Two release builds with the same compiler, version and pointer width, with no sanitizer on either",
+        "A debug build and a release build",
+        "Any two on the same machine"
+      ],
+      "correct": 1,
+      "explanation": "Even the same sanitizer build compared with itself is not a speed to trust."
+    },
+    {
+      "stage": "post",
+      "question": "A report line has a double space in it. What does parse_build do?",
+      "options": [
+        "Reads it anyway",
+        "Refuses it, because the pieces are split at single spaces and an empty piece is how a malformed line is noticed, and leaves the output alone",
+        "Crashes",
+        "Fixes it"
+      ],
+      "correct": 1,
+      "explanation": "All 12 malformed lines in the suite were refused."
+    },
+    {
+      "stage": "post",
+      "question": "Two builds both read gcc-11 c++17 release none 64bit little. What can still differ?",
+      "options": [
+        "Nothing",
+        "The optimisation level (-O1 and -O3 are both release), the warning flags, the standard library and the machine",
+        "The compiler's name",
+        "The pointer width"
+      ],
+      "correct": 1,
+      "explanation": "The line records what the macros say, not the flags that were given."
+    }
+  ]
+}

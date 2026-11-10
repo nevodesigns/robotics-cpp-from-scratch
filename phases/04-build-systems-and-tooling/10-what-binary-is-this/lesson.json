@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "04-10-what-binary-is-this",
+  "title": "What Binary Is This: Which Compiler, How Optimised, What Sanitizer, and Which Numbers May Be Compared",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-05-strings-and-text",
+    "04-06-the-check-that-was-not-in-the-release-build",
+    "04-07-the-tool-that-watches-it-run"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/build_info.hpp",
+    "note": "what a binary was built with as one readable line, parsed back, with a check for when two builds may be compared and a warning for a build that cannot be trusted for speed"
+  },
+  "breaks_first": [
+    "E-BUILD-0008",
+    "E-BUILD-0009",
+    "E-BUILD-0010"
+  ]
+}
