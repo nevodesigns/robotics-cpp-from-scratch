@@ -19,11 +19,11 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 173 of 320 planned, 54 percent |
+| lessons built | 174 of 320 planned, 54 percent |
 | phases opened | 16 of 22 |
 | phases finished to plan | 7 (phases 00, 01, 02, 03, 04, 07 and 08) |
 | hours of material | 305 |
-| Failure Atlas entries | 469 |
+| Failure Atlas entries | 472 |
 | librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
@@ -40,7 +40,7 @@ November below it, kept as it was because it records the reasoning of that day.
 | 02 Memory and ownership | 16 | 16 | A subsystem tree that releases completely, with no cycles |
 | 03 C++ Core III, classes and templates | 18 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 14 | 14 | A library of your own, installed, consumed by a project that never saw its source |
-| 05 Testing, fakes and verification | 7 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
+| 05 Testing, fakes and verification | 8 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
 | 06 Robot maths, by hand then Eigen | 7 | 16 | Where the gripper is, in the world frame, and how you know |
 | 07 Concurrency and real time | 16 | 16 | A measured latency histogram of your own control loop |
 | 08 Systems input and output | 14 | 14 | A framed and checked conversation with a device, over a port you opened |
@@ -67,7 +67,7 @@ is worth more than extending the back.
 ## The lesson contract
 
 Every lesson directory holds exactly this, and `rcpp audit` enforces it with
-rules L001 to L028:
+rules L001 to L029:
 
 ```
 lesson.json        id, title, minutes, platforms, requires, artifact, breaks_first
@@ -99,6 +99,11 @@ Rules worth knowing without reading the source:
 - **L028** the `**Platforms:**` line in a lesson page names the toolchains
   `lesson.json` claims. Added after finding that no page mentioned the clang
   lane and one still said it was not claimed on Windows.
+- **L029** a lesson folder name is at most 48 characters. Added after 04-14, first
+  named with 54, failed the MSVC job alone with "Cannot open compiler generated
+  file": the object file path contains the folder name twice and passed 260
+  characters. It was renamed to 04-14-the-header-that-changed; 05-08 was
+  shortened at the same time.
 - **L027** a lesson may not require one that sorts after it. A curriculum with a
   stated order must not send a learner forward.
 
@@ -518,6 +523,14 @@ libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
 
+### Written 10 November 2026, phase 05 begun
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 05-08 the test that broke | a test pinning the response at one second (0.933636) broke for 6 of 6 harmless changes; a behaviour test passed all 6 and failed all 5 bugs (33.56 and 18.29 percent overshoot among them); a settling bound cut to 1.8 s failed 4 of 6 harmless changes | `rc/test/response.hpp` |
+
+174 of 320 lessons. Phase 05 is at 8 of 12. Next in order: 05 (4 left), 06 (9).
+
 ### Written 10 November 2026, phase 04 finished to plan
 
 | lesson | the finding it rests on | header |
@@ -527,7 +540,7 @@ libstdc++ issue on that version rather than anything in this repository.
 | 04-11 the build that rebuilt nothing or everything | build, edit, revert compiled 3 times by timestamp and 2 by content; a restored file with an old timestamp was judged up to date; 300 random builds made 8 compiles, 292 hits and 0 stale | `rc/core/build_cache.hpp` |
 | 04-12 where did this value come from | the command line 9000 beat the file 8080 and default 80 in any order; of 5 unknown keys 3 got the right suggestion; a swap is 2 edits and LOG_LEVEL is 8 from log_level | `rc/core/layered_config.hpp` |
 | 04-13 two things need different versions | ranges [1.0, 3.0) and [1.5, 2.5) gave C 2.4.0; the newest A (2.0.0) could not live with B so the resolver chose A 1.0.0 and C 1.7.0 in 6 steps; a conflict names who asked for what | `rc/core/resolve.hpp` |
-| 04-14 the header that changed and took everything with it | the same data was 24 bytes then 104 bytes in the class and 8 and 8 behind a pointer; a compiler written destructor does not compile (a checks/ snippet); a deep copy leaves the original at 7.5 | `rc/core/smoother.hpp` |
+| 04-14 the header that changed | the same data was 24 bytes then 104 bytes in the class and 8 and 8 behind a pointer; a compiler written destructor does not compile (a checks/ snippet); a deep copy leaves the original at 7.5 | `rc/core/smoother.hpp` |
 
 173 of 320 lessons, 54 percent. **Phase 04 is at 14 of 14, finished to plan** (seven phases: 00, 01, 02, 03, 04, 07, 08). Next in order: 05 (5 left), 06 (9).
 Two compile-fail snippets and one audit finding to remember: L018 refuses `typedef` (use `using`), a `match:` line is a regular expression, and the checks/ build only gates on a hard compile error, not a warning, since MSVC does not warn where gcc does.

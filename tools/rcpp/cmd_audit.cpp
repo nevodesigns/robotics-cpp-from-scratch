@@ -172,6 +172,20 @@ void check_platform_line(const Lesson& lesson, const std::vector<std::string>& l
   }
 }
 
+// L029: a lesson folder name must be short enough for a Windows build.
+//
+// Windows refuses a path of 260 characters or more, and the compiler writes an object file under the build
+// directory at a path that contains the lesson folder name twice, once as the folder and once inside the
+// target name. Lesson 04-14 was first given a 54 character name, and the MSVC lane failed with "Cannot open
+// compiler generated file" on a file that compiled everywhere else. 47 characters built; 48 is the limit set here.
+void check_path_length(const Lesson& lesson, std::vector<Finding>& out) {
+  const std::string name = fs::path(lesson.path).filename().string();
+  if (name.size() > 48)
+    out.push_back({"L029", lesson.rel_path,
+                   "the folder name is " + std::to_string(name.size()) +
+                       " characters; over 48 and the Windows build can exceed its path limit"});
+}
+
 void check_docs(const Lesson& lesson, std::vector<Finding>& out) {
   const fs::path doc = lesson.path / "docs" / "en.md";
   const auto text = read_file(doc);
@@ -940,6 +954,7 @@ int cmd_audit(const Args& args) {
     check_one_language(*lesson, findings);
     check_cxx17_baseline(*lesson, findings);
     check_platform_claims(*lesson, toolchains, findings);
+    check_path_length(*lesson, findings);
     check_cross_references(*lesson, catalog, findings);
     check_facility_order(*lesson, catalog, findings);
     check_test_constants(*lesson, findings);

@@ -3,7 +3,7 @@ title: A behaviour test with no specification behind it
 match: a test of the behaviour passes every harmless change and fails every real bug
 match: expected harmless_pass
 platforms: linux, windows
-teaches: 05-08-the-test-that-broke-when-nothing-was-wrong
+teaches: 05-08-the-test-that-broke
 ---
 
 ## Symptom

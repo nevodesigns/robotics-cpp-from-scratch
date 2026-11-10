@@ -3,7 +3,7 @@ title: A test that pins a value the system was never promised to produce
 match: a test that pins an exact value breaks on changes that do not matter
 match: expected broken
 platforms: linux, windows
-teaches: 05-08-the-test-that-broke-when-nothing-was-wrong
+teaches: 05-08-the-test-that-broke
 ---
 
 ## Symptom

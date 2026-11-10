@@ -3,7 +3,7 @@ title: A private field added to a class that every file includes
 match: adding a field changes the size of an open class and not of one behind a pointer
 match: expected sizeof
 platforms: linux, windows
-teaches: 04-14-the-header-that-changed-and-took-everything-with-it
+teaches: 04-14-the-header-that-changed
 ---
 
 ## Symptom

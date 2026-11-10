@@ -3,7 +3,7 @@ title: A specification so tight it is the pinned value again
 match: the numbers of the specification can be tightened until it fails a change it should not
 match: expected failed
 platforms: linux, windows
-teaches: 05-08-the-test-that-broke-when-nothing-was-wrong
+teaches: 05-08-the-test-that-broke
 ---
 
 ## Symptom

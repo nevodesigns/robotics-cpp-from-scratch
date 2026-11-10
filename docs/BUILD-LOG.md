@@ -214,7 +214,7 @@ reasoning in their own messages, and `git log` is the record.
 | `8d1f820` | 14-09, two loops one inside the other, graduated `rc/control/cascade.hpp` |
 | `d48020d` | 13-09, straight in space or in the joints, graduated `rc/kin/path.hpp` |
 | `11d1368` | 02-16, a handle the library gave you, graduated `rc/core/handle.hpp` |
-| `58af7a8` | 04-14, the header that changed and took everything with it, graduated `rc/core/smoother.hpp` |
+| `58af7a8` | 04-14, the header that changed, graduated `rc/core/smoother.hpp` |
 | `d25297c` | 04-13, two things need different versions, graduated `rc/core/resolve.hpp` |
 | `e38b98c` | 04-12, where did this value come from, graduated `rc/core/layered_config.hpp` |
 | `62851b0` | 04-11, the build that rebuilt nothing or everything, graduated `rc/core/build_cache.hpp` |
@@ -790,3 +790,5 @@ without the feature: run the exercise and read the pass count.
 **A stub that refused everything passed a refusal test, again, in 04-10.** The test of malformed lines passed for a parser that returned false for every line. It now first requires a good line to be accepted.
 
 **A quiz answer key off by one, in 04-10.** The correct index of one question was 0 where the right option was second. Check `correct` against the option text, not by position in the head.
+
+**A path that was too long for Windows, in 04-14.** The lesson folder was named `14-the-header-that-changed-and-took-everything-with-it` (54 characters). Every other job passed. MSVC failed with `fatal error C1083: Cannot open compiler generated file: '': Invalid argument` on a test file that compiled elsewhere, because the object file path contains the folder name twice and exceeded 260 characters on the runner. The folder, the lesson id and the atlas links were renamed to `04-14-the-header-that-changed`, 05-08 was shortened from 45 to 22 characters, and rule L029 now refuses a folder name over 48 characters (47 had built). Long titles belong in lesson.json and the page, not the folder.

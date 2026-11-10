@@ -3,7 +3,7 @@ title: Two filters that share one state
 match: a copy has its own state, assignment copies it, and a move hands it on
 match: expected b.update
 platforms: linux, windows
-teaches: 04-14-the-header-that-changed-and-took-everything-with-it
+teaches: 04-14-the-header-that-changed
 ---
 
 ## Symptom

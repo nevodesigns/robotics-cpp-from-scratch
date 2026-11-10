@@ -1,5 +1,5 @@
 {
-  "lesson": "05-08-the-test-that-broke-when-nothing-was-wrong",
+  "lesson": "05-08-the-test-that-broke",
   "title": "The Test That Broke When Nothing Was Wrong: Asserting a Behaviour, Not a Number",
   "questions": [
     {

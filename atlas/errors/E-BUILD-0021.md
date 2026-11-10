@@ -3,7 +3,7 @@ title: A hidden type whose destructor the compiler wrote too early
 match: a Smoother is as big as one pointer, however much is inside it
 match: rejects.a_destructor_the_compiler_wrote_too_early
 platforms: linux, windows
-teaches: 04-14-the-header-that-changed-and-took-everything-with-it
+teaches: 04-14-the-header-that-changed
 ---
 
 ## Symptom
