@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "04-11-the-build-that-rebuilt-nothing-or-everything",
+  "title": "The Build That Rebuilt Nothing or Everything: Timestamps, Content and a Cache That Never Serves Stale Output",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-11-a-name-made-from-the-content",
+    "04-01-what-a-build-system-does"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/build_cache.hpp",
+    "note": "a rebuild decision from timestamps, and a cache keyed by the content of the source, its name and the flags"
+  },
+  "breaks_first": [
+    "E-BUILD-0011",
+    "E-BUILD-0012",
+    "E-BUILD-0013"
+  ]
+}
