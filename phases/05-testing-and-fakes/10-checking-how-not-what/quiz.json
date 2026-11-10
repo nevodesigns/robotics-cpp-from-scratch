@@ -1,0 +1,78 @@
+{
+  "lesson": "05-10-checking-how-not-what",
+  "title": "Checking How and Not What: A Test That Recorded the Calls Instead of Looking at the Motor",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A test records the calls made to a fake motor and compares them with a list. The program is changed to ramp in eight steps instead of four. What happens?",
+      "options": [
+        "Nothing",
+        "The test fails though the motor behaves as well or better, and the list is edited",
+        "The test passes",
+        "The motor stops"
+      ],
+      "correct": 1,
+      "explanation": "5 of 5 harmless changes broke the test of the calls."
+    },
+    {
+      "stage": "check",
+      "question": "What does a simulating fake keep that a recording fake does not?",
+      "options": [
+        "A longer list",
+        "The state of the motor, whether it is enabled and its speed, with the rules the real driver has",
+        "The time",
+        "The calls"
+      ],
+      "correct": 1,
+      "explanation": "It counts violations so a test can ask whether a rule was broken."
+    },
+    {
+      "stage": "check",
+      "question": "A speed is set before the driver is enabled. What does the fake do?",
+      "options": [
+        "Applies it",
+        "Counts a violation and leaves the speed unchanged, as the hardware would ignore it",
+        "Throws",
+        "Enables the driver"
+      ],
+      "correct": 1,
+      "explanation": "A speed past the limit was counted and refused the same way."
+    },
+    {
+      "stage": "check",
+      "question": "How many of the 5 harmless changes broke the state test, and how many of the 3 bugs did the state test catch?",
+      "options": [
+        "5 and 0",
+        "0 and 3",
+        "5 and 3",
+        "0 and 0"
+      ],
+      "correct": 1,
+      "explanation": "Both kinds caught all 3 bugs."
+    },
+    {
+      "stage": "post",
+      "question": "Never enabling the driver is a bug both tests catch. What does only the state say?",
+      "options": [
+        "Nothing",
+        "That 4 speeds were ignored by the driver and the final speed is 0",
+        "That it was caught",
+        "That the list differs"
+      ],
+      "correct": 1,
+      "explanation": "A failure that names the consequence can be acted on."
+    },
+    {
+      "stage": "post",
+      "question": "When is a test of the call sequence the right one?",
+      "options": [
+        "Never",
+        "When the order is the requirement, such as a safety interlock that must disable before it moves, and it is chosen on purpose",
+        "Always",
+        "When the fake is slow"
+      ],
+      "correct": 1,
+      "explanation": "The lesson says to choose it deliberately and not by default."
+    }
+  ]
+}
