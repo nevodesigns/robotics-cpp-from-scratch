@@ -1,0 +1,78 @@
+{
+  "lesson": "06-14-adding-a-long-list",
+  "title": "Adding a Long List: Why the Total of a Million Numbers Is Wrong, and Two Ways to Get It Right",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "1e16, then a thousand ones, then -1e16 are added in order in a double. What is the total?",
+      "options": [
+        "1000",
+        "0: 1e16 + 1 is 1e16 in a double, so every one is lost",
+        "1",
+        "1e16"
+      ],
+      "correct": 1,
+      "explanation": "The exact total is 1000, and Kahan's total was 1000.0."
+    },
+    {
+      "stage": "check",
+      "question": "Why does a small number added to a large total lose its low digits?",
+      "options": [
+        "A bug",
+        "A double keeps about sixteen digits, so the sum is rounded and the small number's low digits do not fit",
+        "Addition is not exact in maths",
+        "It is undefined behaviour"
+      ],
+      "correct": 1,
+      "explanation": "A small enough number is lost entirely."
+    },
+    {
+      "stage": "check",
+      "question": "What does Kahan's sum keep in lost?",
+      "options": [
+        "The largest number",
+        "The part of the last number that did not fit into the total, worked out as (new total - old total) - corrected number",
+        "The count",
+        "The error bound"
+      ],
+      "correct": 1,
+      "explanation": "The next number is first corrected by it."
+    },
+    {
+      "stage": "check",
+      "question": "How does the test know the exact total of four million numbers?",
+      "options": [
+        "It adds them in long double",
+        "The numbers are whole multiples of 2^-40, so the exact total is a sum of integers held without rounding in a 64 bit integer",
+        "It trusts the plain sum",
+        "It compares with a second plain sum"
+      ],
+      "correct": 1,
+      "explanation": "A reference that is itself rounded is no reference."
+    },
+    {
+      "stage": "post",
+      "question": "A million copies of the float 0.1 are added. What are the plain and Kahan totals?",
+      "options": [
+        "100000 and 100000",
+        "100958.34 and 100000.00: the plain total is 0.96 percent out",
+        "100000 and 100958",
+        "50000 and 100000"
+      ],
+      "correct": 1,
+      "explanation": "A float keeps about seven digits, so it starts at a much smaller total."
+    },
+    {
+      "stage": "post",
+      "question": "Why must Kahan's sum not be built with -ffast-math?",
+      "options": [
+        "It is slower",
+        "The flag lets the compiler treat addition as exact, so (next - total) - corrected can be simplified to zero and the compensation removed",
+        "It changes the result of addition",
+        "It is unsupported"
+      ],
+      "correct": 1,
+      "explanation": "The compensation depends on the compiler doing exactly what is written."
+    }
+  ]
+}
