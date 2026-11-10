@@ -33,6 +33,11 @@ RigOptions options_for(WaitStyle style) {
 // Cycles in a 300 ms run at 200 Hz.
 const long long kExpectedSlots = 60;
 
+// How far the count of slots may be from that. The producer stops at the end of the run, and if it was stalled across the end,
+// the slots it slept through are never counted as missed. A hosted Windows runner stalled a thread for 15.7 ms (three slots and a
+// bit) in one run, which a margin of 3 could not allow. 8 slots is 40 ms.
+const long long kSlotMargin = 8;
+
 }  // namespace
 
 RC_TEST("every reading is delivered or dropped, and every slot is a reading or a missed slot") {
@@ -47,7 +52,7 @@ RC_TEST("every reading is delivered or dropped, and every slot is a reading or a
 
     // Slots: the producer is paced on a grid, so produced plus dropped slots is the run's length.
     const long long slots = report.produced + report.missed_slots;
-    RC_CHECK(std::llabs(slots - kExpectedSlots) <= 3);
+    RC_CHECK(std::llabs(slots - kExpectedSlots) <= kSlotMargin);
   }
 }
 
@@ -131,7 +136,7 @@ RC_TEST("a consumer too slow for the producer loses readings, counts them, and n
   RC_CHECK_EQ(report.produced, report.delivered + report.dropped);
 
   // The producer kept its rate: a slow consumer is the consumer's problem and not the producer's.
-  RC_CHECK(std::llabs((report.produced + report.missed_slots) - kExpectedSlots) <= 3);
+  RC_CHECK(std::llabs((report.produced + report.missed_slots) - kExpectedSlots) <= kSlotMargin);
 }
 
 RC_TEST("a stop request ends the run promptly, with the books still balanced") {
