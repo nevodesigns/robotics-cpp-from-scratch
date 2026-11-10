@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "05-09-the-bound-you-picked",
+  "title": "The Bound You Picked: Tolerances for a Test With Noise in It, and How Many Samples It Takes to See a Bug",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-12-dice-you-can-replay",
+    "02-08-behaviour-as-a-value",
+    "05-05-the-test-that-fails-sometimes"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::test",
+    "header": "rc/test/tolerance.hpp",
+    "note": "the mean and spread of a statistic, a bound a number of spreads wide, how many samples a bug of a given size needs, and a count of how often a test fails over many seeds"
+  },
+  "breaks_first": [
+    "E-TEST-0021",
+    "E-TEST-0022",
+    "E-TEST-0023"
+  ]
+}
