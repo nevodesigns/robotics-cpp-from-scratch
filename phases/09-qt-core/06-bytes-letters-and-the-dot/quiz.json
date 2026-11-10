@@ -1,0 +1,78 @@
+{
+  "lesson": "09-06-bytes-letters-and-the-dot",
+  "title": "Bytes, Letters and the Dot: What a QString Length Counts, Where Text Goes Wrong on the Wire, and the Decimal Point a Locale Moves",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "An emoji is stored in a QString. What does length() give, and how many bytes in UTF-8?",
+      "options": [
+        "1 and 1",
+        "2 and 4: length() counts 16 bit units and the character takes two",
+        "4 and 4",
+        "1 and 4"
+      ],
+      "correct": 1,
+      "explanation": "Counted as letters it is 1."
+    },
+    {
+      "stage": "check",
+      "question": "How is the number of letters a person would count worked out?",
+      "options": [
+        "length()",
+        "By converting to UCS-4, where every character is one number: text.toUcs4().size()",
+        "From the byte size",
+        "With a regular expression"
+      ],
+      "correct": 1,
+      "explanation": "The micro sign is 2 bytes, length 1 and 1 letter."
+    },
+    {
+      "stage": "check",
+      "question": "The bytes C2 B5 73 are read as Latin-1 and as UTF-8. What are the lengths?",
+      "options": [
+        "3 and 2",
+        "2 and 3",
+        "3 and 3",
+        "2 and 2"
+      ],
+      "correct": 0,
+      "explanation": "The same bytes are different letters in different encodings."
+    },
+    {
+      "stage": "check",
+      "question": "A decoder meets the byte FF in UTF-8. What does it do, and what must the caller ask?",
+      "options": [
+        "Throws",
+        "Puts in U+FFFD and carries on, so the caller has to ask hasError() to know",
+        "Stops",
+        "Skips it silently with no trace"
+      ],
+      "correct": 1,
+      "explanation": "decode_utf8 returns a clean flag."
+    },
+    {
+      "stage": "post",
+      "question": "With German as the application's locale, what does QLocale().toDouble(\"1.500\") give?",
+      "options": [
+        "1.5",
+        "1500: the dot is the thousands separator there",
+        "An error",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "And \"1.5\" is refused."
+    },
+    {
+      "stage": "post",
+      "question": "How should a file or a protocol write and read numbers?",
+      "options": [
+        "With the application's locale",
+        "With QLocale::c(), the plain locale, which does not change with the machine",
+        "With QString::number only",
+        "With a regular expression"
+      ],
+      "correct": 1,
+      "explanation": "The application's locale is for numbers shown to a person."
+    }
+  ]
+}
