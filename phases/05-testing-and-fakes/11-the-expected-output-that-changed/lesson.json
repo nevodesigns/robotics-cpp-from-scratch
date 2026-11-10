@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "05-11-the-expected-output-that-changed",
+  "title": "The Expected Output That Changed Every Run: Comparing a Log With a Saved One, and Showing the Line That Differs",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-12-dice-you-can-replay",
+    "01-05-strings-and-text",
+    "05-01-building-the-test-framework"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::test",
+    "header": "rc/test/golden.hpp",
+    "note": "volatile parts of a log replaced before comparing, and a line by line difference that shows what was added, removed and kept"
+  },
+  "breaks_first": [
+    "E-TEST-0027",
+    "E-TEST-0028",
+    "E-TEST-0029"
+  ]
+}
