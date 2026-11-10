@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "04-13-two-things-need-different-versions",
+  "title": "Two Things Need Different Versions: Version Ranges, the Diamond, and a Resolver That Backs Up",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "04-01-what-a-build-system-does",
+    "04-09-which-version-is-newer"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/resolve.hpp",
+    "note": "version ranges that intersect, and a resolver that picks the newest set of versions satisfying everyone, backing up when the newest cannot be used and naming who disagreed when nothing can"
+  },
+  "breaks_first": [
+    "E-BUILD-0017",
+    "E-BUILD-0018",
+    "E-BUILD-0019"
+  ]
+}
