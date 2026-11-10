@@ -1,0 +1,78 @@
+{
+  "lesson": "04-09-which-version-is-newer",
+  "title": "Which Version Is Newer: Why 1.9 Is Older Than 1.10, Where a Release Candidate Sits, and What Compatible Means",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A script picks the newest of 1.9.0 and 1.10.0 by comparing them as text. Which does it pick?",
+      "options": [
+        "1.10.0",
+        "1.9.0: as text '1.9' sorts after '1.10' because 9 is more than 1",
+        "Both",
+        "Neither"
+      ],
+      "correct": 1,
+      "explanation": "As versions, compare gave -1: 1.9.0 is older."
+    },
+    {
+      "stage": "check",
+      "question": "Where does 1.0.0-rc.1 sit relative to 1.0.0?",
+      "options": [
+        "After it",
+        "Before it: a pre-release is older than the same numbers without a label",
+        "Equal",
+        "It depends on the alphabet"
+      ],
+      "correct": 1,
+      "explanation": "The release outranks its candidate."
+    },
+    {
+      "stage": "check",
+      "question": "Of 1.0.0-beta.2 and 1.0.0-beta.11, which is newer, and what does text say?",
+      "options": [
+        "beta.2, and text agrees",
+        "beta.11, though as text beta.11 sorts first",
+        "They are equal",
+        "Neither is valid"
+      ],
+      "correct": 1,
+      "explanation": "Identifiers that are numbers compare as numbers."
+    },
+    {
+      "stage": "check",
+      "question": "Why does compare number strings as digits, longer is bigger, and not turn them into integers?",
+      "options": [
+        "It is faster",
+        "A very long number would overflow an integer, and comparing as digits cannot",
+        "Integers are banned",
+        "Text is always better"
+      ],
+      "correct": 1,
+      "explanation": "rc.99999999999999999999 against rc.100000000000000000000 gave -1."
+    },
+    {
+      "stage": "post",
+      "question": "A project asks for 1.4.0. Is 2.0.0, which is newer, compatible?",
+      "options": [
+        "Yes, newer is fine",
+        "No: a new major version may break the interface, so the major numbers must match",
+        "Only on Tuesdays",
+        "Yes if the minor is higher"
+      ],
+      "correct": 1,
+      "explanation": "That is the SameMajorVersion rule."
+    },
+    {
+      "stage": "post",
+      "question": "Among 1.2.0, 1.9.4, 2.0.1, 1.10.0, 1.11.0-rc.1 and 0.9.0, which does a request for 1.4.0 get?",
+      "options": [
+        "1.11.0-rc.1",
+        "1.10.0: 1.2.0 is older, 2.0.1 and 0.9.0 have other majors, and the candidate is not offered to a request for a release",
+        "2.0.1",
+        "1.9.4"
+      ],
+      "correct": 1,
+      "explanation": "A pre-release is only offered to somebody who asked for one."
+    }
+  ]
+}
