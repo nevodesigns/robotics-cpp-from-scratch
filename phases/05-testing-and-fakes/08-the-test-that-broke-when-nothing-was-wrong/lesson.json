@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "05-08-the-test-that-broke-when-nothing-was-wrong",
+  "title": "The Test That Broke When Nothing Was Wrong: Asserting a Behaviour, Not a Number",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "05-03-the-test-that-catches-it",
+    "05-04-inputs-you-did-not-think-of"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::test",
+    "header": "rc/test/response.hpp",
+    "note": "overshoot, settling time and steady error measured from a response, and a check of them against a specification"
+  },
+  "breaks_first": [
+    "E-TEST-0018",
+    "E-TEST-0019",
+    "E-TEST-0020"
+  ]
+}
