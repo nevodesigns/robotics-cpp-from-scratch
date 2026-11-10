@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "06-10-where-it-crosses-zero",
+  "title": "Where It Crosses Zero: Finding a Root by Halving, by Newton, and by Both When Newton Loses Its Way",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "02-08-behaviour-as-a-value",
+    "06-05-the-derivative-you-compute"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::math",
+    "header": "rc/math/roots.hpp",
+    "note": "bisection that cannot fail while there is a sign change, Newton that is fast and can run away, and a mix that takes Newton steps while they help"
+  },
+  "breaks_first": [
+    "E-MATH-0016",
+    "E-MATH-0017",
+    "E-MATH-0018"
+  ]
+}
