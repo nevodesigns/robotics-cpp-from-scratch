@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "06-08-the-fit-the-outliers-pulled",
+  "title": "The Fit the Outliers Pulled: Fitting a Line to Points With a Few Wrong Ones, and Lines That Go Straight Up",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-12-dice-you-can-replay",
+    "06-07-solving-a-system"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::math",
+    "header": "rc/math/fit_line.hpp",
+    "note": "a line fitted by minimising the perpendicular distance, which handles a vertical line, and a random-sample fit that ignores wrong points"
+  },
+  "breaks_first": [
+    "E-MATH-0010",
+    "E-MATH-0011",
+    "E-MATH-0012"
+  ]
+}
