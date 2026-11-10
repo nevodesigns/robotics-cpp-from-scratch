@@ -1,0 +1,78 @@
+{
+  "lesson": "06-09-a-path-through-the-waypoints",
+  "title": "A Path Through the Waypoints: Corners, Smooth Curves, and the Loop That Uneven Spacing Makes",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A robot follows straight lines between four waypoints on a square route. How sharp is the turn at a corner, in one step?",
+      "options": [
+        "10.9 degrees",
+        "90.0 degrees: the whole angle in a single step, which no machine can follow",
+        "0 degrees",
+        "180 degrees"
+      ],
+      "correct": 1,
+      "explanation": "A curve through the same waypoints turned at most 10.9 degrees in a step."
+    },
+    {
+      "stage": "check",
+      "question": "What does the alpha of a Catmull-Rom curve set?",
+      "options": [
+        "The speed of the robot",
+        "How the curve is timed along the way: 0 gives every waypoint the same time, 0.5 the square root of the distance, 1 the distance",
+        "The number of points",
+        "The colour"
+      ],
+      "correct": 1,
+      "explanation": "The curve passes through every waypoint whatever alpha is."
+    },
+    {
+      "stage": "check",
+      "question": "Waypoints spaced 10, 1 and 14.1. What is the sharpest turn in one step with alpha 0 and with alpha 0.5?",
+      "options": [
+        "9.1 and 178.2 degrees",
+        "178.2 and 9.1 degrees: uniform timing makes the curve turn back on itself",
+        "10 and 10",
+        "0 and 0"
+      ],
+      "correct": 1,
+      "explanation": "Chordal timing gave 8.7 degrees."
+    },
+    {
+      "stage": "check",
+      "question": "Why does uniform timing loop on uneven waypoints?",
+      "options": [
+        "It is faster",
+        "Every segment gets the same time, so the short step has to be crossed as slowly as the long runs and the curve rushes through it and turns back",
+        "It uses more points",
+        "It is a bug"
+      ],
+      "correct": 1,
+      "explanation": "Timing by distance fixes it."
+    },
+    {
+      "stage": "post",
+      "question": "What happens at a waypoint that is repeated?",
+      "options": [
+        "Nothing",
+        "A distance of zero gives a time interval of zero and a division by it, so repeated waypoints are taken once and the curve function goes straight on a zero interval",
+        "It loops",
+        "It is skipped silently with a warning"
+      ],
+      "correct": 1,
+      "explanation": "Waypoints on a line with the last repeated stayed exactly on it."
+    },
+    {
+      "stage": "post",
+      "question": "What does the curve not do?",
+      "options": [
+        "Pass through the waypoints",
+        "Say anything about speed, avoid obstacles between waypoints, or help when the waypoints are noisy and the robot only needs to pass near them",
+        "Stay smooth",
+        "Work in the plane"
+      ],
+      "correct": 1,
+      "explanation": "A velocity profile is lesson 14-06's job."
+    }
+  ]
+}

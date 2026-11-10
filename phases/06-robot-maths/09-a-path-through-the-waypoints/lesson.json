@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "06-09-a-path-through-the-waypoints",
+  "title": "A Path Through the Waypoints: Corners, Smooth Curves, and the Loop That Uneven Spacing Makes",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "06-01-vectors-and-two-products",
+    "06-05-the-derivative-you-compute"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::math",
+    "header": "rc/math/spline.hpp",
+    "note": "a smooth curve through waypoints with a spacing parameter that stops uneven waypoints making a loop, and two numbers to judge a path by"
+  },
+  "breaks_first": [
+    "E-MATH-0013",
+    "E-MATH-0014",
+    "E-MATH-0015"
+  ]
+}
