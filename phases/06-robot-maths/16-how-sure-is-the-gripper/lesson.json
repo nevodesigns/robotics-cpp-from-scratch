@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "06-16-how-sure-is-the-gripper",
+  "title": "How Sure Is the Gripper: Carrying the Doubt in the Joints Through the Arm to the Tool",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "06-04-transforms-and-frames",
+    "06-05-the-derivative-you-compute",
+    "06-11-the-shape-of-the-doubt"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::math",
+    "header": "rc/math/propagate.hpp",
+    "note": "the position of a planar two-link arm, its Jacobian, and the doubt in the joint angles carried through to the doubt at the tool, checked against random trials"
+  },
+  "breaks_first": [
+    "E-MATH-0034",
+    "E-MATH-0035",
+    "E-MATH-0036"
+  ]
+}
