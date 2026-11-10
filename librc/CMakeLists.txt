@@ -71,6 +71,24 @@ foreach(header ${rc_public_headers})
   endforeach()
 endforeach()
 
+# Every header in one translation unit as well.
+#
+# Compiling each header alone proves each is complete, and says nothing about two of them agreeing. Three headers
+# defined `rc::core::Reading` with three different layouts, each compiled alone and each linked, which is a violation of
+# the one definition rule that no compiler reports across translation units. All of them together in one file does report
+# it, as a redefinition.
+set(together_text "// Generated. Every header at once: two that define one name differently compile alone and fail here.\n")
+foreach(header ${rc_public_headers})
+  file(RELATIVE_PATH include_path "${CMAKE_CURRENT_SOURCE_DIR}/include" "${header}")
+  # leak_check.hpp defines the global allocation functions, which only one translation unit of a program may do, and
+  # it already has its standalone copy above.
+  if(NOT include_path STREQUAL "rc/test/leak_check.hpp")
+    string(APPEND together_text "#include <${include_path}>\n")
+  endif()
+endforeach()
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/standalone/together.cpp" "${together_text}")
+list(APPEND standalone_sources "${CMAKE_CURRENT_BINARY_DIR}/standalone/together.cpp")
+
 file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/standalone/main.cpp"
   "// Generated. The test is that this links, which means every header in\n"
   "// librc compiled alone and twice over.\n"

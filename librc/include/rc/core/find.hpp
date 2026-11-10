@@ -14,12 +14,12 @@
 namespace rc {
 namespace core {
 
-struct Reading {
+struct TimedTemperature {
   double celsius = 0.0;
   int milliseconds = 0;
 };
 
-inline const Reading* find_first_above(const Reading* readings, int count, double limit) {
+inline const TimedTemperature* find_first_above(const TimedTemperature* readings, int count, double limit) {
   // Guard the inputs before touching memory. A null array with a count of ten
   // is a caller mistake, and reading from it would be undefined behaviour that
   // often looks like it worked.
@@ -35,20 +35,20 @@ inline const Reading* find_first_above(const Reading* readings, int count, doubl
   return nullptr;
 }
 
-inline void swap_readings(Reading* a, Reading* b) {
+inline void swap_readings(TimedTemperature* a, TimedTemperature* b) {
   if (a == nullptr || b == nullptr) return;
 
   // The star is doing the work. Without it this would exchange two local copies
   // of the addresses and the caller would see nothing change at all.
-  const Reading held = *a;
+  const TimedTemperature held = *a;
   *a = *b;
   *b = held;
 }
 
-inline const Reading* highest(const Reading* readings, int count) {
+inline const TimedTemperature* highest(const TimedTemperature* readings, int count) {
   if (readings == nullptr || count <= 0) return nullptr;
 
-  const Reading* best = &readings[0];
+  const TimedTemperature* best = &readings[0];
   for (int i = 1; i < count; ++i) {
     if (readings[i].celsius > best->celsius) best = &readings[i];
   }

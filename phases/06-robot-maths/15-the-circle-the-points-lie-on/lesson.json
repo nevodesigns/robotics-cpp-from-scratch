@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "06-15-the-circle-the-points-lie-on",
+  "title": "The Circle the Points Lie On: Fitting a Circle to a Piece of an Arc, and the Bias a Quick Fit Has",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "00-12-dice-you-can-replay",
+    "06-07-solving-a-system",
+    "06-08-the-fit-the-outliers-pulled"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::math",
+    "header": "rc/math/fit_circle.hpp",
+    "note": "a circle through noisy points by one linear solve, refined to minimise the real distances, and how badly each does on a short arc"
+  },
+  "breaks_first": [
+    "E-MATH-0031",
+    "E-MATH-0032",
+    "E-MATH-0033"
+  ]
+}

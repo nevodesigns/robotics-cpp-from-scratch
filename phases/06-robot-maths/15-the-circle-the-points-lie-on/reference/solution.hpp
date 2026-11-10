@@ -1,0 +1,110 @@
+#ifndef LESSON_SOLUTION_HPP
+#define LESSON_SOLUTION_HPP
+
+#include <cmath>
+#include <cstddef>
+#include <vector>
+
+#include <rc/core/random.hpp>
+#include <rc/math/linear.hpp>
+
+struct Pt {
+  double x = 0.0;
+  double y = 0.0;
+};
+
+struct Circle {
+  double cx = 0.0;
+  double cy = 0.0;
+  double r = 0.0;
+  bool valid = false;
+};
+
+// Fit a circle by making x^2 + y^2 + D x + E y + F as close to zero as possible for every point (Kasa's fit).
+//
+// A point is on the circle with centre (a, b) and radius r when (x - a)^2 + (y - b)^2 = r^2, which is x^2 + y^2 + D x + E y + F = 0 with D = -2a,
+// E = -2b and F = a^2 + b^2 - r^2. That is LINEAR in D, E and F, so it is one 3 by 3 system of normal equations, solved with the solver of lesson 06-07.
+//
+// It is fast, and it does not minimise the distance of the points from the circle. It minimises a quantity that grows with the size of the circle, and
+// on a short arc it pulls the answer toward a smaller circle.
+inline Circle fit_circle_algebraic(const std::vector<Pt>& pts) {
+  Circle c;
+  if (pts.size() < 3) return c;
+
+  double sx = 0, sy = 0, sxx = 0, syy = 0, sxy = 0, sxz = 0, syz = 0, sz = 0;
+  for (const Pt& p : pts) {
+    const double z = p.x * p.x + p.y * p.y;
+    sx += p.x;
+    sy += p.y;
+    sxx += p.x * p.x;
+    syy += p.y * p.y;
+    sxy += p.x * p.y;
+    sxz += p.x * z;
+    syz += p.y * z;
+    sz += z;
+  }
+  const double n = static_cast<double>(pts.size());
+
+  rc::math::Matrix a(3, 3);
+  a.at(0, 0) = sxx; a.at(0, 1) = sxy; a.at(0, 2) = sx;
+  a.at(1, 0) = sxy; a.at(1, 1) = syy; a.at(1, 2) = sy;
+  a.at(2, 0) = sx;  a.at(2, 1) = sy;  a.at(2, 2) = n;
+  const std::vector<double> rhs = {-sxz, -syz, -sz};
+
+  bool ok = false;
+  const std::vector<double> sol = rc::math::solve(a, rhs, ok);
+  if (!ok) return c;
+
+  c.cx = -0.5 * sol[0];
+  c.cy = -0.5 * sol[1];
+  const double r2 = c.cx * c.cx + c.cy * c.cy - sol[2];
+  if (!(r2 > 0.0)) return c;
+  c.r = std::sqrt(r2);
+  c.valid = true;
+  return c;
+}
+
+// Improve a circle by minimising the real distances from the points to it, by Gauss-Newton.
+//
+// The residual of a point is its distance from the centre minus the radius. Its derivative with respect to the centre is a unit vector
+// pointing away from the point, and with respect to the radius it is -1. Each step solves a 3 by 3 system of normal equations for
+// the change to make, and a handful of steps is enough from a good start.
+inline Circle refine_circle(const std::vector<Pt>& pts, Circle c, int steps) {
+  if (!c.valid) return c;
+  for (int it = 0; it < steps; ++it) {
+    rc::math::Matrix jtj(3, 3);
+    std::vector<double> jtr(3, 0.0);
+    for (const Pt& p : pts) {
+      const double dx = p.x - c.cx;
+      const double dy = p.y - c.cy;
+      const double rho = std::hypot(dx, dy);
+      if (rho < 1e-12) continue;
+      const double j[3] = {-dx / rho, -dy / rho, -1.0};
+      const double res = rho - c.r;
+      for (int a = 0; a < 3; ++a) {
+        jtr[static_cast<std::size_t>(a)] += j[a] * res;
+        for (int b = 0; b < 3; ++b) jtj.at(static_cast<std::size_t>(a), static_cast<std::size_t>(b)) += j[a] * j[b];
+      }
+    }
+    bool ok = false;
+    const std::vector<double> step = rc::math::solve(jtj, std::vector<double>{-jtr[0], -jtr[1], -jtr[2]}, ok);
+    if (!ok) break;
+    c.cx += step[0];
+    c.cy += step[1];
+    c.r += step[2];
+  }
+  return c;
+}
+
+// Points on an arc of a circle: `n` of them spread evenly in angle over `arc_degrees`, with noise of `sigma` on each coordinate.
+inline std::vector<Pt> arc_points(unsigned seed, int n, double cx, double cy, double r, double arc_degrees, double sigma) {
+  rc::core::Rng rng(seed);
+  std::vector<Pt> pts;
+  for (int i = 0; i < n; ++i) {
+    const double t = (arc_degrees * 3.14159265358979323846 / 180.0) * static_cast<double>(i) / static_cast<double>(n);
+    pts.push_back(Pt{cx + r * std::cos(t) + sigma * rng.gaussian(), cy + r * std::sin(t) + sigma * rng.gaussian()});
+  }
+  return pts;
+}
+
+#endif  // LESSON_SOLUTION_HPP

@@ -19,7 +19,7 @@
 namespace rc {
 namespace core {
 
-struct Reading {
+struct NamedReading {
   std::string name;
   double value = 0.0;
   long at_ms = 0;
@@ -35,7 +35,7 @@ class SensorLog {
   }
 
   void record(const std::string& name, double value, long at_ms) {
-    Reading reading;
+    NamedReading reading;
     reading.name = name;
     reading.value = value;
     reading.at_ms = at_ms;
@@ -51,7 +51,7 @@ class SensorLog {
     if (size_ < capacity_) ++size_;
   }
 
-  std::optional<Reading> latest(const std::string& name) const {
+  std::optional<NamedReading> latest(const std::string& name) const {
     const auto found = latest_.find(name);
     if (found == latest_.end()) return std::nullopt;
     return found->second;
@@ -67,8 +67,8 @@ class SensorLog {
 
   // Oldest first. When the buffer has wrapped, the oldest entry is the one that
   // next_ is about to overwrite, not the one at index zero.
-  std::vector<Reading> history() const {
-    std::vector<Reading> out;
+  std::vector<NamedReading> history() const {
+    std::vector<NamedReading> out;
     out.reserve(size_);
 
     const std::size_t oldest = (size_ < capacity_) ? 0 : next_;
@@ -85,8 +85,8 @@ class SensorLog {
   std::size_t capacity_ = 1;
   std::size_t size_ = 0;
   std::size_t next_ = 0;
-  std::vector<Reading> history_;
-  std::map<std::string, Reading> latest_;
+  std::vector<NamedReading> history_;
+  std::map<std::string, NamedReading> latest_;
 };
 
 }  // namespace core

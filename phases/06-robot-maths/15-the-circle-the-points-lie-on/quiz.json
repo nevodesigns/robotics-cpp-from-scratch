@@ -1,0 +1,78 @@
+{
+  "lesson": "06-15-the-circle-the-points-lie-on",
+  "title": "The Circle the Points Lie On: Fitting a Circle to a Piece of an Arc, and the Bias a Quick Fit Has",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A point is on a circle when x^2 + y^2 + D x + E y + F = 0. Why does that make the fit easy?",
+      "options": [
+        "It is a circle",
+        "The equation is linear in D, E and F, so one 3 by 3 system of normal equations gives the circle",
+        "It needs no data",
+        "It avoids noise"
+      ],
+      "correct": 1,
+      "explanation": "Three points on a circle gave exactly that circle."
+    },
+    {
+      "stage": "check",
+      "question": "The quick fit's mean radius error on a 60 degree arc, and on a full turn?",
+      "options": [
+        "-0.0002 and -0.1049",
+        "-0.1049 and -0.0002: it is fine all the way round and five percent small on a short arc",
+        "0 and 0",
+        "-0.01 and -0.01"
+      ],
+      "correct": 1,
+      "explanation": "The refined fit gave -0.0047 on 60 degrees."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the quick fit biased on a short arc?",
+      "options": [
+        "A coding error",
+        "It minimises a quantity that is not the distance of the points from the circle and that grows with the circle's size, pulling the answer toward a smaller circle",
+        "The noise is not centred",
+        "The arc is too long"
+      ],
+      "correct": 1,
+      "explanation": "The real distance is rho - r."
+    },
+    {
+      "stage": "check",
+      "question": "What does Gauss-Newton refinement minimise?",
+      "options": [
+        "The algebraic quantity",
+        "The sum of squared real distances of the points from the circle, by repeated 3 by 3 solves",
+        "The radius",
+        "The centre's distance from the origin"
+      ],
+      "correct": 1,
+      "explanation": "Ten steps from the quick fit are enough."
+    },
+    {
+      "stage": "post",
+      "question": "The refined fit's rms radius error is 0.006 over 180 degrees, 0.172 over 40 and 5.986 over 15. What does that tell you?",
+      "options": [
+        "The method gets worse",
+        "Refining fixes the bias and not the information: on a gentle curve almost any large circle fits about as well, so the radius is not in the data",
+        "The noise changed",
+        "The seed changed"
+      ],
+      "correct": 1,
+      "explanation": "Drive a longer arc, or fix the radius another way."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the test of the line case also check that a real arc is fitted?",
+      "options": [
+        "Style",
+        "A function that refused everything would pass a test that only checked the refusal",
+        "Speed",
+        "The arc is easy"
+      ],
+      "correct": 1,
+      "explanation": "Ten points on a line gave not valid; a 270 degree arc gave valid."
+    }
+  ]
+}
