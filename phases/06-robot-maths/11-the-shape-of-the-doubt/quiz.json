@@ -1,0 +1,78 @@
+{
+  "lesson": "06-11-the-shape-of-the-doubt",
+  "title": "The Shape of the Doubt: Covariance, the Ellipse It Draws, and Why a Box Around a Position Is the Wrong Shape",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A position estimate is good to two metres in x and one in y, but x and y move together. What does a box around it lose?",
+      "options": [
+        "Nothing",
+        "The tilt: a box aligned to the axes leaves out the dense corners of the tilted cloud and takes in empty ones, so it holds fewer points in more area",
+        "The mean",
+        "The scale"
+      ],
+      "correct": 1,
+      "explanation": "The box had an area of 32.0 and held 92.9 percent; the ellipse 22.3 and 95.2."
+    },
+    {
+      "stage": "check",
+      "question": "What three numbers make a 2D covariance?",
+      "options": [
+        "The mean and two spreads",
+        "The variance in x, the variance in y, and the covariance, how much x and y move together",
+        "The area, length and width",
+        "Two angles and a size"
+      ],
+      "correct": 1,
+      "explanation": "Points (1,2), (3,6), (5,10) give 4, 16 and 8."
+    },
+    {
+      "stage": "check",
+      "question": "For a covariance matrix with xx 2, xy 1, yy 2, what are the eigenvalues and the direction of the long axis?",
+      "options": [
+        "1 and 2 at 0 degrees",
+        "3 and 1 at 45 degrees",
+        "2 and 2 at 90 degrees",
+        "4 and 0 at 45 degrees"
+      ],
+      "correct": 1,
+      "explanation": "The eigenvalues are mean plus or minus a radius."
+    },
+    {
+      "stage": "check",
+      "question": "A point 2.2 metres out along the cloud has a squared Mahalanobis distance of 1.00, and one 2.00 metres out across it has 12.38. What does that say about a gate in metres?",
+      "options": [
+        "Nothing",
+        "It accepts the point that is unlikely and rejects the likely one, since an uncertainty is not the same in every direction",
+        "It is exact",
+        "It is too slow"
+      ],
+      "correct": 1,
+      "explanation": "The limit for 95 percent is 5.991."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a point one spread out along an axis of an uncorrelated cloud at a squared distance of exactly 1?",
+      "options": [
+        "By luck",
+        "The distance is measured in units of the cloud's own spread, so one spread away is 1 whatever the stretch",
+        "It is a rule of the language",
+        "It is not"
+      ],
+      "correct": 1,
+      "explanation": "A point at (3, 0) against variances 9 and 4 has a squared distance of 1."
+    },
+    {
+      "stage": "post",
+      "question": "Ten points lie on a line. What is the squared distance of a point off the line?",
+      "options": [
+        "Large",
+        "Infinity: the determinant is zero, there is no inverse, and the cloud has no width across the line",
+        "Zero",
+        "Not defined, so the program crashes"
+      ],
+      "correct": 1,
+      "explanation": "The centre itself is at distance 0."
+    }
+  ]
+}
