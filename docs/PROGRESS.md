@@ -19,11 +19,11 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 178 of 320 planned, 56 percent |
+| lessons built | 187 of 320 planned, 58 percent |
 | phases opened | 16 of 22 |
-| phases finished to plan | 8 (phases 00 to 05, 07 and 08) |
+| phases finished to plan | 9 (phases 00 to 08) |
 | hours of material | 305 |
-| Failure Atlas entries | 484 |
+| Failure Atlas entries | 511 |
 | librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
@@ -41,7 +41,7 @@ November below it, kept as it was because it records the reasoning of that day.
 | 03 C++ Core III, classes and templates | 18 | 18 | An injectable clock, so dt has a provenance |
 | 04 Build systems and tooling | 14 | 14 | A library of your own, installed, consumed by a project that never saw its source |
 | 05 Testing, fakes and verification | 12 | 12 | A test suite you can prove catches bugs, because you watched it catch six |
-| 06 Robot maths, by hand then Eigen | 7 | 16 | Where the gripper is, in the world frame, and how you know |
+| 06 Robot maths, by hand then Eigen | 16 | 16 | Where the gripper is, in the world frame, and how you know |
 | 07 Concurrency and real time | 16 | 16 | A measured latency histogram of your own control loop |
 | 08 Systems input and output | 14 | 14 | A framed and checked conversation with a device, over a port you opened |
 | 09 Qt Core | 4 | 14 | A sensor on its own thread, reaching the interface without ever touching it |
@@ -522,6 +522,23 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Written 10 November 2026, phase 06 finished to plan
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 06-08 the fit the outliers pulled | perpendicular distances gave 0.29 degrees of angle error against 0.77 for vertical ones on a line at 85 degrees; 30 clustered wrong points among 100 pulled an ordinary fit 20.69 degrees and a random-sample fit 0.03 | `rc/math/fit_line.hpp` |
+| 06-09 a path through the waypoints | straight lines turned 90.0 degrees at a corner in a step, the curve at most 10.9; uniform timing on spacing 10, 1, 14.1 gave a 178.2 degree turn, centripetal 9.1 | `rc/math/spline.hpp` |
+| 06-10 where it crosses zero | halving took 40 steps, Newton 4 and ran to 1.1e+12 on the cube root; Newton in a bracket took 4, 5 and 32 steps and always got there | `rc/math/roots.hpp` |
+| 06-11 the shape of the doubt | the 95 percent ellipse held 95.2 percent of points at area 22.3 where a box held 92.9 at 32.0; 2.2 m along the cloud was squared distance 1.00 and 2.00 m across it 12.38 | `rc/math/covariance.hpp` |
+| 06-12 does the line cross the wall | cross() gave -2.22e-16 for points in a line; the obvious point-in-polygon was wrong for 17 of 625 grid points and the half-open one for 0 | `rc/math/geometry.hpp` |
+| 06-13 random in every direction | latitude and longitude put 7.2 times too many directions near a pole; roll, pitch and yaw gave a mean turn of 126.0 against 126.5 and 40 percent too few small turns | `rc/math/random_rotation.hpp` |
+| 06-14 adding a long list | 1e16 plus a thousand ones minus 1e16 was 0 plain, 1000 Kahan and 998 pairwise; the plain total of 4 million numbers was 2.53e-14 out and a million float tenths 100958.34 | `rc/math/summation.hpp` |
+| 06-15 the circle the points lie on | the quick fit's radius error on a 60 degree arc was -0.1049 against -0.0047 refined; the refined scatter was 0.006, 0.172 and 5.986 over 180, 40 and 15 degrees | `rc/math/fit_circle.hpp` |
+| 06-16 how sure is the gripper | J C J transposed matched 20000 trials at 0.01 rad (5.02e-05 against 5.03e-05) and not at 0.3 (4.52e-02 against 4.00e-02); near a straight arm the spread was 19.69 mm along and 0.20 across | `rc/math/propagate.hpp` |
+
+187 of 320 lessons, 58 percent. **Phase 06 is at 16 of 16, finished to plan** (nine phases: 00 to 08). Next in order: phases 09 to 12 (Qt) and 13 to 16 (to their planned counts), then 17 to 21.
+Two things found on the way. A timing test in 07-16 allowed 3 slots of error and a hosted Windows runner stalled a thread for 15.7 ms across the end of a run; the margin is now 8. And three older headers each defined `rc::core::Reading` differently, which compiled alone and linked, a quiet violation of the one definition rule; the standalone gate now has a translation unit that includes every header at once.
 
 ### Written 10 November 2026, phase 05 finished to plan
 

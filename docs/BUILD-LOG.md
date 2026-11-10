@@ -214,6 +214,16 @@ reasoning in their own messages, and `git log` is the record.
 | `8d1f820` | 14-09, two loops one inside the other, graduated `rc/control/cascade.hpp` |
 | `d48020d` | 13-09, straight in space or in the joints, graduated `rc/kin/path.hpp` |
 | `11d1368` | 02-16, a handle the library gave you, graduated `rc/core/handle.hpp` |
+| `e61b6f6` | 06-16, how sure is the gripper, graduated `rc/math/propagate.hpp` |
+| `b5baa00` | 06-15, the circle the points lie on, graduated `rc/math/fit_circle.hpp`, and the gate for all headers at once |
+| `c059417` | 06-14, adding a long list, graduated `rc/math/summation.hpp` |
+| `c5f5030` | 06-13, random in every direction, graduated `rc/math/random_rotation.hpp` |
+| `b4da93d` | gave the 07-16 slot count a margin of 8 |
+| `06f0ad2` | 06-12, does the line cross the wall, graduated `rc/math/geometry.hpp` |
+| `4c9d702` | 06-11, the shape of the doubt, graduated `rc/math/covariance.hpp` |
+| `f591d28` | 06-10, where it crosses zero, graduated `rc/math/roots.hpp` |
+| `c9c7000` | 06-09, a path through the waypoints, graduated `rc/math/spline.hpp` |
+| `0aa62ec` | 06-08, the fit the outliers pulled, graduated `rc/math/fit_line.hpp` |
 | `9d0ff2c` | 05-12, six faults and a matrix, graduated `rc/test/matrix.hpp` |
 | `2b823e0` | 05-11, the expected output that changed, graduated `rc/test/golden.hpp` |
 | `3b977d9` | 05-10, checking how and not what, graduated `rc/test/sim_motor.hpp` |
@@ -807,3 +817,7 @@ without the feature: run the exercise and read the pass count.
 **Three headers that each defined `rc::core::Reading` differently, found on 10 November.** `find.hpp`, `batch.hpp` and `log.hpp` each compiled alone and linked, because the standalone gate puts every header in its own translation unit, and a name defined two ways in two translation units is a violation of the one definition rule that no compiler reports. Including them in one file gave `redefinition of struct rc::core::Reading`. The three types are now `TimedTemperature`, `TemperatureReading` and `NamedReading`, and the standalone gate has an extra translation unit that includes every header at once (leak_check.hpp apart, which defines the allocation functions and has its own copy). The lessons' own code is untouched: their tests use their own `solution.hpp`, and no other header or tool included these three.
 
 **A name that two new math headers both used.** `fit_circle.hpp` first defined `rc::math::Point2` as `covariance.hpp` already did. Each compiled alone. Including all the math headers in one file found it before it was committed, and the type became `CirclePoint`; the same check is now a standing gate.
+
+**Numbers I expected and the suite contradicted, in phase 06.** Pairwise summation kept 998 of 1000 where I had expected all of them (06-14); the first uneven route for the spline gave a 10 degree turn where I had expected a loop, and a different route gave 178 (06-09); uniformly scattered wrong points moved a line fit by 2.9 degrees where a clustered group moved it 20.7 (06-08); random roll, pitch and yaw had almost the right mean turn, which made the lesson better than the one I planned (06-13). Each doc uses the printed number.
+
+**A stub that passed a finite difference check, in 06-16.** With `tool_position` and `jacobian` both returning zero, the Jacobian agreed with a central difference of zero. The test now also requires a nonzero entry at a known pose.
