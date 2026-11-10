@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "04-14-the-header-that-changed-and-took-everything-with-it",
+  "title": "The Header That Changed and Took Everything With It: Hiding a Class's Insides So Its Size Does Not Change",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "02-04-unique-ownership-and-move",
+    "02-05-copy-and-move-semantics",
+    "04-01-what-a-build-system-does"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/smoother.hpp",
+    "note": "a smoothing filter whose data lives behind a pointer, so adding to it changes nothing a caller was built against, with a deep copy"
+  },
+  "breaks_first": [
+    "E-BUILD-0020",
+    "E-BUILD-0021",
+    "E-BUILD-0022"
+  ]
+}
