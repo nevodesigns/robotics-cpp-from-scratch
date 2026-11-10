@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "05-12-six-faults-and-a-matrix",
+  "title": "Six Faults and a Matrix: Which Check Catches Which Fault, and the Faults That Only One Check Sees",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "02-08-behaviour-as-a-value",
+    "05-03-the-test-that-catches-it",
+    "05-08-the-test-that-broke"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::test",
+    "header": "rc/test/matrix.hpp",
+    "note": "a table of which check catches which injected fault, with the faults nothing catches, the faults only one check catches, and what is lost if a check is removed"
+  },
+  "breaks_first": [
+    "E-TEST-0030",
+    "E-TEST-0031",
+    "E-TEST-0032"
+  ]
+}

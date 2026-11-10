@@ -1,0 +1,78 @@
+{
+  "lesson": "05-12-six-faults-and-a-matrix",
+  "title": "Six Faults and a Matrix: Which Check Catches Which Fault, and the Faults That Only One Check Sees",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A suite is green. What does that say about whether it would catch a flipped sign in the controller?",
+      "options": [
+        "That it would",
+        "Nothing: a test that has never failed has never been shown able to, and the way to find out is to put the fault in",
+        "That it would not",
+        "That the controller is correct"
+      ],
+      "correct": 1,
+      "explanation": "All three checks passed on the clean run."
+    },
+    {
+      "stage": "check",
+      "question": "What does detection_matrix record as caught?",
+      "options": [
+        "A check that passes on a faulty run",
+        "A fault that a check finds, that is, a check that fails on that faulty run",
+        "Every run",
+        "A fault in the plant"
+      ],
+      "correct": 1,
+      "explanation": "caught[f][c] is true when check c returns false on faulty run f."
+    },
+    {
+      "stage": "check",
+      "question": "In the table, which faults were seen by exactly one check?",
+      "options": [
+        "None",
+        "The flipped sign and the weak actuator (by the response check) and the removed limiter (by the limit check)",
+        "All six",
+        "The sensor faults"
+      ],
+      "correct": 1,
+      "explanation": "3 of the 6."
+    },
+    {
+      "stage": "check",
+      "question": "What is lost if the response check is removed, the limit check, and the model check?",
+      "options": [
+        "2, 1 and 0 faults",
+        "6, 6 and 6",
+        "0, 0 and 0",
+        "1, 2 and 3"
+      ],
+      "correct": 0,
+      "explanation": "The model check duplicates what the response check sees, and says why."
+    },
+    {
+      "stage": "post",
+      "question": "The response check is loosened to ends within 0.6 of the target. What happens?",
+      "options": [
+        "Nothing",
+        "The weak actuator, which ends 0.2 away, is missed by every check, and 4 of the 6 faults are left on a single check",
+        "Every fault is caught",
+        "The clean run fails"
+      ],
+      "correct": 1,
+      "explanation": "Re-run the table after every change to a bound."
+    },
+    {
+      "stage": "post",
+      "question": "What does the fault table not show?",
+      "options": [
+        "Which check caught which fault",
+        "Faults you did not think of, and faults of other sizes: it shows only that the ones put in are caught",
+        "False alarms",
+        "Missed faults"
+      ],
+      "correct": 1,
+      "explanation": "Six faults are a start and not a proof."
+    }
+  ]
+}
