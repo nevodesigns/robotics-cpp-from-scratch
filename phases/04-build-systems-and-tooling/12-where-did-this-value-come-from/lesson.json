@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "04-12-where-did-this-value-come-from",
+  "title": "Where Did This Value Come From: Settings from Four Places, Which One Wins, and the Typo That Was Silently Ignored",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "01-13-the-argument-that-was-not-there",
+    "03-02-errors-that-are-not-exceptional",
+    "03-03-containers-and-their-costs"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/layered_config.hpp",
+    "note": "settings layered from defaults, a file, the environment and the command line, each value remembering its source, with unknown keys caught and a nearest known name suggested"
+  },
+  "breaks_first": [
+    "E-BUILD-0014",
+    "E-BUILD-0015",
+    "E-BUILD-0016"
+  ]
+}
