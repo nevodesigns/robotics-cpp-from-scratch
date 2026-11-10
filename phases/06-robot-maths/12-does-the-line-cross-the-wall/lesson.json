@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "06-12-does-the-line-cross-the-wall",
+  "title": "Does the Line Cross the Wall: Segments, Polygons, and the Special Cases That Break the Obvious Test",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "06-01-vectors-and-two-products",
+    "00-04-numbers-that-lie"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::math",
+    "header": "rc/math/geometry.hpp",
+    "note": "which side of a line a point is on, whether two segments touch, the nearest point on a segment, whether a point is inside a polygon, and its area"
+  },
+  "breaks_first": [
+    "E-MATH-0022",
+    "E-MATH-0023",
+    "E-MATH-0024"
+  ]
+}

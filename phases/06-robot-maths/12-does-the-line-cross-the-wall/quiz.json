@@ -1,0 +1,78 @@
+{
+  "lesson": "06-12-does-the-line-cross-the-wall",
+  "title": "Does the Line Cross the Wall: Segments, Polygons, and the Special Cases That Break the Obvious Test",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Three points are on a line on paper but stored as doubles. Why is cross == 0 the wrong test for 'in a line'?",
+      "options": [
+        "It is slower",
+        "Rounding leaves a tiny nonzero number of either sign: the suite saw -2.22e-16 for points on y = 3x, so the test must allow for rounding",
+        "Doubles cannot be zero",
+        "The cross product is always positive"
+      ],
+      "correct": 1,
+      "explanation": "orientation compares the cross product with the size of the triangle's sides."
+    },
+    {
+      "stage": "check",
+      "question": "Two segments lie on one line with a gap between them. Do they intersect?",
+      "options": [
+        "Yes, they are collinear",
+        "No: the case a quick test gets wrong, and the answer comes from asking whether an end lies between the ends of the other",
+        "Only if they touch",
+        "It depends on the direction"
+      ],
+      "correct": 1,
+      "explanation": "All four orientations are zero, so 'opposite sides' means nothing."
+    },
+    {
+      "stage": "check",
+      "question": "A point is 13 along a segment of length 10 and 4 across. How far is it from the segment?",
+      "options": [
+        "4",
+        "5: the nearest point is the end, 3 along and 4 across",
+        "13",
+        "9"
+      ],
+      "correct": 1,
+      "explanation": "A point 4 along and 3 across was 3 from the segment."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the obvious ray casting test fail at some positions?",
+      "options": [
+        "It is slow",
+        "A ray through a corner crosses two edges at once and is counted twice, flipping the answer back",
+        "It cannot count",
+        "The polygon is too big"
+      ],
+      "correct": 1,
+      "explanation": "On a diamond and 625 grid points it was wrong for 17."
+    },
+    {
+      "stage": "post",
+      "question": "What does the half-open rule count?",
+      "options": [
+        "Every edge",
+        "An edge only if one end is strictly above the ray and the other is not, so a corner on the ray belongs to one of the two edges that meet there",
+        "Only horizontal edges",
+        "Edges to the left"
+      ],
+      "correct": 1,
+      "explanation": "The half-open test was wrong for 0 of the 625 points."
+    },
+    {
+      "stage": "post",
+      "question": "The corners of a polygon go clockwise. What does polygon_area give?",
+      "options": [
+        "A positive number",
+        "A negative number: the area is positive for anticlockwise corners and negative for clockwise",
+        "Zero",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "A 4 by 3 rectangle was 12, and -12 reversed."
+    }
+  ]
+}
