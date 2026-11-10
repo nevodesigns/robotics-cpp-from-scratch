@@ -214,6 +214,12 @@ reasoning in their own messages, and `git log` is the record.
 | `8d1f820` | 14-09, two loops one inside the other, graduated `rc/control/cascade.hpp` |
 | `d48020d` | 13-09, straight in space or in the joints, graduated `rc/kin/path.hpp` |
 | `11d1368` | 02-16, a handle the library gave you, graduated `rc/core/handle.hpp` |
+| `58af7a8` | 04-14, the header that changed and took everything with it, graduated `rc/core/smoother.hpp` |
+| `d25297c` | 04-13, two things need different versions, graduated `rc/core/resolve.hpp` |
+| `e38b98c` | 04-12, where did this value come from, graduated `rc/core/layered_config.hpp` |
+| `62851b0` | 04-11, the build that rebuilt nothing or everything, graduated `rc/core/build_cache.hpp` |
+| `bb9e908` | 04-10, what binary is this, graduated `rc/core/build_info.hpp` |
+| `cf0bbdc` | 04-09, which version is newer, graduated `rc/core/version.hpp` |
 | `3c9cbc6` | 03-18, a loop you can run in a millisecond, graduated `rc/core/scheduler.hpp` |
 | `0521ed9` | 03-17, which function got called, graduated `rc/core/reporter.hpp` |
 | `03ffba1` | 03-16, what comes next, graduated `rc/core/event_queue.hpp` |
@@ -778,3 +784,9 @@ without the feature: run the exercise and read the pass count.
 **A tie-break that favoured the slower task, in 03-18.** The scheduler used the queue's own sequence number, assigned when an event is queued. A repeating task queues its next tick as it finishes the last, so at a shared instant the task with the older queued event ran first: the logger before the sensor. The ordering test failed on the first run. Ties now go by the task's registration order.
 
 **A regular expression in an atlas match, in 03-16 and 03-17.** A `match:` line is a regular expression, so an unbalanced parenthesis (`expected std::string(which`) fails the audit. Write the match without brackets.
+
+**A wrong expected number in 04-12 and one in a claim, 04-12.** The test expected the edit distance of "speed_limit" and "sped_limti" to be 2; it is 3, since a swap of two letters is two changes in this distance and the missing letter is a third. The docs also said LOG_LEVEL is nine edits from log_level; it is eight. Both were checked against the code before the numbers went in, and one test now pins the eight.
+
+**A stub that refused everything passed a refusal test, again, in 04-10.** The test of malformed lines passed for a parser that returned false for every line. It now first requires a good line to be accepted.
+
+**A quiz answer key off by one, in 04-10.** The correct index of one question was 0 where the right option was second. Check `correct` against the option text, not by position in the head.
