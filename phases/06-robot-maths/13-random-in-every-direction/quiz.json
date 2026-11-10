@@ -1,0 +1,78 @@
+{
+  "lesson": "06-13-random-in-every-direction",
+  "title": "Random in Every Direction: Why Random Angles Are Not Random Directions or Random Rotations",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A direction is made by choosing a latitude and a longitude each evenly. Where are there too many points?",
+      "options": [
+        "On the equator",
+        "Near the poles: every line of latitude is chosen equally often however short, so the tiny circles near the poles are crowded",
+        "Nowhere",
+        "Along one meridian"
+      ],
+      "correct": 1,
+      "explanation": "Within 10 degrees of the north pole the share was 0.0546 against the true 0.0076."
+    },
+    {
+      "stage": "check",
+      "question": "What fact makes choosing the height z evenly between -1 and 1 cover the sphere evenly?",
+      "options": [
+        "Pythagoras",
+        "The area of a band of a sphere depends only on its height, not on where it is",
+        "The sphere is round",
+        "The longitude is even"
+      ],
+      "correct": 1,
+      "explanation": "The even choice gave 0.0071 within 10 degrees of the pole."
+    },
+    {
+      "stage": "check",
+      "question": "Roll, pitch and yaw chosen evenly give a mean rotation angle of 126.0 degrees. The right mean is 126.5. Is the draw fine?",
+      "options": [
+        "Yes, the mean is right",
+        "No: the share of turns under 30 degrees is 0.0045 against 0.0075, 40 percent too few, and the mean alone hides it",
+        "Yes, within rounding",
+        "It depends on the seed"
+      ],
+      "correct": 1,
+      "explanation": "A check on the average alone would pass the bad draw."
+    },
+    {
+      "stage": "check",
+      "question": "What is Shoemake's method?",
+      "options": [
+        "Three Euler angles",
+        "Three numbers in [0, 1) combined into a unit quaternion that is even over rotations",
+        "A rotation matrix",
+        "A random axis"
+      ],
+      "correct": 1,
+      "explanation": "A pole turned by it fell within 10 degrees of itself 0.0073 of the time."
+    },
+    {
+      "stage": "post",
+      "question": "Why does rotation_angle take the size of the scalar part and hold it to at most 1?",
+      "options": [
+        "Speed",
+        "A quaternion and its negative are the same rotation, and rounding can leave the scalar part a hair over 1, for which the arc cosine is not a number",
+        "Convention",
+        "It is always positive"
+      ],
+      "correct": 1,
+      "explanation": "A scalar part of 1 + 1e-15 must not give not a number."
+    },
+    {
+      "stage": "post",
+      "question": "What does a test of a random sampler need to look at besides the mean?",
+      "options": [
+        "Nothing",
+        "The shape of the distribution, such as the share in a region whose true share is known",
+        "Its speed",
+        "The seed"
+      ],
+      "correct": 1,
+      "explanation": "The share of turns under 30 degrees, and of directions near a pole, caught what the mean did not."
+    }
+  ]
+}
