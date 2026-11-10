@@ -132,6 +132,15 @@ if(rc_qt_headers)
       endforeach()
     endforeach()
 
+    # And all of them at once, for the reason the same extra file exists above.
+    set(qt_together_text "// Generated. Every Qt header at once.\n")
+    foreach(header ${rc_qt_headers})
+      file(RELATIVE_PATH include_path "${CMAKE_CURRENT_SOURCE_DIR}/include" "${header}")
+      string(APPEND qt_together_text "#include <${include_path}>\n")
+    endforeach()
+    file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/standalone/qt_together.cpp" "${qt_together_text}")
+    list(APPEND qt_standalone_sources "${CMAKE_CURRENT_BINARY_DIR}/standalone/qt_together.cpp")
+
     file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/standalone/qt_main.cpp"
       "// Generated. The test is that this links.\n"
       "int main() { return 0; }\n")

@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "id": "09-07-what-the-stream-wrote",
+  "title": "What the Stream Wrote: Byte Order, a Float That Took Eight Bytes, and a String That Is Not the Bytes You Meant",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about what QDataStream writes, so it needs Qt. Lesson 08-01 writes the same sort of frame by hand, one byte at a time, which is the version that needs nothing. Without Qt, do 08-01 and come back when Qt is installed.",
+  "requires": [
+    "09-06-bytes-letters-and-the-dot",
+    "08-01-bytes-on-the-wire"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Core"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/frame.hpp",
+    "note": "a reading written to and read from a documented byte layout with a QDataStream, refusing frames that are short, long or do not end where they should"
+  },
+  "breaks_first": [
+    "E-QT-0030",
+    "E-QT-0031",
+    "E-QT-0032"
+  ]
+}

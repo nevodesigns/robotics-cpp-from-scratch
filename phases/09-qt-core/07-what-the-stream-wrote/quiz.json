@@ -1,0 +1,78 @@
+{
+  "lesson": "09-07-what-the-stream-wrote",
+  "title": "What the Stream Wrote: Byte Order, a Float That Took Eight Bytes, and a String That Is Not the Bytes You Meant",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A Qt program streams the 16 bit number 0x0102 with a default QDataStream to a device whose data sheet says least significant byte first. What does the device see?",
+      "options": [
+        "02 01",
+        "01 02: the default is big endian",
+        "00 01",
+        "01 00"
+      ],
+      "correct": 1,
+      "explanation": "Little endian gave 02 01."
+    },
+    {
+      "stage": "check",
+      "question": "How many bytes does stream << 1.5f write by default, and with single precision?",
+      "options": [
+        "4 and 4",
+        "8 and 4",
+        "8 and 8",
+        "4 and 8"
+      ],
+      "correct": 1,
+      "explanation": "The default precision is double."
+    },
+    {
+      "stage": "check",
+      "question": "What does stream << QString(\"ab\") write?",
+      "options": [
+        "61 62",
+        "A four byte length in bytes and then UTF-16: 00 00 00 04 00 61 00 62",
+        "A length byte and UTF-8",
+        "Two bytes"
+      ],
+      "correct": 1,
+      "explanation": "The format of the lesson writes the length byte and the UTF-8 itself."
+    },
+    {
+      "stage": "check",
+      "question": "The lesson's frame for id 258, value 1.5 and the name micro-s is how many bytes?",
+      "options": [
+        "10",
+        "14",
+        "16",
+        "11"
+      ],
+      "correct": 1,
+      "explanation": "02 01 00 00 00 00 00 00 f8 3f 03 c2 b5 73."
+    },
+    {
+      "stage": "post",
+      "question": "A QDataStream runs out of bytes in the middle of a read. What happens?",
+      "options": [
+        "It throws",
+        "It sets the status to ReadPastEnd and the value read is set to zero, so code that never asks for the status sees zeros",
+        "It waits",
+        "It returns the old value"
+      ],
+      "correct": 1,
+      "explanation": "The second 16 bit number was 0, not the 88 it held before."
+    },
+    {
+      "stage": "post",
+      "question": "Which three questions does decode_reading ask?",
+      "options": [
+        "Is it big endian, is it a float, is it UTF-16",
+        "Did the fixed part read without error, were all the name bytes read, and is the stream at its end",
+        "Is it short, is it long, is it valid",
+        "Is the id zero, is the value zero, is the name empty"
+      ],
+      "correct": 1,
+      "explanation": "All 14 prefixes of the frame, one byte too many and a length byte of 200 were refused."
+    }
+  ]
+}
