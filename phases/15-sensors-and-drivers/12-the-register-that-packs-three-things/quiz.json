@@ -1,0 +1,78 @@
+{
+  "lesson": "15-12-the-register-that-packs-three-things",
+  "title": "The Register That Packs Three Things: Reading a Sensor Chip's Bytes Without Guessing",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A 12 bit sensor reading of 0xFFF is read as an unsigned number. What does a driver think it is?",
+      "options": [
+        "-1",
+        "4095, the far end of the range, when the reading was -1",
+        "0",
+        "2047"
+      ],
+      "correct": 1,
+      "explanation": "The joint resting just below level looks as if it is at full scale."
+    },
+    {
+      "stage": "check",
+      "question": "How do you take a 2 bit field from bit 4 of a register?",
+      "options": [
+        "reg & 2",
+        "(reg >> 4) & ((1u << 2) - 1u), shifting the field down and masking what is above it",
+        "reg << 4",
+        "reg / 4"
+      ],
+      "correct": 1,
+      "explanation": "The range code is extract_bits(status, 4, 2)."
+    },
+    {
+      "stage": "check",
+      "question": "How is a 12 bit two's complement number made into an int?",
+      "options": [
+        "Cast it",
+        "Keep the low 12 bits, and if the top one is set subtract 2 to the twelfth: 0x800 becomes -2048 and 0xFFF becomes -1",
+        "Add 2048",
+        "Negate it"
+      ],
+      "correct": 1,
+      "explanation": "Sign extension."
+    },
+    {
+      "stage": "check",
+      "question": "The chip holds a 12 bit reading in the top of two bytes. What must a driver do before sign extending?",
+      "options": [
+        "Nothing",
+        "Shift the 16 bit word right by 4, so the reading is in the low twelve bits",
+        "Swap the bytes twice",
+        "Add 16"
+      ],
+      "correct": 1,
+      "explanation": "Skipping it makes the reading sixteen times too big."
+    },
+    {
+      "stage": "post",
+      "question": "What does an overrun flag mean for the frame that carries it?",
+      "options": [
+        "It is bad",
+        "The frame is good and an earlier one was lost, so it should be used and the loss recorded: it carried 0.1953 g in the test",
+        "The chip failed",
+        "The range changed"
+      ],
+      "correct": 1,
+      "explanation": "Throwing it away loses a good reading as well."
+    },
+    {
+      "stage": "post",
+      "question": "Why do the tests pack frames by hand?",
+      "options": [
+        "To save time",
+        "So the check is of the decoder against the chip's side of the wire and does not use the code it is checking: all 16384 frames decoded with no axis wrong",
+        "Because the library is missing",
+        "To test the bus"
+      ],
+      "correct": 1,
+      "explanation": "A test that shares the code under test shares its bugs."
+    }
+  ]
+}

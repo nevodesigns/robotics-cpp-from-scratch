@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "15-12-the-register-that-packs-three-things",
+  "title": "The Register That Packs Three Things: Reading a Sensor Chip's Bytes Without Guessing",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "15-08-counts-not-volts",
+    "08-01-bytes-on-the-wire"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sensor",
+    "header": "rc/sensor/registers.hpp",
+    "note": "bit field extraction, sign extension and a decoder for a six byte accelerometer frame with a status byte"
+  },
+  "breaks_first": [
+    "E-SENSE-0026",
+    "E-SENSE-0027",
+    "E-SENSE-0028"
+  ]
+}
