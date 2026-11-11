@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "18-12-one-binary-sim-and-bench",
+  "title": "One Binary, Sim and Bench: The Same Controller and Scenario Against Either, and the Gap Between Them Measured",
+  "type": "capstone",
+  "minutes": 160,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "18-11-pass-or-fail",
+    "18-09-the-bench-link",
+    "18-08-how-far-is-the-simulation-from-the-bench",
+    "03-10-the-destructor-that-did-not-run",
+    "02-04-unique-ownership-and-move"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sim",
+    "header": "rc/sim/rig.hpp",
+    "note": "a configuration that chooses simulation or bench at start up, a backend for each behind one interface, and a run of the same scenario through either"
+  },
+  "breaks_first": [
+    "E-SIM-0034",
+    "E-SIM-0035",
+    "E-SIM-0036"
+  ]
+}
