@@ -99,7 +99,7 @@ Rules worth knowing without reading the source:
 - **L028** the `**Platforms:**` line in a lesson page names the toolchains
   `lesson.json` claims. Added after finding that no page mentioned the clang
   lane and one still said it was not claimed on Windows.
-- **L029** a lesson folder name is at most 48 characters. Added after 04-14, first
+- **L029** a lesson folder name is at most 48 characters, and for a Qt lesson the moc file path is at most 260. Added after 04-14, first
   named with 54, failed the MSVC job alone with "Cannot open compiler generated
   file": the object file path contains the folder name twice and passed 260
   characters. It was renamed to 04-14-the-header-that-changed; 05-08 was

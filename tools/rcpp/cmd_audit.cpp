@@ -178,12 +178,26 @@ void check_platform_line(const Lesson& lesson, const std::vector<std::string>& l
 // directory at a path that contains the lesson folder name twice, once as the folder and once inside the
 // target name. Lesson 04-14 was first given a 54 character name, and the MSVC lane failed with "Cannot open
 // compiler generated file" on a file that compiled everywhere else. 47 characters built; 48 is the limit set here.
+// Ninja on MSVC cannot open a path of more than 260 characters, and the hosted runner's checkout is 61 characters deep. A plain lesson is held
+// to a folder name of 48 characters (04-14 failed at 54). A Qt lesson also has a moc compilation, which sits under the lesson's target name
+// and a 32 character hash, so its path is computed as the runner would write it and held to 260 (09-14 failed at 261 with a 43 character folder).
 void check_path_length(const Lesson& lesson, std::vector<Finding>& out) {
   const std::string name = fs::path(lesson.path).filename().string();
-  if (name.size() > 48)
+  if (name.size() > 48) {
     out.push_back({"L029", lesson.rel_path,
                    "the folder name is " + std::to_string(name.size()) +
                        " characters; over 48 and the Windows build can exceed its path limit"});
+    return;
+  }
+  if (lesson.qt_modules.empty()) return;
+  const std::string phase = fs::path(lesson.path).parent_path().filename().string();
+  const std::string root = "D:\\a\\robotics-cpp-from-scratch\\robotics-cpp-from-scratch\\build\\";
+  const std::string worst = root + "phases\\" + phase + "\\" + name + "\\CMakeFiles\\" + lesson.target_name() + "_reference.dir\\" +
+                            std::string(32, 'a') + "\\mocs_compilation.cpp.obj";
+  if (worst.size() > 260)
+    out.push_back({"L029", lesson.rel_path,
+                   "the Windows build path of the moc file is " + std::to_string(worst.size()) +
+                       " characters; over 260 and MSVC cannot open it. Shorten the folder name"});
 }
 
 void check_docs(const Lesson& lesson, std::vector<Finding>& out) {
