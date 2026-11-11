@@ -19,12 +19,12 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 272 of 320 planned, 85 percent |
-| phases opened | 17 of 22 |
-| phases finished to plan | 18 (phases 00 to 17) |
-| hours of material | 379 |
-| Failure Atlas entries | 766 |
-| librc headers | 167 across 15 modules |
+| lessons built | 284 of 320 planned, 89 percent |
+| phases opened | 18 of 22 |
+| phases finished to plan | 19 (phases 00 to 18) |
+| hours of material | 404 |
+| Failure Atlas entries | 802 |
+| librc headers | 179 across 15 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
 
@@ -53,7 +53,7 @@ November below it, kept as it was because it records the reasoning of that day.
 | 15 Sensors, drivers and vision | 16 | 16 | A noisy sensor made usable, with the cost measured rather than guessed |
 | 16 Estimation and navigation | 16 | 16 | A rover that plans through what it has seen, drives it, fits down it, and notices when the room changes |
 | 17 Middleware, then ROS 2 | 20 | 20 | A graph of nodes brought up in order, running, losing one and degrading safely, on a bus the learner wrote, with the seam where ROS 2 plugs in |
-| 18 Simulation and hardware in the loop | 0 | 12 | not started |
+| 18 Simulation and hardware in the loop | 12 | 12 | One control binary that runs the same scenario against a simulated plant and a bench rig, with the difference between them measured instead of assumed |
 | 19 Safety and field engineering | 0 | 14 | not started |
 | 20 Deployment and cross compilation | 0 | 12 | not started |
 | 21 Capstones | 0 | 10 | not started |
