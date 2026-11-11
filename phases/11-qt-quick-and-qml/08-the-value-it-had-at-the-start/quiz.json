@@ -1,0 +1,78 @@
+{
+  "lesson": "11-08-the-value-it-had-at-the-start",
+  "title": "The Value It Had at the Start: Initial Properties, Component.onCompleted and the Property That Is Required",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A limit is set from C++ after create(). Component.onCompleted read it. What did it see?",
+      "options": [
+        "The new value",
+        "The default: it ran during create(), before the set",
+        "Nothing",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "It saw 1, and the limit was 5."
+    },
+    {
+      "stage": "check",
+      "question": "A binding doubled: limit * 2 reads the same property. What does it give after the late set?",
+      "options": [
+        "The old value",
+        "The new one: a binding follows",
+        "Zero",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "The binding gave 10 either way."
+    },
+    {
+      "stage": "check",
+      "question": "What does create() return for a component with a required property that was not given?",
+      "options": [
+        "An object with a default",
+        "Null, with Required property limit was not initialized",
+        "An object, and a warning",
+        "It crashes"
+      ],
+      "correct": 1,
+      "explanation": "The error names the property."
+    },
+    {
+      "stage": "check",
+      "question": "Why does create_with check every name before it sets any?",
+      "options": [
+        "Speed",
+        "The engine only warns about a name that is not a property, so a typo would set nothing and go on",
+        "Qt requires it",
+        "To sort them"
+      ],
+      "correct": 1,
+      "explanation": "limt and nothing_like_this were refused together."
+    },
+    {
+      "stage": "post",
+      "question": "What does the completion do that the beginning does not?",
+      "options": [
+        "Nothing",
+        "Runs Component.onCompleted, once, after the initial properties are set",
+        "Deletes the object",
+        "Loads the file"
+      ],
+      "correct": 1,
+      "explanation": "The completion ran once."
+    },
+    {
+      "stage": "post",
+      "question": "A Repeater makes many copies of a component. How do they get their values?",
+      "options": [
+        "From create_with",
+        "From the QML, or a model: create_with is for one object made from C++",
+        "From C++ after creation",
+        "They cannot"
+      ],
+      "correct": 1,
+      "explanation": "The lesson says so under what it does not do."
+    }
+  ]
+}
