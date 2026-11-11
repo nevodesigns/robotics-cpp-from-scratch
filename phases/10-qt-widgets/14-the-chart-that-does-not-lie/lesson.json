@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "id": "10-14-the-chart-that-does-not-lie",
+  "title": "The Chart That Does Not Lie: One Model, a Window and a Terminal, and a Steady Signal That Stays Steady",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson draws one chart in a window, so it needs Qt Widgets. Lesson 10-07 draws the same chart as text in a terminal, with the same model, and needs nothing installed. Without Qt, do that and come back when Qt is installed.",
+  "requires": [
+    "10-13-the-line-nobody-could-see",
+    "10-11-ten-thousand-updates-one-paint",
+    "10-08-the-click-beside-the-point",
+    "10-07-the-chart-in-a-terminal",
+    "10-06-a-million-points-in-800-columns",
+    "10-05-ticks-on-nice-numbers"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Widgets"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/signal_chart.hpp",
+    "note": "one chart model of any signal, drawn as a widget and as text from the same range, ticks and columns"
+  },
+  "breaks_first": [
+    "E-QT-0063",
+    "E-QT-0064",
+    "E-QT-0065"
+  ]
+}
