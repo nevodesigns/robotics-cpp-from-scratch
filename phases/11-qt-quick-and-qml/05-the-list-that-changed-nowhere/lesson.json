@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "11-05-the-list-that-changed-nowhere",
+  "title": "The List That Changed Nowhere: What JavaScript Does to a List Property, and the Model That Says So",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about lists crossing into QML, so it needs Qt. Lesson 09-05 is about copies of a Qt container that are shared until one is written, and lesson 03-09 about a view into a vector that goes stale. Without Qt, do those and come back when Qt is installed.",
+  "requires": [
+    "11-02-the-value-that-never-changed",
+    "09-05-a-copy-that-was-not-a-copy"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Gui",
+      "Qml"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/sample_model.hpp",
+    "note": "a list model of numbers that tells every view about each row that is added or removed"
+  },
+  "breaks_first": [
+    "E-QT-0072",
+    "E-QT-0073",
+    "E-QT-0074"
+  ]
+}
