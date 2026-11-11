@@ -19,11 +19,11 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 197 of 320 planned, 62 percent |
+| lessons built | 207 of 320 planned, 65 percent |
 | phases opened | 16 of 22 |
-| phases finished to plan | 10 (phases 00 to 09) |
+| phases finished to plan | 11 (phases 00 to 10) |
 | hours of material | 305 |
-| Failure Atlas entries | 541 |
+| Failure Atlas entries | 571 |
 | librc headers | 130 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
