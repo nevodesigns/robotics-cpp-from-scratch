@@ -1,0 +1,78 @@
+{
+  "lesson": "12-04-the-plan-that-froze-the-window",
+  "title": "The Plan That Froze the Window: A Long Computation, the Event Loop It Stopped, and One That Can Be Cancelled",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A plan of 200 ms is worked out in a slot. What happens to a 10 ms timer?",
+      "options": [
+        "It keeps ticking",
+        "It does not tick for 200 ms: the loop is busy with the slot",
+        "It ticks twice as fast afterwards",
+        "It stops for ever"
+      ],
+      "correct": 1,
+      "explanation": "The largest gap was 210 ms."
+    },
+    {
+      "stage": "check",
+      "question": "Where do the progress and result signals of the runner run?",
+      "options": [
+        "On the worker thread",
+        "On the thread that asked, through the watcher",
+        "On a third thread",
+        "Nowhere"
+      ],
+      "correct": 1,
+      "explanation": "They arrived on the thread that asked."
+    },
+    {
+      "stage": "check",
+      "question": "A second plan is started while one is running. What does start() do?",
+      "options": [
+        "Runs both",
+        "Returns false and leaves the first alone",
+        "Cancels the first",
+        "Queues it silently"
+      ],
+      "correct": 1,
+      "explanation": "It was refused, and the first one was not disturbed."
+    },
+    {
+      "stage": "check",
+      "question": "How does a cancel stop the plan?",
+      "options": [
+        "It kills the thread",
+        "It is a request that the plan looks at every step, so it stops at the next one",
+        "It frees the memory",
+        "It waits for the end"
+      ],
+      "correct": 1,
+      "explanation": "The plan checks promise.isCanceled() at every step."
+    },
+    {
+      "stage": "post",
+      "question": "What is the limit on how promptly a plan stops?",
+      "options": [
+        "The cancel call",
+        "The length of one step: a cancel cannot stop a step in the middle",
+        "The number of cores",
+        "The window size"
+      ],
+      "correct": 1,
+      "explanation": "The lesson says so under what it does not do."
+    },
+    {
+      "stage": "post",
+      "question": "A runner is destroyed while its plan runs. What does the destructor do?",
+      "options": [
+        "Nothing",
+        "Cancels it and waits for it, so that nothing is delivered after",
+        "Detaches the thread",
+        "Deletes the function"
+      ],
+      "correct": 1,
+      "explanation": "No deliveries came afterwards."
+    }
+  ]
+}
