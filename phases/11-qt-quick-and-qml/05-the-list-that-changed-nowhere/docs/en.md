@@ -16,14 +16,14 @@ A robot interface shows a list of recent readings. The list is a property of a C
 
 ### A push onto a list property
 
-On Qt 6.2, one `push` from JavaScript onto each of two properties of the same object:
+One `push` from JavaScript onto each of two properties of the same object, on the three versions of Qt that this repository is built with:
 
-| property | size after | changed signals |
-|---|---|---|
-| `QStringList` | **3** | 1 |
-| `QVariantList` | **2** | **0** |
+| property | Qt 6.2 | Qt 6.4.2 | Qt 6.5.3 |
+|---|---|---|---|
+| `QStringList` | **3**, 1 changed signal | **3**, 1 | **3**, 1 |
+| `QVariantList` | **2**, **0** signals | **3**, 1 | **3**, 1 |
 
-The first is a sequence type, which QML treats as a reference and writes back. The second becomes a plain JavaScript array, and the push went to a copy. The two look the same in QML and behave differently. See `E-QT-0072`.
+A `QStringList` is a sequence type, which QML treats as a reference and writes back, on all three. A `QVariantList` was a plain JavaScript array on 6.2, and the push went to a copy and was lost; on 6.4 and 6.5 it is written back too. The answer to "does this push reach C++" changed with the version, and no error or warning said so. See `E-QT-0072`.
 
 ### A model says what happened
 
@@ -58,7 +58,7 @@ engine.rootContext()->setContextProperty("readings", &model);
 model.append(21.5);                  // from C++ or from QML: the view follows
 ```
 
-**What this does not do.** It holds numbers and appends or clears: a model that removes rows in the middle needs `beginRemoveRows` with its own range, and one that changes a row needs `dataChanged` with the roles that changed. It keeps every row, so a chart that runs for hours wants a bound (lesson 10-02 has one). And whether a list property writes back is Qt 6.2 as measured: a model is the same on every version, which is why it is the thing to use.
+**What this does not do.** It holds numbers and appends or clears: a model that removes rows in the middle needs `beginRemoveRows` with its own range, and one that changes a row needs `dataChanged` with the roles that changed. It keeps every row, so a chart that runs for hours wants a bound (lesson 10-02 has one). And whether a push onto a list property writes back changed between Qt 6.2 and 6.4, as the table shows: a model means the same on every version, which is why it is the thing to use.
 
 ## What Breaks First
 

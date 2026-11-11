@@ -79,7 +79,7 @@ const char* kRepeater =
 
 }  // namespace
 
-RC_TEST("a push from JavaScript onto a QStringList property is written back, and onto a QVariantList it is lost") {
+RC_TEST("a push from JavaScript onto a QStringList property is written back, and whether a QVariantList follows depends on the version of Qt") {
   QTemporaryDir dir;
   QQmlEngine engine;
   Holder holder;
@@ -92,8 +92,9 @@ RC_TEST("a push from JavaScript onto a QStringList property is written back, and
   std::cout << "  after one push onto each: the QStringList has " << holder.names().size() << " (changed signals " << names_signals << "), the QVariantList has "
             << holder.values().size() << " (changed signals " << values_signals << ")\n";
   RC_CHECK_EQ(holder.names().size(), 3);
-  RC_CHECK_EQ(holder.values().size(), 2);          // the push went to a copy
-  RC_CHECK_EQ(values_signals, 0);
+  // Qt 6.2 pushed onto a copy of the QVariantList (2, no signal); Qt 6.4 and 6.5 write it back (3, one signal). Either way the size and the signals agree.
+  RC_CHECK(holder.values().size() == 2 || holder.values().size() == 3);
+  RC_CHECK_EQ(values_signals, holder.values().size() - 2);
 
   // The model of this lesson takes the same push through a function, and says so.
   SampleModel model;
