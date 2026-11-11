@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "17-07-will-they-talk",
+  "title": "Will They Talk: Offered and Requested Quality of Service, and the Silence When They Do Not Match",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-05-reliable-or-fast",
+    "17-06-the-subscriber-that-arrived-late",
+    "01-06-enums-and-states"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::bus",
+    "header": "rc/bus/qos.hpp",
+    "note": "the rules for whether a publisher's offer meets a subscriber's request, with the reason each mismatch gives, and a matcher that connects the pairs that fit"
+  },
+  "breaks_first": [
+    "E-BUS-0019",
+    "E-BUS-0020",
+    "E-BUS-0021"
+  ]
+}
