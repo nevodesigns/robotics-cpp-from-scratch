@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "17-08-too-late-to-be-true",
+  "title": "Too Late to Be True: Deadlines, Lifespans and Data That Is Old by the Time It Arrives",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-02-a-queue-for-each-listener",
+    "17-04-who-is-out-there"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::bus",
+    "header": "rc/bus/staleness.hpp",
+    "note": "a monitor that reports a missed deadline once per gap, and a queue whose messages expire"
+  },
+  "breaks_first": [
+    "E-BUS-0022",
+    "E-BUS-0023",
+    "E-BUS-0024"
+  ]
+}

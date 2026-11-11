@@ -1,0 +1,78 @@
+{
+  "lesson": "17-08-too-late-to-be-true",
+  "title": "Too Late to Be True: Deadlines, Lifespans and Data That Is Old by the Time It Arrives",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A lidar driver is running, its heartbeat is fine, and no scans arrive. Which watch notices?",
+      "options": [
+        "The discovery lease alone",
+        "A deadline on the scan topic: the node is alive and the data is stalled, and only a watch on the stream sees that",
+        "The lifespan",
+        "Nothing can"
+      ],
+      "correct": 1,
+      "explanation": "Alive is not the same as delivering."
+    },
+    {
+      "stage": "check",
+      "question": "A silence has gone on for five deadlines. How many misses does the monitor report?",
+      "options": [
+        "Five",
+        "One: it is reported once per silence and not again until a message re-arms it",
+        "Zero",
+        "Fifty"
+      ],
+      "correct": 1,
+      "explanation": "One dead lidar would otherwise be a thousand log lines."
+    },
+    {
+      "stage": "check",
+      "question": "What does a monitor say before any message has arrived?",
+      "options": [
+        "A miss",
+        "Nothing: a stream that has not begun has no promise yet to break",
+        "Waiting",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "Nothing is missed before the first message."
+    },
+    {
+      "stage": "check",
+      "question": "A message every 0.10 s, up to 0.03 s early or late. What does a deadline of 0.10 s do, and what does 0.17 s do?",
+      "options": [
+        "Both nothing",
+        "992 misses in 2000 messages at 0.10 s, and none at 0.17 s",
+        "None at 0.10",
+        "Both 992"
+      ],
+      "correct": 1,
+      "explanation": "The worst gap is the period plus both jitters."
+    },
+    {
+      "stage": "post",
+      "question": "A consumer takes half as fast as messages are published, with no lifespan. How old is the data it is served, by the end of ten seconds?",
+      "options": [
+        "About 20 ms",
+        "5.00 s: the queue only gets longer and each message served is older than the last",
+        "1 s",
+        "The same as published"
+      ],
+      "correct": 1,
+      "explanation": "A lifespan put a ceiling of 0.1 s on it."
+    },
+    {
+      "stage": "post",
+      "question": "What does a lifespan cost?",
+      "options": [
+        "Nothing",
+        "Messages: 490 of 500 expired at a lifespan of 0.1 s, and the count says how many",
+        "Time",
+        "Memory"
+      ],
+      "correct": 1,
+      "explanation": "The consumer sees less of the world and knows how much less."
+    }
+  ]
+}
