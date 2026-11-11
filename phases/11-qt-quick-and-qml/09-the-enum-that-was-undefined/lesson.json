@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "11-09-the-enum-that-was-undefined",
+  "title": "The Enum That Was Undefined: Naming a C++ Enum in QML, and the Integer It Accepted",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about an enum crossing into QML, so it needs Qt. Lesson 01-06 is about enums in plain C++ and the values that do not belong to one, and lesson 02-08 about turning a state into text. Without Qt, do those and come back when Qt is installed.",
+  "requires": [
+    "11-06-the-property-set-on-nothing",
+    "09-02-what-moc-generates"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Gui",
+      "Qml"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/robot_mode.hpp",
+    "note": "a robot mode that QML can name, with its names and values read from the meta object, an exact conversion from text and a check for a number that is not a mode"
+  },
+  "breaks_first": [
+    "E-QT-0084",
+    "E-QT-0085",
+    "E-QT-0086"
+  ]
+}

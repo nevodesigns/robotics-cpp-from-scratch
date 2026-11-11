@@ -1,0 +1,78 @@
+{
+  "lesson": "11-09-the-enum-that-was-undefined",
+  "title": "The Enum That Was Undefined: Naming a C++ Enum in QML, and the Integer It Accepted",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A C++ enum has no Q_ENUM_NS. What is its name in QML?",
+      "options": [
+        "An error at load",
+        "undefined, and the file loads",
+        "0",
+        "It works anyway"
+      ],
+      "correct": 1,
+      "explanation": "PlainMode.Auto was undefined."
+    },
+    {
+      "stage": "check",
+      "question": "What is RobotMode.Fault in QML, when the C++ enum gives Fault the value 9?",
+      "options": [
+        "3",
+        "9",
+        "Fault",
+        "undefined"
+      ],
+      "correct": 1,
+      "explanation": "The values are the C++ values."
+    },
+    {
+      "stage": "check",
+      "question": "A property holds a mode and QML assigns 99. What happens?",
+      "options": [
+        "An error",
+        "It is stored: nothing in QML stops it",
+        "It becomes 0",
+        "It becomes the nearest mode"
+      ],
+      "correct": 1,
+      "explanation": "The stored value was 99, and its name is unknown."
+    },
+    {
+      "stage": "check",
+      "question": "Where does the check that 99 is not a mode belong?",
+      "options": [
+        "In QML",
+        "In the C++ that receives it, with is_valid_mode",
+        "Nowhere",
+        "In the registration"
+      ],
+      "correct": 1,
+      "explanation": "The meta object says unknown for 99."
+    },
+    {
+      "stage": "post",
+      "question": "Why does mode_from_name refuse \"auto\"?",
+      "options": [
+        "A bug",
+        "Names are exact: the case matters, and an interface that guesses is a risk",
+        "Qt forbids lowercase",
+        "It is too short"
+      ],
+      "correct": 1,
+      "explanation": "auto, AUTO and Auto with a space were each refused."
+    },
+    {
+      "stage": "post",
+      "question": "Why can a namespace have only one Q_NAMESPACE?",
+      "options": [
+        "A style rule",
+        "A namespace has one meta object, and a second Q_NAMESPACE would be another definition of it",
+        "moc is slow",
+        "Qt 6 changed it"
+      ],
+      "correct": 1,
+      "explanation": "The lesson puts the enum in its own namespace."
+    }
+  ]
+}
