@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "17-16-record-and-replay",
+  "title": "Record and Replay: A File of Messages That Reproduces the Day It Went Wrong",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-03-messages-as-bytes",
+    "17-01-topics-by-hand",
+    "17-13-whose-clock-is-it"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::bus",
+    "header": "rc/bus/bag.hpp",
+    "note": "a recording of messages with their stamps, written to and read from bytes with every failure of a bad file reported, and a player that puts them back on a bus at their own pace"
+  },
+  "breaks_first": [
+    "E-BUS-0046",
+    "E-BUS-0047",
+    "E-BUS-0048"
+  ]
+}
