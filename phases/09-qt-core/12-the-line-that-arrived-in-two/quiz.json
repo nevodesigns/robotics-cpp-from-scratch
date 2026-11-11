@@ -1,0 +1,78 @@
+{
+  "lesson": "09-12-the-line-that-arrived-in-two",
+  "title": "The Line That Arrived in Two Pieces: Reading Lines From a Device That Gives You Whatever It Has",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A serial port's readyRead fires and readAll() returns \"temp 21\". What is that?",
+      "options": [
+        "A complete line",
+        "Whatever had arrived: possibly the start of a line, to be joined to the next chunk",
+        "An error",
+        "A line that is missing its newline and should be dropped"
+      ],
+      "correct": 1,
+      "explanation": "A chunk is not a line: the cut falls wherever the arrival did."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the test cut the same bytes 629 ways?",
+      "options": [
+        "To make the test slow",
+        "Because a device can cut a message anywhere, and the lines must come out the same each time",
+        "Because Qt cuts at 629 bytes",
+        "To count the lines"
+      ],
+      "correct": 1,
+      "explanation": "Cutting at every position and into three chunks finds a bug that only some cuts show."
+    },
+    {
+      "stage": "check",
+      "question": "What does \"a\\r\\nb\".split('\\n').at(0) give?",
+      "options": [
+        "a, 1 byte",
+        "a followed by a carriage return, 2 bytes",
+        "a\\r\\nb",
+        "an empty array"
+      ],
+      "correct": 1,
+      "explanation": "Splitting at \\n alone leaves the \\r on the line."
+    },
+    {
+      "stage": "check",
+      "question": "Why is a line over the limit dropped and not just truncated?",
+      "options": [
+        "Truncating is slower",
+        "A truncated line looks like a valid shorter line, and the rest of it would become the next one",
+        "Qt does not allow it",
+        "It makes the output shorter"
+      ],
+      "correct": 1,
+      "explanation": "The assembler skips to the newline that ends it and counts it."
+    },
+    {
+      "stage": "post",
+      "question": "100000 bytes of noise with no newline arrive. How many does the assembler hold?",
+      "options": [
+        "All 100000",
+        "None: it passed the limit, stopped keeping them and is skipping until a newline",
+        "Exactly 8, always",
+        "Half"
+      ],
+      "correct": 1,
+      "explanation": "Its memory is bounded by the limit however much noise arrives."
+    },
+    {
+      "stage": "post",
+      "question": "A device sends half a line and stops. What does the assembler do?",
+      "options": [
+        "Returns the half line after a timeout",
+        "Holds it: it has no timeout, and a caller that needs one must add it",
+        "Drops it at once",
+        "Raises an error"
+      ],
+      "correct": 1,
+      "explanation": "Not timing out a stalled line is stated in what the lesson does not do."
+    }
+  ]
+}
