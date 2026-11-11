@@ -1,0 +1,78 @@
+{
+  "lesson": "10-12-the-pixel-that-differed",
+  "title": "The Pixel That Differed: Comparing Two Chart Images With a Tolerance and a Count",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Two renderings of a chart look the same and differ in 150 pixels by at most 16 of 255. What does an exact comparison say?",
+      "options": [
+        "Equal",
+        "Different: it counts any difference",
+        "Nothing",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "That is why a tolerance is needed."
+    },
+    {
+      "stage": "check",
+      "question": "What is wrong with a tolerance of 255?",
+      "options": [
+        "It is too strict",
+        "No channel can differ by more than 255, so it sees nothing",
+        "It crashes",
+        "It is slow"
+      ],
+      "correct": 1,
+      "explanation": "At 255 the one red pixel was not found."
+    },
+    {
+      "stage": "check",
+      "question": "What does bounds give?",
+      "options": [
+        "The size of the image",
+        "The smallest rectangle holding every differing pixel",
+        "The first differing pixel",
+        "The tolerance"
+      ],
+      "correct": 1,
+      "explanation": "Two pixels far apart gave a rectangle holding both."
+    },
+    {
+      "stage": "check",
+      "question": "Images of 100 by 50 and 100 by 51 are both white. Do they match?",
+      "options": [
+        "Yes",
+        "No: a size mismatch, at any tolerance or count",
+        "Only at tolerance 255",
+        "Only if the count is 51"
+      ],
+      "correct": 1,
+      "explanation": "Comparing the pixels they share would call them equal."
+    },
+    {
+      "stage": "post",
+      "question": "Why does compare use QImage::pixel?",
+      "options": [
+        "It is faster",
+        "It reads any format as the same colour value, so formats need not match",
+        "It is the only way",
+        "It rounds"
+      ],
+      "correct": 1,
+      "explanation": "ARGB32, RGB32, premultiplied and RGBA8888 gave 0 differences."
+    },
+    {
+      "stage": "post",
+      "question": "A chart moved by one pixel differs in 170. Which guard catches it?",
+      "options": [
+        "The tolerance",
+        "The count of differing pixels",
+        "The size",
+        "Nothing does"
+      ],
+      "correct": 1,
+      "explanation": "Stray pixels pass a count of 5; 170 does not."
+    }
+  ]
+}
