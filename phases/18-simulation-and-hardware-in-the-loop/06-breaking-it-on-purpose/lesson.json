@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "18-06-breaking-it-on-purpose",
+  "title": "Breaking It on Purpose: Injected Sensor Faults and the Monitor That Has to Notice Each",
+  "type": "build",
+  "minutes": 130,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "18-04-a-sensor-that-lies-like-the-real-one",
+    "18-05-a-script-for-the-test-day",
+    "17-08-too-late-to-be-true"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sim",
+    "header": "rc/sim/faults.hpp",
+    "note": "faults that can be switched on in a simulated sensor at a time, a monitor of how far the sensor is from a model, and one for a sensor that has stopped changing"
+  },
+  "breaks_first": [
+    "E-SIM-0016",
+    "E-SIM-0017",
+    "E-SIM-0018"
+  ]
+}

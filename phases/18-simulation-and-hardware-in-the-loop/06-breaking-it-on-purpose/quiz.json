@@ -1,0 +1,78 @@
+{
+  "lesson": "18-06-breaking-it-on-purpose",
+  "title": "Breaking It on Purpose: Injected Sensor Faults and the Monitor That Has to Notice Each",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why break a simulated sensor on purpose?",
+      "options": [
+        "For fun",
+        "The code that handles a real fault is the most important and least often run, since the real fault happens once a year: a simulator is the only place to run it daily",
+        "To test the plant",
+        "To slow the loop"
+      ],
+      "correct": 1,
+      "explanation": "The fault is switched on at a chosen time by a line of a scenario."
+    },
+    {
+      "stage": "check",
+      "question": "A stuck sensor froze at the last good reading, 2.0. What does it read when the truth is 3.0, and then 9.0?",
+      "options": [
+        "3.0 and 9.0",
+        "2.0 and 2.0: it repeats the last good reading",
+        "0 and 0",
+        "2.0 and 9.0"
+      ],
+      "correct": 1,
+      "explanation": "Readings before the fault are untouched."
+    },
+    {
+      "stage": "check",
+      "question": "What is a residual?",
+      "options": [
+        "The noise",
+        "The difference between the sensor and what a model says it should read, near zero when all is well",
+        "The error of the plant",
+        "The threshold"
+      ],
+      "correct": 1,
+      "explanation": "Here a shadow of the motor driven by the same commands."
+    },
+    {
+      "stage": "check",
+      "question": "A spike of 0.4 on one reading in 25 was never caught by a monitor needing three in a row. Why is that not a bug?",
+      "options": [
+        "It is a bug",
+        "One reading is not a run: the monitor was built to ignore a single reading, and whether a lone spike matters is for a different monitor, such as a Hampel filter",
+        "Spikes are small",
+        "The threshold was low"
+      ],
+      "correct": 1,
+      "explanation": "The offset was caught in 0.02 s, the drift in 0.46."
+    },
+    {
+      "stage": "post",
+      "question": "A stuck sensor at the target was caught by the residual monitor 2.85 s late and by the stuck monitor at the move. Why?",
+      "options": [
+        "Luck",
+        "A frozen reading at the target looks right and the loop commands almost nothing, so the residual stays small; the stuck monitor knows an unchanging reading is wrong only when motion was expected",
+        "The threshold",
+        "The shadow was wrong"
+      ],
+      "correct": 1,
+      "explanation": "Each monitor sees what the other cannot."
+    },
+    {
+      "stage": "post",
+      "question": "What did raising the residual threshold from 0.02 to 0.2 cost, against a drift of 0.05 a second?",
+      "options": [
+        "Nothing",
+        "The drift was found 4.04 s after it began instead of 0.46: nine times later, with the position by then wrong by 0.2",
+        "Two alarms",
+        "One alarm"
+      ],
+      "correct": 1,
+      "explanation": "Set low it gave false alarms: 200 of 200 runs at twice the noise."
+    }
+  ]
+}
