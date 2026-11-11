@@ -1,0 +1,78 @@
+{
+  "lesson": "15-15-two-clocks-one-timeline",
+  "title": "Two Clocks, One Timeline: Putting Streams That Do Not Tick Together on the Same Instants",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A 10 Hz stream is used at a 100 Hz loop by taking the newest value it has sent. How old can that value be?",
+      "options": [
+        "Exactly current",
+        "Up to a whole sample, and half a sample on average: 0.2384 rms error on a 1 Hz sine",
+        "A millisecond",
+        "It cannot be old"
+      ],
+      "correct": 1,
+      "explanation": "A held value is as old as the gap since its sample."
+    },
+    {
+      "stage": "check",
+      "question": "How is a stream read at an instant between two samples?",
+      "options": [
+        "Take the nearer sample",
+        "Join the sample before and the sample after with a line and read it at the instant",
+        "Average the whole stream",
+        "Round the time"
+      ],
+      "correct": 1,
+      "explanation": "Interpolation, by binary search for the two samples."
+    },
+    {
+      "stage": "check",
+      "question": "A sine at 1 Hz is sampled at 10 Hz. How do the two methods compare?",
+      "options": [
+        "The same",
+        "The line is about ten times closer: rms error 0.0253 against 0.2384 held, matching the 0.0255 and 0.2565 the maths gives",
+        "The hold is closer",
+        "Neither works"
+      ],
+      "correct": 1,
+      "explanation": "Held error goes with the frequency, a line's with its square."
+    },
+    {
+      "stage": "check",
+      "question": "What should interpolation do before the first sample or after the last?",
+      "options": [
+        "Extrapolate the last line",
+        "Say no and leave the output untouched, because there is nothing to join",
+        "Return zero",
+        "Return the nearest sample"
+      ],
+      "correct": 1,
+      "explanation": "A made up value is worse than none."
+    },
+    {
+      "stage": "post",
+      "question": "A stream has a hole from 1.0 s to 1.6 s and a max_gap of 0.15 s. What happens to an instant at 1.3 s?",
+      "options": [
+        "It is interpolated across the hole",
+        "It is not answered: 192 of 251 instants were and none of the 59 in the hole",
+        "It gets the last value",
+        "It crashes"
+      ],
+      "correct": 1,
+      "explanation": "A line across a gap is a guess about time the sensor never saw."
+    },
+    {
+      "stage": "post",
+      "question": "What does interpolation cost that holding does not?",
+      "options": [
+        "Nothing",
+        "It needs a sample after the instant, so it answers for a moment one sample in the past",
+        "Memory",
+        "Accuracy"
+      ],
+      "correct": 1,
+      "explanation": "That is the price of the better answer."
+    }
+  ]
+}
