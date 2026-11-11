@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "13-13-how-wrong-a-pose-is",
+  "title": "How Wrong a Pose Is: Position Error, Orientation Error as a Rotation Vector, and Why Euler Angles Cannot Be Subtracted",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "13-12-the-table-that-describes-an-arm",
+    "06-03-quaternions"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::kin",
+    "header": "rc/kin/pose_error.hpp",
+    "note": "the error between two poses as a position difference and a rotation vector, the axis times the angle of the turn from one orientation to the other, and a test for being close enough in both"
+  },
+  "breaks_first": [
+    "E-KIN-0032",
+    "E-KIN-0033",
+    "E-KIN-0034"
+  ]
+}
