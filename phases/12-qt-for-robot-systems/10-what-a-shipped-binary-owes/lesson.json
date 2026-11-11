@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "12-10-what-a-shipped-binary-owes",
+  "title": "What a Shipped Binary Owes: The Licence of Each Qt Module You Link, How You Link It, and What You Must Hand Over",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "12-09-the-machine-without-qt",
+    "04-13-two-things-need-different-versions"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::core",
+    "header": "rc/core/qt_licence.hpp",
+    "note": "an assessment of the Qt modules a program links, how it links them, and what it ships, that lists what is owed and what is not allowed, and says unknown for a module it does not know"
+  },
+  "breaks_first": [
+    "E-BUILD-0023",
+    "E-BUILD-0024",
+    "E-BUILD-0025"
+  ]
+}
