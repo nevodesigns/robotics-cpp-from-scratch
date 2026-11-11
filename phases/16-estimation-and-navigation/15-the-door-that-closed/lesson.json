@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "16-15-the-door-that-closed",
+  "title": "The Door That Closed: Noticing That the Map Is Out of Date Before the Map Notices",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "16-13-am-i-where-the-map-says",
+    "16-05-what-the-robot-does-not-know"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::nav",
+    "header": "rc/nav/change.hpp",
+    "note": "a per scan count of beams that agree, find a wall that is not on the map, or pass through one that is, and a detector that wants the change to persist"
+  },
+  "breaks_first": [
+    "E-NAV-0041",
+    "E-NAV-0042",
+    "E-NAV-0043"
+  ]
+}

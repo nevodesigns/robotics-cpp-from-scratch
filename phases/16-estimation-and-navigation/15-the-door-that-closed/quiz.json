@@ -1,0 +1,78 @@
+{
+  "lesson": "16-15-the-door-that-closed",
+  "title": "The Door That Closed: Noticing That the Map Is Out of Date Before the Map Notices",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "The map shows a doorway and the door has closed. What does a beam that hits the closed door look like to the map?",
+      "options": [
+        "Nothing",
+        "A beam that ends in free space: a wall that is not on the map, an appearance",
+        "A vanishing",
+        "An agreement"
+      ],
+      "correct": 1,
+      "explanation": "A door that had closed gave 9 appearances and no vanishings."
+    },
+    {
+      "stage": "check",
+      "question": "A wall on the map has been removed. What does a beam through it show?",
+      "options": [
+        "An appearance",
+        "A vanishing: the beam passed through a wall that the map says is there, 11 of them when the door opened",
+        "An agreement",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "A wall that appeared and one that vanished are both changes."
+    },
+    {
+      "stage": "check",
+      "question": "With ranges noisy by 3 cm, what happened at a threshold of 0.01?",
+      "options": [
+        "Nothing was called a change",
+        "80 percent of unchanged scans were called different, and at 0.15 the closed door was almost never seen",
+        "The door was missed",
+        "All were right"
+      ],
+      "correct": 1,
+      "explanation": "Between 0.04 and 0.08 noise rarely fooled it and the door was always seen."
+    },
+    {
+      "stage": "check",
+      "question": "Why should a change last several scans before the map is called out of date?",
+      "options": [
+        "To save time",
+        "One odd scan, a person walking past, is a change in the scan and not in the map",
+        "The sensor is slow",
+        "The rule says so"
+      ],
+      "correct": 1,
+      "explanation": "One odd scan starts a run and an ordinary one ends it."
+    },
+    {
+      "stage": "post",
+      "question": "The robot compares each scan with the map it is repairing from those same scans. What happens to a closed door?",
+      "options": [
+        "It is noticed sooner",
+        "Never: after one scan the doorway cells are unknown and not free, so there is no appearance to count, while compared with the map as it was it was noticed at scan 3",
+        "It is noticed at scan 11",
+        "It crashes"
+      ],
+      "correct": 1,
+      "explanation": "The repair destroys the evidence."
+    },
+    {
+      "stage": "post",
+      "question": "What does the detector not say?",
+      "options": [
+        "Anything",
+        "What changed, or whether the pose was right: a wrong pose makes every wall look moved",
+        "How many scans",
+        "When"
+      ],
+      "correct": 1,
+      "explanation": "A detector that fires on a bad pose tells the truth about the wrong thing."
+    }
+  ]
+}
