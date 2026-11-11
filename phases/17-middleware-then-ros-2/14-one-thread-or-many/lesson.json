@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "17-14-one-thread-or-many",
+  "title": "One Thread or Many: Executors, Callback Groups and the Control Loop Stuck Behind the Planner",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-02-a-queue-for-each-listener",
+    "17-13-whose-clock-is-it",
+    "03-03-containers-and-their-costs"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::bus",
+    "header": "rc/bus/executor_sim.hpp",
+    "note": "a simulation of an executor with a number of threads and callback groups that run one at a time or together, and a measure of how long each callback waited"
+  },
+  "breaks_first": [
+    "E-BUS-0040",
+    "E-BUS-0041",
+    "E-BUS-0042"
+  ]
+}
