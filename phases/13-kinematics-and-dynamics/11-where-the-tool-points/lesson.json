@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "13-11-where-the-tool-points",
+  "title": "Where the Tool Points: Position and Heading of a Three-Link Arm, and the Target That Is Reachable as a Point and Not as a Pose",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "13-02-what-angles-put-it-there",
+    "13-05-the-angle-it-cannot-hold"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::kin",
+    "header": "rc/kin/arm3.hpp",
+    "note": "forward and inverse kinematics of a three-link planar arm for a pose of a position and a heading, with the heading error taken the short way round"
+  },
+  "breaks_first": [
+    "E-KIN-0026",
+    "E-KIN-0027",
+    "E-KIN-0028"
+  ]
+}
