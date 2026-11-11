@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "17-20-a-graph-that-looks-after-itself",
+  "title": "A Graph That Looks After Itself: Watching Nodes, Restarting the One That Stalls, and Stopping Safely When That Fails",
+  "type": "capstone",
+  "minutes": 160,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-19-up-in-order-down-in-reverse",
+    "17-08-too-late-to-be-true",
+    "17-17-the-seam-where-ros-plugs-in"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::ros",
+    "header": "rc/ros/supervisor.hpp",
+    "note": "a supervisor that watches each node's output against a deadline, restarts one that stalls through its life cycle, and gives up on one that will not recover"
+  },
+  "breaks_first": [
+    "E-ROS-0010",
+    "E-ROS-0011",
+    "E-ROS-0012"
+  ]
+}

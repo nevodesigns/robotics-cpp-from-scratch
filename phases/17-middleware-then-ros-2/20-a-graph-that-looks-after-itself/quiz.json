@@ -1,0 +1,78 @@
+{
+  "lesson": "17-20-a-graph-that-looks-after-itself",
+  "title": "A Graph That Looks After Itself: Watching Nodes, Restarting the One That Stalls, and Stopping Safely When That Fails",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "The sensor in a running graph stops producing, and stays active. What stops the arm acting on stale data first?",
+      "options": [
+        "Nothing",
+        "The controller's own watchdog, a deadline of 0.2 s that commands a stop once: it acted at 5.12 s, before the supervisor at 5.17 s",
+        "The supervisor",
+        "The launcher"
+      ],
+      "correct": 1,
+      "explanation": "The fast and local defence cannot be argued with and the supervisor repairs."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the supervisor's detection a deadline after the last scan and not after the stall?",
+      "options": [
+        "It is slow",
+        "Nobody knows when a silence begins until the next output fails to come: the last scan was at 4.91 s and it was seen at 5.17 s",
+        "The clock is wrong",
+        "It samples"
+      ],
+      "correct": 1,
+      "explanation": "A deadline monitor counts from the last message."
+    },
+    {
+      "stage": "check",
+      "question": "The sensor stalls and the viewer fed from it goes quiet too. What should the supervisor do with the viewer?",
+      "options": [
+        "Restart it",
+        "Report it starved and leave it alone with a fresh deadline: restarting the victims leaves the fault where it was",
+        "Give up on it",
+        "Shut it down"
+      ],
+      "correct": 1,
+      "explanation": "The viewer was starved 1 time and restarted 0."
+    },
+    {
+      "stage": "check",
+      "question": "A restart fails because the device cannot be opened. What happens next?",
+      "options": [
+        "Nothing",
+        "The node gets a fresh deadline and is noticed stalled again 0.26 s later: restart failed, stalled, restart failed, stalled, gave up, 0.69 s after the stall",
+        "It is retried for ever",
+        "The graph restarts"
+      ],
+      "correct": 1,
+      "explanation": "After the allowed restarts the next stall is a give up."
+    },
+    {
+      "stage": "post",
+      "question": "An optional viewer is given up on. What happens to the graph?",
+      "options": [
+        "It is shut down",
+        "It carries on: gave_up() stays false and the arm got 49 move commands in 5 s with no stops",
+        "It is restarted",
+        "It is paused"
+      ],
+      "correct": 1,
+      "explanation": "A give up on an optional node is not the robot's problem."
+    },
+    {
+      "stage": "post",
+      "question": "What does a restart give the node, besides the new life cycle?",
+      "options": [
+        "Nothing",
+        "A fresh deadline, so it is not reported again at once: one stall in 6 s gave 1 stalled event and 1 restart",
+        "A new name",
+        "Priority"
+      ],
+      "correct": 1,
+      "explanation": "A node that is never silent is never touched."
+    }
+  ]
+}
