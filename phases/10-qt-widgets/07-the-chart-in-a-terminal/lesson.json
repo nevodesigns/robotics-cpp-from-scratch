@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "10-07-the-chart-in-a-terminal",
+  "title": "The Chart in a Terminal: A Steady Signal Stays Steady and a Spike Stays a Spike",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "10-02-a-value-over-time",
+    "10-05-ticks-on-nice-numbers",
+    "10-06-a-million-points-in-800-columns"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::plot",
+    "header": "rc/plot/text_chart.hpp",
+    "note": "a chart of any list of samples as lines of text, with labelled ticks"
+  },
+  "breaks_first": [
+    "E-PLOT-0013",
+    "E-PLOT-0014",
+    "E-PLOT-0015"
+  ]
+}
