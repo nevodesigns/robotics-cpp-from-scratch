@@ -1,0 +1,78 @@
+{
+  "lesson": "18-02-the-same-code-two-worlds",
+  "title": "The Same Code, Two Worlds: A Plant Interface and the Contract a Fake Must Keep",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why must a controller not know whether it is talking to a simulation or hardware?",
+      "options": [
+        "Style",
+        "So that nothing in it changes between the two, and what passed in simulation is what runs on the machine",
+        "Speed",
+        "It cannot know"
+      ],
+      "correct": 1,
+      "explanation": "The seam is the interface."
+    },
+    {
+      "stage": "check",
+      "question": "A first order motor of time constant 0.1 s is given a step command. How far has its speed got after 0.1 s?",
+      "options": [
+        "50 percent",
+        "About 63 percent: 3.804 of 6.0, and 99 percent after five time constants",
+        "100 percent",
+        "10 percent"
+      ],
+      "correct": 1,
+      "explanation": "Which is why the time constant is a number one can measure."
+    },
+    {
+      "stage": "check",
+      "question": "What does the saturation rule check?",
+      "options": [
+        "That the plant is fast",
+        "That a command ten times the limit does exactly what the limit does: a plant with no clamp broke it",
+        "That the plant is stable",
+        "That the limit is positive"
+      ],
+      "correct": 1,
+      "explanation": "Both directions."
+    },
+    {
+      "stage": "check",
+      "question": "A plant reports its position as it was before the step. Which rule catches it?",
+      "options": [
+        "Reset",
+        "Consistency: over one step the position should move by the new velocity times the step",
+        "Rest",
+        "Symmetry"
+      ],
+      "correct": 1,
+      "explanation": "A controller on it is a step late, which looks like a mysterious delay."
+    },
+    {
+      "stage": "post",
+      "question": "A controller drives two plants to position 1 and both end at 1.0000. Why is that not enough?",
+      "options": [
+        "It is enough",
+        "The plant with no clamp got there at a peak speed of 22.71 against 14.70, past what the motor can do, and the end position is the one thing that is the same",
+        "The plants are the same",
+        "Position is rounded"
+      ],
+      "correct": 1,
+      "explanation": "A test that checks only where it ended misses how."
+    },
+    {
+      "stage": "post",
+      "question": "What does passing the contract not tell you?",
+      "options": [
+        "Anything",
+        "That the plant is the machine it stands for: a motor with the wrong time constant keeps every rule",
+        "That it clamps",
+        "That it is deterministic"
+      ],
+      "correct": 1,
+      "explanation": "The contract is a floor."
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "18-02-the-same-code-two-worlds",
+  "title": "The Same Code, Two Worlds: A Plant Interface and the Contract a Fake Must Keep",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "18-01-a-simulator-is-a-loop-with-a-step",
+    "03-10-the-destructor-that-did-not-run",
+    "02-04-unique-ownership-and-move",
+    "02-08-behaviour-as-a-value"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sim",
+    "header": "rc/sim/plant.hpp",
+    "note": "a plant interface a controller is written against, a simulated motor behind it, and a contract that any plant, simulated or real, must satisfy"
+  },
+  "breaks_first": [
+    "E-SIM-0004",
+    "E-SIM-0005",
+    "E-SIM-0006"
+  ]
+}
