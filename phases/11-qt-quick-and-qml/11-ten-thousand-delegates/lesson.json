@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "11-11-ten-thousand-delegates",
+  "title": "Ten Thousand Delegates: What a Repeater Builds, What a ListView Builds, and a Budget a Test Can Hold",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about how many objects an interface makes for a list, so it needs Qt. Lesson 10-06 is the same economy for a chart: a million samples drawn as at most two points a column. Without Qt, do that and come back when Qt is installed.",
+  "requires": [
+    "11-05-the-list-that-changed-nowhere",
+    "11-03-the-warning-nobody-read"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Gui",
+      "Qml"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/delegate_counter.hpp",
+    "note": "a counter that a QML delegate reports to when it is made and when it goes, and a model of any number of rows that computes each row when asked"
+  },
+  "breaks_first": [
+    "E-QT-0090",
+    "E-QT-0091",
+    "E-QT-0092"
+  ]
+}
