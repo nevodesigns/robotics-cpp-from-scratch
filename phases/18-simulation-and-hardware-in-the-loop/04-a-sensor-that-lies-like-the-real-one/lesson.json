@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "18-04-a-sensor-that-lies-like-the-real-one",
+  "title": "A Sensor That Lies Like the Real One: Bias, Noise, Steps, Delay and Dropouts, in the Order They Happen",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "18-02-the-same-code-two-worlds",
+    "15-08-counts-not-volts",
+    "15-07-the-sensor-that-is-sometimes-wildly-wrong",
+    "03-02-errors-that-are-not-exceptional"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sim",
+    "header": "rc/sim/sensor_model.hpp",
+    "note": "a simulated sensor with a bias, noise, a range, a step size, a delay and dropouts, applied in the order a real one applies them, from a seed"
+  },
+  "breaks_first": [
+    "E-SIM-0010",
+    "E-SIM-0011",
+    "E-SIM-0012"
+  ]
+}
