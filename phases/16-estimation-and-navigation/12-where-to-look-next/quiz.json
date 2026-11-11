@@ -1,0 +1,78 @@
+{
+  "lesson": "16-12-where-to-look-next",
+  "title": "Where to Look Next: Frontiers, and the Difference Between Done and Stuck",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A rover is dropped into an unknown building. Where should it go first?",
+      "options": [
+        "Anywhere",
+        "To where what is known meets what is not: a free cell with an unseen cell beside it",
+        "To the wall",
+        "Home"
+      ],
+      "correct": 1,
+      "explanation": "That is a frontier."
+    },
+    {
+      "stage": "check",
+      "question": "Which of these is a frontier cell?",
+      "options": [
+        "A wall next to an unknown cell",
+        "A free cell with an unknown cell directly beside it, up, down, left or right",
+        "An unknown cell",
+        "Any cell at the edge of the map"
+      ],
+      "correct": 1,
+      "explanation": "A wall is known and an unknown cell cannot be stood in."
+    },
+    {
+      "stage": "check",
+      "question": "Why choose the nearest opening by the way the rover would drive?",
+      "options": [
+        "It is faster to compute",
+        "The straight line can go through a wall: from (5,5) the nearest in a line was 34 steps to drive and the chosen one 24",
+        "It is more accurate to the metre",
+        "It uses less memory"
+      ],
+      "correct": 1,
+      "explanation": "The test checked the choice against its own search."
+    },
+    {
+      "stage": "check",
+      "question": "What does a minimum size for an opening do?",
+      "options": [
+        "Nothing",
+        "Keeps the rover from driving across the room to look at a single missed cell: a minimum of 5 went to the real opening and a minimum of 1 to the speck",
+        "Makes the map bigger",
+        "Sets the rover's width"
+      ],
+      "correct": 1,
+      "explanation": "A speck made a second opening of 4 cells."
+    },
+    {
+      "stage": "post",
+      "question": "What are the three answers when choosing a frontier?",
+      "options": [
+        "Yes, no and maybe",
+        "Found, finished (nothing left of that size) and unreachable (some left and no route over free cells)",
+        "Near, far and wall",
+        "Left, right and straight"
+      ],
+      "correct": 1,
+      "explanation": "A rover shut in is not finished."
+    },
+    {
+      "stage": "post",
+      "question": "What does a version with only 'no goal' lose?",
+      "options": [
+        "Speed",
+        "The difference between a rover that has finished and one that is shut in, which look the same",
+        "The map",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "A sealed room with a sliver seen through a window gave unreachable."
+    }
+  ]
+}

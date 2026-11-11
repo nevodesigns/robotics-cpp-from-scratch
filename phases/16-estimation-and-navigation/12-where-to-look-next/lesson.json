@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "16-12-where-to-look-next",
+  "title": "Where to Look Next: Frontiers, and the Difference Between Done and Stuck",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "16-06-a-path-through-what-you-know",
+    "16-05-what-the-robot-does-not-know"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::nav",
+    "header": "rc/nav/frontier.hpp",
+    "note": "frontier cells, their clusters, and a choice of where to explore next that tells found from finished from unreachable"
+  },
+  "breaks_first": [
+    "E-NAV-0032",
+    "E-NAV-0033",
+    "E-NAV-0034"
+  ]
+}
