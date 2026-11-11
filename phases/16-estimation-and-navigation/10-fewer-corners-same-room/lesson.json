@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "16-10-fewer-corners-same-room",
+  "title": "Fewer Corners, Same Room: Pulling a Grid Path Tight Without Cutting a Wall",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "16-06-a-path-through-what-you-know",
+    "16-07-the-rover-that-fits"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::nav",
+    "header": "rc/nav/shorten.hpp",
+    "note": "a clear-line test that does not slip between diagonal walls, and a greedy shortcut that keeps only the corners it needs"
+  },
+  "breaks_first": [
+    "E-NAV-0026",
+    "E-NAV-0027",
+    "E-NAV-0028"
+  ]
+}
