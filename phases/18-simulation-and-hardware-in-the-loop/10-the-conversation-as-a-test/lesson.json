@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "18-10-the-conversation-as-a-test",
+  "title": "The Conversation as a Test: Golden Transcripts of a Device Session, and Ignoring Exactly What Should Differ",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "18-09-the-bench-link",
+    "01-10-the-fault-that-never-fired",
+    "01-05-strings-and-text",
+    "03-02-errors-that-are-not-exceptional",
+    "01-06-enums-and-states"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sim",
+    "header": "rc/sim/transcript.hpp",
+    "note": "a recording of what was said in each direction in a session, a text form a person can read and review, and a comparison that says where a new session first differs, with some bytes ignored"
+  },
+  "breaks_first": [
+    "E-SIM-0028",
+    "E-SIM-0029",
+    "E-SIM-0030"
+  ]
+}
