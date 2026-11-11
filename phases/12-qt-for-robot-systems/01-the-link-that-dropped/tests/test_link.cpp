@@ -67,7 +67,7 @@ RC_TEST("the wait doubles for each failure up to a cap, and a large number of fa
 
 RC_TEST("a connection that is refused is retried after waits that grow, and a success starts them again from the base") {
   const quint16 port = free_port();
-  LinkClient client(QHostAddress::LocalHost, port, 20, 1000);
+  LinkClient client(QHostAddress::LocalHost, port, 20, 1000, 100);
   client.start();
   const bool three = wait_for([&] { return client.delays().size() >= 3; });
   const QList<int> delays = client.delays();
@@ -95,7 +95,7 @@ RC_TEST("a connection that is refused is retried after waits that grow, and a su
 RC_TEST("a link that the server closes is one drop and one retry, though it is reported twice, and the client reconnects") {
   QTcpServer server;
   RC_CHECK(server.listen(QHostAddress::LocalHost, 0));
-  LinkClient client(QHostAddress::LocalHost, server.serverPort(), 20, 1000);
+  LinkClient client(QHostAddress::LocalHost, server.serverPort(), 20, 1000, 100);
   client.start();
   RC_CHECK(wait_for([&] { return client.state() == LinkClient::kConnected; }));
   RC_CHECK(wait_for([&] { return server.hasPendingConnections(); }));
@@ -124,7 +124,7 @@ RC_TEST("a link that the server closes is one drop and one retry, though it is r
 RC_TEST("lines that arrive in pieces are one line each, and the client says it is connected") {
   QTcpServer server;
   RC_CHECK(server.listen(QHostAddress::LocalHost, 0));
-  LinkClient client(QHostAddress::LocalHost, server.serverPort(), 20, 1000);
+  LinkClient client(QHostAddress::LocalHost, server.serverPort(), 20, 1000, 100);
   client.start();
   RC_CHECK(wait_for([&] { return client.state() == LinkClient::kConnected; }));
   RC_CHECK(wait_for([&] { return server.hasPendingConnections(); }));
@@ -152,7 +152,7 @@ RC_TEST("lines that arrive in pieces are one line each, and the client says it i
 
 RC_TEST("stop ends the retries for good, even when the server comes back") {
   const quint16 port = free_port();
-  LinkClient client(QHostAddress::LocalHost, port, 20, 1000);
+  LinkClient client(QHostAddress::LocalHost, port, 20, 1000, 100);
   client.start();
   RC_CHECK(wait_for([&] { return client.delays().size() >= 1; }));
   client.stop();

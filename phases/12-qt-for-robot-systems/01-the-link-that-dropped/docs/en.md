@@ -30,13 +30,17 @@ A server that closed a link that was up: the socket reported an error (the remot
 
 A line written in pieces, `temp 2` and `1.5\nvolt 12` and `.1\n`, was **2** lines, `temp 21.5` and `volt 12.1`, and half a line was not a line (lesson 09-12).
 
+### An attempt that takes too long
+
+How long a failed attempt takes to be reported is the operating system's business. Linux reported a refused connection to this machine at once. On the Windows runner of this repository the first version of this lesson waited a second and a half for a refusal to a port with nothing listening and none had been reported. A host that is switched off, or behind a firewall that drops packets, is never reported at all. So the client keeps a limit of its own, `connect_timeout_ms`, and an attempt that is still running when it ends is aborted and counted as a failure. The waits in this lesson used a limit of **100** ms and were the same on both systems. See `E-QT-0096`.
+
 ### Stopping
 
 After `stop()`, with the server coming back and **200** ms passing, there were no more waits, the state was stopped and there were **0** good connections: a retry that is waiting is ended, and a client that is stopped is not started by a link that is good. It could be started again. See `E-QT-0098`.
 
 ## Build It
 
-`next_delay_ms`, `LinkClient::on_connected` and `LinkClient::schedule_retry` in `exercise/solution.hpp`.
+`next_delay_ms`, `LinkClient::on_connected` and `LinkClient::schedule_retry` in `exercise/solution.hpp`. The limit on an attempt is supplied.
 
 ```
 rcpp verify 12-01
@@ -47,13 +51,13 @@ rcpp verify 12-01
 `rc/qt/link_client.hpp` joins its module.
 
 ```cpp
-rc::qt::LinkClient link(QHostAddress("192.168.1.20"), 5000, 100, 5000);
+rc::qt::LinkClient link(QHostAddress("192.168.1.20"), 5000, 100, 5000, 2000);
 QObject::connect(&link, &rc::qt::LinkClient::state_changed, this, [this](int s) { show_link_state(s); });
 link.start();
 // on exit: link.stop();
 ```
 
-**What this does not do.** It retries a connection that is refused or closed, and it knows nothing of one that is up and silent: a link that stops sending but is not closed is not a failure to this client (a later lesson of this phase is that). The waits have no random part, so a hundred stations that lose the same robot at once retry together, and a real fleet adds jitter. It is plain TCP, with no encryption and no authentication, and a robot on a network that others share needs both. And the lines are text: a binary protocol needs the framing of lesson 09-07.
+**What this does not do.** It retries a connection that is refused, timed out or closed, and it knows nothing of one that is up and silent: a link that stops sending but is not closed is not a failure to this client (a later lesson of this phase is that). The waits have no random part, so a hundred stations that lose the same robot at once retry together, and a real fleet adds jitter. It is plain TCP, with no encryption and no authentication, and a robot on a network that others share needs both. And the lines are text: a binary protocol needs the framing of lesson 09-07.
 
 ## What Breaks First
 
