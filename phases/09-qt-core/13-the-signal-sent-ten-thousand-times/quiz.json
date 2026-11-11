@@ -1,0 +1,78 @@
+{
+  "lesson": "09-13-the-signal-sent-ten-thousand-times",
+  "title": "The Signal Sent Ten Thousand Times: A Fast Sensor, a Queued Connection and a Latest Value That Counts What It Replaced",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A sensor emits a queued signal 10000 times before the receiving thread's loop runs. How many times does the slot run?",
+      "options": [
+        "Once, with the last value",
+        "10000 times: Qt does not merge queued signals",
+        "Zero",
+        "Only as many as the queue's default size"
+      ],
+      "correct": 1,
+      "explanation": "Each emit is an event in the queue."
+    },
+    {
+      "stage": "check",
+      "question": "Why does publish post a delivery only when one is not already waiting?",
+      "options": [
+        "Posting is not allowed twice",
+        "One waiting delivery will pick up the newest value anyway, so more only fill the queue",
+        "To save a mutex",
+        "Because invokeMethod fails the second time"
+      ],
+      "correct": 1,
+      "explanation": "10000 writes before the loop were one update."
+    },
+    {
+      "stage": "check",
+      "question": "What would happen if deliver forgot to set pending_ to false?",
+      "options": [
+        "Nothing",
+        "Every write after the first update would find a delivery 'waiting' that never comes, and the interface would freeze",
+        "The skipped count would be wrong but updates would continue",
+        "A crash"
+      ],
+      "correct": 1,
+      "explanation": "The pending flag is cleared by the delivery so the next write posts a new one."
+    },
+    {
+      "stage": "check",
+      "question": "What is asserted about 200000 writes from another thread?",
+      "options": [
+        "That exactly 4651 updates arrive",
+        "That updates plus the sum of skipped equal the writes, and the last value arrives",
+        "That every write is an update",
+        "That skipped is zero"
+      ],
+      "correct": 1,
+      "explanation": "The number of updates changes from run to run, the law does not."
+    },
+    {
+      "stage": "post",
+      "question": "A lambda connected with no receiver object to a signal emitted from the sensor's thread runs where?",
+      "options": [
+        "On the interface's thread",
+        "On the sensor's thread, because it is a direct connection",
+        "On a new thread",
+        "Nowhere until the loop runs"
+      ],
+      "correct": 1,
+      "explanation": "A direct slot runs in the thread that emitted."
+    },
+    {
+      "stage": "post",
+      "question": "When is LatestValue the wrong choice?",
+      "options": [
+        "When the interface shows a number",
+        "When every reading must be kept, as in a log",
+        "When the sensor is fast",
+        "When there are two threads"
+      ],
+      "correct": 1,
+      "explanation": "It keeps only the newest and counts the rest: a log wants all of them."
+    }
+  ]
+}

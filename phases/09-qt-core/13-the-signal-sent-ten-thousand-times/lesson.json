@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "id": "09-13-the-signal-sent-ten-thousand-times",
+  "title": "The Signal Sent Ten Thousand Times: A Fast Sensor, a Queued Connection and a Latest Value That Counts What It Replaced",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about queued signals and the Qt event loop, so it needs Qt. Lesson 08-09 is the same question in plain C++: the newest reading or all of them. Without Qt, do that and come back when Qt is installed.",
+  "requires": [
+    "09-03-across-the-thread-boundary",
+    "08-09-the-newest-reading-or-all-of-them"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Core"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/latest_value.hpp",
+    "note": "a thread safe latest value that posts one update to its own thread however often it is written, and says how many writes each update stands for"
+  },
+  "breaks_first": [
+    "E-QT-0048",
+    "E-QT-0049",
+    "E-QT-0050"
+  ]
+}
