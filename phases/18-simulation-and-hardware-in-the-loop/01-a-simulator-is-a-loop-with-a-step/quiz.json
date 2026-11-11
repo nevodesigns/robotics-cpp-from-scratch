@@ -1,0 +1,78 @@
+{
+  "lesson": "18-01-a-simulator-is-a-loop-with-a-step",
+  "title": "A Simulator Is a Loop With a Step: Fixed Time, Variable Frames and the Spiral of Death",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does a simulation that steps by the last frame's duration give different answers on different machines?",
+      "options": [
+        "It does not",
+        "The step size changes the numerical result: a spring simulated for 5 s ended at 0.917 at 60 frames a second and at -0.810 at 30",
+        "Machines have different clocks",
+        "Floating point differs"
+      ],
+      "correct": 1,
+      "explanation": "A fixed step gave 0.906213 at both."
+    },
+    {
+      "stage": "check",
+      "question": "Frames of 16 ms and a step of 10 ms. What does the first frame do?",
+      "options": [
+        "Runs 2 steps",
+        "Runs 1 step and keeps 6 ms, which is 0.6 of a step owed",
+        "Runs nothing",
+        "Runs 1.6 steps"
+      ],
+      "correct": 1,
+      "explanation": "Time that does not fill a step is kept."
+    },
+    {
+      "stage": "check",
+      "question": "What is alpha for?",
+      "options": [
+        "The step size",
+        "How far between the last step and the next the real clock is, which a renderer uses to draw between states",
+        "The error",
+        "The frame count"
+      ],
+      "correct": 1,
+      "explanation": "It is from 0 up to but not including 1."
+    },
+    {
+      "stage": "check",
+      "question": "A window is dragged for 5 s with a step of 10 ms. What should the stepper do?",
+      "options": [
+        "Run 500 steps",
+        "Run at most the limit, 10, drop and count the rest (4.90 s), and owe the next frame nothing for it",
+        "Skip frames",
+        "Crash"
+      ],
+      "correct": 1,
+      "explanation": "A simulation that catches up takes longer to catch up than the time it stands for."
+    },
+    {
+      "stage": "post",
+      "question": "What happens to the error as the step is halved, for this first order method?",
+      "options": [
+        "It doubles",
+        "It roughly halves: 22.222, 10.526, 2.020 at steps of 0.01, 0.005 and 0.001",
+        "It stays",
+        "It quarters exactly"
+      ],
+      "correct": 1,
+      "explanation": "A step of 50 ms against a spring that swings in 0.31 s was 100 percent wrong."
+    },
+    {
+      "stage": "post",
+      "question": "What is needed besides a fixed step for two runs to match to the last bit?",
+      "options": [
+        "Nothing",
+        "Everything the simulation reads must be reproducible too: a random number or a thread race inside the world would break it",
+        "A faster machine",
+        "A smaller step"
+      ],
+      "correct": 1,
+      "explanation": "The same jittery frames twice gave 0.90621265316080712 both times."
+    }
+  ]
+}

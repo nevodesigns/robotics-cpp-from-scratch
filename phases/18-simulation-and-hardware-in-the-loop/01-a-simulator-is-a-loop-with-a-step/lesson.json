@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "18-01-a-simulator-is-a-loop-with-a-step",
+  "title": "A Simulator Is a Loop With a Step: Fixed Time, Variable Frames and the Spiral of Death",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-13-whose-clock-is-it",
+    "14-12-the-rate-the-loop-runs-at",
+    "03-05-time-and-clocks"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sim",
+    "header": "rc/sim/stepper.hpp",
+    "note": "a stepper that turns uneven frame times into a whole number of fixed simulation steps, and refuses to try to catch up with a backlog it cannot clear"
+  },
+  "breaks_first": [
+    "E-SIM-0001",
+    "E-SIM-0002",
+    "E-SIM-0003"
+  ]
+}
