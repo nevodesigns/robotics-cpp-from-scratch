@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "13-15-taking-steps-toward-the-pose",
+  "title": "Taking Steps Toward the Pose: Numerical Inverse Kinematics, the Damping That Keeps It Going Near a Singularity, and Knowing When It Has Failed",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "13-11-where-the-tool-points",
+    "13-13-how-wrong-a-pose-is",
+    "13-04-the-pose-it-cannot-reach-slowly"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::kin",
+    "header": "rc/kin/numeric_ik.hpp",
+    "note": "a numerical inverse kinematics solver for the three link arm: the Jacobian, a damped least squares step that is limited in size, joint limits applied at every step, and a result that says whether it got there and how close it was if it did not"
+  },
+  "breaks_first": [
+    "E-KIN-0038",
+    "E-KIN-0039",
+    "E-KIN-0040"
+  ]
+}
