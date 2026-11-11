@@ -49,7 +49,7 @@ class ShutdownSequence {
 
 // Deletes the objects that were told deleteLater() and whose turn has not come, which an event loop that is not running again will not do. A program that is leaving calls this
 // as one of its last steps.
-inline void drain_deferred_deletes() {
+inline void flush_deferred_deletes() {
   // TODO: QCoreApplication::sendPostedEvents(nullptr, QEvent::DeferredDelete).
 }
 

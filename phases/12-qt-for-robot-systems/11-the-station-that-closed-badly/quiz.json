@@ -67,7 +67,7 @@
       "question": "What delivers the deferred deletes of a program that is leaving?",
       "options": [
         "Nothing",
-        "drain_deferred_deletes, which sends them",
+        "flush_deferred_deletes, which sends them",
         "The destructor of the application",
         "The operating system"
       ],

@@ -2,7 +2,7 @@
 //
 // Closing in the reverse order of starting, from lesson 12-11, graduated.
 //
-// Steps added a, b, c were run c, b, a; a step that returned false and one that threw did not stop the rest and were both in the report; a second run did nothing; an object told deleteLater() was still alive when the loop did not run, and gone after drain_deferred_deletes.
+// Steps added a, b, c were run c, b, a; a step that returned false and one that threw did not stop the rest and were both in the report; a second run did nothing; an object told deleteLater() was still alive when the loop did not run, and gone after flush_deferred_deletes.
 
 #ifndef RC_QT_SHUTDOWN_HPP
 #define RC_QT_SHUTDOWN_HPP
@@ -69,7 +69,7 @@ class ShutdownSequence {
 
 // Deletes the objects that were told deleteLater() and whose turn has not come, which an event loop that is not running again will not do. A program that is leaving calls this
 // as one of its last steps.
-inline void drain_deferred_deletes() { QCoreApplication::sendPostedEvents(nullptr, QEvent::DeferredDelete); }
+inline void flush_deferred_deletes() { QCoreApplication::sendPostedEvents(nullptr, QEvent::DeferredDelete); }
 }  // namespace qt
 }  // namespace rc
 

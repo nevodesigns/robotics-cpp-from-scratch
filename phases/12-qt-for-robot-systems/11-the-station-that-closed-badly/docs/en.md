@@ -28,11 +28,11 @@ Three requests to quit: the step ran **1** time, and the reports had **1**, **0*
 
 ### deleteLater
 
-An object told `deleteLater()`, and then `QCoreApplication::processEvents()`: it was **still alive**. A deferred delete is delivered by an event loop, and not by a call from outside one. After `drain_deferred_deletes()`, which sends the deferred deletes, it was **gone** and the count of live objects was 0. An object that waits for a loop that will not run again is an object whose destructor never runs, with whatever it was holding. See `E-QT-0122`.
+An object told `deleteLater()`, and then `QCoreApplication::processEvents()`: it was **still alive**. A deferred delete is delivered by an event loop, and not by a call from outside one. After `flush_deferred_deletes()`, which sends the deferred deletes, it was **gone** and the count of live objects was 0. An object that waits for a loop that will not run again is an object whose destructor never runs, with whatever it was holding. See `E-QT-0122`.
 
 ## Build It
 
-`ShutdownSequence::run` and `drain_deferred_deletes` in `exercise/solution.hpp`. `add` is supplied.
+`ShutdownSequence::run` and `flush_deferred_deletes` in `exercise/solution.hpp`. `add` is supplied.
 
 ```
 rcpp verify 12-11
@@ -48,7 +48,7 @@ settings_ok = open_settings();   shutdown.add("settings", [&] { return settings.
 log_ok = open_log();             shutdown.add("log", [&] { return log.close(); });
 link.start();                    shutdown.add("link", [&] { link.stop(); return true; });
 robot.arm();                     shutdown.add("robot stop", [&] { return robot.stop(); });
-QObject::connect(&app, &QCoreApplication::aboutToQuit, [&] { shutdown.run(); rc::qt::drain_deferred_deletes(); });
+QObject::connect(&app, &QCoreApplication::aboutToQuit, [&] { shutdown.run(); rc::qt::flush_deferred_deletes(); });
 ```
 
 **What this does not do.** It closes in order and does not know why an order is right: the order is the order of the steps being added, so a step added in the wrong place is closed in the wrong place. It does not wait for a step that does not return, and a step that hangs hangs the shutdown, so a step that waits should carry its own time limit (lesson 12-01 has one). It is for a program that is ending, and a part that is closed and restarted while the program runs wants its own start and stop. It cannot stop a robot that has stopped listening: a step of the station is a request, and the robot has to stop on its own when the station goes quiet.
@@ -61,6 +61,6 @@ QObject::connect(&app, &QCoreApplication::aboutToQuit, [&] { shutdown.run(); rc:
 
 ## Ship It
 
-`rc/qt/shutdown.hpp` holds `ShutdownReport`, `ShutdownSequence` and `drain_deferred_deletes`.
+`rc/qt/shutdown.hpp` holds `ShutdownReport`, `ShutdownSequence` and `flush_deferred_deletes`.
 
 The capstone of this phase ends with one.

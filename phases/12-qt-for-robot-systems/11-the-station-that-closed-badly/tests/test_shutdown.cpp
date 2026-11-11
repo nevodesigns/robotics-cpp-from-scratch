@@ -97,14 +97,14 @@ RC_TEST("only what was started is closed: steps added after a failure to start a
   RC_CHECK_EQ(log.size(), 2);
 }
 
-RC_TEST("an object told deleteLater is still there when no loop runs again, and drain_deferred_deletes deletes it") {
+RC_TEST("an object told deleteLater is still there when no loop runs again, and flush_deferred_deletes deletes it") {
   g_alive = 0;
   Tracked* object = new Tracked();
   QPointer<QObject> watcher(object);
   object->deleteLater();
   QCoreApplication::processEvents();                // ordinary events are processed, and a deferred delete is not delivered from here
   const bool alive_after_processing = !watcher.isNull();
-  drain_deferred_deletes();
+  flush_deferred_deletes();
   const bool alive_after_drain = !watcher.isNull();
   std::cout << "  after deleteLater and processEvents the object is " << (alive_after_processing ? "still alive" : "gone") << ", after the drain " << (alive_after_drain ? "still alive" : "gone")
             << "; alive count " << g_alive << "\n\n";
