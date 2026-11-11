@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "13-12-the-table-that-describes-an-arm",
+  "title": "The Table That Describes an Arm: Denavit-Hartenberg Rows, Two Conventions, and the Same Numbers That Are Two Different Arms",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "13-01-where-the-tool-is",
+    "06-04-transforms-and-frames"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::kin",
+    "header": "rc/kin/dh.hpp",
+    "note": "a Denavit-Hartenberg table turned into the frame of each joint and the tool, in the standard and the modified convention, for revolute and prismatic joints"
+  },
+  "breaks_first": [
+    "E-KIN-0029",
+    "E-KIN-0030",
+    "E-KIN-0031"
+  ]
+}
