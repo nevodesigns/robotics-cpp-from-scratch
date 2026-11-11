@@ -1,7 +1,7 @@
 id: E-PLOT-0012
 title: A chart that costs as many points as it has samples
 match: a million samples are drawn with at most two points a column, and a flat column is one point
-match: expected points
+match: expected this to be true: points
 platforms: linux, windows
 teaches: 10-06-a-million-points-in-800-columns
 ---

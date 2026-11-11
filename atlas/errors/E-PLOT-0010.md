@@ -1,7 +1,7 @@
 id: E-PLOT-0010
 title: A spike that a chart does not show
 match: drawing every 1250th of a million samples never sees a spike that is not on one
-match: expected naive_high
+match: expected this to be true: naive_high
 platforms: linux, windows
 teaches: 10-06-a-million-points-in-800-columns
 ---

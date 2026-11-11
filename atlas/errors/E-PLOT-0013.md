@@ -1,7 +1,7 @@
 id: E-PLOT-0013
 title: A steady signal drawn as violent noise
 match: noise in the last digit of a steady signal fills the chart unless the range has a minimum span
-match: expected rows_marked
+match: expected this to be true: rows_marked
 platforms: linux, windows
 teaches: 10-07-the-chart-in-a-terminal
 ---
