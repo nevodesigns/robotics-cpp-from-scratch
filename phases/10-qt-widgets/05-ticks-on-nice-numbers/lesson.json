@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "10-05-ticks-on-nice-numbers",
+  "title": "Ticks on Nice Numbers: Why an Axis Says 0.2 and Not 0.19999999999999998",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "10-02-a-value-over-time",
+    "01-08-close-enough"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::plot",
+    "header": "rc/plot/ticks.hpp",
+    "note": "the places on an axis where a chart puts a number, and the text of each"
+  },
+  "breaks_first": [
+    "E-PLOT-0007",
+    "E-PLOT-0008",
+    "E-PLOT-0009"
+  ]
+}
