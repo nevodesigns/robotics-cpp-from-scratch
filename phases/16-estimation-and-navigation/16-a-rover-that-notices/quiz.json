@@ -1,0 +1,78 @@
+{
+  "lesson": "16-16-a-rover-that-notices",
+  "title": "A Rover That Notices: Plan, Drive, Sense, Replan, and What Each Choice Costs",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A rover plans once and drives. A door on the route closes. What happens?",
+      "options": [
+        "It goes round",
+        "It keeps pushing at the door: 284 bumps in 300 steps and it never arrived",
+        "It waits",
+        "It reverses"
+      ],
+      "correct": 1,
+      "explanation": "The plan was right when it was made."
+    },
+    {
+      "stage": "check",
+      "question": "What did replanning every step buy in a building that did not change?",
+      "options": [
+        "A shorter route",
+        "Nothing: 33 steps either way, with 33 plans against 1",
+        "A faster rover",
+        "A better map"
+      ],
+      "correct": 1,
+      "explanation": "The first plan was already the best."
+    },
+    {
+      "stage": "check",
+      "question": "What happens when unknown cells are treated as walls, on a map that starts unknown?",
+      "options": [
+        "It plans carefully",
+        "No route at all, after 0 steps, because the rover is standing in a map of nothing but unknown",
+        "It reaches the goal",
+        "It explores"
+      ],
+      "correct": 1,
+      "explanation": "Safe, and the rover never leaves."
+    },
+    {
+      "stage": "check",
+      "question": "A door closes at step 15. What does replanning when the next step is blocked give?",
+      "options": [
+        "Failure",
+        "It arrived in 83 steps with 6 plans and 0 bumps, against 61 as the fewest from the start with the door shut",
+        "It arrived in 33 steps",
+        "It arrived with 100 bumps"
+      ],
+      "correct": 1,
+      "explanation": "The rover had already driven toward the door."
+    },
+    {
+      "stage": "post",
+      "question": "What does believing a contradiction at once save?",
+      "options": [
+        "Plans",
+        "The bumps and steps of a map that averages: 0 bumps and 83 steps, against 4 bumps and 87 steps",
+        "Memory",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "The map was built to ride out noise and so it forgets slowly."
+    },
+    {
+      "stage": "post",
+      "question": "What should a rover do when the planner finds no route?",
+      "options": [
+        "Keep trying",
+        "Stop and say so, with the counts: 54 steps and 7 plans in the sealed building, instead of bumping to its step limit",
+        "Guess",
+        "Turn round"
+      ],
+      "correct": 1,
+      "explanation": "A no route is a result a supervisor needs to hear."
+    }
+  ]
+}

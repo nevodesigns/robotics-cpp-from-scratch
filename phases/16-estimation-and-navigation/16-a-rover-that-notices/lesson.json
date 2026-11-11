@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "16-16-a-rover-that-notices",
+  "title": "A Rover That Notices: Plan, Drive, Sense, Replan, and What Each Choice Costs",
+  "type": "capstone",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "16-06-a-path-through-what-you-know",
+    "16-15-the-door-that-closed",
+    "16-12-where-to-look-next"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::nav",
+    "header": "rc/nav/rover.hpp",
+    "note": "a drive to a goal through a map that starts unknown, with policies for when to replan and whether to believe a contradiction, and the numbers that compare them"
+  },
+  "breaks_first": [
+    "E-NAV-0044",
+    "E-NAV-0045",
+    "E-NAV-0046"
+  ]
+}
