@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "16-13-am-i-where-the-map-says",
+  "title": "Am I Where the Map Says: Scoring a Scan Against a Map, and the Corridor That Cannot Tell",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "16-05-what-the-robot-does-not-know",
+    "16-09-three-numbers-from-two-moves"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::nav",
+    "header": "rc/nav/match.hpp",
+    "note": "a score for how well a scan fits the map from a pose, a search around a guess, and a count of the poses that fit equally well"
+  },
+  "breaks_first": [
+    "E-NAV-0035",
+    "E-NAV-0036",
+    "E-NAV-0037"
+  ]
+}
