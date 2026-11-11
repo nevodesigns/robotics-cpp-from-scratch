@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "15-13-the-read-that-fails",
+  "title": "The Read That Fails: Checksums, Retries and What a Bus Costs",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "15-12-the-register-that-packs-three-things",
+    "15-04-the-sensor-that-stopped"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sensor",
+    "header": "rc/sensor/reliable_read.hpp",
+    "note": "a CRC-8, a frame check, a bounded retry that says what went wrong, and the arithmetic of how many tries are enough"
+  },
+  "breaks_first": [
+    "E-SENSE-0029",
+    "E-SENSE-0030",
+    "E-SENSE-0031"
+  ]
+}
