@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "id": "09-10-the-setting-that-was-converted",
+  "title": "The Setting That Was Converted: What QVariant Does to 3.7, to 3e9 and to the Word \"no\"",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about what QVariant converts silently, so it needs Qt. Lesson 01-15 is about conversions between number types in plain C++, and lesson 00-10 about a number that arrives as text. Without Qt, do those and come back when Qt is installed.",
+  "requires": [
+    "09-08-the-field-that-was-quietly-zero",
+    "00-10-a-program-that-asks"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Core"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/settings_convert.hpp",
+    "note": "whole numbers, true or false and numbers taken from a QVariant, each refused when the conversion would change the value"
+  },
+  "breaks_first": [
+    "E-QT-0039",
+    "E-QT-0040",
+    "E-QT-0041"
+  ]
+}

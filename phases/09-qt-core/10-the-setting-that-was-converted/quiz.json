@@ -1,0 +1,78 @@
+{
+  "lesson": "09-10-the-setting-that-was-converted",
+  "title": "The Setting That Was Converted: What QVariant Does to 3.7, to 3e9 and to the Word \"no\"",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A setting of 3.7 is read with QVariant(3.7).toInt(&ok). What do you get?",
+      "options": [
+        "3 and ok false",
+        "4 and ok true: it rounds, and ok means only that a conversion was done",
+        "3.7",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "QVariant(3e9).toInt() gave -1294967296, also with ok true."
+    },
+    {
+      "stage": "check",
+      "question": "QVariant(-1).toUInt(&ok) gives what?",
+      "options": [
+        "0 with ok false",
+        "4294967295 with ok true",
+        "-1",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "The conversion wrapped and said it worked."
+    },
+    {
+      "stage": "check",
+      "question": "What do QVariant(QString(\"no\")).toBool() and QVariant(QString(\"abc\")).toBool() give?",
+      "options": [
+        "false and false",
+        "true and true: only the empty string, 0 and false are false",
+        "false and true",
+        "true and false"
+      ],
+      "correct": 1,
+      "explanation": "A setting safety = off leaves the safety on."
+    },
+    {
+      "stage": "check",
+      "question": "setting_bool is given \"yes\", \"OFF\" and \"maybe\". What happens?",
+      "options": [
+        "All three are true",
+        "yes is true, OFF is false, and maybe is refused",
+        "All three are refused",
+        "maybe is true"
+      ],
+      "correct": 1,
+      "explanation": "13 of 13 spellings were read and 9 of 9 non-answers refused."
+    },
+    {
+      "stage": "post",
+      "question": "setting_int refuses the double 3.7 and accepts the double 5.0. Why?",
+      "options": [
+        "Rounding",
+        "3.7 would change in becoming an int, and 5.0 would not: only a whole number that fits is accepted",
+        "5 is a prime",
+        "It checks the digits"
+      ],
+      "correct": 1,
+      "explanation": "13 of 13 conversions that would change the value were refused."
+    },
+    {
+      "stage": "post",
+      "question": "Why are the tests that show QVariant's own conversions written as measurements?",
+      "options": [
+        "They are slow",
+        "They describe Qt 6.2, and other versions may convert some of these differently, so they are what was observed and not a promise",
+        "They are optional",
+        "Qt forbids tests"
+      ],
+      "correct": 1,
+      "explanation": "The continuous integration runs on other versions."
+    }
+  ]
+}
