@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "17-02-a-queue-for-each-listener",
+  "title": "A Queue for Each Listener: Depth, Overflow and What a Slow Subscriber Loses",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-01-topics-by-hand",
+    "03-03-containers-and-their-costs"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::bus",
+    "header": "rc/bus/queued_bus.hpp",
+    "note": "a bus with a bounded queue per subscriber, a choice of which message to lose when it is full, and a count of what was lost"
+  },
+  "breaks_first": [
+    "E-BUS-0004",
+    "E-BUS-0005",
+    "E-BUS-0006"
+  ]
+}
