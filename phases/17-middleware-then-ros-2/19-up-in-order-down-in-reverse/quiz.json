@@ -1,0 +1,78 @@
+{
+  "lesson": "17-19-up-in-order-down-in-reverse",
+  "title": "Up in Order, Down in Reverse: Bringing a Graph of Nodes Up and Rolling It Back",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why not start every node at once and let them find each other?",
+      "options": [
+        "It is faster",
+        "The robot works when the machine is fast and fails when it is not, and when one node does not come up the others are left running without it",
+        "It is not possible",
+        "It uses less memory"
+      ],
+      "correct": 1,
+      "explanation": "Start up order decided by timing is luck."
+    },
+    {
+      "stage": "check",
+      "question": "Planner, controller, filter, driver, logger and viewer are listed in that order, each needing the one it follows in the chain. What is the start order?",
+      "options": [
+        "As listed",
+        "driver filter planner controller logger viewer: every node after what it needs, ties going to the one listed first",
+        "Alphabetical",
+        "Random"
+      ],
+      "correct": 1,
+      "explanation": "The choice depends on nothing but the list."
+    },
+    {
+      "stage": "check",
+      "question": "What does a circle of needs do to the start order?",
+      "options": [
+        "It is ignored",
+        "The list is refused with the reason: a needing b needing c needing a has no start order",
+        "The first one starts",
+        "They all start"
+      ],
+      "correct": 1,
+      "explanation": "Finding out by trying would be a robot that hangs at start up."
+    },
+    {
+      "stage": "check",
+      "question": "Why configure every node before activating any?",
+      "options": [
+        "It is faster",
+        "Nothing produces until it is known that everything which consumes it exists, so a failed configure has not yet sent a single message",
+        "The API requires it",
+        "To save threads"
+      ],
+      "correct": 1,
+      "explanation": "Configure opens devices and can fail; activate makes it run."
+    },
+    {
+      "stage": "post",
+      "question": "The planner will not configure. What does the log show?",
+      "options": [
+        "Nothing",
+        "driver:configure filter:configure planner:configure filter:cleanup driver:cleanup: the ones that did configure are cleaned up in reverse and nothing was activated",
+        "planner:cleanup",
+        "Everything restarted"
+      ],
+      "correct": 1,
+      "explanation": "The report says failed planner."
+    },
+    {
+      "stage": "post",
+      "question": "An optional logger fails and a plotter needs it. What is running?",
+      "options": [
+        "Nothing",
+        "Driver, filter and controller: logger and plotter are left out, and the report says which were skipped",
+        "Everything",
+        "Only the driver"
+      ],
+      "correct": 1,
+      "explanation": "A degraded robot is up, and says so."
+    }
+  ]
+}

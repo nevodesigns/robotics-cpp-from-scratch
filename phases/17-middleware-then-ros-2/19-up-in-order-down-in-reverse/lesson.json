@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "17-19-up-in-order-down-in-reverse",
+  "title": "Up in Order, Down in Reverse: Bringing a Graph of Nodes Up and Rolling It Back",
+  "type": "build",
+  "minutes": 140,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-18-a-node-with-a-life-cycle",
+    "03-03-containers-and-their-costs",
+    "02-04-unique-ownership-and-move"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::ros",
+    "header": "rc/ros/launch.hpp",
+    "note": "a start order from what each node needs, a bring up that configures everything before activating anything, a rollback when a required node fails, and a skip when an optional one does"
+  },
+  "breaks_first": [
+    "E-ROS-0007",
+    "E-ROS-0008",
+    "E-ROS-0009"
+  ]
+}
