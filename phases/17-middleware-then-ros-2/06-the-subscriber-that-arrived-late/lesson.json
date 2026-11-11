@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "17-06-the-subscriber-that-arrived-late",
+  "title": "The Subscriber That Arrived Late: Durability, the Last Value and How Old Is Too Old",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-01-topics-by-hand",
+    "17-02-a-queue-for-each-listener"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::bus",
+    "header": "rc/bus/durable_bus.hpp",
+    "note": "a bus that keeps the last few messages of a topic for subscribers that arrive after them, with a limit on how old a replayed message may be"
+  },
+  "breaks_first": [
+    "E-BUS-0016",
+    "E-BUS-0017",
+    "E-BUS-0018"
+  ]
+}

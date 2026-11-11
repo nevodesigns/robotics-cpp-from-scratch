@@ -1,0 +1,78 @@
+{
+  "lesson": "17-06-the-subscriber-that-arrived-late",
+  "title": "The Subscriber That Arrived Late: Durability, the Last Value and How Old Is Too Old",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A map is published once, then a node starts. Why does the node never see it on an ordinary topic?",
+      "options": [
+        "The topic is full",
+        "Nothing is kept: a subscriber hears what is published after it subscribes, and the map was published once before: 0 of 3 late nodes had it",
+        "The node is too slow",
+        "The map is too big"
+      ],
+      "correct": 1,
+      "explanation": "The next message is never coming."
+    },
+    {
+      "stage": "check",
+      "question": "What does a transient local topic do for a subscriber that arrives late?",
+      "options": [
+        "Nothing",
+        "Gives it the remembered messages first, oldest first, then what follows: keep 3 with five published gave 3 4 5 and then 6",
+        "Gives it all messages ever",
+        "Gives it the newest only"
+      ],
+      "correct": 1,
+      "explanation": "Durability is a bounded memory."
+    },
+    {
+      "stage": "check",
+      "question": "1000 messages are published to a topic that keeps 1. What is remembered, and what did an early subscriber hear?",
+      "options": [
+        "1000 and 1",
+        "1 remembered, and the early subscriber heard all 1000 once, with no repeats from the late replay",
+        "1000 and 1000",
+        "0 and 0"
+      ],
+      "correct": 1,
+      "explanation": "The replay goes to the new subscriber only."
+    },
+    {
+      "stage": "check",
+      "question": "Why might a subscriber refuse a remembered message?",
+      "options": [
+        "It is too long",
+        "It is too old to be true any more: a goal from a minute and a half ago may be cancelled",
+        "It is a duplicate",
+        "It has no payload"
+      ],
+      "correct": 1,
+      "explanation": "For a map age does not matter and for a goal it does."
+    },
+    {
+      "stage": "post",
+      "question": "With remembered messages from 0 s and 98 s, what did a limit of 5 s do at 100 s?",
+      "options": [
+        "Nothing",
+        "Heard 1 and skipped 1, where no limit heard 2",
+        "Skipped both",
+        "Heard none"
+      ],
+      "correct": 1,
+      "explanation": "The skip is counted, so a subscriber can tell it was given less."
+    },
+    {
+      "stage": "post",
+      "question": "What is durability here not?",
+      "options": [
+        "A memory",
+        "Persistence across a restart: the memory is in the bus and is lost with it, which is a different feature",
+        "A queue",
+        "A topic option"
+      ],
+      "correct": 1,
+      "explanation": "Transient local lasts while the publisher lives."
+    }
+  ]
+}
