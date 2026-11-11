@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "17-10-goals-that-take-time",
+  "title": "Goals That Take Time: Feedback, Cancel and the States a Goal Passes Through",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-09-a-call-across-the-bus",
+    "01-06-enums-and-states"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::bus",
+    "header": "rc/bus/action.hpp",
+    "note": "a goal that can only move through the legal states, feedback that is only accepted while it runs, and a server that decides what to do with a second goal"
+  },
+  "breaks_first": [
+    "E-BUS-0028",
+    "E-BUS-0029",
+    "E-BUS-0030"
+  ]
+}

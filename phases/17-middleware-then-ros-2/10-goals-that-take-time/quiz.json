@@ -1,0 +1,78 @@
+{
+  "lesson": "17-10-goals-that-take-time",
+  "title": "Goals That Take Time: Feedback, Cancel and the States a Goal Passes Through",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is an action not just a service with a long timeout?",
+      "options": [
+        "It is",
+        "A service that blocks for 90 seconds gives no progress and no way to stop it, and a timeout there means 'I do not know' for the whole time",
+        "It is faster",
+        "It uses less memory"
+      ],
+      "correct": 1,
+      "explanation": "An action adds feedback, cancel and a result."
+    },
+    {
+      "stage": "check",
+      "question": "What does a cancel do to a running goal?",
+      "options": [
+        "Makes it canceled",
+        "Moves it to canceling: only the server's confirmation, after the arm has actually stopped, makes it canceled",
+        "Deletes it",
+        "Makes it aborted"
+      ],
+      "correct": 1,
+      "explanation": "A cancel is a request."
+    },
+    {
+      "stage": "check",
+      "question": "The client cancels in the same moment the arm arrives. What does the goal end as?",
+      "options": [
+        "canceled",
+        "succeeded: the work finished before the cancel took effect, and a client that assumed the cancel worked would be wrong",
+        "aborted",
+        "executing"
+      ],
+      "correct": 1,
+      "explanation": "A cancel can lose a race."
+    },
+    {
+      "stage": "check",
+      "question": "What happens to every call on a goal that has finished?",
+      "options": [
+        "It changes state",
+        "Nothing: 0 changed across succeeded, canceled and aborted goals, so a reported result cannot be overwritten",
+        "It is reopened",
+        "It aborts"
+      ],
+      "correct": 1,
+      "explanation": "Finished is final."
+    },
+    {
+      "stage": "post",
+      "question": "Feedback arrives for a goal that was canceled. What should the goal do?",
+      "options": [
+        "Keep it",
+        "Drop it and count it: 2 kept while executing, 3 dropped after",
+        "Raise an error",
+        "Restart the goal"
+      ],
+      "correct": 1,
+      "explanation": "Progress is only meaningful while the goal runs."
+    },
+    {
+      "stage": "post",
+      "question": "A second goal arrives while the first runs. What are the two rules, and what does preempt old do to the first?",
+      "options": [
+        "Queue and ignore",
+        "Reject the new one, or accept it and ask the old one to cancel, which leaves the old one canceling and not yet stopped",
+        "Merge them",
+        "Abort both"
+      ],
+      "correct": 1,
+      "explanation": "The server decides whether the second waits for the confirmation."
+    }
+  ]
+}
