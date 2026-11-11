@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "17-15-where-is-it-in-which-frame",
+  "title": "Where Is It, in Which Frame: A Tree of Coordinate Frames and the Transform at the Right Time",
+  "type": "build",
+  "minutes": 130,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-13-whose-clock-is-it",
+    "06-01-vectors-and-two-products",
+    "01-06-enums-and-states"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::bus",
+    "header": "rc/bus/frames.hpp",
+    "note": "a tree of frames whose links change with time, a lookup that composes the chain and interpolates, and a refusal to extrapolate"
+  },
+  "breaks_first": [
+    "E-BUS-0043",
+    "E-BUS-0044",
+    "E-BUS-0045"
+  ]
+}
