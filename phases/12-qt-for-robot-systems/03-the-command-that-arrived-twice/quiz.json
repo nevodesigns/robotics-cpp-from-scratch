@@ -1,0 +1,78 @@
+{
+  "lesson": "12-03-the-command-that-arrived-twice",
+  "title": "The Command That Arrived Twice: Retrying What Was Not Acknowledged, and Applying It Once",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "The acknowledgement of a command is lost. What does the sender do?",
+      "options": [
+        "Nothing",
+        "Send the command again: it cannot tell the command was lost from the answer",
+        "Fail the command",
+        "Wait for ever"
+      ],
+      "correct": 1,
+      "explanation": "The first acknowledgement of 10 commands lost was 20 arrivals."
+    },
+    {
+      "stage": "check",
+      "question": "A command arrives a second time. What must the receiver do?",
+      "options": [
+        "Apply it again",
+        "Not apply it, and acknowledge it",
+        "Ignore it, without an acknowledgement",
+        "Apply half of it"
+      ],
+      "correct": 1,
+      "explanation": "It applied each once and refused 10 duplicates."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the receiver acknowledge a duplicate?",
+      "options": [
+        "It is polite",
+        "The first acknowledgement was lost, and without another the sender retries until it fails",
+        "It saves memory",
+        "Qt requires it"
+      ],
+      "correct": 1,
+      "explanation": "The acknowledgement is how the sender stops."
+    },
+    {
+      "stage": "check",
+      "question": "A command has been sent 5 times, its limit, and is due again. What happens?",
+      "options": [
+        "A sixth attempt",
+        "It fails, is removed from the waiting commands, and is listed",
+        "It waits longer",
+        "It is applied"
+      ],
+      "correct": 1,
+      "explanation": "The command was transmitted 5 times and then failed."
+    },
+    {
+      "stage": "post",
+      "question": "Sequence numbers are 16 bits. What happens at 65536?",
+      "options": [
+        "An error",
+        "They wrap to 0: 70000 commands used 65536 numbers with none twice in a row",
+        "They stop",
+        "They become 32 bits"
+      ],
+      "correct": 1,
+      "explanation": "The last of 70000 was 4463."
+    },
+    {
+      "stage": "post",
+      "question": "A receiver remembers the last two numbers. What happens to a retry of an old command?",
+      "options": [
+        "It is refused",
+        "It may be applied again: it has fallen out of the window",
+        "It is delayed",
+        "It is applied twice at once"
+      ],
+      "correct": 1,
+      "explanation": "Number 1 was accepted again after two others."
+    }
+  ]
+}
