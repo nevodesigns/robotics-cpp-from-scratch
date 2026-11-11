@@ -1,0 +1,78 @@
+{
+  "lesson": "17-18-a-node-with-a-life-cycle",
+  "title": "A Node With a Life Cycle: Configure, Activate, and What Failure Does to Each Step",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is a managed node's start up several steps and not one?",
+      "options": [
+        "Style",
+        "Each can fail, and between them there are states a supervisor can see and act on: an inactive node has its device open and is not publishing, so it can be paused without closing it",
+        "Speed",
+        "Threads"
+      ],
+      "correct": 1,
+      "explanation": "Configure, activate, deactivate, cleanup and shutdown."
+    },
+    {
+      "stage": "check",
+      "question": "Activate is requested of an unconfigured node. What happens?",
+      "options": [
+        "The device is started",
+        "The request is refused and its callback is not run: six requests out of order were all refused and only the two legal callbacks ran",
+        "It is configured first",
+        "It fails"
+      ],
+      "correct": 1,
+      "explanation": "A callback must not run from a state it was not written for."
+    },
+    {
+      "stage": "check",
+      "question": "A configure callback returns failure. Where is the node?",
+      "options": [
+        "Inactive",
+        "Unconfigured, as it was: and a retry after the device came back took it to inactive",
+        "Finalized",
+        "Error processing"
+      ],
+      "correct": 1,
+      "explanation": "Failure changes nothing."
+    },
+    {
+      "stage": "check",
+      "question": "A deactivate callback fails. What state is the node in?",
+      "options": [
+        "Inactive",
+        "Active: it was asked to stop and could not, and a failed shutdown likewise did not finalize it",
+        "Finalized",
+        "Unconfigured"
+      ],
+      "correct": 1,
+      "explanation": "A node does not change state because it was asked and could not comply."
+    },
+    {
+      "stage": "post",
+      "question": "What is the difference between failure and error?",
+      "options": [
+        "None",
+        "Failure leaves the node as it was and retryable, error says its state can no longer be trusted and sends it to error processing, where its recovery chooses unconfigured or finalized",
+        "Error is louder",
+        "Failure is final"
+      ],
+      "correct": 1,
+      "explanation": "One recovered and was brought up again, the other was finalized."
+    },
+    {
+      "stage": "post",
+      "question": "Five messages are sent over the life of a node, two of them while it was active. What happened to the other three?",
+      "options": [
+        "They were sent",
+        "Dropped and counted: sent 2, dropped 3, because a lifecycle publisher speaks only while active",
+        "Queued",
+        "Delayed"
+      ],
+      "correct": 1,
+      "explanation": "A node that published while inactive would send readings from a device that was not open."
+    }
+  ]
+}
