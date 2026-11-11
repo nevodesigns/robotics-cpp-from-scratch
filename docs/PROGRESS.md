@@ -19,12 +19,12 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 235 of 320 planned, 73 percent |
+| lessons built | 239 of 320 planned, 75 percent |
 | phases opened | 16 of 22 |
-| phases finished to plan | 14 (phases 00 to 13) |
-| hours of material | 305 |
-| Failure Atlas entries | 655 |
-| librc headers | 130 across 13 modules |
+| phases finished to plan | 15 (phases 00 to 14) |
+| hours of material | 313 |
+| Failure Atlas entries | 667 |
+| librc headers | 134 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
 
@@ -49,7 +49,7 @@ November below it, kept as it was because it records the reasoning of that day.
 | 11 Qt Quick and QML | 2 | 12 | A QML interface whose failures are visible from a test rather than a console nobody watches |
 | 12 Qt for robot systems | 0 | 12 | not started |
 | 13 Kinematics and dynamics | 10 | 16 | An arm asked in both directions, telling apart the pose it cannot reach from the one it cannot hold |
-| 14 Control | 10 | 14 | A loop you can tune, with four measured numbers rather than a feeling |
+| 14 Control | 14 | 14 | A loop you can tune, with four measured numbers rather than a feeling |
 | 15 Sensors, drivers and vision | 10 | 16 | A noisy sensor made usable, with the cost measured rather than guessed |
 | 16 Estimation and navigation | 9 | 16 | A rover that plans through what it has seen, drives it, fits down it, and notices when the room changes |
 | 17 Middleware, then ROS 2 | 0 | 20 | not started |
