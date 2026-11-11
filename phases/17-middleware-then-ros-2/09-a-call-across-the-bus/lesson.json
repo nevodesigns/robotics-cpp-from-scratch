@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "17-09-a-call-across-the-bus",
+  "title": "A Call Across the Bus: Requests, Responses, Timeouts and the Command That Ran Twice",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-05-reliable-or-fast",
+    "17-08-too-late-to-be-true",
+    "02-08-behaviour-as-a-value"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::bus",
+    "header": "rc/bus/service.hpp",
+    "note": "a client that numbers its calls, retries, times out and ignores answers it no longer wants, and a server that runs a repeated request once"
+  },
+  "breaks_first": [
+    "E-BUS-0025",
+    "E-BUS-0026",
+    "E-BUS-0027"
+  ]
+}
