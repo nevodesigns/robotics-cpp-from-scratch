@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "18-07-one-seed-many-streams",
+  "title": "One Seed, Many Streams: Randomness That Does Not Change When You Add a Sensor",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "18-04-a-sensor-that-lies-like-the-real-one",
+    "03-03-containers-and-their-costs",
+    "01-10-the-fault-that-never-fired",
+    "01-05-strings-and-text"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sim",
+    "header": "rc/sim/streams.hpp",
+    "note": "a stream of random numbers for each named part of a simulation, all derived from one master seed, independent of the order they are asked for"
+  },
+  "breaks_first": [
+    "E-SIM-0019",
+    "E-SIM-0020",
+    "E-SIM-0021"
+  ]
+}

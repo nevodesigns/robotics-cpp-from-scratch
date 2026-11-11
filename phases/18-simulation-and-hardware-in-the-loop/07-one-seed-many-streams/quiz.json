@@ -1,0 +1,78 @@
+{
+  "lesson": "18-07-one-seed-many-streams",
+  "title": "One Seed, Many Streams: Randomness That Does Not Change When You Add a Sensor",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does adding a logging camera to a simulation sometimes change a bug that has nothing to do with it?",
+      "options": [
+        "The camera has a bug",
+        "All the parts draw from one generator, so each part's numbers depend on how many draws the others made: with the camera added the imu's noise changed in 1000 of 1000 values",
+        "Memory moved",
+        "The clock changed"
+      ],
+      "correct": 1,
+      "explanation": "The imu was given the camera's numbers."
+    },
+    {
+      "stage": "check",
+      "question": "What is the avalanche property of a mixer?",
+      "options": [
+        "It is fast",
+        "Changing one bit of the input changes about half the output bits: 32.1 of 64 on average here, so neighbouring seeds look unrelated",
+        "It uses little memory",
+        "It is reversible"
+      ],
+      "correct": 1,
+      "explanation": "A mixer that flipped few bits would give seeds 1 and 2 similar streams."
+    },
+    {
+      "stage": "check",
+      "question": "How is a part's seed made?",
+      "options": [
+        "From its index in a list",
+        "From the master seed and a hash of the part's name, so it does not depend on which other parts exist or the order they were made in",
+        "From the clock",
+        "From a counter"
+      ],
+      "correct": 1,
+      "explanation": "The same master and name always give the same seed."
+    },
+    {
+      "stage": "check",
+      "question": "What does a seed of zero do to a xorshift generator, and to this stream?",
+      "options": [
+        "Nothing",
+        "A xorshift generator stays at zero; this stream's successive numbers differ, since it adds a constant before mixing",
+        "It crashes",
+        "It repeats"
+      ],
+      "correct": 1,
+      "explanation": "The state is advanced by a large odd number first."
+    },
+    {
+      "stage": "post",
+      "question": "Streams for the encoder and the imu were asked for in opposite orders in two simulations. What happened?",
+      "options": [
+        "Different numbers",
+        "The motor's and the imu's numbers were identical in both: the order of first asking changes nothing",
+        "An error",
+        "The streams swapped"
+      ],
+      "correct": 1,
+      "explanation": "Each is made from its name."
+    },
+    {
+      "stage": "post",
+      "question": "What was the correlation between two streams from one master seed?",
+      "options": [
+        "1",
+        "-0.0040: no relationship",
+        "0.5",
+        "-1"
+      ],
+      "correct": 1,
+      "explanation": "Independent in the statistical sense."
+    }
+  ]
+}
