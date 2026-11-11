@@ -1,0 +1,78 @@
+{
+  "lesson": "10-13-the-line-nobody-could-see",
+  "title": "The Line Nobody Could See: Contrast, Text on a Colour and a Palette That Survives a White Background",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the contrast ratio of black on white?",
+      "options": [
+        "1",
+        "21",
+        "100",
+        "255"
+      ],
+      "correct": 1,
+      "explanation": "It runs from 1 to 21."
+    },
+    {
+      "stage": "check",
+      "question": "Why is white text on pure green unreadable?",
+      "options": [
+        "Green is dark",
+        "Green is nearly as light as white: the ratio is 1.37, where black text is 15.3",
+        "Qt draws it wrong",
+        "Text is always black"
+      ],
+      "correct": 1,
+      "explanation": "The average of the channels is 85, which says dark, and is wrong."
+    },
+    {
+      "stage": "check",
+      "question": "Which text colour does text_on choose?",
+      "options": [
+        "Always black",
+        "The one with the higher contrast against the background",
+        "The one with the higher brightness average",
+        "White on dark colours"
+      ],
+      "correct": 1,
+      "explanation": "The better of black and white was always at least 4.67."
+    },
+    {
+      "stage": "check",
+      "question": "How many of the eight palette colours reach a contrast of 3 on white?",
+      "options": [
+        "All",
+        "5: indices 0, 1, 2, 3 and 7",
+        "1",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "The yellow is 1.32."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the channel made linear before the weights are applied?",
+      "options": [
+        "Speed",
+        "The value stored in a pixel is not proportional to the light: mid grey 128 is about a fifth of the luminance",
+        "It is optional",
+        "Qt requires it"
+      ],
+      "correct": 1,
+      "explanation": "The luminance of 128 is 0.2159, not 0.5."
+    },
+    {
+      "stage": "post",
+      "question": "Two colours have a high contrast against the page. Are they easy to tell apart?",
+      "options": [
+        "Always",
+        "Not necessarily: contrast against the background says nothing about the difference between them",
+        "Never",
+        "Only in dark mode"
+      ],
+      "correct": 1,
+      "explanation": "The lesson says so under what it does not do."
+    }
+  ]
+}

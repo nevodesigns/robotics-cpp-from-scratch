@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "10-13-the-line-nobody-could-see",
+  "title": "The Line Nobody Could See: Contrast, Text on a Colour and a Palette That Survives a White Background",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "10-02-a-value-over-time",
+    "10-05-ticks-on-nice-numbers"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::plot",
+    "header": "rc/plot/palette.hpp",
+    "note": "the contrast between two colours, the text colour that reads on a background and the series colours that are usable on one"
+  },
+  "breaks_first": [
+    "E-PLOT-0022",
+    "E-PLOT-0023",
+    "E-PLOT-0024"
+  ]
+}
