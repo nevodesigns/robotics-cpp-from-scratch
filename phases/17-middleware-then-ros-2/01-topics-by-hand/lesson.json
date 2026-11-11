@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "17-01-topics-by-hand",
+  "title": "Topics by Hand: Publish, Subscribe and the Order Things Happen In",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "02-08-behaviour-as-a-value",
+    "03-03-containers-and-their-costs",
+    "01-05-strings-and-text",
+    "03-02-errors-that-are-not-exceptional"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::bus",
+    "header": "rc/bus/topic_bus.hpp",
+    "note": "a publish and subscribe bus by topic name that delivers in order, survives a handler that unsubscribes, and queues a publish made from inside a handler"
+  },
+  "breaks_first": [
+    "E-BUS-0001",
+    "E-BUS-0002",
+    "E-BUS-0003"
+  ]
+}

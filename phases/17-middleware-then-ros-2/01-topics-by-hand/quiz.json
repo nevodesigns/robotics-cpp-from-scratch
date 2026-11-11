@@ -1,0 +1,78 @@
+{
+  "lesson": "17-01-topics-by-hand",
+  "title": "Topics by Hand: Publish, Subscribe and the Order Things Happen In",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What problem does a topic solve?",
+      "options": [
+        "Speed",
+        "The publisher and subscriber need to know a name and not each other, so a part can be replaced or a second consumer added without changing the first",
+        "Memory use",
+        "Thread safety"
+      ],
+      "correct": 1,
+      "explanation": "Every new part otherwise changes every old one."
+    },
+    {
+      "stage": "check",
+      "question": "A message is published to a topic with no subscribers. What should happen?",
+      "options": [
+        "An exception",
+        "It is dropped and counted: two such messages gave a dropped count of 2, and a subscriber who came later heard only 1 of 3",
+        "It waits",
+        "It is delivered to every topic"
+      ],
+      "correct": 1,
+      "explanation": "A publisher cannot know who is listening."
+    },
+    {
+      "stage": "check",
+      "question": "A handler unsubscribes a later subscriber during delivery. What does the bus do?",
+      "options": [
+        "Calls it anyway",
+        "Skips it: the tokens are copied when the message goes out and each is checked before its call, so b was not called and the first message reached 2 subscribers",
+        "Crashes",
+        "Calls it twice"
+      ],
+      "correct": 1,
+      "explanation": "Erasing from a list being walked skips or overruns."
+    },
+    {
+      "stage": "check",
+      "question": "A handler publishes a message while handling one. When is it delivered?",
+      "options": [
+        "At once, inside the handler",
+        "After every subscriber of the first message has been called: the publish returned 0 and the log showed second heard 7 before out heard 7",
+        "Never",
+        "Before the first"
+      ],
+      "correct": 1,
+      "explanation": "A queue keeps the order sensible."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the queue stop a ping and a pong that answer each other from overflowing the stack?",
+      "options": [
+        "It rejects them",
+        "It turns the recursion into a loop: 5000 each ran with no nesting",
+        "It slows them",
+        "It drops half"
+      ],
+      "correct": 1,
+      "explanation": "It is still a loop with no end if nothing stops it."
+    },
+    {
+      "stage": "post",
+      "question": "What does this bus not do yet?",
+      "options": [
+        "Deliver messages",
+        "It is one thread with a string payload and no loss or delay: threads, typed payloads and a network are the later lessons",
+        "Order messages",
+        "Unsubscribe"
+      ],
+      "correct": 1,
+      "explanation": "Each of those is a question every middleware has to answer."
+    }
+  ]
+}
