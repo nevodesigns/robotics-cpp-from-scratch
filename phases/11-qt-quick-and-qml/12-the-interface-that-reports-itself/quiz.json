@@ -1,0 +1,78 @@
+{
+  "lesson": "11-12-the-interface-that-reports-itself",
+  "title": "The Interface That Reports Itself: A Harness Through Which Every QML Failure Is Data a Test Can Read",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A QML handler throws a ReferenceError while a file is loaded through the harness. What does the harness report?",
+      "options": [
+        "Nothing: the load succeeded",
+        "A failure of kind warning, with the text of the error",
+        "A crash",
+        "A load failure"
+      ],
+      "correct": 1,
+      "explanation": "Seven of the eight cases were a load failure or a warning; this one was a warning."
+    },
+    {
+      "stage": "check",
+      "question": "A required property is not given. What kind of failure is it?",
+      "options": [
+        "warning",
+        "load: create() gives no object",
+        "probe",
+        "none"
+      ],
+      "correct": 1,
+      "explanation": "It was a load failure with the text Required property."
+    },
+    {
+      "stage": "check",
+      "question": "What does ok() mean?",
+      "options": [
+        "The file loaded",
+        "No failure of any kind has been recorded or printed since the last clear",
+        "The object exists",
+        "There are no warnings of kind probe"
+      ],
+      "correct": 1,
+      "explanation": "It is the one question a test asks at the end."
+    },
+    {
+      "stage": "check",
+      "question": "A test provokes a warning on purpose. What does it do?",
+      "options": [
+        "Ignore ok()",
+        "Look for that failure by its text, and clear before the next step",
+        "Disable the harness",
+        "Catch it in QML"
+      ],
+      "correct": 1,
+      "explanation": "clear forgets, so a test can look at what one step caused."
+    },
+    {
+      "stage": "post",
+      "question": "Item { width: 0 / 0 } is loaded. What does the harness say?",
+      "options": [
+        "A failure",
+        "Nothing: no message was printed or refused, and the width is 0",
+        "A warning",
+        "A load error"
+      ],
+      "correct": 1,
+      "explanation": "It loaded with 0 failures and a width of 0."
+    },
+    {
+      "stage": "post",
+      "question": "What does a test have to do about what QML does not say?",
+      "options": [
+        "Nothing",
+        "Ask for it: read the property and assert on its value",
+        "Add more warnings",
+        "Use a larger timeout"
+      ],
+      "correct": 1,
+      "explanation": "The harness reports what QML says."
+    }
+  ]
+}
