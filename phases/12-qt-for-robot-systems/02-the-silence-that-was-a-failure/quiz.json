@@ -1,0 +1,78 @@
+{
+  "lesson": "12-02-the-silence-that-was-a-failure",
+  "title": "The Silence That Was a Failure: A Link That Is Up and Says Nothing, and a Watchdog That Notices",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A TCP connection to a robot has been silent for an hour. What does the socket say?",
+      "options": [
+        "It has been closed",
+        "Nothing: it is still connected",
+        "It is late",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "A server that said nothing for 300 ms left the socket connected, and so would an hour."
+    },
+    {
+      "stage": "check",
+      "question": "What is the evidence that a robot is alive?",
+      "options": [
+        "The socket is open",
+        "It said something recently",
+        "Its address answers a ping",
+        "The station has not crashed"
+      ],
+      "correct": 1,
+      "explanation": "The watchdog judges by the age of the last sign."
+    },
+    {
+      "stage": "check",
+      "question": "The wall clock is put back by a second. What is the age of the last heartbeat if it is taken as now minus then?",
+      "options": [
+        "Zero",
+        "Negative, which is never late and never lost",
+        "A second",
+        "Infinity"
+      ],
+      "correct": 1,
+      "explanation": "The watchdog clamps it at 0, and the monitor uses a clock that goes forward."
+    },
+    {
+      "stage": "check",
+      "question": "A link stays lost for a thousand looks. How many signals?",
+      "options": [
+        "A thousand",
+        "One for the change to lost: looking again at the same answer is not news",
+        "None",
+        "Two for each look"
+      ],
+      "correct": 1,
+      "explanation": "There were 2 signals in all, for late and for lost."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a beat news at once?",
+      "options": [
+        "It saves a timer",
+        "A sign of life should not wait for the next look to be reported",
+        "Qt requires it",
+        "It is a bug"
+      ],
+      "correct": 1,
+      "explanation": "A beat made the monitor alive without waiting."
+    },
+    {
+      "stage": "post",
+      "question": "What must the limits be longer than?",
+      "options": [
+        "The poll interval",
+        "The longest gap that a healthy robot leaves between messages",
+        "One second",
+        "The reconnect wait"
+      ],
+      "correct": 1,
+      "explanation": "The lesson says a measurement gives it and a guess does not."
+    }
+  ]
+}

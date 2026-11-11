@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "12-02-the-silence-that-was-a-failure",
+  "title": "The Silence That Was a Failure: A Link That Is Up and Says Nothing, and a Watchdog That Notices",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about noticing that something has stopped talking, so it needs Qt. Lesson 07-08 is about a loop that holds its rate and counts what it missed, and lesson 08-13 about a cable that comes out, in plain C++. Without Qt, do those and come back when Qt is installed.",
+  "requires": [
+    "12-01-the-link-that-dropped",
+    "09-11-the-timer-that-fell-behind",
+    "07-14-asking-work-to-stop"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Network"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/heartbeat.hpp",
+    "note": "a watchdog that says whether a link is alive, late or lost from the age of the last heartbeat, with one event for each change"
+  },
+  "breaks_first": [
+    "E-QT-0099",
+    "E-QT-0100",
+    "E-QT-0101"
+  ]
+}
