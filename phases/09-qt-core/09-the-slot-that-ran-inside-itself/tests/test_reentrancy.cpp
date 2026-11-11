@@ -35,11 +35,19 @@ RC_TEST("a handler that lets the loop run is entered again by the readings that 
   std::cout << "  the reading 1, with 2 and 3 arriving while it works, handled by a handler that runs the event loop in the middle:\n    " << joined(naive.log()) << "\n"
             << "    deepest nesting " << naive.max_depth() << ", readings found overwritten " << naive.corrupted() << "\n\n";
   RC_CHECK_EQ(naive.handled(), 3);
-  // 2 and 3 are delivered from inside 1. They are not nested inside each other: Qt does not deliver an event again from a nested call
-  // while the batch it belongs to is still being delivered, so 3 waits until 2 has finished.
-  RC_CHECK_EQ(joined(naive.log()), std::string("begin 1, begin 2, end 2, begin 3, end 3, end 1"));
-  RC_CHECK_EQ(naive.max_depth(), 2);
-  RC_CHECK_EQ(naive.corrupted(), 1);            // 1 came back to find the member holding 3
+  // 2 and 3 are delivered from inside 1, so 1 is the first to begin and the last to end. How deep it goes depends on the version of Qt: on
+  // 6.2 and 6.4 the third reading waited until the second had finished (a depth of 2), and on 6.5.3 it was delivered from inside the second
+  // (a depth of 3). So the test asks for what holds in both: nested, not sequential, and something was overwritten.
+  const QStringList log = naive.log();
+  RC_CHECK_EQ(log.size(), 6);
+  if (log.size() == 6) {
+    RC_CHECK_EQ(log.first().toStdString(), std::string("begin 1"));
+    RC_CHECK_EQ(log.at(1).toStdString(), std::string("begin 2"));            // 2 began before 1 ended: it is nested
+    RC_CHECK_EQ(log.last().toStdString(), std::string("end 1"));
+  }
+  RC_CHECK(naive.max_depth() >= 2);
+  RC_CHECK(naive.max_depth() <= 3);
+  RC_CHECK(naive.corrupted() >= 1);             // 1 came back to find the member holding another reading's value
 
   // The guarded one handles the same three, which is what makes the comparison fair.
   Controller guarded(true);

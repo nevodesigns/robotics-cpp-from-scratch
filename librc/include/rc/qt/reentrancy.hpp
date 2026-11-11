@@ -3,7 +3,7 @@
 // A handler that is not entered again while it runs, from lesson 09-09, graduated.
 //
 // A handler that runs QCoreApplication::processEvents() in the middle of its work, to stay responsive, is entered again by the readings that arrive while it works. With reading 1 in progress and 2 and 3 arriving, the log was begin 1,
-// begin 2, end 2, begin 3, end 3, end 1: nested to a depth of 2 (not 3: Qt does not deliver an event again from a nested call while its own batch is still being delivered), and reading 1 came back to find the member that held its value now holding 3.
+// begin 2, end 2, begin 3, end 3, end 1 on Qt 6.2 and 6.4 (nested to a depth of 2) and begin 1, begin 2, begin 3, end 3, end 2, end 1 on Qt 6.5.3 (a depth of 3); reading 1 came back to find the member that held its value now holding another reading.
 // With a guard that queues readings while one is in progress, the log was begin 1, end 1, begin 2, end 2, begin 3, end 3, at a depth of 1 and with nothing overwritten, and 200 queued readings were all handled once, in order.
 
 #ifndef RC_QT_REENTRANCY

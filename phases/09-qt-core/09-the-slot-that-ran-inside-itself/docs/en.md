@@ -27,11 +27,11 @@ Reading 1, with readings 2 and 3 arriving while it works:
 begin 1, begin 2, end 2, begin 3, end 3, end 1
 ```
 
-The handler was nested to a depth of **2**. Not 3: Qt does not deliver an event again from a nested call while the batch it belongs to is still being delivered, so reading 3 waited for reading 2 to finish. See `E-QT-0036`.
+The handler was nested to a depth of **2** on Qt 6.2 and 6.4: Qt did not deliver an event again from a nested call while the batch it belongs to was still being delivered, so reading 3 waited for reading 2 to finish. On Qt 6.5.3, which the Windows lane uses, the log was `begin 1, begin 2, begin 3, end 3, end 2, end 1`: a depth of **3**. Either way the handler is entered from inside itself. See `E-QT-0036`.
 
 ### What it breaks
 
-The handler keeps the reading it is working on in a member, runs the loop, and then checks that it is still working on it. Reading 1 came back to find the member holding **3**: **1** reading corrupted. Which one is hit depends on timing, so it shows under load and not on the bench. See `E-QT-0037`.
+The handler keeps the reading it is working on in a member, runs the loop, and then checks that it is still working on it. On Qt 6.2 and 6.4, reading 1 came back to find the member holding **3**: **1** reading corrupted; on Qt 6.5.3 both 1 and 2 were: **2**. Which are hit depends on timing and on the version, so it shows under load and not on the bench. See `E-QT-0037`.
 
 ### A guard that queues
 
@@ -69,7 +69,7 @@ connect(sensor, &Sensor::reading, &handler, &rc::qt::ReadingHandler::on_reading)
 ```
 
 **What this does not do.** The guard makes the handler safe against being entered again and does not make `processEvents` a good idea: the line can grow without limit if readings arrive faster than they are handled, and each reading waits for all those before it. The right fix for a handler that is too slow is to
-do its work elsewhere (lesson 09-03). It handles one thread: a handler used from two threads needs a lock as well. And it is Qt's rule about batches that kept the nesting to 2 and not 3, which has not been checked on every Qt version, so a test that asserts the exact log can differ on one.
+do its work elsewhere (lesson 09-03). It handles one thread: a handler used from two threads needs a lock as well. The depth of the nesting is a matter of the Qt version: this lesson's own continuous integration found 2 on Qt 6.2 and 6.4 and 3 on 6.5.3, which is why its test asks only for what holds on all of them.
 
 ## What Breaks First
 
