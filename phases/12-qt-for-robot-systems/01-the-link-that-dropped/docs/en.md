@@ -28,7 +28,7 @@ A server that closed a link that was up: the socket reported an error (the remot
 
 ### Lines
 
-A line written in pieces, `temp 2` and `1.5\nvolt 12` and `.1\n`, was **2** lines, `temp 21.5` and `volt 12.1`, and half a line was not a line (lesson 09-12).
+A line written in pieces, `temp 2` and `1.5\nvolt 12` and `.1\n`, was **2** lines, `temp 21.5` and `volt 12.1`, and half a line was not a line (lesson 09-12). Each complete line is also announced by `line_received` as it arrives, and `send_line` sends a line to the robot when the link is up and refuses, sending nothing, when it is not: it was refused after `stop()`.
 
 ### An attempt that takes too long
 

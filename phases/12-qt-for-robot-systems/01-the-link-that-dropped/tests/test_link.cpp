@@ -143,6 +143,9 @@ RC_TEST("lines that arrive in pieces are one line each, and the client says it i
   RC_CHECK(wait_for([&] { return client.lines().size() >= 2; }));
   const QStringList lines = client.lines();
   RC_CHECK_EQ(lines.size(), 2);
+  RC_CHECK(client.send_line("ping"));                 // and the other way: a line to the robot
+  RC_CHECK(wait_for([&] { return peer->bytesAvailable() >= 5; }));
+  RC_CHECK(peer->readAll() == "ping\n");
   if (lines.size() == 2) {
     RC_CHECK_EQ(lines[0].toStdString(), std::string("temp 21.5"));
     RC_CHECK_EQ(lines[1].toStdString(), std::string("volt 12.1"));
@@ -158,6 +161,7 @@ RC_TEST("stop ends the retries for good, even when the server comes back") {
   client.stop();
   const int scheduled = client.delays().size();
   RC_CHECK(client.state() == LinkClient::kStopped);
+  RC_CHECK(!client.send_line("x"));                   // nothing is sent when there is no link
 
   QTcpServer server;
   RC_CHECK(server.listen(QHostAddress::LocalHost, port));

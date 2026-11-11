@@ -66,6 +66,13 @@ class LinkClient : public QObject {
   }
 
   State state() const { return state_; }
+
+  // Sends a line (the text and a newline) to the robot. Returns false, and sends nothing, unless the link is up.
+  bool send_line(const QString& text) {
+    if (state_ != kConnected) return false;
+    socket_.write(text.toUtf8() + '\n');
+    return true;
+  }
   int attempts() const { return attempts_; }          // failures since the last good connection
   int connects() const { return connects_; }          // good connections, ever
   QList<int> delays() const { return delays_; }       // every wait that was scheduled, in order
@@ -76,6 +83,7 @@ class LinkClient : public QObject {
 
  signals:
   void state_changed(int state);
+  void line_received(const QString& text);        // each complete line that arrives, as it arrives
 
  private slots:
   void attempt() {
@@ -108,6 +116,7 @@ class LinkClient : public QObject {
     int end = buffer_.indexOf('\n');
     while (end >= 0) {
       lines_.append(QString::fromUtf8(buffer_.left(end)));
+      emit line_received(lines_.last());
       buffer_.remove(0, end + 1);
       end = buffer_.indexOf('\n');
     }
