@@ -1,0 +1,78 @@
+{
+  "lesson": "14-11-the-noise-the-derivative-loves",
+  "title": "The Noise the Derivative Loves: A Filter on the D Term and What It Costs",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A joint stands still and its sensor is good to 0.001 rad at 1 kHz. What does the raw derivative of its reading look like?",
+      "options": [
+        "Zero, nothing moved",
+        "Noise about 1.4 rad/s rms, because every reading's error is divided by a millisecond",
+        "A constant",
+        "0.001 rad/s"
+      ],
+      "correct": 1,
+      "explanation": "The test measured 1.4067 rad/s rms of derivative on a joint that was not moving."
+    },
+    {
+      "stage": "check",
+      "question": "What does `alpha = dt / (tf + dt)` set?",
+      "options": [
+        "The sensor's resolution",
+        "The share of each new raw derivative that is let into the filtered value; a small alpha is a slow filter",
+        "The loop gain",
+        "The sample rate"
+      ],
+      "correct": 1,
+      "explanation": "A tf of zero gives alpha of one and the raw derivative."
+    },
+    {
+      "stage": "check",
+      "question": "A slope of 3 rad/s goes through a filter with tf of 0.02 s. What is read after one time constant?",
+      "options": [
+        "3.000, instantly",
+        "About 63 percent of it, 1.869, and 3.000 after ten",
+        "Zero",
+        "6"
+      ],
+      "correct": 1,
+      "explanation": "First order lags reach 63 percent after one time constant."
+    },
+    {
+      "stage": "check",
+      "question": "What did a tf of 0.02 s do to the noise in the derivative?",
+      "options": [
+        "Nothing",
+        "Cut it from 1.4067 to 0.0480 rad/s rms, under 4 percent of the raw value",
+        "Doubled it",
+        "Removed it entirely"
+      ],
+      "correct": 1,
+      "explanation": "The same filter's cost is lag, not noise."
+    },
+    {
+      "stage": "post",
+      "question": "What does the filter cost on a joint that really is moving?",
+      "options": [
+        "Nothing",
+        "Lag of about tf: the derivative's rms error on a noise free swing rose from 0 to 0.2769 rad/s at tf of 0.02 s",
+        "A higher sensor noise",
+        "Memory"
+      ],
+      "correct": 1,
+      "explanation": "The error grew almost in proportion to tf, so noise and lag trade against each other."
+    },
+    {
+      "stage": "post",
+      "question": "In a loop with kp 40 and kd 4, what did filtering the derivative do to the motor?",
+      "options": [
+        "It made the joint miss the target",
+        "Cut the step to step change in force from 9.373 N to 0.317 N, and the joint still ended 0.0000 rad away",
+        "Nothing",
+        "Made it unstable"
+      ],
+      "correct": 1,
+      "explanation": "Choose tf from Td / N and check both the chatter and the settling."
+    }
+  ]
+}

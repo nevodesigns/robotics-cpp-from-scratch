@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "14-11-the-noise-the-derivative-loves",
+  "title": "The Noise the Derivative Loves: A Filter on the D Term and What It Costs",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "14-01-pid-from-scratch",
+    "14-10-the-speed-you-cannot-measure"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::control",
+    "header": "rc/control/filtered_derivative.hpp",
+    "note": "a first order low pass on the derivative term, with its time constant chosen from the derivative time"
+  },
+  "breaks_first": [
+    "E-CTRL-0027",
+    "E-CTRL-0028",
+    "E-CTRL-0029"
+  ]
+}
