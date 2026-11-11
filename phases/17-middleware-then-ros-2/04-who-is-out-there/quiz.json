@@ -1,0 +1,78 @@
+{
+  "lesson": "17-04-who-is-out-there",
+  "title": "Who Is Out There: Announcements, Leases and How Long a Silence Takes to Mean Gone",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "There is no registry to ask who is on the bus. How does a node know the planner is there?",
+      "options": [
+        "It asks the operating system",
+        "The planner announces itself over and over and the others keep a table of who has said so lately",
+        "It assumes",
+        "By the topic name"
+      ],
+      "correct": 1,
+      "explanation": "Discovery is announcements and leases."
+    },
+    {
+      "stage": "check",
+      "question": "A node announced at time 0 with a lease of 3 s. What does the table say at 2.9 s, 3.0 s and 3.1 s?",
+      "options": [
+        "Gone throughout",
+        "Alive at 2.9 and at exactly 3.0, and one gone event at 3.1, said once",
+        "Gone at 3.0",
+        "Alive at 3.1"
+      ],
+      "correct": 1,
+      "explanation": "Silence longer than the lease means gone."
+    },
+    {
+      "stage": "check",
+      "question": "What does an incarnation number tell the table?",
+      "options": [
+        "The node's priority",
+        "Each start has a new one, so a restart inside the lease can be told from a heartbeat: restarted against nothing",
+        "The time",
+        "The topic"
+      ],
+      "correct": 1,
+      "explanation": "A subscriber that held state for the old one needs to know."
+    },
+    {
+      "stage": "check",
+      "question": "The node dies and the lease is 3.5 s with a heartbeat every second. When is it noticed?",
+      "options": [
+        "Immediately",
+        "After about one lease, 3.6 s in the test, plus the polling interval",
+        "After 1 s",
+        "Never"
+      ],
+      "correct": 1,
+      "explanation": "A death is noticed after about one lease."
+    },
+    {
+      "stage": "post",
+      "question": "With 10 percent of heartbeats lost, how often is a node that never dies declared gone at a lease of 1.5 s, and at 5.5 s?",
+      "options": [
+        "Never at either",
+        "172 times in 2000 s at 1.5 s and never at 5.5 s",
+        "Once each",
+        "The same for both"
+      ],
+      "correct": 1,
+      "explanation": "One lost heartbeat is enough to cross a short lease."
+    },
+    {
+      "stage": "post",
+      "question": "What is the lease a trade between?",
+      "options": [
+        "Memory and speed",
+        "How soon a real death is noticed and how often a live node is wrongly declared gone, which the robot has to weigh",
+        "Names and numbers",
+        "Time zones"
+      ],
+      "correct": 1,
+      "explanation": "The right number is where the two costs cross."
+    }
+  ]
+}

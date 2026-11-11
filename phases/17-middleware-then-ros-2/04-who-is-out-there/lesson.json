@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "17-04-who-is-out-there",
+  "title": "Who Is Out There: Announcements, Leases and How Long a Silence Takes to Mean Gone",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-01-topics-by-hand",
+    "03-05-time-and-clocks",
+    "01-06-enums-and-states"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::bus",
+    "header": "rc/bus/discovery.hpp",
+    "note": "a table of who has announced themselves, each with a lease that runs out, and events for appeared, restarted and gone"
+  },
+  "breaks_first": [
+    "E-BUS-0010",
+    "E-BUS-0011",
+    "E-BUS-0012"
+  ]
+}
