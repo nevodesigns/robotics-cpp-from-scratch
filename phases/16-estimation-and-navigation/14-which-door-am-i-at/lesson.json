@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "16-14-which-door-am-i-at",
+  "title": "Which Door Am I At: A Belief Over Places, and Why It Must Never Say Never",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "16-02-two-guesses-are-better",
+    "16-13-am-i-where-the-map-says"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::nav",
+    "header": "rc/nav/belief.hpp",
+    "note": "a histogram belief over cells on a ring, with a motion step that spreads it and a sensor step that sharpens it"
+  },
+  "breaks_first": [
+    "E-NAV-0038",
+    "E-NAV-0039",
+    "E-NAV-0040"
+  ]
+}
