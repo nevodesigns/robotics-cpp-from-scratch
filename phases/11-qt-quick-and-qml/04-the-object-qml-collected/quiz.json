@@ -1,0 +1,78 @@
+{
+  "lesson": "11-04-the-object-qml-collected",
+  "title": "The Object QML Collected: Who Owns What a C++ Function Hands to JavaScript",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "An invokable returns a new QObject with no parent. Who owns it?",
+      "options": [
+        "The caller in C++",
+        "The QML engine: the garbage collector deletes it when the JavaScript value is unreachable",
+        "Nobody",
+        "The parent of the engine"
+      ],
+      "correct": 1,
+      "explanation": "Alive went from 3 to 2 after a collection."
+    },
+    {
+      "stage": "check",
+      "question": "C++ keeps a raw pointer to that object in a member. What is it after a collection?",
+      "options": [
+        "Still valid",
+        "Dangling, with no warning",
+        "Null",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "The pointer C++ kept was gone."
+    },
+    {
+      "stage": "check",
+      "question": "What does CppOwnership with no parent mean?",
+      "options": [
+        "QML deletes it later",
+        "Nobody deletes it unless C++ does: it leaks",
+        "It is deleted at once",
+        "It is shared"
+      ],
+      "correct": 1,
+      "explanation": "The test had to delete it by hand."
+    },
+    {
+      "stage": "check",
+      "question": "What does reading an object from a Q_PROPERTY give?",
+      "options": [
+        "A copy",
+        "An object QML does not own: it is not collected",
+        "A parent",
+        "A new object each time"
+      ],
+      "correct": 1,
+      "explanation": "The held object was alive after the collection."
+    },
+    {
+      "stage": "post",
+      "question": "What does keep_alive set?",
+      "options": [
+        "Only the parent",
+        "The parent and CppOwnership, so there is one owner in C++",
+        "Only the ownership",
+        "Neither"
+      ],
+      "correct": 1,
+      "explanation": "The pooled objects had the pool as parent and CppOwnership."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a pool not enough by itself?",
+      "options": [
+        "It is slow",
+        "It never decides an object is finished: something must clear it",
+        "It is a QObject",
+        "It needs a thread"
+      ],
+      "correct": 1,
+      "explanation": "The lesson says so under what it does not do."
+    }
+  ]
+}

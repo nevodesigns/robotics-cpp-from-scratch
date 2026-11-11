@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "11-04-the-object-qml-collected",
+  "title": "The Object QML Collected: Who Owns What a C++ Function Hands to JavaScript",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about who deletes an object that was given to QML, so it needs Qt. Lesson 09-04 is the same question for QObject parents in plain Qt Core, and lesson 02-01 for unique_ptr in plain C++. Without Qt, do those and come back when Qt is installed.",
+  "requires": [
+    "11-02-the-value-that-never-changed",
+    "09-04-who-deletes-this"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Gui",
+      "Qml"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/qml_ownership.hpp",
+    "note": "a pool that owns the objects it hands to QML, so that the garbage collector never deletes them"
+  },
+  "breaks_first": [
+    "E-QT-0069",
+    "E-QT-0070",
+    "E-QT-0071"
+  ]
+}
