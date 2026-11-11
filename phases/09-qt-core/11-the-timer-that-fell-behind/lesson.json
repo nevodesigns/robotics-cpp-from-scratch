@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "id": "09-11-the-timer-that-fell-behind",
+  "title": "The Timer That Fell Behind: QTimer Intervals, a Blocked Loop and the Ticks Nobody Counted",
+  "type": "build",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about QTimer and the event loop, so it needs Qt. Lesson 07-08 builds the same fixed grid with a pacer in plain C++, and lesson 07-16 measures a loop built on it. Without Qt, do those and come back when Qt is installed.",
+  "requires": [
+    "09-09-the-slot-that-ran-inside-itself",
+    "07-08-a-loop-that-holds-its-rate"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Core"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/ticker.hpp",
+    "note": "a ticker that keeps a fixed grid of slots on a QTimer and reports the slots a blocked loop skipped"
+  },
+  "breaks_first": [
+    "E-QT-0042",
+    "E-QT-0043",
+    "E-QT-0044"
+  ]
+}

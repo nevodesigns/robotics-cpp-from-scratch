@@ -1,0 +1,78 @@
+{
+  "lesson": "09-11-the-timer-that-fell-behind",
+  "title": "The Timer That Fell Behind: QTimer Intervals, a Blocked Loop and the Ticks Nobody Counted",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A repeating 10 ms QTimer is blocked for 100 ms by a slow handler. What happens to the ticks in that time?",
+      "options": [
+        "They are all delivered at once afterwards",
+        "They are gone: the timer does not queue them, and nothing says so",
+        "The timer stops",
+        "They are delivered one per period until it catches up"
+      ],
+      "correct": 1,
+      "explanation": "The lesson's ticker saw 10 slots go by with no tick, and no burst afterwards."
+    },
+    {
+      "stage": "check",
+      "question": "A handler that takes 3 ms ends with timer.start(10). What is the period?",
+      "options": [
+        "10 ms",
+        "13 ms: the interval counts from now, which is after the work",
+        "7 ms",
+        "It depends on the timer type only"
+      ],
+      "correct": 1,
+      "explanation": "In 300 ms the re-armed timer ticked 22 times where 30 periods went by."
+    },
+    {
+      "stage": "check",
+      "question": "Why does delay_to_next_ms round up?",
+      "options": [
+        "To make the delay longer on purpose",
+        "So the timer never fires early, into a slot that has already been delivered",
+        "Because QTimer takes only even numbers",
+        "To avoid a division"
+      ],
+      "correct": 1,
+      "explanation": "A timer that fires a hair early lands in the same slot, and that is not a tick."
+    },
+    {
+      "stage": "check",
+      "question": "After a run, what holds for a Ticker?",
+      "options": [
+        "ticks() equals last_slot()",
+        "ticks() + missed() equals last_slot()",
+        "missed() is always 0",
+        "ticks() is the elapsed time in ms"
+      ],
+      "correct": 1,
+      "explanation": "Every slot up to the last is either a tick or counted as missed."
+    },
+    {
+      "stage": "post",
+      "question": "A ramp adds 0.01 per tick. After a 100 ms block it is behind. What is the fix?",
+      "options": [
+        "A faster timer",
+        "Use the clock or the slot numbers for the time, and the ticks only for when to look",
+        "Count the ticks twice",
+        "Block less"
+      ],
+      "correct": 1,
+      "explanation": "30 or 31 ticks counted 300 or 310 ms in 400 ms of real time."
+    },
+    {
+      "stage": "post",
+      "question": "What does the Ticker not do?",
+      "options": [
+        "Report skipped slots",
+        "Make the event loop real time: a block still costs its slots",
+        "Keep the slots in order",
+        "Avoid drift from the handler's work"
+      ],
+      "correct": 1,
+      "explanation": "It tells you about a block; a loop that cannot tolerate one needs its own thread."
+    }
+  ]
+}
