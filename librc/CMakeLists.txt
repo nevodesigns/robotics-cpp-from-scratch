@@ -116,8 +116,10 @@ if(rc_qt_headers)
   # Qml joins the list from phase 11, where rc/qt/qml_host.hpp arrives. Asking
   # for it here rather than separately keeps the rule that the Qt gate either
   # runs over every rc::qt header or does not run: a gate that quietly covers
-  # some of them reports success for the ones it skipped.
-  find_package(Qt6 QUIET COMPONENTS Core Widgets Qml)
+  # some of them reports success for the ones it skipped. Network joins from
+  # phase 12, where rc/qt/link_client.hpp arrives, and is asked for by name so
+  # that its headers are found on a platform where Qml does not bring them.
+  find_package(Qt6 QUIET COMPONENTS Core Widgets Qml Network)
   if(Qt6_FOUND)
     set(qt_standalone_sources "")
     foreach(header ${rc_qt_headers})
@@ -153,7 +155,7 @@ if(rc_qt_headers)
       ${rc_qt_headers})
     set_target_properties(rc_qt_headers_standalone PROPERTIES AUTOMOC ON)
     target_link_libraries(rc_qt_headers_standalone PRIVATE
-      rc::core Qt6::Core Qt6::Widgets Qt6::Qml)
+      rc::core Qt6::Core Qt6::Widgets Qt6::Qml Qt6::Network)
     if(MSVC)
       target_compile_options(rc_qt_headers_standalone PRIVATE /W4 /WX)
     else()
