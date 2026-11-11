@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "17-05-reliable-or-fast",
+  "title": "Reliable or Fast: Acknowledgements, Retransmission and a Window",
+  "type": "build",
+  "minutes": 130,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "17-03-messages-as-bytes",
+    "17-04-who-is-out-there",
+    "03-03-containers-and-their-costs"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::bus",
+    "header": "rc/bus/reliable.hpp",
+    "note": "a sender with a window and a retransmit timeout, a receiver that delivers in order and ignores repeats, and a cumulative acknowledgement"
+  },
+  "breaks_first": [
+    "E-BUS-0013",
+    "E-BUS-0014",
+    "E-BUS-0015"
+  ]
+}

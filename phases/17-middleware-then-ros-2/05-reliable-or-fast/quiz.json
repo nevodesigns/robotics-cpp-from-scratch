@@ -1,0 +1,78 @@
+{
+  "lesson": "17-05-reliable-or-fast",
+  "title": "Reliable or Fast: Acknowledgements, Retransmission and a Window",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does an acknowledgement of 3 tell the sender?",
+      "options": [
+        "Packet 3 arrived",
+        "The next one the receiver expects is 3: everything below it has arrived",
+        "Packet 3 was lost",
+        "Send 3 again"
+      ],
+      "correct": 1,
+      "explanation": "The acknowledgement is cumulative, so a lost one is covered by the next."
+    },
+    {
+      "stage": "check",
+      "question": "A receiver gets packets 2, 0, 1, 1, 0. What does it deliver?",
+      "options": [
+        "2 0 1 1 0",
+        "a b c, once each and in order, with 2 duplicates counted: 2 waited until 0 and 1 had come",
+        "Only 0",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "Early packets wait and repeats are ignored but still acknowledged."
+    },
+    {
+      "stage": "check",
+      "question": "What does the window do?",
+      "options": [
+        "Sets the timeout",
+        "Limits how many unacknowledged packets are on the wire: window 4 with ten messages sent 4, then nothing until an acknowledgement freed room",
+        "Orders packets",
+        "Drops packets"
+      ],
+      "correct": 1,
+      "explanation": "A window of one sends one message per round trip."
+    },
+    {
+      "stage": "check",
+      "question": "500 messages over a link that loses 20 percent each way. What did sending once deliver, and what did reliable cost?",
+      "options": [
+        "500 and 1.0",
+        "398 delivered at 1.00 packets per message, against 500 delivered at 1.79 packets per message",
+        "250 and 3",
+        "500 and 500"
+      ],
+      "correct": 1,
+      "explanation": "Reliable put almost twice the traffic on a link that was already struggling."
+    },
+    {
+      "stage": "post",
+      "question": "With a one way delay of 50 ticks, how long did 100 messages take at a window of 1 and of 10?",
+      "options": [
+        "The same",
+        "10000 ticks and 1000 ticks: a window of one is one message per round trip",
+        "500 and 500",
+        "1000 and 10000"
+      ],
+      "correct": 1,
+      "explanation": "The time falls in proportion to the window until the link is full."
+    },
+    {
+      "stage": "post",
+      "question": "When is reliable the wrong choice for a topic?",
+      "options": [
+        "Never",
+        "For a stream such as scans that is replaced by the next message: it spends the retransmissions on data that is already stale and adds load to a link in trouble",
+        "For commands",
+        "For parameters"
+      ],
+      "correct": 1,
+      "explanation": "A lost pose is replaced a moment later."
+    }
+  ]
+}
