@@ -1,0 +1,78 @@
+{
+  "lesson": "12-05-the-setting-from-last-time",
+  "title": "The Setting From Last Time: What a Station Keeps Between Runs, What It Reads Back, and Files Written by an Older Version",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A settings file says robot/port=abc. What does QSettings::value(\"robot/port\").toInt() give?",
+      "options": [
+        "An error",
+        "0, and with no ok flag nothing says it was wrong",
+        "5000",
+        "-1"
+      ],
+      "correct": 1,
+      "explanation": "The port abc was 0 with ok false."
+    },
+    {
+      "stage": "check",
+      "question": "What type does a number have when QSettings reads it fresh from an INI file?",
+      "options": [
+        "int",
+        "QString: an INI file keeps text",
+        "double",
+        "It depends on the number"
+      ],
+      "correct": 1,
+      "explanation": "The stored number was a QString."
+    },
+    {
+      "stage": "check",
+      "question": "A speed limit in the file is 99 and the allowed range is 0 to 5. What does the station use?",
+      "options": [
+        "99",
+        "5, with a note that it was pulled to the end",
+        "0",
+        "1.0"
+      ],
+      "correct": 1,
+      "explanation": "It used 5 and noted it."
+    },
+    {
+      "stage": "check",
+      "question": "When is a setting in the file?",
+      "options": [
+        "As soon as setValue is called",
+        "When it is synced: until then it is in memory, and a killed station has kept nothing",
+        "At exit only",
+        "Never"
+      ],
+      "correct": 1,
+      "explanation": "Before save() the file did not exist."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the migration done only once?",
+      "options": [
+        "It is slow",
+        "Starting again would convert 1.5 m/s as if it were millimetres, giving 0.0015",
+        "Qt forbids it",
+        "It is a style rule"
+      ],
+      "correct": 1,
+      "explanation": "The version number, written after the migration, is how it knows."
+    },
+    {
+      "stage": "post",
+      "question": "A value is missing from the file. Is it a problem?",
+      "options": [
+        "Yes, always",
+        "No: it is the default, and a note is for a value that is there and wrong",
+        "Only for the port",
+        "Only on Windows"
+      ],
+      "correct": 1,
+      "explanation": "An empty file had no notes."
+    }
+  ]
+}

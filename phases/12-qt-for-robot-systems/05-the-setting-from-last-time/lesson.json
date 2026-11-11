@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "id": "12-05-the-setting-from-last-time",
+  "title": "The Setting From Last Time: What a Station Keeps Between Runs, What It Reads Back, and Files Written by an Older Version",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about the file a program keeps its settings in, so it needs Qt. Lesson 03-15 is about a number written down and read back in plain C++, and lesson 04-12 about a configuration that does not say what you think. Without Qt, do those and come back when Qt is installed.",
+  "requires": [
+    "09-10-the-setting-that-was-converted",
+    "12-03-the-command-that-arrived-twice"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Core"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/station_settings.hpp",
+    "note": "the settings of a control station, read back with a default and a note for a value that is not usable, written when asked, and migrated from the first version of the file"
+  },
+  "breaks_first": [
+    "E-QT-0105",
+    "E-QT-0106",
+    "E-QT-0107"
+  ]
+}
