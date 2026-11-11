@@ -1,0 +1,78 @@
+{
+  "lesson": "12-11-the-station-that-closed-badly",
+  "title": "The Station That Closed Badly: Shutting Down in the Reverse of Starting, Past a Step That Fails, Once, and the Deletes That Never Ran",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Settings, log, link and monitor were started in that order. In what order are they closed?",
+      "options": [
+        "The same",
+        "The reverse: monitor, link, log, settings",
+        "Alphabetical",
+        "Any"
+      ],
+      "correct": 1,
+      "explanation": "Each is closed before the thing it used."
+    },
+    {
+      "stage": "check",
+      "question": "A step in the middle throws. What happens to the steps after it?",
+      "options": [
+        "They are skipped",
+        "They still run, and the failure is recorded",
+        "The program ends",
+        "They run twice"
+      ],
+      "correct": 1,
+      "explanation": "All 5 ran, including the last."
+    },
+    {
+      "stage": "check",
+      "question": "Why must the step that stops the robot not be skipped?",
+      "options": [
+        "It is the biggest",
+        "It may come after a step that failed, and it is the one that matters most",
+        "Qt requires it",
+        "It is first"
+      ],
+      "correct": 1,
+      "explanation": "The step after a failing one may be the one that stops the robot."
+    },
+    {
+      "stage": "check",
+      "question": "The program is asked to quit three times. How often does a step run?",
+      "options": [
+        "Three times",
+        "Once: the second and later requests do nothing",
+        "Never",
+        "Twice"
+      ],
+      "correct": 1,
+      "explanation": "The step ran 1 time and the later reports were empty."
+    },
+    {
+      "stage": "post",
+      "question": "An object is told deleteLater() and processEvents() is called outside a loop. Is it deleted?",
+      "options": [
+        "Yes",
+        "No: a deferred delete is delivered by an event loop",
+        "Only on Linux",
+        "After a second"
+      ],
+      "correct": 1,
+      "explanation": "It was still alive after processEvents."
+    },
+    {
+      "stage": "post",
+      "question": "What delivers the deferred deletes of a program that is leaving?",
+      "options": [
+        "Nothing",
+        "drain_deferred_deletes, which sends them",
+        "The destructor of the application",
+        "The operating system"
+      ],
+      "correct": 1,
+      "explanation": "After the drain the object was gone."
+    }
+  ]
+}
