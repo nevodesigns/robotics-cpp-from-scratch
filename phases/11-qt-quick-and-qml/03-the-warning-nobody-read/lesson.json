@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "11-03-the-warning-nobody-read",
+  "title": "The Warning Nobody Read: Capturing What Qt Prints So That a Test Can Fail On It",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about what Qt prints and where it goes, so it needs Qt. Lesson 05-04 is about checking inputs a test did not think of, and lesson 05-05 about a fake that records what it was given. Without Qt, do those and come back when Qt is installed.",
+  "requires": [
+    "11-01-the-error-you-only-get-when-it-runs",
+    "09-03-across-the-thread-boundary"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Gui",
+      "Qml"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/message_capture.hpp",
+    "note": "a scope in which every message Qt prints is kept, so that a test can look at it and fail on it"
+  },
+  "breaks_first": [
+    "E-QT-0066",
+    "E-QT-0067",
+    "E-QT-0068"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "11-03-the-warning-nobody-read",
+  "title": "The Warning Nobody Read: Capturing What Qt Prints So That a Test Can Fail On It",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A QML handler throws a ReferenceError. What happens to the load?",
+      "options": [
+        "It fails with an error",
+        "It succeeds, and a warning is printed",
+        "It crashes",
+        "Nothing, ever"
+      ],
+      "correct": 1,
+      "explanation": "The component created its object and the scope kept one warning."
+    },
+    {
+      "stage": "check",
+      "question": "Where does a Qt warning go by default?",
+      "options": [
+        "Into the test result",
+        "To standard error, where a test run does not look",
+        "To a file",
+        "Nowhere"
+      ],
+      "correct": 1,
+      "explanation": "A suite can pass with forty warnings in its log."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the scope restore the previous handler?",
+      "options": [
+        "It is polite",
+        "A handler that stays installed after the scope is a function writing into a destroyed object",
+        "Qt requires one handler",
+        "To count twice"
+      ],
+      "correct": 1,
+      "explanation": "After the scopes the old handler was back and saw 2."
+    },
+    {
+      "stage": "check",
+      "question": "Two scopes are nested. Where does a message printed between them go?",
+      "options": [
+        "Both",
+        "The outer one only",
+        "The inner one only",
+        "Neither"
+      ],
+      "correct": 1,
+      "explanation": "The outer kept the messages printed outside the inner scope."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the list of messages guarded by a mutex?",
+      "options": [
+        "Habit",
+        "Qt calls the handler from whichever thread printed",
+        "QString needs it",
+        "The vector is slow"
+      ],
+      "correct": 1,
+      "explanation": "8 threads of 1000 messages kept all 8000."
+    },
+    {
+      "stage": "post",
+      "question": "What does forward do?",
+      "options": [
+        "Sends messages to the future",
+        "Passes each message to the previous handler as well as keeping it",
+        "Hides them",
+        "Counts them twice"
+      ],
+      "correct": 1,
+      "explanation": "Both messages were kept and the old handler saw both."
+    }
+  ]
+}
