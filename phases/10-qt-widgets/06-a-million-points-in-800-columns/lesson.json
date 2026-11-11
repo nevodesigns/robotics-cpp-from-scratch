@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "10-06-a-million-points-in-800-columns",
+  "title": "A Million Points in 800 Columns: Drawing Every Sample Without Losing the Spike",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "10-02-a-value-over-time",
+    "10-05-ticks-on-nice-numbers"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::plot",
+    "header": "rc/plot/decimate.hpp",
+    "note": "the lowest and highest value in each pixel column of a chart, however many samples there are"
+  },
+  "breaks_first": [
+    "E-PLOT-0010",
+    "E-PLOT-0011",
+    "E-PLOT-0012"
+  ]
+}

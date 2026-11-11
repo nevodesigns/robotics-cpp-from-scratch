@@ -1,0 +1,78 @@
+{
+  "lesson": "10-06-a-million-points-in-800-columns",
+  "title": "A Million Points in 800 Columns: Drawing Every Sample Without Losing the Spike",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A million samples are drawn by taking every 1250th. What can be missing?",
+      "options": [
+        "Nothing",
+        "A spike that is not on a multiple of 1250",
+        "The first sample only",
+        "Only the average"
+      ],
+      "correct": 1,
+      "explanation": "The every 1250th sample peaked at 0.001; the spike of 5 was not in it."
+    },
+    {
+      "stage": "check",
+      "question": "What does decimate keep for each column?",
+      "options": [
+        "The average",
+        "The count, the lowest value and the highest value",
+        "The first sample",
+        "Every sample"
+      ],
+      "correct": 1,
+      "explanation": "A column is drawn as a line from its low to its high."
+    },
+    {
+      "stage": "check",
+      "question": "Which column does a sample exactly at t1 go to?",
+      "options": [
+        "None",
+        "The last one: it is the end of the range and belongs to the final bin",
+        "The first",
+        "An extra column"
+      ],
+      "correct": 1,
+      "explanation": "Without that, the count is 999999 and the newest sample is not drawn."
+    },
+    {
+      "stage": "check",
+      "question": "How many points is a column of 400 equal samples drawn with?",
+      "options": [
+        "400",
+        "1: its low equals its high",
+        "2",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "points_to_draw adds 1 for a flat column and 2 for one whose values differ."
+    },
+    {
+      "stage": "post",
+      "question": "A million samples are drawn in 800 columns. How many points at most?",
+      "options": [
+        "1000000",
+        "1600: two for each column, whatever the sample count",
+        "800000",
+        "800"
+      ],
+      "correct": 1,
+      "explanation": "The drawing cost depends on the width, not on the data."
+    },
+    {
+      "stage": "post",
+      "question": "Which question does a decimated chart not answer?",
+      "options": [
+        "What was the highest value",
+        "Which order the samples in one column came in",
+        "Was there a gap",
+        "How many samples fell in a column"
+      ],
+      "correct": 1,
+      "explanation": "Only the range of each column is kept."
+    }
+  ]
+}
