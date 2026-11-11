@@ -1,0 +1,78 @@
+{
+  "lesson": "12-01-the-link-that-dropped",
+  "title": "The Link That Dropped: Reconnecting to a Robot With a Delay That Grows, and Only Once for Each Drop",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does the wait between attempts grow?",
+      "options": [
+        "To use less memory",
+        "A link that has been down for a while is unlikely to be back this second, and attempts at a fixed rate cost the same each time",
+        "Qt requires it",
+        "To make tests slower"
+      ],
+      "correct": 1,
+      "explanation": "The waits were 20, 40 and 80."
+    },
+    {
+      "stage": "check",
+      "question": "A connection that was good is closed by the other end. What does the socket report?",
+      "options": [
+        "Only disconnected",
+        "An error and disconnected, both",
+        "Nothing",
+        "Only an error"
+      ],
+      "correct": 1,
+      "explanation": "The client scheduled 1 wait for 1 drop."
+    },
+    {
+      "stage": "check",
+      "question": "What is the first wait after a connection succeeded and then dropped?",
+      "options": [
+        "The cap",
+        "The base: the count of failures went back to 0",
+        "The last wait doubled",
+        "Zero"
+      ],
+      "correct": 1,
+      "explanation": "It was 20 ms again."
+    },
+    {
+      "stage": "check",
+      "question": "A connection is refused. What does the socket report?",
+      "options": [
+        "An error and disconnected",
+        "Only an error: it was never connected",
+        "Nothing",
+        "disconnected"
+      ],
+      "correct": 1,
+      "explanation": "The refused attempts reported only the error."
+    },
+    {
+      "stage": "post",
+      "question": "What does stop() do to a retry that is waiting?",
+      "options": [
+        "Lets it run once more",
+        "Ends it: nothing is attempted until start() is called",
+        "Doubles it",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "No more waits, and no good connection, in 200 ms."
+    },
+    {
+      "stage": "post",
+      "question": "A hundred stations lose the same robot together. What does a client with these waits do?",
+      "options": [
+        "Spreads out the retries",
+        "Retry together, at the same instants: a real fleet adds a random part",
+        "Retry once",
+        "Never retry"
+      ],
+      "correct": 1,
+      "explanation": "The lesson says so under what it does not do."
+    }
+  ]
+}

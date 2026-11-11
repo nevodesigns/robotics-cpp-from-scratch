@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "12-01-the-link-that-dropped",
+  "title": "The Link That Dropped: Reconnecting to a Robot With a Delay That Grows, and Only Once for Each Drop",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about a network connection that fails and is retried, so it needs Qt Network. Lesson 07-06 is about waiting without spinning, and lesson 08-13 about a cable that comes out, in plain C++. Without Qt, do those and come back when Qt is installed.",
+  "requires": [
+    "09-12-the-line-that-arrived-in-two",
+    "09-11-the-timer-that-fell-behind",
+    "07-06-waiting-without-spinning"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Network"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/link_client.hpp",
+    "note": "a client of a TCP link that reconnects with a growing delay, once for each failure, and gives up when told to stop"
+  },
+  "breaks_first": [
+    "E-QT-0096",
+    "E-QT-0097",
+    "E-QT-0098"
+  ]
+}
