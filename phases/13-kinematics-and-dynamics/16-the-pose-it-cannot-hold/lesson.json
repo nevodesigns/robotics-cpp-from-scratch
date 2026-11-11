@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "id": "13-16-the-pose-it-cannot-hold",
+  "title": "The Pose It Cannot Hold: Asking an Arm Its Question in Both Directions, and Telling the Pose It Cannot Reach From the One It Cannot Take or Hold",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "13-15-taking-steps-toward-the-pose",
+    "13-14-how-long-the-move-takes",
+    "13-13-how-wrong-a-pose-is",
+    "13-11-where-the-tool-points",
+    "13-06-what-it-takes-to-hold-it-there",
+    "13-05-the-angle-it-cannot-hold"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::kin",
+    "header": "rc/kin/arm_planner.hpp",
+    "note": "a planner that is given a target pose and says whether the arm can do it, and if not why: out of reach, outside the joint limits, or too heavy for the motors to hold, and if so which of the two ways of reaching it to use and how long it takes"
+  },
+  "breaks_first": [
+    "E-KIN-0041",
+    "E-KIN-0042",
+    "E-KIN-0043"
+  ]
+}
