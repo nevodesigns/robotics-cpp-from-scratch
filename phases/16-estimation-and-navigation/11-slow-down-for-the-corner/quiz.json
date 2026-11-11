@@ -1,0 +1,78 @@
+{
+  "lesson": "16-11-slow-down-for-the-corner",
+  "title": "Slow Down for the Corner: Speed From Curvature, and Braking Before You Get There",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A rover drives a radius 1 m corner at a steady 2 m/s. How big is the sideways acceleration?",
+      "options": [
+        "2 m/s^2",
+        "4 m/s^2: speed squared times curvature, 2 squared times 1",
+        "1 m/s^2",
+        "Zero"
+      ],
+      "correct": 1,
+      "explanation": "The test measured 4.00 m/s^2 against a grip of 1.00."
+    },
+    {
+      "stage": "check",
+      "question": "How is curvature found from three points?",
+      "options": [
+        "Their average",
+        "Twice the triangle's area over the product of its three sides, which is one over the radius of the circle through them",
+        "Their distance",
+        "The angle at the middle"
+      ],
+      "correct": 1,
+      "explanation": "Points on a circle of radius r gave 1 / r."
+    },
+    {
+      "stage": "check",
+      "question": "What speed limit does a sideways acceleration of 1 m/s^2 give on a corner of radius 2 m?",
+      "options": [
+        "2 m/s",
+        "1.414 m/s, the square root of the limit over the curvature",
+        "1 m/s",
+        "0.5 m/s"
+      ],
+      "correct": 1,
+      "explanation": "v squared times k is at most a, so v is at most the square root of a over k."
+    },
+    {
+      "stage": "check",
+      "question": "What is wrong with using the limits as the speeds?",
+      "options": [
+        "Nothing",
+        "They ask for a stop in one step: a drop from 2 to 1 m/s between points 5 cm apart is nearly 20 m/s^2 of braking",
+        "They are too slow",
+        "They are too fast"
+      ],
+      "correct": 1,
+      "explanation": "The limits alone asked for 19.81 m/s^2."
+    },
+    {
+      "stage": "post",
+      "question": "How does the profile avoid that?",
+      "options": [
+        "It ignores the limits",
+        "A forward pass limits the gain and a backward pass from the stop limits the braking, using v squared = u squared + 2 a d, so the rover starts slowing early: worst gain 1.00 and loss 1.50",
+        "It uses the average",
+        "It stops"
+      ],
+      "correct": 1,
+      "explanation": "The profile starts and ends at rest and stays under every limit."
+    },
+    {
+      "stage": "post",
+      "question": "What did allowing only 0.5 m/s^2 sideways cost on the 1 m corner?",
+      "options": [
+        "Nothing",
+        "About 2 seconds, 14.49 s against 12.45 s, or 16 percent more time",
+        "10 seconds",
+        "It became faster"
+      ],
+      "correct": 1,
+      "explanation": "The cost of grip is a number to set against the grip."
+    }
+  ]
+}

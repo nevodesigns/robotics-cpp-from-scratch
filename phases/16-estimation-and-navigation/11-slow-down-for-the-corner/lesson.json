@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "16-11-slow-down-for-the-corner",
+  "title": "Slow Down for the Corner: Speed From Curvature, and Braking Before You Get There",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "16-04-how-far-ahead-to-look",
+    "16-10-fewer-corners-same-room"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::nav",
+    "header": "rc/nav/speed.hpp",
+    "note": "curvature from three points, a speed limit from lateral acceleration, and a profile that accelerates and brakes within what the wheels can do"
+  },
+  "breaks_first": [
+    "E-NAV-0029",
+    "E-NAV-0030",
+    "E-NAV-0031"
+  ]
+}
