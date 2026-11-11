@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "18-03-measuring-the-motor",
+  "title": "Measuring the Motor: Finding Gain and Time Constant From a Step, and Knowing How Far to Trust Them",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "18-02-the-same-code-two-worlds",
+    "14-04-choosing-the-gains",
+    "15-02-precise-and-wrong"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sim",
+    "header": "rc/sim/identify.hpp",
+    "note": "a fit of gain and time constant to a measured step response, a prediction from them, and the error between two traces"
+  },
+  "breaks_first": [
+    "E-SIM-0007",
+    "E-SIM-0008",
+    "E-SIM-0009"
+  ]
+}
