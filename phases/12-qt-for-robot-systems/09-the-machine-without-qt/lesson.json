@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "id": "12-09-the-machine-without-qt",
+  "title": "The Machine Without Qt: A Station That Ran Where It Was Built, What Was Not Shipped, and the Path That Only Exists Here",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson is about what has to be in a folder for a program to run on another machine, so it needs Qt. Lesson 04-14 is about a header that changed and took a build with it, and lesson 04-13 about two things that need different versions, in plain C++. Without Qt, do those and come back when Qt is installed.",
+  "requires": [
+    "12-05-the-setting-from-last-time",
+    "04-14-the-header-that-changed"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Core"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/deploy_check.hpp",
+    "note": "a check of a folder that is to be shipped: the files it must hold, by pattern, and the text files in it that name a path that does not exist"
+  },
+  "breaks_first": [
+    "E-QT-0117",
+    "E-QT-0118",
+    "E-QT-0119"
+  ]
+}
