@@ -1,0 +1,78 @@
+{
+  "lesson": "12-06-the-log-nobody-could-search",
+  "title": "The Log Nobody Could Search: Categories, Filter Rules, a Severity That Is Not in Order and a Log That Keeps the Last Thousand",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A category is off. A debug message from it has an argument that calls a function. What happens?",
+      "options": [
+        "The function runs and the message is dropped",
+        "Neither: the message is not built, so the function does not run",
+        "The function runs twice",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "The arguments were worked out 1 time, for the plan only."
+    },
+    {
+      "stage": "check",
+      "question": "Rules: *.debug=false and then station.link.debug=true. Is link debug on?",
+      "options": [
+        "No",
+        "Yes: the last rule that matches wins",
+        "Only for the first message",
+        "It depends on the thread"
+      ],
+      "correct": 1,
+      "explanation": "The link gave 1 message and the plan 0."
+    },
+    {
+      "stage": "check",
+      "question": "The same two rules in the other order. Is link debug on?",
+      "options": [
+        "Yes",
+        "No: the general rule came last and took it back",
+        "Yes, but only in release",
+        "It crashes"
+      ],
+      "correct": 1,
+      "explanation": "The other way round it was 0 and 0."
+    },
+    {
+      "stage": "check",
+      "question": "What number is QtInfoMsg?",
+      "options": [
+        "1",
+        "4: above QtFatalMsg, which is 3",
+        "0",
+        "5"
+      ],
+      "correct": 1,
+      "explanation": "Information is numbered above a fatal error."
+    },
+    {
+      "stage": "post",
+      "question": "A filter says type >= QtWarningMsg. Which of debug, info, warning and critical does it keep?",
+      "options": [
+        "Warning and critical",
+        "Info, warning and critical: the information got in by its number",
+        "Only critical",
+        "All four"
+      ],
+      "correct": 1,
+      "explanation": "The numbers gave 3 and the order of severity gave 2."
+    },
+    {
+      "stage": "post",
+      "question": "A ring of 1000 receives 5000 messages. What does it hold?",
+      "options": [
+        "The first 1000",
+        "The last 1000, oldest first, and has counted 4000 dropped",
+        "All 5000",
+        "The loudest 1000"
+      ],
+      "correct": 1,
+      "explanation": "The oldest that was left was number 4000."
+    }
+  ]
+}
