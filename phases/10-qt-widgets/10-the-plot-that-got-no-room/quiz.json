@@ -1,0 +1,78 @@
+{
+  "lesson": "10-10-the-plot-that-got-no-room",
+  "title": "The Plot That Got No Room: Layouts, Fixed Heights and the Stretch That Gave It the Rest",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Three plain widgets in a vertical layout in a window 300 high. How tall is each?",
+      "options": [
+        "Whatever their content needs",
+        "100: the layout shares the room equally",
+        "300",
+        "30"
+      ],
+      "correct": 1,
+      "explanation": "They were 100, 100 and 100."
+    },
+    {
+      "stage": "check",
+      "question": "What gives the plot the rest of the room?",
+      "options": [
+        "Making it the last widget",
+        "A stretch factor on it, with the others fixed, and an Expanding size policy",
+        "A large font",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "The plot was 250 at 300 and 450 at 500."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the window refuse to be 60 by 40?",
+      "options": [
+        "The platform",
+        "The layout reports the least the widgets need, and sets that as the window minimum",
+        "Qt rounds up",
+        "A bug"
+      ],
+      "correct": 1,
+      "explanation": "It stayed 120 by 130."
+    },
+    {
+      "stage": "check",
+      "question": "What is the smallest height of this panel?",
+      "options": [
+        "80",
+        "130: toolbar 30, plot 80, status bar 20",
+        "100",
+        "300"
+      ],
+      "correct": 1,
+      "explanation": "The minimumSizeHint was 120 by 130."
+    },
+    {
+      "stage": "post",
+      "question": "The status bar is hidden. What happens to its 20 pixels?",
+      "options": [
+        "They stay empty",
+        "The plot takes them: 250 became 270",
+        "The toolbar takes them",
+        "The window shrinks"
+      ],
+      "correct": 1,
+      "explanation": "A hidden widget takes no room in a layout."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a fixed number like 30 a weak choice for a toolbar of buttons?",
+      "options": [
+        "It is too large",
+        "Fonts and screen scaling change what the buttons need, and their size hint says so",
+        "It cannot be changed",
+        "It is a bug"
+      ],
+      "correct": 1,
+      "explanation": "The lesson says so under what it does not do."
+    }
+  ]
+}
