@@ -1,0 +1,78 @@
+{
+  "lesson": "10-09-the-zoom-that-moved-the-point",
+  "title": "The Zoom That Moved the Point: Zooming About the Cursor, Panning in Pixels and Stopping at the Data",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A chart is zoomed by 2 about its middle, and the cursor was on time 80 of 0 to 100. Where is the cursor point now?",
+      "options": [
+        "Where it was",
+        "Off the right edge: x = 1100 of 1000",
+        "At the middle",
+        "At the left edge"
+      ],
+      "correct": 1,
+      "explanation": "Zooming about the cursor is what keeps it at 800."
+    },
+    {
+      "stage": "check",
+      "question": "What does zoom_about keep fixed?",
+      "options": [
+        "The width",
+        "The anchor, at the same fraction of the window",
+        "The start",
+        "The centre"
+      ],
+      "correct": 1,
+      "explanation": "216 zooms did not move the anchor."
+    },
+    {
+      "stage": "check",
+      "question": "Why is 1.12 in and 0.88 out wrong for a wheel?",
+      "options": [
+        "0.88 is too small",
+        "Their product is 0.9856, so a turn out does not undo a turn in",
+        "Qt forbids it",
+        "It is too fast"
+      ],
+      "correct": 1,
+      "explanation": "Five each left the width at 107.5 where it began at 100."
+    },
+    {
+      "stage": "check",
+      "question": "What is one notch of the wheel in Qt units?",
+      "options": [
+        "1",
+        "120",
+        "360",
+        "10"
+      ],
+      "correct": 1,
+      "explanation": "angleDelta is 120 for a notch."
+    },
+    {
+      "stage": "post",
+      "question": "Dragging 100 pixels right on a 1000 pixel chart of 0 to 100. What is the window?",
+      "options": [
+        "0 to 100",
+        "-10 to 90: the window moves the other way",
+        "10 to 110",
+        "-100 to 0"
+      ],
+      "correct": 1,
+      "explanation": "The data follows the hand, so the window goes the other way."
+    },
+    {
+      "stage": "post",
+      "question": "A window is pushed past the start of the data. What does clamp_to do?",
+      "options": [
+        "Shrinks it",
+        "Moves it back to the start, keeping its width",
+        "Leaves it",
+        "Flips it"
+      ],
+      "correct": 1,
+      "explanation": "-10 to 15 became 0 to 25."
+    }
+  ]
+}

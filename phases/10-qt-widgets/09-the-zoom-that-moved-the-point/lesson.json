@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "10-09-the-zoom-that-moved-the-point",
+  "title": "The Zoom That Moved the Point: Zooming About the Cursor, Panning in Pixels and Stopping at the Data",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "10-08-the-click-beside-the-point",
+    "10-02-a-value-over-time"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::plot",
+    "header": "rc/plot/zoom.hpp",
+    "note": "the visible time window of a chart, zoomed about a point, panned by a drag and kept inside the data"
+  },
+  "breaks_first": [
+    "E-PLOT-0019",
+    "E-PLOT-0020",
+    "E-PLOT-0021"
+  ]
+}
