@@ -1,0 +1,78 @@
+{
+  "lesson": "17-12-settings-that-change-while-running",
+  "title": "Settings That Change While Running: Typed Parameters, Validation and Changing Several at Once",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why must a set of a name that was never declared be refused?",
+      "options": [
+        "It is slow",
+        "A mistyped name would create a setting the node never reads, and the operator would believe it had changed something",
+        "Names are case sensitive",
+        "It uses memory"
+      ],
+      "correct": 1,
+      "explanation": "ki: not declared."
+    },
+    {
+      "stage": "check",
+      "question": "A parameter is declared as a real. A client sets it to the integer 5. What happens?",
+      "options": [
+        "It is converted",
+        "It is refused: wrong type, because 1 is not 1.0 and a silent conversion hides which side was wrong",
+        "It becomes 5.0",
+        "It is deleted"
+      ],
+      "correct": 1,
+      "explanation": "Nothing converts."
+    },
+    {
+      "stage": "check",
+      "question": "kp is limited to 0 to 100. Which of these is accepted?",
+      "options": [
+        "250",
+        "-1",
+        "0 and 100, the ends of the range, while 250 and -1 were refused as out of range",
+        "None"
+      ],
+      "correct": 2,
+      "explanation": "The ends are inside the range."
+    },
+    {
+      "stage": "check",
+      "question": "Three changes are requested and the last has the wrong type. What state are the settings in afterwards?",
+      "options": [
+        "Two applied",
+        "As they were: all or none, so kp was still 2.0 and enabled still true",
+        "Three applied",
+        "Undefined"
+      ],
+      "correct": 1,
+      "explanation": "The server works on a copy and applies only when all have passed."
+    },
+    {
+      "stage": "post",
+      "question": "min_speed 0.1 and max_speed 1.0 must become 2.0 and 3.0, with the rule min below max. What happens one at a time and together?",
+      "options": [
+        "Both work",
+        "One at a time the first step breaks the rule and is refused, and together the rule sees the end and passes",
+        "Both are refused",
+        "Together is refused"
+      ],
+      "correct": 1,
+      "explanation": "The rule is checked on how the settings would end up."
+    },
+    {
+      "stage": "post",
+      "question": "What does a read only setting protect against?",
+      "options": [
+        "Typos",
+        "A change from outside to something that must not change while running, such as a serial number: the set was refused and the value stayed A-1001",
+        "Large values",
+        "Unsafe types"
+      ],
+      "correct": 1,
+      "explanation": "A refused set changes nothing."
+    }
+  ]
+}
