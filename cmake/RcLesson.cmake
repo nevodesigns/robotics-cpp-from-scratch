@@ -128,6 +128,19 @@ function(rc_add_lesson)
     file(GLOB variant_sources CONFIGURE_DEPENDS
       "${lesson_dir}/${variant}/*.cpp"
       "${lesson_dir}/${variant}/*.hpp")
+    # A lesson may build on a header of an earlier one. If that header declares a
+    # QObject it has to be moc'd as part of this target too, for the same reason:
+    # without it the signal and the vtable are undefined at link time.
+    foreach(source ${variant_sources})
+      if(source MATCHES "\\.hpp$")
+        file(STRINGS "${source}" qt_includes REGEX "^#include <rc/qt/[a-z_]+\\.hpp>")
+        foreach(line ${qt_includes})
+          string(REGEX REPLACE "^#include <(rc/qt/[a-z_]+\\.hpp)>.*$" "\\1" qt_header "${line}")
+          list(APPEND variant_sources "${PROJECT_SOURCE_DIR}/librc/include/${qt_header}")
+        endforeach()
+      endif()
+    endforeach()
+    list(REMOVE_DUPLICATES variant_sources)
     set(target "${target_base}_${variant}")
 
     # The learner's copy is deliberately allowed to be broken: some lessons ship

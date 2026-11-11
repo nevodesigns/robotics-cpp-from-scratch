@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "id": "09-14-the-sensor-that-never-touched-the-screen",
+  "title": "The Sensor That Never Touched the Screen: A Thread of Its Own, One Way Across and a Stop That Joins",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson puts a Qt thread, a queued update and an event loop together, so it needs Qt. Lesson 07-16 is the same rig in plain C++: a producer, a consumer, a stop token and a joined pair of threads, measured. Without Qt, do that and come back when Qt is installed.",
+  "requires": [
+    "09-13-the-signal-sent-ten-thousand-times",
+    "09-11-the-timer-that-fell-behind",
+    "09-03-across-the-thread-boundary",
+    "07-16-the-loop-measured"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Core"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/sensor_bridge.hpp",
+    "note": "a sensor on a thread of its own that reaches the interface only through a latest value, and whose stop joins the thread"
+  },
+  "breaks_first": [
+    "E-QT-0051",
+    "E-QT-0052",
+    "E-QT-0053"
+  ]
+}
