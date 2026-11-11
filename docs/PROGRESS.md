@@ -19,12 +19,12 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 245 of 320 planned, 77 percent |
+| lessons built | 252 of 320 planned, 79 percent |
 | phases opened | 16 of 22 |
-| phases finished to plan | 16 (phases 00 to 15) |
-| hours of material | 325 |
-| Failure Atlas entries | 685 |
-| librc headers | 140 across 13 modules |
+| phases finished to plan | 17 (phases 00 to 16) |
+| hours of material | 339 |
+| Failure Atlas entries | 706 |
+| librc headers | 147 across 13 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
 
@@ -51,7 +51,7 @@ November below it, kept as it was because it records the reasoning of that day.
 | 13 Kinematics and dynamics | 16 | 16 | An arm asked in both directions, telling apart the pose it cannot reach from the one it cannot hold |
 | 14 Control | 14 | 14 | A loop you can tune, with four measured numbers rather than a feeling |
 | 15 Sensors, drivers and vision | 16 | 16 | A noisy sensor made usable, with the cost measured rather than guessed |
-| 16 Estimation and navigation | 9 | 16 | A rover that plans through what it has seen, drives it, fits down it, and notices when the room changes |
+| 16 Estimation and navigation | 16 | 16 | A rover that plans through what it has seen, drives it, fits down it, and notices when the room changes |
 | 17 Middleware, then ROS 2 | 0 | 20 | not started |
 | 18 Simulation and hardware in the loop | 0 | 12 | not started |
 | 19 Safety and field engineering | 0 | 14 | not started |
