@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "13-14-how-long-the-move-takes",
+  "title": "How Long the Move Takes: Trapezoid Profiles, the Triangle That Replaces Them, and Joints That Must Arrive Together",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "13-09-straight-in-space-or-in-the-joints",
+    "13-05-the-angle-it-cannot-hold"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::kin",
+    "header": "rc/kin/timing.hpp",
+    "note": "a rest to rest move of a joint under a speed limit and an acceleration limit, as a trapezoid or a triangle, and a set of joints given times that make them arrive together"
+  },
+  "breaks_first": [
+    "E-KIN-0035",
+    "E-KIN-0036",
+    "E-KIN-0037"
+  ]
+}
