@@ -1,0 +1,78 @@
+{
+  "lesson": "12-12-a-station-you-can-ship",
+  "title": "A Station You Can Ship: A Link, a Watchdog, an Enable Switch, Commands That Are Retried and a Shutdown That Is in Order",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is a zero sent when the key is up and not nothing?",
+      "options": [
+        "To fill the link",
+        "A zero is a command to stop, and it has to arrive",
+        "Qt needs a value",
+        "The robot ignores silence"
+      ],
+      "correct": 1,
+      "explanation": "The key-up request of 1 m/s sent 0 and the robot received it."
+    },
+    {
+      "stage": "check",
+      "question": "The robot goes quiet and comes back with the key still held. What is the speed?",
+      "options": [
+        "The last one",
+        "Zero: the interlock does not start by itself",
+        "The limit",
+        "Half"
+      ],
+      "correct": 1,
+      "explanation": "It was 0 until the key was let go and pressed."
+    },
+    {
+      "stage": "check",
+      "question": "What connects the watchdog to the interlock?",
+      "options": [
+        "Nothing: they are separate",
+        "on_health, which sets whether the link is alive from the health of the robot",
+        "The retry timer",
+        "The settings"
+      ],
+      "correct": 1,
+      "explanation": "Lost made the speed 0."
+    },
+    {
+      "stage": "check",
+      "question": "The robot loses the first answer to a command. How many times does it apply the command?",
+      "options": [
+        "Twice",
+        "Once, though it arrived twice",
+        "Never",
+        "Three times"
+      ],
+      "correct": 1,
+      "explanation": "It received 2 copies and applied 1."
+    },
+    {
+      "stage": "post",
+      "question": "What speed does a retry send?",
+      "options": [
+        "The speed that is asked now",
+        "The speed the command had when it was first sent, kept with its number",
+        "Zero",
+        "The limit"
+      ],
+      "correct": 1,
+      "explanation": "The retry sends the speed it kept."
+    },
+    {
+      "stage": "post",
+      "question": "What does a second stop() do?",
+      "options": [
+        "Closes again",
+        "Nothing: the first closed everything, once",
+        "Reopens",
+        "Fails"
+      ],
+      "correct": 1,
+      "explanation": "The second report was empty."
+    }
+  ]
+}

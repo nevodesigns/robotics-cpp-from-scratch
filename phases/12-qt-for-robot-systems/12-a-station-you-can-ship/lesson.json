@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "id": "12-12-a-station-you-can-ship",
+  "title": "A Station You Can Ship: A Link, a Watchdog, an Enable Switch, Commands That Are Retried and a Shutdown That Is in Order",
+  "type": "build",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "fallback": "This lesson wires together everything this phase says about a station that talks to a robot, so it needs Qt Network. Lesson 12-03 is the retrying of commands and lesson 07-16 the measuring of a loop, in plain C++. Without Qt, do those and come back when Qt is installed.",
+  "requires": [
+    "12-11-the-station-that-closed-badly",
+    "12-10-what-a-shipped-binary-owes",
+    "12-09-the-machine-without-qt",
+    "12-08-the-button-that-must-be-held",
+    "12-05-the-setting-from-last-time",
+    "12-03-the-command-that-arrived-twice",
+    "12-02-the-silence-that-was-a-failure",
+    "12-01-the-link-that-dropped"
+  ],
+  "cxx_standard": 17,
+  "qt": {
+    "modules": [
+      "Network"
+    ],
+    "min_version": "6.2"
+  },
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::qt",
+    "header": "rc/qt/station.hpp",
+    "note": "a control station of a link that reconnects, a watchdog on the robot, an enable switch, commands that are retried and applied once, and a shutdown in order, wired together"
+  },
+  "breaks_first": [
+    "E-QT-0123",
+    "E-QT-0124",
+    "E-QT-0125"
+  ]
+}
