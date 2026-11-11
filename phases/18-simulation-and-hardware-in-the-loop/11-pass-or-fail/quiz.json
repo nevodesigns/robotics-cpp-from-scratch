@@ -1,0 +1,78 @@
+{
+  "lesson": "18-11-pass-or-fail",
+  "title": "Pass or Fail: Running a Scenario and Judging Every Step of the Trace Against Written Criteria",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why must a scenario run end in a verdict and not in a plot?",
+      "options": [
+        "Plots are slow",
+        "A run passed by looking at it has no test behind it: next month's slow worsening is not looked at, and the verdict names the step and the criterion that failed",
+        "Plots are inaccurate",
+        "Verdicts are shorter"
+      ],
+      "correct": 1,
+      "explanation": "The test fails on a non empty verdict and prints the list."
+    },
+    {
+      "stage": "check",
+      "question": "Why is overshoot a fraction of the step's size?",
+      "options": [
+        "It is easier",
+        "So a big step and a small one can be compared, and the settling band, also a fraction of the step, means the same for both",
+        "It is more accurate",
+        "The plot needs it"
+      ],
+      "correct": 1,
+      "explanation": "2 percent of 1.5 is 0.03 and of 0.1 is 0.002."
+    },
+    {
+      "stage": "check",
+      "question": "An underdamped step up and its exact mirror down are measured. What should the numbers be?",
+      "options": [
+        "Different",
+        "Identical, the same overshoot 0.0759, rise 0.1800 and settling 0.5600: past the target means the side the step was going toward",
+        "Opposite signs",
+        "Half"
+      ],
+      "correct": 1,
+      "explanation": "A measurement that took past to mean above would report no overshoot going down."
+    },
+    {
+      "stage": "check",
+      "question": "The target is changed to where the position already is. What should the analysis do?",
+      "options": [
+        "Report a perfect step",
+        "Leave it out: it moves nothing, so there is no overshoot, rise or settling to report",
+        "Report zero",
+        "Fail"
+      ],
+      "correct": 1,
+      "explanation": "Four changes with one of no size and one beyond the end gave 2 steps."
+    },
+    {
+      "stage": "post",
+      "question": "A loop oscillates for ever around its target. What does its settling time read, and what does the verdict say?",
+      "options": [
+        "0",
+        "-1, which is not a time, and the verdict says settling: it never stayed within the band",
+        "Infinity",
+        "The period"
+      ],
+      "correct": 1,
+      "explanation": "A pass for a loop that never settled would be a lie."
+    },
+    {
+      "stage": "post",
+      "question": "The same scenario is run against a good sensor, one 60 ms late and one stuck from 1 s. What came out?",
+      "options": [
+        "The same",
+        "A pass, then failures on every step (overshoot, settling and final error), then failures on all but the overshoot of the last step, which did not move at all",
+        "Three passes",
+        "Three failures of the same kind"
+      ],
+      "correct": 1,
+      "explanation": "Each verdict said what it was about."
+    }
+  ]
+}

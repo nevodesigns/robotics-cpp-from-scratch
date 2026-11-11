@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "18-11-pass-or-fail",
+  "title": "Pass or Fail: Running a Scenario and Judging Every Step of the Trace Against Written Criteria",
+  "type": "build",
+  "minutes": 130,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "18-05-a-script-for-the-test-day",
+    "18-06-breaking-it-on-purpose",
+    "18-08-how-far-is-the-simulation-from-the-bench",
+    "14-04-choosing-the-gains"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sim",
+    "header": "rc/sim/judge.hpp",
+    "note": "step metrics for every change of target in a recorded run, including steps down, and a verdict against criteria that names each step that failed and why"
+  },
+  "breaks_first": [
+    "E-SIM-0031",
+    "E-SIM-0032",
+    "E-SIM-0033"
+  ]
+}
