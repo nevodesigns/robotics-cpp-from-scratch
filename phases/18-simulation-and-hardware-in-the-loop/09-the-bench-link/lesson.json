@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "18-09-the-bench-link",
+  "title": "The Bench Link: A Controller and a Plant Emulator Exchanging Frames, and What Each Does When the Other Goes Quiet",
+  "type": "build",
+  "minutes": 130,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "18-02-the-same-code-two-worlds",
+    "18-04-a-sensor-that-lies-like-the-real-one",
+    "17-05-reliable-or-fast"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::sim",
+    "header": "rc/sim/bench_link.hpp",
+    "note": "a plant emulator that holds its last command and fails safe when the link goes quiet, and a controller side that refuses a measurement older than one it has"
+  },
+  "breaks_first": [
+    "E-SIM-0025",
+    "E-SIM-0026",
+    "E-SIM-0027"
+  ]
+}
