@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "14-13-gains-that-follow-the-pose",
+  "title": "Gains That Follow the Pose: One Controller for a Joint Whose Inertia Changes",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "14-04-choosing-the-gains",
+    "13-07-what-it-takes-to-move-it"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::control",
+    "header": "rc/control/schedule.hpp",
+    "note": "a table lookup with clamped interpolation and a gain schedule built from the inertia at each knot"
+  },
+  "breaks_first": [
+    "E-CTRL-0033",
+    "E-CTRL-0034",
+    "E-CTRL-0035"
+  ]
+}
