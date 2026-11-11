@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "10-08-the-click-beside-the-point",
+  "title": "The Click Beside the Point: From a Pixel Back to a Sample, in Pixels and Not in Volts",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "10-02-a-value-over-time",
+    "10-06-a-million-points-in-800-columns"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::plot",
+    "header": "rc/plot/pick.hpp",
+    "note": "the map from data to pixels and back, and the sample nearest a click"
+  },
+  "breaks_first": [
+    "E-PLOT-0016",
+    "E-PLOT-0017",
+    "E-PLOT-0018"
+  ]
+}
