@@ -107,6 +107,32 @@ endif()
 add_test(NAME librc.headers-compile-standalone COMMAND rc_headers_standalone)
 set_property(TEST librc.headers-compile-standalone PROPERTY LABELS gate)
 
+# Tests of the library itself, apart from the lessons: each file in tests/ is a program with rc_test.hpp's main, built with the warnings and sanitizers of a lesson and run as a gate.
+find_package(Threads REQUIRED)
+file(GLOB rc_unit_tests CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_*.cpp")
+foreach(source ${rc_unit_tests})
+  get_filename_component(unit_name "${source}" NAME_WE)
+  set(unit_target "rc_${unit_name}")
+  add_executable(${unit_target} "${source}")
+  target_link_libraries(${unit_target} PRIVATE rc::core Threads::Threads)
+  target_compile_features(${unit_target} PRIVATE cxx_std_17)
+  if(MSVC)
+    target_compile_options(${unit_target} PRIVATE /W4)
+  else()
+    target_compile_options(${unit_target} PRIVATE -Wall -Wextra)
+  endif()
+  if(RC_SANITIZE_ADDRESS AND NOT MSVC)
+    target_compile_options(${unit_target} PRIVATE -fsanitize=address,undefined -fno-omit-frame-pointer)
+    target_link_options(${unit_target} PRIVATE -fsanitize=address,undefined)
+  endif()
+  if(RC_SANITIZE_THREAD AND NOT MSVC)
+    target_compile_options(${unit_target} PRIVATE -fsanitize=thread)
+    target_link_options(${unit_target} PRIVATE -fsanitize=thread)
+  endif()
+  add_test(NAME "librc.${unit_name}" COMMAND ${unit_target})
+  set_tests_properties("librc.${unit_name}" PROPERTIES LABELS "reference;gate;librc" TIMEOUT 60)
+endforeach()
+
 # The same two checks for the Qt headers, with Qt linked and AUTOMOC on so that
 # a Q_OBJECT class is compiled the way a real target compiles it. A header
 # declaring Q_OBJECT and never reaching moc links fine until somebody connects

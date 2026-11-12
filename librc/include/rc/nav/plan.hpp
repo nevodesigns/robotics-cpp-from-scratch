@@ -70,6 +70,10 @@ struct PlanOptions {
   double unknown_multiplier = 4.0;   // when unknown is merely expensive
   bool allow_diagonal = true;
   Guess guess = Guess::octile;
+  // May a diagonal step go between two cells that are walls, touching only at their corners? On a grid the step is legal, and a robot with any width cannot make it. Hardened after phase 21
+  // (docs/BUILD-LOG.md, "Hardening pass"): with false, a diagonal step is refused if either of the two cells beside it is a wall. It stays true by default so that every number measured
+  // with the planner is the same; a map inflated by the robot's radius never has a gap that narrow, and one that is not should set this to false.
+  bool allow_corner_cutting = true;
 };
 
 struct Plan {
@@ -113,6 +117,9 @@ inline double step_cost(const OccupancyGrid& grid, int from_x, int from_y, int t
   const int dx = to_x - from_x, dy = to_y - from_y;
   const bool diagonal = dx != 0 && dy != 0;
   if (diagonal && !options.allow_diagonal) return -1.0;
+  if (diagonal && !options.allow_corner_cutting) {
+    if (grid.classify(from_x + dx, from_y) == Cell::occupied || grid.classify(from_x, from_y + dy) == Cell::occupied) return -1.0;
+  }
 
   return (diagonal ? std::sqrt(2.0) : 1.0) * multiplier;
 }
