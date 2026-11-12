@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "20-02-a-toolchain-file-that-cannot-lie",
+  "title": "A Toolchain File That Cannot Lie: Generating It From the Triple, Checking It, and the Setting That Links the Host's Libraries Into the Robot",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "20-01-the-target-is-not-the-host",
+    "04-01-what-a-build-system-does",
+    "03-03-containers-and-their-costs",
+    "01-05-strings-and-text"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::deploy",
+    "header": "rc/deploy/toolchain.hpp",
+    "note": "a toolchain file generated from a target triple, a check that finds the settings that quietly build for the wrong machine, and the three modes of finding a library"
+  },
+  "breaks_first": [
+    "E-DEPLOY-0004",
+    "E-DEPLOY-0005",
+    "E-DEPLOY-0006"
+  ]
+}

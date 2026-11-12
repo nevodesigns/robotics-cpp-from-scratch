@@ -1,0 +1,78 @@
+{
+  "lesson": "20-02-a-toolchain-file-that-cannot-lie",
+  "title": "A Toolchain File That Cannot Lie: Generating It From the Triple, Checking It, and the Setting That Links the Host's Libraries Into the Robot",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why generate the toolchain file from the triple?",
+      "options": [
+        "It looks tidy",
+        "One source of truth: the system name, processor and compilers follow from the triple, and a hand edit cannot make them disagree",
+        "It is faster",
+        "CMake requires it"
+      ],
+      "correct": 1,
+      "explanation": "The same spec gave the same text every time."
+    },
+    {
+      "stage": "check",
+      "question": "What does -march=native mean in a cross build?",
+      "options": [
+        "The robot's CPU",
+        "The CPU of the machine doing the compiling, so the binary may use instructions the robot does not have, with no error",
+        "Nothing",
+        "The default"
+      ],
+      "correct": 1,
+      "explanation": "The compiler cannot know."
+    },
+    {
+      "stage": "check",
+      "question": "The sysroot has no libusb and the host has one for x86_64. What do ONLY and BOTH do?",
+      "options": [
+        "The same",
+        "ONLY says it is missing, which is right; BOTH returns the host's x86_64 library without a word",
+        "BOTH fails",
+        "ONLY returns the host's"
+      ],
+      "correct": 1,
+      "explanation": "CMake's default is BOTH."
+    },
+    {
+      "stage": "check",
+      "question": "Why are programs found on the host and libraries in the sysroot only?",
+      "options": [
+        "Tradition",
+        "A program that runs during the build must run on the machine building, while a library is linked into the robot's binary and must be built for the robot",
+        "Speed",
+        "Size"
+      ],
+      "correct": 1,
+      "explanation": "MODE_PROGRAM NEVER, the rest ONLY."
+    },
+    {
+      "stage": "post",
+      "question": "Why does validate refuse a backslash in a Windows sysroot?",
+      "options": [
+        "Windows is not supported",
+        "CMake reads a backslash as an escape, so the path is not the one written",
+        "It is slow",
+        "It looks wrong"
+      ],
+      "correct": 1,
+      "explanation": "Forward slashes."
+    },
+    {
+      "stage": "post",
+      "question": "What is the one real check of a toolchain file that this lesson cannot make?",
+      "options": [
+        "A unit test",
+        "Running the cross compiler and looking at what the binary was built for with file or readelf: the repository's CI has no cross compiler",
+        "A code review",
+        "The linter"
+      ],
+      "correct": 1,
+      "explanation": "The text and the checks are tested, not CMake's acceptance."
+    }
+  ]
+}
