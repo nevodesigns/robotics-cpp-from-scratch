@@ -164,3 +164,27 @@ jobs:
         env:
           QT_QPA_PLATFORM: offscreen
         run: tools/ci/exercises-fail-cleanly.sh build
+
+  # Gazebo Sim is the second simulator of the field courses. A machine that has it runs the lessons that talk to it; every
+  # lesson passes without it, so it is not part of the contract, and a failure here is reported and does not fail the run
+  # (continue-on-error). It becomes a gate when it has been green for long enough to trust.
+  gazebo:
+    name: gazebo, not a gate
+    runs-on: ubuntu-22.04
+    continue-on-error: true
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: install Gazebo Harmonic
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build lsb-release gnupg curl
+          sudo curl -fsSL https://packages.osrfoundation.org/gazebo.gpg -o /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+          sudo apt-get update
+          sudo apt-get install -y gz-harmonic
+      - run: cmake -S . -B build -G Ninja
+      - name: build what talks to Gazebo
+        run: cmake --build build --target rc_gz_headers_standalone lesson_22_14_the_same_program_another_simulator_reference lesson_22_15_two_simulators_and_the_gap_reference
+      - name: run it against a real Gazebo Sim
+        run: ctest --test-dir build -R "gz-headers|^22-1[45]-.*reference" --output-on-failure

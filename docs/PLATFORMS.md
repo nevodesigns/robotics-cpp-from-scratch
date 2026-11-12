@@ -53,6 +53,19 @@ Moving the whole curriculum to C++20 later is a small, deliberate change: raise
 the standard in `CMakeLists.txt`, and the aliases begin resolving to the
 standard types with no lesson edits at all.
 
+## Gazebo Sim (optional)
+
+The field courses use Gazebo Sim, version 8 (Harmonic), as a second simulator beside the built in one. It is optional in the way Qt is: a lesson that can use it builds without it, and the part of its tests that talks to it is not there. Every lesson passes without Gazebo.
+
+| | |
+|---|---|
+| Version | Gazebo Harmonic (Gazebo Sim 8, gz-transport 13, gz-msgs 10), supported until 2028 |
+| Install | Ubuntu 22.04 and 24.04: the packages.osrfoundation.org apt source, then `sudo apt-get install gz-harmonic` (the continuous integration job `gazebo` has the exact lines) |
+| Checked | `gz sim --versions` prints 8.x |
+| Not supported | Gazebo Classic (end of life January 2025). Windows (the backend starts a process with `fork`). |
+| Where it is used | lessons 22-14 and 22-15 through `rc/gz/gz_backend.hpp`, which is built only where gz-transport13 and gz-msgs10 are found |
+| In continuous integration | the job `gazebo`, which installs Harmonic and runs those lessons. It is not a gate (`continue-on-error`) until it has been green for long enough to trust. |
+
 ## Qt
 
 The baseline is the Qt 6.2 API, because that is what `apt install qt6-base-dev`

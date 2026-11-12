@@ -953,3 +953,49 @@ Three amendments to graduated headers, each found by the review of the repositor
 **A decision, stated plainly.** The two new options default to the old behaviour. Changing the defaults would have changed numbers quoted in the documents of lessons that use the headers (the rover of 16-16 and the whole of phase 21), and every one of them is reproduced by a test. The validation of the PID is the exception: it changes nothing for a controller that was valid and was a bug for one that was not. New code on a real robot should use `Integration::arc` or `midpoint` and `allow_corner_cutting = false` on a map that is not inflated; that is stated in the header comments.
 
 **A mistake of mine while doing it.** A wall in the planner test was seen as a wall three times on a cell that had been seen free twice: the log odds were 0.85, which the grid calls unknown and not occupied, so the walls did not exist and the planner crossed them (it needs four sightings). Found by the test failing, not by reading. And the first edit of the PID header did not apply, because a comment sat between two lines I had matched; the run of the old numbers against the new header showed it.
+
+## Phase 22, the base of the specialisation course (13 November 2026)
+
+Seventeen lessons, built in order in one run after the owner's approval of the plan. Every number in a lesson's document, quiz and atlas entries is printed by that lesson's own test (the generator reads lines of the form `@name value` from the reference run and fills the text from them, so a number cannot be typed wrong). The generator scripts of the first phases were lost with a session's scratch directory and were written again for this phase: a small program that writes the files, builds the reference, runs it, fills the numbers and graduates the header.
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 22-01 a robot as an interface | a fake drive with a time constant of 0.2 s reached 63.2 percent in 0.200 s, a stop from 1 m/s coasted 0.200 m, and a base told 0.5 m/s once stopped itself 1.265 s later (the watchdog) | `rc/hal/interfaces.hpp` |
+| 22-02 frames for a field robot | a lidar 0.25 m up tipped down 5 degrees saw the ground at 2.857 m; two transforms in the wrong order put a point 1.414 m away | `rc/field/frames.hpp` |
+| 22-03 units and limits | a limit of 5 read as m/s instead of km/h made the stop from it 8.331 m instead of 0.642 m, 13.0 times | `rc/field/limits.hpp` |
+| 22-04 motors, gearboxes and backlash | a gear motor from four data sheet numbers gave 350 rpm and 175 at half the stall torque; a gap of 2 degrees was lost whole on reversing, and the output sat 1 degree either side of the target depending on the side it came from | `rc/field/gear_motor.hpp` |
+| 22-05 terrain and friction | the stop from 2 m/s was 0.250 m on tarmac, 0.416 on gravel and 1.853 on ice (7.4 times); gravel can be climbed to 22.3 degrees, ice to 5.1 | `rc/field/terrain.hpp` |
+| 22-06 sensors that fail like the field | a gyro bias of 0.01 rad/s gave 34.1 degrees a minute; GNSS 1.49 m single and 0.020 m fixed with 1.03 percent jumps; an encoder 2 percent off read 0.20 m long in 10 m | `rc/field/sensors.hpp` |
+| 22-07 a field scenario file | a file with six mistakes gave eight reports in one pass, with their lines | `rc/field/field_scenario.hpp` |
+| 22-08 recording and replaying | 17 digits give a run back exactly and 6 were off by 5.0e-06; a log cut by a power failure read as 999 of 1000 entries | `rc/field/run_log.hpp` |
+| 22-09 watching a run | an animated SVG of a 500 pose run came to 24.5 kB; the world is drawn flipped because SVG's y points down and the robot's up | `rc/field/watch.hpp` |
+| 22-10 scoring a run | a path through two posts was 110 samples inside them and 2 collisions; the mean cycle time was 4.72 s and the 95th percentile 9.00 s | `rc/field/score.hpp` |
+| 22-11 the contract test | eleven promises; six broken drives were each caught by their own promise, and the contract found two bugs in the fake of 22-01 (below) | `rc/hal/contract.hpp` |
+| 22-12 describing a robot once | a robot file of 11 numbers, 3 typical; the SDF made from it was accepted by `gz sdf -k` | `rc/field/robot_file.hpp` |
+| 22-13 a world for gazebo | 8 models from a scenario of two patches, two walls, a post and a goal; a wall from (0,0) to (3,4) a box 5 m long turned 0.927 rad | `rc/field/gz_world.hpp` |
+| 22-14 the same program on another simulator | the same script on both ended 0.239 m and 23 degrees apart | `rc/field/backend.hpp`, `rc/gz/gz_backend.hpp` |
+| 22-15 two simulators and the gap | five cases within 2 to 5 mm except drive, turn, drive at 0.082 m and 22.3 degrees; Gazebo's time constant read as 0.041 s against 0.05 | `rc/field/gap.hpp` |
+| 22-16 a bring-up checklist | ten checks and ten faults; a tick count 15 percent off read 1378 against 1200 | `rc/hal/bringup.hpp` |
+| 22-17 a safety case per robot type | 8, 7 and 6 starting hazards; the empty ground template had 16 problems, two for each hazard | `rc/field/safety_case.hpp` |
+
+**Decisions.**
+
+1. **Gazebo is optional and every lesson passes without it.** A lesson with `"gz": true` in its manifest links gz-transport and gz-msgs and defines `RC_HAVE_GZ` when they are found, and its tests skip the Gazebo part when not. `librc/CMakeLists.txt` keeps the `rc/gz` headers out of the all-headers checks and gives them a gate of their own where Gazebo is installed, as it does the Qt ones. The continuous integration job `gazebo` installs Harmonic and runs the two lessons; it is `continue-on-error` until it has been seen green on a hosted runner.
+2. **The Gazebo backend starts a server for each run.** A reset of the world was tried first, and the ground truth publisher stopped publishing after one (its last publish time is in the future of the new clock). Starting costs 2.2 s, and the five cases of 22-15 take 19 s in all.
+3. **Ground truth comes from an OdometryPublisher in the model**, at twice the step rate, and not from the world's pose stream, which is throttled in real time.
+4. **The built in model has no terrain and no walls in this phase.** Lesson 22-15 shows the gap that remains because of it (0.082 m and 22 degrees in a drive, turn, drive) and does not hide it: a time constant read from Gazebo changed the simple cases by a few millimetres, and the compound case by nothing.
+5. **Real world dimensions with a source for every number.** The reference robot is of the class of the TurtleBot3 Burger: its wheel radius (0.033 m) and separation (0.160 m) agree across the sources found, its speed limits (0.22 m/s and 2.84 rad/s) are from the ROBOTIS e-Manual, its body size and mass are from one third party guide and the file says so, and the three numbers not found are marked `typical`.
+
+**Mistakes, and what caught them.**
+
+- **`multi_step` without `pause`.** The first Gazebo backend asked the world for N steps and appeared to work: 5000 steps gave 5.004 s. It was running in real time. The cause was found when 100 steps gave 1.5 s of simulated time over 1.5 s of waiting; with `pause: true` as well, 100 steps give exactly 100. Every comparison made before that was between a stepped simulation and one that ran on its own.
+- **A world held to the wall clock.** With a real time factor of 1 the stepped run still took the time of the run (100 ms for 100 steps). A factor of 0 made it 5.5 times faster.
+- **A publisher that skipped every other step.** The odometry publisher at 1000 Hz on a 1 ms step published every second step, and a wait for the stamp of the last step sometimes ended one step early and the next request overwrote what was left of the previous. Twice the rate fixed it.
+- **A forked child that wrote the parent's buffer.** `freopen` in the child flushed the parent's pending output, so a line of the test report appeared once for each server started, and the run took 55 s instead of 19. Flushing before the fork, and redirecting with `dup2`, fixed both.
+- **The clamp that turned NaN into the limit.** `std::max(-l, std::min(l, x))` is `l` for a NaN `x`. The fake drive of 22-01 did it (a command that is not a number was full speed) and so did the joint bus (a NaN target ran a joint away). Neither was seen by the tests of 22-01. The contract test of 22-11 found both on its first run; they are fixed in 22-01, and the lesson says so.
+- **Names defined twice.** A reference solution is global code and the header it graduates into is in a namespace. Once the header exists, a test that includes both sees every name twice. Lessons that build on earlier headers now say `using namespace rc::field;` in the reference (not in the header), and 22-14, which defines the names the Gazebo adapter derives from, qualifies instead.
+- **Test expectations written before measuring.** The ratio of an ice stop to a tarmac stop was expected as 14.8 and was 7.4; a quarter turn was expected to lose the lag and also lost the rounding of 1.5708 s to 16 samples of 0.1 s; the drive of 22-14 was expected to agree with Gazebo to 0.15 m and was 0.24 m apart. Each was corrected to the measurement, and the document says what the number is.
+- **A problem list in the wrong order.** The scenario parser reported the problems about the whole file before the ones about line 6. It now sorts them by line with the whole-file ones last.
+- **Lost generator scripts.** They lived in a session's scratch directory. The new ones are in the same place and will be lost the same way; the phase's files are what is kept.
+
+**Measurements worth keeping.** Gazebo Sim 8.15 on this machine: a server starts in 2.2 s; with a real time factor of 0 a stepped run is about 5.5 times faster than real time at a 1 ms step; the 100 ms per chunk of the first backend was the clock and not the physics.

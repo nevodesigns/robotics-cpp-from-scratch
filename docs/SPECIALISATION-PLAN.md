@@ -209,3 +209,8 @@ Ground first because the repository's safety, navigation and field work lead str
 6. **Real world dimensions:** a preference of the owner, made a rule in section 3b.
 7. **Which stage first:** stage 1 (the base and the ground track, 63 lessons), one phase at a time, each started on the owner's go-ahead: phase 22 first.
 8. **How stage 1 runs (owner's wish, decided by the planner on 13 November 2026):** the whole of stage 1 (phases 22 to 27) is built in one run, one phase at a time, each pushed and checked on CI before the next starts, with a short report after each. The run stops at the end of stage 1. The arm course (stage 2) is started only when the owner says so, and the same shape then repeats for each specialisation. A red CI, or a decision that is the owner's, stops the run early.
+
+## 10. Progress
+
+- **Phase 22, the shared base: built on 13 November 2026, 17 lessons** (docs/BUILD-LOG.md, "Phase 22"). The lesson map of section 6 held; the Gazebo lessons were tested against Gazebo Sim 8.15 on the build machine, and the continuous integration job for it is not a gate until it has been seen to pass on a hosted runner.
+- Phases 23 to 27, the ground track, are next, in one run, stopping at the end of stage 1.

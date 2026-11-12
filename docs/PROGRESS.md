@@ -18,14 +18,14 @@ starts with an entry of 13 November; the older entries below it are kept as they
 
 | | |
 |---|---|
-| lessons built | 320 of 320 planned, 100 percent |
-| phases opened | 22 of 22 |
+| lessons built | 337: 320 of 320 planned for the original course, 100 percent, and 17 of 138 planned for the specialisation course (phase 22 of 22 to 37) |
+| phases opened | 23 (the 22 of the original plan, and phase 22 of the specialisation course) |
 | phases finished to plan | 22 (phases 00 to 21) |
-| hours of material | 676 (the sum of the minutes in the lesson files, which is what the README counts) |
-| Failure Atlas entries | 910 |
-| librc headers | 305 across 18 modules |
+| hours of material | 699 (the sum of the minutes in the lesson files, which is what the README counts) |
+| Failure Atlas entries | 963 |
+| librc headers | 323 across 21 modules (rc::hal, rc::field and rc::gz are new) |
 | toolchains claimed | 4 |
-| gate tests | 369 (a reference test for each of the 320 lessons, the checks that code which must not compile is refused, and the tests of the library itself), green on every claimed toolchain |
+| gate tests | 387 (a reference test for each of the 320 lessons, the checks that code which must not compile is refused, and the tests of the library itself), green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -56,6 +56,7 @@ starts with an entry of 13 November; the older entries below it are kept as they
 | 19 Safety and field engineering | 14 | 14 | A risk assessment in which every serious hazard is tied to a mechanism that exists and evidence that passes, with the residual risk worked out and not asserted |
 | 20 Deployment and cross compilation | 12 | 12 | A robot that boots into your code, installs a new release without being bricked by a power cut, and rolls back by itself when the release is bad |
 | 21 Capstones | 10 | 10 | A whole robot, run end to end with faults injected, whose report an employer can read and whose every number comes from a test that passes |
+| 22 Field robot foundations (the specialisation course, phase 1 of 16) | 17 | 17 | One shared base for every field robot: hardware interfaces with contract tests and fakes, frames, limits, terrain, sensor faults, a scenario file, recording, scoring, one robot description for two simulators, a bring-up checklist and a safety case |
 
 **Where the gap is.** The plan of 320 lessons is built, and what is thin is no longer the front. It is what the curriculum cannot check from inside this repository: nothing is cross compiled (there is no cross compiler on any lane, so phase 20 teaches what a deployment is made of in tested code and says so), nothing was run on a real robot or a real board (hardware tier 2 is two lessons, 08-05 and 08-14, each with a pseudo terminal fallback, and tier 3 is none), ROS 2 is a labelled sketch (no lesson uses rclcpp), and the capstones are simulations. 21-10's last line says the same of the robot: four hazards of the log have no scenario. The accepted gaps from the review of the repository (hardware drivers, a lidar pipeline, SLAM, field validation, vehicle dynamics) belong to the specialisation course that is to be planned next, not to this repository.
 
@@ -179,7 +180,7 @@ Claimed: `ubuntu-22.04-gcc11`, `ubuntu-24.04-gcc13`, `ubuntu-22.04-clang14`,
 `windows-msvc2022`.
 
 CI jobs: `setup`, `contract`, `build` matrix, `sanitize`,
-`exercises-fail-cleanly`.
+`exercises-fail-cleanly`, and `gazebo`, which installs Gazebo Harmonic and runs the two lessons that talk to it. The last is not a gate (`continue-on-error`): every lesson passes without Gazebo, and the job has not yet run on a hosted runner.
 
 **Windows earns its place.** It has repeatedly caught what three Linux lanes
 agreed on:
@@ -519,6 +520,14 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Written 13 November 2026, phase 22 built (the base of the specialisation course)
+
+**Phase 22 is built: 17 lessons, all green locally** (the full gate of 387 tests, the sanitizers and clang on each lesson, the audit with 0 issues). It was pushed in one go; read the next entry for what continuous integration said. The owner approved the specialisation plan on 13 November (docs/SPECIALISATION-PLAN.md, section 9): the same repository, phases 22 to 37, ground first, the built in simulator as the default and Gazebo Sim as a second backend, hardware optional and tested against fakes, real world dimensions for the models, the humanoid (phase 37) paused and not dropped. Stage 1 is the base and the ground track (phases 22 to 27, 63 lessons) and is built in one run, one phase at a time, stopping at the end of stage 1.
+
+**What phase 22 holds.** `rc::hal` (the Drive, ArmBus and LegBus interfaces and their fakes, the contract test every implementation must pass, the bring-up checklist and a fake board), `rc::field` (frames, limits, a gear motor, terrain and friction, field sensors, the scenario file, the run log, the SVG viewer, scoring, the robot file with a source for every number, the Gazebo world, the backend interface and the gap between simulators, the safety case), and `rc::gz` (the Gazebo Sim backend over gz-transport, built only where Gazebo is installed). Details and every mistake are in docs/BUILD-LOG.md, "Phase 22".
+
+**What is next.** Phase 23, the first of the ground vehicle track (vehicle models), on the owner's standing instruction to build stage 1 to its end.
 
 ### Written 13 November 2026, all 320 lessons built and the hardening pass done
 
