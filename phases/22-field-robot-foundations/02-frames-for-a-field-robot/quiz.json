@@ -1,0 +1,78 @@
+{
+  "lesson": "22-02-frames-for-a-field-robot",
+  "title": "Frames for a Field Robot: Transforms in 2D and 3D, and a Tree That Answers Where a Lidar Point Is on the Map",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does compose(a, b) apply first?",
+      "options": [
+        "a",
+        "b",
+        "Neither, it is symmetric",
+        "The inverse"
+      ],
+      "correct": 1,
+      "explanation": "Right to left, like a function call."
+    },
+    {
+      "stage": "check",
+      "question": "A shift then a turn, against a turn then a shift, moved the point by:",
+      "options": [
+        "0 m",
+        "1.414 m",
+        "1 m",
+        "4 m"
+      ],
+      "correct": 1,
+      "explanation": "Transforms do not commute."
+    },
+    {
+      "stage": "check",
+      "question": "A lidar 0.25 m up and tilted 5 degrees down sees the ground at:",
+      "options": [
+        "0.25 m",
+        "2.858 m",
+        "5 m",
+        "Never"
+      ],
+      "correct": 1,
+      "explanation": "Height over the tangent of the tilt."
+    },
+    {
+      "stage": "check",
+      "question": "What does between() return for a frame it was never told about?",
+      "options": [
+        "The identity",
+        "False: no transform",
+        "A random one",
+        "It crashes"
+      ],
+      "correct": 1,
+      "explanation": "No answer is better than a wrong one."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a robot's geometry code hard to test by looking at it?",
+      "options": [
+        "It is long",
+        "A wrong order or a wrong frame still produces numbers, plausible ones",
+        "It crashes",
+        "It is slow"
+      ],
+      "correct": 1,
+      "explanation": "Compare with an independent calculation."
+    },
+    {
+      "stage": "post",
+      "question": "What error was left after composing a transform with its inverse?",
+      "options": [
+        "Large",
+        "About 0.2 times 1e-15, which is rounding",
+        "Exactly 1",
+        "Nan"
+      ],
+      "correct": 1,
+      "explanation": "Rounding, not a bug."
+    }
+  ]
+}

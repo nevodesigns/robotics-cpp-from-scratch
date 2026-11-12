@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "22-02-frames-for-a-field-robot",
+  "title": "Frames for a Field Robot: Transforms in 2D and 3D, and a Tree That Answers Where a Lidar Point Is on the Map",
+  "type": "build",
+  "minutes": 75,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-01-a-robot-as-an-interface",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::field",
+    "header": "rc/field/frames.hpp",
+    "note": "Tf2 and Tf3 transforms with compose, inverse and apply, and a FrameTree that gives the transform between any two named frames of a robot"
+  },
+  "breaks_first": [
+    "E-FIELD-0004",
+    "E-FIELD-0005",
+    "E-FIELD-0006"
+  ]
+}
