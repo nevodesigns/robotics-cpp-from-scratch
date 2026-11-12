@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "title": "Planning and Following, Per Vehicle",
+  "ends_with": "A route a particular vehicle can drive, followed by a controller that knows how that vehicle moves, at a speed its grip allows, with a way out when it is stuck"
+}
