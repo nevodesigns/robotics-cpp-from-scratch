@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "21-08-a-test-report-you-can-read",
+  "title": "A Test Report You Can Read: Scenarios Tied to Hazards, a Table That Names What Is Not Covered, and a Regression It Catches",
+  "type": "capstone",
+  "minutes": 140,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "21-07-a-delivery-not-a-route",
+    "21-02-a-rover-in-a-building",
+    "19-14-a-risk-assessment-you-can-defend",
+    "19-01-what-can-go-wrong",
+    "18-11-pass-or-fail"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::capstone",
+    "header": "rc/capstone/test_report.hpp",
+    "note": "a suite of scenarios for the rover, each tied to the hazards it is evidence for, run against the building and written as a report that says which hazards are covered, which are failing and which have no test at all"
+  },
+  "breaks_first": [
+    "E-CAP-0022",
+    "E-CAP-0023",
+    "E-CAP-0024"
+  ]
+}

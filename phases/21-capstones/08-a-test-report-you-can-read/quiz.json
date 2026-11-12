@@ -1,0 +1,78 @@
+{
+  "lesson": "21-08-a-test-report-you-can-read",
+  "title": "A Test Report You Can Read: Scenarios Tied to Hazards, a Table That Names What Is Not Covered, and a Regression It Catches",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is 'all tests pass' not enough to hand to somebody deciding whether to trust the robot?",
+      "options": [
+        "Tests are slow",
+        "It does not say which hazards were tried: four of the eight had no scenario at all",
+        "Tests lie",
+        "It is too short"
+      ],
+      "correct": 1,
+      "explanation": "The report names G3, G5, G6 and G7."
+    },
+    {
+      "stage": "check",
+      "question": "For the link scenario S4, what is the pass?",
+      "options": [
+        "Reaching the goal",
+        "Not reaching it: stopped with cause link and still at the end",
+        "Speed",
+        "A short time"
+      ],
+      "correct": 1,
+      "explanation": "A safety scenario passed by completing the task is not testing safety."
+    },
+    {
+      "stage": "check",
+      "question": "The limiter and supervisor are taken out. Which scenarios still pass?",
+      "options": [
+        "None",
+        "The empty building and the doorway: the functional tests pass and the three safety scenarios fail",
+        "All",
+        "Only S4"
+      ],
+      "correct": 1,
+      "explanation": "failing: G1, G2, G4, G8."
+    },
+    {
+      "stage": "check",
+      "question": "The link scenario is left out of the suite. What does the suite say?",
+      "options": [
+        "Red",
+        "Green, and the report lists G2, the unacceptable hazard, as NOT COVERED",
+        "Nothing",
+        "Amber"
+      ],
+      "correct": 1,
+      "explanation": "An uncovered hazard is a gap, not a failure of what was tested."
+    },
+    {
+      "stage": "post",
+      "question": "Why was the layout of the report tested with results made by hand?",
+      "options": [
+        "Speed",
+        "So a change to the physics cannot break the report, and a change to the report is one somebody has to look at",
+        "The simulation is random",
+        "It is a rule"
+      ],
+      "correct": 1,
+      "explanation": "The text is checked to the character."
+    },
+    {
+      "stage": "post",
+      "question": "What can the report not tell?",
+      "options": [
+        "Which scenarios passed",
+        "Whether a scenario's rule would really catch the hazard, and whether the link between scenario and hazard is true: both are claims a person made",
+        "How many tests ran",
+        "The time"
+      ],
+      "correct": 1,
+      "explanation": "A covered hazard was tried once, in one building."
+    }
+  ]
+}
