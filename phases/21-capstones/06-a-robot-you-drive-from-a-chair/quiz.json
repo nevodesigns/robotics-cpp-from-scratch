@@ -1,0 +1,78 @@
+{
+  "lesson": "21-06-a-robot-you-drive-from-a-chair",
+  "title": "A Robot You Drive From a Chair: A Lossy, Delayed Link, a Stop Path on the Robot, and a Timeout Chosen From a Distance",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "At 2 m/s and 1.5 m/s^2 of braking, what timeout stops the robot within a metre of the link going?",
+      "options": [
+        "0.1 s",
+        "None: the braking alone is 1.333 m, so the answer is a lower speed",
+        "0.5 s",
+        "1 s"
+      ],
+      "correct": 1,
+      "explanation": "max_timeout is zero."
+    },
+    {
+      "stage": "check",
+      "question": "The link comes back after a stop, with no reset pressed. What does the robot do?",
+      "options": [
+        "Goes on",
+        "Stays stopped: the link coming back is not permission, and a person presses reset after a second of good link",
+        "Slows",
+        "Resets itself"
+      ],
+      "correct": 1,
+      "explanation": "The latch is the point."
+    },
+    {
+      "stage": "check",
+      "question": "A link that delays every packet by one second. How much farther does a robot at 1 m/s go after the link fails?",
+      "options": [
+        "Nothing",
+        "One metre more (1.598 m against 0.598 m): the delay is added at the speed",
+        "0.1 m",
+        "Ten metres"
+      ],
+      "correct": 1,
+      "explanation": "Plan for the timeout plus the delay."
+    },
+    {
+      "stage": "check",
+      "question": "On a link that loses 20 percent, a timeout of 0.1 s did what over an hour?",
+      "options": [
+        "Nothing",
+        "1198 false stops, with the robot stopped for 52.1 percent of the hour",
+        "3 false stops",
+        "Stopped it once"
+      ],
+      "correct": 1,
+      "explanation": "The operator gives up, and the safety function is switched off."
+    },
+    {
+      "stage": "post",
+      "question": "The robot's timeout is too short for the loss and too long for the distance. What is the answer?",
+      "options": [
+        "Pick the middle",
+        "Neither: a better link, or a lower speed",
+        "A longer reset",
+        "Remove the timeout"
+      ],
+      "correct": 1,
+      "explanation": "The two terms did not meet."
+    },
+    {
+      "stage": "post",
+      "question": "Why does real radio make loss to the power k a poor guide?",
+      "options": [
+        "It does not",
+        "Real loss comes in bursts: false stops are rarer and real outages longer than the independent model says",
+        "Radio never loses packets",
+        "The heartbeat is slower"
+      ],
+      "correct": 1,
+      "explanation": "A limit of the model."
+    }
+  ]
+}

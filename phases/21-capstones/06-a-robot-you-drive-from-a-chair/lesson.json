@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "id": "21-06-a-robot-you-drive-from-a-chair",
+  "title": "A Robot You Drive From a Chair: A Lossy, Delayed Link, a Stop Path on the Robot, and a Timeout Chosen From a Distance",
+  "type": "capstone",
+  "minutes": 140,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "21-05-a-robot-that-knows-how-lost-it-is",
+    "19-14-a-risk-assessment-you-can-defend",
+    "19-02-the-stop-that-does-not-need-the-app",
+    "19-04-how-far-it-goes-before-it-stops",
+    "17-05-reliable-or-fast",
+    "12-08-the-button-that-must-be-held"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::capstone",
+    "header": "rc/capstone/teleop.hpp",
+    "note": "a robot driven from a station over a link that loses and delays packets, with a stop path on the robot, the timeout chosen from a distance, the false stops it costs and the reset that a person has to press"
+  },
+  "breaks_first": [
+    "E-CAP-0016",
+    "E-CAP-0017",
+    "E-CAP-0018"
+  ]
+}
