@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "20-08-boot-into-your-code",
+  "title": "Boot Into Your Code: Service Units From a Spec, the Order They Start In, and a Crash Loop With and Without a Back-Off",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "20-07-a-few-robots-first",
+    "17-20-a-graph-that-looks-after-itself",
+    "19-02-the-stop-that-does-not-need-the-app",
+    "03-03-containers-and-their-costs"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::deploy",
+    "header": "rc/deploy/services.hpp",
+    "note": "systemd style unit files written from a spec and checked for cycles, missing ordering and restart storms, the order services start in, and the starts a crash loop makes with an immediate restart, a back-off and a start limit"
+  },
+  "breaks_first": [
+    "E-DEPLOY-0022",
+    "E-DEPLOY-0023",
+    "E-DEPLOY-0024"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "20-08-boot-into-your-code",
+  "title": "Boot Into Your Code: Service Units From a Spec, the Order They Start In, and a Crash Loop With and Without a Back-Off",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does Requires=drivers say about the order of start?",
+      "options": [
+        "That drivers starts first",
+        "Nothing: it says the service cannot run without drivers, and the order needs After as well",
+        "That they start together",
+        "That drivers restarts it"
+      ],
+      "correct": 1,
+      "explanation": "The planner requires perception but was not ordered after it."
+    },
+    {
+      "stage": "check",
+      "question": "A service crashes 0.2 s after every start and is restarted after 0.1 s with no limit. How many starts in 60 s?",
+      "options": [
+        "6",
+        "About 200 (201 in the run), and the log and a core are busy with it",
+        "5",
+        "1"
+      ],
+      "correct": 1,
+      "explanation": "A restart with no wait is a storm."
+    },
+    {
+      "stage": "check",
+      "question": "The same crash with a start limit of 5 in 10 s and a restart of 0.1 s. What happens?",
+      "options": [
+        "It is fine",
+        "It gives up at 1.5 s after five starts, and the robot is without that program until somebody notices",
+        "It restarts forever",
+        "It slows"
+      ],
+      "correct": 1,
+      "explanation": "A limit makes a quick loop give up."
+    },
+    {
+      "stage": "check",
+      "question": "What does a back-off of 1, 2, 4, 8, 16, 30 s do for the same crash?",
+      "options": [
+        "Gives up sooner",
+        "Six starts in a minute, and the start limit is never reached because the starts are far apart",
+        "Two hundred starts",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "Neither spamming nor giving up."
+    },
+    {
+      "stage": "post",
+      "question": "Why should a back-off reset after a long stable run?",
+      "options": [
+        "Tidiness",
+        "A service healthy for a day that crashes once should restart at once, not wait 30 s for crashes from its first minute",
+        "It saves memory",
+        "It is a rule"
+      ],
+      "correct": 1,
+      "explanation": "A long run ends the loop."
+    },
+    {
+      "stage": "post",
+      "question": "A safety-relevant service is given up on by the init system. What should happen?",
+      "options": [
+        "Nothing",
+        "A stop: a robot that moves and cannot see is the worst combination, and the supervisor of lesson 19-10 has to see it",
+        "A restart",
+        "A reboot only"
+      ],
+      "correct": 1,
+      "explanation": "A failed service is a fact the supervisor has to be told."
+    }
+  ]
+}
