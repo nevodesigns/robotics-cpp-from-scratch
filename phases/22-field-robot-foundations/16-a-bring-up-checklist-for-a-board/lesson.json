@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "22-16-a-bring-up-checklist-for-a-board",
+  "title": "A Bring-Up Checklist for a Real Board: Ten Cheap Checks Before the First Drive, Run Against a Fake of the Board",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 2,
+  "requires": [
+    "22-01-a-robot-as-an-interface",
+    "22-06-sensors-that-fail-like-the-field",
+    "22-11-the-contract-test-for-an-interface",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::hal",
+    "header": "rc/hal/bringup.hpp",
+    "note": "BoardProbe, the lowest level of a drive board (wheel commands, encoder counts, battery, IMU, emergency stop), FakeBoard with ten kinds of fault, and run_bringup, ten checks in the order they should be made, each with a measured value and advice in words"
+  },
+  "breaks_first": [
+    "E-FIELD-0048",
+    "E-FIELD-0049",
+    "E-FIELD-0050"
+  ],
+  "fallback": "Every check runs against FakeBoard, a model of the board and its faults; a learner with no board does the whole lesson on the fake and loses nothing but the final satisfaction of running the same function against a real board."
+}
