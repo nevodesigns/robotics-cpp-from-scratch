@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "id": "21-05-a-robot-that-knows-how-lost-it-is",
+  "title": "A Robot That Knows How Lost It Is: Dead Reckoning, Beacon Fixes, and a Fence Buffer That Is Only as Good as the Drift It Assumes",
+  "type": "capstone",
+  "minutes": 140,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "21-04-a-robot-that-balances",
+    "19-14-a-risk-assessment-you-can-defend",
+    "19-06-the-line-it-may-not-cross",
+    "16-02-two-guesses-are-better",
+    "16-01-where-it-thinks-it-is",
+    "19-10-one-place-that-says-stop"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::capstone",
+    "header": "rc/capstone/localisation.hpp",
+    "note": "a robot that dead reckons, takes noisy beacon fixes into a filter, and keeps a fence buffer that grows with the distance since the last fix, with the drift per metre it must assume measured against the drift it has"
+  },
+  "breaks_first": [
+    "E-CAP-0013",
+    "E-CAP-0014",
+    "E-CAP-0015"
+  ]
+}
