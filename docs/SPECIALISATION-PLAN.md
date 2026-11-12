@@ -63,29 +63,38 @@ Each finding is linked and was read from the search results on 13 November 2026.
 3. **Legged robots are taught from one leg up.** A course on a Cheetah style leg progresses single leg, half body, full robot, with inverse kinematics for end effector trajectories; the Stanford Pupper was designed as a replicable benchmark platform; the Petoi line is the accessible hardware; trot gaits are taught as foot contact patterns on top of forward and inverse kinematics. **Decision: the legged track follows the same ladder**, and the one leg on a stand is its tier 2. Sources: [single leg control practice](https://www.instructables.com/Taming-a-Leg-With-Python-and-CAN-Bus-MIT-Cheetah-S), [Stanford Pupper](https://ar5iv.labs.arxiv.org/html/2110.00736), [Petoi research page](https://www.petoi.com/pages/research-spotlight-1), [Legged Robots Bootcamp](https://github.imc.re/Dynamics-Learning-Workshop/Legged-Robots-Bootcamp).
 4. **Low cost arms exist and are good enough to teach on.** The SO-ARM100 is open source with LeRobot support, uses 12 STS3215 servos in the leader and follower pair, and its price ranges depend on whether the printed parts are included. Source: [CNX Software on the SO-ARM100](https://www.cnx-software.com/2024/12/30/so-arm100-is-an-open-source-ai-robotic-arm-kit-with-lerobot-integration-and-nvidia-jetson-support/), [a retailer listing](https://openelab.io/products/seeed-studio-so-arm100-lerobot).
 5. **Cheap ground robots can have encoders, and the cheapest kits do not.** Build guides for ESP32 robots with encoder motors come to 60 to 70 dollars, the motors being the largest cost; cardboard and TT motor kits have none. Sources: [a build guide](https://robofoundry.medium.com/building-cheapest-ros2-robot-using-esp32-part-1-hardware-build-af0044de68ce), [a classroom rover](https://hackaday.com/2020/03/02/esp32-rover-with-pcb-chassis-is-ready-to-roll), [a buying guide](https://microcontrollerslab.com/?p=43084).
-6. **Simulators.** MuJoCo is Apache 2.0 and strong on contact dynamics, Gazebo is the usual choice for ROS 2 integration, Webots is the most classroom oriented. **None of the sources established deterministic stepping for any of them**, and the repository's rule is that published numbers are byte identical across machines. **Decision: the course uses the repository's own deterministic simulator, extended** (the plan's first phase), and offers MuJoCo, Gazebo and ROS 2 as labelled sketches that are not built or tested here, as phase 17 did for ROS 2. Sources: [a comparison of simulation environments](https://ar5iv.labs.arxiv.org/html/2103.04616), [a review of physics engines](https://arxiv.org/html/2407.08590v1).
+6. **Simulators, and Gazebo in particular.** MuJoCo is Apache 2.0 and strong on contact dynamics, Gazebo is the usual choice for ROS 2 integration, Webots is the most classroom oriented. None of the sources established deterministic stepping for any of them, and the repository's rule is that published numbers are byte identical across machines. **Gazebo Classic reached end of life in late January 2025**, and the current Gazebo (Gazebo Sim, formerly Ignition) is the supported one: ROS 2 Jazzy pairs with Gazebo Harmonic, and Humble has official `ros_gz` builds for Fortress and Harmonic. This machine has Ubuntu 22.04, ROS 2 Humble and **only Gazebo Classic 11.10.2**, so a Gazebo Sim bridge could not be tested here without installing it. **Decision, revised after the owner asked for Gazebo support (13 November 2026): the repository's own deterministic simulator is the default and carries the numbers; Gazebo Sim is a full second backend that a learner can switch to and compare, built and tested, not a sketch.** See section 5. Sources: [a comparison of simulation environments](https://ar5iv.labs.arxiv.org/html/2103.04616), [a review of physics engines](https://arxiv.org/html/2407.08590v1), [Gazebo Classic end of life](https://discourse.openrobotics.org/t/gazebo-classic-end-of-life/48748), [Jazzy and Gazebo Harmonic](https://discourse.openrobotics.org/t/gazebo-classic-end-of-life-ros-2-jazzy/36239), [ros_gz](https://github.com/gazebosim/ros_gz).
 
-What the research could not settle, and the plan therefore does not claim: whether Nav2 supports skid steer by configuration; the exact current text of ISO/TS 15066 against ISO 10218-2:2025; current prices; any simulator's determinism.
+What the research could not settle, and the plan therefore does not claim: whether Nav2 supports skid steer by configuration; the exact current text of ISO/TS 15066 against ISO 10218-2:2025; current prices; any simulator's determinism; whether Gazebo Sim behaves the same on every machine (the plan assumes it does not and measures the gap).
 
 ## 5. Architecture
 
 **Where it lives.** The same repository, as phases 22 to 37, so that it has the tool (`rcpp`), the audit rules, the Failure Atlas (new prefixes `FIELD`, `VEH`, `ARM`, `LEG`), the continuous integration and the `requires` chain for free. A separate repository would need all of that again and would lose the guarantee that a prerequisite is real.
 
-**New modules in `librc`.** `rc::hal` (the interfaces and the contract tests), `rc::field` (shared: terrain, sensor models for the field, scenarios, scoring), `rc::vehicle`, `rc::arm`, `rc::legged`.
+**New modules in `librc`.** `rc::hal` (the interfaces and the contract tests), `rc::gz` (the Gazebo backend, built only where Gazebo is found), `rc::field` (shared: terrain, sensor models for the field, scenarios, scoring), `rc::vehicle`, `rc::arm`, `rc::legged`.
 
 **Rules kept, unchanged.** Plain C++17; every lesson a real CMake target with an exercise that fails cleanly and a reference that passes; every number in a lesson from its own suite; a stub that never hangs; no em dashes; one lesson per commit; the supervisor of phase 19 in every capstone's tests (design rule D9); `rcpp audit` clean and all 8 continuous integration jobs green before the next phase.
 
 **New rules the course would add to the audit.** A lesson with a hardware section ships a fake of the device and a test that runs against it (checked); a lesson that names a standard says it is not a compliance lesson (checked by phrase); a named part appears only in a bring-up page and never in a lesson's tests.
 
+**Two simulators, and how a learner can try both.** The generic interface (section 3) is what makes this cheap. A lesson is written once against `Drive`, `ArmBus`, `LegBus` and the sensor interfaces; behind them sits either the built in simulator or a Gazebo backend, chosen by one line of configuration, as 18-12 chose between a simulation and a bench (`backend = builtin` or `backend = gazebo`). The lesson's code does not change.
+
+- **One description of the robot.** A robot is a small text file (wheel base, link lengths, joint limits, motor limits). The course turns that one file into both the built in model and the **SDF** that Gazebo reads (and a URDF for people who use ROS 2). They cannot disagree, because neither is written by hand. A scenario file likewise produces both the built in scenario and a Gazebo world.
+- **Which Gazebo.** Gazebo Sim (Harmonic is the recommended release) is the target. Gazebo Classic is end of life and is not supported; the SDF files will mostly load in it and nothing more is promised.
+- **How the bridge talks to it.** Directly through Gazebo's own C++ transport library (`gz-transport`), so that it stays a C++ course and needs no ROS 2. A page shows the same thing through `ros_gz_bridge` for people who live in ROS 2.
+- **What a learner sees.** The same exercise, passing in the built in simulator, and a second target that runs the same lesson against Gazebo, with the numbers beside the first run's. A learner without Gazebo never meets it; one with Gazebo can watch the robot in its 3D window.
+- **Not the same numbers, and the course says so.** Gazebo is not deterministic across machines in the way the built in simulator is, and its contact model is different. A Gazebo run is checked against **tolerance bands**, never exact numbers, and one lesson measures the **gap** between the two simulators on the same scenario (the method of 18-08 and 18-12) so the difference is a number a learner has measured, not a worry.
+- **Testing it honestly.** Gazebo tests are built only where Gazebo is found, and where it is not, `rcpp` says so in plain words (it is never a silent pass: the rule of L019). Every Gazebo lesson also passes entirely on the built in simulator, so a skipped Gazebo target never hides a failing lesson. A new continuous integration lane runs the Gazebo targets headless in a container, **non gating while it settles** and gating once it has been stable for a run of pushes. Until that lane exists and is green, no Gazebo number may be quoted in a lesson as measured.
+
 **Safety.** Phase 19's rule carries over: each track's capstone is run under the supervisor, tied to hazards in the log, and the report names what has no test (21-08 and 21-10 are the models).
 
-**What it will not do.** Cross compile (no cross compiler in the continuous integration, as in phase 20); run on any hardware in continuous integration; claim a standard's compliance; replace ROS 2.
+**What it will not do.** Cross compile (no cross compiler in the continuous integration, as in phase 20); run on any hardware in continuous integration; claim a standard's compliance; replace ROS 2; support Gazebo Classic.
 
 ## 6. The lesson map
 
 Counts are the target. Titles are working titles and will be revised as lessons are written, as phase titles were.
 
-### Phase 22, the shared base (12 lessons)
+### Phase 22, the shared base (17 lessons)
 
 1. A robot as an interface: `Drive`, `ArmBus`, `LegBus`
 2. Frames and transforms for field robots, in 2D and 3D
@@ -95,10 +104,17 @@ Counts are the target. Titles are working titles and will be revised as lessons 
 6. Sensor models for the field: lidar, IMU, GNSS, encoders, with their faults
 7. A field scenario file
 8. Recording and replaying a field run
-9. Scoring a run: navigation, manipulation and gait metrics
-10. The contract test for a hardware interface
-11. A bring-up checklist for a real board
-12. A safety case template per robot type (capstone of the base)
+9. Watching a run: the robot as a moving picture (new)
+10. Scoring a run: navigation, manipulation and gait metrics
+11. The contract test for a hardware interface
+12. Describing a robot once: one file, two models (the built in one and the SDF) (new)
+13. A world and a scenario for Gazebo, made from the same scenario file (new)
+14. The same program, another simulator: the Gazebo backend (new)
+15. Two simulators, one scenario, and the gap between them measured (new)
+16. A bring-up checklist for a real board
+17. A safety case template per robot type (capstone of the base)
+
+Each track's world pack (a building, rough ground, an arm cell, a flat floor with slopes) is generated by lesson 13's tool and is shown in the track's lessons, not taught as extra lessons. An optional page shows the ROS 2 route through `ros_gz_bridge`.
 
 ### Track U, ground vehicles (phases 23 to 27, 46 lessons)
 
@@ -138,16 +154,16 @@ The frames of a base and an arm together; what the arm can reach from where the 
 
 **37 Humanoid basics, a stretch (8):** the linear inverted pendulum; the capture point; a walking pattern generator; a footstep planner; standing on one leg; the ankle strategy; swinging the arms; the humanoid capstone. Recommended to be decided after phases 34 to 36, not now.
 
-### Totals
+### Totals (the base grew from 12 to 17 lessons when Gazebo support and a viewer were added on 13 November)
 
 | Part | Lessons |
 |---|---|
-| Base | 12 |
+| Base | 17 |
 | Ground | 46 |
 | Arms | 40 |
 | Mobile manipulators | 10 |
 | Legged | 25 (33 with the humanoid stretch) |
-| **Total** | **133 (141 with the stretch)** |
+| **Total** | **138 (146 with the stretch)** |
 
 For scale: phases 14 to 21 of the first course were 120 lessons.
 
@@ -157,7 +173,7 @@ The owner approves each stage before it is built, as with the phases of the firs
 
 | Stage | What | Lessons |
 |---|---|---|
-| 1 | The base (22) and the ground track (23 to 27) | 58 |
+| 1 | The base (22) and the ground track (23 to 27) | 63 |
 | 2 | The arms track (28 to 32) | 40 |
 | 3 | Mobile manipulators (33) and the legged track (34 to 36) | 35 |
 | 4, optional | Humanoid basics (37) | 8 |
@@ -176,8 +192,9 @@ Ground first because the repository's safety, navigation and field work lead str
 
 ## 9. Questions for the owner
 
-1. **Approve the shape?** One course in the same repository, phases 22 to 37, four stages, ground first.
+1. **Approve the shape?** One course in the same repository, phases 22 to 37, four stages, ground first, with the built in simulator as the default and Gazebo Sim as a second backend.
 2. **Approve the decisions on tiers and hardware?** Every lesson passes without hardware; about a third have an optional hardware section with a fake of the device; interfaces generic, one named reference build per track.
 3. **Humanoid basics** (phase 37): leave as a stretch to decide later, or drop it?
 4. **Hardware parts:** the plan names the SO-ARM100, the Petoi range, the Stanford Pupper and an ESP32 build. Should any be changed, or a part the owner already has put in its place?
-5. **Which stage first?** The recommendation is stage 1, the base and the ground track, 58 lessons, built one phase at a time with the owner's go-ahead for each, as before.
+5. **Gazebo: the version.** The plan targets Gazebo Sim (Harmonic) and not Gazebo Classic, which is end of life and is the only one installed on this machine. Building and testing the backend means installing Gazebo Harmonic and `ros_gz` here (a system change that needs the owner's permission) or using a container. Which?
+6. **Which stage first?** The recommendation is stage 1, the base and the ground track, 63 lessons, built one phase at a time with the owner's go-ahead for each, as before.
