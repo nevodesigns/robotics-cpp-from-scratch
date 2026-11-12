@@ -35,6 +35,7 @@ struct RobotModel {
   Sourced wheel_width;
   Sourced max_speed;
   Sourced max_turn_rate;
+  Sourced com_back;  // optional: how far behind the axle, towards the caster, the centre of mass of the whole robot is, in metres
 };
 
 struct RobotParse {
@@ -57,6 +58,7 @@ inline Sourced* robot_slot(RobotModel& r, const std::string& key) {
   if (key == "wheel_width") return &r.wheel_width;
   if (key == "max_speed") return &r.max_speed;
   if (key == "max_turn_rate") return &r.max_turn_rate;
+  if (key == "com_back") return &r.com_back;
   return nullptr;
 }
 
@@ -168,13 +170,17 @@ inline std::string sdf_model(const RobotModel& r, const std::string& pose) {
   const double ci = sphere_inertia(r.wheel_mass.value, wheel_r);
   const double half_track = 0.5 * r.track_width.value;
   const double caster_x = -0.5 * r.length.value + wheel_r;
+  // Where the weight is. A robot whose centre of mass is over the axle is balanced on two wheels and a caster that touches only when the body rocks, and in a simulator it rocks: it pitches when it speeds up or stops and turns badly afterwards. The centre of mass is therefore put behind the axle, toward the caster, 40 percent of the way to it unless the file says otherwise.
+  const double caster_back = -caster_x;
+  const double com_back = r.com_back.set ? r.com_back.value : 0.4 * caster_back;
+  const double chassis_x = (-r.mass.value * com_back + r.wheel_mass.value * caster_back) / body_m;
   const double pi_half = 1.5707963267948966;
   std::ostringstream o;
   o << std::setprecision(6);
   o << "<model name=\"" << r.name << "\">\n";
   if (!pose.empty()) o << "<pose>" << pose << "</pose>\n";
   o << "<link name=\"chassis\">\n<pose>0 0 " << body_z << " 0 0 0</pose>\n";
-  o << "<inertial><mass>" << body_m << "</mass><inertia><ixx>" << bi.ixx << "</ixx><iyy>" << bi.iyy << "</iyy><izz>" << bi.izz << "</izz></inertia></inertial>\n";
+  o << "<inertial><pose>" << chassis_x << " 0 0 0 0 0</pose><mass>" << body_m << "</mass><inertia><ixx>" << bi.ixx << "</ixx><iyy>" << bi.iyy << "</iyy><izz>" << bi.izz << "</izz></inertia></inertial>\n";
   o << "<collision name=\"collision\"><geometry><box><size>" << r.length.value << " " << r.width.value << " " << body_h << "</size></box></geometry></collision>\n";
   o << "<visual name=\"visual\"><geometry><box><size>" << r.length.value << " " << r.width.value << " " << body_h << "</size></box></geometry></visual>\n</link>\n";
   const char* const names[2] = {"left", "right"};

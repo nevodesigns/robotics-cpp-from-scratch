@@ -4,7 +4,7 @@
 //
 // A Backend is a simulator seen from a program: start it on a scenario and a robot, give it a command (a speed and a turn rate), let it advance by a time, and ask where the robot is. BuiltinBackend is the built in model: the fake drive of lesson 22-01 with the limits of the robot file and a time constant. run_script is the program: it works through a list of (speed, turn rate, seconds) steps against any Backend and returns the trace of poses, sampled every so often. The Gazebo Sim backend, GzBackend in rc/gz/gz_backend.hpp, is the same interface over gz-transport, built where Gazebo is installed.
 //
-// The script of a straight drive of 5 s at 0.2 m/s ended on the built in backend at y = 2.990 from a start at y = 2, and a turn in place of a quarter of a turn ended at 88.8 degrees; the commands of 5 m/s were held to 0.22 m/s by the limits of the file, and on Gazebo Sim the same script ended 0.239 m and 23.4 degrees from the built in model.
+// The script of a straight drive of 5 s at 0.2 m/s ended on the built in backend at y = 2.990 from a start at y = 2, and a turn in place of a quarter of a turn ended at 88.8 degrees; the commands of 5 m/s were held to 0.22 m/s by the limits of the file, and on Gazebo Sim the same script ended 0.098 m and 8.0 degrees from the built in model.
 
 #ifndef RC_RC_FIELD_BACKEND_HPP
 #define RC_RC_FIELD_BACKEND_HPP

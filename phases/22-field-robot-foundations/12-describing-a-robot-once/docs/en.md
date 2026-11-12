@@ -41,6 +41,10 @@ A line with a number and no source is **refused**, at its line, as are a key giv
 
 Gazebo needs the inertia of every link, and a robot description with the wrong one is a robot that spins up like a figure skater or turns like a tanker. The file does not ask for them: it works them out from the mass and the shape. A box of 1 kg with sides 0.138, 0.178 and 0.172 m has an `Ixx` of **0.00511 kg m2**, `m/12 * (y*y + z*z)`; a cylinder about its axis has half `m r squared`. The masses are split so that the body, two wheels and the caster add up to the robot: the SDF's masses summed to **1.000 kg** for a robot of 1 kg. A body that took the whole mass and then added wheels on top would weigh more than the robot. See `E-FIELD-0038`.
 
+### Where the weight is
+
+The SDF puts the centre of mass **behind the axle, 40 percent of the way to the caster**: the chassis' own centre is **14.6 mm** behind the axle in the file. This is a decision with a history. The first version of this function put the weight over the axle, and the robot, in Gazebo, was balanced on two wheels with a caster that touched the floor only when the body rocked. It rocked when it sped up and when it stopped, and a turn made after any drive came out about 30 percent short, while the same turn from rest was right. It was found by checking the model against the simulator in a later lesson of this phase, not by looking at the file, and `com_back` is the optional line of the robot file that sets it (a robot with the weight over its axle is written `com_back 0`, which is how the lesson 22-15 and the next phase reproduce the fault). An optional line counts as a number like the others: a file with it has 12. See `E-FIELD-0054`.
+
 ### Checking the SDF
 
 The test checks that the SDF is well formed, as for the picture of lesson 22-09. A parser of Gazebo's own is a stricter judge: when this lesson was written the output of `to_sdf` was also run through `gz sdf -k` of Gazebo Sim 8.15 (Harmonic) and was accepted. The next lessons run the model in the simulator, which is the real test.

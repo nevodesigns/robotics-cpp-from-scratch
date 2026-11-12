@@ -11,6 +11,7 @@ static void rec(const char* key, double value, int digits = 3) {
   std::cout << "@" << key << " " << std::fixed << std::setprecision(digits) << value << std::endl;
   std::cout.unsetf(std::ios::floatfield);
 }
+[[maybe_unused]] static void recs(const char* key, const std::string& value) { std::cout << "@" << key << " " << value << std::endl; }
 
 
 namespace {
@@ -134,4 +135,17 @@ RC_TEST("the same file gives the built in limits and the SDF, with the same numb
   }
   rec("mass_sum", sum, 3);
   RC_CHECK_NEAR(sum, 1.0, 1e-6);
+}
+RC_TEST("the weight is put behind the axle, towards the caster, so that the robot rests on three points and does not rock") {
+  const RobotParse p = parse_robot(kBurger);
+  const std::string sdf = to_sdf(p.robot);
+  // 40 percent of the way from the axle to the caster (0.036 m back): the chassis' own centre is a little further back than the whole robot's.
+  RC_CHECK(sdf.find("<inertial><pose>-0.0146374 0 0 0 0 0</pose>") != std::string::npos);
+  rec("com_chassis", 0.0146374 * 1000.0, 1);
+  const RobotParse on_axle = parse_robot(std::string(kBurger) + "com_back 0 source test: the weight over the axle, to show what that does\n");
+  RC_CHECK(on_axle.ok());
+  rec("n_numbers_with_com", on_axle.numbers, 0);
+  RC_CHECK(on_axle.numbers == 12);
+  RC_CHECK(to_sdf(on_axle.robot).find("<inertial><pose>0.00118681 0 0 0 0 0</pose>") != std::string::npos);
+  RC_CHECK(parse_robot(kBurger).numbers == 11);
 }

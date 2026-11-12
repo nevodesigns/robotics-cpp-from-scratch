@@ -11,6 +11,7 @@ static void rec(const char* key, double value, int digits = 3) {
   std::cout << "@" << key << " " << std::fixed << std::setprecision(digits) << value << std::endl;
   std::cout.unsetf(std::ios::floatfield);
 }
+[[maybe_unused]] static void recs(const char* key, const std::string& value) { std::cout << "@" << key << " " << value << std::endl; }
 
 
 #ifdef RC_HAVE_GZ

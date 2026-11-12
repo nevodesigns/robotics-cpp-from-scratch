@@ -12,7 +12,7 @@ The built in model's robot answers a command faster or slower than the one in Ga
 
 ## Cause
 
-The time constant was a round number, 0.05 s. Read from Gazebo's own step response it was 0.041 s.
+The time constant was a round number, 0.05 s. Read from Gazebo's own step response it was 0.062 s.
 
 ## Fix
 

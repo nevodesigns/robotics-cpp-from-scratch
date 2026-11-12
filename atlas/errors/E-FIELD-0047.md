@@ -12,7 +12,7 @@ After the built in model is calibrated to Gazebo the two agree, and the claim is
 
 ## Cause
 
-Agreement between two simulations is a statement about the two. The worst gap was 0.083 m after calibration; whether either matches the robot is a separate measurement.
+Agreement between two simulations is a statement about the two. The worst gap was 0.036 m after calibration; whether either matches the robot is a separate measurement.
 
 ## Fix
 
