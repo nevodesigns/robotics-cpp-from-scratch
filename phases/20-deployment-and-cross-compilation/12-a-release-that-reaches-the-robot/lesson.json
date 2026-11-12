@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "id": "20-12-a-release-that-reaches-the-robot",
+  "title": "A Release That Reaches the Robot: Target, Manifest, Version, Fit, Install and Trial in One Pipeline, Cut at Every Step",
+  "type": "capstone",
+  "minutes": 160,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "20-11-does-it-fit",
+    "20-10-what-time-it-is-at-boot",
+    "20-08-boot-into-your-code",
+    "20-07-a-few-robots-first",
+    "20-06-on-trial-until-it-proves-itself",
+    "20-05-a-power-cut-at-every-step",
+    "20-04-what-is-in-the-box",
+    "20-01-the-target-is-not-the-host"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::deploy",
+    "header": "rc/deploy/release.hpp",
+    "note": "one pipeline that refuses a release built for the wrong target, with a bad manifest, an older version or too big a size, installs to the other slot, puts it on trial and rolls it back, with the result for a power cut at every step and a rollout over a fleet"
+  },
+  "breaks_first": [
+    "E-DEPLOY-0034",
+    "E-DEPLOY-0035",
+    "E-DEPLOY-0036"
+  ]
+}

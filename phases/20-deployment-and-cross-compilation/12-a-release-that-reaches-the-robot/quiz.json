@@ -1,0 +1,78 @@
+{
+  "lesson": "20-12-a-release-that-reaches-the-robot",
+  "title": "A Release That Reaches the Robot: Target, Manifest, Version, Fit, Install and Trial in One Pipeline, Cut at Every Step",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is 1.10.0 newer than 1.9.0, and what goes wrong with a text comparison?",
+      "options": [
+        "It is not newer",
+        "By number 10 is more than 9, while as text 1.10.0 sorts before 1.9.0",
+        "Both compare the same",
+        "Text is right"
+      ],
+      "correct": 1,
+      "explanation": "The oldest bug in version handling."
+    },
+    {
+      "stage": "check",
+      "question": "A rollback to 1.2.0 is authorised on a robot with a floor of 1.3.0. What does decide say?",
+      "options": [
+        "install",
+        "refuse below the minimum: the floor cannot be authorised away",
+        "refuse older",
+        "refuse invalid"
+      ],
+      "correct": 1,
+      "explanation": "The release below the floor has a fault that must not come back."
+    },
+    {
+      "stage": "check",
+      "question": "Eight bad releases were offered. What was true of the disk after each refusal?",
+      "options": [
+        "It was changed",
+        "Nothing was written: the pointer was where it was and slot 1 was still empty",
+        "It was bricked",
+        "It had two copies"
+      ],
+      "correct": 1,
+      "explanation": "Do every check that changes nothing first."
+    },
+    {
+      "stage": "check",
+      "question": "Power is lost after each of the ten steps of the install. How many robots were bricked, and how many ended on the new release when it was run again?",
+      "options": [
+        "10 and 0",
+        "0 and 10 of 10",
+        "5 and 5",
+        "0 and 0"
+      ],
+      "correct": 1,
+      "explanation": "The result of 20-05 kept through the pipeline."
+    },
+    {
+      "stage": "post",
+      "question": "A release is healthy for 90 s and then crashes at every boot, with a soak of 30 s. What did the pipeline report?",
+      "options": [
+        "Rolled back",
+        "Confirmed, running 1.5.0, and not up: it was confirmed at 50 s, before it crashed, so the trial could not catch it",
+        "Refused",
+        "Bricked"
+      ],
+      "correct": 1,
+      "explanation": "The limit of the trial, as a result."
+    },
+    {
+      "stage": "post",
+      "question": "A release crashing on 300 of 1000 robots is rolled out in waves. What happened?",
+      "options": [
+        "300 went through a trial",
+        "The rollout halted at wave 0 after 10 robots: 9 on the new release, 1 rolled back, none bricked",
+        "All were bricked",
+        "It was refused"
+      ],
+      "correct": 1,
+      "explanation": "The trial finds it on the robot, the rollout stops the spread."
+    }
+  ]
+}
