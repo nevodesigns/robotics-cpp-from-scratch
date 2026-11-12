@@ -2,7 +2,7 @@
 //
 // Monte Carlo localisation, from lesson 25-05.
 //
-// A set of particles, each a pose and a weight. predict moves each by the odometry (a distance ahead and a turn) with noise of its own. correct weighs each by the product, over the beams, of the likelihood of the range seen given the range that the map gives from that pose: a Gaussian about the expected range plus a share that is uniform to the maximum range, so that one wild beam cannot zero a good particle. resample_if_needed draws a new set in proportion to the weights, by the low variance method, when the effective number of particles N / (1 + variance of the weights) has fallen below half. mean_pose and spread summarise the cloud; the heading is averaged as an angle.
+// A set of particles, each a pose and a weight. predict moves each by the odometry (a distance ahead and a turn) with noise of its own. correct weighs each by the product, over the beams, of the likelihood of the range seen given the range that the map gives from that pose: a Gaussian about the expected range plus a share that is uniform to the maximum range, so that one wild beam cannot zero a good particle. correct returns the average likelihood of the scan under the cloud, the signal that the cloud no longer explains what is seen. resample_if_needed draws a new set in proportion to the weights, by the low variance method, when the effective number of particles N / (1 + variance of the weights) has fallen below half. mean_pose and spread summarise the cloud; the heading is averaged as an angle.
 //
 // From a cloud spread over the whole room, 3000 particles found the robot to 0.021 m after 5 steps of 0.2 m; of 10 runs, 50 particles lost it 10 times and 3000 particles 0; in a rectangular room with nothing in it the cloud settled on two places, 2 of 8 runs ending on the mirror image, and a post in one corner made it 0.
 
@@ -65,10 +65,14 @@ class MonteCarlo {
   // The range a lidar beam at `angle` from the particle's heading would see from the particle in the map.
   double expected_range(const Particle& p, double angle, double max_range) const { return rc::field::cast_ray(map_, p.x, p.y, p.theta + angle, max_range); }
 
-  // Weighs the particles by the ranges seen at the given beam angles (infinity for a beam that saw nothing).
-  void correct(const std::vector<double>& angles, const std::vector<double>& ranges, const McMeasure& m) {
+  // Weighs the particles by the ranges seen at the given beam angles (infinity for a beam that saw nothing). Returns the average of the likelihood factors, weighted by the weights the particles had: how well the whole cloud explains this scan, which is low when the robot is not where the cloud says.
+  double correct(const std::vector<double>& angles, const std::vector<double>& ranges, const McMeasure& m) {
     double total = 0.0;
+    double before = 0.0;
+    double weighted = 0.0;
     for (std::size_t i = 0; i < particles_.size(); ++i) {
+      const double w_before = particles_[i].w;
+      before += w_before;
       double logw = 0.0;
       for (std::size_t b = 0; b < angles.size() && b < ranges.size(); ++b) {
         const double seen = std::isfinite(ranges[b]) ? ranges[b] : m.max_range;
@@ -79,15 +83,22 @@ class MonteCarlo {
         const double rand = m.z_rand / m.max_range;
         logw += std::log(hit + rand);
       }
-      particles_[i].w *= std::exp(m.temper * logw);
+      const double factor = std::exp(m.temper * logw);
+      particles_[i].w *= factor;
       total += particles_[i].w;
+      weighted += w_before * factor;
     }
+    const double average = before > 0.0 ? weighted / before : 0.0;
     if (total <= 0.0) {
       for (std::size_t i = 0; i < particles_.size(); ++i) particles_[i].w = 1.0 / static_cast<double>(particles_.size());
-      return;
+      return average;
     }
     for (std::size_t i = 0; i < particles_.size(); ++i) particles_[i].w /= total;
+    return average;
   }
+
+  // For the lessons that follow: the particles, to be changed.
+  std::vector<Particle>& mutable_particles() { return particles_; }
 
   // N / (1 + variance of the weights times N squared): the number of particles that count.
   double effective_count() const {

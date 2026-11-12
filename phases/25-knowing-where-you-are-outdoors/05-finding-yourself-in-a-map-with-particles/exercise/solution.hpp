@@ -54,21 +54,32 @@ class MonteCarlo {
   // The range a lidar beam at `angle` from the particle's heading would see from the particle in the map.
   double expected_range(const Particle& p, double angle, double max_range) const { return rc::field::cast_ray(map_, p.x, p.y, p.theta + angle, max_range); }
 
-  // Weighs the particles by the ranges seen at the given beam angles (infinity for a beam that saw nothing).
-  void correct(const std::vector<double>& angles, const std::vector<double>& ranges, const McMeasure& m) {
+  // Weighs the particles by the ranges seen at the given beam angles (infinity for a beam that saw nothing). Returns the average of the likelihood factors, weighted by the weights the particles had: how well the whole cloud explains this scan, which is low when the robot is not where the cloud says.
+  double correct(const std::vector<double>& angles, const std::vector<double>& ranges, const McMeasure& m) {
     double total = 0.0;
+    double before = 0.0;
+    double weighted = 0.0;
     for (std::size_t i = 0; i < particles_.size(); ++i) {
+      const double w_before = particles_[i].w;
+      before += w_before;
       (void)angles;  // TODO: for each beam, the likelihood of the range seen is z_hit times a Gaussian of the difference from the expected range (the map's range from this particle; max_range for none) plus z_rand over max_range; the weight is multiplied by exp(temper times the sum over the beams of the log likelihood)
       (void)ranges;
       (void)m;
+      const double factor = 1.0;
       total += particles_[i].w;
+      weighted += w_before * factor;
     }
+    const double average = before > 0.0 ? weighted / before : 0.0;
     if (total <= 0.0) {
       for (std::size_t i = 0; i < particles_.size(); ++i) particles_[i].w = 1.0 / static_cast<double>(particles_.size());
-      return;
+      return average;
     }
     for (std::size_t i = 0; i < particles_.size(); ++i) particles_[i].w /= total;
+    return average;
   }
+
+  // For the lessons that follow: the particles, to be changed.
+  std::vector<Particle>& mutable_particles() { return particles_; }
 
   // N / (1 + variance of the weights times N squared): the number of particles that count.
   double effective_count() const {
