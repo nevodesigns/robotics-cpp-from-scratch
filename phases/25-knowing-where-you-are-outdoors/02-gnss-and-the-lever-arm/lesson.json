@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "25-02-gnss-and-the-lever-arm",
+  "title": "GNSS and the Lever Arm: Latitude and Longitude to Metres, and an Antenna That Is Not Where the Robot Is",
+  "type": "build",
+  "minutes": 75,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-02-frames-for-a-field-robot",
+    "22-06-sensors-that-fail-like-the-field",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::locate",
+    "header": "rc/locate/gnss_frame.hpp",
+    "note": "latitude and longitude turned into metres east and north of an origin (the equirectangular approximation with the cosine of the latitude), the great-circle distance to check it against, and the position of the robot's reference point from the position of an antenna that is a lever arm away from it, turned by the heading"
+  },
+  "breaks_first": [
+    "E-VEH-0058",
+    "E-VEH-0059",
+    "E-VEH-0060"
+  ]
+}
