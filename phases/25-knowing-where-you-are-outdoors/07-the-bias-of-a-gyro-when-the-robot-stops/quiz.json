@@ -1,0 +1,78 @@
+{
+  "lesson": "25-07-the-bias-of-a-gyro-when-the-robot-stops",
+  "title": "The Bias of a Gyro When the Robot Stops: Knowing That It Is Still, Reading the Bias From a Few Seconds of Stillness, and How Often a Robot Must Stop to Keep Its Heading",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What should a gyro read when the robot is standing still?",
+      "options": [
+        "The bias",
+        "Nothing: so what it does read is the bias plus noise",
+        "9.81",
+        "The heading"
+      ],
+      "correct": 1,
+      "explanation": "A measurement of the bias."
+    },
+    {
+      "stage": "check",
+      "question": "A detector that looked at the wheels alone said still for how many of 200 samples of a robot being carried?",
+      "options": [
+        "0",
+        "176",
+        "5",
+        "200 exactly"
+      ],
+      "correct": 1,
+      "explanation": "The wheels were stopped."
+    },
+    {
+      "stage": "check",
+      "question": "The bias read from a stop of 10 s was good to:",
+      "options": [
+        "0.00063 rad/s",
+        "0.00020 rad/s",
+        "1 rad/s",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "The noise over the square root of the samples."
+    },
+    {
+      "stage": "check",
+      "question": "With a stop of 2 s every 10 s the heading ended out by:",
+      "options": [
+        "9.9 degrees",
+        "0.8 degrees",
+        "100 degrees",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "Reading it once gave 9.9."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the detector wait for a whole window?",
+      "options": [
+        "Slowness",
+        "One quiet sample proves nothing",
+        "Tradition",
+        "Memory"
+      ],
+      "correct": 1,
+      "explanation": "A moment of stillness is not stillness."
+    },
+    {
+      "stage": "post",
+      "question": "What found the step in the bias?",
+      "options": [
+        "The wheels",
+        "The next stop, which read the gyro again",
+        "GNSS",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "A filter with no stops would not have."
+    }
+  ]
+}
