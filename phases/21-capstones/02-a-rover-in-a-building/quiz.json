@@ -1,0 +1,78 @@
+{
+  "lesson": "21-02-a-rover-in-a-building",
+  "title": "A Rover in a Building: A Plan, a Range Sensor, a Map and a Supervisor, and What Happens When Somebody Steps Out",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "The supervisor was on and the limiter off, and somebody stepped into the path. What happened?",
+      "options": [
+        "It stopped the rover",
+        "Nothing: the supervisor decides from what it is told, and with no limiter nothing told it about the person (144 ticks in contact)",
+        "The fence stopped it",
+        "It slowed down"
+      ],
+      "correct": 1,
+      "explanation": "A supervisor is not a sensor."
+    },
+    {
+      "stage": "check",
+      "question": "How long was the rover with neither the limiter nor the supervisor in contact with the person?",
+      "options": [
+        "Not at all",
+        "144 ticks of 0.05 s, 7.2 seconds, pushing against them until they left",
+        "1 tick",
+        "The whole run"
+      ],
+      "correct": 1,
+      "explanation": "And then it reached the goal, which is the worst way for a test to pass."
+    },
+    {
+      "stage": "check",
+      "question": "Why did a rover that never forgets wait for 120 s at a doorway that had been clear since 20 s?",
+      "options": [
+        "The planner failed",
+        "It was waiting out of sight of the doorway, so nothing on the map could change: a belief nobody can check does not go away",
+        "The person came back",
+        "The door closed"
+      ],
+      "correct": 1,
+      "explanation": "Forgetting lets it go and look again."
+    },
+    {
+      "stage": "check",
+      "question": "The link was lost at 5 s and came back at 9 s. Why did the rover stay stopped?",
+      "options": [
+        "A bug",
+        "The supervisor latches, and a reset is a person's decision: cause link, still at the end",
+        "The planner",
+        "The sensor"
+      ],
+      "correct": 1,
+      "explanation": "With no supervisor it drove on through."
+    },
+    {
+      "stage": "post",
+      "question": "What is the difference between the limiter alone and the supervisor with it, when the sensor dies?",
+      "options": [
+        "None",
+        "Both stop, but the limiter alone does it with no cause on record and would restart when the sensor came back; the supervisor gives a cause, a latch and a reset",
+        "The limiter is faster",
+        "The supervisor is slower"
+      ],
+      "correct": 1,
+      "explanation": "Both stopped after 2.4 m."
+    },
+    {
+      "stage": "post",
+      "question": "What should the README of a project like this show?",
+      "options": [
+        "The video",
+        "The table of what each layer does, including the row where a layer on its own does nothing, and the rover waiting at a door that is open",
+        "The code",
+        "The map"
+      ],
+      "correct": 1,
+      "explanation": "The interviewer learns that you have run it."
+    }
+  ]
+}

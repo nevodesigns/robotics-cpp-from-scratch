@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "21-02-a-rover-in-a-building",
+  "title": "A Rover in a Building: A Plan, a Range Sensor, a Map and a Supervisor, and What Happens When Somebody Steps Out",
+  "type": "capstone",
+  "minutes": 170,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "21-01-a-robot-that-follows-a-line",
+    "20-12-a-release-that-reaches-the-robot",
+    "19-14-a-risk-assessment-you-can-defend",
+    "16-07-the-rover-that-fits",
+    "16-06-a-path-through-what-you-know",
+    "16-05-what-the-robot-does-not-know",
+    "16-04-how-far-ahead-to-look",
+    "19-05-a-speed-the-sensor-can-vouch-for",
+    "19-10-one-place-that-says-stop"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::capstone",
+    "header": "rc/capstone/delivery_rover.hpp",
+    "note": "a rover that plans through a building from its plan, scans with a nine beam range sensor, maps what it sees, drives under the limiter and supervisor of phase 19, and is tested with a person who steps out, a blocked door, a lost link and a dead sensor"
+  },
+  "breaks_first": [
+    "E-CAP-0004",
+    "E-CAP-0005",
+    "E-CAP-0006"
+  ]
+}
