@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "20-07-a-few-robots-first",
+  "title": "A Few Robots First: Staged Rollout, the Wave That Cannot See a Rare Fault, and Halting on Silence",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "20-06-on-trial-until-it-proves-itself",
+    "19-13-how-likely-after-the-fix",
+    "18-07-one-seed-many-streams",
+    "03-03-containers-and-their-costs"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::deploy",
+    "header": "rc/deploy/rollout.hpp",
+    "note": "a staged rollout over a fleet that halts on too many failures or too little news, and the arithmetic of how many robots a wave needs to have a chance of seeing a rare fault"
+  },
+  "breaks_first": [
+    "E-DEPLOY-0019",
+    "E-DEPLOY-0020",
+    "E-DEPLOY-0021"
+  ]
+}
