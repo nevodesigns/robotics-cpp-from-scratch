@@ -210,7 +210,7 @@ inline std::string sdf_model(const RobotModel& r, const std::string& pose) {
     << "<wheel_separation>" << r.track_width.value << "</wheel_separation><wheel_radius>" << wheel_r << "</wheel_radius>\n"
     << "<max_linear_velocity>" << r.max_speed.value << "</max_linear_velocity><min_linear_velocity>" << -r.max_speed.value << "</min_linear_velocity>\n"
     << "<max_angular_velocity>" << r.max_turn_rate.value << "</max_angular_velocity><min_angular_velocity>" << -r.max_turn_rate.value << "</min_angular_velocity>\n"
-    << "<odom_publish_frequency>50</odom_publish_frequency><topic>cmd_vel</topic><odom_topic>odometry</odom_topic>\n"
+    << "<odom_publish_frequency>50</odom_publish_frequency><topic>/model/" << r.name << "/cmd_vel</topic><odom_topic>/model/" << r.name << "/odometry</odom_topic>\n"
     << "</plugin>\n";
   o << "</model>\n";
   return o.str();

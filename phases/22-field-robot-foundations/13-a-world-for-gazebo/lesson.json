@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "22-13-a-world-for-gazebo",
+  "title": "A World for Gazebo: The Same Scenario File Made Into an SDF World, With the Ground, the Walls, the Posts, the Goals and the Robot Where They Belong",
+  "type": "build",
+  "minutes": 80,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-05-terrain-and-friction",
+    "22-07-a-field-scenario-file",
+    "22-12-describing-a-robot-once",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::field",
+    "header": "rc/field/gz_world.hpp",
+    "note": "an SDF world for Gazebo Sim made from a field scenario and a robot description: physics at a 1 ms step, a ground slab with the base friction, patches as slabs with their friction and tilt, walls and posts as static shapes, goals as markers with no collision, and the robot at the start pose"
+  },
+  "breaks_first": [
+    "E-FIELD-0039",
+    "E-FIELD-0040",
+    "E-FIELD-0041"
+  ]
+}
