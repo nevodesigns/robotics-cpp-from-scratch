@@ -1,0 +1,78 @@
+{
+  "lesson": "20-11-does-it-fit",
+  "title": "Does It Fit: CPU, Memory and Flash Budgets for a Small Board, the Peak a Short Test Never Sees, and What Heat Takes Away",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A planner measured for 60 s on the bench shows a peak of 0.40 cores. In the field its peak is 2.00. What went wrong?",
+      "options": [
+        "The planner",
+        "The test was too short to see the replan that comes once in 70 s: the largest sample is a lower bound on the real peak",
+        "The board",
+        "The unit"
+      ],
+      "correct": 1,
+      "explanation": "Average 0.40 and 0.42: the average barely moves."
+    },
+    {
+      "stage": "check",
+      "question": "Why is there an allowance of 70 percent on the CPU average and 80 percent on memory, and not 100?",
+      "options": [
+        "Tradition",
+        "At 100 percent a CPU misses deadlines when anything coincides, memory kills a program, and flash cannot write the next update",
+        "Marketing",
+        "Safety factor of 2"
+      ],
+      "correct": 1,
+      "explanation": "Memory does not degrade: a program is killed."
+    },
+    {
+      "stage": "check",
+      "question": "The board throttles to 60 percent in a hot box. What happened to the same six programs?",
+      "options": [
+        "Nothing",
+        "Over on both CPU average (2.60 against 1.68) and peaks (4.90 against 3.00): they fit cool and not hot",
+        "Over on memory",
+        "They fit better"
+      ],
+      "correct": 1,
+      "explanation": "Design to the hot number."
+    },
+    {
+      "stage": "check",
+      "question": "A map server of 1500 MB is added and it is idle. What is over?",
+      "options": [
+        "CPU",
+        "Memory only: 3530 MB against 3277 allowed, since its CPU is small",
+        "Flash",
+        "All"
+      ],
+      "correct": 1,
+      "explanation": "Memory is the resource with a cliff."
+    },
+    {
+      "stage": "post",
+      "question": "What does keeping two slots do to the release that fits?",
+      "options": [
+        "Nothing",
+        "It halves it: 6273 MB with two against 12546 MB with one, for 16 GB of flash with 2 GB of data and 200 MB of logs",
+        "Doubles it",
+        "Removes the limit"
+      ],
+      "correct": 1,
+      "explanation": "Fail the build when the release is bigger."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a fit on paper not a fit?",
+      "options": [
+        "Paper is wrong",
+        "The peak is only as good as the longest run measured, and the board, its box and its temperature are real: run the whole robot on the real board, hot, for a shift",
+        "Numbers lie",
+        "It is"
+      ],
+      "correct": 1,
+      "explanation": "The throttling factor is measured for that board."
+    }
+  ]
+}
