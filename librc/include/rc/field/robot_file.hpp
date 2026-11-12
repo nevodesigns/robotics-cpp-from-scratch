@@ -2,7 +2,7 @@
 //
 // The robot description file, from lesson 22-12.
 //
-// A robot is a text file of "key value source ..." lines: a name, a kind (diff_drive here), wheel radius and track width, the body's length, width and height, its mass, the mass of a wheel, the ground clearance, the wheel width and the top speed and turn rate. Every number must carry the word source and then where it came from, or the word typical; a line without one is refused, and the parse says how many of the numbers are typical. limits_of and drive_limits_of give the built in model's limits; to_sdf gives the same robot as an SDF model for Gazebo Sim, with the inertias of a box and of cylinders worked out from the shapes and the masses, a ball caster, and the DiffDrive plugin whose wheel separation, wheel radius and speed limits are the file's numbers.
+// A robot is a text file of "key value source ..." lines: a name, a kind (diff_drive here), wheel radius and track width, the body's length, width and height, its mass, the mass of a wheel, the ground clearance, the wheel width and the top speed and turn rate. Every number must carry the word source and then where it came from, or the word typical; a line without one is refused, and the parse says how many of the numbers are typical. limits_of and drive_limits_of give the built in model's limits; sdf_model gives the same robot as an SDF model element (with an optional pose, for putting it into a world) and to_sdf as a file of its own for Gazebo Sim, with the inertias of a box and of cylinders worked out from the shapes and the masses, a ball caster, and the DiffDrive plugin whose wheel separation, wheel radius and speed limits are the file's numbers.
 //
 // The reference robot (a TurtleBot3 Burger class base) has 11 numbers, 3 of them typical; its SDF was 2.9 kB; the masses of the links added up to 1.000 kg for a mass of 1; a box of 1 kg and 0.138 by 0.178 by 0.172 m has an Ixx of 0.00511 kg m2; and a file with a number and no source was refused at its line.
 
@@ -167,7 +167,7 @@ inline Inertia cylinder_inertia(double m, double radius, double length) {
 inline double sphere_inertia(double m, double radius) { return 0.4 * m * radius * radius; }
 
 // The robot as an SDF model for Gazebo Sim: a body, two wheels on revolute joints, a ball caster at the back, and the DiffDrive system with the file's numbers.
-inline std::string to_sdf(const RobotModel& r) {
+inline std::string sdf_model(const RobotModel& r, const std::string& pose) {
   const double wheel_r = r.wheel_radius.value;
   const double body_h = r.height.value - r.clearance.value;
   const double body_z = r.clearance.value + 0.5 * body_h;
@@ -180,7 +180,8 @@ inline std::string to_sdf(const RobotModel& r) {
   const double pi_half = 1.5707963267948966;
   std::ostringstream o;
   o << std::setprecision(6);
-  o << "<?xml version=\"1.0\"?>\n<sdf version=\"1.9\">\n<model name=\"" << r.name << "\">\n";
+  o << "<model name=\"" << r.name << "\">\n";
+  if (!pose.empty()) o << "<pose>" << pose << "</pose>\n";
   o << "<link name=\"chassis\">\n<pose>0 0 " << body_z << " 0 0 0</pose>\n";
   o << "<inertial><mass>" << body_m << "</mass><inertia><ixx>" << bi.ixx << "</ixx><iyy>" << bi.iyy << "</iyy><izz>" << bi.izz << "</izz></inertia></inertial>\n";
   o << "<collision name=\"collision\"><geometry><box><size>" << r.length.value << " " << r.width.value << " " << body_h << "</size></box></geometry></collision>\n";
@@ -211,9 +212,12 @@ inline std::string to_sdf(const RobotModel& r) {
     << "<max_angular_velocity>" << r.max_turn_rate.value << "</max_angular_velocity><min_angular_velocity>" << -r.max_turn_rate.value << "</min_angular_velocity>\n"
     << "<odom_publish_frequency>50</odom_publish_frequency><topic>cmd_vel</topic><odom_topic>odometry</odom_topic>\n"
     << "</plugin>\n";
-  o << "</model>\n</sdf>\n";
+  o << "</model>\n";
   return o.str();
 }
+
+// The robot as a file of its own: the model inside an sdf element.
+inline std::string to_sdf(const RobotModel& r) { return "<?xml version=\"1.0\"?>\n<sdf version=\"1.9\">\n" + sdf_model(r, "") + "</sdf>\n"; }
 
 
 }  // namespace field

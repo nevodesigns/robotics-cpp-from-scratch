@@ -74,4 +74,4 @@ const rc::field::VehicleLimits limits = rc::field::limits_of(p.robot);   // for 
 
 ## Ship It
 
-`rc/field/robot_file.hpp` holds `Sourced`, `RobotModel`, `RobotParse`, `parse_robot`, `limits_of`, `drive_limits_of`, `Inertia`, `box_inertia`, `cylinder_inertia`, `sphere_inertia` and `to_sdf`.
+`rc/field/robot_file.hpp` holds `Sourced`, `RobotModel`, `RobotParse`, `parse_robot`, `limits_of`, `drive_limits_of`, `Inertia`, `box_inertia`, `cylinder_inertia`, `sphere_inertia`, `sdf_model` and `to_sdf`.
