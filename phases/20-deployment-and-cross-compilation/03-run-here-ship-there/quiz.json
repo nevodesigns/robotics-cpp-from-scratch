@@ -1,0 +1,78 @@
+{
+  "lesson": "20-03-run-here-ship-there",
+  "title": "Run Here, Ship There: Which Binaries Run During the Build, Which Go to the Robot, and the Bug a Native Build Hides",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does a native build pass a graph with a generator built for the target?",
+      "options": [
+        "It is correct",
+        "The target is the host, so it runs: every mistake about which machine is invisible",
+        "The compiler fixes it",
+        "It does not pass"
+      ],
+      "correct": 1,
+      "explanation": "0 problems native, 4 cross."
+    },
+    {
+      "stage": "check",
+      "question": "Which machine must a code generator that the build runs be built for?",
+      "options": [
+        "The target",
+        "The host, or a target the host could run",
+        "Either",
+        "Neither"
+      ],
+      "correct": 1,
+      "explanation": "A message compiler for the robot cannot run on the laptop."
+    },
+    {
+      "stage": "check",
+      "question": "A robot program links a library that was built on the laptop. What goes wrong?",
+      "options": [
+        "Nothing",
+        "The library is the wrong architecture for the robot, and it fails to link or to load",
+        "It runs slowly",
+        "It is larger"
+      ],
+      "correct": 1,
+      "explanation": "robot_node links libmsgs, built for the other machine."
+    },
+    {
+      "stage": "check",
+      "question": "Is a host tool in the bundle an error the compiler reports?",
+      "options": [
+        "Yes",
+        "No: it builds fine and the robot is shipped with a binary it cannot run",
+        "Only on Windows",
+        "Only with warnings"
+      ],
+      "correct": 1,
+      "explanation": "It is a problem only a check of the graph finds."
+    },
+    {
+      "stage": "post",
+      "question": "What does the fix cost?",
+      "options": [
+        "Nothing",
+        "Some tests no longer run in the build, and a library may be built twice, once for each machine",
+        "Speed on the robot",
+        "The signature"
+      ],
+      "correct": 1,
+      "explanation": "A build for two machines is two builds."
+    },
+    {
+      "stage": "post",
+      "question": "What is the real check of all this?",
+      "options": [
+        "A unit test",
+        "A cross build in continuous integration, which this repository does not have",
+        "A code review",
+        "A linter"
+      ],
+      "correct": 1,
+      "explanation": "A passing native build tells you nothing about it."
+    }
+  ]
+}
