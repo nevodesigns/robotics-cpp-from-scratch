@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "25-01-wheels-and-a-gyro-in-a-filter",
+  "title": "Wheels and a Gyro in a Filter: The Wheels Tell the Gyro Its Bias When They Say the Robot Is Going Straight, and the Gyro Tells the Wheels They Slipped",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-06-sensors-that-fail-like-the-field",
+    "23-07-odometry-for-each-kind-of-vehicle",
+    "23-08-calibrating-the-track-width-from-a-run",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::locate",
+    "header": "rc/locate/gyro_wheels.hpp",
+    "note": "a filter for the bias of a gyro that watches the difference between the gyro and the turn rate the wheels give, weighs it by how little the wheels are turning (they are most trustworthy going straight), and refuses the difference when the wheels have slipped; and a heading that integrates the gyro less that bias"
+  },
+  "breaks_first": [
+    "E-VEH-0055",
+    "E-VEH-0056",
+    "E-VEH-0057"
+  ]
+}

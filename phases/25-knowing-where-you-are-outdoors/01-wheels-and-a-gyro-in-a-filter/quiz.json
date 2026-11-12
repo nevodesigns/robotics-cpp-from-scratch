@@ -1,0 +1,78 @@
+{
+  "lesson": "25-01-wheels-and-a-gyro-in-a-filter",
+  "title": "Wheels and a Gyro in a Filter: The Wheels Tell the Gyro Its Bias When They Say the Robot Is Going Straight, and the Gyro Tells the Wheels They Slipped",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why are the wheels a good teacher of the gyro's bias when the robot is going straight?",
+      "options": [
+        "They are not",
+        "Their turn is nothing then and so is their error, so the difference is the bias",
+        "They are fast",
+        "They are heavy"
+      ],
+      "correct": 1,
+      "explanation": "No turn, no scale error."
+    },
+    {
+      "stage": "check",
+      "question": "With the wheels alone the heading ended out by:",
+      "options": [
+        "0",
+        "3.1 degrees",
+        "68.0 degrees",
+        "360 degrees"
+      ],
+      "correct": 1,
+      "explanation": "The slip and the 3 percent."
+    },
+    {
+      "stage": "check",
+      "question": "With the gyro alone the heading ended out by:",
+      "options": [
+        "3.1 degrees",
+        "68.0 degrees",
+        "0",
+        "1 degree"
+      ],
+      "correct": 1,
+      "explanation": "Its bias, integrated."
+    },
+    {
+      "stage": "check",
+      "question": "With the filter the heading ended out by:",
+      "options": [
+        "68.0 degrees",
+        "1.0 degrees",
+        "100 degrees",
+        "360 degrees"
+      ],
+      "correct": 1,
+      "explanation": "The bias is learnt when the wheels say straight."
+    },
+    {
+      "stage": "post",
+      "question": "What happens to a difference that is far from the estimate?",
+      "options": [
+        "It is used",
+        "It is refused as a slip",
+        "It resets the filter",
+        "It is averaged"
+      ],
+      "correct": 1,
+      "explanation": "The wheels were wrong, not the gyro."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the filter's variance for a measurement larger when the wheels are turning?",
+      "options": [
+        "Chance",
+        "The wheels are wrong by a share of their turn rate, so a faster turn is a less certain measurement",
+        "Noise",
+        "Gyros are slow"
+      ],
+      "correct": 1,
+      "explanation": "Variance includes (share times turn rate) squared."
+    }
+  ]
+}
