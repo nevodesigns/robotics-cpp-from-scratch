@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "22-04-motors-gearboxes-and-backlash",
+  "title": "Motors, Gearboxes and Backlash as a Plant: A Gear Motor Built From Its Data Sheet, and the Gap That an Encoder on the Motor Cannot See",
+  "type": "build",
+  "minutes": 80,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-01-a-robot-as-an-interface",
+    "22-03-units-and-limits-that-cannot-be-mixed",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::field",
+    "header": "rc/field/gear_motor.hpp",
+    "note": "a brushed DC gear motor built from data sheet numbers (voltage, no load speed, stall torque, gear ratio), with a current limit, viscous friction, reflected inertia and backlash"
+  },
+  "breaks_first": [
+    "E-FIELD-0010",
+    "E-FIELD-0011",
+    "E-FIELD-0012"
+  ]
+}
