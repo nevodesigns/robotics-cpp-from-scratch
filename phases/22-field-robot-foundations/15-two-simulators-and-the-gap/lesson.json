@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "22-15-two-simulators-and-the-gap",
+  "title": "Two Simulators, One Scenario, and the Gap Between Them Measured, Explained and Shrunk by Calibrating the Built In Model to the Other",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-10-scoring-a-run",
+    "22-14-the-same-program-another-simulator",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::field",
+    "header": "rc/field/gap.hpp",
+    "note": "the gap between two traces (largest and rms position difference, final position and heading), the speeds of a trace, the time constant of a step response read from a trace, a standard set of cases (straight, turn, arc, stop), and the running of the cases on two backends with a table of the gaps"
+  },
+  "breaks_first": [
+    "E-FIELD-0045",
+    "E-FIELD-0046",
+    "E-FIELD-0047"
+  ],
+  "gz": true
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "22-15-two-simulators-and-the-gap",
+  "title": "Two Simulators, One Scenario, and the Gap Between Them Measured, Explained and Shrunk by Calibrating the Built In Model to the Other",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why are two measures of the gap used, the largest and the end?",
+      "options": [
+        "One would do",
+        "The end can be right while the way there was wrong",
+        "They are always equal",
+        "For speed"
+      ],
+      "correct": 1,
+      "explanation": "How it gets there is a different difference from where it arrives."
+    },
+    {
+      "stage": "check",
+      "question": "On first order responses made with time constants of 0.05, 0.20 and 0.35 s, the reader got them back to within:",
+      "options": [
+        "0.5 s",
+        "0.012 s",
+        "Exactly",
+        "10 percent"
+      ],
+      "correct": 1,
+      "explanation": "A trace is enough to read a time constant."
+    },
+    {
+      "stage": "check",
+      "question": "Two built in models with lags of 0.05 and 0.30 s differed at the worst by:",
+      "options": [
+        "Nothing",
+        "0.050 m",
+        "100 m",
+        "0.0001 m"
+      ],
+      "correct": 1,
+      "explanation": "That is the size of the setting's effect."
+    },
+    {
+      "stage": "check",
+      "question": "After setting the lag read from the slower model, the gap was:",
+      "options": [
+        "Larger",
+        "0.0001 m, much smaller",
+        "The same",
+        "Infinite"
+      ],
+      "correct": 1,
+      "explanation": "Calibration is judged by the gap falling."
+    },
+    {
+      "stage": "post",
+      "question": "Does calibrating one simulator to the other show which is right?",
+      "options": [
+        "Yes",
+        "No: it shows what the difference is, and only the robot says which is right",
+        "Always",
+        "Never useful"
+      ],
+      "correct": 1,
+      "explanation": "Agreement is not truth."
+    },
+    {
+      "stage": "post",
+      "question": "Why is each case run from rest on a freshly started world?",
+      "options": [
+        "Habit",
+        "A run that starts where the last ended compares the end of one case with the start of the next",
+        "Speed",
+        "Gazebo requires it"
+      ],
+      "correct": 1,
+      "explanation": "Cases must be independent."
+    }
+  ]
+}

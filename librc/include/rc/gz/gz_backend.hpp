@@ -58,6 +58,9 @@ class GzBackend : public rc::field::Backend {
 
   bool start(const rc::field::FieldScenario& scenario, const rc::field::RobotModel& robot) override {
 #if defined(__linux__)
+    const std::string text = rc::field::to_world(scenario, robot);
+    // A server that is already running this world is reset instead of started again, which takes a fraction of a second and not seconds.
+    if (pid_ > 0 && node_ && text == world_text_) return reset_world();
     stop_server();
     static int counter = 0;
     ++counter;
@@ -66,9 +69,10 @@ class GzBackend : public rc::field::Backend {
     world_path_ = "/tmp/rc_gz_" + tag + ".sdf";
     world_name_ = scenario.name.empty() ? "field" : scenario.name;
     robot_name_ = robot.name;
+    world_text_ = text;
     {
       std::ofstream out(world_path_.c_str());
-      out << rc::field::to_world(scenario, robot);
+      out << text;
       if (!out) return false;
     }
     // The partition keeps this server and this program talking only to each other.
@@ -153,6 +157,24 @@ class GzBackend : public rc::field::Backend {
     }
   }
 
+  // Puts the world back as it was loaded: the time at zero, the robot at its start, the command forgotten. The world stays paused.
+  bool reset_world() {
+    {
+      std::lock_guard<std::mutex> lock(mutex_);
+      got_pose_ = false;
+    }
+    ::gz::msgs::WorldControl request;
+    ::gz::msgs::Boolean reply;
+    bool result = false;
+    request.set_pause(true);
+    request.mutable_reset()->set_all(true);
+    if (!node_->Request("/world/" + world_name_ + "/control", request, 10000, reply, result) || !result) return false;
+    std::unique_lock<std::mutex> lock(mutex_);
+    const bool ready = changed_.wait_for(lock, std::chrono::seconds(20), [this]() { return got_pose_ && pose_time_ < 0.01; });
+    time_offset_ = 0.0;
+    return ready;
+  }
+
   void stop_server() {
 #if defined(__linux__)
     node_.reset();
@@ -169,12 +191,14 @@ class GzBackend : public rc::field::Backend {
     if (!world_path_.empty()) {
       std::remove(world_path_.c_str());
       world_path_.clear();
+      world_text_.clear();
     }
 #endif
   }
 
   std::string world_path_;
   std::string world_name_;
+  std::string world_text_;
   std::string robot_name_;
 #if defined(__linux__)
   pid_t pid_ = -1;
