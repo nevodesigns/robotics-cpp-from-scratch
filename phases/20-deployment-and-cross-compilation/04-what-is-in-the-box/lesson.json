@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "20-04-what-is-in-the-box",
+  "title": "What Is in the Box: A Release Bundle With a Manifest That Checks Itself, and the Four Ways Files Differ From It",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "20-03-run-here-ship-there",
+    "20-01-the-target-is-not-the-host",
+    "00-11-a-name-made-from-the-content",
+    "08-03-checksums-and-what-they-catch"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::deploy",
+    "header": "rc/deploy/bundle.hpp",
+    "note": "a release manifest written in a fixed order with a checksum of its own, a reader that refuses a truncated or edited one, unsafe paths refused, and a verifier that names missing, extra, resized and altered files"
+  },
+  "breaks_first": [
+    "E-DEPLOY-0010",
+    "E-DEPLOY-0011",
+    "E-DEPLOY-0012"
+  ]
+}

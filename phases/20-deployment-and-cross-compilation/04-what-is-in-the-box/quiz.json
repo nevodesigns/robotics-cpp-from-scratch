@@ -1,0 +1,78 @@
+{
+  "lesson": "20-04-what-is-in-the-box",
+  "title": "What Is in the Box: A Release Bundle With a Manifest That Checks Itself, and the Four Ways Files Differ From It",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A download stops half way. What in the manifest finds it?",
+      "options": [
+        "The version",
+        "The end line, which holds the hash of everything above it: its absence is no end line, and a changed manifest is bad checksum",
+        "The sizes",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "The most common damage there is."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the manifest sorted by path?",
+      "options": [
+        "Tidiness",
+        "The same release in any order gives the same text, so the manifest can itself be compared and hashed",
+        "Speed",
+        "Alphabet"
+      ],
+      "correct": 1,
+      "explanation": "Two orders, one text."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the manifest refuse ../../etc/passwd as a path?",
+      "options": [
+        "It is long",
+        "The updater writes at that path: an archive that escapes the directory overwrites the system unpacking it, and the manifest has to refuse it before any file is written",
+        "It has dots",
+        "It is absolute"
+      ],
+      "correct": 1,
+      "explanation": "Only 4 of 15 test paths were accepted."
+    },
+    {
+      "stage": "check",
+      "question": "Which difference can a size check not see?",
+      "options": [
+        "Missing",
+        "A byte changed in place: same size, different hash",
+        "Extra",
+        "All of them"
+      ],
+      "correct": 1,
+      "explanation": "bin/robot_node, hash."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a stale file from an older release a problem?",
+      "options": [
+        "It wastes space",
+        "It is part of what is running, since a program may load it by name, and it is not part of the release",
+        "It is slow",
+        "It has a bad name"
+      ],
+      "correct": 1,
+      "explanation": "bin/old_tool, extra."
+    },
+    {
+      "stage": "post",
+      "question": "Why is FNV-1a not enough for a real release?",
+      "options": [
+        "It is slow",
+        "Anyone can recompute it: a real release is signed with a key kept at the build machine, which needs a cryptographic library this curriculum does not write",
+        "It collides",
+        "It is 64 bits"
+      ],
+      "correct": 1,
+      "explanation": "It catches accident, not intent."
+    }
+  ]
+}
