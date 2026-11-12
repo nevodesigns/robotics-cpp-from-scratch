@@ -4,7 +4,7 @@
 //
 // compare_traces takes two traces of poses sampled at the same times and gives the largest and the rms distance between them, the distance and the heading difference at the end. speeds_of gives the speed in each sample; response_time_constant reads, from the trace of a robot started from rest at a steady command, the time it took to reach 63.2 percent of its final speed. standard_cases are four scripts (straight, turn, arc, stop), run_cases runs them on two backends, starting each afresh, and returns the gaps, and gap_table writes them in rows.
 //
-// The built in model with a time constant of 0.05 s and Gazebo Sim differed by 0.036 m at the worst over the five cases; Gazebo's response to a step of speed was read as a time constant of 0.062 s; with the built in model's set to that the worst gap was 0.036 m. Without Gazebo the same loop was run between two built in models, one with a time constant of 0.3 s: the gap was 0.050 m, the time constant read back was 0.299 s and the gap after calibrating was 0.0001 m.
+// The built in model with a time constant of 0.05 s and Gazebo Sim differed by 0.036 m at the worst over the five cases; Gazebo's response to a step of speed was read as a time constant of 0.062 s; with the built in model's set to that the worst gap was 0.035 m. Without Gazebo the same loop was run between two built in models, one with a time constant of 0.3 s: the gap was 0.050 m, the time constant read back was 0.299 s and the gap after calibrating was 0.0001 m.
 
 #ifndef RC_RC_FIELD_GAP_HPP
 #define RC_RC_FIELD_GAP_HPP

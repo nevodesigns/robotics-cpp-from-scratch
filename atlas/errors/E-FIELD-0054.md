@@ -8,7 +8,7 @@ teaches: 22-12-describing-a-robot-once
 
 ## Symptom
 
-A turn from rest is right and the same turn after a drive is short by a third, and the simulator seems to be wrong about friction.
+A turn from rest is right and the same turn after a drive is short by a quarter, and the simulator seems to be wrong about friction.
 
 ## Cause
 

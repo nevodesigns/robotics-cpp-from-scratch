@@ -94,6 +94,13 @@ function(rc_add_lesson)
     endif()
   endif()
 
+  # A lesson that starts another simulator may declare a longer limit than the usual minute, with "timeout" in its manifest.
+  set(lesson_timeout 60)
+  string(JSON timeout_value ERROR_VARIABLE no_timeout GET "${manifest_text}" "timeout")
+  if(NOT no_timeout AND timeout_value)
+    set(lesson_timeout ${timeout_value})
+  endif()
+
   string(REPLACE "-" "_" target_base "lesson_${lesson_id}")
 
   file(GLOB test_sources CONFIGURE_DEPENDS "${lesson_dir}/tests/*.cpp")
@@ -210,7 +217,7 @@ function(rc_add_lesson)
     add_test(NAME "${lesson_id}.${variant}" COMMAND ${target})
     set_tests_properties("${lesson_id}.${variant}" PROPERTIES
       LABELS "${variant};phase${RC_CURRENT_PHASE}"
-      TIMEOUT 60
+      TIMEOUT ${lesson_timeout}
     )
 
     # A Qt test must not require a display. Setting the platform on the test
