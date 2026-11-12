@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "23-07-odometry-for-each-kind-of-vehicle",
+  "title": "Odometry for Each Kind of Vehicle: Dead Reckoning From Wheels for a Differential Drive, a Skid Steer and a Car, and the One Parameter Each Is Most Sensitive To",
+  "type": "build",
+  "minutes": 85,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "23-01-a-differential-drive-that-slips",
+    "23-02-a-skid-steer-and-its-centre-of-rotation",
+    "23-03-ackermann-geometry-and-the-turning-circle",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::vehicle",
+    "header": "rc/vehicle/odometry.hpp",
+    "note": "wheel odometry for a differential or skid steer vehicle (the effective track width and a distance scale) and for a car (the wheelbase, the rear wheel travel and the measured steering angle with its zero offset), each on the midpoint heading"
+  },
+  "breaks_first": [
+    "E-VEH-0019",
+    "E-VEH-0020",
+    "E-VEH-0021"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "23-07-odometry-for-each-kind-of-vehicle",
+  "title": "Odometry for Each Kind of Vehicle: Dead Reckoning From Wheels for a Differential Drive, a Skid Steer and a Car, and the One Parameter Each Is Most Sensitive To",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the effective track of a skid steer vehicle?",
+      "options": [
+        "The ruler's number",
+        "The real track times the ICR coefficient",
+        "The wheelbase",
+        "Half the track"
+      ],
+      "correct": 1,
+      "explanation": "The vehicle turns as if the track were wider."
+    },
+    {
+      "stage": "check",
+      "question": "A track 3 percent too small made a full turn read how much too much?",
+      "options": [
+        "0",
+        "11.1 degrees",
+        "3 degrees",
+        "360 degrees"
+      ],
+      "correct": 1,
+      "explanation": "The same fraction of every turn."
+    },
+    {
+      "stage": "check",
+      "question": "The ideal odometry on the lossy floor believed it had come home. The robot:",
+      "options": [
+        "Had",
+        "Was more than 3 m away",
+        "Was lost",
+        "Had a bug"
+      ],
+      "correct": 1,
+      "explanation": "Consistent with itself, wrong about the world."
+    },
+    {
+      "stage": "check",
+      "question": "A steering sensor 1 degree off zero, over 20 m straight, made the car believe it had turned:",
+      "options": [
+        "Nothing",
+        "61 degrees",
+        "1 degree",
+        "5 degrees"
+      ],
+      "correct": 1,
+      "explanation": "Distance times tan(delta) over the wheelbase."
+    },
+    {
+      "stage": "post",
+      "question": "What is the first thing to calibrate on a car's odometry?",
+      "options": [
+        "The speed",
+        "The steering zero, with the car on a straight line",
+        "The colour",
+        "The motor"
+      ],
+      "correct": 1,
+      "explanation": "A small angle error becomes a large position error."
+    },
+    {
+      "stage": "post",
+      "question": "Why is odometry alone not a position?",
+      "options": [
+        "It is fine",
+        "It is a running total of mistakes: they only grow",
+        "It is too fast",
+        "It is too slow"
+      ],
+      "correct": 1,
+      "explanation": "Fuse it with something that does not drift."
+    }
+  ]
+}
