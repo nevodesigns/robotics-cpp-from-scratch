@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "id": "19-10-one-place-that-says-stop",
+  "title": "One Place That Says Stop: A Supervisor That Combines Every Monitor, Latches, Keeps Every Cause, and Never Gets Less Strict When a Fault Is Added",
+  "type": "build",
+  "minutes": 130,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "19-09-the-slope-and-the-turn",
+    "19-08-the-battery-and-the-heat",
+    "19-07-two-sensors-that-must-agree",
+    "19-06-the-line-it-may-not-cross",
+    "19-05-a-speed-the-sensor-can-vouch-for",
+    "19-02-the-stop-that-does-not-need-the-app"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::safety",
+    "header": "rc/safety/supervisor.hpp",
+    "note": "a supervisor that takes the state of every monitor, decides normal, degraded or stopped with a speed cap, latches every cause seen, and refuses a reset while a cause remains"
+  },
+  "breaks_first": [
+    "E-SAFE-0028",
+    "E-SAFE-0029",
+    "E-SAFE-0030"
+  ]
+}

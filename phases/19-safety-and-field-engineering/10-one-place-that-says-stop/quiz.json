@@ -1,0 +1,78 @@
+{
+  "lesson": "19-10-one-place-that-says-stop",
+  "title": "One Place That Says Stop: A Supervisor That Combines Every Monitor, Latches, Keeps Every Cause, and Never Gets Less Strict When a Fault Is Added",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What should a field of Inputs that nobody filled in mean?",
+      "options": [
+        "Fine",
+        "The unsafe case: an Inputs of all defaults gave stopped, a cap of 0 and all six causes",
+        "Ignore it",
+        "Slow"
+      ],
+      "correct": 1,
+      "explanation": "A forgotten field must not be a robot that goes on."
+    },
+    {
+      "stage": "check",
+      "question": "A tilt warning (0.5 m/s) and a power share of 0.2 (0.4 m/s) are both present. What is the cap?",
+      "options": [
+        "0.5",
+        "0.4: the lowest cap wins, and both reasons are reported",
+        "0.2",
+        "0.9"
+      ],
+      "correct": 1,
+      "explanation": "The limit bits were tilt plus power."
+    },
+    {
+      "stage": "check",
+      "question": "A robot stopped for a tilt loses its link as well, and both then go away. What is the state?",
+      "options": [
+        "normal",
+        "Still stopped, with both causes on record, until a reset: refused while a cause remains",
+        "degraded",
+        "unknown"
+      ],
+      "correct": 1,
+      "explanation": "link, tilt."
+    },
+    {
+      "stage": "check",
+      "question": "Why keep every cause seen since the latch and not only the first?",
+      "options": [
+        "Memory is cheap",
+        "The first is not always the one that matters, and a reset after one cause with another still there starts the robot towards a hazard the operator was not told of",
+        "It is faster",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "A log that says link lost sends someone to the router."
+    },
+    {
+      "stage": "post",
+      "question": "What was checked over all 1024 combinations of ten conditions?",
+      "options": [
+        "That each one was tested",
+        "That a stop cause always stopped, and that adding a fault never made the mode or the cap less strict: 0 violations in 10240 additions",
+        "The speed",
+        "The compile time"
+      ],
+      "correct": 1,
+      "explanation": "Only the all clear was normal."
+    },
+    {
+      "stage": "post",
+      "question": "What is the supervisor's job compared with the stop path of lesson 19-02?",
+      "options": [
+        "The same",
+        "The supervisor decides; the stop path and the hardware enforce, and must work even if the process with the supervisor dies",
+        "It replaces it",
+        "It is slower"
+      ],
+      "correct": 1,
+      "explanation": "Decide, then enforce."
+    }
+  ]
+}
