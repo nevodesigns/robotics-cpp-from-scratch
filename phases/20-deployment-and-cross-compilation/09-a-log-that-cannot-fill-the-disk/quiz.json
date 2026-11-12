@@ -1,0 +1,78 @@
+{
+  "lesson": "20-09-a-log-that-cannot-fill-the-disk",
+  "title": "A Log That Cannot Fill the Disk: Rotation Under a Byte Budget, and a Guard Against One Error Said a Million Times",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is a full disk worse than a program that cannot write its log?",
+      "options": [
+        "It is slower",
+        "It stops everything else that writes: the configuration, the black box dump, the next update, temporary files",
+        "It deletes the log",
+        "It reboots"
+      ],
+      "correct": 1,
+      "explanation": "Ten different looking faults, one cause."
+    },
+    {
+      "stage": "check",
+      "question": "With 10 MB files, 20 files and 200 MB, how much can the log take in the steady state?",
+      "options": [
+        "Unlimited",
+        "200 MB: the smaller of the total and files times file size",
+        "10 MB",
+        "2 GB"
+      ],
+      "correct": 1,
+      "explanation": "With at most 5 files, 50 MB."
+    },
+    {
+      "stage": "check",
+      "question": "A day at 100 KB/s fills a 4 GB disk after how long with no limit?",
+      "options": [
+        "24 hours",
+        "11.1 hours: the robot dies in its first shift",
+        "1 hour",
+        "Never"
+      ],
+      "correct": 1,
+      "explanation": "With the budget the peak was 199 MB."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the current file never deleted?",
+      "options": [
+        "A bug",
+        "Deleting it would lose the record just written: a record bigger than the whole budget is kept until the next one arrives",
+        "It is hard to delete",
+        "It is empty"
+      ],
+      "correct": 1,
+      "explanation": "9000 bytes against a budget of 5000."
+    },
+    {
+      "stage": "post",
+      "question": "A camera says the same error 1000 times a second for 10 s. How many are written and how many counted?",
+      "options": [
+        "10000 and 0",
+        "5 written, 9995 suppressed and counted, handed over once as a summary",
+        "1 and 9999",
+        "0 and 10000"
+      ],
+      "correct": 1,
+      "explanation": "The log grows with the number of different faults."
+    },
+    {
+      "stage": "post",
+      "question": "Why does rotation without a guard still lose?",
+      "options": [
+        "It does not",
+        "The repeated message fills the budget and pushes out the history that explains it, deleted by the fault itself",
+        "It is slow",
+        "It is not sorted"
+      ],
+      "correct": 1,
+      "explanation": "The two go together."
+    }
+  ]
+}

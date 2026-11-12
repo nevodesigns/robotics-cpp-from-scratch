@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "20-09-a-log-that-cannot-fill-the-disk",
+  "title": "A Log That Cannot Fill the Disk: Rotation Under a Byte Budget, and a Guard Against One Error Said a Million Times",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "20-08-boot-into-your-code",
+    "19-12-what-happened-before-the-stop",
+    "03-03-containers-and-their-costs",
+    "01-05-strings-and-text"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::deploy",
+    "header": "rc/deploy/logstore.hpp",
+    "note": "log files rotated under a budget that is never exceeded and that always drops the oldest first, a check of the policy, and a flood guard that writes the first few of a repeated message and counts the rest"
+  },
+  "breaks_first": [
+    "E-DEPLOY-0025",
+    "E-DEPLOY-0026",
+    "E-DEPLOY-0027"
+  ]
+}
