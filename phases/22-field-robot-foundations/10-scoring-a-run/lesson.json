@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "22-10-scoring-a-run",
+  "title": "Scoring a Run: Navigation, Manipulation and Gait Metrics, and Criteria That Turn Numbers Into a Pass or a Fail",
+  "type": "build",
+  "minutes": 80,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-06-sensors-that-fail-like-the-field",
+    "22-07-a-field-scenario-file",
+    "22-08-recording-and-replaying-a-run",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::field",
+    "header": "rc/field/score.hpp",
+    "note": "a navigation score from a scenario and a log (goals reached in order, time, path length, straightness, clearance, collisions as events, speed), trial statistics for manipulation (success rate, mean and 95th percentile time, error), gait metrics (duty factor, stride period, regularity), and criteria that list what failed"
+  },
+  "breaks_first": [
+    "E-FIELD-0029",
+    "E-FIELD-0030",
+    "E-FIELD-0031",
+    "E-FIELD-0032"
+  ]
+}

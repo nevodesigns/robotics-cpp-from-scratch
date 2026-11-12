@@ -1,0 +1,78 @@
+{
+  "lesson": "22-10-scoring-a-run",
+  "title": "Scoring a Run: Navigation, Manipulation and Gait Metrics, and Criteria That Turn Numbers Into a Pass or a Fail",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is reached the goal not a score?",
+      "options": [
+        "It is, completely",
+        "It says nothing about the way there: collisions, time, rhythm",
+        "Goals are optional",
+        "It is too long"
+      ],
+      "correct": 1,
+      "explanation": "A score is a set of numbers with thresholds."
+    },
+    {
+      "stage": "check",
+      "question": "A V shaped detour, 2 m off a 10 m line, had a straightness of:",
+      "options": [
+        "1.0",
+        "0.9285",
+        "0",
+        "2"
+      ],
+      "correct": 1,
+      "explanation": "10 over the 10.77 m walked."
+    },
+    {
+      "stage": "check",
+      "question": "Why are collisions counted as events?",
+      "options": [
+        "It is tidier",
+        "Samples inside an obstacle depend on the log's rate, not on the mistake",
+        "Events are faster",
+        "No reason"
+      ],
+      "correct": 1,
+      "explanation": "Count mistakes, not samples."
+    },
+    {
+      "stage": "check",
+      "question": "20 trials with two failures gave a success rate of:",
+      "options": [
+        "100",
+        "90.0 percent",
+        "50",
+        "10"
+      ],
+      "correct": 1,
+      "explanation": "Success is over all trials."
+    },
+    {
+      "stage": "post",
+      "question": "The mean time was 4.72 s and the 95th percentile 9.00 s. Which matters to a cell with a deadline?",
+      "options": [
+        "The mean",
+        "The 95th percentile, which shows the slow ones",
+        "Neither",
+        "The minimum"
+      ],
+      "correct": 1,
+      "explanation": "A deadline is met by the slow ones."
+    },
+    {
+      "stage": "post",
+      "question": "What does the irregularity of a gait measure?",
+      "options": [
+        "Speed",
+        "The spread of the stride periods over their mean",
+        "Weight",
+        "Noise"
+      ],
+      "correct": 1,
+      "explanation": "A missed step shows as a long period."
+    }
+  ]
+}
