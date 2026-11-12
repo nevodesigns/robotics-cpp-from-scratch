@@ -1,0 +1,78 @@
+{
+  "lesson": "23-02-a-skid-steer-and-its-centre-of-rotation",
+  "title": "A Skid Steer and Its Centre of Rotation: Why Four Fixed Wheels Turn Only by Scrubbing, What That Costs, and Whether the Motors Can Pay",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "How does a skid steer vehicle turn?",
+      "options": [
+        "By turning its front wheels",
+        "By driving the sides at different speeds and dragging the wheels sideways",
+        "By leaning",
+        "It cannot"
+      ],
+      "correct": 1,
+      "explanation": "Its wheels are fixed to the chassis."
+    },
+    {
+      "stage": "check",
+      "question": "A chassis of 0.30 m by 0.25 m slides its front wheels in a pivot at:",
+      "options": [
+        "0 degrees",
+        "50.2 degrees",
+        "90 degrees",
+        "10 degrees"
+      ],
+      "correct": 1,
+      "explanation": "atan(L over B)."
+    },
+    {
+      "stage": "check",
+      "question": "At chi 1.5 against 1.0, the centre of rotation for the same wheels was:",
+      "options": [
+        "The same",
+        "1.5 times as far",
+        "Half as far",
+        "At the centre"
+      ],
+      "correct": 1,
+      "explanation": "0.625 m and 0.938 m."
+    },
+    {
+      "stage": "check",
+      "question": "Could two gear motors a side pivot a 10 kg vehicle on gravel?",
+      "options": [
+        "Yes, easily",
+        "No: it needed 34.5 N a side against 28.0 N",
+        "Only on ice",
+        "Never needed"
+      ],
+      "correct": 1,
+      "explanation": "The motors can drive it forward and not turn it."
+    },
+    {
+      "stage": "post",
+      "question": "Why are skid steer machines built short?",
+      "options": [
+        "Looks",
+        "A short, wide chassis slides its wheels at a smaller angle and needs less force to turn",
+        "Cost",
+        "No reason"
+      ],
+      "correct": 1,
+      "explanation": "atan(L over B) and the diagonal."
+    },
+    {
+      "stage": "post",
+      "question": "What does the ICR coefficient do to a differential drive model?",
+      "options": [
+        "Nothing",
+        "Makes the turn smaller by one over the coefficient, as if the track were wider",
+        "Speeds it up",
+        "Adds mass"
+      ],
+      "correct": 1,
+      "explanation": "It is a turn efficiency."
+    }
+  ]
+}
