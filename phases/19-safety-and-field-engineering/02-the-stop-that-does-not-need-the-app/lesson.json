@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "19-02-the-stop-that-does-not-need-the-app",
+  "title": "The Stop That Does Not Need the App: A Latched Onboard Stop Path Driven by the Robot's Own Clock",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "19-01-what-can-go-wrong",
+    "14-02-limits-and-watchdog",
+    "12-08-the-button-that-must-be-held",
+    "01-06-enums-and-states"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::safety",
+    "header": "rc/safety/stop_path.hpp",
+    "note": "an onboard stop that starts stopped, latches on a lost heartbeat or an open e-stop loop, runs on the robot's own clock, and needs a deliberate reset"
+  },
+  "breaks_first": [
+    "E-SAFE-0004",
+    "E-SAFE-0005",
+    "E-SAFE-0006"
+  ]
+}
