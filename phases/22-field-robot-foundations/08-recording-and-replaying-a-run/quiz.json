@@ -1,0 +1,78 @@
+{
+  "lesson": "22-08-recording-and-replaying-a-run",
+  "title": "Recording and Replaying a Field Run: A Text Log That Carries Its Scenario, Survives a Cut Power Line, and Proves That Two Runs Were the Same",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "How many digits does a double need to be given back exactly?",
+      "options": [
+        "6",
+        "17",
+        "3",
+        "100"
+      ],
+      "correct": 1,
+      "explanation": "Seventeen significant digits are enough and fewer are not."
+    },
+    {
+      "stage": "check",
+      "question": "Written with 6 digits, a ten second run read back off by:",
+      "options": [
+        "Exactly 0",
+        "Up to 0.0000050",
+        "Wildly",
+        "Nothing could be read"
+      ],
+      "correct": 1,
+      "explanation": "Small, and enough to hide a difference."
+    },
+    {
+      "stage": "check",
+      "question": "Two runs with different seeds first differed at:",
+      "options": [
+        "Never",
+        "0.02 s, the first sample",
+        "The end",
+        "5 s"
+      ],
+      "correct": 1,
+      "explanation": "The noise differs from the start."
+    },
+    {
+      "stage": "check",
+      "question": "A log cut in the middle of a line read as:",
+      "options": [
+        "An error",
+        "999 entries with the truncated flag set",
+        "Nothing",
+        "A crash"
+      ],
+      "correct": 1,
+      "explanation": "The stump of a write is dropped."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the log carry its scenario?",
+      "options": [
+        "To make it bigger",
+        "So the record holds both the question and the answer",
+        "Habit",
+        "For the version"
+      ],
+      "correct": 1,
+      "explanation": "A log must say what it was."
+    },
+    {
+      "stage": "post",
+      "question": "How does the parser know the last line was cut?",
+      "options": [
+        "It counts",
+        "The writer ends every line with a newline, and the text does not end in one",
+        "A checksum",
+        "It cannot"
+      ],
+      "correct": 1,
+      "explanation": "A fixed convention gives a test."
+    }
+  ]
+}

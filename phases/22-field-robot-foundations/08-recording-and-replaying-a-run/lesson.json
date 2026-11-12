@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "22-08-recording-and-replaying-a-run",
+  "title": "Recording and Replaying a Field Run: A Text Log That Carries Its Scenario, Survives a Cut Power Line, and Proves That Two Runs Were the Same",
+  "type": "build",
+  "minutes": 75,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-01-a-robot-as-an-interface",
+    "22-06-sensors-that-fail-like-the-field",
+    "22-07-a-field-scenario-file",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::field",
+    "header": "rc/field/run_log.hpp",
+    "note": "a text run log with a header, the scenario it ran, and timed entries of named channels; exact to the last digit; a parser that survives a truncated last line; lookup by time; and the time of the first difference between two logs"
+  },
+  "breaks_first": [
+    "E-FIELD-0023",
+    "E-FIELD-0024",
+    "E-FIELD-0025"
+  ]
+}
