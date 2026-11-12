@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "19-12-what-happened-before-the-stop",
+  "title": "What Happened Before the Stop: A Fixed-Size Black Box With a Hash Chain, Wrap-Around That Can Still Be Verified, and What Tampering Leaves Behind",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "19-11-prove-it-still-works",
+    "19-10-one-place-that-says-stop",
+    "18-10-the-conversation-as-a-test",
+    "03-03-containers-and-their-costs"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::safety",
+    "header": "rc/safety/blackbox.hpp",
+    "note": "a fixed-size event ring that never allocates while recording, a hash chain that survives the ring wrapping, a verifier that tells an altered entry from a missing one, and the window of events before a stop"
+  },
+  "breaks_first": [
+    "E-SAFE-0034",
+    "E-SAFE-0035",
+    "E-SAFE-0036"
+  ]
+}
