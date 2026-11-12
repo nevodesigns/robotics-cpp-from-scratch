@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "19-04-how-far-it-goes-before-it-stops",
+  "title": "How Far It Goes Before It Stops: Stopping Distance, the Speed a Sight Line Allows, and What Slope and Latency Do to Both",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "19-03-what-the-output-does-on-its-own",
+    "19-02-the-stop-that-does-not-need-the-app",
+    "19-01-what-can-go-wrong",
+    "01-06-enums-and-states"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::safety",
+    "header": "rc/safety/stopping.hpp",
+    "note": "stopping distance with latency, the largest speed a sight line allows, the braking that friction and slope really give, and the whole latency from event to brake"
+  },
+  "breaks_first": [
+    "E-SAFE-0010",
+    "E-SAFE-0011",
+    "E-SAFE-0012"
+  ]
+}
