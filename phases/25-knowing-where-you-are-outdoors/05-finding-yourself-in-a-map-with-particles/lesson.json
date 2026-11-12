@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "25-05-finding-yourself-in-a-map-with-particles",
+  "title": "Finding Yourself in a Map With Particles: A Cloud of Guesses, Weighed by What the Lidar Would See From Each, and the Room That Looks the Same From Two Places",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "25-04-matching-one-scan-to-another",
+    "22-06-sensors-that-fail-like-the-field",
+    "24-09-tracking-things-that-move",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::locate",
+    "header": "rc/locate/mcl.hpp",
+    "note": "Monte Carlo localisation against a map of walls and posts: a set of poses with weights, moved by the odometry with noise, weighed by how well the ranges a lidar would see from each match the ranges it saw (a hit and a random part), resampled when too few count, and summarised by a mean and a spread"
+  },
+  "breaks_first": [
+    "E-VEH-0067",
+    "E-VEH-0068",
+    "E-VEH-0069"
+  ],
+  "timeout": 240
+}
