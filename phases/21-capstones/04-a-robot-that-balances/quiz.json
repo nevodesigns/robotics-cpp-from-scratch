@@ -1,0 +1,78 @@
+{
+  "lesson": "21-04-a-robot-that-balances",
+  "title": "A Robot That Balances: An Inverted Pendulum, a Filter, a Delay It Cannot Afford, and a Stop That Stops It Running Away",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does atan(a_max / g) tell you about the steepest lean a balancing robot can recover from?",
+      "options": [
+        "Exactly the limit",
+        "An upper bound: the measured limit was 16.5 degrees against 22.2, and 21.7 against 39.2 at 8 m/s^2",
+        "A lower bound",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "The formula says what is impossible, the simulation what is achieved."
+    },
+    {
+      "stage": "check",
+      "question": "A delay of 50 ms stood and 55 ms fell. What does that say about a robot that works with a delay of 50 ms?",
+      "options": [
+        "It has plenty of margin",
+        "It is working with almost none: the edge is sharp, and the rms lean at 50 ms was already 1.8 times that with no delay",
+        "It is stable",
+        "It is slow"
+      ],
+      "correct": 1,
+      "explanation": "Lesson 14-07 where the answer is a fall."
+    },
+    {
+      "stage": "check",
+      "question": "With a gyro bias, a filter time constant of 0.5 s stood and drifted 9.38 m in 20 s. Why does it drift?",
+      "options": [
+        "The wheels slip",
+        "The bias leaves a small lean that the robot believes is upright, so it holds a lean and accelerates until the velocity loop settles",
+        "The model is wrong",
+        "The noise"
+      ],
+      "correct": 1,
+      "explanation": "Standing is not the same as being right."
+    },
+    {
+      "stage": "check",
+      "question": "Why does a filter with tau of 1000 s, the gyro alone, fall?",
+      "options": [
+        "Noise",
+        "The gyro's bias builds up as an error in the lean the robot believes it has, with nothing to correct it",
+        "The delay",
+        "The supervisor"
+      ],
+      "correct": 1,
+      "explanation": "It fell at 3.92 s."
+    },
+    {
+      "stage": "post",
+      "question": "What did the supervisor's tilt stop do for a robot started 25 degrees over?",
+      "options": [
+        "Saved it",
+        "Limited the harm: the axle went 0.54 m at up to 0.69 m/s, against 3.17 m at 1.51 m/s for one that kept trying",
+        "Nothing",
+        "Made it fall"
+      ],
+      "correct": 1,
+      "explanation": "A fallen robot that drives across the room is worse than one that fell."
+    },
+    {
+      "stage": "post",
+      "question": "Why does a dead IMU still end in a fall with the supervisor on?",
+      "options": [
+        "It does not",
+        "A balancing robot has no safe state to stand in: the stop cannot keep it up, but the log says why (cause sensors at 2.010 s)",
+        "The supervisor failed",
+        "The filter"
+      ],
+      "correct": 1,
+      "explanation": "Without it no cause either."
+    }
+  ]
+}

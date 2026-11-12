@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "id": "21-04-a-robot-that-balances",
+  "title": "A Robot That Balances: An Inverted Pendulum, a Filter, a Delay It Cannot Afford, and a Stop That Stops It Running Away",
+  "type": "capstone",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "21-03-an-arm-that-picks-and-places",
+    "19-14-a-risk-assessment-you-can-defend",
+    "19-09-the-slope-and-the-turn",
+    "19-10-one-place-that-says-stop",
+    "15-11-two-sensors-one-angle",
+    "14-01-pid-from-scratch",
+    "14-07-the-delay-in-the-loop"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::capstone",
+    "header": "rc/capstone/balancer.hpp",
+    "note": "a robot on two wheels that balances like a broom: the pendulum, a complementary filter, a controller with a velocity loop, and the supervisor's tilt stop, with the steepest recoverable lean, the delay it cannot take and the filter time constant measured"
+  },
+  "breaks_first": [
+    "E-CAP-0010",
+    "E-CAP-0011",
+    "E-CAP-0012"
+  ]
+}
