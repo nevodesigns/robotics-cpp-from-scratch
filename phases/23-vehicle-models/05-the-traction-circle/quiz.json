@@ -1,0 +1,78 @@
+{
+  "lesson": "23-05-the-traction-circle",
+  "title": "The Traction Circle: Turning, Speeding Up and Braking Share One Budget of Grip, and a Vehicle That Spends It All on One Has Nothing Left for the Others",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does the friction circle say?",
+      "options": [
+        "Tyres are round",
+        "Turning, speeding up and braking share one budget of grip",
+        "Grip is free",
+        "Speed is limited by the motor"
+      ],
+      "correct": 1,
+      "explanation": "The squares of the two accelerations sum to at most the square of the grip."
+    },
+    {
+      "stage": "check",
+      "question": "At 1.5 m/s round the smallest circle on gravel, the turn took what share of the grip?",
+      "options": [
+        "10 percent",
+        "69 percent",
+        "100 percent",
+        "1 percent"
+      ],
+      "correct": 1,
+      "explanation": "Lateral acceleration over mu g."
+    },
+    {
+      "stage": "check",
+      "question": "The most the vehicle could brake fell from 4.81 m/s2 to:",
+      "options": [
+        "The same",
+        "3.60 m/s2",
+        "0",
+        "10"
+      ],
+      "correct": 1,
+      "explanation": "What is left of the circle."
+    },
+    {
+      "stage": "check",
+      "question": "At which speed did the turn alone use all the grip?",
+      "options": [
+        "1 m/s",
+        "1.81 m/s",
+        "10 m/s",
+        "Never"
+      ],
+      "correct": 1,
+      "explanation": "sqrt(mu g over kappa)."
+    },
+    {
+      "stage": "post",
+      "question": "At 99 percent of the sliding speed, how much of the straight line braking was left?",
+      "options": [
+        "All of it",
+        "20 percent",
+        "Half",
+        "None, ever"
+      ],
+      "correct": 1,
+      "explanation": "The square root of 1 minus the share squared."
+    },
+    {
+      "stage": "post",
+      "question": "What should a planner do about a bend it will meet at speed?",
+      "options": [
+        "Brake in it",
+        "Slow before it, because the bend leaves little to brake with",
+        "Ignore it",
+        "Speed up"
+      ],
+      "correct": 1,
+      "explanation": "Spend the grip on braking before the turn takes it."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "23-05-the-traction-circle",
+  "title": "The Traction Circle: Turning, Speeding Up and Braking Share One Budget of Grip, and a Vehicle That Spends It All on One Has Nothing Left for the Others",
+  "type": "build",
+  "minutes": 80,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "23-03-ackermann-geometry-and-the-turning-circle",
+    "22-05-terrain-and-friction",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::vehicle",
+    "header": "rc/vehicle/traction.hpp",
+    "note": "the friction circle: the sideways acceleration of a turn takes a share of the grip, and what is left is the most a vehicle can speed up or brake in it, with the slope and the rolling resistance of the terrain under it; the fastest speed and the tightest curve before the tyres let go"
+  },
+  "breaks_first": [
+    "E-VEH-0013",
+    "E-VEH-0014",
+    "E-VEH-0015"
+  ]
+}
