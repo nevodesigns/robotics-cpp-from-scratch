@@ -1,0 +1,78 @@
+{
+  "lesson": "24-02-finding-the-ground",
+  "title": "Finding the Ground: A Plane Fitted by Random Samples, Why a Least Squares Plane Is Pulled Off by What Stands on It, and a Ground That Is Not the Biggest Plane",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is a least squares plane fitted to every point a poor ground?",
+      "options": [
+        "It is slow",
+        "The things standing on the ground pull it up towards them",
+        "It is too exact",
+        "It needs a camera"
+      ],
+      "correct": 1,
+      "explanation": "Squared distances give the outliers a big vote."
+    },
+    {
+      "stage": "check",
+      "question": "With boxes on the ground, the least squares plane was tilted:",
+      "options": [
+        "5.00 degrees",
+        "6.57 degrees",
+        "0 degrees",
+        "45 degrees"
+      ],
+      "correct": 1,
+      "explanation": "True tilt is 5.00."
+    },
+    {
+      "stage": "check",
+      "question": "RANSAC found:",
+      "options": [
+        "6.57 degrees",
+        "5.08 degrees",
+        "90 degrees",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "The obstacles are not corrected for, only not counted."
+    },
+    {
+      "stage": "check",
+      "question": "How many draws made a clean sample 99 percent likely at a share of 85 percent?",
+      "options": [
+        "1000",
+        "5",
+        "1",
+        "50"
+      ],
+      "correct": 1,
+      "explanation": "Log of one minus the confidence over log of one minus the share cubed."
+    },
+    {
+      "stage": "post",
+      "question": "Why was the wall taken for the ground?",
+      "options": [
+        "It was the ground",
+        "It held the most points, and nothing said the ground is level",
+        "RANSAC is random",
+        "The tolerance"
+      ],
+      "correct": 1,
+      "explanation": "Refuse planes tilted beyond what the vehicle drives on."
+    },
+    {
+      "stage": "post",
+      "question": "Why can the same seed be relied on?",
+      "options": [
+        "It cannot",
+        "The draws are repeatable, so a test gives the same answer",
+        "Random numbers are fixed",
+        "It is a hash"
+      ],
+      "correct": 1,
+      "explanation": "A deterministic generator makes a test of a random method possible."
+    }
+  ]
+}

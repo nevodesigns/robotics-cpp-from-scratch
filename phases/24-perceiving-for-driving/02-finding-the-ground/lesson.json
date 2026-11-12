@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "24-02-finding-the-ground",
+  "title": "Finding the Ground: A Plane Fitted by Random Samples, Why a Least Squares Plane Is Pulled Off by What Stands on It, and a Ground That Is Not the Biggest Plane",
+  "type": "build",
+  "minutes": 85,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "24-01-a-lidar-scan-to-points",
+    "22-02-frames-for-a-field-robot",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::perceive",
+    "header": "rc/perceive/ground.hpp",
+    "note": "a plane from three points, the distance of a point to it, a least squares plane z = ax + by + c, a plane found by random samples (RANSAC) that counts the points within a tolerance and may be required to be ground-like, the tilt of a plane, how many samples are enough, and the split of points into ground and the things above it"
+  },
+  "breaks_first": [
+    "E-VEH-0031",
+    "E-VEH-0032",
+    "E-VEH-0033"
+  ]
+}
