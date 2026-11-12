@@ -1,0 +1,78 @@
+{
+  "lesson": "24-05-can-it-drive-there",
+  "title": "Can It Drive There: Slope and Roughness From a Height Map, Judged Against What This Vehicle's Motors, Tyres and Wheels Can Do",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Which two properties of the ground does a height map give?",
+      "options": [
+        "Colour and wetness",
+        "Slope and roughness",
+        "Friction and mass",
+        "Speed and heading"
+      ],
+      "correct": 1,
+      "explanation": "They are different: a ramp is steep and smooth."
+    },
+    {
+      "stage": "check",
+      "question": "A ramp of 10 degrees was read as:",
+      "options": [
+        "0",
+        "10.0 degrees",
+        "45",
+        "0.028"
+      ],
+      "correct": 1,
+      "explanation": "The slope of the plane through the 3 by 3 cells."
+    },
+    {
+      "stage": "check",
+      "question": "The reference vehicle's slope limit on gravel was:",
+      "options": [
+        "25.6 degrees",
+        "22.3 degrees, the smaller of the motors, the grip and the balance",
+        "90 degrees",
+        "10 degrees"
+      ],
+      "correct": 1,
+      "explanation": "Three limits, the least counts."
+    },
+    {
+      "stage": "check",
+      "question": "A slope of 24 degrees on gravel had a cost of:",
+      "options": [
+        "0",
+        "254, lethal",
+        "198",
+        "100"
+      ],
+      "correct": 1,
+      "explanation": "The gravel holds 22.3 degrees."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the cost rise with the square of the share of the limit?",
+      "options": [
+        "It is traditional",
+        "It is nearly free for most of the range and steep near the limit",
+        "To be fast",
+        "Noise"
+      ],
+      "correct": 1,
+      "explanation": "Spend caution where the danger is."
+    },
+    {
+      "stage": "post",
+      "question": "Why can a tall vehicle be limited by its balance and not its grip?",
+      "options": [
+        "It cannot",
+        "It tips at atan(half the track over the height of its centre of mass), which falls as it gets taller",
+        "It is heavier",
+        "Wind"
+      ],
+      "correct": 1,
+      "explanation": "The limit is the smallest of three."
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "24-05-can-it-drive-there",
+  "title": "Can It Drive There: Slope and Roughness From a Height Map, Judged Against What This Vehicle's Motors, Tyres and Wheels Can Do",
+  "type": "build",
+  "minutes": 85,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "24-04-costmap-layers",
+    "23-06-what-the-motors-and-the-battery-allow",
+    "22-05-terrain-and-friction",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::perceive",
+    "header": "rc/perceive/traversability.hpp",
+    "note": "a height grid, the slope and the roughness of each cell from a plane fitted to its 3 by 3 neighbourhood, the limits of a vehicle (the smallest of what its motors can climb, what its tyres grip and where it tips, and the step its wheels can take), and a traversability layer of costs that rises as either limit is approached and is lethal beyond it"
+  },
+  "breaks_first": [
+    "E-VEH-0040",
+    "E-VEH-0041",
+    "E-VEH-0042"
+  ]
+}
