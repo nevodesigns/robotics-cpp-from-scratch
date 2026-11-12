@@ -1,6 +1,6 @@
 # Specialisation course: field robots, ground, arms and legs
 
-Status: a PLAN, written on 13 November 2026, for the owner's approval. Nothing in it is built. No lesson, header, test or atlas entry exists for it yet.
+Status: written on 13 November 2026. **Approved by the owner on 13 November 2026**: the shape (same repository, phases 22 to 37, ground first, the built in simulator as the default and Gazebo Sim as the second backend), the tier and hardware decisions, installing Gazebo Harmonic for testing, real world dimensions for the models, the choice of named parts left to the planner, and the humanoid stretch (phase 37) **paused, not dropped**. Nothing in it is built yet: no lesson, header, test or atlas entry exists for it. Each phase is still started only on the owner's go-ahead, as in the first course.
 
 The plan was made after the 320 lessons of this repository were finished, as agreed, and it was made before any building: research first, then the architecture, then the lesson map, then the list of specialisations, then the questions the owner has to answer.
 
@@ -53,6 +53,15 @@ Both, in layers.
 | Ground | An ESP32 with two encoder motors and an IMU. Build guides put it at 60 to 70 dollars, under 50 without the power bank. Cheaper kits with plastic gearbox motors have no encoders, which is why the lessons need them. | A Raspberry Pi class computer with a low cost lidar on a commercial chassis. |
 | Arms | A small hobby servo arm (to be priced and tested before it is named) | The SO-ARM100, an open source arm built for LeRobot: roughly 220 to 300 dollars for the servo kit, the 3D printed parts extra (about 65 dollars, or printed from the free files). |
 | Legs | A single leg on a stand with two or three hobby servos | A small open quadruped: the Petoi Bittle (225 to 299 dollars) or Quaddle (about 99), or the open source Stanford Pupper. |
+
+## 3b. The models use real world dimensions
+
+Decided by the owner on 13 November 2026 as a preference, and made a rule here: **wherever a robot in the course is based on a real product or a published open design, its model uses that robot's real dimensions**, not made up round numbers.
+
+- **Every number in a robot's description file carries its source**, in the same line: where it was found (a data sheet, an open CAD file, a paper), or the word `typical` when it was not found. A learner can see at a glance which numbers are measured and which are assumed, and the audit refuses a robot file with a number that has neither.
+- **Candidates for the reference robots**, to be confirmed and sourced when each lesson is written, not now: a small research rover of the TurtleBot3 class and a one tenth scale car platform of the F1TENTH class for the ground track; the open SO-ARM100 and a published industrial arm for the arms; a Mini Cheetah or Stanford Pupper class leg for the legged track. The plan commits to the rule and not to those values.
+- **Where it cannot be done honestly** (a dimension that is not published, a motor whose torque curve is not given), the lesson says so, uses a typical value, marks it, and the bring-up page tells the learner how to measure their own and put it in the file.
+- Real dimensions matter for what the lessons teach (a track width decides how a skid steer vehicle turns; link lengths decide what an arm can reach; leg lengths decide a gait), so this is a teaching choice and not decoration.
 
 ## 4. Research findings that shaped the plan
 
@@ -152,7 +161,7 @@ The frames of a base and an arm together; what the arm can reach from where the 
 
 **36 A quadruped controller (8):** the velocity command; a state machine (stand, walk, sit, fallen); adapting to terrain; a model predictive controller on the body, in its short form; safety (torque limits, fall detection, motors off); what changes from simulation to a real robot; the quadruped capstone.
 
-**37 Humanoid basics, a stretch (8):** the linear inverted pendulum; the capture point; a walking pattern generator; a footstep planner; standing on one leg; the ankle strategy; swinging the arms; the humanoid capstone. Recommended to be decided after phases 34 to 36, not now.
+**37 Humanoid basics, PAUSED by the owner on 13 November 2026 (8):** the linear inverted pendulum; the capture point; a walking pattern generator; a footstep planner; standing on one leg; the ankle strategy; swinging the arms; the humanoid capstone. Paused, not dropped: the owner judged it a big stretch. It is picked up again, or not, after phases 34 to 36 are built.
 
 ### Totals (the base grew from 12 to 17 lessons when Gazebo support and a viewer were added on 13 November)
 
@@ -176,7 +185,7 @@ The owner approves each stage before it is built, as with the phases of the firs
 | 1 | The base (22) and the ground track (23 to 27) | 63 |
 | 2 | The arms track (28 to 32) | 40 |
 | 3 | Mobile manipulators (33) and the legged track (34 to 36) | 35 |
-| 4, optional | Humanoid basics (37) | 8 |
+| 4, paused | Humanoid basics (37), paused by the owner and not dropped | 8 |
 
 Ground first because the repository's safety, navigation and field work lead straight into it, because it needs the least hardware to be real, and because the arms and legged tracks reuse its simulator and scoring.
 
@@ -190,11 +199,12 @@ Ground first because the repository's safety, navigation and field work lead str
 
 **One gap to say plainly: learning based control.** Reinforcement learning and imitation learning are now central to arms (the SO-ARM100 exists for LeRobot) and legged robots. Neither course teaches them, since both are built on plain C++ and deterministic, verifiable lessons. The plan keeps room for it: the arm track records demonstrations (31) and the legged track's controller has a clean command interface (36), so a later learning course can sit on top.
 
-## 9. Questions for the owner
+## 9. Decisions of the owner, 13 November 2026
 
-1. **Approve the shape?** One course in the same repository, phases 22 to 37, four stages, ground first, with the built in simulator as the default and Gazebo Sim as a second backend.
-2. **Approve the decisions on tiers and hardware?** Every lesson passes without hardware; about a third have an optional hardware section with a fake of the device; interfaces generic, one named reference build per track.
-3. **Humanoid basics** (phase 37): leave as a stretch to decide later, or drop it?
-4. **Hardware parts:** the plan names the SO-ARM100, the Petoi range, the Stanford Pupper and an ESP32 build. Should any be changed, or a part the owner already has put in its place?
-5. **Gazebo: the version.** The plan targets Gazebo Sim (Harmonic) and not Gazebo Classic, which is end of life and is the only one installed on this machine. Building and testing the backend means installing Gazebo Harmonic and `ros_gz` here (a system change that needs the owner's permission) or using a container. Which?
-6. **Which stage first?** The recommendation is stage 1, the base and the ground track, 63 lessons, built one phase at a time with the owner's go-ahead for each, as before.
+1. **The shape:** approved. The same repository, phases 22 to 37, four stages, ground first, the built in simulator as the default and Gazebo Sim as the second backend.
+2. **Tiers and hardware:** approved. Every lesson passes without hardware; optional hardware sections are tested against a fake of the device.
+3. **Humanoid basics (phase 37):** paused, not dropped.
+4. **Named parts:** left to the planner. The plan's choices stand and may be changed, with the reason recorded here, when each track's reference build is written.
+5. **Gazebo Harmonic:** the owner approved installing it on the build machine. The machine needs an administrator password for that, which the assistant cannot give, so the owner runs the install commands; the plan's Gazebo lessons wait for it (phase 22 lessons 12 to 15). Until it is there, nothing about Gazebo is built, and no Gazebo number is quoted.
+6. **Real world dimensions:** a preference of the owner, made a rule in section 3b.
+7. **Which stage first:** stage 1 (the base and the ground track, 63 lessons), one phase at a time, each started on the owner's go-ahead: phase 22 first.
