@@ -24,7 +24,7 @@ Six things. `command` says what is wanted: a forward speed in m/s and a turn rat
 
 A fake that does exactly what it is told in no time is the kindest possible lie. `FakeDrive` does three things that the hardware does:
 
-1. **It limits.** Told to go 5 m/s, a base with a limit of 1 m/s did **1.000 m/s** after 10 s.
+1. **It limits, and it is not fooled.** A command that is not a number is treated as a stop; the first version of this fake let `std::min` turn it into the limit, which is full speed (found by the contract test of a later lesson). Told to go 5 m/s, a base with a limit of 1 m/s did **1.000 m/s** after 10 s.
 2. **It lags.** The motor and the controller inside the base answer in a time constant, here 0.2 s: the speed reached 63.2 percent of a step in **0.200 s**. A controller written against a base that answers instantly is tuned for a robot that does not exist.
 3. **It watches the clock.** A base whose commander has crashed must not keep driving. After 0.5 s with no command, `FakeDrive` stops itself: a base told 0.5 m/s once was below 0.01 m/s after **1.265 s** (0.5 s of waiting, and then the lag of the slowdown). See `E-FIELD-0001`.
 
@@ -32,7 +32,7 @@ A stop is not instant either: a base at 1 m/s told to stop **coasted 0.200 m**, 
 
 ### Arms and legs
 
-An arm and a set of legs are, to the boundary, the same thing: a row of joints given target angles that they reach at no more than a rate. `JointBus` does that, and refuses a command with the wrong number of joints instead of half applying it. A three joint arm told to move 1 rad at 0.5 rad/s took **2.000 s**; twelve leg joints at 2 rad/s took **0.500 s**. `ArmBus` and `LegBus` are separate types so that a program cannot give an arm's targets to a leg. See `E-FIELD-0003`.
+An arm and a set of legs are, to the boundary, the same thing: a row of joints given target angles that they reach at no more than a rate. `JointBus` does that, and refuses a command with the wrong number of joints instead of half applying it. A command with a NaN in it is refused too, because `std::min` and `std::max` would turn it into the largest step and the joint would run away. A three joint arm told to move 1 rad at 0.5 rad/s took **2.000 s**; twelve leg joints at 2 rad/s took **0.500 s**. `ArmBus` and `LegBus` are separate types so that a program cannot give an arm's targets to a leg. See `E-FIELD-0003`.
 
 ## Build It
 

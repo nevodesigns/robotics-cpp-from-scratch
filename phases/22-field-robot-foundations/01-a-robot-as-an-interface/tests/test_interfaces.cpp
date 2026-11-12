@@ -34,6 +34,15 @@ RC_TEST("a command is limited, answered with a lag of the time constant, and hel
   rec("vfinal", d.state().v);
   RC_CHECK_NEAR(d.state().v, 1.0, 0.001);
 
+  // A command that is not a number is a stop, not full speed.
+  FakeDrive confused;
+  DriveCommand nan_command;
+  nan_command.v = std::nan("");
+  confused.command(fast);
+  confused.command(nan_command);
+  run(confused, 3.0, nullptr);
+  RC_CHECK_NEAR(confused.state().v, 0.0, 1e-3);
+
   FakeDrive step;
   DriveCommand one;
   one.v = 1.0;
@@ -93,6 +102,7 @@ RC_TEST("the same program drives any Drive, and a turn command turns") {
 RC_TEST("joint buses move at their rate, refuse a wrong sized command, and keep arm and leg apart") {
   ArmBus arm(3, 0.5);
   RC_CHECK(!arm.set_targets({1.0, 2.0}));
+  RC_CHECK(!arm.set_targets({1.0, std::nan(""), 0.0}));
   RC_CHECK(arm.set_targets({1.0, 0.0, -1.0}));
   double t = 0.0;
   while (!arm.at_target(1e-6) && t < 10.0) {

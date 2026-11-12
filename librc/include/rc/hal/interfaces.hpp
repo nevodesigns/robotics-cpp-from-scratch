@@ -56,6 +56,11 @@ class FakeDrive : public Drive {
   explicit FakeDrive(const DriveLimits& limits = DriveLimits()) : limits_(limits) {}
 
   void command(const DriveCommand& c) override {
+    // A command that is not a number is not a command. std::min and std::max would turn a NaN into the limit, which is full speed.
+    if (!std::isfinite(c.v) || !std::isfinite(c.w)) {
+      stop();
+      return;
+    }
     want_.v = std::max(-limits_.max_v, std::min(limits_.max_v, c.v));
     want_.w = std::max(-limits_.max_w, std::min(limits_.max_w, c.w));
     since_command_ = 0.0;
@@ -99,6 +104,8 @@ class JointBus {
   // Rejects a command with the wrong number of joints rather than half applying it.
   bool set_targets(const std::vector<double>& targets) {
     if (targets.size() != target_.size()) return false;
+    for (std::size_t i = 0; i < targets.size(); ++i)
+      if (!std::isfinite(targets[i])) return false;
     target_ = targets;
     return true;
   }
