@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "id": "21-09-a-gate-before-the-robot",
+  "title": "A Gate Before the Robot: The Safety Suite as a Release Condition, a Candidate That Looks Fine and Is Not, and the Fault the Gate Cannot See",
+  "type": "capstone",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "21-08-a-test-report-you-can-read",
+    "21-07-a-delivery-not-a-route",
+    "21-02-a-rover-in-a-building",
+    "20-12-a-release-that-reaches-the-robot",
+    "20-06-on-trial-until-it-proves-itself",
+    "19-14-a-risk-assessment-you-can-defend"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::capstone",
+    "header": "rc/capstone/ship_gate.hpp",
+    "note": "a release gate that runs the safety suite on a candidate and refuses to deploy one that fails, joined to the pipeline of phase 20, with a candidate that works but is unsafe, one that is slow to give up, one that fails only on the robot, and a fleet with and without the gate"
+  },
+  "breaks_first": [
+    "E-CAP-0025",
+    "E-CAP-0026",
+    "E-CAP-0027"
+  ]
+}
