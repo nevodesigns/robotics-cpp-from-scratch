@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "22-17-a-safety-case-per-robot-type",
+  "title": "A Safety Case Per Robot Type: Starting Hazards for a Ground Vehicle, an Arm and a Legged Robot, and a Checker That Refuses a Case With a Hole in It",
+  "type": "capstone",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-10-scoring-a-run",
+    "22-11-the-contract-test-for-an-interface",
+    "22-16-a-bring-up-checklist-for-a-board",
+    "19-14-a-risk-assessment-you-can-defend",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::field",
+    "header": "rc/field/safety_case.hpp",
+    "note": "a safety case as data (hazards with severity, exposure and avoidability; controls with a kind, the safety primitive that implements them and the test that proves it; a residual level and a sign-off), starting hazards for a ground vehicle, an arm and a legged robot, a checker that lists every hole, and a markdown report"
+  },
+  "breaks_first": [
+    "E-FIELD-0051",
+    "E-FIELD-0052",
+    "E-FIELD-0053"
+  ]
+}

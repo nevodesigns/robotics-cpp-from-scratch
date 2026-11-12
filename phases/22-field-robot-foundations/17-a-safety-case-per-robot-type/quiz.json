@@ -1,0 +1,78 @@
+{
+  "lesson": "22-17-a-safety-case-per-robot-type",
+  "title": "A Safety Case Per Robot Type: Starting Hazards for a Ground Vehicle, an Arm and a Legged Robot, and a Checker That Refuses a Case With a Hole in It",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What makes a safety claim worth anything?",
+      "options": [
+        "Its length",
+        "The structure behind it: every hazard has a control, and every control has a test",
+        "Its author",
+        "Its date"
+      ],
+      "correct": 1,
+      "explanation": "A sentence that says safe is not a case."
+    },
+    {
+      "stage": "check",
+      "question": "How many hazards did the template of the ground vehicle start with?",
+      "options": [
+        "3",
+        "8",
+        "20",
+        "1"
+      ],
+      "correct": 1,
+      "explanation": "Eight, against seven for an arm and six for a legged robot."
+    },
+    {
+      "stage": "check",
+      "question": "The empty ground template had how many problems?",
+      "options": [
+        "0",
+        "16, two for each hazard",
+        "1",
+        "100"
+      ],
+      "correct": 1,
+      "explanation": "No control and no stated residual for each."
+    },
+    {
+      "stage": "check",
+      "question": "Why is a control with no test a hole?",
+      "options": [
+        "Style",
+        "Nothing shows that it works: it is a hope",
+        "Tests are optional",
+        "It is too short"
+      ],
+      "correct": 1,
+      "explanation": "A control that has never been made to fail is unproven."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a high risk controlled only by a sign refused?",
+      "options": [
+        "Signs are bad",
+        "Information relies on a person doing the right thing, and a high risk needs a function that does not",
+        "Cost",
+        "It is allowed"
+      ],
+      "correct": 1,
+      "explanation": "Protective and design controls come before information."
+    },
+    {
+      "stage": "post",
+      "question": "Does a case with no holes mean the robot is safe?",
+      "options": [
+        "Yes",
+        "No: it means the table has none, and the review and the hardware still have to say the rest",
+        "Always",
+        "Only on Tuesdays"
+      ],
+      "correct": 1,
+      "explanation": "The checker finds holes in a table, not in the world."
+    }
+  ]
+}
