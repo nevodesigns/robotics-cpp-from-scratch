@@ -1,0 +1,78 @@
+{
+  "lesson": "23-03-ackermann-geometry-and-the-turning-circle",
+  "title": "Ackermann Geometry and the Turning Circle: The Bicycle Model, the Two Steering Angles of a Car, the Smallest Circle It Can Drive and the Speed It Can Drive It At",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why can a car not turn on the spot?",
+      "options": [
+        "Heavy",
+        "The turn rate is the speed times tan(steer) over the wheelbase: no speed, no turn",
+        "Bad tyres",
+        "It can"
+      ],
+      "correct": 1,
+      "explanation": "Its rear wheels point where it points."
+    },
+    {
+      "stage": "check",
+      "question": "The smallest circle of the car was:",
+      "options": [
+        "0.1 m",
+        "0.742 m",
+        "5 m",
+        "1.81 m"
+      ],
+      "correct": 1,
+      "explanation": "L over tan of the largest angle."
+    },
+    {
+      "stage": "check",
+      "question": "At the smallest circle the inner and the outer front wheels differed by:",
+      "options": [
+        "Nothing",
+        "5.8 degrees",
+        "45 degrees",
+        "0.1 degrees"
+      ],
+      "correct": 1,
+      "explanation": "They point at right angles to the lines to the centre."
+    },
+    {
+      "stage": "check",
+      "question": "The lane a car needs at its smallest circle is:",
+      "options": [
+        "Its width",
+        "0.062 m wider than the car",
+        "Half its width",
+        "Twice its length"
+      ],
+      "correct": 1,
+      "explanation": "The outer front wheel sweeps further out."
+    },
+    {
+      "stage": "post",
+      "question": "What sets the fastest speed round a circle on gravel?",
+      "options": [
+        "The motor",
+        "The friction: sqrt(mu g R)",
+        "The colour",
+        "The wheelbase only"
+      ],
+      "correct": 1,
+      "explanation": "The tyres can give mu g sideways."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the Ackermann difference invisible on a big circle?",
+      "options": [
+        "It is zero",
+        "On a large radius the two angles are nearly equal",
+        "It is hidden",
+        "Cars cheat"
+      ],
+      "correct": 1,
+      "explanation": "On 20 m the difference is under a tenth of a degree."
+    }
+  ]
+}
