@@ -18,14 +18,14 @@ starts with an entry of 13 November; the older entries below it are kept as they
 
 | | |
 |---|---|
-| lessons built | 337: 320 of 320 planned for the original course, 100 percent, and 17 of 138 planned for the specialisation course (phase 22 of 22 to 37) |
-| phases opened | 23 (the 22 of the original plan, and phase 22 of the specialisation course) |
-| phases finished to plan | 22 (phases 00 to 21) |
-| hours of material | 699 (the sum of the minutes in the lesson files, which is what the README counts) |
-| Failure Atlas entries | 963 |
-| librc headers | 323 across 21 modules (rc::hal, rc::field and rc::gz are new) |
+| lessons built | 346: 320 of 320 planned for the original course, 100 percent, and 26 of 138 planned for the specialisation course (phases 22 and 23 of 22 to 37) |
+| phases opened | 24 (the 22 of the original plan, and phases 22 and 23 of the specialisation course) |
+| phases finished to plan | 24 (phases 00 to 21 of the original plan, and 22 and 23 of the specialisation course) |
+| hours of material | 712 (the sum of the minutes in the lesson files, which is what the README counts) |
+| Failure Atlas entries | 991 |
+| librc headers | 332 across 22 modules (rc::hal, rc::field, rc::gz and rc::vehicle are new) |
 | toolchains claimed | 4 |
-| gate tests | 387 (a reference test for each of the 320 lessons, the checks that code which must not compile is refused, and the tests of the library itself), green on every claimed toolchain |
+| gate tests | 396 (a reference test for each of the 320 lessons, the checks that code which must not compile is refused, and the tests of the library itself), green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -57,6 +57,7 @@ starts with an entry of 13 November; the older entries below it are kept as they
 | 20 Deployment and cross compilation | 12 | 12 | A robot that boots into your code, installs a new release without being bricked by a power cut, and rolls back by itself when the release is bad |
 | 21 Capstones | 10 | 10 | A whole robot, run end to end with faults injected, whose report an employer can read and whose every number comes from a test that passes |
 | 22 Field robot foundations (the specialisation course, phase 1 of 16) | 17 | 17 | One shared base for every field robot: hardware interfaces with contract tests and fakes, frames, limits, terrain, sensor faults, a scenario file, recording, scoring, one robot description for two simulators, a bring-up checklist and a safety case |
+| 23 Vehicle models (the specialisation course, phase 2 of 16) | 9 | 9 | A model of each kind of ground vehicle (differential drive, skid steer, car, tracked) with its slip, its limits and its odometry, calibrated from a run and checked against a simulator |
 
 **Where the gap is.** The plan of 320 lessons is built, and what is thin is no longer the front. It is what the curriculum cannot check from inside this repository: nothing is cross compiled (there is no cross compiler on any lane, so phase 20 teaches what a deployment is made of in tested code and says so), nothing was run on a real robot or a real board (hardware tier 2 is two lessons, 08-05 and 08-14, each with a pseudo terminal fallback, and tier 3 is none), ROS 2 is a labelled sketch (no lesson uses rclcpp), and the capstones are simulations. 21-10's last line says the same of the robot: four hazards of the log have no scenario. The accepted gaps from the review of the repository (hardware drivers, a lidar pipeline, SLAM, field validation, vehicle dynamics) belong to the specialisation course that is to be planned next, not to this repository.
 
@@ -521,13 +522,13 @@ libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
 
-### Written 13 November 2026, phase 22 built (the base of the specialisation course)
+### Written 13 November 2026, phases 22 and 23 built (the base and the vehicle models of the specialisation course)
 
-**Phase 22 is built: 17 lessons, all green locally** (the full gate of 387 tests, the sanitizers and clang on each lesson, the audit with 0 issues). It was pushed in one go; read the next entry for what continuous integration said. The owner approved the specialisation plan on 13 November (docs/SPECIALISATION-PLAN.md, section 9): the same repository, phases 22 to 37, ground first, the built in simulator as the default and Gazebo Sim as a second backend, hardware optional and tested against fakes, real world dimensions for the models, the humanoid (phase 37) paused and not dropped. Stage 1 is the base and the ground track (phases 22 to 27, 63 lessons) and is built in one run, one phase at a time, stopping at the end of stage 1.
+**Phase 22 is built and green on continuous integration (all 9 jobs, the Gazebo one included, on commit cfb4728). Phase 23, the vehicle models, is built: 9 lessons, all green locally** (the full gate of 387 tests, the sanitizers and clang on each lesson, the audit with 0 issues). It was pushed in one go; read the next entry for what continuous integration said. The owner approved the specialisation plan on 13 November (docs/SPECIALISATION-PLAN.md, section 9): the same repository, phases 22 to 37, ground first, the built in simulator as the default and Gazebo Sim as a second backend, hardware optional and tested against fakes, real world dimensions for the models, the humanoid (phase 37) paused and not dropped. Stage 1 is the base and the ground track (phases 22 to 27, 63 lessons) and is built in one run, one phase at a time, stopping at the end of stage 1.
 
 **What phase 22 holds.** `rc::hal` (the Drive, ArmBus and LegBus interfaces and their fakes, the contract test every implementation must pass, the bring-up checklist and a fake board), `rc::field` (frames, limits, a gear motor, terrain and friction, field sensors, the scenario file, the run log, the SVG viewer, scoring, the robot file with a source for every number, the Gazebo world, the backend interface and the gap between simulators, the safety case), and `rc::gz` (the Gazebo Sim backend over gz-transport, built only where Gazebo is installed). Details and every mistake are in docs/BUILD-LOG.md, "Phase 22".
 
-**What is next.** Phase 23, the first of the ground vehicle track (vehicle models), on the owner's standing instruction to build stage 1 to its end.
+**What is next.** Phase 24 (perceiving for driving), on the owner's standing instruction to build stage 1 to its end.
 
 ### Written 13 November 2026, all 320 lessons built and the hardening pass done
 

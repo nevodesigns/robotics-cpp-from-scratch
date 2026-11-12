@@ -1000,3 +1000,34 @@ Seventeen lessons, built in order in one run after the owner's approval of the p
 - **Lost generator scripts.** They lived in a session's scratch directory. The new ones are in the same place and will be lost the same way; the phase's files are what is kept.
 
 **Measurements worth keeping.** Gazebo Sim 8.15 on this machine: a server starts in 2.2 s; with a real time factor of 0 a stepped run is about 5.5 times faster than real time at a 1 ms step; the 100 ms per chunk of the first backend was the clock and not the physics.
+
+## Phase 23, vehicle models (13 November 2026)
+
+Nine lessons on the ground vehicle track of the specialisation course, built after phase 22 was green on continuous integration. The module is `rc::vehicle`, the atlas prefix `VEH`.
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 23-01 a differential drive that slips | a turn efficiency of 0.8 turned a quarter turn into 72.0 degrees; a square of 10 m sides on commands worked out for no loss ended 4.64 m from home with a slip of 2 percent and an efficiency of 0.9 | `rc/vehicle/diff_slip.hpp` |
+| 23-02 a skid steer and its centre of rotation | a pivot of a 10 kg vehicle on gravel needed 34.5 N a side against 28.0 N from two gear motors a side: it cannot pivot on gravel and can on grass and ice | `rc/vehicle/skid_steer.hpp` |
+| 23-03 ackermann geometry | the smallest circle of the 0.3302 m wheelbase car at 24 degrees is 0.742 m; the front wheels are 27.2 and 21.4 degrees apart there; the lane is 0.062 m wider than the car | `rc/vehicle/ackermann.hpp` |
+| 23-04 a tracked vehicle and its slip | half the largest thrust at 10.0 percent slip on a loose sand; a pivot needs 32.7 N a track against 81.8 N for four wheels; slips of 10 and 20 percent veer a straight command by 44.1 degrees in 10 s | `rc/vehicle/tracked.hpp` |
+| 23-05 the traction circle | at 1.5 m/s on the smallest circle the turn takes 69 percent of the grip of gravel and braking falls from 4.81 to 3.60 m/s2; the turn alone uses all of it at 1.81 m/s | `rc/vehicle/traction.hpp` |
+| 23-06 what the motors and the battery allow | top speed on level gravel 1.67 m/s and 0.99 on a slope of 10 degrees; the motors climb 25.6 degrees against 22.3 for the grip of gravel; a battery of 0.5 ohm cut the standing acceleration from 4.54 to 3.32 m/s2 | `rc/vehicle/drive_train.hpp` |
+| 23-07 odometry for each kind of vehicle | the ideal parameters believed the square ended 0.02 m from home when it ended 4.6 m away; a steering sensor 1 degree off made a car driven 20 m straight believe it had turned 61 degrees | `rc/vehicle/odometry.hpp` |
+| 23-08 calibrating the track width | a gyro bias of 0.01 rad/s gave 0.31 percent error from a spin one way and 0.000 from a spin each way; four spins each way halved the spread of 0.0034 m to 0.0019 | `rc/vehicle/calibrate.hpp` |
+| 23-09 checking a model against the simulator | Gazebo with the weight 1 mm behind the axle made 1.01, 0.74 and 0.85 of the turns asked (from rest, after a drive, after a drive and a stop) and with the weight 14.4 mm behind it 0.99, 1.01 and 1.02 | `rc/vehicle/check_model.hpp` |
+
+**Decisions.**
+
+1. **A tracked vehicle uses the Janosi-Hanamoto shear curve and typical soils.** The curve is the one the terramechanics textbooks use; the three soil numbers are typical values of a loose sand and a firm soil and are marked so. Lesson 23-04 says that a real soil needs them measured.
+2. **Sources.** The wheelbase of the car (0.3302 m) is from the vehicle modelling page of a course wiki for the F1TENTH car; its track and steering limit are typical. The dimensions of the TurtleBot3 Burger class robot are those of phase 22.
+3. **A lesson that starts a simulator may declare a longer test limit.** `"timeout"` in the manifest (23-09 has 180 s); the default stays 60.
+4. **A graduated header must not depend on a `using` directive of the lesson.** Lessons whose body uses the names of another namespace qualify them; 23-09's first header did not and was caught by the all-headers check.
+
+**Mistakes.**
+
+- **The fault found in the reference robot** (the weight over the axle, and an explanation of its effect that was wrong) is written up under phase 22, where it was made and corrected, and is the content of 23-09. It is the largest finding of the phase and was found by building the lesson on checking a model against the simulator.
+- **A calibrated odometry that applied the distance scale to the turn.** The scale was multiplied into the heading change as well as the distance, and the calibrated odometry ended 1.2 m from the truth. The turn is the difference of the wheels over the effective track, which already takes in everything that makes a turn other than the wheels say.
+- **A calibration spread that was noise in the wrong place.** A noisy gyro gave a spread of 4e-5 m, too small to show that more spins help. The scatter that matters is the floor's (the robot does not scrub the same way twice), and the lesson now varies the efficiency of each spin by 3 percent.
+- **A stub that named a variable of the solution.** The exercise of 23-06 did not compile because its stub mentioned a constant that exists only in the reference. The exercise lane of the check (every exercise must compile and fail) caught it.
+- **Tests with round numbers for rounded quantities.** Several expectations were exact for continuous time and wrong for a millisecond step (a distance of 10.0003 m, a turn of 72.038 degrees); each was corrected to the tolerance the step implies, and the tolerance is said in a comment.
