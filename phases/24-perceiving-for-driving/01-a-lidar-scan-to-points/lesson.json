@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "24-01-a-lidar-scan-to-points",
+  "title": "A Lidar Scan to Points: Ranges Become Points in the Sensor's Frame and Then in the Vehicle's, and What the Gaps Between Them Hide",
+  "type": "build",
+  "minutes": 75,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-02-frames-for-a-field-robot",
+    "22-06-sensors-that-fail-like-the-field",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::perceive",
+    "header": "rc/perceive/scan.hpp",
+    "note": "a lidar scan as angles and ranges, its points in the sensor's frame (dropping every beam that returned nothing, was too near or too far) and in another frame through a transform, the spacing of the points at a range, the narrowest thing that two beams hit at a range, and the farthest range at which a thing of a width is still hit twice"
+  },
+  "breaks_first": [
+    "E-VEH-0028",
+    "E-VEH-0029",
+    "E-VEH-0030"
+  ]
+}
