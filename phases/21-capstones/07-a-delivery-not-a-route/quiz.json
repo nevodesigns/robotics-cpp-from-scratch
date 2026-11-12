@@ -1,0 +1,78 @@
+{
+  "lesson": "21-07-a-delivery-not-a-route",
+  "title": "A Delivery, Not a Route: A Mission State Machine With a Battery Check, a Timeout for a Blocked Road, and a Pause That Does Not Start Over",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why must the battery cover the round trip and a reserve before the mission starts?",
+      "options": [
+        "Tradition",
+        "A robot that cannot get home has made a delivery and then become a hazard on the road: the cheapest place to find out is before it leaves",
+        "The reserve is a fee",
+        "To keep warm"
+      ],
+      "correct": 1,
+      "explanation": "25 Wh for 20 Wh of round trip and 5 of reserve."
+    },
+    {
+      "stage": "check",
+      "question": "At 0.12 Wh/m used against 0.1 expected, what did checking on the way do?",
+      "options": [
+        "Saved the robot",
+        "Turned back a delivery that would have made it: 3.07 Wh left, not delivered, where the unchecking robot delivered with 1.98 left",
+        "Stranded it",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "The check judges by the expected rate."
+    },
+    {
+      "stage": "check",
+      "question": "At 0.15 Wh/m, what did the robot that checked only at the start do?",
+      "options": [
+        "Delivered and came home",
+        "Delivered and was stranded 26.7 m from home, unable to come back, where the checking robot got home with 0.79 Wh",
+        "Refused",
+        "Turned back"
+      ],
+      "correct": 1,
+      "explanation": "A check on the way costs deliveries and saves robots."
+    },
+    {
+      "stage": "check",
+      "question": "A road is blocked both ways. What state does the mission end in, and why not wait?",
+      "options": [
+        "done",
+        "needs help: stopped where it is, since there is no safe place to go and waiting for ever or doing something clever are both worse",
+        "aborted",
+        "to home"
+      ],
+      "correct": 1,
+      "explanation": "A state machine gives every combination an answer."
+    },
+    {
+      "stage": "post",
+      "question": "The link was lost for 30 s. What did the pause cost?",
+      "options": [
+        "The mission",
+        "31.0 s of time, the whole difference (435 s against 404 s), and no energy: the state, position and timers were kept",
+        "A restart",
+        "The load"
+      ],
+      "correct": 1,
+      "explanation": "A pause does not start over."
+    },
+    {
+      "stage": "post",
+      "question": "A margin of 1.5 on the rate stranded none in 72 worlds. What did it cost?",
+      "options": [
+        "Nothing",
+        "54 of 72 missions refused and half as many delivered: safety bought with work, for the owner to choose",
+        "A bigger battery",
+        "Speed"
+      ],
+      "correct": 1,
+      "explanation": "Same code, one number different."
+    }
+  ]
+}
