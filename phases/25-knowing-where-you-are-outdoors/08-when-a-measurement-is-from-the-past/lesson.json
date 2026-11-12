@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "25-08-when-a-measurement-is-from-the-past",
+  "title": "When a Measurement Is From the Past: Stamps, a History of the State, Correcting the State as It Was and Carrying the Correction Forward, and Finding the Delay Between Two Clocks",
+  "type": "build",
+  "minutes": 85,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "25-03-fix-quality-and-outliers",
+    "25-01-wheels-and-a-gyro-in-a-filter",
+    "24-07-a-scan-taken-while-moving",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::locate",
+    "header": "rc/locate/time_align.hpp",
+    "note": "a history of the estimated state by time that can be asked for the state at a past moment (by interpolating between the two states round it), the correction of a delayed measurement against the state as it was when it was taken, carried to the state now, and an estimate of the lag between two signals by finding the shift that makes them most alike"
+  },
+  "breaks_first": [
+    "E-VEH-0076",
+    "E-VEH-0077",
+    "E-VEH-0078"
+  ]
+}

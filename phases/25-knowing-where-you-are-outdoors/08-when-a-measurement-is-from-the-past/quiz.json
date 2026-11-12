@@ -1,0 +1,78 @@
+{
+  "lesson": "25-08-when-a-measurement-is-from-the-past",
+  "title": "When a Measurement Is From the Past: Stamps, a History of the State, Correcting the State as It Was and Carrying the Correction Forward, and Finding the Delay Between Two Clocks",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What time should a measurement be stamped with?",
+      "options": [
+        "The time it arrived",
+        "The time it was taken",
+        "The time of the log",
+        "None"
+      ],
+      "correct": 1,
+      "explanation": "Arrival is later by the delay."
+    },
+    {
+      "stage": "check",
+      "question": "A late fix taken for the present left a steady error of:",
+      "options": [
+        "0",
+        "0.49 m",
+        "10 m",
+        "0.01 m"
+      ],
+      "correct": 1,
+      "explanation": "Speed times delay."
+    },
+    {
+      "stage": "check",
+      "question": "Comparing the fix with the state of its own time gave an rms error of:",
+      "options": [
+        "0.493 m",
+        "0.045 m",
+        "1 m",
+        "10 m"
+      ],
+      "correct": 1,
+      "explanation": "And the extrapolated way 0.035 m: the same to within the noise."
+    },
+    {
+      "stage": "check",
+      "question": "The lag between the gyro and the wheels was found as:",
+      "options": [
+        "0 s",
+        "0.12 s",
+        "1 s",
+        "0.5 s"
+      ],
+      "correct": 1,
+      "explanation": "The shift of greatest correlation."
+    },
+    {
+      "stage": "post",
+      "question": "When does extrapolating by the velocity fail?",
+      "options": [
+        "Never",
+        "When the velocity changes during the delay, as when the robot brakes to a stop",
+        "At night",
+        "With noise"
+      ],
+      "correct": 1,
+      "explanation": "0.25 m beyond the robot."
+    },
+    {
+      "stage": "post",
+      "question": "What does the history method need that the others do not?",
+      "options": [
+        "Nothing",
+        "A memory of the states long enough to reach back past the delay",
+        "A faster computer",
+        "A magnetometer"
+      ],
+      "correct": 1,
+      "explanation": "StateHistory."
+    }
+  ]
+}
