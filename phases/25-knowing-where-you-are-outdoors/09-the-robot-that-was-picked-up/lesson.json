@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "25-09-the-robot-that-was-picked-up",
+  "title": "The Robot That Was Picked Up: A Cloud That Is Sure and Wrong, the Fall in How Well It Explains the Scan, and Scattering a Few New Guesses Until One Is Right",
+  "type": "capstone",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "25-05-finding-yourself-in-a-map-with-particles",
+    "25-06-how-lost-can-it-be",
+    "25-03-fix-quality-and-outliers",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::locate",
+    "header": "rc/locate/recovery.hpp",
+    "note": "a monitor of how well a particle cloud explains the scans (a slow and a fast average of the likelihood, and the share by which the fast has fallen below the slow), the fraction of random particles that share asks for, the scattering of that fraction over the map, and a three level verdict on the localisation (good, doubtful, lost) from the likelihood and the spread of the cloud"
+  },
+  "breaks_first": [
+    "E-VEH-0079",
+    "E-VEH-0080",
+    "E-VEH-0081"
+  ],
+  "timeout": 300
+}

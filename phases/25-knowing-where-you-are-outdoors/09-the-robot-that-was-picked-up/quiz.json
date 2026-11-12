@@ -1,0 +1,78 @@
+{
+  "lesson": "25-09-the-robot-that-was-picked-up",
+  "title": "The Robot That Was Picked Up: A Cloud That Is Sure and Wrong, the Fall in How Well It Explains the Scan, and Scattering a Few New Guesses Until One Is Right",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does a localiser that has found the robot not notice when the robot is picked up?",
+      "options": [
+        "It does",
+        "The weights are normalised, so the cloud stays as sure as ever of the wrong place",
+        "It is asleep",
+        "The map changes"
+      ],
+      "correct": 1,
+      "explanation": "The normalising hides the fall in the likelihood."
+    },
+    {
+      "stage": "check",
+      "question": "A plain cloud after a carry of 5.6 m was out by:",
+      "options": [
+        "0 m",
+        "8.3 m",
+        "0.1 m",
+        "100 m"
+      ],
+      "correct": 1,
+      "explanation": "And stays out."
+    },
+    {
+      "stage": "check",
+      "question": "With the monitor the robot was found again after how many steps?",
+      "options": [
+        "Never",
+        "21 steps",
+        "1000",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "The monitor called it lost after 1."
+    },
+    {
+      "stage": "check",
+      "question": "Before the robot was moved the monitor put in how much random?",
+      "options": [
+        "20 percent",
+        "0.1 percent",
+        "100 percent",
+        "50 percent"
+      ],
+      "correct": 1,
+      "explanation": "It must not throw away a good cloud."
+    },
+    {
+      "stage": "post",
+      "question": "What does the ratio of the fast to the slow average show?",
+      "options": [
+        "The speed",
+        "Whether the scans are explained now as well as they usually are",
+        "The battery",
+        "The map's age"
+      ],
+      "correct": 1,
+      "explanation": "A fall means the cloud no longer explains what is seen."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the share of random particles limited?",
+      "options": [
+        "Style",
+        "One bad scan must not throw a good cloud away",
+        "Memory",
+        "Law"
+      ],
+      "correct": 1,
+      "explanation": "A cap on the doubt."
+    }
+  ]
+}
