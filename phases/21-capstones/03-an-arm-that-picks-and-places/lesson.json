@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "id": "21-03-an-arm-that-picks-and-places",
+  "title": "An Arm That Picks and Places: Inverse Kinematics, Joint Limits, a Timed Cycle, and a Speed Cut by the Distance to a Person",
+  "type": "capstone",
+  "minutes": 160,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "21-02-a-rover-in-a-building",
+    "19-14-a-risk-assessment-you-can-defend",
+    "19-05-a-speed-the-sensor-can-vouch-for",
+    "19-10-one-place-that-says-stop",
+    "13-14-how-long-the-move-takes",
+    "13-05-the-angle-it-cannot-hold",
+    "13-02-what-angles-put-it-there"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::capstone",
+    "header": "rc/capstone/pick_and_place.hpp",
+    "note": "a two link arm that picks and places: poses from inverse kinematics inside the joint limits, a cycle of synchronised moves, and a speed cut by the distance to a person with a stop for a dead sensor or an open e-stop"
+  },
+  "breaks_first": [
+    "E-CAP-0007",
+    "E-CAP-0008",
+    "E-CAP-0009"
+  ]
+}

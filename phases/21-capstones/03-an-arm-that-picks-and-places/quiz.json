@@ -1,0 +1,78 @@
+{
+  "lesson": "21-03-an-arm-that-picks-and-places",
+  "title": "An Arm That Picks and Places: Inverse Kinematics, Joint Limits, a Timed Cycle, and a Speed Cut by the Distance to a Person",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does arm_pose_for take the elbow up branch for a point sometimes?",
+      "options": [
+        "It is faster",
+        "The elbow down branch may be outside the joint limits, and the other branch fits: there is none only if neither does",
+        "It is random",
+        "Elbow up is the default"
+      ],
+      "correct": 1,
+      "explanation": "With the elbow held to [-2.4, 0.5], q2 was -1.48."
+    },
+    {
+      "stage": "check",
+      "question": "What does a tip speed limit of 0.8 m/s cost in cycle time, and what does 0.25 m/s cost?",
+      "options": [
+        "Nothing and nothing",
+        "About 4 percent (4.10 to 4.28 s) and about 86 percent (7.63 s)",
+        "Half and double",
+        "1 s and 2 s"
+      ],
+      "correct": 1,
+      "explanation": "The arm's own tip speed is at most 1.14 m/s."
+    },
+    {
+      "stage": "check",
+      "question": "At a limit of 0.25 m/s the tip reached 0.30 m/s. Why?",
+      "options": [
+        "A bug in the planner",
+        "The speed is scaled by a fraction that can only move at a limited rate, so a leg that begins quickly overshoots the limit before the ramp catches up: a target, not a wall",
+        "Rounding",
+        "The person moved"
+      ],
+      "correct": 1,
+      "explanation": "Claims about the limit need a margin or a measurement."
+    },
+    {
+      "stage": "check",
+      "question": "With somebody 8 cm from the pick point, how close did the monitored arm come, and how many ticks in contact?",
+      "options": [
+        "0.077 m and 66",
+        "0.150 m, exactly the margin, and 0",
+        "0 m and 100",
+        "0.5 m and 0"
+      ],
+      "correct": 1,
+      "explanation": "It lost one cycle in thirty seconds."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the e-stop stop shorter at the 0.8 m/s limit than at the arm's full speed?",
+      "options": [
+        "The brake is better",
+        "The distance to stop grows with the speed it started from (0.044 m against 0.065 m)",
+        "The loop is different",
+        "Luck"
+      ],
+      "correct": 1,
+      "explanation": "The limit near people matters twice."
+    },
+    {
+      "stage": "post",
+      "question": "Why is this not what a collaborative arm is certified on?",
+      "options": [
+        "It is certified on code",
+        "Certification measures contact forces on a test device on the real arm: this models the logic only, with a tip and no inertia",
+        "It has no gripper",
+        "It is a plane"
+      ],
+      "correct": 1,
+      "explanation": "A model of the logic and not of that."
+    }
+  ]
+}
