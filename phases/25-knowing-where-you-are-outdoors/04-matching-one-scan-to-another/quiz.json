@@ -1,0 +1,78 @@
+{
+  "lesson": "25-04-matching-one-scan-to-another",
+  "title": "Matching One Scan to Another: Iterating Nearest Points to a Rigid Move, Where It Converges, and the Corridor It Cannot Tell Anything About",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does a scan match give?",
+      "options": [
+        "A map",
+        "The rigid move that puts one scan on the other",
+        "A speed",
+        "The colour"
+      ],
+      "correct": 1,
+      "explanation": "A rotation and a translation."
+    },
+    {
+      "stage": "check",
+      "question": "A scan moved by 0.3 m, 0.1 m and 0.15 rad was matched to:",
+      "options": [
+        "10 m",
+        "0.0007 m and 0.0001 rad",
+        "0",
+        "1 rad"
+      ],
+      "correct": 1,
+      "explanation": "In 16 rounds."
+    },
+    {
+      "stage": "check",
+      "question": "In a corridor the match left the move along it wrong by:",
+      "options": [
+        "Nothing",
+        "0.10 m",
+        "0.01 m",
+        "10 m"
+      ],
+      "correct": 1,
+      "explanation": "Every position along it looks the same."
+    },
+    {
+      "stage": "check",
+      "question": "A person in only one scan pulled the match by:",
+      "options": [
+        "Nothing",
+        "0.042 m without a limit, 0.000 m with one",
+        "1 km",
+        "0.000 m without a limit"
+      ],
+      "correct": 1,
+      "explanation": "Points with no partner."
+    },
+    {
+      "stage": "post",
+      "question": "Why does a first guess from the odometry matter?",
+      "options": [
+        "It does not",
+        "The method finds the nearest minimum, which is right only from near",
+        "Speed only",
+        "Law"
+      ],
+      "correct": 1,
+      "explanation": "5 rounds against 16."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the rms of the match not a measure of how well it is determined?",
+      "options": [
+        "It is",
+        "It is small whether or not the geometry constrains the move",
+        "It is always zero",
+        "It is too noisy"
+      ],
+      "correct": 1,
+      "explanation": "A corridor matches well in every position along it."
+    }
+  ]
+}

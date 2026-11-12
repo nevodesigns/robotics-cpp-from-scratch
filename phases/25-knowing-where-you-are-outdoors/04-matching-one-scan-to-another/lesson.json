@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "25-04-matching-one-scan-to-another",
+  "title": "Matching One Scan to Another: Iterating Nearest Points to a Rigid Move, Where It Converges, and the Corridor It Cannot Tell Anything About",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "25-02-gnss-and-the-lever-arm",
+    "24-03-from-points-to-obstacles",
+    "22-02-frames-for-a-field-robot",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::locate",
+    "header": "rc/locate/icp.hpp",
+    "note": "the iterative closest point match of one set of 2D points to another: pair each point with its nearest within a distance, find the rotation and translation that best put the pairs together in the least squares sense in closed form, move, and repeat until the move is small"
+  },
+  "breaks_first": [
+    "E-VEH-0064",
+    "E-VEH-0065",
+    "E-VEH-0066"
+  ]
+}
