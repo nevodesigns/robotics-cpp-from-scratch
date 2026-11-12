@@ -11,9 +11,8 @@ disagree.
 [BUILD-LOG.md](BUILD-LOG.md) is the long version: the runbook, the commit by
 commit record, every mistake made while building and what caught it.
 
-Last updated 5 November 2026. The recovery point near the end, "Where this left off",
-has one written on 5 November for reading first on 11 November, and the one from 4
-November below it, kept as it was because it records the reasoning of that day.
+Last updated 13 November 2026, after the plan of 320 lessons was finished and the hardening pass. The recovery point near the end, "Where this left off",
+starts with an entry of 13 November; the older entries below it are kept as they were because they record the reasoning of their days.
 
 ## Snapshot
 
@@ -22,11 +21,11 @@ November below it, kept as it was because it records the reasoning of that day.
 | lessons built | 320 of 320 planned, 100 percent |
 | phases opened | 22 of 22 |
 | phases finished to plan | 22 (phases 00 to 21) |
-| hours of material | 478 |
+| hours of material | 676 (the sum of the minutes in the lesson files, which is what the README counts) |
 | Failure Atlas entries | 910 |
-| librc headers | 214 across 18 modules |
+| librc headers | 305 across 18 modules |
 | toolchains claimed | 4 |
-| reference tests | 190, green on every claimed toolchain |
+| gate tests | 369 (a reference test for each of the 320 lessons, the checks that code which must not compile is refused, and the tests of the library itself), green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -58,11 +57,7 @@ November below it, kept as it was because it records the reasoning of that day.
 | 20 Deployment and cross compilation | 12 | 12 | A robot that boots into your code, installs a new release without being bricked by a power cut, and rolls back by itself when the release is bad |
 | 21 Capstones | 10 | 10 | A whole robot, run end to end with faults injected, whose report an employer can read and whose every number comes from a test that passes |
 
-**Where the gap is.** The front of the book is the thinnest part relative to
-how early a learner meets it. Phases 00 to 03 are the first thing somebody who
-has never programmed walks through, and they hold 50 of a planned 66. Everything
-after phase 13 is material such a learner cannot reach yet. Finishing the front
-is worth more than extending the back.
+**Where the gap is.** The plan of 320 lessons is built, and what is thin is no longer the front. It is what the curriculum cannot check from inside this repository: nothing is cross compiled (there is no cross compiler on any lane, so phase 20 teaches what a deployment is made of in tested code and says so), nothing was run on a real robot or a real board (hardware tier 2 is two lessons, 08-05 and 08-14, each with a pseudo terminal fallback, and tier 3 is none), ROS 2 is a labelled sketch (no lesson uses rclcpp), and the capstones are simulations. 21-10's last line says the same of the robot: four hazards of the log have no scenario. The accepted gaps from the review of the repository (hardware drivers, a lidar pipeline, SLAM, field validation, vehicle dynamics) belong to the specialisation course that is to be planned next, not to this repository.
 
 ## The lesson contract
 
@@ -140,23 +135,28 @@ twice.
 
 ## librc
 
-110 headers. Modules and counts:
+305 headers. Modules and counts (counted from the directory, with `find`):
 
 | Module | Headers |
 |---|---|
-| `rc::core` | 34 |
-| `rc::control` | 8 |
-| `rc::io` | 8 |
-| `rc::math` | 8 |
-| `rc::qt` | 8 |
-| `rc::nav` | 7 |
-| `rc::kin` | 5 |
+| `rc::core` | 57 |
+| `rc::qt` | 42 |
+| `rc::io` | 18 |
+| `rc::math` | 18 |
+| `rc::control` | 17 |
+| `rc::bus` | 16 |
+| `rc::kin` | 16 |
+| `rc::nav` | 16 |
 | `rc::rt` | 15 |
-| `rc::test` | 9 |
-| `rc::plot` | 2 |
-| `rc::sensor` | 2 |
-| `rc::sim` | 2 |
-| `rc::vision` | 2 |
+| `rc::sim` | 15 |
+| `rc::safety` | 14 |
+| `rc::test` | 14 |
+| `rc::deploy` | 12 |
+| `rc::capstone` | 10 |
+| `rc::sensor` | 9 |
+| `rc::plot` | 8 |
+| `rc::ros` | 4 |
+| `rc::vision` | 4 |
 
 `rc/core/compat.hpp` is the C++17 shim: `rc::span`, `rc::format`,
 `rc::expected`. It has no `expected<void>`, and `rc::expected` has no
@@ -164,13 +164,10 @@ twice.
 
 ## Failure Atlas
 
-328 entries under `atlas/errors/`, each with a `match:` pattern that
+910 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-CPP` 73, `E-NUM` 30, `E-QT` 23, `E-NAV` 19, `E-MEM` 19, `E-IO` 18,
-`E-TEST` 17, `E-CTRL` 14, `E-DEBUG` 14, `E-SENSE` 13, `E-KIN` 10, `E-RT` 14,
-`E-MATH` 6, `E-VIS` 6, `E-CMAKE` 5, `E-LNK` 6, `E-PLOT` 5, `E-BUILD` 4,
-`E-THREAD` 24, `E-TIME` 4, `E-TSAN` 4.
+`E-QT` 125, `E-CPP` 99, `E-BUS` 48, `E-IO` 48, `E-NAV` 46, `E-KIN` 43, `E-SAFE` 42, `E-CTRL` 38, `E-SENSE` 37, `E-DEPLOY` 36, `E-MATH` 36, `E-NUM` 36, `E-SIM` 36, `E-TEST` 32, `E-MEM` 31, `E-CAP` 30, `E-BUILD` 25, `E-PLOT` 24, `E-THREAD` 24, `E-DEBUG` 14, `E-RT` 14, `E-ROS` 12, `E-VIS` 12, `E-TIME` 7, `E-LNK` 6, `E-CMAKE` 5, `E-TSAN` 4.
 
 L025 requires every `match:` pattern to be ASCII, because build output is
 normalised to ASCII quotes before matching, so a pattern with a typographic
@@ -522,6 +519,14 @@ reached through `std::vector::insert` inlined into a test in 08-04. A known
 libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
+
+### Written 13 November 2026, all 320 lessons built and the hardening pass done
+
+**The plan of lessons is complete.** 22 phases, 320 lessons, 910 atlas entries, 305 headers in 18 modules, 369 gate tests. Phases 14 to 18 were built before the roadmap of 12 November; 19 (safety), 20 (deployment) and 21 (capstones) were built on 12 and 13 November, and each of those was pushed with the continuous integration green on all 8 jobs before the next was started. The hardening pass (docs/BUILD-LOG.md, "Hardening pass") followed: `Pid` validation, `Odometry` integration schemes and `plan_path` corner cutting, with the first tests of the library itself in `librc/tests/`.
+
+**What to read first.** The last sections of docs/BUILD-LOG.md: phases 17 to 21 and the hardening pass, each with its findings, decisions and mistakes. The decisions that shape what the code can and cannot claim are the same three: no ROS 2 lane (phase 17), no cross compiler (phase 20), and the two new options of the hardening pass default to the old behaviour so that every quoted number still reproduces.
+
+**What is next, in order.** The final check of the repository (this one; the audit is clean, the numbers above were corrected, and the last run of the continuous integration is the one for the commit that carries it). Then the specialisation course on ground vehicles, arms, mobile manipulators and legged robots, on all four hardware tiers, which is to be PLANNED FIRST (the audience, the tier mix, named or generic hardware, research, the architecture and the lesson map, and the list of robotics specialisations), approved by the owner, and only then built.
 
 ### Written 10 November 2026, phase 06 finished to plan
 
@@ -1148,18 +1153,8 @@ Humble is installed on this machine, so phase 17 is not blocked.
 
 ## Not done
 
-**Phase 12 and phases 17 to 21 are unbuilt**, 80 lessons.
+**Everything the curriculum cannot check from inside this repository.** No lesson cross compiles anything (no cross compiler on any lane); no lesson was run on a real robot (hardware tier 2 is two lessons, tier 3 none: 296 lessons are software only, 22 simulated); no lesson compiles against ROS 2 (17-17 is a labelled sketch); the capstones are simulations with simple physics and say what they leave out.
 
-**Three phases are finished to their planned counts**, phase 01 at 18 of 18, phase 07 at
-16 of 16 and phase 08 at 14 of 14. No other is. The plan in ARCHITECTURE.md has not been revised against what the lessons
-turned out to need, and some phases may want a different count rather than the
-planned one.
+**The specialisation course is planned, not built.** Ground vehicles, arms and manipulators, mobile manipulators, legged robots, designed for all four hardware tiers: see the memory of the project and the roadmap; the planning (research, architecture, lesson map, the list of specialisations) needs the owner's answers on audience, tier mix and named hardware before anything is built.
 
-**Hardware tiers 2 and 3 are almost untouched.** 143 of the 145 lessons are tier
-0 or 1: 121 software only, 22 simulated. The two tier 2 lessons are 08-05 and 08-14,
-and both ship a pseudo terminal fallback, so the rule that every tier 2 or 3 lesson
-ships a simulated fallback has been exercised twice. Neither has been run on real
-hardware.
-
-**Phase 20 will want a cross compilation toolchain** for the target board,
-which is an apt install rather than hardware.
+**Accepted gaps, by decision.** Hardware drivers, a lidar pipeline, SLAM, field validation and vehicle dynamics are not in this repository and are the specialisation course's work. The two options of the hardening pass default to the old behaviour on purpose (BUILD-LOG, "Hardening pass").
