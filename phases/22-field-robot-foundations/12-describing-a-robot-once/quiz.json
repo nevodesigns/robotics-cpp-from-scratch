@@ -1,0 +1,78 @@
+{
+  "lesson": "22-12-describing-a-robot-once",
+  "title": "Describing a Robot Once: One Text File With a Source for Every Number, and Two Models Made From It, the Built In One and the SDF",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does the word typical in a robot file mean?",
+      "options": [
+        "The number is exact",
+        "The number was not found; it is a value for a robot of this class",
+        "The number is wrong",
+        "It is a unit"
+      ],
+      "correct": 1,
+      "explanation": "Honesty about what is measured."
+    },
+    {
+      "stage": "check",
+      "question": "How many of the 11 numbers of the reference robot are typical?",
+      "options": [
+        "None",
+        "3",
+        "All",
+        "Half"
+      ],
+      "correct": 1,
+      "explanation": "A reader can see which."
+    },
+    {
+      "stage": "check",
+      "question": "The masses of the links in the SDF added up to:",
+      "options": [
+        "1.000 kg, the robot's mass",
+        "2 kg",
+        "0",
+        "10 kg"
+      ],
+      "correct": 0,
+      "explanation": "The body gets the mass that is left after the wheels."
+    },
+    {
+      "stage": "check",
+      "question": "What is a line with a number and no source?",
+      "options": [
+        "Fine",
+        "Refused at its line",
+        "A warning",
+        "Ignored"
+      ],
+      "correct": 1,
+      "explanation": "No source, no number."
+    },
+    {
+      "stage": "post",
+      "question": "Why generate both models from one file?",
+      "options": [
+        "It is shorter",
+        "Two copies of a dimension will eventually disagree, and neither simulator will say so",
+        "Files are faster",
+        "SDF needs it"
+      ],
+      "correct": 1,
+      "explanation": "One place to be wrong."
+    },
+    {
+      "stage": "post",
+      "question": "Why compute inertias from the shapes?",
+      "options": [
+        "Gazebo cannot",
+        "A default inertia is a robot that spins or turns wrongly",
+        "To save typing only",
+        "It is required"
+      ],
+      "correct": 1,
+      "explanation": "Wrong inertia is silently wrong dynamics."
+    }
+  ]
+}
