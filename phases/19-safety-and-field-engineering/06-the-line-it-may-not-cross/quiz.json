@@ -1,0 +1,78 @@
+{
+  "lesson": "19-06-the-line-it-may-not-cross",
+  "title": "The Line It May Not Cross: A Geofence, the Point in Polygon Bug at a Vertex, and a Buffer That Grows With the Drift",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does the fence stop the robot before the line and not at it?",
+      "options": [
+        "It is tidier",
+        "Stopping takes distance: ordered at the line, the robot ends up over it by its stopping distance",
+        "It is cheaper",
+        "Lines are thick"
+      ],
+      "correct": 1,
+      "explanation": "The buffer is the stopping distance plus the position error."
+    },
+    {
+      "stage": "check",
+      "question": "A point inside the diamond is at the same height as a vertex, and a naive count says outside. What is wrong?",
+      "options": [
+        "The point",
+        "The ray goes through a vertex and both edges meeting there are counted, so one crossing is counted twice",
+        "The polygon",
+        "The sign of x"
+      ],
+      "correct": 1,
+      "explanation": "The half open rule counts it once."
+    },
+    {
+      "stage": "check",
+      "question": "In the L shape at (4, 4) next to the reflex corner, how far is the nearest edge?",
+      "options": [
+        "1.000 m, to the line x = 5",
+        "1.414 m: the nearest point of the segment is the corner at (5, 5), not the foot of the line",
+        "4 m",
+        "0 m"
+      ],
+      "correct": 1,
+      "explanation": "A segment ends."
+    },
+    {
+      "stage": "check",
+      "question": "In a corridor 6 m wide the robot is in the middle. After 100 m of dead reckoning at 2 percent drift with a stopping distance of 1.2 m, what is the state?",
+      "options": [
+        "inside",
+        "outside: the buffer is 3.2 m, more than the 3 m from each side, so there is no inside left",
+        "warning",
+        "unknown"
+      ],
+      "correct": 1,
+      "explanation": "After 10 m it was inside."
+    },
+    {
+      "stage": "post",
+      "question": "The robot's position is a NaN. What should the fence say?",
+      "options": [
+        "inside",
+        "unknown, and that is a stop: a position that is not a number is not somewhere inside",
+        "outside by 1 m",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "The fence speed is 0 too."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a software fence not enough where the boundary is a road?",
+      "options": [
+        "It is slow",
+        "It stops the robot on its own estimate of where it is, and a wrong estimate or a failure puts the robot through it: a physical barrier does not depend on the software",
+        "It is too complex",
+        "It needs GPS"
+      ],
+      "correct": 1,
+      "explanation": "A promise on a map is not a wall."
+    }
+  ]
+}
