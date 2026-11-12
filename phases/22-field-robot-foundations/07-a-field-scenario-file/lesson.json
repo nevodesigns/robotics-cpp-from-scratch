@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "22-07-a-field-scenario-file",
+  "title": "A Field Scenario File: One Text File for the Ground, the Walls, the Goals and the Faults, Parsed With Every Mistake Reported at Once",
+  "type": "build",
+  "minutes": 75,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-05-terrain-and-friction",
+    "22-06-sensors-that-fail-like-the-field",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::field",
+    "header": "rc/field/field_scenario.hpp",
+    "note": "a text format for a field scenario (ground, patches, walls, posts, start, goals, timed faults), a parser that reports every problem with its line number, a writer that round trips, and builders for the terrain and the lidar world"
+  },
+  "breaks_first": [
+    "E-FIELD-0020",
+    "E-FIELD-0021",
+    "E-FIELD-0022"
+  ]
+}
