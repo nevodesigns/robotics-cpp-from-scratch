@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "title": "Field Robot Foundations",
+  "ends_with": "One shared base for every field robot: hardware interfaces with contract tests and fakes, frames, limits, terrain, sensor faults, a scenario file, recording, scoring, one robot description for two simulators, and a safety case"
+}
