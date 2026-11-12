@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "24-07-a-scan-taken-while-moving",
+  "title": "A Scan Taken While Moving: Every Beam Is Fired From a Different Place, and the Wall That Bends in the Point Cloud Is the Vehicle's Own Motion",
+  "type": "build",
+  "minutes": 80,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "24-01-a-lidar-scan-to-points",
+    "22-02-frames-for-a-field-robot",
+    "23-01-a-differential-drive-that-slips",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::perceive",
+    "header": "rc/perceive/deskew.hpp",
+    "note": "the pose of the sensor at the moment each beam was fired, found by interpolating between its poses at the start and the end of the scan, and the points of the scan put into the frame of the start pose with each beam's own pose; the distance and angle a sweep skews by at a speed"
+  },
+  "breaks_first": [
+    "E-VEH-0046",
+    "E-VEH-0047",
+    "E-VEH-0048"
+  ]
+}
