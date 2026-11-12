@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "24-09-tracking-things-that-move",
+  "title": "Tracking Things That Move: A Constant Velocity Filter for Each Object, Association by Distance, and the Three Ways It Goes Wrong",
+  "type": "capstone",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "24-03-from-points-to-obstacles",
+    "24-04-costmap-layers",
+    "22-06-sensors-that-fail-like-the-field",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::perceive",
+    "header": "rc/perceive/track.hpp",
+    "note": "a Kalman filter for a point moving with a nearly constant velocity (position and velocity, with a white acceleration as its process noise), greedy association of detections to tracks within a gate, and a tracker that starts a track on a detection, confirms it after some hits, lets it coast through misses and drops it after too many, and predicts where a track will be"
+  },
+  "breaks_first": [
+    "E-VEH-0052",
+    "E-VEH-0053",
+    "E-VEH-0054"
+  ]
+}

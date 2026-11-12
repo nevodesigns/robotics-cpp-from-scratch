@@ -18,9 +18,9 @@ starts with an entry of 13 November; the older entries below it are kept as they
 
 | | |
 |---|---|
-| lessons built | 346: 320 of 320 planned for the original course, 100 percent, and 26 of 138 planned for the specialisation course (phases 22 and 23 of 22 to 37) |
-| phases opened | 24 (the 22 of the original plan, and phases 22 and 23 of the specialisation course) |
-| phases finished to plan | 24 (phases 00 to 21 of the original plan, and 22 and 23 of the specialisation course) |
+| lessons built | 355: 320 of 320 planned for the original course, 100 percent, and 35 of 138 planned for the specialisation course (phases 22 to 24 of 22 to 37) |
+| phases opened | 25 (the 22 of the original plan, and phases 22 to 24 of the specialisation course) |
+| phases finished to plan | 25 (phases 00 to 21 of the original plan, and 22 to 24 of the specialisation course) |
 | hours of material | 712 (the sum of the minutes in the lesson files, which is what the README counts) |
 | Failure Atlas entries | 991 |
 | librc headers | 332 across 22 modules (rc::hal, rc::field, rc::gz and rc::vehicle are new) |
@@ -58,6 +58,7 @@ starts with an entry of 13 November; the older entries below it are kept as they
 | 21 Capstones | 10 | 10 | A whole robot, run end to end with faults injected, whose report an employer can read and whose every number comes from a test that passes |
 | 22 Field robot foundations (the specialisation course, phase 1 of 16) | 17 | 17 | One shared base for every field robot: hardware interfaces with contract tests and fakes, frames, limits, terrain, sensor faults, a scenario file, recording, scoring, one robot description for two simulators, a bring-up checklist and a safety case |
 | 23 Vehicle models (the specialisation course, phase 2 of 16) | 9 | 9 | A model of each kind of ground vehicle (differential drive, skid steer, car, tracked) with its slip, its limits and its odometry, calibrated from a run and checked against a simulator |
+| 24 Perceiving for driving (the specialisation course, phase 3 of 16) | 9 | 9 | A scan turned into a map a vehicle can plan through: points, ground, obstacles, costs, passable ground, holes, the distortion of a moving sweep undone, a camera's view of the floor, and things that move tracked |
 
 **Where the gap is.** The plan of 320 lessons is built, and what is thin is no longer the front. It is what the curriculum cannot check from inside this repository: nothing is cross compiled (there is no cross compiler on any lane, so phase 20 teaches what a deployment is made of in tested code and says so), nothing was run on a real robot or a real board (hardware tier 2 is two lessons, 08-05 and 08-14, each with a pseudo terminal fallback, and tier 3 is none), ROS 2 is a labelled sketch (no lesson uses rclcpp), and the capstones are simulations. 21-10's last line says the same of the robot: four hazards of the log have no scenario. The accepted gaps from the review of the repository (hardware drivers, a lidar pipeline, SLAM, field validation, vehicle dynamics) belong to the specialisation course that is to be planned next, not to this repository.
 
