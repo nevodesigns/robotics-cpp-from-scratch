@@ -1,0 +1,78 @@
+{
+  "lesson": "23-04-a-tracked-vehicle-and-its-slip",
+  "title": "A Tracked Vehicle and Its Slip: The Thrust a Track Gets From Soil, the Slip It Costs, and What a Little More Slip on One Side Does to a Straight Line",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why must a track slip to give thrust?",
+      "options": [
+        "It is worn",
+        "The thrust is the reaction to shearing the soil, and shearing is a slip",
+        "Bad design",
+        "It need not"
+      ],
+      "correct": 1,
+      "explanation": "No push, no thrust."
+    },
+    {
+      "stage": "check",
+      "question": "On the loose sand, half the largest thrust came at a slip of:",
+      "options": [
+        "1 percent",
+        "10.0 percent",
+        "50 percent",
+        "90 percent"
+      ],
+      "correct": 1,
+      "explanation": "Most of the thrust is got for the first few percent."
+    },
+    {
+      "stage": "check",
+      "question": "A pivot needed how much a track?",
+      "options": [
+        "Nothing",
+        "32.7 N, against 81.8 N for four wheels",
+        "1000 N",
+        "The same as wheels"
+      ],
+      "correct": 1,
+      "explanation": "The weight is spread nearer the middle."
+    },
+    {
+      "stage": "check",
+      "question": "Slips of 10 and 20 percent on the two tracks turned a straight command by:",
+      "options": [
+        "0",
+        "44.1 degrees in 10 s",
+        "180 degrees",
+        "1 degree"
+      ],
+      "correct": 1,
+      "explanation": "The track that slips more is slower over the ground."
+    },
+    {
+      "stage": "post",
+      "question": "Why can a heading not be held by sending equal commands to two tracks?",
+      "options": [
+        "It can",
+        "The slips need not be equal: ground varies from side to side",
+        "Motors differ only",
+        "Tracks are loose"
+      ],
+      "correct": 1,
+      "explanation": "Hold a heading by feedback."
+    },
+    {
+      "stage": "post",
+      "question": "Why are the soil values of the lesson marked typical?",
+      "options": [
+        "Laziness",
+        "They are textbook values for a kind of soil, not those of the soil the robot will drive on",
+        "Secret",
+        "Wrong"
+      ],
+      "correct": 1,
+      "explanation": "Measure the soil in use."
+    }
+  ]
+}

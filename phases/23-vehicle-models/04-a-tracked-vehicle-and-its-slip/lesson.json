@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "23-04-a-tracked-vehicle-and-its-slip",
+  "title": "A Tracked Vehicle and Its Slip: The Thrust a Track Gets From Soil, the Slip It Costs, and What a Little More Slip on One Side Does to a Straight Line",
+  "type": "build",
+  "minutes": 85,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "23-02-a-skid-steer-and-its-centre-of-rotation",
+    "22-05-terrain-and-friction",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::vehicle",
+    "header": "rc/vehicle/tracked.hpp",
+    "note": "the thrust a track gets from soil as a function of its slip (the Janosi-Hanamoto shear curve), the slip needed for a thrust, the resistance to a pivot of a track with an even pressure along it, and a tracked drive whose two tracks slip by different amounts"
+  },
+  "breaks_first": [
+    "E-VEH-0010",
+    "E-VEH-0011",
+    "E-VEH-0012"
+  ]
+}
