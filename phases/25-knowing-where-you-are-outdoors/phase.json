@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "title": "Knowing Where You Are, Outdoors",
+  "ends_with": "A position estimate that uses wheels, a gyro, GNSS, scans and a map, says how wrong it can be, and recovers when it has been picked up and put down somewhere else"
+}
