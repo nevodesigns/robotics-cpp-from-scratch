@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "19-09-the-slope-and-the-turn",
+  "title": "The Slope and the Turn: When a Vehicle Tips, the Speed a Curve Allows, and a Tilt Estimate That Is Not Fooled by a Turn",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "19-08-the-battery-and-the-heat",
+    "19-04-how-far-it-goes-before-it-stops",
+    "19-07-two-sensors-that-must-agree",
+    "18-07-one-seed-many-streams"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::safety",
+    "header": "rc/safety/tilt.hpp",
+    "note": "the tipping geometry of a vehicle, the speed a curve allows, a tilt estimate that blends a gyro with an accelerometer it does not always trust, and a monitor with a warning and a debounced stop"
+  },
+  "breaks_first": [
+    "E-SAFE-0025",
+    "E-SAFE-0026",
+    "E-SAFE-0027"
+  ]
+}
