@@ -1,0 +1,78 @@
+{
+  "lesson": "22-11-the-contract-test-for-an-interface",
+  "title": "The Contract Test for a Hardware Interface: Eleven Promises Every Drive Must Keep, Checked on a Fake, a Simulator and a Board Alike",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does an interface not say?",
+      "options": [
+        "Which functions exist",
+        "What happens when they are called",
+        "Their names",
+        "Their arguments"
+      ],
+      "correct": 1,
+      "explanation": "That is the contract."
+    },
+    {
+      "stage": "check",
+      "question": "How many promises did the fake of 22-01 break once fixed?",
+      "options": [
+        "0",
+        "3",
+        "11",
+        "6"
+      ],
+      "correct": 0,
+      "explanation": "A contract test is passed or it is not."
+    },
+    {
+      "stage": "check",
+      "question": "What did std::min(limit, NaN) return?",
+      "options": [
+        "NaN",
+        "The limit, so a NaN became full speed",
+        "Zero",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "NaN is not less than anything."
+    },
+    {
+      "stage": "check",
+      "question": "Why does the contract make a fresh drive for each promise?",
+      "options": [
+        "To be slow",
+        "So one promise's state cannot hide or cause another's failure",
+        "Memory",
+        "No reason"
+      ],
+      "correct": 1,
+      "explanation": "Independence."
+    },
+    {
+      "stage": "post",
+      "question": "Why test the contract with broken drives as well as good ones?",
+      "options": [
+        "For fun",
+        "To show that it can fail: a test that has never been seen to fail proves little",
+        "To save time",
+        "To break things"
+      ],
+      "correct": 1,
+      "explanation": "A pass is only worth something if the test can fail."
+    },
+    {
+      "stage": "post",
+      "question": "What is the use of passing the expected limits to the contract?",
+      "options": [
+        "None",
+        "The same function can judge a toy base and a heavy one",
+        "Speed",
+        "It is required by C++"
+      ],
+      "correct": 1,
+      "explanation": "Expectations belong to the drive, promises to the interface."
+    }
+  ]
+}
