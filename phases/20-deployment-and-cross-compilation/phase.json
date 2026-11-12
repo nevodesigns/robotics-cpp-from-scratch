@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "title": "Deployment and Cross Compilation",
+  "ends_with": "A robot that boots into your code, installs a new release without being bricked by a power cut, and rolls back by itself when the release is bad"
+}
