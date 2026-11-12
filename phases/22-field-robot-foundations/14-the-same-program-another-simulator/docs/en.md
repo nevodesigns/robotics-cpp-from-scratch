@@ -32,7 +32,7 @@ It is built only where Gazebo's libraries are installed, and only on Linux. Wher
 
 ### The same script on both
 
-The program of the test drives north for 5 s at 0.2 m/s, turns in place for a quarter of a turn at 1 rad/s, and drives on for 3 s. On the built in backend it ended at (0.410, 2.983); on Gazebo Sim, through the same `run_script`, at (0.484, 3.206), **0.235 m** apart and **23.0 degrees** apart in heading, in the same 97 samples. They are in the same neighbourhood and they are not the same robot: Gazebo's wheels take time to change speed, so it coasted on while it began to turn. That gap is the subject of the next lesson, which measures it and shrinks it.
+The program of the test drives north for 5 s at 0.2 m/s, turns in place for a quarter of a turn at 1 rad/s, and drives on for 3 s. On the built in backend it ended at (0.410, 2.983); on Gazebo Sim, through the same `run_script`, at (0.484, 3.211), **0.239 m** apart and **23.4 degrees** apart in heading, in the same 97 samples. They are in the same neighbourhood and they are not the same robot: Gazebo's wheels take time to change speed, so it coasted on while it began to turn. That gap is the subject of the next lesson, which measures it and shrinks it.
 
 ## Build It
 

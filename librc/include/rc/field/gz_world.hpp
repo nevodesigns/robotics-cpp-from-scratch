@@ -4,7 +4,7 @@
 //
 // to_world takes a FieldScenario (lesson 22-07) and a RobotModel (lesson 22-12) and gives one SDF world: the physics plugin and the scene broadcaster, a ground slab with the friction of the base surface, each patch as a slab a millimetre higher than the one before with its own friction and its tilt, each wall as a thin box laid along its segment, each post as a cylinder, each goal as a marker that can be seen and not touched, and the robot at the start pose with its heading. wall_box and patch_tilt are the two conversions that are easy to get wrong. Faults are not in the world: they happen in the adapter, which is the next lesson.
 //
-// A scenario of 2 patches, 2 walls, a post and a goal gave a world of 8 models in 6.5 kB; a wall from (0, 0) to (3, 4) became a box 5.000 m long turned 0.927295 rad; a grade of 0.1 became a pitch of -0.0996687 rad; the world was accepted by gz sdf and ran in Gazebo Sim 8.15.
+// A scenario of 2 patches, 2 walls, a post and a goal gave a world of 8 models in 6.8 kB; a wall from (0, 0) to (3, 4) became a box 5.000 m long turned 0.927295 rad; a grade of 0.1 became a pitch of -0.0996687 rad; the world was accepted by gz sdf and ran in Gazebo Sim 8.15.
 
 #ifndef RC_RC_FIELD_GZ_WORLD_HPP
 #define RC_RC_FIELD_GZ_WORLD_HPP
@@ -87,7 +87,7 @@ inline std::string to_world(const FieldScenario& sc, const RobotModel& robot) {
   std::ostringstream o;
   o << std::setprecision(6);
   o << "<?xml version=\"1.0\"?>\n<sdf version=\"1.9\">\n<world name=\"" << (sc.name.empty() ? "field" : sc.name) << "\">\n";
-  o << "<physics name=\"fixed\" type=\"dart\"><max_step_size>0.001</max_step_size><real_time_factor>1.0</real_time_factor></physics>\n";
+  o << "<physics name=\"fixed\" type=\"dart\"><max_step_size>0.001</max_step_size><real_time_factor>0</real_time_factor></physics>\n";
   o << "<plugin filename=\"gz-sim-physics-system\" name=\"gz::sim::systems::Physics\"/>\n";
   o << "<plugin filename=\"gz-sim-user-commands-system\" name=\"gz::sim::systems::UserCommands\"/>\n";
   o << "<plugin filename=\"gz-sim-scene-broadcaster-system\" name=\"gz::sim::systems::SceneBroadcaster\"/>\n";

@@ -73,7 +73,7 @@ inline std::string to_world(const FieldScenario& sc, const RobotModel& robot) {
   std::ostringstream o;
   o << std::setprecision(6);
   o << "<?xml version=\"1.0\"?>\n<sdf version=\"1.9\">\n<world name=\"" << (sc.name.empty() ? "field" : sc.name) << "\">\n";
-  o << "<physics name=\"fixed\" type=\"dart\"><max_step_size>0.001</max_step_size><real_time_factor>1.0</real_time_factor></physics>\n";
+  o << "<physics name=\"fixed\" type=\"dart\"><max_step_size>0.001</max_step_size><real_time_factor>0</real_time_factor></physics>\n";
   o << "<plugin filename=\"gz-sim-physics-system\" name=\"gz::sim::systems::Physics\"/>\n";
   o << "<plugin filename=\"gz-sim-user-commands-system\" name=\"gz::sim::systems::UserCommands\"/>\n";
   o << "<plugin filename=\"gz-sim-scene-broadcaster-system\" name=\"gz::sim::systems::SceneBroadcaster\"/>\n";

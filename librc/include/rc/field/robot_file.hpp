@@ -4,7 +4,7 @@
 //
 // A robot is a text file of "key value source ..." lines: a name, a kind (diff_drive here), wheel radius and track width, the body's length, width and height, its mass, the mass of a wheel, the ground clearance, the wheel width and the top speed and turn rate. Every number must carry the word source and then where it came from, or the word typical; a line without one is refused, and the parse says how many of the numbers are typical. limits_of and drive_limits_of give the built in model's limits; sdf_model gives the same robot as an SDF model element (with an optional pose, for putting it into a world) and to_sdf as a file of its own for Gazebo Sim, with the inertias of a box and of cylinders worked out from the shapes and the masses, a ball caster, and the DiffDrive plugin whose wheel separation, wheel radius and speed limits are the file's numbers.
 //
-// The reference robot (a TurtleBot3 Burger class base) has 11 numbers, 3 of them typical; its SDF was 2.9 kB; the masses of the links added up to 1.000 kg for a mass of 1; a box of 1 kg and 0.138 by 0.178 by 0.172 m has an Ixx of 0.00511 kg m2; and a file with a number and no source was refused at its line.
+// The reference robot (a TurtleBot3 Burger class base) has 11 numbers, 3 of them typical; its SDF was 3.2 kB; the masses of the links added up to 1.000 kg for a mass of 1; a box of 1 kg and 0.138 by 0.178 by 0.172 m has an Ixx of 0.00511 kg m2; and a file with a number and no source was refused at its line.
 
 #ifndef RC_RC_FIELD_ROBOT_FILE_HPP
 #define RC_RC_FIELD_ROBOT_FILE_HPP
@@ -205,6 +205,10 @@ inline std::string sdf_model(const RobotModel& r, const std::string& pose) {
       << "<axis><xyz expressed_in=\"__model__\">0 1 0</xyz></axis></joint>\n";
   }
   o << "<joint name=\"caster_joint\" type=\"ball\"><parent>chassis</parent><child>caster</child></joint>\n";
+  o << "<plugin filename=\"gz-sim-odometry-publisher-system\" name=\"gz::sim::systems::OdometryPublisher\">\n"
+    << "<odom_frame>world</odom_frame><robot_base_frame>" << r.name << "</robot_base_frame><dimensions>2</dimensions>\n"
+    << "<odom_publish_frequency>2000</odom_publish_frequency><odom_topic>/model/" << r.name << "/pose_gt</odom_topic>\n"
+    << "</plugin>\n";
   o << "<plugin filename=\"gz-sim-diff-drive-system\" name=\"gz::sim::systems::DiffDrive\">\n"
     << "<left_joint>left_wheel_joint</left_joint><right_joint>right_wheel_joint</right_joint>\n"
     << "<wheel_separation>" << r.track_width.value << "</wheel_separation><wheel_radius>" << wheel_r << "</wheel_radius>\n"

@@ -35,7 +35,7 @@ A line with a number and no source is **refused**, at its line, as are a key giv
 
 ### Two models
 
-`limits_of` gives the limits the built in model uses (the `VehicleLimits` of lesson 22-03) and `drive_limits_of` the limits of the `FakeDrive` of lesson 22-01: 0.22 m/s and 2.84 rad/s, from the file. `to_sdf` gives the same robot as an **SDF model** for Gazebo Sim: a body, two wheels on revolute joints, a ball caster at the back, and the `DiffDrive` system configured with the wheel separation, the wheel radius and the same limits. The test checks that the numbers printed in the SDF are the numbers of the file: `0.16` for the separation, `0.033` for the radius, `0.22` and `-2.84` for the limits, the wheels at plus and minus half the track. See `E-FIELD-0037`.
+`limits_of` gives the limits the built in model uses (the `VehicleLimits` of lesson 22-03) and `drive_limits_of` the limits of the `FakeDrive` of lesson 22-01: 0.22 m/s and 2.84 rad/s, from the file. `to_sdf` gives the same robot as an **SDF model** for Gazebo Sim: a body, two wheels on revolute joints, a ball caster at the back, the `DiffDrive` system configured with the wheel separation, the wheel radius and the same limits, and an `OdometryPublisher` that publishes the robot's true pose at every step (at twice the step rate, so that no step is skipped) on `/model/<name>/pose_gt`, which is what a test reads in place of a sensor. The test checks that the numbers printed in the SDF are the numbers of the file: `0.16` for the separation, `0.033` for the radius, `0.22` and `-2.84` for the limits, the wheels at plus and minus half the track. See `E-FIELD-0037`.
 
 ### Inertia from the shapes
 

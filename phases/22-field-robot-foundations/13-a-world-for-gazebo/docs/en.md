@@ -18,14 +18,14 @@ The scenario of lesson 22-07 says where the ground is soft, where the walls are,
 
 `to_world` takes a scenario and a robot description (lesson 22-12) and writes one SDF world:
 
-- the **physics** at a step of 1 ms, and the plugins that make a world run: physics, user commands, and the scene broadcaster that publishes where everything is;
+- the **physics** at a step of 1 ms, not held to the clock (a real time factor of 0: the program that drives it steps time itself, and a run should take as long as the physics needs, which here was about a fifth of the time of the run), and the plugins that make a world run: physics, user commands, and the scene broadcaster that publishes where everything is;
 - a **ground slab**, 200 m square and 0.2 m thick, with the friction of the scenario's base surface;
 - each **patch** as a slab of its own with its surface's friction, one millimetre higher than the one before, because where two patches overlap the later is on top (lesson 22-05);
 - each **wall** as a thin tall box, each **post** as a cylinder;
 - each **goal** as a marker you can see and cannot touch;
 - the **robot**, from the file, at the start pose with its heading.
 
-The scenario of the test (two patches, two walls, a post, a goal) gave **8 models in 6.5 kB**, all of them fixed except the robot. See `E-FIELD-0039`.
+The scenario of the test (two patches, two walls, a post, a goal) gave **8 models in 6.8 kB**, all of them fixed except the robot. See `E-FIELD-0039`.
 
 ### The two conversions that go wrong
 

@@ -5,7 +5,7 @@
 //
 // GzBackend writes the world of a scenario (rc/field/gz_world.hpp) to a file, starts a Gazebo Sim server on it as a child process
 // (paused, headless, in a partition of its own so that two runs never hear each other), and talks to it over gz-transport: the
-// command is a Twist published on /model/<name>/cmd_vel, the pose is read from /world/<name>/pose/info, and time is advanced
+// command is a Twist published on /model/<name>/cmd_vel, the pose is read from the ground truth odometry the model publishes at every step, /model/<name>/pose_gt, and time is advanced
 // with the world control service in steps of 1 ms, so that a run is as long as it was asked to be and not as long as the
 // computer took. The server is stopped when the object is destroyed, and by the kernel if the program dies first.
 //
@@ -19,7 +19,7 @@
 #define RC_GZ_GZ_BACKEND_HPP
 
 #include <gz/msgs/boolean.pb.h>
-#include <gz/msgs/pose_v.pb.h>
+#include <gz/msgs/odometry.pb.h>
 #include <gz/msgs/twist.pb.h>
 #include <gz/msgs/world_control.pb.h>
 #include <gz/transport/Node.hh>
@@ -38,6 +38,7 @@
 #include <thread>
 
 #if defined(__linux__)
+#include <fcntl.h>
 #include <signal.h>
 #include <sys/prctl.h>
 #include <sys/wait.h>
@@ -58,10 +59,8 @@ class GzBackend : public rc::field::Backend {
 
   bool start(const rc::field::FieldScenario& scenario, const rc::field::RobotModel& robot) override {
 #if defined(__linux__)
-    const std::string text = rc::field::to_world(scenario, robot);
-    // A server that is already running this world is reset instead of started again, which takes a fraction of a second and not seconds.
-    if (pid_ > 0 && node_ && text == world_text_) return reset_world();
     stop_server();
+    const std::string text = rc::field::to_world(scenario, robot);
     static int counter = 0;
     ++counter;
     const std::string tag = std::to_string(static_cast<long>(::getpid())) + "_" + std::to_string(counter);
@@ -69,7 +68,6 @@ class GzBackend : public rc::field::Backend {
     world_path_ = "/tmp/rc_gz_" + tag + ".sdf";
     world_name_ = scenario.name.empty() ? "field" : scenario.name;
     robot_name_ = robot.name;
-    world_text_ = text;
     {
       std::ofstream out(world_path_.c_str());
       out << text;
@@ -77,26 +75,25 @@ class GzBackend : public rc::field::Backend {
     }
     // The partition keeps this server and this program talking only to each other.
     ::setenv("GZ_PARTITION", partition.c_str(), 1);
+    // Whatever is waiting in a buffer would otherwise be written twice, once by each process.
+    std::fflush(nullptr);
     pid_ = ::fork();
     if (pid_ < 0) return false;
     if (pid_ == 0) {
       ::prctl(PR_SET_PDEATHSIG, SIGTERM);
-      if (std::freopen("/dev/null", "w", stdout) == nullptr) ::_exit(1);
-      if (std::freopen("/dev/null", "w", stderr) == nullptr) ::_exit(1);
+      const int null_fd = ::open("/dev/null", O_WRONLY);
+      if (null_fd < 0 || ::dup2(null_fd, 1) < 0 || ::dup2(null_fd, 2) < 0) ::_exit(1);
       ::execlp("gz", "gz", "sim", "-s", world_path_.c_str(), static_cast<char*>(nullptr));
       ::_exit(127);
     }
     node_.reset(new ::gz::transport::Node());
     got_pose_ = false;
     pose_time_ = 0.0;
-    if (!node_->Subscribe("/world/" + world_name_ + "/pose/info", &GzBackend::on_pose, this)) return false;
+    // The robot's own ground truth, which the model publishes at every step of simulated time.
+    if (!node_->Subscribe("/model/" + robot_name_ + "/pose_gt", &GzBackend::on_odometry, this)) return false;
     twist_ = node_->Advertise<::gz::msgs::Twist>("/model/" + robot_name_ + "/cmd_vel");
-    // The server takes a few seconds to load the world.
-    std::unique_lock<std::mutex> lock(mutex_);
-    const bool ready = changed_.wait_for(lock, std::chrono::seconds(60), [this]() { return got_pose_; });
-    // The server has run a moment before it was seen; time is counted from the first pose.
-    time_offset_ = pose_time_;
-    return ready;
+    // The server takes a few seconds to load the world: ask it for five steps until it answers (the publisher is silent for the first), which also gives the first pose.
+    return first_step(60.0);
 #else
     (void)scenario;
     (void)robot;
@@ -129,7 +126,7 @@ class GzBackend : public rc::field::Backend {
     request.set_multi_step(static_cast<unsigned int>(steps));
     node_->Request("/world/" + world_name_ + "/control", request, 10000, reply, result);
     std::unique_lock<std::mutex> lock(mutex_);
-    changed_.wait_for(lock, std::chrono::seconds(120), [this, target]() { return pose_time_ >= target - 1.5e-3; });
+    changed_.wait_for(lock, std::chrono::seconds(120), [this, target]() { return pose_time_ >= target - 1.0e-5; });
   }
 
   rc::field::BackendPose pose() const override {
@@ -140,38 +137,35 @@ class GzBackend : public rc::field::Backend {
   }
 
  private:
-  void on_pose(const ::gz::msgs::Pose_V& message) {
-    for (int i = 0; i < message.pose_size(); ++i) {
-      if (message.pose(i).name() != robot_name_) continue;
-      const ::gz::msgs::Pose& p = message.pose(i);
-      const double qx = p.orientation().x(), qy = p.orientation().y(), qz = p.orientation().z(), qw = p.orientation().w();
-      std::lock_guard<std::mutex> lock(mutex_);
-      pose_.x = p.position().x();
-      pose_.y = p.position().y();
-      pose_.theta = std::atan2(2.0 * (qw * qz + qx * qy), 1.0 - 2.0 * (qy * qy + qz * qz));
-      pose_time_ = static_cast<double>(message.header().stamp().sec()) + 1.0e-9 * static_cast<double>(message.header().stamp().nsec());
-      pose_.t = pose_time_;
-      got_pose_ = true;
-      changed_.notify_all();
-      return;
-    }
+  void on_odometry(const ::gz::msgs::Odometry& message) {
+    const ::gz::msgs::Pose& p = message.pose();
+    const double qx = p.orientation().x(), qy = p.orientation().y(), qz = p.orientation().z(), qw = p.orientation().w();
+    std::lock_guard<std::mutex> lock(mutex_);
+    pose_.x = p.position().x();
+    pose_.y = p.position().y();
+    pose_.theta = std::atan2(2.0 * (qw * qz + qx * qy), 1.0 - 2.0 * (qy * qy + qz * qz));
+    pose_time_ = static_cast<double>(message.header().stamp().sec()) + 1.0e-9 * static_cast<double>(message.header().stamp().nsec());
+    pose_.t = pose_time_;
+    got_pose_ = true;
+    changed_.notify_all();
   }
 
-  // Puts the world back as it was loaded: the time at zero, the robot at its start, the command forgotten. The world stays paused.
-  bool reset_world() {
-    {
-      std::lock_guard<std::mutex> lock(mutex_);
-      got_pose_ = false;
+  // Asks a paused world for a few steps, trying again until the server is up, and waits for the pose that step publishes. Time is counted from it.
+  bool first_step(double timeout_seconds) {
+    const auto start = std::chrono::steady_clock::now();
+    bool sent = false;
+    while (!sent && std::chrono::duration<double>(std::chrono::steady_clock::now() - start).count() < timeout_seconds) {
+      ::gz::msgs::WorldControl request;
+      ::gz::msgs::Boolean reply;
+      bool result = false;
+      request.set_pause(true);
+      request.set_multi_step(5);
+      sent = node_->Request("/world/" + world_name_ + "/control", request, 1000, reply, result) && result;
     }
-    ::gz::msgs::WorldControl request;
-    ::gz::msgs::Boolean reply;
-    bool result = false;
-    request.set_pause(true);
-    request.mutable_reset()->set_all(true);
-    if (!node_->Request("/world/" + world_name_ + "/control", request, 10000, reply, result) || !result) return false;
+    if (!sent) return false;
     std::unique_lock<std::mutex> lock(mutex_);
-    const bool ready = changed_.wait_for(lock, std::chrono::seconds(20), [this]() { return got_pose_ && pose_time_ < 0.01; });
-    time_offset_ = 0.0;
+    const bool ready = changed_.wait_for(lock, std::chrono::seconds(30), [this]() { return got_pose_ && pose_time_ < 0.05; });
+    time_offset_ = pose_time_;
     return ready;
   }
 
@@ -191,14 +185,12 @@ class GzBackend : public rc::field::Backend {
     if (!world_path_.empty()) {
       std::remove(world_path_.c_str());
       world_path_.clear();
-      world_text_.clear();
     }
 #endif
   }
 
   std::string world_path_;
   std::string world_name_;
-  std::string world_text_;
   std::string robot_name_;
 #if defined(__linux__)
   pid_t pid_ = -1;

@@ -109,8 +109,9 @@ RC_TEST("two built in models with different lags differ, the lag is read from th
 RC_TEST("the built in model and Gazebo Sim on the five cases, before and after the built in model is given Gazebo's time constant") {
   rc::gz::GzBackend gazebo;
   const std::vector<GapCase> cases = standard_cases();
+  const std::vector<std::vector<BackendPose>> gz_traces = run_all(gazebo, scenario(), robot(), cases, 0.1);
   BuiltinBackend uncalibrated(0.05);
-  const std::vector<TraceGap> before = run_cases(uncalibrated, gazebo, scenario(), robot(), cases, 0.1);
+  const std::vector<TraceGap> before = gaps_of(run_all(uncalibrated, scenario(), robot(), cases, 0.1), gz_traces);
   std::cout << "  before calibration:\n" << gap_table(cases, before);
   rec("before_max", worst_gap(before), 3);
   rec("straight_before", before[0].max_position, 3);
@@ -125,7 +126,7 @@ RC_TEST("the built in model and Gazebo Sim on the five cases, before and after t
   RC_CHECK(tau > 0.0);
 
   BuiltinBackend calibrated(tau);
-  const std::vector<TraceGap> after = run_cases(calibrated, gazebo, scenario(), robot(), cases, 0.1);
+  const std::vector<TraceGap> after = gaps_of(run_all(calibrated, scenario(), robot(), cases, 0.1), gz_traces);
   std::cout << "  after calibration:\n" << gap_table(cases, after);
   rec("after_max", worst_gap(after), 3);
   rec("straight_after", after[0].max_position, 3);

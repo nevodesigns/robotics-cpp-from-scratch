@@ -186,6 +186,10 @@ inline std::string sdf_model(const RobotModel& r, const std::string& pose) {
       << "<axis><xyz expressed_in=\"__model__\">0 1 0</xyz></axis></joint>\n";
   }
   o << "<joint name=\"caster_joint\" type=\"ball\"><parent>chassis</parent><child>caster</child></joint>\n";
+  o << "<plugin filename=\"gz-sim-odometry-publisher-system\" name=\"gz::sim::systems::OdometryPublisher\">\n"
+    << "<odom_frame>world</odom_frame><robot_base_frame>" << r.name << "</robot_base_frame><dimensions>2</dimensions>\n"
+    << "<odom_publish_frequency>2000</odom_publish_frequency><odom_topic>/model/" << r.name << "/pose_gt</odom_topic>\n"
+    << "</plugin>\n";
   o << "<plugin filename=\"gz-sim-diff-drive-system\" name=\"gz::sim::systems::DiffDrive\">\n"
     << "<left_joint>left_wheel_joint</left_joint><right_joint>right_wheel_joint</right_joint>\n"
     << "<wheel_separation>" << r.track_width.value << "</wheel_separation><wheel_radius>" << wheel_r << "</wheel_radius>\n"

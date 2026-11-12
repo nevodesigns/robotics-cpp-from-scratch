@@ -20,7 +20,7 @@ Lesson 22-14 ran one program on two simulators and they ended 0.24 m and 23 degr
 
 ### Four cases, each from rest
 
-A single run says little, so `standard_cases` is five: **straight**, **turn** in place, **arc**, **stop**, and **drive, turn, drive**. They are the things a base is asked to do, each starting from rest, and each shows a different difference: the straight drive shows the lag in speeding up, the turn the lag in the turning, the arc both, the stop the way the speed runs out, and the last whether a turn that follows a drive is the same as one from rest. `run_cases` runs each on both backends, started afresh for each, and `gap_table` writes the gaps in rows. Starting afresh matters: a run that begins where the last ended compares the end of one case with the start of the next.
+A single run says little, so `standard_cases` is five: **straight**, **turn** in place, **arc**, **stop**, and **drive, turn, drive**. They are the things a base is asked to do, each starting from rest, and each shows a different difference: the straight drive shows the lag in speeding up, the turn the lag in the turning, the arc both, the stop the way the speed runs out, and the last whether a turn that follows a drive is the same as one from rest. `run_all` runs each on a backend, started afresh for each, `gaps_of` compares two sets of runs and `gap_table` writes the gaps in rows. Gazebo's runs are kept, so that the built in model, before and after it is calibrated, is compared with the very same Gazebo traces and not with a second set. Starting afresh matters: a run that begins where the last ended compares the end of one case with the start of the next.
 
 ### Reading a time constant off a trace
 
@@ -32,9 +32,9 @@ Where Gazebo is not installed the whole procedure can still be shown. Two built 
 
 ### Between the built in model and Gazebo
 
-The five cases were run on both, each started afresh (Gazebo is reset, not restarted), with the built in model's time constant at 0.05 s, a round number. The worst gap was **0.081 m**: **0.004 m** on the straight, **0.005 m** on the turn and **0.005 m** on the stop. Then the step response of Gazebo's robot was read with the same function as for the synthetic one: a time constant of **0.040 s**. The built in model was given that, and the worst gap was **0.082 m** (straight 0.002, turn 0.005, stop 0.005). The first four cases were within a few millimetres to begin with, because 0.05 s was already close to 0.04 s, so the new constant changed them by almost nothing: that is what calibrating a model that was nearly right looks like, and a result that had to be reported as it came out.
+The five cases were run on both, each started afresh (a Gazebo server is started for each, about two seconds), the runs kept and compared with both versions of the built in model, with the first of them having the built in model's time constant at 0.05 s, a round number. The worst gap was **0.082 m**: **0.004 m** on the straight, **0.005 m** on the turn and **0.005 m** on the stop. Then the step response of Gazebo's robot was read with the same function as for the synthetic one: a time constant of **0.041 s**. The built in model was given that, and the worst gap was **0.083 m** (straight 0.002, turn 0.005, stop 0.005). The first four cases were within a few millimetres to begin with, because 0.05 s was already close to 0.04 s, so the new constant changed them by almost nothing: that is what calibrating a model that was nearly right looks like, and a result that had to be reported as it came out.
 
-The last case is the one that stays: **drive, turn, drive** was **0.081 m** and **22.8 degrees** apart before calibration and **0.082 m** and **22.8 degrees** after. A turn from rest is the same in the two simulators; a turn that follows a drive is not, because in Gazebo the wheels scrub on the ground as the robot turns, stick and slip, and turn it less than was asked, which the built in model has nothing to say about. One time constant cannot close that.
+The last case is the one that stays: **drive, turn, drive** was **0.082 m** and **22.3 degrees** apart before calibration and **0.083 m** and **22.3 degrees** after. A turn from rest is the same in the two simulators; a turn that follows a drive is not, because in Gazebo the wheels scrub on the ground as the robot turns, stick and slip, and turn it less than was asked, which the built in model has nothing to say about. One time constant cannot close that.
 
 What remains is what the two simulate differently and one time constant does not capture. It is a gap that is now known and small, and not one that was there and unseen.
 
@@ -72,4 +72,4 @@ std::cout << rc::field::gap_table(cases, gaps);
 
 ## Ship It
 
-`rc/field/gap.hpp` holds `TraceGap`, `compare_traces`, `speeds_of`, `response_time_constant`, `GapCase`, `standard_cases`, `run_cases`, `worst_gap` and `gap_table`.
+`rc/field/gap.hpp` holds `TraceGap`, `compare_traces`, `speeds_of`, `response_time_constant`, `GapCase`, `standard_cases`, `run_all`, `gaps_of`, `run_cases`, `worst_gap` and `gap_table`.

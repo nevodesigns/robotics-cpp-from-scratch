@@ -4,7 +4,7 @@
 //
 // compare_traces takes two traces of poses sampled at the same times and gives the largest and the rms distance between them, the distance and the heading difference at the end. speeds_of gives the speed in each sample; response_time_constant reads, from the trace of a robot started from rest at a steady command, the time it took to reach 63.2 percent of its final speed. standard_cases are four scripts (straight, turn, arc, stop), run_cases runs them on two backends, starting each afresh, and returns the gaps, and gap_table writes them in rows.
 //
-// The built in model with a time constant of 0.05 s and Gazebo Sim differed by 0.081 m at the worst over the five cases; Gazebo's response to a step of speed was read as a time constant of 0.040 s; with the built in model's set to that the worst gap was 0.082 m. Without Gazebo the same loop was run between two built in models, one with a time constant of 0.3 s: the gap was 0.050 m, the time constant read back was 0.299 s and the gap after calibrating was 0.0001 m.
+// The built in model with a time constant of 0.05 s and Gazebo Sim differed by 0.082 m at the worst over the five cases; Gazebo's response to a step of speed was read as a time constant of 0.041 s; with the built in model's set to that the worst gap was 0.083 m. Without Gazebo the same loop was run between two built in models, one with a time constant of 0.3 s: the gap was 0.050 m, the time constant read back was 0.299 s and the gap after calibrating was 0.0001 m.
 
 #ifndef RC_RC_FIELD_GAP_HPP
 #define RC_RC_FIELD_GAP_HPP
@@ -118,17 +118,25 @@ inline std::vector<GapCase> standard_cases() {
   return cases;
 }
 
-// Runs every case on both backends, each started afresh on the scenario, and gives the gap of each.
-inline std::vector<TraceGap> run_cases(Backend& a, Backend& b, const FieldScenario& scenario, const RobotModel& robot, const std::vector<GapCase>& cases, double sample_dt) {
-  std::vector<TraceGap> gaps;
+// Runs every case on a backend, started afresh on the scenario for each, and gives the traces. A case that could not be started gives an empty trace.
+inline std::vector<std::vector<BackendPose>> run_all(Backend& backend, const FieldScenario& scenario, const RobotModel& robot, const std::vector<GapCase>& cases, double sample_dt) {
+  std::vector<std::vector<BackendPose>> traces;
   for (std::size_t i = 0; i < cases.size(); ++i) {
-    if (!a.start(scenario, robot) || !b.start(scenario, robot)) {
-      gaps.push_back(TraceGap());
-      continue;
-    }
-    gaps.push_back(compare_traces(run_script(a, cases[i].script, sample_dt), run_script(b, cases[i].script, sample_dt)));
+    if (backend.start(scenario, robot)) traces.push_back(run_script(backend, cases[i].script, sample_dt));
+    else traces.push_back(std::vector<BackendPose>());
   }
+  return traces;
+}
+
+inline std::vector<TraceGap> gaps_of(const std::vector<std::vector<BackendPose>>& a, const std::vector<std::vector<BackendPose>>& b) {
+  std::vector<TraceGap> gaps;
+  for (std::size_t i = 0; i < a.size() && i < b.size(); ++i) gaps.push_back(compare_traces(a[i], b[i]));
   return gaps;
+}
+
+// Runs every case on both backends and gives the gap of each.
+inline std::vector<TraceGap> run_cases(Backend& a, Backend& b, const FieldScenario& scenario, const RobotModel& robot, const std::vector<GapCase>& cases, double sample_dt) {
+  return gaps_of(run_all(a, scenario, robot, cases, sample_dt), run_all(b, scenario, robot, cases, sample_dt));
 }
 
 inline double worst_gap(const std::vector<TraceGap>& gaps) {

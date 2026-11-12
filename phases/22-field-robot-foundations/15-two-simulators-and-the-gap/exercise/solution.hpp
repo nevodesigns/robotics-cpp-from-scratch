@@ -81,17 +81,25 @@ inline std::vector<GapCase> standard_cases() {
   return cases;
 }
 
-// Runs every case on both backends, each started afresh on the scenario, and gives the gap of each.
-inline std::vector<TraceGap> run_cases(Backend& a, Backend& b, const FieldScenario& scenario, const RobotModel& robot, const std::vector<GapCase>& cases, double sample_dt) {
-  std::vector<TraceGap> gaps;
+// Runs every case on a backend, started afresh on the scenario for each, and gives the traces. A case that could not be started gives an empty trace.
+inline std::vector<std::vector<BackendPose>> run_all(Backend& backend, const FieldScenario& scenario, const RobotModel& robot, const std::vector<GapCase>& cases, double sample_dt) {
+  std::vector<std::vector<BackendPose>> traces;
   for (std::size_t i = 0; i < cases.size(); ++i) {
-    if (!a.start(scenario, robot) || !b.start(scenario, robot)) {
-      gaps.push_back(TraceGap());
-      continue;
-    }
-    gaps.push_back(compare_traces(run_script(a, cases[i].script, sample_dt), run_script(b, cases[i].script, sample_dt)));
+    if (backend.start(scenario, robot)) traces.push_back(run_script(backend, cases[i].script, sample_dt));
+    else traces.push_back(std::vector<BackendPose>());
   }
+  return traces;
+}
+
+inline std::vector<TraceGap> gaps_of(const std::vector<std::vector<BackendPose>>& a, const std::vector<std::vector<BackendPose>>& b) {
+  std::vector<TraceGap> gaps;
+  for (std::size_t i = 0; i < a.size() && i < b.size(); ++i) gaps.push_back(compare_traces(a[i], b[i]));
   return gaps;
+}
+
+// Runs every case on both backends and gives the gap of each.
+inline std::vector<TraceGap> run_cases(Backend& a, Backend& b, const FieldScenario& scenario, const RobotModel& robot, const std::vector<GapCase>& cases, double sample_dt) {
+  return gaps_of(run_all(a, scenario, robot, cases, sample_dt), run_all(b, scenario, robot, cases, sample_dt));
 }
 
 inline double worst_gap(const std::vector<TraceGap>& gaps) {
