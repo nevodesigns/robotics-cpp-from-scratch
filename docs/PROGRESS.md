@@ -19,12 +19,12 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 310 of 320 planned, 97 percent |
-| phases opened | 20 of 22 |
-| phases finished to plan | 21 (phases 00 to 20) |
-| hours of material | 453 |
-| Failure Atlas entries | 880 |
-| librc headers | 204 across 17 modules |
+| lessons built | 320 of 320 planned, 100 percent |
+| phases opened | 22 of 22 |
+| phases finished to plan | 22 (phases 00 to 21) |
+| hours of material | 478 |
+| Failure Atlas entries | 910 |
+| librc headers | 214 across 18 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
 
@@ -56,7 +56,7 @@ November below it, kept as it was because it records the reasoning of that day.
 | 18 Simulation and hardware in the loop | 12 | 12 | One control binary that runs the same scenario against a simulated plant and a bench rig, with the difference between them measured instead of assumed |
 | 19 Safety and field engineering | 14 | 14 | A risk assessment in which every serious hazard is tied to a mechanism that exists and evidence that passes, with the residual risk worked out and not asserted |
 | 20 Deployment and cross compilation | 12 | 12 | A robot that boots into your code, installs a new release without being bricked by a power cut, and rolls back by itself when the release is bad |
-| 21 Capstones | 0 | 10 | not started |
+| 21 Capstones | 10 | 10 | A whole robot, run end to end with faults injected, whose report an employer can read and whose every number comes from a test that passes |
 
 **Where the gap is.** The front of the book is the thinnest part relative to
 how early a learner meets it. Phases 00 to 03 are the first thing somebody who
