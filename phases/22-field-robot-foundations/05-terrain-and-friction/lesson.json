@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "22-05-terrain-and-friction",
+  "title": "Terrain and Friction: Surfaces, Slopes, and What the Ground Lets a Vehicle Do",
+  "type": "build",
+  "minutes": 70,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-03-units-and-limits-that-cannot-be-mixed",
+    "22-04-motors-gearboxes-and-backlash",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::field",
+    "header": "rc/field/terrain.hpp",
+    "note": "surfaces with friction and rolling resistance, patches of terrain with a slope, and the traction limits (drive, brake, climb, hold) that follow from them"
+  },
+  "breaks_first": [
+    "E-FIELD-0013",
+    "E-FIELD-0014",
+    "E-FIELD-0015"
+  ]
+}

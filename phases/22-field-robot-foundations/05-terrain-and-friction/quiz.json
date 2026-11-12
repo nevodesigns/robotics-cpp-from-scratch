@@ -1,0 +1,78 @@
+{
+  "lesson": "22-05-terrain-and-friction",
+  "title": "Terrain and Friction: Surfaces, Slopes, and What the Ground Lets a Vehicle Do",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What decides the most force a tyre can put on the ground?",
+      "options": [
+        "The motor",
+        "The weight on it times the friction coefficient",
+        "The colour",
+        "The speed"
+      ],
+      "correct": 1,
+      "explanation": "No motor can push harder than the ground allows."
+    },
+    {
+      "stage": "check",
+      "question": "At 2 m/s, ice against tarmac made the stopping distance:",
+      "options": [
+        "The same",
+        "7.4 times as long",
+        "Twice as long",
+        "Shorter"
+      ],
+      "correct": 1,
+      "explanation": "The distance goes as the inverse of the friction."
+    },
+    {
+      "stage": "check",
+      "question": "Going down a grade of 0.2 on gravel, the stop from 2 m/s took:",
+      "options": [
+        "The same as flat",
+        "0.717 m, against 0.416 m on the flat",
+        "Zero",
+        "10 m"
+      ],
+      "correct": 1,
+      "explanation": "Gravity works against the brakes."
+    },
+    {
+      "stage": "check",
+      "question": "Gravel can be climbed up to about:",
+      "options": [
+        "5 degrees",
+        "22.3 degrees",
+        "60 degrees",
+        "90 degrees"
+      ],
+      "correct": 1,
+      "explanation": "tan(angle) = mu minus the rolling resistance."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a speed limit set on a dry floor not safe on gravel?",
+      "options": [
+        "Gravel is faster",
+        "The stopping distance goes as the inverse of the friction",
+        "Gravel is slippery only at night",
+        "It is safe"
+      ],
+      "correct": 1,
+      "explanation": "The limit has to follow the ground."
+    },
+    {
+      "stage": "post",
+      "question": "Where two patches overlap, which is under the vehicle?",
+      "options": [
+        "The earlier",
+        "The later one added",
+        "The average",
+        "Neither"
+      ],
+      "correct": 1,
+      "explanation": "Later patches lie above."
+    }
+  ]
+}
