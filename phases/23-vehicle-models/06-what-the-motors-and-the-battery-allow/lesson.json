@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "23-06-what-the-motors-and-the-battery-allow",
+  "title": "What the Motors and the Battery Allow: Top Speed, Acceleration and Climb From a Drive Train, and Which of the Motors or the Grip Is the One That Runs Out First",
+  "type": "build",
+  "minutes": 85,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-04-motors-gearboxes-and-backlash",
+    "23-05-the-traction-circle",
+    "22-05-terrain-and-friction",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::vehicle",
+    "header": "rc/vehicle/drive_train.hpp",
+    "note": "a drive train (motors, gearbox efficiency, wheel radius, mass, battery with an internal resistance), the force it gives at a speed with the battery's sag, the resistance of the terrain and of the air, the top speed and the acceleration the motors allow, the steepest slope they can climb, and which of the motors or the grip is the limit"
+  },
+  "breaks_first": [
+    "E-VEH-0016",
+    "E-VEH-0017",
+    "E-VEH-0018"
+  ]
+}
