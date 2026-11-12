@@ -1,0 +1,78 @@
+{
+  "lesson": "23-01-a-differential-drive-that-slips",
+  "title": "A Differential Drive That Slips: Wheel Speeds to Motion, With the Two Losses a Real Floor Adds, and What Each Costs in Distance and in Turn",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Which loss takes a fraction of every turn?",
+      "options": [
+        "Longitudinal slip",
+        "Turn efficiency",
+        "Gravity",
+        "Backlash"
+      ],
+      "correct": 1,
+      "explanation": "Slip is in the direction of travel."
+    },
+    {
+      "stage": "check",
+      "question": "10 m of wheel travel with 5 percent slip was how far on the ground?",
+      "options": [
+        "10 m",
+        "9.50 m",
+        "5 m",
+        "9 m"
+      ],
+      "correct": 1,
+      "explanation": "The fraction is taken off."
+    },
+    {
+      "stage": "check",
+      "question": "A turn the wheels say is 90 degrees, at an efficiency of 0.8, was:",
+      "options": [
+        "90 degrees",
+        "72.0 degrees",
+        "80 degrees",
+        "45 degrees"
+      ],
+      "correct": 1,
+      "explanation": "0.8 of 90."
+    },
+    {
+      "stage": "check",
+      "question": "How much more wheel travel does a turn need at efficiency 0.8?",
+      "options": [
+        "None",
+        "25 percent",
+        "5 percent",
+        "80 percent"
+      ],
+      "correct": 1,
+      "explanation": "One over 0.8 less one."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the square not close?",
+      "options": [
+        "The floor is round",
+        "Each turn is short, so the next side points the wrong way, and the error grows with the side",
+        "The wheels are loose",
+        "Chance"
+      ],
+      "correct": 1,
+      "explanation": "The efficiency does the damage."
+    },
+    {
+      "stage": "post",
+      "question": "How can the efficiency be found?",
+      "options": [
+        "From the data sheet",
+        "From a measured turn: the body's turn over the turn the wheels ask for",
+        "It cannot",
+        "By guessing"
+      ],
+      "correct": 1,
+      "explanation": "It is a ratio of two things that can be measured."
+    }
+  ]
+}
