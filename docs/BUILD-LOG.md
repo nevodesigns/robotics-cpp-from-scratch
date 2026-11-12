@@ -1062,3 +1062,34 @@ Nine lessons on turning sensor data into something a planner can use. The module
 - **A step that a plane smooths away.** The plane through the 3 by 3 cells of a step of 5 cm read as 14 degrees and a roughness inside the limit, and the first version of 24-05 did not call it lethal. The steepest rise between neighbours was added; the lesson keeps both numbers.
 - **A cell on an edge.** A post of 0.025 m rasterised to no cells because the centres of the four cells round it are 0.035 m away; the sizes in 24-04 were changed to ones that cover a cell.
 - **A stub that named what only the solution defines.** Twice, in 23-06 and again in 24-07; the exercises did not compile. The fix both times was in the stub, and the exercise stage of the check caught it, as it is meant to.
+
+## Phase 25, knowing where you are outdoors (13 November 2026)
+
+Nine lessons on the position estimate of a ground vehicle. The module is `rc::locate`, the atlas prefix `VEH` (continued).
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 25-01 wheels and a gyro in a filter | over 120 s with a bias of 0.01 rad/s and a slip, the heading ended 3.1 degrees out from the wheels, 68.0 from the gyro and 1.0 from the filter; with wheels 12 percent out the unweighted estimator ended 3.7 degrees out on average | `rc/locate/gyro_wheels.hpp` |
+| 25-02 GNSS and the lever arm | a degree of longitude at 52 degrees is 68 459 m against 111 195 for latitude; the flat map is 0.036 m off at 1 km and 357 m off at 100 km; an antenna 0.5 m from the centre moved at 0.50 m/s on a robot turning on the spot | `rc/locate/gnss_frame.hpp` |
+| 25-03 fix quality and outliers | with 1 percent of fixes thrown 8 m, the worst error was 6.04 m ungated and 2.29 m gated, refusing 0.2 percent of good fixes; treating every fix as fixed gave 2.81 m rms on the single fixes against 0.67 m; a gate that never gives up found a carried robot after 68 fixes, one that gives up after 5 refusals after 5 | `rc/locate/gnss_filter.hpp` |
+| 25-04 matching one scan to another | a scan moved 0.30 m, 0.10 m and 0.15 rad was matched to 0.0007 m and 0.0001 rad in 16 rounds; it converged from 0.5 rad of rotation error and not from 0.8; a corridor left the error along it at 0.10 m | `rc/locate/icp.hpp` |
+| 25-05 finding yourself in a map with particles | 3000 particles found the robot in 5 steps to 0.021 m; 50 particles lost it in 10 runs of 10; a plain rectangular room put the cloud on the mirror image in 2 of 8 | `rc/locate/mcl.hpp` |
+| 25-06 how lost can it be | the 95 percent radius was 0.22 m after 10 m and 7.07 m after 100 m, 31.6 times for ten times the distance; 27 m to 1 m and 80 m to 5 m | `rc/locate/dead_reckon.hpp` |
+| 25-07 the bias of a gyro when the robot stops | stopping 2 s every 60 s took the heading error after 300 s from 9.9 degrees to 4.6, every 10 s to 0.8; a detector of wheels alone called a carried robot still in 176 of 200 samples | `rc/locate/stillness.hpp` |
+| 25-08 when a measurement is from the past | a fix 0.25 s late at 2 m/s left a bias of 0.49 m; extrapolating or using the history gave 0.035 and 0.045 m rms; braking to a stop during the delay put the extrapolated fix 0.25 m beyond the robot | `rc/locate/time_align.hpp` |
+| 25-09 the robot that was picked up | a plain cloud was 8.3 m out after a carry of 5.6 m; with the monitor the robot was found again after 21 steps and flagged lost after 1 | `rc/locate/recovery.hpp` |
+
+**Decisions.**
+
+1. **Statistical tests assert wide bounds.** Several lessons (25-03, 25-05, 25-07, 25-09) test the behaviour of random methods. The numbers in the documents are from the build that made them; the assertions hold across toolchains by comparing quantities with a wide margin between them (50 particles against 3000, a stop every 10 s against none).
+2. **`MonteCarlo::correct` returns the average likelihood** (a change to 25-05's header made for 25-09), so the recovery lesson can build on it without a second copy of the localiser.
+3. **A longer test limit for the localisation lessons** (240 and 300 s in the manifest), because 3000 particles of 24 ray casts run for tens of seconds under the sanitizers.
+
+**Mistakes, and what caught them.**
+
+- **A claim that did not hold.** The first version of 25-01 said weighing the wheels by how straight they are was what made the bias estimate good. On wheels that had been calibrated the naive estimator did nearly as well (1.4 degrees against 1.0). The claim was kept only for wheels 12 percent out, where it holds (3.7 against 1.6), and the lesson says both.
+- **A gate that was supposed to lose the robot for ever.** The first test of 25-03 expected a gate that never gives up to lose a carried robot for good. It found it after 68 fixes, because the filter's uncertainty grows while it refuses and the gate widens with it. The lesson says that, and the price of waiting.
+- **A match that was held by the sampling of the walls.** In 25-04 a few points on a partition across a corridor could not outvote hundreds on the walls, and the match stayed at the odometry's error; with as many points as the walls it found the truth. The sampling is part of the result.
+- **Particles too few for the room.** 1000 particles lost the robot 4 times in 10 in 25-05 and 3000 lost it 0, which is the number the lesson now uses; an earlier version asserted a count that only one toolchain gave.
+- **An extrapolation that was as good as the history.** In 25-08 extrapolating a late fix by the velocity was as good as the history through the manoeuvres of the run; the case that separates them is a stop during the delay, which the lesson now shows.
+- **A solution variable used by the stub.** Twice again (25-04 and earlier), the stub mentioned a variable defined only in the solution; the exercise stage of the check caught both. The fix is to define what the lines after the stub need before the solution block.
