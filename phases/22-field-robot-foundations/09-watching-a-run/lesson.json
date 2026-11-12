@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "22-09-watching-a-run",
+  "title": "Watching a Run: The Robot as a Moving Picture, an Animated SVG Made From the Scenario and the Log, Opened in Any Browser",
+  "type": "build",
+  "minutes": 70,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-07-a-field-scenario-file",
+    "22-08-recording-and-replaying-a-run",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::field",
+    "header": "rc/field/watch.hpp",
+    "note": "an animated SVG of a run (terrain patches, walls, posts, goals, the path, and the robot moving along it) made from a scenario and a run log, with the bounds computed from everything in the picture and the y axis turned the right way up"
+  },
+  "breaks_first": [
+    "E-FIELD-0026",
+    "E-FIELD-0027",
+    "E-FIELD-0028"
+  ]
+}
