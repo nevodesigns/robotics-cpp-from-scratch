@@ -19,12 +19,12 @@ November below it, kept as it was because it records the reasoning of that day.
 
 | | |
 |---|---|
-| lessons built | 298 of 320 planned, 93 percent |
-| phases opened | 19 of 22 |
-| phases finished to plan | 20 (phases 00 to 19) |
-| hours of material | 430 |
-| Failure Atlas entries | 844 |
-| librc headers | 192 across 16 modules |
+| lessons built | 310 of 320 planned, 97 percent |
+| phases opened | 20 of 22 |
+| phases finished to plan | 21 (phases 00 to 20) |
+| hours of material | 453 |
+| Failure Atlas entries | 880 |
+| librc headers | 204 across 17 modules |
 | toolchains claimed | 4 |
 | reference tests | 190, green on every claimed toolchain |
 
@@ -55,7 +55,7 @@ November below it, kept as it was because it records the reasoning of that day.
 | 17 Middleware, then ROS 2 | 20 | 20 | A graph of nodes brought up in order, running, losing one and degrading safely, on a bus the learner wrote, with the seam where ROS 2 plugs in |
 | 18 Simulation and hardware in the loop | 12 | 12 | One control binary that runs the same scenario against a simulated plant and a bench rig, with the difference between them measured instead of assumed |
 | 19 Safety and field engineering | 14 | 14 | A risk assessment in which every serious hazard is tied to a mechanism that exists and evidence that passes, with the residual risk worked out and not asserted |
-| 20 Deployment and cross compilation | 0 | 12 | not started |
+| 20 Deployment and cross compilation | 12 | 12 | A robot that boots into your code, installs a new release without being bricked by a power cut, and rolls back by itself when the release is bad |
 | 21 Capstones | 0 | 10 | not started |
 
 **Where the gap is.** The front of the book is the thinnest part relative to
