@@ -1,0 +1,78 @@
+{
+  "lesson": "24-06-holes-and-drops",
+  "title": "Holes and Drops: A Lidar Tipped Down Sees the Ground at a Known Range, So Ground That Is Not There Is a Hole, and How Fast It Can Be Driven at Depends on How Far Away the Ground Is Seen",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "How is a hole seen by a lidar?",
+      "options": [
+        "Directly",
+        "As ground that should be there and is not",
+        "By its colour",
+        "It cannot be"
+      ],
+      "correct": 1,
+      "explanation": "You expect the ground."
+    },
+    {
+      "stage": "check",
+      "question": "A lidar 0.25 m up, tipped down 5 degrees, meets level ground how far ahead?",
+      "options": [
+        "0.25 m",
+        "2.86 m",
+        "10 m",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "h over tan(pitch)."
+    },
+    {
+      "stage": "check",
+      "question": "A beam that returns nothing where the ground should be is:",
+      "options": [
+        "Ground",
+        "A hole",
+        "Raised",
+        "Noise only"
+      ],
+      "correct": 1,
+      "explanation": "Longer, or none."
+    },
+    {
+      "stage": "check",
+      "question": "At 5 m/s with a scan every 0.1 s, how far does the vehicle go between scans?",
+      "options": [
+        "0.1 m",
+        "0.5 m",
+        "5 m",
+        "0.05 m"
+      ],
+      "correct": 1,
+      "explanation": "A hole narrower than that can fall between them."
+    },
+    {
+      "stage": "post",
+      "question": "What was the fastest speed from which the vehicle could stop before ground first seen 2.86 m away?",
+      "options": [
+        "2.49 m/s",
+        "10 m/s",
+        "1 m/s",
+        "0"
+      ],
+      "correct": 0,
+      "explanation": "Latency and braking."
+    },
+    {
+      "stage": "post",
+      "question": "What happens to the safe speed if the sensor is tipped down further?",
+      "options": [
+        "It rises",
+        "It falls: the ground is seen nearer",
+        "Nothing",
+        "It is infinite"
+      ],
+      "correct": 1,
+      "explanation": "The ground is seen at h over tan(pitch)."
+    }
+  ]
+}
