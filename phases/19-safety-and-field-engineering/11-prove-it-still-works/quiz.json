@@ -1,0 +1,78 @@
+{
+  "lesson": "19-11-prove-it-still-works",
+  "title": "Prove It Still Works: A Self-Test That Runs Every Check, a Permit That Expires, and the Stop That Cannot Be Tested From Software Alone",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why must safety functions be tested on purpose?",
+      "options": [
+        "Regulations",
+        "They are dormant: a welded relay or a cut wire gives no sign until the moment the function is needed",
+        "It is cheap",
+        "They are slow"
+      ],
+      "correct": 1,
+      "explanation": "A latent fault."
+    },
+    {
+      "stage": "check",
+      "question": "Five checks run, and the second fails. Does the run stop?",
+      "options": [
+        "Yes, at the first failure",
+        "No: every check is run and every failure reported (three failed in the test), and a throw or a missing check is a failure too",
+        "Only for exceptions",
+        "Yes, but it logs"
+      ],
+      "correct": 1,
+      "explanation": "A short circuit hides the rest."
+    },
+    {
+      "stage": "check",
+      "question": "What does all_passed give for an empty list of results?",
+      "options": [
+        "true",
+        "false: a test that checked nothing has not passed",
+        "an error",
+        "depends"
+      ],
+      "correct": 1,
+      "explanation": "An emptied self-test would otherwise be the cleanest result."
+    },
+    {
+      "stage": "check",
+      "question": "With the contactor welded closed, which check failed?",
+      "options": [
+        "Both",
+        "Only the one that read the contactor: the software check passed, because the software was right and the machine could not stop",
+        "Neither",
+        "The software check only"
+      ],
+      "correct": 1,
+      "explanation": "A test of the code is not a test of the machine."
+    },
+    {
+      "stage": "post",
+      "question": "A test that passed an hour ago, and one that failed a minute ago. Is driving permitted?",
+      "options": [
+        "Yes, the pass is recent",
+        "No: a failed test cancels the earlier pass",
+        "Only slowly",
+        "Yes for an hour"
+      ],
+      "correct": 1,
+      "explanation": "The permit also fails on a backwards clock."
+    },
+    {
+      "stage": "post",
+      "question": "At a failure rate of 1e-5 per hour, how often to test to keep the chance of an undetected failure at 1 in 1000?",
+      "options": [
+        "Every year",
+        "About every 100 hours, 4.2 days: the interval follows from a rate and a target",
+        "Every day",
+        "Never"
+      ],
+      "correct": 1,
+      "explanation": "A year without a test is 8.39e-02."
+    }
+  ]
+}
