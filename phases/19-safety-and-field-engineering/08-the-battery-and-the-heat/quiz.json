@@ -1,0 +1,78 @@
+{
+  "lesson": "19-08-the-battery-and-the-heat",
+  "title": "The Battery and the Heat: Derating Before Stopping, Voltage That Sags Under Load, and a Resume Point Above the Stop Point",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why derate before stopping?",
+      "options": [
+        "It looks nicer",
+        "A robot told to slow down has time to reach somewhere safe, and a robot cut off where it stands may not",
+        "It saves power",
+        "It is required"
+      ],
+      "correct": 1,
+      "explanation": "The warning zone is also an early signal."
+    },
+    {
+      "stage": "check",
+      "question": "A battery at 22.0 V at rest drives 15 A through 0.1 ohm. What do the terminals read, and what should a monitor judge it as?",
+      "options": [
+        "22.0 and 22.0",
+        "20.5 at the terminals, and 22.0 once the sag is added back: the battery has lost nothing",
+        "20.5 and 20.5",
+        "24.0"
+      ],
+      "correct": 1,
+      "explanation": "A stop below 21 V at the terminals changed state 60 times in a minute."
+    },
+    {
+      "stage": "check",
+      "question": "A battery sits at its stop voltage with a little noise. What happens with a resume point equal to the stop voltage?",
+      "options": [
+        "Nothing",
+        "It stops and starts again over and over: 135 stops in 600 samples against 1 with a resume at 21.0 V",
+        "It stays stopped",
+        "It derates"
+      ],
+      "correct": 1,
+      "explanation": "Hysteresis."
+    },
+    {
+      "stage": "check",
+      "question": "Why did the hard stop run for an hour with 53 stops and almost the same mean power as derating?",
+      "options": [
+        "A bug",
+        "Heat was only dealt with at the limit, so it hit the limit again each time: the work done was about the same, with a hotter machine that kept stopping",
+        "It was cold",
+        "It ran slower"
+      ],
+      "correct": 1,
+      "explanation": "Derating found a balance at about 0.81 power."
+    },
+    {
+      "stage": "post",
+      "question": "A thermistor wire comes off and reads 200 degrees. What should the monitor do?",
+      "options": [
+        "Ignore it",
+        "Stop: a reading outside the plausible range cannot be real and not knowing is a stop",
+        "Derate",
+        "Reset"
+      ],
+      "correct": 1,
+      "explanation": "A good reading brought it back."
+    },
+    {
+      "stage": "post",
+      "question": "What does this monitor not do that a lithium pack needs?",
+      "options": [
+        "Anything",
+        "Watch the cells one by one, which is where fires start, and it cannot stand in for the battery's own protection",
+        "Measure current",
+        "Derate"
+      ],
+      "correct": 1,
+      "explanation": "The state is not latched here; the supervisor latches."
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "19-08-the-battery-and-the-heat",
+  "title": "The Battery and the Heat: Derating Before Stopping, Voltage That Sags Under Load, and a Resume Point Above the Stop Point",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "19-07-two-sensors-that-must-agree",
+    "19-01-what-can-go-wrong",
+    "18-07-one-seed-many-streams",
+    "01-06-enums-and-states"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::safety",
+    "header": "rc/safety/power.hpp",
+    "note": "a power monitor that derates smoothly with voltage and temperature, corrects the voltage for load, refuses implausible readings, and resumes only above the point it stopped at"
+  },
+  "breaks_first": [
+    "E-SAFE-0022",
+    "E-SAFE-0023",
+    "E-SAFE-0024"
+  ]
+}
