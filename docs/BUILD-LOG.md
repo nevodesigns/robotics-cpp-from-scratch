@@ -1031,3 +1031,34 @@ Nine lessons on the ground vehicle track of the specialisation course, built aft
 - **A calibration spread that was noise in the wrong place.** A noisy gyro gave a spread of 4e-5 m, too small to show that more spins help. The scatter that matters is the floor's (the robot does not scrub the same way twice), and the lesson now varies the efficiency of each spin by 3 percent.
 - **A stub that named a variable of the solution.** The exercise of 23-06 did not compile because its stub mentioned a constant that exists only in the reference. The exercise lane of the check (every exercise must compile and fail) caught it.
 - **Tests with round numbers for rounded quantities.** Several expectations were exact for continuous time and wrong for a millisecond step (a distance of 10.0003 m, a turn of 72.038 degrees); each was corrected to the tolerance the step implies, and the tolerance is said in a comment.
+
+## Phase 24, perceiving for driving (13 November 2026)
+
+Nine lessons on turning sensor data into something a planner can use. The module is `rc::perceive`, the atlas prefix `VEH` (continued from phase 23).
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 24-01 a lidar scan to points | 360 beams gave 360 points and, with a tenth of them lost, 325; a sensor tipped 5 degrees put a flat wall at heights from -0.19 to 0.69 m; points 0.175 m apart at 10 m; a post of 0.3 m gets two beams only to 17.2 m | `rc/perceive/scan.hpp` |
+| 24-02 finding the ground | a plane fitted to everything was 6.57 degrees against a true 5.00 with boxes on the ground, a plane of random samples 5.08; a wall with more points than the ground was taken for it (90 degrees) unless planes tilted over 30 degrees were refused (0.2) | `rc/perceive/ground.hpp` |
+| 24-03 from points to obstacles | four objects found at a radius of 0.2 m, none at 0.02, three at 0.6 and one at 5; a wall 11 m away fell apart at a fixed 0.15 m and held at a radius that grows with range; two posts 0.35 m apart at 2 m joined at a fixed 0.4 m | `rc/perceive/cluster.hpp` |
+| 24-04 costmap layers | a gap of 0.60 m left 2 free cells for a vehicle with an inscribed radius of 0.25 m and a gap of 0.40 m left none; an obstacle that had gone left 7 ghost cells in a layer that only marks and none in one that clears | `rc/perceive/costmap.hpp` |
+| 24-05 can it drive there | a ramp of 24 degrees cost 198 on tarmac and was lethal (254) on gravel; a step of 5 cm read as 14.0 degrees by the plane and 26.6 between neighbours | `rc/perceive/traversability.hpp` |
+| 24-06 holes and drops | a lidar 0.25 m up and tipped 5 degrees meets the ground 2.86 m ahead everywhere across; a hole of 0.3 m fell between scans at 5 m/s and 0.1 s a scan; the fastest to stop before ground first seen there was 2.49 m/s | `rc/perceive/drops.hpp` |
+| 24-07 a scan taken while moving | a wall straight ahead was 0.119 m rms from straight in a cloud made as if the sensor had not turned (1 rad/s, 0.1 s), 0 after deskewing | `rc/perceive/deskew.hpp` |
+| 24-08 the camera and the ground | one image row spans 0.009 m of ground at the centre, 0.139 at row 140 and 0.82 at row 120; a pitch a degree wrong put row 140 37 percent out | `rc/perceive/ground_camera.hpp` |
+| 24-09 tracking things that move | the filter read a velocity to 0.122 m/s where the difference of two positions was 1.073; ids swapped in 5 of 20 runs of two people stopping side by side and 0 of 20 a metre apart | `rc/perceive/track.hpp` |
+
+**Decisions.**
+
+1. **The camera is a pinhole with no lens.** Distortion belongs to a calibration lesson that comes with the arm track, where a camera is also needed; lesson 24-08 says so.
+2. **Clustering is quadratic.** It compares every pair of points. Fine for a scan of a few hundred points, and the lesson says that a grid or tree is the cure for more.
+3. **The tracker is nearest neighbour with one hypothesis**, and its lesson shows where it fails.
+
+**Mistakes, and what caught them.**
+
+- **A wrong explanation about ids.** The first test of 24-09 had two targets crossing at right angles and expected the filter to swap them. It did not: a constant velocity prediction keeps targets apart that move differently. The failure case is people who meet, stop and walk on; the lesson was rewritten to say that, with 5 swaps in 20 runs.
+- **A test world that hid the thing it tested.** The wall of 24-03 was placed at the maximum range of the lidar, so most of its points were beyond it and were dropped; and the two posts in front of the wall hid part of it, splitting it. Both are now placed so that the test is of the clustering and not of the sensor.
+- **A geometry that wrote its own answer.** The first scene of 24-02 put the boxes at three places along the ground and the least squares plane came out within 0.02 degrees of the truth; the boxes had to be piled at one end to pull it. The pull is the point, so the scene was made to show it.
+- **A step that a plane smooths away.** The plane through the 3 by 3 cells of a step of 5 cm read as 14 degrees and a roughness inside the limit, and the first version of 24-05 did not call it lethal. The steepest rise between neighbours was added; the lesson keeps both numbers.
+- **A cell on an edge.** A post of 0.025 m rasterised to no cells because the centres of the four cells round it are 0.035 m away; the sizes in 24-04 were changed to ones that cover a cell.
+- **A stub that named what only the solution defines.** Twice, in 23-06 and again in 24-07; the exercises did not compile. The fix both times was in the stub, and the exercise stage of the check caught it, as it is meant to.

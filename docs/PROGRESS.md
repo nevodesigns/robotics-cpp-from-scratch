@@ -21,11 +21,11 @@ starts with an entry of 13 November; the older entries below it are kept as they
 | lessons built | 355: 320 of 320 planned for the original course, 100 percent, and 35 of 138 planned for the specialisation course (phases 22 to 24 of 22 to 37) |
 | phases opened | 25 (the 22 of the original plan, and phases 22 to 24 of the specialisation course) |
 | phases finished to plan | 25 (phases 00 to 21 of the original plan, and 22 to 24 of the specialisation course) |
-| hours of material | 712 (the sum of the minutes in the lesson files, which is what the README counts) |
-| Failure Atlas entries | 991 |
-| librc headers | 332 across 22 modules (rc::hal, rc::field, rc::gz and rc::vehicle are new) |
+| hours of material | 724 (the sum of the minutes in the lesson files, which is what the README counts) |
+| Failure Atlas entries | 1018 |
+| librc headers | 341 across 23 modules (rc::hal, rc::field, rc::gz, rc::vehicle and rc::perceive are new) |
 | toolchains claimed | 4 |
-| gate tests | 396 (a reference test for each of the 320 lessons, the checks that code which must not compile is refused, and the tests of the library itself), green on every claimed toolchain |
+| gate tests | 405 (a reference test for each of the 320 lessons, the checks that code which must not compile is refused, and the tests of the library itself), green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -523,13 +523,13 @@ libstdc++ issue on that version rather than anything in this repository.
 
 ## Where this left off
 
-### Written 13 November 2026, phases 22 and 23 built (the base and the vehicle models of the specialisation course)
+### Written 13 November 2026, phases 22 to 24 built (the base, the vehicle models and perceiving for driving)
 
-**Phase 22 is built and green on continuous integration (all 9 jobs, the Gazebo one included, on commit cfb4728). Phase 23, the vehicle models, is built: 9 lessons, all green locally** (the full gate of 387 tests, the sanitizers and clang on each lesson, the audit with 0 issues). It was pushed in one go; read the next entry for what continuous integration said. The owner approved the specialisation plan on 13 November (docs/SPECIALISATION-PLAN.md, section 9): the same repository, phases 22 to 37, ground first, the built in simulator as the default and Gazebo Sim as a second backend, hardware optional and tested against fakes, real world dimensions for the models, the humanoid (phase 37) paused and not dropped. Stage 1 is the base and the ground track (phases 22 to 27, 63 lessons) and is built in one run, one phase at a time, stopping at the end of stage 1.
+**Phase 22 is built and green on continuous integration (all 9 jobs, the Gazebo one included, on commit cfb4728). Phase 23, the vehicle models, is built and green on continuous integration (commit 3b9f793). Phase 24, perceiving for driving, is built: 9 lessons, all green locally** (the full gate of 387 tests, the sanitizers and clang on each lesson, the audit with 0 issues). It was pushed in one go; read the next entry for what continuous integration said. The owner approved the specialisation plan on 13 November (docs/SPECIALISATION-PLAN.md, section 9): the same repository, phases 22 to 37, ground first, the built in simulator as the default and Gazebo Sim as a second backend, hardware optional and tested against fakes, real world dimensions for the models, the humanoid (phase 37) paused and not dropped. Stage 1 is the base and the ground track (phases 22 to 27, 63 lessons) and is built in one run, one phase at a time, stopping at the end of stage 1.
 
 **What phase 22 holds.** `rc::hal` (the Drive, ArmBus and LegBus interfaces and their fakes, the contract test every implementation must pass, the bring-up checklist and a fake board), `rc::field` (frames, limits, a gear motor, terrain and friction, field sensors, the scenario file, the run log, the SVG viewer, scoring, the robot file with a source for every number, the Gazebo world, the backend interface and the gap between simulators, the safety case), and `rc::gz` (the Gazebo Sim backend over gz-transport, built only where Gazebo is installed). Details and every mistake are in docs/BUILD-LOG.md, "Phase 22".
 
-**What is next.** Phase 24 (perceiving for driving), on the owner's standing instruction to build stage 1 to its end.
+**What is next.** Phase 25 (knowing where you are, outdoors), on the owner's standing instruction to build stage 1 to its end.
 
 ### Written 13 November 2026, all 320 lessons built and the hardening pass done
 
