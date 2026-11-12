@@ -1,0 +1,78 @@
+{
+  "lesson": "20-10-what-time-it-is-at-boot",
+  "title": "What Time It Is at Boot: A Clock That Starts in 1970, the Jump When It Is Set, and Records That Sort Themselves Wrongly",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Which clock should every timeout and rate of the robot be measured in?",
+      "options": [
+        "The wall clock",
+        "Time since boot, which only goes forward and cannot be set",
+        "Either",
+        "GPS"
+      ],
+      "correct": 1,
+      "explanation": "A wall clock timeout fires at the sync."
+    },
+    {
+      "stage": "check",
+      "question": "The clock is set at 40 s on a boot that started in 1970. How big is the jump?",
+      "options": [
+        "A second",
+        "About 1.79e9 s, 56.9 years, in one step while 0.2 s of real time passed",
+        "An hour",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "classify calls it a step forward."
+    },
+    {
+      "stage": "check",
+      "question": "A timeout of 0.3 s is measured on the wall clock, and the clock is put back an hour. When does it fire?",
+      "options": [
+        "At once",
+        "Never: the elapsed time is negative",
+        "After 0.3 s",
+        "After an hour"
+      ],
+      "correct": 1,
+      "explanation": "Time since boot said expired."
+    },
+    {
+      "stage": "check",
+      "question": "Sorted by the wall clock, how many of six records of two boots were in the wrong place?",
+      "options": [
+        "None",
+        "5: the early records of the second boot carry 1970 time and go before the whole of the first boot",
+        "1",
+        "All"
+      ],
+      "correct": 1,
+      "explanation": "By boot and time since boot, none."
+    },
+    {
+      "stage": "post",
+      "question": "Why does check_validity answer unknown before the clock is set?",
+      "options": [
+        "A bug",
+        "A 1970 clock says not yet valid for a certificate that is fine: a guess must not be used to say yes or no",
+        "It is faster",
+        "It is a convention"
+      ],
+      "correct": 1,
+      "explanation": "The robot needs the time without a certificate."
+    },
+    {
+      "stage": "post",
+      "question": "What does a robot that suspends do to the monotonic clock on many systems?",
+      "options": [
+        "Nothing",
+        "It does not count the suspended time, so time since boot is shorter than the real time",
+        "It speeds it up",
+        "It resets it"
+      ],
+      "correct": 1,
+      "explanation": "A limit of this model."
+    }
+  ]
+}
