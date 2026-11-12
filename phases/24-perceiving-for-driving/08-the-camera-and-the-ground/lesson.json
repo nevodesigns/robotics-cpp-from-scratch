@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "24-08-the-camera-and-the-ground",
+  "title": "The Camera and the Ground: Where on the Floor a Pixel Is, How the Answer Falls Apart Towards the Horizon, and What a Degree of Pitch Does to It",
+  "type": "build",
+  "minutes": 85,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-02-frames-for-a-field-robot",
+    "24-02-finding-the-ground",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::perceive",
+    "header": "rc/perceive/ground_camera.hpp",
+    "note": "a pinhole camera at a height above the ground and tipped down by a pitch, the point on level ground that a pixel looks at and the pixel that a ground point falls on, the row of the horizon, the ground distance a pixel step spans, and the distance a wrong pitch or height gives"
+  },
+  "breaks_first": [
+    "E-VEH-0049",
+    "E-VEH-0050",
+    "E-VEH-0051"
+  ]
+}
