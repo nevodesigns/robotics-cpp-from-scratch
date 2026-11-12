@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "26-01-a-path-a-car-can-drive",
+  "title": "A Path a Car Can Drive: Searching Over Pose and Heading With Arcs the Car Can Make, and Why the Grid Path With Its Corners Is Not a Path at All",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "24-04-costmap-layers",
+    "23-03-ackermann-geometry-and-the-turning-circle",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/hybrid_astar.hpp",
+    "note": "hybrid A*: a search over (x, y, heading) in which each step is an arc of a car with the steering at one of a few angles, the result is a path whose every part is an arc the car can drive, nodes are kept one to a cell of a coarse grid of position and heading, the cost is the length with penalties for steering, changing steering and reversing, and the heuristic is the distance to the goal"
+  },
+  "breaks_first": [
+    "E-VEH-0082",
+    "E-VEH-0083",
+    "E-VEH-0084"
+  ]
+}
