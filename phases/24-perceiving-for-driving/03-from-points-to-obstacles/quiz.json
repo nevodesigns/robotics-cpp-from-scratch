@@ -1,0 +1,78 @@
+{
+  "lesson": "24-03-from-points-to-obstacles",
+  "title": "From Points to Obstacles: Clustering by Distance, With a Radius That Grows With Range Because the Points Do",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the one parameter that decides a clustering by distance?",
+      "options": [
+        "The colour",
+        "How close two points must be to be one thing",
+        "The number of points",
+        "The sensor"
+      ],
+      "correct": 1,
+      "explanation": "The radius."
+    },
+    {
+      "stage": "check",
+      "question": "At a radius of 0.2 m the scene gave:",
+      "options": [
+        "0 clusters",
+        "4 clusters",
+        "1 cluster",
+        "7 clusters"
+      ],
+      "correct": 1,
+      "explanation": "Four objects, three scattered points dropped."
+    },
+    {
+      "stage": "check",
+      "question": "At a radius of 5 m the scene gave:",
+      "options": [
+        "4 clusters",
+        "1 cluster",
+        "0",
+        "7"
+      ],
+      "correct": 1,
+      "explanation": "Everything joins."
+    },
+    {
+      "stage": "check",
+      "question": "A fixed radius of 0.15 m on a wall 11 m away found how many objects?",
+      "options": [
+        "1",
+        "0",
+        "12",
+        "100"
+      ],
+      "correct": 1,
+      "explanation": "The points are 0.19 m apart."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the radius grow with range?",
+      "options": [
+        "Style",
+        "The points of a far thing are further apart",
+        "To be fast",
+        "Noise"
+      ],
+      "correct": 1,
+      "explanation": "Spacing is range times the beam step."
+    },
+    {
+      "stage": "post",
+      "question": "What does a radius that is the same at every range do near the sensor?",
+      "options": [
+        "Nothing",
+        "It joins things that are close together, like two posts with a gap between them",
+        "It splits walls",
+        "It speeds up"
+      ],
+      "correct": 1,
+      "explanation": "Big enough for the far is too big for the near."
+    }
+  ]
+}

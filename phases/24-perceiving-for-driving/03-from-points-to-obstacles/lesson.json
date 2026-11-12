@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "24-03-from-points-to-obstacles",
+  "title": "From Points to Obstacles: Clustering by Distance, With a Radius That Grows With Range Because the Points Do",
+  "type": "build",
+  "minutes": 80,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "24-01-a-lidar-scan-to-points",
+    "24-02-finding-the-ground",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::perceive",
+    "header": "rc/perceive/cluster.hpp",
+    "note": "obstacle points grouped into objects by a distance that is a base radius plus a share of the range, by joining every pair of points closer than that, with the centroid and the size of each object and a floor on how many points make one"
+  },
+  "breaks_first": [
+    "E-VEH-0034",
+    "E-VEH-0035",
+    "E-VEH-0036"
+  ]
+}
