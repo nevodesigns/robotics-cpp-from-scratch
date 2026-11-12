@@ -79,6 +79,21 @@ function(rc_add_lesson)
     endif()
   endif()
 
+  # A lesson with "gz": true can use Gazebo Sim when it is installed: the transport and message libraries are linked and
+  # RC_HAVE_GZ is defined, and the lesson's tests skip the part that needs them when they are not. Gazebo is optional, as Qt
+  # is, but a missing one is never an error here, because every lesson passes without it (the course's rule for hardware).
+  set(lesson_gz FALSE)
+  string(JSON gz_flag ERROR_VARIABLE no_gz GET "${manifest_text}" "gz")
+  if(NOT no_gz AND gz_flag)
+    find_package(gz-transport13 QUIET)
+    find_package(gz-msgs10 QUIET)
+    if(gz-transport13_FOUND AND gz-msgs10_FOUND)
+      set(lesson_gz TRUE)
+    else()
+      message(STATUS "lesson ${lesson_id}: built without Gazebo, gz-transport13 or gz-msgs10 was not found")
+    endif()
+  endif()
+
   string(REPLACE "-" "_" target_base "lesson_${lesson_id}")
 
   file(GLOB test_sources CONFIGURE_DEPENDS "${lesson_dir}/tests/*.cpp")
@@ -170,6 +185,11 @@ function(rc_add_lesson)
       foreach(module ${qt_modules})
         target_link_libraries(${target} PRIVATE Qt6::${module})
       endforeach()
+    endif()
+
+    if(lesson_gz)
+      target_link_libraries(${target} PRIVATE gz-transport13::gz-transport13 gz-msgs10::gz-msgs10)
+      target_compile_definitions(${target} PRIVATE RC_HAVE_GZ=1)
     endif()
 
     if(MSVC)

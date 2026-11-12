@@ -1,0 +1,78 @@
+{
+  "lesson": "22-14-the-same-program-another-simulator",
+  "title": "The Same Program, Another Simulator: One Backend Interface, the Built In Model Behind It, and Gazebo Sim Behind It Too",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why a second simulator behind the same interface?",
+      "options": [
+        "Speed",
+        "A program tested on one has learnt that simulator's habits; two let the answers be compared",
+        "Licensing",
+        "Gazebo is better"
+      ],
+      "correct": 1,
+      "explanation": "The comparison is the test."
+    },
+    {
+      "stage": "check",
+      "question": "Driving straight 5 s at 0.2 m/s from y = 2 ended on the built in backend at:",
+      "options": [
+        "y = 3.0 exactly",
+        "y = 2.990, a little short of 3 because of the lag",
+        "y = 2",
+        "y = 5"
+      ],
+      "correct": 1,
+      "explanation": "Speed times time less speed times time constant."
+    },
+    {
+      "stage": "check",
+      "question": "A command of 5 m/s with a limit of 0.22 in the robot file gave:",
+      "options": [
+        "5 m/s",
+        "0.22 m/s",
+        "0",
+        "2.5 m/s"
+      ],
+      "correct": 1,
+      "explanation": "The limits come from the file."
+    },
+    {
+      "stage": "check",
+      "question": "How is the Gazebo run made as long as it was asked to be?",
+      "options": [
+        "It runs in real time",
+        "The server is paused and stepped by the world control service until the clock gets there",
+        "A sleep",
+        "It is not"
+      ],
+      "correct": 1,
+      "explanation": "Time is advanced, not waited for."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the Gazebo backend put itself in a partition of its own?",
+      "options": [
+        "For speed",
+        "So that two runs, or two tests, never hear each other's messages",
+        "It is required",
+        "For logging"
+      ],
+      "correct": 1,
+      "explanation": "Transport is shared by default."
+    },
+    {
+      "stage": "post",
+      "question": "What happens to the lesson on a machine without Gazebo?",
+      "options": [
+        "It fails",
+        "It builds and passes without the Gazebo test",
+        "It is skipped",
+        "It asks to install it"
+      ],
+      "correct": 1,
+      "explanation": "Every lesson passes without what it cannot assume."
+    }
+  ]
+}

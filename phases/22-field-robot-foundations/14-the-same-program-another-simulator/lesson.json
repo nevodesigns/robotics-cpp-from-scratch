@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "id": "22-14-the-same-program-another-simulator",
+  "title": "The Same Program, Another Simulator: One Backend Interface, the Built In Model Behind It, and Gazebo Sim Behind It Too",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "22-01-a-robot-as-an-interface",
+    "22-07-a-field-scenario-file",
+    "22-12-describing-a-robot-once",
+    "22-13-a-world-for-gazebo",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::field",
+    "header": "rc/field/backend.hpp",
+    "note": "the Backend interface (start, command, advance, pose) for a simulator, the built in backend on top of the fake drive, and run_script, the program that drives a scenario by a list of steps and records the trace; with the Gazebo Sim backend of rc/gz/gz_backend.hpp used where Gazebo is installed"
+  },
+  "breaks_first": [
+    "E-FIELD-0042",
+    "E-FIELD-0043",
+    "E-FIELD-0044"
+  ],
+  "gz": true
+}
