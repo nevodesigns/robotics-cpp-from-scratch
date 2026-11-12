@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "19-03-what-the-output-does-on-its-own",
+  "title": "What the Output Does When Nothing Is in Charge: Safe Values per Channel and a Brake That Applies on Loss of Power",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "19-02-the-stop-that-does-not-need-the-app",
+    "19-01-what-can-go-wrong",
+    "03-03-containers-and-their-costs",
+    "01-06-enums-and-states"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::safety",
+    "header": "rc/safety/failsafe.hpp",
+    "note": "a safe value for every output channel, the list of channels that are unsafe when the controller dies, and a brake design that is engaged by the loss of anything"
+  },
+  "breaks_first": [
+    "E-SAFE-0007",
+    "E-SAFE-0008",
+    "E-SAFE-0009"
+  ]
+}
