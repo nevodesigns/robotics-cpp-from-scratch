@@ -1,0 +1,78 @@
+{
+  "lesson": "25-03-fix-quality-and-outliers",
+  "title": "Fix Quality and Outliers: Weighing a Fix by What the Receiver Says It Is, Refusing One That Is Too Far From Where the Robot Is, and Taking One Back After Too Many Refusals",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What information is in a GNSS fix besides the position?",
+      "options": [
+        "Nothing",
+        "The level of the fix, which says how much to believe it",
+        "The time only",
+        "The weather"
+      ],
+      "correct": 1,
+      "explanation": "Fixed, float, single or none."
+    },
+    {
+      "stage": "check",
+      "question": "On the single fixes the filter that weighed them had an rms error of:",
+      "options": [
+        "2.81 m",
+        "0.67 m",
+        "0",
+        "10 m"
+      ],
+      "correct": 1,
+      "explanation": "The other followed noise as if it were signal."
+    },
+    {
+      "stage": "check",
+      "question": "The worst error with the gate was:",
+      "options": [
+        "6.04 m",
+        "2.29 m",
+        "0",
+        "100 m"
+      ],
+      "correct": 1,
+      "explanation": "It refuses the jumps."
+    },
+    {
+      "stage": "check",
+      "question": "The gate refused what share of the good fixes?",
+      "options": [
+        "0 percent",
+        "0.2 percent, near the 1 percent its threshold says",
+        "50 percent",
+        "100 percent"
+      ],
+      "correct": 1,
+      "explanation": "Chi-square, 99 percent point."
+    },
+    {
+      "stage": "post",
+      "question": "Why did a gate that never gives up find a carried robot so late?",
+      "options": [
+        "It is stupid",
+        "Every fix was refused until the filter's uncertainty had grown to admit 20 m",
+        "Fixes were bad",
+        "The robot was heavy"
+      ],
+      "correct": 1,
+      "explanation": "68 fixes against 5."
+    },
+    {
+      "stage": "post",
+      "question": "What does max_refused do?",
+      "options": [
+        "Nothing",
+        "After that many refusals in a row, the next fix is taken as a new start",
+        "Counts fixes",
+        "Sets the sigma"
+      ],
+      "correct": 1,
+      "explanation": "A way back from being wrong."
+    }
+  ]
+}

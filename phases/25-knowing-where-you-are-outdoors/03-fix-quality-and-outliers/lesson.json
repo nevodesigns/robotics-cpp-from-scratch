@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "25-03-fix-quality-and-outliers",
+  "title": "Fix Quality and Outliers: Weighing a Fix by What the Receiver Says It Is, Refusing One That Is Too Far From Where the Robot Is, and Taking One Back After Too Many Refusals",
+  "type": "build",
+  "minutes": 85,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "25-02-gnss-and-the-lever-arm",
+    "24-09-tracking-things-that-move",
+    "22-06-sensors-that-fail-like-the-field",
+    "21-10-the-whole-robot-for-a-day"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::locate",
+    "header": "rc/locate/gnss_filter.hpp",
+    "note": "a position filter fed by GNSS fixes whose noise is taken from the fix level (fixed, float, single, none), that tests each fix against the filter's own prediction with a chi-square gate and refuses one that is too far, and that takes the next fix as a new start after too many refusals in a row"
+  },
+  "breaks_first": [
+    "E-VEH-0061",
+    "E-VEH-0062",
+    "E-VEH-0063"
+  ]
+}
