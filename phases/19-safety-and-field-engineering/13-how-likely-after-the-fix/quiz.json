@@ -1,0 +1,78 @@
+{
+  "lesson": "19-13-how-likely-after-the-fix",
+  "title": "How Likely After the Fix: Fault Trees, the Average Chance a Safety Function Is Dead, and Why Common Cause Limits Redundancy",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A protection's chance of failing is not known (NaN). How should the arithmetic treat it?",
+      "options": [
+        "As 0",
+        "As 1: not knowing is not a small chance, and the protection is counted as failed",
+        "Skip it",
+        "As 0.5"
+      ],
+      "correct": 1,
+      "explanation": "p_and({0.001, NaN}) was 0.001."
+    },
+    {
+      "stage": "check",
+      "question": "What is a single point of failure in a fault tree?",
+      "options": [
+        "The top event",
+        "A basic event that on its own causes the top event: one reached through or nodes only",
+        "The largest probability",
+        "The last event"
+      ],
+      "correct": 1,
+      "explanation": "The welded contactor, until a second was put in series."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the average chance a function is dead about half of rate times interval, and when is that wrong?",
+      "options": [
+        "It is always right",
+        "Over the interval it rises from zero to its end value; the shortcut overstates it when rate times interval is not small: 31 percent too high at ten years",
+        "It is half the rate",
+        "It is twice"
+      ],
+      "correct": 1,
+      "explanation": "4.258e-02 against 4.383e-02 at a year."
+    },
+    {
+      "stage": "check",
+      "question": "With 10 percent common cause, how much better is a second channel than one?",
+      "options": [
+        "275 times",
+        "10 times: the beta term is nearly all of the answer",
+        "Twice",
+        "No better"
+      ],
+      "correct": 1,
+      "explanation": "With beta 0 it was 275."
+    },
+    {
+      "stage": "post",
+      "question": "G2 went from beta 0.10 to beta 0.02 and stayed in the same class. What does that say?",
+      "options": [
+        "Nothing",
+        "The improvement was real, 4.4 times lower pfd, but did not cross a band: classes are coarse, and the numbers matter more than the class",
+        "The calculation is wrong",
+        "Beta does not matter"
+      ],
+      "correct": 1,
+      "explanation": "3.75e-04 to 8.56e-05, both likelihood 2."
+    },
+    {
+      "stage": "post",
+      "question": "With the ideal pair, the product scores 4, which reads low. What is the class and why?",
+      "options": [
+        "low",
+        "medium: a severity of 4 is never classed lower, and a catastrophe's residual risk has to be accepted by a named person, not computed away",
+        "high",
+        "unacceptable"
+      ],
+      "correct": 1,
+      "explanation": "The floor of lesson 19-01."
+    }
+  ]
+}
