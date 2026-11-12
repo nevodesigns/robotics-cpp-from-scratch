@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "20-05-a-power-cut-at-every-step",
+  "title": "A Power Cut at Every Step: Two Slots and a Commit, and Why Overwriting the Running Release Bricks the Robot",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "20-04-what-is-in-the-box",
+    "19-11-prove-it-still-works",
+    "19-03-what-the-output-does-on-its-own",
+    "03-03-containers-and-their-costs"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::deploy",
+    "header": "rc/deploy/slots.hpp",
+    "note": "two image slots with a boot pointer, an installer that writes the inactive slot and commits last, a boot that falls back to the other valid slot, and the same install cut at every possible step"
+  },
+  "breaks_first": [
+    "E-DEPLOY-0013",
+    "E-DEPLOY-0014",
+    "E-DEPLOY-0015"
+  ]
+}
