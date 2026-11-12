@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "19-14-a-risk-assessment-you-can-defend",
+  "title": "A Risk Assessment You Can Defend: Every Serious Hazard Tied to a Mechanism That Exists and Evidence That Passes, With the Residual Risk Worked Out",
+  "type": "capstone",
+  "minutes": 180,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "19-13-how-likely-after-the-fix",
+    "19-12-what-happened-before-the-stop",
+    "19-11-prove-it-still-works",
+    "19-10-one-place-that-says-stop",
+    "19-01-what-can-go-wrong"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::safety",
+    "header": "rc/safety/assessment.hpp",
+    "note": "an assessment that gives credit only to mitigations that name a known mechanism and pass their evidence, counts redundancy only across independent groups, works out the residual risk, and says exactly why it is not defensible"
+  },
+  "breaks_first": [
+    "E-SAFE-0040",
+    "E-SAFE-0041",
+    "E-SAFE-0042"
+  ]
+}

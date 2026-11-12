@@ -1,0 +1,78 @@
+{
+  "lesson": "19-14-a-risk-assessment-you-can-defend",
+  "title": "A Risk Assessment You Can Defend: Every Serious Hazard Tied to a Mechanism That Exists and Evidence That Passes, With the Residual Risk Worked Out",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the difference between an assessment and a spreadsheet of mitigations?",
+      "options": [
+        "Colour",
+        "The assessment checks its own claims: a mitigation gets credit only if its mechanism exists and its evidence passes, and a claim with nothing under it is worth zero",
+        "Length",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "A document can be a promise."
+    },
+    {
+      "stage": "check",
+      "question": "Two software mitigations are listed for G7. What is the combined pfd compared with one?",
+      "options": [
+        "The product",
+        "The same: within a group only the best counts, because they can fail for the same reason (3.64e-03 before and after)",
+        "Half",
+        "Zero"
+      ],
+      "correct": 1,
+      "explanation": "Across groups they are redundant with a common-cause share."
+    },
+    {
+      "stage": "check",
+      "question": "Why are G1, G2 and G4 medium after, with a pfd of 1.03e-05?",
+      "options": [
+        "The arithmetic",
+        "The floor: a severity of 4 is never classed below medium, and the residual risk has to be accepted by a named person",
+        "A mistake",
+        "Their pfd is large"
+      ],
+      "correct": 1,
+      "explanation": "The product would have said low."
+    },
+    {
+      "stage": "check",
+      "question": "The brake is changed to one applied by power. What does the assessment say?",
+      "options": [
+        "Nothing",
+        "The evidence fails in G1, G2 and G4, which relied on it: 3 evidence failures and 9 findings, with the credit, the second group and the residual class all following",
+        "One finding",
+        "It passes"
+      ],
+      "correct": 1,
+      "explanation": "Change the line, and the assessment follows."
+    },
+    {
+      "stage": "post",
+      "question": "A mitigation's pfd is a NaN. What happens?",
+      "options": [
+        "Ignored",
+        "It counts as 1, and G5's residual risk became high: not knowing is not a small chance",
+        "Zero",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "The finding was residual risk is high or worse."
+    },
+    {
+      "stage": "post",
+      "question": "What does defensible not mean?",
+      "options": [
+        "That the tests ran",
+        "That nothing can go wrong: three catastrophes remain at medium, a person has put their name to that, and the hazards never written down are not in the report",
+        "That it is certified",
+        "That it is fast"
+      ],
+      "correct": 1,
+      "explanation": "A tool for keeping an assessment honest, not a certificate."
+    }
+  ]
+}
