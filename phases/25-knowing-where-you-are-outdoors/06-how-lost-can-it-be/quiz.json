@@ -1,0 +1,78 @@
+{
+  "lesson": "25-06-how-lost-can-it-be",
+  "title": "How Lost Can It Be: The Bound on Dead Reckoning Between Fixes, Why It Grows Faster Than the Distance, and When the Robot Must Stop and Ask",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What should a robot carry with its position between fixes?",
+      "options": [
+        "Nothing",
+        "A number for how wrong it can be",
+        "Its colour",
+        "Its name"
+      ],
+      "correct": 1,
+      "explanation": "An estimate without an error bar is a hope."
+    },
+    {
+      "stage": "check",
+      "question": "The 95 percent radius after 10 m, and after 100 m, were:",
+      "options": [
+        "1 m and 10 m",
+        "0.22 m and 7.07 m: 31.6 times for ten times the distance",
+        "The same",
+        "0 and 0"
+      ],
+      "correct": 1,
+      "explanation": "A heading walk makes the error grow as the distance to the power of three halves."
+    },
+    {
+      "stage": "check",
+      "question": "95 percent of 400 noisy runs ended within:",
+      "options": [
+        "0.01 m",
+        "5.10 m, near the bound",
+        "100 m",
+        "5 m"
+      ],
+      "correct": 1,
+      "explanation": "The arithmetic agreed with a simulation."
+    },
+    {
+      "stage": "check",
+      "question": "A fix of 5 cm brought the radius down to:",
+      "options": [
+        "No change",
+        "0.122 m",
+        "10 m",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "And it grows again."
+    },
+    {
+      "stage": "post",
+      "question": "Why does doubling the distance between fixes more than double how lost the robot can be?",
+      "options": [
+        "It does not",
+        "The heading wanders as it goes and the heading error becomes position error with the distance",
+        "Rounding",
+        "Wheels wear"
+      ],
+      "correct": 1,
+      "explanation": "Three halves power."
+    },
+    {
+      "stage": "post",
+      "question": "What does needs_fix say?",
+      "options": [
+        "The battery is low",
+        "The robot may now be further out than a limit",
+        "A fix exists",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "It is the bound against a limit."
+    }
+  ]
+}
