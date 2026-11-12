@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "id": "21-01-a-robot-that-follows-a-line",
+  "title": "A Robot That Follows a Line: A Camera, a Blob, a PID and a Supervisor, and What a Delayed Camera and a Dead One Do to It",
+  "type": "capstone",
+  "minutes": 150,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "20-12-a-release-that-reaches-the-robot",
+    "19-14-a-risk-assessment-you-can-defend",
+    "15-06-finding-something-in-the-frame",
+    "15-05-an-image-is-a-buffer",
+    "14-01-pid-from-scratch",
+    "00-05-first-motion",
+    "01-02-control-flow-and-limits"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::capstone",
+    "header": "rc/capstone/line_follower.hpp",
+    "note": "a line follower from a simulated camera: the line found as a blob, steered by a PID, run under the supervisor of phase 19, with the effect of speed, latency, a gap and a dead camera measured"
+  },
+  "breaks_first": [
+    "E-CAP-0001",
+    "E-CAP-0002",
+    "E-CAP-0003"
+  ]
+}
