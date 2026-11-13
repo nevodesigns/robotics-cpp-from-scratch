@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "30-04-a-map-of-where-the-arm-can-go",
+  "title": "A Map of Where the Arm Can Go: A Roadmap Built Once for a Fixed Scene, Queries That Cost a Search, and a Map That Is Wrong When the Scene Is",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "30-03-growing-a-tree-through-the-clutter",
+    "16-06-a-path-through-what-you-know"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/roadmap.hpp",
+    "note": "a probabilistic roadmap for an arm in a fixed scene: random free configurations, each joined by a free edge (conservative advancement) to its nearest few, a count of the pieces the graph falls into, a query that joins the start and the goal to the nearest nodes and finds the shortest path through the graph by Dijkstra's method, the number of poses looked at to build and to query, and the fraction of the roadmap's edges that are still free in a changed scene"
+  },
+  "breaks_first": [
+    "E-ARM-0061",
+    "E-ARM-0062",
+    "E-ARM-0063"
+  ]
+}
