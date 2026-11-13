@@ -1,0 +1,78 @@
+{
+  "lesson": "32-02-three-arms-and-one-plate",
+  "title": "Three Arms and One Plate: The Delta Robot, Its Closed Form Both Ways, and Why It Is So Fast",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What keeps a delta's platform from tilting?",
+      "options": [
+        "The motors",
+        "The parallelograms of rods",
+        "Gravity",
+        "A sensor"
+      ],
+      "correct": 1,
+      "explanation": "Three movements, no tilt."
+    },
+    {
+      "stage": "check",
+      "question": "How is each arm solved?",
+      "options": [
+        "All together",
+        "On its own, in its own frame, as two circles meeting",
+        "By search",
+        "By a table"
+      ],
+      "correct": 1,
+      "explanation": "Rotate the target into the arm's frame."
+    },
+    {
+      "stage": "check",
+      "question": "At -0.40 m the reach was:",
+      "options": [
+        "0.310 m out from the axis",
+        "1 m",
+        "0 m",
+        "The whole box"
+      ],
+      "correct": 0,
+      "explanation": "A dome."
+    },
+    {
+      "stage": "check",
+      "question": "The moving parts weighed:",
+      "options": [
+        "18 kg",
+        "0.78 kg, against 18 for a six axis arm",
+        "Nothing",
+        "The same"
+      ],
+      "correct": 1,
+      "explanation": "The motors stay on the base."
+    },
+    {
+      "stage": "post",
+      "question": "What is a delta for?",
+      "options": [
+        "Welding",
+        "Fast, light pick and place from above",
+        "Reaching under things",
+        "Slow heavy lifting"
+      ],
+      "correct": 1,
+      "explanation": "Light parts, high rate."
+    },
+    {
+      "stage": "post",
+      "question": "What is not checked here?",
+      "options": [
+        "The inverse kinematics",
+        "The rods colliding and the limits of their ball joints",
+        "The forward kinematics",
+        "The symmetry"
+      ],
+      "correct": 1,
+      "explanation": "Real joints limit the usable angles."
+    }
+  ]
+}
