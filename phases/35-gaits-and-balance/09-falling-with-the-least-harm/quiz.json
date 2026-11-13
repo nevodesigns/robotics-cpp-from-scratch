@@ -1,0 +1,78 @@
+{
+  "lesson": "35-09-falling-with-the-least-harm",
+  "title": "Falling With the Least Harm: How Long Before the Ground, Whether There Is Time to Recover, and Going Soft to Spread the Blow",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What decides between trying to recover and going soft?",
+      "options": [
+        "Luck",
+        "Whether the time to the ground is more than a recovery step needs",
+        "The colour",
+        "The weight"
+      ],
+      "correct": 1,
+      "explanation": "Here 0.30 s."
+    },
+    {
+      "stage": "check",
+      "question": "The quick fall took how long to reach the ground?",
+      "options": [
+        "0.38 s",
+        "0.22 s",
+        "5 s",
+        "0 s"
+      ],
+      "correct": 1,
+      "explanation": "With a tilt of 23 degrees at 3.0 rad/s."
+    },
+    {
+      "stage": "check",
+      "question": "What was the quick fall told to do?",
+      "options": [
+        "Recover",
+        "Go soft (2)",
+        "Nothing",
+        "Stand up"
+      ],
+      "correct": 1,
+      "explanation": "There was no time for a step."
+    },
+    {
+      "stage": "check",
+      "question": "Soft legs gave a landing force of:",
+      "options": [
+        "1118 N",
+        "224 N, 5 times less",
+        "0 N",
+        "1 N"
+      ],
+      "correct": 1,
+      "explanation": "Energy over a longer stroke."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a tiny tilt not 'about to fall'?",
+      "options": [
+        "It is",
+        "The balance control holds it, and the time to the ground only means something when it is not",
+        "It is small",
+        "It is heavy"
+      ],
+      "correct": 1,
+      "explanation": "An inverted pendulum with any tilt falls in the end."
+    },
+    {
+      "stage": "post",
+      "question": "Should a robot that has fallen get straight up?",
+      "options": [
+        "Yes",
+        "No: its motors may be hot or a leg bent; check first (36-02)",
+        "Always",
+        "Only on slopes"
+      ],
+      "correct": 1,
+      "explanation": "Getting up is among the hardest things."
+    }
+  ]
+}

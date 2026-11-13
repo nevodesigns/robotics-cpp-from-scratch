@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "35-09-falling-with-the-least-harm",
+  "title": "Falling With the Least Harm: How Long Before the Ground, Whether There Is Time to Recover, and Going Soft to Spread the Blow",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "35-08-slopes-and-steps",
+    "35-07-taking-a-step-when-pushed",
+    "19-09-the-slope-and-the-turn"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/fall_safety.hpp",
+    "note": "the end of balance: the time a tilting body (an inverted pendulum with a tilt and a tilt rate) has before it reaches the ground, by stepping the pendulum's equation; a decision, from the tilt, the rate and that time, between nothing, trying to recover (a step, 35-07, needs time to be taken), going soft to protect the robot (when there is no time left), and having fallen; the force of the landing as the energy to be taken up over the distance the legs and body give, and so what going soft is worth; and the checks that a robot that has fallen is not made to get up on a hot or broken leg"
+  },
+  "breaks_first": [
+    "E-LEG-0048",
+    "E-LEG-0049",
+    "E-LEG-0050"
+  ]
+}
