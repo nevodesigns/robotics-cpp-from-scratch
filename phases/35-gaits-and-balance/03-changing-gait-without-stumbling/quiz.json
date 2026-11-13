@@ -1,0 +1,78 @@
+{
+  "lesson": "35-03-changing-gait-without-stumbling",
+  "title": "Changing Gait Without Stumbling: Phase Tables for Walk, Trot, Pace and Bound, Turning One Into Another at a Bounded Rate, and a Switch With a Gap",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is a gait, as the controller sees it?",
+      "options": [
+        "A speed",
+        "A table of phase offsets, one for each leg",
+        "A leg length",
+        "A sound"
+      ],
+      "correct": 1,
+      "explanation": "34-04's phase."
+    },
+    {
+      "stage": "check",
+      "question": "Why is a phase difference wrapped before it is limited?",
+      "options": [
+        "Tradition",
+        "0.95 and 0.05 are 0.1 apart on the circle, not 0.9",
+        "It is faster",
+        "It is not"
+      ],
+      "correct": 1,
+      "explanation": "The offset goes forward through the wrap."
+    },
+    {
+      "stage": "check",
+      "question": "The abrupt change jumped a leg's phase by:",
+      "options": [
+        "0.0002",
+        "0.250 of a cycle in one tick",
+        "0",
+        "10 cycles"
+      ],
+      "correct": 1,
+      "explanation": "The bounded rate moved it 0.0002 a tick."
+    },
+    {
+      "stage": "check",
+      "question": "A speed hovering at 0.5 m/s flapped how many times with one switch speed?",
+      "options": [
+        "0",
+        "175",
+        "0",
+        "1"
+      ],
+      "correct": 1,
+      "explanation": "With the gap: 0."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the count of feet down not show the danger of an abrupt change?",
+      "options": [
+        "It does",
+        "Both changes kept 2 or more feet down; the harm is the phase jump",
+        "It is wrong",
+        "No feet are counted"
+      ],
+      "correct": 1,
+      "explanation": "A leg cannot follow a jump."
+    },
+    {
+      "stage": "post",
+      "question": "What is held fixed in this lesson?",
+      "options": [
+        "The offsets",
+        "The duty and period during a change",
+        "The speed",
+        "The tables"
+      ],
+      "correct": 1,
+      "explanation": "They too would be moved at a bounded rate."
+    }
+  ]
+}

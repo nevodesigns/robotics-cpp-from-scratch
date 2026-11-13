@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "35-03-changing-gait-without-stumbling",
+  "title": "Changing Gait Without Stumbling: Phase Tables for Walk, Trot, Pace and Bound, Turning One Into Another at a Bounded Rate, and a Switch With a Gap",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "35-02-falling-and-catching-in-a-trot",
+    "34-04-down-and-up",
+    "26-07-how-fast-the-path-can-be-driven"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/gait_schedule.hpp",
+    "note": "the schedule of gaits for four legs: the phase offsets of a walk, a trot, a pace and a bound (legs in the order front left, front right, rear left, rear right); a move of a leg's offset toward another gait's at a bounded rate by the shortest way round the cycle (a phase wraps); the least number of feet on the ground while a gait is changed into another, abruptly and at a bounded rate; and the choice of gait from the speed, with a gap between the speed that changes up and the one that changes down so that it does not flap"
+  },
+  "breaks_first": [
+    "E-LEG-0030",
+    "E-LEG-0031",
+    "E-LEG-0032"
+  ]
+}
