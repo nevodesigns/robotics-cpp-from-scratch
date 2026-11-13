@@ -1425,3 +1425,38 @@ Nine lessons on keeping a quadruped upright while it walks and trots. The module
 - **A spike that hid the thing it was meant to disturb** (34-07, found again here): the same lesson of testing a guard against the case it guards.
 - **Patching a spec with a script that cut the file before the tail was added** (35-05, 35-06, 35-07, 35-08): each time the next run showed a syntax error and the tail was appended again; the patch scripts now cut the placeholder and append the tail in one command.
 - **A scratchpad that was wiped** by the laptop's shutdown: restored from the backup, which is refreshed after every lesson.
+
+## Phase 36, a quadruped controller (13 November 2026)
+
+Eight lessons that turn the legs, gaits and balance of phases 34 and 35 into a robot that does what it is told and keeps itself safe. The module is `rc::legged` (now 25 headers), the atlas prefix `LEG` (continued, 0051 to 0074). The lesson list of the plan had seven items under a count of eight; the eighth is getting up (36-03), which the state machine needs and which 35-09 had promised. Every figure is typical of a 12 kg robot and says so.
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 36-01 what the operator asks for | a command of 1.0 forward and 0.4 sideways was scaled onto the ellipse to 0.71 and 0.28, keeping its direction; a jump to 0.8 m/s took 0.80 s at 1.0 m/s2; the legs allowed 1.60 m/s (a step of 0.20 m over a stance of 0.125 s) and 0.5 m/s needed a step of 0.062 m while 2.0 m/s was beyond the leg | `rc/legged/velocity_cmd.hpp` |
+| 36-02 sit, stand, walk, fall | a day of sit, stand, walk, stand and sit went through 6 changes with the rise in 0.9 s; knees at 0.85 of their limit and a low battery each refused the rise; a walk was slowed to a stop before it was lowered; a lost link gave fault 1, knees at the limit 2, a rise that never finished 4 and three falls then fault 5 | `rc/legged/dog_state.hpp` |
+| 36-03 getting up | a 12 kg robot needed up to 5.9 N m at the knee to rise from a crouch of 0.12 m against a peak of 20; a rise in 1 s used 0.034 of the knee's thermal life and in 6 s 0.202; the heaviest body that could rise was 40.6 kg by torque and 24.8 by heat in 6 s; 65 kg could not | `rc/legged/get_up.hpp` |
+| 36-04 feet that find the ground | on level ground the search closed the 1 cm of clearance (0.010 m, 0.04 s); a bump of 3 cm needed none; a step down of 5 cm took 0.060 m and 0.24 s at 0.25 m/s; a hole of 15 cm against a reach of 10 cm was reported after 0.40 s; a gain of 0.2 moved the ground estimate 6.0 mm after one landing and 26.8 mm after ten | `rc/legged/terrain_adapt.hpp` |
+| 36-05 looking ahead with the body | with the ZMP bound alternating between 15 cm and 1 cm every 0.2 s the fixed gain law (3 and 0.9, clipped) recovered pushes up to 0.70 m/s and the predictive controller (15 steps of 0.05 s, 300 projected gradient iterations) 0.71, against 0.90 with the bound always wide; for 0.6 m/s the body was back in 1.00 s and 0.60 s, and for 0.3 m/s the fixed law took 0.00 s and the predictive one 0.35 | `rc/legged/body_mpc.hpp` |
+| 36-06 the layer that can take the power away | a torque of 40 N m was cut to 20; knees at 0.9 and 0.95 of their limit were derated to 0.50 and 0.25 and at 1.0 switched off; a link silent for 0.3 s gave soft and for 2.0 s off; the emergency stop gave soft standing and off sitting; hot knees and a silent link gave soft with the derating kept | `rc/legged/dog_safety.hpp` |
+| 36-07 what changes on the real robot | gains of 10 and 1.5 settled a joint in 0.53 s with no overshoot; gains of 40 and 3 settled in 0.24 s in the simulator and with 20 ms of delay and a 10 ms lag overshot 23.5 percent and never settled; the delay stood was 19 ms for gains of 60 and 3 and 43 ms for 10 and 1.5; over 100 random joints they settled on 46 and 97 percent | `rc/legged/sim_to_real.hpp` |
+| 36-08 a quadruped for a job | a walk of 0.6 m/s with 1 kg over 500 m was released (legs 1.60 m/s, slope 27.8 degrees, step 0.050 m, push 0.31 m/s, knees 39.5 K of 60, range 957 m, a person at 3 m allowing 3.48 m/s); a speed of 2.0, a slope of 40 degrees, a push of 0.9, 30 kg of load, a route of 5000 m and a person at 0.3 m failed at requirements 1 to 6 | `rc/legged/quad_job.hpp` |
+
+**Decisions.**
+
+1. **The command is clipped on an ellipse and eased at a bounded acceleration**; the top speed is set from the legs and not from the stick.
+2. **The state machine checks before every change and gets up a limited number of times**; a fault stays until a reset and the reset goes to sit.
+3. **Getting up is planned from the torque at the bottom and the thermal life**, with the rise's heat counted by Miner's rule.
+4. **The terrain search is bounded**: past the leg's reach a drop is a hole and the leg is not loaded.
+5. **The predictive controller is the shortest form that is honest**: one direction, the exact discrete pendulum, a bounded ZMP whose bound can change step by step, a projected gradient solver with a fixed count; its claim is speed and anticipation, not strength.
+6. **The safety layer outranks the controller and turns off while standing into soft**, since a robot switched off standing drops.
+7. **The sim-to-real lesson is one joint with a delay and a lag**, tested against a spread of random robots, and says the last word is the robot's.
+8. **The capstone is a screen with a named first failure**, as in 32-06 and 33-10.
+9. **The run stops here.** Phase 37 (the humanoid) stays paused and the learning course stays deferred.
+
+**Mistakes, and what caught them.**
+
+- **A name that clashed when the headers were put together** (36-02's `kWalk`, `kStand` and the like against 35-03's gait kinds in the same namespace): the lesson's own build passed and the together build of the headers refused it; the states are now `kDWalk` and so on. The check after every lesson is now `grep "error:"` on that build, since the file names of the headers contain the word error.
+- **A commit that was split wrongly** (two lessons put in one commit and then in the wrong two): `git stash --keep-index` swapped the contents; the commits were redone by path with `git add` of the lesson's own folder, header and atlas entries.
+- **A timing check in a test** (36-05's first version asserted that the solver took under 50 ms and recorded the time in the lesson): removed, since a clock is not a gate and the recorded number changed between runs; the lesson says how many iterations it needs.
+- **Claims that the numbers did not bear out**, six times: an inverted pendulum with a small tilt falls in the end, so the fall decision needs a rate test (35-09, found again in 36-05); a clipped fixed gain law is already as strong as bang-bang control, so the predictive controller's advantage is speed and not the largest push (36-05); a gentle controller does not overshoot with delay and the stiff one rings and never settles (36-07); a hobby grade knee motor had to be used to make the heat of a rise matter (36-03); the heat of a rise is simply proportional to its time in the thermal count, and the lesson says so; and a reset with the operator still asking to walk put the machine straight back to rising (36-02's test).
+- **The laptop was shut down in the middle of the phase**: the progress file had a note of where it stood, the generator was restored from its backup, and the note was removed with this write-up.
