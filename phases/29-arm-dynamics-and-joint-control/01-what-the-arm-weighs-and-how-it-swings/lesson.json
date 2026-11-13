@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "29-01-what-the-arm-weighs-and-how-it-swings",
+  "title": "What the Arm Weighs and How It Swings: Rigid Body Dynamics of a Six Joint Arm by Recursive Newton and Euler, the Mass Matrix, and an Energy That Must Not Drift",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "28-03-how-the-tool-moves-when-the-joints-do",
+    "13-07-what-it-takes-to-move-it",
+    "13-06-what-it-takes-to-hold-it-there"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/dynamics3d.hpp",
+    "note": "the rigid body dynamics of a serial arm in the standard convention: the mass, centre of mass and inertia of each link (uniform rods along the links, with typical radii, built from the table), recursive Newton and Euler in the base frame for the joint torques of a motion, the mass matrix from unit accelerations, the torques of gravity and of the velocity products, forward dynamics for six joints, the energy of a state, and a fourth order step against a first order one"
+  },
+  "breaks_first": [
+    "E-ARM-0028",
+    "E-ARM-0029",
+    "E-ARM-0030"
+  ]
+}

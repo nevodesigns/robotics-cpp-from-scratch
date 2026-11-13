@@ -1,0 +1,78 @@
+{
+  "lesson": "29-01-what-the-arm-weighs-and-how-it-swings",
+  "title": "What the Arm Weighs and How It Swings: Rigid Body Dynamics of a Six Joint Arm by Recursive Newton and Euler, the Mass Matrix, and an Energy That Must Not Drift",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What are the three kinds of torque in an arm's motion?",
+      "options": [
+        "Static, dynamic and thermal",
+        "Holding it up, speeding it up, and what the joints throw at each other",
+        "Motor, gear and load",
+        "Fast, slow and still"
+      ],
+      "correct": 1,
+      "explanation": "g(q), M(q) qdd and C qd."
+    },
+    {
+      "stage": "check",
+      "question": "The torque to hold a 2 kg rod of 0.4 m out horizontally was:",
+      "options": [
+        "0.000000 N m",
+        "3.924 N m, which is m g L over 2",
+        "100 N m",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "And nothing when it stands up."
+    },
+    {
+      "stage": "check",
+      "question": "What check can a sign error in the recursion not survive?",
+      "options": [
+        "A time test",
+        "The torque of gravity must be the slope of the potential energy",
+        "A unit test only",
+        "A visual check"
+      ],
+      "correct": 1,
+      "explanation": "Matched to 0.00000001 N m."
+    },
+    {
+      "stage": "check",
+      "question": "An arm let fall for a second lost how much of its energy with a fourth order step and a first order one?",
+      "options": [
+        "0.03723 and 0.000000000496",
+        "0.000000000496 and 0.03723",
+        "The same",
+        "None of it in either"
+      ],
+      "correct": 1,
+      "explanation": "The integrator is part of the model."
+    },
+    {
+      "stage": "post",
+      "question": "How does the velocity torque grow with speed?",
+      "options": [
+        "Linearly",
+        "With the square of the speed: doubling gave four times",
+        "Not at all",
+        "With the cube"
+      ],
+      "correct": 1,
+      "explanation": "Coriolis and centripetal."
+    },
+    {
+      "stage": "post",
+      "question": "What must be true of the mass matrix?",
+      "options": [
+        "Nothing",
+        "Symmetric and positive: kinetic energy is never negative",
+        "Diagonal",
+        "Constant"
+      ],
+      "correct": 1,
+      "explanation": "x transpose M x > 0."
+    }
+  ]
+}
