@@ -1,0 +1,78 @@
+{
+  "lesson": "28-07-one-joint-too-many",
+  "title": "One Joint Too Many: The Null Space of a Seven Joint Arm, Moving the Elbow While the Hand Stays, and Steering Away From the Limits",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the null space of a seven joint arm's Jacobian?",
+      "options": [
+        "Its limits",
+        "Joint motions that the tool does not feel",
+        "Its singularities",
+        "Its inverse"
+      ],
+      "correct": 1,
+      "explanation": "One joint too many."
+    },
+    {
+      "stage": "check",
+      "question": "A joint motion put through the null space was felt by the tool at:",
+      "options": [
+        "1.244 m/s",
+        "0.0000000001 of its size",
+        "All of it",
+        "Half"
+      ],
+      "correct": 1,
+      "explanation": "Not at all."
+    },
+    {
+      "stage": "check",
+      "question": "Starting 0.086 of its range from its limit, the margin became:",
+      "options": [
+        "0.086",
+        "0.156 while the tool stayed within 0.00037 m",
+        "0",
+        "Negative"
+      ],
+      "correct": 1,
+      "explanation": "The elbow moved, the hand did not."
+    },
+    {
+      "stage": "check",
+      "question": "Without a correction on the tool, it drifted:",
+      "options": [
+        "0.00037 m",
+        "0.00076 m",
+        "Not at all",
+        "100 m"
+      ],
+      "correct": 1,
+      "explanation": "The null space is a first order promise."
+    },
+    {
+      "stage": "post",
+      "question": "Why must a preferred joint motion be projected?",
+      "options": [
+        "It is faster",
+        "Added directly, it moves the tool: 1.244 m/s against 0.00000000",
+        "To save memory",
+        "It is law"
+      ],
+      "correct": 1,
+      "explanation": "The standard mistake."
+    },
+    {
+      "stage": "post",
+      "question": "What is wrong with an unclamped solution that reaches the pose?",
+      "options": [
+        "Nothing",
+        "It may need a joint outside its limit, which the arm cannot do: 0.283 rad outside",
+        "It is slow",
+        "It is exact"
+      ],
+      "correct": 1,
+      "explanation": "Accurate and impossible."
+    }
+  ]
+}

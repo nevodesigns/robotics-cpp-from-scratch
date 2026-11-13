@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "28-07-one-joint-too-many",
+  "title": "One Joint Too Many: The Null Space of a Seven Joint Arm, Moving the Elbow While the Hand Stays, and Steering Away From the Limits",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "28-06-where-the-arm-loses-a-direction",
+    "28-05-iterating-to-a-pose"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/redundant.hpp",
+    "note": "redundancy: the part of a joint motion that the tool does not feel (the null space, as the motion less the damped solution for the tool velocity it would cause), the margin of a joint to its nearest limit as a share of its range, the gradient of the squared distance of the joints from the middle of their limits, a self motion run in which the joints move toward the middle of the limits while the tool is held (with and without a correction of its error), and the effect of clamping to the limits on iteration with seven joints"
+  },
+  "breaks_first": [
+    "E-ARM-0019",
+    "E-ARM-0020",
+    "E-ARM-0021"
+  ]
+}
