@@ -1,0 +1,78 @@
+{
+  "lesson": "32-05-one-yardstick-for-five-robots",
+  "title": "One Yardstick for Five Robots: Reach Volume by Sampling, the Room a Robot Takes for It, and What the Numbers Do and Do Not Say",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why ask every robot the same question?",
+      "options": [
+        "It is faster",
+        "Their reaches are described in different terms and cannot be compared otherwise",
+        "It is required",
+        "To hide differences"
+      ],
+      "correct": 1,
+      "explanation": "Can you put the tool here, level?"
+    },
+    {
+      "stage": "check",
+      "question": "How was the volume found?",
+      "options": [
+        "By a formula",
+        "By asking the question at random points and counting the yes answers",
+        "By measuring",
+        "By a table"
+      ],
+      "correct": 1,
+      "explanation": "40000 points."
+    },
+    {
+      "stage": "check",
+      "question": "Which had the largest reach volume?",
+      "options": [
+        "The SCARA, 0.084 m3",
+        "The six axis arm, 1.731 m3",
+        "The gantry",
+        "The delta"
+      ],
+      "correct": 1,
+      "explanation": "A ball, against the SCARA's slab."
+    },
+    {
+      "stage": "check",
+      "question": "The Stewart platform used what share of its room?",
+      "options": [
+        "0.07",
+        "0.98",
+        "1",
+        "0"
+      ],
+      "correct": 0,
+      "explanation": "Its base and legs are large for a small stroke."
+    },
+    {
+      "stage": "post",
+      "question": "Does the largest volume make the best robot?",
+      "options": [
+        "Yes",
+        "No: volume leaves out speed, payload, stiffness, accuracy and the shape of the work",
+        "Always",
+        "Only for arms"
+      ],
+      "correct": 1,
+      "explanation": "The task chooses."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the standard error of use?",
+      "options": [
+        "It is not",
+        "It says how many points the estimate needs and is the square root of n small",
+        "It is decoration",
+        "It speeds the sampling"
+      ],
+      "correct": 1,
+      "explanation": "Sixteen times the points, a quarter of the error."
+    }
+  ]
+}

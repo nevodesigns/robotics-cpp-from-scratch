@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "32-05-one-yardstick-for-five-robots",
+  "title": "One Yardstick for Five Robots: Reach Volume by Sampling, the Room a Robot Takes for It, and What the Numbers Do and Do Not Say",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "32-04-three-straight-axes",
+    "32-03-six-legs-and-a-table",
+    "32-02-three-arms-and-one-plate",
+    "32-01-two-joints-and-a-plunger",
+    "28-08-where-the-arm-can-work"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/compare.hpp",
+    "note": "comparing workspaces: one question put to every kind of robot (can the tool be put at this point, held level or pointing down), a Monte Carlo estimate of the volume of the points that answer yes with its standard error, an implementation of the question for the SCARA, the delta, the Stewart platform (at a level pose, within the stroke of its legs), the gantry and the six axis arm, and the ratio of the reach volume to the volume the machine takes up, with the figures for the room typical and stated"
+  },
+  "breaks_first": [
+    "E-ARM-0115",
+    "E-ARM-0116",
+    "E-ARM-0117"
+  ]
+}
