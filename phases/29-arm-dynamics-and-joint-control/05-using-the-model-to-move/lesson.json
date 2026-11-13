@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "29-05-using-the-model-to-move",
+  "title": "Using the Model to Move: Computed Torque, an Error That Behaves Like a Second Order System, and How Wrong the Model Can Be Before It Is Worse Than None",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "29-04-friction-and-play-in-a-joint",
+    "29-02-holding-the-arm-up",
+    "29-01-what-the-arm-weighs-and-how-it-swings"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/computed_torque.hpp",
+    "note": "computed torque control of an arm: the torque that the model says gives the acceleration the reference asks for plus feedback on the position and velocity errors (the mass matrix times the wanted acceleration, plus the velocity products and gravity), a joint space quintic move, a joint PD controller with gravity compensation to compare it with, a model with all its masses and inertias scaled, and a run that gives the root mean square and largest error and the largest torque"
+  },
+  "breaks_first": [
+    "E-ARM-0040",
+    "E-ARM-0041",
+    "E-ARM-0042"
+  ]
+}

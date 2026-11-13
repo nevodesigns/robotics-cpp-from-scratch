@@ -1,0 +1,78 @@
+{
+  "lesson": "29-05-using-the-model-to-move",
+  "title": "Using the Model to Move: Computed Torque, an Error That Behaves Like a Second Order System, and How Wrong the Model Can Be Before It Is Worse Than None",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does computed torque do with the model?",
+      "options": [
+        "Draws the arm",
+        "Asks it for the torque that gives the wanted acceleration, so the joints act as independent unit masses",
+        "Simulates a sensor",
+        "Filters the encoder"
+      ],
+      "correct": 1,
+      "explanation": "The model's own inverse."
+    },
+    {
+      "stage": "check",
+      "question": "The rms error on the fast move with an exact model, for PD with gravity and computed torque:",
+      "options": [
+        "0.000056948 and 0.04293 rad",
+        "0.04293 and 0.000056948 rad",
+        "The same",
+        "0 and 0"
+      ],
+      "correct": 1,
+      "explanation": "The model removes the error."
+    },
+    {
+      "stage": "check",
+      "question": "Computed torque at 20 rad/s from 0.1 rad out crossed zero how many times?",
+      "options": [
+        "Several",
+        "0: it is critically damped",
+        "Always",
+        "Once"
+      ],
+      "correct": 1,
+      "explanation": "Kp = wn squared, Kv = 2 wn."
+    },
+    {
+      "stage": "check",
+      "question": "With every mass 10, 20 and 40 percent too big the rms error was:",
+      "options": [
+        "0.01455, 0.00853, 0.00467",
+        "0.00467, 0.00853 and 0.01455 rad",
+        "0 at all three",
+        "The same at all three"
+      ],
+      "correct": 1,
+      "explanation": "In proportion to the model's error."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a model that is too light worse than one that is too heavy by the same amount?",
+      "options": [
+        "It is not",
+        "It gives torques that fall short, and the feedback has to make up the rest: 0.03469 against 0.01455 rad",
+        "Heavier is safer by law",
+        "Rounding"
+      ],
+      "correct": 1,
+      "explanation": "Underestimating the arm."
+    },
+    {
+      "stage": "post",
+      "question": "What must a reference be for computed torque?",
+      "options": [
+        "Anything",
+        "Smooth to the second derivative: a jump in acceleration asks for a jump in torque",
+        "Slow",
+        "Linear"
+      ],
+      "correct": 1,
+      "explanation": "A quintic."
+    }
+  ]
+}
