@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "28-08-where-the-arm-can-work",
+  "title": "Where the Arm Can Work: Reach by Sampling, the Shorter Reach With the Tool Down, the Smaller Region Where It Can Move Well, and What Fits on a Table",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "28-07-one-joint-too-many",
+    "28-04-eight-ways-to-reach-a-pose",
+    "13-10-where-the-arm-works-well"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/reach3d.hpp",
+    "note": "the workspace of an arm in three dimensions: random joint angles through forward kinematics marked into a grid of voxels (optionally only those poses whose smallest singular value is above a floor, the dexterous ones), the volume read off the grid, the farthest reach found, and what the tool can reach pointing straight down, by the closed form of lesson 28-04 inside the joint limits: the farthest out along an axis and the share of a table"
+  },
+  "breaks_first": [
+    "E-ARM-0022",
+    "E-ARM-0023",
+    "E-ARM-0024"
+  ]
+}
