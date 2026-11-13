@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "33-05-tipping-with-the-arm-out",
+  "title": "Tipping With the Arm Out: The Centre of Mass of Base, Arm and Load, and How Hard the Base May Brake or Turn",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "33-04-the-base-and-the-arm-as-one",
+    "19-09-the-slope-and-the-turn",
+    "29-01-what-the-arm-weighs-and-how-it-swings"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::mobile",
+    "header": "rc/mobile/tip_margin.hpp",
+    "note": "the stability of a base with an arm on it: the centre of mass of the base, the arm's links (each taken at the middle of its link) and a payload at the tool, in the world; the limits on the base's acceleration forward, braking, and turning each way beyond which the centre of mass would be pushed past the edge of the wheels' rectangle (g times the distance to the edge over the height of the centre of mass); how this changes between an arm tucked in, an arm reaching forward and sideways and a payload; and the stopping distance and the curve speed they allow"
+  },
+  "breaks_first": [
+    "E-MOB-0013",
+    "E-MOB-0014",
+    "E-MOB-0015"
+  ]
+}

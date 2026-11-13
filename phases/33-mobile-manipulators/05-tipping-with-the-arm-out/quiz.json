@@ -1,0 +1,78 @@
+{
+  "lesson": "33-05-tipping-with-the-arm-out",
+  "title": "Tipping With the Arm Out: The Centre of Mass of Base, Arm and Load, and How Hard the Base May Brake or Turn",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What moves when the arm moves?",
+      "options": [
+        "Nothing",
+        "The centre of mass of the whole, and so the tipping limits",
+        "The wheels",
+        "The floor"
+      ],
+      "correct": 1,
+      "explanation": "Every kilogram at the end of the arm moves it."
+    },
+    {
+      "stage": "check",
+      "question": "The braking limit with the arm tucked was:",
+      "options": [
+        "11.01 m/s2",
+        "5.19 m/s2",
+        "0",
+        "100 m/s2"
+      ],
+      "correct": 0,
+      "explanation": "Reaching: 8.88; loaded: 5.19."
+    },
+    {
+      "stage": "check",
+      "question": "With 5 kg in the hand the braking limit was:",
+      "options": [
+        "11.01 m/s2",
+        "5.19 m/s2, below what the wheels would grip",
+        "The same as tucked",
+        "Unlimited"
+      ],
+      "correct": 1,
+      "explanation": "It tipped before it skidded."
+    },
+    {
+      "stage": "check",
+      "question": "What does a centred mass give?",
+      "options": [
+        "Nothing",
+        "The formula of 19-09: g times half the track over the height",
+        "A tilt",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "The test checks it."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a limit chosen for the tucked arm unsafe?",
+      "options": [
+        "It is not",
+        "The loaded or extended arm has a lower limit",
+        "It is too low",
+        "Arms do not move"
+      ],
+      "correct": 1,
+      "explanation": "11.01 against 5.19 m/s2."
+    },
+    {
+      "stage": "post",
+      "question": "Which turn is the dangerous one?",
+      "options": [
+        "A turn with the arm tucked",
+        "Towards the side the arm is reaching to",
+        "A straight line",
+        "A stop"
+      ],
+      "correct": 1,
+      "explanation": "4.22 against 7.92 m/s2."
+    }
+  ]
+}
