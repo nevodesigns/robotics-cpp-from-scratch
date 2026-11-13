@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "31-09-keeping-what-the-hand-showed",
+  "title": "Keeping What the Hand Showed: Recording a Demonstration, Resampling It to a Steady Rate, Trimming the Idle Ends, and Checking It Is Worth Keeping",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "31-08-an-arm-that-follows-a-hand",
+    "31-02-picking-and-placing-in-order",
+    "18-07-one-seed-many-streams"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/demo_record.hpp",
+    "note": "recording demonstrations from a leader and follower pair as episodes of timestamped samples (the leader's joints as the action, the follower's as what was observed, the hand): resampling to a steady rate by interpolation, the largest gap between samples, the idle stretches at the start and end that are trimmed, the lag of what was observed behind what was commanded, and a check of an episode's quality, so that a bad one is found before anything is trained on it"
+  },
+  "breaks_first": [
+    "E-ARM-0100",
+    "E-ARM-0101",
+    "E-ARM-0102"
+  ]
+}

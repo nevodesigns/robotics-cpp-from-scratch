@@ -1,0 +1,78 @@
+{
+  "lesson": "31-09-keeping-what-the-hand-showed",
+  "title": "Keeping What the Hand Showed: Recording a Demonstration, Resampling It to a Steady Rate, Trimming the Idle Ends, and Checking It Is Worth Keeping",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why resample an episode?",
+      "options": [
+        "To save space",
+        "Messages do not arrive at a steady rate and what uses them wants equal steps",
+        "To change it",
+        "For colour"
+      ],
+      "correct": 1,
+      "explanation": "Linear interpolation onto a grid."
+    },
+    {
+      "stage": "check",
+      "question": "Trimming the idle ends of the episode left:",
+      "options": [
+        "5.0 s",
+        "2.8 s",
+        "0 s",
+        "1 s"
+      ],
+      "correct": 1,
+      "explanation": "The reaching."
+    },
+    {
+      "stage": "check",
+      "question": "The follower lagged the leader by how much, as found?",
+      "options": [
+        "0 ms",
+        "100 ms",
+        "1 s",
+        "100 s"
+      ],
+      "correct": 1,
+      "explanation": "True value 100 ms."
+    },
+    {
+      "stage": "check",
+      "question": "An episode that lost 20 frames in a row was:",
+      "options": [
+        "Kept",
+        "Refused: its longest gap was 0.70 s",
+        "Trimmed",
+        "Resampled and kept"
+      ],
+      "correct": 1,
+      "explanation": "The good one was kept."
+    },
+    {
+      "stage": "post",
+      "question": "Why trim the idle ends?",
+      "options": [
+        "To save space only",
+        "They teach doing nothing, which is not the task",
+        "They are noisy",
+        "They are long"
+      ],
+      "correct": 1,
+      "explanation": "The task is the motion."
+    },
+    {
+      "stage": "post",
+      "question": "What does the check not say?",
+      "options": [
+        "The longest gap",
+        "Whether the demonstration was a good way to do the task",
+        "The duration",
+        "The idle share"
+      ],
+      "correct": 1,
+      "explanation": "A clumsy one that succeeded passes."
+    }
+  ]
+}
