@@ -1,0 +1,78 @@
+{
+  "lesson": "29-02-holding-the-arm-up",
+  "title": "Holding the Arm Up: Gravity Compensation, the Droop of a Plain PD Controller, and Finding Out What Is in the Gripper",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does a plain PD controller sag under the arm's weight?",
+      "options": [
+        "Gains are low",
+        "It holds the arm up only with its error: the error times the gain equals the weight",
+        "Friction",
+        "The model is wrong"
+      ],
+      "correct": 1,
+      "explanation": "Droop is the weight over the gain."
+    },
+    {
+      "stage": "check",
+      "question": "At the shoulder the arm sagged, and the weight over the gain said:",
+      "options": [
+        "0.000000000 rad",
+        "0.1113 rad, against 0.1093 predicted",
+        "0 rad",
+        "1 rad"
+      ],
+      "correct": 1,
+      "explanation": "To within the pose changing as it sags."
+    },
+    {
+      "stage": "check",
+      "question": "A payload of 2 kg the controller did not know about left an error of:",
+      "options": [
+        "0.000000000 rad",
+        "0.0646 rad",
+        "0 rad",
+        "0.00010 rad"
+      ],
+      "correct": 1,
+      "explanation": "The compensation covered the arm only."
+    },
+    {
+      "stage": "check",
+      "question": "The mass estimated from six poses with noise was:",
+      "options": [
+        "0 kg",
+        "2.00 kg (it was 2)",
+        "10 kg",
+        "2.000000 kg exactly"
+      ],
+      "correct": 1,
+      "explanation": "Linear in the one unknown: least squares."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the torque for a payload linear in its mass?",
+      "options": [
+        "Luck",
+        "It is the Jacobian's transpose times the weight, and the weight is mass times g",
+        "Gravity is linear in position",
+        "It is not"
+      ],
+      "correct": 1,
+      "explanation": "One unknown, many equations."
+    },
+    {
+      "stage": "post",
+      "question": "How does a payload go into the model?",
+      "options": [
+        "Add the mass and leave the centre",
+        "The sum of the masses, the weighted mean of the centres, and the inertia by the parallel axis rule",
+        "Replace the link",
+        "Ignore it"
+      ],
+      "correct": 1,
+      "explanation": "Otherwise the weight is in the wrong place."
+    }
+  ]
+}

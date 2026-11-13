@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "29-02-holding-the-arm-up",
+  "title": "Holding the Arm Up: Gravity Compensation, the Droop of a Plain PD Controller, and Finding Out What Is in the Gripper",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "29-01-what-the-arm-weighs-and-how-it-swings",
+    "28-03-how-the-tool-moves-when-the-joints-do",
+    "14-04-choosing-the-gains"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/gravity_comp.hpp",
+    "note": "holding an arm up: a joint PD controller with an optional feedforward of the gravity torque of the model, the steady error of a PD controller that has to supply the weight itself (the torque over the gain), a payload added to the last link as a point mass with the mass, centre and inertia of the pair, an estimate of the payload from the torques the arm needs to hold still in several poses (a least squares on one number), and a run that steps the controller and the arm to rest"
+  },
+  "breaks_first": [
+    "E-ARM-0031",
+    "E-ARM-0032",
+    "E-ARM-0033"
+  ]
+}
