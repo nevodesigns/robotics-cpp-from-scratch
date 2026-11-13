@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "30-02-how-far-it-is-safe-to-step",
+  "title": "How Far It Is Safe to Step: Checking a Motion and Not Just a Pose, a Bound on How Fast the Arm Can Sweep, and a Thin Obstacle That Fixed Steps Miss",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "30-01-the-shape-of-the-arm",
+    "28-03-how-the-tool-moves-when-the-joints-do"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/motion_check.hpp",
+    "note": "checking a motion between two joint configurations: a bound that does not depend on the pose on how far any point of the arm moves for a change of the joint angles (the joint's turn times the length of everything beyond it, with the tool and the radii), fixed steps along the edge, and conservative advancement, in which each step is the clearance less a margin over that bound, so no step can carry the arm through an obstacle"
+  },
+  "breaks_first": [
+    "E-ARM-0055",
+    "E-ARM-0056",
+    "E-ARM-0057"
+  ]
+}
