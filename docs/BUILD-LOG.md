@@ -1228,3 +1228,35 @@ Eight lessons on making an arm do what it is told once it has mass. The module i
 - **A `using namespace` for a namespace that is not included.** 29-04 again (the lesson includes no rc::arm header); and a missing include of the closed form's header in the tests of 29-01 (for `elbow_arm`).
 - **A stub that used a variable defined only in the solution**, in 29-01's recursion; the variables the stub needs are declared before the solution block.
 - **Audit rules met.** L020 refused citations of lessons not yet written; L021 refused a lambda in 28-06 (replaced by `std::greater`), and the wrong lesson numbers of a few `requires` were found by looking at the folders.
+
+## Phase 30, moving without hitting (13 November 2026)
+
+Eight lessons on planning an arm's motion so that it touches nothing and still gets there. The module is `rc::arm` (now 25 headers), the atlas prefix `ARM` (continued, to 0075). The scene is capsules for the links, spheres and boxes for the world; all clearances come from the capsule distances of 30-01, and every number below comes from the lesson's own test suite.
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 30-01 the shape of the arm | a sphere 0.30 m, a capsule 0.70 and a box 0.50 from the arm gave those distances; the floor left 0.140 m and a pose below it was 0.160 m through; six link pairs, three of them not neighbours, are checked for self collision, and a folded arm was 0.120 m into itself | `rc/arm/collision.hpp` |
+| 30-02 how far it is safe to step | a bound on how far the links sweep for a joint step (1.33 m for the whole arm) held on 200 random steps (worst ratio 0.289); a fixed step of the checker missed a thin wall on a 2.0 rad edge, the conservative check found it in 14 checks, and a far-away edge cost 2 checks against 201 | `rc/arm/motion_check.hpp` |
+| 30-03 growing a tree through the clutter | RRT-Connect solved 6 of 6 seeds with 23 nodes, plain RRT 3 of 6 with 58; the path was 2.90 times the straight line; a start or goal in collision gave no plan at once (0 iterations) | `rc/arm/rrt.hpp` |
+| 30-04 a map of where the arm can go | a roadmap of 250 nodes and 8 neighbours cost 56 406 checks to build and 858 to answer a query, against 2 432 for a fresh RRT; the path was 0.74 of the RRT's; 5 components; a narrow gap was crossed with 7 of the samples at 40, 120 and 300 nodes alike, and 34 percent of a poorly connected map's edges were bad | `rc/arm/roadmap.hpp` |
+| 30-05 making the path shorter and smoother | shortcutting cut a path from 4.83 to 1.85 rad over 150 tries and cut the sharpest turn from 2.25 to 0.60; the clearance rose from 0.0001 to 0.0202 m | `rc/arm/shortcut.hpp` |
+| 30-06 putting the path in time | an S-curve move took 1.220 s against 1.000 s for a trapezoid (whose jerk was 4000 rad/s3); the timed path used 0.727 of the velocity limit and all of the acceleration and jerk; a wandering path took 14.33 s against 1.45 s direct; half the limits doubled the time (3.70 to 6.45) | `rc/arm/time_param.hpp` |
+| 30-07 a world that changes | a scene version moved from 0 to 4 over four changes; a thing seen 2.0 s ago at 0.5 m/s was taken to have grown 0.50 m; the clearance fell from 0.31 to 0.11 m for that growth; an arm that kept a part in its hand cleared the world by 0.090 m and, with the part left out, was 0.090 m through it | `rc/arm/scene_monitor.hpp` |
+| 30-08 getting out of the way of something that moves | a track gave 0.499 m/s for a true 0.5; a meeting 1 m away at 0.5 m/s was found 1.78 s ahead; an arm that did not look went 0.112 m through a sphere rising across its path, one that stopped and waited kept 0.031 m and took 2.15 s (1.50 free), and one that planned round kept 0.135 m and took 4.20 s with 1 plan | `rc/arm/moving_obstacle.hpp` |
+
+**Decisions.**
+
+1. **Capsules, spheres and boxes only.** Distance to a box is found by a ternary search along the capsule's axis; it is exact for a convex shape and cheap.
+2. **A conservative edge check by bounds, not by fine steps.** 30-02's bound on the sweep of a joint step lets the planner skip most checks on long clear edges and refuse any edge it cannot prove.
+3. **A count of the poses looked at is carried by every plan** (`PlanProblem::checks`, mutable), because the cost of a plan is the number of checks and not the time.
+4. **The floor check skips the first link** (the base stands on it), and self pairs are those more than one link apart.
+5. **30-08 plans round at once or waits, by a flag.** The first version also tried to retreat to a pose away from a big obstacle; the scene put the arm's start pose inside the obstacle, so the retreat could not be tested honestly and was left out (and said so in the lesson).
+
+**Mistakes, and what caught them.**
+
+- **An exercise that never ended.** In 30-03 a stub `steer` that returned its start made the connect loop spin (exit 124). `extend` now treats a step that makes no progress as trapped, so a wrong stub fails at once.
+- **An exercise that passed with the stub.** In 30-05 duplicated points hid the sharp turns, so the stub passed. The test now also requires the length to fall and no repeated points.
+- **A half-finished lesson committed with another change** (30-04 with a change to 30-03). Undone with a soft reset, the generated files removed and the lesson generated again properly; the poses counter went in as its own commit.
+- **30-08 was tuned against its own scenario for a long time.** The obstacle growth first made the arm wait 13 times for a slow reach (2.15 s), then, when halved until the arm's own pose was free, planned round at once. The lesson says what was measured: waiting was faster than going round here (2.15 s against 4.20 s), both were safe, and which is right depends on whether the thing leaves. A big obstacle that was already on the arm could not be got away from by standing still, and the lesson says that too.
+- **A folder name over the limit** (L029, 49 characters for 30-08): renamed to `08-getting-out-of-the-way-of-a-moving-thing`. `done.sh` was also run with a short slug (no target found), which showed up as `ninja: unknown target` and a count of 0; the next run used the full slug.
+- **The scratchpad was found by a glob that matched more than one session**, and a `sed` over the wrong paths printed errors; checked with `git status` that nothing outside the lesson had changed.
