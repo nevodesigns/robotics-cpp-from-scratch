@@ -1,0 +1,78 @@
+{
+  "lesson": "30-01-the-shape-of-the-arm",
+  "title": "The Shape of the Arm: Capsules for the Links, Spheres, Boxes and a Floor for the World, and the Pairs of Links That Must Not Be Asked",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why are links modelled as capsules?",
+      "options": [
+        "They are pretty",
+        "A segment and a radius fit a long link well and cost almost nothing to check",
+        "Capsules are standard in law",
+        "They are exact"
+      ],
+      "correct": 1,
+      "explanation": "Cheap and a good fit."
+    },
+    {
+      "stage": "check",
+      "question": "The distance of a capsule of radius 0.1 to a sphere of radius 0.2 with centres 1 m apart was:",
+      "options": [
+        "0.300 m",
+        "0.700 m clear",
+        "1 m",
+        "0 m"
+      ],
+      "correct": 1,
+      "explanation": "1 - 0.1 - 0.2."
+    },
+    {
+      "stage": "check",
+      "question": "With the floor raised to 0.4 m the arm's signed distance was:",
+      "options": [
+        "0.140 m",
+        "-0.160 m: negative, through it",
+        "0",
+        "1 m"
+      ],
+      "correct": 1,
+      "explanation": "It says by how much."
+    },
+    {
+      "stage": "check",
+      "question": "How many pairs of links does the self check ask about, for four capsules?",
+      "options": [
+        "6",
+        "3",
+        "0",
+        "12"
+      ],
+      "correct": 1,
+      "explanation": "Those that share a joint are not asked."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a collision model that is a little too big better than one that is a little too small?",
+      "options": [
+        "It is not",
+        "It keeps the planner a little further away than it needs to; too small hits things",
+        "It is faster",
+        "It is exact"
+      ],
+      "correct": 1,
+      "explanation": "Err on the side of distance."
+    },
+    {
+      "stage": "post",
+      "question": "Why does a segment to box distance work by a ternary search?",
+      "options": [
+        "Luck",
+        "The distance of a point to a convex set is convex along a line: one minimum",
+        "Boxes are round",
+        "It is closed form"
+      ],
+      "correct": 1,
+      "explanation": "No closed form, but convex."
+    }
+  ]
+}

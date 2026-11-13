@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "30-01-the-shape-of-the-arm",
+  "title": "The Shape of the Arm: Capsules for the Links, Spheres, Boxes and a Floor for the World, and the Pairs of Links That Must Not Be Asked",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "29-01-what-the-arm-weighs-and-how-it-swings",
+    "28-02-the-tool-in-three-dimensions",
+    "28-04-eight-ways-to-reach-a-pose"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/collision.hpp",
+    "note": "the collision model of an arm: each link a capsule (a line segment with a radius) between the origins of its frames, with the last one extended to the tool tip; the world as spheres, axis aligned boxes and a floor; the distance between a segment and a segment, a point and a box (found by a search along the segment, since the distance to a convex set is convex along a line), the signed distance of a capsule to each kind of obstacle, and of the links to each other for the pairs that do not share a joint; and the smallest of them for a set of joint angles"
+  },
+  "breaks_first": [
+    "E-ARM-0052",
+    "E-ARM-0053",
+    "E-ARM-0054"
+  ]
+}
