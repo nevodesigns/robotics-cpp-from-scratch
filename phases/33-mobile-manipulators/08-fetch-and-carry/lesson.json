@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "33-08-fetch-and-carry",
+  "title": "Fetch and Carry: A Mission From a Shelf to a Table, With the Rule That the Base Moves Only When the Arm Is Tucked and the Arm Moves Only When the Base Is Still",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "33-07-knowing-where-well-enough-to-grasp",
+    "33-05-tipping-with-the-arm-out",
+    "31-02-picking-and-placing-in-order",
+    "21-07-a-delivery-not-a-route"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::mobile",
+    "header": "rc/mobile/fetch_carry.hpp",
+    "note": "a fetch and carry mission as a state machine: check the battery, drive to the pick station with the arm tucked, put the arm out above the part, go down, close, verify the grasp by the gap between the fingers (retrying a limited number of times), lift, tuck the arm, drive to the place station, put the arm out, lower, release, retreat, tuck, done; faults for no part, a part dropped on the way, a step that took too long and a low battery; and an interlock that lets the base move only when the arm is tucked and the arm come out only when the base is still"
+  },
+  "breaks_first": [
+    "E-MOB-0022",
+    "E-MOB-0023",
+    "E-MOB-0024"
+  ]
+}

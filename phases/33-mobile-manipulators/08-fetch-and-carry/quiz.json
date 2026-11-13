@@ -1,0 +1,78 @@
+{
+  "lesson": "33-08-fetch-and-carry",
+  "title": "Fetch and Carry: A Mission From a Shelf to a Table, With the Rule That the Base Moves Only When the Arm Is Tucked and the Arm Moves Only When the Base Is Still",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why must the base not drive with the arm out?",
+      "options": [
+        "It is slower",
+        "It tips (33-05) and the hand is hard to control",
+        "It is noisy",
+        "It is allowed"
+      ],
+      "correct": 1,
+      "explanation": "The interlock holds the base."
+    },
+    {
+      "stage": "check",
+      "question": "A mission that went to plan took:",
+      "options": [
+        "97 ticks",
+        "113 ticks",
+        "0 ticks",
+        "a minute"
+      ],
+      "correct": 0,
+      "explanation": "With one miss and a retry: 113."
+    },
+    {
+      "stage": "check",
+      "question": "A battery of 4.5 Wh for a mission needing 4.0 Wh:",
+      "options": [
+        "Started and ran down on the way",
+        "Stopped at the start, in fault 4",
+        "Was ignored",
+        "Doubled the speed"
+      ],
+      "correct": 1,
+      "explanation": "A margin of 1.2 times."
+    },
+    {
+      "stage": "check",
+      "question": "The faulty plan with the interlock had how many unsafe ticks?",
+      "options": [
+        "15",
+        "0",
+        "100",
+        "1"
+      ],
+      "correct": 1,
+      "explanation": "Without it 15."
+    },
+    {
+      "stage": "post",
+      "question": "What did the interlock turn the bug into?",
+      "options": [
+        "A tipped robot",
+        "A stopped robot (a timeout)",
+        "A faster robot",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "Fault 3."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the interlock separate from the state machine?",
+      "options": [
+        "For style",
+        "It holds even when the state machine is wrong",
+        "It is shorter",
+        "It is required"
+      ],
+      "correct": 1,
+      "explanation": "A separate, simple rule."
+    }
+  ]
+}
