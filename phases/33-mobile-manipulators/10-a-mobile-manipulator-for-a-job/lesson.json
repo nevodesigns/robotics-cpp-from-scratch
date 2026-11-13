@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "id": "33-10-a-mobile-manipulator-for-a-job",
+  "title": "A Mobile Manipulator for a Job: Every Check of the Phase Run Against One Job, and the First One That Fails Named",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "33-09-one-speed-budget-for-base-and-arm",
+    "33-08-fetch-and-carry",
+    "33-07-knowing-where-well-enough-to-grasp",
+    "33-06-how-much-it-can-carry",
+    "33-03-choosing-where-to-park",
+    "27-08-a-release-for-this-vehicle"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::mobile",
+    "header": "rc/mobile/mm_job.hpp",
+    "note": "the capstone of the mobile manipulator phase: a job written as numbers (where to pick and where to put, the payload, the length of the route and the speed wanted, how close people come, how well the base stops) and a robot written as numbers (its arm and mount, masses, drive, the errors of its localisation, its camera); a check that runs the parking choice at the pick and the place (33-03), the stopping accuracy against the tolerance of the ring (33-02), the payload budget (33-06), the grasp chance with the camera (33-07), the battery for the route (33-06), the travel speed the load allows (33-05, 33-09) and the speed the nearest person allows (33-09), and says which is the first to fail"
+  },
+  "breaks_first": [
+    "E-MOB-0028",
+    "E-MOB-0029",
+    "E-MOB-0030"
+  ]
+}
