@@ -1260,3 +1260,35 @@ Eight lessons on planning an arm's motion so that it touches nothing and still g
 - **30-08 was tuned against its own scenario for a long time.** The obstacle growth first made the arm wait 13 times for a slow reach (2.15 s), then, when halved until the arm's own pose was free, planned round at once. The lesson says what was measured: waiting was faster than going round here (2.15 s against 4.20 s), both were safe, and which is right depends on whether the thing leaves. A big obstacle that was already on the arm could not be got away from by standing still, and the lesson says that too.
 - **A folder name over the limit** (L029, 49 characters for 30-08): renamed to `08-getting-out-of-the-way-of-a-moving-thing`. `done.sh` was also run with a short slug (no target found), which showed up as `ninja: unknown target` and a count of 0; the next run used the full slug.
 - **The scratchpad was found by a glob that matched more than one session**, and a `sed` over the wrong paths printed errors; checked with `git status` that nothing outside the lesson had changed.
+
+## Phase 31, manipulation (13 November 2026)
+
+Nine lessons on picking a thing up and putting it down. The module is `rc::arm` (now 34 headers), the atlas prefix `ARM` (continued, to 0102). The hand, the contact, the friction and the safety numbers are typical and marked so; the separation lesson is a model of the idea in ISO 13855 and ISO/TS 15066 and says in its first lines that it is not a safety function.
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 31-01 a hand that pinches | a kilogram at rest needed 9.81 N of squeeze at a friction of 0.5 and 14.81 N when lifted at 5 m/s2; a hand of 235 N held at most 16.0 kg at a safety factor of 1.5 and 8.0 kg with pads at half the friction | `rc/arm/gripper.hpp` |
+| 31-02 picking and placing in order | a pick and place that went to plan took 36 ticks, one miss and a retry 48; a hand that always missed stopped in fault 1 after 3 tries; a dropped part was seen at once (fault 2) and a move that never arrived stopped at tick 62 (fault 3) | `rc/arm/pick_place.hpp` |
+| 31-03 finding the part with a camera | a pixel 60 right of the centre at 0.5 m was 0.050 m to the side; with 2 mm of noise 5 points gave 3.5 mm and 0.64 degrees and 40 points 1.1 mm and 0.20 degrees; a flat set of points gave no fit; one degree of tilt was 10.5 mm at 0.6 m | `rc/arm/hand_eye.hpp` |
+| 31-04 feeling that it has touched | driven at 0.2 rad/s into a wall, contact was found 15 ms after it was reached at 1.31 N m and at 0.6 rad/s the wall reached 5.20 N m; a threshold of 0.05 N m with gravity 5 percent out gave a false alarm in free motion and 0.8 N m none | `rc/arm/contact.hpp` |
+| 31-05 putting a peg in a hole | a peg 2 mm off a hole with 100 micrometres of clearance needed 0.8 N of push from a hand of 300 N/m, 5.6 N from 2000 N/m and 279 N (against 50) from 100 000 N/m, which jammed; at a friction of 1.2 the peg could not slide; over offsets of 0 to 4 mm the soft hand got in 13 of 17 and the stiff one 2 | `rc/arm/insertion.hpp` |
+| 31-06 staying far enough from a person | a person at 1.6 m/s, 100 ms of reaction, 5 m/s2 of braking and 17 cm of margins made a robot at 1.0 m/s need 0.85 m and at rest 0.33 m; 1.0 m allowed 1.23 m/s and 2.0 m allowed 2.49 m/s; a robot braking at the full distance came to rest 0.17 m away, one that left out the person's motion at minus 0.31 m and one that left out the reaction time at minus 0.09 m | `rc/arm/ssm.hpp` |
+| 31-07 how many parts an hour | a cycle took 3.68 s at the rated speed (977 an hour), 5.70 s at half and 10.13 s at a quarter, with 0.8 s of hand and 1.07 s of slow approach that do not scale; a target of 5.16 s needed an override of 0.576 and 2.95 s was refused; a person at 1.0 m made the cycle 3.77 s and at 2.0 m 3.68 s | `rc/arm/cycle_time.hpp` |
+| 31-08 an arm that follows a hand | a follower with a 50 ms lag had an rms error of 0.059 rad with the leader read at 100 Hz, 0.081 at 20 Hz and 0.168 with 100 ms of delay; a jump of 1 rad was followed at 2 rad/s in 0.48 s; without a watchdog a follower went 0.398 rad on after the link was lost | `rc/arm/teleop.hpp` |
+| 31-09 keeping what the hand showed | an episode of 5.0 s had 151 samples and a longest gap of 0.039 s, trimmed to 2.8 s from the 3 s reach with 1 s of idling at each end; the follower lag was found as 100 ms (true 100); an episode that lost 20 frames in a row had a gap of 0.70 s and was refused | `rc/arm/demo_record.hpp` |
+
+**Decisions.**
+
+1. **The stub of each lesson is the one function that carries the lesson's idea** (the force that holds, the grasp check, the back projection, the debounce, the push to centre, the inverse speed, the bisection, the follower step, the trim), and each stub returns something that fails the tests at once and never loops.
+2. **31-03 fits the camera by the polar factor of the cross covariance** (Newton's iteration) and not by a singular value decomposition, so that no matrix library is needed; it says that it fails for points in a plane. Eye in hand (A X = X B) is named and not built.
+3. **31-06 is a model, with typical numbers, and says so in its opening lines**; the speed of a person and the reaction time are for the learner to replace by the current edition and a measurement. Power and force limiting is named and not modelled.
+4. **31-07 finds the override by bisection** because the contact speed does not scale with it.
+5. **No learning in 31-09**: it stores, resamples, trims and checks demonstrations, which is what the plan said (the learning course is later).
+
+**Mistakes, and what caught them.**
+
+- **`requires` ids written from memory, three times** (28-01 and 19-01 and 18-01 do not exist; the folders are 28-02, 19-01-what-can-go-wrong and 18-07). Rule L012 caught each; the ids are now read off the folder listing before the spec is written, and a commit with an audit issue is undone with a soft reset and made again after the fix.
+- **A `using namespace rc::arm` in a lesson that includes no arm header** (31-01), and the reverse, a lesson that includes `frames.hpp` and has no `using` (31-03); both compile errors named the line.
+- **A test that proved nothing** in 31-08: the first lost link test let the follower converge before the timeout, so the follower with a watchdog and the one without ended in the same place. The test now has the leader jump just before the link is lost, and the lesson says that holding at the timeout is true by construction.
+- **Wording that the numbers did not bear out**, three times: in 31-05 the stiff hand got in a little beyond the clearance, not only inside it; in 31-06 the robot that left out the reaction time also met the person (minus 0.09 m); in 31-09 trimming left 2.8 s of a 3 s reach because a smooth reach starts and ends slower than the threshold. Each was changed in the lesson, not in the test.
+- **Name of the reference for `done.sh`**: it takes the whole underscored slug of the lesson, which was a mistake again once in phase 30 and not in this phase.
