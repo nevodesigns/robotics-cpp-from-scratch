@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "28-01-frames-and-a-table-for-an-arm",
+  "title": "Frames and a Table for an Arm in Three Dimensions: Poses, the Two Denavit-Hartenberg Conventions, and Two Real Arms Written Down",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "13-12-the-table-that-describes-an-arm",
+    "06-04-transforms-and-frames"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/frames.hpp",
+    "note": "poses in three dimensions as a rotation matrix and a translation (compose, inverse, a transformed point, re-orthonormalising a rotation that has drifted), the Denavit-Hartenberg row in both conventions (standard: Rz(theta) Tz(d) Tx(a) Rx(alpha); modified: Rx(alpha) Tx(a) Rz(theta) Tz(d)), an arm table with joint offsets and limits, and two real arms written as tables with their sources: the UR5 (standard) and the Franka Emika Panda (modified)"
+  },
+  "breaks_first": [
+    "E-ARM-0001",
+    "E-ARM-0002",
+    "E-ARM-0003"
+  ]
+}
