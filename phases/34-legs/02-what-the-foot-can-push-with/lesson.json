@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "34-02-what-the-foot-can-push-with",
+  "title": "What the Foot Can Push With: The Leg Jacobian, the Joint Torques That Hold a Body Up, and Why a Bent Knee Costs More Than a Straight One",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "34-01-where-the-foot-is",
+    "28-03-how-the-tool-moves-when-the-joints-do",
+    "29-01-what-the-arm-weighs-and-how-it-swings"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/leg_force.hpp",
+    "note": "the leg's Jacobian (how the foot moves when each joint does), the joint torques that make the ground push the foot up with a given force (minus the Jacobian's transpose times the force the ground gives), the foot's force from measured torques (the inverse), the joint rates for a foot velocity (and when they cannot be found), and the torques a quadruped's legs need to stand at different heights"
+  },
+  "breaks_first": [
+    "E-LEG-0004",
+    "E-LEG-0005",
+    "E-LEG-0006"
+  ]
+}

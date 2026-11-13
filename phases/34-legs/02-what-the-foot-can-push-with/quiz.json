@@ -1,0 +1,78 @@
+{
+  "lesson": "34-02-what-the-foot-can-push-with",
+  "title": "What the Foot Can Push With: The Leg Jacobian, the Joint Torques That Hold a Body Up, and Why a Bent Knee Costs More Than a Straight One",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What connects the foot's force to the joints' torques?",
+      "options": [
+        "Nothing",
+        "The Jacobian's transpose, by virtual work",
+        "The knee alone",
+        "The battery"
+      ],
+      "correct": 1,
+      "explanation": "The same work seen from two ends."
+    },
+    {
+      "stage": "check",
+      "question": "The knee's torque for the crouch was:",
+      "options": [
+        "5.43 N m",
+        "1.88 N m",
+        "0 N m",
+        "29.4 N m"
+      ],
+      "correct": 0,
+      "explanation": "With the leg nearly straight it was 1.88."
+    },
+    {
+      "stage": "check",
+      "question": "Why does a straight leg need less torque?",
+      "options": [
+        "It is stronger metal",
+        "The force goes along the bones, so the shank's lean from the vertical is small",
+        "It is lighter",
+        "It is not true"
+      ],
+      "correct": 1,
+      "explanation": "Torque is weight times the lean."
+    },
+    {
+      "stage": "check",
+      "question": "The knee rate for 0.5 m/s at 0.40 m was:",
+      "options": [
+        "3.4 rad/s",
+        "15.5 rad/s",
+        "0",
+        "1000 rad/s"
+      ],
+      "correct": 1,
+      "explanation": "It grows as the leg straightens."
+    },
+    {
+      "stage": "post",
+      "question": "What does the inverse of the transpose give?",
+      "options": [
+        "Nothing",
+        "The force at the foot from the torques measured at the joints",
+        "The rates",
+        "The mass"
+      ],
+      "correct": 1,
+      "explanation": "A way to feel the ground without a force sensor."
+    },
+    {
+      "stage": "post",
+      "question": "What is not in this model?",
+      "options": [
+        "The Jacobian",
+        "Friction, the legs' own weight, and acceleration",
+        "The sign",
+        "The force"
+      ],
+      "correct": 1,
+      "explanation": "It is static."
+    }
+  ]
+}
