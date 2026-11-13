@@ -1,0 +1,118 @@
+// rc/drive/vehicle_release.hpp
+//
+// A release for this vehicle, from lesson 27-08.
+//
+// check_update takes what is on the vehicle (its id and class, its software, configuration schema and map version, and whether it is parked, in a mission and how charged) and an offered bundle (class, software, schema, map and the vehicle id its calibration was made for, if it carries one) and returns every reason the update is refused: the wrong class, a calibration for another vehicle, a schema or a map older than the one on the vehicle, a vehicle that is not parked, one in a mission, one with too little charge, or a version the rules of lesson 20-12 do not accept. No reasons means it may go ahead. post_update_selftest takes what a short drive on the new software measured (how far a forward command moved the vehicle, the ratio of the wheels' distance to the ground's over 1 m, the distance an emergency stop took from a speed, whether the scanner saw a target) and returns what failed. boots_until_settled runs the boot loader of lesson 20-06: a release whose self test passes is confirmed at its first boot, and one whose self test fails is never confirmed and is rolled back when its tries are used up.
+//
+// A vehicle that was moving, in a mission and at 20 percent charge was refused for 3 reasons at once. A bundle carrying the calibration of another vehicle was refused, and a track of 0.40 m taken for 0.25 m would have made it turn 1.60 times too little. A wheel wired backwards failed 1 check and a calibration lost failed 1. A release that passed its self test was confirmed in 1 boot and one that failed it was rolled back after 4.
+
+#ifndef RC_RC_DRIVE_VEHICLE_RELEASE_HPP
+#define RC_RC_DRIVE_VEHICLE_RELEASE_HPP
+
+#include <cmath>
+#include <rc/deploy/release.hpp>
+#include <rc/deploy/trial.hpp>
+#include <string>
+#include <vector>
+
+namespace rc {
+namespace drive {
+
+struct OnBoard {
+  std::string id;
+  std::string vehicle_class;
+  std::string software;
+  int config_schema = 1;
+  int map_version = 1;
+  bool parked = true;
+  bool mission_active = false;
+  double soc = 1.0;  // fraction of full
+};
+
+struct Bundle {
+  std::string vehicle_class;
+  std::string software;
+  int config_schema = 1;
+  int map_version = 1;
+  std::string calibration_for;  // the vehicle id the calibration was made for, or empty if none is carried
+};
+
+enum Refusal { kWrongClass = 0, kWrongCalibration = 1, kOlderSchema = 2, kOlderMap = 3, kNotParked = 4, kMissionActive = 5, kLowCharge = 6, kVersion = 7 };
+
+struct UpdatePolicy {
+  double min_soc = 0.5;
+  std::string minimum_version = "1.0.0";
+  bool rollback_authorised = false;
+};
+
+// Every reason the bundle is refused for this vehicle: an empty list means it may go ahead.
+inline std::vector<Refusal> check_update(const OnBoard& v, const Bundle& b, const UpdatePolicy& p) {
+  std::vector<Refusal> why;
+  if (b.vehicle_class != v.vehicle_class) why.push_back(kWrongClass);
+  if (!b.calibration_for.empty() && b.calibration_for != v.id) why.push_back(kWrongCalibration);
+  if (b.config_schema < v.config_schema) why.push_back(kOlderSchema);
+  if (b.map_version < v.map_version) why.push_back(kOlderMap);
+  if (!v.parked) why.push_back(kNotParked);
+  if (v.mission_active) why.push_back(kMissionActive);
+  if (!(v.soc >= p.min_soc)) why.push_back(kLowCharge);
+  if (rc::deploy::decide(v.software, b.software, p.minimum_version, p.rollback_authorised) != rc::deploy::VersionDecision::install) why.push_back(kVersion);
+  return why;
+}
+
+struct SelfTestInput {
+  double forward_moved_m = 0.0;   // how far a command to go forward moved the vehicle
+  double odom_over_ground = 1.0;  // the wheels' distance over the ground's, over a drive of 1 m
+  double estop_distance_m = 0.0;  // the distance an emergency stop took from the test speed
+  bool scanner_saw_target = false;
+};
+
+struct SelfTestLimits {
+  double min_forward_m = 0.05;
+  double odom_tolerance = 0.05;  // the ratio may be this far from 1
+  double estop_max_m = 1.0;
+};
+
+// What the new software got wrong on the vehicle, as names; empty if it passed.
+inline std::vector<std::string> post_update_selftest(const SelfTestInput& in, const SelfTestLimits& lim) {
+  std::vector<std::string> failed;
+  if (!(in.forward_moved_m >= lim.min_forward_m)) failed.push_back("wheel direction");
+  if (!(std::fabs(in.odom_over_ground - 1.0) <= lim.odom_tolerance)) failed.push_back("odometry");
+  if (!(in.estop_distance_m <= lim.estop_max_m)) failed.push_back("emergency stop");
+  if (!in.scanner_saw_target) failed.push_back("scanner");
+  return failed;
+}
+
+// The boot loader of lesson 20-06 with this release on trial: how many boots until it is settled (confirmed, or rolled back), and which slot it ended on.
+struct Settled {
+  int boots = 0;
+  int slot = 0;
+  bool confirmed = false;
+  bool rolled_back = false;
+};
+
+inline Settled boots_until_settled(int old_slot, int new_slot, int tries, bool selftest_passes) {
+  rc::deploy::BootState s;
+  s.active = old_slot;
+  rc::deploy::start_trial(s, new_slot, tries);
+  Settled out;
+  for (int guard = 0; guard < 100; ++guard) {
+    const int slot = rc::deploy::on_boot(s);
+    ++out.boots;
+    out.slot = slot;
+    if (s.rolled_back) {
+      out.rolled_back = true;
+      return out;
+    }
+    if (slot == new_slot && selftest_passes) {
+      out.confirmed = rc::deploy::confirm(s);
+      return out;
+    }
+  }
+  return out;
+}
+
+
+}  // namespace drive
+}  // namespace rc
+
+#endif

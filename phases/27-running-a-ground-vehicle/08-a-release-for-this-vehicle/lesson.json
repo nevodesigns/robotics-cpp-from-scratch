@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "27-08-a-release-for-this-vehicle",
+  "title": "A Release for This Vehicle: Only When It Is Parked and Charged, Never With Another Vehicle's Calibration, and Kept Only If It Drives Properly",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "27-07-when-something-stops-working",
+    "20-12-a-release-that-reaches-the-robot",
+    "23-08-calibrating-the-track-width-from-a-run"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/vehicle_release.hpp",
+    "note": "releasing to a ground vehicle: a check of the vehicle's own state against an offered bundle (right class of vehicle, the calibration carried is its own, the map and the configuration schema are not older, the vehicle parked, no mission under way, charge enough, and the version accepted by the rules of lesson 20-12), listing every reason a bundle is refused; a self test of what the new software does on the vehicle (a wheel that drives forward, odometry that agrees with the ground over a short drive, an emergency stop that stops in its distance, a scanner that sees a target); and the trial of lesson 20-06, in which a release that fails its self test is never confirmed and is rolled back"
+  },
+  "breaks_first": [
+    "E-VEH-0133",
+    "E-VEH-0134",
+    "E-VEH-0135"
+  ]
+}

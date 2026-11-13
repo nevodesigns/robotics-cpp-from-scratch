@@ -1,0 +1,78 @@
+{
+  "lesson": "27-08-a-release-for-this-vehicle",
+  "title": "A Release for This Vehicle: Only When It Is Parked and Charged, Never With Another Vehicle's Calibration, and Kept Only If It Drives Properly",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is an update refused when the vehicle is not parked?",
+      "options": [
+        "Rules",
+        "It is a reboot, and a reboot of a moving vehicle is a stop and a lost mission",
+        "Updates are slow",
+        "Parking is free"
+      ],
+      "correct": 1,
+      "explanation": "It must be at rest."
+    },
+    {
+      "stage": "check",
+      "question": "A vehicle that was moving, in a mission and at 20 percent charge was refused for how many reasons?",
+      "options": [
+        "1",
+        "3",
+        "7",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "Every reason is listed."
+    },
+    {
+      "stage": "check",
+      "question": "A track width of 0.40 m taken for 0.25 m makes a skid steer turn:",
+      "options": [
+        "1.60 times too little",
+        "The same",
+        "Twice as much",
+        "Not at all"
+      ],
+      "correct": 0,
+      "explanation": "The calibration of another vehicle."
+    },
+    {
+      "stage": "check",
+      "question": "A release that failed its self test was rolled back after how many boots?",
+      "options": [
+        "1",
+        "4",
+        "100",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "Three tries, then the old slot."
+    },
+    {
+      "stage": "post",
+      "question": "What does only a self test pass do?",
+      "options": [
+        "Nothing",
+        "Confirms the release",
+        "Reboots",
+        "Updates the map"
+      ],
+      "correct": 1,
+      "explanation": "The release does not get to say it is fine."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a charge that is not a number counted as low?",
+      "options": [
+        "It is cheaper",
+        "A comparison with it is false, so it must fail the check",
+        "Batteries lie",
+        "Law"
+      ],
+      "correct": 1,
+      "explanation": "Written as 'soc >= minimum', so NaN fails."
+    }
+  ]
+}
