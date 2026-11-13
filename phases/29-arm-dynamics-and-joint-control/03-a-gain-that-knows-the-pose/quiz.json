@@ -1,0 +1,78 @@
+{
+  "lesson": "29-03-a-gain-that-knows-the-pose",
+  "title": "A Gain That Knows the Pose: The Joint Control Cascade of an Arm, an Inertia That Changes Threefold With the Pose, and Gains That Follow It",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is a joint's gain not one number for an arm?",
+      "options": [
+        "Motors differ",
+        "The inertia the joint sees depends on the pose",
+        "Gains are random",
+        "Arms are heavy"
+      ],
+      "correct": 1,
+      "explanation": "It changes several fold."
+    },
+    {
+      "stage": "check",
+      "question": "The shoulder's inertia went from 0.691 to 2.091 kg m2, a ratio of:",
+      "options": [
+        "1.8",
+        "3.0, and through a 100:1 gear 1.8",
+        "1",
+        "100"
+      ],
+      "correct": 1,
+      "explanation": "A geared joint sees less of the change."
+    },
+    {
+      "stage": "check",
+      "question": "With gains for the heaviest pose, the overshoot at the lightest pose was:",
+      "options": [
+        "0.0 percent",
+        "13909338 percent, against 0.0 at the heaviest",
+        "0 percent",
+        "The same"
+      ],
+      "correct": 1,
+      "explanation": "The velocity loop's bandwidth is Kv over J."
+    },
+    {
+      "stage": "check",
+      "question": "With gains that follow the inertia, the overshoot at the lightest was:",
+      "options": [
+        "13909338 percent",
+        "0.0 percent",
+        "Unstable",
+        "50 percent"
+      ],
+      "correct": 1,
+      "explanation": "Kv = J times the bandwidth."
+    },
+    {
+      "stage": "post",
+      "question": "What does an integral do when the torque is at its limit?",
+      "options": [
+        "Nothing",
+        "It keeps adding up the error: it winds up and overshoots: 186 percent, against 19.0 held",
+        "It resets",
+        "It stops the arm"
+      ],
+      "correct": 1,
+      "explanation": "Hold it while saturated."
+    },
+    {
+      "stage": "post",
+      "question": "Why does a geared joint need the pose in its gains less?",
+      "options": [
+        "It does not",
+        "Most of the inertia it sees is its own rotor through the gear squared",
+        "Gears are stiff",
+        "It is slower"
+      ],
+      "correct": 1,
+      "explanation": "The gear ratio squared."
+    }
+  ]
+}

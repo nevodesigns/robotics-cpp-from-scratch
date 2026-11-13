@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "29-03-a-gain-that-knows-the-pose",
+  "title": "A Gain That Knows the Pose: The Joint Control Cascade of an Arm, an Inertia That Changes Threefold With the Pose, and Gains That Follow It",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "29-02-holding-the-arm-up",
+    "14-04-choosing-the-gains",
+    "22-04-motors-gearboxes-and-backlash"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/joint_cascade.hpp",
+    "note": "the cascade of one arm joint: a position loop that asks for a velocity, a velocity loop with proportional and integral terms that asks for a torque (limited, with the integral held while the torque is at its limit if asked), and a current loop that is a lag; the inertia the joint sees as the diagonal of the mass matrix plus the rotor's inertia through the gear squared; gains for a wanted bandwidth that follow that inertia; and a step response run with a delay in the loop, giving the overshoot, the settling time and whether it was stable"
+  },
+  "breaks_first": [
+    "E-ARM-0034",
+    "E-ARM-0035",
+    "E-ARM-0036"
+  ]
+}
