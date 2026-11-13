@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "27-06-the-checklist-before-the-run",
+  "title": "The Checklist Before the Run: Ten Checks as Code, the Ones That Block and the Ones That Warn, and a Number That Is Not a Number",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "27-04-how-far-it-can-go-and-how-hot",
+    "27-05-a-log-that-tells-you-what-went-wrong",
+    "22-16-a-bring-up-checklist-for-a-board"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/field_checklist.hpp",
+    "note": "the check before each run of a ground vehicle: ten checks of the vehicle's state (energy for the mission and a reserve, the emergency stop tried recently, the position known, the scan fresh, the geofence loaded, the release the expected one, the link, the log space, the clock, the motor temperature), each written so that a number that is not a number fails it, six that block the run and four that warn, a decision that lets a warning be overridden with a recorded reason and never a block, and a report with the numbers"
+  },
+  "breaks_first": [
+    "E-VEH-0127",
+    "E-VEH-0128",
+    "E-VEH-0129"
+  ]
+}

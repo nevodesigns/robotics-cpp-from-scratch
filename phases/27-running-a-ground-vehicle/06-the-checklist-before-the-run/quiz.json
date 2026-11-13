@@ -1,0 +1,78 @@
+{
+  "lesson": "27-06-the-checklist-before-the-run",
+  "title": "The Checklist Before the Run: Ten Checks as Code, the Ones That Block and the Ones That Warn, and a Number That Is Not a Number",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the difference between a block and a warning?",
+      "options": [
+        "Colour",
+        "A block stops the run; a warning may be overridden with a reason",
+        "Warnings are louder",
+        "None"
+      ],
+      "correct": 1,
+      "explanation": "A block cannot be argued with."
+    },
+    {
+      "stage": "check",
+      "question": "Making each check fail alone blocked the run how many times?",
+      "options": [
+        "4",
+        "6",
+        "10",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "And warned 4 times."
+    },
+    {
+      "stage": "check",
+      "question": "A state in which every number was not a number failed how many checks?",
+      "options": [
+        "10",
+        "8",
+        "0",
+        "2"
+      ],
+      "correct": 1,
+      "explanation": "A value that is not a number fails."
+    },
+    {
+      "stage": "check",
+      "question": "With 5.00 Wh left, 4.50 needed and a reserve of 0.50, the energy check:",
+      "options": [
+        "Failed",
+        "Passed; 4.99 failed",
+        "Was skipped",
+        "Warned"
+      ],
+      "correct": 1,
+      "explanation": "The check is >=, tested at the edge."
+    },
+    {
+      "stage": "post",
+      "question": "Why is every check written as 'ok when within the limit'?",
+      "options": [
+        "Style",
+        "A comparison with a number that is not a number is false, so it fails",
+        "Speed",
+        "Law"
+      ],
+      "correct": 1,
+      "explanation": "age <= limit is false for NaN."
+    },
+    {
+      "stage": "post",
+      "question": "What happens to an override of a block?",
+      "options": [
+        "It is accepted",
+        "It is refused and reported",
+        "It is ignored without a word",
+        "It counts as a warning"
+      ],
+      "correct": 1,
+      "explanation": "A checklist with an override for everything is a suggestion."
+    }
+  ]
+}
