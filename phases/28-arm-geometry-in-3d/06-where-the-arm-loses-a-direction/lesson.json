@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "28-06-where-the-arm-loses-a-direction",
+  "title": "Where the Arm Loses a Direction: Singular Values, Three Kinds of Singularity, and a Line Drawn Over the Shoulder",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "28-05-iterating-to-a-pose",
+    "13-04-the-pose-it-cannot-reach-slowly"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/singular.hpp",
+    "note": "the singular values of a six row Jacobian (the square roots of the eigenvalues of J J transpose by the Jacobi method), manipulability and the condition number, the smallest singular value as the distance from a singularity, the damping that grows as it falls (zero above a threshold, rising to a maximum), and a resolved rate run of the tool along a straight line with fixed orientation, with the peak joint rate and the tracking error it costs"
+  },
+  "breaks_first": [
+    "E-ARM-0016",
+    "E-ARM-0017",
+    "E-ARM-0018"
+  ]
+}
