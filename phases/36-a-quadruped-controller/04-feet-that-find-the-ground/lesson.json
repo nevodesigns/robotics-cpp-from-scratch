@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "36-04-feet-that-find-the-ground",
+  "title": "Feet That Find the Ground: Reaching Down Until Contact, a Ground Height Learned From Each Landing, and a Hole Told From a Step",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "36-03-getting-up",
+    "34-07-feeling-the-ground",
+    "34-05-the-path-of-a-step",
+    "35-08-slopes-and-steps"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/terrain_adapt.hpp",
+    "note": "feet that adapt to ground they have not seen: after the swing the foot goes on reaching down at a bounded rate until the contact sense of 34-07 says it is down (or until it has reached as far as the leg may, which is a hole and not a step), the height at which it touched is the ground there, an estimate of the ground's height under each foot is moved toward it by a gain (so that one bump does not move the body), and the body's height follows the mean of the estimates; tested over level ground, a bump, a step down and a hole, with the time the search added and what each foot ended with"
+  },
+  "breaks_first": [
+    "E-LEG-0060",
+    "E-LEG-0061",
+    "E-LEG-0062"
+  ]
+}

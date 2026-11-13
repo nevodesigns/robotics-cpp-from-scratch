@@ -1,0 +1,78 @@
+{
+  "lesson": "36-04-feet-that-find-the-ground",
+  "title": "Feet That Find the Ground: Reaching Down Until Contact, a Ground Height Learned From Each Landing, and a Hole Told From a Step",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "How does a foot with no camera for the ground deal with a step down?",
+      "options": [
+        "It cannot",
+        "It lands where expected and keeps reaching down until the contact sense says it is down",
+        "It jumps",
+        "It waits"
+      ],
+      "correct": 1,
+      "explanation": "A little at a time."
+    },
+    {
+      "stage": "check",
+      "question": "A step down of 5 cm took an extension of:",
+      "options": [
+        "0.000 m",
+        "0.060 m, in 0.24 s",
+        "0 m",
+        "1 m"
+      ],
+      "correct": 1,
+      "explanation": "At 0.25 m/s."
+    },
+    {
+      "stage": "check",
+      "question": "What did a hole deeper than the leg may reach give?",
+      "options": [
+        "A normal landing",
+        "A report of a hole after 0.40 s",
+        "A fall",
+        "A bump"
+      ],
+      "correct": 1,
+      "explanation": "Do not put weight on that leg."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the ground estimate moved by a gain?",
+      "options": [
+        "To save time",
+        "One stone should not lift the body, while a real change is followed",
+        "To be slow",
+        "It is not"
+      ],
+      "correct": 1,
+      "explanation": "6.0 mm after one landing."
+    },
+    {
+      "stage": "post",
+      "question": "What must a swing do when the foot touches early?",
+      "options": [
+        "Go on",
+        "Stop, or the foot pushes into the bump",
+        "Speed up",
+        "Reverse"
+      ],
+      "correct": 1,
+      "explanation": "The contact sense of 34-07."
+    },
+    {
+      "stage": "post",
+      "question": "What is not covered?",
+      "options": [
+        "The search",
+        "Looking ahead, soft ground and the slip of the foot",
+        "The hole",
+        "The gain"
+      ],
+      "correct": 1,
+      "explanation": "A camera would let the robot choose the foot place."
+    }
+  ]
+}
