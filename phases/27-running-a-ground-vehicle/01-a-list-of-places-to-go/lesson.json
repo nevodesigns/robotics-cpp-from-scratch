@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "27-01-a-list-of-places-to-go",
+  "title": "A List of Places to Go: Waypoints With Tolerances, Dwell and Timeouts, Skipping or Giving Up, and Resuming After a Reboot Without Starting Over",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "26-04-following-a-path-pure-pursuit-and-stanley",
+    "26-08-when-the-vehicle-is-stuck",
+    "21-07-a-delivery-not-a-route"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/waypoint_mission.hpp",
+    "note": "a waypoint mission for a ground vehicle: a list of waypoints each with a tolerance, a dwell time, a timeout and a speed; a leg is reached when the vehicle comes within the tolerance (and has stayed for the dwell time); a leg that times out is skipped or ends the mission, by policy; and the progress is saved as text, so a vehicle that reboots goes on from the leg it was on"
+  },
+  "breaks_first": [
+    "E-VEH-0112",
+    "E-VEH-0113",
+    "E-VEH-0114"
+  ]
+}

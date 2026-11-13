@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "title": "Running a Ground Vehicle",
+  "ends_with": "A ground vehicle that does a day of work: missions, a person at the controls when needed, protective fields, a battery and motors that are watched, logs that explain, a checklist before each run, degraded modes, and releases that can be rolled back"
+}
