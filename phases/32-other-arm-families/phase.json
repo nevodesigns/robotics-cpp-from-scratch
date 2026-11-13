@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "title": "Other Arm Families",
+  "ends_with": "A choice of robot for a task made from numbers: the SCARA, the delta, the parallel platform and the gantry each modelled with its own geometry, their workspaces and speeds compared on one footing, and a cell specified and checked against a task"
+}

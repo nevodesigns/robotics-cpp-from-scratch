@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "32-01-two-joints-and-a-plunger",
+  "title": "Two Joints and a Plunger: The SCARA, Its Closed Form Reach, Its Two Elbows, and Why Its Joints Carry No Weight",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "28-04-eight-ways-to-reach-a-pose",
+    "28-06-where-the-arm-loses-a-direction",
+    "29-01-what-the-arm-weighs-and-how-it-swings",
+    "31-07-how-many-parts-an-hour"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/scara.hpp",
+    "note": "the SCARA arm: two revolute joints turning about vertical axes, a vertical slide and a roll at the tool; forward kinematics, the closed form inverse kinematics with its two elbow solutions, the reach test against the arm's own limits, the planar Jacobian and its determinant (which is zero when the arm is straight or folded), and the torque the payload's weight puts on the joints, which is zero for the first two"
+  },
+  "breaks_first": [
+    "E-ARM-0103",
+    "E-ARM-0104",
+    "E-ARM-0105"
+  ]
+}
