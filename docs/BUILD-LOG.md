@@ -1358,3 +1358,36 @@ Ten lessons on a wheeled base with an arm on it, ending in a check of whether a 
 - **A timing test** (33-02's first version compared the speed of two functions): removed, since a clock on a shared machine is a flaky gate; the lesson says what the quick test needs (two comparisons) and not how many times faster it is.
 - **Claims that the numbers did not bear out**, five times: the ring at the first height has no hole in the middle (inner radius 0.00), where the first text said there was one; the speed supervisor's robot stopped 28 mm inside its margins and not outside them, because a speed limit that falls continuously asks for a faster slowdown than the brakes give (the lesson now says so); the base's price changed its travel by only 20 percent for a factor of 1000; and the arm's payload limit was the rating of the structure and not its joints.
 - **A person who never stopped walking** (33-09's first simulation): the person walked through the stopped robot, as the protective distance assumes they do not; the test now ends when the robot stops, as in 31-06.
+
+## Phase 34, legs (13 November 2026)
+
+Eight lessons on one leg of a four legged robot: the first phase of stage 4. The module is `rc::legged` (new, 8 headers), the atlas prefix `LEG` (new, 0001 to 0023). The leg is three joints (a lean, a hip pitch with a sideways offset, and a knee) with typical dimensions of a 12 kg quadruped (offset 0.08 m, thigh and shank 0.21 m); every mass, torque, motor and servo figure is typical and says so.
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 34-01 where the foot is | the foot was put back at the place asked to 1e-9 m for 680 of 756 grid places (left and right legs, either knee), the two knees giving the same foot; a foot 0.30 m below the hip had the knee at minus 89 degrees; 0.50 m below was out of reach and a straight leg had a straightness of 0.000 | `rc/legged/leg_kin.hpp` |
+| 34-02 what the foot can push with | the Jacobian agreed with small joint moves; a 12 kg robot on four feet (29.4 N each) needed 5.43, 4.33 and 1.88 N m at the knee with the foot 0.20, 0.30 and 0.40 m below the hip and 0.00 N m at the hip (the foot is under it); the force came back from the torques to 1e-9 N; a foot speed of 0.5 m/s needed a knee rate of 3.4 rad/s at 0.30 m and 15.5 at 0.40 m | `rc/legged/leg_force.hpp` |
+| 34-03 the body from the feet | the height, roll and pitch were found from four feet to 1e-9; three feet gave the same; with 5 mm of noise the height was uncertain by 2.5 mm, the roll 0.92 degrees and the pitch 0.65 with four feet, and 3.6 mm, 1.29 and 0.95 with three | `rc/legged/body_pose.hpp` |
+| 34-04 down and up | a walk (duty 0.75) always had 3 feet down, a trot (0.5) 2, and a duty of 0.35 had no foot down for 30 percent of the period; at 0.4 m/s with a stance of 0.25 s the foot came down 0.050 m ahead of the hip and left 0.050 m behind; a speed error of 0.2 m/s at a gain of 0.1 added 20 mm | `rc/legged/stance_swing.hpp` |
+| 34-05 the path of a step | a swing of 0.10 m, 0.05 m high in 0.25 s left and landed at 0.000 m/s where a straight up and down path landed at 0.80; peak speed 0.87 m/s and acceleration 19.2 m/s2; the joints needed up to 4.7 rad/s over 0.25 s and 9.4 over 0.125 s, against 8 rad/s a servo gives | `rc/legged/foot_path.hpp` |
+| 34-06 how hot the knees get | the knee gave 4.33 N m standing on four feet and 8.65 in a trot's stance (6.12 rms); the windings settled 14.0 K and 28.1 K above the air (a crouch of 0.20 m: 44.3 K) against a limit of 60 K; a 40 kg robot held crouched reached the limit in 25 s; the knees could trot with 17.5 kg at 0.30 m | `rc/legged/leg_load.hpp` |
+| 34-07 feeling the ground | at 500 Hz with 1 N of noise, thresholds of 8 N on and 4 N off with 3 readings found touchdown in 12 ms and lift-off in 2 ms (after it was commanded) with 12 changes in 6 steps; without the blank after lift-off the spike gave 24, and with one threshold a foot grazing the ground changed state 10 times in 0.4 s against 0 | `rc/legged/foot_contact.hpp` |
+| 34-08 making the zeros true | offsets of 2, minus 3 and 4 degrees were found as 1.95, minus 3.16 and 4.19 from 12 poses with 2 mm of noise; the foot was 14.6 mm from where it was commanded before and 3.4 mm after (the noise in all three axes); poses with a straight leg gave no fit; a thigh 10 mm too long left a residual of 3.6 mm | `rc/legged/leg_calib.hpp` |
+
+**Decisions.**
+
+1. **A new module, `rc::legged`, and a new atlas prefix, `LEG`**, built on the arm's ideas (the two link problem, the Jacobian, virtual work, the heat model of 29-08) and with its own geometry.
+2. **A knee bent backward** (sign minus one) is the convention of every lesson, with one knee sign for the whole robot, and the left and right legs differ only in the side's sign.
+3. **Static torques first**: the load and heat lessons use the weight's share through the Jacobian; impact and acceleration are named as not modelled.
+4. **Contact from the torque**, since most small quadrupeds have no foot sensor: the force estimate of 34-02, with three guards (two thresholds, a run of readings and a blank after lift-off).
+5. **Calibration of the three zeros only**, with the residual as the sign that something else is wrong.
+6. **The run goes on to phases 35 and 36 and stops at the end of 36**; phase 37 (the humanoid) stays paused.
+
+**Mistakes, and what caught them.**
+
+- **The scratchpad was wiped again** when the laptop was shut down and started: the generator scripts and the specs were restored from `/home/nwokolo/robotics-generator-backup` (refreshed after every lesson, which is what made it cheap).
+- **A missing closing brace in a test** (34-01), found by the compiler's first error.
+- **A refusal case that was not one** (34-01): a foot at the hip's height straight below was not nearer the lean axis than the offset; the test now uses a place that is.
+- **Claims that the numbers did not bear out**, six times: in 34-02 the hip's torque is zero when the foot is under the hip (the text said it was not), and the singularity test needed a threshold set for the size of the determinant (a leg a nanometre short of straight was still above 1e-9); in 34-03 the height of a body above level ground is its distance from the plane whatever the tilt (the text first multiplied by the cosines), and a rotation matrix had the sign of its pitch terms wrong in the test; in 34-07 the leg's acceleration spike hid the lift-off when it came during the force's fall, so it was moved to just after, and the grazing foot needed a force around the threshold to flap; and in 34-08 a single bent pose does fix the three offsets, so the unobservable case is the straight leg.
+- **A qualified call to a function in the wrong namespace** (34-06's `::stand_torques`): it compiled in the lesson, where everything is global, and would not have in the graduated header; the standalone headers target is now run after every lesson and its errors read.
+- **A placeholder with a wrong bracket** (`{{o1]}`), which the generator left in the text; found by grep.
