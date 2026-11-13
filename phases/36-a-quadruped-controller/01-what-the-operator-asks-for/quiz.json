@@ -1,0 +1,78 @@
+{
+  "lesson": "36-01-what-the-operator-asks-for",
+  "title": "What the Operator Asks For: A Velocity Command, Clipped to What the Robot Can Do and Eased Toward by a Bounded Acceleration",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is the limit on forward and sideways speed an ellipse?",
+      "options": [
+        "Tradition",
+        "A leg can step further forward than sideways, so the two are limited together",
+        "It looks neat",
+        "It is required"
+      ],
+      "correct": 1,
+      "explanation": "A box would allow a diagonal that is too fast."
+    },
+    {
+      "stage": "check",
+      "question": "A command of 1.0 forward and 0.4 sideways became:",
+      "options": [
+        "1.0 and 0.4",
+        "0.71 and 0.28, the same direction",
+        "0 and 0",
+        "1.0 and 0.4"
+      ],
+      "correct": 1,
+      "explanation": "Scaled onto the ellipse."
+    },
+    {
+      "stage": "check",
+      "question": "A jump to 0.8 m/s took how long?",
+      "options": [
+        "0 s",
+        "0.80 s at 1.0 m/s2",
+        "10 s",
+        "1.60 s"
+      ],
+      "correct": 1,
+      "explanation": "A bounded acceleration."
+    },
+    {
+      "stage": "check",
+      "question": "The legs allowed what top speed?",
+      "options": [
+        "2.0 m/s",
+        "1.60 m/s",
+        "10 m/s",
+        "0.5 m/s only"
+      ],
+      "correct": 1,
+      "explanation": "0.20 m over 0.125 s."
+    },
+    {
+      "stage": "post",
+      "question": "What does a jump in the command do to the legs?",
+      "options": [
+        "Nothing",
+        "Tells the body to be where it is not, and the feet cannot follow",
+        "Helps",
+        "Speeds them"
+      ],
+      "correct": 1,
+      "explanation": "The gaits assume smooth commands."
+    },
+    {
+      "stage": "post",
+      "question": "What sets the top speed limit?",
+      "options": [
+        "A hope",
+        "The longest step over the shortest stance, from the legs",
+        "The stick",
+        "The colour"
+      ],
+      "correct": 1,
+      "explanation": "Not from the stick."
+    }
+  ]
+}
