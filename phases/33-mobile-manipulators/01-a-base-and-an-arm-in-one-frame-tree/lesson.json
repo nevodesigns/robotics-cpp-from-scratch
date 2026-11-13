@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "33-01-a-base-and-an-arm-in-one-frame-tree",
+  "title": "A Base and an Arm in One Frame Tree: World, Base, Mount, Tool, and How an Error in the Base Becomes an Error at the Hand",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "28-02-the-tool-in-three-dimensions",
+    "28-01-frames-and-a-table-for-an-arm",
+    "22-02-frames-for-a-field-robot",
+    "32-06-choosing-the-robot-for-the-job"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::mobile",
+    "header": "rc/mobile/mm_frames.hpp",
+    "note": "the frames of a wheeled base with an arm on it: the base's pose in the world (x, y and heading on flat ground), the arm's mounting on the base (an offset, a height and a turn), the arm's own table and tool; the tool's pose in the world from the base pose and the joint angles; a point in the world put into the arm's own base frame (where the arm has to reach to); and the error at the hand that an error in the base's position or heading makes"
+  },
+  "breaks_first": [
+    "E-MOB-0001",
+    "E-MOB-0002",
+    "E-MOB-0003"
+  ]
+}
