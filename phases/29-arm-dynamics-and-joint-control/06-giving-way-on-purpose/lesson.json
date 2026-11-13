@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "29-06-giving-way-on-purpose",
+  "title": "Giving Way on Purpose: Cartesian Impedance for an Arm That Meets a Surface, Admittance for One That Cannot Be Torque Controlled, and Why Each Likes a Different Surface",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "29-05-using-the-model-to-move",
+    "28-03-how-the-tool-moves-when-the-joints-do",
+    "14-07-the-delay-in-the-loop"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/compliance.hpp",
+    "note": "making an arm behave as a spring and damper at its tool: Cartesian impedance (the joint torques that give the tool a wrench of stiffness times the pose error plus damping times the velocity error, through the transpose of the Jacobian, with the torque of gravity added), a surface that pushes back like a stiff spring with some damping, a run that presses the tool towards a point below the surface and reports the peak and settled force, and admittance (a virtual mass, damper and spring that turn the measured force into a displacement of the commanded position) for a tool that is position controlled, with a delay in the force and the inner loop's own lag"
+  },
+  "breaks_first": [
+    "E-ARM-0043",
+    "E-ARM-0044",
+    "E-ARM-0045"
+  ],
+  "timeout": 240
+}

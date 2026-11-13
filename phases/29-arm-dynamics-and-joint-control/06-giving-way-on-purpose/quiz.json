@@ -1,0 +1,78 @@
+{
+  "lesson": "29-06-giving-way-on-purpose",
+  "title": "Giving Way on Purpose: Cartesian Impedance for an Arm That Meets a Surface, Admittance for One That Cannot Be Torque Controlled, and Why Each Likes a Different Surface",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does Cartesian impedance make the tool?",
+      "options": [
+        "A rigid rod",
+        "A spring and damper about the target, in the task's own space",
+        "A motor",
+        "A filter"
+      ],
+      "correct": 1,
+      "explanation": "Stiffness times error, minus damping times velocity."
+    },
+    {
+      "stage": "check",
+      "question": "With the target 2 cm below the surface, the settled force with stiffnesses 200, 500 and 1000 N/m was:",
+      "options": [
+        "4.02, 9.75, 19.00 N: the stiffness times 2 cm",
+        "The same for all",
+        "Zero",
+        "2 N"
+      ],
+      "correct": 0,
+      "explanation": "The stiffness is the force you will press with."
+    },
+    {
+      "stage": "check",
+      "question": "Peak force on coming down on the surface, stiff against soft:",
+      "options": [
+        "27.6 N and 68.6 N",
+        "68.6 N and 27.6 N",
+        "The same",
+        "0 N"
+      ],
+      "correct": 1,
+      "explanation": "A stiff arm is a stiff impact."
+    },
+    {
+      "stage": "check",
+      "question": "On the stiff surface the admittance with a damper of 100 N s/m was steady (1) or not (0)?",
+      "options": [
+        "0",
+        "1",
+        "Only on a soft one",
+        "Always"
+      ],
+      "correct": 0,
+      "explanation": "With 1500 it was 1."
+    },
+    {
+      "stage": "post",
+      "question": "Why is admittance trouble on a stiff surface?",
+      "options": [
+        "It is not",
+        "The delay and the inner loop's lag are inside the loop, and a stiff surface turns a millimetre into a big force",
+        "Gravity",
+        "Gears"
+      ],
+      "correct": 1,
+      "explanation": "The damper must be about stiffness over bandwidth."
+    },
+    {
+      "stage": "post",
+      "question": "Which is the arm that is torque controlled suited to?",
+      "options": [
+        "Admittance",
+        "Impedance, which is stable on stiff surfaces",
+        "Neither",
+        "Both equally"
+      ],
+      "correct": 1,
+      "explanation": "Force out, not position out."
+    }
+  ]
+}
