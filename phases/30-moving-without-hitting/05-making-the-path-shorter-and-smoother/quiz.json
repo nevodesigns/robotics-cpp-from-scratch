@@ -1,0 +1,78 @@
+{
+  "lesson": "30-05-making-the-path-shorter-and-smoother",
+  "title": "Making the Path Shorter and Smoother: Shortcuts Between Random Points, Corners Cut Where There Is Room, and the Clearance Both Quietly Spend",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is a shortcut?",
+      "options": [
+        "A faster robot",
+        "Replacing the part of a path between two random points by the straight edge, if it is free",
+        "A smaller scene",
+        "A smaller arm"
+      ],
+      "correct": 1,
+      "explanation": "Skip the detour."
+    },
+    {
+      "stage": "check",
+      "question": "The path was how many times the straight line before and after shortcutting?",
+      "options": [
+        "1.85 then 4.83",
+        "4.83 then 1.85",
+        "The same",
+        "1 and 1"
+      ],
+      "correct": 1,
+      "explanation": "Free and bad, then free and better."
+    },
+    {
+      "stage": "check",
+      "question": "The sharpest turn went from 2.25 rad to:",
+      "options": [
+        "2.25 rad",
+        "0.60 rad after cutting the corners twice",
+        "0",
+        "3 rad"
+      ],
+      "correct": 1,
+      "explanation": "A corner is a place the arm must stop and turn."
+    },
+    {
+      "stage": "check",
+      "question": "The clearance along the path after shortcutting with no margin and with the margin kept was:",
+      "options": [
+        "0.0202 and 0.0001 m",
+        "0.0001 and 0.0202 m",
+        "The same",
+        "Negative both"
+      ],
+      "correct": 1,
+      "explanation": "The margin must go through every pass."
+    },
+    {
+      "stage": "post",
+      "question": "Why must a corner cut be checked only for the middle edge?",
+      "options": [
+        "The others are short",
+        "The two outer pieces lie on the old segments, which were free",
+        "Corners are free",
+        "It is cheaper only"
+      ],
+      "correct": 1,
+      "explanation": "They are parts of what was checked."
+    },
+    {
+      "stage": "post",
+      "question": "Why are random shortcuts a good first pass?",
+      "options": [
+        "They are exact",
+        "A random path is full of detours that a straight edge skips, and a hundred tries find most",
+        "They are slow",
+        "They avoid the margin"
+      ],
+      "correct": 1,
+      "explanation": "Cheap and effective."
+    }
+  ]
+}

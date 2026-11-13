@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "30-05-making-the-path-shorter-and-smoother",
+  "title": "Making the Path Shorter and Smoother: Shortcuts Between Random Points, Corners Cut Where There Is Room, and the Clearance Both Quietly Spend",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "30-03-growing-a-tree-through-the-clutter",
+    "30-02-how-far-it-is-safe-to-step"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/shortcut.hpp",
+    "note": "improving a path in joint space after it has been found: the length of a path, the point at a given distance along it, shortcutting (choose two random points of the path, replace what lies between them by the straight edge if that edge is free), cutting the corners of the vertices (replace a vertex by two points a fraction of the way along its two segments if the edge between them is free), the largest turn between neighbouring segments, and the smallest clearance of the arm along the path"
+  },
+  "breaks_first": [
+    "E-ARM-0064",
+    "E-ARM-0065",
+    "E-ARM-0066"
+  ]
+}
