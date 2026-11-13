@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "34-04-down-and-up",
+  "title": "Down and Up: The Phase of a Leg, How Long It Stands and Swings, and Where the Foot Should Come Down",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "34-03-the-body-from-the-feet",
+    "34-02-what-the-foot-can-push-with",
+    "26-07-how-fast-the-path-can-be-driven"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/stance_swing.hpp",
+    "note": "the timing of a gait for four legs: a period, a duty factor (the fraction of the period each foot is on the ground) and a phase offset for each leg; the phase of a leg at a time, whether it is in stance or swing and how far through that part it is; how many feet are on the ground, for a walk (duty three quarters) and a trot (a half) and what a duty under a half does; the velocity of a stance foot in the body's frame (minus the body's velocity and its turn); and where to put the foot down (the foot's default place under the hip, moved ahead by half the distance the body travels in the stance, and by a correction that pushes against a speed that is too high)"
+  },
+  "breaks_first": [
+    "E-LEG-0009",
+    "E-LEG-0010",
+    "E-LEG-0011"
+  ]
+}

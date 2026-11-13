@@ -1,0 +1,78 @@
+{
+  "lesson": "34-04-down-and-up",
+  "title": "Down and Up: The Phase of a Leg, How Long It Stands and Swings, and Where the Foot Should Come Down",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the duty factor?",
+      "options": [
+        "The speed",
+        "The fraction of the period a foot is on the ground",
+        "The step length",
+        "The weight"
+      ],
+      "correct": 1,
+      "explanation": "Stance is the duty, swing the rest."
+    },
+    {
+      "stage": "check",
+      "question": "A walk with a duty of 0.75 always had at least how many feet down?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "It can stand still."
+    },
+    {
+      "stage": "check",
+      "question": "A duty of 0.35 gave a flight phase of:",
+      "options": [
+        "0 percent",
+        "30 percent",
+        "100 percent",
+        "50 percent"
+      ],
+      "correct": 1,
+      "explanation": "No foot on the ground."
+    },
+    {
+      "stage": "check",
+      "question": "Raibert's rule puts the foot ahead of the hip by:",
+      "options": [
+        "Nothing",
+        "Half the distance the body goes in the stance, 0.050 m here",
+        "The step length",
+        "A metre"
+      ],
+      "correct": 1,
+      "explanation": "It leaves -0.050 m behind."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the speed term push the foot forward when the body is too fast?",
+      "options": [
+        "For luck",
+        "A foot further ahead slows the body",
+        "It speeds the body",
+        "It does not"
+      ],
+      "correct": 1,
+      "explanation": "A small speed controller."
+    },
+    {
+      "stage": "post",
+      "question": "Why can a trot not stand still?",
+      "options": [
+        "It can",
+        "Two feet cannot hold a body still, so it balances while moving",
+        "It is slow",
+        "Legs"
+      ],
+      "correct": 1,
+      "explanation": "35-02."
+    }
+  ]
+}
