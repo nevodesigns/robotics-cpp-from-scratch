@@ -1,0 +1,78 @@
+{
+  "lesson": "29-08-how-much-the-motors-can-give",
+  "title": "How Much the Motors Can Give: Torque Limits and Heat in an Arm, the Payload That Fits at a Pose, and the Fastest a Move Can Be Made and Repeated",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What are the two torque limits of a motor?",
+      "options": [
+        "Static and dynamic",
+        "The peak, for an instant, and the continuous, for ever without overheating",
+        "Input and output",
+        "Cold and hot"
+      ],
+      "correct": 1,
+      "explanation": "And between them is a question of time."
+    },
+    {
+      "stage": "check",
+      "question": "A joint holding the arm stretched out reached its limit in:",
+      "options": [
+        "293 s",
+        "293 s, and folded it never did",
+        "Never in either",
+        "1 s"
+      ],
+      "correct": 1,
+      "explanation": "Holding a pose is a current."
+    },
+    {
+      "stage": "check",
+      "question": "The payload at the tool with the arm out and folded was:",
+      "options": [
+        "10.00 kg and 2.50 kg",
+        "2.50 kg and 10.00 kg",
+        "The same",
+        "0 and 0"
+      ],
+      "correct": 1,
+      "explanation": "The rated payload is for the best pose."
+    },
+    {
+      "stage": "check",
+      "question": "A move of 0.7 rad by the peak limits and by the continuous limits took:",
+      "options": [
+        "0.39 s and 0.29 s",
+        "0.29 s and 0.39 s",
+        "The same",
+        "0 s each"
+      ],
+      "correct": 1,
+      "explanation": "The rms heats."
+    },
+    {
+      "stage": "post",
+      "question": "Why can a move be fine once and not all day?",
+      "options": [
+        "It cannot",
+        "The rms heat accumulates: 118 K steady with no wait against 27 K with a wait of 4 s",
+        "Gears wear",
+        "Noise"
+      ],
+      "correct": 1,
+      "explanation": "The limit is 75 K."
+    },
+    {
+      "stage": "post",
+      "question": "How does the inertia part of the torque change as a move is made faster?",
+      "options": [
+        "Not at all",
+        "As the inverse square of the duration: halving it asked 4.0 times",
+        "Linearly",
+        "It falls"
+      ],
+      "correct": 1,
+      "explanation": "The weight does not change."
+    }
+  ]
+}

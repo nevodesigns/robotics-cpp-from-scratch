@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "29-08-how-much-the-motors-can-give",
+  "title": "How Much the Motors Can Give: Torque Limits and Heat in an Arm, the Payload That Fits at a Pose, and the Fastest a Move Can Be Made and Repeated",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "29-05-using-the-model-to-move",
+    "29-02-holding-the-arm-up",
+    "27-04-how-far-it-can-go-and-how-hot"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/limits_heat.hpp",
+    "note": "what the motors of an arm can give: a motor at each joint with a torque constant at the output, a resistance, a thermal resistance and capacity, a peak and a continuous torque; the current and the heat of a torque and the time to the temperature limit in closed form; the largest payload at a pose that every joint can hold (a linear problem in the one mass, with an interval for each joint); the torques of a quintic move and their largest and root mean square values; the shortest duration of the move that keeps the largest torque within the peak and the root mean square torque within the continuous limit; and the temperature a move repeated with a wait reaches"
+  },
+  "breaks_first": [
+    "E-ARM-0049",
+    "E-ARM-0050",
+    "E-ARM-0051"
+  ]
+}
