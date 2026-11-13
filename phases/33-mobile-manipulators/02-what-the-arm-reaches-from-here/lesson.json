@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "33-02-what-the-arm-reaches-from-here",
+  "title": "What the Arm Reaches From Here: The Ring Around the Arm, Where the Base May Stop, and How Much Room It Leaves",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "33-01-a-base-and-an-arm-in-one-frame-tree",
+    "28-08-where-the-arm-can-work",
+    "28-04-eight-ways-to-reach-a-pose"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::mobile",
+    "header": "rc/mobile/base_reach.hpp",
+    "note": "what an arm on a base can reach from where the base is: the target in the world put into the arm's frame and asked of the arm's inverse kinematics (tool pointing down); the ring the arm reaches at a height, as an inner and an outer radius from its own axis, found by stepping outward along a line; a quick test of a base pose against that ring; and the width of the ring, which is how far from the ideal place the base may stop and still reach"
+  },
+  "breaks_first": [
+    "E-MOB-0004",
+    "E-MOB-0005",
+    "E-MOB-0006"
+  ]
+}

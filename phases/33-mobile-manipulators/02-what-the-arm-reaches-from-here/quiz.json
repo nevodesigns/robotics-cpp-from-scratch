@@ -1,0 +1,78 @@
+{
+  "lesson": "33-02-what-the-arm-reaches-from-here",
+  "title": "What the Arm Reaches From Here: The Ring Around the Arm, Where the Base May Stop, and How Much Room It Leaves",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does an arm reach, tool down, at one height?",
+      "options": [
+        "A disc",
+        "A ring between an inner and an outer radius from its axis",
+        "A line",
+        "A point"
+      ],
+      "correct": 1,
+      "explanation": "There is a hole in the middle."
+    },
+    {
+      "stage": "check",
+      "question": "At -0.10 m below the mount the ring ran from:",
+      "options": [
+        "0 to 0.72 m",
+        "0.00 to 0.72 m",
+        "1 to 2 m",
+        "36.0 to 1 m"
+      ],
+      "correct": 1,
+      "explanation": "An inner and an outer radius."
+    },
+    {
+      "stage": "check",
+      "question": "The quick test agreed with the full inverse kinematics on:",
+      "options": [
+        "100 percent of places",
+        "10 percent",
+        "Nothing",
+        "Only one"
+      ],
+      "correct": 0,
+      "explanation": "576 places, varied in heading too."
+    },
+    {
+      "stage": "check",
+      "question": "The tolerance for the base's stopping place was:",
+      "options": [
+        "36.0 cm",
+        "0 cm",
+        "10 m",
+        "1 mm"
+      ],
+      "correct": 0,
+      "explanation": "Half the width of the ring."
+    },
+    {
+      "stage": "post",
+      "question": "Why can the ring be found along one line?",
+      "options": [
+        "It cannot",
+        "The shoulder turns all the way round, so the reach is the same in every direction",
+        "Luck",
+        "The mount"
+      ],
+      "correct": 1,
+      "explanation": "Symmetry about the vertical axis."
+    },
+    {
+      "stage": "post",
+      "question": "What is not checked by the ring?",
+      "options": [
+        "The end pose",
+        "The whole path to it, and targets that need the tool horizontal",
+        "The radius",
+        "The mount"
+      ],
+      "correct": 1,
+      "explanation": "Those are other questions."
+    }
+  ]
+}
