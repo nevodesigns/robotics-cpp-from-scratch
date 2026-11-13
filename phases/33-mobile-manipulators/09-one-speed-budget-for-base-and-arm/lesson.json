@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "33-09-one-speed-budget-for-base-and-arm",
+  "title": "One Speed Budget for Base and Arm: What a Person's Nearness Allows, What the Load Allows, and a Supervisor That Shares the Smaller Between Them",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "33-08-fetch-and-carry",
+    "33-06-how-much-it-can-carry",
+    "31-06-staying-far-enough-from-a-person",
+    "27-03-a-field-that-moves-with-the-vehicle"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::mobile",
+    "header": "rc/mobile/mm_supervisor.hpp",
+    "note": "a supervisor for the speeds of a base with an arm: the fastest the base may go so that it can stop in a given distance by braking at a fraction of the deceleration at which it would tip (33-05); the speed that a person's nearness allows for the whole robot (31-06), which is the sum of the base's speed toward them and the hand's; a sharing of that budget between base and hand when both are asked for more than it (both scaled by the same factor); and a supervisor step that gives the limited speeds, a status (free, scaled, stopped) and which limit was binding, tested against a person walking at the robot"
+  },
+  "breaks_first": [
+    "E-MOB-0025",
+    "E-MOB-0026",
+    "E-MOB-0027"
+  ]
+}

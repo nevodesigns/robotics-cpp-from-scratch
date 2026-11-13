@@ -1,0 +1,78 @@
+{
+  "lesson": "33-09-one-speed-budget-for-base-and-arm",
+  "title": "One Speed Budget for Base and Arm: What a Person's Nearness Allows, What the Load Allows, and a Supervisor That Shares the Smaller Between Them",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does the person's budget count the base and the hand together?",
+      "options": [
+        "It does not",
+        "A person near the robot cares about the speed of whatever is coming at them",
+        "The hand is slow",
+        "It is simpler"
+      ],
+      "correct": 1,
+      "explanation": "The speeds add."
+    },
+    {
+      "stage": "check",
+      "question": "With the load the base was held to:",
+      "options": [
+        "2.04 m/s to stop in 0.5 m",
+        "10 m/s",
+        "0 m/s",
+        "1.23 m/s"
+      ],
+      "correct": 0,
+      "explanation": "A margin of 0.8 on the tipping deceleration."
+    },
+    {
+      "stage": "check",
+      "question": "A person 1.0 m away allowed what in all?",
+      "options": [
+        "1.23 m/s",
+        "Nothing",
+        "Any speed",
+        "2.04 m/s"
+      ],
+      "correct": 0,
+      "explanation": "Base and hand were scaled by one factor."
+    },
+    {
+      "stage": "check",
+      "question": "A person at 0.2 m (inside the distance for standing still):",
+      "options": [
+        "Left the speeds",
+        "Stopped both",
+        "Halved them",
+        "Doubled them"
+      ],
+      "correct": 1,
+      "explanation": "Status 2."
+    },
+    {
+      "stage": "post",
+      "question": "Why scale base and hand by the same factor?",
+      "options": [
+        "It is easy",
+        "Neither is starved and the motion keeps its shape",
+        "It is required",
+        "Chance"
+      ],
+      "correct": 1,
+      "explanation": "The ratio is kept."
+    },
+    {
+      "stage": "post",
+      "question": "What did the unsupervised robot do against the person walking at it?",
+      "options": [
+        "Stopped",
+        "Met them, closing at 3.1 m/s",
+        "Went round",
+        "Slowed"
+      ],
+      "correct": 1,
+      "explanation": "The supervised one stopped 0.14 m away."
+    }
+  ]
+}
