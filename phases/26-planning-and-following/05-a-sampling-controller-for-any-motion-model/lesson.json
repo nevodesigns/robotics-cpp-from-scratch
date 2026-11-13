@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "26-05-a-sampling-controller-for-any-motion-model",
+  "title": "A Sampling Controller for Any Motion Model: Many Random Futures, Weighted by How Good They Are, and Why the Model Has to Be the Vehicle's",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "26-04-following-a-path-pure-pursuit-and-stanley",
+    "24-04-costmap-layers"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/sampling.hpp",
+    "note": "a sampling controller (model predictive path integral): roll out many noisy control sequences with a motion model, score each by distance from the path, closeness to the path's next stretch, and the cost grid, weight them by exp(-cost/lambda), and move the nominal sequence by the weighted noise; the motion model is a plug-in (a unicycle for a differential drive, a bicycle with a curvature limit for a car)"
+  },
+  "breaks_first": [
+    "E-VEH-0094",
+    "E-VEH-0095",
+    "E-VEH-0096"
+  ],
+  "timeout": 180
+}
