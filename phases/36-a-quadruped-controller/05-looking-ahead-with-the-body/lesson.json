@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "36-05-looking-ahead-with-the-body",
+  "title": "Looking Ahead With the Body: A Short Horizon Controller for the Body's Sideways Balance, With the Foot's Limit Built Into the Problem",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "36-04-feet-that-find-the-ground",
+    "35-07-taking-a-step-when-pushed",
+    "35-02-falling-and-catching-in-a-trot",
+    "35-06-where-the-weight-presses"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/body_mpc.hpp",
+    "note": "a model predictive controller in its short form for the body's balance in one direction: the body as the inverted pendulum of 35-02 (position and velocity relative to the middle of the support, with x'' = (g/h) (x - p) for a ZMP at p), the ZMP bounded by the feet's extent, the exact discrete model over a time step, the predictions over a horizon written as matrices in the sequence of ZMP commands, the quadratic cost of the position and velocity along it and of the commands, and the constrained minimum found by a projected gradient method (a step down the gradient, then the bounds); only the first command is used and the problem is solved again at the next step; compared with a fixed gain law that is clipped at the bound, by the largest push each can recover from"
+  },
+  "breaks_first": [
+    "E-LEG-0063",
+    "E-LEG-0064",
+    "E-LEG-0065"
+  ]
+}

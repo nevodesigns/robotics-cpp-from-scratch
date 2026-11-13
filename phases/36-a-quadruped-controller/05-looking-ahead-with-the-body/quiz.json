@@ -1,0 +1,78 @@
+{
+  "lesson": "36-05-looking-ahead-with-the-body",
+  "title": "Looking Ahead With the Body: A Short Horizon Controller for the Body's Sideways Balance, With the Foot's Limit Built Into the Problem",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does a predictive controller know that a fixed gain law does not?",
+      "options": [
+        "More physics",
+        "What it will be able to do later (here, the bound on the ZMP), and that what it does now decides that",
+        "How to walk",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "It looks ahead."
+    },
+    {
+      "stage": "check",
+      "question": "The largest push recovered:",
+      "options": [
+        "0.70 m/s by the fixed law and 0.71 m/s by the predictive controller: about the same",
+        "Twice as much",
+        "0",
+        "10 m/s"
+      ],
+      "correct": 0,
+      "explanation": "A saturating law with high gain already uses all the push."
+    },
+    {
+      "stage": "check",
+      "question": "For a push of 0.6 m/s the body was back at the middle:",
+      "options": [
+        "Never",
+        "After 1.00 s (fixed law) and 0.60 s (predictive)",
+        "At once",
+        "After a minute"
+      ],
+      "correct": 1,
+      "explanation": "Speed is where it wins."
+    },
+    {
+      "stage": "check",
+      "question": "For a small push the quieter controller was:",
+      "options": [
+        "The predictive one",
+        "The fixed gain law: 0.00 s against 0.35 s",
+        "Neither",
+        "Both the same"
+      ],
+      "correct": 1,
+      "explanation": "A plan has a cost."
+    },
+    {
+      "stage": "post",
+      "question": "Why is only the first command used?",
+      "options": [
+        "It is cheaper",
+        "The state changes and the problem is solved again at the next step: a receding horizon",
+        "The others are wrong",
+        "It is required"
+      ],
+      "correct": 1,
+      "explanation": "Every step has new information."
+    },
+    {
+      "stage": "post",
+      "question": "What is a real controller's solver, unlike this one?",
+      "options": [
+        "The same",
+        "A proper QP solver with a warm start and a check that it converged",
+        "A table",
+        "A lookup"
+      ],
+      "correct": 1,
+      "explanation": "This one is a plain projected gradient with fixed iterations."
+    }
+  ]
+}
