@@ -1,0 +1,78 @@
+{
+  "lesson": "36-02-sit-stand-walk-fall",
+  "title": "Sit, Stand, Walk, Fall: A State Machine That Moves Between Them Only When It Is Safe, and Refuses When It Is Not",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is most of the controller's work deciding what it may do next?",
+      "options": [
+        "It is lazy",
+        "Each mode has things it may and must not do, and the robot damages itself otherwise",
+        "It is simple",
+        "It is slow"
+      ],
+      "correct": 1,
+      "explanation": "A state machine with a check at every step."
+    },
+    {
+      "stage": "check",
+      "question": "With knees at 0.85 of their limit the robot:",
+      "options": [
+        "Rose",
+        "Refused to rise (1)",
+        "Walked",
+        "Fell"
+      ],
+      "correct": 1,
+      "explanation": "Under 0.8 is needed."
+    },
+    {
+      "stage": "check",
+      "question": "Told to sit while walking at 0.6 m/s it:",
+      "options": [
+        "Lowered at once",
+        "Slowed to a stop first and then lowered",
+        "Fell",
+        "Ignored it"
+      ],
+      "correct": 1,
+      "explanation": "A robot that lowers at speed falls."
+    },
+    {
+      "stage": "check",
+      "question": "A robot that fell 3 times and still tried ended in fault:",
+      "options": [
+        "1",
+        "5, out of tries",
+        "2",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "A limited number of tries."
+    },
+    {
+      "stage": "post",
+      "question": "Why does a fault go to sit and not to the old state?",
+      "options": [
+        "No reason",
+        "So the operator sees the reset",
+        "It is easier",
+        "It is required"
+      ],
+      "correct": 1,
+      "explanation": "A fault stays until it is reset."
+    },
+    {
+      "stage": "post",
+      "question": "What is not in this lesson?",
+      "options": [
+        "The states",
+        "The motion of the legs between them",
+        "The checks",
+        "The faults"
+      ],
+      "correct": 1,
+      "explanation": "The machine is told when they finish."
+    }
+  ]
+}
