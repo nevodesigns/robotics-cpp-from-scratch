@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "34-08-making-the-zeros-true",
+  "title": "Making the Zeros True: Fitting the Joint Offsets of a Leg From Where the Foot Was Measured, and What It Cannot Fix",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "34-07-feeling-the-ground",
+    "34-02-what-the-foot-can-push-with",
+    "28-09-the-arm-it-really-is"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/leg_calib.hpp",
+    "note": "calibrating a leg: the three joint angles are read from servos whose zero was set when the horn was pressed on, so each has an unknown offset; given the angles commanded at a number of poses and the places where the foot was then measured (on a jig or a ruled board), the offsets are found by Gauss-Newton on the difference between the foot's measured and predicted places, with the Jacobian of 34-02 (the normal equations of three unknowns, solved with a relative test for singularity), and the residual that remains is the part that offsets cannot explain (a link length that is wrong)"
+  },
+  "breaks_first": [
+    "E-LEG-0021",
+    "E-LEG-0022",
+    "E-LEG-0023"
+  ]
+}
