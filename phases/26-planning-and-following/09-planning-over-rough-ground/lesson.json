@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "26-09-planning-over-rough-ground",
+  "title": "Planning Over Rough Ground: Paying for Sand and Slope in Energy, Paying for Risk, and When the Shortest Way Is Not the Cheapest",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "26-01-a-path-a-car-can-drive",
+    "24-05-can-it-drive-there",
+    "23-05-the-traction-circle"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/offroad.hpp",
+    "note": "planning over rough ground: a terrain grid of surface and slope per cell, the energy of a metre from rolling resistance and the slope along the heading, a step cost that adds weighted energy and weighted risk (from a cost layer) to the distance, blocked cells never crossed, and an A* search over eight neighbours that finds the cheapest path, not the shortest"
+  },
+  "breaks_first": [
+    "E-VEH-0106",
+    "E-VEH-0107",
+    "E-VEH-0108"
+  ]
+}

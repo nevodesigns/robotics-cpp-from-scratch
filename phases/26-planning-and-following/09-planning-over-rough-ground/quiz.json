@@ -1,0 +1,78 @@
+{
+  "lesson": "26-09-planning-over-rough-ground",
+  "title": "Planning Over Rough Ground: Paying for Sand and Slope in Energy, Paying for Risk, and When the Shortest Way Is Not the Cheapest",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does the work per metre over a cell depend on, besides the surface?",
+      "options": [
+        "The colour",
+        "The slope along the heading the vehicle takes",
+        "The time of day",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "Up costs more than across."
+    },
+    {
+      "stage": "check",
+      "question": "A metre up a slope of 14 degrees cost, against across it:",
+      "options": [
+        "1.47 J against 25.2 J",
+        "25.2 J against 1.47 J",
+        "The same",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "m g sin(a) is added."
+    },
+    {
+      "stage": "check",
+      "question": "The shortest path across the sand band cost, and the cheapest:",
+      "options": [
+        "66 J and 90 J",
+        "90 J and 66 J, at 16.0 m and 31.2 m",
+        "The same",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "Longer, and cheaper."
+    },
+    {
+      "stage": "check",
+      "question": "Crossing the patch of risk, the worst cell cost was:",
+      "options": [
+        "0 with no weight",
+        "200 with no weight and 0 with one",
+        "255 both",
+        "0 both"
+      ],
+      "correct": 1,
+      "explanation": "The weight sent it round."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the planner price a step and not a cell?",
+      "options": [
+        "For speed",
+        "The cost depends on the heading, on a slope",
+        "Memory",
+        "The grid is square"
+      ],
+      "correct": 1,
+      "explanation": "A cell has no heading."
+    },
+    {
+      "stage": "post",
+      "question": "What does a goal in a ring of blocked cells give?",
+      "options": [
+        "The nearest cell",
+        "found = false and an empty path, after 6476 expansions",
+        "A crash",
+        "A path through the ring"
+      ],
+      "correct": 1,
+      "explanation": "Say so."
+    }
+  ]
+}
