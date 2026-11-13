@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "27-04-how-far-it-can-go-and-how-hot",
+  "title": "How Far It Can Go and How Hot It Gets: The Energy of the Way Home, the Computer That Never Sleeps, and a Slope That Is Fine for a Minute",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "27-01-a-list-of-places-to-go",
+    "26-09-planning-over-rough-ground",
+    "19-08-the-battery-and-the-heat"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/range.hpp",
+    "note": "the energy and the heat of a ground vehicle on a route: the energy of a route over terrain from the work against rolling resistance and slope, the drive efficiency and the constant power of the computer and sensors over the time taken, the decision to turn back when the charge left is below the energy of the way home over that ground plus a reserve, and a lumped thermal model of a motor on a slope with the time to its limit in closed form"
+  },
+  "breaks_first": [
+    "E-VEH-0121",
+    "E-VEH-0122",
+    "E-VEH-0123"
+  ]
+}

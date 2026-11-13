@@ -1,0 +1,78 @@
+{
+  "lesson": "27-04-how-far-it-can-go-and-how-hot",
+  "title": "How Far It Can Go and How Hot It Gets: The Energy of the Way Home, the Computer That Never Sleeps, and a Slope That Is Fine for a Minute",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is the computer part of the energy of a route?",
+      "options": [
+        "It is not",
+        "It draws power all the time, for as long as the route takes",
+        "It is heavy",
+        "It heats the motors"
+      ],
+      "correct": 1,
+      "explanation": "79 percent of a metre of tarmac."
+    },
+    {
+      "stage": "check",
+      "question": "A metre of sand cost, against a metre of tarmac:",
+      "options": [
+        "10.1 J against 22.0 J",
+        "22.0 J against 10.1 J",
+        "The same",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "Work, over the efficiency, plus the computer."
+    },
+    {
+      "stage": "check",
+      "question": "The vehicle that took the way home as flat turned back at 16.8 m and was:",
+      "options": [
+        "Home with 71 J spare",
+        "25 J short of getting home",
+        "Exactly home",
+        "Stuck at the start"
+      ],
+      "correct": 1,
+      "explanation": "The sand band was not in the estimate."
+    },
+    {
+      "stage": "check",
+      "question": "A slope of 20 degrees reached the motor's limit in:",
+      "options": [
+        "Never",
+        "62 s",
+        "1 s",
+        "1 hour"
+      ],
+      "correct": 1,
+      "explanation": "A slope of 14 degrees could be held for ever."
+    },
+    {
+      "stage": "post",
+      "question": "What does the closed form of the time to the limit say when the steady rise is under the limit?",
+      "options": [
+        "Zero",
+        "Never: it settles below the limit",
+        "Infinity of heat",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "-Rth Cth ln(1 - limit/steady) has no answer."
+    },
+    {
+      "stage": "post",
+      "question": "Why does speed matter twice for the energy of a route?",
+      "options": [
+        "It does not",
+        "The work is the same and the computer runs for longer at a lower speed",
+        "Drag",
+        "Weight"
+      ],
+      "correct": 1,
+      "explanation": "Idle power times time."
+    }
+  ]
+}
