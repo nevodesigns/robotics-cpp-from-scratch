@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "27-09-a-ground-vehicle-for-a-day",
+  "title": "A Ground Vehicle for a Day: The Checklist, the Mission, the Field, the Modes, the Unsticking and the Log Reader, on One Scripted Day, With and Without Them",
+  "type": "build",
+  "minutes": 120,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "27-01-a-list-of-places-to-go",
+    "27-02-a-person-at-the-controls",
+    "27-03-a-field-that-moves-with-the-vehicle",
+    "27-04-how-far-it-can-go-and-how-hot",
+    "27-05-a-log-that-tells-you-what-went-wrong",
+    "27-06-the-checklist-before-the-run",
+    "27-07-when-something-stops-working",
+    "27-08-a-release-for-this-vehicle",
+    "26-08-when-the-vehicle-is-stuck"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/ugv_day.hpp",
+    "note": "a scripted day of a ground vehicle on one road: the checklist before leaving, a mission of three sites and home, a person who steps in front of it (the protective field), a snag (the unsticking ladder), a loss of GNSS and a short loss of the scanner (the modes), sand on the way (the energy), a release offered in the middle of a job and again at the dock (the vehicle's release check), and a log read at the end by the log doctor; run once with all of these layers and once without, and the day written up"
+  },
+  "breaks_first": [
+    "E-VEH-0136",
+    "E-VEH-0137",
+    "E-VEH-0138"
+  ]
+}

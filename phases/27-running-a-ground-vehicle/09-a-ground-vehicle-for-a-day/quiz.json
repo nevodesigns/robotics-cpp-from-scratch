@@ -1,0 +1,78 @@
+{
+  "lesson": "27-09-a-ground-vehicle-for-a-day",
+  "title": "A Ground Vehicle for a Day: The Checklist, the Mission, the Field, the Modes, the Unsticking and the Log Reader, on One Scripted Day, With and Without Them",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "How are the limits on the speed joined?",
+      "options": [
+        "Added",
+        "The least of them, with the field having the last word",
+        "The first one wins",
+        "Averaged"
+      ],
+      "correct": 1,
+      "explanation": "combine_speed."
+    },
+    {
+      "stage": "check",
+      "question": "With the layers the vehicle completed how many of the 4 legs, and touched how many people?",
+      "options": [
+        "2 and 1",
+        "4 and 0",
+        "2 and 5",
+        "4 and 1"
+      ],
+      "correct": 1,
+      "explanation": "The whole day, and no one."
+    },
+    {
+      "stage": "check",
+      "question": "Without the layers the vehicle:",
+      "options": [
+        "Did the whole day",
+        "Drove into the person, skipped two legs and ran out of charge 150 m from the dock",
+        "Never left the dock",
+        "Went home early"
+      ],
+      "correct": 1,
+      "explanation": "It did what it was told."
+    },
+    {
+      "stage": "check",
+      "question": "The release offered in the middle of a job was:",
+      "options": [
+        "Taken",
+        "Refused, and taken at the dock",
+        "Lost",
+        "Refused at the dock too"
+      ],
+      "correct": 1,
+      "explanation": "The vehicle was not parked."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the field applied before the unsticking ladder?",
+      "options": [
+        "It is faster",
+        "A vehicle backing up must not back into the person who made it stop",
+        "Habit",
+        "No reason"
+      ],
+      "correct": 1,
+      "explanation": "The order is the decision."
+    },
+    {
+      "stage": "post",
+      "question": "What is the main thing this simulation does not tell you?",
+      "options": [
+        "Nothing",
+        "What a real day on a real vehicle is like: it is one dimension, a point, scripted",
+        "How fast it is",
+        "The battery"
+      ],
+      "correct": 1,
+      "explanation": "Everything here ran against fakes."
+    }
+  ]
+}
