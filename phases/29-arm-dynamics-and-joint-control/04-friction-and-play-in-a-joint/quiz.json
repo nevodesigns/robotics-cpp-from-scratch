@@ -1,0 +1,78 @@
+{
+  "lesson": "29-04-friction-and-play-in-a-joint",
+  "title": "Friction and Play in a Joint: Stick and Slip, a Gear With a Gap in It, and Which Encoder the Loop Should Watch",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does a joint stick and then slip at low speed?",
+      "options": [
+        "Gravity",
+        "Friction is higher at rest than when sliding (the Stribeck part), so it has to break free",
+        "The motor is weak",
+        "Noise"
+      ],
+      "correct": 1,
+      "explanation": "More to start than to keep going."
+    },
+    {
+      "stage": "check",
+      "question": "The friction torque peaked at 0.017 rad/s at 0.0559 N m, and then:",
+      "options": [
+        "Rose for ever",
+        "Fell to 0.0503 N m at 0.05 rad/s, and grew again with the speed",
+        "Stayed",
+        "Vanished"
+      ],
+      "correct": 1,
+      "explanation": "A Stribeck dip."
+    },
+    {
+      "stage": "check",
+      "question": "Following a slow ramp, the error without and with the friction fed forward was:",
+      "options": [
+        "0.00000 and 0.00000 rad",
+        "0.00000 and 0.00000 rad",
+        "The same",
+        "0 and 0"
+      ],
+      "correct": 1,
+      "explanation": "The feedforward does the work the integral did late."
+    },
+    {
+      "stage": "check",
+      "question": "The play of 0.0100 rad was measured as:",
+      "options": [
+        "0",
+        "0.0102 rad",
+        "1 rad",
+        "0.0013 rad"
+      ],
+      "correct": 1,
+      "explanation": "The motor's travel before the load moves."
+    },
+    {
+      "stage": "post",
+      "question": "What does closing the position loop, with an integral, on the load's encoder do with play in the gear?",
+      "options": [
+        "Nothing",
+        "Puts the dead zone inside the loop: it hunts (0.0013 rad over a second)",
+        "Fixes it",
+        "Stops the motor"
+      ],
+      "correct": 1,
+      "explanation": "Push, nothing, jump."
+    },
+    {
+      "stage": "post",
+      "question": "What does closing it on the motor's encoder cost?",
+      "options": [
+        "Nothing",
+        "The load is somewhere in the gap: 0.0034 rad off the target",
+        "Stability",
+        "Speed"
+      ],
+      "correct": 1,
+      "explanation": "It controls the motor, not the load."
+    }
+  ]
+}
