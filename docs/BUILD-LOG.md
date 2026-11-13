@@ -1322,3 +1322,40 @@ Six lessons on the robots that are not a six axis arm, ending in a choice of rob
 - **Uninitialised variables found by clang** (32-01) though the other toolchains were silent; initialised in the test.
 - **A test that did not test** (32-05's first box check compared a number with itself); removed and replaced by a comparison with the known volume.
 - **A `using` line missing or not needed** (32-04 needed it, 32-01 did not), the compile error naming the line.
+
+## Phase 33, mobile manipulators (13 November 2026)
+
+Ten lessons on a wheeled base with an arm on it, ending in a check of whether a job can be done. The module is `rc::mobile` (new, 10 headers), the atlas prefix `MOB` (new, 0001 to 0030). Every mass, force, error and speed figure is typical and says so; the arm is the typical elbow arm of 28-04.
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 33-01 a base and an arm in one frame tree | with the base at (2, 1) turned 90 degrees the tool at zero was at (2.000, 1.550, 0.050); a point put into the arm's frame and back agreed to 1e-9 m; an error of 5 mm in the base moved the hand 5 mm and one degree of heading moved a hand 0.9 m out 15.7 mm | `rc/mobile/mm_frames.hpp` |
+| 33-02 what the arm reaches from here | at a target 0.10 m below the mount the reach ran from 0.00 to 0.72 m from the arm's axis (0.63 m at a target 0.20 m lower); the quick ring test agreed with the full inverse kinematics on 100 percent of 576 base places; the tolerance for the base's stopping place was 36.0 cm | `rc/mobile/base_reach.hpp` |
+| 33-03 choosing where to park | 252 candidate places; with margin weighted most the base was put in the middle of the ring (margin 1.00) on the near side; weighting travel gave 1.24 m of travel against 2.56 m with no weight; a row of obstacles moved the choice 20 degrees or more round, and a ring of obstacles left 0 free places | `rc/mobile/parking.hpp` |
+| 33-04 the base and the arm as one | eight columns (the base's driving and turning and six joints), each checked against a small move; a line of 1.5 m was drawn by arm and base together to 0.000 m (base 1.43 m) where the arm alone ended 1.18 m short with its manipulability at 0.0000; a base 30 times dearer drove 1.20 m and 33 times cheaper 1.50 m | `rc/mobile/whole_body.hpp` |
+| 33-05 tipping with the arm out | with the arm tucked the base could brake at 11.01 m/s2, reaching 0.65 m at 8.88 and with 5 kg in the hand 5.19, below the 5.89 m/s2 the wheels would grip; reaching to one side cut the turning limit to 4.22 from 7.92; a centred mass gave the formula of 19-09 exactly | `rc/mobile/tip_margin.hpp` |
+| 33-06 how much it can carry | the arm held 5.0 kg (its rating), the base could carry 4.3 kg and still stop from 1.5 m/s in 0.2 m (5.62 m/s2 needed), the wheels 130.7 kg for 0.5 m/s2: tipping was the binding limit; 10 kg aboard cut the range from 15 509 m to 13 838 m | `rc/mobile/payload_effect.hpp` |
+| 33-07 knowing where well enough to grasp | a base known to 20 mm and 1 degree with a mount known to 0.2 degree left the hand uncertain by 25.6 mm at 0.9 m; against 10 mm that is a chance of 0.30 (20 000 simulated grasps gave 0.30); 99 percent needs 3.9 mm; a camera on the hand good to 2 mm gave 1.000 | `rc/mobile/grasp_budget.hpp` |
+| 33-08 fetch and carry | a mission took 97 ticks, 113 with a missed grasp tried again, an always missing hand stopped in fault 1 after 3 tries, a dropped part gave fault 2, 4.5 Wh for a 4.0 Wh mission fault 4; a faulty plan that drove with the arm out had 15 unsafe ticks without the interlock and 0 with it (a timeout, fault 3) | `rc/mobile/fetch_carry.hpp` |
+| 33-09 one speed budget for base and arm | the load held the base to 2.04 m/s to stop in 0.5 m at a margin of 0.8; a person at 1.0 m allowed 1.23 m/s in all and base 1.0 and hand 0.5 were scaled to 0.82 and 0.41; at 0.2 m both were stopped; against a person walking at 1.6 m/s the supervised robot stopped 0.14 m away (28 mm inside its 0.17 m of margins) and the unsupervised one met them at 3.1 m/s | `rc/mobile/mm_supervisor.hpp` |
+| 33-10 a mobile manipulator for a job | a job of 2 kg over 6 m was released (tolerance 35 cm against a stopping sigma of 3 cm, budget 4.3 kg, grasp 1.000, range 13.1 km); 8 kg failed at requirement 3, a stopping sigma of 15 cm at 2, a camera of 12 mm at 4, a route of 30 000 m at 5, a fast route at 6, a person 0.45 m from the route at 7, and a shelf ringed by obstacles at 1 | `rc/mobile/mm_job.hpp` |
+
+**Decisions.**
+
+1. **A new module, `rc::mobile`, and a new atlas prefix, `MOB`**, since the phase is about the base and the arm together. Its headers use the arm's names through `using rc::arm::...` declarations (the first version used none and the headers did not compile alone).
+2. **Flat ground, a differential base with two rates** (driving and turning): the whole-body Jacobian has eight columns, and the base's cost is a weight in a least cost solution.
+3. **The arm reaches tool down, from the arm's own axis**, and the ring is found along one line because the shoulder turns all the way round.
+4. **Tipping and payload extend 19-09 and 29-08 with the pose**: link masses at the middle of each link, the payload at the tool, and the three limits on the payload compared (the arm's, the tipping and the traction).
+5. **An interlock separate from the mission**: the base drives only with the arm tucked and the arm goes out only with the base stopped; a wrong plan becomes a stopped robot.
+6. **The supervisor is a model**, with the numbers of 31-06; it says plainly that it is not a safety function.
+7. **The capstone is a screen with a named first failure**, in the manner of 32-06 and 27-08, and not a simulation of the whole job.
+8. **The run stops here**; stage 4 (the legged robots, phases 34 to 36) waits for the owner.
+
+**Mistakes, and what caught them.**
+
+- **Headers that did not compile alone** (33-01): the graduated header used `Pose`, `compose` and others from `rc::arm` unqualified, which the lesson's own `using namespace` hid. The standalone headers target caught it, and every mobile header now declares what it uses. `done.sh` shows the last lines of that target's errors, which I had read with `tail` and nearly missed.
+- **A spec patched by a script that failed half way** (33-02, 33-09): the append after the failed patch did not run, the files were left with a placeholder tail, and one run showed a compile error of a timing test. Patching is now done in one script and the result read before the next step.
+- **A timing test** (33-02's first version compared the speed of two functions): removed, since a clock on a shared machine is a flaky gate; the lesson says what the quick test needs (two comparisons) and not how many times faster it is.
+- **Claims that the numbers did not bear out**, five times: the ring at the first height has no hole in the middle (inner radius 0.00); the SCARA-like first mount for 32-06 did not apply here, but the arm's reach at a lower target narrowed less than the first text said; the speed supervisor's robot stopped 28 mm inside its margins and not outside them, because a speed limit that falls continuously asks for a faster slowdown than the brakes give (the lesson now says so); the base's price changed its travel by only 20 percent for a factor of 1000; and the arm's payload limit was the rating of the structure and not its joints.
+- **A person who never stopped walking** (33-09's first simulation): the person walked through the stopped robot, as the protective distance assumes they do not; the test now ends when the robot stops, as in 31-06.
+- **A name for two things** (33-06's `max_payload` is the arm's own function and the lesson's function for the budget is `payload_budget`), and a local `kPi` clashing with the arm module's (32-05, repeated in thought and avoided).
