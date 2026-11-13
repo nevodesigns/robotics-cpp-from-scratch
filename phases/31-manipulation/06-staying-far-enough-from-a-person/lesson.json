@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "31-06-staying-far-enough-from-a-person",
+  "title": "Staying Far Enough From a Person: The Protective Separation Distance, the Speed It Allows, and What Each Term Is For",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "31-05-putting-a-peg-in-a-hole",
+    "30-08-getting-out-of-the-way-of-a-moving-thing",
+    "29-08-how-much-the-motors-can-give",
+    "19-01-what-can-go-wrong"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/ssm.hpp",
+    "note": "speed and separation monitoring in the form that ISO 13855 and ISO/TS 15066 use, modelled and not certified: the protective separation distance as the sum of the distance a person covers during the reaction and stopping times, the distance the robot covers during the reaction time, the robot's stopping distance, an intrusion distance and the measurement uncertainties; the greatest robot speed that a given separation allows (the inverse); and a one dimensional simulation of a person walking at the robot, to show that the distance is enough, and that leaving out a term makes it not enough"
+  },
+  "breaks_first": [
+    "E-ARM-0091",
+    "E-ARM-0092",
+    "E-ARM-0093"
+  ]
+}
