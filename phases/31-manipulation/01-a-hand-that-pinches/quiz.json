@@ -1,0 +1,78 @@
+{
+  "lesson": "31-01-a-hand-that-pinches",
+  "title": "A Hand That Pinches: Stroke, Force, Friction, and How Heavy a Thing Two Fingers Can Hold",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What holds a thing between two fingers?",
+      "options": [
+        "The squeeze itself",
+        "Friction at the pads, which the squeeze makes",
+        "Glue",
+        "The thing's weight"
+      ],
+      "correct": 1,
+      "explanation": "Friction, mu times the squeeze at each pad."
+    },
+    {
+      "stage": "check",
+      "question": "A kilogram at rest needed what squeeze at a friction of 0.5?",
+      "options": [
+        "9.81 N",
+        "14.81 N",
+        "1 N",
+        "235 N"
+      ],
+      "correct": 0,
+      "explanation": "The weight over two pads of friction."
+    },
+    {
+      "stage": "check",
+      "question": "Lifting it at 5 m/s2 needed:",
+      "options": [
+        "9.81 N",
+        "14.81 N",
+        "The same",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "The acceleration adds to the weight."
+    },
+    {
+      "stage": "check",
+      "question": "Pads at half the friction hold:",
+      "options": [
+        "Twice as much",
+        "8.0 kg against 16.0 kg",
+        "The same",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "Half."
+    },
+    {
+      "stage": "post",
+      "question": "Why does a safety factor go on the force?",
+      "options": [
+        "For luck",
+        "Friction and the acceleration are not known exactly",
+        "To use the motor",
+        "It does not"
+      ],
+      "correct": 1,
+      "explanation": "A pad that is dirty is a smaller hand."
+    },
+    {
+      "stage": "post",
+      "question": "What is the closing time of a hand a part of?",
+      "options": [
+        "Nothing",
+        "Every pick's cycle time",
+        "The friction",
+        "The stroke"
+      ],
+      "correct": 1,
+      "explanation": "Distance over the finger speed."
+    }
+  ]
+}
