@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "31-03-finding-the-part-with-a-camera",
+  "title": "Finding the Part With a Camera: From a Pixel and a Depth to a Point in the Arm's Frame, and Measuring Where the Camera Is",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "31-02-picking-and-placing-in-order",
+    "28-09-the-arm-it-really-is",
+    "28-02-the-tool-in-three-dimensions"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/hand_eye.hpp",
+    "note": "a fixed camera and an arm: the pinhole back projection of a pixel and a depth to a point in the camera frame, the transform from the camera to the base found by fitting corresponding points (the tool's place from the arm's kinematics and the same point as the camera saw it) with the polar factor of their cross covariance, the residual of the fit, and the point seen by the camera put into the base frame"
+  },
+  "breaks_first": [
+    "E-ARM-0082",
+    "E-ARM-0083",
+    "E-ARM-0084"
+  ]
+}
