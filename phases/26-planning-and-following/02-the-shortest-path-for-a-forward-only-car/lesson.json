@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "26-02-the-shortest-path-for-a-forward-only-car",
+  "title": "The Shortest Path for a Car That Only Goes Forward: Dubins Paths, an Exact Finish for the Search, and the Loop to a Goal Just Behind You",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "26-01-a-path-a-car-can-drive",
+    "23-03-ackermann-geometry-and-the-turning-circle"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/dubins.hpp",
+    "note": "Dubins paths: the shortest path between two poses for a car that goes forward only and turns no tighter than a given radius is one of six words of left arcs, right arcs and a straight line (LSL, RSR, LSR, RSL, RLR, LRL), each worked out in closed form; the path is sampled by walking the three pieces, and it finishes a hybrid search exactly on the goal pose"
+  },
+  "breaks_first": [
+    "E-VEH-0085",
+    "E-VEH-0086",
+    "E-VEH-0087"
+  ]
+}

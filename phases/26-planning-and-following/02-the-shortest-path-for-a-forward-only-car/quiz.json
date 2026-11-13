@@ -1,0 +1,78 @@
+{
+  "lesson": "26-02-the-shortest-path-for-a-forward-only-car",
+  "title": "The Shortest Path for a Car That Only Goes Forward: Dubins Paths, an Exact Finish for the Search, and the Loop to a Goal Just Behind You",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "How many words can the shortest path of a forward-only car be?",
+      "options": [
+        "Two",
+        "Six: LSL, RSR, LSR, RSL, RLR, LRL",
+        "A hundred",
+        "One"
+      ],
+      "correct": 1,
+      "explanation": "Three pieces of arc or line."
+    },
+    {
+      "stage": "check",
+      "question": "Over 200 pairs of poses the walked end was within:",
+      "options": [
+        "1 m",
+        "0.000000000 m of the goal",
+        "10 cm",
+        "Anywhere"
+      ],
+      "correct": 1,
+      "explanation": "The test walks the arcs."
+    },
+    {
+      "stage": "check",
+      "question": "A Dubins tail after the search was how long?",
+      "options": [
+        "4.70 m, ending exactly on the goal",
+        "0 m",
+        "100 m",
+        "It failed"
+      ],
+      "correct": 0,
+      "explanation": "The search stopped 0.073 m short."
+    },
+    {
+      "stage": "check",
+      "question": "A radius of 0.4 m for this car gave a curvature of:",
+      "options": [
+        "1.35",
+        "2.50 per metre, past the limit",
+        "0",
+        "1"
+      ],
+      "correct": 1,
+      "explanation": "A path the car cannot drive."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the path to a goal 0.5 m behind a loop?",
+      "options": [
+        "A bug",
+        "The car cannot reverse in a Dubins path: it was 10.3 times the distance",
+        "Arcs are slow",
+        "The goal is far"
+      ],
+      "correct": 1,
+      "explanation": "Reeds and Shepp allow reversing."
+    },
+    {
+      "stage": "post",
+      "question": "What does the Dubins lesson not do?",
+      "options": [
+        "Nothing",
+        "Check the path against the grid, or reverse",
+        "Use arcs",
+        "Work in closed form"
+      ],
+      "correct": 1,
+      "explanation": "Say what is left out."
+    }
+  ]
+}
