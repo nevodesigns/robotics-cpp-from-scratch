@@ -1,0 +1,78 @@
+{
+  "lesson": "26-04-following-a-path-pure-pursuit-and-stanley",
+  "title": "Following a Path: Pure Pursuit and Stanley, Where Each Cuts the Curve or Swings Across the Line",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does pure pursuit steer towards?",
+      "options": [
+        "The goal only",
+        "A point a lookahead distance ahead on the path",
+        "The nearest wall",
+        "The last point"
+      ],
+      "correct": 1,
+      "explanation": "Along the arc that reaches it."
+    },
+    {
+      "stage": "check",
+      "question": "A short lookahead (0.1 m) crossed the path how often, against a long (1.5 m)?",
+      "options": [
+        "2 against 9",
+        "9 against 2",
+        "The same",
+        "Never"
+      ],
+      "correct": 1,
+      "explanation": "It turns hard, overshoots, turns back."
+    },
+    {
+      "stage": "check",
+      "question": "Where a straight turned into a circle of radius 3 m, a lookahead of 2.0 m strayed at most:",
+      "options": [
+        "0.015 m",
+        "0.149 m",
+        "0.036 m",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "A long lookahead cuts every curve."
+    },
+    {
+      "stage": "check",
+      "question": "At the same bend Stanley strayed at most:",
+      "options": [
+        "0.149 m",
+        "0.036 m",
+        "1 m",
+        "3 m"
+      ],
+      "correct": 1,
+      "explanation": "It corrects the error it has now."
+    },
+    {
+      "stage": "post",
+      "question": "What does the angle atan2(-k e, v) in Stanley do?",
+      "options": [
+        "Speeds the car up",
+        "Turns the front axle back towards the path, more gently at speed",
+        "Stops the car",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "The sign is for a car left of the path."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the nearest-point search only look forward?",
+      "options": [
+        "Speed only",
+        "A path that passes near itself would make the follower jump back",
+        "Memory",
+        "The grid"
+      ],
+      "correct": 1,
+      "explanation": "A path can come near itself."
+    }
+  ]
+}

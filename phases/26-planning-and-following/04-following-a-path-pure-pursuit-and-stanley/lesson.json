@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "26-04-following-a-path-pure-pursuit-and-stanley",
+  "title": "Following a Path: Pure Pursuit and Stanley, Where Each Cuts the Curve or Swings Across the Line",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "26-03-smoothing-a-path-without-cutting-corners",
+    "23-03-ackermann-geometry-and-the-turning-circle"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/follow.hpp",
+    "note": "path followers for a car: pure pursuit steers along the arc that reaches a point a lookahead distance ahead on the path; Stanley steers by the heading error plus an angle from the cross-track error of the front axle; a signed cross-track distance, a nearest-point search that only moves forward, and a run of the bicycle model that reports the worst and final error"
+  },
+  "breaks_first": [
+    "E-VEH-0091",
+    "E-VEH-0092",
+    "E-VEH-0093"
+  ]
+}
