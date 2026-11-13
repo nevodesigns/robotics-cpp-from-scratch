@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "28-04-eight-ways-to-reach-a-pose",
+  "title": "Eight Ways to Reach a Pose: Closed Form Inverse Kinematics for an Arm With a Spherical Wrist, and the Arms It Does Not Work For",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "28-03-how-the-tool-moves-when-the-joints-do",
+    "13-02-what-angles-put-it-there"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/ik_closed.hpp",
+    "note": "closed form inverse kinematics for a six joint arm whose last three axes meet in a point (a spherical wrist): the wrist centre from the target and the tool, the angle of the first joint (two choices, shoulder front and back), the elbow (two choices) from the law of cosines, the shoulder from the geometry of the plane, and the wrist as a Z Y Z Euler angle (two choices, with its own singularity), giving up to eight solutions that are all checked by forward kinematics; and a test of whether a table has such a wrist"
+  },
+  "breaks_first": [
+    "E-ARM-0010",
+    "E-ARM-0011",
+    "E-ARM-0012"
+  ]
+}

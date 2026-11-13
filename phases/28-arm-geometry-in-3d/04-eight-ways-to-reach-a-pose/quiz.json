@@ -1,0 +1,78 @@
+{
+  "lesson": "28-04-eight-ways-to-reach-a-pose",
+  "title": "Eight Ways to Reach a Pose: Closed Form Inverse Kinematics for an Arm With a Spherical Wrist, and the Arms It Does Not Work For",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does a spherical wrist make inverse kinematics easy?",
+      "options": [
+        "It is light",
+        "The point where the last three axes meet is fixed by the first three joints alone",
+        "It has fewer joints",
+        "It is faster"
+      ],
+      "correct": 1,
+      "explanation": "Split the arm in two."
+    },
+    {
+      "stage": "check",
+      "question": "How many solutions did the solver give on average for a reachable pose?",
+      "options": [
+        "1",
+        "8.0",
+        "100",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "Two shoulders, two elbows, two wrists."
+    },
+    {
+      "stage": "check",
+      "question": "A pose 1.5 m from the base gave how many solutions?",
+      "options": [
+        "8",
+        "0: out of reach, an empty list",
+        "1",
+        "4"
+      ],
+      "correct": 1,
+      "explanation": "Say so."
+    },
+    {
+      "stage": "check",
+      "question": "Is the UR5's wrist spherical (1) or not (0)?",
+      "options": [
+        "0: its fifth joint is offset",
+        "1",
+        "Only at zero",
+        "Yes at the elbow"
+      ],
+      "correct": 0,
+      "explanation": "d5 is not zero."
+    },
+    {
+      "stage": "post",
+      "question": "What is the test that matters for an inverse kinematics solver?",
+      "options": [
+        "That it returns the angles you started with",
+        "That every solution put through forward kinematics reaches the pose",
+        "That it is fast",
+        "That it returns one answer"
+      ],
+      "correct": 1,
+      "explanation": "0.0000000000 m for all."
+    },
+    {
+      "stage": "post",
+      "question": "Which of the eight does the solver pick?",
+      "options": [
+        "The first",
+        "None: it gives all, and the caller picks within the limits, nearest the present angles",
+        "The smallest",
+        "A random one"
+      ],
+      "correct": 1,
+      "explanation": "1 of 8 were allowed with limits."
+    }
+  ]
+}
