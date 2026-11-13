@@ -1,0 +1,78 @@
+{
+  "lesson": "30-08-getting-out-of-the-way-of-a-moving-thing",
+  "title": "Getting Out of the Way of Something That Moves: Guessing Where It Is Going, Looking Along the Plan for the Moment They Meet, and Choosing Between Waiting and Going Round",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "How does a track get a velocity?",
+      "options": [
+        "It is told",
+        "From the difference between successive sightings over the time, smoothed",
+        "From one sighting",
+        "From the camera"
+      ],
+      "correct": 1,
+      "explanation": "Seen twice, it has a velocity."
+    },
+    {
+      "stage": "check",
+      "question": "An arm that did not look was how far from the obstacle at the closest?",
+      "options": [
+        "0.031 m",
+        "-0.112 m, through it",
+        "0.135 m",
+        "1 m"
+      ],
+      "correct": 1,
+      "explanation": "It went through it."
+    },
+    {
+      "stage": "check",
+      "question": "Waiting and planning round took:",
+      "options": [
+        "4.20 s and 2.15 s",
+        "2.15 s and 4.20 s",
+        "The same",
+        "1.50 s each"
+      ],
+      "correct": 1,
+      "explanation": "Going round was slower than waiting."
+    },
+    {
+      "stage": "check",
+      "question": "A meeting with an obstacle 1 m away coming at 0.5 m/s was predicted how far away?",
+      "options": [
+        "1 s",
+        "1.78 s",
+        "0 s",
+        "10 s"
+      ],
+      "correct": 1,
+      "explanation": "1 m less the radii, over 0.5 m/s."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the monitor go on looking after a new plan?",
+      "options": [
+        "It is wasteful",
+        "The obstacle may run into the new plan too: a plan is a promise about a world that moves",
+        "To save time",
+        "It does not"
+      ],
+      "correct": 1,
+      "explanation": "A plan made against where it is now."
+    },
+    {
+      "stage": "post",
+      "question": "When is waiting better than going round?",
+      "options": [
+        "Never",
+        "When the thing is about to go away; a long detour is for nothing",
+        "When it is bigger",
+        "Always"
+      ],
+      "correct": 1,
+      "explanation": "A monitor cannot tell: wait a moment, then plan."
+    }
+  ]
+}

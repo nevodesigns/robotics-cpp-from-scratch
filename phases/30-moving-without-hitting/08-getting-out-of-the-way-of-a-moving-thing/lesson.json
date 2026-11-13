@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "30-08-getting-out-of-the-way-of-a-moving-thing",
+  "title": "Getting Out of the Way of Something That Moves: Guessing Where It Is Going, Looking Along the Plan for the Moment They Meet, and Choosing Between Waiting and Going Round",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "30-07-a-world-that-changes",
+    "30-06-putting-the-path-in-time",
+    "30-05-making-the-path-shorter-and-smoother",
+    "26-10-how-often-to-replan"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/moving_obstacle.hpp",
+    "note": "an arm that shares its cell with something that moves: a track of the thing (its place and a velocity from successive sightings, smoothed), a prediction of where it will be, a look along the arm's planned trajectory for the first moment at which the arm's capsules and the predicted obstacle meet, and a run that follows the trajectory, stops when a meeting is predicted within a horizon, and then either waits for the thing to pass or plans again from where it stands (RRT-Connect and shortcutting, against the obstacle made a little larger) and goes on, with the monitor still looking along whatever plan it has"
+  },
+  "breaks_first": [
+    "E-ARM-0073",
+    "E-ARM-0074",
+    "E-ARM-0075"
+  ]
+}
