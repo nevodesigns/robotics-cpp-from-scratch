@@ -1,0 +1,78 @@
+{
+  "lesson": "31-08-an-arm-that-follows-a-hand",
+  "title": "An Arm That Follows a Hand: Mapping a Leader's Joints to a Follower's, Following Within Its Limits, and What Delay and a Lost Link Do",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does the follower need that the leader does not give?",
+      "options": [
+        "A target",
+        "A limit on what it may do",
+        "A camera",
+        "A map"
+      ],
+      "correct": 1,
+      "explanation": "Never more than it safely can."
+    },
+    {
+      "stage": "check",
+      "question": "A jump of 1.0 rad in the leader was followed in:",
+      "options": [
+        "One tick",
+        "0.48 s at the speed limit",
+        "Never",
+        "0 s"
+      ],
+      "correct": 1,
+      "explanation": "At no more than 2.0 rad/s."
+    },
+    {
+      "stage": "check",
+      "question": "Which tracked the leader best?",
+      "options": [
+        "20 Hz messages",
+        "100 Hz with no delay (0.059 rad)",
+        "100 ms of delay",
+        "None"
+      ],
+      "correct": 1,
+      "explanation": "Both rate and delay add to the error."
+    },
+    {
+      "stage": "check",
+      "question": "With the link lost, the follower with a watchdog:",
+      "options": [
+        "Went on 0.398 rad",
+        "Moved 0.000 rad more: it held",
+        "Sped up",
+        "Reset"
+      ],
+      "correct": 1,
+      "explanation": "It holds."
+    },
+    {
+      "stage": "post",
+      "question": "What does a wrong zero give?",
+      "options": [
+        "Noise",
+        "A constant offset between leader and follower",
+        "A delay",
+        "A faster follower"
+      ],
+      "correct": 1,
+      "explanation": "Calibrate the pair in a pose."
+    },
+    {
+      "stage": "post",
+      "question": "What protects a follower led into the table?",
+      "options": [
+        "The leader",
+        "Contact detection and the motor limits, not this lesson's follower",
+        "Nothing is needed",
+        "The map"
+      ],
+      "correct": 1,
+      "explanation": "There is no collision check in the loop."
+    }
+  ]
+}

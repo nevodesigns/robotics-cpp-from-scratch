@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "31-08-an-arm-that-follows-a-hand",
+  "title": "An Arm That Follows a Hand: Mapping a Leader's Joints to a Follower's, Following Within Its Limits, and What Delay and a Lost Link Do",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "31-07-how-many-parts-an-hour",
+    "29-07-an-arm-made-of-smart-servos",
+    "31-06-staying-far-enough-from-a-person"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/teleop.hpp",
+    "note": "leader and follower teleoperation joint to joint, as with a pair of hobby arms: the map from a leader's reading to a follower's target (a zero for each, a scale, and the follower's limits), a follower that goes toward its target as a first order lag with a speed limit, a link watchdog that holds the follower still when no message has come for a time, and the tracking error that the rate of the messages and their delay add"
+  },
+  "breaks_first": [
+    "E-ARM-0097",
+    "E-ARM-0098",
+    "E-ARM-0099"
+  ]
+}
