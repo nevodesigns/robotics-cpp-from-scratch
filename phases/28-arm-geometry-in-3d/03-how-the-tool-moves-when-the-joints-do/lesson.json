@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "28-03-how-the-tool-moves-when-the-joints-do",
+  "title": "How the Tool Moves When the Joints Do: The Jacobian of an Arm in Three Dimensions, Checked Against Finite Differences, and Torque From Force",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "28-02-the-tool-in-three-dimensions",
+    "13-08-what-the-tool-can-push"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/jacobian.hpp",
+    "note": "the geometric Jacobian of an arm in three dimensions: for each revolute joint its axis and a point on it (taken from the frame before the row in the standard convention and the frame after it in the modified one), the column z cross (tool point minus that point) over z, the tool's velocity from joint rates, the joint torques that balance a wrench at the tool (the transpose), and a finite difference Jacobian to check it against"
+  },
+  "breaks_first": [
+    "E-ARM-0007",
+    "E-ARM-0008",
+    "E-ARM-0009"
+  ]
+}
