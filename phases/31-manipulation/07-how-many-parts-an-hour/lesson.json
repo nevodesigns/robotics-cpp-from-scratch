@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "31-07-how-many-parts-an-hour",
+  "title": "How Many Parts an Hour: Cycle Time Built From Its Pieces, the Speed Override It Takes to Hit a Target, and What a Person Standing Near Costs",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "31-06-staying-far-enough-from-a-person",
+    "31-04-feeling-that-it-has-touched",
+    "31-01-a-hand-that-pinches",
+    "30-06-putting-the-path-in-time",
+    "21-03-an-arm-that-picks-and-places"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/cycle_time.hpp",
+    "note": "the cycle time of a pick and place as a sum of its pieces: the moves (each a trapezoid of distance, speed and acceleration, with the slow approach to a contact and the speed cap from a person's nearness), the hand's closing and opening, and the settling; the throughput from it; the speed override that a target cycle time needs (found by bisection, since the contact speed does not scale); and the cycle time with a person at a given distance, from the speed limit of the separation lesson"
+  },
+  "breaks_first": [
+    "E-ARM-0094",
+    "E-ARM-0095",
+    "E-ARM-0096"
+  ]
+}

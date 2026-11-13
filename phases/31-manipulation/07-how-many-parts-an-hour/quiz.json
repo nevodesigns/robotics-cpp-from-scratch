@@ -1,0 +1,78 @@
+{
+  "lesson": "31-07-how-many-parts-an-hour",
+  "title": "How Many Parts an Hour: Cycle Time Built From Its Pieces, the Speed Override It Takes to Hit a Target, and What a Person Standing Near Costs",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is a cycle time made of?",
+      "options": [
+        "The arm's speed alone",
+        "The moves and the waits, added up",
+        "The hand alone",
+        "The camera"
+      ],
+      "correct": 1,
+      "explanation": "A sum of pieces."
+    },
+    {
+      "stage": "check",
+      "question": "At half the speed the cycle took:",
+      "options": [
+        "Twice as long",
+        "5.70 s against 3.68 s, less than twice",
+        "The same",
+        "Half as long"
+      ],
+      "correct": 1,
+      "explanation": "The hand and the contact approach do not stretch."
+    },
+    {
+      "stage": "check",
+      "question": "What did a target of 2.95 s give?",
+      "options": [
+        "An override of 1",
+        "-1: refused, the rated speed is too slow",
+        "0.5",
+        "Any value"
+      ],
+      "correct": 1,
+      "explanation": "Change the cell."
+    },
+    {
+      "stage": "check",
+      "question": "A person 1.0 m away made the cycle:",
+      "options": [
+        "3.77 s",
+        "3.68 s",
+        "3.68 s",
+        "Stopped"
+      ],
+      "correct": 0,
+      "explanation": "The speed cap of 31-06."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the override found by bisection?",
+      "options": [
+        "It is faster",
+        "The contact speed does not scale, so the cycle is not a simple function of k",
+        "It is the only way",
+        "It is not"
+      ],
+      "correct": 1,
+      "explanation": "The cycle falls as k rises."
+    },
+    {
+      "stage": "post",
+      "question": "Where is a cycle's time often spent?",
+      "options": [
+        "Only in the carry",
+        "Often in the parts that do not depend on the arm's speed",
+        "In the camera",
+        "Nowhere"
+      ],
+      "correct": 1,
+      "explanation": "The hand and the contact approaches."
+    }
+  ]
+}
