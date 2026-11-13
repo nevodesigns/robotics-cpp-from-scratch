@@ -25,6 +25,7 @@ struct PlanProblem {
   double margin = 0.02;        // m
   int max_iter = 3000;
   unsigned long long seed = 1;
+  mutable int checks = 0;      // the poses looked at so far, over every plan made with this problem
 };
 
 struct PlanResult {
@@ -32,6 +33,7 @@ struct PlanResult {
   std::vector<std::vector<double> > path;
   int iterations = 0;
   int nodes = 0;
+  int checks = 0;  // poses looked at by this plan
 };
 
 inline double joint_distance(const std::vector<double>& a, const std::vector<double>& b) {
@@ -87,7 +89,9 @@ inline ExtendStatus extend(const PlanProblem& p, Tree& tree, const std::vector<d
   const int near = tree.nearest(target);
   const std::vector<double> nq = steer(tree.q[static_cast<std::size_t>(near)], target, p.eta);
   if (joint_distance(nq, tree.q[static_cast<std::size_t>(near)]) < 1e-12) return kTrapped;  // a step that goes nowhere is a blocked one (and keeps a loop that joins two trees from running for ever)
-  if (!edge_conservative(p.check, tree.q[static_cast<std::size_t>(near)], nq, p.bounds, p.margin).free) return kTrapped;
+  const EdgeResult er = edge_conservative(p.check, tree.q[static_cast<std::size_t>(near)], nq, p.bounds, p.margin);
+  p.checks += er.checks;
+  if (!er.free) return kTrapped;
   tree.add(nq, near);
   return joint_distance(nq, target) < 1e-9 ? kReached : kAdvanced;
 }
@@ -96,6 +100,7 @@ inline ExtendStatus extend(const PlanProblem& p, Tree& tree, const std::vector<d
 inline PlanResult rrt(const PlanProblem& p, const std::vector<double>& start, const std::vector<double>& goal) {
   PlanResult out;
   PlanRng rng(p.seed);
+  const int c0 = p.checks;
   if (!free_pose(p.check, start, p.margin) || !free_pose(p.check, goal, p.margin)) return out;
   Tree tree;
   tree.add(start, -1);
@@ -104,15 +109,19 @@ inline PlanResult rrt(const PlanProblem& p, const std::vector<double>& start, co
     const std::vector<double> target = rng.uniform() < p.goal_bias ? goal : sample_config(*p.check.table, rng);
     if (extend(p, tree, target) == kTrapped) continue;
     const int last = static_cast<int>(tree.q.size()) - 1;
-    if (joint_distance(tree.q[static_cast<std::size_t>(last)], goal) <= p.eta &&
-        edge_conservative(p.check, tree.q[static_cast<std::size_t>(last)], goal, p.bounds, p.margin).free) {
-      out.path = tree.path_to(last);
-      out.path.push_back(goal);
-      out.found = true;
-      break;
+    if (joint_distance(tree.q[static_cast<std::size_t>(last)], goal) <= p.eta) {
+      const EdgeResult join = edge_conservative(p.check, tree.q[static_cast<std::size_t>(last)], goal, p.bounds, p.margin);
+      p.checks += join.checks;
+      if (join.free) {
+        out.path = tree.path_to(last);
+        out.path.push_back(goal);
+        out.found = true;
+        break;
+      }
     }
   }
   out.nodes = static_cast<int>(tree.q.size());
+  out.checks = p.checks - c0;
   return out;
 }
 
@@ -120,6 +129,7 @@ inline PlanResult rrt(const PlanProblem& p, const std::vector<double>& start, co
 inline PlanResult rrt_connect(const PlanProblem& p, const std::vector<double>& start, const std::vector<double>& goal) {
   PlanResult out;
   PlanRng rng(p.seed);
+  const int c0 = p.checks;
   if (!free_pose(p.check, start, p.margin) || !free_pose(p.check, goal, p.margin)) return out;
   Tree ta, tb;
   ta.add(start, -1);
@@ -141,6 +151,7 @@ inline PlanResult rrt_connect(const PlanProblem& p, const std::vector<double>& s
         out.path = pa;
         out.found = true;
         out.nodes = static_cast<int>(ta.q.size() + tb.q.size());
+        out.checks = p.checks - c0;
         return out;
       }
     }
@@ -148,6 +159,7 @@ inline PlanResult rrt_connect(const PlanProblem& p, const std::vector<double>& s
     a_is_start = !a_is_start;
   }
   out.nodes = static_cast<int>(ta.q.size() + tb.q.size());
+  out.checks = p.checks - c0;
   return out;
 }
 
