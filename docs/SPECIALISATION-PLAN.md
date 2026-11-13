@@ -213,4 +213,4 @@ Ground first because the repository's safety, navigation and field work lead str
 ## 10. Progress
 
 - **Phase 22, the shared base: built on 13 November 2026, 17 lessons** (docs/BUILD-LOG.md, "Phase 22"). The lesson map of section 6 held; the Gazebo lessons were tested against Gazebo Sim 8.15 on the build machine, and the continuous integration job for it is not a gate until it has been seen to pass on a hosted runner.
-- Phases 23 to 27, the ground track, are next, in one run, stopping at the end of stage 1.
+- **Phases 23 to 27, the ground track: built on 13 November 2026, 46 lessons** (23: 9, 24: 9, 25: 9, 26: 10, 27: 9; docs/BUILD-LOG.md has a section for each). The lesson map of section 6 held, with one change of order inside phase 26 (the speed profile and the unsticking came before the rough ground and the replanning, as listed there). Phase 27 builds on phases 19 to 21 and does not repeat them. The continuous integration of phases 22 to 26 is green on all 9 jobs; phase 27's is in the progress file. **Stage 1 is built and the run has stopped, as the owner asked.** The arm course (stage 2, phases 28 to 32) starts when the owner says so.
