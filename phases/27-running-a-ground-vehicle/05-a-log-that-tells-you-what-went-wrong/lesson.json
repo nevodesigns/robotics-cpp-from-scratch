@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "27-05-a-log-that-tells-you-what-went-wrong",
+  "title": "A Log That Tells You What Went Wrong: Reading a Field Run for Stuck, Slipping, Off the Path, Draining and Missing Time",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "27-04-how-far-it-can-go-and-how-hot",
+    "26-08-when-the-vehicle-is-stuck",
+    "22-09-watching-a-run"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/log_doctor.hpp",
+    "note": "reading a field log: rows of time, position, commanded and wheel speed, charge and cross-track error are scanned for the faults a ground vehicle has (stuck, wheels turning and the ground not moving, off the path, the charge draining faster than usual, and time missing from the log), each as a span with a size, with the rows of a flagged window marked so a span starts when the fault did, and spans too short to matter dropped"
+  },
+  "breaks_first": [
+    "E-VEH-0124",
+    "E-VEH-0125",
+    "E-VEH-0126"
+  ]
+}

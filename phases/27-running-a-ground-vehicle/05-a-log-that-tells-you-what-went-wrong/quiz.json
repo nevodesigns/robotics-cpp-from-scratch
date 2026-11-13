@@ -1,0 +1,78 @@
+{
+  "lesson": "27-05-a-log-that-tells-you-what-went-wrong",
+  "title": "A Log That Tells You What Went Wrong: Reading a Field Run for Stuck, Slipping, Off the Path, Draining and Missing Time",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is the span of a finding marked from the start of its window?",
+      "options": [
+        "For looks",
+        "The window needs time to see the fault, so the span would start late",
+        "To make it longer",
+        "It is not"
+      ],
+      "correct": 1,
+      "explanation": "A span starts when the fault did."
+    },
+    {
+      "stage": "check",
+      "question": "In the run with five faults, how many were found?",
+      "options": [
+        "0",
+        "5",
+        "2",
+        "10"
+      ],
+      "correct": 1,
+      "explanation": "Each within 1.8 s."
+    },
+    {
+      "stage": "check",
+      "question": "Twenty clean runs with noise gave how many false findings?",
+      "options": [
+        "5",
+        "0",
+        "20",
+        "100"
+      ],
+      "correct": 1,
+      "explanation": "The shortest spans are dropped."
+    },
+    {
+      "stage": "check",
+      "question": "A slip that left the ground at 80 percent of the wheels was:",
+      "options": [
+        "Reported",
+        "Not reported: the threshold is 70 percent",
+        "Fatal",
+        "A gap"
+      ],
+      "correct": 1,
+      "explanation": "50 percent was."
+    },
+    {
+      "stage": "post",
+      "question": "Where does the ground speed come from, when judging slip?",
+      "options": [
+        "The wheels",
+        "The position of the vehicle",
+        "The commanded speed",
+        "The battery"
+      ],
+      "correct": 1,
+      "explanation": "The wheels are the thing being judged."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a gap a finding?",
+      "options": [
+        "It is not",
+        "The other tests say nothing about the time that is missing",
+        "The disk is full",
+        "The clock is wrong"
+      ],
+      "correct": 1,
+      "explanation": "The vehicle may have done anything in it."
+    }
+  ]
+}
