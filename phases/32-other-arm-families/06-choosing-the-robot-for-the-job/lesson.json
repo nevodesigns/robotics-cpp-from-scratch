@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "32-06-choosing-the-robot-for-the-job",
+  "title": "Choosing the Robot for the Job: A Task Written as Numbers, Each Family Checked Against It, and the Fastest One That Passes Everything",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "32-05-one-yardstick-for-five-robots",
+    "32-04-three-straight-axes",
+    "31-07-how-many-parts-an-hour",
+    "31-06-staying-far-enough-from-a-person",
+    "21-03-an-arm-that-picks-and-places"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/cell.hpp",
+    "note": "the capstone of the arm course: a task written as numbers (the area of the work, the payload, a tilt or none, the accuracy, the cycle time wanted, the length of the moves); the five kinds of robot of the arm course with typical figures (payload, speed, acceleration, repeatability, tilt, the height they work at, how far from the work they are mounted); a check of each against the task that says which requirement it fails (the area, by the reach test of 32-05 over a grid of the work; the payload; the tilt; the accuracy; the cycle, by the cycle time of 31-07); and a choice of the fastest that passes every one, or none"
+  },
+  "breaks_first": [
+    "E-ARM-0118",
+    "E-ARM-0119",
+    "E-ARM-0120"
+  ]
+}
