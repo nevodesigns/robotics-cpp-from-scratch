@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "28-09-the-arm-it-really-is",
+  "title": "The Arm It Really Is: Calibrating the Table From Measured Tool Positions, What a Measurement Cannot Tell Apart, and How Many Poses Are Enough",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "28-05-iterating-to-a-pose",
+    "28-08-where-the-arm-can-work",
+    "23-08-calibrating-the-track-width-from-a-run"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/calibrate_kin.hpp",
+    "note": "kinematic calibration: the correction of a table as four numbers for each joint (the joint offset, the offset along the axis, the link length and the twist), a table made from the nominal one and a correction, simulated measurements of the tool's place with noise from an arm whose table is off by a tolerance, the Levenberg-Marquardt step (the Jacobian of the tool's place with respect to the corrections by central differences, the normal equations with a small damping, solved by elimination), the rms error on poses the fit was and was not made from, and the corrections that give the same tool place whatever the joints do"
+  },
+  "breaks_first": [
+    "E-ARM-0025",
+    "E-ARM-0026",
+    "E-ARM-0027"
+  ]
+}
