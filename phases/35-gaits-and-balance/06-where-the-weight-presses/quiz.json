@@ -1,0 +1,78 @@
+{
+  "lesson": "35-06-where-the-weight-presses",
+  "title": "Where the Weight Presses: The Centre of Pressure, the Zero Moment Point of an Accelerating Body, and the Acceleration the Feet Can Allow",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Where does a body that accelerates forward press on the ground?",
+      "options": [
+        "Under its centre of mass",
+        "Behind its centre of mass, by h over g times the acceleration",
+        "In front of it",
+        "Nowhere"
+      ],
+      "correct": 1,
+      "explanation": "83 mm behind for 3 m/s2."
+    },
+    {
+      "stage": "check",
+      "question": "The centre of pressure must be:",
+      "options": [
+        "Anywhere",
+        "Inside the polygon of the feet on the ground",
+        "Under the head",
+        "At the front"
+      ],
+      "correct": 1,
+      "explanation": "A foot cannot pull."
+    },
+    {
+      "stage": "check",
+      "question": "With four feet the acceleration allowed sideways was:",
+      "options": [
+        "6.90 m/s2",
+        "5.45 m/s2",
+        "0",
+        "100 m/s2"
+      ],
+      "correct": 1,
+      "explanation": "g times the half width over the height."
+    },
+    {
+      "stage": "check",
+      "question": "With two diagonal feet down:",
+      "options": [
+        "6.90 m/s2 is allowed",
+        "No acceleration is safe: the support is a line",
+        "Any is safe",
+        "Half is safe"
+      ],
+      "correct": 1,
+      "explanation": "A trot is caught, not balanced."
+    },
+    {
+      "stage": "post",
+      "question": "What does a taller body do to the greatest acceleration?",
+      "options": [
+        "Raises it",
+        "Lowers it, since it goes as 1 over h",
+        "Nothing",
+        "Doubles it"
+      ],
+      "correct": 1,
+      "explanation": "g times the distance over the height."
+    },
+    {
+      "stage": "post",
+      "question": "What does the body not do in this model?",
+      "options": [
+        "Accelerate",
+        "Turn, and change height",
+        "Stand",
+        "Press"
+      ],
+      "correct": 1,
+      "explanation": "A turning body adds a term."
+    }
+  ]
+}

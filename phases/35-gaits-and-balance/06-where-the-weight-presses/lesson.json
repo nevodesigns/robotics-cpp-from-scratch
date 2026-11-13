@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "35-06-where-the-weight-presses",
+  "title": "Where the Weight Presses: The Centre of Pressure, the Zero Moment Point of an Accelerating Body, and the Acceleration the Feet Can Allow",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "35-05-keeping-the-body-level",
+    "35-01-standing-on-three-legs",
+    "33-05-tipping-with-the-arm-out"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/zmp.hpp",
+    "note": "where a body presses on the ground: the centre of pressure from the forces on the feet (the mean of their places weighted by force); the zero moment point of a body of height h whose centre is accelerating horizontally at a (the centre of mass moved back by h over g times a, for a body that does not turn), which is where the centre of pressure must be for the body to be in balance; the margin of that point inside the feet that are down (a polygon for three or four feet, a line for two); and the greatest acceleration in a direction that keeps the point inside, with its agreement with the tipping limit of 33-05"
+  },
+  "breaks_first": [
+    "E-LEG-0039",
+    "E-LEG-0040",
+    "E-LEG-0041"
+  ]
+}
