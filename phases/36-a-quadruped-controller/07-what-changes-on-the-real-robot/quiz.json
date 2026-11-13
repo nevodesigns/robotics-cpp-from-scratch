@@ -1,0 +1,78 @@
+{
+  "lesson": "36-07-what-changes-on-the-real-robot",
+  "title": "What Changes on the Real Robot: Delay, a Slow Actuator and Friction in the Loop, the Delay a Joint Can Stand, and Gains Chosen Against a Spread of Robots",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Which controller failed on the real joint?",
+      "options": [
+        "The gentle one",
+        "The stiff one that looked quickest in the simulator",
+        "Neither",
+        "Both"
+      ],
+      "correct": 1,
+      "explanation": "It rang and did not settle."
+    },
+    {
+      "stage": "check",
+      "question": "The stiff gains with 20 ms of delay and a 10 ms lag:",
+      "options": [
+        "Settled in 0.24 s",
+        "Overshot 23.5 percent and did not settle",
+        "Were unchanged",
+        "Overshot 0 percent"
+      ],
+      "correct": 1,
+      "explanation": "The delay adds phase lag and a quick loop has less margin."
+    },
+    {
+      "stage": "check",
+      "question": "The largest delay the stiff gains could stand was:",
+      "options": [
+        "43 ms",
+        "19 ms",
+        "0 ms",
+        "1 s"
+      ],
+      "correct": 1,
+      "explanation": "The gentle ones stood 43 ms."
+    },
+    {
+      "stage": "check",
+      "question": "Over 100 random robots the gentle gains settled on:",
+      "options": [
+        "46 percent",
+        "97 percent",
+        "0 percent",
+        "All"
+      ],
+      "correct": 1,
+      "explanation": "The stiff ones on 46."
+    },
+    {
+      "stage": "post",
+      "question": "How does the sim-to-real gap shrink?",
+      "options": [
+        "By hope",
+        "By measuring the real robot's delay and lag and putting them into the simulation and the margin",
+        "By stiffer gains",
+        "By a faster computer"
+      ],
+      "correct": 1,
+      "explanation": "Measurement."
+    },
+    {
+      "stage": "post",
+      "question": "What is the last word on a controller?",
+      "options": [
+        "The simulator",
+        "The robot",
+        "The plan",
+        "The margin"
+      ],
+      "correct": 1,
+      "explanation": "A step test is one test."
+    }
+  ]
+}

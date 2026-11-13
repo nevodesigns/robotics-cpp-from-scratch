@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "36-07-what-changes-on-the-real-robot",
+  "title": "What Changes on the Real Robot: Delay, a Slow Actuator and Friction in the Loop, the Delay a Joint Can Stand, and Gains Chosen Against a Spread of Robots",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "36-06-the-layer-that-can-take-the-power-away",
+    "29-07-an-arm-made-of-smart-servos",
+    "18-08-how-far-is-the-simulation-from-the-bench",
+    "29-03-a-gain-that-knows-the-pose"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/sim_to_real.hpp",
+    "note": "the gap between a simulator and the real joint: a joint with inertia, a PD law, a torque limit and friction, with the real robot's differences added to the simulation (a delay in the command, a lag in the actuator that makes the torque follow the command with a time constant); the step response of that loop (whether it settles, its overshoot and its settling time); the largest delay it can stand with given gains (found by halving an interval); and the share of a spread of randomly drawn robots (inertia, delay and lag each over a range) for which a set of gains settles, to show that gains chosen for the nominal robot can fail on the real one, and that a gentler set has a margin"
+  },
+  "breaks_first": [
+    "E-LEG-0069",
+    "E-LEG-0070",
+    "E-LEG-0071"
+  ]
+}
