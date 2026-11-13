@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "26-07-how-fast-the-path-can-be-driven",
+  "title": "How Fast the Path Can Be Driven: A Speed for Every Point, Within the Grip of a Turn, the Brakes Before It, and the Stop Line",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "26-03-smoothing-a-path-without-cutting-corners",
+    "23-05-the-traction-circle"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/speed_profile.hpp",
+    "note": "a speed profile along a path: the speed at each point is capped by the curvature there and the sideways acceleration the surface allows, then a backward pass makes it possible to brake in time for every slower point (and for a stop), and a forward pass keeps the speeding up within the motors' limit; the times between points follow"
+  },
+  "breaks_first": [
+    "E-VEH-0100",
+    "E-VEH-0101",
+    "E-VEH-0102"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "26-07-how-fast-the-path-can-be-driven",
+  "title": "How Fast the Path Can Be Driven: A Speed for Every Point, Within the Grip of a Turn, the Brakes Before It, and the Stop Line",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does the backward pass of a speed profile do?",
+      "options": [
+        "Reverses the vehicle",
+        "Limits each speed to what the vehicle could still slow down from to reach the next point",
+        "Speeds up",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "It puts the brakes on before the bend."
+    },
+    {
+      "stage": "check",
+      "question": "The capped speeds alone asked for a deceleration of:",
+      "options": [
+        "1.5 m/s2",
+        "20.0 m/s2, far over the limit",
+        "0",
+        "1"
+      ],
+      "correct": 1,
+      "explanation": "The brakes must start before the bend."
+    },
+    {
+      "stage": "check",
+      "question": "The profile asked for how much, against a limit of 1.5?",
+      "options": [
+        "20.0",
+        "1.50 m/s2",
+        "100",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "Within the limit."
+    },
+    {
+      "stage": "check",
+      "question": "How far before the stop line did the slowing begin?",
+      "options": [
+        "0 m",
+        "1.30 m",
+        "100 m",
+        "At the line"
+      ],
+      "correct": 1,
+      "explanation": "v squared over 2 a."
+    },
+    {
+      "stage": "post",
+      "question": "The same path took how long on ice, against tarmac?",
+      "options": [
+        "5.9 s on ice",
+        "8.0 s on ice against 5.9 s on tarmac",
+        "The same",
+        "It cannot"
+      ],
+      "correct": 1,
+      "explanation": "The grip sets the pace."
+    },
+    {
+      "stage": "post",
+      "question": "Why did smoothing a corner save time?",
+      "options": [
+        "Shorter path",
+        "The curvature at the corner point was lower, so the cap was higher: 8.6 s to 8.2 s",
+        "Luck",
+        "Faster motors"
+      ],
+      "correct": 1,
+      "explanation": "A corner asks a crawl."
+    }
+  ]
+}
