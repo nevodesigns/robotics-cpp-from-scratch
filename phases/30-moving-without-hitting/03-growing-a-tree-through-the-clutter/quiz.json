@@ -1,0 +1,78 @@
+{
+  "lesson": "30-03-growing-a-tree-through-the-clutter",
+  "title": "Growing a Tree Through the Clutter: RRT and RRT-Connect for an Arm, Why Two Trees Beat One, and the Planner That Must Know When to Give Up",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why can a planner for an arm not use a grid?",
+      "options": [
+        "Grids are slow only",
+        "Six dimensions are too many cells, and the obstacles are not simple in joint space: the only way to know is to ask the collision model",
+        "Arms are heavy",
+        "Grids are old"
+      ],
+      "correct": 1,
+      "explanation": "A million cells at ten steps a side."
+    },
+    {
+      "stage": "check",
+      "question": "Across 6 seeds, how many did RRT-Connect and RRT find?",
+      "options": [
+        "3 and 6",
+        "6 and 3",
+        "None",
+        "All of each"
+      ],
+      "correct": 1,
+      "explanation": "With 23 nodes against 58."
+    },
+    {
+      "stage": "check",
+      "question": "How long were the paths against the straight line in joint space?",
+      "options": [
+        "The same",
+        "2.90 times",
+        "Half",
+        "Exactly twice"
+      ],
+      "correct": 1,
+      "explanation": "Free, not good."
+    },
+    {
+      "stage": "check",
+      "question": "With the goal inside the wall the planner:",
+      "options": [
+        "Ran for ever",
+        "Said so at once: no path, 0 iterations",
+        "Found a path through the wall",
+        "Moved the wall"
+      ],
+      "correct": 1,
+      "explanation": "A goal that fails the pose check."
+    },
+    {
+      "stage": "post",
+      "question": "Why does a second tree from the goal help so much?",
+      "options": [
+        "It does not",
+        "Each tree reaches out and they meet, where one tree has to hit a small goal in a large space",
+        "It doubles the nodes",
+        "Luck"
+      ],
+      "correct": 1,
+      "explanation": "RRT-Connect."
+    },
+    {
+      "stage": "post",
+      "question": "What does the goal bias do?",
+      "options": [
+        "Chooses the shortest path",
+        "Samples the goal one time in ten to pull the tree towards it",
+        "Avoids the wall",
+        "Smooths the path"
+      ],
+      "correct": 1,
+      "explanation": "A small pull."
+    }
+  ]
+}

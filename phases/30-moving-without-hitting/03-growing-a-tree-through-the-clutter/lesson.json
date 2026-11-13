@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "30-03-growing-a-tree-through-the-clutter",
+  "title": "Growing a Tree Through the Clutter: RRT and RRT-Connect for an Arm, Why Two Trees Beat One, and the Planner That Must Know When to Give Up",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "30-02-how-far-it-is-safe-to-step",
+    "16-06-a-path-through-what-you-know"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/rrt.hpp",
+    "note": "sampling based planning for an arm in joint space: a random sample inside the joint limits (the goal itself some of the time), the nearest node of a tree, a step towards the sample of at most a set length, the edge checked by conservative advancement (30-02) and the node kept if it is free; RRT, which grows one tree from the start until a node can be joined to the goal; RRT-Connect, which grows a tree from each end and tries to join the new node to the other tree, swapping the trees; a path read back through the parents; and a planner that gives up after a number of iterations or at once if an end is in collision"
+  },
+  "breaks_first": [
+    "E-ARM-0058",
+    "E-ARM-0059",
+    "E-ARM-0060"
+  ]
+}
