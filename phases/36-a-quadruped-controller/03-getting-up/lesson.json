@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "36-03-getting-up",
+  "title": "Getting Up: The Torque at the Lowest Crouch, the Heat of a Slow Rise, and the Heaviest Robot That Can Stand From the Ground",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "36-02-sit-stand-walk-fall",
+    "34-06-how-hot-the-knees-get",
+    "34-02-what-the-foot-can-push-with"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/get_up.hpp",
+    "note": "rising from a crouch with four feet on the ground: the torque at the knee for the body's weight at each height from the crouch to the stand (the stance torque of 34-06 at that height), the greatest of them against the motor's peak torque, the heat of the rise as the share of the time the knee could stand at each torque that the rise uses (each step of the rise counted as its time over the time that torque would take to bring the winding to its limit), and the heaviest body that can rise at all or without overheating, found by halving an interval"
+  },
+  "breaks_first": [
+    "E-LEG-0057",
+    "E-LEG-0058",
+    "E-LEG-0059"
+  ]
+}
