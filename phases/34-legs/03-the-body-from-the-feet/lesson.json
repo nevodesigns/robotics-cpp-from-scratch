@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "34-03-the-body-from-the-feet",
+  "title": "The Body From the Feet: A Plane Through the Stance Feet, and the Height, Roll and Pitch of the Body Above It",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "34-02-what-the-foot-can-push-with",
+    "34-01-where-the-foot-is",
+    "25-09-the-robot-that-was-picked-up"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/body_pose.hpp",
+    "note": "the pose of the body above level ground from the places of the feet that are on it, seen in the body's frame: a plane fitted by least squares through the stance feet (the normal equations of three unknowns), the body's height as the distance of the body's origin from the plane, and its roll and pitch from the plane's normal; at least three feet that are not in a line; and how much noise in the feet's places comes through to the three numbers, with four feet and with three"
+  },
+  "breaks_first": [
+    "E-LEG-0007",
+    "E-LEG-0008"
+  ]
+}

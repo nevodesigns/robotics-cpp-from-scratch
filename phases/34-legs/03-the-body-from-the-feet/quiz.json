@@ -1,0 +1,78 @@
+{
+  "lesson": "34-03-the-body-from-the-feet",
+  "title": "The Body From the Feet: A Plane Through the Stance Feet, and the Height, Roll and Pitch of the Body Above It",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why do the feet give a second opinion on the body's tilt?",
+      "options": [
+        "They do not",
+        "On level ground they lie in one plane, which, seen from the body, is its tilt and height",
+        "They are accurate",
+        "They weigh the body"
+      ],
+      "correct": 1,
+      "explanation": "And they do not drift."
+    },
+    {
+      "stage": "check",
+      "question": "How many feet on the ground does the fit need at least?",
+      "options": [
+        "One",
+        "Three, not in a line",
+        "Four",
+        "Two"
+      ],
+      "correct": 1,
+      "explanation": "Fewer, or a line, give no plane."
+    },
+    {
+      "stage": "check",
+      "question": "With 5 mm of noise the roll was uncertain by:",
+      "options": [
+        "0 degrees",
+        "0.92 degrees with four feet and 1.29 with three",
+        "90 degrees",
+        "1 mm"
+      ],
+      "correct": 1,
+      "explanation": "A fourth foot averages some noise out."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the tilt so uncertain for so little noise?",
+      "options": [
+        "Bad luck",
+        "The feet are only about 0.4 m apart: a small base is a poor tilt sensor",
+        "The ground",
+        "The joints"
+      ],
+      "correct": 1,
+      "explanation": "Tilt is height difference over distance."
+    },
+    {
+      "stage": "post",
+      "question": "What must be left out of the fit?",
+      "options": [
+        "The stance feet",
+        "A swing foot, which is not on the ground",
+        "The front feet",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "Otherwise the plane tilts."
+    },
+    {
+      "stage": "post",
+      "question": "What does the plane give on a slope?",
+      "options": [
+        "The tilt relative to gravity",
+        "The tilt relative to the ground, not gravity",
+        "Nothing",
+        "The heading"
+      ],
+      "correct": 1,
+      "explanation": "35-04 brings in the IMU."
+    }
+  ]
+}
