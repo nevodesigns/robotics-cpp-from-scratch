@@ -1,0 +1,78 @@
+{
+  "lesson": "33-03-choosing-where-to-park",
+  "title": "Choosing Where to Park: Candidate Places Round the Target, a Score That Trades Reach Margin Against Travel and Clearance, and Saying None",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is the margin in the ring part of the score?",
+      "options": [
+        "To look tidy",
+        "It is the room the base has to stop short or long and still reach",
+        "It is required by law",
+        "It is the travel"
+      ],
+      "correct": 1,
+      "explanation": "1 in the middle of the ring."
+    },
+    {
+      "stage": "check",
+      "question": "With travel weighted most the base travelled:",
+      "options": [
+        "2.56 m",
+        "1.24 m",
+        "0 m",
+        "10 m"
+      ],
+      "correct": 1,
+      "explanation": "Against 2.56 m with no weight on travel."
+    },
+    {
+      "stage": "check",
+      "question": "With obstacles all round the target, how many places were free?",
+      "options": [
+        "252",
+        "0",
+        "1",
+        "36"
+      ],
+      "correct": 1,
+      "explanation": "The answer was none."
+    },
+    {
+      "stage": "check",
+      "question": "Where did the base go when a row of obstacles blocked the near side?",
+      "options": [
+        "Through them",
+        "Round to a bearing of -30 degrees",
+        "Nowhere",
+        "Back to the start"
+      ],
+      "correct": 1,
+      "explanation": "Every choice kept the clearance."
+    },
+    {
+      "stage": "post",
+      "question": "What do the weights decide?",
+      "options": [
+        "Nothing",
+        "Whether to arrive soon, with room, or clear of things",
+        "The colour",
+        "The arm's length"
+      ],
+      "correct": 1,
+      "explanation": "The trade between travel and margin."
+    },
+    {
+      "stage": "post",
+      "question": "What must a choice be able to say?",
+      "options": [
+        "Yes always",
+        "None",
+        "Maybe",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "A choice that returns something anyway sends the base into a wall."
+    }
+  ]
+}

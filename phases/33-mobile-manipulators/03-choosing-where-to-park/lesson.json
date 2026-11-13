@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "33-03-choosing-where-to-park",
+  "title": "Choosing Where to Park: Candidate Places Round the Target, a Score That Trades Reach Margin Against Travel and Clearance, and Saying None",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "33-02-what-the-arm-reaches-from-here",
+    "33-01-a-base-and-an-arm-in-one-frame-tree",
+    "26-01-a-path-a-car-can-drive"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::mobile",
+    "header": "rc/mobile/parking.hpp",
+    "note": "choosing where the base should stop to work on a target: candidate places on rings round the target (the arm's axis at a chosen distance and bearing from it, the base facing the target), each rejected if it collides with an obstacle (circles, with the base's radius and a clearance) or reaches the target with less than a minimum margin inside the arm's ring, and each of the rest scored by its margin in the ring, how far the base has to travel and how much clearance it has; the best is chosen, or none"
+  },
+  "breaks_first": [
+    "E-MOB-0007",
+    "E-MOB-0008",
+    "E-MOB-0009"
+  ]
+}
