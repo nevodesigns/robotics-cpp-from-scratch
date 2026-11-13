@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "30-06-putting-the-path-in-time",
+  "title": "Putting the Path in Time: Jerk Limited Profiles That Respect Every Joint, the Stop at Every Corner, and the Cost of a Path With Many Vertices",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "30-05-making-the-path-shorter-and-smoother",
+    "14-06-a-profile-the-machine-can-follow",
+    "29-08-how-much-the-motors-can-give"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/time_param.hpp",
+    "note": "turning a path in joint space into a trajectory in time: for each straight segment the distance along it is moved by a jerk limited S curve (seven phases: jerk up, constant acceleration, jerk down, cruise, and the mirror of them), whose limits on speed, acceleration and jerk along the segment are the smallest of each joint's limit over that joint's share of the direction; the closed form of the peak speed for a segment too short to reach the cruise speed; the joint positions, speeds, accelerations and jerks at any time; the trapezoid profile (no jerk limit) for comparison; and the segment by segment total, at rest at every vertex"
+  },
+  "breaks_first": [
+    "E-ARM-0067",
+    "E-ARM-0068",
+    "E-ARM-0069"
+  ]
+}

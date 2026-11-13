@@ -1,0 +1,78 @@
+{
+  "lesson": "30-06-putting-the-path-in-time",
+  "title": "Putting the Path in Time: Jerk Limited Profiles That Respect Every Joint, the Stop at Every Corner, and the Cost of a Path With Many Vertices",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does the jerk limit of an S curve prevent?",
+      "options": [
+        "Slow moves",
+        "A step in the acceleration, which shakes the arm and its gearboxes",
+        "Friction",
+        "Rounding"
+      ],
+      "correct": 1,
+      "explanation": "Rate of change of acceleration."
+    },
+    {
+      "stage": "check",
+      "question": "The S curve and the trapezoid for a move of 1 rad took:",
+      "options": [
+        "1.000 s and 1.220 s",
+        "1.220 s and 1.000 s",
+        "The same",
+        "0 s"
+      ],
+      "correct": 1,
+      "explanation": "A little longer: the price of the jerk limit."
+    },
+    {
+      "stage": "check",
+      "question": "The trapezoid's jerk over a millisecond step was:",
+      "options": [
+        "20 rad/s3",
+        "4000 rad/s3",
+        "0",
+        "1000 rad/s3 exactly"
+      ],
+      "correct": 1,
+      "explanation": "Against a limit of 20."
+    },
+    {
+      "stage": "check",
+      "question": "The wandering path of 17 points took 14.33 s and its straight shortcut:",
+      "options": [
+        "14.33 s",
+        "1.45 s",
+        "0 s",
+        "The same"
+      ],
+      "correct": 1,
+      "explanation": "A stop at every vertex."
+    },
+    {
+      "stage": "post",
+      "question": "How are a joint's limits turned into limits along a segment?",
+      "options": [
+        "Averaged",
+        "The smallest, over the joints, of the joint's limit over its share of the direction",
+        "The largest",
+        "They are not"
+      ],
+      "correct": 1,
+      "explanation": "The limiting joint sets it."
+    },
+    {
+      "stage": "post",
+      "question": "Why did halving the speed limits not change a short move?",
+      "options": [
+        "It did",
+        "A short move never reaches its cruise speed: acceleration and jerk limit it",
+        "Speeds are ignored",
+        "Rounding"
+      ],
+      "correct": 1,
+      "explanation": "Only the long move cruises."
+    }
+  ]
+}
