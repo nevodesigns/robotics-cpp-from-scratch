@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "31-05-putting-a-peg-in-a-hole",
+  "title": "Putting a Peg in a Hole: A Chamfer, a Friction Cone, and a Hand That Gives Sideways So the Peg Can Find the Hole",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "31-04-feeling-that-it-has-touched",
+    "29-06-giving-way-on-purpose",
+    "31-03-finding-the-part-with-a-camera"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/insertion.hpp",
+    "note": "a peg going into a hole with a chamfer, in the quasi static sideways model: the clearance between peg and hole, the chamfer's width and angle, the friction at the contact, and the sideways stiffness of the hand; the push down that moves a peg sideways to the hole (the sideways part of the push on the chamfer less friction, against the hand's stiffness), whether the peg can slide at all (the friction cone), and the outcome of an insertion at a given offset: in, missed (beyond the chamfer) or jammed (the push needed is more than the hand may give)"
+  },
+  "breaks_first": [
+    "E-ARM-0088",
+    "E-ARM-0089",
+    "E-ARM-0090"
+  ]
+}
