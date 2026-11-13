@@ -1,0 +1,78 @@
+{
+  "lesson": "26-03-smoothing-a-path-without-cutting-corners",
+  "title": "Smoothing a Path Without Cutting Corners: Pulling Points Straight, Holding Them Near the Plan, and Not Into the Wall",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What are the two pulls on each point of a smoothing path?",
+      "options": [
+        "Up and down",
+        "Towards the neighbours' midpoint, and back towards the plan",
+        "Left and right",
+        "Forward and back"
+      ],
+      "correct": 1,
+      "explanation": "Straighten, but stay near the route."
+    },
+    {
+      "stage": "check",
+      "question": "The corner path's sharpest curvature went from:",
+      "options": [
+        "3.64 to 7.1",
+        "7.1 to 3.64 per metre",
+        "0 to 1",
+        "No change"
+      ],
+      "correct": 1,
+      "explanation": "The car's limit is 1.35."
+    },
+    {
+      "stage": "check",
+      "question": "With no grid, how many points ended inside the block?",
+      "options": [
+        "0",
+        "5",
+        "All",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "The shortcut inside the corner."
+    },
+    {
+      "stage": "check",
+      "question": "With the grid check, how many ended inside?",
+      "options": [
+        "5",
+        "0",
+        "Most",
+        "10"
+      ],
+      "correct": 1,
+      "explanation": "Moves into a blocked cell are refused."
+    },
+    {
+      "stage": "post",
+      "question": "What does more smoothing cost?",
+      "options": [
+        "Nothing",
+        "Distance from the plan: 0.04 m light, 0.63 m heavy",
+        "Memory",
+        "Speed of the car"
+      ],
+      "correct": 1,
+      "explanation": "The planner checked the plan."
+    },
+    {
+      "stage": "post",
+      "question": "Does smoothing guarantee the car's curvature limit?",
+      "options": [
+        "Yes",
+        "No: it lowers it, and the number must be checked",
+        "Only on grids",
+        "Only in simulation"
+      ],
+      "correct": 1,
+      "explanation": "Check after, or plan with arcs."
+    }
+  ]
+}

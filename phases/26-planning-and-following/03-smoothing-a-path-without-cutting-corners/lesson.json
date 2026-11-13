@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "26-03-smoothing-a-path-without-cutting-corners",
+  "title": "Smoothing a Path Without Cutting Corners: Pulling Points Straight, Holding Them Near the Plan, and Not Into the Wall",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "26-01-a-path-a-car-can-drive",
+    "24-04-costmap-layers"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/smooth.hpp",
+    "note": "smoothing a path: even resampling, then a gradient smoother that moves each interior point towards its neighbours' midpoint and back towards where the plan had it, with the ends fixed, refusing any move into a cell of the cost grid that is inscribed or worse; the curvature of three points (Menger) measures the result"
+  },
+  "breaks_first": [
+    "E-VEH-0088",
+    "E-VEH-0089",
+    "E-VEH-0090"
+  ]
+}

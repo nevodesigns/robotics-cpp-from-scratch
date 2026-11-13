@@ -1,0 +1,89 @@
+#ifndef LESSON_SOLUTION_HPP
+#define LESSON_SOLUTION_HPP
+
+#include <algorithm>
+#include <cmath>
+#include <cstddef>
+#include <rc/drive/hybrid_astar.hpp>
+#include <vector>
+
+using namespace rc::drive;
+
+struct SmoothConfig {
+  double data_weight = 0.1;    // how hard each point is pulled back to the plan
+  double smooth_weight = 0.3;  // how hard each point is pulled to its neighbours' midpoint
+  double tolerance = 1e-5;     // stop when the total move in a sweep is below this, metres
+  int max_sweeps = 2000;
+};
+
+struct SmoothResult {
+  std::vector<CarPose> path;
+  int sweeps = 0;
+};
+
+// Points an even `spacing` apart along the polyline, the first and last where it starts and ends.
+inline std::vector<CarPose> resample(const std::vector<CarPose>& in, double spacing) {
+  std::vector<CarPose> out;
+  if (in.empty()) return out;
+  out.push_back(in.front());
+  double carried = 0.0;  // metres since the last point written
+  for (std::size_t i = 1; i < in.size(); ++i) {
+    double ax = in[i - 1].x, ay = in[i - 1].y;
+    const double seg = std::hypot(in[i].x - ax, in[i].y - ay);
+    double left = seg;
+    while (carried + left >= spacing && seg > 0.0) {
+      const double use = spacing - carried;
+      ax += (in[i].x - ax) * use / left;
+      ay += (in[i].y - ay) * use / left;
+      left -= use;
+      carried = 0.0;
+      CarPose p;
+      p.x = ax;
+      p.y = ay;
+      out.push_back(p);
+    }
+    carried += left;
+  }
+  const CarPose& last = in.back();
+  if (std::hypot(out.back().x - last.x, out.back().y - last.y) > 1e-9) out.push_back(last);
+  return out;
+}
+
+inline bool cell_blocked(const CostGrid* grid, double x, double y) {
+  if (grid == nullptr) return false;
+  return grid->at(grid->cell_i(x), grid->cell_j(y)) >= rc::perceive::kCostInscribed;
+}
+
+// Smooths the interior points of a path. The ends are fixed. With a grid, a move into a blocked cell is refused.
+inline SmoothResult smooth_path(const std::vector<CarPose>& plan, const CostGrid* grid, const SmoothConfig& cfg) {
+  SmoothResult r;
+  r.path = plan;
+  const std::size_t n = plan.size();
+  if (n < 3) return r;
+  for (int sweep = 0; sweep < cfg.max_sweeps; ++sweep) {
+    double moved = 0.0;
+    (void)moved;  // TODO: for each interior point, move it by the data weight times (plan - point) plus the smooth weight times (previous + next - 2 point), unless the new place is blocked; add the move to `moved`
+    r.sweeps = sweep + 1;
+    if (moved < cfg.tolerance) break;
+  }
+  return r;
+}
+
+// The curvature of the circle through three points (zero if two of them coincide or all are in a line).
+inline double menger_curvature(const CarPose& a, const CarPose& b, const CarPose& c) {
+  const double ab = std::hypot(b.x - a.x, b.y - a.y);
+  const double bc = std::hypot(c.x - b.x, c.y - b.y);
+  const double ca = std::hypot(a.x - c.x, a.y - c.y);
+  if (ab < 1e-12 || bc < 1e-12 || ca < 1e-12) return 0.0;
+  const double cross = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+  return 2.0 * std::fabs(cross) / (ab * bc * ca);
+}
+
+inline double max_menger_curvature(const std::vector<CarPose>& path) {
+  double worst = 0.0;
+  for (std::size_t i = 1; i + 1 < path.size(); ++i) worst = std::max(worst, menger_curvature(path[i - 1], path[i], path[i + 1]));
+  return worst;
+}
+
+
+#endif
