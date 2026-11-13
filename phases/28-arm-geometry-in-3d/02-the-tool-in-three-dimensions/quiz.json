@@ -1,0 +1,78 @@
+{
+  "lesson": "28-02-the-tool-in-three-dimensions",
+  "title": "The Tool in Three Dimensions: Forward Kinematics of a Six and a Seven Joint Arm, the Tool Offset, and Roll Pitch Yaw With Its Hole at Ninety Degrees",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the tool's pose in forward kinematics?",
+      "options": [
+        "The last joint angle",
+        "The base, then every row of the table for its joint angle, then the tool offset",
+        "A sum of joint angles",
+        "The first row"
+      ],
+      "correct": 1,
+      "explanation": "Multiplication."
+    },
+    {
+      "stage": "check",
+      "question": "With every joint at zero the UR5's tool was at:",
+      "options": [
+        "(0, 0, 0)",
+        "(-0.81725, -0.19145, -0.00549) m, the sums of its table",
+        "(1, 1, 1)",
+        "Nowhere"
+      ],
+      "correct": 1,
+      "explanation": "x = a2 + a3, y = -(d4 + d6), z = d1 - d5."
+    },
+    {
+      "stage": "check",
+      "question": "The Panda's zero pose, within the limits (1) or not (0)?",
+      "options": [
+        "0: it is not a pose the arm can take",
+        "1",
+        "Only for joint 4",
+        "Both"
+      ],
+      "correct": 0,
+      "explanation": "Joint 4 may not be zero."
+    },
+    {
+      "stage": "check",
+      "question": "A tool offset of 0.15 m moved the tool how far, and along whose axis?",
+      "options": [
+        "0 m",
+        "0.150 m along the flange's own axis",
+        "1 m along the base's",
+        "0.15 m along the base's y"
+      ],
+      "correct": 1,
+      "explanation": "A gripper's tip is not the flange."
+    },
+    {
+      "stage": "post",
+      "question": "Where do roll and yaw stop being separate?",
+      "options": [
+        "At zero",
+        "Where the pitch is a quarter turn",
+        "At a half turn of roll",
+        "Never"
+      ],
+      "correct": 1,
+      "explanation": "The hole of roll pitch yaw."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a test that compares the code with the code useless for forward kinematics?",
+      "options": [
+        "It is slow",
+        "It proves nothing about the table: use values read off by hand",
+        "It is too exact",
+        "It is circular only in C++"
+      ],
+      "correct": 1,
+      "explanation": "Sums of the table's numbers."
+    }
+  ]
+}

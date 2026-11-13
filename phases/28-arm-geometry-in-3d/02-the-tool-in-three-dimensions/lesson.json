@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "28-02-the-tool-in-three-dimensions",
+  "title": "The Tool in Three Dimensions: Forward Kinematics of a Six and a Seven Joint Arm, the Tool Offset, and Roll Pitch Yaw With Its Hole at Ninety Degrees",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "28-01-frames-and-a-table-for-an-arm",
+    "13-01-where-the-tool-is"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/fk.hpp",
+    "note": "forward kinematics of an arm from its table: each joint's row read in the table's convention with the joint angle and its offset, the frames of all the links, the tool as the base times the rows times a tool offset, a check against the joint limits, and the orientation as roll pitch yaw (the order z, y, x) with the convention that fixes the yaw at zero where the pitch is a quarter turn"
+  },
+  "breaks_first": [
+    "E-ARM-0004",
+    "E-ARM-0005",
+    "E-ARM-0006"
+  ]
+}
