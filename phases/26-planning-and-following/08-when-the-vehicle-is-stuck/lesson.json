@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "26-08-when-the-vehicle-is-stuck",
+  "title": "When the Vehicle Is Stuck: Noticing It Without Crying Wolf, a Ladder of Things to Try Per Vehicle, and Knowing When to Give Up",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "26-04-following-a-path-pure-pursuit-and-stanley",
+    "26-06-a-skid-steer-controller-that-knows-slip"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/unstick.hpp",
+    "note": "recovery from being stuck: a detector that says stuck when the vehicle has been commanded to move for a whole window and has moved less than a distance, a ladder of behaviours chosen by the number of attempts and what the vehicle can do (wait, back up, spin, give up), a state machine that runs one behaviour to its end or to a time limit and goes back to normal, forgets the attempts once the vehicle has made real progress, and gives up after a number of tries"
+  },
+  "breaks_first": [
+    "E-VEH-0103",
+    "E-VEH-0104",
+    "E-VEH-0105"
+  ]
+}

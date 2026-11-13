@@ -1,0 +1,78 @@
+{
+  "lesson": "26-08-when-the-vehicle-is-stuck",
+  "title": "When the Vehicle Is Stuck: Noticing It Without Crying Wolf, a Ladder of Things to Try Per Vehicle, and Knowing When to Give Up",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What are the two halves of the stuck test?",
+      "options": [
+        "Speed and battery",
+        "Commanded to move for a whole window, and moved less than a distance",
+        "Time and place",
+        "Heat and weight"
+      ],
+      "correct": 1,
+      "explanation": "A stopped vehicle is not stuck."
+    },
+    {
+      "stage": "check",
+      "question": "A vehicle commanded to stop for 10 s was flagged how many times?",
+      "options": [
+        "3.0",
+        "0",
+        "Many",
+        "Once"
+      ],
+      "correct": 1,
+      "explanation": "It was not trying to move."
+    },
+    {
+      "stage": "check",
+      "question": "The snagged vehicle finished in 23.5 s on which attempt?",
+      "options": [
+        "At the first attempt, by waiting",
+        "After 2 attempts, the second by backing up",
+        "None",
+        "Without recovery"
+      ],
+      "correct": 1,
+      "explanation": "The wait did not help; the back up did."
+    },
+    {
+      "stage": "check",
+      "question": "The wall that never moved was given up on after how many attempts?",
+      "options": [
+        "2",
+        "3",
+        "1",
+        "Never"
+      ],
+      "correct": 1,
+      "explanation": "Bounded, not for ever."
+    },
+    {
+      "stage": "post",
+      "question": "Why does a car's ladder back up twice instead of spinning?",
+      "options": [
+        "Cars are slow",
+        "A car cannot spin in place",
+        "Cars are heavy",
+        "It is a bug"
+      ],
+      "correct": 1,
+      "explanation": "Leave out the rungs a vehicle cannot do."
+    },
+    {
+      "stage": "post",
+      "question": "Why does every behaviour have a time limit?",
+      "options": [
+        "For looks",
+        "A back up that is itself blocked would reverse for ever",
+        "Memory",
+        "The grid"
+      ],
+      "correct": 1,
+      "explanation": "A recovery must not hang."
+    }
+  ]
+}
