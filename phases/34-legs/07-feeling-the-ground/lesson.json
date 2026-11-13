@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "34-07-feeling-the-ground",
+  "title": "Feeling the Ground: Contact From the Torque at the Joints, With a Blank After Lift-off and a Gap Between On and Off",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "34-06-how-hot-the-knees-get",
+    "34-02-what-the-foot-can-push-with",
+    "31-04-feeling-that-it-has-touched"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/foot_contact.hpp",
+    "note": "telling that a foot is on the ground from an estimate of the force at the foot (from the joint torques, 34-02): a threshold to say on and a lower one to say off (so a force that hovers near one does not make the state flap), a count of readings in a row before a change is believed, and a blank after the foot is told to lift during which touchdown is not believed (the leg's own acceleration makes a spike); tested on a simulated step with noise, a lift-off spike and a grazing touch, to show how soon contact is found and what each of the three guards is for"
+  },
+  "breaks_first": [
+    "E-LEG-0018",
+    "E-LEG-0019",
+    "E-LEG-0020"
+  ]
+}

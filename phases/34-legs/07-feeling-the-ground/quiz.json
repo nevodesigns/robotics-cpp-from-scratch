@@ -1,0 +1,78 @@
+{
+  "lesson": "34-07-feeling-the-ground",
+  "title": "Feeling the Ground: Contact From the Torque at the Joints, With a Blank After Lift-off and a Gap Between On and Off",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "How does a foot with no sensor know it is on the ground?",
+      "options": [
+        "It cannot",
+        "From the torque at the joints, turned into the force at the foot",
+        "From the camera",
+        "From the timetable"
+      ],
+      "correct": 1,
+      "explanation": "34-02's inverse of the transpose."
+    },
+    {
+      "stage": "check",
+      "question": "Why two thresholds, on and off?",
+      "options": [
+        "Tradition",
+        "A force that hovers near one makes the state flap",
+        "To save time",
+        "It is required"
+      ],
+      "correct": 1,
+      "explanation": "10 changes with one, 0 with two."
+    },
+    {
+      "stage": "check",
+      "question": "What is the blank after the foot is told to lift for?",
+      "options": [
+        "Speed",
+        "The leg's own acceleration gives a spike that is not the ground",
+        "Noise",
+        "The battery"
+      ],
+      "correct": 1,
+      "explanation": "24 changes without it, 12 with."
+    },
+    {
+      "stage": "check",
+      "question": "Touchdown was found how long after the force began to rise?",
+      "options": [
+        "0 ms",
+        "12 ms",
+        "1 s",
+        "2 s"
+      ],
+      "correct": 1,
+      "explanation": "A run of 3 readings."
+    },
+    {
+      "stage": "post",
+      "question": "What does a foot down earlier than the gait says mean?",
+      "options": [
+        "Nothing",
+        "A bump: hold the swing and take the load",
+        "A hole",
+        "A fault"
+      ],
+      "correct": 1,
+      "explanation": "Late would be a hole."
+    },
+    {
+      "stage": "post",
+      "question": "What is not decided here?",
+      "options": [
+        "Whether the foot is down",
+        "Slip, and early or late touchdown",
+        "The thresholds",
+        "The run"
+      ],
+      "correct": 1,
+      "explanation": "Those come in 35-08 and 36-03."
+    }
+  ]
+}
