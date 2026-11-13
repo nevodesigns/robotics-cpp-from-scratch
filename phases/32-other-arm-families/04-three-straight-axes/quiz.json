@@ -1,0 +1,78 @@
+{
+  "lesson": "32-04-three-straight-axes",
+  "title": "Three Straight Axes: The Gantry, the Time of a Straight Line Across Axes of Different Strength, and What a Long Beam Does to Accuracy",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does a gantry need no inverse kinematics?",
+      "options": [
+        "It does",
+        "The tool's place is the axes' positions",
+        "It is slow",
+        "It is small"
+      ],
+      "correct": 1,
+      "explanation": "Three straight axes at right angles."
+    },
+    {
+      "stage": "check",
+      "question": "Which took longer for the move of 0.4 m and 0.4 m?",
+      "options": [
+        "Each axis on its own, 0.825 s",
+        "A straight line, 0.900 s",
+        "The same",
+        "Neither"
+      ],
+      "correct": 1,
+      "explanation": "z sets the speed and x the acceleration."
+    },
+    {
+      "stage": "check",
+      "question": "Twice the span made the sag how many times as great?",
+      "options": [
+        "2",
+        "8",
+        "4",
+        "16"
+      ],
+      "correct": 1,
+      "explanation": "L cubed."
+    },
+    {
+      "stage": "check",
+      "question": "The first resonance for 5 kg was:",
+      "options": [
+        "71 Hz",
+        "1 Hz",
+        "10 kHz",
+        "0"
+      ],
+      "correct": 0,
+      "explanation": "sqrt(k/m) over 2 pi."
+    },
+    {
+      "stage": "post",
+      "question": "What does a skew of the two ends give?",
+      "options": [
+        "Nothing",
+        "An error that grows with the lever, from the beam turning",
+        "A faster axis",
+        "Less sag"
+      ],
+      "correct": 1,
+      "explanation": "60 micrometres at 0.3 m."
+    },
+    {
+      "stage": "post",
+      "question": "What makes a bigger gantry less accurate?",
+      "options": [
+        "Its colour",
+        "Its beams, whose sag grows with the cube of the length unless the section grows",
+        "Its software",
+        "Its motors"
+      ],
+      "correct": 1,
+      "explanation": "L cubed."
+    }
+  ]
+}

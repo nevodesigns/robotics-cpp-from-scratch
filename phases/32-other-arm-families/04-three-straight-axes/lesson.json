@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "32-04-three-straight-axes",
+  "title": "Three Straight Axes: The Gantry, the Time of a Straight Line Across Axes of Different Strength, and What a Long Beam Does to Accuracy",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "32-03-six-legs-and-a-table",
+    "30-06-putting-the-path-in-time",
+    "29-08-how-much-the-motors-can-give",
+    "31-07-how-many-parts-an-hour"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/gantry.hpp",
+    "note": "the Cartesian gantry: three straight axes with their own speed and acceleration limits; the time of a move when each axis goes on its own and when the tool is to go in a straight line (the line's speed and acceleration are set by the weakest axis for its share of the direction); the sag of a crossbeam under a load at its middle, the stiffness it gives and the first resonance with the moving mass; and the skew of a beam driven from both ends when the two ends are out of step"
+  },
+  "breaks_first": [
+    "E-ARM-0112",
+    "E-ARM-0113",
+    "E-ARM-0114"
+  ]
+}
