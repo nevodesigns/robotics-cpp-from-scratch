@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "35-01-standing-on-three-legs",
+  "title": "Standing on Three Legs: The Support Polygon, How Near the Centre of Mass Is to Its Edge, and the Shift of the Body That a Crawl Needs",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "34-04-down-and-up",
+    "34-03-the-body-from-the-feet",
+    "33-05-tipping-with-the-arm-out"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/static_gait.hpp",
+    "note": "a static gait, a crawl, in which one leg is lifted at a time and the other three hold the body: the support polygon of the feet on the ground, the distance of the centre of mass's projection from its nearest edge (positive inside, the static stability margin), the margin for each lift of a symmetric robot (which is zero when the body is centred, since the centre falls on the diagonal), the shift of the body toward the middle of the three feet that makes it positive, and the fraction of the stance that a crawl needs for the shift"
+  },
+  "breaks_first": [
+    "E-LEG-0024",
+    "E-LEG-0025",
+    "E-LEG-0026"
+  ]
+}

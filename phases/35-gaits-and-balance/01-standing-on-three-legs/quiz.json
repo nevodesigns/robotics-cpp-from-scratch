@@ -1,0 +1,78 @@
+{
+  "lesson": "35-01-standing-on-three-legs",
+  "title": "Standing on Three Legs: The Support Polygon, How Near the Centre of Mass Is to Its Edge, and the Shift of the Body That a Crawl Needs",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What makes a body statically stable?",
+      "options": [
+        "Slow legs",
+        "Its centre of mass, projected down, is inside the polygon of the feet on the ground",
+        "A heavy body",
+        "A flat floor only"
+      ],
+      "correct": 1,
+      "explanation": "And the margin is how far inside."
+    },
+    {
+      "stage": "check",
+      "question": "With the body centred and a foot lifted the margin was:",
+      "options": [
+        "0.078 m",
+        "0.000 m, on the diagonal",
+        "1 m",
+        "0.031 m"
+      ],
+      "correct": 1,
+      "explanation": "A centred body has no margin."
+    },
+    {
+      "stage": "check",
+      "question": "After moving the centre of mass to the middle of the three feet the margin was:",
+      "options": [
+        "0.000 m",
+        "0.078 m",
+        "0.5 m",
+        "negative"
+      ],
+      "correct": 1,
+      "explanation": "A shift of up to 8.1 cm."
+    },
+    {
+      "stage": "check",
+      "question": "A shift forward with a front foot lifted:",
+      "options": [
+        "Helps",
+        "Goes toward the foot that is leaving and does not help",
+        "Is the best",
+        "Is unnecessary"
+      ],
+      "correct": 1,
+      "explanation": "It depends on which leg is going up."
+    },
+    {
+      "stage": "post",
+      "question": "Why is zero margin not safe?",
+      "options": [
+        "It is",
+        "A push, a bump or the swing of the leg itself tips it",
+        "It is slow",
+        "It is heavy"
+      ],
+      "correct": 1,
+      "explanation": "The body is on an edge."
+    },
+    {
+      "stage": "post",
+      "question": "What does the margin not say?",
+      "options": [
+        "The room inside",
+        "Anything about acceleration or the swing of the lifted leg",
+        "The polygon",
+        "The edge"
+      ],
+      "correct": 1,
+      "explanation": "35-02 and 35-06."
+    }
+  ]
+}
