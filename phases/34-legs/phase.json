@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "title": "Legs",
+  "ends_with": "A leg modelled well enough to stand on and step with: its geometry both ways, the forces it can give and the torque they cost, the body's pose from the feet, the timing and the path of a step, the load and heat of its servos, the sense that the foot has touched, and the calibration that makes the numbers true"
+}

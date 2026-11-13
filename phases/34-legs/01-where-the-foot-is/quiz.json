@@ -1,0 +1,78 @@
+{
+  "lesson": "34-01-where-the-foot-is",
+  "title": "Where the Foot Is: A Leg of Three Joints, Its Forward and Inverse Kinematics, the Two Knees, and the Straight Leg",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "How many answers has the inverse kinematics of a leg for a place within reach?",
+      "options": [
+        "One",
+        "Two, with the knee bent one way or the other",
+        "Four",
+        "Infinitely many"
+      ],
+      "correct": 1,
+      "explanation": "Plus or minus the arccosine."
+    },
+    {
+      "stage": "check",
+      "question": "Over a grid of 756 places, how many were reachable?",
+      "options": [
+        "756",
+        "680",
+        "0",
+        "1"
+      ],
+      "correct": 1,
+      "explanation": "A place nearer the lean axis than the offset, or beyond the leg's length, is refused."
+    },
+    {
+      "stage": "check",
+      "question": "A place 0.50 m below the hip:",
+      "options": [
+        "Was reached",
+        "Was out of reach",
+        "Needed the other knee",
+        "Was reached with a lean"
+      ],
+      "correct": 1,
+      "explanation": "The leg is 0.42 m long."
+    },
+    {
+      "stage": "check",
+      "question": "The knee was -89 degrees for the foot 0.30 m below the hip, which is:",
+      "options": [
+        "Straight",
+        "Bent back, as a standing dog's",
+        "Folded flat",
+        "Unreachable"
+      ],
+      "correct": 1,
+      "explanation": "Lower stands bend more."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the straight leg a singularity?",
+      "options": [
+        "It is not",
+        "The foot cannot move farther along the leg and the joint rates grow without bound near it",
+        "It is slow",
+        "It is weak"
+      ],
+      "correct": 1,
+      "explanation": "As in 32-01."
+    },
+    {
+      "stage": "post",
+      "question": "What is not in this model?",
+      "options": [
+        "The forward kinematics",
+        "Joint limits, backlash and the true zeros of the joints",
+        "The two knees",
+        "The offset"
+      ],
+      "correct": 1,
+      "explanation": "34-08 measures the zeros."
+    }
+  ]
+}

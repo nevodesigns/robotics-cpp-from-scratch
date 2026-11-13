@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "34-01-where-the-foot-is",
+  "title": "Where the Foot Is: A Leg of Three Joints, Its Forward and Inverse Kinematics, the Two Knees, and the Straight Leg",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "28-04-eight-ways-to-reach-a-pose",
+    "32-01-two-joints-and-a-plunger",
+    "28-06-where-the-arm-loses-a-direction"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/leg_kin.hpp",
+    "note": "the kinematics of one leg of a four legged robot: three joints (a hip that leans the leg sideways, a hip that swings it forward and back, and a knee), with a sideways offset of the hip joint, a thigh and a shank; the position of the foot in the hip's frame from the joint angles; the joint angles from a foot position in closed form (the lean from the geometry in the plane across the body, then the two link problem in the plane of the leg, with the knee bent either way); whether a place can be reached; and the number that measures how near the leg is to straight"
+  },
+  "breaks_first": [
+    "E-LEG-0001",
+    "E-LEG-0002",
+    "E-LEG-0003"
+  ]
+}
