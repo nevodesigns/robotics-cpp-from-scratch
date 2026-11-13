@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "35-08-slopes-and-steps",
+  "title": "Slopes and Steps: What Grip, Tipping and the Legs' Reach Each Allow, How High a Foot Can Be Put, and How High the Servos Can Swing It",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "35-07-taking-a-step-when-pushed",
+    "34-05-the-path-of-a-step",
+    "34-01-where-the-foot-is",
+    "23-05-the-traction-circle"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/terrain_limits.hpp",
+    "note": "the limits of a quadruped on slopes and steps: the steepest slope before the feet slip (the arctangent of the friction), before the body tips (the arctangent of the half wheelbase over the height of the centre of mass), and before the legs cannot reach if the body stays level (the arctangent of the leg's spare length over the half wheelbase); the highest step a foot can be put on by the leg's geometry (found by halving an interval with the inverse kinematics of 34-01 and the knee's limit), and the highest the servos can swing it in a given time (with the joint rates of 34-05); and which limit is the first to bind"
+  },
+  "breaks_first": [
+    "E-LEG-0045",
+    "E-LEG-0046",
+    "E-LEG-0047"
+  ]
+}

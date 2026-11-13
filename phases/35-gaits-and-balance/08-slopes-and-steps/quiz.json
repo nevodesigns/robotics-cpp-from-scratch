@@ -1,0 +1,78 @@
+{
+  "lesson": "35-08-slopes-and-steps",
+  "title": "Slopes and Steps: What Grip, Tipping and the Legs' Reach Each Allow, How High a Foot Can Be Put, and How High the Servos Can Swing It",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Which three things can limit a robot on a slope?",
+      "options": [
+        "Colour, size, weight",
+        "Grip, tipping and the legs' reach",
+        "Speed",
+        "Battery"
+      ],
+      "correct": 1,
+      "explanation": "The lowest is the first to give."
+    },
+    {
+      "stage": "check",
+      "question": "On a wet floor (friction 0.3) the feet slipped at:",
+      "options": [
+        "31.0 degrees",
+        "16.7 degrees",
+        "35.1 degrees",
+        "0 degrees"
+      ],
+      "correct": 1,
+      "explanation": "Dry: 31.0."
+    },
+    {
+      "stage": "check",
+      "question": "Which limit was the first to give for these legs?",
+      "options": [
+        "Friction",
+        "Number 2, the reach of a body kept level",
+        "Nothing",
+        "Colour"
+      ],
+      "correct": 1,
+      "explanation": "0 friction, 1 tipping, 2 reach."
+    },
+    {
+      "stage": "check",
+      "question": "The highest step by geometry and by the servos in 0.20 s:",
+      "options": [
+        "0.033 m and 0.229 m",
+        "0.229 m and 0.033 m",
+        "The same",
+        "0 m"
+      ],
+      "correct": 1,
+      "explanation": "The servos give a fraction."
+    },
+    {
+      "stage": "post",
+      "question": "What lets a robot climb a steeper slope than its reach allows with a level body?",
+      "options": [
+        "Nothing",
+        "Tilting the body to follow the slope",
+        "A faster gait",
+        "Lighter legs"
+      ],
+      "correct": 1,
+      "explanation": "The attitude of 35-04 set to the slope's."
+    },
+    {
+      "stage": "post",
+      "question": "What must a robot do to climb stairs with these servos?",
+      "options": [
+        "Nothing",
+        "Slow down: a longer swing allows a higher step",
+        "Speed up",
+        "Turn"
+      ],
+      "correct": 1,
+      "explanation": "The servos set the height at that pace."
+    }
+  ]
+}
