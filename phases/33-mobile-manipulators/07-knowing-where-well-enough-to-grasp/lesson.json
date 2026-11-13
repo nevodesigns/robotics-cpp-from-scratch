@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "33-07-knowing-where-well-enough-to-grasp",
+  "title": "Knowing Where Well Enough to Grasp: An Error Budget From Base to Fingertip, the Chance a Grasp Works, and the Camera That Takes the Base Out of It",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "33-06-how-much-it-can-carry",
+    "33-01-a-base-and-an-arm-in-one-frame-tree",
+    "31-03-finding-the-part-with-a-camera",
+    "25-06-how-lost-can-it-be"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::mobile",
+    "header": "rc/mobile/grasp_budget.hpp",
+    "note": "the error budget of a grasp by a mobile manipulator: the independent errors of the base's place, its heading (multiplied by the distance to the hand), the arm's mounting and the arm's own repeatability combined into one standard deviation at the hand; the chance that a grasp works for a given tolerance (the error function of the tolerance over the standard deviation, and its inverse for a wanted chance); the standard deviation needed for a wanted chance; and the same budget after a camera on the hand has measured the part relative to the hand, which takes the base's errors out"
+  },
+  "breaks_first": [
+    "E-MOB-0019",
+    "E-MOB-0020",
+    "E-MOB-0021"
+  ]
+}
