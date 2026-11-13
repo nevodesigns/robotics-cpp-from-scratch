@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "id": "36-08-a-quadruped-for-a-job",
+  "title": "A Quadruped for a Job: Every Check of Phases 34 to 36 Run Against One Walk, and the First That Fails Named",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "36-07-what-changes-on-the-real-robot",
+    "36-06-the-layer-that-can-take-the-power-away",
+    "36-03-getting-up",
+    "36-01-what-the-operator-asks-for",
+    "35-08-slopes-and-steps",
+    "35-07-taking-a-step-when-pushed",
+    "33-10-a-mobile-manipulator-for-a-job"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/quad_job.hpp",
+    "note": "the capstone of the legged track: a walk written as numbers (the speed wanted, the steepest slope and highest step on the way, the push it may meet, the extra load, the length of the route, the nearest a person comes) and a quadruped written as numbers (its leg, motor, mass and the figures of the lessons); a check that runs the fastest speed the legs allow (36-01), the slope and the step (35-08), the push that can be answered (35-07), the knees' heat in a trot with the load and whether the robot can still get up with it (34-06, 36-03), the battery for the route, and the speed the nearest person allows (31-06), and says which is the first to fail"
+  },
+  "breaks_first": [
+    "E-LEG-0072",
+    "E-LEG-0073",
+    "E-LEG-0074"
+  ]
+}
