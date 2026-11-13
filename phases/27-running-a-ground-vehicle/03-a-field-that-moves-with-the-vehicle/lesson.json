@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "27-03-a-field-that-moves-with-the-vehicle",
+  "title": "A Field That Moves With the Vehicle: Protective Fields Sized by Stopping Distance, Bent Round the Turn, and Switched in Sets",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "27-02-a-person-at-the-controls",
+    "19-04-how-far-it-goes-before-it-stops",
+    "26-07-how-fast-the-path-can-be-driven"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/protective_field.hpp",
+    "note": "protective fields for a ground vehicle, in the manner of the fields of a safety laser scanner (as used under the standard for driverless industrial trucks, ISO 3691-4, which this lesson models but does not claim to meet): a stop field as long as the stopping distance at the speed plus a margin, as wide as the vehicle plus a margin, bent along the arc of the turn; a warning field twice as long; points in the vehicle frame tested against them; and the choice of the smallest of a few field sets that was designed for at least the speed"
+  },
+  "breaks_first": [
+    "E-VEH-0118",
+    "E-VEH-0119",
+    "E-VEH-0120"
+  ]
+}
