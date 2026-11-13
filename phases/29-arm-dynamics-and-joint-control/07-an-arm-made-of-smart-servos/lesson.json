@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "29-07-an-arm-made-of-smart-servos",
+  "title": "An Arm Made of Smart Servos: A Position Command That Is Quantised, Slow to Arrive and Answered by a Spring, and How to Hold a Pose Anyway",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "29-06-giving-way-on-purpose",
+    "29-02-holding-the-arm-up",
+    "22-01-a-robot-as-an-interface"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/servo_bus.hpp",
+    "note": "a joint made of a serial bus servo as a model: a position goal rounded to the servo's steps, a bus whose cycle time follows from the bytes of a write to all servos and a read from all of them at a baud rate, an internal loop that is a spring and damper with a limited torque and speed, the droop of that spring under a load, a goal shifted by the load over the stiffness to hold a pose, and the delay between a commanded ramp and the motion it causes at a given update rate"
+  },
+  "breaks_first": [
+    "E-ARM-0046",
+    "E-ARM-0047",
+    "E-ARM-0048"
+  ]
+}
