@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "35-05-keeping-the-body-level",
+  "title": "Keeping the Body Level: A Moment Wanted, Vertical Forces on the Feet That Give It, and the Largest Push That Can Be Answered",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "35-04-an-attitude-it-can-trust",
+    "35-01-standing-on-three-legs",
+    "34-02-what-the-foot-can-push-with"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/balance_force.hpp",
+    "note": "holding the body level with the feet: the roll and pitch moments wanted from a PD law on the attitude and its rate, the vertical forces on the feet on the ground that add up to the body's weight and give those moments about the centre of mass (three equations in the feet's forces: the least norm solution for four feet, the exact one for three), whether every force is zero or more (a foot can only push), the moments the feet's forces actually give after the negative ones are cut off, and the size of moment that can be answered, which is the weight times how far the centre of pressure can move inside the feet"
+  },
+  "breaks_first": [
+    "E-LEG-0036",
+    "E-LEG-0037",
+    "E-LEG-0038"
+  ]
+}

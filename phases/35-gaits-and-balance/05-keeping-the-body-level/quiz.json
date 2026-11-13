@@ -1,0 +1,78 @@
+{
+  "lesson": "35-05-keeping-the-body-level",
+  "title": "Keeping the Body Level: A Moment Wanted, Vertical Forces on the Feet That Give It, and the Largest Push That Can Be Answered",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why can the forces on four feet be chosen?",
+      "options": [
+        "They cannot",
+        "Four feet are more than the three conditions (weight, roll moment, pitch moment) need",
+        "Feet are free",
+        "Gravity helps"
+      ],
+      "correct": 1,
+      "explanation": "The least norm solution is one choice."
+    },
+    {
+      "stage": "check",
+      "question": "What did each foot carry with no moment wanted?",
+      "options": [
+        "46.1 N",
+        "29.4 N",
+        "0 N",
+        "17.7 N"
+      ],
+      "correct": 1,
+      "explanation": "A quarter of the weight each."
+    },
+    {
+      "stage": "check",
+      "question": "What is the largest roll moment that can be given?",
+      "options": [
+        "Anything",
+        "17.7 N m, the weight times the half width",
+        "25 N m",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "Beyond it a foot would have to pull."
+    },
+    {
+      "stage": "check",
+      "question": "A push of 25 N m, with the feet's limit of 17.7 N m:",
+      "options": [
+        "Was answered",
+        "Rolled the body over (1)",
+        "Was ignored",
+        "Was halved"
+      ],
+      "correct": 1,
+      "explanation": "No controller can give what the feet cannot."
+    },
+    {
+      "stage": "post",
+      "question": "What happens to a moment beyond the limit?",
+      "options": [
+        "Nothing",
+        "It is scaled down, keeping its direction, to the most that can be given",
+        "It is doubled",
+        "It is cut off"
+      ],
+      "correct": 1,
+      "explanation": "Otherwise the forces would add to more than the weight."
+    },
+    {
+      "stage": "post",
+      "question": "Why does a trot need a different controller?",
+      "options": [
+        "It is faster",
+        "Two feet cannot give the three conditions",
+        "It is heavier",
+        "It is not different"
+      ],
+      "correct": 1,
+      "explanation": "35-02."
+    }
+  ]
+}
