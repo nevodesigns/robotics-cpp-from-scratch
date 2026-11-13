@@ -1,0 +1,78 @@
+{
+  "lesson": "35-07-taking-a-step-when-pushed",
+  "title": "Taking a Step When Pushed: The Capture Point, Where a Foot Must Land, and How the Time to Get It There Limits the Push That Can Be Answered",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the capture point?",
+      "options": [
+        "The centre of mass",
+        "The place on the ground over which the body would come to rest, x plus v times the time constant",
+        "The foot",
+        "The hip"
+      ],
+      "correct": 1,
+      "explanation": "A foot put there catches it."
+    },
+    {
+      "stage": "check",
+      "question": "A push of 0.30 m/s put the capture point how far out?",
+      "options": [
+        "24.5 cm",
+        "5.0 cm",
+        "0 cm",
+        "25 cm"
+      ],
+      "correct": 1,
+      "explanation": "And the foot had to land 24.5 cm out, after a swing of 0.25 s."
+    },
+    {
+      "stage": "check",
+      "question": "Why must the foot land further than the capture point of the push?",
+      "options": [
+        "It need not",
+        "The capture point runs away exponentially while the foot is in the air",
+        "For luck",
+        "The ground is soft"
+      ],
+      "correct": 1,
+      "explanation": "xi0 e^(t / T)."
+    },
+    {
+      "stage": "check",
+      "question": "The largest push that could be answered with a swing of 0.35 s:",
+      "options": [
+        "0.56 m/s",
+        "0.17 m/s",
+        "1 m/s",
+        "0 m/s"
+      ],
+      "correct": 1,
+      "explanation": "With 0.15 s it was 0.56 m/s."
+    },
+    {
+      "stage": "post",
+      "question": "Why is a fast swing worth so much?",
+      "options": [
+        "It is not",
+        "The capture point grows exponentially with the swing time",
+        "It is quiet",
+        "It saves energy"
+      ],
+      "correct": 1,
+      "explanation": "Each tenth of a second costs a large share."
+    },
+    {
+      "stage": "post",
+      "question": "When is a step the right answer?",
+      "options": [
+        "Always",
+        "When the push is beyond what the feet's moments can answer (35-05)",
+        "Never",
+        "For small pushes"
+      ],
+      "correct": 1,
+      "explanation": "Small pushes by forces, large ones by a step."
+    }
+  ]
+}

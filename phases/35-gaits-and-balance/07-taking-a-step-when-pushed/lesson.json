@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "35-07-taking-a-step-when-pushed",
+  "title": "Taking a Step When Pushed: The Capture Point, Where a Foot Must Land, and How the Time to Get It There Limits the Push That Can Be Answered",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "35-06-where-the-weight-presses",
+    "35-02-falling-and-catching-in-a-trot",
+    "34-05-the-path-of-a-step"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/push_recovery.hpp",
+    "note": "answering a push by taking a step: the capture point of an inverted pendulum (the place on the ground, measured from the foot or the line of the feet that are down, where the body would come to rest if a foot were put there: x plus v times the square root of h over g), which grows as e to the t over T while nothing is done; the place a foot must land to catch it when the swing takes a time (the capture point at the landing time, with a margin); whether that place is within reach of the leg; and the largest push (as a speed given to the body) that can be answered for a swing time, found in closed form"
+  },
+  "breaks_first": [
+    "E-LEG-0042",
+    "E-LEG-0043",
+    "E-LEG-0044"
+  ]
+}
