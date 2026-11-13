@@ -1,0 +1,78 @@
+{
+  "lesson": "34-05-the-path-of-a-step",
+  "title": "The Path of a Step: A Swing That Starts and Ends Slowly, Clears the Ground, and Asks the Servos for Less Than They Have",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why should the foot land at rest?",
+      "options": [
+        "It looks nice",
+        "A foot that lands with speed hits the ground and the body feels it",
+        "It is faster",
+        "It is required"
+      ],
+      "correct": 1,
+      "explanation": "A jolt at touchdown."
+    },
+    {
+      "stage": "check",
+      "question": "The foot's landing speed was:",
+      "options": [
+        "0.80 m/s",
+        "0.000 m/s",
+        "1 m/s",
+        "0.87 m/s"
+      ],
+      "correct": 1,
+      "explanation": "The straight up-and-down path lands at 0.80."
+    },
+    {
+      "stage": "check",
+      "question": "Doubling the swing time did what to the peak acceleration?",
+      "options": [
+        "Halved it",
+        "Quartered it",
+        "Doubled it",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "Speed halves, acceleration quarters."
+    },
+    {
+      "stage": "check",
+      "question": "The joints needed up to 4.7 rad/s over 0.25 s and over 0.125 s:",
+      "options": [
+        "4.7 rad/s",
+        "9.4 rad/s",
+        "0",
+        "8 rad/s"
+      ],
+      "correct": 1,
+      "explanation": "The rate is inversely proportional to the time."
+    },
+    {
+      "stage": "post",
+      "question": "What does the height h cost?",
+      "options": [
+        "Nothing",
+        "Speed: a higher clearance is a faster path for the same time",
+        "Weight",
+        "Accuracy"
+      ],
+      "correct": 1,
+      "explanation": "It is a clearance you choose."
+    },
+    {
+      "stage": "post",
+      "question": "What does the function say when a point on the path cannot be reached?",
+      "options": [
+        "True",
+        "False",
+        "Nothing",
+        "A random angle"
+      ],
+      "correct": 1,
+      "explanation": "A step beyond the leg's reach."
+    }
+  ]
+}

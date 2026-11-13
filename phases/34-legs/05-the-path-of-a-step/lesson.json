@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "34-05-the-path-of-a-step",
+  "title": "The Path of a Step: A Swing That Starts and Ends Slowly, Clears the Ground, and Asks the Servos for Less Than They Have",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "34-04-down-and-up",
+    "34-01-where-the-foot-is",
+    "30-06-putting-the-path-in-time",
+    "29-07-an-arm-made-of-smart-servos"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/foot_path.hpp",
+    "note": "the path of a foot through one step: the swing from the place the foot leaves to the place it lands, along the ground by a smooth rise from rest to rest (minimum jerk) and in height by a curve that is zero with its first two derivatives at both ends and has its top at the step's height; the stance as a straight line back at the body's speed; the peak speed and acceleration of the swing; how high the foot is over an obstacle in the way; and the greatest joint rate the swing needs along the whole path (by the inverse kinematics at points of the path), to be set against what the servos can do"
+  },
+  "breaks_first": [
+    "E-LEG-0012",
+    "E-LEG-0013",
+    "E-LEG-0014"
+  ]
+}
