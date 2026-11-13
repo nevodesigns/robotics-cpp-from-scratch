@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "34-06-how-hot-the-knees-get",
+  "title": "How Hot the Knees Get: Torque Over a Step, the Heat of the Windings, and How Heavy a Robot the Legs Can Carry",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "34-05-the-path-of-a-step",
+    "34-02-what-the-foot-can-push-with",
+    "29-08-how-much-the-motors-can-give"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/leg_load.hpp",
+    "note": "the load on a leg's servos over a gait: the torque each joint gives when the foot is on the ground carrying its share of the body's weight (all of the body's weight divided among the feet that are down, from 34-02), the small torque it gives in the air, the root mean square of the torque over a cycle, the heat in the windings from it and the temperature rise it settles to (the heat model of 29-08), the time to the limit if it never settles below it, and the heaviest body the knees can carry in a gait without passing their limit"
+  },
+  "breaks_first": [
+    "E-LEG-0015",
+    "E-LEG-0016",
+    "E-LEG-0017"
+  ]
+}

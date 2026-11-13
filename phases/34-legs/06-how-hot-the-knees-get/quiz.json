@@ -1,0 +1,78 @@
+{
+  "lesson": "34-06-how-hot-the-knees-get",
+  "title": "How Hot the Knees Get: Torque Over a Step, the Heat of the Windings, and How Heavy a Robot the Legs Can Carry",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does a trot heat the knees more than standing?",
+      "options": [
+        "It is faster",
+        "Only two feet are down, so each carries twice the load and heat goes as the square",
+        "Air",
+        "It is not so"
+      ],
+      "correct": 1,
+      "explanation": "28.1 K against 14.0 K."
+    },
+    {
+      "stage": "check",
+      "question": "The knee's stance torque in the trot was:",
+      "options": [
+        "4.33 N m",
+        "8.65 N m",
+        "0 N m",
+        "60 N m"
+      ],
+      "correct": 1,
+      "explanation": "Twice standing's."
+    },
+    {
+      "stage": "check",
+      "question": "Which torque sets the heating over a cycle?",
+      "options": [
+        "The mean",
+        "The root mean square",
+        "The peak",
+        "The swing torque"
+      ],
+      "correct": 1,
+      "explanation": "Heat goes as the square."
+    },
+    {
+      "stage": "check",
+      "question": "The heaviest body the knees could trot with at 0.30 m:",
+      "options": [
+        "12 kg",
+        "17.5 kg",
+        "1000 kg",
+        "0 kg"
+      ],
+      "correct": 1,
+      "explanation": "Less when crouched."
+    },
+    {
+      "stage": "post",
+      "question": "What happens to a heavy robot held in a crouch?",
+      "options": [
+        "Nothing",
+        "The windings pass their limit in time, here 25 s, and the legs go limp",
+        "It cools",
+        "It gets lighter"
+      ],
+      "correct": 1,
+      "explanation": "29-08's time to the limit."
+    },
+    {
+      "stage": "post",
+      "question": "What is not in this model?",
+      "options": [
+        "The stance torque",
+        "Impact peaks at touchdown, and the controller that cuts current",
+        "The rms",
+        "The heat"
+      ],
+      "correct": 1,
+      "explanation": "It is a steady, single lump model."
+    }
+  ]
+}
