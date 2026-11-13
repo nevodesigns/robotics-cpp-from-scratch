@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "36-06-the-layer-that-can-take-the-power-away",
+  "title": "The Layer That Can Take the Power Away: Torque Limits, Heat Derating, a Link Watchdog, an Emergency Stop, and Why Off Is Not Always Safe",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "36-05-looking-ahead-with-the-body",
+    "36-02-sit-stand-walk-fall",
+    "35-09-falling-with-the-least-harm",
+    "31-08-an-arm-that-follows-a-hand",
+    "19-02-the-stop-that-does-not-need-the-app"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/dog_safety.hpp",
+    "note": "the safety layer of a quadruped, run every tick and outranking the controller: a limit on each joint's torque; a derating of the torque as a motor's temperature approaches its limit (full below 0.8 of it, falling to nothing at 1.0, and off beyond); a watchdog on the link (soft after a short silence, off after a long one); the emergency stop; the fall decision of 35-09; a choice among four modes (normal, derated, soft, off) by priority; and the rule that going off while the robot is standing is turned into going soft first (the legs give gently) and off only when it is down, since a robot switched off standing drops"
+  },
+  "breaks_first": [
+    "E-LEG-0066",
+    "E-LEG-0067",
+    "E-LEG-0068"
+  ]
+}

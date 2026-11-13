@@ -1,0 +1,78 @@
+{
+  "lesson": "36-06-the-layer-that-can-take-the-power-away",
+  "title": "The Layer That Can Take the Power Away: Torque Limits, Heat Derating, a Link Watchdog, an Emergency Stop, and Why Off Is Not Always Safe",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is off not always safe for a quadruped?",
+      "options": [
+        "It is",
+        "A robot switched off while standing collapses and lands hard",
+        "It is slow",
+        "Motors need power"
+      ],
+      "correct": 1,
+      "explanation": "Off while standing becomes soft."
+    },
+    {
+      "stage": "check",
+      "question": "A torque command of 40 N m was cut to:",
+      "options": [
+        "40 N m",
+        "20 N m",
+        "0 N m",
+        "100 N m"
+      ],
+      "correct": 1,
+      "explanation": "The peak the motor may give."
+    },
+    {
+      "stage": "check",
+      "question": "Knees at 0.9 of their limit were derated to:",
+      "options": [
+        "0.25 of the torque",
+        "0.50 of the torque",
+        "All of it",
+        "None"
+      ],
+      "correct": 1,
+      "explanation": "Full at 0.8, nothing at 1.0."
+    },
+    {
+      "stage": "check",
+      "question": "The emergency stop with the robot standing gave mode:",
+      "options": [
+        "3, off",
+        "2, soft",
+        "0, normal",
+        "1, derated"
+      ],
+      "correct": 1,
+      "explanation": "Sitting it gave 3."
+    },
+    {
+      "stage": "post",
+      "question": "What does the layer take when several things are asked?",
+      "options": [
+        "The first",
+        "The highest mode, keeping the derating scale",
+        "The average",
+        "The last"
+      ],
+      "correct": 1,
+      "explanation": "2 with the knees hot and the link silent."
+    },
+    {
+      "stage": "post",
+      "question": "Is this a certified safety function?",
+      "options": [
+        "Yes",
+        "No: a model of the logic; a real one runs on separate hardware with a hardware stop",
+        "Almost",
+        "It replaces one"
+      ],
+      "correct": 1,
+      "explanation": "19-02."
+    }
+  ]
+}
