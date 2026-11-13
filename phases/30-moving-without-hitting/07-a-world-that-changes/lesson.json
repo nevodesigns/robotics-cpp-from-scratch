@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "30-07-a-world-that-changes",
+  "title": "A World That Changes: A Planning Scene With a Version, Objects That Grow Less Certain as They Age, a Part in the Gripper, and Plans That Know They Are Stale",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "30-06-putting-the-path-in-time",
+    "30-04-a-map-of-where-the-arm-can-go",
+    "30-02-how-far-it-is-safe-to-step"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/scene_monitor.hpp",
+    "note": "a planning scene that changes: objects (spheres and boxes) added, moved and removed by identifier, each change raising a version; a time of last seen and a speed it may have moved at, so that an object not seen for a while is treated as bigger by the distance it could have moved (up to a cap); the scene as the collision model of 30-01 at a time; a test whether a plan made at one version is stale at another; and a part held in the gripper, which makes the arm longer and fatter at its tool"
+  },
+  "breaks_first": [
+    "E-ARM-0070",
+    "E-ARM-0071",
+    "E-ARM-0072"
+  ]
+}
