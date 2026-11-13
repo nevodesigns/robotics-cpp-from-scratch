@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "35-04-an-attitude-it-can-trust",
+  "title": "An Attitude It Can Trust: A Gyro for the Fast Part, the Accelerometer and the Feet for the Slow Part, and Which of Them Is Wrong When",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "35-03-changing-gait-without-stumbling",
+    "34-03-the-body-from-the-feet",
+    "25-07-the-bias-of-a-gyro-when-the-robot-stops",
+    "19-09-the-slope-and-the-turn"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/attitude.hpp",
+    "note": "estimating the body's roll and pitch while it walks: the gyro's rates added up (accurate for a moment, drifting with its bias), the accelerometer's direction of gravity (right on average and wrong at every step, because the body accelerates), accepted only when the size of what it feels is near g, and the roll and pitch from the feet (34-03), valid only with three or more feet down; a complementary filter that adds the gyro and pulls gently toward the accelerometer and the feet with a gain for each; and the error of each source and the filter in a simulated walk and a simulated trot"
+  },
+  "breaks_first": [
+    "E-LEG-0033",
+    "E-LEG-0034",
+    "E-LEG-0035"
+  ]
+}
