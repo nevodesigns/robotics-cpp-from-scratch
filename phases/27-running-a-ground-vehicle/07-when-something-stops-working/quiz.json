@@ -1,0 +1,78 @@
+{
+  "lesson": "27-07-when-something-stops-working",
+  "title": "When Something Stops Working: Modes From Full Speed to a Safe Stop, a Second Fault That Costs More, and Coming Back Up One Step at a Time",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why not just stop when anything fails?",
+      "options": [
+        "Stopping is dangerous",
+        "A vehicle that stops needs a person to walk to it, for a fault a slower vehicle could live with",
+        "Motors cannot stop",
+        "Law"
+      ],
+      "correct": 1,
+      "explanation": "Do less, not nothing."
+    },
+    {
+      "stage": "check",
+      "question": "A lost scanner asked for which mode?",
+      "options": [
+        "1",
+        "3, a safe stop",
+        "Full",
+        "2"
+      ],
+      "correct": 1,
+      "explanation": "Nothing sees obstacles."
+    },
+    {
+      "stage": "check",
+      "question": "A lost GNSS and a lost link together asked for:",
+      "options": [
+        "1",
+        "2, a creep: a second fault costs more",
+        "Full",
+        "A stop"
+      ],
+      "correct": 1,
+      "explanation": "It has lost the thing that would have caught it."
+    },
+    {
+      "stage": "check",
+      "question": "A requirement flapping every 2 s changed the mode raw and through the manager:",
+      "options": [
+        "1 and 60 times",
+        "60 and 1 times",
+        "The same",
+        "0 and 0"
+      ],
+      "correct": 1,
+      "explanation": "The dwell stops it."
+    },
+    {
+      "stage": "post",
+      "question": "How long did the vehicle take to be back at full speed once the scanner came back?",
+      "options": [
+        "At once",
+        "30 s, one step per dwell",
+        "Never",
+        "1 s"
+      ],
+      "correct": 1,
+      "explanation": "Safe stop, creep, reduced, full."
+    },
+    {
+      "stage": "post",
+      "question": "How far could the vehicle go on dead reckoning before its sigma reached 1.5 m?",
+      "options": [
+        "10 m",
+        "468 m",
+        "1 m",
+        "As far as it likes"
+      ],
+      "correct": 1,
+      "explanation": "d = (limit squared - sigma0 squared) / k squared."
+    }
+  ]
+}

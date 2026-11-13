@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "27-07-when-something-stops-working",
+  "title": "When Something Stops Working: Modes From Full Speed to a Safe Stop, a Second Fault That Costs More, and Coming Back Up One Step at a Time",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "27-06-the-checklist-before-the-run",
+    "25-06-how-lost-can-it-be",
+    "19-10-one-place-that-says-stop"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/degraded.hpp",
+    "note": "degraded modes for a ground vehicle: four modes (full, reduced, creep, safe stop) each with a speed cap; a rule that gives the mode a set of health flags and the uncertainty of the position require (a lost scanner is a stop, a lost gyro a creep, a lost GNSS, link or wheel sensor a reduced mode, any two of the last four a creep, and a position sigma past its steps worse again); a manager that goes down at once and comes back up one step at a time after a dwell in which the requirement stayed better; and the distance a vehicle can go on dead reckoning before the uncertainty puts it in the next mode"
+  },
+  "breaks_first": [
+    "E-VEH-0130",
+    "E-VEH-0131",
+    "E-VEH-0132"
+  ]
+}
