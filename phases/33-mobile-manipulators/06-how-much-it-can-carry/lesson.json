@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "33-06-how-much-it-can-carry",
+  "title": "How Much It Can Carry: The Arm's Torque, the Base's Braking and Traction, and Which One Says No First",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "33-05-tipping-with-the-arm-out",
+    "29-08-how-much-the-motors-can-give",
+    "23-05-the-traction-circle",
+    "23-06-what-the-motors-and-the-battery-allow"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::mobile",
+    "header": "rc/mobile/payload_effect.hpp",
+    "note": "the heaviest payload a mobile manipulator may carry, as the least of three limits: what the arm's joints can hold at the pose (29-08), what the base can carry and still be able to stop in a given distance without tipping (33-05), and what its wheels can accelerate with a wanted acceleration (the drive's force, the friction of the floor); and what a payload does to the base's range on a battery (rolling resistance grows with the mass), and which limit is the binding one"
+  },
+  "breaks_first": [
+    "E-MOB-0016",
+    "E-MOB-0017",
+    "E-MOB-0018"
+  ]
+}
