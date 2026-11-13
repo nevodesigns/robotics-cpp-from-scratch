@@ -1,0 +1,78 @@
+{
+  "lesson": "31-04-feeling-that-it-has-touched",
+  "title": "Feeling That It Has Touched: A Torque Residual, a Threshold Above the Model's Error, and a Count of Ticks Before Believing It",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the residual?",
+      "options": [
+        "The motor's current",
+        "The torque measured less the torque the model says free motion needs",
+        "The error in position",
+        "The noise"
+      ],
+      "correct": 1,
+      "explanation": "Zero in free motion, the contact's torque when it touches."
+    },
+    {
+      "stage": "check",
+      "question": "A threshold of 0.05 N m gave how many false alarms with gravity 5 percent out?",
+      "options": [
+        "0",
+        "1",
+        "Exactly 1",
+        "Not known"
+      ],
+      "correct": 1,
+      "explanation": "Below the model's error."
+    },
+    {
+      "stage": "check",
+      "question": "Which approach was a harder hit?",
+      "options": [
+        "0.2 rad/s",
+        "0.6 rad/s",
+        "Neither",
+        "Both the same"
+      ],
+      "correct": 1,
+      "explanation": "5.20 N m by the time it stopped."
+    },
+    {
+      "stage": "check",
+      "question": "Why is the detection delayed?",
+      "options": [
+        "It is not",
+        "The residual is filtered and has to stay over the threshold for a count",
+        "The wall is slow",
+        "The motor is slow"
+      ],
+      "correct": 1,
+      "explanation": "Both are for noise."
+    },
+    {
+      "stage": "post",
+      "question": "What does the count of ticks protect against?",
+      "options": [
+        "A slow motor",
+        "One noisy tick being taken as contact",
+        "The wall",
+        "Gravity"
+      ],
+      "correct": 1,
+      "explanation": "Noise."
+    },
+    {
+      "stage": "post",
+      "question": "What is not covered?",
+      "options": [
+        "The residual",
+        "The force at the tip from all the joints",
+        "The filter",
+        "The threshold"
+      ],
+      "correct": 1,
+      "explanation": "That goes through the Jacobian."
+    }
+  ]
+}

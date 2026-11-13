@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "31-04-feeling-that-it-has-touched",
+  "title": "Feeling That It Has Touched: A Torque Residual, a Threshold Above the Model's Error, and a Count of Ticks Before Believing It",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "31-03-finding-the-part-with-a-camera",
+    "29-06-giving-way-on-purpose",
+    "29-02-holding-the-arm-up"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/contact.hpp",
+    "note": "contact detection from the joint torque: the residual between the torque measured (from the motor current) and the torque the model says the free motion needs (gravity, friction, inertia), a low pass filter on it, a threshold that has to be above what the model gets wrong and the noise, and a count of ticks the residual must stay over it before contact is believed; tested on a single joint driven into a wall, for how soon contact was found, what the wall's force was by then, and what a low threshold does in free motion"
+  },
+  "breaks_first": [
+    "E-ARM-0085",
+    "E-ARM-0086",
+    "E-ARM-0087"
+  ]
+}
