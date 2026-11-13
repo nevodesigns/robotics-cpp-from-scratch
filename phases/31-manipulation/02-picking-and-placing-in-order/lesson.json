@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "31-02-picking-and-placing-in-order",
+  "title": "Picking and Placing in Order: A State Machine With a Check After Every Step That Can Fail",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "31-01-a-hand-that-pinches",
+    "30-08-getting-out-of-the-way-of-a-moving-thing",
+    "26-10-how-often-to-replan"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/pick_place.hpp",
+    "note": "a pick and place as a state machine: approach above the part, go down, close the hand, check by the finger gap that the part is held (and is the right size), lift, carry, lower, open, retreat; a missed grasp backs off and tries again up to a limit and then stops with a reason; a part that falls on the way is noticed from the gap; every state has a time limit; the machine takes what was sensed (which target the arm has reached, the gap, whether the hand has settled) and gives what to do next (a target and open or closed)"
+  },
+  "breaks_first": [
+    "E-ARM-0079",
+    "E-ARM-0080",
+    "E-ARM-0081"
+  ]
+}

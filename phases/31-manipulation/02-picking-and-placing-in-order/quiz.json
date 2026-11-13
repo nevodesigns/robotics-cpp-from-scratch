@@ -1,0 +1,78 @@
+{
+  "lesson": "31-02-picking-and-placing-in-order",
+  "title": "Picking and Placing in Order: A State Machine With a Check After Every Step That Can Fail",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is a pick a state machine and not a script?",
+      "options": [
+        "It is shorter",
+        "Each step can fail and the next step depends on whether it did",
+        "Scripts are slow",
+        "Robots need it"
+      ],
+      "correct": 1,
+      "explanation": "A check after each step."
+    },
+    {
+      "stage": "check",
+      "question": "A hand closed on nothing has a gap:",
+      "options": [
+        "Near the part's width",
+        "Near zero",
+        "Fully open",
+        "Unknown"
+      ],
+      "correct": 1,
+      "explanation": "That is how a miss is seen."
+    },
+    {
+      "stage": "check",
+      "question": "A hand that missed every time stopped in fault:",
+      "options": [
+        "2",
+        "1",
+        "3",
+        "0"
+      ],
+      "correct": 1,
+      "explanation": "After 3 tries."
+    },
+    {
+      "stage": "check",
+      "question": "A part that fell on the way was noticed:",
+      "options": [
+        "At the end",
+        "At once, from the gap",
+        "Never",
+        "By the camera"
+      ],
+      "correct": 1,
+      "explanation": "The gap is watched while carrying."
+    },
+    {
+      "stage": "post",
+      "question": "Why does every state have a time limit?",
+      "options": [
+        "For speed",
+        "A move that never arrives would hold the machine for ever",
+        "It does not",
+        "To save power"
+      ],
+      "correct": 1,
+      "explanation": "Fault 3."
+    },
+    {
+      "stage": "post",
+      "question": "Does the machine know where the part is?",
+      "options": [
+        "Yes",
+        "No: a target is a number that a planner turns into a motion",
+        "Always",
+        "Sometimes"
+      ],
+      "correct": 1,
+      "explanation": "It is a function from sensed to commanded."
+    }
+  ]
+}
