@@ -1292,3 +1292,33 @@ Nine lessons on picking a thing up and putting it down. The module is `rc::arm` 
 - **A test that proved nothing** in 31-08: the first lost link test let the follower converge before the timeout, so the follower with a watchdog and the one without ended in the same place. The test now has the leader jump just before the link is lost, and the lesson says that holding at the timeout is true by construction.
 - **Wording that the numbers did not bear out**, three times: in 31-05 the stiff hand got in a little beyond the clearance, not only inside it; in 31-06 the robot that left out the reaction time also met the person (minus 0.09 m); in 31-09 trimming left 2.8 s of a 3 s reach because a smooth reach starts and ends slower than the threshold. Each was changed in the lesson, not in the test.
 - **Name of the reference for `done.sh`**: it takes the whole underscored slug of the lesson, which was a mistake again once in phase 30 and not in this phase.
+
+## Phase 32, other arm families (13 November 2026)
+
+Six lessons on the robots that are not a six axis arm, ending in a choice of robot made from a task. The module is `rc::arm` (now 40 headers), the atlas prefix `ARM` (continued, to 0120). Every dimension and every speed, payload and repeatability figure is typical and says so.
+
+| lesson | the finding it rests on | header |
+|---|---|---|
+| 32-01 two joints and a plunger | the SCARA's inverse kinematics put the tool back to 1e-9 m for 159 of 272 point and elbow pairs of a grid; a point 0.5 m out was refused for 0.225 m links; the Jacobian determinant l1 l2 sin q2 was 0.0506 at a right angle and 0 straight; a 2 kg payload put 0 N m on the first two joints against 7.85 N m on a six axis shoulder at 0.4 m | `rc/arm/scara.hpp` |
+| 32-02 three arms and one plate | the delta's forward kinematics put the platform back to 1e-9 m for 386 of 486 grid points; the reach at 0.40 m below the base was 0.310 m out, narrowing toward the bottom; the moving parts came to 0.78 kg against 18 kg for a six axis arm | `rc/arm/delta.hpp` |
+| 32-03 six legs and a table | the legs were all 0.343 m at 0.30 m up; a raise of 50 mm and a tilt of 10 degrees needed 0.366 to 0.410 m; Newton's iteration found a pose again in 4 steps; the condition measure was 0.120 at home, 0.038 at 80 degrees of yaw and 0 (singular) at 90 degrees | `rc/arm/stewart.hpp` |
+| 32-04 three straight axes | a move of 0.4 m in x and 0.4 m in z took 0.825 s axis by axis and 0.900 s in a straight line (z limits the speed and x the acceleration), and a move mostly in x cost nothing extra; a 1 m aluminium beam sagged 50 micrometres under 50 N (1.0 MN/m), 8 times as much at twice the span, with a first resonance of 71 Hz at 5 kg; ends 0.2 mm out put 60 micrometres of error at 0.3 m | `rc/arm/gantry.hpp` |
+| 32-05 one yardstick for five robots | by sampling 40 000 points the reach volumes were 0.084 m3 (SCARA), 0.072 (delta), 0.006 (Stewart, level), 0.035 (gantry) and 1.731 (six axis arm, tool down), about 0.4 percent for the SCARA; against the room each takes, 0.33, 0.47, 0.07, 0.29 and 0.98 | `rc/arm/compare.hpp` |
+| 32-06 choosing the robot for the job | four jobs went to four different robots (small light parts to the delta at 0.81 s, a heavier part turned over to the arm at 2.71 s, optics to the Stewart platform at 2.0 s, a wide table to the gantry at 2.82 s) and a job of 500 kg gave none; a SCARA over the middle of the work reached 0.48 of it and beside it 1.00 | `rc/arm/cell.hpp` |
+
+**Decisions.**
+
+1. **One question for every family** (32-05): `reaches(x, y, z)`, level or pointing down, with a Monte Carlo volume and its standard error; the stance that volume is not a criterion is in the lesson.
+2. **The Stewart layout is the six six standard one** (pairs of joints, platform pairs turned 60 degrees, each leg to the nearer joint of the neighbouring pair); the first layout tried, all legs turned the same way, was singular at home.
+3. **The delta's inverse is solved arm by arm** in each arm's own frame, as two circles meeting; the forward is three spheres meeting.
+4. **32-06's families are one typical design each**, with the figures marked typical; the choice is the shortest cycle among those that fail nothing, and none is a result.
+5. **The arm course stops here.** Stage 3 (mobile manipulators, phase 33) is started only when the owner says.
+
+**Mistakes, and what caught them.**
+
+- **A name that clashed when all the headers were put together** (`Box`, in 30-01's collision header and in 32-05's compare header): found by the standalone header build and not by the lesson's own build, because the lesson commit had been made with the error filtered out of the script's output. Renamed `ReachBox`, the commit made again. The script's habit is now to run the standalone headers target and read its errors before the commit.
+- **A claim the numbers did not bear out**, five times: in 32-03 the singular yaw was a quarter turn, not "somewhere in a turn" (the scan found 0 at 90 degrees); in 32-04 the first limits made the straight line cost nothing extra, which is true when one axis sets both the speed and the acceleration, so the lesson now uses limits where two axes do and tests both cases; the resonance of the beam is 71 Hz, not the hundreds first expected; in 32-05 the arm's share of its room came out above 1 until the room was drawn as the sphere of its reach; in 32-06 a SCARA mounted at 0.25 m did not cover a 0.30 by 0.24 m job and at 0.28 m does (the inner and outer radii leave a window of 1.4 cm).
+- **A failing lesson committed by the script again** (32-03, a bound of 1e-9 on a ratio that is 1e-8 by finite differences); fixed, undone with a soft reset and made again before pushing.
+- **Uninitialised variables found by clang** (32-01) though the other toolchains were silent; initialised in the test.
+- **A test that did not test** (32-05's first box check compared a number with itself); removed and replaced by a comparison with the known volume.
+- **A `using` line missing or not needed** (32-04 needed it, 32-01 did not), the compile error naming the line.
