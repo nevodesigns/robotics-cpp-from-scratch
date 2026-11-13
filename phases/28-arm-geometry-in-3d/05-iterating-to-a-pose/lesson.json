@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "28-05-iterating-to-a-pose",
+  "title": "Iterating to a Pose: Damped Least Squares for Any Arm, Why It Needs the Damping, and What It Finds Instead of Eight",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "28-03-how-the-tool-moves-when-the-joints-do",
+    "28-04-eight-ways-to-reach-a-pose"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::arm",
+    "header": "rc/arm/ik_dls.hpp",
+    "note": "numerical inverse kinematics by damped least squares: the error of a pose as the difference of the places and the rotation vector of the target rotation times the transpose of the present one (with the half turn handled), the step J transpose times the solution of (J J transpose plus lambda squared) y = error with a 6 by 6 solve, a limit on the largest joint step, an optional clamp to the joint limits, and a result that says whether it converged, in how many steps, and how far it was left"
+  },
+  "breaks_first": [
+    "E-ARM-0013",
+    "E-ARM-0014",
+    "E-ARM-0015"
+  ]
+}

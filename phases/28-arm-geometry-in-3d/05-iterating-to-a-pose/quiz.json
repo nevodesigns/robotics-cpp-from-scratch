@@ -1,0 +1,78 @@
+{
+  "lesson": "28-05-iterating-to-a-pose",
+  "title": "Iterating to a Pose: Damped Least Squares for Any Arm, Why It Needs the Damping, and What It Finds Instead of Eight",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does damping do to the step near a singularity?",
+      "options": [
+        "Makes it larger",
+        "Limits it, at a little cost in accuracy",
+        "Stops the arm",
+        "Nothing"
+      ],
+      "correct": 1,
+      "explanation": "lambda squared on the diagonal."
+    },
+    {
+      "stage": "check",
+      "question": "Near a straight elbow the plain step and the damped step were:",
+      "options": [
+        "0.021 and 20.61 rad",
+        "20.61 and 0.021 rad",
+        "The same",
+        "0 and 0"
+      ],
+      "correct": 1,
+      "explanation": "An enormous one, and a limited one."
+    },
+    {
+      "stage": "check",
+      "question": "From a start of all zeros the UR5 converged in how many of 40 poses?",
+      "options": [
+        "37",
+        "31",
+        "All",
+        "None"
+      ],
+      "correct": 1,
+      "explanation": "It is a local method."
+    },
+    {
+      "stage": "check",
+      "question": "What did a pose out of reach do?",
+      "options": [
+        "Crashed",
+        "Stopped at the limit of steps, 0.64 m away, with ok false",
+        "Converged",
+        "Looped for ever"
+      ],
+      "correct": 1,
+      "explanation": "Give up, and say so."
+    },
+    {
+      "stage": "post",
+      "question": "Why did the Panda's solutions differ from the joint angles that made the pose?",
+      "options": [
+        "A bug",
+        "It has seven joints: a family of angles reaches the same pose",
+        "Rounding",
+        "Damping"
+      ],
+      "correct": 1,
+      "explanation": "28-07 uses the family."
+    },
+    {
+      "stage": "post",
+      "question": "On the typical arm which of the eight did the iteration find?",
+      "options": [
+        "Always the first",
+        "One of them, depending on the start: 29 of 40 were among the eight",
+        "None",
+        "All"
+      ],
+      "correct": 1,
+      "explanation": "It finds the solution nearest the start."
+    }
+  ]
+}
