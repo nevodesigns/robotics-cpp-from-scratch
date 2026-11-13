@@ -1,0 +1,78 @@
+{
+  "lesson": "32-03-six-legs-and-a-table",
+  "title": "Six Legs and a Table: The Stewart Platform, Easy One Way and Iterative the Other, and Where Its Legs Lose Their Grip",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "For a parallel platform, which direction of kinematics has a formula?",
+      "options": [
+        "Neither",
+        "Leg lengths from a pose",
+        "Pose from leg lengths",
+        "Both"
+      ],
+      "correct": 1,
+      "explanation": "The opposite of a serial arm."
+    },
+    {
+      "stage": "check",
+      "question": "At home the legs were all:",
+      "options": [
+        "0.366 m",
+        "0.343 m",
+        "0 m",
+        "0.410 m"
+      ],
+      "correct": 1,
+      "explanation": "A symmetric hexapod."
+    },
+    {
+      "stage": "check",
+      "question": "How is the pose found from the lengths?",
+      "options": [
+        "By a formula",
+        "By Newton's iteration from a guess",
+        "By a table",
+        "By luck"
+      ],
+      "correct": 1,
+      "explanation": "4 steps from a guess."
+    },
+    {
+      "stage": "check",
+      "question": "What limits a platform's reach?",
+      "options": [
+        "Joint angles only",
+        "Leg stroke (and joint cones, not modelled)",
+        "The camera",
+        "The weight"
+      ],
+      "correct": 1,
+      "explanation": "0.366 to 0.410 m for that motion."
+    },
+    {
+      "stage": "post",
+      "question": "What is dangerous about a parallel singularity?",
+      "options": [
+        "Nothing",
+        "The platform can give way under a load",
+        "It is slow",
+        "It is noisy"
+      ],
+      "correct": 1,
+      "explanation": "It loses the ability to resist a force."
+    },
+    {
+      "stage": "post",
+      "question": "What is a good starting guess in a controller?",
+      "options": [
+        "Zero",
+        "The last pose",
+        "A random pose",
+        "The home pose always"
+      ],
+      "correct": 1,
+      "explanation": "That is why the iteration converges so fast."
+    }
+  ]
+}

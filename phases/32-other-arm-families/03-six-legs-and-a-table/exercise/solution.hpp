@@ -1,0 +1,117 @@
+#ifndef LESSON_SOLUTION_HPP
+#define LESSON_SOLUTION_HPP
+
+#include <cmath>
+
+struct StewartPose {
+  double v[6] = {0, 0, 0, 0, 0, 0};  // x, y, z, roll, pitch, yaw
+};
+
+struct Stewart {
+  double bx[6], by[6];   // base joints in the base frame (z = 0)
+  double px[6], py[6];   // platform joints in the platform frame (z = 0)
+  Stewart() {
+    const double kDeg = 3.14159265358979323846 / 180.0;
+    const double rb = 0.25, rp = 0.15;                // m (typical of a small hexapod)
+    // pairs of joints: the base pairs centred at 0, 120 and 240 degrees, the platform pairs at 60, 180 and 300, each leg to the nearer joint of the neighbouring pair
+    const double ab[6] = {10, 110, 130, 230, 250, 350};
+    const double ap[6] = {50, 70, 170, 190, 290, 310};
+    for (int i = 0; i < 6; ++i) {
+      bx[i] = rb * std::cos(ab[i] * kDeg);
+      by[i] = rb * std::sin(ab[i] * kDeg);
+      px[i] = rp * std::cos(ap[i] * kDeg);
+      py[i] = rp * std::sin(ap[i] * kDeg);
+    }
+  }
+};
+
+// The six leg lengths for a pose.
+inline void stewart_lengths(const Stewart& s, const StewartPose& p, double len[6]) {
+  (void)s;  // TODO: turn each platform joint (px, py, 0) by R = Rz(yaw) Ry(pitch) Rx(roll), add (x, y, z), and the leg length is the distance to its base joint (bx, by, 0)
+  (void)p;
+  for (int i = 0; i < 6; ++i) len[i] = 0.0;
+}
+
+// Solves a x = b for six unknowns by elimination with partial pivoting; false if singular. `ratio` is the smallest pivot over the largest.
+inline bool solve6(double a[6][6], double b[6], double x[6], double* ratio) {
+  double pmin = 1e300, pmax = 0.0;
+  for (int c = 0; c < 6; ++c) {
+    int best = c;
+    for (int r = c + 1; r < 6; ++r)
+      if (std::fabs(a[r][c]) > std::fabs(a[best][c])) best = r;
+    const double piv = std::fabs(a[best][c]);
+    if (piv < pmin) pmin = piv;
+    if (piv > pmax) pmax = piv;
+    if (piv < 1e-14) {
+      if (ratio) *ratio = 0.0;
+      return false;
+    }
+    if (best != c) {
+      for (int k = 0; k < 6; ++k) {
+        const double t = a[c][k];
+        a[c][k] = a[best][k];
+        a[best][k] = t;
+      }
+      const double t = b[c];
+      b[c] = b[best];
+      b[best] = t;
+    }
+    for (int r = c + 1; r < 6; ++r) {
+      const double f = a[r][c] / a[c][c];
+      for (int k = c; k < 6; ++k) a[r][k] -= f * a[c][k];
+      b[r] -= f * b[c];
+    }
+  }
+  for (int r = 5; r >= 0; --r) {
+    double sum = b[r];
+    for (int k = r + 1; k < 6; ++k) sum -= a[r][k] * x[k];
+    x[r] = sum / a[r][r];
+  }
+  if (ratio) *ratio = pmin / pmax;
+  return true;
+}
+
+// The matrix of the derivatives of the six lengths with respect to the six pose values, by small differences.
+inline void stewart_matrix(const Stewart& s, const StewartPose& p, double j[6][6]) {
+  double l0[6], l1[6];
+  stewart_lengths(s, p, l0);
+  const double h = 1e-6;
+  for (int c = 0; c < 6; ++c) {
+    StewartPose q = p;
+    q.v[c] += h;
+    stewart_lengths(s, q, l1);
+    for (int r = 0; r < 6; ++r) j[r][c] = (l1[r] - l0[r]) / h;
+  }
+}
+
+// How near the legs are to losing a direction at this pose: near 1 is good, near 0 is singular.
+inline double stewart_condition(const Stewart& s, const StewartPose& p) {
+  double j[6][6], b[6] = {1, 1, 1, 1, 1, 1}, x[6], ratio = 0.0;
+  stewart_matrix(s, p, j);
+  solve6(j, b, x, &ratio);
+  return ratio;
+}
+
+// The pose that has the leg lengths `len`, from a guess, by Newton's iteration; the number of steps in `iters`.
+inline bool stewart_pose(const Stewart& s, const double len[6], StewartPose& pose, int* iters) {
+  for (int it = 0; it < 60; ++it) {
+    double l[6], j[6][6], r[6], dx[6];
+    stewart_lengths(s, pose, l);
+    double err = 0.0;
+    for (int i = 0; i < 6; ++i) {
+      r[i] = len[i] - l[i];
+      err += r[i] * r[i];
+    }
+    if (std::sqrt(err) < 1e-12) {
+      if (iters) *iters = it;
+      return true;
+    }
+    stewart_matrix(s, pose, j);
+    if (!solve6(j, r, dx, nullptr)) return false;
+    for (int c = 0; c < 6; ++c) pose.v[c] += dx[c];
+  }
+  return false;
+}
+
+
+#endif
