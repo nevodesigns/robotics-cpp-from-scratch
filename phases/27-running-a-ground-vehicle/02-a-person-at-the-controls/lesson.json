@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "27-02-a-person-at-the-controls",
+  "title": "A Person at the Controls: The Speed They Can Drive at When They See the Past, the Dead Man's Timeout, and a Vehicle That Slows Itself for the Wall",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "27-01-a-list-of-places-to-go",
+    "21-06-a-robot-you-drive-from-a-chair",
+    "19-04-how-far-it-goes-before-it-stops"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/teleop_governor.hpp",
+    "note": "teleoperation of a ground vehicle: the speed at which a vehicle can still stop within what an operator can see, given the video delay, their reaction and the command delay; a governor that ramps the commanded speed within acceleration and braking limits, drops to a stop when no command has arrived within a timeout, and caps the speed so the vehicle can stop short of an obstacle that its own sensor sees, whatever the operator asks"
+  },
+  "breaks_first": [
+    "E-VEH-0115",
+    "E-VEH-0116",
+    "E-VEH-0117"
+  ]
+}

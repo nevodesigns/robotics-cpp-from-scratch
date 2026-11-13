@@ -1,0 +1,78 @@
+{
+  "lesson": "27-02-a-person-at-the-controls",
+  "title": "A Person at the Controls: The Speed They Can Drive at When They See the Past, the Dead Man's Timeout, and a Vehicle That Slows Itself for the Wall",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does the delay of an operator add to the stopping distance?",
+      "options": [
+        "Nothing",
+        "The vehicle goes on at its speed for the whole delay before it starts to brake",
+        "It halves it",
+        "Only the braking"
+      ],
+      "correct": 1,
+      "explanation": "v times T, plus the braking distance."
+    },
+    {
+      "stage": "check",
+      "question": "The speed allowed with 0.5 s of delay in all and with 2.0 s was:",
+      "options": [
+        "2.32 m/s and 4.00 m/s",
+        "4.00 m/s and 2.32 m/s",
+        "The same",
+        "2 m/s both"
+      ],
+      "correct": 1,
+      "explanation": "Falls with the delay."
+    },
+    {
+      "stage": "check",
+      "question": "After the commands stopped, a vehicle at 2 m/s went on with a timeout of 0.5 s:",
+      "options": [
+        "4.99 m",
+        "1.99 m",
+        "0 m",
+        "10 m"
+      ],
+      "correct": 1,
+      "explanation": "v times timeout, plus the braking."
+    },
+    {
+      "stage": "check",
+      "question": "With the obstacle sensed and the operator at full speed, the vehicle stopped:",
+      "options": [
+        "58.7 m past it",
+        "0.50 m short of it",
+        "On it",
+        "At the start"
+      ],
+      "correct": 1,
+      "explanation": "A cap from the vehicle's own sensor."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the governor ramp the speed?",
+      "options": [
+        "To save the battery only",
+        "A step in the request is not a step in the wheels: it throws the load and spins them",
+        "It is slower",
+        "Law"
+      ],
+      "correct": 1,
+      "explanation": "1.33 s to reach 2 m/s."
+    },
+    {
+      "stage": "post",
+      "question": "What does a dead man's timeout add to?",
+      "options": [
+        "Nothing",
+        "The stopping distance: v times the timeout",
+        "The battery",
+        "The latency of the video"
+      ],
+      "correct": 1,
+      "explanation": "It is part of the distance."
+    }
+  ]
+}
