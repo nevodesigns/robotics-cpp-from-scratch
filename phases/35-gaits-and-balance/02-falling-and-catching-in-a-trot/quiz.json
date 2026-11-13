@@ -1,0 +1,78 @@
+{
+  "lesson": "35-02-falling-and-catching-in-a-trot",
+  "title": "Falling and Catching in a Trot: A Body on Two Feet as an Inverted Pendulum, and How Long a Stance May Last Before the Next Feet Must Land",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is a trot always falling?",
+      "options": [
+        "It is slow",
+        "With two feet down there is no support polygon, only a line, and the body falls toward one side until the other pair lands",
+        "It is heavy",
+        "Gravity is odd"
+      ],
+      "correct": 1,
+      "explanation": "An inverted pendulum."
+    },
+    {
+      "stage": "check",
+      "question": "A body 10 mm off the line took how long to fall 6 cm?",
+      "options": [
+        "0.22 s",
+        "0.41 s",
+        "0 s",
+        "0.166 s"
+      ],
+      "correct": 1,
+      "explanation": "With 30 mm it was 0.22 s."
+    },
+    {
+      "stage": "check",
+      "question": "What does a taller body do?",
+      "options": [
+        "Falls faster",
+        "Falls more slowly: 0.50 s for 0.40 m",
+        "Nothing",
+        "Cannot trot"
+      ],
+      "correct": 1,
+      "explanation": "T is sqrt(h / g)."
+    },
+    {
+      "stage": "check",
+      "question": "A stance of 0.25 s with the centre 30 mm off the line was:",
+      "options": [
+        "Fine",
+        "Too long (it falls first)",
+        "Free",
+        "Impossible to say"
+      ],
+      "correct": 1,
+      "explanation": "0 for that offset."
+    },
+    {
+      "stage": "post",
+      "question": "What does a negative time mean?",
+      "options": [
+        "A bug",
+        "The centre is moving back toward the line fast enough that it never gets there",
+        "The past",
+        "Zero"
+      ],
+      "correct": 1,
+      "explanation": "It stops first."
+    },
+    {
+      "stage": "post",
+      "question": "What is not in the model?",
+      "options": [
+        "The pendulum",
+        "Where the swing feet land and the body's rotation",
+        "The time constant",
+        "The closed form"
+      ],
+      "correct": 1,
+      "explanation": "35-07 for the step."
+    }
+  ]
+}

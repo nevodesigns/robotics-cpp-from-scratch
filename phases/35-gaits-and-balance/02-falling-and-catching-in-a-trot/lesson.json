@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "35-02-falling-and-catching-in-a-trot",
+  "title": "Falling and Catching in a Trot: A Body on Two Feet as an Inverted Pendulum, and How Long a Stance May Last Before the Next Feet Must Land",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "35-01-standing-on-three-legs",
+    "34-04-down-and-up",
+    "33-05-tipping-with-the-arm-out"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::legged",
+    "header": "rc/legged/trot_balance.hpp",
+    "note": "why a trot works and how its timing is limited: with two diagonal feet down the body can only turn about the line joining them, and near the upright it behaves as an inverted pendulum (the sideways distance of the centre of mass from the line obeys x'' = (g/h) x), which moves away from the line as x0 cosh(t/T) + v0 T sinh(t/T) with T the square root of h over g; the time it takes to move out by a given distance (found in closed form from a quadratic in e to the t over T); whether a stance of a given length is short enough, and what the height and the starting offset do to the time allowed"
+  },
+  "breaks_first": [
+    "E-LEG-0027",
+    "E-LEG-0028",
+    "E-LEG-0029"
+  ]
+}
