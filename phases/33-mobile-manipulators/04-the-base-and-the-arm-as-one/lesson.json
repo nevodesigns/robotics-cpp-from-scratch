@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "33-04-the-base-and-the-arm-as-one",
+  "title": "The Base and the Arm as One: A Jacobian With Eight Columns, a Weight on Moving the Base, and a Line Drawn Farther Than the Arm Alone Can Reach",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "33-03-choosing-where-to-park",
+    "28-03-how-the-tool-moves-when-the-joints-do",
+    "28-05-iterating-to-a-pose",
+    "28-06-where-the-arm-loses-a-direction"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::mobile",
+    "header": "rc/mobile/whole_body.hpp",
+    "note": "moving a hand with the base and the arm together: a Jacobian of eight columns (the base's forward speed and turning rate, then the six joints) giving the hand's velocity in the world, the rates that give the hand a wanted velocity at least cost (a weighted damped least squares with a price on moving the base), and a simulated line drawn by the hand a metre and a half long, with the base only turning and driving along its heading, to compare with the arm alone"
+  },
+  "breaks_first": [
+    "E-MOB-0010",
+    "E-MOB-0011",
+    "E-MOB-0012"
+  ]
+}

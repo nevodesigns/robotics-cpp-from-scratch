@@ -1,0 +1,78 @@
+{
+  "lesson": "33-04-the-base-and-the-arm-as-one",
+  "title": "The Base and the Arm as One: A Jacobian With Eight Columns, a Weight on Moving the Base, and a Line Drawn Farther Than the Arm Alone Can Reach",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does the whole body have eight columns and not nine?",
+      "options": [
+        "It has nine",
+        "A differential drive base cannot slide sideways, so it has two rates",
+        "Cameras",
+        "Chance"
+      ],
+      "correct": 1,
+      "explanation": "Driving and turning."
+    },
+    {
+      "stage": "check",
+      "question": "The arm alone ended how far short of a line of 1.5 m?",
+      "options": [
+        "0.000 m",
+        "1.18 m",
+        "0 m",
+        "10 m"
+      ],
+      "correct": 1,
+      "explanation": "At full stretch, its manipulability was 0.0000."
+    },
+    {
+      "stage": "check",
+      "question": "Arm and base together:",
+      "options": [
+        "Fell short",
+        "Reached it to 0.000 m",
+        "Fell over",
+        "Did not move"
+      ],
+      "correct": 1,
+      "explanation": "The base drove 1.43 m."
+    },
+    {
+      "stage": "check",
+      "question": "What does a dearer base do?",
+      "options": [
+        "Moves more",
+        "Moves less, and the arm more",
+        "Stops the arm",
+        "Nothing at all"
+      ],
+      "correct": 1,
+      "explanation": "1.20 m against 1.50 m for a cheap one."
+    },
+    {
+      "stage": "post",
+      "question": "Why did the price on the base change the travel so little?",
+      "options": [
+        "It cannot",
+        "The base has to cover the distance the arm cannot, whatever the price",
+        "A bug",
+        "Chance"
+      ],
+      "correct": 1,
+      "explanation": "The weight shifts the share, not the total."
+    },
+    {
+      "stage": "post",
+      "question": "What is not in this model?",
+      "options": [
+        "The Jacobian",
+        "The base's acceleration and slip, the joint speed limits and obstacles",
+        "The weights",
+        "The line"
+      ],
+      "correct": 1,
+      "explanation": "Those are other lessons."
+    }
+  ]
+}
