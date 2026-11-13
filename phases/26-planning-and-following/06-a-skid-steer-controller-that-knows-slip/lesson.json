@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "26-06-a-skid-steer-controller-that-knows-slip",
+  "title": "A Skid Steer Controller That Knows Slip: The Track It Really Turns On, the Speed the Ground Allows in a Turn, and Why the Plain Follower Slides Wide",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "26-04-following-a-path-pure-pursuit-and-stanley",
+    "23-02-a-skid-steer-and-its-centre-of-rotation",
+    "23-05-the-traction-circle"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::drive",
+    "header": "rc/drive/skid_follow.hpp",
+    "note": "a path follower for a skid steer vehicle: pure pursuit gives a curvature, the traction limit of the surface (lesson 23-05) caps the speed in the turn, and the wheel speeds are worked out with the effective track chi times B and the slip of the wheels (lesson 23-02), so the body turns as asked; run against a plant that has the real chi and slip"
+  },
+  "breaks_first": [
+    "E-VEH-0097",
+    "E-VEH-0098",
+    "E-VEH-0099"
+  ]
+}

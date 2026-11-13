@@ -1,0 +1,78 @@
+{
+  "lesson": "26-06-a-skid-steer-controller-that-knows-slip",
+  "title": "A Skid Steer Controller That Knows Slip: The Track It Really Turns On, the Speed the Ground Allows in a Turn, and Why the Plain Follower Slides Wide",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does a skid steer vehicle turn less than the plain track geometry says?",
+      "options": [
+        "The wheels are small",
+        "The wheels slide sideways: the effective track is chi times the real one",
+        "It is heavy",
+        "Friction is zero"
+      ],
+      "correct": 1,
+      "explanation": "Chi is 1 or more."
+    },
+    {
+      "stage": "check",
+      "question": "Holding the path on tarmac: aware against unaware, the worst error was:",
+      "options": [
+        "0.115 m against 0.042 m",
+        "0.042 m against 0.115 m",
+        "The same",
+        "0 against 0"
+      ],
+      "correct": 1,
+      "explanation": "The unaware one asks for a turn that is too small."
+    },
+    {
+      "stage": "check",
+      "question": "On ice at 1.2 m/s the plain controller let go in how many steps?",
+      "options": [
+        "0",
+        "51",
+        "None",
+        "All"
+      ],
+      "correct": 1,
+      "explanation": "The speed was above what the grip holds."
+    },
+    {
+      "stage": "check",
+      "question": "How many times the speed does the same curve allow on gravel than on ice?",
+      "options": [
+        "1",
+        "2.12",
+        "10",
+        "0.5"
+      ],
+      "correct": 1,
+      "explanation": "The square root of the ratio of mu."
+    },
+    {
+      "stage": "post",
+      "question": "What does the limited controller give up?",
+      "options": [
+        "Nothing",
+        "Time: 5.4 s against 4.6 s on ice",
+        "The path",
+        "Safety"
+      ],
+      "correct": 1,
+      "explanation": "It is slower and on the path."
+    },
+    {
+      "stage": "post",
+      "question": "Why is there a floor on the speed in a turn?",
+      "options": [
+        "For looks",
+        "A controller that can command zero in a turn never gets out of it",
+        "Memory",
+        "The grid"
+      ],
+      "correct": 1,
+      "explanation": "A vehicle that stops is not following."
+    }
+  ]
+}
