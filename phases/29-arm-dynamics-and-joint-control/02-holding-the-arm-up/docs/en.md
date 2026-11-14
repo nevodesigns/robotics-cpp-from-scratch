@@ -34,9 +34,24 @@ A payload is a point mass on the last link. The mass is the sum, the centre of m
 
 `pd_torque` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- If asked, add the torque of gravity of the model for this pose to each joint's torque.
+
+As shipped, 2 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- A PD controller that has to hold the arm up with its error sags by the torque over the gain, and adding gravity takes it away.
+- A payload the controller does not know about is a droop, and its mass is found from the torques in six poses.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 29-02
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -30,9 +30,26 @@ Neighbouring beams are `angle_inc` apart, so at a range of `r` their points are 
 
 `scan_to_points` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For each beam whose range is a number between the limits, the point is the range times the cosine and the sine of the beam's angle (the minimum angle plus the step times the index).
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- A scan of a room becomes a point for every beam, and the points are where the wall is.
+- Beams that saw nothing, were too near or too far, or are not numbers give no points.
+- Seen from a sensor tipped down, the points of a vertical wall are not at one height.
+- Lost beams are lost points.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 24-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

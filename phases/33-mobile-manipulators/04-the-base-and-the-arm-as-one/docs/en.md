@@ -34,9 +34,24 @@ With the base 30 times as costly to move it drove 1.20 m, and with it made 33 ti
 
 `wb_rates` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- With winv the inverse costs (1 / w_base for the two base rates, 1 for the joints), form A = J winv J^T + lambda^2 I (6 by 6), solve A y = xi with rc::arm::solve6, and the rates are winv times J^T y.
+
+As shipped, 2 of the 3 tests fail, and these are the ones your code has to turn green:
+
+- The rates give the hand its velocity, and a dearer base moves less.
+- A line farther than the arm can reach is drawn by the arm and base together and not by the arm alone.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 33-04
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

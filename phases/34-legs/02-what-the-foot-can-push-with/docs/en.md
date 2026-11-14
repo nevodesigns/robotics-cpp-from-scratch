@@ -38,9 +38,23 @@ The inverse is the singularity again: a foot speed of 0.5 m/s straight down need
 
 `stand_torques` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Tau_c is minus the sum over the rows r of j[r][c] times ground[r] (the transpose of the Jacobian times the force, with the sign flipped).
+
+As shipped, 1 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- Holding a body up takes less torque from the knee the straighter the leg, and the torques give the force back.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 34-02
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -36,9 +36,27 @@ A lidar mounted 0.25 m above the ground and tipped 5 degrees down saw the ground
 
 `compose` and `inverse` for `Tf3` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the notes beside each `TODO` put it:
+
+- The rotation is a.r times b.r, and the translation is a.r times b.t plus a.t.
+- The rotation is the transpose, and the translation is minus that times a.t.
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- A transform composed with its inverse is the identity, in the plane and in space.
+- The order of composition matters, by a measurable amount.
+- The chain map, odom, base, lidar carries a point to the map, and agrees with the plane arithmetic.
+- A lidar tipped down sees the ground at a range that is not its height divided by anything simple.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 22-02
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

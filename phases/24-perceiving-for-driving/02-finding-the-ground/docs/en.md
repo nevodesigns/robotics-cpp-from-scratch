@@ -36,9 +36,25 @@ A wall can hold more points than the ground does, and then the biggest plane is 
 
 `fit_plane_ransac` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For each draw pick three different points, make a plane, skip it if it is too tilted, count the points within the tolerance, and keep the plane with the most.
+
+As shipped, 3 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- What stands on the ground pulls a least squares plane off it and does not move a plane of random samples.
+- The ground and what stands on it are split by height above the plane.
+- A wall with more points than the ground is the biggest plane, and is the ground only if nothing says the ground is level.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 24-02
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

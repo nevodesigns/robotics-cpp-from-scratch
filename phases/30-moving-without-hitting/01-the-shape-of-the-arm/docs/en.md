@@ -38,9 +38,23 @@ An arm can hit itself: the flange can come down on the base column. But two link
 
 The self-collision pairs of `scene_distance` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For every pair of capsules more than one apart in the list (the ones next to each other share a joint and always touch), the signed distance between them; keep the smallest.
+
+As shipped, 1 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- Links that share a joint are not asked, and the flange brought down beside the base touches the base column.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 30-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

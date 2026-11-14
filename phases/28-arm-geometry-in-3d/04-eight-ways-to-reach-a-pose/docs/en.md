@@ -39,9 +39,25 @@ The closed form needs the last three axes to meet. The UR5 does not have a spher
 
 `ik_spherical` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The first joint is atan2 of the wrist centre (or that plus a half turn, with the radius negative); the elbow comes from sin(theta3) = (X^2 + Y^2 - a2^2 - d4^2) / (2 a2 d4), two angles; theta2 = atan2(Y, X) - atan2(-d4 cos(theta3), a2 + d4 sin(theta3)); the wrist is a Z Y Z Euler angle of R03 transposed times the flange's rotation, with its two solutions and its singular case.
+
+As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- For many poses the angles that made the pose are among the solutions and every solution reaches it.
+- A pose out of reach has no solution, at the very edge the elbow up and down are one, and a straight wrist has fewer.
+- The limits of the joints take some of the eight away.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 28-04
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

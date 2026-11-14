@@ -37,9 +37,23 @@ The order is what is cheapest to change last: the speed is the operator's choice
 
 `check_job` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- In this order: the speed against max_speed(step_max, duty, period_min) (36-01); the slope against the least of max_slope_friction, max_slope_tip and max_slope_level (degrees) and the step against max_step_servo (35-08); the push against max_push_speed(reach, margin, swing, com_h) (35-07); the knee's winding_rise in a trot (stance_torques with two feet down at the body's height with mass plus payload, cycle_rms_torque with a swing torque of 0.3) against the motor's rise limit and rise_plan (36-03) for torque and heat; the range from the power (8 times the winding loss plus the idle power) against 1.2 times the route; and the person's max_speed (31-06) against the useful minimum; first_fail is the number of the first that failed.
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- A walk inside what the robot can do is released, with every figure kept.
+- Each way a walk can be too much is named by the first requirement that fails.
+- The first failure is the first in the list, and the figures of the others are still kept.
+
 ```
 rcpp verify 36-08
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

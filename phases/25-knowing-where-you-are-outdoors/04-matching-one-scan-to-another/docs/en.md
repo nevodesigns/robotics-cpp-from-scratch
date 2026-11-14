@@ -36,9 +36,25 @@ A person who is in one scan and not the other has points with no partner. Left i
 
 The centroid and rotation step of `icp` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Centre the paired points on their means; the rotation that best aligns them is atan2(sum of cross, sum of dot) of the centred pairs; the translation takes the rotated source mean to the target mean.
+
+As shipped, all 5 of the 5 tests fail. They are, in the order the suite runs them:
+
+- A scan moved by a known amount is matched back to it, from a first guess of no move.
+- It converges only from a first guess not too far off, and the limit is a matter of the shape.
+- In a corridor the match cannot tell how far along it the sensor moved, and a partition across it tells it.
+- A person in one scan and not the other pulls the match unless pairs that are too far apart are ignored.
+- A first guess from the odometry saves rounds.
+
 ```
 rcpp verify 25-04
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -30,9 +30,23 @@ A joint driven at 0.2 rad/s into a stiff wall was found to have touched 15 ms af
 
 `contact_update` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Residual = measured - model; filt = alpha * residual + (1 - alpha) * filt; count the ticks in a row with |filt| over the threshold (reset to 0 otherwise); hit when the count reaches need.
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- The detector declares contact only when the filtered residual has stayed over the threshold.
+- A joint driven into a wall is found to have touched, and a faster approach is a harder hit.
+- A threshold below what the model gets wrong gives false alarms in free motion.
+
 ```
 rcpp verify 31-04
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -38,9 +38,26 @@ A legged robot's score is in its rhythm. From one foot's contact signal, `gait_m
 
 `score_navigation` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Walk the pose entries: add up the step lengths and the speeds, track the least clearance less the radius, count a collision when the clearance first goes below zero, and advance through the goals in order when the robot is within a goal's tolerance.
+
+As shipped, 4 of the 6 tests fail, and these are the ones your code has to turn green:
+
+- A straight run is as efficient as a run can be, and a detour of the same distance apart is not.
+- A stretch of samples inside a post is one collision, and the clearance says how far inside.
+- Goals count in the order they were given, and a goal reached early does not count for the next.
+- Criteria turn a score into a list of what failed.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 22-10
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

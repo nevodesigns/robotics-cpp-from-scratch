@@ -50,9 +50,25 @@ A file with six mistakes, one per line (no value after `scenario`, a duration of
 
 `interpret` in `exercise/solution.hpp`: one branch for each keyword.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- One branch per keyword: check the count of values (count), read the numbers (numbers), check what must hold (a surface that exists, x1 > x0, a positive radius), and fill the scenario or call bad(); an unknown keyword is a problem too.
+
+As shipped, all 5 of the 5 tests fail. They are, in the order the suite runs them:
+
+- A good file is read into the scenario, comments and blank lines and all.
+- Every mistake in a bad file is reported once, with the line it is on.
+- Writing a scenario and reading it back repeats it exactly.
+- The terrain, the lidar world and the faults come out of the scenario.
+- A file with no start and no duration says so, and a fault past the end is a problem.
+
 ```
 rcpp verify 22-07
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

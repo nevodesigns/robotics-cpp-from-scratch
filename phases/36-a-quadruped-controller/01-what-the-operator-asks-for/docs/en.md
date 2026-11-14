@@ -30,9 +30,25 @@ The step is the speed times the stance time, and the step must be within the leg
 
 `limit_command` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Clip the asked command (scale vx and vy together by the ellipse's measure sqrt((vx / vx_max)^2 + (vy / vy_max)^2) if it is over 1; clamp wz), then move each component of `now` toward it by at most its acceleration times dt.
+
+As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- A command outside the ellipse is scaled back onto it, keeping its direction, and the turn rate is capped.
+- A jump in the command becomes a ramp at the bounded acceleration, in both directions.
+- The sideways command is eased from where it is, at no more than its own acceleration, in both directions.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 36-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

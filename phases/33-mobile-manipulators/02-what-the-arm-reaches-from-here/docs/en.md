@@ -34,9 +34,23 @@ The ring has a width, and half of it is the tolerance: 36.0 cm. A base that stop
 
 `reach_annulus` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For r from 0 outward in steps, ask tool_down_reachable at (r, 0, z); r_in is the first radius that is reachable and r_out the last.
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- The ring the arm reaches has an inner and an outer radius, and a lower target gives a narrower one.
+- A point inside the ring is reached from the base and one outside is not, whichever way the base faces.
+- The quick test agrees with the full inverse kinematics.
+
 ```
 rcpp verify 33-02
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -36,9 +36,26 @@ A speed limit of 5 meant as km/h and read as m/s. The vehicle stopped from 1.39 
 
 `shape` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Clamp to the speed limits, then limit the change from prev_v and prev_w by the rates, then cut v so that v times w stays within max_lateral.
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- Speed up slowly, brake harder, and the numbers are the ones the limits say.
+- A fast turn at speed is cut by speed times turn rate, and a straight line is not.
+- A limit read in the wrong unit makes the stopping distance thirteen times as long.
+- A command beyond the limits is flagged as clamped.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 22-03
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

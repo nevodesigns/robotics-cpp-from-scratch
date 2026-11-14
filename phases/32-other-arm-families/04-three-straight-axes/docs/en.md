@@ -34,9 +34,24 @@ A wide beam is driven from both ends, and if the two ends are out of step (one m
 
 `straight_line_time` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The length of d; for each axis with a share u = |d_i| / length of the direction the path speed is at most v_i / u and the acceleration at most a_i / u; take the smallest of each and use trapezoid_time of the length.
+
+As shipped, 2 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- A straight line across axes of different strength is slower than letting each go on its own.
+- With equal axes a diagonal takes the time of one axis.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 32-04
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

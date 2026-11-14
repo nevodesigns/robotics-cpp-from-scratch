@@ -36,9 +36,26 @@ The same path took 5.9 s on tarmac and 8.0 s on ice, with nothing changed but th
 
 The three passes in `speed_profile`, in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Cap each point by sqrt(a_lat / |k|) and the caps; set the start and end speeds; then a backward pass v[i] <= sqrt(v[i+1]^2 + 2 a_dec ds[i]) from the end, and a forward pass v[i+1] <= sqrt(v[i]^2 + 2 a_acc ds[i]) from the start.
+
+As shipped, all 6 of the 6 tests fail. They are, in the order the suite runs them:
+
+- No point is driven faster than the sideways limit allows.
+- The brakes are applied before the bend, within the braking limit, which the capped speeds alone do not give.
+- The speeding up is within the limit, from rest.
+- A stop line is reached at zero speed, with the slowing begun in time.
+- The same path is slower on ice than on tarmac.
+- A corner of 90 degrees costs time, and smoothing it gives some back.
+
 ```
 rcpp verify 26-07
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

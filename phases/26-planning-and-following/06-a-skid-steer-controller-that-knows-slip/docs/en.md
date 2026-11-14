@@ -39,9 +39,25 @@ On ice the limit in a tight turn is below the floor of 0.2 m/s only for very sha
 
 `skid_wheel_speeds` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The sum of the wheel speeds is 2 v / (r (1 - slip)); the difference is w chi B / r; the left is half of (sum - difference), the right half of (sum + difference).
+
+As shipped, 3 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- The wheel speeds make the body go and turn as asked.
+- A controller that knows chi and slip holds the path, one that does not strays.
+- On ice the plain controller lets go in the turn and one that limits its speed does not.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 26-06
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

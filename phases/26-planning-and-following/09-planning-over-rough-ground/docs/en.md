@@ -36,9 +36,24 @@ A goal in a ring of blocked cells was not found after 6476 expansions and gave a
 
 `step_cost` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The energy per metre is the mean of the two cells' (going the way of the step); the risk is the target cell's cost over 255; the price is dist * (1 + energy weight * energy + risk weight * risk).
+
+As shipped, 2 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- With no weight on energy the shortest path goes through the sand, with weight it takes the ford.
+- A patch of risk that is not blocked is crossed unless risk has a weight.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 26-09
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

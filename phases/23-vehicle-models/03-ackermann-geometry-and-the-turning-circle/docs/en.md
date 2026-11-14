@@ -40,9 +40,23 @@ Round a circle of radius `R` at speed `v` the car accelerates sideways at `v*v /
 
 `ackermann_angles` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Each front wheel is at the end of a line at right angles to its own rolling, which meets the rear axle's line at the centre of the circle: the inner wheel is at atan(L / (R - B/2)), the outer at atan(L / (R + B/2)).
+
+As shipped, 1 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- The two front wheels are at different angles, and the difference is what the Ackermann condition says.
+
+The other 4 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 23-03
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

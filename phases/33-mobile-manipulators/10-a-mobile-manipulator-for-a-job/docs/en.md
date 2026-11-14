@@ -38,9 +38,23 @@ The requirements are ordered by what can be changed cheapest last: a place to pa
 
 `check_job` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Run, in this order, the parking choice at the pick and the place (reach_annulus at the target's height in the arm's frame, then choose_park); the ring's tolerance against three times the stopping sigma; payload_budget against the payload; the grasp chance with the camera (sigma_after_servo, grasp_probability) at least 0.99; range_m for the loaded base against 1.2 times the route; tip_speed_limit from the tipping deceleration of the tucked pose with the payload against the speed wanted; max_speed of the person's distance against the useful minimum; first_fail is the number of the first requirement that failed.
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- A job inside what the robot can do is released, with every figure kept.
+- Each way a job can be too much for the robot is named by the requirement that fails first.
+- A job with the shelf out of the reach of any parking place is refused at the first requirement.
+
 ```
 rcpp verify 33-10
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -34,9 +34,23 @@ The state says whether the foot is down. The gait (34-04) says whether it should
 
 `contact_update` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- While off, count readings over f_on (but none inside the blank after lift) and go on after `need` in a row; while on, count readings under f_off and go off after `need` in a row; a reading on the wrong side resets the run.
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- Touchdown and lift-off are believed after a run of readings, and a reading on the wrong side resets the run.
+- A stepping foot gives one touchdown and one lift-off a step, found within a few readings.
+- The blank keeps the lift-off spike out, and two thresholds keep a grazing foot from flapping.
+
 ```
 rcpp verify 34-07
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

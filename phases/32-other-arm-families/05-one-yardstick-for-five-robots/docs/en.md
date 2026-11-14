@@ -34,9 +34,22 @@ A robot that reaches a lot in a lot of room is not efficient. Against the room e
 
 `workspace_volume` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Draw n random points in the box (a generator of your own from the seed), count the ones for which reaches is true, and return the box's volume times that share; the standard error is the box's volume times sqrt(p (1 - p) / n).
+
+As shipped, both of the 2 tests fail. They are, in the order the suite runs them:
+
+- The sampling gives the volume of a ball and of a box, with an error that shrinks with the points.
+- Each kind of robot is asked the same question, and the volumes and the room they take are compared.
+
 ```
 rcpp verify 32-05
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

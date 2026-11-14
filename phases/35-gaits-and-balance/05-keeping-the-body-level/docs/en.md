@@ -34,9 +34,23 @@ With the feet's forces in the loop the body (inertia 0.05 kg m2 about the roll a
 
 `foot_forces_raw` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For the n feet on the ground build the 3 by n matrix A with rows (1, y, -x), the wanted vector (W, mx, my), solve (A A^T) y = w (3 by 3, Cramer's rule; false if the determinant is nearly zero) and the force on foot k is the k-th entry of A^T y (it may be negative).
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- The weight is shared equally with no moment wanted, and wanted moments are given exactly with four or three feet.
+- A foot can only push, so a moment beyond the weight times the half width cannot be given.
+- A PD law on the attitude answers a push the feet can answer and rolls over for one they cannot.
+
 ```
 rcpp verify 35-05
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

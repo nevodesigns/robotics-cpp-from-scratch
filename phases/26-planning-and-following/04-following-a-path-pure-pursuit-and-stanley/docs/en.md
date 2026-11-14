@@ -32,9 +32,27 @@ On a corner of 90 degrees pure pursuit cut inside by 0.38 m (the closest the car
 
 `pure_pursuit_steer` and `stanley_steer` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the notes beside each `TODO` put it:
+
+- Alpha is the angle from the heading to the point path[j]; steer = atan2(2 L sin(alpha), distance to the point).
+- The heading error wrap_pi(path_heading - heading) plus atan2(-k e, speed), where e is positive when the front axle is left of the path.
+
+As shipped, 4 of the 7 tests fail, and these are the ones your code has to turn green:
+
+- Both followers bring a car that starts to the side onto a straight path.
+- Pure pursuit cuts a curve, more with a longer lookahead, and Stanley hugs it.
+- A very short lookahead swings across the path far more often than a longer one.
+- A corner of 90 degrees is cut by the lookahead, smoothed or not.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 26-04
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

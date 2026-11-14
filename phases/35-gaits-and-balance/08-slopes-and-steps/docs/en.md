@@ -30,9 +30,24 @@ The swing has to lift the foot over the step and onto it in the swing time, and 
 
 `max_step_height` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Halve an interval for the rise s from 0 to h: the place is (x, the hip's width, -(h - s)); it is reachable if leg_ik (knee -1) has a solution with the knee angle q[2] between knee_lo and knee_hi; the largest such s.
+
+As shipped, 2 of the 3 tests fail, and these are the ones your code has to turn green:
+
+- The highest step by the legs' geometry is greater the further ahead the foot is put (the knee folds less), and a tighter knee limit lowers it.
+- The servos lower the step that can be swung, and a longer swing allows a higher one.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 35-08
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

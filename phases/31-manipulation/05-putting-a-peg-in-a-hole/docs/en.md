@@ -34,9 +34,24 @@ If the slope is not steeper than the friction cone (tan of the angle at most mu)
 
 `push_to_centre` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The offset beyond half the clearance, times k, over (tan of the angle less mu); 0 if it is within, a huge number if it cannot slide.
+
+As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
+
+- The push to bring the peg in is zero inside the clearance and grows with the stiffness and the offset.
+- A soft hand brings the peg in with a small push where a stiff one jams, and a peg beyond the chamfer is missed.
+- A peg on a slope not steeper than the friction cannot slide, however soft the hand.
+- Over a range of offsets the soft hand gets the peg in more often than the stiff one.
+
 ```
 rcpp verify 31-05
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

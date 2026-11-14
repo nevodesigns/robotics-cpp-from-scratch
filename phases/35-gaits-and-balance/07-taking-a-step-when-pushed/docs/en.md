@@ -34,9 +34,24 @@ A foot landed at the target left the capture point 2.0 cm inside it, the margin,
 
 `step_target` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The capture point at the landing time is xi0 e^(t_land / T) (capture_at); the target is that plus the margin; ok if the target is within the reach.
+
+As shipped, 2 of the 3 tests fail, and these are the ones your code has to turn green:
+
+- The foot must land beyond the capture point of the landing time, and the push that can be answered falls with the swing time.
+- A foot landed at the target leaves the capture point inside it, and one landed short leaves it outside.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 35-07
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

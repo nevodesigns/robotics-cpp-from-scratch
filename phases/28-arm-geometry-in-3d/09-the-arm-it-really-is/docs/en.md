@@ -32,9 +32,25 @@ Some corrections give exactly the same tool place for every joint angle. The axe
 
 The step of `calibrate` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Solve (J^T J + lambda I) step = J^T residual with solve_dense.
+
+As shipped, 3 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- Calibrating from enough measured poses takes the error from millimetres to the size of the noise, on poses it has not seen too.
+- With fewer measurements than corrections the fit is exact on its own poses and poor on others, and it gets better with every pose added.
+- More noise in the measurements is more error on new poses.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 28-09
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

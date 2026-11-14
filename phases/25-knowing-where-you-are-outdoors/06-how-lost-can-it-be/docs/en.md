@@ -34,9 +34,25 @@ A fix brings the bound down at once: a fix of 5 cm took it to **0.122 m**, and i
 
 `DeadReckoning::step`, the covariance update, in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- P' = F P F^T + G diag(var_ds, var_dth) G^T, with F = [[1,0,-ds sin],[0,1,ds cos],[0,0,1]] and G = [[cos, -ds sin / 2],[sin, ds cos / 2],[0,1]] at the middle heading.
+
+As shipped, all 5 of the 5 tests fail. They are, in the order the suite runs them:
+
+- With no noise there is no bound, and with the noise of the distance alone the bound grows as the square root of the distance.
+- With a heading that wanders the bound grows faster than the distance, as its three halves power.
+- A Monte Carlo of noisy runs agrees with the bound.
+- Turning adds to the bound, and a fix takes it back and it grows again.
+- The distance a robot may go before it might be 1 m out, or 5 m, is worked out before it sets off.
+
 ```
 rcpp verify 25-06
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

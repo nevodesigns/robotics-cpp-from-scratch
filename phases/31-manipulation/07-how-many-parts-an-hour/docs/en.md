@@ -34,9 +34,23 @@ The speed a person's distance allows (31-06) caps the tool speed. A person 1.0 m
 
 `scale_for_cycle` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The cycle time falls as k rises; if k = 1 is not fast enough return -1, else bisect k between a small number and 1 until cycle_time meets the target.
+
+As shipped, 1 of the 3 tests fail, and these are the ones your code has to turn green:
+
+- The override for a target cycle is found, and a target faster than the rated speed is refused.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 31-07
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

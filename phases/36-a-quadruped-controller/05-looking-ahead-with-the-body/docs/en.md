@@ -24,15 +24,31 @@ The cost is quadratic in the commands, with bounds on each: a small quadratic pr
 
 ### What it buys
 
-The bound here is 15 cm for 0.2 s and 1 cm for 0.2 s, alternately (while the swing feet land the ZMP has nowhere to go). A `fixed gain law, kx = 3.0 and kv = 0.9, clipped` to the bound that is available now, cannot see that the narrow time is coming. The largest push recovered was 0.70 m/s by the fixed gain law and 0.71 m/s by the predictive controller: about the same, because a saturating law with a high gain already uses all the push there is. Where the predictive controller wins is in speed: for a push of 0.6 m/s the body was back at the middle after 1.00 s with the fixed law and 0.60 s with the predictive controller, since it spends the wide windows well. And for a small push (0.3 m/s) the fixed law was quieter (0.00 s against 0.35 s): the predictive controller plans, and a plan has a cost when there is nothing to plan for. It is not a stronger controller; it is one that knows what is coming. See `E-LEG-0065`.
+The bound here is 15 cm for 0.2 s and 1 cm for 0.2 s, alternately (while the swing feet land the ZMP has nowhere to go). A `fixed gain law, kx = 3.0 and kv = 0.9, clipped` to the bound that is available now, cannot see that the narrow time is coming. The largest push recovered was 0.70 m/s by the fixed gain law and 0.71 m/s by the predictive controller: about the same, because a saturating law with a high gain already uses all the push there is. Where the predictive controller wins is in speed: for a push of 0.6 m/s the body was back at the middle after 1.05 s with the fixed law and 0.65 s with the predictive controller, since it spends the wide windows well. And for a small push (0.3 m/s) the fixed law was quieter (0.05 s against 0.40 s): the predictive controller plans, and a plan has a cost when there is nothing to plan for. It is not a stronger controller; it is one that knows what is coming. See `E-LEG-0065`.
 
 ## Build It
 
 `mpc_zmp` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Predictions s_k = A^k s0 + sum over j < k of A^(k-1-j) B u_j (rows for the position and velocity at each of the n steps, a matrix Phi in the commands and a vector F from the free motion); cost = sum of qx x_k^2 + qv v_k^2 + r u_j^2; H = 2 (Phi^T Q Phi + r I) and g = 2 Phi^T Q F; start from u = 0 and repeat: u = clip(u - (1 / trace H) (H u + g), -bound[k], bound[k]) for each command k; return the first command (and fill u_all).
+
+As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- The controller's commands respect the bound and push the body back.
+- When the bound on the ZMP changes with the support, the predictive controller recovers from pushes as large as a clipped fixed gain law does, and settles sooner.
+- Each weight does its own work: a dear command is a small one, and the weights on position and velocity are not interchangeable.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 36-05
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -34,9 +34,25 @@ For a car the rear wheels give the distance and the **steering angle** gives the
 
 `WheelOdometry::update` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The distance is the scale times the mean of the two; the turn is the difference over the effective track (which takes in everything that makes a turn smaller); add them on the heading at the middle of the step.
+
+As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- With the parameters of the model the odometry is the model.
+- A track width 3 percent too small makes a full turn read 3 percent too much, and a wheel scale out reads the distance out.
+- Against slip and a poor turn the ideal parameters do not close the square and the calibrated ones do.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 23-07
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -36,9 +36,23 @@ For a 10 kg vehicle of this shape it was **34.5 N a side on gravel** and **7.7 N
 
 `pivot_thrust_per_side` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The scrubbing torque is mu * m * g * half the diagonal; the two sides give force times the track; so the force per side is mu m g sqrt(L2 + B2) / (2 B).
+
+As shipped, 1 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- A pivot needs a force from each side that depends on the floor, and the motors may not have it.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 23-02
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

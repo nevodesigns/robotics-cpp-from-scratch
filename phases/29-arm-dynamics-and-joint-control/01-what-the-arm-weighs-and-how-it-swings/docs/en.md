@@ -55,9 +55,26 @@ Applying exactly the gravity torque as the motor torque gives zero acceleration:
 
 The backward recursion of `inverse_dynamics` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The force on link i is its own plus what it passes on to the next; the moment about its frame is its own, plus the moment of its weight and inertia force about the frame, plus the next's moment, plus the next force at the next frame's offset; the torque is the part along the joint axis of the moment about the joint's point, which adds the force at the frame's offset from that point.
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- A rod out horizontally from a horizontal axis needs m g L / 2 to be held, and nothing when it stands up.
+- The torque of gravity is the slope of the potential energy, and the mass matrix is symmetric and positive.
+- What the joints throw at each other grows with the square of the speed.
+- An arm let fall keeps its energy with a fourth order step and does not with a first order one.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 29-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

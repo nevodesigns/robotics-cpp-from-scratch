@@ -41,9 +41,23 @@ A job of 500 kg gave -1: no robot, and saying so is a result. See `E-ARM-0120`.
 
 `choose_family` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Check every family against the task (fill out[i]); of those for which all_ok is true, return the index of the one with the shortest cycle_s, or -1 if none.
+
+As shipped, 1 of the 2 tests fail, and these are the ones your code has to turn green:
+
+- Four different jobs go to four different robots, and a job nothing can do is refused.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 32-06
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

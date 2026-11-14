@@ -38,9 +38,23 @@ At full stretch (0.42 m) the knee is straight: its angle's sine, the `straightne
 
 `leg_ik` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- D = sqrt(y2 + z2 - offset squared) is the foot's depth in the leg's plane; q0 = atan2(z, y) - atan2(-d, offset); then the two link problem for (x, d): cos q2 = (x2 + d2 - l1 squared - l2 squared) / (2 l1 l2), q2 = knee times acos of it, q1 = atan2(x, d) - atan2(l2 sin q2, l1 + l2 cos q2); false if the place is out of reach.
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- The foot goes back to where it was asked, for either knee and either side.
+- A standing leg has the knee bent and its foot below the hip, and a place too far is refused.
+- The leg is straight at full stretch and a leg to its full length reaches the longest.
+
 ```
 rcpp verify 34-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

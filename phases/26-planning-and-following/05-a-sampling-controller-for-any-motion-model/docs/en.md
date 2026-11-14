@@ -41,9 +41,27 @@ With 8 samples the mean error over four seeds was 0.152 m; with 100 it was 0.077
 
 The weighting and the update of the nominal in `mppi_control`, in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Weight_i = exp(-(cost_i - least cost) / lambda); then for each step k, add to the nominal v and w the weighted average over the samples of the noise that was added, clamped to the model's limits.
+
+As shipped, 5 of the 6 tests fail, and these are the ones your code has to turn green:
+
+- A car that starts to the side is brought onto the path with its own model, within its limits.
+- The same controller drives a differential drive, which may turn harder.
+- Planning with the wrong model hardly hurts tracking at ten plans a second, but its predictions are wrong.
+- A controller that knows the grid goes round a block in the path, one that does not drives into it.
+- More samples track the path better.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 26-05
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

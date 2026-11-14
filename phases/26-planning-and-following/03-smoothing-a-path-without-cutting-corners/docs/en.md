@@ -32,9 +32,25 @@ A small block just inside a corner is exactly where a smoother wants to go, beca
 
 The update of each point in `smooth_path`, in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For each interior point, move it by the data weight times (plan - point) plus the smooth weight times (previous + next - 2 point), unless the new place is blocked; add the move to `moved`.
+
+As shipped, 3 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- Smoothing lowers the sharpest curvature of a path with a corner, and the ends stay.
+- A smoother that does not look at the walls cuts the corner into one, and one that does cannot.
+- A heavy smoother wanders further from the plan than a light one.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 26-03
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

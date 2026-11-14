@@ -57,9 +57,23 @@ The last check gives one command and then nothing, and requires the wheels to st
 
 `check_direction` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Stop and note the encoders, drive both wheels forward for a second, and fail with advice if either encoder counted down or did not count.
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- A healthy board passes the ten checks, in the order that costs least first.
+- Each fault fails the check of its own, and no check that is not its consequence.
+- The numbers measured are the ones the fault set, and the advice says what to do about it.
+
 ```
 rcpp verify 22-16
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

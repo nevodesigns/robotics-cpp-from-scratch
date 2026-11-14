@@ -34,9 +34,25 @@ The grip of gravel holds a slope of **22.3 degrees** (lesson 22-05) and the moto
 
 `motor_force` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The motor torque is ke times the current less the viscous drag at the motor's speed; at the wheel it is that times the gear ratio and the efficiency, for each motor, over the wheel radius.
+
+As shipped, all 5 of the 5 tests fail. They are, in the order the suite runs them:
+
+- The force falls in a straight line with speed from the stall force to nothing at the no load speed.
+- The top speed on the level is a little under the no load speed, and a slope takes much of it.
+- The motors climb a steeper slope than gravel will hold, and a lesser one than tarmac will.
+- A battery with a large internal resistance sags under the load of a standing start and takes the acceleration with it.
+- On tarmac the motors are the limit, and on gravel and ice the grip is.
+
 ```
 rcpp verify 23-06
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -42,9 +42,26 @@ If the extra room kept from the obstacle is so large that the arm's own pose is 
 
 `time_to_collision` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The arm's configuration is the trajectory's at traj_time + dt (not past its end); the obstacle is where the track predicts at now + dt; if the arm's capsules come within the margin of it, that is the time.
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- A meeting with an obstacle that is coming is found, about when the geometry says, and one going away is not.
+- An arm that does not look goes through what rises in its path; one that looks stops, and either waits or goes round, and both are safe.
+- The monitor keeps looking after a plan: with no room planned for the obstacle to move into, the arm still gets round with no contact.
+- When the arm is already inside what planning has to avoid there is no plan, and the arm waits.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 30-08
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

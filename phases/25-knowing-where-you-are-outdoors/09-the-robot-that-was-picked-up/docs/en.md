@@ -38,9 +38,24 @@ The monitor must not put in particles when the robot is where it should be: that
 
 `RecoveryMonitor::update` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- On the first call set both averages to the value and return 0; after that move each average towards the value by its alpha; the share is 1 - fast / slow, held between 0 and max_share.
+
+As shipped, 2 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- The monitor asks for nothing while the scans are explained and for more as the fast average falls below the slow.
+- A robot put down elsewhere is lost for good by a plain cloud and found again by one with a monitor.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 25-09
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

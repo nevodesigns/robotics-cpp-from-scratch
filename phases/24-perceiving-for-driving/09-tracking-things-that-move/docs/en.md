@@ -38,9 +38,26 @@ A person walked across the path at 1.4 m/s, and the track's velocity predicted w
 
 `associate` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Repeat: find the closest pair of an unmatched track and an unused detection, within the gate; match them; until there is none.
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- A detection is a tentative track, three in a row confirm it, and one false detection is never believed.
+- A short gap is coasted through and the id kept, a long one drops the track and the target gets a new one.
+- Two targets that meet and stop close together can swap their ids, and a metre apart they do not.
+- Where a person will be in two seconds is read from the track, and association pairs the nearest first.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 24-09
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

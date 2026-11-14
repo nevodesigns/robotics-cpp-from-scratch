@@ -40,9 +40,27 @@ The joints and the tool do the same work: the power of the tool, wrench times ve
 
 `jacobian` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The linear part of column i is the axis z cross (the tool point minus the point on the axis); the angular part is the axis z.
+
+As shipped, 5 of the 6 tests fail, and these are the ones your code has to turn green:
+
+- The analytic Jacobian is the finite difference one, for both arms, in both conventions' own rule.
+- The rule of the other convention gives a Jacobian that is wrong.
+- Joint rates give the tool the velocity the Jacobian says.
+- A tool offset changes the linear part of the Jacobian and not the angular part.
+- A vertical force at the tool asks nothing of the first joint, whose axis is vertical.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 28-03
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

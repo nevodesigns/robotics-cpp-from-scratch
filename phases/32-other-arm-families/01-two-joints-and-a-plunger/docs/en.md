@@ -34,9 +34,23 @@ The first two axes are vertical, so gravity is along them and puts no torque on 
 
 `scara_ik` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Cos q2 = (x2 + y2 - l1 squared - l2 squared) / (2 l1 l2), false if outside [-1, 1]; q2 = elbow times acos of it; q1 = atan2(y, x) - atan2(l2 sin q2, l1 + l2 cos q2); false if either is outside its limits.
+
+As shipped, 1 of the 3 tests fail, and these are the ones your code has to turn green:
+
+- The inverse kinematics puts the tool where it was asked, for either elbow.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 32-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

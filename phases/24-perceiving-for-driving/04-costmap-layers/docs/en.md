@@ -38,9 +38,24 @@ Two posts 0.60 m apart left **2 free cells** across the line between them for a 
 
 `inflate` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For every cell within the inflation radius of this lethal cell, give it 253 if it is within the inscribed radius and 252 exp(-scale (d - inscribed)) beyond, unless it is lethal itself, keeping the higher cost.
+
+As shipped, 2 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- The inflation is the footprint of the robot: inscribed inside its radius and a decay beyond it.
+- A gap between two posts is open to the centre of the robot only if it is wider than twice the radius, and the inflation shows it.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 24-04
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

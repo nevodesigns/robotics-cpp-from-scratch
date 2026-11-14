@@ -34,9 +34,23 @@ No two robots are the same. 100 joints were drawn at random with the inertia wit
 
 `simulate_step` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Each step: the command is kp (target - q) - kd w clipped to the torque limit; put it in a ring and take the one from `delay` ago (zero before that); the torque applied follows it with the lag (applied += (delayed - applied) dt / lag; the delayed command itself if the lag is zero); subtract Coulomb friction (the friction's sign against the speed; at rest, no motion if the drive is within the friction); w += (applied - friction) / inertia dt; q += w dt; track the peak; settled if it was within 2 percent of the target for the last second, t_settle when it entered the band for good; a runaway is not settled.
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- In the simulator a critically damped joint settles with almost no overshoot, and a stiffer one is quicker.
+- A delay and a lag in the actuator make a joint that settled in the simulator ring on the real one, and a joint with too much delay does not settle at all.
+- The delay a joint can stand is found, a gentler set of gains stands more, and over a spread of robots the stiff gains fail where the gentle ones settle.
+
 ```
 rcpp verify 36-07
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

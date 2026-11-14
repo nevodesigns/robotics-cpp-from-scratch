@@ -30,9 +30,23 @@ The stance has to be shorter than that time, with room: a stance of 0.25 s was 1
 
 `time_to_move` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- With T = sqrt(h / g), a = (x0 + v0 T) / 2 and b = (x0 - v0 T) / 2, x(t) = L is a u squared - L u + b = 0 for u = e^(t / T); take the root (L + sqrt(L squared - 4 a b)) / (2 a) and the time is T times its logarithm; zero if x0 is already at L, negative if there is no such time.
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- The closed form agrees with integrating the pendulum, and a body that starts at the limit has no time.
+- A body falls away from the line of its feet sooner the further off it starts, and later the taller it is.
+- A stance is long enough or too long for the body's offset, with a margin.
+
 ```
 rcpp verify 35-02
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

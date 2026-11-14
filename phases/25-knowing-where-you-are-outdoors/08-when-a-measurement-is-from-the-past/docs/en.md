@@ -42,9 +42,26 @@ Two sensors on a robot often do not share a clock. A gyro and the wheels' turn r
 
 `StateHistory::at` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Find the two states either side of t (the first with a time not before t, and the one before it), and take the point the same fraction of the way between them; the heading is interpolated as it is.
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- The state at a past time is found between the states either side of it, and not at all outside the history.
+- A fix is compared with where the robot was then, and the correction is carried to now.
+- A late fix taken for the present leaves a steady error of speed times delay; carrying the correction forward removes it.
+- When the robot stops during the delay, moving the fix on by the velocity puts it a quarter of a metre beyond the robot, and the history does not.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 25-08
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

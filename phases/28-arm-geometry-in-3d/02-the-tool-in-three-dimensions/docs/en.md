@@ -38,9 +38,26 @@ A rotation is nine numbers; people want three. Roll about x, pitch about y, yaw 
 
 `forward` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Start from the base and compose each row of the table in turn (row_pose with the joint angle), then the tool offset.
+
+As shipped, 4 of the 6 tests fail, and these are the ones your code has to turn green:
+
+- With every joint at zero the UR5's tool is where the sums of its lengths put it.
+- The Panda's flange at zero is at its published place, and its zero pose is not one it can take.
+- Turning the first joint turns the whole arm about the base axis.
+- The tool offset moves the tool along the flange's own axis.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 28-02
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

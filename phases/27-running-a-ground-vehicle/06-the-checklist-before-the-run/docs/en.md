@@ -51,9 +51,26 @@ A vehicle with 5.00 Wh left and a mission that needs 4.50 Wh and a reserve of 0.
 
 `run_checks` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- One make_check for each of ten things: energy (charge at least the mission plus the reserve), emergency stop (tried within the limit), position (sigma within the limit), scan (age within the limit), geofence (loaded), release (the expected one), link, log space, clock, motor temperature; write each as a comparison that is false for a number that is not a number.
+
+As shipped, all 6 of the 6 tests fail. They are, in the order the suite runs them:
+
+- A good vehicle passes all ten checks and may go.
+- Each check can fail alone, and the block or the warning is the one it is meant to be.
+- A number that is not a number fails its check.
+- The energy check is exact at the edge.
+- A warning can be overridden with a reason, a block cannot, and a reason is needed.
+- The report names every check and shows the numbers.
+
 ```
 rcpp verify 27-06
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

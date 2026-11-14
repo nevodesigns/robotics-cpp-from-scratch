@@ -38,9 +38,27 @@ A real device does not recompute the field every tick. It holds a few sets, each
 
 `in_swept_field` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For a straight, 0 <= x <= length and |y| <= half width; for a turn, the point must be within half the width of the circle of radius 1/curvature, and no further along that circle from the vehicle than the length.
+
+As shipped, 5 of the 6 tests fail, and these are the ones your code has to turn green:
+
+- The field is as long as the vehicle needs to stop, and it stops short of a thing by the margin.
+- A field worked out with no latency lets the vehicle through a thing.
+- On a turn the straight field misses a thing on the arc, and the swept field finds it.
+- Points behind, beside or past the end of the field are not in it.
+- A thing in the warning field slows the vehicle to a creep and one in the stop field stops it.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 27-03
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

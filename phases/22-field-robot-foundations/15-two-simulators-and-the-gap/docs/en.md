@@ -46,9 +46,25 @@ A gap that falls when one parameter is set is a difference of **that parameter**
 
 `compare_traces` and `response_time_constant` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the notes beside each `TODO` put it:
+
+- For each sample both have, the distance between the two poses; the largest, the root mean square, and the distance and the heading difference at the last one.
+- Find the final speed (the mean of the last fifth), take 63.2 percent of it, and find the time at which the speed first reaches that, between the two samples either side; each speed belongs to the middle of its interval.
+
+As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
+
+- The gap between two traces is the distance, sample against sample.
+- The time constant of a first order response is read back from its trace.
+- Two built in models with different lags differ, the lag is read from the slower one, and set in the faster one they agree.
+- The built in model and Gazebo Sim on the five cases, before and after the built in model is given Gazebo's time constant.
+
 ```
 rcpp verify 22-15
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

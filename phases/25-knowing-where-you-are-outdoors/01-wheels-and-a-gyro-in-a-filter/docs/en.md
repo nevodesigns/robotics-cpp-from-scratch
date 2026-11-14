@@ -30,9 +30,24 @@ When a wheel slips the wheels' turn is wrong by half or more, and the difference
 
 `GyroBiasFilter::update` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The measurement of the bias is gyro - wheel_rate, with a variance of sigma^2 + (share * wheel_rate)^2; if it is within gate standard deviations of the estimate, a scalar Kalman update; otherwise count it as refused.
+
+As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
+
+- With no motion the bias of the gyro is read from the gyro, and with the wheels going straight it is read from the difference.
+- When the wheels are turning they are trusted less, and a difference far from the estimate is refused as a slip.
+- Over a run of two minutes the filter keeps the heading, where the gyro alone drifts and the wheels alone are caught by a slip.
+- Weighing the wheels by how straight they are matters when the wheels are not well calibrated.
+
 ```
 rcpp verify 25-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

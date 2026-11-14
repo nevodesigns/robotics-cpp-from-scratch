@@ -38,9 +38,27 @@ The shortest path for a car that cannot reverse to a goal 0.5 m directly behind 
 
 `dubins_word`, the six closed forms, in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For each of the six words, work out the middle piece p from the geometry (two circles of radius 1 and the line between them), then the arcs t and q from the headings; a word does not exist if the square root or the arc cosine has no answer.
+
+As shipped, all 7 of the 7 tests fail. They are, in the order the suite runs them:
+
+- The walked end of the shortest word is the goal, for many pairs of poses.
+- A goal straight ahead is a straight line, and no path is shorter than the distance.
+- The shortest is the least of the words that exist.
+- A path at the car's radius is a path the car can drive.
+- A radius smaller than the car's turns tighter than the car can.
+- A Dubins tail finishes the hybrid search exactly on the goal.
+- A goal just behind the car is a long loop, because the car cannot reverse.
+
 ```
 rcpp verify 26-02
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

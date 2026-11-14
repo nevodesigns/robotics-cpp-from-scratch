@@ -34,9 +34,24 @@ The skew is the speed times the sweep time: at 5 m/s, **0.50 m**. A turn is wors
 
 `deskew` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The beam was fired a fraction (i + 1/2) / n of the way through the sweep; find the pose then (interpolate_pose), put the point in the world by it, and then into the frame of the start pose by the inverse of start.
+
+As shipped, 2 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- A turning sensor makes a wall look rotated, and deskewing straightens it.
+- A vehicle driving at the wall makes it look slanted, and deskewing straightens that too.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 24-07
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -30,9 +30,24 @@ A position error in the base is carried over one for one to the hand: 5 mm gave 
 
 `tool_in_world` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The arm's forward kinematics with the arm's base frame in the world (the base's pose composed with the mount) as its base.
+
+As shipped, 2 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- With the base at the origin the tool is where the arm alone says, shifted by the mount.
+- Moving the base moves the tool with it, and turning the base turns the tool about the base's centre.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 33-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

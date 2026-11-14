@@ -53,9 +53,27 @@ The test checks that the SDF is well formed, as for the picture of lesson 22-09.
 
 The key line of `parse_robot`, and the two inertia formulas, in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the notes beside each `TODO` put it:
+
+- Refuse a key given twice, a missing or bad number, and a line without the word source and some text after it; otherwise store the value and its source (the words after 'source', joined by spaces) and count it.
+- About x it is m / 12 times (sy squared plus sz squared), and likewise for the others.
+- About the axis it is half m r squared; about the other two m / 12 times (3 r squared plus length squared).
+
+As shipped, all 5 of the 5 tests fail. They are, in the order the suite runs them:
+
+- The reference robot parses, every number has its source, and the typical ones are counted.
+- A number with no source, a given twice, an unknown key and a missing one are all refused.
+- The inertias are the ones of the shapes.
+- The same file gives the built in limits and the SDF, with the same numbers in both.
+- The weight is put behind the axle, towards the caster, so that the robot rests on three points and does not rock.
+
 ```
 rcpp verify 22-12
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

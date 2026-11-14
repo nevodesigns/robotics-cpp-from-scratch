@@ -34,9 +34,24 @@ A crawl is slow: the body must shift, then lift, then place, then shift back, fo
 
 `polygon_margin` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For each edge from corner i to the next, the signed distance of p from the edge's line is the cross product of the edge with (p - corner i) over the edge's length, positive on the left for a polygon taken anticlockwise (flip the sign if the corners go clockwise: the sign of the area); the margin is the least over the edges.
+
+As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
+
+- The margin is the distance to the nearest edge, positive inside and negative outside, either way round.
+- Lifting a leg with the body centred puts the centre of mass on an edge, and shifting it gives a margin.
+- A body shifted the wrong way is outside the triangle, and a shift toward the middle is inside.
+- The middle of the corners and the shift to it are the numbers geometry gives.
+
 ```
 rcpp verify 35-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

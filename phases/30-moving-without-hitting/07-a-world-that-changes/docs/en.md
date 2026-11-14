@@ -30,9 +30,23 @@ When the gripper holds something, the arm is longer and fatter at its tool. A pa
 
 The growth in `scene_at` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The growth is the speed times the time since it was last seen, never less than zero and never more than the cap.
+
+As shipped, 1 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- An object not seen for a while is treated as bigger by how far it could have gone, up to a cap.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 30-07
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

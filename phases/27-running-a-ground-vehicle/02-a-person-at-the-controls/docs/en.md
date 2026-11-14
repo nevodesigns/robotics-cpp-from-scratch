@@ -40,9 +40,25 @@ The vehicle has its own sensor, and the person has the delay. The governor caps 
 
 `TeleopGovernor::step` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The target is the request, zero if nothing has been heard within the timeout, no more than the top speed, no more than stop_speed(obstacle - margin, latency, decel); then move the speed towards it by at most accel * dt going up and decel * dt coming down.
+
+As shipped, 3 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- When the commands stop the vehicle stops, after the timeout and then the braking.
+- A request is reached by ramping, not at once.
+- An obstacle the vehicle senses stops it short whatever the operator asks, and without the cap it goes through.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 27-02
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

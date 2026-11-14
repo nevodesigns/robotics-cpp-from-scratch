@@ -32,9 +32,24 @@ For the reference vehicle (the motor values are typical, not measured) a slope o
 
 `route_wh` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Path_energy over the efficiency, plus the idle power times the time (length over speed); then divide by 3600 for watt hours.
+
+As shipped, 2 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- A metre costs the work, over the efficiency, plus the computer that never sleeps.
+- The way home estimated as flat strands a vehicle that the way home planned over the ground does not.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 27-04
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

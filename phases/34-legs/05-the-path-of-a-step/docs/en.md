@@ -34,9 +34,24 @@ The foot's path, through the inverse kinematics (34-01) at points along it, give
 
 `swing_position` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Along the line from p0 to p1 by s = tau cubed (10 - 15 tau + 6 tau squared), and h in height on top: 64 h tau cubed (1 - tau) cubed added to z.
+
+As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
+
+- The swing starts and ends at rest, goes from the leaving place to the landing place, and tops out at the step's height.
+- The peaks of speed and acceleration fall as the swing is given more time, and the stance goes back at the body's speed.
+- The servos have to turn fast enough, and a shorter swing asks for more.
+- A step to the side is treated as a step forward is.
+
 ```
 rcpp verify 34-05
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

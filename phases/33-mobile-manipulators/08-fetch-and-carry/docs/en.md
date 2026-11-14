@@ -30,9 +30,24 @@ Every command the machine gives goes through `guard`: the base may be told to dr
 
 `guard` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- If the command drives the base (drive_to is not 0) while the arm is not tucked (arm_at is not 1), cancel the driving; if it sends the arm out or down (arm_goal over 1) while the base has not stopped, hold the arm (arm_goal 0); set *blocked if either was done.
+
+As shipped, 2 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- The interlock holds the base while the arm is out and the arm while the base moves.
+- A dropped part, a low battery and a faulty plan are each stopped, and the interlock is what stops the last.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 33-08
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

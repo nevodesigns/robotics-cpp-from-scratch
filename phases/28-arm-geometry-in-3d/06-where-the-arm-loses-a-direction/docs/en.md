@@ -40,9 +40,24 @@ The better answer is not to go near. A path planner (phase 30) that keeps the sm
 
 `adaptive_lambda` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Zero if sigma_min is at least eps; otherwise lambda_max times the square root of (1 - (sigma_min / eps)^2); a sigma that is not a number gets the full damping.
+
+As shipped, 2 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- The damping is none well away, and rises to its maximum at the singularity.
+- Drawing a line past the shoulder axis, an undamped step turns joint 1 hard and a damped one does not, at a price in accuracy.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 28-06
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

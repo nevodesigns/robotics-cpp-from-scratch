@@ -36,9 +36,25 @@ The efficiency is not on a data sheet; it depends on the floor, the tyres and th
 
 `DiffSlip::step` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The ground speed is the mean wheel speed times the radius times (1 - slip); the turn rate is eff times the wheel difference times the radius over the track; use the heading at the middle of the step.
+
+As shipped, all 5 of the 5 tests fail. They are, in the order the suite runs them:
+
+- Without losses the model follows the arc the wheel speeds describe.
+- Slip takes a fraction of every metre of wheel travel.
+- A turn efficiency of 0.8 turns 72 degrees where the wheels say 90, and costs a quarter more wheel travel to make up.
+- A square driven on the commands of the ideal model does not close, and the error is the losses.
+- The efficiency is read back from a measured turn.
+
 ```
 rcpp verify 23-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

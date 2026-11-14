@@ -36,9 +36,24 @@ An encoder counts whole ticks, so it is a tick short at worst: **1.00 mm** short
 
 `cast_ray` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For each wall solve origin + t * direction = start + u * (end - start) with t >= 0 and u in [0, 1]; for each post solve the quadratic for the near hit; keep the smallest t within max_range.
+
+As shipped, 2 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- A ray finds the nearest wall or post, and nothing when there is none in range.
+- The lidar noise and the dropouts measured from many scans are the ones set.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 22-06
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

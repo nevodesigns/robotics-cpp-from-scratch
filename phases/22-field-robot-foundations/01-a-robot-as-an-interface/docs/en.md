@@ -38,9 +38,25 @@ An arm and a set of legs are, to the boundary, the same thing: a row of joints g
 
 `FakeDrive::step` in `exercise/solution.hpp`: age the command, apply the watchdog, lag the speeds towards the target, then move the pose.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Age the command, apply the watchdog, lag v and w towards the target, then move the pose.
+
+As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- A command is limited, answered with a lag of the time constant, and held.
+- A base that stops hearing commands stops itself, and a stop coasts for the time constant.
+- The same program drives any Drive, and a turn command turns.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 22-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

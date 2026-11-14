@@ -38,9 +38,25 @@ A `Terrain` is a base cell with patches laid on it, each a rectangle of one surf
 
 `traction` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The slope along the heading is grade_x cos + grade_y sin; drive is g (mu cos - sin - crr cos), brake is g (mu cos + sin + crr cos); it holds if the steepest grade is at most mu.
+
+As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- The stopping distance on flat ground is v squared over twice g times (mu + crr), and the surface changes it several times over.
+- A slope helps one way and hurts the other, and costs nothing across it.
+- There is a steepest slope a surface can be climbed or held on.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 22-05
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

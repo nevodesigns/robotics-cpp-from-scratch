@@ -30,9 +30,24 @@ Lesson 24-01 showed that the points of a scan are `range * angle_inc` apart. A w
 
 `cluster_points` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For every pair of points closer than base_radius + range_gain * the larger distance from the origin, join their groups (union-find with the parent array).
+
+As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
+
+- Four objects among scattered points are found as four clusters, at the right places, and the scattered points are dropped.
+- Too small a radius sees no objects, too large joins neighbours, and the right one lies between.
+- A wall far away is broken into points by a fixed radius, and held together by a radius that grows with range.
+- Two posts close together are one object to a radius that is too big for the near range, and two to one that grows with it.
+
 ```
 rcpp verify 24-03
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

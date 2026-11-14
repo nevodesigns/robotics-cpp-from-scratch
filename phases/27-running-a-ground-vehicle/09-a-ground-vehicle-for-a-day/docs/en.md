@@ -50,9 +50,24 @@ With 0.5 Wh the checklist blocked on energy, and only energy; the vehicle did no
 
 `combine_speed` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The speed wanted, no more than the mode's cap, and then protective_speed of the field result.
+
+As shipped, 2 of the 7 tests fail, and these are the ones your code has to turn green:
+
+- With the layers the vehicle does the whole day, touches no one, and gets home with charge to spare.
+- The speed limits are joined by taking the least, and the field has the last word.
+
+The other 5 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 27-09
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

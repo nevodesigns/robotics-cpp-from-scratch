@@ -36,9 +36,26 @@ Keeping 12 headings to a cell is a coarse and fast search; 48 is fine and slow. 
 
 The search loop of `hybrid_astar` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Take the cheapest open node; stop if it is near the goal in position and heading and walk back through the parents; otherwise, for each steering (and reverse if allowed) whose arc is free, make the new pose, price the move, and keep the node if it is cheaper than any before in its cell of the coarse grid.
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- On an empty field the path ends at the goal and every part of it is an arc the car can drive.
+- A wall with a gap is driven through the gap.
+- Finer headings in a cell cost expansions.
+- A goal that is walled in is reported as not found.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 26-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -34,9 +34,23 @@ The base is narrower than it is long here (a half track of 0.22 m), and an arm r
 
 `com_world` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The mean, weighted by mass, of the base's centre (in the world), the middle of each link (between the previous frame, the arm's base for the first, and its own) and the tool for the payload.
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- With no arm mass and no load the centre of mass is the base's, and masses pull it by their moments.
+- Reaching and carrying take the centre of mass towards the edge and cut the braking limit.
+- Reaching to one side cuts the limit on turning towards it, and a centred mass gives the 19-09 value.
+
 ```
 rcpp verify 33-05
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -34,9 +34,26 @@ A ramp of 24 degrees is within what the motors can climb. On tarmac, whose tyres
 
 `slope_and_roughness` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The slope of x is the sum of dx times the height over 6 times the cell, likewise for y; the plane's height at the middle is the mean; the roughness is the root of the sum of squared differences from the plane over 6 (9 cells less 3 for the plane); the largest gradient is the largest height difference to a neighbour over the distance to it, as an angle.
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- The slope of a ramp is read from the plane of its neighbourhood, and does not depend on its direction.
+- Noise on flat ground is roughness, and the step shows at its edge.
+- The layer is free on smooth ground, rises with the slope, and is lethal on the steep slope and at the step.
+- The same slope is passable on tarmac and not on gravel, because the grip is not the same.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 24-05
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

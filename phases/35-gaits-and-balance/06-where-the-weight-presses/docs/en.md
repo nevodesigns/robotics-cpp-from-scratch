@@ -34,9 +34,25 @@ With a hind foot lifted and the body centred, the margin was 0.000 m (35-01: the
 
 `zmp_from_com` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The centre of mass moved back by h over g times the acceleration, in x and in y.
+
+As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- The centre of pressure is the force weighted mean of the feet, and equals the zero moment point when the forces are chosen to give it.
+- The greatest acceleration is g times the distance to the edge over the height, and agrees with the tipping limit.
+- With three feet and a centred body there is no margin, and with two feet there never is.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 35-06
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

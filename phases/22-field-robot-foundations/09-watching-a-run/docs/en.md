@@ -38,9 +38,24 @@ Names are escaped (`<loop>` becomes `&lt;loop&gt;`), a number is never written a
 
 `bounds_of` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Grow the rectangle over the start, both corners of each patch, both ends of each wall, each post and goal with its radius, and the x and y of every "pose" entry.
+
+As shipped, 2 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- The bounds hold everything that is drawn.
+- The world is flipped so that y is up, the view starts at minus the top, and the playback follows the speed.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 22-09
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -40,9 +40,24 @@ A slope takes its share first. Heading up a slope of 0.2 on gravel the vehicle h
 
 `traction_budget` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Share is lateral over grip; if it is 1 or more the tyres have let go; otherwise the grip left for the line of travel is grip * sqrt(1 - share^2); drive is that less gravity along the slope and the rolling resistance, brake is that plus both.
+
+As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
+
+- On a straight line the budget is the whole grip, less the rolling resistance.
+- A turn takes a share of the grip and the rest is what is left to speed up and to brake with.
+- Past the edge the tyres let go, and the speed at which that happens is the one the limit gives.
+- Near the edge there is almost nothing left to brake with, and a slope takes its share first.
+
 ```
 rcpp verify 23-05
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

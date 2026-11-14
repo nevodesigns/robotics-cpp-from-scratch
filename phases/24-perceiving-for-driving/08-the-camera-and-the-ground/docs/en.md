@@ -32,9 +32,25 @@ The height, the pitch and the flat floor. A height **10 percent wrong** put ever
 
 `pixel_to_ground` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Tipped down by the pitch the ray is (cos(pitch) + up sin(pitch), left, -sin(pitch) + up cos(pitch)) in the vehicle's frame; it meets the ground when its height has fallen by `height`, at t = -height / its z; the point is t times its x and y.
+
+As shipped, all 5 of the 5 tests fail. They are, in the order the suite runs them:
+
+- A pixel looks at a point of the ground, and the point falls back on the same pixel.
+- The horizon is above the centre of the image by the focal length times the tangent of the pitch, and nothing above it is ground.
+- The distance of a row is the height over the tangent of the angle it looks down by.
+- One row spans more ground the further away it looks, and nearly all of it at the horizon.
+- A pitch a degree wrong moves the far ground a lot, and a height 10 percent wrong moves it by 10 percent.
+
 ```
 rcpp verify 24-08
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

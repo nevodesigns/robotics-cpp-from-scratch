@@ -34,9 +34,25 @@ The roadmap is a statement about a scene. Change the scene and it is wrong. Afte
 
 The search of `roadmap_query` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Dijkstra's method from S: a queue ordered by distance, each node's distance and the node before it; stop when G is taken.
+
+As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- A roadmap built once answers many queries, each far cheaper than a fresh plan, with shorter paths.
+- More nodes join the pieces of the graph, and in this easy scene even a small roadmap answers the queries that have free ends.
+- A roadmap built for one scene is wrong in another, and the check says by how much.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 30-04
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

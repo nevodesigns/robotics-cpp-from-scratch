@@ -34,9 +34,24 @@ The gait is chosen from the speed, and with a gap: change up to the trot above o
 
 `step_offsets_toward` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For each leg the difference to the target wrapped to the range -0.5 to 0.5 (subtract floor(d + 0.5)), limited to plus or minus rate * dt, added to the offset, and the offset wrapped to 0 to 1.
+
+As shipped, 2 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- The offsets move toward the target by the shortest way round and no faster than the rate.
+- A change of gait keeps feet down either way, but an abrupt one jumps the legs' phases, and the speed switch has a gap.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 35-03
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

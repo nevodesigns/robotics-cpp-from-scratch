@@ -40,9 +40,25 @@ With six joints, a target that needs a joint outside its limit is unreachable: t
 
 `null_space_motion` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- V is the tool velocity that the motion m would cause; take from m the damped joint solution for that velocity (dls_step with lambda): what is left is felt by nothing.
+
+As shipped, 3 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- A joint motion put through the null space is not felt by the tool, for seven joints, and there is none for six.
+- A motion applied without the projection is felt by the tool, and through it is not.
+- The elbow moves towards the middle of the limits while the hand stays, and nothing moves with no null space term.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 28-07
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

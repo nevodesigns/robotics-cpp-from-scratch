@@ -34,9 +34,26 @@ A car cannot be at any point facing any way (lesson 26-01), and a waypoint with 
 
 `WaypointMission::step` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- If the vehicle is within the tolerance, start the dwell; when the dwell time has passed mark the leg reached and advance; if the leg has taken longer than its timeout mark it timed out, then skip it or abort by the policy.
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- A list of waypoints is reached in order, standing at the one that asks to.
+- A leg that cannot be reached times out, and the policy skips it or ends the mission.
+- Restoring saved progress goes on from the leg, where starting again drives the first legs twice.
+- A tolerance finer than the turning circle can be reached keeps a car circling the point.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 27-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -39,9 +39,27 @@ A plan that takes 1 s and starts where the vehicle was arrives 1 s later, 1 m be
 
 `should_replan` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- A changed goal first; then a blocked path (which may bypass the cooldown); then, if the last plan was not too recent, being off the path, then the period.
+
+As shipped, 5 of the 6 tests fail, and these are the ones your code has to turn green:
+
+- The reasons come in order, and a blocked cell beyond the look-ahead is not a reason yet.
+- The cooldown holds back everything but a blocked path, which can be made to wait too.
+- Never replanning stops at the wall, planning for the reasons arrives, planning every tick arrives but plans a great deal.
+- An early look-ahead hides the time a plan takes, a late one makes the vehicle stand and wait.
+- A plan begun where the vehicle will be starts near it when it arrives, and one begun where it was sends the vehicle chasing its own plan.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 26-10
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

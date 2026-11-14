@@ -30,9 +30,24 @@ Each landing says how high the ground is under that foot. An estimate of the gro
 
 `reach_down_step` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Do nothing once done or hole; if the foot is in contact it is done; otherwise lower it by rate times dt, and if it has gone max_extra below its planned place stop there and say hole.
+
+As shipped, 2 of the 3 tests fail, and these are the ones your code has to turn green:
+
+- On level ground the foot is down at the end of the swing, and a search lowers it until it touches.
+- A bump is met early, a step down is found by reaching, and a hole is given up on.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 36-04
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

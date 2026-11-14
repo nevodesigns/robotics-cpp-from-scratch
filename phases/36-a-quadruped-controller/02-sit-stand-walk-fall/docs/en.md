@@ -34,9 +34,24 @@ A fault stays until it is reset: the link lost while up (fault 1), the knees at 
 
 `dog_step` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- A fault stays until in.reset (then sit); while up, the link lost is fault 1, the heat at or over 1 is fault 2 (not when sitting), a fall (35-09's kFallen) puts it in fallen, rising or lowering for over move_timeout is fault 4; from sit, rise if the operator wants stand or walk and the battery is ok and the heat under 0.8; rising to stand when stood; stand to lowering if sit is wanted or the battery is not ok, to walk if walk is wanted and the command is not zero; walk back to stand only when stopped; lowering to sit when sat; fallen tries to rise again if wanted and safe, counting the tries and fault 5 after max_tries.
+
+As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
+
+- A day of sit, stand, walk, stand and sit goes through the states in order, and a walk is stopped before it is lowered.
+- It refuses to rise hot or low, sits down when the battery runs out, and lowers rather than walking on.
+- A lost link, hot knees, a move that never finishes and too many falls are faults that only a reset clears.
+- Walking needs both the wish and a speed, and getting up needs both the wish and the conditions.
+
 ```
 rcpp verify 36-02
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

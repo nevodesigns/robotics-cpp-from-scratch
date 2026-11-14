@@ -34,9 +34,24 @@ In a walk three or more feet are on the ground, and 34-03's plane through the fe
 
 `attitude_update` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Add the gyro's rate times dt to the roll and the pitch; if |a| is within gate times g of g, pull the roll toward atan2(ay, az) and the pitch toward atan2(-ax, sqrt(ay2 + az2)) by k_acc dt times the difference; if feet_valid, pull both toward the feet's angles by k_feet dt times the difference.
+
+As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
+
+- A level, still body is read as level, and the gate refuses an accelerometer that feels too much.
+- The gyro alone drifts, the accelerometer alone is wrong at every step, and the filter is better than both.
+- In a trot the feet cannot be used, and the filter falls back on the gyro and the accelerometer.
+- Pitch is handled as roll is: the gyro, the accelerometer and the feet each move it, and the defaults are the ones written down.
+
 ```
 rcpp verify 35-04
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

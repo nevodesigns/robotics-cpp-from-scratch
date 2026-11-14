@@ -40,9 +40,25 @@ Scaling the speed limits is how an operator slows an arm down. Halving them took
 
 `scurve_peak` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- If the acceleration reaches A, distance = P (P / A + A / J), a quadratic in P; otherwise distance = 2 P^1.5 / sqrt(J); take the smaller of that and V (the knee is the speed at which the acceleration just reaches A).
+
+As shipped, all 5 of the 5 tests fail. They are, in the order the suite runs them:
+
+- An S curve covers the distance from rest to rest within its limits, long or short.
+- The S curve is a little slower than the trapezoid, and the trapezoid asks for a jerk that is nothing but a spike.
+- Over a path no joint's speed, acceleration or jerk passes its limit, and the limiting joint is close to it.
+- A path with many vertices stops at each of them, and its straight shortcut does not.
+- Halving the speed limits nearly doubles the time of a long move and changes a short one much less.
+
 ```
 rcpp verify 30-06
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

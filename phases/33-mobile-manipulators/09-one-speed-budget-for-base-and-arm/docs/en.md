@@ -30,9 +30,25 @@ In a simulation a person walks at 1.6 m/s at a robot that is asked to go toward 
 
 `share_budget` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Hold the base to base_cap; if total is zero stop both (status 2, binding 2); if the base and hand speeds toward the person together are over total, scale both by total over their sum (status 1, binding 2); status 1 and binding 1 if only the base cap acted.
+
+As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- The base is held to its own limit, and base and hand are scaled together to the person's total.
+- The supervisor follows the person's distance, from free to scaled to stopped.
+- Against a person walking at the robot the supervised robot stops short and an unsupervised one does not.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 33-09
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

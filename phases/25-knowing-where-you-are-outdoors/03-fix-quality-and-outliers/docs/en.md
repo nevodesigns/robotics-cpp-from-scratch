@@ -30,9 +30,25 @@ A gate is a statement that the filter is right. When the filter is wrong, it ref
 
 `GnssFilter::update`, the gate in particular, in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The squared distance of the fix from the prediction in units of their combined uncertainty is (d' S^-1 d) with S the top left 2 by 2 of P plus r on its diagonal; if it is above the gate, refuse the fix, and after max_refused refusals in a row start again from this fix.
+
+As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- A jump of 8 m drags a filter that takes every fix, and a gate refuses it.
+- A filter that takes every fix as fixed is overconfident on the single ones.
+- A robot carried 20 m is found again late by a gate that never gives up and at once by one that does.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 25-03
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

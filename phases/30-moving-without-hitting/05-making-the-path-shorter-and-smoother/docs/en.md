@@ -30,9 +30,23 @@ Both passes find shorter, smoother paths by going closer to things. A shortcut w
 
 The two points of `cut_corners` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The two points are the vertex moved a fraction f towards the previous point and towards the next point.
+
+As shipped, 1 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- Cutting the corners rounds the sharp turns and the path is still free.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 30-05
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -40,9 +40,26 @@ A rectangular room with nothing in it looks the same turned half a turn: the rob
 
 `MonteCarlo::correct` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For each beam, the likelihood of the range seen is z_hit times a Gaussian of the difference from the expected range (the map's range from this particle; max_range for none) plus z_rand over max_range; the weight is multiplied by exp(temper times the sum over the beams of the log likelihood).
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- From a cloud over the whole room three thousand particles find the robot.
+- Too few particles lose the robot more often than enough do.
+- In a room that is the same from two places the cloud settles on both, and a feature in one corner picks one.
+- Resampling keeps the number of particles and equal weights, and does not happen when the weights are even.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 25-05
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

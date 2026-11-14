@@ -41,9 +41,26 @@ A planner that finds nothing cannot know whether there is nothing to find. With 
 
 `steer` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- If the target is within eta return it; otherwise the point eta along the straight line from `from` to it.
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- In free space a path is found at once and goes from the start to the goal.
+- With a wall between, two trees find a path faster than one, and every edge of every path is free.
+- The same seed gives the same path and another seed another.
+- Steering goes the step and no further, and reaches a target that is near.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 30-03
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

@@ -34,9 +34,24 @@ A width must lie between closed and open. Closing takes the distance over the fi
 
 `required_force` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The weight is mass times (gravity plus the acceleration); two pads share it, each holding mu times the squeeze; times the safety factor.
+
+As shipped, 2 of the 3 tests fail, and these are the ones your code has to turn green:
+
+- The force that holds a mass is the weight over the friction of two pads, and grows with the acceleration.
+- The heaviest payload is the same sum turned round, and halving the friction halves it.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 31-01
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

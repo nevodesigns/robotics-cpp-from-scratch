@@ -34,9 +34,24 @@ A camera on the hand (31-03) measures the part relative to the hand, so none of 
 
 `hand_sigma` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The heading and mount errors in quadrature times the lever, then in quadrature with the position and the arm's repeatability.
+
+As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
+
+- The errors add in quadrature, and the heading's is multiplied by the lever.
+- The chance of a good grasp follows the error function, and simulated grasps agree.
+- A wanted chance needs a number of sigmas, and so a sigma at the hand.
+- A camera on the hand takes the base's errors out of the budget.
+
 ```
 rcpp verify 33-07
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

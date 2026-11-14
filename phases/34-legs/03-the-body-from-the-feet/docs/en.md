@@ -34,9 +34,23 @@ The ground is flat and level under all the stance feet, and the feet do not slip
 
 `fit_ground_plane` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For the feet on the ground form the normal equations A c = b with rows (1, x, y) and the right side z (A is the sum of row times row transposed, b the sum of row times z), and solve the 3 by 3 system by Cramer's rule; false if fewer than three feet or the determinant is nearly zero.
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- The height, roll and pitch of the body are found from four feet on level ground.
+- Three feet are enough, fewer are not, and three in a line give no plane.
+- Noise in the feet's places comes through to the pose, and a fourth foot averages some of it out.
+
 ```
 rcpp verify 34-03
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

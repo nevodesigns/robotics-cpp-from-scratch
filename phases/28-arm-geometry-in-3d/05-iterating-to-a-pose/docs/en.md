@@ -34,9 +34,27 @@ The Panda, with seven joints, reached the pose in 36 of 40, and with angles that
 
 `dls_step` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- A = J J^T + lambda^2 I (6 by 6); solve A y = e with solve6; the step is J^T y.
+
+As shipped, 5 of the 6 tests fail, and these are the ones your code has to turn green:
+
+- From a start near the answer the iteration reaches the pose, and from a start far away it often does.
+- A seven joint arm reaches the pose and does not need to be at the joint angles that made it.
+- Near a straight elbow an undamped step is enormous and a damped one is not.
+- A pose out of reach is stopped by the limit of steps, with the tool as near as it got.
+- On the arm with a spherical wrist the iteration finds one of the eight closed form solutions.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 28-05
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

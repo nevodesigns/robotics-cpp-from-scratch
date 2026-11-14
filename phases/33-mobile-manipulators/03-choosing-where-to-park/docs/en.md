@@ -38,9 +38,23 @@ With obstacles all round the target 0 of the 252 places were free, and the answe
 
 `choose_park` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The arm's axis is the target plus d at the bearing phi; the base faces the target (heading phi + pi), its centre from base_for_axis; drop it if its clearance to any obstacle (centre distance less the obstacle's radius and the base's) is under p.clearance; else score = w_margin * margin - w_travel * travel + w_clear * min(clearance, cap), the margin being the smaller of d - r_in and r_out - d over the tolerance; keep the best (and count the free places).
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- With nothing in the way the base is put on the near side, in the middle of the ring when margin counts most.
+- Weighting travel puts the base at the near edge of the ring, weighting margin in the middle.
+- Obstacles move the choice round them, and obstacles all round give none.
+
 ```
 rcpp verify 33-03
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

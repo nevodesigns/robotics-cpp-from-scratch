@@ -34,9 +34,24 @@ Off means the motors give no torque. A robot that is standing and loses all torq
 
 `safety_decide` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Ask for off on the emergency stop, on a fall (kFallen), on a link silent for over link_off, and on heat of at least heat_off; for soft on kFallSoft and a link silent for over link_soft; for derating, with a scale of (heat_off - heat) / (heat_off - heat_warn), when the heat is over heat_warn; the mode is the highest asked, and off while standing becomes soft; the scale is 0 when off.
+
+As shipped, 2 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- Hot knees are derated down to nothing, then switched off.
+- A silent link asks for soft and then off, a stop and a fall ask for off, and off while standing becomes soft.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 36-06
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

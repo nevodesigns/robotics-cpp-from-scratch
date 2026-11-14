@@ -34,9 +34,24 @@ A clearance of 3 cm is free with no margin and not free with a margin of 5 cm. T
 
 The step of `edge_conservative` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- No point can move more than the sweep of the whole edge times the share of it covered: so the share that can be covered is (clearance - margin) / full sweep.
+
+As shipped, 2 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- A thin obstacle between the steps is missed by fixed steps and found by conservative advancement.
+- Far from anything conservative advancement looks at far fewer poses than fixed steps.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 30-02
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

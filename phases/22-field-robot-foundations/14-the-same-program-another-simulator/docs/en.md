@@ -38,9 +38,25 @@ The program of the test drives north for 5 s at 0.2 m/s, turns in place for a qu
 
 `BuiltinBackend::advance` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For each millisecond, give the fake drive the held command again (so that its watchdog stays quiet), step it by 0.001 and add 0.001 to the time.
+
+As shipped, 3 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- A straight drive goes where speed times time, less the lag, says, along the heading.
+- A quarter turn in place turns a quarter of a turn, and the limits of the file hold a command back.
+- The program is written against Backend and is the same program for any of them.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 22-14
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

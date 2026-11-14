@@ -34,9 +34,24 @@ And a move that is fine once is not fine all day. Repeated with no wait, a move 
 
 `max_payload` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For each joint |own + mass times per_kg| <= limit is an interval for the mass (two ends, the smaller and the larger of the two solutions); the answer is where all intervals overlap, from zero up.
+
+As shipped, 2 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- The payload that fits depends on the pose, and a payload at the limit is held at the limit.
+- A payload that the arm alone cannot hold is refused with a negative answer.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 29-08
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

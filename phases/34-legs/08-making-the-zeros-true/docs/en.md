@@ -34,9 +34,23 @@ If the thigh is 10 mm longer than the geometry says, no offsets explain it: the 
 
 `calibrate_offsets` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- For each pose, the Jacobian at the commanded angles plus the offsets found so far, the difference r between the measured place and the predicted one; add J^T J to a and J^T r to b (3 by 3 and 3).
+
+As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+
+- Offsets in the joint zeros are found from where the foot was measured.
+- Noise-free measurements give the offsets exactly, and poses with a straight leg give no fit.
+- A link that is the wrong length is not an offset, and the residual says so.
+
 ```
 rcpp verify 34-08
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

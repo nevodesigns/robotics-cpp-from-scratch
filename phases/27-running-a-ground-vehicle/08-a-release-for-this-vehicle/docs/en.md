@@ -46,9 +46,25 @@ A release whose self test passes is confirmed at its first boot (1 boot). One wh
 
 `check_update` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- One reason for each of: the class is not the vehicle's, a calibration carried for another vehicle, a schema or a map older than the vehicle's, the vehicle moving, in a mission, charge below the minimum (a charge that is not a number counts as low), and a version that rc::deploy::decide does not say to install.
+
+As shipped, 3 of the 6 tests fail, and these are the ones your code has to turn green:
+
+- Each reason refuses on its own, with the right name.
+- Every reason is listed, not just the first.
+- Another vehicle's calibration is refused, and what it would have done is a turn that is off by the ratio of the tracks.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 27-08
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

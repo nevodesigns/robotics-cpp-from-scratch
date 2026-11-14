@@ -38,9 +38,26 @@ That matters because the encoder is on the motor. A PD loop on it settles where 
 
 `GearMotor::step` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Limit the voltage, find the current and limit it, find the torque, accelerate the rotor, then move the output through the backlash.
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- The data sheet numbers come back out: the no load speed, and half the speed at half the stall torque.
+- The time constant from the constants is the time a step takes to reach 63 percent.
+- On reversing, the gear side crosses the whole gap before the output moves.
+- A position loop on the motor encoder settles where the encoder says, and the output is off by half the gap, on the side it came from.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 22-04
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

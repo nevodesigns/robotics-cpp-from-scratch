@@ -36,9 +36,26 @@ A gyro that warms up has a bias that steps. A step of 0.01 rad/s at 100 s was fo
 
 `StillnessDetector::update` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Remember the accelerometer magnitudes of the last window samples; count how many samples in a row both wheels have been under the limit; the robot is still if that count has reached the window and the spread (largest less smallest) of the magnitudes over the window is within the limit.
+
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- A robot is still when its wheels and its accelerometer are both quiet for a window.
+- Wheels that are stopped are not enough: a robot carried or dragged is not still.
+- Stopping for a couple of seconds now and then keeps the heading where reading the bias once does not.
+- A step in the bias, as when the gyro warms, is found at the next stop.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 25-07
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

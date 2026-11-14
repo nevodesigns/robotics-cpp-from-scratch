@@ -40,9 +40,24 @@ A control with no test is a hope. A control whose test does not pass is a known 
 
 `check_case` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Ids used twice; a control against a hazard that does not exist, with no test, with a test that does not pass, or with a primitive that is not known; a hazard with no control, a high risk with only information, a high residual risk nobody signed, or no residual stated.
+
+As shipped, 2 of the 5 tests fail, and these are the ones your code has to turn green:
+
+- A template with nothing filled in has a problem for every hazard, and a filled one has none.
+- Five deliberate holes are each found, in words.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 22-17
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

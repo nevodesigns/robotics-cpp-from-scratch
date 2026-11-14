@@ -36,9 +36,23 @@ In a simulation of a person walking at the robot, a robot that braked at the ful
 
 `max_speed` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Protective_distance is a quadratic in v_r (a = 1/(2 decel), b = v_h/decel + t_r, c = everything else less the separation); take the positive root, 0 if the constant term is not negative.
+
+As shipped, 1 of the 3 tests fail, and these are the ones your code has to turn green:
+
+- The greatest speed a separation allows is the inverse, and is zero when standing still does not fit.
+
+The other 2 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 31-06
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

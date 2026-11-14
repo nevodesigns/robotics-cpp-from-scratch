@@ -39,9 +39,25 @@ Each behaviour runs until it is done or until a time limit: a back up that is it
 
 `behaviour_for_attempt`, the ladder, in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Attempt 0 waits; attempt 1 backs up (or spins if it cannot reverse); attempt 2 spins (or backs up if it cannot spin); after that, give up; a vehicle that can do neither gives up after waiting.
+
+As shipped, 3 of the 6 tests fail, and these are the ones your code has to turn green:
+
+- A vehicle caught on a snag backs up out of it and finishes, where one without recovery never does.
+- A wall that never moves is given up on, in bounded time, not tried for ever.
+- The ladder differs by vehicle: a car cannot spin.
+
+The other 3 pass already, because they test the parts that are given.
+
 ```
 rcpp verify 26-08
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

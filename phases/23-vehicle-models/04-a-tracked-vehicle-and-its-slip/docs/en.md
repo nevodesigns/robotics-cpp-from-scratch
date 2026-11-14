@@ -36,9 +36,25 @@ A track has its weight spread along its length, not at four points, and a pivot 
 
 `track_thrust` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- The thrust is the largest thrust times (1 - (1 - exp(-x)) / x), with x = slip * length / shear modulus.
+
+As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+
+- The thrust is zero with no slip, rises with it, and tends to the largest the soil can give.
+- Half the largest thrust comes at a slip of ten percent on a loose sand, and the slip for a thrust is the inverse.
+- A pivot costs a track well under half of what a four wheeled chassis of the same size needs, and a slip of a few percent.
+
+The other one passes already, because it tests the parts that are given.
+
 ```
 rcpp verify 23-04
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 

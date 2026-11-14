@@ -34,9 +34,24 @@ The matrix of length changes is the Jacobian of the legs, and where it is nearly
 
 `stewart_lengths` in `exercise/solution.hpp`.
 
+Open `exercise/solution.hpp`. The part you write is marked `TODO`; the rest of the file is already written, and it is worth reading before you start, because your part is called by it or calls it.
+
+What to write, as the note beside the `TODO` puts it:
+
+- Turn each platform joint (px, py, 0) by R = Rz(yaw) Ry(pitch) Rx(roll), add (x, y, z), and the leg length is the distance to its base joint (bx, by, 0).
+
+As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
+
+- The leg lengths at home are all equal for a symmetric hexapod, and a raise lengthens them.
+- A raise and a tilt need a range of leg lengths.
+- The pose is found again from the leg lengths, from a guess that is some way off.
+- The legs control the platform well at home and lose a direction elsewhere.
+
 ```
 rcpp verify 32-03
 ```
+
+A failing check names the test and prints the number it expected beside the one it got, so start from the first failure and work down. When the suite is green, read `reference/solution.hpp` beside your own version: where the two differ and both pass, the difference is worth understanding.
 
 ## Use It
 
