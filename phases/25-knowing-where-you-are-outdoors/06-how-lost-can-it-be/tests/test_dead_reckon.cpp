@@ -155,3 +155,17 @@ RC_TEST("the distance a robot may go before it might be 1 m out, or 5 m, is work
   RC_CHECK(d.needs_fix(1.0));
   RC_CHECK(!d.needs_fix(50.0));
 }
+
+RC_TEST("the pose is carried as well as its doubt: straight on is along x, and a quarter turn to the left ends ahead and to the left") {
+  DeadReckoning straight((OdometryNoise()));
+  for (int i = 0; i < 10; ++i) straight.step(0.1, 0.0);
+  RC_CHECK_NEAR(straight.x(), 1.0, 1e-12);
+  RC_CHECK_NEAR(straight.y(), 0.0, 1e-12);
+  DeadReckoning arc((OdometryNoise()));
+  const int n = 1000;
+  const double quarter = 0.5 * 3.14159265358979323846;   // a circle of radius 1 m
+  for (int i = 0; i < n; ++i) arc.step(quarter / n, quarter / n);
+  RC_CHECK_NEAR(arc.x(), 1.0, 1e-5);
+  RC_CHECK_NEAR(arc.y(), 1.0, 1e-5);
+  RC_CHECK_NEAR(arc.theta(), quarter, 1e-9);
+}

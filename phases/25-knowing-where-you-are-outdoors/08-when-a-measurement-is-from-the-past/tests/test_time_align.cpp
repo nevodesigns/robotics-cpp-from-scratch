@@ -230,3 +230,20 @@ RC_TEST("the delay between two sensors is found as the shift that makes them mos
   RC_CHECK_NEAR(1.0 * 0.04 * 180.0 / kPi, 2.29, 0.01);
   RC_CHECK(estimate_lag(std::vector<double>(), gyro, 10) == 0);
 }
+
+RC_TEST("a past state is found between its neighbours in y as it is in x") {
+  StateHistory h;
+  for (int i = 0; i <= 10; ++i) {
+    Stamped s;
+    s.t = 0.1 * i;
+    s.x = 2.0 * s.t;
+    s.y = 1.0 - 3.0 * s.t;
+    s.theta = 0.5 * s.t;
+    h.add(s);
+  }
+  Stamped out;
+  RC_CHECK(h.at(0.45, out));
+  RC_CHECK_NEAR(out.x, 0.9, 1e-12);
+  RC_CHECK_NEAR(out.y, 1.0 - 3.0 * 0.45, 1e-12);
+  RC_CHECK_NEAR(out.theta, 0.225, 1e-12);
+}
