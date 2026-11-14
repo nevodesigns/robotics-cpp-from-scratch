@@ -30,13 +30,13 @@
       "stage": "check",
       "question": "Rx(90) then Ry(90) compared with Ry(90) then Rx(90):",
       "options": [
-        "They give different orientations, because rotation does not commute",
+        "They give different orientations",
         "The second is invalid",
         "They give the same orientation",
         "They differ only in sign"
       ],
       "correct": 0,
-      "explanation": "Try it with a book. This is why every convention has to state its order, and why using a different one silently gives wrong answers everywhere."
+      "explanation": "Rotation does not commute. Try it with a book. This is why every convention has to state its order, and why using a different one silently gives wrong answers everywhere."
     },
     {
       "stage": "check",

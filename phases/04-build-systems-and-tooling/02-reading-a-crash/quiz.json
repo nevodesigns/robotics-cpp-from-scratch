@@ -43,12 +43,12 @@
       "question": "A heap buffer overflow crashes inside std::sort. What is the most likely cause?",
       "options": [
         "The elements are not copyable",
-        "The comparator is not a strict weak ordering, so the sort runs off the end",
+        "The comparator is not a strict weak ordering",
         "A bug in the standard library",
         "The vector was too small to sort"
       ],
       "correct": 1,
-      "explanation": "A comparator that reports an element as less than itself makes the sort look for a pivot that cannot exist. The crash is in the library and the defect is in the argument."
+      "explanation": "The sort runs off the end. A comparator that reports an element as less than itself makes the sort look for a pivot that cannot exist. The crash is in the library and the defect is in the argument."
     },
     {
       "stage": "post",
@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "Why check for a use after free before checking for an overflow?",
       "options": [
-        "A use after free report also names a heap address, so an overflow check would match it first",
+        "A use after free report also names a heap address",
         "Because use after free is more serious",
         "The order does not matter",
         "Because overflows never mention addresses"
       ],
       "correct": 0,
-      "explanation": "Classification by substring has to run most specific first, which is a general rule for this kind of matching rather than a quirk of these two."
+      "explanation": "An overflow check would match it first. Classification by substring has to run most specific first, which is a general rule for this kind of matching rather than a quirk of these two."
     }
   ]
 }

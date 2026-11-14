@@ -9,10 +9,10 @@
         "The loop gets quieter",
         "The loop gets faster",
         "Nothing, a loop is a loop",
-        "The inertia grows, so the same gains give less natural frequency and less damping: overshoot went from 0.087 to 0.444 and settling from 0.74 s to 4.32 s"
+        "The inertia grows"
       ],
       "correct": 3,
-      "explanation": "The test arm's inertia went from 0.50 to 3.00."
+      "explanation": "The same gains give less natural frequency and less damping: overshoot went from 0.087 to 0.444 and settling from 0.74 s to 4.32 s. The test arm's inertia went from 0.50 to 3.00."
     },
     {
       "stage": "check",
@@ -31,24 +31,24 @@
       "question": "With each pose given the gains for its own inertia, what did the response do?",
       "options": [
         "Got worse",
-        "Stayed the same: 0.74 s settling at every extension, overshoot between 0.087 and 0.093, with kp rising from 32 to 192",
+        "Stayed the same",
         "Became instantaneous",
         "Became unstable"
       ],
       "correct": 1,
-      "explanation": "That is gain scheduling."
+      "explanation": "0.74 s settling at every extension, overshoot between 0.087 and 0.093, with kp rising from 32 to 192. That is gain scheduling."
     },
     {
       "stage": "check",
       "question": "What should a lookup do beyond the ends of its table?",
       "options": [
-        "Hold the end value, so a pose outside the table gets the nearest designed gains and not a guess",
+        "Hold the end value",
         "Return zero",
         "Extrapolate the last line",
         "Throw"
       ],
       "correct": 0,
-      "explanation": "A pose beyond the last knot should get the last knot's gains."
+      "explanation": "A pose outside the table gets the nearest designed gains and not a guess. A pose beyond the last knot should get the last knot's gains."
     },
     {
       "stage": "post",
@@ -57,10 +57,10 @@
         "Five is always exact",
         "Two is not allowed",
         "Lines are slower",
-        "The inertia is curved and the lines are straight: with two knots the settling time ranged from 0.35 to 0.74 s over 21 poses, a spread of 0.394 s, against 0.022 s with five"
+        "The inertia is curved and the lines are straight"
       ],
       "correct": 3,
-      "explanation": "Put more knots where the table is most curved."
+      "explanation": "With two knots the settling time ranged from 0.35 to 0.74 s over 21 poses, a spread of 0.394 s, against 0.022 s with five. Put more knots where the table is most curved."
     },
     {
       "stage": "post",

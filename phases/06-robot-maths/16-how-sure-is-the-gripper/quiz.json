@@ -18,25 +18,25 @@
       "stage": "check",
       "question": "What is the covariance of the tool, given the covariance C of the joints and the Jacobian J?",
       "options": [
-        "J C J transposed: the tool moves by J times the joint error",
+        "J C J transposed",
         "C J",
         "J squared",
         "J + C"
       ],
       "correct": 0,
-      "explanation": "The formula is exact for small errors and a linear approximation otherwise."
+      "explanation": "The tool moves by J times the joint error. The formula is exact for small errors and a linear approximation otherwise."
     },
     {
       "stage": "check",
       "question": "How well does the formula agree with 20000 random trials for joint spreads of 0.01 and 0.3 rad?",
       "options": [
         "Badly both times",
-        "Well then badly: 5.02e-05 against 5.03e-05, then 4.52e-02 against 4.00e-02, because the arm's sines and cosines show for large errors",
+        "Well then badly",
         "Badly then well",
         "Well both times"
       ],
       "correct": 1,
-      "explanation": "For large errors use the trials themselves."
+      "explanation": "5.02e-05 against 5.03e-05, then 4.52e-02 against 4.00e-02, because the arm's sines and cosines show for large errors. For large errors use the trials themselves."
     },
     {
       "stage": "check",
@@ -56,11 +56,11 @@
       "options": [
         "It vanishes",
         "It doubles",
-        "It is nearly all along one direction: with the elbow at 0.05 rad the spread was 19.69 mm along and 0.20 across, a ratio of 97",
+        "It is nearly all along one direction",
         "It is round"
       ],
       "correct": 2,
-      "explanation": "The Jacobian loses a direction at the singularity of lesson 13-04."
+      "explanation": "With the elbow at 0.05 rad the spread was 19.69 mm along and 0.20 across, a ratio of 97. The Jacobian loses a direction at the singularity of lesson 13-04."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "It changes each day",
         "It is always too small",
-        "It hides the shape: the tool may be known to a fraction of a millimetre across the arm and ten times worse along it, and a task needs the direction it works in",
+        "It hides the shape",
         "Numbers are inexact"
       ],
       "correct": 2,
-      "explanation": "Report the ellipse and its axes."
+      "explanation": "The tool may be known to a fraction of a millimetre across the arm and ten times worse along it, and a task needs the direction it works in. Report the ellipse and its axes."
     }
   ]
 }

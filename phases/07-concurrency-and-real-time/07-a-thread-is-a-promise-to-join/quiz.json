@@ -9,10 +9,10 @@
         "The thread is joined automatically",
         "The thread is detached automatically",
         "Nothing, the thread finishes by itself",
-        "The thread is destroyed while joinable, so the program calls std::terminate: measured as 'terminate called without an active exception' and exit status 134"
+        "The thread is destroyed while joinable"
       ],
       "correct": 3,
-      "explanation": "A started thread is a promise to join or detach it. Status 134 is 128 plus SIGABRT, as lesson 00-09 explained, and it arrives with no last line of output."
+      "explanation": "The program calls std::terminate: measured as 'terminate called without an active exception' and exit status 134. A started thread is a promise to join or detach it. Status 134 is 128 plus SIGABRT, as lesson 00-09 explained, and it arrives with no last line of output."
     },
     {
       "stage": "check",
@@ -21,10 +21,10 @@
         "The thread is cancelled",
         "The exception is caught and the thread is joined later",
         "The join runs during unwinding",
-        "The exception unwinds the stack, t is destroyed while joinable, and std::terminate runs before the catch block can: measured, status 134 and the catch never ran"
+        "The exception unwinds the stack, t is destroyed while joinable, and std::terminate runs before the catch block can"
       ],
       "correct": 3,
-      "explanation": "Code that is correct on the path that does not throw is not correct. The join has to be attached to the object, a destructor, and not to the line after the thread starts."
+      "explanation": "Measured, status 134 and the catch never ran. Code that is correct on the path that does not throw is not correct. The join has to be attached to the object, a destructor, and not to the line after the thread starts."
     },
     {
       "stage": "check",

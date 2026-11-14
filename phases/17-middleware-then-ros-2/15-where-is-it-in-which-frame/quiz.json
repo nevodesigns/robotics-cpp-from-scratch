@@ -8,11 +8,11 @@
       "options": [
         "Only the laser's range and bearing to the obstacle",
         "The map's resolution and origin",
-        "The chain of frames from the laser up to the map, each a transform: the laser on the base, the base in odom, odom in the map",
+        "The chain of frames from the laser up to the map, each a transform",
         "The robot's speed at the time of the scan"
       ],
       "correct": 2,
-      "explanation": "The obstacle is known in the laser's frame. Each link up the tree turns it into the next frame's coordinates until it is in the map's."
+      "explanation": "The laser on the base, the base in odom, odom in the map. The obstacle is known in the laser's frame. Each link up the tree turns it into the next frame's coordinates until it is in the map's."
     },
     {
       "stage": "check",

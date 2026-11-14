@@ -7,12 +7,12 @@
       "question": "Why record a whole session as a test instead of writing the expected value for each reply?",
       "options": [
         "It needs no device, so it can replace the bench",
-        "It catches what a reply-at-a-time test misses: a firmware change that adds a byte to every reply, or a reordering, and it is recorded and not composed",
+        "It catches what a reply-at-a-time test misses",
         "A recorded session is shorter than written expectations",
         "It runs faster than a test of single replies"
       ],
       "correct": 1,
-      "explanation": "Each reply can look right by itself while the session as a whole has changed. And a recording is what the device really said, where an expectation is what someone thought it would."
+      "explanation": "A firmware change that adds a byte to every reply, or a reordering, and it is recorded and not composed. Each reply can look right by itself while the session as a whole has changed. And a recording is what the device really said, where an expectation is what someone thought it would."
     },
     {
       "stage": "check",
@@ -20,11 +20,11 @@
       "options": [
         "Read it as two bytes, 01 and 02",
         "Read it as one byte and ignore the rest",
-        "Refuse it: line 1, bytes are two hexadecimal digits each, since two bytes with no space look like one number",
+        "Refuse it: line 1, bytes are two hexadecimal digits each",
         "Skip the line and read the others"
       ],
       "correct": 2,
-      "explanation": "Bytes are two hexadecimal digits each, separated by spaces. A reader that guessed would be comparing against something nobody wrote."
+      "explanation": "Two bytes with no space look like one number. Bytes are two hexadecimal digits each, separated by spaces. A reader that guessed would be comparing against something nobody wrote."
     },
     {
       "stage": "check",
@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "Replies carry a time of day at bytes 2 to 5 and it differs every run. What is the remedy?",
       "options": [
-        "A mask over exactly those bytes of replies: without it the first difference was message 1 byte 2, with it none",
+        "A mask over exactly those bytes of replies",
         "Compare only the lengths of the replies",
         "Record the golden session again every day",
         "Mask the whole of every reply"
       ],
       "correct": 0,
-      "explanation": "The time is the only thing allowed to change, so only those four bytes of replies are exempt. A mask over more than that would let real changes through."
+      "explanation": "Without it the first difference was message 1 byte 2, with it none. The time is the only thing allowed to change, so only those four bytes of replies are exempt. A mask over more than that would let real changes through."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "Content, at message 0 byte 0",
         "Extra, from message 6",
         "Nothing: an added byte is ignored",
-        "Length, at message 1 and offset 8: the first reply is longer and the shorter one ended at 8"
+        "Length, at message 1 and offset 8"
       ],
       "correct": 3,
-      "explanation": "The first reply is one byte longer than the golden one. That is reported as a difference in length, at the offset where the shorter message ended."
+      "explanation": "The first reply is longer and the shorter one ended at 8. The first reply is one byte longer than the golden one. That is reported as a difference in length, at the offset where the shorter message ended."
     }
   ]
 }

@@ -45,10 +45,10 @@
         "0.00153 rad, one step",
         "0.0002 rad",
         "Nothing: the servo holds its goal",
-        "0.133 rad: load over stiffness; a shifted goal left it 0.0002 rad off"
+        "0.133 rad: load over stiffness"
       ],
       "correct": 3,
-      "explanation": "The servo's loop is a spring of 15 N m/rad, and 2 over 15 is 0.133 rad. Shifting the goal by the load over the stiffness left 0.0002 rad."
+      "explanation": "A shifted goal left it 0.0002 rad off. The servo's loop is a spring of 15 N m/rad, and 2 over 15 is 0.133 rad. Shifting the goal by the load over the stiffness left 0.0002 rad."
     },
     {
       "stage": "post",
@@ -56,11 +56,11 @@
       "options": [
         "The servo's speed limit is lower at 20 Hz",
         "The bus sends fewer bits at 20 Hz",
-        "The goals arrive as a staircase and the spring follows it late: 97 ms against 77 ms",
+        "The goals arrive as a staircase and the spring follows it late",
         "The rounding is coarser at 20 Hz"
       ],
       "correct": 2,
-      "explanation": "Between goals the servo is chasing the last one. Faster updates shrink that part of the lag, down to the servo's own 73 ms."
+      "explanation": "97 ms against 77 ms. Between goals the servo is chasing the last one. Faster updates shrink that part of the lag, down to the servo's own 73 ms."
     },
     {
       "stage": "post",

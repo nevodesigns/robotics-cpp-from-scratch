@@ -19,12 +19,12 @@
       "question": "At 200 Hz for 2 seconds, a spinning consumer, a polling one (1 ms) and a sleeping one. Which has the lowest median latency, and what did it cost?",
       "options": [
         "The poller, since 1 ms is short",
-        "The spinner, at 0.4 microseconds, which used 1999 ms of CPU in 2000: a whole core",
+        "The spinner, at 0.4 microseconds, which used 1999 ms of CPU in 2000",
         "They were all equal",
         "The sleeper, at no cost"
       ],
       "correct": 1,
-      "explanation": "The poller's median was 514 to 549 us and its CPU 31 to 32 ms; the sleeper's was 39 to 65 us and 4.7 to 8.9 ms. Nothing is free, and the right choice comes from the budget."
+      "explanation": "A whole core. The poller's median was 514 to 549 us and its CPU 31 to 32 ms; the sleeper's was 39 to 65 us and 4.7 to 8.9 ms. Nothing is free, and the right choice comes from the budget."
     },
     {
       "stage": "check",
@@ -33,10 +33,10 @@
         "The queue's capacity",
         "Nothing; some readings are just late",
         "19 readings",
-        "41 of 60: a latency figure over the 19 that got through says nothing about the rest, so every reading must be delivered or dropped and the counts must add up"
+        "41 of 60: a latency figure over the 19 that got through says nothing about the rest"
       ],
       "correct": 3,
-      "explanation": "The 19 survivors looked healthy, since the queue never held more than four. Conservation, produced equals delivered plus dropped, is the first thing the suite checks."
+      "explanation": "Every reading must be delivered or dropped and the counts must add up. The 19 survivors looked healthy, since the queue never held more than four. Conservation, produced equals delivered plus dropped, is the first thing the suite checks."
     },
     {
       "stage": "check",
@@ -44,23 +44,23 @@
       "options": [
         "Wait until there is room",
         "Double the queue",
-        "Drop the reading, count it, and keep its rate: measured, produced plus missed slots stayed at about 60 so the slow consumer did not slow the producer",
+        "Drop the reading, count it, and keep its rate",
         "Stop"
       ],
       "correct": 2,
-      "explanation": "A producer that blocks on a full queue has moved the loss from the queue to the sensor. The slots law checks that the producer's grid was kept."
+      "explanation": "Measured, produced plus missed slots stayed at about 60 so the slow consumer did not slow the producer. A producer that blocks on a full queue has moved the loss from the queue to the sensor. The slots law checks that the producer's grid was kept."
     },
     {
       "stage": "post",
       "question": "A test asserted that a spinning consumer went round more than 100 times per reading, and failed in 3 of 10 runs with 12 busy loops competing. Why, and what replaced it?",
       "options": [
         "The assertion was too strict by a few percent",
-        "With every core busy the spinning thread is descheduled too and goes round far less, so the count depends on the CPU the scheduler grants; it is now printed, and only bounds a slower machine cannot break are asserted: a poller goes round at most about once a millisecond, a sleeper at most once per reading plus its timeouts",
+        "With every core busy the spinning thread is descheduled too and goes round far less",
         "The spinner has a bug",
         "Spinning does not work under load"
       ],
       "correct": 1,
-      "explanation": "Never gate on a count that scheduling affects. After the change: 0 failures in 12 quiet runs and 0 in 20 loaded runs."
+      "explanation": "The count depends on the CPU the scheduler grants; it is now printed, and only bounds a slower machine cannot break are asserted: a poller goes round at most about once a millisecond, a sleeper at most once per reading plus its timeouts. Never gate on a count that scheduling affects. After the change: 0 failures in 12 quiet runs and 0 in 20 loaded runs."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "Percentiles are faster",
         "Means are hard to compute",
-        "A timing distribution has a hard floor and a long tail, so a mean says almost nothing about the tail, which is the whole question: the sleeper's worst was 473 to 1548 us against a p99 of 167 to 245",
+        "A timing distribution has a hard floor and a long tail",
         "Because the histogram cannot compute a mean"
       ],
       "correct": 2,
-      "explanation": "Lesson 07-03's argument, with numbers: one reading in the sleeper's run took 1.5 ms, which was the scheduler and not the queue. A specification written as an average is not a specification."
+      "explanation": "A mean says almost nothing about the tail, which is the whole question: the sleeper's worst was 473 to 1548 us against a p99 of 167 to 245. Lesson 07-03's argument, with numbers: one reading in the sleeper's run took 1.5 ms, which was the scheduler and not the queue. A specification written as an average is not a specification."
     }
   ]
 }

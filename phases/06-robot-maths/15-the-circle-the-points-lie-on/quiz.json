@@ -6,25 +6,25 @@
       "stage": "pre",
       "question": "A point is on a circle when x^2 + y^2 + D x + E y + F = 0. Why does that make the fit easy?",
       "options": [
-        "The equation is linear in D, E and F, so one 3 by 3 system of normal equations gives the circle",
+        "The equation is linear in D, E and F",
         "It avoids noise",
         "It is a circle",
         "It needs no data"
       ],
       "correct": 0,
-      "explanation": "Three points on a circle gave exactly that circle."
+      "explanation": "One 3 by 3 system of normal equations gives the circle. Three points on a circle gave exactly that circle."
     },
     {
       "stage": "check",
       "question": "The quick fit's mean radius error on a 60 degree arc, and on a full turn?",
       "options": [
         "0 and 0",
-        "-0.1049 and -0.0002: it is fine all the way round and five percent small on a short arc",
+        "-0.1049 and -0.0002",
         "-0.0002 and -0.1049",
         "-0.01 and -0.01"
       ],
       "correct": 1,
-      "explanation": "The refined fit gave -0.0047 on 60 degrees."
+      "explanation": "It is fine all the way round and five percent small on a short arc. The refined fit gave -0.0047 on 60 degrees."
     },
     {
       "stage": "check",
@@ -57,10 +57,10 @@
         "The seed changed",
         "The method gets worse",
         "The noise changed",
-        "Refining fixes the bias and not the information: on a gentle curve almost any large circle fits about as well, so the radius is not in the data"
+        "Refining fixes the bias and not the information"
       ],
       "correct": 3,
-      "explanation": "Drive a longer arc, or fix the radius another way."
+      "explanation": "On a gentle curve almost any large circle fits about as well, so the radius is not in the data. Drive a longer arc, or fix the radius another way."
     },
     {
       "stage": "post",

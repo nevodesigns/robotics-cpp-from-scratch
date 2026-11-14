@@ -31,12 +31,12 @@
       "question": "A heading that starts one degree wrong costs 1.75 m over a straight hundred metres and 0.11 m around a closed square. Why the difference?",
       "options": [
         "The square is shorter",
-        "On a straight run the offset is distance times its tangent and grows; around a loop it largely cancels on the way back",
+        "On a straight run the offset is distance times its tangent and grows",
         "The measurement is noisier on the square",
         "Turning corrects the heading"
       ],
       "correct": 1,
-      "explanation": "Which is the mirror image of the wheel base result, and together they are the reason to calibrate each parameter on the path that exposes it."
+      "explanation": "Around a loop it largely cancels on the way back. Which is the mirror image of the wheel base result, and together they are the reason to calibrate each parameter on the path that exposes it."
     },
     {
       "stage": "check",
@@ -56,11 +56,11 @@
       "options": [
         "The number of encoder ticks",
         "The current wheel speeds",
-        "How far it has driven since the last correction, since the error grows with distance rather than with the clock",
+        "How far it has driven since the last correction",
         "The time since startup"
       ],
       "correct": 2,
-      "explanation": "A robot parked for an hour has drifted by nothing. A number on a screen saying forty metres since the last fix turns a mysterious failure into an obvious one."
+      "explanation": "The error grows with distance rather than with the clock. A robot parked for an hour has drifted by nothing. A number on a screen saying forty metres since the last fix turns a mysterious failure into an obvious one."
     },
     {
       "stage": "post",

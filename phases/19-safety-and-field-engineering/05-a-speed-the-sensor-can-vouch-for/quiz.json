@@ -67,12 +67,12 @@
       "question": "What does a range-based limiter not protect against?",
       "options": [
         "A wall straight ahead",
-        "Anything the sensor cannot see: a drop, a glass door, a low bar, and a sensor that is the single point of failure",
+        "Anything the sensor cannot see",
         "An obstacle behind when reversing",
         "A sensor that stops publishing"
       ],
       "correct": 1,
-      "explanation": "The limiter is only as good as what the sensor returns. Glass, a drop in the floor and a bar below the scan plane return nothing useful."
+      "explanation": "A drop, a glass door, a low bar, and a sensor that is the single point of failure. The limiter is only as good as what the sensor returns. Glass, a drop in the floor and a bar below the scan plane return nothing useful."
     }
   ]
 }

@@ -32,11 +32,11 @@
       "options": [
         "It does not need to, if the measurements are frequent",
         "To keep the arithmetic stable",
-        "Every correction reduces it, so without something increasing it the filter becomes certain and stops listening",
+        "Every correction reduces it",
         "Because motion is measured in different units"
       ],
       "correct": 2,
-      "explanation": "The gain falls with the prior variance, so a variance near zero means the estimate does not move. The filter has concluded it is certain, and nothing can talk it out of that."
+      "explanation": "Without something increasing it the filter becomes certain and stops listening. The gain falls with the prior variance, so a variance near zero means the estimate does not move. The filter has concluded it is certain, and nothing can talk it out of that."
     },
     {
       "stage": "check",

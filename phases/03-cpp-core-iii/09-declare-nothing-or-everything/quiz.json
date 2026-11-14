@@ -67,12 +67,12 @@
       "question": "Declaring a move constructor suppresses the implicit copy, and declaring a destructor suppresses the implicit move. Why does only one of those get reported?",
       "options": [
         "Neither is reported; the lesson measures both as silent",
-        "Losing the copy is refused at the call site, because the caller tries to use what was taken away; losing the move takes away something the compiler was going to do for you, and nothing complains",
+        "Losing the copy is refused at the call site",
         "Only the move case is reported, by the sanitizers",
         "Both are reported, with -Wdeprecated-copy"
       ],
       "correct": 1,
-      "explanation": "That asymmetry is why the destructor case needs a static_assert. The copy case is in the lesson's checks directory as code that must not compile; the destructor case compiles perfectly and just gets slower."
+      "explanation": "The caller tries to use what was taken away; losing the move takes away something the compiler was going to do for you, and nothing complains. That asymmetry is why the destructor case needs a static_assert. The copy case is in the lesson's checks directory as code that must not compile; the destructor case compiles perfectly and just gets slower."
     }
   ]
 }

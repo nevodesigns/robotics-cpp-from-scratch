@@ -6,25 +6,25 @@
       "stage": "pre",
       "question": "Two CPU-bound processes share one core, one at nice 0 and one at nice 19. How much of the core does the nice 19 process get, measured?",
       "options": [
-        "About 1.6 percent: it did 24 million iterations against 1448",
+        "About 1.6 percent",
         "About 20 percent",
         "None at all",
         "About half"
       ],
       "correct": 0,
-      "explanation": "A lower priority is a share, and the shares are very unequal. The kernel's weights, 1024 and 15, predicted it: 15 over 1039 is 1.4 percent."
+      "explanation": "It did 24 million iterations against 1448. A lower priority is a share, and the shares are very unequal. The kernel's weights, 1024 and 15, predicted it: 15 over 1039 is 1.4 percent."
     },
     {
       "stage": "check",
       "question": "Low holds a lock, High wants it, Medium wants only the CPU. Without inheritance, who finishes first and why?",
       "options": [
         "High, since it has the highest priority",
-        "Medium, at tick 12, before High at tick 16: Medium outranks Low and runs for ten ticks while Low cannot finish the work that releases the lock",
+        "Medium, at tick 12, before High at tick 16",
         "Low",
         "They finish together"
       ],
       "correct": 1,
-      "explanation": "High waited 15 ticks after it woke. A task that outranks nothing in the picture finishing before the highest priority one is the signature of inversion."
+      "explanation": "Medium outranks Low and runs for ten ticks while Low cannot finish the work that releases the lock. High waited 15 ticks after it woke. A task that outranks nothing in the picture finishing before the highest priority one is the signature of inversion."
     },
     {
       "stage": "check",
@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "High waits for a lock Medium holds, Medium waits for a lock Low holds, and a busy task N (priority 3) sits between Medium (2) and High (4). What does inheriting only one step do?",
       "options": [
-        "Gives Low only Medium's priority, 2, which N (3) still beats, so the inversion survives: Low must inherit High's 4 through Medium",
+        "Gives Low only Medium's priority, 2, which N (3) still beats",
         "Deadlocks",
         "Makes N run first",
         "Works the same as transitive inheritance"
       ],
       "correct": 0,
-      "explanation": "Tested directly: an answer that looked one step passed the classic scenario and failed exactly the chain scenario. Without inheritance High finished at tick 15 after N at 11; through the chain, High at 5 and N at 15."
+      "explanation": "The inversion survives: Low must inherit High's 4 through Medium. Tested directly: an answer that looked one step passed the classic scenario and failed exactly the chain scenario. Without inheritance High finished at tick 15 after N at 11; through the chain, High at 5 and N at 15."
     },
     {
       "stage": "post",
@@ -56,11 +56,11 @@
       "options": [
         "It succeeds",
         "It succeeds only on Windows",
-        "It is refused, Operation not permitted, and nice(-5) is refused too: raising priority needs a privilege, and the call fails quietly if its result is not read",
+        "It is refused, Operation not permitted, and nice(-5) is refused too",
         "It crashes"
       ],
       "correct": 2,
-      "explanation": "Real time priorities need root, CAP_SYS_NICE or a raised RLIMIT_RTPRIO, set up where the robot is installed. A program that depends on one must check the result and make the fallback visible."
+      "explanation": "Raising priority needs a privilege, and the call fails quietly if its result is not read. Real time priorities need root, CAP_SYS_NICE or a raised RLIMIT_RTPRIO, set up where the robot is installed. A program that depends on one must check the result and make the fallback visible."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "Real threads cannot have priorities",
         "Simulation is faster to write",
-        "Real priorities need privilege the suite cannot assume, and the scheduler's choices cannot be forced or repeated portably, so a simulation makes every tick exact and runs identically on all four toolchains",
+        "Real priorities need privilege the suite cannot assume, and the scheduler's choices cannot be forced or repeated portably",
         "Because Windows has no mutexes"
       ],
       "correct": 2,
-      "explanation": "The measured facts about real nice values are recorded as measurements, and the arithmetic that predicted them is what the suite tests. The inversion itself is shown tick by tick."
+      "explanation": "A simulation makes every tick exact and runs identically on all four toolchains. The measured facts about real nice values are recorded as measurements, and the arithmetic that predicted them is what the suite tests. The inversion itself is shown tick by tick."
     }
   ]
 }

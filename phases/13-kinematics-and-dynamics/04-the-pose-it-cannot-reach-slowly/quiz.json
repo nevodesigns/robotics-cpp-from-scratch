@@ -57,10 +57,10 @@
         "Yes, it costs too much elsewhere",
         "It makes no difference either way",
         "Yes, otherwise the arm never reaches full speed",
-        "No: at half reach with lambda 0.01 the tool still moves at over 99 percent of the speed asked, so leaving it on removes a mode"
+        "No: at half reach with lambda 0.01 the tool still moves at over 99 percent of the speed asked"
       ],
       "correct": 3,
-      "explanation": "What does need reporting is the shortfall: J q against v is the number that tells a path follower it is falling behind rather than tracking."
+      "explanation": "Leaving it on removes a mode. What does need reporting is the shortfall: J q against v is the number that tells a path follower it is falling behind rather than tracking."
     },
     {
       "stage": "post",

@@ -6,25 +6,25 @@
       "stage": "pre",
       "question": "The system [[1e-20, 1], [1, 1]] x = [1, 2] has the answer (1, 1). Elimination without swapping rows gives (0, 1). Why?",
       "options": [
-        "The pivot is tiny, so the multiple is 10^20, which swamps the second row and rounds its 1 and 2 away",
+        "The pivot is tiny",
         "A bug in the arithmetic",
         "The matrix is singular",
         "Doubles cannot represent 1e-20"
       ],
       "correct": 0,
-      "explanation": "Partial pivoting swaps the largest entry up first, so no multiple is ever larger than one."
+      "explanation": "The multiple is 10^20, which swamps the second row and rounds its 1 and 2 away. Partial pivoting swaps the largest entry up first, so no multiple is ever larger than one."
     },
     {
       "stage": "check",
       "question": "A matrix has a condition number of 10^10. What does that mean for the answer to A x = b, however good the solver?",
       "options": [
         "The solver is slow",
-        "About ten digits are gone before the solver starts, because the problem cannot tell nearby answers apart; pivoting does not change it",
+        "About ten digits are gone before the solver starts",
         "The matrix is singular",
         "Nothing"
       ],
       "correct": 1,
-      "explanation": "The Hilbert matrix at n = 10 had a condition number of 3.54e+13 and an answer right to four digits."
+      "explanation": "The problem cannot tell nearby answers apart; pivoting does not change it. The Hilbert matrix at n = 10 had a condition number of 3.54e+13 and an answer right to four digits."
     },
     {
       "stage": "check",
@@ -45,10 +45,10 @@
         "The transpose is slow",
         "Multiplication is inexact",
         "It uses more memory",
-        "A^T A has the square of the condition number of A, so the answer loses about twice as many digits"
+        "A^T A has the square of the condition number of A"
       ],
       "correct": 3,
-      "explanation": "The sixth Hilbert matrix is 2.91e+07 and its normal equations 4.59e+14, which is 0.54 of the square."
+      "explanation": "The answer loses about twice as many digits. The sixth Hilbert matrix is 2.91e+07 and its normal equations 4.59e+14, which is 0.54 of the square."
     },
     {
       "stage": "post",
@@ -57,10 +57,10 @@
         "More iterations",
         "It uses higher precision",
         "It ignores small data",
-        "It reduces A to triangular form with reflections and applies them to b, never forming A transpose times A, so the condition number is A's own"
+        "It reduces A to triangular form with reflections and applies them to b, never forming A transpose times A"
       ],
       "correct": 3,
-      "explanation": "At degree 12 the normal equations had an error of 1.00, which is no digits at all, and QR 2.09e-08."
+      "explanation": "The condition number is A's own. At degree 12 the normal equations had an error of 1.00, which is no digits at all, and QR 2.09e-08."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "It is a bug",
         "It is faster",
-        "A pivot fell below the rounding of the largest entry, so as far as a double can tell the matrix is singular and any number would be an invention",
+        "A pivot fell below the rounding of the largest entry",
         "The matrix was too big"
       ],
       "correct": 2,
-      "explanation": "At n = 10 there were four correct digits. At n = 12 the condition number is about 10^16, which is all a double has."
+      "explanation": "As far as a double can tell the matrix is singular and any number would be an invention. At n = 10 there were four correct digits. At n = 12 the condition number is about 10^16, which is all a double has."
     }
   ]
 }

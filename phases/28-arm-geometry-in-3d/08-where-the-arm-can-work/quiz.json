@@ -57,22 +57,22 @@
         "The closed form fails without limits",
         "Limits make the table lower",
         "Limits change the tool's orientation",
-        "The closed form gives all the solutions; the arm can take only those inside its limits: 96 percent against 78 with plus and minus 60 degrees"
+        "The closed form gives all the solutions"
       ],
       "correct": 3,
-      "explanation": "Limits of 120 degrees cost nothing here, which was measured and not assumed. Limits of 60 degrees took the coverage from 96 to 78 percent."
+      "explanation": "The arm can take only those inside its limits: 96 percent against 78 with plus and minus 60 degrees. Limits of 120 degrees cost nothing here, which was measured and not assumed. Limits of 60 degrees took the coverage from 96 to 78 percent."
     },
     {
       "stage": "post",
       "question": "Why is the reach on a data sheet not the working area?",
       "options": [
-        "It is the outside of a sphere; the useful region is shorter once the orientation is asked for and smaller where the arm cannot move well",
+        "It is the outside of a sphere",
         "It is measured with no payload",
         "It is rounded up by the maker",
         "It is given for the flange and not the tool"
       ],
       "correct": 0,
-      "explanation": "Reach is the furthest the tool gets in any orientation. With the tool pointing down, and only where the arm still moves well, the region is smaller."
+      "explanation": "The useful region is shorter once the orientation is asked for and smaller where the arm cannot move well. Reach is the furthest the tool gets in any orientation. With the tool pointing down, and only where the arm still moves well, the region is smaller."
     }
   ]
 }

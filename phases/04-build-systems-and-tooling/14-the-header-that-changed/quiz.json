@@ -7,12 +7,12 @@
       "question": "A private field is added to a class in a header used all over a project. What is the cost beyond rebuilding?",
       "options": [
         "None",
-        "Code built against the old header reserves the old size for the object, so linking old and new code together corrupts memory",
+        "Code built against the old header reserves the old size for the object",
         "The class gets slower",
         "The header gets smaller"
       ],
       "correct": 1,
-      "explanation": "The same data was 24 bytes in version 1 and 104 in version 2."
+      "explanation": "Linking old and new code together corrupts memory. The same data was 24 bytes in version 1 and 104 in version 2."
     },
     {
       "stage": "check",
@@ -21,10 +21,10 @@
         "0 and 8",
         "24 and 104",
         "8 bytes and 104 bytes",
-        "8 bytes and 8 bytes: the size of one pointer, whatever is inside"
+        "8 bytes and 8 bytes"
       ],
       "correct": 3,
-      "explanation": "A Smoother was 8 bytes."
+      "explanation": "The size of one pointer, whatever is inside. A Smoother was 8 bytes."
     },
     {
       "stage": "check",
@@ -56,11 +56,11 @@
       "options": [
         "15",
         "0",
-        "7.5: the copy has its own state, so the original had not moved",
+        "7.5: the copy has its own state",
         "17.5"
       ],
       "correct": 2,
-      "explanation": "The copy constructor made a new Impl from the old one."
+      "explanation": "The original had not moved. The copy constructor made a new Impl from the old one."
     },
     {
       "stage": "post",

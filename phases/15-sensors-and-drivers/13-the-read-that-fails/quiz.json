@@ -31,24 +31,24 @@
       "question": "Why is a CRC better than a plain sum of the bytes?",
       "options": [
         "It uses less memory",
-        "It sees a change of order: on a five byte frame it missed 0 of 6 swapped pairs of bytes and a sum missed all 6",
+        "It sees a change of order",
         "It is longer",
         "It is cheaper"
       ],
       "correct": 1,
-      "explanation": "A sum does not care about order."
+      "explanation": "On a five byte frame it missed 0 of 6 swapped pairs of bytes and a sum missed all 6. A sum does not care about order."
     },
     {
       "stage": "check",
       "question": "What should a bounded retry report beyond whether it worked?",
       "options": [
-        "How many attempts it took, and how many were timeouts and how many were bad frames, because those are different faults",
+        "How many attempts it took, and how many were timeouts and how many were bad frames",
         "Nothing",
         "The time of day",
         "The CRC"
       ],
       "correct": 0,
-      "explanation": "Counts are the driver's health."
+      "explanation": "Those are different faults. Counts are the driver's health."
     },
     {
       "stage": "post",

@@ -8,23 +8,23 @@
       "options": [
         "Marks are too small",
         "The camera is broken",
-        "A mark on the bright side is lighter than plain background on the dim side: one threshold found 0.582 of the marks and marked 0.446 of everything else",
+        "A mark on the bright side is lighter than plain background on the dim side",
         "Thresholds only work on colour"
       ],
       "correct": 2,
-      "explanation": "The question per pixel is whether it is darker than its neighbours."
+      "explanation": "One threshold found 0.582 of the marks and marked 0.446 of everything else. The question per pixel is whether it is darker than its neighbours."
     },
     {
       "stage": "check",
       "question": "What makes the sum of any rectangle cost four reads?",
       "options": [
         "A copy of the image",
-        "A summed area table: entry (x, y) is the sum of everything above and to the left, so a box is four entries added and subtracted",
+        "A summed area table",
         "A histogram",
         "Sorting"
       ],
       "correct": 1,
-      "explanation": "The table is built once in one pass."
+      "explanation": "Entry (x, y) is the sum of everything above and to the left, so a box is four entries added and subtracted. The table is built once in one pass."
     },
     {
       "stage": "check",
@@ -32,11 +32,11 @@
       "options": [
         "Zero",
         "The full box area",
-        "The count of pixels actually inside the picture: 81 of the 17 by 17 box, giving 90.0 on a flat picture of 90",
+        "The count of pixels actually inside the picture",
         "The radius"
       ],
       "correct": 2,
-      "explanation": "Dividing by the whole box lowers the mean towards the border, so marks there are missed."
+      "explanation": "81 of the 17 by 17 box, giving 90.0 on a flat picture of 90. Dividing by the whole box lowers the mean towards the border, so marks there are missed."
     },
     {
       "stage": "check",
@@ -45,22 +45,22 @@
         "It finds more",
         "It crashes",
         "Nothing",
-        "The window averages the mark with itself and sees nothing odd: a radius of 1 found only 0.317 of the marks"
+        "The window averages the mark with itself and sees nothing odd"
       ],
       "correct": 3,
-      "explanation": "The window must be bigger than the mark."
+      "explanation": "A radius of 1 found only 0.317 of the marks. The window must be bigger than the mark."
     },
     {
       "stage": "post",
       "question": "What happens when the window is as wide as the picture?",
       "options": [
-        "It is a global threshold again: radius 100 found 0.577 and marked 0.405, nearly the same as one Otsu threshold",
+        "It is a global threshold again",
         "It becomes exact",
         "Nothing changes",
         "It gets better"
       ],
       "correct": 0,
-      "explanation": "Between the two, 8 to 16 here, it works."
+      "explanation": "Radius 100 found 0.577 and marked 0.405, nearly the same as one Otsu threshold. Between the two, 8 to 16 here, it works."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "Sets the radius",
         "Removes the marks",
         "Brightens it",
-        "Asks a pixel to be darker than the mean by a margin, so noise is not marked: with noise of 6 levels, 0 marked 0.269 of the background and 20 marked 0.001 while finding 0.987"
+        "Asks a pixel to be darker than the mean by a margin"
       ],
       "correct": 3,
-      "explanation": "Choose it below the marks' contrast and above the noise."
+      "explanation": "Noise is not marked: with noise of 6 levels, 0 marked 0.269 of the background and 20 marked 0.001 while finding 0.987. Choose it below the marks' contrast and above the noise."
     }
   ]
 }

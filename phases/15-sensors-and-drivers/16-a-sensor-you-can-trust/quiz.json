@@ -9,22 +9,22 @@
         "It is removed",
         "Nothing",
         "It doubles",
-        "The smoother has already spread a share of it, alpha, into every later reading, where the rejection filter would have caught it whole: 0.200 of a spike of 50 against 0.000"
+        "The smoother has already spread a share of it, alpha, into every later reading, where the rejection filter would have caught it whole"
       ],
       "correct": 3,
-      "explanation": "Reject while an outlier is still one reading."
+      "explanation": "0.200 of a spike of 50 against 0.000. Reject while an outlier is still one reading."
     },
     {
       "stage": "check",
       "question": "In what order should the stages run?",
       "options": [
-        "Calibrate, reject, smooth, so every stage works in real units and an outlier is rejected whole",
+        "Calibrate, reject, smooth",
         "Reject, smooth, calibrate",
         "Smooth, reject, calibrate",
         "Any order"
       ],
       "correct": 0,
-      "explanation": "A raw 3.0 through a scale of 2 and an offset of 1 came out as 7.0000."
+      "explanation": "Every stage works in real units and an outlier is rejected whole. A raw 3.0 through a scale of 2 and an offset of 1 came out as 7.0000."
     },
     {
       "stage": "check",
@@ -56,23 +56,23 @@
       "options": [
         "Doubles it",
         "Removes it",
-        "Holds it back by about half its window until enough of the window agrees: time to half way was 0.03 s at a window of 7 and 0.07 s at 15 with alpha 0.5, against 0.00 s with none",
+        "Holds it back by about half its window until enough of the window agrees",
         "Nothing"
       ],
       "correct": 2,
-      "explanation": "A wide window rejects better and follows worse."
+      "explanation": "Time to half way was 0.03 s at a window of 7 and 0.07 s at 15 with alpha 0.5, against 0.00 s with none. A wide window rejects better and follows worse."
     },
     {
       "stage": "post",
       "question": "Why build the table of four costs?",
       "options": [
         "To impress the reader",
-        "A quieter output lags more and no row is best, so the choice is made against the loop's own budget with the numbers in front of you rather than found out from a sluggish controller",
+        "A quieter output lags more and no row is best",
         "To pick the largest alpha",
         "For the documentation"
       ],
       "correct": 1,
-      "explanation": "Measured, not guessed."
+      "explanation": "The choice is made against the loop's own budget with the numbers in front of you rather than found out from a sluggish controller. Measured, not guessed."
     }
   ]
 }

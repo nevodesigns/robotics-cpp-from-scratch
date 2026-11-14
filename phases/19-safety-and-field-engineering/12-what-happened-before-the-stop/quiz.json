@@ -20,11 +20,11 @@
       "options": [
         "Fine: the first event left is the start of a new chain",
         "Missing: a gap at the first event left",
-        "Altered: it has lost its predecessor, so the box keeps the chain value of the last event overwritten and verify starts from it",
+        "Altered: it has lost its predecessor",
         "Nothing: the chain is not checked after a wrap"
       ],
       "correct": 2,
-      "explanation": "The first event left was chained to one that has been overwritten. Keeping that one's chain value lets the check start from the right place: 12 dropped, verified from the kept link."
+      "explanation": "The box keeps the chain value of the last event overwritten and verify starts from it. The first event left was chained to one that has been overwritten. Keeping that one's chain value lets the check start from the right place: 12 dropped, verified from the kept link."
     },
     {
       "stage": "check",

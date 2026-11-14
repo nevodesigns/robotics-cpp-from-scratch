@@ -18,13 +18,13 @@
       "stage": "check",
       "question": "Why do [1.0, 2.0) and [2.0, 3.0) have nothing in common?",
       "options": [
-        "The high end is excluded, so 2.0 is in the second only and the ranges touch without overlapping",
+        "The high end is excluded",
         "They are the same",
         "2.0 is in neither",
         "A bug"
       ],
       "correct": 0,
-      "explanation": "intersect gave an empty range and is_empty said so."
+      "explanation": "2.0 is in the second only and the ranges touch without overlapping. intersect gave an empty range and is_empty said so."
     },
     {
       "stage": "check",
@@ -45,22 +45,22 @@
         "Ignores B",
         "Reports a conflict",
         "Installs both",
-        "Gives that A up, puts back what it had asked for, and tries the next older: here A 1.0.0, B 1.0.0 and C 1.7.0"
+        "Gives that A up, puts back what it had asked for, and tries the next older"
       ],
       "correct": 3,
-      "explanation": "It took 6 steps."
+      "explanation": "Here A 1.0.0, B 1.0.0 and C 1.7.0. It took 6 steps."
     },
     {
       "stage": "post",
       "question": "What should a conflict message contain?",
       "options": [
         "The date",
-        "The package and each requirement with who asked for it, such as C: no version satisfies everyone, since A 1.0 needs [1.0.0, 2.0.0), B 1.0 needs [2.0.0, 3.0.0)",
+        "The package and each requirement with who asked for it, such as C",
         "A stack trace",
         "The word failed"
       ],
       "correct": 1,
-      "explanation": "Without the names nobody can fix it."
+      "explanation": "No version satisfies everyone, since A 1.0 needs [1.0.0, 2.0.0), B 1.0 needs [2.0.0, 3.0.0). Without the names nobody can fix it."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "It stops after 10 steps",
         "Cycles are rejected",
-        "Each package is chosen once and a chosen package is not chosen again: it resolved in 3 steps",
+        "Each package is chosen once and a chosen package is not chosen again",
         "It guesses"
       ],
       "correct": 2,
-      "explanation": "The steps were under 10 and both packages were chosen."
+      "explanation": "It resolved in 3 steps. The steps were under 10 and both packages were chosen."
     }
   ]
 }

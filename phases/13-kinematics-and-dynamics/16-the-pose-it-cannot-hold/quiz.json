@@ -9,10 +9,10 @@
         "One reason; one remedy",
         "The same remedy",
         "Two reasons",
-        "Out of reach, outside the joint limits, too heavy to hold: three remedies"
+        "Out of reach, outside the joint limits, too heavy to hold"
       ],
       "correct": 3,
-      "explanation": "The planner gave four different verdicts for four targets."
+      "explanation": "Three remedies. The planner gave four different verdicts for four targets."
     },
     {
       "stage": "check",
@@ -20,23 +20,23 @@
       "options": [
         "The limits",
         "The time",
-        "Out of reach: with no angles there is nothing to check the limits or torques of",
+        "Out of reach",
         "Too heavy"
       ],
       "correct": 2,
-      "explanation": "The wrist has to be reachable before anything else means anything."
+      "explanation": "With no angles there is nothing to check the limits or torques of. The wrist has to be reachable before anything else means anything."
     },
     {
       "stage": "check",
       "question": "The arm straight out, payload 0.5 kg. Which motor is nearest its limit?",
       "options": [
-        "The shoulder: 71.1225 of 80 N m, 0.889031",
+        "The shoulder",
         "None",
         "The wrist",
         "The elbow"
       ],
       "correct": 0,
-      "explanation": "The shoulder carries the whole arm."
+      "explanation": "71.1225 of 80 N m, 0.889031. The shoulder carries the whole arm."
     },
     {
       "stage": "check",
@@ -44,11 +44,11 @@
       "options": [
         "It is over",
         "It is at 0",
-        "It is at its limit: 80 of 80 N m",
+        "It is at its limit",
         "It is at half"
       ],
       "correct": 2,
-      "explanation": "The elbow was at 37.8008 of 40."
+      "explanation": "80 of 80 N m. The elbow was at 37.8008 of 40."
     },
     {
       "stage": "post",
@@ -67,12 +67,12 @@
       "question": "Why is the torque a static check only?",
       "options": [
         "Qt requires it",
-        "It is the torque to hold still: moving asks more, which lesson 13-07 is about",
+        "It is the torque to hold still",
         "Motors only hold",
         "It is easier"
       ],
       "correct": 1,
-      "explanation": "The lesson says so under what it does not do."
+      "explanation": "Moving asks more, which lesson 13-07 is about. The lesson says so under what it does not do."
     }
   ]
 }

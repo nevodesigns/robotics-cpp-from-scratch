@@ -20,11 +20,11 @@
       "options": [
         "Raises kp slowly",
         "Reads the sensor twice",
-        "Commands plus d below the target and minus d above it, so the plant swings about the target by itself",
+        "Commands plus d below the target and minus d above it",
         "Switches the loop off"
       ],
       "correct": 2,
-      "explanation": "The swing's size and cycle time carry the answer."
+      "explanation": "The plant swings about the target by itself. The swing's size and cycle time carry the answer."
     },
     {
       "stage": "check",
@@ -69,10 +69,10 @@
         "The rule is exact",
         "To test the sensor",
         "Steps are required",
-        "The rule sets differ a lot: Ziegler-Nichols overshot by 0.597 and the gentler set by 0.376, and a loop is judged on rise time, overshoot, settling time and final error"
+        "The rule sets differ a lot"
       ],
       "correct": 3,
-      "explanation": "Four numbers, not a feeling."
+      "explanation": "Ziegler-Nichols overshot by 0.597 and the gentler set by 0.376, and a loop is judged on rise time, overshoot, settling time and final error. Four numbers, not a feeling."
     }
   ]
 }

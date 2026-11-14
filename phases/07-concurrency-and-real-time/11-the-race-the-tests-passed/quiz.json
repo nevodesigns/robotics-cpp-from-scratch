@@ -21,22 +21,22 @@
         "Nothing, since both halves are locked",
         "shutdown waits for the push",
         "The push is refused",
-        "The task is pushed into a queue shutdown has already drained, so it is accepted and counted and never processed: stranded"
+        "The task is pushed into a queue shutdown has already drained"
       ],
       "correct": 3,
-      "explanation": "Every access is locked and the whole is not atomic. It is the check-then-act race. The fix is one lock held across the check and the push."
+      "explanation": "It is accepted and counted and never processed: stranded. Every access is locked and the whole is not atomic. It is the check-then-act race. The fix is one lock held across the check and the push."
     },
     {
       "stage": "check",
       "question": "A hook at submit.gap runs shutdown() on the same thread as the submit. What did the buggy version do across 300 trials, and what did running two real threads 300 times do?",
       "options": [
         "The unaided run found it 300 times",
-        "The forced hook stranded a task in 300 of 300, where the unaided run usually found 0 in 300: no timing is involved, so the failure is the same every time",
+        "The forced hook stranded a task in 300 of 300, where the unaided run usually found 0 in 300",
         "The forced hook found nothing",
         "Both stranded a task in every trial"
       ],
       "correct": 1,
-      "explanation": "Forcing the interleaving needs no second thread and no luck. The unaided count varies between 0 and a handful and is printed and not asserted."
+      "explanation": "No timing is involved, so the failure is the same every time. Forcing the interleaving needs no second thread and no luck. The unaided count varies between 0 and a handful and is printed and not asserted."
     },
     {
       "stage": "check",

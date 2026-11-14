@@ -45,10 +45,10 @@
         "Activating is slower than configuring, so it is done last",
         "The bus needs every topic to exist before any message is sent",
         "So that the nodes can be activated in any order",
-        "Nothing produces until it is known that everything which consumes it exists, so a failed configure has not yet sent a single message"
+        "Nothing produces until it is known that everything which consumes it exists"
       ],
       "correct": 3,
-      "explanation": "Configuring is where devices are opened and things fail. Doing all of it first means that a failure is found before anything has started producing."
+      "explanation": "A failed configure has not yet sent a single message. Configuring is where devices are opened and things fail. Doing all of it first means that a failure is found before anything has started producing."
     },
     {
       "stage": "post",

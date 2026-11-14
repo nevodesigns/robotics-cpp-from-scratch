@@ -8,11 +8,11 @@
       "options": [
         "The string one",
         "The one declared last",
-        "The bool one: a pointer converts to bool with a built-in conversion, which beats the constructor that would make a string",
+        "The bool one",
         "Neither, it is ambiguous"
       ],
       "correct": 2,
-      "explanation": "The log said flag: ok."
+      "explanation": "A pointer converts to bool with a built-in conversion, which beats the constructor that would make a string. The log said flag: ok."
     },
     {
       "stage": "check",
@@ -55,12 +55,12 @@
       "question": "f(int) and f(const char*) exist. What does f(0) call, and f(nullptr)?",
       "options": [
         "The pointer, then the int",
-        "The int, then the pointer: 0 is an int that merely converts to a null pointer",
+        "The int, then the pointer",
         "The pointer, then the pointer",
         "Both ambiguous"
       ],
       "correct": 1,
-      "explanation": "Write nullptr when a null pointer is meant."
+      "explanation": "0 is an int that merely converts to a null pointer. Write nullptr when a null pointer is meant."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "Fewer functions",
         "Macros",
         "More overloads",
-        "Give the flag version its own name, such as report_ok, so a call says which is meant"
+        "Give the flag version its own name, such as report_ok"
       ],
       "correct": 3,
-      "explanation": "Overloads on types that convert into each other are where these surprises live."
+      "explanation": "A call says which is meant. Overloads on types that convert into each other are where these surprises live."
     }
   ]
 }

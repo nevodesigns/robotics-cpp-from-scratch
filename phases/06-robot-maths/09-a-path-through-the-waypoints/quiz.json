@@ -7,12 +7,12 @@
       "question": "A robot follows straight lines between four waypoints on a square route. How sharp is the turn at a corner, in one step?",
       "options": [
         "10.9 degrees",
-        "90.0 degrees: the whole angle in a single step, which no machine can follow",
+        "90.0 degrees",
         "180 degrees",
         "0 degrees"
       ],
       "correct": 1,
-      "explanation": "A curve through the same waypoints turned at most 10.9 degrees in a step."
+      "explanation": "The whole angle in a single step, which no machine can follow. A curve through the same waypoints turned at most 10.9 degrees in a step."
     },
     {
       "stage": "check",
@@ -21,10 +21,10 @@
         "The number of points",
         "The colour",
         "The speed of the robot",
-        "How the curve is timed along the way: 0 gives every waypoint the same time, 0.5 the square root of the distance, 1 the distance"
+        "How the curve is timed along the way"
       ],
       "correct": 3,
-      "explanation": "The curve passes through every waypoint whatever alpha is."
+      "explanation": "0 gives every waypoint the same time, 0.5 the square root of the distance, 1 the distance. The curve passes through every waypoint whatever alpha is."
     },
     {
       "stage": "check",
@@ -32,23 +32,23 @@
       "options": [
         "9.1 and 178.2 degrees",
         "10 and 10",
-        "178.2 and 9.1 degrees: uniform timing makes the curve turn back on itself",
+        "178.2 and 9.1 degrees",
         "0 and 0"
       ],
       "correct": 2,
-      "explanation": "Chordal timing gave 8.7 degrees."
+      "explanation": "Uniform timing makes the curve turn back on itself. Chordal timing gave 8.7 degrees."
     },
     {
       "stage": "check",
       "question": "Why does uniform timing loop on uneven waypoints?",
       "options": [
-        "Every segment gets the same time, so the short step has to be crossed as slowly as the long runs and the curve rushes through it and turns back",
+        "Every segment gets the same time",
         "It uses more points",
         "It is a bug",
         "It is faster"
       ],
       "correct": 0,
-      "explanation": "Timing by distance fixes it."
+      "explanation": "The short step has to be crossed as slowly as the long runs and the curve rushes through it and turns back. Timing by distance fixes it."
     },
     {
       "stage": "post",
@@ -57,10 +57,10 @@
         "Nothing",
         "It loops",
         "It is skipped silently with a warning",
-        "A distance of zero gives a time interval of zero and a division by it, so repeated waypoints are taken once and the curve function goes straight on a zero interval"
+        "A distance of zero gives a time interval of zero and a division by it"
       ],
       "correct": 3,
-      "explanation": "Waypoints on a line with the last repeated stayed exactly on it."
+      "explanation": "Repeated waypoints are taken once and the curve function goes straight on a zero interval. Waypoints on a line with the last repeated stayed exactly on it."
     },
     {
       "stage": "post",

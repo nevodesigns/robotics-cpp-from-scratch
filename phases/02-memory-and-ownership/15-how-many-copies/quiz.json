@@ -7,12 +7,12 @@
       "question": "A program stores a few thousand objects and is slower than the arithmetic says it should be. Nothing leaks. Where might the cost be?",
       "options": [
         "In the output",
-        "Copies that are not on any line of the source: in parameters, in a vector growing and in returns",
+        "Copies that are not on any line of the source",
         "In the heap size",
         "In the compiler"
       ],
       "correct": 1,
-      "explanation": "A type that counts its own copies and moves makes them visible."
+      "explanation": "In parameters, in a vector growing and in returns. A type that counts its own copies and moves makes them visible."
     },
     {
       "stage": "check",
@@ -20,11 +20,11 @@
       "options": [
         "Refuses to grow",
         "Moves the elements anyway",
-        "Copies every element, since a move that might throw half way cannot be undone",
+        "Copies every element",
         "Skips the elements"
       ],
       "correct": 2,
-      "explanation": "100 push_backs: 0 copies with noexcept, 127 without."
+      "explanation": "A move that might throw half way cannot be undone. 100 push_backs: 0 copies with noexcept, 127 without."
     },
     {
       "stage": "check",
@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "What does emplace_back(i) do differently from push_back(Packet(i))?",
       "options": [
-        "It builds the object where it will live, so there is no temporary to move: 0 copies and 0 moves",
+        "It builds the object where it will live",
         "Nothing",
         "It is slower",
         "It copies twice"
       ],
       "correct": 0,
-      "explanation": "It passes the arguments on to the constructor."
+      "explanation": "There is no temporary to move: 0 copies and 0 moves. It passes the arguments on to the constructor."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "The count is wrong",
         "Returns never copy",
         "The code is perfect",
-        "The compiler can remove copies and moves altogether, so zero may be its work and not the code's"
+        "The compiler can remove copies and moves altogether"
       ],
       "correct": 3,
-      "explanation": "Counts show what happened, not what the code guarantees."
+      "explanation": "Zero may be its work and not the code's. Counts show what happened, not what the code guarantees."
     }
   ]
 }

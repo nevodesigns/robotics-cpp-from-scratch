@@ -57,10 +57,10 @@
         "Certificates cannot be checked without a network",
         "It is quicker than comparing dates",
         "The certificate's dates are in another time zone",
-        "A 1970 clock says not yet valid for a certificate that is fine: a guess must not be used to say yes or no"
+        "A 1970 clock says not yet valid for a certificate that is fine"
       ],
       "correct": 3,
-      "explanation": "On a 1970 clock a good certificate looks 56 years early. Saying unknown, and not yes or no, lets the robot fetch the time first."
+      "explanation": "A guess must not be used to say yes or no. On a 1970 clock a good certificate looks 56 years early. Saying unknown, and not yes or no, lets the robot fetch the time first."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "It resets it to zero",
         "It makes it run faster to catch up",
-        "It does not count the suspended time, so time since boot is shorter than the real time",
+        "It does not count the suspended time",
         "Nothing: it keeps counting"
       ],
       "correct": 2,
-      "explanation": "On many systems the monotonic clock stops while the machine is suspended. A timeout measured across a suspend is then shorter than the real time that passed."
+      "explanation": "Time since boot is shorter than the real time. On many systems the monotonic clock stops while the machine is suspended. A timeout measured across a suspend is then shorter than the real time that passed."
     }
   ]
 }

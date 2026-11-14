@@ -8,11 +8,11 @@
       "options": [
         "It spins",
         "It follows the circle exactly",
-        "It runs a little wide at every step, always the same way, so the errors add up",
+        "It runs a little wide at every step, always the same way",
         "It runs too short"
       ],
       "correct": 2,
-      "explanation": "The radius from the centre was bigger than 1 at every step count."
+      "explanation": "The errors add up. The radius from the centre was bigger than 1 at every step count."
     },
     {
       "stage": "check",
@@ -32,11 +32,11 @@
       "options": [
         "The average of the wheel speeds",
         "The one at the start",
-        "The one halfway through the step, since the start is too early and the end too late by equal amounts",
+        "The one halfway through the step",
         "The one at the end"
       ],
       "correct": 2,
-      "explanation": "Twice the steps then gives a quarter of the error, and 13 steps were enough for a millimetre."
+      "explanation": "The start is too early and the end too late by equal amounts. Twice the steps then gives a quarter of the error, and 13 steps were enough for a millimetre."
     },
     {
       "stage": "check",
@@ -55,12 +55,12 @@
       "question": "Why does the exact arc step have to treat going straight separately?",
       "options": [
         "It does not",
-        "The radius is forward divided by the turn, so a zero turn is a division by zero, and a tiny one is the difference of two nearly equal numbers",
+        "The radius is forward divided by the turn",
         "Circles cannot be straight",
         "Straight lines are faster"
       ],
       "correct": 1,
-      "explanation": "Below a turn of 1e-9 it moves forward along the heading."
+      "explanation": "A zero turn is a division by zero, and a tiny one is the difference of two nearly equal numbers. Below a turn of 1e-9 it moves forward along the heading."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "When the robot is large",
         "When the circle is small",
         "Never",
-        "When the wheel speeds change during the step, which a real robot's do every control cycle, so the step has to be short anyway"
+        "When the wheel speeds change during the step, which a real robot's do every control cycle"
       ],
       "correct": 3,
-      "explanation": "Then the midpoint step is about as good, and it extends to cases with no circle formula."
+      "explanation": "The step has to be short anyway. Then the midpoint step is about as good, and it extends to cases with no circle formula."
     }
   ]
 }

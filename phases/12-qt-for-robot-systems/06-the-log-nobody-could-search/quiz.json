@@ -55,12 +55,12 @@
       "question": "A filter says type >= QtWarningMsg. Which of debug, info, warning and critical does it keep?",
       "options": [
         "Only critical",
-        "Info, warning and critical: the information got in by its number",
+        "Info, warning and critical",
         "Warning and critical",
         "All four"
       ],
       "correct": 1,
-      "explanation": "The numbers gave 3 and the order of severity gave 2."
+      "explanation": "The information got in by its number. The numbers gave 3 and the order of severity gave 2."
     },
     {
       "stage": "post",

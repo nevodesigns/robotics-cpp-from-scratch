@@ -9,10 +9,10 @@
         "A crash",
         "The original exception",
         "Nothing",
-        "A std::exception copied from the base part: it is no longer an invalid_argument, and on some libraries the message is gone too"
+        "A std::exception copied from the base part"
       ],
       "correct": 3,
-      "explanation": "Caught by reference it kept both the type and the message."
+      "explanation": "It is no longer an invalid_argument, and on some libraries the message is gone too. Caught by reference it kept both the type and the message."
     },
     {
       "stage": "check",
@@ -30,25 +30,25 @@
       "stage": "check",
       "question": "What is the difference between throw e; and throw; inside a handler?",
       "options": [
-        "throw e; throws a copy made from the declared type of e, throw; rethrows the very object with its own type",
+        "throw e; throws a copy made from the declared type of e, throw",
         "throw; is slower",
         "throw e; is safer",
         "None"
       ],
       "correct": 0,
-      "explanation": "throw e; gave cut down to exception, throw; gave still invalid_argument."
+      "explanation": "Rethrows the very object with its own type. throw e; gave cut down to exception, throw; gave still invalid_argument."
     },
     {
       "stage": "check",
       "question": "What does parse_all do before rethrowing?",
       "options": [
         "Nothing",
-        "It records which item failed, then uses a bare throw; so the caller still sees the original type",
+        "It records which item failed, then uses a bare throw",
         "It swallows the error",
         "It changes the message"
       ],
       "correct": 1,
-      "explanation": "The caller learns both where and what."
+      "explanation": "So the caller still sees the original type. The caller learns both where and what."
     },
     {
       "stage": "post",
@@ -57,22 +57,22 @@
         "drop A, B, C, then the handler",
         "handler, then drop A, B, C",
         "only the handler",
-        "drop C, drop B, drop A, then the handler: reverse order of construction, before the handler starts"
+        "drop C, drop B, drop A, then the handler"
       ],
       "correct": 3,
-      "explanation": "That is why cleanup belongs in a destructor."
+      "explanation": "Reverse order of construction, before the handler starts. That is why cleanup belongs in a destructor."
     },
     {
       "stage": "post",
       "question": "A function releases a motor on the line after a call that can throw. What happens when it throws?",
       "options": [
         "The release runs twice",
-        "The release is skipped, since a throw leaves at once and only destructors run on the way out",
+        "The release is skipped",
         "The release runs",
         "The program restarts"
       ],
       "correct": 1,
-      "explanation": "Put the release in a destructor so the unwinding does it."
+      "explanation": "A throw leaves at once and only destructors run on the way out. Put the release in a destructor so the unwinding does it."
     }
   ]
 }

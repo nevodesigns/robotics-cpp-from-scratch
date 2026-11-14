@@ -8,11 +8,11 @@
       "options": [
         "Nothing, since the span is too small to draw",
         "A slow drift",
-        "Violent oscillation filling the whole height, because the scale expanded until the last digit of the reading filled it",
+        "Violent oscillation filling the whole height",
         "A flat line, since the signal is flat"
       ],
       "correct": 2,
-      "explanation": "Measured: more than fifteen rows of twenty. A change of one part in ten million is drawn exactly as large as a change of one volt, and people respond by filtering a signal that was never noisy."
+      "explanation": "The scale expanded until the last digit of the reading filled it. Measured: more than fifteen rows of twenty. A change of one part in ten million is drawn exactly as large as a change of one volt, and people respond by filtering a signal that was never noisy."
     },
     {
       "stage": "check",
@@ -30,13 +30,13 @@
       "stage": "check",
       "question": "A rolling window keeps the last five hundred samples. What is wrong with that?",
       "options": [
-        "Five hundred samples is fifty seconds at ten hertz and half a second at a thousand, so the x axis means something different on every run",
+        "Five hundred samples is fifty seconds at ten hertz and half a second at a thousand",
         "Five hundred is too few for a chart",
         "Nothing, if the rate is known",
         "It uses unbounded memory"
       ],
       "correct": 0,
-      "explanation": "Drop by age, which is the policy, and keep a capacity as a separate guard, which is what stops a faster than expected signal growing the buffer without limit."
+      "explanation": "The x axis means something different on every run. Drop by age, which is the policy, and keep a capacity as a separate guard, which is what stops a faster than expected signal growing the buffer without limit."
     },
     {
       "stage": "check",

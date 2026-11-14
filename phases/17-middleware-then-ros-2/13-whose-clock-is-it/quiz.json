@@ -33,22 +33,22 @@
         "Fire 200 times at once, so that no period is missed",
         "Not fire at all until the clock has run another 100 s",
         "Stop, and wait to be restarted by the node",
-        "Fire a bounded number of times and count the rest as skipped: once, with 199 skipped, where a catch-up timer fired 200 times at once"
+        "Fire a bounded number of times and count the rest as skipped"
       ],
       "correct": 3,
-      "explanation": "The 200 overdue periods are for time that was skipped, not lived through. One firing, a count of what was skipped, and then on from the new time."
+      "explanation": "Once, with 199 skipped, where a catch-up timer fired 200 times at once. The 200 overdue periods are for time that was skipped, not lived through. One firing, a count of what was skipped, and then on from the new time."
     },
     {
       "stage": "check",
       "question": "The clock goes from 100 s back to 0. What does a timer with its old schedule do?",
       "options": [
-        "Is silent for the first 100 s of the new run, because it waits for the clock to reach its old next time: 0 firings against 199",
+        "Is silent for the first 100 s of the new run",
         "Fires 199 times at once to catch up with the new run",
         "Fires as usual: a timer only looks at differences in time",
         "Fires at twice its rate until it reaches its old next time"
       ],
       "correct": 0,
-      "explanation": "Its next firing was set for 100.5 s. Unless it notices the new epoch, it sits waiting for a time the new run will not reach for a hundred seconds."
+      "explanation": "It waits for the clock to reach its old next time: 0 firings against 199. Its next firing was set for 100.5 s. Unless it notices the new epoch, it sits waiting for a time the new run will not reach for a hundred seconds."
     },
     {
       "stage": "post",

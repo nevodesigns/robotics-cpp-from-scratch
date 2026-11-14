@@ -18,13 +18,13 @@
       "stage": "check",
       "question": "Does the same push onto a QStringList property reach C++?",
       "options": [
-        "On Qt 6.2 it did: a sequence type is a reference and is written back",
+        "On Qt 6.2 it did",
         "Never",
         "Only in C++",
         "Only with a signal"
       ],
       "correct": 0,
-      "explanation": "The QStringList had 3, with 1 changed signal."
+      "explanation": "A sequence type is a reference and is written back. The QStringList had 3, with 1 changed signal."
     },
     {
       "stage": "check",
@@ -32,11 +32,11 @@
       "options": [
         "An error",
         "The new row",
-        "The old rows: it was never told",
+        "The old rows",
         "Nothing"
       ],
       "correct": 2,
-      "explanation": "The silent model had 2 rows and its view 1 item."
+      "explanation": "It was never told. The silent model had 2 rows and its view 1 item."
     },
     {
       "stage": "check",
@@ -45,10 +45,10 @@
         "That a mutex is held",
         "To quit",
         "To repaint",
-        "Which rows are new, so that it creates items for exactly those"
+        "Which rows are new"
       ],
       "correct": 3,
-      "explanation": "Three appends were rows 0-0, 1-1 and 2-2."
+      "explanation": "It creates items for exactly those. Three appends were rows 0-0, 1-1 and 2-2."
     },
     {
       "stage": "post",

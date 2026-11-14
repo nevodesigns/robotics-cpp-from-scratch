@@ -56,11 +56,11 @@
       "options": [
         "Passes everything",
         "Nothing",
-        "Fails 4 of 6 harmless changes: a bound copied from the last run is the pinned value again",
+        "Fails 4 of 6 harmless changes",
         "Makes the test stricter and better"
       ],
       "correct": 2,
-      "explanation": "The requirement was 3 seconds."
+      "explanation": "A bound copied from the last run is the pinned value again. The requirement was 3 seconds."
     },
     {
       "stage": "post",

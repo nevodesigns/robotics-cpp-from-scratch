@@ -30,13 +30,13 @@
       "stage": "check",
       "question": "connect returns true and the slot never runs. What is the most likely reason?",
       "options": [
-        "A queued connection cannot copy the argument type, so every delivery is dropped with one line on the console",
+        "A queued connection cannot copy the argument type",
         "The connection type was wrong",
         "The receiver was destroyed",
         "The signal was never emitted"
       ],
       "correct": 0,
-      "explanation": "connect returning true means the signatures matched, not that anything will arrive. Measured, a signal carrying Qt::HANDLE delivered zero of a hundred, and the program had no way to see the warning."
+      "explanation": "Every delivery is dropped with one line on the console. connect returning true means the signatures matched, not that anything will arrive. Measured, a signal carrying Qt::HANDLE delivered zero of a hundred, and the program had no way to see the warning."
     },
     {
       "stage": "check",
@@ -44,11 +44,11 @@
       "options": [
         "Only if it contains pointers",
         "Only when the receiver is a widget",
-        "No: measured, five hundred of five hundred arrive with no registration at all, because the function pointer syntax registers the type",
+        "No: measured, five hundred of five hundred arrive with no registration at all",
         "Yes, always, as on Qt 5"
       ],
       "correct": 2,
-      "explanation": "Which matters because the obsolete advice hides the real hazard. The types that still fail are ones recorded under a name Qt cannot resolve, such as a typedef, and they fail silently."
+      "explanation": "The function pointer syntax registers the type. Which matters because the obsolete advice hides the real hazard. The types that still fail are ones recorded under a name Qt cannot resolve, such as a typedef, and they fail silently."
     },
     {
       "stage": "post",

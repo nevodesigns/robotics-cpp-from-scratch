@@ -20,11 +20,11 @@
       "options": [
         "10, the ones from 0.0 to 0.9",
         "1, since only 0.0 is exactly zero",
-        "19, because everything from -0.9 to 0.9 truncates to 0, so the origin cell is twice the size of the others",
+        "19, because everything from -0.9 to 0.9 truncates to 0",
         "20, since every position is within a metre of zero"
       ],
       "correct": 2,
-      "explanation": "Measured: 19 in cell 0 and 1 in cell -1 by cast, and 10 and 10 by floor. The cell of -0.5 should be the one below zero, which is what floor_to_int gives."
+      "explanation": "The origin cell is twice the size of the others. Measured: 19 in cell 0 and 1 in cell -1 by cast, and 10 and 10 by floor. The cell of -0.5 should be the one below zero, which is what floor_to_int gives."
     },
     {
       "stage": "check",

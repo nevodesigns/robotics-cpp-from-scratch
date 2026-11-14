@@ -32,11 +32,11 @@
       "options": [
         "The filter is tuned too slowly",
         "The beacon's 0.1 m is optimistic",
-        "The error is set by the time between fixes: the drift between them, and the fix does not correct the heading, which is what is wrong",
+        "The error is set by the time between fixes",
         "The wheel is 10 percent big"
       ],
       "correct": 2,
-      "explanation": "A fix resets the position and leaves the heading wrong, so the drift starts again at once. How far it gets is set by how long until the next fix."
+      "explanation": "The drift between them, and the fix does not correct the heading, which is what is wrong. A fix resets the position and leaves the heading wrong, so the drift starts again at once. How far it gets is set by how long until the next fix."
     },
     {
       "stage": "check",
@@ -45,22 +45,22 @@
         "It stopped at the edge",
         "It slowed as it neared the edge",
         "It turned back toward the axis",
-        "It never stopped: the belief stays on the axis, so the fence never trips, and the robot ended at y = -18.3 m"
+        "It never stopped"
       ],
       "correct": 3,
-      "explanation": "The fence was checked against where the robot believed it was. That belief stayed in the middle of the corridor while the robot left it."
+      "explanation": "The belief stays on the axis, so the fence never trips, and the robot ended at y = -18.3 m. The fence was checked against where the robot believed it was. That belief stayed in the middle of the corridor while the robot left it."
     },
     {
       "stage": "post",
       "question": "Which assumed drifts stopped the robot before the truth left the corridor?",
       "options": [
-        "0.20 and 0.40 m per metre: 0.05 and 0.10 stopped it after the truth was outside, and the real drift at the edge was 0.156 and growing",
+        "0.20 and 0.40 m per metre",
         "All four",
         "None of them",
         "Only 0.05, the smallest"
       ],
       "correct": 0,
-      "explanation": "By the time the truth reached the edge it had drifted 1.5 m in 9.6 m, and the rate was rising. A buffer built on less than that stops too late."
+      "explanation": "0.05 and 0.10 stopped it after the truth was outside, and the real drift at the edge was 0.156 and growing. By the time the truth reached the edge it had drifted 1.5 m in 9.6 m, and the rate was rising. A buffer built on less than that stops too late."
     },
     {
       "stage": "post",

@@ -7,12 +7,12 @@
       "question": "A planner measured for 60 s on the bench shows a peak of 0.40 cores. In the field its peak is 2.00. What went wrong?",
       "options": [
         "The planner has a bug that only shows in the field",
-        "The test was too short to see the replan that comes once in 70 s: the largest sample is a lower bound on the real peak",
+        "The test was too short to see the replan that comes once in 70 s",
         "The board in the field is slower",
         "The bench measured cores and the field measured percent"
       ],
       "correct": 1,
-      "explanation": "The replan that takes 2.0 cores comes once in 70 s, and a 60 s test contained none. The average hardly changed: 0.40 against 0.42."
+      "explanation": "The largest sample is a lower bound on the real peak. The replan that takes 2.0 cores comes once in 70 s, and a 60 s test contained none. The average hardly changed: 0.40 against 0.42."
     },
     {
       "stage": "check",
@@ -33,10 +33,10 @@
         "Nothing: throttling only affects peaks",
         "They fit better, since they run cooler",
         "Memory went over, since slow programs hold more",
-        "Over on both CPU average (2.60 against 1.68) and peaks (4.90 against 3.00): they fit cool and not hot"
+        "Over on both CPU average (2.60 against 1.68) and peaks (4.90 against 3.00)"
       ],
       "correct": 3,
-      "explanation": "At 60 percent the four cores are worth 2.4. The same programs that fit a cool board are over on both the average and the peaks."
+      "explanation": "They fit cool and not hot. At 60 percent the four cores are worth 2.4. The same programs that fit a cool board are over on both the average and the peaks."
     },
     {
       "stage": "check",
@@ -67,12 +67,12 @@
       "question": "Why is a fit on paper not a fit?",
       "options": [
         "The arithmetic of the check is approximate",
-        "The peak is only as good as the longest run measured, and the board, its box and its temperature are real: run the whole robot on the real board, hot, for a shift",
+        "The peak is only as good as the longest run measured, and the board, its box and its temperature are real",
         "A fit on paper is a fit, if the allowances are met",
         "Paper cannot record peaks"
       ],
       "correct": 1,
-      "explanation": "The profile only knows the peaks that happened while it was being measured, and the throttling depends on the real box. The check is a screen."
+      "explanation": "Run the whole robot on the real board, hot, for a shift. The profile only knows the peaks that happened while it was being measured, and the throttling depends on the real box. The check is a screen."
     }
   ]
 }

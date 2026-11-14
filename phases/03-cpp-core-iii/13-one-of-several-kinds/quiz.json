@@ -55,24 +55,24 @@
       "question": "Driving at 0.8 and -0.4 and then setting a limit of 0.5, what are the wheel speeds?",
       "options": [
         "0.8 and -0.4",
-        "0.5 and -0.4: the limit clamps what is happening now, not only the next drive",
+        "0.5 and -0.4",
         "0 and 0",
         "0.5 and -0.5"
       ],
       "correct": 1,
-      "explanation": "A drive of 3 and -3 afterwards gave 0.5 and -0.5."
+      "explanation": "The limit clamps what is happening now, not only the next drive. A drive of 3 and -3 afterwards gave 0.5 and -0.5."
     },
     {
       "stage": "post",
       "question": "What is sizeof a variant, compared with its alternatives?",
       "options": [
-        "The largest alternative plus a tag: 24 against Drive's 16 on the machine measured",
+        "The largest alternative plus a tag",
         "The sum of all of them",
         "Always 8",
         "The smallest"
       ],
       "correct": 0,
-      "explanation": "The three added up came to 25."
+      "explanation": "24 against Drive's 16 on the machine measured. The three added up came to 25."
     }
   ]
 }

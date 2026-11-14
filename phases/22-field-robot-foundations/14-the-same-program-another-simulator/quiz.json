@@ -8,11 +8,11 @@
       "options": [
         "The built in one is too slow",
         "To run two robots at once",
-        "A program tested on one has learnt that simulator's habits; two let the answers be compared",
+        "A program tested on one has learnt that simulator's habits",
         "Gazebo needs a reference to start"
       ],
       "correct": 2,
-      "explanation": "With one simulator a program can come to depend on its quirks. With two behind one interface, the same script's answers can be laid side by side."
+      "explanation": "Two let the answers be compared. With one simulator a program can come to depend on its quirks. With two behind one interface, the same script's answers can be laid side by side."
     },
     {
       "stage": "check",

@@ -57,10 +57,10 @@
         "std::function, on every call",
         "The lambda, when it was created",
         "The lambda, on every call",
-        "std::function, when it was assigned, because what it holds did not fit in its internal buffer"
+        "std::function, when it was assigned"
       ],
       "correct": 3,
-      "explanation": "The lambda never allocates: 64 bytes of captures is a 64 byte object on the stack, and calling it directly cost 0. The allocation comes from type erasure needing somewhere to keep an object whose size is not known until runtime, and it happens at assignment, so build the callback outside the loop."
+      "explanation": "What it holds did not fit in its internal buffer. The lambda never allocates: 64 bytes of captures is a 64 byte object on the stack, and calling it directly cost 0. The allocation comes from type erasure needing somewhere to keep an object whose size is not known until runtime, and it happens at assignment, so build the callback outside the loop."
     },
     {
       "stage": "post",

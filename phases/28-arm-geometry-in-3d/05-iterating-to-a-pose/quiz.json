@@ -57,10 +57,10 @@
         "The damping changed the answer",
         "The joint limits moved it",
         "The iteration stopped early",
-        "It has seven joints: a family of angles reaches the same pose"
+        "It has seven joints"
       ],
       "correct": 3,
-      "explanation": "Seven joints for six numbers of pose leaves one freedom over. The iteration lands on whichever member of the family is near its start."
+      "explanation": "A family of angles reaches the same pose. Seven joints for six numbers of pose leaves one freedom over. The iteration lands on whichever member of the family is near its start."
     },
     {
       "stage": "post",

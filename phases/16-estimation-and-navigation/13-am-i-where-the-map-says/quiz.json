@@ -32,11 +32,11 @@
       "options": [
         "Improves the score",
         "Nothing",
-        "Loses half the beams to noise: 0.492 at the true pose, against 0.951 at one cell and 0.984 at two",
+        "Loses half the beams to noise",
         "Is the only correct choice"
       ],
       "correct": 2,
-      "explanation": "A tolerance costs sharpness, so it is not simply made large."
+      "explanation": "0.492 at the true pose, against 0.951 at one cell and 0.984 at two. A tolerance costs sharpness, so it is not simply made large."
     },
     {
       "stage": "check",
@@ -45,10 +45,10 @@
         "The corridor is too long",
         "0",
         "1",
-        "41 poses scored within 0.005 of the best: every position along it fits equally well, so the scan does not say where along it you are"
+        "41 poses scored within 0.005 of the best"
       ],
       "correct": 3,
-      "explanation": "The room with a block tied 1."
+      "explanation": "Every position along it fits equally well, so the scan does not say where along it you are. The room with a block tied 1."
     },
     {
       "stage": "post",
@@ -56,23 +56,23 @@
       "options": [
         "Take the last",
         "Take the first",
-        "Take the one nearest the guess, so a rover in a corridor stays where odometry put it and does not jump",
+        "Take the one nearest the guess",
         "Pick one at random"
       ],
       "correct": 2,
-      "explanation": "A tie settled by chance is a jump by metres."
+      "explanation": "A rover in a corridor stays where odometry put it and does not jump. A tie settled by chance is a jump by metres."
     },
     {
       "stage": "post",
       "question": "Why did the room with a block against one wall only just tell the true pose from its mirror?",
       "options": [
-        "Most of a room's walls look alike from anywhere, so the mirror still scored 0.869 against 1.000: scoring finds that two poses fit and the map has to have something to choose between them",
+        "Most of a room's walls look alike from anywhere",
         "The block was too small to see",
         "The mirror is correct",
         "The search was wrong"
       ],
       "correct": 0,
-      "explanation": "An empty rectangular room scored both at 1.000."
+      "explanation": "The mirror still scored 0.869 against 1.000: scoring finds that two poses fit and the map has to have something to choose between them. An empty rectangular room scored both at 1.000."
     }
   ]
 }

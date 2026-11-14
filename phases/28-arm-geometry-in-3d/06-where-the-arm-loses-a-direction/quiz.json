@@ -55,12 +55,12 @@
       "question": "Why is the smallest singular value only a number you choose to read?",
       "options": [
         "It changes with the pose",
-        "It mixes metres and radians, so its size depends on how the rows are scaled",
+        "It mixes metres and radians",
         "It is only known to a few digits",
         "It is the same for every arm"
       ],
       "correct": 1,
-      "explanation": "Three rows of the Jacobian are in metres per radian and three are pure numbers. Weight the rotation differently and the same pose gives another value."
+      "explanation": "Its size depends on how the rows are scaled. Three rows of the Jacobian are in metres per radian and three are pure numbers. Weight the rotation differently and the same pose gives another value."
     },
     {
       "stage": "post",

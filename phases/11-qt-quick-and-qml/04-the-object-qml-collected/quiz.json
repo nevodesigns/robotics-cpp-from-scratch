@@ -7,12 +7,12 @@
       "question": "An invokable returns a new QObject with no parent. Who owns it?",
       "options": [
         "Nobody",
-        "The QML engine: the garbage collector deletes it when the JavaScript value is unreachable",
+        "The QML engine",
         "The parent of the engine",
         "The caller in C++"
       ],
       "correct": 1,
-      "explanation": "Alive went from 3 to 2 after a collection."
+      "explanation": "The garbage collector deletes it when the JavaScript value is unreachable. Alive went from 3 to 2 after a collection."
     },
     {
       "stage": "check",
@@ -33,22 +33,22 @@
         "It is deleted at once",
         "It is shared",
         "QML deletes it later",
-        "Nobody deletes it unless C++ does: it leaks"
+        "Nobody deletes it unless C++ does"
       ],
       "correct": 3,
-      "explanation": "The test had to delete it by hand."
+      "explanation": "It leaks. The test had to delete it by hand."
     },
     {
       "stage": "check",
       "question": "What does reading an object from a Q_PROPERTY give?",
       "options": [
-        "An object QML does not own: it is not collected",
+        "An object QML does not own",
         "A parent",
         "A new object each time",
         "A copy"
       ],
       "correct": 0,
-      "explanation": "The held object was alive after the collection."
+      "explanation": "It is not collected. The held object was alive after the collection."
     },
     {
       "stage": "post",
@@ -57,22 +57,22 @@
         "Only the parent",
         "Only the ownership",
         "Neither",
-        "The parent and CppOwnership, so there is one owner in C++"
+        "The parent and CppOwnership"
       ],
       "correct": 3,
-      "explanation": "The pooled objects had the pool as parent and CppOwnership."
+      "explanation": "There is one owner in C++. The pooled objects had the pool as parent and CppOwnership."
     },
     {
       "stage": "post",
       "question": "Why is a pool not enough by itself?",
       "options": [
         "It is slow",
-        "It never decides an object is finished: something must clear it",
+        "It never decides an object is finished",
         "It needs a thread",
         "It is a QObject"
       ],
       "correct": 1,
-      "explanation": "The lesson says so under what it does not do."
+      "explanation": "Something must clear it. The lesson says so under what it does not do."
     }
   ]
 }

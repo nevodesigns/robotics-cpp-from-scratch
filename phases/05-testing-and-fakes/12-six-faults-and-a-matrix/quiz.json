@@ -69,10 +69,10 @@
         "False alarms",
         "Which check caught which fault",
         "Missed faults",
-        "Faults you did not think of, and faults of other sizes: it shows only that the ones put in are caught"
+        "Faults you did not think of, and faults of other sizes"
       ],
       "correct": 3,
-      "explanation": "Six faults are a start and not a proof."
+      "explanation": "It shows only that the ones put in are caught. Six faults are a start and not a proof."
     }
   ]
 }

@@ -19,12 +19,12 @@
       "question": "The same object read 21.5 through a const LooseSensor& and 0 through a LooseSensor taken by value. Why did the second one not fail or warn?",
       "options": [
         "The by-value parameter was const, which disabled the override",
-        "The copy really is a LooseSensor, so virtual dispatch correctly picked the base implementation; the derived part was never copied",
+        "The copy really is a LooseSensor",
         "Virtual dispatch does not work on copies",
         "The compiler optimised the call away and returned a default"
       ],
       "correct": 1,
-      "explanation": "sizeof(LooseSensor) is 8 and sizeof(LooseThermometer) is 16. The copy is eight bytes and the rest has nowhere to go. That is slicing: legal, silent on gcc and clang, and silent even under clang's -Weverything."
+      "explanation": "Virtual dispatch correctly picked the base implementation; the derived part was never copied. sizeof(LooseSensor) is 8 and sizeof(LooseThermometer) is 16. The copy is eight bytes and the rest has nowhere to go. That is slicing: legal, silent on gcc and clang, and silent even under clang's -Weverything."
     },
     {
       "stage": "check",
@@ -67,12 +67,12 @@
       "question": "Why does no value type in librc, including rc::math::Pose, have a virtual destructor?",
       "options": [
         "Value types cannot have virtual functions in C++17",
-        "One virtual function costs one hidden pointer per object, so a million readings would pay eight megabytes for dispatch they never use",
+        "One virtual function costs one hidden pointer per object",
         "Because adding one would make them non-copyable",
         "Because the sanitizer reports virtual destructors on value types"
       ],
       "correct": 1,
-      "explanation": "Measured in the lesson: sizeof went from 16 to 24 on a 64 bit platform when one virtual function was added, and the cost is per object rather than per class. An interface is for things you swap; a value is not one."
+      "explanation": "A million readings would pay eight megabytes for dispatch they never use. Measured in the lesson: sizeof went from 16 to 24 on a 64 bit platform when one virtual function was added, and the cost is per object rather than per class. An interface is for things you swap; a value is not one."
     }
   ]
 }

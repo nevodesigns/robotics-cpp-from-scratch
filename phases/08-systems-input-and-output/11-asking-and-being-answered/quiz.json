@@ -18,13 +18,13 @@
       "stage": "check",
       "question": "With ids, no answer was wrong, yet the device ended at 227 instead of 200. Why?",
       "options": [
-        "A resend is a repeated command: the answer was what was lost, the device had already done it, and it did it again, 27 times",
+        "A resend is a repeated command",
         "The late responses added to the position",
         "The device cannot count",
         "The ids were wrong"
       ],
       "correct": 0,
-      "explanation": "The overshoot equals the number of resends exactly. Matching ids is the requester's half; the device has a half too."
+      "explanation": "The answer was what was lost, the device had already done it, and it did it again, 27 times. The overshoot equals the number of resends exactly. Matching ids is the requester's half; the device has a half too."
     },
     {
       "stage": "check",
@@ -43,12 +43,12 @@
       "question": "Why does a retry keep the same id?",
       "options": [
         "To save a byte",
-        "The id is how the device recognises a repeat, so a fresh one makes a resend look like a different command and the cache stops working",
+        "The id is how the device recognises a repeat",
         "The protocol forbids new ids",
         "Ids are expensive to generate"
       ],
       "correct": 1,
-      "explanation": "A retry is the same request sent again. A new id says it is a different one."
+      "explanation": "A fresh one makes a resend look like a different command and the cache stops working. A retry is the same request sent again. A new id says it is a different one."
     },
     {
       "stage": "post",
@@ -57,10 +57,10 @@
         "The id belongs to the port",
         "It would make the ids irregular",
         "Failed sends are impossible",
-        "The request never went out, so waiting out its timeouts is waiting for an answer to nothing, and the next id would skip a number for no reason"
+        "The request never went out"
       ],
       "correct": 3,
-      "explanation": "State should describe what happened on the wire. A request that was never sent is not Waiting."
+      "explanation": "Waiting out its timeouts is waiting for an answer to nothing, and the next id would skip a number for no reason. State should describe what happened on the wire. A request that was never sent is not Waiting."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "Yes, always",
         "No, because ids are enough",
-        "Not for correctness: repeating an absolute move leaves the device in the same place, so the retry is harmless",
+        "Not for correctness",
         "Only on Windows"
       ],
       "correct": 2,
-      "explanation": "A command that is safe to repeat is idempotent. Designing commands that way is cheaper than remembering answers, and is the better fix where the protocol allows it."
+      "explanation": "Repeating an absolute move leaves the device in the same place, so the retry is harmless. A command that is safe to repeat is idempotent. Designing commands that way is cheaper than remembering answers, and is the better fix where the protocol allows it."
     }
   ]
 }

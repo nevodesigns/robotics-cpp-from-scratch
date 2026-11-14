@@ -44,11 +44,11 @@
       "options": [
         "The failed robots did not report",
         "The canary wave was skipped",
-        "0.5 percent is below 5 percent at every wave: the threshold never fires for a rare fault",
+        "0.5 percent is below 5 percent at every wave",
         "The threshold was applied to the wrong wave"
       ],
       "correct": 2,
-      "explanation": "Five failures in a thousand is half a percent, never above 5 percent in any wave. A threshold of zero halts, but only when a wave happens to include a bad robot."
+      "explanation": "The threshold never fires for a rare fault. Five failures in a thousand is half a percent, never above 5 percent in any wave. A threshold of zero halts, but only when a wave happens to include a bad robot."
     },
     {
       "stage": "post",
@@ -67,12 +67,12 @@
       "question": "What helps with a rare, severe fault, since a canary cannot see it?",
       "options": [
         "A lower failure threshold",
-        "Tests on the variants that exist before release, more robots and more time, and the hazard log: it belongs there and not in the rollout",
+        "Tests on the variants that exist before release, more robots and more time, and the hazard log",
         "A faster rollout, to find it sooner",
         "A smaller first wave"
       ],
       "correct": 1,
-      "explanation": "A canary of ten sees a one in two hundred fault one time in twenty. If the fault is severe it has to be found before release and recorded as a hazard."
+      "explanation": "It belongs there and not in the rollout. A canary of ten sees a one in two hundred fault one time in twenty. If the fault is severe it has to be found before release and recorded as a hazard."
     }
   ]
 }

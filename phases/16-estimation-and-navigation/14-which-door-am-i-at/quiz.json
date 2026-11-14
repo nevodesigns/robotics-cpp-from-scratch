@@ -8,11 +8,11 @@
       "options": [
         "The corridor is too long",
         "It can",
-        "It might be at several separate places, and one number and a spread describe one lump: after one reading of a door the belief had 9 places near the top",
+        "It might be at several separate places, and one number and a spread describe one lump",
         "The spread is too big"
       ],
       "correct": 2,
-      "explanation": "A belief over places can be at several at once."
+      "explanation": "After one reading of a door the belief had 9 places near the top. A belief over places can be at several at once."
     },
     {
       "stage": "check",
@@ -21,10 +21,10 @@
         "Sharpens it",
         "Nothing",
         "Deletes it",
-        "Spreads it out by the slip: all of it at place 5, moved one place with 0.8, 0.1 and 0.1, gave 0.10, 0.80 and 0.10"
+        "Spreads it out by the slip"
       ],
       "correct": 3,
-      "explanation": "And the ring wraps."
+      "explanation": "All of it at place 5, moved one place with 0.8, 0.1 and 0.1, gave 0.10, 0.80 and 0.10. And the ring wraps."
     },
     {
       "stage": "check",
@@ -32,11 +32,11 @@
       "options": [
         "Moves it",
         "Spreads it",
-        "Multiplies each place by how believable the reading makes it and normalises: after one door reading each door was 0.0938 and each wall 0.0104",
+        "Multiplies each place by how believable the reading makes it and normalises",
         "Resets it"
       ],
       "correct": 2,
-      "explanation": "The prediction was worked out by hand."
+      "explanation": "After one door reading each door was 0.0938 and each wall 0.0104. The prediction was worked out by hand."
     },
     {
       "stage": "check",
@@ -55,24 +55,24 @@
       "question": "A belief is told the sensor never errs and then gets one wrong reading. What happens?",
       "options": [
         "It crashes",
-        "The true place is multiplied by zero, the belief is wiped out and resets: 0.042 of the true place and 5 steps to recover, against 1.000 and 1 step for a belief that allowed a 1 percent error",
+        "The true place is multiplied by zero, the belief is wiped out and resets",
         "It improves",
         "Nothing"
       ],
       "correct": 1,
-      "explanation": "A probability of zero says something is impossible."
+      "explanation": "0.042 of the true place and 5 steps to recover, against 1.000 and 1 step for a belief that allowed a 1 percent error. A probability of zero says something is impossible."
     },
     {
       "stage": "post",
       "question": "In 200 trips with a sensor wrong 1 time in 20, which description of the sensor did best?",
       "options": [
-        "About right, 0.05 to 0.10 for a wrong reading: 0.710 and 0.715 found the place, against 0.625 for never wrong and 0.050 for a sensor that says nothing",
+        "About right, 0.05 to 0.10 for a wrong reading",
         "Half wrong",
         "Always wrong",
         "Never wrong"
       ],
       "correct": 0,
-      "explanation": "Too confident and too sceptical are both worse."
+      "explanation": "0.710 and 0.715 found the place, against 0.625 for never wrong and 0.050 for a sensor that says nothing. Too confident and too sceptical are both worse."
     }
   ]
 }

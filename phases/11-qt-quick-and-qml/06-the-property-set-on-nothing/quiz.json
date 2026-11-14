@@ -21,10 +21,10 @@
         "NaN",
         "-1",
         "An error",
-        "0, from an invalid QVariant: nothing says the name was wrong"
+        "0, from an invalid QVariant"
       ],
       "correct": 3,
-      "explanation": "It was invalid and converted to 0."
+      "explanation": "Nothing says the name was wrong. It was invalid and converted to 0."
     },
     {
       "stage": "check",
@@ -55,12 +55,12 @@
       "question": "What does evaluate return for an undefined name?",
       "options": [
         "It throws",
-        "ok false with the message ReferenceError: ... is not defined",
+        "ok false with the message ReferenceError",
         "0",
         "ok true and an empty value"
       ],
       "correct": 1,
-      "explanation": "None of the failures was ok, and none threw."
+      "explanation": "... is not defined. None of the failures was ok, and none threw."
     },
     {
       "stage": "post",

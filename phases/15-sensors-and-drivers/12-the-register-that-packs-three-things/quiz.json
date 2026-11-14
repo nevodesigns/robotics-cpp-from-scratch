@@ -32,23 +32,23 @@
       "options": [
         "Negate it",
         "Cast it",
-        "Keep the low 12 bits, and if the top one is set subtract 2 to the twelfth: 0x800 becomes -2048 and 0xFFF becomes -1",
+        "Keep the low 12 bits, and if the top one is set subtract 2 to the twelfth",
         "Add 2048"
       ],
       "correct": 2,
-      "explanation": "Sign extension."
+      "explanation": "0x800 becomes -2048 and 0xFFF becomes -1. Sign extension."
     },
     {
       "stage": "check",
       "question": "The chip holds a 12 bit reading in the top of two bytes. What must a driver do before sign extending?",
       "options": [
         "Swap the bytes twice",
-        "Shift the 16 bit word right by 4, so the reading is in the low twelve bits",
+        "Shift the 16 bit word right by 4",
         "Nothing",
         "Add 16"
       ],
       "correct": 1,
-      "explanation": "Skipping it makes the reading sixteen times too big."
+      "explanation": "The reading is in the low twelve bits. Skipping it makes the reading sixteen times too big."
     },
     {
       "stage": "post",
@@ -57,22 +57,22 @@
         "The chip failed",
         "The range changed",
         "It is bad",
-        "The frame is good and an earlier one was lost, so it should be used and the loss recorded: it carried 0.1953 g in the test"
+        "The frame is good and an earlier one was lost"
       ],
       "correct": 3,
-      "explanation": "Throwing it away loses a good reading as well."
+      "explanation": "It should be used and the loss recorded: it carried 0.1953 g in the test. Throwing it away loses a good reading as well."
     },
     {
       "stage": "post",
       "question": "Why do the tests pack frames by hand?",
       "options": [
-        "So the check is of the decoder against the chip's side of the wire and does not use the code it is checking: all 16384 frames decoded with no axis wrong",
+        "So the check is of the decoder against the chip's side of the wire and does not use the code it is checking",
         "To test the bus",
         "Because the library is missing",
         "To save time"
       ],
       "correct": 0,
-      "explanation": "A test that shares the code under test shares its bugs."
+      "explanation": "All 16384 frames decoded with no axis wrong. A test that shares the code under test shares its bugs."
     }
   ]
 }

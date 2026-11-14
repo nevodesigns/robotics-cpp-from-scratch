@@ -7,12 +7,12 @@
       "question": "A robot fits y = m x + k to the points of a wall that runs straight ahead of it. What happens?",
       "options": [
         "A fit with slope zero",
-        "A vertical line has no slope, so the sums divide by zero and there is no answer; the form a x + b y + c = 0 can describe it",
+        "A vertical line has no slope",
         "A fit at 45 degrees",
         "A good fit"
       ],
       "correct": 1,
-      "explanation": "Points on x = 3 gave a valid line at 90.0 degrees from fit_line, and no answer from the vertical distance fit."
+      "explanation": "The sums divide by zero and there is no answer; the form a x + b y + c = 0 can describe it. Points on x = 3 gave a valid line at 90.0 degrees from fit_line, and no answer from the vertical distance fit."
     },
     {
       "stage": "check",
@@ -30,13 +30,13 @@
       "stage": "check",
       "question": "A line has an angle of 179 degrees in one description and 1 in another. How far apart are they?",
       "options": [
-        "2: a line has no direction, so the angle is taken modulo 180 and compared the smaller way round",
+        "2: a line has no direction",
         "90",
         "0",
         "178"
       ],
       "correct": 0,
-      "explanation": "The suite checked that 179 and 1 are 2 degrees apart."
+      "explanation": "The angle is taken modulo 180 and compared the smaller way round. The suite checked that 179 and 1 are 2 degrees apart."
     },
     {
       "stage": "check",

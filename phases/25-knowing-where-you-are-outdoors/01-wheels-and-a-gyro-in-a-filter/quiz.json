@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "Why is the filter's variance for a measurement larger when the wheels are turning?",
       "options": [
-        "The wheels are wrong by a share of their turn rate, so a faster turn is a less certain measurement",
+        "The wheels are wrong by a share of their turn rate",
         "The gyro is noisier in a turn",
         "The filter runs slower in a turn",
         "The bias changes with the turn rate"
       ],
       "correct": 0,
-      "explanation": "At 0.3 rad/s with wheels 5 percent wrong the measurement is uncertain by 0.015 rad/s, three times the gyro's noise, so it counts for much less."
+      "explanation": "A faster turn is a less certain measurement. At 0.3 rad/s with wheels 5 percent wrong the measurement is uncertain by 0.015 rad/s, three times the gyro's noise, so it counts for much less."
     }
   ]
 }

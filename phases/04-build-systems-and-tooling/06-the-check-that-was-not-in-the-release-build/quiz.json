@@ -21,10 +21,10 @@
         "For any precondition, since release builds are tested too",
         "For things that can happen but are rare",
         "Never: it should always be replaced",
-        "For things you believe cannot happen: verified while developing, free afterwards, and knowingly absent from the build you ship"
+        "For things you believe cannot happen"
       ],
       "correct": 3,
-      "explanation": "That trade is what assert is for, and it is a good one for a bounds check in a hot loop. The defect is using it for things that should not happen and must still be noticed on the machine, where the only build that checks is the one that never leaves your desk."
+      "explanation": "Verified while developing, free afterwards, and knowingly absent from the build you ship. That trade is what assert is for, and it is a good one for a bounds check in a hot loop. The defect is using it for things that should not happen and must still be noticed on the machine, where the only build that checks is the one that never leaves your desk."
     },
     {
       "stage": "check",
@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "Why must a check macro name its condition exactly once?",
       "options": [
-        "Anything written at the call site runs again, and only on the failing path, so a pop or a read is lost exactly when something is already wrong",
+        "Anything written at the call site runs again, and only on the failing path",
         "Because the compiler rejects duplicate evaluation",
         "To keep the stringised form accurate",
         "It does not matter if the condition is const"
       ],
       "correct": 0,
-      "explanation": "The same hazard as the classic MAX macro. Measured on RC_EXPECT, a counting function inside it ran once when the condition held and once when it did not. Stringising with #condition is not an evaluation."
+      "explanation": "A pop or a read is lost exactly when something is already wrong. The same hazard as the classic MAX macro. Measured on RC_EXPECT, a counting function inside it ran once when the condition held and once when it did not. Stringising with #condition is not an evaluation."
     },
     {
       "stage": "post",

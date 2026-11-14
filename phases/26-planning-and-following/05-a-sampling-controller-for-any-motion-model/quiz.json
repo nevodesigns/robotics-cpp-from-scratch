@@ -33,10 +33,10 @@
         "0.67 m against 0.047 m: far worse",
         "0.047 m for both",
         "It left the path altogether",
-        "0.018 m against 0.047 m: hardly different, because it replans every 0.1 s"
+        "0.018 m against 0.047 m"
       ],
       "correct": 3,
-      "explanation": "The wrong model was no worse at tracking, because every plan starts from where the car really is. Its 2 second prediction was 0.67 m out, which matters for anything that relies on the prediction."
+      "explanation": "Hardly different, because it replans every 0.1 s. The wrong model was no worse at tracking, because every plan starts from where the car really is. Its 2 second prediction was 0.67 m out, which matters for anything that relies on the prediction."
     },
     {
       "stage": "check",
@@ -67,12 +67,12 @@
       "question": "What is the price of more samples?",
       "options": [
         "A longer horizon",
-        "More rollouts every step, on the vehicle's processor: 0.152 m error at 8 samples against 0.077 m at 100",
+        "More rollouts every step, on the vehicle's processor",
         "A lower control rate, by design",
         "Nothing on a modern processor"
       ],
       "correct": 1,
-      "explanation": "Samples times horizon rollouts are computed every 0.1 s. Going from 8 to 100 halved the error and multiplied that work by twelve."
+      "explanation": "0.152 m error at 8 samples against 0.077 m at 100. Samples times horizon rollouts are computed every 0.1 s. Going from 8 to 100 halved the error and multiplied that work by twelve."
     }
   ]
 }

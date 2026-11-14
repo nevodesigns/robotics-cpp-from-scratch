@@ -67,12 +67,12 @@
       "question": "What is needed besides a fixed step for two runs to match to the last bit?",
       "options": [
         "A smaller step, so that rounding does not differ",
-        "Everything the simulation reads must be reproducible too: a random number or a thread race inside the world would break it",
+        "Everything the simulation reads must be reproducible too",
         "The same machine, since processors differ",
         "Nothing: a fixed step is enough for determinism"
       ],
       "correct": 1,
-      "explanation": "The same jittery frames gave 0.90621265316080712 twice because nothing else varied. A random draw or a thread race inside the world would undo it."
+      "explanation": "A random number or a thread race inside the world would break it. The same jittery frames gave 0.90621265316080712 twice because nothing else varied. A random draw or a thread race inside the world would undo it."
     }
   ]
 }

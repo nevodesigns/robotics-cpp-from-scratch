@@ -8,11 +8,11 @@
       "options": [
         "A grid cannot represent angles",
         "A grid would need the arm's dynamics",
-        "Six dimensions are too many cells, and the obstacles are not simple in joint space: the only way to know is to ask the collision model",
+        "Six dimensions are too many cells, and the obstacles are not simple in joint space",
         "A grid only works for convex obstacles"
       ],
       "correct": 2,
-      "explanation": "Ten steps a side in six dimensions is a million cells, each needing a collision check, and it is still coarse. Sampling asks only where the tree goes."
+      "explanation": "The only way to know is to ask the collision model. Ten steps a side in six dimensions is a million cells, each needing a collision check, and it is still coarse. Sampling asks only where the tree goes."
     },
     {
       "stage": "check",

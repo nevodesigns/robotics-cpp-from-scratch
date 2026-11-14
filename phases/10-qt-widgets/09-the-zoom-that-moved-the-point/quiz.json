@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "A chart is zoomed by 2 about its middle, and the cursor was on time 80 of 0 to 100. Where is the cursor point now?",
       "options": [
-        "Off the right edge: x = 1100 of 1000",
+        "Off the right edge",
         "At the left edge",
         "Where it was",
         "At the middle"
       ],
       "correct": 0,
-      "explanation": "Zooming about the cursor is what keeps it at 800."
+      "explanation": "X = 1100 of 1000. Zooming about the cursor is what keeps it at 800."
     },
     {
       "stage": "check",
@@ -33,10 +33,10 @@
         "It is too fast",
         "0.88 is too small",
         "Qt forbids it",
-        "Their product is 0.9856, so a turn out does not undo a turn in"
+        "Their product is 0.9856"
       ],
       "correct": 3,
-      "explanation": "Five each left the width at 107.5 where it began at 100."
+      "explanation": "A turn out does not undo a turn in. Five each left the width at 107.5 where it began at 100."
     },
     {
       "stage": "check",

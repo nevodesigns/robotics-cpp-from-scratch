@@ -67,12 +67,12 @@
       "question": "A test passes with the fake and fails on real hardware. What is the most likely reason?",
       "options": [
         "The interface is wrong",
-        "The fake is more cooperative than the device: never late, never out of range, never gone mid read",
+        "The fake is more cooperative than the device",
         "The hardware is faulty",
         "The test was written incorrectly"
       ],
       "correct": 1,
-      "explanation": "A fake only exhibits what it was told to. Every difference you discover on hardware is worth adding to the fake so it is covered from then on."
+      "explanation": "Never late, never out of range, never gone mid read. A fake only exhibits what it was told to. Every difference you discover on hardware is worth adding to the fake so it is covered from then on."
     }
   ]
 }

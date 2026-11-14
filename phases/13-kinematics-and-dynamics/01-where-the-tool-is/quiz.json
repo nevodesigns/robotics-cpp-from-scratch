@@ -44,11 +44,11 @@
       "options": [
         "Compare two runs with the same angles",
         "Check that the tool moves when a joint moves",
-        "A planar two link arm has a closed form, so the machinery can be compared against a formula derived without it",
+        "A planar two link arm has a closed form",
         "Round trip a pose through the chain and its inverse"
       ],
       "correct": 2,
-      "explanation": "Measured at 3721 configurations the worst disagreement is 2.8e-16 metres. A round trip through the chain itself would pass even if the chain were consistently wrong."
+      "explanation": "The machinery can be compared against a formula derived without it. Measured at 3721 configurations the worst disagreement is 2.8e-16 metres. A round trip through the chain itself would pass even if the chain were consistently wrong."
     },
     {
       "stage": "post",

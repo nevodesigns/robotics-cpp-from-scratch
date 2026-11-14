@@ -19,12 +19,12 @@
       "question": "Why is the step damped?",
       "options": [
         "To make it faster",
-        "Near a singularity the plain step is enormous: 24496.8 rad for a tenth of a metre",
+        "Near a singularity the plain step is enormous",
         "To avoid overshoot only",
         "Qt requires it"
       ],
       "correct": 1,
-      "explanation": "The damped step was 0.000163301 rad."
+      "explanation": "24496.8 rad for a tenth of a metre. The damped step was 0.000163301 rad."
     },
     {
       "stage": "check",
@@ -69,10 +69,10 @@
         "A third one",
         "Not found",
         "The same one",
-        "The mirror solution, with the opposite sign of elbow angle: 2.55128 and -2.55128"
+        "The mirror solution, with the opposite sign of elbow angle"
       ],
       "correct": 3,
-      "explanation": "Both ways, from 5 of 5 starts."
+      "explanation": "2.55128 and -2.55128. Both ways, from 5 of 5 starts."
     }
   ]
 }

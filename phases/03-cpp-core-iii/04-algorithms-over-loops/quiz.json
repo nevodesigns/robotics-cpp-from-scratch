@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "After std::find_if, what must happen before reading the result?",
       "options": [
-        "Compare it against end(), because dereferencing end() is undefined behaviour",
+        "Compare it against end()",
         "Check that the container is not empty",
         "Nothing, the result is always valid",
         "Convert it to an index"
       ],
       "correct": 0,
-      "explanation": "It is exactly the null pointer check in different clothing: the not found answer is a value that must never be dereferenced."
+      "explanation": "Dereferencing end() is undefined behaviour. It is exactly the null pointer check in different clothing: the not found answer is a value that must never be dereferenced."
     }
   ]
 }

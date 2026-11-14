@@ -44,11 +44,11 @@
       "options": [
         "To save memory",
         "Links cannot hold more than 64 messages",
-        "A device that sends as fast as the loop reads means nothing is ever waiting, so an unbounded drain never returns and the loop misses its deadline",
+        "A device that sends as fast as the loop reads means nothing is ever waiting",
         "To make the function faster"
       ],
       "correct": 2,
-      "explanation": "The loop has a deadline and a call that lasts as long as the device chooses cannot be inside it. The `more` flag says it stopped at the limit."
+      "explanation": "An unbounded drain never returns and the loop misses its deadline. The loop has a deadline and a call that lasts as long as the device chooses cannot be inside it. The `more` flag says it stopped at the limit."
     },
     {
       "stage": "post",
@@ -57,10 +57,10 @@
         "It depends on the baud rate",
         "A state, so the newest is enough",
         "Neither",
-        "A change, so each one has to be added and a skipped one is lost; carrying a running total would turn it into a state"
+        "A change, so each one has to be added and a skipped one is lost"
       ],
       "correct": 3,
-      "explanation": "The newest is a policy for states. For changes the sum is what matters, and 990 of 1000 was thrown away unused."
+      "explanation": "Carrying a running total would turn it into a state. The newest is a policy for states. For changes the sum is what matters, and 990 of 1000 was thrown away unused."
     },
     {
       "stage": "post",

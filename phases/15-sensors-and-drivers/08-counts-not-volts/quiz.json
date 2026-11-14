@@ -21,10 +21,10 @@
         "It saves a division",
         "A convention with no effect",
         "The top code is reserved",
-        "The converter has 2^bits steps, so the highest code is 2^bits - 1 and the top of the range is the top edge of the last step; dividing by one fewer makes the steps too big and every reading wrong"
+        "The converter has 2^bits steps"
       ],
       "correct": 3,
-      "explanation": "Three bits over 0 to 8 V is eight steps of 1 V. Divided by seven the code for 1.0 V is 0 where it should be 1."
+      "explanation": "The highest code is 2^bits - 1 and the top of the range is the top edge of the last step; dividing by one fewer makes the steps too big and every reading wrong. Three bits over 0 to 8 V is eight steps of 1 V. Divided by seven the code for 1.0 V is 0 where it should be 1."
     },
     {
       "stage": "check",
@@ -44,11 +44,11 @@
       "options": [
         "It makes the converter more accurate",
         "It increases the number of bits",
-        "It moves the input across the boundaries between codes from reading to reading, so the fraction of readings in each code follows where the input really is within the step",
+        "It moves the input across the boundaries between codes from reading to reading",
         "It cancels the converter's error"
       ],
       "correct": 2,
-      "explanation": "Without anything moving the input the same code comes every time. With noise the average carries the information below one step."
+      "explanation": "The fraction of readings in each code follows where the input really is within the step. Without anything moving the input the same code comes every time. With noise the average carries the information below one step."
     },
     {
       "stage": "post",
@@ -67,12 +67,12 @@
       "question": "What does dither cost?",
       "options": [
         "Nothing",
-        "The single reading's accuracy: one reading is now wrong by about the noise and not by 0.29 of a step, and it buys resolution only in an average, so it needs a signal that holds still while it is averaged",
+        "The single reading's accuracy",
         "A faster converter",
         "Extra bits"
       ],
       "correct": 1,
-      "explanation": "At noise of 1 step a single reading was wrong by 1.0489. It is a trade, not a free gain."
+      "explanation": "One reading is now wrong by about the noise and not by 0.29 of a step, and it buys resolution only in an average, so it needs a signal that holds still while it is averaged. At noise of 1 step a single reading was wrong by 1.0489. It is a trade, not a free gain."
     }
   ]
 }

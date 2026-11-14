@@ -55,12 +55,12 @@
       "question": "What happens when a class declares a destructor and nothing else?",
       "options": [
         "Nothing changes",
-        "The move operations are suppressed, so it silently falls back to copying",
+        "The move operations are suppressed",
         "The copy operations are suppressed",
         "The class becomes non copyable"
       ],
       "correct": 1,
-      "explanation": "Declaring a destructor stops the compiler generating moves. It is a performance cliff with no diagnostic, and it is the usual reason a class that looks fine is slow."
+      "explanation": "It silently falls back to copying. Declaring a destructor stops the compiler generating moves. It is a performance cliff with no diagnostic, and it is the usual reason a class that looks fine is slow."
     },
     {
       "stage": "post",

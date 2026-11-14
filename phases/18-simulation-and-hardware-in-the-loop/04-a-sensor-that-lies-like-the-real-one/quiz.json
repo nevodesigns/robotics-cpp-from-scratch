@@ -8,11 +8,11 @@
       "options": [
         "It makes the simulation run too fast to follow",
         "It uses more memory than a realistic one",
-        "A controller tested on it has never met a delay, noise or a step size: one that overshot by 0.19 with it overshot by 0.65 with a sensor 60 ms old",
+        "A controller tested on it has never met a delay, noise or a step size",
         "It makes the controller's gains too low"
       ],
       "correct": 2,
-      "explanation": "The real sensor is late, noisy and coarse. A controller that has only ever seen the truth has not been tested against any of that."
+      "explanation": "One that overshot by 0.19 with it overshot by 0.65 with a sensor 60 ms old. The real sensor is late, noisy and coarse. A controller that has only ever seen the truth has not been tested against any of that."
     },
     {
       "stage": "check",
@@ -45,10 +45,10 @@
         "Zero, marked invalid",
         "The truth, marked invalid",
         "The previous reading, marked valid",
-        "A reading marked invalid that carries the last good value, so a loop that ignores the mark does not jump to the origin"
+        "A reading marked invalid that carries the last good value"
       ],
       "correct": 3,
-      "explanation": "A zero is a reading of zero. Carrying the last good value, with the mark, means a loop that forgets to check the mark does something sensible."
+      "explanation": "A loop that ignores the mark does not jump to the origin. A zero is a reading of zero. Carrying the last good value, with the mark, means a loop that forgets to check the mark does something sensible."
     },
     {
       "stage": "post",
@@ -56,11 +56,11 @@
       "options": [
         "So that the generator's period is used up evenly",
         "Because the options are read after the draw",
-        "So that switching one effect on does not change what another does: the delayed sensor read exactly what the plain one had read two samples before",
+        "So that switching one effect on does not change what another does",
         "To make the sensor slower, like a real one"
       ],
       "correct": 2,
-      "explanation": "If a delay changed how many numbers were drawn, turning it on would also change the noise, and a test would fail for the wrong reason."
+      "explanation": "The delayed sensor read exactly what the plain one had read two samples before. If a delay changed how many numbers were drawn, turning it on would also change the noise, and a test would fail for the wrong reason."
     },
     {
       "stage": "post",

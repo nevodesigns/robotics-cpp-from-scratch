@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "A map cell holds a probability, updated by multiplying in each observation. A sensor right seven times in ten sees it occupied forty four times. What can change it back?",
       "options": [
-        "Nothing: one minus p has fallen below what a double holds beside 1.0, so p is exactly 1 and every later update multiplies zero",
+        "Nothing: one minus p has fallen below what a double holds beside 1.0",
         "One contrary observation, since the update is symmetric",
         "About twice as many contrary observations",
         "Forty four contrary observations"
       ],
       "correct": 0,
-      "explanation": "Measured: 1 - p is 1.887e-15 at 40 observations and recovers in 41 misses, 1.110e-16 at 43 and recovers in 44, and exactly 0 at 44 and never recovers. Forty four observations is under two seconds of a 30 Hz scanner."
+      "explanation": "P is exactly 1 and every later update multiplies zero. Measured: 1 - p is 1.887e-15 at 40 observations and recovers in 41 misses, 1.110e-16 at 43 and recovers in 44, and exactly 0 at 44 and never recovers. Forty four observations is under two seconds of a 30 Hz scanner."
     },
     {
       "stage": "check",
@@ -20,11 +20,11 @@
       "options": [
         "It depends on the sensor's reliability",
         "Two thousand, since the arithmetic is symmetric",
-        "Five, the same as after ten confirmations: the clamp bounds how sure a cell may become, so it bounds how long it takes to change its mind",
+        "Five, the same as after ten confirmations",
         "About forty, once the log odds pass the threshold"
       ],
       "correct": 2,
-      "explanation": "Measured with the clamp at plus and minus four. A wall standing after two hundred scans of a parked van came down six scans after it drove away."
+      "explanation": "The clamp bounds how sure a cell may become, so it bounds how long it takes to change its mind. Measured with the clamp at plus and minus four. A wall standing after two hundred scans of a parked van came down six scans after it drove away."
     },
     {
       "stage": "check",
@@ -68,11 +68,11 @@
       "options": [
         "How reliable the sensor is",
         "The size of the grid",
-        "How quickly the world you work in changes, since it decides how long a wall survives after it is removed",
+        "How quickly the world you work in changes",
         "The planner's replanning rate"
       ],
       "correct": 2,
-      "explanation": "The sensor's reliability is already in the per-observation step. The clamp is a statement about the world: a warehouse with pallets moving hourly wants a tight one, a surveyed pipe rack can afford a loose one."
+      "explanation": "It decides how long a wall survives after it is removed. The sensor's reliability is already in the per-observation step. The clamp is a statement about the world: a warehouse with pallets moving hourly wants a tight one, a surveyed pipe rack can afford a loose one."
     }
   ]
 }

@@ -7,12 +7,12 @@
       "question": "Why is a full disk worse than a program that cannot write its log?",
       "options": [
         "A full disk makes the robot reboot",
-        "It stops everything else that writes: the configuration, the black box dump, the next update, temporary files",
+        "It stops everything else that writes",
         "A full disk deletes the oldest log by itself",
         "It is not worse: only logging stops"
       ],
       "correct": 1,
-      "explanation": "Everything that writes shares the disk. When it is full the configuration cannot be saved, the black box cannot be dumped and the next update cannot be stored."
+      "explanation": "The configuration, the black box dump, the next update, temporary files. Everything that writes shares the disk. When it is full the configuration cannot be saved, the black box cannot be dumped and the next update cannot be stored."
     },
     {
       "stage": "check",
@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "Why is the current file never deleted?",
       "options": [
-        "Deleting it would lose the record just written: a record bigger than the whole budget is kept until the next one arrives",
+        "Deleting it would lose the record just written",
         "The current file is locked by the operating system",
         "It is always empty when rotation runs",
         "Deleting it would break the file numbering"
       ],
       "correct": 0,
-      "explanation": "A record larger than the whole budget is usually the one somebody wanted, a stack trace or a dump. It is kept until the next record closes its file."
+      "explanation": "A record bigger than the whole budget is kept until the next one arrives. A record larger than the whole budget is usually the one somebody wanted, a stack trace or a dump. It is kept until the next record closes its file."
     },
     {
       "stage": "post",

@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "On wet ground with brakes of 3 and a 17 degree downhill slope, what is the deceleration?",
       "options": [
-        "0: friction gives 0.3 g cos(slope), gravity takes g sin(slope), and nothing is left, so the robot cannot stop by braking",
+        "0: friction gives 0.3 g cos(slope), gravity takes g sin(slope), and nothing is left",
         "3 m/s2, what the brakes give",
         "2.94 m/s2, as on wet flat ground",
         "1.19 m/s2, as on a 10 degree slope"
       ],
       "correct": 0,
-      "explanation": "Wet ground at 17 degrees can give about as much grip as gravity pulls down the slope. Nothing is left for slowing down, and the formula's distance is infinite."
+      "explanation": "The robot cannot stop by braking. Wet ground at 17 degrees can give about as much grip as gravity pulls down the slope. Nothing is left for slowing down, and the formula's distance is infinite."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "The formula is only valid in simulation",
         "It leaves out the robot's mass",
-        "It assumes constant deceleration, one friction and a known latency, and the real brake, load and surface vary: the robot must be stopped for real at the speed it gives",
+        "It assumes constant deceleration, one friction and a known latency, and the real brake, load and surface vary",
         "It is exact, so testing adds nothing"
       ],
       "correct": 2,
-      "explanation": "It agreed with a step by step simulation to 5 mm, which shows the algebra is right. Whether the real brake and floor behave as assumed is shown by stopping the real robot."
+      "explanation": "The robot must be stopped for real at the speed it gives. It agreed with a step by step simulation to 5 mm, which shows the algebra is right. Whether the real brake and floor behave as assumed is shown by stopping the real robot."
     }
   ]
 }

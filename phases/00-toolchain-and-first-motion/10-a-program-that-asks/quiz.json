@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "A person types 12abc and the program reads it with in >> value. What happens?",
       "options": [
-        "It succeeds with 12 and leaves abc in the stream, so a mistake is accepted without a word",
+        "It succeeds with 12 and leaves abc in the stream",
         "It reads 12abc as text",
         "It fails",
         "It crashes"
       ],
       "correct": 0,
-      "explanation": "The suite prints 12abc, 3,5, 7 8 and 9.5.1 read as 12, 3, 7 and 9.5."
+      "explanation": "A mistake is accepted without a word. The suite prints 12abc, 3,5, 7 8 and 9.5.1 read as 12, 3, 7 and 9.5."
     },
     {
       "stage": "check",
@@ -68,11 +68,11 @@
       "options": [
         "Keyboards are banned",
         "It hides bugs",
-        "Nothing waits for a keyboard, so the suite runs in a script and always finishes; the same trick tests anything that asks",
+        "Nothing waits for a keyboard",
         "It is faster to write"
       ],
       "correct": 2,
-      "explanation": "A test that needs a person at a keyboard cannot run on a build server."
+      "explanation": "The suite runs in a script and always finishes; the same trick tests anything that asks. A test that needs a person at a keyboard cannot run on a build server."
     }
   ]
 }

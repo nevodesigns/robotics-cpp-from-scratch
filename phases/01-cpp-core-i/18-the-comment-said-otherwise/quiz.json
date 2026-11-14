@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "percent_exact divides by 1023 and nothing else. Why is rounding to the nearest percent left out of the fix?",
       "options": [
-        "It is a second, larger change: it moves 560 of 1024 answers, where dividing by 1023 moves 49, and it should be decided on its own",
+        "It is a second, larger change",
         "Rounding gives the wrong answer at 1023",
         "Rounding is not possible with integers",
         "Rounding would make it slower"
       ],
       "correct": 0,
-      "explanation": "Change the least you can, and run the pin again. A fix that also changes what every caller has been getting makes it impossible to tell which change broke a result."
+      "explanation": "It moves 560 of 1024 answers, where dividing by 1023 moves 49, and it should be decided on its own. Change the least you can, and run the pin again. A fix that also changes what every caller has been getting makes it impossible to tell which change broke a result."
     }
   ]
 }

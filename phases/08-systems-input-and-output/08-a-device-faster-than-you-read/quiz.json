@@ -44,11 +44,11 @@
       "options": [
         "The compiler requires it",
         "It is faster",
-        "A uint8_t is promoted to int first, so 2 minus 254 is -252 and not 4, and a loss across the wrap is not counted",
+        "A uint8_t is promoted to int first",
         "int cannot hold 255"
       ],
       "correct": 2,
-      "explanation": "The wrap is the reason the counter is unsigned. The arithmetic must wrap the same way, and a test on an unbroken stream never shows the difference."
+      "explanation": "2 minus 254 is -252 and not 4, and a loss across the wrap is not counted. The wrap is the reason the counter is unsigned. The arithmetic must wrap the same way, and a test on an unbroken stream never shows the difference."
     },
     {
       "stage": "post",

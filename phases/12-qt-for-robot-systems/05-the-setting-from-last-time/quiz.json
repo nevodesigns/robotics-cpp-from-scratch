@@ -45,10 +45,10 @@
         "As soon as setValue is called",
         "Never",
         "At exit only",
-        "When it is synced: until then it is in memory, and a killed station has kept nothing"
+        "When it is synced"
       ],
       "correct": 3,
-      "explanation": "Before save() the file did not exist."
+      "explanation": "Until then it is in memory, and a killed station has kept nothing. Before save() the file did not exist."
     },
     {
       "stage": "post",

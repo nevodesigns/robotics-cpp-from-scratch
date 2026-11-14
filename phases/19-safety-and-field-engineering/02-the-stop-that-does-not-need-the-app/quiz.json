@@ -68,11 +68,11 @@
       "options": [
         "It only works at 100 Hz",
         "It depends on a network being present",
-        "If the control loop that calls it hangs, nothing calls it: the same idea has to exist in hardware that does not run your code",
+        "If the control loop that calls it hangs, nothing calls it",
         "It cannot tell a pressed button from a cut wire"
       ],
       "correct": 2,
-      "explanation": "This code runs inside the robot's control loop. If that loop stops, so does the stop path, which is why a hardware watchdog and a brake that applies itself are also needed."
+      "explanation": "The same idea has to exist in hardware that does not run your code. This code runs inside the robot's control loop. If that loop stops, so does the stop path, which is why a hardware watchdog and a brake that applies itself are also needed."
     }
   ]
 }

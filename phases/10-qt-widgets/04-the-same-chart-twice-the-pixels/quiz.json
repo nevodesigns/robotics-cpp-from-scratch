@@ -54,13 +54,13 @@
       "stage": "post",
       "question": "A colleague fixes the quarter-size chart by multiplying every coordinate by the ratio before painting. What breaks?",
       "options": [
-        "Every hit test, layout calculation and stored geometry, because now half the program is in one unit and half in the other",
+        "Every hit test, layout calculation and stored geometry",
         "The image size, which is now doubled twice",
         "Nothing, it is an equivalent fix",
         "Only the pen widths"
       ],
       "correct": 0,
-      "explanation": "Setting the ratio is what lets everything above that line stay in the units the layout is in. That is the point of having a ratio at all."
+      "explanation": "Now half the program is in one unit and half in the other. Setting the ratio is what lets everything above that line stay in the units the layout is in. That is the point of having a ratio at all."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "Logical for everything, since it scales",
         "Cosmetic for everything, since it is always one pixel",
-        "Hairlines for rules and gridlines, whose job is to be visible and not noticed; a logical width for anything that should look the same size on every screen",
+        "Hairlines for rules and gridlines, whose job is to be visible and not noticed",
         "It makes no difference at ratios above 1"
       ],
       "correct": 2,
-      "explanation": "setWidth(1) is what you get by not choosing: too thin to be a deliberate thickness and too thick to be a hairline. A cosmetic pen also ignores the painter's transform, which is what a grid wants and never what a drawn object wants."
+      "explanation": "A logical width for anything that should look the same size on every screen. setWidth(1) is what you get by not choosing: too thin to be a deliberate thickness and too thick to be a hairline. A cosmetic pen also ignores the painter's transform, which is what a grid wants and never what a drawn object wants."
     }
   ]
 }

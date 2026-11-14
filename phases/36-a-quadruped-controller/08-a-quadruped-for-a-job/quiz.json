@@ -69,10 +69,10 @@
         "From the most dangerous to the least",
         "From the quickest to compute to the slowest",
         "In the order the lessons were taught",
-        "From what is cheapest to change last: the operator's speed, the job's ground, then the robot's own limits"
+        "From what is cheapest to change last"
       ],
       "correct": 3,
-      "explanation": "The operator can change the speed, the job fixes the ground and the push, and the knees and the battery are the robot's. When the first failure is the robot's own limit, no setting helps."
+      "explanation": "The operator's speed, the job's ground, then the robot's own limits. The operator can change the speed, the job fixes the ground and the push, and the knees and the battery are the robot's. When the first failure is the robot's own limit, no setting helps."
     }
   ]
 }

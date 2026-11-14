@@ -56,11 +56,11 @@
       "options": [
         "Because data() returns null for an empty vector",
         "To make the comparison faster",
-        "An allocator may hand a freed buffer straight back for the next request, so two different buffers can share an address",
+        "An allocator may hand a freed buffer straight back for the next request",
         "Because the address is not stable between runs"
       ],
       "correct": 2,
-      "explanation": "A vector that reallocated can land at the address it just released, which makes an address-only check report no change after every pointer it handed out was invalidated. Comparing capacity catches it, and predicting with would_reallocate avoids depending on allocator behaviour at all."
+      "explanation": "Two different buffers can share an address. A vector that reallocated can land at the address it just released, which makes an address-only check report no change after every pointer it handed out was invalidated. Comparing capacity catches it, and predicting with would_reallocate avoids depending on allocator behaviour at all."
     },
     {
       "stage": "post",

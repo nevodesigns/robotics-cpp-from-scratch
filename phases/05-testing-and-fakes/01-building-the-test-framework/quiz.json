@@ -21,10 +21,10 @@
         "Globals cannot hold vectors",
         "So the registry can be reset between runs",
         "It makes the registry faster to access",
-        "The order of construction between translation units is undefined, so a registrar could run before a global was built"
+        "The order of construction between translation units is undefined"
       ],
       "correct": 3,
-      "explanation": "A static local is constructed the first time control reaches it, which is necessarily before its first use. That is the standard cure for the static initialisation order problem."
+      "explanation": "A registrar could run before a global was built. A static local is constructed the first time control reaches it, which is necessarily before its first use. That is the standard cure for the static initialisation order problem."
     },
     {
       "stage": "check",
@@ -44,11 +44,11 @@
       "options": [
         "Pastes it onto the previous token",
         "Evaluates the expression twice",
-        "Turns the expression into a string literal, so a failure can print the code",
+        "Turns the expression into a string literal",
         "Marks it as a preprocessor directive"
       ],
       "correct": 2,
-      "explanation": "Stringification is why a report can say expected this to be true: 1 == 2, rather than only reporting that something was false."
+      "explanation": "A failure can print the code. Stringification is why a report can say expected this to be true: 1 == 2, rather than only reporting that something was false."
     },
     {
       "stage": "post",

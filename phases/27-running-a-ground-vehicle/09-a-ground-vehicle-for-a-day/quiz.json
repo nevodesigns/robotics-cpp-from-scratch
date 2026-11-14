@@ -67,12 +67,12 @@
       "question": "What is the main thing this simulation does not tell you?",
       "options": [
         "Whether the layers work together at all",
-        "What a real day on a real vehicle is like: it is one dimension, a point, scripted",
+        "What a real day on a real vehicle is like",
         "Which layer handles which event",
         "How much charge the day used"
       ],
       "correct": 1,
-      "explanation": "It is one road, a point for a vehicle and a script of events, all against fakes. It shows how the parts fit, not how a day goes."
+      "explanation": "It is one dimension, a point, scripted. It is one road, a point for a vehicle and a script of events, all against fakes. It shows how the parts fit, not how a day goes."
     }
   ]
 }

@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "Why does the fmod version of wrap_angle need an extra check for negative results?",
       "options": [
-        "fmod keeps the sign of its left operand, so a negative input gives a negative remainder",
+        "fmod keeps the sign of its left operand",
         "To avoid dividing by zero",
         "Because pi is irrational",
         "fmod cannot accept negative numbers at all"
       ],
       "correct": 0,
-      "explanation": "fmod truncates towards zero rather than wrapping, so negative inputs land outside the intended range and need one more turn added."
+      "explanation": "A negative input gives a negative remainder. fmod truncates towards zero rather than wrapping, so negative inputs land outside the intended range and need one more turn added."
     },
     {
       "stage": "post",

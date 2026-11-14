@@ -57,10 +57,10 @@
         "The tolerance",
         "It does not exist",
         "It is too old",
-        "It is not drawn: its pixel is off the chart, and a click there is not on the data"
+        "It is not drawn"
       ],
       "correct": 3,
-      "explanation": "Samples at -5 s and 105 s would be at x = -50 and 1050."
+      "explanation": "Its pixel is off the chart, and a click there is not on the data. Samples at -5 s and 105 s would be at x = -50 and 1050."
     },
     {
       "stage": "post",

@@ -9,10 +9,10 @@
         "Nothing",
         "An agreement",
         "A vanishing",
-        "A beam that ends in free space: a wall that is not on the map, an appearance"
+        "A beam that ends in free space"
       ],
       "correct": 3,
-      "explanation": "A door that had closed gave 9 appearances and no vanishings."
+      "explanation": "A wall that is not on the map, an appearance. A door that had closed gave 9 appearances and no vanishings."
     },
     {
       "stage": "check",
@@ -54,25 +54,25 @@
       "stage": "post",
       "question": "The robot compares each scan with the map it is repairing from those same scans. What happens to a closed door?",
       "options": [
-        "Never: after one scan the doorway cells are unknown and not free, so there is no appearance to count, while compared with the map as it was it was noticed at scan 3",
+        "Never: after one scan the doorway cells are unknown and not free",
         "It crashes",
         "It is noticed sooner",
         "It is noticed at scan 11"
       ],
       "correct": 0,
-      "explanation": "The repair destroys the evidence."
+      "explanation": "There is no appearance to count, while compared with the map as it was it was noticed at scan 3. The repair destroys the evidence."
     },
     {
       "stage": "post",
       "question": "What does the detector not say?",
       "options": [
-        "What changed, or whether the pose was right: a wrong pose makes every wall look moved",
+        "What changed, or whether the pose was right",
         "Anything",
         "How many scans",
         "When"
       ],
       "correct": 0,
-      "explanation": "A detector that fires on a bad pose tells the truth about the wrong thing."
+      "explanation": "A wrong pose makes every wall look moved. A detector that fires on a bad pose tells the truth about the wrong thing."
     }
   ]
 }

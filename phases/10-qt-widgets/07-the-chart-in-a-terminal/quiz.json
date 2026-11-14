@@ -8,23 +8,23 @@
       "options": [
         "Nothing",
         "An error",
-        "A storm: the range is 2e-6 wide, so the noise fills the chart",
+        "A storm: the range is 2e-6 wide",
         "A flat line"
       ],
       "correct": 2,
-      "explanation": "It marked 11 of 13 rows."
+      "explanation": "The noise fills the chart. It marked 11 of 13 rows."
     },
     {
       "stage": "check",
       "question": "What does min_span do?",
       "options": [
         "Removes noise",
-        "Makes the range at least that wide, centred on the data, so a steady signal is a flat line",
+        "Makes the range at least that wide, centred on the data",
         "Sets the number of rows",
         "Sets the step of the ticks"
       ],
       "correct": 1,
-      "explanation": "With a span of 1 the same signal marked one row."
+      "explanation": "A steady signal is a flat line. With a span of 1 the same signal marked one row."
     },
     {
       "stage": "check",
@@ -57,22 +57,22 @@
         "Every row has a tick",
         "Qt requires it",
         "Space only",
-        "A label says something only where a tick is: the value at that row is a nice number"
+        "A label says something only where a tick is"
       ],
       "correct": 3,
-      "explanation": "The 13 rows had 3 labels, on nice numbers."
+      "explanation": "The value at that row is a nice number. The 13 rows had 3 labels, on nice numbers."
     },
     {
       "stage": "post",
       "question": "What is min_span a choice about?",
       "options": [
         "The number of columns",
-        "What counts as steady for this signal: 0.1 suits a temperature and not a microvolt",
+        "What counts as steady for this signal",
         "The size of the window",
         "The font"
       ],
       "correct": 1,
-      "explanation": "The chart cannot know the scale at which a signal stops being interesting."
+      "explanation": "0.1 suits a temperature and not a microvolt. The chart cannot know the scale at which a signal stops being interesting."
     }
   ]
 }

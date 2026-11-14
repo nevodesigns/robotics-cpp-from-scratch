@@ -7,12 +7,12 @@
       "question": "Why is a degree of longitude shorter than a degree of latitude?",
       "options": [
         "The earth is wider at the equator",
-        "The meridians meet at the poles, so it is shorter by the cosine of the latitude",
+        "The meridians meet at the poles",
         "Longitude is measured from Greenwich",
         "It is not, on a sphere"
       ],
       "correct": 1,
-      "explanation": "A degree of latitude is the same length everywhere. A degree of longitude shrinks toward the poles: at 52 degrees north it is 68458 m, 38 percent less."
+      "explanation": "It is shorter by the cosine of the latitude. A degree of latitude is the same length everywhere. A degree of longitude shrinks toward the poles: at 52 degrees north it is 68458 m, 38 percent less."
     },
     {
       "stage": "check",

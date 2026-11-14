@@ -21,10 +21,10 @@
         "To store the unit's name for printing",
         "To carry the conversion factor to SI",
         "To let the quantity be specialised per unit",
-        "To make Quantity<MetreTag> and Quantity<SecondTag> different types, so the arithmetic defined between two of the same tag refuses the rest"
+        "To make Quantity<MetreTag> and Quantity<SecondTag> different types"
       ],
       "correct": 3,
-      "explanation": "It costs nothing at runtime: sizeof is one double, it is trivially copyable, and every operation is a function that disappears."
+      "explanation": "The arithmetic defined between two of the same tag refuses the rest. It costs nothing at runtime: sizeof is one double, it is trivially copyable, and every operation is a function that disappears."
     },
     {
       "stage": "check",
@@ -43,12 +43,12 @@
       "question": "Everything a type system promises is a thing that does not compile, and there is no RC_CHECK for that. How does this lesson test its refusals?",
       "options": [
         "It does not; the refusals are documented instead",
-        "Snippets in checks/ are compiled by the build and the tests are marked WILL_FAIL, so a snippet that starts compiling is a test failure",
+        "Snippets in checks/ are compiled by the build and the tests are marked WILL_FAIL",
         "By reading the compiler's output for expected diagnostics",
         "With static_assert in the test file"
       ],
       "correct": 1,
-      "explanation": "Keep each snippet to one refusal, since a file that fails for two reasons still passes when one of them stops working. And compile them against the finished implementation, or they pass for the wrong reason."
+      "explanation": "A snippet that starts compiling is a test failure. Keep each snippet to one refusal, since a file that fails for two reasons still passes when one of them stops working. And compile them against the finished implementation, or they pass for the wrong reason."
     },
     {
       "stage": "post",

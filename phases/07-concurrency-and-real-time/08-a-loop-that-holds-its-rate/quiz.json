@@ -7,12 +7,12 @@
       "question": "A loop does 2 ms of work and then sleep_for(10 ms), meaning to run at 100 Hz. What rate does it run at?",
       "options": [
         "200 Hz",
-        "About 83 Hz, since each cycle takes the work plus the period, 12 ms: measured at 82.6 Hz on real threads",
+        "About 83 Hz, since each cycle takes the work plus the period, 12 ms",
         "It depends on the operating system's tick",
         "100 Hz, since it sleeps for the period"
       ],
       "correct": 1,
-      "explanation": "A cycle is work plus sleep. Simulated, the 100th cycle started at 1188 ms where 990 was wanted. The line looks right, which is why it ships."
+      "explanation": "Measured at 82.6 Hz on real threads. A cycle is work plus sleep. Simulated, the 100th cycle started at 1188 ms where 990 was wanted. The line looks right, which is why it ships."
     },
     {
       "stage": "check",
@@ -21,10 +21,10 @@
         "Off by exactly the work time",
         "Exact, since it accounts for the work",
         "It fails to compile",
-        "About 105 to 110 us late per cycle, 1.1 percent slow: every sleep overshoots a little and nothing corrects it, so the error is added up"
+        "About 105 to 110 us late per cycle, 1.1 percent slow"
       ],
       "correct": 3,
-      "explanation": "Measured 3032 ms against 3000. sleep_until a fixed grid was 3000.1 to 3000.3 ms, about 1 us per cycle, because the deadline is computed from the start and so the error of one cycle is gone by the next."
+      "explanation": "Every sleep overshoots a little and nothing corrects it, so the error is added up. Measured 3032 ms against 3000. sleep_until a fixed grid was 3000.1 to 3000.3 ms, about 1 us per cycle, because the deadline is computed from the start and so the error of one cycle is gone by the next."
     },
     {
       "stage": "check",
@@ -33,10 +33,10 @@
         "Stops the loop",
         "Waits for the next full period",
         "Doubles the period",
-        "Runs the missed cycles back to back with no sleep until it has caught up: measured 5 cycles started late, and a shortest interval of 2 ms"
+        "Runs the missed cycles back to back with no sleep until it has caught up"
       ],
       "correct": 3,
-      "explanation": "The total time came out right, 300.06 ms, and the spacing was lost. A controller sees several updates a couple of milliseconds apart, each with a dt far below the period, then silence."
+      "explanation": "Measured 5 cycles started late, and a shortest interval of 2 ms. The total time came out right, 300.06 ms, and the spacing was lost. A controller sees several updates a couple of milliseconds apart, each with a dt far below the period, then silence."
     },
     {
       "stage": "check",
@@ -44,11 +44,11 @@
       "options": [
         "0, 10, 20, 30, 40 and none",
         "0, 8, 22, 57, 59 and none",
-        "0, 10, 30, 70, 80 and 4 slots dropped: one for the 14 ms cycle and three for the 35",
+        "0, 10, 30, 70, 80 and 4 slots dropped",
         "0, 10, 30, 70, 80 and none"
       ],
       "correct": 2,
-      "explanation": "Every start is on the grid, and the sleeping loop that adds a period after the work started them at 0, 18, 42, 87 and 99. The count is what tells you the loop was running below its rate."
+      "explanation": "One for the 14 ms cycle and three for the 35. Every start is on the grid, and the sleeping loop that adds a period after the work started them at 0, 18, 42, 87 and 99. The count is what tells you the loop was running below its rate."
     },
     {
       "stage": "post",
@@ -56,11 +56,11 @@
       "options": [
         "Sleeps 0 and runs at once",
         "Rounds down and treats it as on time",
-        "Drops the whole slot and waits until 50 ms, because it never runs missed cycles in a burst",
+        "Drops the whole slot and waits until 50 ms",
         "Throws"
       ],
       "correct": 2,
-      "explanation": "Late by any amount loses the slot, with the sleep 10 ms minus 1 ns. That is the price of never bursting, and it is written down so it is a decision and not a surprise."
+      "explanation": "It never runs missed cycles in a burst. Late by any amount loses the slot, with the sleep 10 ms minus 1 ns. That is the price of never bursting, and it is written down so it is a decision and not a surprise."
     },
     {
       "stage": "post",

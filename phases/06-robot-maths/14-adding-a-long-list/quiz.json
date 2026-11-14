@@ -8,23 +8,23 @@
       "options": [
         "1",
         "1e16",
-        "0: 1e16 + 1 is 1e16 in a double, so every one is lost",
+        "0: 1e16 + 1 is 1e16 in a double",
         "1000"
       ],
       "correct": 2,
-      "explanation": "The exact total is 1000, and Kahan's total was 1000.0."
+      "explanation": "Every one is lost. The exact total is 1000, and Kahan's total was 1000.0."
     },
     {
       "stage": "check",
       "question": "Why does a small number added to a large total lose its low digits?",
       "options": [
         "Addition is not exact in maths",
-        "A double keeps about sixteen digits, so the sum is rounded and the small number's low digits do not fit",
+        "A double keeps about sixteen digits",
         "It is undefined behaviour",
         "A bug"
       ],
       "correct": 1,
-      "explanation": "A small enough number is lost entirely."
+      "explanation": "The sum is rounded and the small number's low digits do not fit. A small enough number is lost entirely."
     },
     {
       "stage": "check",
@@ -45,22 +45,22 @@
         "It adds them in long double",
         "It compares with a second plain sum",
         "It trusts the plain sum",
-        "The numbers are whole multiples of 2^-40, so the exact total is a sum of integers held without rounding in a 64 bit integer"
+        "The numbers are whole multiples of 2^-40"
       ],
       "correct": 3,
-      "explanation": "A reference that is itself rounded is no reference."
+      "explanation": "The exact total is a sum of integers held without rounding in a 64 bit integer. A reference that is itself rounded is no reference."
     },
     {
       "stage": "post",
       "question": "A million copies of the float 0.1 are added. What are the plain and Kahan totals?",
       "options": [
-        "100958.34 and 100000.00: the plain total is 0.96 percent out",
+        "100958.34 and 100000.00",
         "50000 and 100000",
         "100000 and 100000",
         "100000 and 100958"
       ],
       "correct": 0,
-      "explanation": "A float keeps about seven digits, so it starts at a much smaller total."
+      "explanation": "The plain total is 0.96 percent out. A float keeps about seven digits, so it starts at a much smaller total."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "It is unsupported",
         "It changes the result of addition",
         "It is slower",
-        "The flag lets the compiler treat addition as exact, so (next - total) - corrected can be simplified to zero and the compensation removed"
+        "The flag lets the compiler treat addition as exact"
       ],
       "correct": 3,
-      "explanation": "The compensation depends on the compiler doing exactly what is written."
+      "explanation": "(next - total) - corrected can be simplified to zero and the compensation removed. The compensation depends on the compiler doing exactly what is written."
     }
   ]
 }

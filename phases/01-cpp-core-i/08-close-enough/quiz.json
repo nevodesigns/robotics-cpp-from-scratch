@@ -18,13 +18,13 @@
       "stage": "check",
       "question": "At magnitude 1e9 the gap between neighbouring doubles is 1.19e-7. What does a tolerance of 1e-9 mean there?",
       "options": [
-        "No two distinct doubles can satisfy it, so a loop waiting for agreement can only stop on an identical bit pattern",
+        "No two distinct doubles can satisfy it",
         "It rounds up to the gap, so it behaves as 1.19e-7",
         "It is very strict but achievable with enough iterations",
         "It is undefined behaviour"
       ],
       "correct": 0,
-      "explanation": "There is nothing between a value and its neighbour. A tolerance smaller than that gap is not strict, it is impossible, and that is the difference between a slow algorithm and one that cannot terminate."
+      "explanation": "A loop waiting for agreement can only stop on an identical bit pattern. There is nothing between a value and its neighbour. A tolerance smaller than that gap is not strict, it is impossible, and that is the difference between a slow algorithm and one that cannot terminate."
     },
     {
       "stage": "check",
@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "In kahan_sum, why must (next - total) - adjusted keep its parentheses?",
       "options": [
-        "Algebraically it is zero, and in floating point it is the part that did not fit, so reassociating it throws the correction away",
+        "Algebraically it is zero, and in floating point it is the part that did not fit",
         "To avoid integer overflow in the intermediate",
         "Because subtraction is not commutative",
         "For readability only"
       ],
       "correct": 0,
-      "explanation": "Floating point addition is not associative, which is both why the algorithm is needed and how it works. An optimiser permitted to reassociate the expression, which -ffast-math permits, computes zero and silently reduces the function to plain addition."
+      "explanation": "Reassociating it throws the correction away. Floating point addition is not associative, which is both why the algorithm is needed and how it works. An optimiser permitted to reassociate the expression, which -ffast-math permits, computes zero and silently reduces the function to plain addition."
     }
   ]
 }

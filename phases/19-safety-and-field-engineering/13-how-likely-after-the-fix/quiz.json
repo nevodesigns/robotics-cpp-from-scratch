@@ -31,12 +31,12 @@
       "question": "Why is the average chance a function is dead about half of rate times interval, and when is that wrong?",
       "options": [
         "It is exact at every interval",
-        "Over the interval it rises from zero to its end value; the shortcut overstates it when rate times interval is not small: 31 percent too high at ten years",
+        "Over the interval it rises from zero to its end value",
         "It is half the failure rate, whatever the interval",
         "It understates the chance, by 31 percent at ten years"
       ],
       "correct": 1,
-      "explanation": "The chance of being dead grows from nothing just after a test to its largest just before the next, and a demand can come at any time. The straight line shortcut overshoots once the curve bends."
+      "explanation": "The shortcut overstates it when rate times interval is not small: 31 percent too high at ten years. The chance of being dead grows from nothing just after a test to its largest just before the next, and a demand can come at any time. The straight line shortcut overshoots once the curve bends."
     },
     {
       "stage": "check",
@@ -57,10 +57,10 @@
         "Beta makes no difference to the pfd",
         "The calculation was wrong at one of the two betas",
         "A fivefold cut in beta is too small to measure",
-        "The improvement was real, 4.4 times lower pfd, but did not cross a band: classes are coarse, and the numbers matter more than the class"
+        "The improvement was real, 4.4 times lower pfd, but did not cross a band"
       ],
       "correct": 3,
-      "explanation": "The pfd fell from 3.75e-04 to 8.56e-05. Both land in the band for likelihood 2, so the class is the same, and the numbers are what show the gain."
+      "explanation": "Classes are coarse, and the numbers matter more than the class. The pfd fell from 3.75e-04 to 8.56e-05. Both land in the band for likelihood 2, so the class is the same, and the numbers are what show the gain."
     },
     {
       "stage": "post",

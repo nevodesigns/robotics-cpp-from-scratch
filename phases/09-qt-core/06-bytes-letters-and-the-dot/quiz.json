@@ -20,11 +20,11 @@
       "options": [
         "length()",
         "From the byte size",
-        "By converting to UCS-4, where every character is one number: text.toUcs4().size()",
+        "By converting to UCS-4, where every character is one number",
         "With a regular expression"
       ],
       "correct": 2,
-      "explanation": "The micro sign is 2 bytes, length 1 and 1 letter."
+      "explanation": "Text.toUcs4().size(). The micro sign is 2 bytes, length 1 and 1 letter."
     },
     {
       "stage": "check",
@@ -43,12 +43,12 @@
       "question": "A decoder meets the byte FF in UTF-8. What does it do, and what must the caller ask?",
       "options": [
         "Throws",
-        "Puts in U+FFFD and carries on, so the caller has to ask hasError() to know",
+        "Puts in U+FFFD and carries on",
         "Stops",
         "Skips it silently with no trace"
       ],
       "correct": 1,
-      "explanation": "decode_utf8 returns a clean flag."
+      "explanation": "The caller has to ask hasError() to know. decode_utf8 returns a clean flag."
     },
     {
       "stage": "post",

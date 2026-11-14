@@ -68,11 +68,11 @@
       "options": [
         "A value outside its range, such as a gain of 250",
         "A value of the wrong type, such as an integer for a real",
-        "A change from outside to something that must not change while running, such as a serial number: the set was refused and the value stayed A-1001",
+        "A change from outside to something that must not change while running, such as a serial number",
         "A name that was never declared"
       ],
       "correct": 2,
-      "explanation": "Some settings describe the node and are not controls. Declared read only, a set from outside is refused and the value is unchanged."
+      "explanation": "The set was refused and the value stayed A-1001. Some settings describe the node and are not controls. Declared read only, a set from outside is refused and the value is unchanged."
     }
   ]
 }

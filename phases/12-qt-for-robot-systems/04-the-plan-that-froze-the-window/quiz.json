@@ -44,23 +44,23 @@
       "options": [
         "It waits for the end",
         "It kills the thread",
-        "It is a request that the plan looks at every step, so it stops at the next one",
+        "It is a request that the plan looks at every step",
         "It frees the memory"
       ],
       "correct": 2,
-      "explanation": "The plan checks promise.isCanceled() at every step."
+      "explanation": "It stops at the next one. The plan checks promise.isCanceled() at every step."
     },
     {
       "stage": "post",
       "question": "What is the limit on how promptly a plan stops?",
       "options": [
-        "The length of one step: a cancel cannot stop a step in the middle",
+        "The length of one step",
         "The window size",
         "The cancel call",
         "The number of cores"
       ],
       "correct": 0,
-      "explanation": "The lesson says so under what it does not do."
+      "explanation": "A cancel cannot stop a step in the middle. The lesson says so under what it does not do."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "Detaches the thread",
         "Deletes the function",
-        "Cancels it and waits for it, so that nothing is delivered after",
+        "Cancels it and waits for it",
         "Nothing"
       ],
       "correct": 2,
-      "explanation": "No deliveries came afterwards."
+      "explanation": "Nothing is delivered after. No deliveries came afterwards."
     }
   ]
 }

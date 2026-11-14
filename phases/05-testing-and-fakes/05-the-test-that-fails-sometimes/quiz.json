@@ -18,13 +18,13 @@
       "stage": "check",
       "question": "The same small piece of work was timed 400 times: fastest 38.39 us, median 39.50, mean 42.31, 99th percentile 95.00, worst 105.53. What shape is that?",
       "options": [
-        "A floor and no ceiling: nothing can make the work faster than it is and many things can make it slower",
+        "A floor and no ceiling",
         "Uniform between the fastest and the worst",
         "A normal distribution centred on the mean",
         "Two clusters, one fast and one slow"
       ],
       "correct": 0,
-      "explanation": "The median is one microsecond above the floor and the worst is nearly three times it. A threshold placed anywhere near the middle of that is a coin toss."
+      "explanation": "Nothing can make the work faster than it is and many things can make it slower. The median is one microsecond above the floor and the worst is nearly three times it. A threshold placed anywhere near the middle of that is a coin toss."
     },
     {
       "stage": "check",
@@ -33,10 +33,10 @@
         "It converges faster than the mean",
         "It is the least affected by outliers in both directions",
         "It matches what users experience",
-        "Noise can add time and never remove it, so the minimum is the closest any run came to measuring the thing itself"
+        "Noise can add time and never remove it"
       ],
       "correct": 3,
-      "explanation": "A mean measures whatever else the machine was doing, and a single sample measures whether it happened to be doing it just then."
+      "explanation": "The minimum is the closest any run came to measuring the thing itself. A mean measures whatever else the machine was doing, and a single sample measures whether it happened to be doing it just then."
     },
     {
       "stage": "check",
@@ -67,12 +67,12 @@
       "question": "A test starts a worker and needs to check the result. Sleep, or wait?",
       "options": [
         "Sleep briefly and retry the whole test if it fails",
-        "Wait for the condition with a generous deadline: measured, 0.55 ms against a five second deadline, and the deadline exists only so a hang becomes a failure",
+        "Wait for the condition with a generous deadline",
         "Sleep long enough for the slowest machine you support",
         "Join the thread, since that is what join is for"
       ],
       "correct": 1,
-      "explanation": "A fixed sleep is wrong in both directions at once: too short and it fails on a busy machine, too long and every run pays for it. A machine four times slower needs a sleep four times longer and there is no number that is both."
+      "explanation": "Measured, 0.55 ms against a five second deadline, and the deadline exists only so a hang becomes a failure. A fixed sleep is wrong in both directions at once: too short and it fails on a busy machine, too long and every run pays for it. A machine four times slower needs a sleep four times longer and there is no number that is both."
     }
   ]
 }

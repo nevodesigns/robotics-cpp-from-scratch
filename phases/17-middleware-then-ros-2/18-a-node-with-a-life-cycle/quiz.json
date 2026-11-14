@@ -7,12 +7,12 @@
       "question": "Why is a managed node's start up several steps and not one?",
       "options": [
         "Each step runs on its own thread, so they cannot be merged",
-        "Each can fail, and between them there are states a supervisor can see and act on: an inactive node has its device open and is not publishing, so it can be paused without closing it",
+        "Each can fail, and between them there are states a supervisor can see and act on",
         "ROS 2 nodes cannot open a device and publish in the same function",
         "So that the constructor can never throw"
       ],
       "correct": 1,
-      "explanation": "Opening the device and starting to publish are different things that can each go wrong. Between them is inactive, where the device is open and nothing is sent."
+      "explanation": "An inactive node has its device open and is not publishing, so it can be paused without closing it. Opening the device and starting to publish are different things that can each go wrong. Between them is inactive, where the device is open and nothing is sent."
     },
     {
       "stage": "check",
@@ -21,10 +21,10 @@
         "The node is configured first and then activated",
         "The activate callback runs and returns failure",
         "The node goes to error processing",
-        "The request is refused and its callback is not run: six requests out of order were all refused and only the two legal callbacks ran"
+        "The request is refused and its callback is not run"
       ],
       "correct": 3,
-      "explanation": "A transition is legal only from certain states. Refusing it before the callback runs means the callback never has to cope with a device that was never opened."
+      "explanation": "Six requests out of order were all refused and only the two legal callbacks ran. A transition is legal only from certain states. Refusing it before the callback runs means the callback never has to cope with a device that was never opened."
     },
     {
       "stage": "check",

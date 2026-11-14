@@ -20,11 +20,11 @@
       "options": [
         "It is slow",
         "It is too strict",
-        "No channel can differ by more than 255, so it sees nothing",
+        "No channel can differ by more than 255",
         "It crashes"
       ],
       "correct": 2,
-      "explanation": "At 255 the one red pixel was not found."
+      "explanation": "It sees nothing. At 255 the one red pixel was not found."
     },
     {
       "stage": "check",
@@ -57,10 +57,10 @@
         "It is the only way",
         "It rounds",
         "It is faster",
-        "It reads any format as the same colour value, so formats need not match"
+        "It reads any format as the same colour value"
       ],
       "correct": 3,
-      "explanation": "ARGB32, RGB32, premultiplied and RGBA8888 gave 0 differences."
+      "explanation": "Formats need not match. ARGB32, RGB32, premultiplied and RGBA8888 gave 0 differences."
     },
     {
       "stage": "post",

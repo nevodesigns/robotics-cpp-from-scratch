@@ -57,10 +57,10 @@
         "The middleware requires a reason string for every refusal",
         "So that the check can be repeated for each property in turn",
         "Because a yes or no cannot be logged",
-        "A yes or no leaves a person guessing which of five properties differed: the camera against the demanding node gave three named reasons"
+        "A yes or no leaves a person guessing which of five properties differed"
       ],
       "correct": 3,
-      "explanation": "The camera against the demanding node differed in reliability, durability and deadline. Named, each is a line to change; unnamed, it is a guessing game."
+      "explanation": "The camera against the demanding node gave three named reasons. The camera against the demanding node differed in reliability, durability and deadline. Named, each is a line to change; unnamed, it is a guessing game."
     },
     {
       "stage": "post",

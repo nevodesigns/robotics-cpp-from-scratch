@@ -44,11 +44,11 @@
       "options": [
         "Nothing",
         "Quarters it exactly",
-        "Roughly halves it: 0.1821 s at kp 100 became 0.0950 s at kp 400, with the limit times the natural frequency near 1.8",
+        "Roughly halves it",
         "Doubles it"
       ],
       "correct": 2,
-      "explanation": "A joint twice as stiff needs a loop about twice as fast."
+      "explanation": "0.1821 s at kp 100 became 0.0950 s at kp 400, with the limit times the natural frequency near 1.8. A joint twice as stiff needs a loop about twice as fast."
     },
     {
       "stage": "post",
@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "Why not run the loop just under its largest stable period?",
       "options": [
-        "It would work until a late tick or a plant with a little extra delay, because there is no margin left, and the overshoot there is already several times larger",
+        "It would work until a late tick or a plant with a little extra delay",
         "The sensor would fail",
         "Bisection forbids it",
         "It would be slower"
       ],
       "correct": 0,
-      "explanation": "The limit is for this plant and a steady period only."
+      "explanation": "There is no margin left, and the overshoot there is already several times larger. The limit is for this plant and a steady period only."
     }
   ]
 }

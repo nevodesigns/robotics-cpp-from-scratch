@@ -57,10 +57,10 @@
         "They are in it, as plugins",
         "Gazebo cannot simulate a GNSS outage",
         "They would slow the physics",
-        "They concern what the sensors report, so they belong between the world and the program"
+        "They concern what the sensors report"
       ],
       "correct": 3,
-      "explanation": "A GNSS outage or a lost beam is something the robot's sensors report. The adapter between the world and the program applies them."
+      "explanation": "They belong between the world and the program. A GNSS outage or a lost beam is something the robot's sensors report. The adapter between the world and the program applies them."
     },
     {
       "stage": "post",

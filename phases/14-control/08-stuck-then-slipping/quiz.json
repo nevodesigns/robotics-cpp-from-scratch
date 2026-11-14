@@ -9,10 +9,10 @@
         "Friction is random",
         "The sensor is wrong",
         "The gain is too low to ever matter",
-        "The force stops growing once the error is small, and below the breakaway force the mass stays stuck, so it rests anywhere inside the band the breakaway over the gain allows"
+        "The force stops growing once the error is small, and below the breakaway force the mass stays stuck"
       ],
       "correct": 3,
-      "explanation": "With a breakaway of 1.5 N and a gain of 20 the band is 0.075, and it stopped at 0.0623."
+      "explanation": "It rests anywhere inside the band the breakaway over the gain allows. With a breakaway of 1.5 N and a gain of 20 the band is 0.075, and it stopped at 0.0623."
     },
     {
       "stage": "check",
@@ -33,10 +33,10 @@
         "Reverses it",
         "Stops it at once",
         "Accelerates it for ever",
-        "Keeps it going, because the force that keeps a mass moving, the Coulomb force of 1.0 N, is less than the force that started it, and it settles at 0.4 m/s"
+        "Keeps it going"
       ],
       "correct": 3,
-      "explanation": "Stiction is larger than Coulomb friction, so a range of forces keeps a mass going and will not start it."
+      "explanation": "The force that keeps a mass moving, the Coulomb force of 1.0 N, is less than the force that started it, and it settles at 0.4 m/s. Stiction is larger than Coulomb friction, so a range of forces keeps a mass going and will not start it."
     },
     {
       "stage": "check",
@@ -54,13 +54,13 @@
       "stage": "post",
       "question": "Freezing the integral inside a band of 0.01 stopped the hunting with a final error of 0.0051, and a band of 0.08 left it 0.0367 off. What is the lesson?",
       "options": [
-        "A band trades the hunting for a steady error about as large as the band, so it should be as narrow as the joint can resolve and no wider than the error you can tolerate",
+        "A band trades the hunting for a steady error about as large as the band",
         "Always use the widest band",
         "Bands do not work",
         "The error does not depend on the band"
       ],
       "correct": 0,
-      "explanation": "A wide band is quiet and wrong by more than the oscillation ever was."
+      "explanation": "It should be as narrow as the joint can resolve and no wider than the error you can tolerate. A wide band is quiet and wrong by more than the oscillation ever was."
     },
     {
       "stage": "post",

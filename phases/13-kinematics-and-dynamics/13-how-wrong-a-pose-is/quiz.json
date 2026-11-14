@@ -9,10 +9,10 @@
         "1 degree and 1 degree",
         "0 and 0",
         "360 and 360",
-        "-360 degrees, and a rotation error of nearly 0: they are the same orientation"
+        "-360 degrees, and a rotation error of nearly 0"
       ],
       "correct": 3,
-      "explanation": "The rotation error was 9.4e-16 rad."
+      "explanation": "They are the same orientation. The rotation error was 9.4e-16 rad."
     },
     {
       "stage": "check",
@@ -32,23 +32,23 @@
       "options": [
         "It is slow",
         "It is negative",
-        "(trace - 1) / 2 rounds to 1, so the angle is 0 and the answer is lost",
+        "(trace - 1) / 2 rounds to 1",
         "It is NaN"
       ],
       "correct": 2,
-      "explanation": "The antisymmetric part gave 1e-10."
+      "explanation": "The angle is 0 and the answer is lost. The antisymmetric part gave 1e-10."
     },
     {
       "stage": "check",
       "question": "Where is the axis of a half turn?",
       "options": [
-        "In the symmetric part: the antisymmetric part is zero there",
+        "In the symmetric part",
         "Nowhere",
         "In the antisymmetric part",
         "In the trace"
       ],
       "correct": 0,
-      "explanation": "R is 2 k kT less I at a half turn."
+      "explanation": "The antisymmetric part is zero there. R is 2 k kT less I at a half turn."
     },
     {
       "stage": "post",

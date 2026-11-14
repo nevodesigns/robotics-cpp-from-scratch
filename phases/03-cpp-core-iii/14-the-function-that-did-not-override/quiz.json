@@ -9,10 +9,10 @@
         "The robot is broken",
         "It is too fast",
         "The gain is zero",
-        "Its function differs from the base's by a missing const, so it is a new function and the base version runs"
+        "Its function differs from the base's by a missing const"
       ],
       "correct": 3,
-      "explanation": "Called directly it gave 10, through the base it gave 0."
+      "explanation": "It is a new function and the base version runs. Called directly it gave 10, through the base it gave 0."
     },
     {
       "stage": "check",
@@ -30,13 +30,13 @@
       "stage": "check",
       "question": "A base constructor calls a virtual function. Which version runs?",
       "options": [
-        "The base's own: the derived part is not built yet, so the object is a base object",
+        "The base's own",
         "The most derived",
         "Both",
         "Neither"
       ],
       "correct": 0,
-      "explanation": "The base constructor was told base, and afterwards the object said special."
+      "explanation": "The derived part is not built yet, so the object is a base object. The base constructor was told base, and afterwards the object said special."
     },
     {
       "stage": "check",
@@ -55,12 +55,12 @@
       "question": "A function takes a Controller by value and is passed a Proportional with gain 3. For error 2, what does it return?",
       "options": [
         "6",
-        "0: only the base part is copied, so the base version runs",
+        "0: only the base part is copied",
         "2",
         "3"
       ],
       "correct": 1,
-      "explanation": "By reference it was 6."
+      "explanation": "The base version runs. By reference it was 6."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "To save memory",
         "To copy it",
-        "So it can wrap any controller without slicing; the wrapped one must outlive it, or the reference dangles",
+        "So it can wrap any controller without slicing",
         "There is no risk"
       ],
       "correct": 2,
-      "explanation": "Lesson 02-07 is about the dangling reference."
+      "explanation": "The wrapped one must outlive it, or the reference dangles. Lesson 02-07 is about the dangling reference."
     }
   ]
 }

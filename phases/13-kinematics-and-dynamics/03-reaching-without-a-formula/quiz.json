@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "Approaching the workspace edge, convergence went 390 then 1281 then 5236 iterations, then failed. What is that?",
       "options": [
-        "The singularity from lesson 13-02, seen from the solver's side: the columns line up and the direction outward stops existing",
+        "The singularity from lesson 13-02, seen from the solver's side",
         "A sign that the gain is too small",
         "The iteration cap being reached by chance",
         "Accumulated rounding error in the Jacobian"
       ],
       "correct": 0,
-      "explanation": "The same geometry that made the closed form's two answers merge is what makes the numerical method stall. Convergence slowing sharply is how it announces itself before it stops working."
+      "explanation": "The columns line up and the direction outward stops existing. The same geometry that made the closed form's two answers merge is what makes the numerical method stall. Convergence slowing sharply is how it announces itself before it stops working."
     }
   ]
 }

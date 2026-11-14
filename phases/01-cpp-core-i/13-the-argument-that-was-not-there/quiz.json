@@ -67,12 +67,12 @@
       "question": "A tool is given --sped 0.9 when it expects --speed. Which of these actually catches it?",
       "options": [
         "Returning a three-outcome Option instead of a fallback",
-        "Rejecting any unrecognised argument that starts with a dash, since no return type can know what the user meant",
+        "Rejecting any unrecognised argument that starts with a dash",
         "Using parse_number instead of atoi on the value",
         "Checking argc before indexing argv"
       ],
       "correct": 1,
-      "explanation": "The richer return type catches a missing value but not a misspelled name, because --sped is simply an option the tool does not have. Walk the arguments once, compare each dashed one against the known list, and fail on the leftovers. Printing the resolved settings before starting is the cheap second half."
+      "explanation": "No return type can know what the user meant. The richer return type catches a missing value but not a misspelled name, because --sped is simply an option the tool does not have. Walk the arguments once, compare each dashed one against the known list, and fail on the leftovers. Printing the resolved settings before starting is the cheap second half."
     }
   ]
 }

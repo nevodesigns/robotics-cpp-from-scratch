@@ -54,13 +54,13 @@
       "stage": "post",
       "question": "What is the general rule that covers brightness, frame differences, blurs and gains?",
       "options": [
-        "The pixel is the storage, not the arithmetic: compute in int or float, decide what to do with anything out of range, and cast once on the way back",
+        "The pixel is the storage, not the arithmetic",
         "Always use saturating arithmetic on pixels",
         "Clamp the input rather than the output",
         "Always use floating point for images"
       ],
       "correct": 0,
-      "explanation": "Nine pixels of 200 in a blur add to 1800, which is seven times what fits, and a - b on unsigned pixels is enormous wherever b is larger."
+      "explanation": "Compute in int or float, decide what to do with anything out of range, and cast once on the way back. Nine pixels of 200 in a blur add to 1800, which is seven times what fits, and a - b on unsigned pixels is enormous wherever b is larger."
     },
     {
       "stage": "post",

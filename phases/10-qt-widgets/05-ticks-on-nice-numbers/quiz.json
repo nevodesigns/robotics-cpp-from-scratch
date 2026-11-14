@@ -68,11 +68,11 @@
       "options": [
         "The number of decimals",
         "The step",
-        "About how many: the step is a nice number, so the count is near it",
+        "About how many",
         "The exact number of ticks"
       ],
       "correct": 2,
-      "explanation": "42 ranges gave a count between 2 and 13 for a target of 6."
+      "explanation": "The step is a nice number, so the count is near it. 42 ranges gave a count between 2 and 13 for a target of 6."
     }
   ]
 }

@@ -9,10 +9,10 @@
         "A second check of the manifest's hash",
         "A signature on the release",
         "A faster install",
-        "A stage that asks whether the release is safe, before the first stage: the pipeline does not know what the release does"
+        "A stage that asks whether the release is safe, before the first stage"
       ],
       "correct": 3,
-      "explanation": "The pipeline of 20-12 checks that a release is for this robot, intact, newer and small enough. It has no idea whether the policy inside drives into people."
+      "explanation": "The pipeline does not know what the release does. The pipeline of 20-12 checks that a release is for this robot, intact, newer and small enough. It has no idea whether the policy inside drives into people."
     },
     {
       "stage": "check",
@@ -20,11 +20,11 @@
       "options": [
         "None: an unsafe rover fails everything",
         "S4, the lost link",
-        "S1, the empty building: it drives perfectly, and only the three scenarios with something in the way failed",
+        "S1, the empty building",
         "All five"
       ],
       "correct": 2,
-      "explanation": "With nothing in the way the unsafe candidate is a perfectly good rover. That is why a functional test alone proves so little."
+      "explanation": "It drives perfectly, and only the three scenarios with something in the way failed. With nothing in the way the unsafe candidate is a perfectly good rover. That is why a functional test alone proves so little."
     },
     {
       "stage": "check",
@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "Twenty robots are offered the unsafe rover. How many run it with and without the gate?",
       "options": [
-        "0 with the gate and 20 without: the pipeline checks everything it knows to check, and the release is valid",
+        "0 with the gate and 20 without",
         "20 with the gate and 20 without",
         "0 with either: the pipeline refuses it",
         "10 and 10"
       ],
       "correct": 0,
-      "explanation": "The release was valid, fitted and booted, so the pipeline passed it to all twenty. Only the gate knew what the policy did."
+      "explanation": "The pipeline checks everything it knows to check, and the release is valid. The release was valid, fitted and booted, so the pipeline passed it to all twenty. Only the gate knew what the policy did."
     }
   ]
 }

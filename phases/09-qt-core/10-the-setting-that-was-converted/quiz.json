@@ -9,10 +9,10 @@
         "3.7",
         "3 and ok false",
         "0",
-        "4 and ok true: it rounds, and ok means only that a conversion was done"
+        "4 and ok true"
       ],
       "correct": 3,
-      "explanation": "QVariant(3e9).toInt() gave -1294967296, also with ok true."
+      "explanation": "It rounds, and ok means only that a conversion was done. QVariant(3e9).toInt() gave -1294967296, also with ok true."
     },
     {
       "stage": "check",
@@ -31,12 +31,12 @@
       "question": "What do QVariant(QString(\"no\")).toBool() and QVariant(QString(\"abc\")).toBool() give?",
       "options": [
         "false and true",
-        "true and true: only the empty string, 0 and false are false",
+        "true and true",
         "true and false",
         "false and false"
       ],
       "correct": 1,
-      "explanation": "A setting safety = off leaves the safety on."
+      "explanation": "Only the empty string, 0 and false are false. A setting safety = off leaves the safety on."
     },
     {
       "stage": "check",
@@ -56,11 +56,11 @@
       "options": [
         "5 is a prime",
         "It checks the digits",
-        "3.7 would change in becoming an int, and 5.0 would not: only a whole number that fits is accepted",
+        "3.7 would change in becoming an int, and 5.0 would not",
         "Rounding"
       ],
       "correct": 2,
-      "explanation": "13 of 13 conversions that would change the value were refused."
+      "explanation": "Only a whole number that fits is accepted. 13 of 13 conversions that would change the value were refused."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "Qt forbids tests",
         "They are slow",
-        "They describe Qt 6.2, and other versions may convert some of these differently, so they are what was observed and not a promise",
+        "They describe Qt 6.2, and other versions may convert some of these differently",
         "They are optional"
       ],
       "correct": 2,
-      "explanation": "The continuous integration runs on other versions."
+      "explanation": "They are what was observed and not a promise. The continuous integration runs on other versions."
     }
   ]
 }

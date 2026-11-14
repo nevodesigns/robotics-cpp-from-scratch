@@ -7,24 +7,24 @@
       "question": "A joint stands still and its sensor is good to 0.001 rad at 1 kHz. What does the raw derivative of its reading look like?",
       "options": [
         "Zero, nothing moved",
-        "Noise about 1.4 rad/s rms, because every reading's error is divided by a millisecond",
+        "Noise about 1.4 rad/s rms",
         "A constant",
         "0.001 rad/s"
       ],
       "correct": 1,
-      "explanation": "The test measured 1.4067 rad/s rms of derivative on a joint that was not moving."
+      "explanation": "Every reading's error is divided by a millisecond. The test measured 1.4067 rad/s rms of derivative on a joint that was not moving."
     },
     {
       "stage": "check",
       "question": "What does `alpha = dt / (tf + dt)` set?",
       "options": [
-        "The share of each new raw derivative that is let into the filtered value; a small alpha is a slow filter",
+        "The share of each new raw derivative that is let into the filtered value",
         "The loop gain",
         "The sample rate",
         "The sensor's resolution"
       ],
       "correct": 0,
-      "explanation": "A tf of zero gives alpha of one and the raw derivative."
+      "explanation": "A small alpha is a slow filter. A tf of zero gives alpha of one and the raw derivative."
     },
     {
       "stage": "check",
@@ -57,10 +57,10 @@
         "Memory",
         "A higher sensor noise",
         "Nothing",
-        "Lag of about tf: the derivative's rms error on a noise free swing rose from 0 to 0.2769 rad/s at tf of 0.02 s"
+        "Lag of about tf"
       ],
       "correct": 3,
-      "explanation": "The error grew almost in proportion to tf, so noise and lag trade against each other."
+      "explanation": "The derivative's rms error on a noise free swing rose from 0 to 0.2769 rad/s at tf of 0.02 s. The error grew almost in proportion to tf, so noise and lag trade against each other."
     },
     {
       "stage": "post",

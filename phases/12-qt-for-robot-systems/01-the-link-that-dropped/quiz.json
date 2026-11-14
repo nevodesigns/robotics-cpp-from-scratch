@@ -67,12 +67,12 @@
       "question": "A hundred stations lose the same robot together. What does a client with these waits do?",
       "options": [
         "Never retry",
-        "Retry together, at the same instants: a real fleet adds a random part",
+        "Retry together, at the same instants",
         "Spreads out the retries",
         "Retry once"
       ],
       "correct": 1,
-      "explanation": "The lesson says so under what it does not do."
+      "explanation": "A real fleet adds a random part. The lesson says so under what it does not do."
     }
   ]
 }

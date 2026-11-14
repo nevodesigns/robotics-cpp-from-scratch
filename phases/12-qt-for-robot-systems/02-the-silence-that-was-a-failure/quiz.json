@@ -43,12 +43,12 @@
       "question": "A link stays lost for a thousand looks. How many signals?",
       "options": [
         "A thousand",
-        "One for the change to lost: looking again at the same answer is not news",
+        "One for the change to lost",
         "None",
         "Two for each look"
       ],
       "correct": 1,
-      "explanation": "There were 2 signals in all, for late and for lost."
+      "explanation": "Looking again at the same answer is not news. There were 2 signals in all, for late and for lost."
     },
     {
       "stage": "post",

@@ -56,11 +56,11 @@
       "options": [
         "The roadmap's nodes lie on straight lines",
         "The roadmap ignores the joint limits",
-        "Dijkstra finds the shortest path through the graph, not the first a tree found: 0.74 times the length",
+        "Dijkstra finds the shortest path through the graph, not the first a tree found",
         "They are not: both wander equally"
       ],
       "correct": 2,
-      "explanation": "A tree returns the first path it finds. The graph search returns the shortest one the roadmap contains, which was 0.74 times as long."
+      "explanation": "0.74 times the length. A tree returns the first path it finds. The graph search returns the shortest one the roadmap contains, which was 0.74 times as long."
     },
     {
       "stage": "post",

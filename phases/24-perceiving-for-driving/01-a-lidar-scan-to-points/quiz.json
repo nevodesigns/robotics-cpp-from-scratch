@@ -57,10 +57,10 @@
         "The wall is not flat at that scale",
         "The beams are refracted near the floor",
         "The ranges are noisier for a tipped sensor",
-        "The sensor's plane is tilted, so beams to the front are lowered and beams behind raised"
+        "The sensor's plane is tilted"
       ],
       "correct": 3,
-      "explanation": "Tipped down 5 degrees, the scan plane cuts the wall ahead lower and the wall behind higher. Taken through the mount's transform the heights ran from -0.19 to 0.69 m."
+      "explanation": "Beams to the front are lowered and beams behind raised. Tipped down 5 degrees, the scan plane cuts the wall ahead lower and the wall behind higher. Taken through the mount's transform the heights ran from -0.19 to 0.69 m."
     },
     {
       "stage": "post",

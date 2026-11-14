@@ -30,13 +30,13 @@
       "stage": "check",
       "question": "Why is soft=2.5 left unchanged?",
       "options": [
-        "The t= inside the word soft is not at the start of a word, so it is not a time",
+        "The t= inside the word soft is not at the start of a word",
         "It is not a number",
         "It has a dot",
         "It is too short"
       ],
       "correct": 0,
-      "explanation": "A t= with no number after it, as in target=3 t= none, is also left alone."
+      "explanation": "It is not a time. A t= with no number after it, as in target=3 t= none, is also left alone."
     },
     {
       "stage": "check",
@@ -55,12 +55,12 @@
       "question": "What is the longest common subsequence used for?",
       "options": [
         "Sorting",
-        "Finding the most lines two logs have in common in order, so that what is left over is exactly what was removed and added",
+        "Finding the most lines two logs have in common in order",
         "Hashing",
         "Counting lines"
       ],
       "correct": 1,
-      "explanation": "table[i][j] is how many lines the first i and the first j have in common."
+      "explanation": "What is left over is exactly what was removed and added. table[i][j] is how many lines the first i and the first j have in common."
     },
     {
       "stage": "post",

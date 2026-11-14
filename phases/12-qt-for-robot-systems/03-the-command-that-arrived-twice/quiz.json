@@ -8,11 +8,11 @@
       "options": [
         "Wait for ever",
         "Nothing",
-        "Send the command again: it cannot tell the command was lost from the answer",
+        "Send the command again",
         "Fail the command"
       ],
       "correct": 2,
-      "explanation": "The first acknowledgement of 10 commands lost was 20 arrivals."
+      "explanation": "It cannot tell the command was lost from the answer. The first acknowledgement of 10 commands lost was 20 arrivals."
     },
     {
       "stage": "check",
@@ -56,11 +56,11 @@
       "options": [
         "They become 32 bits",
         "They stop",
-        "They wrap to 0: 70000 commands used 65536 numbers with none twice in a row",
+        "They wrap to 0",
         "An error"
       ],
       "correct": 2,
-      "explanation": "The last of 70000 was 4463."
+      "explanation": "70000 commands used 65536 numbers with none twice in a row. The last of 70000 was 4463."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "It is delayed",
         "It is applied twice at once",
         "It is refused",
-        "It may be applied again: it has fallen out of the window"
+        "It may be applied again"
       ],
       "correct": 3,
-      "explanation": "Number 1 was accepted again after two others."
+      "explanation": "It has fallen out of the window. Number 1 was accepted again after two others."
     }
   ]
 }

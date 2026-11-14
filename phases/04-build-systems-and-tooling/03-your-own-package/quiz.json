@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "Why does an exported target need its include directory described twice?",
       "options": [
-        "There are two places the headers live: the source tree while this project builds, and the install prefix afterwards",
+        "There are two places the headers live",
         "To support both Windows and Linux paths",
         "Once for debug and once for release",
         "Once for the compiler and once for the linker"
       ],
       "correct": 0,
-      "explanation": "BUILD_INTERFACE applies during this build and is dropped on export. INSTALL_INTERFACE applies only in the exported package and is relative to wherever it landed."
+      "explanation": "The source tree while this project builds, and the install prefix afterwards. BUILD_INTERFACE applies during this build and is dropped on export. INSTALL_INTERFACE applies only in the exported package and is relative to wherever it landed."
     },
     {
       "stage": "check",

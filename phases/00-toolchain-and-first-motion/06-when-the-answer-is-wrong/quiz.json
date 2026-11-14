@@ -7,12 +7,12 @@
       "question": "A calculation returns a number that is exactly half what it should be. What is the most useful next thought?",
       "options": [
         "The compiler optimised it incorrectly",
-        "Something was averaged, or applied twice, so look for the factor rather than reading the whole function",
+        "Something was averaged, or applied twice",
         "The input was wrong",
         "A rounding error accumulated"
       ],
       "correct": 1,
-      "explanation": "A wrong number is wrong in a way, and the way is a short list. Turning it wrong into out by a factor of two is a hypothesis, and a hypothesis can be tested in a minute."
+      "explanation": "Look for the factor rather than reading the whole function. A wrong number is wrong in a way, and the way is a short list. Turning it wrong into out by a factor of two is a hypothesis, and a hypothesis can be tested in a minute."
     },
     {
       "stage": "check",

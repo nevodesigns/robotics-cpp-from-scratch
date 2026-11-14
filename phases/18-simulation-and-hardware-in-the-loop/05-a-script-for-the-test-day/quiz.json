@@ -31,12 +31,12 @@
       "question": "A time is written 1.5e. What should the parser do?",
       "options": [
         "Read it as 1.5 and carry on, as std::stod does",
-        "Refuse it: a number is the whole word or it is an error, since reading 1.5 would run a scenario different from the one written",
+        "Refuse it: a number is the whole word or it is an error",
         "Read it as 15, treating the e as an exponent of 1",
         "Read it as zero, the default for a bad number"
       ],
       "correct": 1,
-      "explanation": "A word that is not wholly a number is an error. Taking the part that parses changes the scenario without telling anyone."
+      "explanation": "Reading 1.5 would run a scenario different from the one written. A word that is not wholly a number is an error. Taking the part that parses changes the scenario without telling anyone."
     },
     {
       "stage": "check",
@@ -57,22 +57,22 @@
         "An event at zero is treated as a comment",
         "The parser refuses a time of zero",
         "The first step is skipped while the simulation starts up",
-        "The first interval starts at 0, and an interval that excludes its start has no place for an event at 0: events_between(0, 0.01) gave nothing and events_between(-1, 0.01) gave it"
+        "The first interval starts at 0, and an interval that excludes its start has no place for an event at 0"
       ],
       "correct": 3,
-      "explanation": "With the rule t0 < time <= t1, the interval from 0 to 0.01 does not contain 0. Starting the first interval before zero gives the event a home."
+      "explanation": "Events_between(0, 0.01) gave nothing and events_between(-1, 0.01) gave it. With the rule t0 < time <= t1, the interval from 0 to 0.01 does not contain 0. Starting the first interval before zero gives the event a home."
     },
     {
       "stage": "post",
       "question": "An event at 1.0 s and steps of 0.1 s arrives at step 11 in one run and 10 in another. What differs?",
       "options": [
-        "How the step's time was worked out: adding 0.1 ten times gives 0.9999999999999999, short of 1.0, and the step number times 0.1 gives 1.0",
+        "How the step's time was worked out",
         "The parser read the event's time as 1.1 in one run",
         "The scenario was sorted differently in the two runs",
         "One run used a step of 0.09 by mistake"
       ],
       "correct": 0,
-      "explanation": "0.1 has no exact binary form, and ten of them added fall just short of 1.0. The step number times the step lands on it."
+      "explanation": "Adding 0.1 ten times gives 0.9999999999999999, short of 1.0, and the step number times 0.1 gives 1.0. 0.1 has no exact binary form, and ten of them added fall just short of 1.0. The step number times the step lands on it."
     }
   ]
 }

@@ -7,12 +7,12 @@
       "question": "A std::priority_queue<int> is given 5, 1, 9 and 3. What does top() return?",
       "options": [
         "1",
-        "9: it is a max-heap, so the greatest comes first",
+        "9: it is a max-heap",
         "5",
         "3"
       ],
       "correct": 1,
-      "explanation": "A schedule wants the earliest, so it must compare the other way round."
+      "explanation": "The greatest comes first. A schedule wants the earliest, so it must compare the other way round."
     },
     {
       "stage": "check",
@@ -69,10 +69,10 @@
         "The sequence number forbids it",
         "You can",
         "It is a bug",
-        "A priority queue only gives its top, so a simulation marks an event cancelled and skips it when it comes out"
+        "A priority queue only gives its top"
       ],
       "correct": 3,
-      "explanation": "That is a limit of the container, stated in the lesson."
+      "explanation": "A simulation marks an event cancelled and skips it when it comes out. That is a limit of the container, stated in the lesson."
     }
   ]
 }

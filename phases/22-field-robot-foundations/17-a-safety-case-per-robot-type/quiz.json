@@ -8,11 +8,11 @@
       "options": [
         "The number of hazards it lists",
         "A statement that the robot was tested",
-        "The structure behind it: every hazard has a control, and every control has a test",
+        "The structure behind it",
         "The standard it names"
       ],
       "correct": 2,
-      "explanation": "A case is a table that can be checked: no hazard without a control, no control without a test that passes."
+      "explanation": "Every hazard has a control, and every control has a test. A case is a table that can be checked: no hazard without a control, no control without a test that passes."
     },
     {
       "stage": "check",

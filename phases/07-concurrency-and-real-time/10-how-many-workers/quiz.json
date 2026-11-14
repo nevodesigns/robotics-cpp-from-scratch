@@ -20,35 +20,35 @@
       "options": [
         "It gets worse past 4 workers",
         "It is the same as for computation",
-        "It keeps scaling far past the core count: 44.6 times with 48 workers, because a waiting task uses no core",
+        "It keeps scaling far past the core count",
         "It stops at the core count, as before"
       ],
       "correct": 2,
-      "explanation": "Computation scales to the cores and stops; waiting scales to the number of things waited on. A pool sized once and used for both is wrong for one of them."
+      "explanation": "44.6 times with 48 workers, because a waiting task uses no core. Computation scales to the cores and stops; waiting scales to the number of things waited on. A pool sized once and used for both is wrong for one of them."
     },
     {
       "stage": "check",
       "question": "4000 trivial tasks: a thread started and joined for each, against a pool of 4. What did the measurement give?",
       "options": [
         "About the same",
-        "About 122 ms against 5.4 ms: starting a thread costs tens of microseconds, which is nothing for a long task and most of the time for a tiny one",
+        "About 122 ms against 5.4 ms",
         "122 ms for the pool",
         "The pool was slower because of the queue"
       ],
       "correct": 1,
-      "explanation": "A thread costs roughly thirty microseconds to start and stop. That is what a pool is for besides the count: it pays that once."
+      "explanation": "Starting a thread costs tens of microseconds, which is nothing for a long task and most of the time for a tiny one. A thread costs roughly thirty microseconds to start and stop. That is what a pool is for besides the count: it pays that once."
     },
     {
       "stage": "check",
       "question": "Ten tasks on two workers, three of which throw. What does the pool report, and what about the workers?",
       "options": [
-        "10 completed and 3 failed, and the workers carry on: the exception is caught per task at the one place tasks run",
+        "10 completed and 3 failed, and the workers carry on",
         "Nothing, the exceptions are swallowed silently",
         "The process ends, as an escaping exception always does",
         "7 completed, and two workers are lost"
       ],
       "correct": 0,
-      "explanation": "Five further tasks submitted afterwards all ran. The failed count is what keeps a pool that swallows exceptions from hiding bugs."
+      "explanation": "The exception is caught per task at the one place tasks run. Five further tasks submitted afterwards all ran. The failed count is what keeps a pool that swallows exceptions from hiding bugs."
     },
     {
       "stage": "post",
@@ -67,12 +67,12 @@
       "question": "Under GCC 11's thread sanitizer this pool's suite reported 69 problems, two of them lock-order-inversion. Under clang 14's it reported none in 15 runs. Which should you believe?",
       "options": [
         "GCC's, since more reports means more thorough",
-        "Clang's, after checking the code: GCC 11's runtime does not see the lock handed back inside a timed condition variable wait, so its record of held locks goes stale and it invents edges; no code path takes the two locks in the other order",
+        "Clang's, after checking the code",
         "Both, so the pool is broken",
         "Neither, sanitizers are unreliable"
       ],
       "correct": 1,
-      "explanation": "The tool limitation is E-TSAN-0002 and it also fabricates lock-order cycles. A cycle report passing through a timed wait on GCC 11 is that problem until the code shows a real reversed order."
+      "explanation": "GCC 11's runtime does not see the lock handed back inside a timed condition variable wait, so its record of held locks goes stale and it invents edges; no code path takes the two locks in the other order. The tool limitation is E-TSAN-0002 and it also fabricates lock-order cycles. A cycle report passing through a timed wait on GCC 11 is that problem until the code shows a real reversed order."
     }
   ]
 }

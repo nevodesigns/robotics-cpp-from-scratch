@@ -43,12 +43,12 @@
       "question": "A joint with a five newton load and a proportional gain of twenty stops 0.25 short. Why exactly that?",
       "options": [
         "The output limits were reached",
-        "Proportional output exists only while there is error, so it stops at the error that produces the force the load needs: the load over the gain",
+        "Proportional output exists only while there is error",
         "The measurement is biased by the load",
         "The derivative term is opposing it"
       ],
       "correct": 1,
-      "explanation": "Five over twenty is 0.25, and no amount of derivative gain changes it, because the derivative term is zero once the thing has stopped moving."
+      "explanation": "It stops at the error that produces the force the load needs: the load over the gain. Five over twenty is 0.25, and no amount of derivative gain changes it, because the derivative term is zero once the thing has stopped moving."
     },
     {
       "stage": "post",
@@ -56,11 +56,11 @@
       "options": [
         "The band is only valid after the peak",
         "The first entry is harder to compute",
-        "An oscillating response passes through the band on its way past the target, so the first entry is near the start with all the ringing still to come",
+        "An oscillating response passes through the band on its way past the target",
         "They give the same answer for any real response"
       ],
       "correct": 2,
-      "explanation": "The worse a loop rings, the earlier the wrong version reports it as settled, and the error is in the flattering direction, which is the direction nobody questions."
+      "explanation": "The first entry is near the start with all the ringing still to come. The worse a loop rings, the earlier the wrong version reports it as settled, and the error is in the flattering direction, which is the direction nobody questions."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "Always add one, then tune it down",
         "Add one whenever the plant has damping",
         "Add one if the rise time is too slow",
-        "Run it with P and D only and look at where it stops: if it stops on the target, there is nothing for an integral term to do"
+        "Run it with P and D only and look at where it stops"
       ],
       "correct": 3,
-      "explanation": "The question is about the machine rather than the controller: is there something needing a constant force just to hold still. One experiment answers it."
+      "explanation": "If it stops on the target, there is nothing for an integral term to do. The question is about the machine rather than the controller: is there something needing a constant force just to hold still. One experiment answers it."
     }
   ]
 }

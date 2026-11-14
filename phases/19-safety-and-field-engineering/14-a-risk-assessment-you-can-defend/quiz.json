@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "What is the difference between an assessment and a spreadsheet of mitigations?",
       "options": [
-        "The assessment checks its own claims: a mitigation gets credit only if its mechanism exists and its evidence passes, and a claim with nothing under it is worth zero",
+        "The assessment checks its own claims",
         "An assessment is longer and has a signature",
         "An assessment uses probabilities and a spreadsheet does not",
         "Nothing, if the spreadsheet lists every hazard"
       ],
       "correct": 0,
-      "explanation": "A mitigation here names a mechanism that must exist and carries evidence that is run. One that fails either earns no credit at all."
+      "explanation": "A mitigation gets credit only if its mechanism exists and its evidence passes, and a claim with nothing under it is worth zero. A mitigation here names a mechanism that must exist and carries evidence that is run. One that fails either earns no credit at all."
     },
     {
       "stage": "check",
@@ -21,10 +21,10 @@
         "The product of the two, 1.33e-05",
         "Half, 1.82e-03",
         "Zero: two mitigations cover every failure",
-        "The same: within a group only the best counts, because they can fail for the same reason (3.64e-03 before and after)"
+        "The same: within a group only the best counts"
       ],
       "correct": 3,
-      "explanation": "Both are software and can fail for the same reason, so only the better one counts. Redundancy is credited across groups, with a common cause share."
+      "explanation": "They can fail for the same reason (3.64e-03 before and after). Both are software and can fail for the same reason, so only the better one counts. Redundancy is credited across groups, with a common cause share."
     },
     {
       "stage": "check",
@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "The brake is changed to one applied by power. What does the assessment say?",
       "options": [
-        "The evidence fails in G1, G2 and G4, which relied on it: 3 evidence failures and 9 findings, with the credit, the second group and the residual class all following",
+        "The evidence fails in G1, G2 and G4, which relied on it",
         "Nothing: the brake's pfd is unchanged",
         "One finding, for the brake itself",
         "It passes, since the software stop still works"
       ],
       "correct": 0,
-      "explanation": "The brake's evidence cuts its wire and expects it to engage, which a power applied brake does not. Every hazard that leaned on it loses the credit, its second group and its class."
+      "explanation": "3 evidence failures and 9 findings, with the credit, the second group and the residual class all following. The brake's evidence cuts its wire and expects it to engage, which a power applied brake does not. Every hazard that leaned on it loses the credit, its second group and its class."
     },
     {
       "stage": "post",
@@ -67,12 +67,12 @@
       "question": "What does defensible not mean?",
       "options": [
         "That the evidence was run",
-        "That nothing can go wrong: three catastrophes remain at medium, a person has put their name to that, and the hazards never written down are not in the report",
+        "That nothing can go wrong",
         "That every hazard has an owner",
         "That a mechanism was named for each mitigation"
       ],
       "correct": 1,
-      "explanation": "It means each claim has something under it. Three catastrophes are still medium by the floor, and a hazard nobody wrote down is not assessed at all."
+      "explanation": "Three catastrophes remain at medium, a person has put their name to that, and the hazards never written down are not in the report. It means each claim has something under it. Three catastrophes are still medium by the floor, and a hazard nobody wrote down is not assessed at all."
     }
   ]
 }

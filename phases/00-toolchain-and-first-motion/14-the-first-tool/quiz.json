@@ -7,12 +7,12 @@
       "question": "A tool reads std::cin and writes std::cout directly. What does that cost when testing it?",
       "options": [
         "Nothing",
-        "It cannot be tested without a person typing and watching, so the logic is better taken as stream parameters",
+        "It cannot be tested without a person typing and watching",
         "It is slower",
         "It cannot run on Windows"
       ],
       "correct": 1,
-      "explanation": "The test hands run_drive text and reads back what it wrote."
+      "explanation": "The logic is better taken as stream parameters. The test hands run_drive text and reads back what it wrote."
     },
     {
       "stage": "check",
@@ -20,23 +20,23 @@
       "options": [
         "The robot needs all three at once",
         "To save time",
-        "Output written before a problem is found cannot be taken back: a bad third number after the picture leaves half an answer, which a script reading the output cannot tell from a result",
+        "Output written before a problem is found cannot be taken back",
         "It is a rule of C++"
       ],
       "correct": 2,
-      "explanation": "With 'fast' for the right speed: status 2, a message on the error stream and 0 characters of output."
+      "explanation": "A bad third number after the picture leaves half an answer, which a script reading the output cannot tell from a result. With 'fast' for the right speed: status 2, a message on the error stream and 0 characters of output."
     },
     {
       "stage": "check",
       "question": "A person types fast for the right speed. What does the tool do?",
       "options": [
-        "Writes right speed: not a number (allowed 0 to 2) to the error stream, nothing to the output, and returns the misused status 2",
+        "Writes right speed",
         "Asks again for ever",
         "Uses zero",
         "Crashes"
       ],
       "correct": 0,
-      "explanation": "The message names the value, the problem and the allowed range."
+      "explanation": "Not a number (allowed 0 to 2) to the error stream, nothing to the output, and returns the misused status 2. The message names the value, the problem and the allowed range."
     },
     {
       "stage": "check",
@@ -54,25 +54,25 @@
       "stage": "post",
       "question": "A straight drive has no height. What does the picture show?",
       "options": [
-        "A single row with S and E on it, because scale_to_fit scales by the axis that has an extent",
+        "A single row with S and E on it",
         "A circle",
         "An error",
         "Nothing"
       ],
       "correct": 0,
-      "explanation": "A scale that divided by the height would have given not a number everywhere."
+      "explanation": "Scale_to_fit scales by the axis that has an extent. A scale that divided by the height would have given not a number everywhere."
     },
     {
       "stage": "post",
       "question": "Why is the start of the path at the bottom left of the picture and the end at the top right?",
       "options": [
         "Left is zero",
-        "The robot's y grows upward and rows of text grow downward, so the picture has to flip it, and the quarter circle ends up about as wide as it is tall",
+        "The robot's y grows upward and rows of text grow downward",
         "The order of the arguments",
         "A mistake"
       ],
       "correct": 1,
-      "explanation": "E was in the top row and S in the bottom row, at column 0."
+      "explanation": "The picture has to flip it, and the quarter circle ends up about as wide as it is tall. E was in the top row and S in the bottom row, at column 0."
     }
   ]
 }

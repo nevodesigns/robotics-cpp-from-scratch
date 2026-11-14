@@ -18,13 +18,13 @@
       "stage": "check",
       "question": "Severity 4 with likelihood 1 scores 4. By the product alone that is low. What does the log class it as?",
       "options": [
-        "Medium: a catastrophic outcome is never classed below medium, because the likelihood is a guess and the outcome is not",
+        "Medium: a catastrophic outcome is never classed below medium",
         "Low: 4 is in the low band, and the class follows the score",
         "High: any severity 4 is at least high",
         "Unacceptable: a possible death can never be accepted"
       ],
       "correct": 0,
-      "explanation": "The likelihood is an estimate made by people who hope it is small. The severity is what happens. So one rule overrides the product: severity 4 never classes below medium."
+      "explanation": "The likelihood is a guess and the outcome is not. The likelihood is an estimate made by people who hope it is small. The severity is what happens. So one rule overrides the product: severity 4 never classes below medium."
     },
     {
       "stage": "check",
@@ -55,12 +55,12 @@
       "question": "unaddressed() lists a severity 4, likelihood 1 fire with no mitigation but not a severity 2, likelihood 1 pinch with none. Why?",
       "options": [
         "The pinch has an owner and the fire has none",
-        "The fire is medium by the floor and so is not low, while the pinch is low: a low risk with nothing done is allowed, a catastrophe with nothing done is not",
+        "The fire is medium by the floor and so is not low, while the pinch is low",
         "The fire scores higher than the pinch by the product",
         "The pinch has a mitigation that the log does not show"
       ],
       "correct": 1,
-      "explanation": "Both score low by the product. The floor lifts the fire to medium, and anything that is not low needs something done about it."
+      "explanation": "A low risk with nothing done is allowed, a catastrophe with nothing done is not. Both score low by the product. The floor lifts the fire to medium, and anything that is not low needs something done about it."
     },
     {
       "stage": "post",

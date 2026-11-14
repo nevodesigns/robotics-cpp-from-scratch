@@ -31,12 +31,12 @@
       "question": "const int size = readings.size(); int buffer[size]; is refused. Why, when const int kCount = 8; int buffer[kCount]; is accepted?",
       "options": [
         "Because size is a std::size_t and array bounds must be int",
-        "const says nobody may change it, not that the value is known at build time; the second works only because an integral const initialised by a constant expression is itself usable as one",
+        "const says nobody may change it, not that the value is known at build time",
         "Because readings.size() might return zero",
         "Both are refused; C++ has no variable-length arrays at all"
       ],
       "correct": 1,
-      "explanation": "That C++98 rule covers integral types only, which is why the same thing with a const double fails on both compilers. The feature appears to work until the first time it matters."
+      "explanation": "The second works only because an integral const initialised by a constant expression is itself usable as one. That C++98 rule covers integral types only, which is why the same thing with a const double fails on both compilers. The feature appears to work until the first time it matters."
     },
     {
       "stage": "check",

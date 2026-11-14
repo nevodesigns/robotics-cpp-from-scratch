@@ -9,10 +9,10 @@
         "The encoder cannot resolve slow motion",
         "The motor's torque ripples at low speed",
         "Viscous friction grows as the joint slows",
-        "Friction is higher at rest than when sliding (the Stribeck part), so it has to break free"
+        "Friction is higher at rest than when sliding (the Stribeck part)"
       ],
       "correct": 3,
-      "explanation": "It takes more to start the joint than to keep it sliding. The controller builds up torque until it breaks free, and by then has too much."
+      "explanation": "It has to break free. It takes more to start the joint than to keep it sliding. The controller builds up torque until it breaks free, and by then has too much."
     },
     {
       "stage": "check",

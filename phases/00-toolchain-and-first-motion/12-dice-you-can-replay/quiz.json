@@ -8,11 +8,11 @@
       "options": [
         "Removing the random numbers",
         "A faster computer",
-        "A generator started from a seed the test prints, so the same numbers can be produced again",
+        "A generator started from a seed the test prints",
         "Running it fifty times"
       ],
       "correct": 2,
-      "explanation": "Seed 12345 gave the same largest draw, 0.999863 at draw 32, both times."
+      "explanation": "The same numbers can be produced again. Seed 12345 gave the same largest draw, 0.999863 at draw 32, both times."
     },
     {
       "stage": "check",
@@ -21,10 +21,10 @@
         "It does not break it",
         "Zero is too small",
         "It overflows",
-        "Zero shifted and xored with itself is zero, so the state never leaves it"
+        "Zero shifted and xored with itself is zero"
       ],
       "correct": 3,
-      "explanation": "The constructor swaps a zero seed for a fixed non-zero one."
+      "explanation": "The state never leaves it. The constructor swaps a zero seed for a fixed non-zero one."
     },
     {
       "stage": "check",
@@ -32,11 +32,11 @@
       "options": [
         "It repeats",
         "The remainder is slow",
-        "Unless n divides the range exactly, the smaller remainders arise one more time than the rest: with n of 3,000,000,000, 0.604 of draws fell below 1,294,967,296 where 0.433 is fair",
+        "Unless n divides the range exactly, the smaller remainders arise one more time than the rest",
         "It is always fair"
       ],
       "correct": 2,
-      "explanation": "below(n) discards the few draws below a threshold to remove the imbalance."
+      "explanation": "With n of 3,000,000,000, 0.604 of draws fell below 1,294,967,296 where 0.433 is fair. below(n) discards the few draws below a threshold to remove the imbalance."
     },
     {
       "stage": "check",
@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "Why is this generator not for anything secret?",
       "options": [
-        "Its next number can be worked out from the last, so someone who sees some output can predict the rest",
+        "Its next number can be worked out from the last",
         "It is too slow",
         "It only makes whole numbers",
         "It uses too much memory"
       ],
       "correct": 0,
-      "explanation": "It is for simulation and tests, and its virtue is that every line can be read."
+      "explanation": "Someone who sees some output can predict the rest. It is for simulation and tests, and its virtue is that every line can be read."
     }
   ]
 }

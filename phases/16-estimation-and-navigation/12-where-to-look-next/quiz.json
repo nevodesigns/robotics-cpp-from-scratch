@@ -9,10 +9,10 @@
         "Anywhere",
         "To the wall",
         "Home",
-        "To where what is known meets what is not: a free cell with an unseen cell beside it"
+        "To where what is known meets what is not"
       ],
       "correct": 3,
-      "explanation": "That is a frontier."
+      "explanation": "A free cell with an unseen cell beside it. That is a frontier."
     },
     {
       "stage": "check",
@@ -32,23 +32,23 @@
       "options": [
         "It is more accurate to the metre",
         "It uses less memory",
-        "The straight line can go through a wall: from (5,5) the nearest in a line was 34 steps to drive and the chosen one 24",
+        "The straight line can go through a wall",
         "It is faster to compute"
       ],
       "correct": 2,
-      "explanation": "The test checked the choice against its own search."
+      "explanation": "From (5,5) the nearest in a line was 34 steps to drive and the chosen one 24. The test checked the choice against its own search."
     },
     {
       "stage": "check",
       "question": "What does a minimum size for an opening do?",
       "options": [
         "Makes the map bigger",
-        "Keeps the rover from driving across the room to look at a single missed cell: a minimum of 5 went to the real opening and a minimum of 1 to the speck",
+        "Keeps the rover from driving across the room to look at a single missed cell",
         "Sets the rover's width",
         "Nothing"
       ],
       "correct": 1,
-      "explanation": "A speck made a second opening of 4 cells."
+      "explanation": "A minimum of 5 went to the real opening and a minimum of 1 to the speck. A speck made a second opening of 4 cells."
     },
     {
       "stage": "post",

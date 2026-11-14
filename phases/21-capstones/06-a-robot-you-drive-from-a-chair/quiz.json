@@ -7,12 +7,12 @@
       "question": "At 2 m/s and 1.5 m/s^2 of braking, what timeout stops the robot within a metre of the link going?",
       "options": [
         "0.667 s",
-        "None: the braking alone is 1.333 m, so the answer is a lower speed",
+        "None: the braking alone is 1.333 m",
         "0.3 s",
         "0.1 s"
       ],
       "correct": 1,
-      "explanation": "At 2 m/s the braking distance alone is 2 squared over twice 1.5, 1.333 m. No timeout can make that less than a metre."
+      "explanation": "The answer is a lower speed. At 2 m/s the braking distance alone is 2 squared over twice 1.5, 1.333 m. No timeout can make that less than a metre."
     },
     {
       "stage": "check",
@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "Why does real radio make loss to the power k a poor guide?",
       "options": [
-        "Real loss comes in bursts: false stops are rarer and real outages longer than the independent model says",
+        "Real loss comes in bursts",
         "Real radio never loses packets",
         "It is a good guide: losses are independent",
         "The heartbeat rate changes with the loss"
       ],
       "correct": 0,
-      "explanation": "The table assumes each packet is lost independently. A real link loses them in runs, so the same average loss gives fewer false stops and longer silences."
+      "explanation": "False stops are rarer and real outages longer than the independent model says. The table assumes each packet is lost independently. A real link loses them in runs, so the same average loss gives fewer false stops and longer silences."
     }
   ]
 }

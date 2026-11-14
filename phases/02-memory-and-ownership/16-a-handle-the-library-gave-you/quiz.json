@@ -55,12 +55,12 @@
       "question": "Two devices: one is handed over with std::move and one replaced by an assignment. What does the log show?",
       "options": [
         "opened 1, closed 1",
-        "opened 2, closed 2, bad closes 0: the assignment closed the device it overwrote",
+        "opened 2, closed 2, bad closes 0",
         "opened 2, closed 3",
         "opened 2, closed 1"
       ],
       "correct": 1,
-      "explanation": "The one moved from is empty afterwards."
+      "explanation": "The assignment closed the device it overwrote. The one moved from is empty afterwards."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "Twice as much",
         "A heap allocation",
         "16 bytes",
-        "Nothing: sizeof was 8 for both, because a closer with no data takes no space"
+        "Nothing: sizeof was 8 for both"
       ],
       "correct": 3,
-      "explanation": "A deleter that carries data would add to the size."
+      "explanation": "A closer with no data takes no space. A deleter that carries data would add to the size."
     }
   ]
 }

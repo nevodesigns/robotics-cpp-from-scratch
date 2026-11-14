@@ -67,12 +67,12 @@
       "question": "What can the report not tell?",
       "options": [
         "How many scenarios were run",
-        "Whether a scenario's rule would really catch the hazard, and whether the link between scenario and hazard is true: both are claims a person made",
+        "Whether a scenario's rule would really catch the hazard, and whether the link between scenario and hazard is true",
         "Which hazards had no scenario",
         "Whether the suite was green"
       ],
       "correct": 1,
-      "explanation": "That a scenario is evidence for a hazard is something a person decided. The report repeats the claim and cannot test it, and covered means tried once in one building."
+      "explanation": "Both are claims a person made. That a scenario is evidence for a hazard is something a person decided. The report repeats the claim and cannot test it, and covered means tried once in one building."
     }
   ]
 }

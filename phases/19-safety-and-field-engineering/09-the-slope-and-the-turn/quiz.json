@@ -44,23 +44,23 @@
       "options": [
         "The gate was too tight and rejected every sample",
         "The gyro's bias was too large",
-        "The magnitude is only about 8 percent over g, which is inside the gate, so the filter trusted the accelerometer",
+        "The magnitude is only about 8 percent over g, which is inside the gate",
         "The vibration was larger than the turn"
       ],
       "correct": 2,
-      "explanation": "Gravity and 4 m/s2 at right angles have a size only 8 percent above g. A gate of 15 percent lets that through, and the error was 22.1 degrees against 5.1 at 3 percent."
+      "explanation": "The filter trusted the accelerometer. Gravity and 4 m/s2 at right angles have a size only 8 percent above g. A gate of 15 percent lets that through, and the error was 22.1 degrees against 5.1 at 3 percent."
     },
     {
       "stage": "post",
       "question": "What did a gate of 1 percent cost?",
       "options": [
         "Nothing: a tighter gate is always better",
-        "The gyro's bias built up because few samples passed: 4.1 degrees after 60 s against 1.2 at 15 percent",
+        "The gyro's bias built up because few samples passed",
         "It followed the accelerometer into every turn",
         "It stopped the robot in every turn"
       ],
       "correct": 1,
-      "explanation": "Vibration moves the magnitude by about 3 percent, so a 1 percent gate rejects nearly everything and the gyro is rarely corrected."
+      "explanation": "4.1 degrees after 60 s against 1.2 at 15 percent. Vibration moves the magnitude by about 3 percent, so a 1 percent gate rejects nearly everything and the gyro is rarely corrected."
     },
     {
       "stage": "post",

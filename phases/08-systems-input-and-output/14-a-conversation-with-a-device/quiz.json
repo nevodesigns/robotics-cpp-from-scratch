@@ -9,10 +9,10 @@
         "The device stops streaming while it is asked",
         "It is delivered to the telemetry code first",
         "Nothing, it is queued",
-        "Whatever arrives during the wait is read out of the port and thrown away: 38 frames lost in fifty requests"
+        "Whatever arrives during the wait is read out of the port and thrown away"
       ],
       "correct": 3,
-      "explanation": "Each request waits a few milliseconds and a frame arrives every ten. A session reads the link in exactly one place and routes each message, and lost none."
+      "explanation": "38 frames lost in fifty requests. Each request waits a few milliseconds and a frame arrives every ten. A session reads the link in exactly one place and routes each message, and lost none."
     },
     {
       "stage": "check",
@@ -31,12 +31,12 @@
       "question": "After the power cycle the device had done 177 moves and 177 were answered, though 40 requests were resent. Why were none done twice?",
       "options": [
         "The checksum caught the repeats",
-        "The requester kept the id across each resend and the device remembered the last id it answered, so a repeat was replayed and not repeated",
+        "The requester kept the id across each resend and the device remembered the last id it answered",
         "The resends never arrived",
         "The device ignores a second request"
       ],
       "correct": 1,
-      "explanation": "40 replays, and a position that matches exactly. Matching ids on the requester is half of it; the reply cache on the device is the other half."
+      "explanation": "A repeat was replayed and not repeated. 40 replays, and a position that matches exactly. Matching ids on the requester is half of it; the reply cache on the device is the other half."
     },
     {
       "stage": "check",
@@ -56,23 +56,23 @@
       "options": [
         "Resend it, in case",
         "Leave it waiting",
-        "Abandon it and count it, because its answer was on the old connection, and the caller asked for something that may or may not have happened",
+        "Abandon it and count it",
         "Ignore it silently"
       ],
       "correct": 2,
-      "explanation": "Left waiting, it blocks every new request until its attempts run out, and resent to a power cycled device it may be done twice. Counting it tells the caller to check."
+      "explanation": "Its answer was on the old connection, and the caller asked for something that may or may not have happened. Left waiting, it blocks every new request until its attempts run out, and resent to a power cycled device it may be done twice. Counting it tells the caller to check."
     },
     {
       "stage": "post",
       "question": "The tests are all passing. What is the honest limit of what they show?",
       "options": [
         "Only that Windows builds",
-        "The faults are independent where real noise comes in bursts, the delay is generated, the pseudo terminal has no real timing, and the device never errs in its own firmware; real hardware will find something else, though not one of the problems this phase measured",
+        "The faults are independent where real noise comes in bursts, the delay is generated, the pseudo terminal has no real timing, and the device never errs in its own firmware",
         "Nothing, passing tests prove the code is correct on any hardware",
         "Only that the code compiles"
       ],
       "correct": 1,
-      "explanation": "Each simplification was chosen so a result could be counted and repeated. The tests establish that the known failures are handled, and they say so rather than claiming more."
+      "explanation": "Real hardware will find something else, though not one of the problems this phase measured. Each simplification was chosen so a result could be counted and repeated. The tests establish that the known failures are handled, and they say so rather than claiming more."
     }
   ]
 }

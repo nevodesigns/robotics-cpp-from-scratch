@@ -9,10 +9,10 @@
         "A plot cannot show overshoot",
         "A verdict takes less space in the log",
         "Plots cannot be made without a display",
-        "A run passed by looking at it has no test behind it: next month's slow worsening is not looked at, and the verdict names the step and the criterion that failed"
+        "A run passed by looking at it has no test behind it"
       ],
       "correct": 3,
-      "explanation": "Someone looked today and it was fine. Nobody will look at every run, and a slow drift past the limit is caught only by a check that runs every time."
+      "explanation": "Next month's slow worsening is not looked at, and the verdict names the step and the criterion that failed. Someone looked today and it was fine. Nobody will look at every run, and a slow drift past the limit is caught only by a check that runs every time."
     },
     {
       "stage": "check",

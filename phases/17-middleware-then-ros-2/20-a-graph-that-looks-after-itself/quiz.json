@@ -18,13 +18,13 @@
       "stage": "check",
       "question": "Why is the supervisor's detection a deadline after the last scan and not after the stall?",
       "options": [
-        "Nobody knows when a silence begins until the next output fails to come: the last scan was at 4.91 s and it was seen at 5.17 s",
+        "Nobody knows when a silence begins until the next output fails to come",
         "The supervisor polls only once a second",
         "The sensor reports its own stall after a delay",
         "The clock of the supervisor runs behind the sensor's"
       ],
       "correct": 0,
-      "explanation": "A silence is only known once an expected output has failed to arrive. So the deadline of 0.25 s runs from the last scan, at 4.91 s."
+      "explanation": "The last scan was at 4.91 s and it was seen at 5.17 s. A silence is only known once an expected output has failed to arrive. So the deadline of 0.25 s runs from the last scan, at 4.91 s."
     },
     {
       "stage": "check",
@@ -43,12 +43,12 @@
       "question": "A restart fails because the device cannot be opened. What happens next?",
       "options": [
         "It is retried at once, as fast as the supervisor can loop",
-        "The node gets a fresh deadline and is noticed stalled again 0.26 s later: restart failed, stalled, restart failed, stalled, gave up, 0.69 s after the stall",
+        "The node gets a fresh deadline and is noticed stalled again 0.26 s later",
         "The supervisor gives up at the first failed restart",
         "The node is left stalled and never looked at again"
       ],
       "correct": 1,
-      "explanation": "A failed restart is reported and the node is watched again. Two restarts are allowed, so the third stall, 0.69 s after the first, is a give up."
+      "explanation": "Restart failed, stalled, restart failed, stalled, gave up, 0.69 s after the stall. A failed restart is reported and the node is watched again. Two restarts are allowed, so the third stall, 0.69 s after the first, is a give up."
     },
     {
       "stage": "post",

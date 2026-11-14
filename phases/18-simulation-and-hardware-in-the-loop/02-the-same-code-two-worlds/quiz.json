@@ -68,11 +68,11 @@
       "options": [
         "Whether the plant clamps its command",
         "Whether two plants given the same commands agree",
-        "That the plant is the machine it stands for: a motor with the wrong time constant keeps every rule",
+        "That the plant is the machine it stands for",
         "Whether a reset returns it to rest"
       ],
       "correct": 2,
-      "explanation": "The six rules check that the plant behaves like a plant. They cannot check that its gain and time constant are those of the real motor."
+      "explanation": "A motor with the wrong time constant keeps every rule. The six rules check that the plant behaves like a plant. They cannot check that its gain and time constant are those of the real motor."
     }
   ]
 }

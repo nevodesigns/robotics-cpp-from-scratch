@@ -19,12 +19,12 @@
       "question": "Why is white text on pure green unreadable?",
       "options": [
         "Qt draws it wrong",
-        "Green is nearly as light as white: the ratio is 1.37, where black text is 15.3",
+        "Green is nearly as light as white",
         "Text is always black",
         "Green is dark"
       ],
       "correct": 1,
-      "explanation": "The average of the channels is 85, which says dark, and is wrong."
+      "explanation": "The ratio is 1.37, where black text is 15.3. The average of the channels is 85, which says dark, and is wrong."
     },
     {
       "stage": "check",
@@ -54,13 +54,13 @@
       "stage": "post",
       "question": "Why is the channel made linear before the weights are applied?",
       "options": [
-        "The value stored in a pixel is not proportional to the light: mid grey 128 is about a fifth of the luminance",
+        "The value stored in a pixel is not proportional to the light",
         "It is optional",
         "Speed",
         "Qt requires it"
       ],
       "correct": 0,
-      "explanation": "The luminance of 128 is 0.2159, not 0.5."
+      "explanation": "Mid grey 128 is about a fifth of the luminance. The luminance of 128 is 0.2159, not 0.5."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "Only in dark mode",
         "Never",
-        "Not necessarily: contrast against the background says nothing about the difference between them",
+        "Not necessarily",
         "Always"
       ],
       "correct": 2,
-      "explanation": "The lesson says so under what it does not do."
+      "explanation": "Contrast against the background says nothing about the difference between them. The lesson says so under what it does not do."
     }
   ]
 }

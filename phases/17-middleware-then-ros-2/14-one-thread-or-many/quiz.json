@@ -31,24 +31,24 @@
       "question": "Everything is in one mutually exclusive group and the executor has two threads. What is the worst wait?",
       "options": [
         "0: a second thread always removes the wait",
-        "45, exactly what one thread gave: callbacks in one exclusive group never overlap, and the second thread sits idle",
+        "45, exactly what one thread gave",
         "22, half of what one thread gave",
         "90, twice what one thread gave, from contention"
       ],
       "correct": 1,
-      "explanation": "A mutually exclusive group runs one of its callbacks at a time however many threads there are. The planner still blocks the control."
+      "explanation": "Callbacks in one exclusive group never overlap, and the second thread sits idle. A mutually exclusive group runs one of its callbacks at a time however many threads there are. The planner still blocks the control."
     },
     {
       "stage": "check",
       "question": "What does making the group reentrant cost?",
       "options": [
         "Nothing: reentrant is exclusive with the waiting removed",
-        "The callbacks of that group can now run at once, so whatever they share needs a lock: the race the exclusive group was preventing",
+        "The callbacks of that group can now run at once",
         "A thread for each callback in the group",
         "The order of delivery within a topic"
       ],
       "correct": 1,
-      "explanation": "The exclusive group was what guaranteed its callbacks never touched shared data together. Remove it and the callbacks have to protect that data themselves."
+      "explanation": "Whatever they share needs a lock: the race the exclusive group was preventing. The exclusive group was what guaranteed its callbacks never touched shared data together. Remove it and the callbacks have to protect that data themselves."
     },
     {
       "stage": "post",

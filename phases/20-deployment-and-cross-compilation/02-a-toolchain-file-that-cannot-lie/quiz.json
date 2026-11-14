@@ -20,11 +20,11 @@
       "options": [
         "The robot's CPU, since that is the target",
         "The oldest CPU of the target's architecture",
-        "The CPU of the machine doing the compiling, so the binary may use instructions the robot does not have, with no error",
+        "The CPU of the machine doing the compiling",
         "Nothing: the flag is ignored in a cross build"
       ],
       "correct": 2,
-      "explanation": "Native means the machine the compiler is running on. In a cross build that is the laptop, and the compiler has no way to know the robot lacks those instructions."
+      "explanation": "The binary may use instructions the robot does not have, with no error. Native means the machine the compiler is running on. In a cross build that is the laptop, and the compiler has no way to know the robot lacks those instructions."
     },
     {
       "stage": "check",
@@ -67,12 +67,12 @@
       "question": "What is the one real check of a toolchain file that this lesson cannot make?",
       "options": [
         "A unit test of the generator",
-        "Running the cross compiler and looking at what the binary was built for with file or readelf: the repository's CI has no cross compiler",
+        "Running the cross compiler and looking at what the binary was built for with file or readelf",
         "A review of the generated text",
         "Running cmake on the laptop with the file"
       ],
       "correct": 1,
-      "explanation": "The lesson checks the text and the rules. Whether a real cross compiler accepts it and produces a binary for the right machine can only be seen by running one."
+      "explanation": "The repository's CI has no cross compiler. The lesson checks the text and the rules. Whether a real cross compiler accepts it and produces a binary for the right machine can only be seen by running one."
     }
   ]
 }

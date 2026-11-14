@@ -56,11 +56,11 @@
       "options": [
         "The robot is safe",
         "The log is complete to the last event",
-        "The log has not been edited between the robot and the report: a missing, reordered or altered event would be found",
+        "The log has not been edited between the robot and the report",
         "The clock was right all day"
       ],
       "correct": 2,
-      "explanation": "Each event carries a hash of itself and the one before. A change, a removal or a reordering between the robot and the report would break the chain."
+      "explanation": "A missing, reordered or altered event would be found. Each event carries a hash of itself and the one before. A change, a removal or a reordering between the robot and the report would break the chain."
     },
     {
       "stage": "post",

@@ -8,11 +8,11 @@
       "options": [
         "There is no way to tell without reading all of them",
         "At least six",
-        "Fewer than six, and possibly one, because the compiler carries on after a mistake and reports what follows against a misunderstanding",
+        "Fewer than six, and possibly one",
         "Exactly six"
       ],
       "correct": 2,
-      "explanation": "Measured in this lesson: four mistakes produce six errors on both GCC and Clang, and fixing the first removes three of them."
+      "explanation": "The compiler carries on after a mistake and reports what follows against a misunderstanding. Measured in this lesson: four mistakes produce six errors on both GCC and Clang, and fixing the first removes three of them."
     },
     {
       "stage": "check",

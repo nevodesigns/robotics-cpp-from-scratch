@@ -6,25 +6,25 @@
       "stage": "pre",
       "question": "Headings 3.14 and -3.14. What is their difference the short way round?",
       "options": [
-        "About -0.003: nearly the same direction",
+        "About -0.003",
         "6.28",
         "3.14",
         "0"
       ],
       "correct": 0,
-      "explanation": "The difference of the numbers is 6.28 and the short way round is -0.00318531."
+      "explanation": "Nearly the same direction. The difference of the numbers is 6.28 and the short way round is -0.00318531."
     },
     {
       "stage": "check",
       "question": "Why is the heading of a three link arm the sum of its angles?",
       "options": [
         "It is a convention",
-        "Each angle is measured from the link before it, so the directions add",
+        "Each angle is measured from the link before it",
         "Qt requires it",
         "The third link is longest"
       ],
       "correct": 1,
-      "explanation": "A heading of 2 pi after folding out, back and out."
+      "explanation": "The directions add. A heading of 2 pi after folding out, back and out."
     },
     {
       "stage": "check",

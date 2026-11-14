@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "Why is a repeated gripper command harmless and a repeated dispense command not?",
       "options": [
-        "The gripper closing twice leaves it closed, and dispensing twice gives two: the first is idempotent and the second is not, so the second needs the server to remember",
+        "The gripper closing twice leaves it closed, and dispensing twice gives two",
         "The gripper's server remembers its answers and the dispenser's does not",
         "Closing takes longer than dispensing, so the repeat arrives too late to matter",
         "A dispense command is sent best effort and a gripper command reliable"
       ],
       "correct": 0,
-      "explanation": "Closing a closed gripper changes nothing. Dispensing again gives a second dose, so that service must not be run twice for one request."
+      "explanation": "The first is idempotent and the second is not, so the second needs the server to remember. Closing a closed gripper changes nothing. Dispensing again gives a second dose, so that service must not be run twice for one request."
     }
   ]
 }

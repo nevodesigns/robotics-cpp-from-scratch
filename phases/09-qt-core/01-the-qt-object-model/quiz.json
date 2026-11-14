@@ -54,13 +54,13 @@
       "stage": "post",
       "question": "You get undefined reference to vtable for BatteryMonitor. What is wrong?",
       "options": [
-        "moc did not run for that class, because of a missing Q_OBJECT or a header the target does not know about",
+        "moc did not run for that class",
         "The signal has the wrong argument type",
         "Qt is not installed",
         "You forgot to call connect"
       ],
       "correct": 0,
-      "explanation": "Without moc, the generated virtual functions and signal bodies do not exist, so the linker has nothing to point the vtable at."
+      "explanation": "Of a missing Q_OBJECT or a header the target does not know about. Without moc, the generated virtual functions and signal bodies do not exist, so the linker has nothing to point the vtable at."
     },
     {
       "stage": "post",

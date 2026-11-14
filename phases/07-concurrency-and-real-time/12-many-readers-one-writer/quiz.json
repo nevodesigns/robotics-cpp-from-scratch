@@ -8,35 +8,35 @@
       "options": [
         "It doubles every time",
         "It stays the same",
-        "It falls: 8 readers got about a fifth of what one reader did, because every read takes the same lock",
+        "It falls: 8 readers got about a fifth of what one reader did",
         "It rises with the number of readers"
       ],
       "correct": 2,
-      "explanation": "Measured 40774, 10093 and 8503 reads per millisecond at 1, 4 and 8 readers. A mutex serialises readers and moves its cache line between cores on every acquisition."
+      "explanation": "Every read takes the same lock. Measured 40774, 10093 and 8503 reads per millisecond at 1, 4 and 8 readers. A mutex serialises readers and moves its cache line between cores on every acquisition."
     },
     {
       "stage": "check",
       "question": "shared_mutex allows many readers at once. With 8 readers, how many writes did the writer manage, out of about 14,000 wanted?",
       "options": [
         "About 7,000",
-        "92, and 71 in a second run: readers kept arriving before the last left, so the writer never got in",
+        "92, and 71 in a second run",
         "Zero, always",
         "About 14,000, since the writer is unaffected"
       ],
       "correct": 1,
-      "explanation": "It was also slower for readers than the plain mutex it replaced. The standard does not say whether a writer is preferred, so code must not depend on either. Count what the writer completes, not only what the readers do."
+      "explanation": "Readers kept arriving before the last left, so the writer never got in. It was also slower for readers than the plain mutex it replaced. The standard does not say whether a writer is preferred, so code must not depend on either. Count what the writer completes, not only what the readers do."
     },
     {
       "stage": "check",
       "question": "A reader's data copy overlaps a write. How does a seqlock reader know to throw the copy away?",
       "options": [
-        "It reads the counter before and after: odd means a write is in progress, and a different value afterwards means one landed, so it retries",
+        "It reads the counter before and after",
         "It checks a checksum",
         "It locks the writer out",
         "It compares the value with the last one"
       ],
       "correct": 0,
-      "explanation": "Forced on one thread in the suite: a write landed between the data read and the second counter read, the reader retried once, and returned the new value whole."
+      "explanation": "Odd means a write is in progress, and a different value afterwards means one landed, so it retries. Forced on one thread in the suite: a write landed between the data read and the second counter read, the reader retried once, and returned the new value whole."
     },
     {
       "stage": "check",
@@ -57,10 +57,10 @@
         "Retries are free",
         "It is broken",
         "Nothing, it is a one-off",
-        "Readers starve against a value rewritten continuously, about 24 retries per read, so it suits a value that changes in bursts, not one rewritten as fast as possible"
+        "Readers starve against a value rewritten continuously, about 24 retries per read"
       ],
       "correct": 3,
-      "explanation": "Spaced writes, 20 microseconds apart, cost a few retries each. The number to watch in production is retries() against reads."
+      "explanation": "It suits a value that changes in bursts, not one rewritten as fast as possible. Spaced writes, 20 microseconds apart, cost a few retries each. The number to watch in production is retries() against reads."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "std::string has no default constructor",
         "The compiler cannot hash a string",
         "Strings are too big",
-        "The reader copies raw bytes while a writer may be changing them; a string's bytes are a pointer to memory the writer could free, so a copy taken mid-write could be dereferenced before it is discarded. The type must be trivially copyable"
+        "The reader copies raw bytes while a writer may be changing them"
       ],
       "correct": 3,
-      "explanation": "A static_assert on std::is_trivially_copyable, proved by checks/. A refusal at compile time, where a run-time crash would have been the alternative."
+      "explanation": "A string's bytes are a pointer to memory the writer could free, so a copy taken mid-write could be dereferenced before it is discarded. The type must be trivially copyable. A static_assert on std::is_trivially_copyable, proved by checks/. A refusal at compile time, where a run-time crash would have been the alternative."
     }
   ]
 }

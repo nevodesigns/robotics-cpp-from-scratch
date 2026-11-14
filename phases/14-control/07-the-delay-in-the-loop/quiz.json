@@ -9,10 +9,10 @@
         "The gain halves",
         "Nothing, a delay does not change the gain",
         "It only gets slower",
-        "It may become unstable: a delay adds no gain but adds lag that grows with frequency, and it uses up the phase margin"
+        "It may become unstable"
       ],
       "correct": 3,
-      "explanation": "At a proportional gain of 3000 the margin went from 71.8 degrees to -19.6 at 10 ms, and the step response grew without bound."
+      "explanation": "A delay adds no gain but adds lag that grows with frequency, and it uses up the phase margin. At a proportional gain of 3000 the margin went from 71.8 degrees to -19.6 at 10 ms, and the step response grew without bound."
     },
     {
       "stage": "check",
@@ -21,10 +21,10 @@
         "It depends on the gain",
         "10",
         "36",
-        "180: a delay is a time, and a time at a frequency is a fraction of a turn, so it is exactly backwards at fifty hertz"
+        "180: a delay is a time, and a time at a frequency is a fraction of a turn"
       ],
       "correct": 3,
-      "explanation": "360 times the frequency times the delay. It grows with frequency, which is why a fast loop is hit first."
+      "explanation": "It is exactly backwards at fifty hertz. 360 times the frequency times the delay. It grows with frequency, which is why a fast loop is hit first."
     },
     {
       "stage": "check",
@@ -44,23 +44,23 @@
       "options": [
         "Numbers overflow",
         "The simulation was wrong",
-        "Sampling is a delay of its own, which a continuous model with a pure delay does not describe well, so with no delay it is an upper bound and not a figure",
+        "Sampling is a delay of its own, which a continuous model with a pure delay does not describe well",
         "The inertia was too small"
       ],
       "correct": 2,
-      "explanation": "A command is held between samples, on average half a sample late. With any real delay added, the prediction was within 4.5 percent."
+      "explanation": "With no delay it is an upper bound and not a figure. A command is held between samples, on average half a sample late. With any real delay added, the prediction was within 4.5 percent."
     },
     {
       "stage": "post",
       "question": "Why does the test compare phase margins round the circle and not directly?",
       "options": [
-        "An angle is a direction: minus 293 degrees and plus 67 are the same one, so a direct comparison fails on a correct answer",
+        "An angle is a direction",
         "Doubles cannot be compared directly",
         "To loosen the tolerance",
         "The complex number is inexact"
       ],
       "correct": 0,
-      "explanation": "The argument of a complex number is reduced to one turn and a margin computed from a formula is not. The difference is taken modulo 360."
+      "explanation": "Minus 293 degrees and plus 67 are the same one, so a direct comparison fails on a correct answer. The argument of a complex number is reduced to one turn and a margin computed from a formula is not. The difference is taken modulo 360."
     },
     {
       "stage": "post",

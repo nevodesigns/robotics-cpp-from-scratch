@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "Why does exact_text start at 15 digits and widen, rather than always writing 17?",
       "options": [
-        "Seventeen is always correct but writes 0.1 as 0.10000000000000001, so it starts at the 15 digits any typed decimal survives and widens only if the value does not read back",
+        "Seventeen is always correct but writes 0.1 as 0.10000000000000001",
         "Fifteen is the most a stream will print",
         "Seventeen digits is not enough for every double",
         "Because 17 digits is slower to write than 15"
       ],
       "correct": 0,
-      "explanation": "digits10 is 15, so a decimal that long survives being a double. max_digits10 is 17, so a double that long survives being a decimal. Trying 15, 16, 17 gives the shortest text that reads back identically: 2.45 stays 2.45 and 0.1 + 0.2 becomes 0.30000000000000004."
+      "explanation": "It starts at the 15 digits any typed decimal survives and widens only if the value does not read back. digits10 is 15, so a decimal that long survives being a double. max_digits10 is 17, so a double that long survives being a decimal. Trying 15, 16, 17 gives the shortest text that reads back identically: 2.45 stays 2.45 and 0.1 + 0.2 becomes 0.30000000000000004."
     }
   ]
 }

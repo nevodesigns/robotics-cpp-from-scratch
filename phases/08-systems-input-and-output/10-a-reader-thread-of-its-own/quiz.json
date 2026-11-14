@@ -30,13 +30,13 @@
       "stage": "check",
       "question": "Why is the thread declared as the last member of LinkReader?",
       "options": [
-        "It starts after everything it uses exists, and the compiler joins it before any of that is destroyed, because members are destroyed in reverse order",
+        "It starts after everything it uses exists, and the compiler joins it before any of that is destroyed",
         "It is a convention",
         "It saves memory",
         "Threads must be last in every class"
       ],
       "correct": 0,
-      "explanation": "A thread declared first starts before the queue and the link exist. Declared last, its start and its join are both on the right side of everything it touches."
+      "explanation": "Members are destroyed in reverse order. A thread declared first starts before the queue and the link exist. Declared last, its start and its join are both on the right side of everything it touches."
     },
     {
       "stage": "check",
@@ -45,10 +45,10 @@
         "The operating system limits it",
         "The port is slow",
         "Errors are counted slowly",
-        "It rests after a failure as well as after nothing waiting, so a dead cable does not cost a core"
+        "It rests after a failure as well as after nothing waiting"
       ],
       "correct": 3,
-      "explanation": "A loop that rests only when nothing was waiting has a branch with no rest in it. A failing port takes that branch."
+      "explanation": "A dead cable does not cost a core. A loop that rests only when nothing was waiting has a branch with no rest in it. A failing port takes that branch."
     },
     {
       "stage": "post",
@@ -67,12 +67,12 @@
       "question": "The queue behind pop() is full and nobody is taking messages. What happens, and why is it done that way?",
       "options": [
         "The port is closed",
-        "New messages are dropped and counted, so the reader's budget is never spent waiting and a slow consumer shows up as a number",
+        "New messages are dropped and counted",
         "The reader blocks until there is room",
         "The oldest are overwritten silently"
       ],
       "correct": 1,
-      "explanation": "A reader that blocks on its own queue is the main thread's problem again. Dropping and counting keeps the reader on time and makes the consumer's slowness visible."
+      "explanation": "The reader's budget is never spent waiting and a slow consumer shows up as a number. A reader that blocks on its own queue is the main thread's problem again. Dropping and counting keeps the reader on time and makes the consumer's slowness visible."
     }
   ]
 }

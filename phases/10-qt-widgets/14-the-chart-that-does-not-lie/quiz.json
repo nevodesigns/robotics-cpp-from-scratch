@@ -8,11 +8,11 @@
       "options": [
         "Qt requires it",
         "The range is expensive",
-        "So the two charts cannot disagree: a steady signal is flat in both or storm in both",
+        "So the two charts cannot disagree",
         "To save time"
       ],
       "correct": 2,
-      "explanation": "The steady signal was 1 of 13 rows and 1 of 130 pixel rows."
+      "explanation": "A steady signal is flat in both or storm in both. The steady signal was 1 of 13 rows and 1 of 130 pixel rows."
     },
     {
       "stage": "check",
@@ -33,10 +33,10 @@
         "The first column of both",
         "Different places",
         "The last column of both",
-        "The same fraction across: column 35 of 50 and column 140 of 200"
+        "The same fraction across"
       ],
       "correct": 3,
-      "explanation": "0.71 and 0.70."
+      "explanation": "Column 35 of 50 and column 140 of 200. 0.71 and 0.70."
     },
     {
       "stage": "check",

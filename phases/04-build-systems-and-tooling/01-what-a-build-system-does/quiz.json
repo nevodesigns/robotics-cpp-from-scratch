@@ -55,12 +55,12 @@
       "question": "Why does adding a source file sometimes have no effect until you configure again?",
       "options": [
         "Because the compiler caches source files",
-        "The graph is worked out at configure time, so building only executes the graph already written down",
+        "The graph is worked out at configure time",
         "Because timestamps are only read once",
         "Because new files default to being excluded"
       ],
       "correct": 1,
-      "explanation": "Configure decides the graph, build executes it. Editing a file already in the graph is picked up automatically; changing the shape of the graph is not."
+      "explanation": "Building only executes the graph already written down. Configure decides the graph, build executes it. Editing a file already in the graph is picked up automatically; changing the shape of the graph is not."
     },
     {
       "stage": "post",

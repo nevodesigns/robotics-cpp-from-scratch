@@ -20,11 +20,11 @@
       "options": [
         "It works for functions that are not smooth",
         "It avoids the subtraction entirely",
-        "The errors on the two sides cancel rather than add: 2.055e-12 against 1.388e-08 at each method's own best step",
+        "The errors on the two sides cancel rather than add",
         "It needs a smaller step, so it is more precise"
       ],
       "correct": 2,
-      "explanation": "Their best steps are also different: the square root of the machine epsilon for a forward difference and its cube root for a central one, both confirmed by sweeping."
+      "explanation": "2.055e-12 against 1.388e-08 at each method's own best step. Their best steps are also different: the square root of the machine epsilon for a forward difference and its cube root for a central one, both confirmed by sweeping."
     },
     {
       "stage": "check",

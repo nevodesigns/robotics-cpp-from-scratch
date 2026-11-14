@@ -19,12 +19,12 @@
       "question": "Why does a row number have to be subtracted from the height rather than used directly?",
       "options": [
         "Because rows are counted from one",
-        "A robot's y grows upward and a screen's rows grow downward, so without the flip the picture is a mirror image",
+        "A robot's y grows upward and a screen's rows grow downward",
         "Because the scale is negative",
         "To leave room for the axis labels"
       ],
       "correct": 1,
-      "explanation": "A mirror image of a plausible path is another plausible path, which is why this survives so long. Test it with a direction: a point higher up the field must get a smaller row number."
+      "explanation": "Without the flip the picture is a mirror image. A mirror image of a plausible path is another plausible path, which is why this survives so long. Test it with a direction: a point higher up the field must get a smaller row number."
     },
     {
       "stage": "check",
@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "This lesson draws in a terminal rather than in a window. Why is that the right choice for the end of phase 00?",
       "options": [
-        "It needs nothing installed, so nobody is blocked at the moment the phase pays off",
+        "It needs nothing installed",
         "Terminals draw faster than windows",
         "The picture is more accurate",
         "A window would need more code"
       ],
       "correct": 0,
-      "explanation": "The arithmetic here is the same arithmetic the Qt plotter uses in phase 10. What changes there is the surface it is drawn on, not the idea, and by then installing Qt is a reasonable thing to ask."
+      "explanation": "Nobody is blocked at the moment the phase pays off. The arithmetic here is the same arithmetic the Qt plotter uses in phase 10. What changes there is the surface it is drawn on, not the idea, and by then installing Qt is a reasonable thing to ask."
     }
   ]
 }

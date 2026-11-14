@@ -8,11 +8,11 @@
       "options": [
         "It removes it",
         "It halves it",
-        "It multiplies it by about a thousand: each reading is wrong by a little, and dividing by a millisecond turns a thousandth of a radian into about a radian a second",
+        "It multiplies it by about a thousand",
         "Nothing, the noise cancels"
       ],
       "correct": 2,
-      "explanation": "The lesson measured 1.422 rad/s rms from the difference against 0.006 from the observer."
+      "explanation": "Each reading is wrong by a little, and dividing by a millisecond turns a thousandth of a radian into about a radian a second. The lesson measured 1.422 rad/s rms from the difference against 0.006 from the observer."
     },
     {
       "stage": "check",
@@ -43,12 +43,12 @@
       "question": "The observer is given no acceleration on a noise free swing. What happens?",
       "options": [
         "It diverges",
-        "The estimate is smooth and late: 0.543 rad/s of error against 1.70e-03 when told, because every change in speed has to arrive through the correction",
+        "The estimate is smooth and late",
         "Nothing, the sensor is exact",
         "It is exact"
       ],
       "correct": 1,
-      "explanation": "Without the model the prediction assumes the speed stays as it is."
+      "explanation": "0.543 rad/s of error against 1.70e-03 when told, because every change in speed has to arrive through the correction. Without the model the prediction assumes the speed stays as it is."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "The sensor is too slow",
         "Gains must be integers",
         "The maths is wrong",
-        "The same correction that follows the truth also follows the noise: noise rose from 0.0002 to 0.1675 rad/s as the bandwidth went from 5 to 400 while the lag fell from 2.55 to 0.063"
+        "The same correction that follows the truth also follows the noise"
       ],
       "correct": 3,
-      "explanation": "Choose w from the machine's noise and the accelerations the model misses, and measure both."
+      "explanation": "Noise rose from 0.0002 to 0.1675 rad/s as the bandwidth went from 5 to 400 while the lag fell from 2.55 to 0.063. Choose w from the machine's noise and the accelerations the model misses, and measure both."
     }
   ]
 }

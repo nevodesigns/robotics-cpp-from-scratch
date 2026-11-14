@@ -68,11 +68,11 @@
       "options": [
         "To make up for capsules that are too thin",
         "To keep the version from rising too often",
-        "It could have moved by speed times the time since it was seen: ignorance made into room",
+        "It could have moved by speed times the time since it was seen",
         "Because sensors measure radius badly"
       ],
       "correct": 2,
-      "explanation": "Not having seen it lately means not knowing where it is. Growing it by how far it could have gone turns that into room the planner keeps."
+      "explanation": "Ignorance made into room. Not having seen it lately means not knowing where it is. Growing it by how far it could have gone turns that into room the planner keeps."
     }
   ]
 }

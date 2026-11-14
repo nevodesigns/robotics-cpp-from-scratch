@@ -57,10 +57,10 @@
         "It does not prefer it; the effect is neutral",
         "Because unknown cells are cheaper to expand",
         "Because the heuristic favours straight lines",
-        "There are no obstacles in it, because nothing has looked, so it is always the cheapest way through"
+        "There are no obstacles in it"
       ],
       "correct": 3,
-      "explanation": "Measured on a partially surveyed corridor, the unknown route was 55.00 against 57.49 and crossed 25 cells nothing had seen. It was shorter for that reason alone."
+      "explanation": "Nothing has looked, so it is always the cheapest way through. Measured on a partially surveyed corridor, the unknown route was 55.00 against 57.49 and crossed 25 cells nothing had seen. It was shorter for that reason alone."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "It only matters when no known route exists",
         "It should be set to the sensor's reliability",
-        "It is where the decision actually lives, and it is sharp: on one map everything at 1.10 and over took the surveyed route and everything below took the shortcut",
+        "It is where the decision actually lives, and it is sharp",
         "Very little, since any value above 1 discourages unknown space"
       ],
       "correct": 2,
-      "explanation": "Sweep it on your own map rather than guessing. Blocked is the right default for anything carrying a load or moving near people; expensive is for when exploring is part of the job."
+      "explanation": "On one map everything at 1.10 and over took the surveyed route and everything below took the shortcut. Sweep it on your own map rather than guessing. Blocked is the right default for anything carrying a load or moving near people; expensive is for when exploring is part of the job."
     }
   ]
 }

@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "A JSON config is read with toDouble(-1). The key 'speed' is misspelt in the file. What does the program get, and what does it know?",
       "options": [
-        "-1, and nothing: the same answer as a real -1, a string, a null and a boolean",
+        "-1, and nothing",
         "An error",
         "0 and a warning",
         "A crash"
       ],
       "correct": 0,
-      "explanation": "Five different situations gave the same -1."
+      "explanation": "The same answer as a real -1, a string, a null and a boolean. Five different situations gave the same -1."
     },
     {
       "stage": "check",
@@ -31,12 +31,12 @@
       "question": "What does read_number do with a number outside the limits the caller gave?",
       "options": [
         "Accepts it",
-        "Reports out of range: 1.5 against a limit of 1, and 1e300 against 1000",
+        "Reports out of range",
         "Reports wrong type",
         "Clamps it"
       ],
       "correct": 1,
-      "explanation": "The limits themselves are allowed."
+      "explanation": "1.5 against a limit of 1, and 1e300 against 1000. The limits themselves are allowed."
     },
     {
       "stage": "check",
@@ -45,10 +45,10 @@
         "Zero",
         "9007199254740994",
         "The same",
-        "9007199254740992: a double holds whole numbers exactly only up to 2^53"
+        "9007199254740992"
       ],
       "correct": 3,
-      "explanation": "toInteger kept it exactly."
+      "explanation": "A double holds whole numbers exactly only up to 2^53. toInteger kept it exactly."
     },
     {
       "stage": "post",
@@ -56,11 +56,11 @@
       "options": [
         "They are too small",
         "They are negative",
-        "They are not whole numbers held exactly: one has a fraction, and the other is too big for 64 bits and arrived as a double",
+        "They are not whole numbers held exactly",
         "They are strings"
       ],
       "correct": 2,
-      "explanation": "A string \"7\" was refused as the wrong type."
+      "explanation": "One has a fraction, and the other is too big for 64 bits and arrived as a double. A string \"7\" was refused as the wrong type."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "Messages are secret",
         "They are always empty",
         "Qt has no messages",
-        "The messages are Qt's and change between versions, so the test would fail for a reason that does not matter"
+        "The messages are Qt's and change between versions"
       ],
       "correct": 3,
-      "explanation": "On Qt 6.2 a trailing comma gave \"object is missing after a comma\"."
+      "explanation": "The test would fail for a reason that does not matter. On Qt 6.2 a trailing comma gave \"object is missing after a comma\"."
     }
   ]
 }

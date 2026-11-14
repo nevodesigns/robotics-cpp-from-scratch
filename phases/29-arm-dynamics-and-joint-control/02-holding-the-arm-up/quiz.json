@@ -8,11 +8,11 @@
       "options": [
         "Its derivative term fights the weight",
         "The motor saturates under the weight",
-        "It holds the arm up only with its error: the error times the gain equals the weight",
+        "It holds the arm up only with its error",
         "Its gain falls as the arm sags"
       ],
       "correct": 2,
-      "explanation": "With no motion the derivative gives nothing, so only the gain times the error is left to carry the weight. There has to be an error for there to be a torque."
+      "explanation": "The error times the gain equals the weight. With no motion the derivative gives nothing, so only the gain times the error is left to carry the weight. There has to be an error for there to be a torque."
     },
     {
       "stage": "check",

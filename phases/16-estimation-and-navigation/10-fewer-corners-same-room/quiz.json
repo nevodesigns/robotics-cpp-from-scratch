@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "Why not follow a grid planner's path cell by cell?",
       "options": [
-        "It is legal but a staircase: 72 points and 7 turns for a path that needed 8 points, and the robot weaves along it",
+        "It is legal but a staircase",
         "It is wrong",
         "It is too short",
         "It has gaps"
       ],
       "correct": 0,
-      "explanation": "Most cells of a grid path are not needed."
+      "explanation": "72 points and 7 turns for a path that needed 8 points, and the robot weaves along it. Most cells of a grid path are not needed."
     },
     {
       "stage": "check",

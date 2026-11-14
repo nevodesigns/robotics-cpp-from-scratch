@@ -8,11 +8,11 @@
       "options": [
         "The lidar is off while it is carried",
         "The map is updated to match",
-        "The weights are normalised, so the cloud stays as sure as ever of the wrong place",
+        "The weights are normalised",
         "The odometry keeps it in place"
       ],
       "correct": 2,
-      "explanation": "After normalising, the weights add to one whether the scan fits well or badly. The number that fell is the average likelihood before normalising."
+      "explanation": "The cloud stays as sure as ever of the wrong place. After normalising, the weights add to one whether the scan fits well or badly. The number that fell is the average likelihood before normalising."
     },
     {
       "stage": "check",

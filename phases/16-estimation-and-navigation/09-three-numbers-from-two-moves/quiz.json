@@ -9,10 +9,10 @@
         "About 10 cm",
         "It finishes exactly, because the errors cancel",
         "About a centimetre",
-        "About 250 cm, and 46 degrees out in heading: the three errors add and every straight line is a curve"
+        "About 250 cm, and 46 degrees out in heading"
       ],
       "correct": 3,
-      "explanation": "The same in the same direction every time, so averaging does not help. Individually they were 132, 75 and 35 cm."
+      "explanation": "The three errors add and every straight line is a curve. The same in the same direction every time, so averaging does not help. Individually they were 132, 75 and 35 cm."
     },
     {
       "stage": "check",
@@ -33,46 +33,46 @@
         "The order does not matter",
         "It is alphabetical",
         "To make the algebra shorter",
-        "Each needs the one before: the wheelbase from the spin needs the mean scale, and the difference from the veer needs the real wheelbase"
+        "Each needs the one before"
       ],
       "correct": 3,
-      "explanation": "Solving them in another order has an unknown on the right of every equation."
+      "explanation": "The wheelbase from the spin needs the mean scale, and the difference from the veer needs the real wheelbase. Solving them in another order has an unknown on the right of every equation."
     },
     {
       "stage": "check",
       "question": "Why can the robot not measure its own straight drive?",
       "options": [
         "It has no sensors",
-        "How far it went is the thing it is wrong about: the encoders say what they say, so the measurement has to come from outside, a tape or a camera",
+        "How far it went is the thing it is wrong about",
         "It moves too fast",
         "The encoders are digital"
       ],
       "correct": 1,
-      "explanation": "Which is why a calibration is as good as the tape and the protractor."
+      "explanation": "The encoders say what they say, so the measurement has to come from outside, a tape or a camera. Which is why a calibration is as good as the tape and the protractor."
     },
     {
       "stage": "post",
       "question": "Twenty calibrations with a tape good to 3 mm and a protractor good to 0.2 degrees gave each scale to about 0.06 percent rms, and the square closed to 2.3 cm. What limits it?",
       "options": [
         "The wheel base",
-        "The noise in the measurements, which goes into the three numbers; longer test moves make a fixed error a smaller fraction",
+        "The noise in the measurements, which goes into the three numbers",
         "The speed of the robot",
         "The algebra"
       ],
       "correct": 1,
-      "explanation": "A hundred times better than 249.9 cm, and what remains is measurement noise."
+      "explanation": "Longer test moves make a fixed error a smaller fraction. A hundred times better than 249.9 cm, and what remains is measurement noise."
     },
     {
       "stage": "post",
       "question": "A robot is calibrated on a dry floor and then drives on a wet one. What is wrong with the calibration?",
       "options": [
-        "It finds errors that are the same every time; a wheel that slips is a different robot each run, so the calibration is no help and the position needs correcting from outside",
+        "It finds errors that are the same every time",
         "The wheelbase changes",
         "Nothing",
         "It overcorrects"
       ],
       "correct": 0,
-      "explanation": "Calibration removes the systematic errors. What is random, or changes with the surface, is what a correction from outside is for."
+      "explanation": "A wheel that slips is a different robot each run, so the calibration is no help and the position needs correcting from outside. Calibration removes the systematic errors. What is random, or changes with the surface, is what a correction from outside is for."
     }
   ]
 }

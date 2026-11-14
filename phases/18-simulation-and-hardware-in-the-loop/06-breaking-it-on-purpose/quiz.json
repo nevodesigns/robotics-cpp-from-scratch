@@ -57,10 +57,10 @@
         "The residual threshold was too high, and the stuck monitor has none",
         "The shadow model was 2.85 s behind the plant",
         "The stuck monitor runs faster than the residual monitor",
-        "A frozen reading at the target looks right and the loop commands almost nothing, so the residual stays small; the stuck monitor knows an unchanging reading is wrong only when motion was expected"
+        "A frozen reading at the target looks right and the loop commands almost nothing"
       ],
       "correct": 3,
-      "explanation": "Frozen at about the right value, the sensor and the shadow agree. Only when the robot was told to move did an unchanging reading become evidence."
+      "explanation": "The residual stays small; the stuck monitor knows an unchanging reading is wrong only when motion was expected. Frozen at about the right value, the sensor and the shadow agree. Only when the robot was told to move did an unchanging reading become evidence."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "Nothing: a higher threshold only removes false alarms",
         "The drift was not found at all",
-        "The drift was found 4.04 s after it began instead of 0.46: nine times later, with the position by then wrong by 0.2",
+        "The drift was found 4.04 s after it began instead of 0.46",
         "The drift was found twice as late, at 0.92 s"
       ],
       "correct": 2,
-      "explanation": "Too low and healthy runs raise alarms: 200 of 200 at twice the noise. Too high and a real drift runs on for seconds. Both costs can be read from the simulation."
+      "explanation": "Nine times later, with the position by then wrong by 0.2. Too low and healthy runs raise alarms: 200 of 200 at twice the noise. Too high and a real drift runs on for seconds. Both costs can be read from the simulation."
     }
   ]
 }

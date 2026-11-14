@@ -32,11 +32,11 @@
       "options": [
         "None",
         "An extra column",
-        "The last one: it is the end of the range and belongs to the final bin",
+        "The last one",
         "The first"
       ],
       "correct": 2,
-      "explanation": "Without that, the count is 999999 and the newest sample is not drawn."
+      "explanation": "It is the end of the range and belongs to the final bin. Without that, the count is 999999 and the newest sample is not drawn."
     },
     {
       "stage": "check",

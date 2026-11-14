@@ -9,10 +9,10 @@
         "It is slower",
         "The cross product is always positive",
         "Doubles cannot be zero",
-        "Rounding leaves a tiny nonzero number of either sign: the suite saw -2.22e-16 for points on y = 3x, so the test must allow for rounding"
+        "Rounding leaves a tiny nonzero number of either sign"
       ],
       "correct": 3,
-      "explanation": "orientation compares the cross product with the size of the triangle's sides."
+      "explanation": "The suite saw -2.22e-16 for points on y = 3x, so the test must allow for rounding. orientation compares the cross product with the size of the triangle's sides."
     },
     {
       "stage": "check",
@@ -54,25 +54,25 @@
       "stage": "post",
       "question": "What does the half-open rule count?",
       "options": [
-        "An edge only if one end is strictly above the ray and the other is not, so a corner on the ray belongs to one of the two edges that meet there",
+        "An edge only if one end is strictly above the ray and the other is not",
         "Every edge",
         "Only horizontal edges",
         "Edges to the left"
       ],
       "correct": 0,
-      "explanation": "The half-open test was wrong for 0 of the 625 points."
+      "explanation": "A corner on the ray belongs to one of the two edges that meet there. The half-open test was wrong for 0 of the 625 points."
     },
     {
       "stage": "post",
       "question": "The corners of a polygon go clockwise. What does polygon_area give?",
       "options": [
         "A positive number",
-        "A negative number: the area is positive for anticlockwise corners and negative for clockwise",
+        "A negative number",
         "An error",
         "Zero"
       ],
       "correct": 1,
-      "explanation": "A 4 by 3 rectangle was 12, and -12 reversed."
+      "explanation": "The area is positive for anticlockwise corners and negative for clockwise. A 4 by 3 rectangle was 12, and -12 reversed."
     }
   ]
 }

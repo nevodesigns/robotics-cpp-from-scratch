@@ -9,10 +9,10 @@
         "They separate a type from its value",
         "They call a function at compile time",
         "They mark a name as private",
-        "They say 'the one in there': std and rc::core are namespaces, named places where names live, so two people can both write a function called limit"
+        "They say 'the one in there'"
       ],
       "correct": 3,
-      "explanation": "A namespace is a named place for names. The prefix says which place, which is the whole point: drive::limit and arm::limit are different functions that never meet."
+      "explanation": "Std and rc::core are namespaces, named places where names live, so two people can both write a function called limit. A namespace is a named place for names. The prefix says which place, which is the whole point: drive::limit and arm::limit are different functions that never meet."
     },
     {
       "stage": "check",
@@ -55,12 +55,12 @@
       "question": "drive::limit calls ::clamp(...) with a leading ::. What does the :: buy?",
       "options": [
         "Nothing, it is optional decoration",
-        "It names the global clamp and nothing else, so a using-directive somewhere else cannot redirect the call to a different function",
+        "It names the global clamp and nothing else",
         "It makes the call compile-time",
         "Faster code"
       ],
       "correct": 1,
-      "explanation": "The suite puts using namespace general in scope, whose int clamp would hijack an unqualified call, and checks that drive::limit still reaches the global one exactly once."
+      "explanation": "A using-directive somewhere else cannot redirect the call to a different function. The suite puts using namespace general in scope, whose int clamp would hijack an unqualified call, and checks that drive::limit still reaches the global one exactly once."
     },
     {
       "stage": "post",

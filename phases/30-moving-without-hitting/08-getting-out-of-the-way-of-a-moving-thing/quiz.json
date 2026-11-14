@@ -56,11 +56,11 @@
       "options": [
         "The new plan may be longer than the old",
         "The track's velocity needs more sightings",
-        "The obstacle may run into the new plan too: a plan is a promise about a world that moves",
+        "The obstacle may run into the new plan too",
         "The planner may not have finished"
       ],
       "correct": 2,
-      "explanation": "The new path was made for where the obstacle was. It keeps moving, and may move into the new path as well."
+      "explanation": "A plan is a promise about a world that moves. The new path was made for where the obstacle was. It keeps moving, and may move into the new path as well."
     },
     {
       "stage": "post",

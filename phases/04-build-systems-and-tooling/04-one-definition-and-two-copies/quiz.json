@@ -45,10 +45,10 @@
         "A const variable at namespace scope",
         "A static variable at namespace scope",
         "A global initialised in main",
-        "A function-local static inside an inline function: the inline makes the function one entity, so the standard guarantees its local static is one object"
+        "A function-local static inside an inline function"
       ],
       "correct": 3,
-      "explanation": "A member function defined inside a class is already inline, which is why header-only classes work without anybody writing the keyword. C++17's inline variables do the same for data."
+      "explanation": "The inline makes the function one entity, so the standard guarantees its local static is one object. A member function defined inside a class is already inline, which is why header-only classes work without anybody writing the keyword. C++17's inline variables do the same for data."
     },
     {
       "stage": "post",

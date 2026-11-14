@@ -33,22 +33,22 @@
         "It stops once and stays stopped",
         "It runs at half power",
         "Nothing: noise is below the threshold",
-        "It stops and starts again over and over: 135 stops in 600 samples against 1 with a resume at 21.0 V"
+        "It stops and starts again over and over"
       ],
       "correct": 3,
-      "explanation": "At the threshold noise carries the reading across it again and again. A resume point above the stop point means it has to recover properly before it restarts."
+      "explanation": "135 stops in 600 samples against 1 with a resume at 21.0 V. At the threshold noise carries the reading across it again and again. A resume point above the stop point means it has to recover properly before it restarts."
     },
     {
       "stage": "check",
       "question": "Why did the hard stop run for an hour with 53 stops and almost the same mean power as derating?",
       "options": [
-        "Heat was only dealt with at the limit, so it hit the limit again each time: the work done was about the same, with a hotter machine that kept stopping",
+        "Heat was only dealt with at the limit",
         "The hard stop cools the motor better each time it stops",
         "Its limit was set 20 degrees higher than the derating one",
         "It did far more work, at the cost of a few stops"
       ],
       "correct": 0,
-      "explanation": "Running flat out until the limit and then stopping gave almost the same work, 0.85 against 0.81, with a peak at the limit 53 times. Derating settled where heating and cooling balance."
+      "explanation": "It hit the limit again each time: the work done was about the same, with a hotter machine that kept stopping. Running flat out until the limit and then stopping gave almost the same work, 0.85 against 0.81, with a peak at the limit 53 times. Derating settled where heating and cooling balance."
     },
     {
       "stage": "post",

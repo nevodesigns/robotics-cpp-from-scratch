@@ -8,11 +8,11 @@
       "options": [
         "Nothing",
         "The mean",
-        "The tilt: a box aligned to the axes leaves out the dense corners of the tilted cloud and takes in empty ones, so it holds fewer points in more area",
+        "The tilt: a box aligned to the axes leaves out the dense corners of the tilted cloud and takes in empty ones",
         "The scale"
       ],
       "correct": 2,
-      "explanation": "The box had an area of 32.0 and held 92.9 percent; the ellipse 22.3 and 95.2."
+      "explanation": "It holds fewer points in more area. The box had an area of 32.0 and held 92.9 percent; the ellipse 22.3 and 95.2."
     },
     {
       "stage": "check",
@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "A point 2.2 metres out along the cloud has a squared Mahalanobis distance of 1.00, and one 2.00 metres out across it has 12.38. What does that say about a gate in metres?",
       "options": [
-        "It accepts the point that is unlikely and rejects the likely one, since an uncertainty is not the same in every direction",
+        "It accepts the point that is unlikely and rejects the likely one",
         "Nothing",
         "It is exact",
         "It is too slow"
       ],
       "correct": 0,
-      "explanation": "The limit for 95 percent is 5.991."
+      "explanation": "An uncertainty is not the same in every direction. The limit for 95 percent is 5.991."
     },
     {
       "stage": "post",
@@ -56,11 +56,11 @@
       "options": [
         "It is a rule of the language",
         "It is not",
-        "The distance is measured in units of the cloud's own spread, so one spread away is 1 whatever the stretch",
+        "The distance is measured in units of the cloud's own spread",
         "By luck"
       ],
       "correct": 2,
-      "explanation": "A point at (3, 0) against variances 9 and 4 has a squared distance of 1."
+      "explanation": "One spread away is 1 whatever the stretch. A point at (3, 0) against variances 9 and 4 has a squared distance of 1."
     },
     {
       "stage": "post",

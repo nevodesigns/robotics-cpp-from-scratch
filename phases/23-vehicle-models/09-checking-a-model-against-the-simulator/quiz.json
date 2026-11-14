@@ -68,11 +68,11 @@
       "options": [
         "The wheels' friction",
         "The lag of the wheel speeds",
-        "The weight over the axle: the robot rocked on two wheels and a caster",
+        "The weight over the axle",
         "A slip of 2 percent"
       ],
       "correct": 2,
-      "explanation": "With the weight over the axle the body rocked on two wheels and a caster after driving. Moving the weight behind the axle gave 0.99, 1.01 and 1.02."
+      "explanation": "The robot rocked on two wheels and a caster. With the weight over the axle the body rocked on two wheels and a caster after driving. Moving the weight behind the axle gave 0.99, 1.01 and 1.02."
     }
   ]
 }

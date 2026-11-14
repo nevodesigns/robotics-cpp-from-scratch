@@ -55,12 +55,12 @@
       "question": "Lesson 05-03 warned that a round trip proves little. Why is round tripping through the forward kinematics fair here?",
       "options": [
         "Round trips are always valid for inverse problems",
-        "The forward kinematics was independently checked against a closed form in 13-01, so it can be trusted to say where a solution lands",
+        "The forward kinematics was independently checked against a closed form in 13-01",
         "Because the errors are too small to matter",
         "Because both directions were written by the same person"
       ],
       "correct": 1,
-      "explanation": "Round tripping two halves that were never independently checked proves only that they agree. One half here has an external check behind it, which is what makes the other half's round trip evidence."
+      "explanation": "It can be trusted to say where a solution lands. Round tripping two halves that were never independently checked proves only that they agree. One half here has an external check behind it, which is what makes the other half's round trip evidence."
     },
     {
       "stage": "post",

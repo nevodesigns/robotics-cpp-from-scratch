@@ -21,10 +21,10 @@
         "3",
         "0",
         "1",
-        "2: Qt does not deliver an event again from a nested call while its own batch is being delivered, so 3 waited for 2"
+        "2: Qt does not deliver an event again from a nested call while its own batch is being delivered"
       ],
       "correct": 3,
-      "explanation": "Reading 1 came back to find the member holding 3."
+      "explanation": "3 waited for 2. Reading 1 came back to find the member holding 3."
     },
     {
       "stage": "check",
@@ -43,12 +43,12 @@
       "question": "What does a busy flag that refuses a second call do wrong?",
       "options": [
         "Nothing",
-        "It loses the reading: what is wanted is that the call waits its turn in a line",
+        "It loses the reading",
         "It slows the first",
         "It corrupts the member"
       ],
       "correct": 1,
-      "explanation": "The guard in the lesson queues instead of refusing."
+      "explanation": "What is wanted is that the call waits its turn in a line. The guard in the lesson queues instead of refusing."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "More processEvents calls",
         "Make the member static",
-        "Do the work somewhere else, on another thread (lesson 09-03), so that the handler returns to the loop on its own",
+        "Do the work somewhere else, on another thread (lesson 09-03)",
         "A bigger guard"
       ],
       "correct": 2,
-      "explanation": "The guard makes the handler safe and does not make processEvents a good idea."
+      "explanation": "The handler returns to the loop on its own. The guard makes the handler safe and does not make processEvents a good idea."
     }
   ]
 }

@@ -7,12 +7,12 @@
       "question": "A download stops half way. What in the manifest finds it?",
       "options": [
         "The file sizes, which add up short",
-        "The end line, which holds the hash of everything above it: its absence is no end line, and a changed manifest is bad checksum",
+        "The end line, which holds the hash of everything above it",
         "The version line, which is missing",
         "The sorted order, which is broken"
       ],
       "correct": 1,
-      "explanation": "A manifest cut short has no end line, and one that was changed no longer matches the hash in its end line. Each gets its own reason."
+      "explanation": "Its absence is no end line, and a changed manifest is bad checksum. A manifest cut short has no end line, and one that was changed no longer matches the hash in its end line. Each gets its own reason."
     },
     {
       "stage": "check",
@@ -21,22 +21,22 @@
         "Sorting makes the parser faster",
         "So that the files are unpacked in order",
         "Because paths are compared as text",
-        "The same release in any order gives the same text, so the manifest can itself be compared and hashed"
+        "The same release in any order gives the same text"
       ],
       "correct": 3,
-      "explanation": "If the text depended on the order the files were listed in, the same release would have many manifests and none could be compared or hashed."
+      "explanation": "The manifest can itself be compared and hashed. If the text depended on the order the files were listed in, the same release would have many manifests and none could be compared or hashed."
     },
     {
       "stage": "check",
       "question": "Why does the manifest refuse ../../etc/passwd as a path?",
       "options": [
         "It is an absolute path",
-        "The updater writes at that path: an archive that escapes the directory overwrites the system unpacking it, and the manifest has to refuse it before any file is written",
+        "The updater writes at that path",
         "It has more than one dot",
         "It is longer than a path may be"
       ],
       "correct": 1,
-      "explanation": "An archive that can name a path outside its own directory can overwrite the system that unpacks it. The refusal has to come before anything is written."
+      "explanation": "An archive that escapes the directory overwrites the system unpacking it, and the manifest has to refuse it before any file is written. An archive that can name a path outside its own directory can overwrite the system that unpacks it. The refusal has to come before anything is written."
     },
     {
       "stage": "check",
@@ -54,13 +54,13 @@
       "stage": "post",
       "question": "Why is a stale file from an older release a problem?",
       "options": [
-        "It is part of what is running, since a program may load it by name, and it is not part of the release",
+        "It is part of what is running",
         "It takes up space on the robot",
         "Its name is not in the right directory",
         "It slows down the verification"
       ],
       "correct": 0,
-      "explanation": "bin/old_tool was left by release 1.3. Something may still load it by name, so the robot is running a file that no release describes."
+      "explanation": "A program may load it by name, and it is not part of the release. bin/old_tool was left by release 1.3. Something may still load it by name, so the robot is running a file that no release describes."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "It is too slow for large files",
         "Its 64 bits collide too often for 1000 files",
-        "Anyone can recompute it: a real release is signed with a key kept at the build machine, which needs a cryptographic library this curriculum does not write",
+        "Anyone can recompute it",
         "It cannot hash an empty file"
       ],
       "correct": 2,
-      "explanation": "It caught 1000 of 1000 single bit flips, which is accident. Someone who changes a file on purpose can also change the hash, which only a signature prevents."
+      "explanation": "A real release is signed with a key kept at the build machine, which needs a cryptographic library this curriculum does not write. It caught 1000 of 1000 single bit flips, which is accident. Someone who changes a file on purpose can also change the hash, which only a signature prevents."
     }
   ]
 }

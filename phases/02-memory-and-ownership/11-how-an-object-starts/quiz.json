@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "What is the difference between setting a member in the constructor's initialiser list and assigning it in the constructor's body?",
       "options": [
-        "In the list the member is built once with its value; in the body it is first built blank and then overwritten, so the work is done twice",
+        "In the list the member is built once with its value",
         "None, they compile to the same thing in every case",
         "The list is only for const members",
         "The body runs first, then the list"
       ],
       "correct": 0,
-      "explanation": "By the time the body runs every member already exists. Measured with a type that counts its own construction: the list built 0 blank and 2 copies with 0 overwrites; the body built 2 blank, 0 copies and overwrote 2."
+      "explanation": "In the body it is first built blank and then overwritten, so the work is done twice. By the time the body runs every member already exists. Measured with a type that counts its own construction: the list built 0 blank and 2 copies with 0 overwrites; the body built 2 blank, 0 copies and overwrote 2."
     },
     {
       "stage": "check",

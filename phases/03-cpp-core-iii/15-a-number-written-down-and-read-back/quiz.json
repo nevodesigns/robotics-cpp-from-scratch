@@ -8,23 +8,23 @@
       "options": [
         "The log is too big",
         "Nothing",
-        "A stream writes six significant digits, so the number that is read back is a different one",
+        "A stream writes six significant digits",
         "It is too slow"
       ],
       "correct": 2,
-      "explanation": "Of 20000 readings, 0 read back exactly through a stream."
+      "explanation": "The number that is read back is a different one. Of 20000 readings, 0 read back exactly through a stream."
     },
     {
       "stage": "check",
       "question": "How many of 20000 readings of mixed size read back exactly after std::to_string, and after shortest_text?",
       "options": [
-        "5627 and 20000: to_string writes large numbers in full, so some survive",
+        "5627 and 20000",
         "20000 both",
         "0 both",
         "0 and 5627"
       ],
       "correct": 0,
-      "explanation": "Six digits through a stream gave 0."
+      "explanation": "To_string writes large numbers in full, so some survive. Six digits through a stream gave 0."
     },
     {
       "stage": "check",
@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "Why does parse_number refuse nan, inf and 1e999 as well as 1.5x?",
       "options": [
-        "strtod accepts those words and overflow as numbers, and a configuration never means them, so they would break a division later",
+        "strtod accepts those words and overflow as numbers, and a configuration never means them",
         "They are valid numbers",
         "It is slow",
         "The standard forbids them"
       ],
       "correct": 0,
-      "explanation": "All ten bad texts were refused and each left the output alone."
+      "explanation": "They would break a division later. All ten bad texts were refused and each left the output alone."
     }
   ]
 }

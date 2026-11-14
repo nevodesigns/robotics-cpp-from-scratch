@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "What does computed torque do with the model?",
       "options": [
-        "Asks it for the torque that gives the wanted acceleration, so the joints act as independent unit masses",
+        "Asks it for the torque that gives the wanted acceleration",
         "Runs it ahead of time to plan the move",
         "Uses it to estimate the joint velocities",
         "Compares it with the arm and adapts its masses"
       ],
       "correct": 0,
-      "explanation": "The torque sent is the mass matrix times the wanted acceleration, plus the velocity and gravity terms. If the model is right the arm's acceleration is the wanted one, in every joint separately."
+      "explanation": "The joints act as independent unit masses. The torque sent is the mass matrix times the wanted acceleration, plus the velocity and gravity terms. If the model is right the arm's acceleration is the wanted one, in every joint separately."
     },
     {
       "stage": "check",

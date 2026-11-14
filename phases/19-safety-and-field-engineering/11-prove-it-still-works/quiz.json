@@ -44,11 +44,11 @@
       "options": [
         "Both: a welded contactor fails every check",
         "Neither: the software cannot see a weld",
-        "Only the one that read the contactor: the software check passed, because the software was right and the machine could not stop",
+        "Only the one that read the contactor",
         "The software check only"
       ],
       "correct": 2,
-      "explanation": "The stop logic did command the supply open, so the check of the logic passed. Only reading the contactor's auxiliary contact showed that it had not opened."
+      "explanation": "The software check passed, because the software was right and the machine could not stop. The stop logic did command the supply open, so the check of the logic passed. Only reading the contactor's auxiliary contact showed that it had not opened."
     },
     {
       "stage": "post",
@@ -67,12 +67,12 @@
       "question": "At a failure rate of 1e-5 per hour, how often to test to keep the chance of an undetected failure at 1 in 1000?",
       "options": [
         "Every hour",
-        "About every 100 hours, 4.2 days: the interval follows from a rate and a target",
+        "About every 100 hours, 4.2 days",
         "Once a year",
         "Every 1001 hours"
       ],
       "correct": 1,
-      "explanation": "With a constant rate the chance of having failed by time t is one less e to the minus rate times t. For 1 in 1000 at 1e-5 an hour that is 100.1 hours."
+      "explanation": "The interval follows from a rate and a target. With a constant rate the chance of having failed by time t is one less e to the minus rate times t. For 1 in 1000 at 1e-5 an hour that is 100.1 hours."
     }
   ]
 }

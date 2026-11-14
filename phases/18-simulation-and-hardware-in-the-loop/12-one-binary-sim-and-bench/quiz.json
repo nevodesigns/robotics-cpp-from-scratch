@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "What is the surest way to keep a simulation and a robot from diverging?",
       "options": [
-        "Have no second controller: the controller is the same program, and the choice of what is on the other side is configuration made when it starts",
+        "Have no second controller",
         "Review both controllers whenever either is changed",
         "Build both with the same compiler and flags",
         "Run both every night and compare the logs"
       ],
       "correct": 0,
-      "explanation": "Two copies of a controller drift apart however carefully they are reviewed. One program, told at start up what it is talking to, has nothing to drift from."
+      "explanation": "The controller is the same program, and the choice of what is on the other side is configuration made when it starts. Two copies of a controller drift apart however carefully they are reviewed. One program, told at start up what it is talking to, has nothing to drift from."
     },
     {
       "stage": "check",
@@ -20,11 +20,11 @@
       "options": [
         "Stop at the first bad line and report it",
         "Use the default for every bad line and start",
-        "Report all 8 with their line numbers and leave the settings as they were: a program that starts with half a configuration is one no one can describe",
+        "Report all 8 with their line numbers and leave the settings as they were",
         "Start with the lines that could be read"
       ],
       "correct": 2,
-      "explanation": "Every bad line is reported with its number, and nothing is applied. A program running on half of what was asked for is in a state nobody chose."
+      "explanation": "A program that starts with half a configuration is one no one can describe. Every bad line is reported with its number, and nothing is applied. A program running on half of what was asked for is in a state nobody chose."
     },
     {
       "stage": "check",
@@ -57,10 +57,10 @@
         "Noise, which no model can match",
         "The plant model, which is wrong",
         "The controller's gain",
-        "What the simulation still lacks: the 5 percent loss, which a delay cannot imitate"
+        "What the simulation still lacks"
       ],
       "correct": 3,
-      "explanation": "Two bench runs differ by 0.0053, so noise accounts for little of 0.0772. What the simulation has no way to imitate with a delay is frames that never arrive."
+      "explanation": "The 5 percent loss, which a delay cannot imitate. Two bench runs differ by 0.0053, so noise accounts for little of 0.0772. What the simulation has no way to imitate with a delay is frames that never arrive."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "The measured position is not stored",
         "The true position is cheaper to record",
         "So that the controller can use it",
-        "The judge and the comparison are about what the plant did, and the measurement is what the controller was told: a late or noisy sensor would otherwise hide in the answer"
+        "The judge and the comparison are about what the plant did, and the measurement is what the controller was told"
       ],
       "correct": 3,
-      "explanation": "The controller only ever sees the measurement. The tools that judge the run need what really happened, or a bad sensor would make a bad run look good."
+      "explanation": "A late or noisy sensor would otherwise hide in the answer. The controller only ever sees the measurement. The tools that judge the run need what really happened, or a bad sensor would make a bad run look good."
     }
   ]
 }

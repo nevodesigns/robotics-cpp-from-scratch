@@ -44,11 +44,11 @@
       "options": [
         "Connects faster",
         "It ignores errors",
-        "It is part of its item, so the connection ends with it",
+        "It is part of its item",
         "It connects twice"
       ],
       "correct": 2,
-      "explanation": "The same reloads gave 0 warnings."
+      "explanation": "The connection ends with it. The same reloads gave 0 warnings."
     },
     {
       "stage": "post",
@@ -56,11 +56,11 @@
       "options": [
         "Lambdas are slow",
         "Qt forbids it",
-        "A lambda is a new function each time, so there is nothing to compare",
+        "A lambda is a new function each time",
         "Lambdas are unique"
       ],
       "correct": 2,
-      "explanation": "It works for member function pointers."
+      "explanation": "There is nothing to compare. It works for member function pointers."
     },
     {
       "stage": "post",

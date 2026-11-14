@@ -9,10 +9,10 @@
         "8080, the last read",
         "Neither",
         "The default",
-        "9000, if the settings rank their sources: the command line is meant more than a file, whatever order they are read in"
+        "9000, if the settings rank their sources"
       ],
       "correct": 3,
-      "explanation": "The suite measured 9000 from the command line."
+      "explanation": "The command line is meant more than a file, whatever order they are read in. The suite measured 9000 from the command line."
     },
     {
       "stage": "check",
@@ -31,12 +31,12 @@
       "question": "speed_limt=0.5 is set and the robot goes at full speed. Why?",
       "options": [
         "The limit is ignored on purpose",
-        "A map accepts any key and the program reads only those it knows, so a misspelt key just sits there",
+        "A map accepts any key and the program reads only those it knows",
         "The command line is weaker",
         "The value is wrong"
       ],
       "correct": 1,
-      "explanation": "unknown_keys found 5 of the 6 keys set."
+      "explanation": "A misspelt key just sits there. unknown_keys found 5 of the 6 keys set."
     },
     {
       "stage": "check",

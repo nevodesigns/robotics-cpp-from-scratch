@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "Thread 1 locks A then B. Thread 2 locks B then A. When can this hang?",
       "options": [
-        "When thread 1 holds A and thread 2 holds B at the same moment, so each waits for the other for ever",
+        "When thread 1 holds A and thread 2 holds B at the same moment",
         "Never, since each lock is released eventually",
         "Only if both use the same mutex",
         "Only on a single core"
       ],
       "correct": 0,
-      "explanation": "A cycle of lock orders is needed. Measured with the overlap forced: at least one thread gave up every time. With the same order in both threads none did."
+      "explanation": "Each waits for the other for ever. A cycle of lock orders is needed. Measured with the overlap forced: at least one thread gave up every time. With the same order in both threads none did."
     },
     {
       "stage": "check",
@@ -20,11 +20,11 @@
       "options": [
         "Exactly one in each run",
         "None, which proves the code is safe",
-        "None in all three runs, while other gaps showed hundreds or thousands, so a run that does not deadlock proves nothing",
+        "None in all three runs, while other gaps showed hundreds or thousands",
         "Thousands in each run, so it is easy to find"
       ],
       "correct": 2,
-      "explanation": "With no gap: 129, 3739, 3387. With 100 us: 0, 0, 0. With 1000 us: 0, 3, 16. The same bug appeared and vanished with the timing, which is why testing cannot be relied on to find it."
+      "explanation": "A run that does not deadlock proves nothing. With no gap: 129, 3739, 3387. With 100 us: 0, 0, 0. With 1000 us: 0, 3, 16. The same bug appeared and vanished with the timing, which is why testing cannot be relied on to find it."
     },
     {
       "stage": "check",
@@ -57,10 +57,10 @@
         "Because timed_mutex deadlocks",
         "try_lock_for is slow",
         "try_lock_for is not in C++17",
-        "Under both gcc 11's and clang 14's thread sanitizers, a try_lock_for that succeeds is reported as 'unlock of an unlocked mutex': 15 of 15 runs measured, because pthread_mutex_clocklock is not intercepted. The program is correct and the tool cannot see it"
+        "Under both gcc 11's and clang 14's thread sanitizers, a try_lock_for that succeeds is reported as 'unlock of an unlocked mutex'"
       ],
       "correct": 3,
-      "explanation": "A plain try_lock is seen by both sanitizers: 0 of 30 runs reported. Production timeouts should not move to system_clock to quieten a tool, since that jumps when the clock is adjusted."
+      "explanation": "15 of 15 runs measured, because pthread_mutex_clocklock is not intercepted. The program is correct and the tool cannot see it. A plain try_lock is seen by both sanitizers: 0 of 30 runs reported. Production timeouts should not move to system_clock to quieten a tool, since that jumps when the clock is adjusted."
     },
     {
       "stage": "post",

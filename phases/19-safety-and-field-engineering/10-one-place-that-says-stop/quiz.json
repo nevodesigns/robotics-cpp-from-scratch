@@ -56,11 +56,11 @@
       "options": [
         "That each combination had a test written for it",
         "That the supervisor ran in under a millisecond",
-        "That a stop cause always stopped, and that adding a fault never made the mode or the cap less strict: 0 violations in 10240 additions",
+        "That a stop cause always stopped, and that adding a fault never made the mode or the cap less strict",
         "That at least one combination was normal"
       ],
       "correct": 2,
-      "explanation": "1008 combinations stopped, 15 were degraded and 1 was normal. Checking the property over all of them catches a rule that would have passed any single test."
+      "explanation": "0 violations in 10240 additions. 1008 combinations stopped, 15 were degraded and 1 was normal. Checking the property over all of them catches a rule that would have passed any single test."
     },
     {
       "stage": "post",

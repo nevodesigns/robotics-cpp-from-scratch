@@ -20,11 +20,11 @@
       "options": [
         "The window has a margin and the terminal does not",
         "Characters are drawn at twice the scale",
-        "A character cell is about twice as tall as it is wide, so a metre across costs twice as many columns as a metre up costs rows, while a pixel is square",
+        "A character cell is about twice as tall as it is wide",
         "Terminals have half the resolution"
       ],
       "correct": 2,
-      "explanation": "Both numbers describe round. What round looks like depends on what the surface is made of, which is exactly the thing worth passing in rather than baking in."
+      "explanation": "A metre across costs twice as many columns as a metre up costs rows, while a pixel is square. Both numbers describe round. What round looks like depends on what the surface is made of, which is exactly the thing worth passing in rather than baking in."
     },
     {
       "stage": "check",
@@ -43,12 +43,12 @@
       "question": "Sixty columns of terminal fit a path into fifty nine steps, but four hundred pixels fit into four hundred. Why?",
       "options": [
         "It is a rounding convention with no reason behind it",
-        "A character grid is indexed by cell, so the span is between the first centre and the last, while a window is continuous",
+        "A character grid is indexed by cell",
         "Terminals count from one",
         "The window reserves a pixel for the border"
       ],
       "correct": 1,
-      "explanation": "This is what an off by one looks like when it does not crash anything: a picture very slightly too big, for years. The tests pin both answers so the difference is visible rather than absorbed."
+      "explanation": "The span is between the first centre and the last, while a window is continuous. This is what an off by one looks like when it does not crash anything: a picture very slightly too big, for years. The tests pin both answers so the difference is visible rather than absorbed."
     },
     {
       "stage": "post",
@@ -57,22 +57,22 @@
         "Because Qt cannot be tested",
         "The rendering tests were left for phase 10",
         "Because the drawing is too slow to test",
-        "The arithmetic is separate from the drawing, so it can be checked without a window, a screen or an event loop"
+        "The arithmetic is separate from the drawing"
       ],
       "correct": 3,
-      "explanation": "Of the forty or so lines in the widget, the only one doing any thinking calls the function you wrote. That ratio is what a good boundary between arithmetic and a user interface looks like."
+      "explanation": "It can be checked without a window, a screen or an event loop. Of the forty or so lines in the widget, the only one doing any thinking calls the function you wrote. That ratio is what a good boundary between arithmetic and a user interface looks like."
     },
     {
       "stage": "post",
       "question": "This lesson is marked optional. What does a learner without Qt lose?",
       "options": [
-        "Nothing that anything later depends on, since 00-07 already drew the path with the same arithmetic",
+        "Nothing that anything later depends on",
         "The ability to draw at all until phase 10",
         "The graduated mapping, which later lessons need",
         "The whole of phase 00's payoff"
       ],
       "correct": 0,
-      "explanation": "That is why the terminal version is the required one and this is the bonus. An installation should never stand between a beginner and their first payoff."
+      "explanation": "00-07 already drew the path with the same arithmetic. That is why the terminal version is the required one and this is the bonus. An installation should never stand between a beginner and their first payoff."
     }
   ]
 }

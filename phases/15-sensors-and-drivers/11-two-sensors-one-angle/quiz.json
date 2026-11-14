@@ -7,12 +7,12 @@
       "question": "A gyro reads 0.02 rad/s too high and its rate is added up to give an angle. What happens to the angle?",
       "options": [
         "It saturates",
-        "It walks away at 0.02 rad/s for ever: 0.764 rad rms over 60 s on a still joint, against 0.757 predicted for a ramp",
+        "It walks away at 0.02 rad/s for ever",
         "Nothing, the noise averages out",
         "It oscillates"
       ],
       "correct": 1,
-      "explanation": "A bias is the one error that averaging does not remove."
+      "explanation": "0.764 rad rms over 60 s on a still joint, against 0.757 predicted for a ramp. A bias is the one error that averaging does not remove."
     },
     {
       "stage": "check",
@@ -54,13 +54,13 @@
       "stage": "post",
       "question": "Why is no single tau best?",
       "options": [
-        "A short tau passes the accelerometer's noise and a long one passes the gyro's bias and lag: the swinging error went 0.0144 at 0.05 s, 0.0082 at 0.2 s and 0.3202 at 20 s",
+        "A short tau passes the accelerometer's noise and a long one passes the gyro's bias and lag",
         "The gyro is too slow",
         "Taus must be integers",
         "The maths forbids it"
       ],
       "correct": 0,
-      "explanation": "Measure both errors for the machine and choose between."
+      "explanation": "The swinging error went 0.0144 at 0.05 s, 0.0082 at 0.2 s and 0.3202 at 20 s. Measure both errors for the machine and choose between."
     },
     {
       "stage": "post",

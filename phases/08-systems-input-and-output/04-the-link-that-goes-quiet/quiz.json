@@ -44,11 +44,11 @@
       "options": [
         "Discard them, the sender will retransmit",
         "Deliver both messages from a single poll",
-        "Keep the unparsed bytes and continue from them on the next poll, since the read already took them out of the port",
+        "Keep the unparsed bytes and continue from them on the next poll",
         "Read them again on the next poll"
       ],
       "correct": 2,
-      "explanation": "Bytes taken from the port are gone from it. Returning early without keeping the remainder loses every message after the first in a chunk, which on a busy link looks like a device that has halved its rate."
+      "explanation": "The read already took them out of the port. Bytes taken from the port are gone from it. Returning early without keeping the remainder loses every message after the first in a chunk, which on a busy link looks like a device that has halved its rate."
     },
     {
       "stage": "post",
@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "Why does poll take the time as an argument instead of reading a clock?",
       "options": [
-        "A test can then make an hour pass instantly, so the staleness policy is checked rather than hoped about",
+        "A test can then make an hour pass instantly",
         "It keeps the function const",
         "The clock is not available on every platform",
         "Reading a clock is too slow inside a loop"
       ],
       "correct": 0,
-      "explanation": "The same seam as LoopMonitor in 07-03 and rate_limit in 01-02. A timeout you cannot test is a timeout you find out about in the field."
+      "explanation": "The staleness policy is checked rather than hoped about. The same seam as LoopMonitor in 07-03 and rate_limit in 01-02. A timeout you cannot test is a timeout you find out about in the field."
     }
   ]
 }

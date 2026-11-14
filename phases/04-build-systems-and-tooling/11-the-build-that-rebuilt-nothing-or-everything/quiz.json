@@ -7,12 +7,12 @@
       "question": "A source file is restored from a backup and has an older timestamp than the object built from the file it replaced. What does a timestamp-based build do?",
       "options": [
         "Rebuilds",
-        "Says it is up to date and uses the old object, because the source is not newer than the output",
+        "Says it is up to date and uses the old object",
         "Fails",
         "Asks"
       ],
       "correct": 1,
-      "explanation": "The text had changed and the timestamp was 400 against an object at 1000."
+      "explanation": "The source is not newer than the output. The text had changed and the timestamp was 400 against an object at 1000."
     },
     {
       "stage": "check",
@@ -33,10 +33,10 @@
         "The compiler's name only",
         "Only the text",
         "The timestamp",
-        "The name, the text and the flags, because an output depends on all three"
+        "The name, the text and the flags"
       ],
       "correct": 3,
-      "explanation": "The same source with -O0 and -O2 are different builds."
+      "explanation": "An output depends on all three. The same source with -O0 and -O2 are different builds."
     },
     {
       "stage": "check",

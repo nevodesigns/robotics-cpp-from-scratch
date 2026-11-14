@@ -32,11 +32,11 @@
       "options": [
         "Only the final write of a program is ever lost",
         "The crash handler flushed everything written before it",
-        "The write to std::cerr flushed them, because std::cerr is tied to std::cout, so the unbuffered line dragged the waiting ones out with it",
+        "The write to std::cerr flushed them",
         "printf and the first cout had already filled the buffer"
       ],
       "correct": 2,
-      "explanation": "So which diagnostics you see depends on where the unbuffered one happened to be, and the line you never saw is not the line it stopped at. With no cerr at all, both buffered lines were lost."
+      "explanation": "Std::cerr is tied to std::cout, so the unbuffered line dragged the waiting ones out with it. So which diagnostics you see depends on where the unbuffered one happened to be, and the line you never saw is not the line it stopped at. With no cerr at all, both buffered lines were lost."
     },
     {
       "stage": "check",

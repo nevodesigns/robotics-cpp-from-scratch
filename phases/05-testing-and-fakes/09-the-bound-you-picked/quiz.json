@@ -7,12 +7,12 @@
       "question": "A test averages 100 noisy readings of spread 1 and uses a bound of 0.1, picked because the first run's error was 0.013. How often does it fail?",
       "options": [
         "Never",
-        "About a third of the time: the average itself varies by about 0.1, so a bound of one spread is exceeded 31.8 percent of the time",
+        "About a third of the time",
         "Always",
         "Once in a thousand"
       ],
       "correct": 1,
-      "explanation": "3176 of 10000 failed."
+      "explanation": "The average itself varies by about 0.1, so a bound of one spread is exceeded 31.8 percent of the time. 3176 of 10000 failed."
     },
     {
       "stage": "check",
@@ -20,11 +20,11 @@
       "options": [
         "1",
         "1 over n",
-        "About 1 divided by the square root of n: 0.1 for 100 readings",
+        "About 1 divided by the square root of n",
         "n"
       ],
       "correct": 2,
-      "explanation": "The suite measured 0.0997 over 10000 seeds."
+      "explanation": "0.1 for 100 readings. The suite measured 0.0997 over 10000 seeds."
     },
     {
       "stage": "check",
@@ -56,11 +56,11 @@
       "options": [
         "0 and 0",
         "50 and 50",
-        "0.1 percent and 100 percent: the bound is too wide for that bug at that length",
+        "0.1 percent and 100 percent",
         "100 percent and 100 percent"
       ],
       "correct": 2,
-      "explanation": "A bias of 0.5 was seen 15.1 percent of the time."
+      "explanation": "The bound is too wide for that bug at that length. A bias of 0.5 was seen 15.1 percent of the time."
     },
     {
       "stage": "post",

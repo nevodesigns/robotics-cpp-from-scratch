@@ -44,23 +44,23 @@
       "options": [
         "It is relative",
         "It is too long",
-        "That path exists only on the builder, so Qt looks in a place that is not there",
+        "That path exists only on the builder",
         "Qt forbids it"
       ],
       "correct": 2,
-      "explanation": "It was reported as a stray path."
+      "explanation": "Qt looks in a place that is not there. It was reported as a stray path."
     },
     {
       "stage": "post",
       "question": "Why does the check have to be run on a machine like the target?",
       "options": [
         "Windows needs it",
-        "On the build machine every path exists, so no path looks stray",
+        "On the build machine every path exists",
         "It is faster",
         "Qt requires it"
       ],
       "correct": 1,
-      "explanation": "The lesson says so under what it does not do."
+      "explanation": "No path looks stray. The lesson says so under what it does not do."
     },
     {
       "stage": "post",

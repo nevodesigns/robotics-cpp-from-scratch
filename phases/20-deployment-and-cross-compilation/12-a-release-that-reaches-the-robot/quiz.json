@@ -55,12 +55,12 @@
       "question": "A release is healthy for 90 s and then crashes at every boot, with a soak of 30 s. What did the pipeline report?",
       "options": [
         "Rolled back to 1.4.2 after four boots",
-        "Confirmed, running 1.5.0, and not up: it was confirmed at 50 s, before it crashed, so the trial could not catch it",
+        "Confirmed, running 1.5.0, and not up",
         "Refused at the trial stage",
         "Bricked, with nothing booting"
       ],
       "correct": 1,
-      "explanation": "Healthy at 20 s plus a soak of 30 s confirms at 50 s. The crash at 90 s then belongs to a confirmed release, with nothing to fall back to."
+      "explanation": "It was confirmed at 50 s, before it crashed, so the trial could not catch it. Healthy at 20 s plus a soak of 30 s confirms at 50 s. The crash at 90 s then belongs to a confirmed release, with nothing to fall back to."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "All 1000 were given it and 300 rolled back",
         "It was refused at the manifest",
-        "The rollout halted at wave 0 after 10 robots: 9 on the new release, 1 rolled back, none bricked",
+        "The rollout halted at wave 0 after 10 robots",
         "300 were bricked before it halted"
       ],
       "correct": 2,
-      "explanation": "The robot with the fault failed its trial and rolled back, and the rollout counted that failure and stopped. The two mechanisms did their separate jobs."
+      "explanation": "9 on the new release, 1 rolled back, none bricked. The robot with the fault failed its trial and rolled back, and the rollout counted that failure and stopped. The two mechanisms did their separate jobs."
     }
   ]
 }

@@ -9,10 +9,10 @@
         "Along one meridian",
         "On the equator",
         "Nowhere",
-        "Near the poles: every line of latitude is chosen equally often however short, so the tiny circles near the poles are crowded"
+        "Near the poles"
       ],
       "correct": 3,
-      "explanation": "Within 10 degrees of the north pole the share was 0.0546 against the true 0.0076."
+      "explanation": "Every line of latitude is chosen equally often however short, so the tiny circles near the poles are crowded. Within 10 degrees of the north pole the share was 0.0546 against the true 0.0076."
     },
     {
       "stage": "check",

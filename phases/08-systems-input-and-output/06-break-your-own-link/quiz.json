@@ -21,22 +21,22 @@
         "A flipped bit is always corrected by the checksum",
         "The parser ignores them",
         "Flipped bits are rarer",
-        "The frame keeps its length, so the checksum rejects exactly that frame and the stream stays in step"
+        "The frame keeps its length"
       ],
       "correct": 3,
-      "explanation": "Measured, a flip cost 1.01 to 1.07 frames and a drop cost 1.72 to 1.89. The difference is whether the length the parser was promised is still true."
+      "explanation": "The checksum rejects exactly that frame and the stream stays in step. Measured, a flip cost 1.01 to 1.07 frames and a drop cost 1.72 to 1.89. The difference is whether the length the parser was promised is still true."
     },
     {
       "stage": "check",
       "question": "Why are the fault rates given in parts per million as integers rather than as a fraction?",
       "options": [
-        "The standard fixes the random engines but not the distributions, so a floating point decision can differ between compilers; an integer comparison cannot",
+        "The standard fixes the random engines but not the distributions",
         "Integers are faster",
         "It is the convention for serial ports",
         "Fractions cannot be less than one"
       ],
       "correct": 0,
-      "explanation": "A test asserts a number measured on one machine. That only holds on the others if the same seed gives the same faults everywhere, which needs an owned generator and an integer comparison."
+      "explanation": "A floating point decision can differ between compilers; an integer comparison cannot. A test asserts a number measured on one machine. That only holds on the others if the same seed gives the same faults everywhere, which needs an owned generator and an integer comparison."
     },
     {
       "stage": "check",
@@ -54,13 +54,13 @@
       "stage": "post",
       "question": "A test injects only bit flips and finds the eight bit CRC never lets a wrong frame through. What is wrong with the conclusion?",
       "options": [
-        "CRC-8 detects every single bit error by construction, so the test could never find the failure; dropped bytes make misaligned frames that pass about one in 256",
+        "CRC-8 detects every single bit error by construction",
         "Flips are too rare to count",
         "The test should flip two bits",
         "Nothing, the CRC is perfect"
       ],
       "correct": 0,
-      "explanation": "The fault the test chose is the one the check is guaranteed to catch. The fault that gets through is a different kind of damage, and only a test that injects it can see it."
+      "explanation": "The test could never find the failure; dropped bytes make misaligned frames that pass about one in 256. The fault the test chose is the one the check is guaranteed to catch. The fault that gets through is a different kind of damage, and only a test that injects it can see it."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "Zero means random",
         "The port ignored the seed",
-        "The state of a xorshift generator stays at zero for ever, so it never produces a fault",
+        "The state of a xorshift generator stays at zero for ever",
         "Zero is an invalid rate"
       ],
       "correct": 2,
-      "explanation": "Xor and shift of zero is zero. A seed of zero must become something else, or the test passes for the wrong reason."
+      "explanation": "It never produces a fault. Xor and shift of zero is zero. A seed of zero must become something else, or the test passes for the wrong reason."
     }
   ]
 }

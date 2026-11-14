@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "A rover plans once and drives. A door on the route closes. What happens?",
       "options": [
-        "It keeps pushing at the door: 284 bumps in 300 steps and it never arrived",
+        "It keeps pushing at the door",
         "It waits",
         "It reverses",
         "It goes round"
       ],
       "correct": 0,
-      "explanation": "The plan was right when it was made."
+      "explanation": "284 bumps in 300 steps and it never arrived. The plan was right when it was made."
     },
     {
       "stage": "check",
@@ -32,11 +32,11 @@
       "options": [
         "It reaches the goal",
         "It explores",
-        "No route at all, after 0 steps, because the rover is standing in a map of nothing but unknown",
+        "No route at all, after 0 steps",
         "It plans carefully"
       ],
       "correct": 2,
-      "explanation": "Safe, and the rover never leaves."
+      "explanation": "The rover is standing in a map of nothing but unknown. Safe, and the rover never leaves."
     },
     {
       "stage": "check",
@@ -57,22 +57,22 @@
         "Plans",
         "Nothing",
         "Memory",
-        "The bumps and steps of a map that averages: 0 bumps and 83 steps, against 4 bumps and 87 steps"
+        "The bumps and steps of a map that averages"
       ],
       "correct": 3,
-      "explanation": "The map was built to ride out noise and so it forgets slowly."
+      "explanation": "0 bumps and 83 steps, against 4 bumps and 87 steps. The map was built to ride out noise and so it forgets slowly."
     },
     {
       "stage": "post",
       "question": "What should a rover do when the planner finds no route?",
       "options": [
-        "Stop and say so, with the counts: 54 steps and 7 plans in the sealed building, instead of bumping to its step limit",
+        "Stop and say so, with the counts",
         "Guess",
         "Turn round",
         "Keep trying"
       ],
       "correct": 0,
-      "explanation": "A no route is a result a supervisor needs to hear."
+      "explanation": "54 steps and 7 plans in the sealed building, instead of bumping to its step limit. A no route is a result a supervisor needs to hear."
     }
   ]
 }

@@ -44,11 +44,11 @@
       "options": [
         "inside: the robot is 3 m from each side",
         "warning: within 1 m of the buffer",
-        "outside: the buffer is 3.2 m, more than the 3 m from each side, so there is no inside left",
+        "outside: the buffer is 3.2 m, more than the 3 m from each side",
         "unknown: dead reckoning gives no position"
       ],
       "correct": 2,
-      "explanation": "The buffer is 1.2 m plus 2 percent of 100 m, 3.2 m. In a 6 m corridor nowhere is that far from both sides, so the fence stops the robot until it gets a fix."
+      "explanation": "There is no inside left. The buffer is 1.2 m plus 2 percent of 100 m, 3.2 m. In a 6 m corridor nowhere is that far from both sides, so the fence stops the robot until it gets a fix."
     },
     {
       "stage": "post",
@@ -57,10 +57,10 @@
         "inside, since no edge was crossed",
         "outside, by the stop buffer",
         "warning, until a number arrives",
-        "unknown, and that is a stop: a position that is not a number is not somewhere inside"
+        "unknown, and that is a stop"
       ],
       "correct": 3,
-      "explanation": "A NaN compares false with everything, so a careless test would call it inside. The fence reports unknown, and unknown stops the robot."
+      "explanation": "A position that is not a number is not somewhere inside. A NaN compares false with everything, so a careless test would call it inside. The fence reports unknown, and unknown stops the robot."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "It cannot represent a road's curved edge",
         "It is too slow to stop a fast robot",
-        "It stops the robot on its own estimate of where it is, and a wrong estimate or a failure puts the robot through it: a physical barrier does not depend on the software",
+        "It stops the robot on its own estimate of where it is, and a wrong estimate or a failure puts the robot through it",
         "It needs a fix every metre"
       ],
       "correct": 2,
-      "explanation": "The fence acts on where the robot thinks it is. If that is wrong, or the software has stopped, the robot crosses the line believing it has not."
+      "explanation": "A physical barrier does not depend on the software. The fence acts on where the robot thinks it is. If that is wrong, or the software has stopped, the robot crosses the line believing it has not."
     }
   ]
 }

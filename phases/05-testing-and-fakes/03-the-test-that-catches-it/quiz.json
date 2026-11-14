@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "Where do the boundaries worth testing come from?",
       "options": [
-        "Every comparison in the implementation decides something, and each produces three cases: below, exactly, and above",
+        "Every comparison in the implementation decides something, and each produces three cases",
         "The extremes of the input type",
         "The values in the specification's examples",
         "Whatever the coverage report highlights"
       ],
       "correct": 0,
-      "explanation": "Two of the three are usually obvious and the third is the one that ships. The cheap habit is that whenever a test uses a value near a limit, add one at the limit."
+      "explanation": "Below, exactly, and above. Two of the three are usually obvious and the third is the one that ships. The cheap habit is that whenever a test uses a value near a limit, add one at the limit."
     },
     {
       "stage": "post",

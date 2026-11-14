@@ -6,25 +6,25 @@
       "stage": "pre",
       "question": "The Jacobian J gives tool speed from joint speeds. What gives the joint torques for a force at the tool?",
       "options": [
-        "The transpose of J: power is the same at both ends of a rigid arm, so torque is J transposed times force",
+        "The transpose of J",
         "The inverse of J",
         "The determinant of J",
         "J itself"
       ],
       "correct": 0,
-      "explanation": "Using J instead of its transpose leaves the first row unchanged and the second wrong, and the elbow torque came out +4.89 where it should be -3.99."
+      "explanation": "Power is the same at both ends of a rigid arm, so torque is J transposed times force. Using J instead of its transpose leaves the first row unchanged and the second wrong, and the elbow torque came out +4.89 where it should be -3.99."
     },
     {
       "stage": "check",
       "question": "Why does the test check the torques against the work done as each joint moves?",
       "options": [
         "Work is always zero",
-        "The principle of virtual work shares no algebra with the Jacobian, so a mistake in one cannot hide in both",
+        "The principle of virtual work shares no algebra with the Jacobian",
         "The Jacobian is not exact",
         "It is quicker"
       ],
       "correct": 1,
-      "explanation": "It agreed to 1.9e-09 N m across 1014 poses and forces."
+      "explanation": "A mistake in one cannot hide in both. It agreed to 1.9e-09 N m across 1014 poses and forces."
     },
     {
       "stage": "check",
@@ -32,23 +32,23 @@
       "options": [
         "A rounding error",
         "The tool is heavy",
-        "Going from torques to force inverts a matrix whose determinant is l1 l2 sin(q2), which is nearly zero there, so the inverse is badly conditioned",
+        "Going from torques to force inverts a matrix whose determinant is l1 l2 sin(q2), which is nearly zero there",
         "The motors are noisy"
       ],
       "correct": 2,
-      "explanation": "A force along a straight arm puts almost no torque on either joint, so the torques say almost nothing about it."
+      "explanation": "The inverse is badly conditioned. A force along a straight arm puts almost no torque on either joint, so the torques say almost nothing about it."
     },
     {
       "stage": "check",
       "question": "Nearly straight, the arm could push 720 N along itself and 20 N across it. Why is the tool so strong along the arm?",
       "options": [
-        "The load goes down the structure of the arm, so the joints feel almost no torque from it, and the motors' limits are far away",
+        "The load goes down the structure of the arm",
         "The links are heavier",
         "The motors are stronger there",
         "A bug in the limit"
       ],
       "correct": 0,
-      "explanation": "Exactly straight it is infinite. And along the arm it can hardly move at all, 0.02 m/s, so the direction it cannot move in is the direction it pushes hardest."
+      "explanation": "The joints feel almost no torque from it, and the motors' limits are far away. Exactly straight it is infinite. And along the arm it can hardly move at all, 0.02 m/s, so the direction it cannot move in is the direction it pushes hardest."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "The payload only",
         "Nothing",
         "The colour",
-        "The direction and the pose: across the arm it is limited by the motors, along it the structure carries the load, and it changes with the elbow"
+        "The direction and the pose"
       ],
       "correct": 3,
-      "explanation": "The same motors gave 20 N across a nearly straight arm and 720 N along it. A rating without a direction is the best case or the worst."
+      "explanation": "Across the arm it is limited by the motors, along it the structure carries the load, and it changes with the elbow. The same motors gave 20 N across a nearly straight arm and 720 N along it. A rating without a direction is the best case or the worst."
     }
   ]
 }

@@ -9,10 +9,10 @@
         "Elbow up is always tried first",
         "The branch is chosen at random",
         "Elbow up is faster to compute",
-        "The elbow down branch may be outside the joint limits, and the other branch fits: there is none only if neither does"
+        "The elbow down branch may be outside the joint limits, and the other branch fits"
       ],
       "correct": 3,
-      "explanation": "The elbow down branch is preferred. Where the joint limits rule it out, the other branch is used, and the point is refused only if neither fits."
+      "explanation": "There is none only if neither does. The elbow down branch is preferred. Where the joint limits rule it out, the other branch is used, and the point is refused only if neither fits."
     },
     {
       "stage": "check",
@@ -32,11 +32,11 @@
       "options": [
         "The planner has a bug in its limit",
         "The speed was rounded to one decimal",
-        "The speed is scaled by a fraction that can only move at a limited rate, so a leg that begins quickly overshoots the limit before the ramp catches up: a target, not a wall",
+        "The speed is scaled by a fraction that can only move at a limited rate",
         "The person moved the limit"
       ],
       "correct": 2,
-      "explanation": "The scaling fraction ramps at a limited rate. A leg that starts fast is over the limit for a moment, so the limit is a target with an overshoot."
+      "explanation": "A leg that begins quickly overshoots the limit before the ramp catches up: a target, not a wall. The scaling fraction ramps at a limited rate. A leg that starts fast is over the limit for a moment, so the limit is a target with an overshoot."
     },
     {
       "stage": "check",
@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "Why is this not what a collaborative arm is certified on?",
       "options": [
-        "Certification measures contact forces on a test device on the real arm: this models the logic only, with a tip and no inertia",
+        "Certification measures contact forces on a test device on the real arm",
         "It is certified on its source code",
         "It moves in a plane only",
         "It has no gripper"
       ],
       "correct": 0,
-      "explanation": "Certification is about the force and pressure of a real contact, measured on the real arm. This model has a tip, a speed and no inertia."
+      "explanation": "This models the logic only, with a tip and no inertia. Certification is about the force and pressure of a real contact, measured on the real arm. This model has a tip, a speed and no inertia."
     }
   ]
 }

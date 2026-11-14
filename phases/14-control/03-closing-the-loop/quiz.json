@@ -8,11 +8,11 @@
       "options": [
         "Because position is harder to measure",
         "Because heading errors are always smaller",
-        "A differential drive cannot move sideways, so commanding x and y asks for motion it cannot perform",
+        "A differential drive cannot move sideways",
         "Because a PID can only control one value"
       ],
       "correct": 2,
-      "explanation": "The machine can turn to face a target and drive forward. Controlling heading and choosing a forward speed expresses exactly what it can do."
+      "explanation": "Commanding x and y asks for motion it cannot perform. The machine can turn to face a target and drive forward. Controlling heading and choosing a forward speed expresses exactly what it can do."
     },
     {
       "stage": "check",

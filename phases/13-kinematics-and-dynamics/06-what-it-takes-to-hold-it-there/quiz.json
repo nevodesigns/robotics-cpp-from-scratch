@@ -33,10 +33,10 @@
         "The formula is not exact",
         "It is faster",
         "Energy is easier to compute",
-        "It shares no algebra with the formula, so the same mistake in both cannot pass; they agreed to 4.8e-09 N m over 507 poses"
+        "It shares no algebra with the formula"
       ],
       "correct": 3,
-      "explanation": "A check built from the same reasoning as the code can only confirm the reasoning. The energy slope is a different route to the same torque."
+      "explanation": "The same mistake in both cannot pass; they agreed to 4.8e-09 N m over 507 poses. A check built from the same reasoning as the code can only confirm the reasoning. The energy slope is a different route to the same torque."
     },
     {
       "stage": "check",
@@ -45,10 +45,10 @@
         "It is the worst case",
         "It is the rating of the arm",
         "It is the average over the workspace",
-        "It is the best case: true in the bent pose and nearly three times too high for the longest lever"
+        "It is the best case"
       ],
       "correct": 3,
-      "explanation": "The torque is a straight line in the payload with different coefficients at every pose, so each pose has its own heaviest payload."
+      "explanation": "True in the bent pose and nearly three times too high for the longest lever. The torque is a straight line in the payload with different coefficients at every pose, so each pose has its own heaviest payload."
     },
     {
       "stage": "post",
@@ -56,23 +56,23 @@
       "options": [
         "The inertia increased",
         "The payload changed",
-        "At the top gravity pushes the shoulder over by 17.6 N m per radian, so a gain below that cannot bring it back and one above can",
+        "At the top gravity pushes the shoulder over by 17.6 N m per radian",
         "Nothing physical; the simulation is noisy"
       ],
       "correct": 2,
-      "explanation": "Upright is a hilltop: the torque falls as the arm leans, so gravity adds to the lean. The gain has to exceed the slope."
+      "explanation": "A gain below that cannot bring it back and one above can. Upright is a hilltop: the torque falls as the arm leans, so gravity adds to the lean. The gain has to exceed the slope."
     },
     {
       "stage": "post",
       "question": "heaviest_payload compares with a tolerance when deciding that a joint never runs out, not with exactly zero. Why?",
       "options": [
         "Doubles cannot be compared with zero",
-        "cos(pi / 2) is 6e-17 and not zero, so an exact comparison reports a payload in the millions for a pose that should have no limit",
+        "cos(pi / 2) is 6e-17 and not zero",
         "It makes the function faster",
         "Zero is not a valid payload"
       ],
       "correct": 1,
-      "explanation": "The pose is exactly upright in the mathematics and a rounding error away from it in the machine. A tolerance says what is meant."
+      "explanation": "An exact comparison reports a payload in the millions for a pose that should have no limit. The pose is exactly upright in the mathematics and a rounding error away from it in the machine. A tolerance says what is meant."
     }
   ]
 }

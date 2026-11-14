@@ -8,11 +8,11 @@
       "options": [
         "9",
         "12",
-        "16: the struct is padded at the end to a multiple of its own alignment, so that the second element of an array keeps its uint64_t aligned",
+        "16: the struct is padded at the end to a multiple of its own alignment",
         "It depends on the order"
       ],
       "correct": 2,
-      "explanation": "The size of a struct is never the sum of the sizes of its members."
+      "explanation": "The second element of an array keeps its uint64_t aligned. The size of a struct is never the sum of the sizes of its members."
     },
     {
       "stage": "check",
@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "The lesson tried every order of 400 random structs. What did that show about putting the most strictly aligned member first?",
       "options": [
-        "It gave the smallest size in all 400, so for alignments that are powers of two it is the best order there is",
+        "It gave the smallest size in all 400",
         "It made no difference",
         "It was often best",
         "It was sometimes worse"
       ],
       "correct": 0,
-      "explanation": "It saved up to 32 bytes against the order written."
+      "explanation": "For alignments that are powers of two it is the best order there is. It saved up to 32 bytes against the order written."
     },
     {
       "stage": "post",
@@ -67,12 +67,12 @@
       "question": "What does a static_assert on sizeof of a record protect against?",
       "options": [
         "Nothing",
-        "A field added later, or one whose alignment changed, quietly growing the record: it becomes a compile error and not a surprise in a log file",
+        "A field added later, or one whose alignment changed, quietly growing the record",
         "A slower build",
         "Wrong data in the fields"
       ],
       "correct": 1,
-      "explanation": "Sixteen bytes can be lost to one member in the wrong place and nothing else fails."
+      "explanation": "It becomes a compile error and not a surprise in a log file. Sixteen bytes can be lost to one member in the wrong place and nothing else fails."
     }
   ]
 }

@@ -30,37 +30,37 @@
       "stage": "check",
       "question": "The cascade peaked at 3.04 rad/s against a limit of 3. Why not exactly 3?",
       "options": [
-        "The inner loop is a tracking loop and overshoots its setpoint a little, so a limit that must never be exceeded needs a hard stop behind it",
+        "The inner loop is a tracking loop and overshoots its setpoint a little",
         "A rounding error",
         "The limit is approximate by design",
         "The torque limit"
       ],
       "correct": 0,
-      "explanation": "The limit is not enforced afterwards. It holds because the loop is not asked for more, to within what the inner loop tracks."
+      "explanation": "A limit that must never be exceeded needs a hard stop behind it. The limit is not enforced afterwards. It holds because the loop is not asked for more, to within what the inner loop tracks."
     },
     {
       "stage": "check",
       "question": "Why does the integral stop accumulating when the motor is saturated and the error is still pushing the same way?",
       "options": [
         "The error is zero then",
-        "It would only grow without changing the torque, and then have to be unwound before the loop could respond: windup",
+        "It would only grow without changing the torque, and then have to be unwound before the loop could respond",
         "Integrals are unstable above a limit",
         "To save computation"
       ],
       "correct": 1,
-      "explanation": "Five seconds against a stuck joint left the guarded integral at 0.000 where an unguarded one would be 15."
+      "explanation": "Windup. Five seconds against a stuck joint left the guarded integral at 0.000 where an unguarded one would be 15."
     },
     {
       "stage": "post",
       "question": "A load of 5 N m arrives. The P and D loop sagged 0.0250 rad for good, the PID reached 0.0208 rad worst, and the cascade 0.0051. Why is the cascade so much better?",
       "options": [
-        "The speed loop is fast and has the integral, so a load is corrected at its rate and not at the position loop's, and it finishes on target",
+        "The speed loop is fast and has the integral",
         "A better motor",
         "The load is smaller",
         "A larger gain"
       ],
       "correct": 0,
-      "explanation": "The PID's integral is slow and shares its gain with the position loop. The cascade's is in the loop that feels the load first."
+      "explanation": "A load is corrected at its rate and not at the position loop's, and it finishes on target. The PID's integral is slow and shares its gain with the position loop. The cascade's is in the loop that feels the load first."
     },
     {
       "stage": "post",

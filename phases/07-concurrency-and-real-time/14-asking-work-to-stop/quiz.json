@@ -9,22 +9,22 @@
         "Under a microsecond",
         "Exactly 10 ms",
         "Immediately, since the flag is atomic",
-        "A median of 3.27 ms and a worst of about 9.3 ms: it notices only when it next wakes, so the delay is up to the whole interval"
+        "A median of 3.27 ms and a worst of about 9.3 ms"
       ],
       "correct": 3,
-      "explanation": "A wait the request itself wakes had a median of 72 us. Polling is not wrong, it is slow in proportion to its sleep."
+      "explanation": "It notices only when it next wakes, so the delay is up to the whole interval. A wait the request itself wakes had a median of 72 us. Polling is not wrong, it is slow in proportion to its sleep."
     },
     {
       "stage": "check",
       "question": "stop.request_stop() sets a flag. A consumer is asleep inside queue.pop_for with a 1500 ms wait. What happens?",
       "options": [
-        "Nothing: a flag is something to look at and a sleeping thread is not looking, so it sleeps until an item arrives or the wait ends",
+        "Nothing: a flag is something to look at and a sleeping thread is not looking",
         "It wakes and exits at once",
         "The thread is killed",
         "The queue closes itself"
       ],
       "correct": 0,
-      "explanation": "A StopCallback that calls queue.close() is the answer. Measured: three consumers asleep, request_stop(), all three returned closed within 0 ms."
+      "explanation": "It sleeps until an item arrives or the wait ends. A StopCallback that calls queue.close() is the answer. Measured: three consumers asleep, request_stop(), all three returned closed within 0 ms."
     },
     {
       "stage": "check",
@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "A StopCallback is registered after request_stop() has already been called. What happens?",
       "options": [
-        "It runs at once, where it is constructed, so registering late cannot miss the request",
+        "It runs at once, where it is constructed",
         "It throws",
         "It never runs, since the request is over",
         "It runs on the next request"
       ],
       "correct": 0,
-      "explanation": "The constructor checks the stopped flag under the same lock the requester copies the list under, so the action runs exactly once whichever side got there first."
+      "explanation": "Registering late cannot miss the request. The constructor checks the stopped flag under the same lock the requester copies the list under, so the action runs exactly once whichever side got there first."
     },
     {
       "stage": "post",
@@ -56,11 +56,11 @@
       "options": [
         "To count callbacks",
         "To make the list thread safe",
-        "To wait for a request that is running callbacks now, so what the action captured is not destroyed while the action is still using it",
+        "To wait for a request that is running callbacks now",
         "To notify the requester"
       ],
       "correct": 2,
-      "explanation": "Measured, forced: a callback held open, its owner destroyed on another thread. The destructor waited, and the callback finished before it did."
+      "explanation": "What the action captured is not destroyed while the action is still using it. Measured, forced: a callback held open, its owner destroyed on another thread. The destructor waited, and the callback finished before it did."
     },
     {
       "stage": "post",

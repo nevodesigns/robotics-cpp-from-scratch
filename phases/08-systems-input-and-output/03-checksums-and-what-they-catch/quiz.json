@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "Measured over every single flipped bit, how do a sum, an exclusive or, CRC-8 and CRC-16 compare?",
       "options": [
-        "All four catch every one, so a single bit flip is no reason to choose between them",
+        "All four catch every one",
         "Only the CRCs catch them",
         "The sum catches the fewest",
         "Only CRC-16 catches them all"
       ],
       "correct": 0,
-      "explanation": "The argument for a CRC has to be made on something other than single bit errors, which is where most of the folklore about it stops."
+      "explanation": "A single bit flip is no reason to choose between them. The argument for a CRC has to be made on something other than single bit errors, which is where most of the folklore about it stops."
     },
     {
       "stage": "check",
@@ -44,11 +44,11 @@
       "options": [
         "That the polynomial is correct",
         "That the starting value is correct",
-        "Nothing about agreeing with anyone else, since every wrong variant is self consistent too",
+        "Nothing about agreeing with anyone else",
         "That the implementation is standard"
       ],
       "correct": 2,
-      "explanation": "The published check value is what settles it: CRC-8 over the nine bytes 123456789 is 0xF4. Without that you have a checksum that talks to itself."
+      "explanation": "Every wrong variant is self consistent too. The published check value is what settles it: CRC-8 over the nine bytes 123456789 is 0xF4. Without that you have a checksum that talks to itself."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "Whether the bits are reflected",
         "The starting value",
         "The choice of polynomial",
-        "The width of the checksum, since above its width every scheme of that width is one in two to the n"
+        "The width of the checksum"
       ],
       "correct": 3,
-      "explanation": "Eight bits is one in 256 and sixteen is one in 65536. Choose the width from the residual risk you will accept, then choose a standard polynomial of that width so the other end can be told which by name."
+      "explanation": "Above its width every scheme of that width is one in two to the n. Eight bits is one in 256 and sixteen is one in 65536. Choose the width from the residual risk you will accept, then choose a standard polynomial of that width so the other end can be told which by name."
     }
   ]
 }

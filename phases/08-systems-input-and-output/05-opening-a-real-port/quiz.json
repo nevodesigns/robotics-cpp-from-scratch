@@ -31,12 +31,12 @@
       "question": "Why open with O_NOCTTY and O_NONBLOCK?",
       "options": [
         "They make reads faster",
-        "Each prevents a hang: the first stops a byte from the device signalling your process, the second stops the open waiting for a carrier that will never come",
+        "Each prevents a hang",
         "Both are needed for binary data",
         "They are required by POSIX"
       ],
       "correct": 1,
-      "explanation": "Without O_NOCTTY a Ctrl-C byte arriving on the wire can stop your program. Without O_NONBLOCK the open waits for a modem signal a microcontroller does not assert."
+      "explanation": "The first stops a byte from the device signalling your process, the second stops the open waiting for a carrier that will never come. Without O_NOCTTY a Ctrl-C byte arriving on the wire can stop your program. Without O_NONBLOCK the open waits for a modem signal a microcontroller does not assert."
     },
     {
       "stage": "check",
@@ -68,11 +68,11 @@
       "options": [
         "Because the code is known to be wrong",
         "Because Windows serial ports are unreliable",
-        "A silent gap in what is tested is worse than a stated one, because a reader assumes coverage that does not exist",
+        "A silent gap in what is tested is worse than a stated one",
         "Because the tests would be too slow"
       ],
       "correct": 2,
-      "explanation": "A virtual COM port needs a driver that continuous integration cannot install. A USB serial adapter with its TX wired to its RX closes the gap for about ten dollars, and until somebody does that the limit belongs written down."
+      "explanation": "A reader assumes coverage that does not exist. A virtual COM port needs a driver that continuous integration cannot install. A USB serial adapter with its TX wired to its RX closes the gap for about ten dollars, and until somebody does that the limit belongs written down."
     }
   ]
 }

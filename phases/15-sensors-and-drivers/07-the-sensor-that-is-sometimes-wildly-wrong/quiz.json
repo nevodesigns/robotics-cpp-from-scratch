@@ -19,12 +19,12 @@
       "question": "Why does a median not move at all for the same spike?",
       "options": [
         "It ignores the largest value on purpose",
-        "It is the middle of the sorted window, so it counts which side of the middle a reading falls and not how far",
+        "It is the middle of the sorted window",
         "It averages the middle three",
         "It rounds"
       ],
       "correct": 1,
-      "explanation": "A spike is one value above the middle, and moving it further above changes nothing about where the middle is."
+      "explanation": "It counts which side of the middle a reading falls and not how far. A spike is one value above the middle, and moving it further above changes nothing about where the middle is."
     },
     {
       "stage": "check",
@@ -32,11 +32,11 @@
       "options": [
         "Five is a bug",
         "The sorting is unstable",
-        "The bad readings become the middle once they are more than half of the window: the limit is (9 - 1) / 2 = 4",
+        "The bad readings become the middle once they are more than half of the window",
         "Nine is too small to be accurate"
       ],
       "correct": 2,
-      "explanation": "To survive a burst of b the window needs 2b + 1 readings, and it costs b samples of delay."
+      "explanation": "The limit is (9 - 1) / 2 = 4. To survive a burst of b the window needs 2b + 1 readings, and it costs b samples of delay."
     },
     {
       "stage": "check",
@@ -45,10 +45,10 @@
         "They are the same",
         "The median, always",
         "The Hampel filter, always",
-        "Neither is better: Hampel removed the spikes and left the noise as it found it with no delay, while the median also averaged the noise but came out four samples late"
+        "Neither is better"
       ],
       "correct": 3,
-      "explanation": "Allowing for its delay the median was at 0.025, below the noise. Which is right depends on whether the noise or the spikes are the problem."
+      "explanation": "Hampel removed the spikes and left the noise as it found it with no delay, while the median also averaged the noise but came out four samples late. Allowing for its delay the median was at 0.025, below the noise. Which is right depends on whether the noise or the spikes are the problem."
     },
     {
       "stage": "post",
@@ -57,22 +57,22 @@
         "A bug in the threshold",
         "The window is too small",
         "Steps cannot be filtered",
-        "On the first reading of a step, a step and a spike are the same thing, and only the readings after it say which: it waits for half the window to agree"
+        "On the first reading of a step, a step and a spike are the same thing, and only the readings after it say which"
       ],
       "correct": 3,
-      "explanation": "The same four as the breakdown point, because they are one fact. If a step must be seen faster, the answer is a second sensor."
+      "explanation": "It waits for half the window to agree. The same four as the breakdown point, because they are one fact. If a step must be seen faster, the answer is a second sensor."
     },
     {
       "stage": "post",
       "question": "A very quiet sensor reads exactly the same for a window and then changes by a real 0.003. A Hampel filter with no floor rejects it. Why?",
       "options": [
         "0.003 is too small to be real",
-        "The window's spread is exactly zero, so the threshold is zero, and every change however small is infinitely far from it; a floor at the sensor's resolution fixes it",
+        "The window's spread is exactly zero",
         "Rounding error",
         "The median is wrong"
       ],
       "correct": 1,
-      "explanation": "The floor is the one thing the window cannot know, the least the sensor can resolve, and the caller does."
+      "explanation": "The threshold is zero, and every change however small is infinitely far from it; a floor at the sensor's resolution fixes it. The floor is the one thing the window cannot know, the least the sensor can resolve, and the caller does."
     }
   ]
 }

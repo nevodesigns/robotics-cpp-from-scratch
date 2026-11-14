@@ -20,11 +20,11 @@
       "options": [
         "gcc is not supported",
         "It is alphabetical",
-        "Clang also defines __GNUC__, so testing gcc first would call a clang build gcc",
+        "Clang also defines __GNUC__",
         "Clang is newer"
       ],
       "correct": 2,
-      "explanation": "Clang defines the macros of the compiler it imitates."
+      "explanation": "Testing gcc first would call a clang build gcc. Clang defines the macros of the compiler it imitates."
     },
     {
       "stage": "check",

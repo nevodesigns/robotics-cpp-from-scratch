@@ -7,12 +7,12 @@
       "question": "Two folders of a project need to be compared to see whether they are the same. What makes that cheap?",
       "options": [
         "Comparing every byte each time",
-        "Giving every file a short name made from its content, so equal names mean equal content",
+        "Giving every file a short name made from its content",
         "Looking at the dates",
         "Counting the files"
       ],
       "correct": 1,
-      "explanation": "That is what a version control tool does with every file."
+      "explanation": "Equal names mean equal content. That is what a version control tool does with every file."
     },
     {
       "stage": "check",
@@ -20,23 +20,23 @@
       "options": [
         "Changes nothing",
         "Changes the length",
-        "Changes about half of the bits wherever the change is: a mean of 32.4 of 64, between 16 and 44, over every place in a 200 character text",
+        "Changes about half of the bits wherever the change is",
         "Changes one bit"
       ],
       "correct": 2,
-      "explanation": "That spread is why equal names can be trusted to mean equal content."
+      "explanation": "A mean of 32.4 of 64, between 16 and 44, over every place in a 200 character text. That spread is why equal names can be trusted to mean equal content."
     },
     {
       "stage": "check",
       "question": "Why are a snapshot's file names combined with xor?",
       "options": [
         "It hides the files",
-        "Xor gives the same answer in whatever order, and a folder has no order, so a name that depended on one would change when nothing did",
+        "Xor gives the same answer in whatever order, and a folder has no order",
         "It sorts them",
         "It is the fastest"
       ],
       "correct": 1,
-      "explanation": "The same three files in two orders had the same snapshot name."
+      "explanation": "A name that depended on one would change when nothing did. The same three files in two orders had the same snapshot name."
     },
     {
       "stage": "check",

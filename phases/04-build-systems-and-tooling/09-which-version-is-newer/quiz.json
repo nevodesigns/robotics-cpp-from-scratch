@@ -56,11 +56,11 @@
       "options": [
         "Yes if the minor is higher",
         "Yes, newer is fine",
-        "No: a new major version may break the interface, so the major numbers must match",
+        "No: a new major version may break the interface",
         "Only on Tuesdays"
       ],
       "correct": 2,
-      "explanation": "That is the SameMajorVersion rule."
+      "explanation": "The major numbers must match. That is the SameMajorVersion rule."
     },
     {
       "stage": "post",

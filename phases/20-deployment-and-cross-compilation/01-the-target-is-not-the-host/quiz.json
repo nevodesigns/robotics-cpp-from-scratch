@@ -21,10 +21,10 @@
         "It is 64 bits, as on every 64 bit machine",
         "It is unsigned, where it is signed on Linux",
         "It is 16 bits, kept from older versions of Windows",
-        "It is 32 bits, where it is 64 on 64 bit Linux, so code that uses long for a 64 bit value breaks only there"
+        "It is 32 bits, where it is 64 on 64 bit Linux"
       ],
       "correct": 3,
-      "explanation": "The two Windows targets are 64 bit machines with a 32 bit long. Code that puts a 64 bit value in a long works on every Linux target and fails only there."
+      "explanation": "Code that uses long for a 64 bit value breaks only there. The two Windows targets are 64 bit machines with a 32 bit long. Code that puts a 64 bit value in a long works on every Linux target and fails only there."
     },
     {
       "stage": "check",
@@ -56,23 +56,23 @@
       "options": [
         "Use the host's triple instead",
         "Pick the closest known triple",
-        "Be invalid with no word sizes: a reader that guesses builds for the wrong machine without a word",
+        "Be invalid with no word sizes",
         "Fall back to x86_64-linux-gnu, the most common"
       ],
       "correct": 2,
-      "explanation": "Nine malformed triples all came back invalid with a pointer width of 0. A guess would build for some machine, and nothing would say it was the wrong one."
+      "explanation": "A reader that guesses builds for the wrong machine without a word. Nine malformed triples all came back invalid with a pointer width of 0. A guess would build for some machine, and nothing would say it was the wrong one."
     },
     {
       "stage": "post",
       "question": "How do you check a struct's size on the real target?",
       "options": [
         "Print sizeof on the laptop and compare with the table",
-        "A static_assert on sizeof in the header, compiled by the cross compiler, since the model here was never run on that machine",
+        "A static_assert on sizeof in the header, compiled by the cross compiler",
         "Trust the layout model, which applies the target's rules",
         "Ask the maker of the board"
       ],
       "correct": 1,
-      "explanation": "The model's numbers for ARM and i686 are the rules applied, not measurements. An assertion compiled by the real cross compiler fails the build if they are wrong."
+      "explanation": "The model here was never run on that machine. The model's numbers for ARM and i686 are the rules applied, not measurements. An assertion compiled by the real cross compiler fails the build if they are wrong."
     }
   ]
 }

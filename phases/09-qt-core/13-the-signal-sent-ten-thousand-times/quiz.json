@@ -18,13 +18,13 @@
       "stage": "check",
       "question": "Why does publish post a delivery only when one is not already waiting?",
       "options": [
-        "One waiting delivery will pick up the newest value anyway, so more only fill the queue",
+        "One waiting delivery will pick up the newest value anyway",
         "Posting is not allowed twice",
         "To save a mutex",
         "Because invokeMethod fails the second time"
       ],
       "correct": 0,
-      "explanation": "10000 writes before the loop were one update."
+      "explanation": "More only fill the queue. 10000 writes before the loop were one update."
     },
     {
       "stage": "check",
@@ -56,11 +56,11 @@
       "options": [
         "Nowhere until the loop runs",
         "On a new thread",
-        "On the sensor's thread, because it is a direct connection",
+        "On the sensor's thread",
         "On the interface's thread"
       ],
       "correct": 2,
-      "explanation": "A direct slot runs in the thread that emitted."
+      "explanation": "It is a direct connection. A direct slot runs in the thread that emitted."
     },
     {
       "stage": "post",

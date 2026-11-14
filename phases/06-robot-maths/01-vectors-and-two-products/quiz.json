@@ -20,11 +20,11 @@
       "options": [
         "How far apart the vectors are",
         "Whether the vectors are the same length",
-        "Whether the two directions broadly agree, so whether a target is ahead or behind",
+        "Whether the two directions broadly agree",
         "Which side of the path the robot is on"
       ],
       "correct": 2,
-      "explanation": "Positive means they point the same way, negative means opposed. That single test answers is this in front of me, which is worth the whole operation."
+      "explanation": "Whether a target is ahead or behind. Positive means they point the same way, negative means opposed. That single test answers is this in front of me, which is worth the whole operation."
     },
     {
       "stage": "check",

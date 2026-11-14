@@ -44,11 +44,11 @@
       "options": [
         "The compiler requires it",
         "It is always zero",
-        "It comes off a wire, and it decides how many bytes to wait for, so a claim larger than the window would wait for bytes there is no room to keep",
+        "It comes off a wire, and it decides how many bytes to wait for",
         "Lengths are signed"
       ],
       "correct": 2,
-      "explanation": "A claim is not a fact. Checked against the window and against the size of the check, it is counted as malformed and the start byte is given up."
+      "explanation": "A claim larger than the window would wait for bytes there is no room to keep. A claim is not a fact. Checked against the window and against the size of the check, it is counted as malformed and the start byte is given up."
     },
     {
       "stage": "post",

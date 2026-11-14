@@ -43,12 +43,12 @@
       "question": "Why not simply take the derivative on the error, which removes the larger share?",
       "options": [
         "It is mathematically incorrect",
-        "A step of setpoint moves the error by the whole step in one sample: measured, 4020 N against 20 N on a one metre step",
+        "A step of setpoint moves the error by the whole step in one sample",
         "It makes the loop unstable at any gain",
         "It cannot be computed without the setpoint's velocity"
       ],
       "correct": 1,
-      "explanation": "Neither is wrong. They are right about different inputs, and the combination to reach for is feedforward with the derivative left on the measurement."
+      "explanation": "Measured, 4020 N against 20 N on a one metre step. Neither is wrong. They are right about different inputs, and the combination to reach for is feedforward with the derivative left on the measurement."
     },
     {
       "stage": "post",

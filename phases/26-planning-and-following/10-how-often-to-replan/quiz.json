@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "Why replan for reasons and not on a timer alone?",
       "options": [
-        "A timer plans too often or too late; a reason is a thing that went wrong",
+        "A timer plans too often or too late",
         "A timer cannot be tested",
         "Reasons use less memory",
         "A timer needs a clock"
       ],
       "correct": 0,
-      "explanation": "The vehicle that planned for reasons used 5 plans. A short timer plans constantly for nothing, and a long one plans too late for a wall."
+      "explanation": "A reason is a thing that went wrong. The vehicle that planned for reasons used 5 plans. A short timer plans constantly for nothing, and a long one plans too late for a wall."
     },
     {
       "stage": "check",

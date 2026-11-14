@@ -67,12 +67,12 @@
       "question": "What is the position of the joint after the end of its move?",
       "options": [
         "It goes on",
-        "Its whole distance: it stays",
+        "Its whole distance",
         "0",
         "Unknown"
       ],
       "correct": 1,
-      "explanation": "After 2.5 s it was 2.0."
+      "explanation": "It stays. After 2.5 s it was 2.0."
     }
   ]
 }

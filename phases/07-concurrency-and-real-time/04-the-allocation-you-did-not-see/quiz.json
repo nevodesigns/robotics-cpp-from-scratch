@@ -8,11 +8,11 @@
       "options": [
         "Cache misses on the stack buffer",
         "The timer's own resolution",
-        "The operating system: a scheduling event, a page fault, an interrupt",
+        "The operating system",
         "A hidden allocation in the body"
       ],
       "correct": 2,
-      "explanation": "The body that allocates had a worst case of 36 us, lower than the body that cannot. No timing threshold separates an allocation from the machine being busy."
+      "explanation": "A scheduling event, a page fault, an interrupt. The body that allocates had a worst case of 36 us, lower than the body that cannot. No timing threshold separates an allocation from the machine being busy."
     },
     {
       "stage": "check",
@@ -45,34 +45,34 @@
         "Because it depends on the optimisation level",
         "Because the standard leaves it unspecified between runs",
         "Because it changes with the string's contents",
-        "It is 15 characters on two of the libraries this curriculum builds against and 22 on the third, so a loop that is allocation free on a laptop may not be on the robot"
+        "It is 15 characters on two of the libraries this curriculum builds against and 22 on the third"
       ],
       "correct": 3,
-      "explanation": "std::function has a boundary of the same kind: a lambda capturing one double fits inside it everywhere, three doubles does not on every library."
+      "explanation": "A loop that is allocation free on a laptop may not be on the robot. std::function has a boundary of the same kind: a lambda capturing one double fits inside it everywhere, three doubles does not on every library."
     },
     {
       "stage": "post",
       "question": "A fixed-capacity pool is asked for a slot and has none. What should it do?",
       "options": [
         "Block until a slot is returned",
-        "Return nothing, count the refusal, and let the caller decide, because growing gives up the only property it had",
+        "Return nothing, count the refusal, and let the caller decide",
         "Reuse the oldest slot in use",
         "Allocate one more slot, since running out is rare"
       ],
       "correct": 1,
-      "explanation": "It would grow at the worst possible moment, which is when the system is already late. The count of refusals is what tells you the pool was sized for last year's worst case."
+      "explanation": "Growing gives up the only property it had. It would grow at the worst possible moment, which is when the system is already late. The count of refusals is what tells you the pool was sized for last year's worst case."
     },
     {
       "stage": "post",
       "question": "Why does releasing the same slot twice matter more than it looks?",
       "options": [
         "It leaks the slot permanently",
-        "The free list then holds one index twice, so two later callers are handed the same object and the damage appears somewhere else entirely",
+        "The free list then holds one index twice",
         "It only matters if the pool is nearly full",
         "It corrupts the heap"
       ],
       "correct": 1,
-      "explanation": "Refusing it and counting it turns a bug that shows up as impossible data in another subsystem into a number at the place the mistake was made."
+      "explanation": "Two later callers are handed the same object and the damage appears somewhere else entirely. Refusing it and counting it turns a bug that shows up as impossible data in another subsystem into a number at the place the mistake was made."
     }
   ]
 }

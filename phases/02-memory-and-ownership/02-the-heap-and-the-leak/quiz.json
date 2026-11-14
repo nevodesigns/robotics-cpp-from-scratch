@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "In the reference, why was the early return turned into a break?",
       "options": [
-        "It leaves the loop but not the function, so there is still exactly one place that gives the memory back",
+        "It leaves the loop but not the function",
         "Because return is not allowed inside a loop",
         "To avoid copying the return value",
         "Because break is faster than return"
       ],
       "correct": 0,
-      "explanation": "One way out means one delete. It is the cheapest possible fix and it survives somebody adding a third exit condition later."
+      "explanation": "There is still exactly one place that gives the memory back. One way out means one delete. It is the cheapest possible fix and it survives somebody adding a third exit condition later."
     },
     {
       "stage": "post",

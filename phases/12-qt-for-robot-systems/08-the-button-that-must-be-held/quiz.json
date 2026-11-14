@@ -7,12 +7,12 @@
       "question": "A key is held and the system repeats it. What does a handler that takes each release as the end of the hold see?",
       "options": [
         "An error",
-        "The key let go again and again: the repeats arrive as release and press pairs",
+        "The key let go again and again",
         "One hold",
         "Nothing"
       ],
       "correct": 1,
-      "explanation": "It saw the key let go 5 times."
+      "explanation": "The repeats arrive as release and press pairs. It saw the key let go 5 times."
     },
     {
       "stage": "check",
@@ -68,11 +68,11 @@
       "options": [
         "The key is slow",
         "Qt requires it",
-        "A reset must not be a start: the person must let go and press again",
+        "A reset must not be a start",
         "It saves memory"
       ],
       "correct": 2,
-      "explanation": "After the key was let go the reset worked, and did not arm."
+      "explanation": "The person must let go and press again. After the key was let go the reset worked, and did not arm."
     }
   ]
 }

@@ -21,10 +21,10 @@
         "Waits for the thread",
         "Destroys the thread",
         "Stops the thread at once",
-        "Sets a flag the thread must check: it does not stop anything by itself"
+        "Sets a flag the thread must check"
       ],
       "correct": 3,
-      "explanation": "Only wait() says the thread has finished."
+      "explanation": "It does not stop anything by itself. Only wait() says the thread has finished."
     },
     {
       "stage": "check",
@@ -44,11 +44,11 @@
       "options": [
         "The event loop",
         "Nothing",
-        "A sleep of one period after each reading, so it cannot run faster, though it can run slower",
+        "A sleep of one period after each reading",
         "The mutex"
       ],
       "correct": 2,
-      "explanation": "The rate is a ceiling and not a grid."
+      "explanation": "It cannot run faster, though it can run slower. The rate is a ceiling and not a grid."
     },
     {
       "stage": "post",

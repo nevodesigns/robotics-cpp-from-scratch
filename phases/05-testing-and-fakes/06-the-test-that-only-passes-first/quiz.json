@@ -56,11 +56,11 @@
       "options": [
         "The reset should have been called once, after both passes",
         "Nothing: 1 and 0 differ, so the detection was correct",
-        "The backwards pass inherited the dirty value from the forwards pass, so both probes failed, and the counts were untrue even though they differed",
+        "The backwards pass inherited the dirty value from the forwards pass",
         "The loop ran off the end of the vector when counting down"
       ],
       "correct": 2,
-      "explanation": "A tool for finding shared state had shared state between its own two passes. The assertion held for the wrong reason, and only printing the numbers and reading them caught it."
+      "explanation": "Both probes failed, and the counts were untrue even though they differed. A tool for finding shared state had shared state between its own two passes. The assertion held for the wrong reason, and only printing the numbers and reading them caught it."
     },
     {
       "stage": "post",

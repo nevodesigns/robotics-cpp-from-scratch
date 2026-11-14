@@ -33,10 +33,10 @@
         "The planner had run out of iterations",
         "The person came back at 20 s",
         "The map marked the doorway as a wall for good",
-        "It was waiting out of sight of the doorway, so nothing on the map could change: a belief nobody can check does not go away"
+        "It was waiting out of sight of the doorway"
       ],
       "correct": 3,
-      "explanation": "From where it waited the doorway was out of view, so no beam could clear it. Forgetting after 4 s made it go and look, and it arrived 7 s after the person left."
+      "explanation": "Nothing on the map could change: a belief nobody can check does not go away. From where it waited the doorway was out of view, so no beam could clear it. Forgetting after 4 s made it go and look, and it arrived 7 s after the person left."
     },
     {
       "stage": "check",
@@ -56,11 +56,11 @@
       "options": [
         "None: both stop and both record the cause",
         "The limiter alone does not stop",
-        "Both stop, but the limiter alone does it with no cause on record and would restart when the sensor came back; the supervisor gives a cause, a latch and a reset",
+        "Both stop, but the limiter alone does it with no cause on record and would restart when the sensor came back",
         "The supervisor stops later, after 4.8 m"
       ],
       "correct": 2,
-      "explanation": "The limiter reads a NaN as a blocked path and sets the speed to zero. The supervisor adds what a person needs afterwards: why it stopped, and that it stays stopped."
+      "explanation": "The supervisor gives a cause, a latch and a reset. The limiter reads a NaN as a blocked path and sets the speed to zero. The supervisor adds what a person needs afterwards: why it stopped, and that it stays stopped."
     },
     {
       "stage": "post",

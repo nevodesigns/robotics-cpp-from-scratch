@@ -43,36 +43,36 @@
       "question": "Demanding half of the best manipulability left 86.6 percent of the reachable area and 0.9 left 43.6. What does that show?",
       "options": [
         "Nothing changes",
-        "A mild demand costs almost nothing and a strict one costs most of the ring, so the demand decides how much floor is usable",
+        "A mild demand costs almost nothing and a strict one costs most of the ring",
         "The grid was too coarse",
         "The edges are thick"
       ],
       "correct": 1,
-      "explanation": "The area never grows as the demand rises."
+      "explanation": "The demand decides how much floor is usable. The area never grows as the demand rises."
     },
     {
       "stage": "post",
       "question": "A shoulder limited to the top half kept 70 percent of the area, not 50. Why?",
       "options": [
-        "The second link folds back over the shoulder's own side, so the arm reaches points below the shoulder's line",
+        "The second link folds back over the shoulder's own side",
         "The grid is symmetric",
         "Joints do not matter",
         "A mistake in the grid"
       ],
       "correct": 0,
-      "explanation": "Measure the area under the real limits and do not estimate it."
+      "explanation": "The arm reaches points below the shoulder's line. Measure the area under the real limits and do not estimate it."
     },
     {
       "stage": "post",
       "question": "An elbow that bends only one way lost no reachable or usable area. Why, and what did it lose?",
       "options": [
-        "The two elbow poses for a point are mirror images, so one is always legal; what is lost is the choice between them, which matters to a path and not to a map",
+        "The two elbow poses for a point are mirror images",
         "Nothing was lost",
         "The map was wrong",
         "It lost half the area"
       ],
       "correct": 0,
-      "explanation": "Lesson 13-09 showed why keeping a branch matters along a path."
+      "explanation": "One is always legal; what is lost is the choice between them, which matters to a path and not to a map. Lesson 13-09 showed why keeping a branch matters along a path."
     }
   ]
 }

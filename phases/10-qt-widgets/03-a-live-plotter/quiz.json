@@ -56,11 +56,11 @@
       "options": [
         "Nothing, Q_OBJECT is always required",
         "The widget now needs an event loop",
-        "Q_OBJECT is load bearing here: without it the signal has no definition and the build fails at the link",
+        "Q_OBJECT is load bearing here",
         "The widget can no longer be rendered offscreen"
       ],
       "correct": 2,
-      "explanation": "Removing the macro from the 00-08 window changed nothing observable, which is why that lesson does not claim it as a trap and this one does."
+      "explanation": "Without it the signal has no definition and the build fails at the link. Removing the macro from the 00-08 window changed nothing observable, which is why that lesson does not claim it as a trap and this one does."
     },
     {
       "stage": "post",

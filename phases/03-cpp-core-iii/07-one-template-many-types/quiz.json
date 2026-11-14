@@ -44,11 +44,11 @@
       "options": [
         "Yes, since the capacity is the same",
         "Yes, with the element type erased at runtime",
-        "No: they share a definition and nothing else, so each has its own code and its own statics",
+        "No: they share a definition and nothing else",
         "Only if double and int are the same size"
       ],
       "correct": 2,
-      "explanation": "Each instantiation is separate code. Pushing into one leaves the other at size zero, and sizeof(Ring<double, 8>) is 80 against 48 for Ring<double, 4>. It is also why a template in a header costs compile time per type and per translation unit."
+      "explanation": "Each has its own code and its own statics. Each instantiation is separate code. Pushing into one leaves the other at size zero, and sizeof(Ring<double, 8>) is 80 against 48 for Ring<double, 4>. It is also why a template in a header costs compile time per type and per translation unit."
     },
     {
       "stage": "post",
@@ -56,11 +56,11 @@
       "options": [
         "It went down to about 5 lines as well",
         "It had no effect at all",
-        "It went up, to 254 lines from 224, because clang reports the assertion and then instantiates the rest anyway",
+        "It went up, to 254 lines from 224",
         "It became a warning rather than an error"
       ],
       "correct": 2,
-      "explanation": "So the obvious conclusion is half wrong. What a static_assert reliably fixes on both compilers is the first error line, which becomes a sentence you wrote naming your own file, instead of a libstdc++ header 21 instantiation frames deep."
+      "explanation": "Clang reports the assertion and then instantiates the rest anyway. So the obvious conclusion is half wrong. What a static_assert reliably fixes on both compilers is the first error line, which becomes a sentence you wrote naming your own file, instead of a libstdc++ header 21 instantiation frames deep."
     },
     {
       "stage": "post",

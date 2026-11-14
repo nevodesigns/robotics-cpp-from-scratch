@@ -7,12 +7,12 @@
       "question": "A function returns an int local it never wrote to. The same source gave 1405118043 compiled at -O0 and 0 at -O2. What happened?",
       "options": [
         "The stack happened to hold different leftovers in the two builds",
-        "Reading it is undefined behaviour, so the compiler may assume it cannot happen and is free to answer differently at each optimisation level",
+        "Reading it is undefined behaviour",
         "-O2 zeroes locals as a safety measure and -O0 does not",
         "The optimiser has a bug that should be reported"
       ],
       "correct": 1,
-      "explanation": "There was no correct answer to give. This is why uninitialised reads produce the works-in-debug-fails-in-release pattern in both directions."
+      "explanation": "The compiler may assume it cannot happen and is free to answer differently at each optimisation level. There was no correct answer to give. This is why uninitialised reads produce the works-in-debug-fails-in-release pattern in both directions."
     },
     {
       "stage": "check",
@@ -66,13 +66,13 @@
       "stage": "post",
       "question": "A filler wrote two of a Pose's three doubles and returned true. bytes_still_poisoned reported 8 of 24. On an eight byte frame where every byte was written, it reported 2. What does that pair of results tell you about the tool?",
       "options": [
-        "It is exact for a struct of doubles and a lower bound for raw bytes, because a byte deliberately written to the pattern cannot be told from one never touched",
+        "It is exact for a struct of doubles and a lower bound for raw bytes",
         "The second result is a bug in the counting loop",
         "It is unreliable, since it reported unwritten bytes in a fully written buffer",
         "It only works on types whose size is a multiple of eight"
       ],
       "correct": 0,
-      "explanation": "No correct code writes a repeated 0xff into a double, because that is a NaN, so for a struct of doubles the count names the field exactly. A byte buffer can legitimately contain the pattern, so there the count is a floor on what was written."
+      "explanation": "A byte deliberately written to the pattern cannot be told from one never touched. No correct code writes a repeated 0xff into a double, because that is a NaN, so for a struct of doubles the count names the field exactly. A byte buffer can legitimately contain the pattern, so there the count is a floor on what was written."
     }
   ]
 }

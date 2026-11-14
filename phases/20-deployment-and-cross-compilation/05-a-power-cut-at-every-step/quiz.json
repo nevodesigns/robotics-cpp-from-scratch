@@ -43,12 +43,12 @@
       "question": "Why can a cut install simply be run again?",
       "options": [
         "It keeps a record of the step it reached and resumes there",
-        "The plan is made from what boots now and not from where the last attempt stopped, so it needs no memory of the failure",
+        "The plan is made from what boots now and not from where the last attempt stopped",
         "It locks the disk so that a second attempt waits",
         "A cut install leaves both slots valid by luck"
       ],
       "correct": 1,
-      "explanation": "An installer that must work out where it stopped has a second thing to get wrong. Starting from what boots now, 11 of 11 cut installs finished on release 2."
+      "explanation": "It needs no memory of the failure. An installer that must work out where it stopped has a second thing to get wrong. Starting from what boots now, 11 of 11 cut installs finished on release 2."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "That the disk has two physical drives",
         "That flash never wears out",
-        "That a single write is atomic, so that a power cut falls between steps and never inside one: pull the real power hundreds of times",
+        "That a single write is atomic",
         "That the boot loader can be updated too"
       ],
       "correct": 2,
-      "explanation": "The argument rests on a power cut never landing in the middle of a write. Whether that holds for this flash is found by pulling the power, many times."
+      "explanation": "A power cut falls between steps and never inside one: pull the real power hundreds of times. The argument rests on a power cut never landing in the middle of a write. Whether that holds for this flash is found by pulling the power, many times."
     }
   ]
 }

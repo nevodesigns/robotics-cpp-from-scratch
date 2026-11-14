@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "Why does Welford's method keep precision where a running total loses it?",
       "options": [
-        "No quantity ever holds the sum, so the digits are not spent on a large constant offset",
+        "No quantity ever holds the sum",
         "It divides earlier, which rounds less",
         "It stores every reading and recomputes",
         "It uses long double internally"
       ],
       "correct": 0,
-      "explanation": "Readings around a million, varying by a hundredth, exhaust a double's significant digits on the constant part. Welford's works in corrections, which stay the size of the variation."
+      "explanation": "The digits are not spent on a large constant offset. Readings around a million, varying by a hundredth, exhaust a double's significant digits on the constant part. Welford's works in corrections, which stay the size of the variation."
     },
     {
       "stage": "post",

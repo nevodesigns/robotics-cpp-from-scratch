@@ -33,10 +33,10 @@
         "Because pointers are faster than integers",
         "Because indexes cannot be negative",
         "Because minus one is a valid index in C++",
-        "nullptr is a value the language itself understands as nothing, so it needs no convention"
+        "nullptr is a value the language itself understands as nothing"
       ],
       "correct": 3,
-      "explanation": "Every codebase invents a different sentinel index and somebody eventually forgets to check it. nullptr means nothing found in a way the compiler and the reader both recognise."
+      "explanation": "It needs no convention. Every codebase invents a different sentinel index and somebody eventually forgets to check it. nullptr means nothing found in a way the compiler and the reader both recognise."
     },
     {
       "stage": "check",

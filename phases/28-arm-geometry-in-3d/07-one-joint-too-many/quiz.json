@@ -67,12 +67,12 @@
       "question": "What is wrong with an unclamped solution that reaches the pose?",
       "options": [
         "It took more steps than the clamped one",
-        "It may need a joint outside its limit, which the arm cannot do: 0.283 rad outside",
+        "It may need a joint outside its limit, which the arm cannot do",
         "Its tool error is larger",
         "It ignores the null space"
       ],
       "correct": 1,
-      "explanation": "It reached the pose with joint 6 0.283 rad past its limit. An answer the arm cannot take is wrong however small its error."
+      "explanation": "0.283 rad outside. It reached the pose with joint 6 0.283 rad past its limit. An answer the arm cannot take is wrong however small its error."
     }
   ]
 }

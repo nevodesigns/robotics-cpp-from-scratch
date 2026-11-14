@@ -19,12 +19,12 @@
       "question": "Why does a doubling wait with a cap beat a fixed wait?",
       "options": [
         "It is simpler",
-        "It is quick for a glitch, since the first retries are 10, 20 and 40 ms, and as patient as a slow fixed wait for a long absence, with a worst wait of the cap",
+        "It is quick for a glitch",
         "It never fails",
         "It uses less memory"
       ],
       "correct": 1,
-      "explanation": "A fixed wait picks one of two bad answers. 38 tries against 62, and a worst wait of 1952 ms against 900 ms: the cap is the number to choose."
+      "explanation": "The first retries are 10, 20 and 40 ms, and as patient as a slow fixed wait for a long absence, with a worst wait of the cap. A fixed wait picks one of two bad answers. 38 tries against 62, and a worst wait of 1952 ms against 900 ms: the cap is the number to choose."
     },
     {
       "stage": "check",
@@ -33,10 +33,10 @@
         "Powers are slow",
         "It gives a different answer",
         "The compiler rejects pow",
-        "For a long enough absence the power overflows to infinity, which then compares as no wait or never, so a step at a time stopped at the cap is safe"
+        "For a long enough absence the power overflows to infinity, which then compares as no wait or never"
       ],
       "correct": 3,
-      "explanation": "The test calls it with a million failures in a row, a robot left in a cupboard, and requires exactly the cap."
+      "explanation": "A step at a time stopped at the cap is safe. The test calls it with a million failures in a row, a robot left in a cupboard, and requires exactly the cap."
     },
     {
       "stage": "check",
@@ -55,12 +55,12 @@
       "question": "After a reconnect with the parser kept, one frame was lost and the sequence tracker counted 91 losses. Where did each come from?",
       "options": [
         "The cable dropped them",
-        "The old parser held half a frame and ate the start of the first new one; and the device restarted its counter at 100 while the tracker expected 9, so 91 messages were counted that were never sent",
+        "The old parser held half a frame and ate the start of the first new one",
         "A checksum bug",
         "The backoff"
       ],
       "correct": 1,
-      "explanation": "A new connection is a new conversation. Everything that learned something from the old one, the parser, the counter, the clock map, a request in flight, has to forget it."
+      "explanation": "And the device restarted its counter at 100 while the tracker expected 9, so 91 messages were counted that were never sent. A new connection is a new conversation. Everything that learned something from the old one, the parser, the counter, the clock map, a request in flight, has to forget it."
     },
     {
       "stage": "post",

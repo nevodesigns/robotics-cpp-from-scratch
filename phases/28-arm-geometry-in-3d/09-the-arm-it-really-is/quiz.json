@@ -68,11 +68,11 @@
       "options": [
         "The measurements were too few",
         "The damping biased them",
-        "Some give the same tool place whatever the joints do, so the measurements cannot separate them",
+        "Some give the same tool place whatever the joints do",
         "Levenberg-Marquardt stops early"
       ],
       "correct": 2,
-      "explanation": "Along parallel axes two corrections have the same effect. The fit gets the tool's place right and the split between them is arbitrary."
+      "explanation": "The measurements cannot separate them. Along parallel axes two corrections have the same effect. The fit gets the tool's place right and the split between them is arbitrary."
     }
   ]
 }

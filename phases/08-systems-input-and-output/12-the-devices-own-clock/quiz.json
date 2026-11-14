@@ -19,12 +19,12 @@
       "question": "Using the first message's clock offset for ever was 185 ms wrong after an hour. Why does it grow?",
       "options": [
         "The wrap accumulates error",
-        "The device's oscillator runs a little fast or slow, 50 ppm here, so the offset between the two clocks changes steadily",
+        "The device's oscillator runs a little fast or slow, 50 ppm here",
         "The host clock stops",
         "The link gets slower"
       ],
       "correct": 1,
-      "explanation": "50 parts per million over 3600 seconds is 180 ms. An offset is a measurement of one instant, not a constant."
+      "explanation": "The offset between the two clocks changes steadily. 50 parts per million over 3600 seconds is 180 ms. An offset is a measurement of one instant, not a constant."
     },
     {
       "stage": "check",
@@ -32,23 +32,23 @@
       "options": [
         "It is cheaper",
         "The average would overflow",
-        "An arrival time is the send time plus a delay that is never negative, so the least delayed sample is the closest to the truth and the line must lie under the rest",
+        "An arrival time is the send time plus a delay that is never negative",
         "Averages are not defined for times"
       ],
       "correct": 2,
-      "explanation": "Jitter only adds. Averaging would put the delay into the estimate, and the minimum finds the floor."
+      "explanation": "The least delayed sample is the closest to the truth and the line must lie under the rest. Jitter only adds. Averaging would put the delay into the estimate, and the minimum finds the floor."
     },
     {
       "stage": "check",
       "question": "The map's error was measured against the send time plus 2 ms. Why not the send time itself?",
       "options": [
         "The device clock is rounded",
-        "The least delay cannot be separated from the clock offset without a second clock, so it is the part nobody on one side of the link can know",
+        "The least delay cannot be separated from the clock offset without a second clock",
         "A mistake in the test",
         "2 ms is the clock resolution"
       ],
       "correct": 1,
-      "explanation": "For fusing two sensors that share the host the constant cancels. For absolute time it does not, and the lesson names it instead of hiding it."
+      "explanation": "It is the part nobody on one side of the link can know. For fusing two sensors that share the host the constant cancels. For absolute time it does not, and the lesson names it instead of hiding it."
     },
     {
       "stage": "post",
@@ -57,22 +57,22 @@
         "The unwrapper crashes",
         "The checksum fails",
         "The device sends bad stamps",
-        "The unwrapped timeline carries on without the downtime, so every old bucket is that far out, and the fit averages them with the new ones until they leave the window"
+        "The unwrapped timeline carries on without the downtime"
       ],
       "correct": 3,
-      "explanation": "Measured, 5011 ms for a five second reset, and 3.5 ms when the map was reset on the restart."
+      "explanation": "Every old bucket is that far out, and the fit averages them with the new ones until they leave the window. Measured, 5011 ms for a five second reset, and 3.5 ms when the map was reset on the restart."
     },
     {
       "stage": "post",
       "question": "How does the unwrapper tell a device reset from a message that arrived late?",
       "options": [
-        "A link delivers in order, so a stamp that goes backwards is a reset; and a silence of more than half a turn looks like one, which is the counter's limit",
+        "A link delivers in order",
         "It cannot tell the difference",
         "By the checksum",
         "By the baud rate"
       ],
       "correct": 0,
-      "explanation": "A counter can see a gap just under half its range. Past that, a gap and a restart cannot be told apart, which is why a boot counter in the message is the better design."
+      "explanation": "A stamp that goes backwards is a reset; and a silence of more than half a turn looks like one, which is the counter's limit. A counter can see a gap just under half its range. Past that, a gap and a restart cannot be told apart, which is why a boot counter in the message is the better design."
     }
   ]
 }

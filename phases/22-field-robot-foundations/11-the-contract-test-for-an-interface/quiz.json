@@ -55,12 +55,12 @@
       "question": "Why test the contract with broken drives as well as good ones?",
       "options": [
         "Broken drives are easier to write",
-        "To show that it can fail: a test that has never been seen to fail proves little",
+        "To show that it can fail",
         "To measure how fast the contract runs",
         "To find bugs in the broken drives"
       ],
       "correct": 1,
-      "explanation": "Each of six drives with one fault was caught by the promise it breaks. That is the evidence that the promises check something."
+      "explanation": "A test that has never been seen to fail proves little. Each of six drives with one fault was caught by the promise it breaks. That is the evidence that the promises check something."
     },
     {
       "stage": "post",

@@ -8,35 +8,35 @@
       "options": [
         "A recording is smaller than a live run, so it can be searched faster",
         "A recording contains the node's internal state at every step",
-        "A node's behaviour depends only on the messages it gets, so the same messages at the same pace give the same output: a running average gave 2.000 3.000 2.333 3.250 3.000 live and from the file",
+        "A node's behaviour depends only on the messages it gets",
         "Replaying runs the node more slowly, so the bug can be watched"
       ],
       "correct": 2,
-      "explanation": "If the node sees the same messages at the same times it does the same thing. So a failure that was recorded can be made to happen again, at a desk."
+      "explanation": "The same messages at the same pace give the same output: a running average gave 2.000 3.000 2.333 3.250 3.000 live and from the file. If the node sees the same messages at the same times it does the same thing. So a failure that was recorded can be made to happen again, at a desk."
     },
     {
       "stage": "check",
       "question": "Why is a payload written with its length and not as a C string?",
       "options": [
-        "A payload is bytes and may contain a zero: one with a zero byte in it round trips because its length is written",
+        "A payload is bytes and may contain a zero",
         "A C string would be slower to write for long payloads",
         "A length keeps the payload aligned to eight bytes",
         "A C string cannot hold characters above 127"
       ],
       "correct": 0,
-      "explanation": "A string ends at its first zero byte, and binary payloads are full of them. Written with its length, a payload comes back whole."
+      "explanation": "One with a zero byte in it round trips because its length is written. A string ends at its first zero byte, and binary payloads are full of them. Written with its length, a payload comes back whole."
     },
     {
       "stage": "check",
       "question": "A recording was cut by a power failure. What should the reader do, at any length the file could be cut to?",
       "options": [
         "Read the complete messages and stop at the cut",
-        "Refuse it, and leave the bag empty: all 92 prefixes of the test file were refused and none left half a bag behind",
+        "Refuse it, and leave the bag empty",
         "Read what is there and fill the rest with zeros",
         "Read up to the cut and mark the last message as partial"
       ],
       "correct": 1,
-      "explanation": "A cut file is not the recording. Refusing it, and handing back an empty bag, means a caller who forgets to check the status does not replay half a run as if it were all of it."
+      "explanation": "All 92 prefixes of the test file were refused and none left half a bag behind. A cut file is not the recording. Refusing it, and handing back an empty bag, means a caller who forgets to check the status does not replay half a run as if it were all of it."
     },
     {
       "stage": "check",

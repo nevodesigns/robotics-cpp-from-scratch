@@ -7,12 +7,12 @@
       "question": "A pixel is found for an object. What does it tell you about where the object is?",
       "options": [
         "Its position in the world",
-        "Which way to look: every point along a line from the camera lands on the same pixel, so how far along it is not in the picture",
+        "Which way to look",
         "Nothing",
         "Its distance"
       ],
       "correct": 1,
-      "explanation": "A pixel is a direction. The distance has to come from the size of something, a second camera, or the floor."
+      "explanation": "Every point along a line from the camera lands on the same pixel, so how far along it is not in the picture. A pixel is a direction. The distance has to come from the size of something, a second camera, or the floor."
     },
     {
       "stage": "check",
@@ -21,22 +21,22 @@
         "It is off the picture",
         "It is at the centre",
         "It divides by zero",
-        "The depth is negative and the division gives a perfectly good pixel: the mirror image of the point two metres in front, which is why projection says the point is not visible"
+        "The depth is negative and the division gives a perfectly good pixel"
       ],
       "correct": 3,
-      "explanation": "A point behind the lens does not appear mirrored, it does not appear. The flag exists so the pixel cannot be mistaken for one."
+      "explanation": "The mirror image of the point two metres in front, which is why projection says the point is not visible. A point behind the lens does not appear mirrored, it does not appear. The flag exists so the pixel cannot be mistaken for one."
     },
     {
       "stage": "check",
       "question": "Ignoring a lens with k1 of -0.25 put a point near the corner of a 640 by 480 picture 56 pixels from where it was. Why is it invisible near the middle?",
       "options": [
-        "The bend goes as the radius to the third and fifth powers, so it is 0.1 of a pixel at a radius of 0.1 and 55.8 pixels at 0.8",
+        "The bend goes as the radius to the third and fifth powers",
         "The sensor is smaller in the middle",
         "It is not invisible",
         "The lens is flat in the middle"
       ],
       "correct": 0,
-      "explanation": "At two metres that corner is 22.3 cm of floor. A calibration at the centre of the picture finds almost no distortion."
+      "explanation": "It is 0.1 of a pixel at a radius of 0.1 and 55.8 pixels at 0.8. At two metres that corner is 22.3 cm of floor. A calibration at the centre of the picture finds almost no distortion."
     },
     {
       "stage": "check",
@@ -45,10 +45,10 @@
         "To save memory",
         "Pixels are discrete",
         "The formula is too long",
-        "The bend depends on the radius of the point being looked for, so the answer is needed to work out the answer; it is guessed, corrected and repeated"
+        "The bend depends on the radius of the point being looked for"
       ],
       "correct": 3,
-      "explanation": "One pass left the corner 14.5 px out, five 0.083, twenty 3.5e-10."
+      "explanation": "The answer is needed to work out the answer; it is guessed, corrected and repeated. One pass left the corner 14.5 px out, five 0.083, twenty 3.5e-10."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "Lens distortion",
         "The focal length changes",
-        "The target gets smaller as it recedes and a pixel does not, so a pixel is a bigger fraction of it, and the error goes as the square of the distance",
+        "The target gets smaller as it recedes and a pixel does not",
         "The camera is worse far away"
       ],
       "correct": 2,
-      "explanation": "At 10 m the target is 10 pixels wide, and one pixel is ten percent of it."
+      "explanation": "A pixel is a bigger fraction of it, and the error goes as the square of the distance. At 10 m the target is 10 pixels wide, and one pixel is ten percent of it."
     }
   ]
 }

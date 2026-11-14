@@ -43,12 +43,12 @@
       "question": "What is wrong with using the limits as the speeds?",
       "options": [
         "Nothing",
-        "They ask for a stop in one step: a drop from 2 to 1 m/s between points 5 cm apart is nearly 20 m/s^2 of braking",
+        "They ask for a stop in one step",
         "They are too slow",
         "They are too fast"
       ],
       "correct": 1,
-      "explanation": "The limits alone asked for 19.81 m/s^2."
+      "explanation": "A drop from 2 to 1 m/s between points 5 cm apart is nearly 20 m/s^2 of braking. The limits alone asked for 19.81 m/s^2."
     },
     {
       "stage": "post",
@@ -56,11 +56,11 @@
       "options": [
         "It uses the average",
         "It stops",
-        "A forward pass limits the gain and a backward pass from the stop limits the braking, using v squared = u squared + 2 a d, so the rover starts slowing early: worst gain 1.00 and loss 1.50",
+        "A forward pass limits the gain and a backward pass from the stop limits the braking, using v squared = u squared + 2 a d",
         "It ignores the limits"
       ],
       "correct": 2,
-      "explanation": "The profile starts and ends at rest and stays under every limit."
+      "explanation": "The rover starts slowing early: worst gain 1.00 and loss 1.50. The profile starts and ends at rest and stays under every limit."
     },
     {
       "stage": "post",

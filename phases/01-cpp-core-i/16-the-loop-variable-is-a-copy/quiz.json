@@ -31,12 +31,12 @@
       "question": "A function must return a pointer to the first reading above a limit. Its loop is for (Reading r : readings) and it returns &r. What is wrong?",
       "options": [
         "It does not compile, since r is not a pointer",
-        "The pointer is to r, a copy that stops existing when the function returns, so it must be for (const Reading& r : readings)",
+        "The pointer is to r, a copy that stops existing when the function returns",
         "Nothing, &r is the address of the reading",
         "It returns nullptr, since r is const"
       ],
       "correct": 1,
-      "explanation": "Measured from inside the loop: the address of a by value loop variable is different from the element's. The suite checks the returned pointer equals the address of the right element in the vector."
+      "explanation": "It must be for (const Reading& r : readings). Measured from inside the loop: the address of a by value loop variable is different from the element's. The suite checks the returned pointer equals the address of the right element in the vector."
     },
     {
       "stage": "check",
@@ -44,23 +44,23 @@
       "options": [
         "The Holder lives until the end of the loop, so it is safe",
         "The loop runs zero times",
-        "The Holder is destroyed before the body runs, so the loop reads something already gone, which summed to 2882482050 with no error in a normal build",
+        "The Holder is destroyed before the body runs",
         "It does not compile, since a temporary cannot be iterated"
       ],
       "correct": 2,
-      "explanation": "Measured: the count of destroyed holders was 1 when the body first ran. The address sanitizer reports stack-use-after-scope. Returning a copy by value is safe, because the copy is kept alive for the loop. C++23 changed the rule; this curriculum is on C++17."
+      "explanation": "The loop reads something already gone, which summed to 2882482050 with no error in a normal build. Measured: the count of destroyed holders was 1 when the body first ran. The address sanitizer reports stack-use-after-scope. Returning a copy by value is safe, because the copy is kept alive for the loop. C++23 changed the rule; this curriculum is on C++17."
     },
     {
       "stage": "post",
       "question": "for (auto& flag : flags) will not compile when flags is a std::vector<bool>. Why?",
       "options": [
-        "Because vector<bool> packs flags into bits, so there is no bool to refer to and indexing hands back a temporary stand-in that a plain reference cannot bind to",
+        "Because vector<bool> packs flags into bits",
         "Because flags is const",
         "Because auto cannot be deduced for bool",
         "Because vector<bool> cannot be iterated"
       ],
       "correct": 0,
-      "explanation": "The stand-in is 16 bytes on gcc 11, a pointer and a mask. for (auto flag : flags) works because it copies the stand-in, and writing to the flags is an index loop. Both compilers refuse the reference, which checks/ proves."
+      "explanation": "There is no bool to refer to and indexing hands back a temporary stand-in that a plain reference cannot bind to. The stand-in is 16 bytes on gcc 11, a pointer and a mask. for (auto flag : flags) works because it copies the stand-in, and writing to the flags is an index loop. Both compilers refuse the reference, which checks/ proves."
     },
     {
       "stage": "post",

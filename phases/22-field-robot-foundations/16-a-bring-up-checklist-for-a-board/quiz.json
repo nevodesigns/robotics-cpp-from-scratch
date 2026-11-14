@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "Why does a reversed left motor fail three checks?",
       "options": [
-        "The wheel counts down for a left command and cancels the other in the scale: the checks behind the cause fail with it",
+        "The wheel counts down for a left command and cancels the other in the scale",
         "Three wires are wrong",
         "The checks are run three times",
         "The motor is weaker in reverse"
       ],
       "correct": 0,
-      "explanation": "One cause, three failures: direction, then sides, then scale. The first line of the report is the cause and the others follow from it."
+      "explanation": "The checks behind the cause fail with it. One cause, three failures: direction, then sides, then scale. The first line of the report is the cause and the others follow from it."
     },
     {
       "stage": "post",

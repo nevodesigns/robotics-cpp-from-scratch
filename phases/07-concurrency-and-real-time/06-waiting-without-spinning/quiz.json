@@ -32,23 +32,23 @@
       "options": [
         "To make the code shorter",
         "Because wait_until can only be called in a loop",
-        "A wakeup only says look again: another consumer may have taken the item first, and the standard allows a wait to return with nobody having notified",
+        "A wakeup only says look again",
         "Loops are faster"
       ],
       "correct": 2,
-      "explanation": "Measured with two consumers and one item: one took it and the other had to carry on waiting. A spurious wakeup is allowed even when nothing changed, so the condition is always rechecked."
+      "explanation": "Another consumer may have taken the item first, and the standard allows a wait to return with nobody having notified. Measured with two consumers and one item: one took it and the other had to carry on waiting. A spurious wakeup is allowed even when nothing changed, so the condition is always rechecked."
     },
     {
       "stage": "check",
       "question": "Three consumers are asleep in pop_for. close() uses notify_one instead of notify_all. What happens?",
       "options": [
-        "One wakes and returns closed; the other two stay asleep until their deadlines, and a program waiting to join them cannot exit",
+        "One wakes and returns closed",
         "None of them wake",
         "All three wake, since the queue is closed",
         "It does not compile"
       ],
       "correct": 0,
-      "explanation": "Every waiter has to notice, so every waiter has to be woken. With notify_all, the measured result was all three returned closed within 1 ms of a 5000 ms wait."
+      "explanation": "The other two stay asleep until their deadlines, and a program waiting to join them cannot exit. Every waiter has to notice, so every waiter has to be woken. With notify_all, the measured result was all three returned closed within 1 ms of a 5000 ms wait."
     },
     {
       "stage": "post",

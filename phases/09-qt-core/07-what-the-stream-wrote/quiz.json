@@ -31,12 +31,12 @@
       "question": "What does stream << QString(\"ab\") write?",
       "options": [
         "61 62",
-        "A four byte length in bytes and then UTF-16: 00 00 00 04 00 61 00 62",
+        "A four byte length in bytes and then UTF-16",
         "Two bytes",
         "A length byte and UTF-8"
       ],
       "correct": 1,
-      "explanation": "The format of the lesson writes the length byte and the UTF-8 itself."
+      "explanation": "00 00 00 04 00 61 00 62. The format of the lesson writes the length byte and the UTF-8 itself."
     },
     {
       "stage": "check",
@@ -57,10 +57,10 @@
         "It waits",
         "It returns the old value",
         "It throws",
-        "It sets the status to ReadPastEnd and the value read is set to zero, so code that never asks for the status sees zeros"
+        "It sets the status to ReadPastEnd and the value read is set to zero"
       ],
       "correct": 3,
-      "explanation": "The second 16 bit number was 0, not the 88 it held before."
+      "explanation": "Code that never asks for the status sees zeros. The second 16 bit number was 0, not the 88 it held before."
     },
     {
       "stage": "post",

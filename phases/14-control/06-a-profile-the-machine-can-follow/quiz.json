@@ -55,12 +55,12 @@
       "question": "A singularity limits how fast one direction of a path can be driven. What should slow down?",
       "options": [
         "Nothing; the loop should absorb it",
-        "The whole profile in time: stretching by a factor divides every velocity by it and every acceleration by its square, preserving the shape exactly",
+        "The whole profile in time",
         "Only the limited direction",
         "The acceleration limit only"
       ],
       "correct": 1,
-      "explanation": "The shape of a path is the relationship between its axes at each instant. Scale one and it becomes a different path with the same endpoints. For several axes, take the longest time any of them needs and stretch them all to it."
+      "explanation": "Stretching by a factor divides every velocity by it and every acceleration by its square, preserving the shape exactly. The shape of a path is the relationship between its axes at each instant. Scale one and it becomes a different path with the same endpoints. For several axes, take the longest time any of them needs and stretch them all to it."
     },
     {
       "stage": "post",

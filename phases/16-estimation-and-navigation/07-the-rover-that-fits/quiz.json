@@ -33,10 +33,10 @@
         "Both are performance optimisations",
         "The disc is more conservative and rounding up is less so",
         "Neither matters at a 10 cm resolution",
-        "The disc avoids over-blocking diagonals by root two and closing gaps the robot fits through; rounding up keeps the map from claiming the robot fits when it does not"
+        "The disc avoids over-blocking diagonals by root two and closing gaps the robot fits through"
       ],
       "correct": 3,
-      "explanation": "Rounding up makes inflation conservative by up to one cell, which belongs in the margin rather than being a surprise. Unknown also grows as unknown rather than as occupied, since a cell beside unseen ground is not known to be blocked."
+      "explanation": "Rounding up keeps the map from claiming the robot fits when it does not. Rounding up makes inflation conservative by up to one cell, which belongs in the margin rather than being a surprise. Unknown also grows as unknown rather than as occupied, since a cell beside unseen ground is not known to be blocked."
     },
     {
       "stage": "check",

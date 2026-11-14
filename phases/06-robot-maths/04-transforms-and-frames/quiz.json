@@ -7,12 +7,12 @@
       "question": "What does a transform describe?",
       "options": [
         "The shape of a robot link",
-        "Where one frame sits relative to another: a rotation and a translation",
+        "Where one frame sits relative to another",
         "How fast a joint is moving",
         "A position in the world frame only"
       ],
       "correct": 1,
-      "explanation": "Turn by the rotation, then move by the translation. Chaining them is how a camera reading becomes something an arm can act on."
+      "explanation": "A rotation and a translation. Turn by the rotation, then move by the translation. Chaining them is how a camera reading becomes something an arm can act on."
     },
     {
       "stage": "check",
@@ -20,11 +20,11 @@
       "options": [
         "A direction must be normalised first",
         "A direction is only translated",
-        "A direction is only rotated, because moving a frame does not change which way north is",
+        "A direction is only rotated",
         "There is no difference"
       ],
       "correct": 2,
-      "explanation": "Using the wrong one gives an answer wrong by exactly the translation: small, plausible, persistent, and able to survive review for months."
+      "explanation": "Moving a frame does not change which way north is. Using the wrong one gives an answer wrong by exactly the translation: small, plausible, persistent, and able to survive review for months."
     },
     {
       "stage": "check",

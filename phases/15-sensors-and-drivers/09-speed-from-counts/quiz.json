@@ -32,35 +32,35 @@
       "options": [
         "The sample rate is too low",
         "The window is too long",
-        "A clock tick is a tiny part of a long gap and a large part of a short one: ten microseconds against twenty milliseconds, and against twenty microseconds",
+        "A clock tick is a tiny part of a long gap and a large part of a short one",
         "The encoder is worse at high speed"
       ],
       "correct": 2,
-      "explanation": "The resolution of edge timing is a clock tick, so it is best when the gaps are long."
+      "explanation": "Ten microseconds against twenty milliseconds, and against twenty microseconds. The resolution of edge timing is a clock tick, so it is best when the gaps are long."
     },
     {
       "stage": "check",
       "question": "An encoder stops. What should the edge timing estimate do, and why?",
       "options": [
         "Hold the last speed",
-        "Fall: a stopped encoder produces no edges, so the speed can only be lower than the last gap says, at most one count over the time since the last edge",
+        "Fall: a stopped encoder produces no edges",
         "Go to zero at once",
         "Report an error"
       ],
       "correct": 1,
-      "explanation": "500 counts a second read 10 a tenth of a second after the last edge and 1 after a second."
+      "explanation": "The speed can only be lower than the last gap says, at most one count over the time since the last edge. 500 counts a second read 10 a tenth of a second after the last edge and 1 after a second."
     },
     {
       "stage": "post",
       "question": "Why is the first edge after a reversal not used for a speed?",
       "options": [
         "It is too late",
-        "It is the same position crossed the other way, so the time since the previous edge says nothing about how fast it is going back",
+        "It is the same position crossed the other way",
         "Direction is not measured",
         "It is always noisy"
       ],
       "correct": 1,
-      "explanation": "The estimate is zero until a second edge in the new direction, and then it is signed the other way."
+      "explanation": "The time since the previous edge says nothing about how fast it is going back. The estimate is zero until a second edge in the new direction, and then it is signed the other way."
     },
     {
       "stage": "post",

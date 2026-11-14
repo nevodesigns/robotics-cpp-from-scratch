@@ -68,11 +68,11 @@
       "options": [
         "-Werror is unavailable on one of the four toolchains",
         "checks/ files are the only ones that produce warnings",
-        "A learner's first warning should be a message they can read and decide about; a course that fails the build on a warning in lesson four teaches them to switch warnings off",
+        "A learner's first warning should be a message they can read and decide about",
         "The lesson targets would not compile with -Werror"
       ],
       "correct": 2,
-      "explanation": "A checks/ snippet is not the learner's code, it is an assertion about what a compiler will refuse, so it is compiled the way a project that means it would. A real project should turn -Werror on, and what makes that bearable is counting sites and keeping a written ledger of the warnings already dismissed."
+      "explanation": "A course that fails the build on a warning in lesson four teaches them to switch warnings off. A checks/ snippet is not the learner's code, it is an assertion about what a compiler will refuse, so it is compiled the way a project that means it would. A real project should turn -Werror on, and what makes that bearable is counting sites and keeping a written ledger of the warnings already dismissed."
     }
   ]
 }

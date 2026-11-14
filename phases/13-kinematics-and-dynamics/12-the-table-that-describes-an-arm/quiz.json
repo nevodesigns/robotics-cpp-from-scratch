@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "A vendor gives a Denavit-Hartenberg table. What else must you know to use it?",
       "options": [
-        "Which convention it was written for: standard and modified are different arms for the same numbers",
+        "Which convention it was written for",
         "Nothing",
         "The motor type",
         "The weight of the arm"
       ],
       "correct": 0,
-      "explanation": "One table gave tools 0.626211 m apart."
+      "explanation": "Standard and modified are different arms for the same numbers. One table gave tools 0.626211 m apart."
     },
     {
       "stage": "check",

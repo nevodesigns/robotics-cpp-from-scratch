@@ -57,10 +57,10 @@
         "Qt requires it",
         "To save time",
         "Windows needs it",
-        "The engine caches compiled files by URL, so a second component on the same file is ready at once"
+        "The engine caches compiled files by URL"
       ],
       "correct": 3,
-      "explanation": "The comparison of modes needs two first loads."
+      "explanation": "A second component on the same file is ready at once. The comparison of modes needs two first loads."
     },
     {
       "stage": "post",

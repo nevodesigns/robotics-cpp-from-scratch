@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "A 15625 KiB array was declared in main beside a branch that only used a std::vector. That branch crashed. Why?",
       "options": [
-        "The frame is allocated when the function is entered, not when the declaration is reached, so an unused local costs its full space",
+        "The frame is allocated when the function is entered, not when the declaration is reached",
         "The compiler initialised the array before choosing the branch",
         "The vector allocated on the stack because the array was nearby",
         "It was a compiler bug; moving the array should change nothing"
       ],
       "correct": 0,
-      "explanation": "Measured: moving the array into its own function made the vector branch survive with status 0. So several large locals in mutually exclusive branches can fail when no single branch would."
+      "explanation": "An unused local costs its full space. Measured: moving the array into its own function made the vector branch survive with status 0. So several large locals in mutually exclusive branches can fail when no single branch would."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "So the guard can be copied safely between calls",
         "Destructors run faster than an explicit decrement",
         "Because the counter must be decremented before the recursive call returns",
-        "An early return, a break or a throw all skip a line at the bottom and none of them skips a destructor; a counter that leaks reports a limit never reached"
+        "An early return, a break or a throw all skip a line at the bottom and none of them skips a destructor"
       ],
       "correct": 3,
-      "explanation": "This is lesson 02-03's point applied to recursion. The guard also deletes its copy operations, and checks/ proves it: copying one would count a level once and give it back twice."
+      "explanation": "A counter that leaks reports a limit never reached. This is lesson 02-03's point applied to recursion. The guard also deletes its copy operations, and checks/ proves it: copying one would count a level once and give it back twice."
     }
   ]
 }

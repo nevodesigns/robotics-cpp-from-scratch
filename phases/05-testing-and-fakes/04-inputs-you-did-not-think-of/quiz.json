@@ -33,10 +33,10 @@
         "The wide one is testing the wrong function",
         "The narrow one is too slow to run enough values",
         "Nothing: both simply need more trials",
-        "The wide one will not reach it in any run you have time for; the narrow one cannot reach it at all, at any number of trials"
+        "The wide one will not reach it in any run you have time for"
       ],
       "correct": 3,
-      "explanation": "The largest number nine digits can spell is nowhere near the largest the parser can hold. That generator would report the parser correct for ever, on any machine. From the outside both look the same: a green tick and a large trial count."
+      "explanation": "The narrow one cannot reach it at all, at any number of trials. The largest number nine digits can spell is nowhere near the largest the parser can hold. That generator would report the parser correct for ever, on any machine. From the outside both look the same: a green tick and a large trial count."
     },
     {
       "stage": "check",

@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "A 10 Hz stream is used at a 100 Hz loop by taking the newest value it has sent. How old can that value be?",
       "options": [
-        "Up to a whole sample, and half a sample on average: 0.2384 rms error on a 1 Hz sine",
+        "Up to a whole sample, and half a sample on average",
         "A millisecond",
         "Exactly current",
         "It cannot be old"
       ],
       "correct": 0,
-      "explanation": "A held value is as old as the gap since its sample."
+      "explanation": "0.2384 rms error on a 1 Hz sine. A held value is as old as the gap since its sample."
     },
     {
       "stage": "check",
@@ -33,10 +33,10 @@
         "The hold is closer",
         "The same",
         "Neither works",
-        "The line is about ten times closer: rms error 0.0253 against 0.2384 held, matching the 0.0255 and 0.2565 the maths gives"
+        "The line is about ten times closer"
       ],
       "correct": 3,
-      "explanation": "Held error goes with the frequency, a line's with its square."
+      "explanation": "Rms error 0.0253 against 0.2384 held, matching the 0.0255 and 0.2565 the maths gives. Held error goes with the frequency, a line's with its square."
     },
     {
       "stage": "check",
@@ -44,11 +44,11 @@
       "options": [
         "Extrapolate the last line",
         "Return zero",
-        "Say no and leave the output untouched, because there is nothing to join",
+        "Say no and leave the output untouched",
         "Return the nearest sample"
       ],
       "correct": 2,
-      "explanation": "A made up value is worse than none."
+      "explanation": "There is nothing to join. A made up value is worse than none."
     },
     {
       "stage": "post",
@@ -57,22 +57,22 @@
         "It crashes",
         "It gets the last value",
         "It is interpolated across the hole",
-        "It is not answered: 192 of 251 instants were and none of the 59 in the hole"
+        "It is not answered"
       ],
       "correct": 3,
-      "explanation": "A line across a gap is a guess about time the sensor never saw."
+      "explanation": "192 of 251 instants were and none of the 59 in the hole. A line across a gap is a guess about time the sensor never saw."
     },
     {
       "stage": "post",
       "question": "What does interpolation cost that holding does not?",
       "options": [
         "Memory",
-        "It needs a sample after the instant, so it answers for a moment one sample in the past",
+        "It needs a sample after the instant",
         "Accuracy",
         "Nothing"
       ],
       "correct": 1,
-      "explanation": "That is the price of the better answer."
+      "explanation": "It answers for a moment one sample in the past. That is the price of the better answer."
     }
   ]
 }

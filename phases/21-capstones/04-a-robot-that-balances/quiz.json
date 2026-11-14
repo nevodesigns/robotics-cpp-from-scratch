@@ -20,11 +20,11 @@
       "options": [
         "It is stable, with 5 ms to spare",
         "It has plenty of margin: 50 ms is far from one second",
-        "It is working with almost none: the edge is sharp, and the rms lean at 50 ms was already 1.8 times that with no delay",
+        "It is working with almost none",
         "It will stand at 55 ms too, with retuned gains"
       ],
       "correct": 2,
-      "explanation": "Standing at 50 ms and falling at 55 ms is a cliff, and nothing at 50 ms warns of it except the larger lean."
+      "explanation": "The edge is sharp, and the rms lean at 50 ms was already 1.8 times that with no delay. Standing at 50 ms and falling at 55 ms is a cliff, and nothing at 50 ms warns of it except the larger lean."
     },
     {
       "stage": "check",
@@ -33,10 +33,10 @@
         "The accelerometer's noise pushes it along",
         "The wheels slip a little at each correction",
         "The motor model is wrong by a constant",
-        "The bias leaves a small lean that the robot believes is upright, so it holds a lean and accelerates until the velocity loop settles"
+        "The bias leaves a small lean that the robot believes is upright"
       ],
       "correct": 3,
-      "explanation": "The filter's idea of upright is off by what the bias leaves. Holding that false upright means holding a real lean, which means accelerating."
+      "explanation": "It holds a lean and accelerates until the velocity loop settles. The filter's idea of upright is off by what the bias leaves. Holding that false upright means holding a real lean, which means accelerating."
     },
     {
       "stage": "check",
@@ -68,11 +68,11 @@
       "options": [
         "It does not: the supervisor holds it up",
         "The supervisor's stop was too slow",
-        "A balancing robot has no safe state to stand in: the stop cannot keep it up, but the log says why (cause sensors at 2.010 s)",
+        "A balancing robot has no safe state to stand in",
         "The filter switches to the accelerometer"
       ],
       "correct": 2,
-      "explanation": "Stopping the motors of a balancing robot lets it fall. The stop is still worth having for what it records and for what it prevents after the fall."
+      "explanation": "The stop cannot keep it up, but the log says why (cause sensors at 2.010 s). Stopping the motors of a balancing robot lets it fall. The stop is still worth having for what it records and for what it prevents after the fall."
     }
   ]
 }

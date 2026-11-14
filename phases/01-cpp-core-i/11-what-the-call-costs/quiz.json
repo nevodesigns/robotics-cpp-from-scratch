@@ -57,10 +57,10 @@
         "Always at 32, which is sizeof(std::string)",
         "Never: a string's characters are always on the heap",
         "Always at 16, on every implementation",
-        "It depends on the standard library: measured at 16 here, with sizeof(std::string) of 32, and it is not a language rule"
+        "It depends on the standard library"
       ],
       "correct": 3,
-      "explanation": "Characters were inside the object up to length 15 and on the heap from 16. That threshold is an implementation choice, so the suite prints the table and does not assert the number. It is why pass strings by const reference is advice about long strings."
+      "explanation": "Measured at 16 here, with sizeof(std::string) of 32, and it is not a language rule. Characters were inside the object up to length 15 and on the heap from 16. That threshold is an implementation choice, so the suite prints the table and does not assert the number. It is why pass strings by const reference is advice about long strings."
     },
     {
       "stage": "post",

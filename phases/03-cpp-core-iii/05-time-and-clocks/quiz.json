@@ -30,13 +30,13 @@
       "stage": "check",
       "question": "What does the chrono library give you that a double named timeout does not?",
       "options": [
-        "The units live in the type, so seconds cannot be passed where milliseconds are expected",
+        "The units live in the type",
         "Automatic thread safety",
         "A smaller memory footprint",
         "Better precision"
       ],
       "correct": 0,
-      "explanation": "Confusing milliseconds with seconds is a thousandfold error. With a plain number the units live in a comment, and the mistake is silent."
+      "explanation": "Seconds cannot be passed where milliseconds are expected. Confusing milliseconds with seconds is a thousandfold error. With a plain number the units live in a comment, and the mistake is silent."
     },
     {
       "stage": "check",

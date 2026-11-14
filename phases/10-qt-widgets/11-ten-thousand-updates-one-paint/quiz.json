@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "A paintEvent draws all 300 columns although the event is for one. What is wrong?",
       "options": [
-        "The work is done and thrown away: the loop should go over only the columns in the event rectangle",
+        "The work is done and thrown away",
         "It crashes",
         "It paints twice",
         "Nothing: Qt clips it"
       ],
       "correct": 0,
-      "explanation": "One sample went over 1 column, where a full update went over 300."
+      "explanation": "The loop should go over only the columns in the event rectangle. One sample went over 1 column, where a full update went over 300."
     },
     {
       "stage": "post",

@@ -43,12 +43,12 @@
       "question": "A gap of 0.6 m in the line was crossed with which debounce?",
       "options": [
         "3 frames (60 ms)",
-        "50 frames (1000 ms): a shorter debounce stopped the robot at the gap",
+        "50 frames (1000 ms)",
         "10 frames (200 ms)",
         "25 frames (500 ms)"
       ],
       "correct": 1,
-      "explanation": "The gap empties the picture for about a second at this speed. Shorter debounces stopped the robot at the gap; the cost of a long one is a second of driving blind."
+      "explanation": "A shorter debounce stopped the robot at the gap. The gap empties the picture for about a second at this speed. Shorter debounces stopped the robot at the gap; the cost of a long one is a second of driving blind."
     },
     {
       "stage": "post",

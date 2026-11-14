@@ -54,13 +54,13 @@
       "stage": "post",
       "question": "Why does mode_from_name refuse \"auto\"?",
       "options": [
-        "Names are exact: the case matters, and an interface that guesses is a risk",
+        "Names are exact",
         "It is too short",
         "Qt forbids lowercase",
         "A bug"
       ],
       "correct": 0,
-      "explanation": "auto, AUTO and Auto with a space were each refused."
+      "explanation": "The case matters, and an interface that guesses is a risk. auto, AUTO and Auto with a space were each refused."
     },
     {
       "stage": "post",

@@ -69,10 +69,10 @@
         "The smoothed path was much shorter",
         "The acceleration limit was raised",
         "The stop line moved",
-        "The curvature at the corner point was lower, so the cap was higher: 8.6 s to 8.2 s"
+        "The curvature at the corner point was lower"
       ],
       "correct": 3,
-      "explanation": "The cap at a point goes as one over the root of the curvature. The raw corner's sharpest point forces a crawl; the smoothed one, less of one."
+      "explanation": "The cap was higher: 8.6 s to 8.2 s. The cap at a point goes as one over the root of the curvature. The raw corner's sharpest point forces a crawl; the smoothed one, less of one."
     }
   ]
 }

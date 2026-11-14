@@ -42,13 +42,13 @@
       "stage": "check",
       "question": "Why does create_with check every name before it sets any?",
       "options": [
-        "The engine only warns about a name that is not a property, so a typo would set nothing and go on",
+        "The engine only warns about a name that is not a property",
         "Qt requires it",
         "To sort them",
         "Speed"
       ],
       "correct": 0,
-      "explanation": "limt and nothing_like_this were refused together."
+      "explanation": "A typo would set nothing and go on. limt and nothing_like_this were refused together."
     },
     {
       "stage": "post",
@@ -69,10 +69,10 @@
         "They cannot",
         "From create_with",
         "From C++ after creation",
-        "From the QML, or a model: create_with is for one object made from C++"
+        "From the QML, or a model"
       ],
       "correct": 3,
-      "explanation": "The lesson says so under what it does not do."
+      "explanation": "Create_with is for one object made from C++. The lesson says so under what it does not do."
     }
   ]
 }
