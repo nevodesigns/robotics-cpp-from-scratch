@@ -17,6 +17,6 @@ Built on x86_64 for aarch64 the graph had 4 problems: msg_gen and unit_tests bui
 
 Build what the build runs for the host.
 
-```cpp
+```text
 Steps built for the host: msg_gen
 ```
