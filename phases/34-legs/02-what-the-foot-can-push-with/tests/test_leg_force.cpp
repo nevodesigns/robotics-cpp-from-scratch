@@ -133,3 +133,14 @@ RC_TEST("a foot velocity needs joint rates that grow as the leg straightens, and
   leg_jacobian(g, q[0], q[1], q[2], j);
   RC_CHECK(!joint_rates(j, v, r));
 }
+
+RC_TEST("the determinant and the solver are right for a matrix with no symmetry to hide behind") {
+  const double m[3][3] = {{2.0, 0.0, 1.0}, {1.0, 3.0, 2.0}, {5.0, 1.0, 4.0}};
+  RC_CHECK_NEAR(det3(m), 6.0, 1e-12);   // 2 (12 - 2) - 0 + 1 (1 - 15)
+  const double b[3] = {5.0, 1.0, 15.0};   // m times (1, -2, 3)
+  double x[3] = {0.0, 0.0, 0.0};
+  RC_CHECK(solve3(m, b, x));
+  RC_CHECK_NEAR(x[0], 1.0, 1e-12);
+  RC_CHECK_NEAR(x[1], -2.0, 1e-12);
+  RC_CHECK_NEAR(x[2], 3.0, 1e-12);
+}

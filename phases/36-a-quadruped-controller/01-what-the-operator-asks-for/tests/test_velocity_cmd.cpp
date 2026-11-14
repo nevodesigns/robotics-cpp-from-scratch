@@ -118,3 +118,17 @@ RC_TEST("the legs allow a top speed, and a speed asks for a step that must be wi
   RC_CHECK(slow.ok && !fast.ok);
   RC_CHECK_NEAR(slow.step, 0.5 * stance, 1e-12);
 }
+
+RC_TEST("the sideways command is eased from where it is, at no more than its own acceleration, in both directions") {
+  CmdLimits l;   // ay = 1.0
+  Cmd now;
+  now.vy = 0.2;
+  Cmd ask;
+  ask.vy = 0.25;
+  Cmd out = limit_command(ask, now, l, 0.1);
+  RC_CHECK_NEAR(out.vy, 0.25, 1e-12);   // 0.05 away, within the 0.1 a step allows
+  ask.vy = -0.3;
+  out = limit_command(ask, now, l, 0.1);
+  RC_CHECK_NEAR(out.vy, 0.1, 1e-12);    // 0.5 away: one step of 0.1 toward it
+  RC_CHECK_NEAR(out.vx, 0.0, 1e-12);
+}

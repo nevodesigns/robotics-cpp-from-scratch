@@ -121,3 +121,10 @@ RC_TEST("a silent link asks for soft and then off, a stop and a fall ask for off
   RC_CHECK(bo.mode == kSafeSoft);              // the higher of soft and derated
   RC_CHECK_NEAR(bo.scale, 0.5, 1e-12);          // and the derating still applies
 }
+
+RC_TEST("the scale multiplies the command") {
+  SafetyOut s;
+  s.scale = 0.5;
+  RC_CHECK_NEAR(apply_scale(4.0, s), 2.0, 1e-12);
+  RC_CHECK_NEAR(apply_scale(-4.0, s), -2.0, 1e-12);
+}

@@ -148,3 +148,13 @@ RC_TEST("a change of gait keeps feet down either way, but an abrupt one jumps th
   RC_CHECK(gait_for_speed(0.7, kWalk, 0.6, 0.4) == kTrot);
   RC_CHECK(gait_for_speed(0.3, kTrot, 0.6, 0.4) == kWalk);
 }
+
+RC_TEST("each gait's table is the one its name means") {
+  const double want[4][4] = {{0.0, 0.5, 0.25, 0.75}, {0.0, 0.5, 0.5, 0.0}, {0.0, 0.5, 0.0, 0.5}, {0.0, 0.0, 0.5, 0.5}};
+  const int kinds[4] = {kWalk, kTrot, kPace, kBound};
+  for (int k = 0; k < 4; ++k) {
+    double o[4] = {-1.0, -1.0, -1.0, -1.0};
+    gait_offsets(kinds[k], o);
+    for (int i = 0; i < 4; ++i) RC_CHECK_NEAR(o[i], want[k][i], 1e-12);
+  }
+}

@@ -129,3 +129,15 @@ RC_TEST("a stance foot moves back in the body's frame, and the touchdown is ahea
   RC_CHECK_NEAR(td2[0] - (hip[0] + 0.5 * fast[0] * t_st), 0.1 * 0.2, 1e-12);
   RC_CHECK(td2[0] > td[0]);
 }
+
+RC_TEST("a leg's offset is added to its phase, which only shows when the offset is not a half") {
+  GaitTiming g;
+  g.period = 0.5;
+  g.offset[0] = 0.0;
+  g.offset[1] = 0.5;
+  g.offset[2] = 0.25;
+  g.offset[3] = 0.75;
+  RC_CHECK_NEAR(leg_phase(g, 2, 0.0), 0.25, 1e-12);
+  RC_CHECK_NEAR(leg_phase(g, 3, 0.1), 0.95, 1e-12);   // 0.2 of the period done, plus 0.75
+  RC_CHECK_NEAR(leg_phase(g, 3, 0.2), 0.15, 1e-12);   // 0.4 plus 0.75, wrapped
+}

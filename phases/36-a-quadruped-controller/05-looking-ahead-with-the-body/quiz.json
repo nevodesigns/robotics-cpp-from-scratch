@@ -32,7 +32,7 @@
       "options": [
         "Never",
         "After a minute",
-        "After 1.00 s (fixed law) and 0.60 s (predictive)",
+        "After 1.05 s (fixed law) and 0.65 s (predictive)",
         "At once"
       ],
       "correct": 2,
@@ -43,7 +43,7 @@
       "question": "For a small push the quieter controller was:",
       "options": [
         "The predictive one",
-        "The fixed gain law: 0.00 s against 0.35 s",
+        "The fixed gain law: 0.05 s against 0.40 s",
         "Both the same",
         "Neither"
       ],

@@ -122,3 +122,23 @@ RC_TEST("the servos have to turn fast enough, and a shorter swing asks for more"
   const double far_p1[3] = {0.5, g.l0, -0.30};
   RC_CHECK(!swing_peak_joint_rate(g, p0, far_p1, 0.05, 0.25, -1, &pk));
 }
+
+RC_TEST("a step to the side is treated as a step forward is") {
+  // the stance foot goes back against both parts of the body's velocity
+  const double td[3] = {0.05, 0.08, -0.30}, v[2] = {0.4, 0.2};
+  double s[3] = {0.0, 0.0, 0.0};
+  stance_position(td, v, 0.25, s);
+  RC_CHECK_NEAR(s[0], -0.05, 1e-12);
+  RC_CHECK_NEAR(s[1], 0.03, 1e-12);
+  // a swing of the same length has the same peaks whichever way it points
+  // (a low swing, so that the peaks are those of the motion over the ground, and a direction that is mostly sideways)
+  const double len = std::sqrt(0.03 * 0.03 + 0.10 * 0.10);
+  const double f0[3] = {0.0, 0.08, -0.30}, f1[3] = {len, 0.08, -0.30};
+  const double s0[3] = {0.0, 0.03, -0.30}, s1[3] = {0.03, 0.13, -0.30};
+  double vf = 0.0, af = 0.0, vs = 0.0, as = 0.0;
+  swing_peaks(f0, f1, 0.005, 0.25, &vf, &af);
+  swing_peaks(s0, s1, 0.005, 0.25, &vs, &as);
+  RC_CHECK(vf > 0.0 && af > 0.0);
+  RC_CHECK_NEAR(vs, vf, 1e-6 * (vf + 1.0));
+  RC_CHECK_NEAR(as, af, 1e-6 * (af + 1.0));
+}

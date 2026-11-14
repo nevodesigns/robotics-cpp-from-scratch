@@ -125,3 +125,12 @@ RC_TEST("with three feet and a centred body there is no margin, and with two fee
   RC_CHECK(support_margin(feet, three, shifted) > 0.0);
   RC_CHECK(max_accel(feet, three, shifted, 0.27, u) > 0.5);
 }
+
+RC_TEST("the centre of pressure is right in both directions for forces that are all different") {
+  const double feet[4][2] = {{0.2, 0.1}, {0.2, -0.1}, {-0.2, 0.1}, {-0.2, -0.1}};
+  const double f[4] = {10.0, 20.0, 30.0, 40.0};
+  double c[2] = {0.0, 0.0};
+  RC_CHECK(cop_from_forces(feet, f, c));
+  RC_CHECK_NEAR(c[0], -0.08, 1e-12);   // (10 + 20 - 30 - 40) 0.2 / 100
+  RC_CHECK_NEAR(c[1], -0.02, 1e-12);   // (10 - 20 + 30 - 40) 0.1 / 100
+}

@@ -225,3 +225,36 @@ RC_TEST("a lost link, hot knees, a move that never finishes and too many falls a
     RC_CHECK(falls >= d.max_tries);
   }
 }
+
+RC_TEST("walking needs both the wish and a speed, and getting up needs both the wish and the conditions") {
+  DogIn in;
+  in.stood = true;
+  in.sat = false;
+  Dog a;
+  a.s = kDStand;
+  in.want = kWantWalk;
+  in.cmd_speed = 0.0;
+  dog_step(a, in, 0.01);
+  RC_CHECK(a.s == kDStand);   // asked to walk at no speed: it stands
+  in.want = kWantStand;
+  in.cmd_speed = 0.5;
+  dog_step(a, in, 0.01);
+  RC_CHECK(a.s == kDStand);   // a speed without the wish to walk: it stands
+  in.want = kWantWalk;
+  dog_step(a, in, 0.01);
+  RC_CHECK(a.s == kDWalk);
+  Dog b;
+  b.s = kDFallen;
+  DogIn down;
+  down.want = kWantSit;
+  dog_step(b, down, 0.01);
+  RC_CHECK(b.s == kDFallen);  // nobody asked it to get up
+  down.want = kWantStand;
+  down.battery_ok = false;
+  dog_step(b, down, 0.01);
+  RC_CHECK(b.s == kDFallen);  // asked, but the battery says no
+  down.battery_ok = true;
+  dog_step(b, down, 0.01);
+  RC_CHECK(b.s == kDRising);
+  RC_CHECK(b.tries == 1);
+}

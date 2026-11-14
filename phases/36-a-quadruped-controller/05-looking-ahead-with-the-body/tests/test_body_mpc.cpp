@@ -27,10 +27,10 @@ static const Pin kPins[] = {
     {"v_mpc", 0.709650456905365},
     {"v_limit", 0.9041570660012562},
     {"push", 0.6},
-    {"t_pd", 1.0},
-    {"t_mpc", 0.6000000000000001},
-    {"t_pd_small", 0.0},
-    {"t_mpc_small", 0.35000000000000003},
+    {"t_pd", 1.05},
+    {"t_mpc", 0.65},
+    {"t_pd_small", 0.05},
+    {"t_mpc_small", 0.4},
 };
 
 static void rec(const char* key, double value, int digits = 3) {
@@ -75,7 +75,7 @@ bool recovers(bool mpc, double v0, double kx, double kv) {
   return std::fabs(x) < 0.02 && std::fabs(v) < 0.05;
 }
 
-// Steps until the body is within 1 cm of the middle and slower than 5 cm/s (-1 if it does not get there in 8 s).
+// The number of steps after which the body is within 1 cm of the middle and slower than 5 cm/s (-1 if it does not get there in 8 s).
 int settle_steps(bool mpc, double v0, double kx, double kv) {
   double A[2][2], B[2];
   lipm_discretize(kH, kDt, A, B);
@@ -88,7 +88,7 @@ int settle_steps(bool mpc, double v0, double kx, double kv) {
     const double nv = A[1][0] * x + A[1][1] * v + B[1] * p;
     x = nx;
     v = nv;
-    if (std::fabs(x) < 0.01 && std::fabs(v) < 0.05) return i;
+    if (std::fabs(x) < 0.01 && std::fabs(v) < 0.05) return i + 1;   // the state after step i is the state at time (i + 1) dt
   }
   return -1;
 }
@@ -121,7 +121,7 @@ RC_TEST("the discrete model agrees with the pendulum, and with the ZMP under the
   RC_CHECK_NEAR(A[0][1], std::sinh(w * kDt) / w, 1e-12);
 }
 
-RC_TEST("the controller's commands respect the bound, push the body back, and cost little time") {
+RC_TEST("the controller's commands respect the bound and push the body back") {
   double u[20], b[15], wide[15];
   for (int k = 0; k < 15; ++k) {
     b[k] = bound_at(k);
@@ -141,7 +141,7 @@ RC_TEST("the controller's commands respect the bound, push the body back, and co
   rec("iters", 300, 0);
 }
 
-RC_TEST("when the bound on the ZMP changes with the support, the predictive controller recovers from larger pushes than a clipped fixed gain law that cannot see it coming") {
+RC_TEST("when the bound on the ZMP changes with the support, the predictive controller recovers from pushes as large as a clipped fixed gain law does, and settles sooner") {
   const double kx = 3.0, kv = 0.9;
   RC_CHECK(recovers(false, 0.2, kx, kv) && recovers(true, 0.2, kx, kv));
   const double v_pd = largest(false, kx, kv), v_mpc = largest(true, kx, kv);
@@ -166,4 +166,18 @@ RC_TEST("when the bound on the ZMP changes with the support, the predictive cont
   RC_CHECK(v_mpc <= v_limit + 0.02);
   RC_CHECK(sm >= 0 && sp >= 0 && sm < sp);
   RC_CHECK(sp_small <= sm_small);   // for a small push the fixed gain law is as quiet or quieter
+}
+
+RC_TEST("each weight does its own work: a dear command is a small one, and the weights on position and velocity are not interchangeable") {
+  double wide[15];
+  for (int k = 0; k < 15; ++k) wide[k] = kBound;
+  const double cheap = mpc_zmp(0.0, 0.3, kH, kDt, 15, wide, 1.0, 1.0, 0.01, 300, nullptr);
+  const double dear = mpc_zmp(0.0, 0.3, kH, kDt, 15, wide, 1.0, 1.0, 1.0e6, 300, nullptr);
+  RC_CHECK(cheap > 0.0 && dear > 0.0);
+  RC_CHECK(dear < 0.1 * cheap);
+  const double pos_only = mpc_zmp(0.02, 0.1, kH, kDt, 15, wide, 1.0, 0.0, 1.0, 300, nullptr);
+  const double vel_only = mpc_zmp(0.02, 0.1, kH, kDt, 15, wide, 0.0, 1.0, 1.0, 300, nullptr);
+  // held as measured: swapping the two weights inside the solver swaps these two numbers
+  RC_CHECK_NEAR(pos_only, 0.0670151093, 1e-6);
+  RC_CHECK_NEAR(vel_only, 0.0638202826, 1e-6);
 }

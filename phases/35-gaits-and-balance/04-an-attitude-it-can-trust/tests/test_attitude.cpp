@@ -72,6 +72,7 @@ Result simulate(bool feet, double secs) {
   acc_only.k_feet = 0.0;
   both.k_feet = feet ? 1.0 : 0.0;
   double gyro_roll = 0.0, gyro_pitch = 0.0;
+  (void)gyro_pitch;   // integrated for symmetry with the roll; only the roll is reported here
   double s_gyro = 0.0, s_acc = 0.0, s_fa = 0.0, s_ff = 0.0;
   int n = 0, ok = 0, total = 0;
   for (double t = 0.0; t < secs; t += dt) {
@@ -150,4 +151,39 @@ RC_TEST("in a trot the feet cannot be used, and the filter falls back on the gyr
   rec("err_trot", trot.err_f_feet, 2);
   RC_CHECK_NEAR(trot.err_f_feet, trot.err_f_acc, 1e-9);
   RC_CHECK(trot.err_f_feet > walk.err_f_feet);
+}
+
+RC_TEST("pitch is handled as roll is: the gyro, the accelerometer and the feet each move it, and the defaults are the ones written down") {
+  const double g = 9.81, r = 0.3, p = 0.2;
+  // gravity seen by a body rolled r and pitched p
+  const double acc[3] = {-g * std::sin(p), g * std::cos(p) * std::sin(r), g * std::cos(p) * std::cos(r)};
+  double ar = 0.0, ap = 0.0;
+  accel_angles(acc, &ar, &ap);
+  RC_CHECK_NEAR(ar, r, 1e-12);
+  RC_CHECK_NEAR(ap, p, 1e-12);
+  const double none[3] = {0.0, 0.0, 0.0};   // an accelerometer reading the gate refuses
+  // the gyro alone: a pitch rate turns the pitch and leaves the roll
+  AttitudeFilter a;
+  for (int i = 0; i < 100; ++i) attitude_update(a, 0.0, 0.1, none, 0.0, 0.0, false, 0.01);
+  RC_CHECK_NEAR(a.pitch, 0.1, 1e-9);
+  RC_CHECK_NEAR(a.roll, 0.0, 1e-12);
+  // the accelerometer alone pulls both angles to the ones gravity shows
+  AttitudeFilter b;
+  for (int i = 0; i < 4000; ++i) attitude_update(b, 0.0, 0.0, acc, 0.0, 0.0, false, 0.01);
+  RC_CHECK_NEAR(b.roll, r, 1e-3);
+  RC_CHECK_NEAR(b.pitch, p, 1e-3);
+  // the feet alone pull each angle to its own
+  AttitudeFilter c;
+  for (int i = 0; i < 3000; ++i) attitude_update(c, 0.0, 0.0, none, -0.05, 0.1, true, 0.01);
+  RC_CHECK_NEAR(c.roll, -0.05, 1e-3);
+  RC_CHECK_NEAR(c.pitch, 0.1, 1e-3);
+  // one step with the default gains: the feet pull at 1 per second
+  AttitudeFilter d;
+  attitude_update(d, 0.0, 0.0, none, 0.0, 1.0, true, 0.01);
+  RC_CHECK_NEAR(d.pitch, 0.01, 1e-12);
+  // the default gate is 15 percent: a reading 17 percent too large is refused
+  const double big[3] = {-1.17 * g * std::sin(p), 0.0, 1.17 * g * std::cos(p)};
+  AttitudeFilter e;
+  attitude_update(e, 0.0, 0.0, big, 0.0, 0.0, false, 0.01);
+  RC_CHECK_NEAR(e.pitch, 0.0, 1e-12);
 }

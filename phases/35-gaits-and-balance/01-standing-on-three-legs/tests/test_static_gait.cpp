@@ -95,3 +95,17 @@ RC_TEST("a body shifted the wrong way is outside the triangle, and a shift towar
   const double away[2] = {-0.05, 0.0};
   RC_CHECK(crawl_margin(feet, 0, away) > 0.0);
 }
+
+RC_TEST("the middle of the corners and the shift to it are the numbers geometry gives") {
+  const double tri[3][2] = {{1.0, 2.0}, {4.0, 2.0}, {1.0, 8.0}};
+  double c[2] = {7.0, 7.0};   // not zero to begin with: the function must not add to what it was handed
+  centroid(tri, 3, c);
+  RC_CHECK_NEAR(c[0], 2.0, 1e-12);
+  RC_CHECK_NEAR(c[1], 4.0, 1e-12);
+  double feet[4][2];
+  default_feet(0.2, 0.1, feet);
+  double shift = 0.0;
+  const double m = crawl_margin_shifted(feet, 0, &shift);
+  RC_CHECK_NEAR(shift, std::sqrt(0.2 * 0.2 + 0.1 * 0.1) / 3.0, 1e-12);   // a third of the way to the corner opposite the lifted foot
+  RC_CHECK(m > 0.0);
+}
