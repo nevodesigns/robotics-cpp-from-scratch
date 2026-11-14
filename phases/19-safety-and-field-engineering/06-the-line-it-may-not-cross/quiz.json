@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why does the fence stop the robot before the line and not at it?",
       "options": [
-        "It is tidier",
+        "The line on the map is drawn with some thickness",
         "Stopping takes distance: ordered at the line, the robot ends up over it by its stopping distance",
-        "Lines are thick",
-        "It is cheaper"
+        "Stopping at the line would need a second fence",
+        "The position is only updated once a second"
       ],
       "correct": 1,
-      "explanation": "The buffer is the stopping distance plus the position error."
+      "explanation": "A robot told to stop at the line is still moving when it reaches it. The buffer is the distance it needs to stop, plus how wrong its position may be."
     },
     {
       "stage": "check",
       "question": "A point inside the diamond is at the same height as a vertex, and a naive count says outside. What is wrong?",
       "options": [
         "The ray goes through a vertex and both edges meeting there are counted, so one crossing is counted twice",
-        "The polygon",
-        "The sign of x",
-        "The point"
+        "The point is exactly on an edge, which counts as outside",
+        "The polygon's corners were listed in the wrong order",
+        "The ray was cast to the left where the rule needs the right"
       ],
       "correct": 0,
-      "explanation": "The half open rule counts it once."
+      "explanation": "Counting an edge when the point's height is between its ends, inclusive, counts the vertex for both edges. The half open rule counts each vertex once."
     },
     {
       "stage": "check",
       "question": "In the L shape at (4, 4) next to the reflex corner, how far is the nearest edge?",
       "options": [
         "1.414 m: the nearest point of the segment is the corner at (5, 5), not the foot of the line",
-        "1.000 m, to the line x = 5",
-        "4 m",
-        "0 m"
+        "1.000 m, the distance to the line x = 5",
+        "0.000 m: the point is on the boundary",
+        "5.000 m, the length of the edge"
       ],
       "correct": 0,
-      "explanation": "A segment ends."
+      "explanation": "The edge is a segment that ends at the corner. The nearest point of it to (4, 4) is that corner, at the root of two away."
     },
     {
       "stage": "check",
       "question": "In a corridor 6 m wide the robot is in the middle. After 100 m of dead reckoning at 2 percent drift with a stopping distance of 1.2 m, what is the state?",
       "options": [
-        "inside",
-        "unknown",
+        "inside: the robot is 3 m from each side",
+        "warning: within 1 m of the buffer",
         "outside: the buffer is 3.2 m, more than the 3 m from each side, so there is no inside left",
-        "warning"
+        "unknown: dead reckoning gives no position"
       ],
       "correct": 2,
-      "explanation": "After 10 m it was inside."
+      "explanation": "The buffer is 1.2 m plus 2 percent of 100 m, 3.2 m. In a 6 m corridor nowhere is that far from both sides, so the fence stops the robot until it gets a fix."
     },
     {
       "stage": "post",
       "question": "The robot's position is a NaN. What should the fence say?",
       "options": [
-        "inside",
-        "Nothing",
-        "outside by 1 m",
+        "inside, since no edge was crossed",
+        "outside, by the stop buffer",
+        "warning, until a number arrives",
         "unknown, and that is a stop: a position that is not a number is not somewhere inside"
       ],
       "correct": 3,
-      "explanation": "The fence speed is 0 too."
+      "explanation": "A NaN compares false with everything, so a careless test would call it inside. The fence reports unknown, and unknown stops the robot."
     },
     {
       "stage": "post",
       "question": "Why is a software fence not enough where the boundary is a road?",
       "options": [
-        "It needs GPS",
-        "It is too complex",
+        "It cannot represent a road's curved edge",
+        "It is too slow to stop a fast robot",
         "It stops the robot on its own estimate of where it is, and a wrong estimate or a failure puts the robot through it: a physical barrier does not depend on the software",
-        "It is slow"
+        "It needs a fix every metre"
       ],
       "correct": 2,
-      "explanation": "A promise on a map is not a wall."
+      "explanation": "The fence acts on where the robot thinks it is. If that is wrong, or the software has stopped, the robot crosses the line believing it has not."
     }
   ]
 }

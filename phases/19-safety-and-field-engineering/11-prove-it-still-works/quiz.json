@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why must safety functions be tested on purpose?",
       "options": [
-        "Regulations",
-        "They are slow",
+        "They are used so often that they wear out",
+        "Regulations ask for a signature each week",
         "They are dormant: a welded relay or a cut wire gives no sign until the moment the function is needed",
-        "It is cheap"
+        "They slow the control loop if left untested"
       ],
       "correct": 2,
-      "explanation": "A latent fault."
+      "explanation": "A function that is only needed in an emergency can be broken for months without anyone knowing. Testing it is the only way to find out before it is needed."
     },
     {
       "stage": "check",
       "question": "Five checks run, and the second fails. Does the run stop?",
       "options": [
         "No: every check is run and every failure reported (three failed in the test), and a throw or a missing check is a failure too",
-        "Yes, at the first failure",
-        "Yes, but it logs",
-        "Only for exceptions"
+        "Yes, at the first failure, to save time",
+        "Yes, but the failure is logged",
+        "Only if the failure was an exception"
       ],
       "correct": 0,
-      "explanation": "A short circuit hides the rest."
+      "explanation": "Stopping at the first failure hides the others. All five ran, three failed, and a check that threw or was missing counted as a failure too."
     },
     {
       "stage": "check",
       "question": "What does all_passed give for an empty list of results?",
       "options": [
-        "depends",
-        "an error",
-        "true",
+        "true: nothing failed",
+        "An error, since there is nothing to judge",
+        "Whatever the last run gave",
         "false: a test that checked nothing has not passed"
       ],
       "correct": 3,
-      "explanation": "An emptied self-test would otherwise be the cleanest result."
+      "explanation": "A self test that somebody emptied, or whose checks never registered, would otherwise report a perfect result."
     },
     {
       "stage": "check",
       "question": "With the contactor welded closed, which check failed?",
       "options": [
-        "Neither",
-        "The software check only",
+        "Both: a welded contactor fails every check",
+        "Neither: the software cannot see a weld",
         "Only the one that read the contactor: the software check passed, because the software was right and the machine could not stop",
-        "Both"
+        "The software check only"
       ],
       "correct": 2,
-      "explanation": "A test of the code is not a test of the machine."
+      "explanation": "The stop logic did command the supply open, so the check of the logic passed. Only reading the contactor's auxiliary contact showed that it had not opened."
     },
     {
       "stage": "post",
       "question": "A test that passed an hour ago, and one that failed a minute ago. Is driving permitted?",
       "options": [
         "No: a failed test cancels the earlier pass",
-        "Only slowly",
-        "Yes, the pass is recent",
-        "Yes for an hour"
+        "Yes: the pass is still within its hour",
+        "Yes, at reduced speed",
+        "Yes, until the next scheduled test"
       ],
       "correct": 0,
-      "explanation": "The permit also fails on a backwards clock."
+      "explanation": "The permit comes from the most recent result. A failure a minute ago says more about the machine now than a pass an hour ago."
     },
     {
       "stage": "post",
       "question": "At a failure rate of 1e-5 per hour, how often to test to keep the chance of an undetected failure at 1 in 1000?",
       "options": [
-        "Every day",
+        "Every hour",
         "About every 100 hours, 4.2 days: the interval follows from a rate and a target",
-        "Never",
-        "Every year"
+        "Once a year",
+        "Every 1001 hours"
       ],
       "correct": 1,
-      "explanation": "A year without a test is 8.39e-02."
+      "explanation": "With a constant rate the chance of having failed by time t is one less e to the minus rate times t. For 1 in 1000 at 1e-5 an hour that is 100.1 hours."
     }
   ]
 }

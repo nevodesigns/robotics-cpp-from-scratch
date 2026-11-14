@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What should a field of Inputs that nobody filled in mean?",
       "options": [
-        "Ignore it",
-        "Fine",
-        "Slow",
+        "The safe case: an Inputs of all defaults gave normal",
+        "Nothing: defaults are skipped",
+        "A warning: defaults gave degraded and a cap of 0.5",
         "The unsafe case: an Inputs of all defaults gave stopped, a cap of 0 and all six causes"
       ],
       "correct": 3,
-      "explanation": "A forgotten field must not be a robot that goes on."
+      "explanation": "Every default is the dangerous reading, so a field somebody forgot to fill stops the robot instead of letting it go."
     },
     {
       "stage": "check",
       "question": "A tilt warning (0.5 m/s) and a power share of 0.2 (0.4 m/s) are both present. What is the cap?",
       "options": [
-        "0.5",
-        "0.9",
-        "0.2",
+        "0.5, the tilt's cap, since tilt outranks power",
+        "0.9, the two added",
+        "0.2, the power share itself",
         "0.4: the lowest cap wins, and both reasons are reported"
       ],
       "correct": 3,
-      "explanation": "The limit bits were tilt plus power."
+      "explanation": "The top speed of 2 m/s times a share of 0.2 is 0.4, lower than the tilt warning's 0.5. Both reasons are kept in the report."
     },
     {
       "stage": "check",
       "question": "A robot stopped for a tilt loses its link as well, and both then go away. What is the state?",
       "options": [
-        "degraded",
+        "normal: nothing is wrong any more",
         "Still stopped, with both causes on record, until a reset: refused while a cause remains",
-        "unknown",
-        "normal"
+        "degraded, until the operator confirms",
+        "Stopped, with only the tilt on record, since it came first"
       ],
       "correct": 1,
-      "explanation": "link, tilt."
+      "explanation": "Causes going away does not restart the robot. A reset is refused while any remains, and every cause seen since the latch is kept."
     },
     {
       "stage": "check",
       "question": "Why keep every cause seen since the latch and not only the first?",
       "options": [
-        "Nothing",
-        "It is faster",
+        "The log is easier to read with more entries",
+        "Only the last cause matters, and it might be missed",
         "The first is not always the one that matters, and a reset after one cause with another still there starts the robot towards a hazard the operator was not told of",
-        "Memory is cheap"
+        "So that the supervisor can count faults"
       ],
       "correct": 2,
-      "explanation": "A log that says link lost sends someone to the router."
+      "explanation": "A robot that lost its link while tilting has two things to be looked at. Recording only the first would hide the second from the person who resets it."
     },
     {
       "stage": "post",
       "question": "What was checked over all 1024 combinations of ten conditions?",
       "options": [
-        "The compile time",
-        "The speed",
+        "That each combination had a test written for it",
+        "That the supervisor ran in under a millisecond",
         "That a stop cause always stopped, and that adding a fault never made the mode or the cap less strict: 0 violations in 10240 additions",
-        "That each one was tested"
+        "That at least one combination was normal"
       ],
       "correct": 2,
-      "explanation": "Only the all clear was normal."
+      "explanation": "1008 combinations stopped, 15 were degraded and 1 was normal. Checking the property over all of them catches a rule that would have passed any single test."
     },
     {
       "stage": "post",
       "question": "What is the supervisor's job compared with the stop path of lesson 19-02?",
       "options": [
         "The supervisor decides; the stop path and the hardware enforce, and must work even if the process with the supervisor dies",
-        "It replaces it",
-        "It is slower",
-        "The same"
+        "The supervisor replaces the stop path",
+        "They are two names for the same code",
+        "The stop path decides and the supervisor enforces"
       ],
       "correct": 0,
-      "explanation": "Decide, then enforce."
+      "explanation": "The supervisor gathers every monitor into one decision. The stop path and the hardware carry it out, and still stop the robot if the supervisor's process is gone."
     }
   ]
 }

@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What most often tips a ground vehicle over?",
       "options": [
-        "A slope the robot was told to climb",
-        "The wind",
-        "A bad sensor",
+        "A slope it was told to climb straight up",
+        "A sensor fault that hides an obstacle",
+        "A strong wind from the side",
         "A turn at a speed its geometry does not allow, or a payload that raised its centre of gravity"
       ],
       "correct": 3,
-      "explanation": "Sideways acceleration is v squared times curvature."
+      "explanation": "The sideways acceleration in a turn is the speed squared times the curvature, and what the vehicle can take falls as its centre of gravity rises."
     },
     {
       "stage": "check",
       "question": "A payload lifts the centre of gravity from 0.3 m to 0.5 m on a track of 0.5 m. What happens to the tipping acceleration?",
       "options": [
         "It falls from 8.18 to 4.91 m/s^2, 40 percent less, and the slope it tips on from 39.8 to 26.6 degrees",
-        "It doubles",
-        "Nothing",
-        "It halves"
+        "It halves, from 8.18 to 4.09 m/s2, and the slope from 39.8 to 19.9 degrees",
+        "Nothing: only the track width matters",
+        "It rises, since a heavier vehicle is harder to tip"
       ],
       "correct": 0,
-      "explanation": "A radius 1 m turn went from 2.02 to 1.57 m/s."
+      "explanation": "The tipping acceleration is g times half the track over the height. Raising the height by two thirds cuts it by 40 percent."
     },
     {
       "stage": "check",
       "question": "Why does an accelerometer alone give 27 degrees of roll in a steady turn on level ground?",
       "options": [
-        "The gyro drifted",
+        "Its gyro has drifted by 27 degrees",
         "It feels the sideways acceleration of the turn as well as gravity and cannot tell them apart",
-        "It is broken",
-        "The ground is tilted"
+        "The floor is tilted by that much",
+        "It is saturated by the vibration"
       ],
       "correct": 1,
-      "explanation": "A 4 m/s^2 turn adds up to atan(4/9.81) of apparent lean."
+      "explanation": "A sideways acceleration of 4 m/s2 with gravity looks exactly like gravity on a floor tilted by the arctangent of 4 over 9.81."
     },
     {
       "stage": "check",
       "question": "Why did a gate of 15 percent of g not help in a turn at 4 m/s^2?",
       "options": [
-        "Gyro bias",
-        "It is too tight",
+        "The gate was too tight and rejected every sample",
+        "The gyro's bias was too large",
         "The magnitude is only about 8 percent over g, which is inside the gate, so the filter trusted the accelerometer",
-        "The filter is broken"
+        "The vibration was larger than the turn"
       ],
       "correct": 2,
-      "explanation": "22.1 degrees against 5.1 at 3 percent."
+      "explanation": "Gravity and 4 m/s2 at right angles have a size only 8 percent above g. A gate of 15 percent lets that through, and the error was 22.1 degrees against 5.1 at 3 percent."
     },
     {
       "stage": "post",
       "question": "What did a gate of 1 percent cost?",
       "options": [
-        "Nothing",
+        "Nothing: a tighter gate is always better",
         "The gyro's bias built up because few samples passed: 4.1 degrees after 60 s against 1.2 at 15 percent",
-        "Memory",
-        "A crash"
+        "It followed the accelerometer into every turn",
+        "It stopped the robot in every turn"
       ],
       "correct": 1,
-      "explanation": "No single gate is right for both."
+      "explanation": "Vibration moves the magnitude by about 3 percent, so a 1 percent gate rejects nearly everything and the gyro is rarely corrected."
     },
     {
       "stage": "post",
       "question": "Why does the tilt monitor need a debounce on its stop level but not on its warning?",
       "options": [
-        "The warning is rarer",
-        "No reason",
+        "The warning level is reached less often",
+        "A warning is reported to the operator and a stop is not",
         "A single bump past the stop level should not stop the robot, and a warning costs nothing to give early",
-        "It is faster"
+        "The stop level is measured by a different sensor"
       ],
       "correct": 2,
-      "explanation": "A NaN is the exception: stop at once."
+      "explanation": "One sample over the stop level may be a bump. Three in a row is a tilt. A warning costs nothing, and a NaN is a stop at once."
     }
   ]
 }

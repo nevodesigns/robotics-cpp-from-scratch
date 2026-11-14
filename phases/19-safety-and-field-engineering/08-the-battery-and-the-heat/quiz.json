@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why derate before stopping?",
       "options": [
-        "It saves power",
+        "Derating uses less of the battery than stopping does",
         "A robot told to slow down has time to reach somewhere safe, and a robot cut off where it stands may not",
-        "It is required",
-        "It looks nicer"
+        "A stop is not allowed by the standard without a warning",
+        "Derating cools the motor faster than stopping"
       ],
       "correct": 1,
-      "explanation": "The warning zone is also an early signal."
+      "explanation": "At half power the robot can still drive to a safe place. Cut off outright it stays where it is, which may be the worst place."
     },
     {
       "stage": "check",
       "question": "A battery at 22.0 V at rest drives 15 A through 0.1 ohm. What do the terminals read, and what should a monitor judge it as?",
       "options": [
-        "22.0 and 22.0",
-        "24.0",
+        "20.5 at the terminals, and it should be judged at 20.5: that is what the motors get",
+        "22.0 at the terminals: a healthy battery does not sag",
         "20.5 at the terminals, and 22.0 once the sag is added back: the battery has lost nothing",
-        "20.5 and 20.5"
+        "23.5 at the terminals, since current raises the voltage"
       ],
       "correct": 2,
-      "explanation": "A stop below 21 V at the terminals changed state 60 times in a minute."
+      "explanation": "15 A through 0.1 ohm drops 1.5 V inside the battery. Adding it back gives the resting voltage, which is what says how much charge is left."
     },
     {
       "stage": "check",
       "question": "A battery sits at its stop voltage with a little noise. What happens with a resume point equal to the stop voltage?",
       "options": [
-        "It stays stopped",
-        "It derates",
-        "Nothing",
+        "It stops once and stays stopped",
+        "It runs at half power",
+        "Nothing: noise is below the threshold",
         "It stops and starts again over and over: 135 stops in 600 samples against 1 with a resume at 21.0 V"
       ],
       "correct": 3,
-      "explanation": "Hysteresis."
+      "explanation": "At the threshold noise carries the reading across it again and again. A resume point above the stop point means it has to recover properly before it restarts."
     },
     {
       "stage": "check",
       "question": "Why did the hard stop run for an hour with 53 stops and almost the same mean power as derating?",
       "options": [
         "Heat was only dealt with at the limit, so it hit the limit again each time: the work done was about the same, with a hotter machine that kept stopping",
-        "A bug",
-        "It ran slower",
-        "It was cold"
+        "The hard stop cools the motor better each time it stops",
+        "Its limit was set 20 degrees higher than the derating one",
+        "It did far more work, at the cost of a few stops"
       ],
       "correct": 0,
-      "explanation": "Derating found a balance at about 0.81 power."
+      "explanation": "Running flat out until the limit and then stopping gave almost the same work, 0.85 against 0.81, with a peak at the limit 53 times. Derating settled where heating and cooling balance."
     },
     {
       "stage": "post",
       "question": "A thermistor wire comes off and reads 200 degrees. What should the monitor do?",
       "options": [
-        "Ignore it",
-        "Reset",
+        "Derate to half power until it reads sensibly",
+        "Ignore it and use the last good reading",
         "Stop: a reading outside the plausible range cannot be real and not knowing is a stop",
-        "Derate"
+        "Treat it as 80 degrees, the stop limit"
       ],
       "correct": 2,
-      "explanation": "A good reading brought it back."
+      "explanation": "200 degrees is not a temperature the motor can have. The monitor does not know the real one, and not knowing is a stop; a good reading brings it back."
     },
     {
       "stage": "post",
       "question": "What does this monitor not do that a lithium pack needs?",
       "options": [
-        "Anything",
-        "Derate",
-        "Measure current",
+        "Measure the current drawn",
+        "Allow for the sag under load",
+        "Stop on a reading that cannot be real",
         "Watch the cells one by one, which is where fires start, and it cannot stand in for the battery's own protection"
       ],
       "correct": 3,
-      "explanation": "The state is not latched here; the supervisor latches."
+      "explanation": "The monitor sees the pack as one voltage. A lithium pack fails cell by cell, and that needs the battery's own protection circuit."
     }
   ]
 }

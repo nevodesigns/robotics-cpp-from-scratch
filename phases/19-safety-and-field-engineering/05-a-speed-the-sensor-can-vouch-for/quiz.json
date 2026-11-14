@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "A lidar returns infinity for a direction. What does that most safely mean?",
       "options": [
-        "The path is empty to the end of its reach",
-        "An error",
-        "The sensor is off",
+        "The path is clear to the end of the sensor's reach, since nothing was hit",
+        "The sensor has failed and the robot must stop at once",
+        "The obstacle is closer than the blind zone",
         "Nothing was returned: an empty hall and a black or glossy surface look the same, so it can vouch only for a modest distance"
       ],
       "correct": 3,
-      "explanation": "The limiter takes it as 1.5 m."
+      "explanation": "Silence is ambiguous, so it is treated as a short clear distance, 1.5 m here. The robot may carry on slowly and cannot go fast on the evidence of nothing."
     },
     {
       "stage": "check",
       "question": "A front reading is NaN and the command is 2 m/s. What does std::min(2.0, max_speed(NaN, ...)) return?",
       "options": [
-        "1.0",
-        "0",
+        "NaN, which the motor driver treats as a stop",
+        "0: std::min picks the smaller, and NaN counts as smallest",
         "2.0: a comparison with NaN is false, so the first argument wins and the robot goes at full speed",
-        "NaN"
+        "1.0, half the command"
       ],
       "correct": 2,
-      "explanation": "The limiter gave 0."
+      "explanation": "std::min returns its first argument unless the second compares less, and nothing compares less with a NaN. The limiter checks for it and gives 0."
     },
     {
       "stage": "check",
       "question": "Why is a reading of 0.05 m, inside the blind zone, trusted as 0 and not as 0.05?",
       "options": [
-        "It is rounded",
-        "It is too small",
+        "It is rounded down to the nearest tenth of a metre",
+        "Because the robot must already be touching the obstacle",
         "The sensor cannot see there: it is not a measurement, and it is exactly where things about to be hit are",
-        "The robot is touching"
+        "Because 0.05 m is below the margin of 0.3 m in any case"
       ],
       "correct": 2,
-      "explanation": "A blind zone is not a short range."
+      "explanation": "Inside the blind zone the number is not a measurement of anything. Treating it as blocked is the only reading that cannot be wrong in the dangerous direction."
     },
     {
       "stage": "check",
       "question": "A good reading of 4.0 m is 0.25 s old and the maximum age is 0.2 s. What speed is allowed?",
       "options": [
         "0: an old reading is a picture of where the robot was, and the age is part of the reading",
-        "4.0",
-        "2.0",
-        "1.0"
+        "2.0 m/s: the distance was good when it was measured",
+        "1.0 m/s, half speed for an old reading",
+        "4.0 m/s, the distance over one second"
       ],
       "correct": 0,
-      "explanation": "Exactly at 0.2 s is still fresh."
+      "explanation": "What was 4.0 m away a quarter of a second ago may not be now. A reading older than the limit vouches for nothing, and exactly at the limit it is still fresh."
     },
     {
       "stage": "post",
       "question": "With the limiter on, how close did the robot come to a wall at a margin of 0.3 m?",
       "options": [
         "0.30 m: it slowed to a stop at the margin, with no sight of the wall except through the range",
-        "1 m",
-        "5 m",
-        "0.0 m"
+        "0.00 m: it touched the wall at a crawl",
+        "1.50 m, the no return distance",
+        "It hit the wall at 2.00 m/s"
       ],
       "correct": 0,
-      "explanation": "Without it, it hit at 2.00 m/s."
+      "explanation": "The allowed speed falls as the range does and reaches zero at the margin, so the robot came to rest there. With no limiter it arrived at 2.00 m/s."
     },
     {
       "stage": "post",
       "question": "What does a range-based limiter not protect against?",
       "options": [
-        "People",
+        "A wall straight ahead",
         "Anything the sensor cannot see: a drop, a glass door, a low bar, and a sensor that is the single point of failure",
-        "Walls",
-        "Boxes"
+        "An obstacle behind when reversing",
+        "A sensor that stops publishing"
       ],
       "correct": 1,
-      "explanation": "A second kind of sensor covers a different failure."
+      "explanation": "The limiter is only as good as what the sensor returns. Glass, a drop in the floor and a bar below the scan plane return nothing useful."
     }
   ]
 }
