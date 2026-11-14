@@ -7,72 +7,72 @@
       "question": "What are the two pulls on each point of a smoothing path?",
       "options": [
         "Towards the neighbours' midpoint, and back towards the plan",
-        "Forward and back",
-        "Left and right",
-        "Up and down"
+        "Toward the goal, and away from the start",
+        "Toward the nearest wall, and away from it",
+        "Toward lower cost cells, and toward the goal"
       ],
       "correct": 0,
-      "explanation": "Straighten, but stay near the route."
+      "explanation": "One pull straightens the chain and the other keeps it near the route the planner checked. Their weights decide how smooth and how faithful the result is."
     },
     {
       "stage": "check",
       "question": "The corner path's sharpest curvature went from:",
       "options": [
-        "3.64 to 7.1",
+        "7.1 to 1.35 per metre, the car's limit",
         "7.1 to 3.64 per metre",
-        "0 to 1",
-        "No change"
+        "3.64 to 7.1 per metre",
+        "7.1 to 0.0 per metre"
       ],
       "correct": 1,
-      "explanation": "The car's limit is 1.35."
+      "explanation": "65 sweeps halved it. It was still several times the car's 1.35 per metre, so a smoothed corner is not yet a drivable one."
     },
     {
       "stage": "check",
       "question": "With no grid, how many points ended inside the block?",
       "options": [
-        "All",
-        "0",
+        "0: the smoother holds the plan",
+        "All of them",
         "5",
-        "0"
+        "1, at the corner itself"
       ],
       "correct": 2,
-      "explanation": "The shortcut inside the corner."
+      "explanation": "The straightest chain cuts inside the corner, and the block was there. Nothing told the smoother about it."
     },
     {
       "stage": "check",
       "question": "With the grid check, how many ended inside?",
       "options": [
         "0",
-        "5",
-        "10",
-        "Most"
+        "5, as without it",
+        "1",
+        "2"
       ],
       "correct": 0,
-      "explanation": "Moves into a blocked cell are refused."
+      "explanation": "A move that would put a point in an inscribed or worse cell is not made. The chain smooths as far as the grid allows."
     },
     {
       "stage": "post",
       "question": "What does more smoothing cost?",
       "options": [
-        "Speed of the car",
+        "Sweeps: the loop never ends",
         "Distance from the plan: 0.04 m light, 0.63 m heavy",
-        "Memory",
-        "Nothing"
+        "Length: the path gets longer",
+        "Nothing, once the grid is checked"
       ],
       "correct": 1,
-      "explanation": "The planner checked the plan."
+      "explanation": "The light setting stayed within 0.04 m of the plan and the heavy one moved 0.63 m. What the planner checked was the plan."
     },
     {
       "stage": "post",
       "question": "Does smoothing guarantee the car's curvature limit?",
       "options": [
-        "Only on grids",
-        "Only in simulation",
-        "Yes",
+        "Yes, if enough sweeps are run",
+        "Yes, when the grid check is on",
+        "Yes, for corners of 90 degrees or less",
         "No: it lowers it, and the number must be checked"
       ],
       "correct": 3,
-      "explanation": "Check after, or plan with arcs."
+      "explanation": "Even the heavy setting left 1.55 per metre against a limit of 1.35. The curvature has to be measured afterwards, or the path planned in arcs."
     }
   ]
 }

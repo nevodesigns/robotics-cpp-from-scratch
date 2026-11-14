@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What does pure pursuit steer towards?",
       "options": [
-        "The goal only",
+        "The nearest point of the path",
         "A point a lookahead distance ahead on the path",
-        "The nearest wall",
-        "The last point"
+        "The path's direction at the car",
+        "The end of the path"
       ],
       "correct": 1,
-      "explanation": "Along the arc that reaches it."
+      "explanation": "The steering is that of the arc which passes through a point of the path one lookahead away. The lookahead is the only setting."
     },
     {
       "stage": "check",
       "question": "A short lookahead (0.1 m) crossed the path how often, against a long (1.5 m)?",
       "options": [
-        "The same",
+        "2 against 9",
         "9 against 2",
-        "Never",
-        "2 against 9"
+        "9 against 9",
+        "0 against 2"
       ],
       "correct": 1,
-      "explanation": "It turns hard, overshoots, turns back."
+      "explanation": "With 0.1 m it steers hard at a point just ahead, overshoots and steers hard back. With 1.5 m it comes in gently."
     },
     {
       "stage": "check",
       "question": "Where a straight turned into a circle of radius 3 m, a lookahead of 2.0 m strayed at most:",
       "options": [
-        "0",
-        "0.036 m",
         "0.015 m",
+        "0.036 m",
+        "0.000 m: it is exact on a circle",
         "0.149 m"
       ],
       "correct": 3,
-      "explanation": "A long lookahead cuts every curve."
+      "explanation": "The point it chases is already round the bend, so it starts turning early and cuts inside. A lookahead of 0.6 m strayed 0.015 m."
     },
     {
       "stage": "check",
       "question": "At the same bend Stanley strayed at most:",
       "options": [
-        "3 m",
-        "1 m",
         "0.149 m",
+        "0.015 m",
+        "0.000 m",
         "0.036 m"
       ],
       "correct": 3,
-      "explanation": "It corrects the error it has now."
+      "explanation": "Stanley steers by the heading error and the offset of the front axle, with no look ahead, so it does not start the turn early."
     },
     {
       "stage": "post",
       "question": "What does the angle atan2(-k e, v) in Stanley do?",
       "options": [
-        "Nothing",
-        "Speeds the car up",
+        "Points the car at a point ahead on the path",
+        "Limits the steering to the car's maximum",
         "Turns the front axle back towards the path, more gently at speed",
-        "Stops the car"
+        "Slows the car as the error grows"
       ],
       "correct": 2,
-      "explanation": "The sign is for a car left of the path."
+      "explanation": "The correction for an offset e is an angle whose tangent is the gain times the offset over the speed. At a higher speed the same offset gets a smaller angle."
     },
     {
       "stage": "post",
       "question": "Why does the nearest-point search only look forward?",
       "options": [
         "A path that passes near itself would make the follower jump back",
-        "The grid",
-        "Memory",
-        "Speed only"
+        "Looking backward is slower",
+        "The car never reverses",
+        "The path's points are sorted by distance"
       ],
       "correct": 0,
-      "explanation": "A path can come near itself."
+      "explanation": "On a path that loops close to itself the nearest point overall may be on an earlier part. Searching only ahead of the last match keeps the follower moving on."
     }
   ]
 }

@@ -7,72 +7,72 @@
       "question": "What does the backward pass of a speed profile do?",
       "options": [
         "Limits each speed to what the vehicle could still slow down from to reach the next point",
-        "Reverses the vehicle",
-        "Speeds up",
-        "Nothing"
+        "Limits each speed to what could be reached from the point before",
+        "Caps each speed by the sideways grip",
+        "Removes the stop line"
       ],
       "correct": 0,
-      "explanation": "It puts the brakes on before the bend."
+      "explanation": "Working from the end, no point may be faster than a speed from which the brakes can reach the next point's speed. That moves the slowing to before the bend."
     },
     {
       "stage": "check",
       "question": "The capped speeds alone asked for a deceleration of:",
       "options": [
-        "1.5 m/s2",
-        "0",
+        "1.5 m/s2, the limit",
+        "0 m/s2",
         "20.0 m/s2, far over the limit",
-        "1"
+        "2.0 m/s2"
       ],
       "correct": 2,
-      "explanation": "The brakes must start before the bend."
+      "explanation": "Capping each point on its own drops the speed in one step at the start of the bend. No brake gives 20 m/s2."
     },
     {
       "stage": "check",
       "question": "The profile asked for how much, against a limit of 1.5?",
       "options": [
-        "0",
-        "100",
+        "20.0 m/s2",
+        "0.75 m/s2",
         "1.50 m/s2",
-        "20.0"
+        "Nothing: it never slowed"
       ],
       "correct": 2,
-      "explanation": "Within the limit."
+      "explanation": "After the backward pass the slowing is spread over the points before the bend, and its peak is the braking limit itself."
     },
     {
       "stage": "check",
       "question": "How far before the stop line did the slowing begin?",
       "options": [
-        "100 m",
+        "0 m: at the line itself",
         "1.30 m",
-        "0 m",
-        "At the line"
+        "0.2 m, one point before",
+        "13 m"
       ],
       "correct": 1,
-      "explanation": "v squared over 2 a."
+      "explanation": "From 2 m/s at 1.5 m/s2 the distance is v squared over 2a, 1.33 m, and the profile began slowing 1.30 m before the line."
     },
     {
       "stage": "post",
       "question": "The same path took how long on ice, against tarmac?",
       "options": [
-        "5.9 s on ice",
+        "5.9 s on both: the path is the same",
         "8.0 s on ice against 5.9 s on tarmac",
-        "The same",
-        "It cannot"
+        "5.9 s on ice against 8.0 s on tarmac",
+        "Twice as long on ice"
       ],
       "correct": 1,
-      "explanation": "The grip sets the pace."
+      "explanation": "The sideways cap comes from the grip. Less grip, a lower speed through the bend, and a longer run of braking into it."
     },
     {
       "stage": "post",
       "question": "Why did smoothing a corner save time?",
       "options": [
-        "Faster motors",
-        "Luck",
-        "Shorter path",
+        "The smoothed path was much shorter",
+        "The acceleration limit was raised",
+        "The stop line moved",
         "The curvature at the corner point was lower, so the cap was higher: 8.6 s to 8.2 s"
       ],
       "correct": 3,
-      "explanation": "A corner asks a crawl."
+      "explanation": "The cap at a point goes as one over the root of the curvature. The raw corner's sharpest point forces a crawl; the smoothed one, less of one."
     }
   ]
 }

@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why does a skid steer vehicle turn less than the plain track geometry says?",
       "options": [
-        "Friction is zero",
+        "Its motors are weaker in a turn",
         "The wheels slide sideways: the effective track is chi times the real one",
-        "The wheels are small",
-        "It is heavy"
+        "Its wheels are too far apart",
+        "The ground pushes back harder on the inside"
       ],
       "correct": 1,
-      "explanation": "Chi is 1 or more."
+      "explanation": "All four wheels point straight ahead, so turning drags them sideways. The body turns as if the track were chi times wider, 1.5 times on tarmac here."
     },
     {
       "stage": "check",
       "question": "Holding the path on tarmac: aware against unaware, the worst error was:",
       "options": [
         "0.042 m against 0.115 m",
-        "0 against 0",
         "0.115 m against 0.042 m",
-        "The same"
+        "0.042 m for both",
+        "0.000 m against 0.115 m"
       ],
       "correct": 0,
-      "explanation": "The unaware one asks for a turn that is too small."
+      "explanation": "A controller that takes chi as 1 asks for too small a difference in wheel speeds and slides wide of every bend. Knowing chi and the slip held the path to 0.042 m."
     },
     {
       "stage": "check",
       "question": "On ice at 1.2 m/s the plain controller let go in how many steps?",
       "options": [
-        "0",
-        "None",
-        "All",
+        "0, as with the limited controller",
+        "All of them",
+        "5",
         "51"
       ],
       "correct": 3,
-      "explanation": "The speed was above what the grip holds."
+      "explanation": "At 1.2 m/s the bend asked for more sideways grip than ice has. The controller that capped its speed in the bend let go in 0 steps."
     },
     {
       "stage": "check",
       "question": "How many times the speed does the same curve allow on gravel than on ice?",
       "options": [
-        "0.5",
-        "10",
-        "1",
+        "The same speed",
+        "Twice the ratio of the frictions",
+        "Half the speed",
         "2.12"
       ],
       "correct": 3,
-      "explanation": "The square root of the ratio of mu."
+      "explanation": "The speed at which a curve lets go goes as the root of the friction. The ratio of the two speeds was 2.12."
     },
     {
       "stage": "post",
       "question": "What does the limited controller give up?",
       "options": [
         "Time: 5.4 s against 4.6 s on ice",
-        "Nothing",
-        "The path",
-        "Safety"
+        "Accuracy: it strays further from the path",
+        "The slip compensation",
+        "Nothing: it was faster as well"
       ],
       "correct": 0,
-      "explanation": "It is slower and on the path."
+      "explanation": "The plain controller finished sooner by sliding. The limited one took 0.8 s more and stayed on the path."
     },
     {
       "stage": "post",
       "question": "Why is there a floor on the speed in a turn?",
       "options": [
-        "For looks",
-        "The grid",
+        "To keep the motors cool",
+        "So the slip estimate stays valid",
         "A controller that can command zero in a turn never gets out of it",
-        "Memory"
+        "Because pure pursuit needs a minimum speed"
       ],
       "correct": 2,
-      "explanation": "A vehicle that stops is not following."
+      "explanation": "If the cap can reach zero, a sharp enough curve stops the vehicle, and a stopped vehicle never leaves the curve."
     }
   ]
 }

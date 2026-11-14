@@ -7,72 +7,72 @@
       "question": "Why replan for reasons and not on a timer alone?",
       "options": [
         "A timer plans too often or too late; a reason is a thing that went wrong",
-        "Timers are slow",
-        "No reason",
-        "Reasons are cheaper only"
+        "A timer cannot be tested",
+        "Reasons use less memory",
+        "A timer needs a clock"
       ],
       "correct": 0,
-      "explanation": "A blocked path, off the path, a changed goal."
+      "explanation": "The vehicle that planned for reasons used 5 plans. A short timer plans constantly for nothing, and a long one plans too late for a wall."
     },
     {
       "stage": "check",
       "question": "The vehicle that never replanned:",
       "options": [
         "Stood in front of the wall and never arrived",
-        "Arrived late",
-        "Went round",
-        "Arrived in 20.9 s"
+        "Went round the wall",
+        "Arrived in 21.4 s",
+        "Arrived, after touching the wall"
       ],
       "correct": 0,
-      "explanation": "It followed the plan into the wall."
+      "explanation": "Its plan was made before the wall was known. With no reason to plan again it stopped at the safety distance and stayed."
     },
     {
       "stage": "check",
       "question": "Planning every 0.2 s used how many plans, against the reasons' 5?",
       "options": [
-        "1",
-        "None",
-        "5",
+        "5, the same",
+        "20",
+        "2",
         "86, and no quicker (21.4 s against 20.9 s)"
       ],
       "correct": 3,
-      "explanation": "The planner never stops."
+      "explanation": "86 plans to arrive in 21.4 s, against 5 plans and 20.9 s. More planning bought nothing."
     },
     {
       "stage": "check",
       "question": "How long did the vehicle stand and wait with the look-ahead of 0.6 m, against 3 m?",
       "options": [
-        "Never",
         "0.3 s against 2.1 s",
+        "2.1 s for both",
         "2.1 s against 0.3 s",
-        "The same"
+        "Not at all with either"
       ],
       "correct": 2,
-      "explanation": "An early look-ahead hides the planning time."
+      "explanation": "Noticed 0.6 m ahead, there is no path left to drive while the planner runs. Noticed 3 m ahead, the vehicle keeps moving until the new plan comes."
     },
     {
       "stage": "post",
       "question": "Where should a plan that takes a second begin?",
       "options": [
-        "At the goal",
-        "At the start",
-        "Where the vehicle is",
+        "Where the vehicle was when planning began",
+        "At the nearest point of the old path",
+        "At the last waypoint passed",
         "Where it will be when the plan arrives: 0.06 m off, and it arrived in 20.1 s"
       ],
       "correct": 3,
-      "explanation": "Begun from where it was, it started 1.16 m behind and planned 83 times without arriving."
+      "explanation": "By the time the plan arrives the vehicle has moved on. Planned from the old position it was 1.16 m off its new path at once, and planned 83 times without arriving."
     },
     {
       "stage": "post",
       "question": "Why may a blocked path bypass the cooldown?",
       "options": [
-        "Cooldowns are broken",
+        "It is the cheapest reason to check",
         "Waiting costs a stop or a crash",
-        "Speed",
-        "It is a bug"
+        "Blocked paths are rare",
+        "The cooldown only applies to timers"
       ],
       "correct": 1,
-      "explanation": "The other reasons can wait."
+      "explanation": "The cooldown is there to stop needless planning. A wall ahead is not needless, and a second's wait is a second closer to it."
     }
   ]
 }

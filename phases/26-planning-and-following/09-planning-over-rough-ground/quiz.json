@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What does the work per metre over a cell depend on, besides the surface?",
       "options": [
-        "The colour",
-        "Nothing",
-        "The time of day",
+        "The vehicle's speed",
+        "The cell's distance from the goal",
+        "The number of cells crossed",
         "The slope along the heading the vehicle takes"
       ],
       "correct": 3,
-      "explanation": "Up costs more than across."
+      "explanation": "The work is the weight times the rolling resistance plus the sine of the slope along the direction of travel. Going up a slope costs far more than going across it."
     },
     {
       "stage": "check",
       "question": "A metre up a slope of 14 degrees cost, against across it:",
       "options": [
         "25.2 J against 1.47 J",
-        "0",
         "1.47 J against 25.2 J",
-        "The same"
+        "25.2 J for both",
+        "9.8 J against 1.47 J"
       ],
       "correct": 0,
-      "explanation": "m g sin(a) is added."
+      "explanation": "Across the slope only rolling resistance is paid. Up it, the weight times the sine of 14 degrees is added for every metre."
     },
     {
       "stage": "check",
       "question": "The shortest path across the sand band cost, and the cheapest:",
       "options": [
         "66 J and 90 J",
-        "The same",
+        "90 J for both",
         "90 J and 66 J, at 16.0 m and 31.2 m",
-        "0"
+        "16 J and 31 J"
       ],
       "correct": 2,
-      "explanation": "Longer, and cheaper."
+      "explanation": "Straight through the sand was 16.0 m and 90 J. Round by the gravel ford was nearly twice as far and cost 66 J."
     },
     {
       "stage": "check",
       "question": "Crossing the patch of risk, the worst cell cost was:",
       "options": [
-        "255 both",
-        "0 with no weight",
-        "0 both",
+        "0 with no weight and 200 with one",
+        "200 for both",
+        "253 for both",
         "200 with no weight and 0 with one"
       ],
       "correct": 3,
-      "explanation": "The weight sent it round."
+      "explanation": "With no weight on risk the patch is as good as any ground, so the shortest path crosses it. With a weight the planner went round."
     },
     {
       "stage": "post",
       "question": "Why does the planner price a step and not a cell?",
       "options": [
-        "For speed",
+        "A step is cheaper to compute",
         "The cost depends on the heading, on a slope",
-        "Memory",
-        "The grid is square"
+        "Cells have different sizes",
+        "To allow diagonal moves"
       ],
       "correct": 1,
-      "explanation": "A cell has no heading."
+      "explanation": "The same cell is cheap to cross along the contour and dear to climb, so the price belongs to the move from one cell to the next."
     },
     {
       "stage": "post",
       "question": "What does a goal in a ring of blocked cells give?",
       "options": [
-        "A crash",
+        "The cell nearest the goal",
         "found = false and an empty path, after 6476 expansions",
-        "The nearest cell",
-        "A path through the ring"
+        "A path that crosses the ring at its thinnest",
+        "A path to the ring's edge"
       ],
       "correct": 1,
-      "explanation": "Say so."
+      "explanation": "A step into a blocked cell is never allowed, so no path exists. The planner says so after exhausting what it can reach."
     }
   ]
 }

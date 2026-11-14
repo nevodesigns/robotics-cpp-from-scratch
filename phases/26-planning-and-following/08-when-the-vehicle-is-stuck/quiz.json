@@ -7,72 +7,72 @@
       "question": "What are the two halves of the stuck test?",
       "options": [
         "Commanded to move for a whole window, and moved less than a distance",
-        "Heat and weight",
-        "Time and place",
-        "Speed and battery"
+        "Stopped for a whole window, wherever it is",
+        "Off the path, and not moving",
+        "Commanded to move, and moving slowly"
       ],
       "correct": 0,
-      "explanation": "A stopped vehicle is not stuck."
+      "explanation": "A vehicle that is not being asked to move is not stuck. One asked to move that covers less than 0.1 m in 3 s is."
     },
     {
       "stage": "check",
       "question": "A vehicle commanded to stop for 10 s was flagged how many times?",
       "options": [
-        "3.0",
+        "Once, after 3 s",
         "0",
-        "Once",
-        "Many"
+        "Three times",
+        "Every tick"
       ],
       "correct": 1,
-      "explanation": "It was not trying to move."
+      "explanation": "It was commanded to stop, so the first half of the test was false throughout."
     },
     {
       "stage": "check",
       "question": "The snagged vehicle finished in 23.5 s on which attempt?",
       "options": [
-        "Without recovery",
         "At the first attempt, by waiting",
+        "After 3 attempts, by spinning",
         "After 2 attempts, the second by backing up",
-        "None"
+        "It did not finish"
       ],
       "correct": 2,
-      "explanation": "The wait did not help; the back up did."
+      "explanation": "Waiting changed nothing. Backing up to 2.6 m freed it, and it finished in 23.5 s; without recovery it had not finished after 120 s."
     },
     {
       "stage": "check",
       "question": "The wall that never moved was given up on after how many attempts?",
       "options": [
+        "1",
         "2",
-        "Never",
         "3",
-        "1"
+        "It kept trying until the test ended"
       ],
       "correct": 2,
-      "explanation": "Bounded, not for ever."
+      "explanation": "The ladder was climbed three times and then the vehicle stopped and reported, after 31.2 s."
     },
     {
       "stage": "post",
       "question": "Why does a car's ladder back up twice instead of spinning?",
       "options": [
-        "It is a bug",
-        "Cars are heavy",
-        "Cars are slow",
+        "Spinning uses too much power",
+        "Spinning damages the tyres",
+        "The second back up goes further",
         "A car cannot spin in place"
       ],
       "correct": 3,
-      "explanation": "Leave out the rungs a vehicle cannot do."
+      "explanation": "A rung the vehicle cannot do is left out. A differential drive or skid steer spins in place to look round; a car's ladder backs up again."
     },
     {
       "stage": "post",
       "question": "Why does every behaviour have a time limit?",
       "options": [
-        "For looks",
-        "The grid",
-        "Memory",
+        "To keep the attempts evenly spaced",
+        "So the wait is always the longest step",
+        "To reset the stuck detector",
         "A back up that is itself blocked would reverse for ever"
       ],
       "correct": 3,
-      "explanation": "A recovery must not hang."
+      "explanation": "A recovery can be blocked too. With a limit the behaviour ends and the ladder moves on."
     }
   ]
 }

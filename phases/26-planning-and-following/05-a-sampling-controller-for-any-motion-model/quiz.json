@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What does a sampling controller need to know about the vehicle?",
       "options": [
-        "Nothing",
-        "Its whole design",
+        "Its mass and its motor constants",
+        "A linear model about the path",
         "A function that says where one step of control takes it",
-        "Its colour"
+        "Nothing: it learns the vehicle as it drives"
       ],
       "correct": 2,
-      "explanation": "It tries futures with that function."
+      "explanation": "The controller rolls candidate control sequences forward with that function and scores where they go. Any model that can be stepped will do."
     },
     {
       "stage": "check",
       "question": "How many samples did the car test use?",
       "options": [
-        "1",
-        "1000",
+        "8",
+        "24",
         "100",
-        "8"
+        "2000"
       ],
       "correct": 2,
-      "explanation": "Each is a noisy copy of the nominal."
+      "explanation": "Each control step makes 100 noisy copies of the nominal sequence, rolls each out over 2 seconds and weights them by cost."
     },
     {
       "stage": "check",
       "question": "Planning with a unicycle for the car, tracking error against the car's own model:",
       "options": [
-        "It crashed",
-        "Far worse",
-        "Far better",
+        "0.67 m against 0.047 m: far worse",
+        "0.047 m for both",
+        "It left the path altogether",
         "0.018 m against 0.047 m: hardly different, because it replans every 0.1 s"
       ],
       "correct": 3,
-      "explanation": "The wrong model shows in the predictions, 0.67 m out over 2 s."
+      "explanation": "The wrong model was no worse at tracking, because every plan starts from where the car really is. Its 2 second prediction was 0.67 m out, which matters for anything that relies on the prediction."
     },
     {
       "stage": "check",
       "question": "A controller given the grid made how many poses in blocked cells?",
       "options": [
         "0",
-        "All",
-        "Half",
-        "15"
+        "15",
+        "100",
+        "1, at the corner of the block"
       ],
       "correct": 0,
-      "explanation": "The cost of the cell is in the score."
+      "explanation": "A blocked cell adds a large cost to any rollout that enters it, so the weighted average steers round. Given no grid, the controller made 15 such poses."
     },
     {
       "stage": "post",
       "question": "What does lambda do?",
       "options": [
         "Sets how many of the worse rollouts still count in the weighted average",
-        "Nothing",
-        "Sets the speed",
-        "Sets the horizon"
+        "Sets how much noise is added to each control",
+        "Sets how far along the path the end cost looks",
+        "Sets how often the controller runs"
       ],
       "correct": 0,
-      "explanation": "exp(-(cost - least) / lambda)."
+      "explanation": "The weight of a rollout falls off with how much worse it is than the best, on a scale of lambda. Small lambda follows the best few and large lambda averages many."
     },
     {
       "stage": "post",
       "question": "What is the price of more samples?",
       "options": [
-        "Memory only",
+        "A longer horizon",
         "More rollouts every step, on the vehicle's processor: 0.152 m error at 8 samples against 0.077 m at 100",
-        "None",
-        "Accuracy"
+        "A lower control rate, by design",
+        "Nothing on a modern processor"
       ],
       "correct": 1,
-      "explanation": "Choose against the processor."
+      "explanation": "Samples times horizon rollouts are computed every 0.1 s. Going from 8 to 100 halved the error and multiplied that work by twelve."
     }
   ]
 }

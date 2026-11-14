@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is a path through the cells of a grid not a path for a car?",
       "options": [
-        "Cells are small",
+        "Its cells are larger than the car",
         "It has corners, which need a curvature no car has",
-        "Grids are slow",
-        "Cars are fast"
+        "A grid path is longer than it need be",
+        "It ignores the cost of the cells"
       ],
       "correct": 1,
-      "explanation": "A car cannot be anywhere facing any way."
+      "explanation": "A grid path turns through a right angle between neighbouring cells. A car turns along an arc no tighter than its smallest circle."
     },
     {
       "stage": "check",
       "question": "The hybrid path had a largest curvature of:",
       "options": [
         "1.35 per metre, within the limit of 1.35",
-        "100",
-        "0",
-        "15.7"
+        "15.7 per metre, as for the grid path",
+        "0.74 per metre",
+        "2.50 per metre, a little over the limit"
       ],
       "correct": 0,
-      "explanation": "Every part is an arc the car can drive."
+      "explanation": "The path is a chain of arcs of the bicycle model, each steered no harder than the car can, so its curvature is at most the limit of 1.35."
     },
     {
       "stage": "check",
       "question": "The corner of the grid path needed a curvature of:",
       "options": [
-        "1",
+        "1.35 per metre, the car's limit",
         "15.7 per metre",
-        "1.35",
-        "0"
+        "7.1 per metre",
+        "0 per metre: a corner has no curvature"
       ],
       "correct": 1,
-      "explanation": "A 90 degree turn in 0.1 m."
+      "explanation": "A quarter turn, 1.57 rad, between two poses 0.1 m apart is 15.7 per metre, more than ten times what the car can do."
     },
     {
       "stage": "check",
       "question": "A goal that was walled in was reported as:",
       "options": [
         "Not found, with an empty path",
-        "A crash",
-        "Found",
-        "Found at the nearest point"
+        "Found, at the nearest free pose",
+        "Found, by a path through the wall",
+        "Still searching when the test ended"
       ],
       "correct": 0,
-      "explanation": "Say so."
+      "explanation": "After the limit of 4000 expansions the planner returned an empty path and said not found. Returning the nearest pose would send the car to a wall."
     },
     {
       "stage": "post",
       "question": "What keeps the search from running for ever over continuous poses?",
       "options": [
-        "A timer only",
-        "Luck",
+        "The arcs have a fixed length",
+        "The heuristic never overestimates",
         "Nodes are kept one to a cell of a coarse grid of position and heading",
-        "Memory"
+        "The penalty for reversing"
       ],
       "correct": 2,
-      "explanation": "The cheapest into each cell wins."
+      "explanation": "A new pose that lands in a cell of position and heading already reached more cheaply is dropped, so the number of nodes is bounded by the number of cells."
     },
     {
       "stage": "post",
       "question": "What does a finer grid of headings cost?",
       "options": [
-        "Nothing",
-        "A faster search",
-        "Accuracy",
+        "A less accurate final heading",
+        "Longer arcs",
+        "Nothing: the search is the same size",
         "More expansions: 1146 at 12 headings and 2675 at 48"
       ],
       "correct": 3,
-      "explanation": "Use the fewest that reach the goal heading."
+      "explanation": "More headings to a cell means more distinct nodes to expand. The search grew from 1146 expansions to 2675."
     }
   ]
 }

@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "How many words can the shortest path of a forward-only car be?",
       "options": [
-        "Two",
+        "Two: a left turn and a right turn",
         "Six: LSL, RSR, LSR, RSL, RLR, LRL",
-        "A hundred",
-        "One"
+        "Three, one for each piece",
+        "As many as there are pairs of poses"
       ],
       "correct": 1,
-      "explanation": "Three pieces of arc or line."
+      "explanation": "Each of the three pieces is a left arc, a right arc or a straight, and only six combinations can be shortest. The method tries all six and keeps the shortest that exists."
     },
     {
       "stage": "check",
       "question": "Over 200 pairs of poses the walked end was within:",
       "options": [
-        "Anywhere",
-        "10 cm",
-        "1 m",
+        "0.073 m of the goal",
+        "A centimetre of the goal",
+        "The grid's cell size of the goal",
         "0.000000000 m of the goal"
       ],
       "correct": 3,
-      "explanation": "The test walks the arcs."
+      "explanation": "Each formula was checked by driving its three pieces with exact arcs and seeing where they end. A sign error would have ended somewhere else."
     },
     {
       "stage": "check",
       "question": "A Dubins tail after the search was how long?",
       "options": [
-        "0 m",
-        "100 m",
+        "0.073 m, the gap it closed",
+        "1.25 m",
         "4.70 m, ending exactly on the goal",
-        "It failed"
+        "It could not be built: the goal was too close"
       ],
       "correct": 2,
-      "explanation": "The search stopped 0.073 m short."
+      "explanation": "The goal was a little behind and to the side of the search's last pose, so a forward-only car had to loop. From an earlier pose of the search a tail of 1.25 m was found."
     },
     {
       "stage": "check",
       "question": "A radius of 0.4 m for this car gave a curvature of:",
       "options": [
-        "0",
-        "1",
+        "1.35 per metre, the limit",
+        "0.40 per metre",
         "2.50 per metre, past the limit",
-        "1.35"
+        "0.74 per metre"
       ],
       "correct": 2,
-      "explanation": "A path the car cannot drive."
+      "explanation": "The curvature is one over the radius. The car's smallest radius is 0.742 m, and a path drawn at 0.4 m asks for almost twice what it can steer."
     },
     {
       "stage": "post",
       "question": "Why is the path to a goal 0.5 m behind a loop?",
       "options": [
         "The car cannot reverse in a Dubins path: it was 10.3 times the distance",
-        "Arcs are slow",
-        "A bug",
-        "The goal is far"
+        "The formula is inexact for short distances",
+        "The radius was set too small",
+        "The goal's heading was reversed"
       ],
       "correct": 0,
-      "explanation": "Reeds and Shepp allow reversing."
+      "explanation": "A car that only goes forward has to go round to arrive facing the same way half a metre back. One that could reverse would back up."
     },
     {
       "stage": "post",
       "question": "What does the Dubins lesson not do?",
       "options": [
-        "Nothing",
-        "Use arcs",
-        "Work in closed form",
+        "Give the six words in closed form",
+        "Walk the path to check its end",
+        "Use the car's own radius",
         "Check the path against the grid, or reverse"
       ],
       "correct": 3,
-      "explanation": "Say what is left out."
+      "explanation": "The tail is geometry only. A tail that passes through a wall is possible here, and a family with reversing is another lesson."
     }
   ]
 }
