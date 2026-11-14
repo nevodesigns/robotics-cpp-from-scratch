@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why must a scenario run end in a verdict and not in a plot?",
       "options": [
-        "Plots are inaccurate",
-        "Plots are slow",
-        "Verdicts are shorter",
+        "A plot cannot show overshoot",
+        "A verdict takes less space in the log",
+        "Plots cannot be made without a display",
         "A run passed by looking at it has no test behind it: next month's slow worsening is not looked at, and the verdict names the step and the criterion that failed"
       ],
       "correct": 3,
-      "explanation": "The test fails on a non empty verdict and prints the list."
+      "explanation": "Someone looked today and it was fine. Nobody will look at every run, and a slow drift past the limit is caught only by a check that runs every time."
     },
     {
       "stage": "check",
       "question": "Why is overshoot a fraction of the step's size?",
       "options": [
-        "It is easier",
-        "It is more accurate",
+        "A fraction is quicker to compute than a distance",
+        "So that it cannot be negative",
         "So a big step and a small one can be compared, and the settling band, also a fraction of the step, means the same for both",
-        "The plot needs it"
+        "Because the trace is stored as fractions"
       ],
       "correct": 2,
-      "explanation": "2 percent of 1.5 is 0.03 and of 0.1 is 0.002."
+      "explanation": "An overshoot of 0.05 is serious on a step of 0.1 and trivial on a step of 1.5. As a fraction of the step, one limit serves both."
     },
     {
       "stage": "check",
       "question": "An underdamped step up and its exact mirror down are measured. What should the numbers be?",
       "options": [
-        "Opposite signs",
-        "Different",
+        "Opposite: 0.0759 going up and -0.0759 going down",
+        "Different: a step down has no overshoot, since it ends below the target",
         "Identical, the same overshoot 0.0759, rise 0.1800 and settling 0.5600: past the target means the side the step was going toward",
-        "Half"
+        "Half as large going down, since gravity helps"
       ],
       "correct": 2,
-      "explanation": "A measurement that took past to mean above would report no overshoot going down."
+      "explanation": "A step down that goes below its target has overshot. Measured as past the target in the direction of travel, the mirror image gives the same numbers."
     },
     {
       "stage": "check",
       "question": "The target is changed to where the position already is. What should the analysis do?",
       "options": [
         "Leave it out: it moves nothing, so there is no overshoot, rise or settling to report",
-        "Fail",
-        "Report a perfect step",
-        "Report zero"
+        "Report a perfect step: no overshoot, no rise time, settled at once",
+        "Fail the run, since a target was set and nothing moved",
+        "Report a step with a settling time of -1"
       ],
       "correct": 0,
-      "explanation": "Four changes with one of no size and one beyond the end gave 2 steps."
+      "explanation": "Nothing moved, so there is nothing to measure. Reporting it as a perfect step would improve the averages with a step that never happened."
     },
     {
       "stage": "post",
       "question": "A loop oscillates for ever around its target. What does its settling time read, and what does the verdict say?",
       "options": [
-        "The period",
+        "The period of the oscillation, and the verdict passes",
         "-1, which is not a time, and the verdict says settling: it never stayed within the band",
-        "Infinity",
-        "0"
+        "Zero, since it is at the target on average",
+        "The length of the step, and the verdict says final error"
       ],
       "correct": 1,
-      "explanation": "A pass for a loop that never settled would be a lie."
+      "explanation": "Settling means staying inside the band for the rest of the step. An oscillation leaves it again and again, so there is no settling time to give."
     },
     {
       "stage": "post",
       "question": "The same scenario is run against a good sensor, one 60 ms late and one stuck from 1 s. What came out?",
       "options": [
         "A pass, then failures on every step (overshoot, settling and final error), then failures on all but the overshoot of the last step, which did not move at all",
-        "Three passes",
-        "Three failures of the same kind",
-        "The same"
+        "Three passes: the scenario was the same",
+        "Three failures on the same criterion",
+        "A pass, a pass and a failure on the last step only"
       ],
       "correct": 0,
-      "explanation": "Each verdict said what it was about."
+      "explanation": "The late sensor rings on every step. The stuck one leaves the position unmoved for the last step, so that step has no overshoot and still never settles."
     }
   ]
 }

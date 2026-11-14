@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why not use the time constant on the motor's datasheet?",
       "options": [
-        "It is always wrong",
+        "It is given for the motor's voltage and not for its command",
         "It is for a motor in the maker's conditions, not yours warmed up and loaded, and a controller tuned on a wrong time constant overshoots on the real one",
-        "It is in the wrong units",
-        "It is too precise"
+        "Datasheets quote the electrical time constant, which is always zero",
+        "It changes every time the motor is switched on"
       ],
       "correct": 1,
-      "explanation": "Measure it on the machine."
+      "explanation": "The datasheet's figure is for a bare motor under the maker's conditions. The one that matters is the motor in this machine, with its load."
     },
     {
       "stage": "check",
       "question": "What is the gain, read from a step?",
       "options": [
-        "The peak speed",
-        "The time to settle",
-        "The slope at the start",
+        "The highest speed reached during the step",
+        "The slope of the speed in the first few readings",
+        "The time the speed takes to reach its final value",
         "The speed it settled to over the command, taking the mean of the last tenth of the readings so one noisy sample does not decide it"
       ],
       "correct": 3,
-      "explanation": "1.9991 against 2.0 in the clean test."
+      "explanation": "The gain is how much speed a unit of command buys in the end. Averaging the last tenth of the trace gave 1.9991 for a true 2.0."
     },
     {
       "stage": "check",
       "question": "The clean fit gave a time constant of 0.0989 for a motor built with 0.1. Whose error is that?",
       "options": [
         "The simulated motor's: Euler at 2 ms makes the effective time constant about half a step shorter, and a measurement of a simulation measures the simulation",
-        "The fit's",
-        "The clock",
-        "The noise"
+        "The fit's: least squares always reads a little short",
+        "The noise's, though the trace was clean",
+        "The clock's: the readings were stamped 1 percent late"
       ],
       "correct": 0,
-      "explanation": "The step size is part of the model."
+      "explanation": "Stepped with Euler at 2 ms, a first order system behaves as if its time constant were about half a step shorter. The fit read what was there."
     },
     {
       "stage": "check",
       "question": "At a noise of 0.5 the quick log fit gave 0.222 with a small spread. What does that mean?",
       "options": [
-        "The spread is the error",
+        "It is right: a small spread means a good estimate",
         "It is confidently wrong: the logarithm of a noisy number does not average to the logarithm of the number, so the line leans, and the refined fit gave 0.0989",
-        "It is right",
-        "The noise is too small"
+        "The noise was too large for any method",
+        "The trace was too short, and the refined fit gave the same 0.222"
       ],
       "correct": 1,
-      "explanation": "Reading the 63 percent crossing leaned the other way, 0.0794."
+      "explanation": "Noise pushes every logged point the same way, so the line is tilted and the answer is biased, not scattered. Searching for the time constant directly gave 0.0989 at every noise level."
     },
     {
       "stage": "post",
       "question": "A model fitted on a step of 1 predicts steps up to a command of 12 to within 0.01 and a command of 20 to within 14.4. Why?",
       "options": [
-        "The noise grows",
-        "The fit is bad",
+        "The fit was poor to begin with, and the error grows with the command",
+        "The time constant gets longer at high commands",
         "The motor clamps its command at 12 and the model has no limit: it is good where it was fitted and the limit is not found by the fit",
-        "The time constant changes"
+        "Noise is proportional to the command"
       ],
       "correct": 2,
-      "explanation": "A model is good where it was fitted."
+      "explanation": "The model is linear, and the motor is linear only up to its limit of 12. At 20 the motor goes to 24 and the model says 40."
     },
     {
       "stage": "post",
       "question": "Which traces should a fit refuse?",
       "options": [
-        "Any over a second",
-        "Any with noise",
-        "None",
+        "Only traces with noise above 0.5",
+        "Only traces shorter than one time constant",
+        "None: any trace gives some estimate",
         "Too few readings, different lengths, a zero command, a motor that never moved, and a speed already final from the first reading"
       ],
       "correct": 3,
-      "explanation": "Numbers with no meaning attached are worse than none."
+      "explanation": "Each of those gives no information about the gain or the time constant. A fit that returned numbers for them would be making them up."
     }
   ]
 }

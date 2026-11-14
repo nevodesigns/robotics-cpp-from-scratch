@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why does adding a logging camera to a simulation sometimes change a bug that has nothing to do with it?",
       "options": [
-        "The clock changed",
-        "The camera has a bug",
+        "The camera uses the same seed as the bug, so it reproduces it elsewhere",
+        "Logging slows the simulation, and the bug depends on timing",
         "All the parts draw from one generator, so each part's numbers depend on how many draws the others made: with the camera added the imu's noise changed in 1000 of 1000 values",
-        "Memory moved"
+        "The camera's noise is added to every other sensor's"
       ],
       "correct": 2,
-      "explanation": "The imu was given the camera's numbers."
+      "explanation": "With one shared generator, inserting a part that draws numbers shifts everyone else's. The imu's noise did not get worse; it got someone else's."
     },
     {
       "stage": "check",
       "question": "What is the avalanche property of a mixer?",
       "options": [
-        "It is reversible",
-        "It is fast",
+        "Its output can be turned back into its input",
+        "The same input always gives the same output",
         "Changing one bit of the input changes about half the output bits: 32.1 of 64 on average here, so neighbouring seeds look unrelated",
-        "It uses little memory"
+        "Its output is always larger than its input"
       ],
       "correct": 2,
-      "explanation": "A mixer that flipped few bits would give seeds 1 and 2 similar streams."
+      "explanation": "Seeds 1, 2 and 3 are nearly the same number. A good mixer makes them into three that share nothing, so their streams start differently."
     },
     {
       "stage": "check",
       "question": "How is a part's seed made?",
       "options": [
-        "From a counter",
-        "From the clock",
-        "From its index in a list",
+        "From the order in which the parts were created",
+        "From the master seed plus the part's index in a list",
+        "From the time the part was first used",
         "From the master seed and a hash of the part's name, so it does not depend on which other parts exist or the order they were made in"
       ],
       "correct": 3,
-      "explanation": "The same master and name always give the same seed."
+      "explanation": "A seed that depends only on the master and the name is the same whatever else exists. Adding or reordering parts leaves it alone."
     },
     {
       "stage": "check",
       "question": "What does a seed of zero do to a xorshift generator, and to this stream?",
       "options": [
-        "Nothing",
-        "It crashes",
-        "It repeats",
+        "Both stay at zero for ever",
+        "Both work: zero is as good a seed as any",
+        "This stream stays at zero, and a xorshift generator recovers after one draw",
         "A xorshift generator stays at zero; this stream's successive numbers differ, since it adds a constant before mixing"
       ],
       "correct": 3,
-      "explanation": "The state is advanced by a large odd number first."
+      "explanation": "Xor and shifts of zero are zero, so a xorshift state of zero never leaves it. Adding a constant before mixing moves this one off zero at once."
     },
     {
       "stage": "post",
       "question": "Streams for the encoder and the imu were asked for in opposite orders in two simulations. What happened?",
       "options": [
-        "Different numbers",
+        "The streams swapped: each part got the other's numbers",
         "The motor's and the imu's numbers were identical in both: the order of first asking changes nothing",
-        "An error",
-        "The streams swapped"
+        "The second simulation got an error for asking out of order",
+        "The first part asked got the same numbers and the second different ones"
       ],
       "correct": 1,
-      "explanation": "Each is made from its name."
+      "explanation": "A stream is made from the master seed and its own name the first time it is asked for. When that happens makes no difference."
     },
     {
       "stage": "post",
       "question": "What was the correlation between two streams from one master seed?",
       "options": [
         "-0.0040: no relationship",
-        "0.5",
-        "1",
-        "-1"
+        "1.0000: they are the same stream",
+        "0.5000: they share half their bits",
+        "-1.0000: one is the mirror of the other"
       ],
       "correct": 0,
-      "explanation": "Independent in the statistical sense."
+      "explanation": "The encoder's and the imu's numbers from one master seed had no relationship that the correlation could find."
     }
   ]
 }

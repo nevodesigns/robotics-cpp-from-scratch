@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is plotting the two traces on the same axes not enough?",
       "options": [
-        "It needs a screen",
-        "Plots are inaccurate",
-        "It is slow",
+        "A plot cannot show two traces at once",
+        "A plot rounds the values to the screen's pixels",
+        "Plots take too long to draw for long runs",
         "It finds a gross error and misses a small one that matters, and it cannot go in a test: a model 17 percent out looks fine and scores nearly three times the noise floor"
       ],
       "correct": 3,
-      "explanation": "Turn the look into numbers."
+      "explanation": "A person's eye catches a model that is far out and passes one that is a little out. And nobody's eye runs in continuous integration."
     },
     {
       "stage": "check",
       "question": "A simulated trace is 0.05 too high everywhere. What are its bias and its lag?",
       "options": [
-        "0 and 0",
+        "A bias of 0 and a lag of 1: an offset on a rising trace looks like a shift",
         "A bias of 0.0500 and a lag of 0: the shift is judged by the variance of the differences, so a constant offset does not move it",
-        "0.05 and 1",
-        "0 and 5"
+        "A bias of 0.0500 and a lag of 5",
+        "A bias of 0 and a lag of 0: a constant does not count"
       ],
       "correct": 1,
-      "explanation": "Judged by plain error, the shift came out 1."
+      "explanation": "Shifting a rising trace moves it toward one that is too high, so plain error would report a lag of 1. Judging by how much the differences vary takes the constant out."
     },
     {
       "stage": "check",
       "question": "A sensor is 5 samples late in an open loop. What does compare find, and what does it find inside a closed loop?",
       "options": [
         "Open loop: shift 5 and an error of 0.0000 at it; closed loop: shift 4 and an error that barely fell, 0.1396 from 0.1553, since the controller reacts to the late reading and the dynamics change",
-        "0 in both",
-        "5 in both",
-        "4 in both"
+        "Shift 5 and an error of 0.0000 in both",
+        "Shift 4 in both, with the error halved",
+        "Open loop: shift 0; closed loop: shift 5"
       ],
       "correct": 0,
-      "explanation": "A late sensor in a loop is not a late copy of the same trace."
+      "explanation": "On its own a delay is a pure shift and is found exactly. In a loop the controller acts on the late reading, so the whole response changes and no shift lines the traces up."
     },
     {
       "stage": "check",
       "question": "What is the noise floor, and how is it found?",
       "options": [
         "The rms noise on one real run, found from two real runs of the same thing: their rms difference over the square root of two: 0.0102 for noise 0.01",
-        "The smallest reading",
-        "The sensor's resolution",
-        "The model's error"
+        "The sensor's resolution, read from its data sheet",
+        "The smallest error any model scored",
+        "The error of the model at its best fit"
       ],
       "correct": 0,
-      "explanation": "A perfect model scored 0.0105."
+      "explanation": "Two real runs differ only by their noise, and the difference of two noisy values has root two times the noise of one. No model can score below that."
     },
     {
       "stage": "post",
       "question": "A model's time constant is 17 percent below the real motor's. What does its error look like?",
       "options": [
-        "Half",
+        "About the floor: 0.0098, too close to tell",
         "Nearly three times the floor: 0.0272 against 0.0098, in a loop that plots much the same",
-        "Ten times",
-        "Zero"
+        "Ten times the floor",
+        "17 percent above the floor"
       ],
       "correct": 1,
-      "explanation": "The error was smallest at the true value."
+      "explanation": "At the true time constant the error sat on the floor, 0.0098. At 0.10, where the plots look alike, it was 0.0272."
     },
     {
       "stage": "post",
       "question": "What does the name of an exceeded limit tell you?",
       "options": [
-        "The time",
-        "Nothing",
+        "When the limit was exceeded",
+        "By how much the limit was exceeded",
         "What to look at: a model that exceeds only lag is missing a delay, and one that exceeds rmse and max has the wrong dynamics",
-        "The sign"
+        "Which run was the simulated one"
       ],
       "correct": 2,
-      "explanation": "The wrong motor and no sensor delay exceeded rmse, max and lag."
+      "explanation": "The fitted model exceeded none. The one with the wrong motor and no sensor delay exceeded rmse, max and lag, and each name points at a cause."
     }
   ]
 }

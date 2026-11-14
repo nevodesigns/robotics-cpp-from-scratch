@@ -7,72 +7,72 @@
       "question": "Why does a simulation that steps by the last frame's duration give different answers on different machines?",
       "options": [
         "The step size changes the numerical result: a spring simulated for 5 s ended at 0.917 at 60 frames a second and at -0.810 at 30",
-        "It does not",
-        "Floating point differs",
-        "Machines have different clocks"
+        "Floating point rounds differently on each processor: the spring ended at 0.917 on one and 0.906 on another",
+        "Faster machines run more of the simulation's time: a spring simulated for 5 s covered 10 s at 60 frames a second",
+        "The spring's stiffness is read from the frame rate: 0.917 at 60 frames a second and 0.906 at 30"
       ],
       "correct": 0,
-      "explanation": "A fixed step gave 0.906213 at both."
+      "explanation": "The numerical answer depends on the step, and the frame time is different on every machine and every run. A fixed step took the same 1000 steps each time and gave 0.906213."
     },
     {
       "stage": "check",
       "question": "Frames of 16 ms and a step of 10 ms. What does the first frame do?",
       "options": [
         "Runs 1 step and keeps 6 ms, which is 0.6 of a step owed",
-        "Runs 1.6 steps",
-        "Runs 2 steps",
-        "Runs nothing"
+        "Runs 2 steps, rounding up, and owes nothing",
+        "Runs 1 step and drops the other 6 ms",
+        "Runs nothing until 20 ms have built up"
       ],
       "correct": 0,
-      "explanation": "Time that does not fill a step is kept."
+      "explanation": "One whole step fits in 16 ms. The 6 ms left is carried forward, so no time is lost and none invented."
     },
     {
       "stage": "check",
       "question": "What is alpha for?",
       "options": [
-        "The step size",
-        "The error",
+        "How many steps were run in the last frame",
+        "The fraction of real time that was dropped",
         "How far between the last step and the next the real clock is, which a renderer uses to draw between states",
-        "The frame count"
+        "The ratio of the step to the frame time"
       ],
       "correct": 2,
-      "explanation": "It is from 0 up to but not including 1."
+      "explanation": "After the whole steps are taken, part of a step is still owed. A renderer uses that fraction, from 0 up to but not including 1, to draw between the last state and the next."
     },
     {
       "stage": "check",
       "question": "A window is dragged for 5 s with a step of 10 ms. What should the stepper do?",
       "options": [
-        "Run 500 steps",
-        "Crash",
+        "Run all 500 steps so that no time is lost, and take as long as that needs",
+        "Run 10 steps now and the other 490 over the following frames",
         "Run at most the limit, 10, drop and count the rest (4.90 s), and owe the next frame nothing for it",
-        "Skip frames"
+        "Run no steps and discard the frame"
       ],
       "correct": 2,
-      "explanation": "A simulation that catches up takes longer to catch up than the time it stands for."
+      "explanation": "Running hundreds of owed steps takes longer than the time they stand for, so the debt grows. The stepper runs up to its limit, counts the 4.90 s it gave up, and carries on."
     },
     {
       "stage": "post",
       "question": "What happens to the error as the step is halved, for this first order method?",
       "options": [
-        "It doubles",
-        "It stays",
-        "It quarters exactly",
+        "It quarters: 22.222, 5.556, 0.222 at steps of 0.01, 0.005 and 0.001",
+        "It stays about the same: the error is set by the spring",
+        "It doubles, because more steps add more rounding",
         "It roughly halves: 22.222, 10.526, 2.020 at steps of 0.01, 0.005 and 0.001"
       ],
       "correct": 3,
-      "explanation": "A step of 50 ms against a spring that swings in 0.31 s was 100 percent wrong."
+      "explanation": "A first order method's error is proportional to the step. At 50 ms, against a spring that swings in 0.31 s, the energy error was the whole 200."
     },
     {
       "stage": "post",
       "question": "What is needed besides a fixed step for two runs to match to the last bit?",
       "options": [
-        "A smaller step",
+        "A smaller step, so that rounding does not differ",
         "Everything the simulation reads must be reproducible too: a random number or a thread race inside the world would break it",
-        "Nothing",
-        "A faster machine"
+        "The same machine, since processors differ",
+        "Nothing: a fixed step is enough for determinism"
       ],
       "correct": 1,
-      "explanation": "The same jittery frames twice gave 0.90621265316080712 both times."
+      "explanation": "The same jittery frames gave 0.90621265316080712 twice because nothing else varied. A random draw or a thread race inside the world would undo it."
     }
   ]
 }

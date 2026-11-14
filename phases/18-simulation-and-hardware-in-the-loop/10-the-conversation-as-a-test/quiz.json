@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why record a whole session as a test instead of writing the expected value for each reply?",
       "options": [
-        "It needs no device",
+        "It needs no device, so it can replace the bench",
         "It catches what a reply-at-a-time test misses: a firmware change that adds a byte to every reply, or a reordering, and it is recorded and not composed",
-        "It is shorter to write",
-        "It runs faster"
+        "A recorded session is shorter than written expectations",
+        "It runs faster than a test of single replies"
       ],
       "correct": 1,
-      "explanation": "The conversation as a whole is what breaks."
+      "explanation": "Each reply can look right by itself while the session as a whole has changed. And a recording is what the device really said, where an expectation is what someone thought it would."
     },
     {
       "stage": "check",
       "question": "A transcript file has a line `> 0102`. What should the reader do?",
       "options": [
-        "Skip it",
-        "Read two bytes",
+        "Read it as two bytes, 01 and 02",
+        "Read it as one byte and ignore the rest",
         "Refuse it: line 1, bytes are two hexadecimal digits each, since two bytes with no space look like one number",
-        "Read one byte"
+        "Skip the line and read the others"
       ],
       "correct": 2,
-      "explanation": "A half read golden file must never be used."
+      "explanation": "Bytes are two hexadecimal digits each, separated by spaces. A reader that guessed would be comparing against something nobody wrote."
     },
     {
       "stage": "check",
       "question": "Why does compare report only the first difference?",
       "options": [
-        "Memory",
+        "Later differences are slower to find",
         "After the first one everything that follows is out of step, and a second report is noise",
-        "The test would fail",
-        "Speed"
+        "A test may only fail once",
+        "The transcript is read one line at a time"
       ],
       "correct": 1,
-      "explanation": "It names where: message and byte."
+      "explanation": "Once one message differs in length or is missing, every later one is compared with the wrong partner. The first difference is the one that carries information."
     },
     {
       "stage": "check",
       "question": "Replies carry a time of day at bytes 2 to 5 and it differs every run. What is the remedy?",
       "options": [
         "A mask over exactly those bytes of replies: without it the first difference was message 1 byte 2, with it none",
-        "Fix the clock",
-        "Delete the test",
-        "Compare only lengths"
+        "Compare only the lengths of the replies",
+        "Record the golden session again every day",
+        "Mask the whole of every reply"
       ],
       "correct": 0,
-      "explanation": "The test would otherwise fail every day."
+      "explanation": "The time is the only thing allowed to change, so only those four bytes of replies are exempt. A mask over more than that would let real changes through."
     },
     {
       "stage": "post",
       "question": "A mask covers bytes 2 to 5 of replies. A request's byte 1 and a reply's byte 6 are changed. What happens?",
       "options": [
         "Both are caught: the mask covers only the direction and the bytes it was given for",
-        "Neither is caught",
-        "Only the reply",
-        "Both pass"
+        "Neither is caught: the mask hides them",
+        "Only the reply's byte 6 is caught",
+        "Only the request's byte 1 is caught"
       ],
       "correct": 0,
-      "explanation": "A reading one byte past the masked time was caught at message 1, byte 6."
+      "explanation": "The mask names a direction and a range of bytes. A request is the other direction and byte 6 is outside the range, so both are compared as usual."
     },
     {
       "stage": "post",
       "question": "New firmware adds a byte to every reply. What does the golden transcript say?",
       "options": [
-        "Content at message 0",
-        "Extra",
-        "Nothing",
+        "Content, at message 0 byte 0",
+        "Extra, from message 6",
+        "Nothing: an added byte is ignored",
         "Length, at message 1 and offset 8: the first reply is longer and the shorter one ended at 8"
       ],
       "correct": 3,
-      "explanation": "A protocol change no one announced."
+      "explanation": "The first reply is one byte longer than the golden one. That is reported as a difference in length, at the offset where the shorter message ended."
     }
   ]
 }

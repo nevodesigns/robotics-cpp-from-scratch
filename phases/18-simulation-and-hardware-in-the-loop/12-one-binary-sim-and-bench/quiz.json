@@ -7,72 +7,72 @@
       "question": "What is the surest way to keep a simulation and a robot from diverging?",
       "options": [
         "Have no second controller: the controller is the same program, and the choice of what is on the other side is configuration made when it starts",
-        "Review the code",
-        "Use the same compiler",
-        "Test them often"
+        "Review both controllers whenever either is changed",
+        "Build both with the same compiler and flags",
+        "Run both every night and compare the logs"
       ],
       "correct": 0,
-      "explanation": "Two code bases diverge for a year."
+      "explanation": "Two copies of a controller drift apart however carefully they are reviewed. One program, told at start up what it is talking to, has nothing to drift from."
     },
     {
       "stage": "check",
       "question": "A configuration has 8 lines, every one wrong. What should the parser do?",
       "options": [
-        "Use the defaults",
-        "Stop at the first",
+        "Stop at the first bad line and report it",
+        "Use the default for every bad line and start",
         "Report all 8 with their line numbers and leave the settings as they were: a program that starts with half a configuration is one no one can describe",
-        "Ignore them"
+        "Start with the lines that could be read"
       ],
       "correct": 2,
-      "explanation": "A missing backend is an error too."
+      "explanation": "Every bad line is reported with its number, and nothing is applied. A program running on half of what was asked for is in a state nobody chose."
     },
     {
       "stage": "check",
       "question": "The bench is set up with no delay and no loss, and the simulation is run on the same scenario. What should the difference be?",
       "options": [
-        "Half a percent",
-        "10 percent",
+        "Small but not zero, since the bench has a link",
+        "About the noise floor, 0.0053",
         "Nothing: 0.0000 rms, since set up to be the same they must be the same, and if they differ the difference is a bug in a backend",
-        "Small"
+        "Half a percent, from rounding in the link"
       ],
       "correct": 2,
-      "explanation": "This is the first test of a rig."
+      "explanation": "With no delay, no loss and no noise the bench backend is the simulation's plant reached another way. Any difference then is a mistake in one of them."
     },
     {
       "stage": "check",
       "question": "The bench has a link delay of 2 ticks each way. Which sensor delay in the simulation matched it best?",
       "options": [
-        "8",
+        "2, the link's delay one way",
         "4, the round trip of the link, which cut the difference from 0.1901 to 0.0772",
-        "2",
-        "0"
+        "0: the simulation has no link to delay",
+        "8, twice the round trip"
       ],
       "correct": 1,
-      "explanation": "A simulation with too much delay is a different loop: 1.2860 at 8."
+      "explanation": "A command takes 2 ticks to arrive and the measurement 2 to come back. A sensor delay of 4 ticks stands in for that round trip."
     },
     {
       "stage": "post",
       "question": "After matching the delay the gap was still 0.0772, far above the noise floor of 0.0053. What is left?",
       "options": [
-        "The plant",
-        "The controller",
-        "Noise",
+        "Noise, which no model can match",
+        "The plant model, which is wrong",
+        "The controller's gain",
         "What the simulation still lacks: the 5 percent loss, which a delay cannot imitate"
       ],
       "correct": 3,
-      "explanation": "The number says how much the link cost and what remains to model."
+      "explanation": "Two bench runs differ by 0.0053, so noise accounts for little of 0.0772. What the simulation has no way to imitate with a delay is frames that never arrive."
     },
     {
       "stage": "post",
       "question": "Why does the trace record the plant's true position and not the measured one?",
       "options": [
-        "It is simpler",
-        "Speed",
-        "The measurement is not available",
+        "The measured position is not stored",
+        "The true position is cheaper to record",
+        "So that the controller can use it",
         "The judge and the comparison are about what the plant did, and the measurement is what the controller was told: a late or noisy sensor would otherwise hide in the answer"
       ],
       "correct": 3,
-      "explanation": "truth() is for the test."
+      "explanation": "The controller only ever sees the measurement. The tools that judge the run need what really happened, or a bad sensor would make a bad run look good."
     }
   ]
 }

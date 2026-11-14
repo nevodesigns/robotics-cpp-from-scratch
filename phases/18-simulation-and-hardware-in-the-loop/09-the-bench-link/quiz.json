@@ -7,72 +7,72 @@
       "question": "A plant emulator is sent one command of 6 and then nothing for a second. What should it do?",
       "options": [
         "Hold it for a moment and then act on zero: with no watchdog it ran at speed 12 to position 10.920, with one it stopped at 0.720",
-        "Ask for another",
-        "Hold the command: that is what a motor driver does",
-        "Stop at once"
+        "Hold the command for the whole second: with no watchdog it reached position 0.720, the right place",
+        "Stop at once, the moment one tick passes with no command: it stopped at 0.060",
+        "Repeat the last command at half strength until a new one comes: it reached 5.460"
       ],
       "correct": 0,
-      "explanation": "A motor left running for a controller that has gone quiet is the dangerous way to fail."
+      "explanation": "Holding for a tick or two covers an ordinary gap. Holding for a second is a motor running with nobody in control, so after a few ticks the plant acts on zero."
     },
     {
       "stage": "check",
       "question": "Commands 2 and then 1 arrive, in that order. What does the emulator do with 1?",
       "options": [
-        "Queues it",
+        "Acts on it, since it arrived last and so is the newest",
         "Ignores it and counts it: it was sent before 2 and was overtaken, and acting on it would undo the newest decision",
-        "Averages them",
-        "Acts on it"
+        "Queues it and acts on it after command 2 has finished",
+        "Averages it with command 2"
       ],
       "correct": 1,
-      "explanation": "The plant used command 2."
+      "explanation": "The sequence number says 1 was sent first and was overtaken on the way. Acting on it would replace the controller's latest decision with an older one."
     },
     {
       "stage": "check",
       "question": "The link dies for a second just after the target is stepped to -1. Where does a plant that holds its last command end up, against one with a watchdog?",
       "options": [
-        "The same place",
+        "-1.45 against -21.85: the watchdog made it worse",
         "-21.85 against -1.45: the held command was the strongest one, run for a second at full speed",
-        "0 and 0",
-        "-1 and -1"
+        "-1.00 for both: the plant stops at the target",
+        "0.00 for both: the plant returns to where it started"
       ],
       "correct": 1,
-      "explanation": "This is the test to write first for any bench."
+      "explanation": "The last command before the link died was the full push toward the new target. Held for a second, it drove the plant twenty times too far."
     },
     {
       "stage": "check",
       "question": "Measurements with ticks 5, 7, 6, 7 reach the controller. What is kept?",
       "options": [
-        "Only 5",
-        "Only 7",
+        "All four: every measurement is information",
+        "Only 5: anything after the first is a repeat",
         "5 and 7: 6 was overtaken and the second 7 was a repeat, so 2 were refused",
-        "All four"
+        "5, 7 and 6: only the second 7 is refused"
       ],
       "correct": 2,
-      "explanation": "The controller keeps the newest by the emulator's tick."
+      "explanation": "The emulator's tick orders the measurements. One that is older than the newest already seen, or the same, is refused and counted."
     },
     {
       "stage": "post",
       "question": "At 40 percent loss each way the loop still settled. Why?",
       "options": [
         "Each command is built from the latest measurement and a lost one is replaced by the next: 115 of 300 ticks held a measurement that was not new and the error was still under a thousandth",
-        "Loss does not matter",
-        "The link was good",
-        "The plant is slow"
+        "The plant is too slow to notice a lost command",
+        "The link resends what was lost",
+        "Loss of 40 percent each way cancels out over a round trip"
       ],
       "correct": 0,
-      "explanation": "A stream that supersedes itself does not need reliable delivery."
+      "explanation": "A lost command or measurement is superseded by the next one a tick later. That is why a stream like this is sent once and not resent."
     },
     {
       "stage": "post",
       "question": "Frames overtook each other 69 times. How much did a controller that took each as it arrived suffer?",
       "options": [
-        "A lot",
-        "It failed",
-        "Nothing at all",
+        "A great deal: the loop was unstable, 1.6110 against 0.1604",
+        "Nothing at all: the order of measurements cannot matter",
+        "It settled faster by 2.42 ticks",
         "Little in this loop, 0.1611 against 0.1604, and acted on information 2.42 ticks old against 2.17: the harm would show in a velocity estimate more than in a proportional gain"
       ],
       "correct": 3,
-      "explanation": "The age of the information is the cost."
+      "explanation": "A proportional loop barely notices. Anything that differences successive measurements, a velocity or an estimator, would be hurt by taking them out of order."
     }
   ]
 }

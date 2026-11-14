@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why must a controller not know whether it is talking to a simulation or hardware?",
       "options": [
-        "Style",
+        "Because hardware is too slow to be told apart from a simulation",
         "So that nothing in it changes between the two, and what passed in simulation is what runs on the machine",
-        "Speed",
-        "It cannot know"
+        "So that the simulation can be made faster than the hardware",
+        "Because the controller has no way to ask"
       ],
       "correct": 1,
-      "explanation": "The seam is the interface."
+      "explanation": "If the controller is the same code on both sides of the interface, then what was tested in simulation is exactly what is put on the machine."
     },
     {
       "stage": "check",
       "question": "A first order motor of time constant 0.1 s is given a step command. How far has its speed got after 0.1 s?",
       "options": [
-        "10 percent",
-        "50 percent",
-        "100 percent",
+        "50 percent: 3.000 of 6.0, and 100 percent after two time constants",
+        "100 percent: a time constant is the time to reach the final speed",
+        "10 percent: 0.600 of 6.0, and 63 percent after five time constants",
         "About 63 percent: 3.804 of 6.0, and 99 percent after five time constants"
       ],
       "correct": 3,
-      "explanation": "Which is why the time constant is a number one can measure."
+      "explanation": "A first order response covers 63 percent of the way in one time constant, here 3.804 of 6.0, and 5.961 after five."
     },
     {
       "stage": "check",
       "question": "What does the saturation rule check?",
       "options": [
-        "That the plant is fast",
-        "That the limit is positive",
+        "That the plant never reaches its limit in normal use",
+        "That the limit is the same in both directions",
         "That a command ten times the limit does exactly what the limit does: a plant with no clamp broke it",
-        "That the plant is stable"
+        "That a command at the limit gives twice what half the limit gives"
       ],
       "correct": 2,
-      "explanation": "Both directions."
+      "explanation": "A real motor driver cannot give more than its limit. A plant that goes on responding beyond it lets a controller be tuned against a machine that does not exist."
     },
     {
       "stage": "check",
       "question": "A plant reports its position as it was before the step. Which rule catches it?",
       "options": [
         "Consistency: over one step the position should move by the new velocity times the step",
-        "Symmetry",
-        "Reset",
-        "Rest"
+        "Determinism: two plants given the same commands should agree",
+        "Reset: position and velocity should be zero after a reset",
+        "Saturation: ten times the limit should do what the limit does"
       ],
       "correct": 0,
-      "explanation": "A controller on it is a step late, which looks like a mysterious delay."
+      "explanation": "After a step the position should have moved by the new velocity times the step. A plant that reports the old position is one step behind."
     },
     {
       "stage": "post",
       "question": "A controller drives two plants to position 1 and both end at 1.0000. Why is that not enough?",
       "options": [
         "The plant with no clamp got there at a peak speed of 22.71 against 14.70, past what the motor can do, and the end position is the one thing that is the same",
-        "It is enough",
-        "The plants are the same",
-        "Position is rounded"
+        "It is enough: a controller is judged by where the plant ends",
+        "The two plants are the same class, so the test proves nothing",
+        "Both overshoot by the same amount, which the end position hides"
       ],
       "correct": 0,
-      "explanation": "A test that checks only where it ended misses how."
+      "explanation": "Both arrive. The unclamped plant did it 54 percent faster than the motor can go, and a test that looks only at the end sees no difference."
     },
     {
       "stage": "post",
       "question": "What does passing the contract not tell you?",
       "options": [
-        "That it clamps",
-        "Anything",
+        "Whether the plant clamps its command",
+        "Whether two plants given the same commands agree",
         "That the plant is the machine it stands for: a motor with the wrong time constant keeps every rule",
-        "That it is deterministic"
+        "Whether a reset returns it to rest"
       ],
       "correct": 2,
-      "explanation": "The contract is a floor."
+      "explanation": "The six rules check that the plant behaves like a plant. They cannot check that its gain and time constant are those of the real motor."
     }
   ]
 }

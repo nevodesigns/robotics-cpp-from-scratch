@@ -7,72 +7,72 @@
       "question": "Why break a simulated sensor on purpose?",
       "options": [
         "The code that handles a real fault is the most important and least often run, since the real fault happens once a year: a simulator is the only place to run it daily",
-        "For fun",
-        "To slow the loop",
-        "To test the plant"
+        "A simulated sensor never fails unless it is broken, so the monitor would otherwise never be built",
+        "Breaking it shows whether the plant model is right",
+        "A broken sensor makes the loop run faster, which exposes timing bugs"
       ],
       "correct": 0,
-      "explanation": "The fault is switched on at a chosen time by a line of a scenario."
+      "explanation": "Fault handling is the code that matters most when it is needed and is almost never exercised. A scenario line that breaks the sensor at a chosen time exercises it on every run."
     },
     {
       "stage": "check",
       "question": "A stuck sensor froze at the last good reading, 2.0. What does it read when the truth is 3.0, and then 9.0?",
       "options": [
-        "3.0 and 9.0",
+        "3.0 and 9.0: a stuck sensor follows the truth one sample late",
         "2.0 and 2.0: it repeats the last good reading",
-        "0 and 0",
-        "2.0 and 9.0"
+        "0 and 0: a stuck sensor reads nothing",
+        "2.0 and 9.0: it unsticks when the truth moves far enough"
       ],
       "correct": 1,
-      "explanation": "Readings before the fault are untouched."
+      "explanation": "Stuck means frozen at the last good reading. Whatever the truth does afterwards, the sensor goes on saying 2.0."
     },
     {
       "stage": "check",
       "question": "What is a residual?",
       "options": [
-        "The error of the plant",
-        "The threshold",
+        "The noise left after averaging several readings",
+        "The part of the command that the plant did not follow",
         "The difference between the sensor and what a model says it should read, near zero when all is well",
-        "The noise"
+        "The alarm threshold less the current reading"
       ],
       "correct": 2,
-      "explanation": "Here a shadow of the motor driven by the same commands."
+      "explanation": "A copy of the plant model is driven by the same commands, and the sensor is compared with it. A lying sensor shows up as a gap between the two."
     },
     {
       "stage": "check",
       "question": "A spike of 0.4 on one reading in 25 was never caught by a monitor needing three in a row. Why is that not a bug?",
       "options": [
-        "It is a bug",
+        "It is a bug: a monitor should catch every bad reading",
         "One reading is not a run: the monitor was built to ignore a single reading, and whether a lone spike matters is for a different monitor, such as a Hampel filter",
-        "The threshold was low",
-        "Spikes are small"
+        "The spike was smaller than the threshold of 0.02",
+        "The spike fell between two samples and was never read"
       ],
       "correct": 1,
-      "explanation": "The offset was caught in 0.02 s, the drift in 0.46."
+      "explanation": "Asking for three in a row is what stops one noisy sample from raising an alarm. The same rule lets a one sample spike through, which is a job for another kind of filter."
     },
     {
       "stage": "post",
       "question": "A stuck sensor at the target was caught by the residual monitor 2.85 s late and by the stuck monitor at the move. Why?",
       "options": [
-        "The threshold",
-        "Luck",
-        "The shadow was wrong",
+        "The residual threshold was too high, and the stuck monitor has none",
+        "The shadow model was 2.85 s behind the plant",
+        "The stuck monitor runs faster than the residual monitor",
         "A frozen reading at the target looks right and the loop commands almost nothing, so the residual stays small; the stuck monitor knows an unchanging reading is wrong only when motion was expected"
       ],
       "correct": 3,
-      "explanation": "Each monitor sees what the other cannot."
+      "explanation": "Frozen at about the right value, the sensor and the shadow agree. Only when the robot was told to move did an unchanging reading become evidence."
     },
     {
       "stage": "post",
       "question": "What did raising the residual threshold from 0.02 to 0.2 cost, against a drift of 0.05 a second?",
       "options": [
-        "Two alarms",
-        "One alarm",
+        "Nothing: a higher threshold only removes false alarms",
+        "The drift was not found at all",
         "The drift was found 4.04 s after it began instead of 0.46: nine times later, with the position by then wrong by 0.2",
-        "Nothing"
+        "The drift was found twice as late, at 0.92 s"
       ],
       "correct": 2,
-      "explanation": "Set low it gave false alarms: 200 of 200 runs at twice the noise."
+      "explanation": "Too low and healthy runs raise alarms: 200 of 200 at twice the noise. Too high and a real drift runs on for seconds. Both costs can be read from the simulation."
     }
   ]
 }
