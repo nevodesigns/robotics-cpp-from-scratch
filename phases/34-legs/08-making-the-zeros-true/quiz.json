@@ -60,7 +60,7 @@
         "The offsets found are larger than a spline tooth"
       ],
       "correct": 2,
-      "explanation": "With a thigh 10 mm longer than the model says the fit ran and left 3.6 mm that no offsets could explain. Fit or measure the lengths; do not accept the calibration."
+      "explanation": "With a thigh 10 mm longer than the model says, and measurements with no noise, the fit ran and still left 3.6 mm that no offsets could explain. Know the noise of the jig, and do not accept a calibration whose residual is larger than that."
     },
     {
       "stage": "post",

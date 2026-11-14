@@ -28,7 +28,7 @@ If every pose has the leg straight, the knee's offset cannot be told from the hi
 
 ### What offsets cannot fix
 
-If the thigh is 10 mm longer than the geometry says, no offsets explain it: the fit still ran and the residual stayed at 3.6 mm, far above the noise level. A residual much larger than the noise says that the model, not only the zeros, is wrong (a link length, a hip offset). Measure those, or fit them too, and do not accept a calibration whose residual is large. See `E-LEG-0023`.
+If the thigh is 10 mm longer than the geometry says, no offsets explain it: with measurements that had no noise at all the fit still ran and a residual of 3.6 mm was left, where true zeros and a true model would have left none. That is about the size of what 2 mm of noise leaves on its own (3.4 mm), so on a real jig an error of this size does not stand far above the noise; it adds to it. This is why the noise of the jig has to be known before the fit: a residual larger than the noise accounts for says that the model, not only the zeros, is wrong (a link length, a hip offset), and a jig too coarse to show it cannot be used to rule it out. Measure the links, or fit them too, and do not accept a calibration whose residual is larger than its noise. See `E-LEG-0023`.
 
 ## Build It
 
