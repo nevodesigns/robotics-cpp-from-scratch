@@ -11,7 +11,7 @@ disagree.
 [BUILD-LOG.md](BUILD-LOG.md) is the long version: the runbook, the commit by
 commit record, every mistake made while building and what caught it.
 
-Last updated 13 November 2026, after the plan of 320 lessons was finished and the hardening pass. The recovery point near the end, "Where this left off",
+Last updated 14 November 2026, after stage 4 of the specialisation course and the review of the whole repository that followed it (docs/BUILD-LOG.md, "Review of 14 November 2026"). The recovery point near the end, "Where this left off",
 starts with an entry of 13 November; the older entries below it are kept as they were because they record the reasoning of their days.
 
 ## Snapshot
@@ -25,7 +25,7 @@ starts with an entry of 13 November; the older entries below it are kept as they
 | Failure Atlas entries | 1326 |
 | librc headers | 444 across 28 modules (rc::hal, rc::field, rc::gz, rc::vehicle, rc::perceive, rc::locate, rc::drive, rc::arm, rc::mobile and rc::legged are new) |
 | toolchains claimed | 4 |
-| gate tests | 508 (a reference test for each of the 320 lessons, the checks that code which must not compile is refused, and the tests of the library itself), green on every claimed toolchain |
+| gate tests | 508 (a reference test for each of the 458 lessons, the checks that code which must not compile is refused, and the tests of the library itself), green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -150,12 +150,15 @@ twice.
 
 ## librc
 
-305 headers. Modules and counts (counted from the directory, with `find`):
+444 headers in 28 modules (counted from the directory, with `find`):
 
 | Module | Headers |
 |---|---|
 | `rc::core` | 57 |
 | `rc::qt` | 42 |
+| `rc::arm` | 40 |
+| `rc::legged` | 25 |
+| `rc::drive` | 19 |
 | `rc::io` | 18 |
 | `rc::math` | 18 |
 | `rc::control` | 17 |
@@ -164,14 +167,21 @@ twice.
 | `rc::nav` | 16 |
 | `rc::rt` | 15 |
 | `rc::sim` | 15 |
+| `rc::field` | 14 |
 | `rc::safety` | 14 |
 | `rc::test` | 14 |
 | `rc::deploy` | 12 |
 | `rc::capstone` | 10 |
+| `rc::mobile` | 10 |
+| `rc::locate` | 9 |
+| `rc::perceive` | 9 |
 | `rc::sensor` | 9 |
+| `rc::vehicle` | 9 |
 | `rc::plot` | 8 |
 | `rc::ros` | 4 |
 | `rc::vision` | 4 |
+| `rc::hal` | 3 |
+| `rc::gz` | 1 |
 
 `rc/core/compat.hpp` is the C++17 shim: `rc::span`, `rc::format`,
 `rc::expected`. It has no `expected<void>`, and `rc::expected` has no
@@ -179,10 +189,10 @@ twice.
 
 ## Failure Atlas
 
-910 entries under `atlas/errors/`, each with a `match:` pattern that
+1326 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-QT` 125, `E-CPP` 99, `E-BUS` 48, `E-IO` 48, `E-NAV` 46, `E-KIN` 43, `E-SAFE` 42, `E-CTRL` 38, `E-SENSE` 37, `E-DEPLOY` 36, `E-MATH` 36, `E-NUM` 36, `E-SIM` 36, `E-TEST` 32, `E-MEM` 31, `E-CAP` 30, `E-BUILD` 25, `E-PLOT` 24, `E-THREAD` 24, `E-DEBUG` 14, `E-RT` 14, `E-ROS` 12, `E-VIS` 12, `E-TIME` 7, `E-LNK` 6, `E-CMAKE` 5, `E-TSAN` 4.
+`E-VEH` 138, `E-QT` 125, `E-ARM` 120, `E-CPP` 99, `E-LEG` 74, `E-FIELD` 54, `E-BUS` 48, `E-IO` 48, `E-NAV` 46, `E-KIN` 43, `E-SAFE` 42, `E-CTRL` 38, `E-SENSE` 37, `E-DEPLOY` 36, `E-MATH` 36, `E-NUM` 36, `E-SIM` 36, `E-TEST` 32, `E-MEM` 31, `E-CAP` 30, `E-MOB` 30, `E-BUILD` 25, `E-PLOT` 24, `E-THREAD` 24, `E-DEBUG` 14, `E-RT` 14, `E-ROS` 12, `E-VIS` 12, `E-TIME` 7, `E-LNK` 6, `E-CMAKE` 5, `E-TSAN` 4.
 
 L025 requires every `match:` pattern to be ASCII, because build output is
 normalised to ASCII quotes before matching, so a pattern with a typographic
@@ -541,7 +551,7 @@ libstdc++ issue on that version rather than anything in this repository.
 
 **What phase 22 holds.** `rc::hal` (the Drive, ArmBus and LegBus interfaces and their fakes, the contract test every implementation must pass, the bring-up checklist and a fake board), `rc::field` (frames, limits, a gear motor, terrain and friction, field sensors, the scenario file, the run log, the SVG viewer, scoring, the robot file with a source for every number, the Gazebo world, the backend interface and the gap between simulators, the safety case), and `rc::gz` (the Gazebo Sim backend over gz-transport, built only where Gazebo is installed). Details and every mistake are in docs/BUILD-LOG.md, "Phase 22".
 
-**What is next.** Phase 30 (moving without hitting, 8 lessons), then 31 (manipulation) and 32 (other arm families), one phase at a time, each pushed, checked on continuous integration and reported; the run stops at the end of stage 2.
+**What is next.** Nothing is queued. Phase 37 and the learning based control course wait for the owner, as said above. The review of 14 November 2026 (docs/BUILD-LOG.md) lists what was found weak in phases 22 to 36 and what was done about it.
 
 ### Written 13 November 2026, all 320 lessons built and the hardening pass done
 

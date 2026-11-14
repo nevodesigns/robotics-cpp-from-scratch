@@ -99,7 +99,7 @@ hundreds of lessons missing all three and a green badge throughout.
 
 ## Curriculum map
 
-Twenty one phases, roughly 320 lessons at the full build. Two ordering rules:
+Twenty two phases (00 to 21), 320 lessons at the full build, which is the original course and is built. The specialisation course that followed it (phases 22 to 37) has its own plan in [SPECIALISATION-PLAN.md](SPECIALISATION-PLAN.md) and is not in this table. Two ordering rules:
 something moves in the first hour, and every phase ends with something that
 runs, shows or moves.
 
