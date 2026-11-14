@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What does a scan match give?",
       "options": [
-        "A map",
-        "A speed",
-        "The colour",
+        "The position of the robot in the map",
+        "A list of the obstacles that moved",
+        "The noise of the scanner",
         "The rigid move that puts one scan on the other"
       ],
       "correct": 3,
-      "explanation": "A rotation and a translation."
+      "explanation": "Two scans of the same place differ by where the sensor went between them. The match is that move."
     },
     {
       "stage": "check",
       "question": "A scan moved by 0.3 m, 0.1 m and 0.15 rad was matched to:",
       "options": [
-        "0",
+        "0.01 m and 0.15 rad",
         "0.0007 m and 0.0001 rad",
-        "10 m",
-        "1 rad"
+        "0.3 m and 0.0001 rad",
+        "Nothing: it needs a first guess"
       ],
       "correct": 1,
-      "explanation": "In 16 rounds."
+      "explanation": "With 1 cm of noise on every point and no first guess, sixteen rounds brought it to under a millimetre."
     },
     {
       "stage": "check",
       "question": "In a corridor the match left the move along it wrong by:",
       "options": [
-        "0.01 m",
-        "10 m",
+        "0.000 m",
+        "0.50 m, the whole move",
         "0.10 m",
-        "Nothing"
+        "A few millimetres"
       ],
       "correct": 2,
-      "explanation": "Every position along it looks the same."
+      "explanation": "Two parallel walls say nothing about the distance along them, so that part stayed exactly as the odometry guessed: 0.4 m for a true 0.5 m."
     },
     {
       "stage": "check",
       "question": "A person in only one scan pulled the match by:",
       "options": [
         "0.042 m without a limit, 0.000 m with one",
-        "1 km",
-        "0.000 m without a limit",
-        "Nothing"
+        "0.042 m with a limit, 0.000 m without",
+        "0.3 m either way",
+        "Nothing either way"
       ],
       "correct": 0,
-      "explanation": "Points with no partner."
+      "explanation": "The person's points were paired with whatever was nearest and dragged the fit. A limit of 0.3 m on the pair distance left them out."
     },
     {
       "stage": "post",
       "question": "Why does a first guess from the odometry matter?",
       "options": [
-        "It does not",
+        "It makes the match more accurate at the end",
         "The method finds the nearest minimum, which is right only from near",
-        "Speed only",
-        "Law"
+        "The match cannot start without one",
+        "It removes the people from the scan"
       ],
       "correct": 1,
-      "explanation": "5 rounds against 16."
+      "explanation": "Each round pairs a point with its nearest neighbour. From a guess wrong by 0.8 rad the L shaped room fitted itself somewhere else."
     },
     {
       "stage": "post",
       "question": "Why is the rms of the match not a measure of how well it is determined?",
       "options": [
-        "It is",
-        "It is too noisy",
-        "It is always zero",
+        "It is larger in a corridor",
+        "It only counts the points near the sensor",
+        "It grows with the number of rounds",
         "It is small whether or not the geometry constrains the move"
       ],
       "correct": 3,
-      "explanation": "A corridor matches well in every position along it."
+      "explanation": "In the corridor the walls line up perfectly wherever the scan slides along them. A small rms says the points fit, not that the answer is fixed."
     }
   ]
 }

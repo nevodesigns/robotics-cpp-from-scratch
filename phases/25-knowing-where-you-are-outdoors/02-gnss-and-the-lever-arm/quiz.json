@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is a degree of longitude shorter than a degree of latitude?",
       "options": [
-        "Longitude is slower",
+        "The earth is wider at the equator",
         "The meridians meet at the poles, so it is shorter by the cosine of the latitude",
-        "It is not",
-        "Rounding"
+        "Longitude is measured from Greenwich",
+        "It is not, on a sphere"
       ],
       "correct": 1,
-      "explanation": "At 52 degrees north by 38 percent."
+      "explanation": "A degree of latitude is the same length everywhere. A degree of longitude shrinks toward the poles: at 52 degrees north it is 68458 m, 38 percent less."
     },
     {
       "stage": "check",
       "question": "One degree of latitude was:",
       "options": [
-        "1 km",
+        "68458 m",
         "111195 m",
-        "1000 km",
-        "10 m"
+        "6371 km",
+        "60 m"
       ],
       "correct": 1,
-      "explanation": "R times the angle."
+      "explanation": "The earth's radius of 6371 km times one degree in radians. It is the same at every latitude."
     },
     {
       "stage": "check",
       "question": "At 10 km the flat map was how far from the great circle?",
       "options": [
-        "1 km",
-        "100 m",
-        "0",
+        "0.036 m",
+        "357 m",
+        "Nothing: the map is exact",
         "3.55 m"
       ],
       "correct": 3,
-      "explanation": "It grows with distance."
+      "explanation": "The flat map's error grows with distance: 0.036 m at 1 km, 3.55 m at 10 km, 357 m at 100 km. One origin serves a field, not a country."
     },
     {
       "stage": "check",
       "question": "A robot turning on the spot with an antenna 0.5 m from its centre had an antenna moving at:",
       "options": [
         "0.50 m/s",
-        "0.05 m/s",
-        "0 m/s",
-        "5 m/s"
+        "0 m/s: the robot did not move",
+        "1.00 m/s",
+        "0.044 m/s"
       ],
       "correct": 0,
-      "explanation": "The lever times the turn rate."
+      "explanation": "The antenna goes round a circle of radius 0.5 m at 1 rad/s. A filter that takes it for the robot sees a robot moving at half a metre a second."
     },
     {
       "stage": "post",
       "question": "With the heading wrong by 5 degrees, what was left after the lever correction?",
       "options": [
-        "The whole lever",
-        "1 m",
+        "0.5 m, the whole lever",
+        "Nothing: the correction is exact",
         "0.044 m, the lever times the error",
-        "Nothing"
+        "5 m"
       ],
       "correct": 2,
-      "explanation": "The correction needs the heading."
+      "explanation": "The lever is turned by the heading to subtract it. Five degrees is 0.087 rad, and 0.5 m times that is 0.044 m."
     },
     {
       "stage": "post",
       "question": "Why should the antenna be as near the reference point as the sky allows?",
       "options": [
         "The error of the correction is the lever times the heading error",
-        "No reason",
-        "Looks",
-        "Cable length"
+        "The cable is shorter",
+        "The antenna sees more sky when low",
+        "A short lever needs no correction at all"
       ],
       "correct": 0,
-      "explanation": "A short lever forgives a poor heading."
+      "explanation": "The lever still has to be subtracted. What shrinks with it is how much a heading error can spoil that subtraction."
     }
   ]
 }

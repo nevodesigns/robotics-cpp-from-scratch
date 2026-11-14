@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why does a localiser that has found the robot not notice when the robot is picked up?",
       "options": [
-        "The map changes",
-        "It is asleep",
+        "The lidar is off while it is carried",
+        "The map is updated to match",
         "The weights are normalised, so the cloud stays as sure as ever of the wrong place",
-        "It does"
+        "The odometry keeps it in place"
       ],
       "correct": 2,
-      "explanation": "The normalising hides the fall in the likelihood."
+      "explanation": "After normalising, the weights add to one whether the scan fits well or badly. The number that fell is the average likelihood before normalising."
     },
     {
       "stage": "check",
       "question": "A plain cloud after a carry of 5.6 m was out by:",
       "options": [
         "8.3 m",
-        "100 m",
-        "0.1 m",
-        "0 m"
+        "0.3 m",
+        "5.6 m exactly",
+        "0.006 m"
       ],
       "correct": 0,
-      "explanation": "And stays out."
+      "explanation": "With no particles anywhere near the new place there is nothing to weigh up. The cloud stayed where it was, sure and wrong."
     },
     {
       "stage": "check",
       "question": "With the monitor the robot was found again after how many steps?",
       "options": [
-        "Never",
-        "1000",
-        "0",
+        "1 step",
+        "5 steps",
+        "It was not found",
         "21 steps"
       ],
       "correct": 3,
-      "explanation": "The monitor called it lost after 1."
+      "explanation": "It was called lost after one step, and scattered particles took 21 steps to land near the truth and take over the cloud."
     },
     {
       "stage": "check",
       "question": "Before the robot was moved the monitor put in how much random?",
       "options": [
         "0.1 percent",
-        "100 percent",
-        "20 percent",
-        "50 percent"
+        "20 percent, the limit",
+        "Exactly none",
+        "5 percent"
       ],
       "correct": 0,
-      "explanation": "It must not throw away a good cloud."
+      "explanation": "While the robot was where the cloud said, the two averages agreed and almost nothing was scattered. The error was 0.006 m with the monitor and without."
     },
     {
       "stage": "post",
       "question": "What does the ratio of the fast to the slow average show?",
       "options": [
-        "The battery",
+        "How many particles are left",
         "Whether the scans are explained now as well as they usually are",
-        "The map's age",
-        "The speed"
+        "How fast the robot is moving",
+        "How old the last resampling is"
       ],
       "correct": 1,
-      "explanation": "A fall means the cloud no longer explains what is seen."
+      "explanation": "The slow average is the usual level of fit and the fast one the recent level. When the fast one drops below the slow one, something has changed."
     },
     {
       "stage": "post",
       "question": "Why is the share of random particles limited?",
       "options": [
-        "Law",
-        "Style",
-        "Memory",
+        "Random particles are expensive to draw",
+        "The map has a limited area",
+        "The resampling cannot handle more",
         "One bad scan must not throw a good cloud away"
       ],
       "correct": 3,
-      "explanation": "A cap on the doubt."
+      "explanation": "A person walking past spoils a scan without the robot having moved. Capped at 20 percent, the cloud survives it."
     }
   ]
 }

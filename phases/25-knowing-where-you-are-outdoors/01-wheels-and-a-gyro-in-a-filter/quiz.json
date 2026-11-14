@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why are the wheels a good teacher of the gyro's bias when the robot is going straight?",
       "options": [
-        "They are fast",
+        "They have no noise when going straight",
         "Their turn is nothing then and so is their error, so the difference is the bias",
-        "They are not",
-        "They are heavy"
+        "They are sampled faster than the gyro",
+        "They are not: the bias can only be learnt while turning"
       ],
       "correct": 1,
-      "explanation": "No turn, no scale error."
+      "explanation": "The wheels are wrong by a share of the turn they report. Going straight they report none, so whatever the gyro reads then is its bias."
     },
     {
       "stage": "check",
       "question": "With the wheels alone the heading ended out by:",
       "options": [
         "68.0 degrees",
-        "360 degrees",
-        "0",
+        "1.0 degrees",
+        "0.0 degrees: wheels do not drift",
         "3.1 degrees"
       ],
       "correct": 3,
-      "explanation": "The slip and the 3 percent."
+      "explanation": "The wheels' turn was 3 percent off, and a slip halved it for 2 s. Together that left 3.1 degrees."
     },
     {
       "stage": "check",
       "question": "With the gyro alone the heading ended out by:",
       "options": [
-        "0",
         "3.1 degrees",
+        "1.0 degrees",
         "68.0 degrees",
-        "1 degree"
+        "6.8 degrees"
       ],
       "correct": 2,
-      "explanation": "Its bias, integrated."
+      "explanation": "A bias of 0.01 rad/s added up for 120 s is 1.2 rad, about 68 degrees. A small bias is a large heading error given time."
     },
     {
       "stage": "check",
       "question": "With the filter the heading ended out by:",
       "options": [
         "1.0 degrees",
-        "100 degrees",
+        "3.1 degrees",
         "68.0 degrees",
-        "360 degrees"
+        "0.0 degrees"
       ],
       "correct": 0,
-      "explanation": "The bias is learnt when the wheels say straight."
+      "explanation": "It learnt the bias as 0.0089 rad/s while the robot went straight, and refused the slip. The position ended 0.3 m out, against 1.8 m and 14.1 m."
     },
     {
       "stage": "post",
       "question": "What happens to a difference that is far from the estimate?",
       "options": [
-        "It is averaged",
-        "It resets the filter",
+        "It is used, with a smaller weight",
+        "It replaces the estimate",
         "It is refused as a slip",
-        "It is used"
+        "It is kept and averaged with the next one"
       ],
       "correct": 2,
-      "explanation": "The wheels were wrong, not the gyro."
+      "explanation": "A gyro's bias does not jump. A difference several standard deviations from the estimate is a wheel that slipped, so it is refused and counted."
     },
     {
       "stage": "post",
       "question": "Why is the filter's variance for a measurement larger when the wheels are turning?",
       "options": [
         "The wheels are wrong by a share of their turn rate, so a faster turn is a less certain measurement",
-        "Noise",
-        "Chance",
-        "Gyros are slow"
+        "The gyro is noisier in a turn",
+        "The filter runs slower in a turn",
+        "The bias changes with the turn rate"
       ],
       "correct": 0,
-      "explanation": "Variance includes (share times turn rate) squared."
+      "explanation": "At 0.3 rad/s with wheels 5 percent wrong the measurement is uncertain by 0.015 rad/s, three times the gyro's noise, so it counts for much less."
     }
   ]
 }

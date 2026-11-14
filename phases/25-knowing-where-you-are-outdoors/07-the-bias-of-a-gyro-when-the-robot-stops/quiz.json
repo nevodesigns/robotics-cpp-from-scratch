@@ -6,37 +6,37 @@
       "stage": "pre",
       "question": "What should a gyro read when the robot is standing still?",
       "options": [
-        "The heading",
-        "9.81",
-        "The bias",
+        "Its last reading before it stopped",
+        "The earth's rotation only, which is its bias",
+        "Zero, exactly, if it is a good one",
         "Nothing: so what it does read is the bias plus noise"
       ],
       "correct": 3,
-      "explanation": "A measurement of the bias."
+      "explanation": "A robot that is not turning has no turn rate to report. Whatever the gyro says then is its own bias, with noise on top."
     },
     {
       "stage": "check",
       "question": "A detector that looked at the wheels alone said still for how many of 200 samples of a robot being carried?",
       "options": [
-        "200 exactly",
-        "0",
+        "0 of 200",
+        "25, one window",
         "176",
-        "5"
+        "200: wheels cannot tell"
       ],
       "correct": 2,
-      "explanation": "The wheels were stopped."
+      "explanation": "Its wheels were stopped while it swung in someone's hands. Asking the accelerometer to be quiet as well brought it to 0."
     },
     {
       "stage": "check",
       "question": "The bias read from a stop of 10 s was good to:",
       "options": [
-        "0",
-        "0.00020 rad/s",
         "0.00063 rad/s",
-        "1 rad/s"
+        "0.00020 rad/s",
+        "0.005 rad/s, the noise of one reading",
+        "0.00002 rad/s"
       ],
       "correct": 1,
-      "explanation": "The noise over the square root of the samples."
+      "explanation": "The gyro's noise of 0.005 rad/s over the root of the number of samples. One second gave 0.00063 and ten seconds 0.00020."
     },
     {
       "stage": "check",
@@ -44,35 +44,35 @@
       "options": [
         "0.8 degrees",
         "9.9 degrees",
-        "100 degrees",
-        "0"
+        "4.6 degrees",
+        "0.0 degrees"
       ],
       "correct": 0,
-      "explanation": "Reading it once gave 9.9."
+      "explanation": "The bias walks, so a reading goes stale. Read once it left 9.9 degrees after 300 s; every 60 s, 4.6; every 10 s, 0.8."
     },
     {
       "stage": "post",
       "question": "Why does the detector wait for a whole window?",
       "options": [
-        "Memory",
-        "Tradition",
-        "Slowness",
+        "The gyro needs time to warm up",
+        "The wheels report late",
+        "The filter needs 25 samples to start",
         "One quiet sample proves nothing"
       ],
       "correct": 3,
-      "explanation": "A moment of stillness is not stillness."
+      "explanation": "A robot can pass through zero speed without being at rest. Half a second of quiet wheels and a quiet accelerometer is the evidence."
     },
     {
       "stage": "post",
       "question": "What found the step in the bias?",
       "options": [
-        "Nothing",
+        "The gate of the filter",
         "The next stop, which read the gyro again",
-        "The wheels",
-        "GNSS"
+        "A slip of the wheels",
+        "The accelerometer"
       ],
       "correct": 1,
-      "explanation": "A filter with no stops would not have."
+      "explanation": "The bias stepped by 0.01 rad/s at 100 s and was read again 19 s later, when the robot next stood still."
     }
   ]
 }

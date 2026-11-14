@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What should a robot carry with its position between fixes?",
       "options": [
-        "Nothing",
+        "The time of the last fix only",
         "A number for how wrong it can be",
-        "Its name",
-        "Its colour"
+        "The number of wheel turns since the fix",
+        "A flag that says dead reckoning is on"
       ],
       "correct": 1,
-      "explanation": "An estimate without an error bar is a hope."
+      "explanation": "Between fixes the position is a guess that gets worse. Carrying its covariance says how much worse, so the rest of the robot can decide what it may still do."
     },
     {
       "stage": "check",
       "question": "The 95 percent radius after 10 m, and after 100 m, were:",
       "options": [
-        "The same",
-        "1 m and 10 m",
-        "0 and 0",
+        "0.22 m and 2.2 m: ten times for ten times the distance",
+        "0.22 m and 0.70 m: 3.16 times",
+        "7.07 m at both",
         "0.22 m and 7.07 m: 31.6 times for ten times the distance"
       ],
       "correct": 3,
-      "explanation": "A heading walk makes the error grow as the distance to the power of three halves."
+      "explanation": "A heading that wanders turns into position error that grows with the distance, and the heading error itself keeps growing. That gives the power of three halves."
     },
     {
       "stage": "check",
       "question": "95 percent of 400 noisy runs ended within:",
       "options": [
         "5.10 m, near the bound",
-        "100 m",
-        "5 m",
-        "0.01 m"
+        "7.07 m exactly",
+        "0.22 m",
+        "31.6 m"
       ],
       "correct": 0,
-      "explanation": "The arithmetic agreed with a simulation."
+      "explanation": "The bound was 7.07 m and 95 percent of 400 simulated runs were within 5.10 m. The bound is a little loose because a circle has to hold the long axis of an ellipse."
     },
     {
       "stage": "check",
       "question": "A fix of 5 cm brought the radius down to:",
       "options": [
-        "No change",
-        "0",
-        "10 m",
+        "0.05 m exactly",
+        "7.07 m: a fix does not change the bound",
+        "0.22 m",
         "0.122 m"
       ],
       "correct": 3,
-      "explanation": "And it grows again."
+      "explanation": "The fix's own 5 cm combines with what dead reckoning had, and the radius of 95 percent comes to 0.122 m. Then it grows again."
     },
     {
       "stage": "post",
       "question": "Why does doubling the distance between fixes more than double how lost the robot can be?",
       "options": [
-        "Wheels wear",
-        "Rounding",
+        "The wheels slip more on long runs",
+        "The scale error doubles",
         "The heading wanders as it goes and the heading error becomes position error with the distance",
-        "It does not"
+        "It does not: the bound is proportional to the distance"
       ],
       "correct": 2,
-      "explanation": "Three halves power."
+      "explanation": "Distance noise alone adds as a random walk, the square root of the distance. The heading's walk makes the bound grow as the distance to the power of three halves."
     },
     {
       "stage": "post",
       "question": "What does needs_fix say?",
       "options": [
         "The robot may now be further out than a limit",
-        "Nothing",
-        "A fix exists",
-        "The battery is low"
+        "A fix has just arrived",
+        "The covariance has become singular",
+        "The odometry has stopped"
       ],
       "correct": 0,
-      "explanation": "It is the bound against a limit."
+      "explanation": "A task that needs the robot within a metre, on a route with no fix for 80 m, cannot be done: the bound passes 1 m after 27 m."
     }
   ]
 }

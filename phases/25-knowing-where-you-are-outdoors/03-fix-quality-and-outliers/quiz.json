@@ -7,12 +7,12 @@
       "question": "What information is in a GNSS fix besides the position?",
       "options": [
         "The level of the fix, which says how much to believe it",
-        "Nothing",
-        "The weather",
-        "The time only"
+        "Only the number of satellites",
+        "The heading",
+        "The robot's speed"
       ],
       "correct": 0,
-      "explanation": "Fixed, float, single or none."
+      "explanation": "A fixed fix is good to centimetres, a float to a quarter of a metre and a single to a metre and a half. The level is how the receiver says which."
     },
     {
       "stage": "check",
@@ -20,59 +20,59 @@
       "options": [
         "2.81 m",
         "0.67 m",
-        "0",
-        "10 m"
+        "0.02 m",
+        "1.5 m"
       ],
       "correct": 1,
-      "explanation": "The other followed noise as if it were signal."
+      "explanation": "Given the 1.5 m noise that a single fix has, the filter smoothed them to 0.67 m. Taking each as good to 2 cm, it followed the noise: 2.81 m."
     },
     {
       "stage": "check",
       "question": "The worst error with the gate was:",
       "options": [
-        "100 m",
-        "2.29 m",
         "6.04 m",
-        "0"
+        "2.29 m",
+        "8 m",
+        "0.67 m"
       ],
       "correct": 1,
-      "explanation": "It refuses the jumps."
+      "explanation": "Five fixes were thrown 8 m. The filter that took them all was pulled 6.04 m off; the gate refused them, and what was left was the noise of single fixes."
     },
     {
       "stage": "check",
       "question": "The gate refused what share of the good fixes?",
       "options": [
-        "0 percent",
-        "100 percent",
+        "None of them",
+        "1 percent exactly",
         "0.2 percent, near the 1 percent its threshold says",
-        "50 percent"
+        "5 percent"
       ],
       "correct": 2,
-      "explanation": "Chi-square, 99 percent point."
+      "explanation": "The gate is the 99 percent point of a chi-square with two degrees of freedom, so about one correct fix in a hundred is expected to be refused. Here it was 0.2 percent."
     },
     {
       "stage": "post",
       "question": "Why did a gate that never gives up find a carried robot so late?",
       "options": [
-        "The robot was heavy",
-        "It is stupid",
-        "Fixes were bad",
+        "The fixes were single level",
+        "The gate was set too loose",
+        "The filter's velocity was wrong",
         "Every fix was refused until the filter's uncertainty had grown to admit 20 m"
       ],
       "correct": 3,
-      "explanation": "68 fixes against 5."
+      "explanation": "The gate assumes the filter is right. Carried 20 m, the robot refused 68 fixes, 14 s of them, while it believed it was somewhere else."
     },
     {
       "stage": "post",
       "question": "What does max_refused do?",
       "options": [
-        "Counts fixes",
-        "Nothing",
-        "Sets the sigma",
+        "Limits how many fixes are refused in a run",
+        "Raises the gate after each refusal",
+        "Switches the receiver to single level",
         "After that many refusals in a row, the next fix is taken as a new start"
       ],
       "correct": 3,
-      "explanation": "A way back from being wrong."
+      "explanation": "With a limit of 5 the carried robot was found five fixes after it was put down. The risk is that five bad fixes in a row can do the same."
     }
   ]
 }

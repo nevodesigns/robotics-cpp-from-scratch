@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What time should a measurement be stamped with?",
       "options": [
-        "The time of the log",
-        "None",
-        "The time it arrived",
+        "The time the filter used it",
+        "The time of the last odometry step",
+        "Any time, as long as it is consistent",
         "The time it was taken"
       ],
       "correct": 3,
-      "explanation": "Arrival is later by the delay."
+      "explanation": "The measurement describes the world at the moment it was taken. Arrival is that plus a delay which has to be known."
     },
     {
       "stage": "check",
       "question": "A late fix taken for the present left a steady error of:",
       "options": [
-        "0",
-        "10 m",
+        "0.045 m",
+        "0.035 m",
         "0.49 m",
-        "0.01 m"
+        "Nothing: a late fix is still a fix"
       ],
       "correct": 2,
-      "explanation": "Speed times delay."
+      "explanation": "At about 2 m/s a fix 0.25 s old is half a metre behind. Treating it as the position now pulls the estimate back by that much, every second."
     },
     {
       "stage": "check",
       "question": "Comparing the fix with the state of its own time gave an rms error of:",
       "options": [
-        "1 m",
+        "0.493 m",
         "0.045 m",
-        "10 m",
-        "0.493 m"
+        "0.25 m",
+        "0.003 m"
       ],
       "correct": 1,
-      "explanation": "And the extrapolated way 0.035 m: the same to within the noise."
+      "explanation": "Both ways of allowing for the delay were within the 3 cm noise of the fix, and ten times better than ignoring it."
     },
     {
       "stage": "check",
       "question": "The lag between the gyro and the wheels was found as:",
       "options": [
-        "1 s",
-        "0 s",
-        "0.5 s",
+        "0.25 s",
+        "0.04 s",
+        "0.00 s: they share a clock",
         "0.12 s"
       ],
       "correct": 3,
-      "explanation": "The shift of greatest correlation."
+      "explanation": "The gyro and the wheels see the same turning. Sliding one against the other and keeping the shift with the largest correlation gave the true 0.12 s."
     },
     {
       "stage": "post",
       "question": "When does extrapolating by the velocity fail?",
       "options": [
         "When the velocity changes during the delay, as when the robot brakes to a stop",
-        "With noise",
-        "Never",
-        "At night"
+        "When the fix is noisier than the odometry",
+        "When the delay is under a tenth of a second",
+        "When the robot goes straight"
       ],
       "correct": 0,
-      "explanation": "0.25 m beyond the robot."
+      "explanation": "Extrapolating assumes the velocity held over the delay. A robot that braked to a stop in that time was put 0.25 m further on than it was."
     },
     {
       "stage": "post",
       "question": "What does the history method need that the others do not?",
       "options": [
-        "A faster computer",
-        "A magnetometer",
+        "A second receiver",
+        "The velocity at the time of arrival",
         "A memory of the states long enough to reach back past the delay",
-        "Nothing"
+        "A model of the brakes"
       ],
       "correct": 2,
-      "explanation": "StateHistory."
+      "explanation": "To compare a fix with the state at its stamp, the estimator must still have that state. The history here holds 4000 of them."
     }
   ]
 }
