@@ -1496,3 +1496,20 @@ After stage 4 the owner asked for the whole repository to be gone through again,
 - **The sweep was run on phases 34 to 36 only.** Phases 22 to 33 have the pinned numbers and have not had the sweep or the tests it would ask for.
 - **`using namespace rc::...;` at the top of 74 reference solutions** of phases 22 to 36. A lesson's solution is one file read by one test, so it harms nothing, and it is not the style of the earlier phases.
 - **The generator** that built phases 22 to 36 does not yet write the held numbers or spread the answers; a lesson built with it must be given both (L030 will refuse the second).
+
+## Review of 14 November 2026, second round
+
+The owner then asked for what the first round had left to be fixed as well. This is that work. It was interrupted twice by the usage limit and once by the laptop shutting down, which wiped the temporary folder the tools were in; the tools had been copied to a folder outside it after each phase, and nothing committed was lost.
+
+**The quizzes of phases 17 to 36 were rewritten: 1236 questions.** For each question the right answer and its place were kept, the three wrong answers were replaced by ones a person might really give (a common mistake, the lesson's own numbers the wrong way round, the answer to a neighbouring question), and the explanation was written out in one or two sentences. Each lesson's page was read for it. Before, a wrong answer in these phases was usually "Nothing", "It is slow" or "10 m/s", and an explanation was about 35 characters; after, an explanation is about 135.
+
+**The reason was moved out of 654 right answers.** Across the whole repository a right answer that was more than twice as long as any other option, and that carried its own reason after a colon or a "because", was cut at that point and the reason put at the front of the explanation. The share of questions whose right answer is more than twice the next longest fell from about half to 29 percent (812 of 2748). The wrong answers of phases 00 to 16 were not rewritten: they were real ones to begin with.
+
+**Reading every page for the quizzes found four more claims that the numbers did not bear out.**
+
+- **34-08** said that a thigh 10 mm too long left a residual of 3.6 mm, "far above the noise level". The 3.6 mm was measured with no noise at all, and noise of 2 mm in each axis leaves 3.4 mm by itself: about the same. The page, the atlas entry and the quiz now say that an error of that size adds to the noise and is seen only if the noise of the jig is known.
+- **29-04** had a test called "feeding the friction forward makes a slow ramp followed much more closely" that asserted 1.3e-12 was more than twice 1.3e-14. Both errors were measured after two seconds, by which time the integral has found the friction and neither controller is off. `track_ramp` now also reports the largest error in the first two seconds and when the error last exceeded 0.1 mrad: 0.91 mrad and 0.32 s without the feedforward, 0.38 mrad and 0.06 s with it. The lesson now says where the feedforward helps (every start, stop and reversal) and where it does not (a long steady move).
+- **25-05**'s quiz asked about "a thousand particles" where the lesson uses three thousand.
+- **30-04** had "5 piece1" for "5 pieces", in the page and in the header.
+
+**What a shutdown taught.** The sweep that plants bugs in phases 22 to 33 writes its results as it goes. They were in the temporary folder and were lost with it, an hour of machine time. They are now written to the folder outside it. Anything that takes an hour to make goes somewhere that survives a restart.
