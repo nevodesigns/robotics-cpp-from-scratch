@@ -7,72 +7,72 @@
       "question": "What is a staged rollout for?",
       "options": [
         "To learn about a bad release from a few robots before it reaches all of them",
-        "Testing signatures",
-        "Speed",
-        "Saving bandwidth"
+        "To spread the download so the network is not overloaded",
+        "To give each site its own version",
+        "To test the signature on a few robots"
       ],
       "correct": 0,
-      "explanation": "300 failed at once; 4 staged."
+      "explanation": "A fault that hits 300 of 1000 robots was stopped after 4 failures in a first wave of 10. Sent to all at once it failed on 300."
     },
     {
       "stage": "check",
       "question": "A release fails on one robot in two hundred. What is the chance a canary of 10 robots sees it?",
       "options": [
         "4.9 percent: 1 - (1 - 0.005)^10",
-        "Certain",
-        "50 percent",
-        "39 percent"
+        "39.4 percent",
+        "95 percent",
+        "0.5 percent, the fault's own rate"
       ],
       "correct": 0,
-      "explanation": "A hundred robots: 39.4 percent."
+      "explanation": "The chance that none of ten is a bad robot is 0.995 to the tenth, 0.951. So the canary sees the fault about one time in twenty."
     },
     {
       "stage": "check",
       "question": "How many robots must have the release for a 95 percent chance of seeing a fault in one robot in two hundred?",
       "options": [
-        "10",
-        "50",
+        "10: a canary is enough",
+        "100",
         "598, which is 60 percent of a fleet of 1000",
-        "100"
+        "919"
       ],
       "correct": 2,
-      "explanation": "99 percent needs 919."
+      "explanation": "For 0.995 to the n to fall to 0.05, n has to be 598. For 99 percent it is 919. A staged rollout shows how large the net would have to be."
     },
     {
       "stage": "check",
       "question": "Why did the rollout with a threshold of 5 percent reach the whole fleet with 5 failures in 1000?",
       "options": [
-        "A bug",
-        "The robots were silent",
+        "The failed robots did not report",
+        "The canary wave was skipped",
         "0.5 percent is below 5 percent at every wave: the threshold never fires for a rare fault",
-        "The canary was too big"
+        "The threshold was applied to the wrong wave"
       ],
       "correct": 2,
-      "explanation": "A threshold of zero halts, by chance."
+      "explanation": "Five failures in a thousand is half a percent, never above 5 percent in any wave. A threshold of zero halts, but only when a wave happens to include a bad robot."
     },
     {
       "stage": "post",
       "question": "With 45 percent of the fleet silent, why must the rollout halt?",
       "options": [
-        "The wave is too small",
-        "It is safer to be slow",
-        "Silent robots are failed",
+        "Silent robots are counted as failed",
+        "A small wave is always halted",
+        "Halting is the default when in doubt",
         "There is not enough news to say it is safe, and a robot that crashed into a failed update is a silent robot"
       ],
       "correct": 3,
-      "explanation": "The blind rollout gave it to all 1000."
+      "explanation": "A robot that failed to boot the update cannot report. Counting only those that reported, the rollout looked clean and went to all 1000, 450 of them unheard from."
     },
     {
       "stage": "post",
       "question": "What helps with a rare, severe fault, since a canary cannot see it?",
       "options": [
-        "A faster rollout",
+        "A lower failure threshold",
         "Tests on the variants that exist before release, more robots and more time, and the hazard log: it belongs there and not in the rollout",
-        "Nothing",
-        "A bigger threshold"
+        "A faster rollout, to find it sooner",
+        "A smaller first wave"
       ],
       "correct": 1,
-      "explanation": "A staged rollout tells you how big the net is."
+      "explanation": "A canary of ten sees a one in two hundred fault one time in twenty. If the fault is severe it has to be found before release and recorded as a hazard."
     }
   ]
 }

@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why generate the toolchain file from the triple?",
       "options": [
-        "It is faster",
-        "It looks tidy",
-        "CMake requires it",
+        "CMake refuses a toolchain file written by hand",
+        "A generated file configures faster",
+        "So that the file can be left out of version control",
         "One source of truth: the system name, processor and compilers follow from the triple, and a hand edit cannot make them disagree"
       ],
       "correct": 3,
-      "explanation": "The same spec gave the same text every time."
+      "explanation": "The system name, the processor and the compiler names all follow from the triple. Written by hand they can contradict each other, as the copied one did in six places."
     },
     {
       "stage": "check",
       "question": "What does -march=native mean in a cross build?",
       "options": [
-        "Nothing",
-        "The robot's CPU",
+        "The robot's CPU, since that is the target",
+        "The oldest CPU of the target's architecture",
         "The CPU of the machine doing the compiling, so the binary may use instructions the robot does not have, with no error",
-        "The default"
+        "Nothing: the flag is ignored in a cross build"
       ],
       "correct": 2,
-      "explanation": "The compiler cannot know."
+      "explanation": "Native means the machine the compiler is running on. In a cross build that is the laptop, and the compiler has no way to know the robot lacks those instructions."
     },
     {
       "stage": "check",
       "question": "The sysroot has no libusb and the host has one for x86_64. What do ONLY and BOTH do?",
       "options": [
-        "BOTH fails",
+        "ONLY returns the host's library; BOTH says it is missing",
         "ONLY says it is missing, which is right; BOTH returns the host's x86_64 library without a word",
-        "ONLY returns the host's",
-        "The same"
+        "Both say it is missing",
+        "Both return the host's library"
       ],
       "correct": 1,
-      "explanation": "CMake's default is BOTH."
+      "explanation": "Looking only in the sysroot turns a missing library into an error that says what to add. Looking in both places hands back a library for the wrong processor."
     },
     {
       "stage": "check",
       "question": "Why are programs found on the host and libraries in the sysroot only?",
       "options": [
-        "Tradition",
-        "Speed",
+        "Programs are larger than libraries",
+        "CMake cannot search the sysroot for programs",
         "A program that runs during the build must run on the machine building, while a library is linked into the robot's binary and must be built for the robot",
-        "Size"
+        "The sysroot has no directory for programs"
       ],
       "correct": 2,
-      "explanation": "MODE_PROGRAM NEVER, the rest ONLY."
+      "explanation": "A code generator has to run on the laptop during the build. What is linked into the robot's binary has to be for the robot, so it must come from the sysroot and nowhere else."
     },
     {
       "stage": "post",
       "question": "Why does validate refuse a backslash in a Windows sysroot?",
       "options": [
         "CMake reads a backslash as an escape, so the path is not the one written",
-        "Windows is not supported",
-        "It looks wrong",
-        "It is slow"
+        "Windows targets are not supported",
+        "A backslash is not allowed in any path",
+        "The sysroot must be on the same drive as the build"
       ],
       "correct": 0,
-      "explanation": "Forward slashes."
+      "explanation": "In a CMake file a backslash starts an escape sequence. C:\\sysroots\\win is read as something else, and forward slashes work on Windows too."
     },
     {
       "stage": "post",
       "question": "What is the one real check of a toolchain file that this lesson cannot make?",
       "options": [
-        "A code review",
+        "A unit test of the generator",
         "Running the cross compiler and looking at what the binary was built for with file or readelf: the repository's CI has no cross compiler",
-        "A unit test",
-        "The linter"
+        "A review of the generated text",
+        "Running cmake on the laptop with the file"
       ],
       "correct": 1,
-      "explanation": "The text and the checks are tested, not CMake's acceptance."
+      "explanation": "The lesson checks the text and the rules. Whether a real cross compiler accepts it and produces a binary for the right machine can only be seen by running one."
     }
   ]
 }

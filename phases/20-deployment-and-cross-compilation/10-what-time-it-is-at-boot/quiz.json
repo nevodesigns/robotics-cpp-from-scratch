@@ -7,72 +7,72 @@
       "question": "Which clock should every timeout and rate of the robot be measured in?",
       "options": [
         "Time since boot, which only goes forward and cannot be set",
-        "Either",
-        "The wall clock",
-        "GPS"
+        "The wall clock, which everyone agrees on",
+        "GPS time, which is the most accurate",
+        "Either, as long as it is used consistently"
       ],
       "correct": 0,
-      "explanation": "A wall clock timeout fires at the sync."
+      "explanation": "The wall clock can be set forward or back at any moment. An interval measured on it jumps with it; time since boot cannot be set at all."
     },
     {
       "stage": "check",
       "question": "The clock is set at 40 s on a boot that started in 1970. How big is the jump?",
       "options": [
-        "An hour",
+        "About 40 s, the time since boot",
         "About 1.79e9 s, 56.9 years, in one step while 0.2 s of real time passed",
-        "Nothing",
-        "A second"
+        "An hour, the usual time zone error",
+        "Nothing: setting a clock is not a jump"
       ],
       "correct": 1,
-      "explanation": "classify calls it a step forward."
+      "explanation": "The wall clock went from 1970 to 2026 in one step. Anything timing itself on it saw 56.9 years pass in a fifth of a second."
     },
     {
       "stage": "check",
       "question": "A timeout of 0.3 s is measured on the wall clock, and the clock is put back an hour. When does it fire?",
       "options": [
-        "After 0.3 s",
-        "At once",
+        "At once, since an hour has passed",
+        "After 0.3 s, as designed",
         "Never: the elapsed time is negative",
-        "After an hour"
+        "After an hour and 0.3 s"
       ],
       "correct": 2,
-      "explanation": "Time since boot said expired."
+      "explanation": "With the clock an hour back, now minus the last heartbeat is negative and never exceeds the timeout. Measured since boot it expired as it should."
     },
     {
       "stage": "check",
       "question": "Sorted by the wall clock, how many of six records of two boots were in the wrong place?",
       "options": [
         "5: the early records of the second boot carry 1970 time and go before the whole of the first boot",
-        "1",
-        "All",
-        "None"
+        "None: the wall clock gives the true order",
+        "1, the record at the sync",
+        "All 6"
       ],
       "correct": 0,
-      "explanation": "By boot and time since boot, none."
+      "explanation": "Boot 2's first records were written before its clock was set, so they carry 1970 and sort ahead of everything. Ordered by boot and time since boot, none is misplaced."
     },
     {
       "stage": "post",
       "question": "Why does check_validity answer unknown before the clock is set?",
       "options": [
-        "A bug",
-        "It is faster",
-        "It is a convention",
+        "Certificates cannot be checked without a network",
+        "It is quicker than comparing dates",
+        "The certificate's dates are in another time zone",
         "A 1970 clock says not yet valid for a certificate that is fine: a guess must not be used to say yes or no"
       ],
       "correct": 3,
-      "explanation": "The robot needs the time without a certificate."
+      "explanation": "On a 1970 clock a good certificate looks 56 years early. Saying unknown, and not yes or no, lets the robot fetch the time first."
     },
     {
       "stage": "post",
       "question": "What does a robot that suspends do to the monotonic clock on many systems?",
       "options": [
-        "It resets it",
-        "It speeds it up",
+        "It resets it to zero",
+        "It makes it run faster to catch up",
         "It does not count the suspended time, so time since boot is shorter than the real time",
-        "Nothing"
+        "Nothing: it keeps counting"
       ],
       "correct": 2,
-      "explanation": "A limit of this model."
+      "explanation": "On many systems the monotonic clock stops while the machine is suspended. A timeout measured across a suspend is then shorter than the real time that passed."
     }
   ]
 }

@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "A download stops half way. What in the manifest finds it?",
       "options": [
-        "The version",
+        "The file sizes, which add up short",
         "The end line, which holds the hash of everything above it: its absence is no end line, and a changed manifest is bad checksum",
-        "The sizes",
-        "Nothing"
+        "The version line, which is missing",
+        "The sorted order, which is broken"
       ],
       "correct": 1,
-      "explanation": "The most common damage there is."
+      "explanation": "A manifest cut short has no end line, and one that was changed no longer matches the hash in its end line. Each gets its own reason."
     },
     {
       "stage": "check",
       "question": "Why is the manifest sorted by path?",
       "options": [
-        "Alphabet",
-        "Tidiness",
-        "Speed",
+        "Sorting makes the parser faster",
+        "So that the files are unpacked in order",
+        "Because paths are compared as text",
         "The same release in any order gives the same text, so the manifest can itself be compared and hashed"
       ],
       "correct": 3,
-      "explanation": "Two orders, one text."
+      "explanation": "If the text depended on the order the files were listed in, the same release would have many manifests and none could be compared or hashed."
     },
     {
       "stage": "check",
       "question": "Why does the manifest refuse ../../etc/passwd as a path?",
       "options": [
-        "It is long",
+        "It is an absolute path",
         "The updater writes at that path: an archive that escapes the directory overwrites the system unpacking it, and the manifest has to refuse it before any file is written",
-        "It is absolute",
-        "It has dots"
+        "It has more than one dot",
+        "It is longer than a path may be"
       ],
       "correct": 1,
-      "explanation": "Only 4 of 15 test paths were accepted."
+      "explanation": "An archive that can name a path outside its own directory can overwrite the system that unpacks it. The refusal has to come before anything is written."
     },
     {
       "stage": "check",
       "question": "Which difference can a size check not see?",
       "options": [
-        "Missing",
-        "Extra",
+        "A file that never arrived",
+        "A file left over from an older release",
         "A byte changed in place: same size, different hash",
-        "All of them"
+        "A file cut short by a byte"
       ],
       "correct": 2,
-      "explanation": "bin/robot_node, hash."
+      "explanation": "One byte of bin/robot_node was changed and the size stayed the same. Only the hash of the contents shows it."
     },
     {
       "stage": "post",
       "question": "Why is a stale file from an older release a problem?",
       "options": [
         "It is part of what is running, since a program may load it by name, and it is not part of the release",
-        "It is slow",
-        "It wastes space",
-        "It has a bad name"
+        "It takes up space on the robot",
+        "Its name is not in the right directory",
+        "It slows down the verification"
       ],
       "correct": 0,
-      "explanation": "bin/old_tool, extra."
+      "explanation": "bin/old_tool was left by release 1.3. Something may still load it by name, so the robot is running a file that no release describes."
     },
     {
       "stage": "post",
       "question": "Why is FNV-1a not enough for a real release?",
       "options": [
-        "It is slow",
-        "It is 64 bits",
+        "It is too slow for large files",
+        "Its 64 bits collide too often for 1000 files",
         "Anyone can recompute it: a real release is signed with a key kept at the build machine, which needs a cryptographic library this curriculum does not write",
-        "It collides"
+        "It cannot hash an empty file"
       ],
       "correct": 2,
-      "explanation": "It catches accident, not intent."
+      "explanation": "It caught 1000 of 1000 single bit flips, which is accident. Someone who changes a file on purpose can also change the hash, which only a signature prevents."
     }
   ]
 }

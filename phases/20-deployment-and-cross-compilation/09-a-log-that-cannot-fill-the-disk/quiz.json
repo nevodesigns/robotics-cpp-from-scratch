@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is a full disk worse than a program that cannot write its log?",
       "options": [
-        "It is slower",
+        "A full disk makes the robot reboot",
         "It stops everything else that writes: the configuration, the black box dump, the next update, temporary files",
-        "It reboots",
-        "It deletes the log"
+        "A full disk deletes the oldest log by itself",
+        "It is not worse: only logging stops"
       ],
       "correct": 1,
-      "explanation": "Ten different looking faults, one cause."
+      "explanation": "Everything that writes shares the disk. When it is full the configuration cannot be saved, the black box cannot be dumped and the next update cannot be stored."
     },
     {
       "stage": "check",
       "question": "With 10 MB files, 20 files and 200 MB, how much can the log take in the steady state?",
       "options": [
-        "2 GB",
-        "Unlimited",
-        "10 MB",
+        "2 GB: files times the total",
+        "10 MB, one file",
+        "As much as the disk holds",
         "200 MB: the smaller of the total and files times file size"
       ],
       "correct": 3,
-      "explanation": "With at most 5 files, 50 MB."
+      "explanation": "The budget is whichever limit is tighter. Twenty files of 10 MB is exactly 200 MB; with at most 5 files it would be 50 MB."
     },
     {
       "stage": "check",
       "question": "A day at 100 KB/s fills a 4 GB disk after how long with no limit?",
       "options": [
-        "Never",
+        "24 hours, exactly a day",
         "11.1 hours: the robot dies in its first shift",
         "1 hour",
-        "24 hours"
+        "Never: 100 KB/s is too slow to matter"
       ],
       "correct": 1,
-      "explanation": "With the budget the peak was 199 MB."
+      "explanation": "100 KB a second is 8.6 GB a day. A 4 GB disk is full in 11.1 hours; with the budget the same day peaked at 199 MB."
     },
     {
       "stage": "check",
       "question": "Why is the current file never deleted?",
       "options": [
         "Deleting it would lose the record just written: a record bigger than the whole budget is kept until the next one arrives",
-        "It is empty",
-        "A bug",
-        "It is hard to delete"
+        "The current file is locked by the operating system",
+        "It is always empty when rotation runs",
+        "Deleting it would break the file numbering"
       ],
       "correct": 0,
-      "explanation": "9000 bytes against a budget of 5000."
+      "explanation": "A record larger than the whole budget is usually the one somebody wanted, a stack trace or a dump. It is kept until the next record closes its file."
     },
     {
       "stage": "post",
       "question": "A camera says the same error 1000 times a second for 10 s. How many are written and how many counted?",
       "options": [
-        "1 and 9999",
-        "0 and 10000",
+        "10000 written and none suppressed",
+        "1 written, 9999 suppressed",
         "5 written, 9995 suppressed and counted, handed over once as a summary",
-        "10000 and 0"
+        "None written, 10000 counted"
       ],
       "correct": 2,
-      "explanation": "The log grows with the number of different faults."
+      "explanation": "The first five in a window of 10 s are written and the rest are counted, to be reported once as a single line. A different message is not held back."
     },
     {
       "stage": "post",
       "question": "Why does rotation without a guard still lose?",
       "options": [
         "The repeated message fills the budget and pushes out the history that explains it, deleted by the fault itself",
-        "It does not",
-        "It is not sorted",
-        "It is slow"
+        "Rotation deletes the newest file first",
+        "Rotation cannot run while a message repeats",
+        "It does not lose anything: the budget protects the history"
       ],
       "correct": 0,
-      "explanation": "The two go together."
+      "explanation": "A flood of one line fills every file in the budget. The half hour before the fault, which would explain it, is what gets deleted."
     }
   ]
 }

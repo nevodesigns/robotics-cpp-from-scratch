@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is the try used up before the release runs?",
       "options": [
-        "Tradition",
+        "So that a release cannot refuse to be tried",
         "A release too broken to say anything must still cost a try: a counter changed only by a working release does not count crashes",
-        "It is faster",
-        "Flash wears"
+        "Because flash is written before the kernel starts",
+        "To keep the count the same on both slots"
       ],
       "correct": 1,
-      "explanation": "The counter lives in the boot loader."
+      "explanation": "If only a working release could decrement the counter, a release that crashes at once would be retried for ever. The boot loader counts, and it is not the thing on trial."
     },
     {
       "stage": "check",
       "question": "A release hangs: up, never healthy, never crashing. What rolls it back?",
       "options": [
         "A supervisor that resets the robot at the health deadline: without one it is up for ever doing nothing",
-        "The boot counter alone",
-        "The user",
-        "Nothing needed"
+        "The boot counter alone, after three boots",
+        "The release's own watchdog thread",
+        "Nothing: a hang uses up its tries by itself"
       ],
       "correct": 0,
-      "explanation": "4 boots, rolled back."
+      "explanation": "A hang never resets the robot, so the counter never advances. A supervisor that resets it when the health deadline passes turns a hang into a counted failure."
     },
     {
       "stage": "check",
       "question": "A release is healthy at 20 s and crashes at 40 s. It confirms itself when the program starts. What happens?",
       "options": [
-        "It confirms again",
-        "Rolled back",
-        "Fine",
+        "It is rolled back after 4 boots",
+        "It runs normally: the crash comes after the confirmation",
+        "It confirms again at each boot and stays up",
         "Confirmed at second zero, then crashes with nothing to roll back to: a crash loop, 20 boots and not up"
       ],
       "correct": 3,
-      "explanation": "Confirming early makes the trial a decoration."
+      "explanation": "Confirmed at once, it is no longer on trial when it crashes at 40 s. There is nothing to fall back to, and it looped for all 20 boots."
     },
     {
       "stage": "check",
       "question": "With a crash at 120 s and a healthy time of 20 s, which soaks catch it?",
       "options": [
-        "None",
-        "Only 0",
-        "All",
+        "All of them: any soak catches a crash",
+        "90 s and longer",
+        "None: a crash at 120 s is after every soak",
         "100 s and longer: 20 plus the soak must come after the crash, so 90 s is not enough"
       ],
       "correct": 3,
-      "explanation": "110 s is before 120 s."
+      "explanation": "Confirmation comes at 20 s plus the soak. With 90 s that is 110 s, before the crash, so the bad release is confirmed. With 100 s the crash comes first."
     },
     {
       "stage": "post",
       "question": "What can the code not know about the soak?",
       "options": [
-        "Its sign",
+        "Whether it is measured in seconds",
         "How long it takes the failure to show: a leak, a filling disk or a daily task is found from what the robot does",
-        "Its units",
-        "Its type"
+        "Whether the health checks passed",
+        "How many tries the release has left"
       ],
       "correct": 1,
-      "explanation": "A number to be found, not to be chosen."
+      "explanation": "The soak has to outlast the time the failure takes to appear. That depends on what the robot does, and has to be found by watching it."
     },
     {
       "stage": "post",
       "question": "Why is a health check not a safety check?",
       "options": [
-        "It is faster",
-        "Health checks are optional",
+        "A health check runs less often",
+        "A safety check is done by the boot loader",
         "A release can be healthy by its own checks and dangerous: the first drive of a new release is with the wheels off the ground",
-        "They are the same"
+        "They are the same check under two names"
       ],
       "correct": 2,
-      "explanation": "Lesson 19-10 is about the other kind of failure."
+      "explanation": "Healthy means the processes are up and answering. It says nothing about whether the robot will drive into something."
     }
   ]
 }

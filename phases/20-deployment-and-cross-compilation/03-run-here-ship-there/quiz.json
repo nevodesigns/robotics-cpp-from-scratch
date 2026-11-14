@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why does a native build pass a graph with a generator built for the target?",
       "options": [
-        "The compiler fixes it",
-        "It is correct",
-        "It does not pass",
+        "The compiler notices and builds the generator for the host",
+        "It does not pass: the graph has 4 problems either way",
+        "A native build never runs the generator",
         "The target is the host, so it runs: every mistake about which machine is invisible"
       ],
       "correct": 3,
-      "explanation": "0 problems native, 4 cross."
+      "explanation": "When the laptop is also the target, a program built for the target runs on the laptop. The same graph had 0 problems native and 4 when built for the robot."
     },
     {
       "stage": "check",
       "question": "Which machine must a code generator that the build runs be built for?",
       "options": [
-        "The target",
+        "The target, like every other executable",
         "The host, or a target the host could run",
-        "Neither",
-        "Either"
+        "Either: the build picks whichever exists",
+        "Neither: generators are scripts"
       ],
       "correct": 1,
-      "explanation": "A message compiler for the robot cannot run on the laptop."
+      "explanation": "The build executes it, so it has to run where the build runs. An aarch64 generator cannot be executed on an x86_64 laptop."
     },
     {
       "stage": "check",
       "question": "A robot program links a library that was built on the laptop. What goes wrong?",
       "options": [
         "The library is the wrong architecture for the robot, and it fails to link or to load",
-        "Nothing",
-        "It is larger",
-        "It runs slowly"
+        "Nothing: a library is only data until it is loaded",
+        "It links, and runs more slowly",
+        "It links, and is larger than it need be"
       ],
       "correct": 0,
-      "explanation": "robot_node links libmsgs, built for the other machine."
+      "explanation": "The library's code is for the laptop's processor. The robot's linker refuses it, or the robot cannot load it."
     },
     {
       "stage": "check",
       "question": "Is a host tool in the bundle an error the compiler reports?",
       "options": [
-        "Only with warnings",
+        "Yes: the linker refuses a host binary",
         "No: it builds fine and the robot is shipped with a binary it cannot run",
-        "Only on Windows",
-        "Yes"
+        "Yes, as a warning",
+        "Only if the tool is larger than the bundle allows"
       ],
       "correct": 1,
-      "explanation": "It is a problem only a check of the graph finds."
+      "explanation": "Nothing in the build objects to installing a file. The robot ends up carrying a tool it cannot run, and only a check of the graph says so."
     },
     {
       "stage": "post",
       "question": "What does the fix cost?",
       "options": [
-        "Speed on the robot",
-        "Nothing",
+        "Nothing: the fixed graph is strictly better",
+        "A slower robot",
         "Some tests no longer run in the build, and a library may be built twice, once for each machine",
-        "The signature"
+        "A second sysroot"
       ],
       "correct": 2,
-      "explanation": "A build for two machines is two builds."
+      "explanation": "Tests built for the robot cannot run during the build, and a library both machines need is compiled twice. Two machines are two builds."
     },
     {
       "stage": "post",
       "question": "What is the real check of all this?",
       "options": [
-        "A linter",
-        "A unit test",
+        "A native build that passes",
+        "A unit test of the graph checker",
         "A cross build in continuous integration, which this repository does not have",
-        "A code review"
+        "A review of the build files"
       ],
       "correct": 2,
-      "explanation": "A passing native build tells you nothing about it."
+      "explanation": "The checker models the rules. A real cross build is what shows whether the project obeys them, and this repository's CI does not have one."
     }
   ]
 }

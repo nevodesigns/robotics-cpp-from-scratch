@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What does the target triple x86_64-w64-mingw32 name?",
       "options": [
-        "A library",
-        "A compiler",
+        "A compiler: the name of the program that builds for Windows",
+        "A library: the C runtime the program links against",
         "A target: architecture, vendor and system, with the system last since the second part is not an operating system",
-        "A board"
+        "A board: the hardware the program is flashed to"
       ],
       "correct": 2,
-      "explanation": "Three shapes of triple are accepted."
+      "explanation": "A triple names what the code is built for. With three parts, if the second is not an operating system it is read as architecture, vendor and system."
     },
     {
       "stage": "check",
       "question": "What is odd about long on 64 bit Windows?",
       "options": [
-        "It is signed",
-        "It is 128 bits",
-        "Nothing",
+        "It is 64 bits, as on every 64 bit machine",
+        "It is unsigned, where it is signed on Linux",
+        "It is 16 bits, kept from older versions of Windows",
         "It is 32 bits, where it is 64 on 64 bit Linux, so code that uses long for a 64 bit value breaks only there"
       ],
       "correct": 3,
-      "explanation": "The two Windows rows."
+      "explanation": "The two Windows targets are 64 bit machines with a 32 bit long. Code that puts a 64 bit value in a long works on every Linux target and fails only there."
     },
     {
       "stage": "check",
       "question": "The same struct was 40 bytes on x86_64, 32 on 32 bit ARM and 28 on i686. Why is i686 smaller than ARM?",
       "options": [
-        "It has fewer registers",
-        "A bug",
-        "Smaller pointers only",
+        "i686 has smaller pointers than 32 bit ARM",
+        "i686 leaves out the padding at the end of the struct",
+        "32 bit ARM stores a long in 8 bytes",
         "32 bit x86 aligns an eight byte field to 4, and 32 bit ARM to 8"
       ],
       "correct": 3,
-      "explanation": "Alignment is part of the ABI."
+      "explanation": "Both have 4 byte pointers and longs. The difference is where an 8 byte field may start, which is part of each target's rules."
     },
     {
       "stage": "check",
       "question": "{ char, int64 } holds only fixed width types. Why is it not safe to send as it is?",
       "options": [
         "It is 16 bytes on the 64 bit targets and 12 on 32 bit x86, because of the int64's alignment",
-        "It is too small",
-        "The char is signed",
-        "It is"
+        "It is: fixed width types have the same layout everywhere",
+        "The char is signed on some targets and unsigned on others",
+        "It is too small for a network packet"
       ],
       "correct": 0,
-      "explanation": "Write each field out in a defined order and width."
+      "explanation": "The fields are the same size everywhere, but the padding before the int64 is 7 bytes where it aligns to 8 and 3 where it aligns to 4."
     },
     {
       "stage": "post",
       "question": "What should the parser do with a triple it cannot read?",
       "options": [
-        "Use the host",
-        "Guess the closest",
+        "Use the host's triple instead",
+        "Pick the closest known triple",
         "Be invalid with no word sizes: a reader that guesses builds for the wrong machine without a word",
-        "Throw"
+        "Fall back to x86_64-linux-gnu, the most common"
       ],
       "correct": 2,
-      "explanation": "Nine malformed triples were all invalid."
+      "explanation": "Nine malformed triples all came back invalid with a pointer width of 0. A guess would build for some machine, and nothing would say it was the wrong one."
     },
     {
       "stage": "post",
       "question": "How do you check a struct's size on the real target?",
       "options": [
-        "Trust the model",
+        "Print sizeof on the laptop and compare with the table",
         "A static_assert on sizeof in the header, compiled by the cross compiler, since the model here was never run on that machine",
-        "Ask a colleague",
-        "Print it"
+        "Trust the layout model, which applies the target's rules",
+        "Ask the maker of the board"
       ],
       "correct": 1,
-      "explanation": "The numbers for ARM and i686 are the rules applied, not measured."
+      "explanation": "The model's numbers for ARM and i686 are the rules applied, not measurements. An assertion compiled by the real cross compiler fails the build if they are wrong."
     }
   ]
 }

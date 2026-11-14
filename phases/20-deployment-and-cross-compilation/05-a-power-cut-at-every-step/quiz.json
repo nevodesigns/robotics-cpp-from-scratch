@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why does copying the new release over the running one brick the robot when the power fails?",
       "options": [
-        "The copy is slow",
+        "The copy is too slow to finish before the battery runs out",
         "For the time it takes the slot is half old and half new, with the old hash, and there is no other slot to boot",
-        "The files are signed",
-        "Flash wears"
+        "The new files are signed and the old ones are not",
+        "Flash wears out when it is written in place"
       ],
       "correct": 1,
-      "explanation": "8 of 10 cuts bricked."
+      "explanation": "Any cut after the first chunk and before the hash leaves a slot that is neither release, and nothing else to boot. 8 of the 10 possible cuts bricked the robot."
     },
     {
       "stage": "check",
       "question": "In the two slot install, what is the last step and why last?",
       "options": [
         "The move of the boot pointer: nothing before it changes what boots, and it is one write",
-        "The reboot",
-        "The hash",
-        "The first chunk"
+        "Writing the hash and version: that is what makes the slot valid",
+        "Writing the last chunk: until then the release is incomplete",
+        "The reboot: nothing takes effect until then"
       ],
       "correct": 0,
-      "explanation": "After nine of ten steps the robot still boots release 1."
+      "explanation": "The chunks and the hash go into the slot that is not running. Only the pointer decides what boots, so it is moved last, in a single write."
     },
     {
       "stage": "check",
       "question": "After the ninth of ten steps, which release does the robot boot?",
       "options": [
-        "Neither",
-        "Both",
+        "Release 2: it is complete and valid",
+        "Neither: the install was interrupted",
         "Release 1: release 2 is complete and valid in the other slot but the pointer has not moved",
-        "Release 2"
+        "Whichever slot has the newer version"
       ],
       "correct": 2,
-      "explanation": "The old release is untouched until the last step."
+      "explanation": "The pointer still names slot 0. The new release sits finished in slot 1 and the old one has not been touched."
     },
     {
       "stage": "check",
       "question": "Why can a cut install simply be run again?",
       "options": [
-        "It checks for a lock",
+        "It keeps a record of the step it reached and resumes there",
         "The plan is made from what boots now and not from where the last attempt stopped, so it needs no memory of the failure",
-        "It is lucky",
-        "It is slow"
+        "It locks the disk so that a second attempt waits",
+        "A cut install leaves both slots valid by luck"
       ],
       "correct": 1,
-      "explanation": "11 of 11 ended on release 2."
+      "explanation": "An installer that must work out where it stopped has a second thing to get wrong. Starting from what boots now, 11 of 11 cut installs finished on release 2."
     },
     {
       "stage": "post",
       "question": "A chunk of the new release is damaged after the switch. What boots?",
       "options": [
-        "A blank screen",
-        "Release 2 with an error",
-        "Nothing",
+        "Release 2, with the damaged chunk skipped",
+        "Nothing: the pointer names an invalid slot",
+        "Release 2, after the chunk is repaired from slot 0",
         "The release before, from the other slot: the slot is invalid and the fallback is the design"
       ],
       "correct": 3,
-      "explanation": "Release 1 from slot 0."
+      "explanation": "The boot checks the slot's hash and, finding it wrong, takes the other slot. The previous release is always there because the slots alternate."
     },
     {
       "stage": "post",
       "question": "What does this scheme assume about the hardware that you must test on the real robot?",
       "options": [
-        "That it is fast",
-        "Nothing",
+        "That the disk has two physical drives",
+        "That flash never wears out",
         "That a single write is atomic, so that a power cut falls between steps and never inside one: pull the real power hundreds of times",
-        "That it has two disks"
+        "That the boot loader can be updated too"
       ],
       "correct": 2,
-      "explanation": "Flash that tears a write breaks the whole argument."
+      "explanation": "The argument rests on a power cut never landing in the middle of a write. Whether that holds for this flash is found by pulling the power, many times."
     }
   ]
 }

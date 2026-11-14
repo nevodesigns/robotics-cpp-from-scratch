@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What does Requires=drivers say about the order of start?",
       "options": [
-        "That drivers restarts it",
+        "That drivers is started first",
         "Nothing: it says the service cannot run without drivers, and the order needs After as well",
-        "That they start together",
-        "That drivers starts first"
+        "That the two are started at the same moment",
+        "That drivers restarts the service if it fails"
       ],
       "correct": 1,
-      "explanation": "The planner requires perception but was not ordered after it."
+      "explanation": "Requires is about dependence and After is about order. With only Requires the two start together, and the planner finds nothing on half the boots."
     },
     {
       "stage": "check",
       "question": "A service crashes 0.2 s after every start and is restarted after 0.1 s with no limit. How many starts in 60 s?",
       "options": [
         "About 200 (201 in the run), and the log and a core are busy with it",
-        "1",
-        "6",
-        "5"
+        "5, the default limit",
+        "6, one every ten seconds",
+        "1: a crashed service is not restarted"
       ],
       "correct": 0,
-      "explanation": "A restart with no wait is a storm."
+      "explanation": "A crash at 0.2 s and a restart after 0.1 s is about three starts a second. The broken program fills the log and keeps a core busy for as long as it is left."
     },
     {
       "stage": "check",
       "question": "The same crash with a start limit of 5 in 10 s and a restart of 0.1 s. What happens?",
       "options": [
-        "It is fine",
-        "It slows",
+        "It restarts for ever, a little slower",
+        "It backs off to once every 30 s",
         "It gives up at 1.5 s after five starts, and the robot is without that program until somebody notices",
-        "It restarts forever"
+        "It is restarted 201 times"
       ],
       "correct": 2,
-      "explanation": "A limit makes a quick loop give up."
+      "explanation": "Five starts in a second and a half reach the limit, and the service is left failed. The robot goes on without that program."
     },
     {
       "stage": "check",
       "question": "What does a back-off of 1, 2, 4, 8, 16, 30 s do for the same crash?",
       "options": [
-        "Gives up sooner",
-        "Nothing",
-        "Two hundred starts",
+        "Two hundred starts, spread over the minute",
+        "It gives up after five starts",
+        "Nothing: the waits are ignored once the limit is set",
         "Six starts in a minute, and the start limit is never reached because the starts are far apart"
       ],
       "correct": 3,
-      "explanation": "Neither spamming nor giving up."
+      "explanation": "Each wait is longer than the last, so a persistent fault costs a handful of starts and the service is still being tried."
     },
     {
       "stage": "post",
       "question": "Why should a back-off reset after a long stable run?",
       "options": [
-        "It is a rule",
+        "To keep the waits from overflowing",
         "A service healthy for a day that crashes once should restart at once, not wait 30 s for crashes from its first minute",
-        "It saves memory",
-        "Tidiness"
+        "Because the start limit is counted per day",
+        "So that the log shows the first crash"
       ],
       "correct": 1,
-      "explanation": "A long run ends the loop."
+      "explanation": "The back-off answers a crash loop. A long healthy run means the loop is over, and the next crash is a new event."
     },
     {
       "stage": "post",
       "question": "A safety-relevant service is given up on by the init system. What should happen?",
       "options": [
-        "A reboot only",
-        "A restart",
-        "Nothing",
+        "Nothing: the init system has dealt with it",
+        "A reboot, which starts everything again",
+        "A restart of that service only",
         "A stop: a robot that moves and cannot see is the worst combination, and the supervisor of lesson 19-10 has to see it"
       ],
       "correct": 3,
-      "explanation": "A failed service is a fact the supervisor has to be told."
+      "explanation": "A service that was given up on is no longer doing its job. If that job was seeing obstacles, the supervisor has to know and stop the robot."
     }
   ]
 }
