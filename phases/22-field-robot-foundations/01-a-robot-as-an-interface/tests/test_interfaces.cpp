@@ -152,3 +152,23 @@ RC_TEST("joint buses move at their rate, refuse a wrong sized command, and keep 
   rec("t_leg", t);
   RC_CHECK_NEAR(t, 0.5, 0.02);
 }
+
+
+RC_TEST("a base that turns as it drives goes round a circle, in y as well as in x") {
+  DriveLimits lim;
+  lim.tau = 1e-6;   // answers at once, so the path is the circle of the command
+  FakeDrive d(lim);
+  const double dt = 0.001;
+  const int steps = 1571;   // a quarter of a turn at 1 rad/s
+  for (int i = 0; i < steps; ++i) {
+    DriveCommand c;
+    c.v = 1.0;
+    c.w = 1.0;
+    d.command(c);
+    d.step(dt);
+  }
+  const DriveState s = d.state();
+  RC_CHECK_NEAR(s.theta, 1.571, 1e-6);
+  RC_CHECK_NEAR(s.x, 1.0, 2e-3);   // a circle of radius v / w = 1 m: a quarter of it ends at (1, 1)
+  RC_CHECK_NEAR(s.y, 1.0, 2e-3);
+}

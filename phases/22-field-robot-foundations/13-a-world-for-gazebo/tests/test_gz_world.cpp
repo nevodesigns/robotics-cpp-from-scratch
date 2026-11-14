@@ -158,3 +158,11 @@ RC_TEST("the goal is a marker with nothing to collide with") {
   RC_CHECK(goal.find("<collision") == std::string::npos);
   RC_CHECK(goal.find("<visual") != std::string::npos);
 }
+
+
+RC_TEST("a wall that does not start at the origin is as long as it is and sits at its own middle") {
+  const WorldBox b = wall_box(rc::field::Segment{1.0, 1.0, 4.0, 5.0}, 0.1, 1.0);
+  RC_CHECK_NEAR(b.sx, 5.0, 1e-12);   // 3 across and 4 up, wherever it starts
+  RC_CHECK_NEAR(b.cx, 2.5, 1e-12);
+  RC_CHECK_NEAR(b.cy, 3.0, 1e-12);
+}

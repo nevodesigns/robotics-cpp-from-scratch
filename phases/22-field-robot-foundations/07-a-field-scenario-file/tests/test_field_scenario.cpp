@@ -137,3 +137,19 @@ RC_TEST("a file with no start and no duration says so, and a fault past the end 
   RC_CHECK(q.problems.size() == 1);
   RC_CHECK(q.problems[0].line == 4);
 }
+
+
+RC_TEST("what is written back has every patch and every fault in it, not only the same text twice") {
+  const ScenarioParse first = parse_scenario(kGood);
+  const std::string once = write_scenario(first.scenario);
+  RC_CHECK(once.find("patch sand") != std::string::npos);
+  RC_CHECK(once.find("patch ice") != std::string::npos);
+  RC_CHECK(once.find("fault gnss_outage") != std::string::npos);
+  RC_CHECK(once.find("fault lidar_dropout") != std::string::npos);
+  const ScenarioParse second = parse_scenario(once);
+  RC_CHECK(second.ok());
+  RC_CHECK(second.scenario.patches.size() == first.scenario.patches.size());
+  RC_CHECK(second.scenario.faults.size() == first.scenario.faults.size());
+  RC_CHECK(first.scenario.patches.size() == 2u);
+  RC_CHECK(first.scenario.faults.size() == 2u);
+}

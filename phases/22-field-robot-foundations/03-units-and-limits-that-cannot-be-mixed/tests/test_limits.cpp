@@ -129,3 +129,19 @@ RC_TEST("a command beyond the limits is flagged as clamped") {
   RC_CHECK(s.v <= lim.max_v.mps);
   RC_CHECK(s.w <= lim.max_w.rps);
 }
+
+
+RC_TEST("the turn rate is eased as the speed is, and a change within the limit is not called limited") {
+  VehicleLimits lim;   // max_alpha 4 rad/s2, max_accel 0.5 m/s2
+  const Shaped a = shape(0.0, 2.0, 0.0, 0.0, 0.1, lim);
+  RC_CHECK_NEAR(a.w, 0.4, 1e-12);       // 4 rad/s2 for 0.1 s
+  RC_CHECK(a.limited_rate);
+  const Shaped b = shape(0.0, 0.5, 0.0, 0.4, 0.1, lim);
+  RC_CHECK_NEAR(b.w, 0.5, 1e-12);       // 0.1 more is within the 0.4 allowed
+  RC_CHECK(!b.limited_rate);
+  const Shaped c = shape(0.0, -2.0, 0.0, 0.4, 0.1, lim);
+  RC_CHECK_NEAR(c.w, 0.0, 1e-12);       // and it comes down by the same 0.4
+  const Shaped d = shape(1.0, 0.0, 0.98, 0.0, 0.1, lim);
+  RC_CHECK_NEAR(d.v, 1.0, 1e-12);       // 0.02 more is within the 0.05 allowed
+  RC_CHECK(!d.limited_rate);
+}

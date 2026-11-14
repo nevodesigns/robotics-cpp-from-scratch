@@ -137,3 +137,14 @@ RC_TEST("a log cut by a power failure still reads, and a bad line stops the read
   RC_CHECK(!back.ok);
   RC_CHECK(back.error_line == 3);
 }
+
+
+RC_TEST("a log that stops early differs from the longer one at the first entry it lacks, whichever is given first") {
+  const RunLog a = drive(1);
+  RunLog shorter;   // built afresh, so that nothing of the longer log is left in its storage
+  shorter.entries.assign(a.entries.begin(), a.entries.end() - 4);
+  shorter.entries.shrink_to_fit();
+  const double expected = a.entries[shorter.entries.size()].t;
+  RC_CHECK_NEAR(first_difference(a, shorter, 0.0), expected, 1e-12);
+  RC_CHECK_NEAR(first_difference(shorter, a, 0.0), expected, 1e-12);
+}
