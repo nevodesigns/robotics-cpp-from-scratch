@@ -7,72 +7,72 @@
       "question": "Where in the rise is the knee's torque greatest?",
       "options": [
         "At the bottom, with the legs most folded",
-        "In the middle",
-        "At the top",
-        "It is constant"
+        "At the top, where the legs are nearly straight",
+        "Half way up, where the body moves fastest",
+        "It is the same all the way, since the weight does not change"
       ],
       "correct": 0,
-      "explanation": "The shank leans most there."
+      "explanation": "The knee's torque is the foot's share of the weight times how far the shank leans from the vertical. That lean is greatest with the legs folded, so the start of the rise is the hard part."
     },
     {
       "stage": "check",
       "question": "The knee's peak torque in the rise for 12 kg was:",
       "options": [
-        "0 N m",
-        "100 N m",
+        "20 N m, the motor's peak",
+        "2.9 N m, since two knees share each leg's load",
         "5.9 N m",
-        "20 N m"
+        "23.5 N m, more than the motor can give"
       ],
       "correct": 2,
-      "explanation": "Against a peak of 20 N m."
+      "explanation": "Up to 5.9 N m rising from a crouch of 0.12 m, against a peak of 20 N m, so a 12 kg robot has room to spare."
     },
     {
       "stage": "check",
       "question": "A rise in 6 s used what share of the thermal life compared with 1 s?",
       "options": [
-        "Half",
+        "A sixth as much, because the torque is lower in a slow rise",
         "Six times as much (0.202 against 0.034)",
-        "The same",
-        "None"
+        "The same: the heat depends on the height gained, not the time",
+        "Thirty six times as much, since heat goes as the square"
       ],
       "correct": 1,
-      "explanation": "The knee carries the weight for six times as long."
+      "explanation": "In this count the torque at each height is the same however fast the rise is, so the heat is proportional to the time spent: 0.202 against 0.034. A slow rise is the hot one."
     },
     {
       "stage": "check",
       "question": "A 65 kg robot:",
       "options": [
-        "Rose in a second",
-        "Rose slowly",
-        "Could rise",
+        "Could rise in 1 s but not in 6 s",
+        "Could rise only from a shallow crouch",
+        "Rose, using most of its thermal life",
         "Could not rise at all"
       ],
       "correct": 3,
-      "explanation": "0 for yes."
+      "explanation": "The heaviest body that stays within the knee's peak torque was 40.6 kg. At 65 kg the torque at the bottom is more than the motor has, whatever the time."
     },
     {
       "stage": "post",
       "question": "Why check the rise before trying?",
       "options": [
-        "It is faster",
-        "It is required",
+        "Because the plan is needed to choose the gait afterwards",
+        "Because the legs cannot be stopped once a rise has begun",
         "A rise that overheats the knees or needs more than the peak wears out the motors for nothing",
-        "It is tidy"
+        "Because a failed rise always ends in a fall"
       ],
       "correct": 2,
-      "explanation": "36-02's tries come from this."
+      "explanation": "The check costs nothing, and a rise that cannot succeed costs heat and wear. So the machine of 36-02 refuses it and goes to a fault and not to another try."
     },
     {
       "stage": "post",
       "question": "What is not covered?",
       "options": [
-        "The torque",
-        "The heat",
-        "The mass",
+        "The effect of the crouch's depth on the torque",
+        "The share of the weight on each of the four feet",
+        "The heaviest body that can rise within the heat",
         "Getting up from upside down, and the rise's acceleration"
       ],
       "correct": 3,
-      "explanation": "A different routine."
+      "explanation": "The count is quasi-static: it leaves out the torque that accelerating the body needs. Getting up from upside down starts with a roll over and is a different routine."
     }
   ]
 }

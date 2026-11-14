@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is the limit on forward and sideways speed an ellipse?",
       "options": [
-        "It looks neat",
-        "It is required",
-        "Tradition",
+        "Each motor has its own speed limit, and an ellipse is the sum of the four",
+        "The body is longer than it is wide, so it has more inertia about one axis",
+        "An ellipse is cheaper to compute than a rectangle on a small processor",
         "A leg can step further forward than sideways, so the two are limited together"
       ],
       "correct": 3,
-      "explanation": "A box would allow a diagonal that is too fast."
+      "explanation": "The limit comes from the legs' reach, which is longer fore and aft than to the side. A rectangle would allow the full forward and the full sideways speed at once, a diagonal that asks for a step no leg can take."
     },
     {
       "stage": "check",
       "question": "A command of 1.0 forward and 0.4 sideways became:",
       "options": [
-        "1.0 and 0.4",
-        "0 and 0",
+        "1.0 and 0.4, unchanged, because each is within its own limit",
+        "1.0 and 0.0, the sideways part dropped to keep the forward speed",
         "0.71 and 0.28, the same direction",
-        "1.0 and 0.4"
+        "0.50 and 0.20, each halved"
       ],
       "correct": 2,
-      "explanation": "Scaled onto the ellipse."
+      "explanation": "The command sits at the corner of the rectangle, which is outside the ellipse by a factor of the square root of two. Both parts are divided by that, so the direction is kept: 0.71 and 0.28."
     },
     {
       "stage": "check",
       "question": "A jump to 0.8 m/s took how long?",
       "options": [
-        "10 s",
+        "0.40 s, since the ramp starts from half way",
         "0.80 s at 1.0 m/s2",
-        "1.60 s",
-        "0 s"
+        "1.60 s, there and back",
+        "One time step: the limit only applies to the turn rate"
       ],
       "correct": 1,
-      "explanation": "A bounded acceleration."
+      "explanation": "The command in use may change by at most 1.0 m/s in each second, so 0.8 m/s takes 0.80 s. It is the same going down as going up."
     },
     {
       "stage": "check",
       "question": "The legs allowed what top speed?",
       "options": [
-        "2.0 m/s",
+        "0.80 m/s: a 0.20 m step over a 0.25 s stance",
         "1.60 m/s",
-        "10 m/s",
-        "0.5 m/s only"
+        "1.0 m/s, the limit set on the stick",
+        "2.0 m/s, which needed a step within reach"
       ],
       "correct": 1,
-      "explanation": "0.20 m over 0.125 s."
+      "explanation": "The fastest speed is the longest step over the shortest stance time: 0.20 m over 0.125 s. At 2.0 m/s the step needed was beyond the leg's reach."
     },
     {
       "stage": "post",
       "question": "What does a jump in the command do to the legs?",
       "options": [
         "Tells the body to be where it is not, and the feet cannot follow",
-        "Speeds them",
-        "Nothing",
-        "Helps"
+        "Makes the servos overheat at once, before the body has moved",
+        "Changes the gait from a trot to a walk without a transition",
+        "Nothing: the leg controller filters it out on its own"
       ],
       "correct": 0,
-      "explanation": "The gaits assume smooth commands."
+      "explanation": "The gaits of phase 35 plan each step from the commanded velocity. A velocity that jumps asks for a body position the feet were not placed for, so the command is eased and not handed on as it comes."
     },
     {
       "stage": "post",
       "question": "What sets the top speed limit?",
       "options": [
         "The longest step over the shortest stance, from the legs",
-        "A hope",
-        "The stick",
-        "The colour"
+        "The limit on the stick, chosen by the operator",
+        "The battery's voltage under load",
+        "The ellipse, which is drawn first and the legs made to fit it"
       ],
       "correct": 0,
-      "explanation": "Not from the stick."
+      "explanation": "The legs decide: reach and the quickest swing the servos can do. The limit on the command has to be set below that, however far the stick is pushed."
     }
   ]
 }

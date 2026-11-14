@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is off not always safe for a quadruped?",
       "options": [
-        "It is",
-        "It is slow",
+        "The motors heat up when the power is cut suddenly",
+        "The state machine loses track of where the legs are",
         "A robot switched off while standing collapses and lands hard",
-        "Motors need power"
+        "The battery can be damaged by the sudden loss of load"
       ],
       "correct": 2,
-      "explanation": "Off while standing becomes soft."
+      "explanation": "With no torque the legs fold and the body drops: the force of 35-09 on stiff legs. So off while standing is turned into soft, and the body is let down first."
     },
     {
       "stage": "check",
       "question": "A torque command of 40 N m was cut to:",
       "options": [
-        "0 N m",
-        "40 N m",
+        "40 N m, since the controller is trusted",
+        "0 N m: a command over the limit is refused whole",
         "20 N m",
-        "100 N m"
+        "10 N m, half the peak, to leave a margin"
       ],
       "correct": 2,
-      "explanation": "The peak the motor may give."
+      "explanation": "Every joint's command is clipped to the motor's peak, in either direction. A controller that is wrong can ask for anything and cannot get more than that."
     },
     {
       "stage": "check",
       "question": "Knees at 0.9 of their limit were derated to:",
       "options": [
-        "All of it",
+        "0.90 of the torque, the same fraction as the heat",
         "0.50 of the torque",
         "0.25 of the torque",
-        "None"
+        "Nothing: at 0.9 the layer asks for off"
       ],
       "correct": 1,
-      "explanation": "Full at 0.8, nothing at 1.0."
+      "explanation": "The torque is full up to 0.8 and falls in a straight line to nothing at 1.0, so 0.9 is half way. A quarter is what 0.95 gave."
     },
     {
       "stage": "check",
       "question": "The emergency stop with the robot standing gave mode:",
       "options": [
         "2, soft",
-        "0, normal",
         "3, off",
-        "1, derated"
+        "1, derated",
+        "0, normal, until the operator confirms"
       ],
       "correct": 0,
-      "explanation": "Sitting it gave 3."
+      "explanation": "The stop asks for off, and off while standing is turned into soft so that the body goes down gently. With the robot sitting the same stop gave 3."
     },
     {
       "stage": "post",
       "question": "What does the layer take when several things are asked?",
       "options": [
-        "The first",
-        "The average",
-        "The last",
+        "The first one asked, until it clears",
+        "The lowest mode that still deals with the most urgent",
+        "The highest mode, with the scale set back to 1",
         "The highest mode, keeping the derating scale"
       ],
       "correct": 3,
-      "explanation": "2 with the knees hot and the link silent."
+      "explanation": "The modes are numbered by how much they take away, and the layer takes the highest asked. With hot knees and a silent link it chose soft and kept the derating as well."
     },
     {
       "stage": "post",
       "question": "Is this a certified safety function?",
       "options": [
-        "Almost",
-        "Yes",
-        "It replaces one",
+        "Yes, because it outranks the controller",
+        "Yes, once its tests pass on every toolchain",
+        "Nearly: it only lacks a second sensor for the heat",
         "No: a model of the logic; a real one runs on separate hardware with a hardware stop"
       ],
       "correct": 3,
-      "explanation": "19-02."
+      "explanation": "It is the logic, in the same program as the controller it limits. A safety function in the sense of 19-02 is separate hardware with its own stop."
     }
   ]
 }

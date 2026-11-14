@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Which controller failed on the real joint?",
       "options": [
-        "The gentle one",
-        "Both",
-        "Neither",
+        "The gentle one, which was too slow to catch the step",
+        "Both, once the delay was added",
+        "Neither: the difference was within the 2 percent band",
         "The stiff one that looked quickest in the simulator"
       ],
       "correct": 3,
-      "explanation": "It rang and did not settle."
+      "explanation": "The stiff gains were quicker in the simulator and rang without settling once the delay and lag were added. The gentle ones still settled."
     },
     {
       "stage": "check",
       "question": "The stiff gains with 20 ms of delay and a 10 ms lag:",
       "options": [
-        "Settled in 0.24 s",
-        "Overshot 0 percent",
-        "Were unchanged",
+        "Settled in 0.24 s with 0.2 percent of overshoot, as before",
+        "Settled, but in 0.53 s",
+        "Hit the torque limit and stopped short of the target",
         "Overshot 23.5 percent and did not settle"
       ],
       "correct": 3,
-      "explanation": "The delay adds phase lag and a quick loop has less margin."
+      "explanation": "Delay is phase lag at the frequency where the loop crosses, and a quick loop crosses high, where the same delay is more lag."
     },
     {
       "stage": "check",
       "question": "The largest delay the stiff gains could stand was:",
       "options": [
         "19 ms",
-        "1 s",
-        "0 ms",
-        "43 ms"
+        "43 ms",
+        "20 ms, the delay of the test",
+        "10 ms, the lag of the motor"
       ],
       "correct": 0,
-      "explanation": "The gentle ones stood 43 ms."
+      "explanation": "19 ms, which is why 20 ms was enough to break it. The gentle gains stood 43 ms, more than twice the margin."
     },
     {
       "stage": "check",
       "question": "Over 100 random robots the gentle gains settled on:",
       "options": [
         "97 percent",
-        "All",
         "46 percent",
-        "0 percent"
+        "All of them",
+        "About half, the same as the stiff gains"
       ],
       "correct": 0,
-      "explanation": "The stiff ones on 46."
+      "explanation": "With the inertia, delay and lag drawn at random the gentle gains settled on 97 of 100 and the stiff ones on 46."
     },
     {
       "stage": "post",
       "question": "How does the sim-to-real gap shrink?",
       "options": [
-        "By a faster computer",
+        "By making the simulator's time step smaller",
         "By measuring the real robot's delay and lag and putting them into the simulation and the margin",
-        "By hope",
-        "By stiffer gains"
+        "By raising the gains until the real joint is as quick as the simulated one",
+        "By adding random noise to the simulated sensor"
       ],
       "correct": 1,
-      "explanation": "Measurement."
+      "explanation": "The gap here is things the simulator left out. Measure them on the robot, put them in, and choose gains with a margin over what was measured."
     },
     {
       "stage": "post",
       "question": "What is the last word on a controller?",
       "options": [
-        "The plan",
-        "The simulator",
+        "The simulator, once the delay and lag are in it",
+        "The margin in delay",
         "The robot",
-        "The margin"
+        "The success rate over the random robots"
       ],
       "correct": 2,
-      "explanation": "A step test is one test."
+      "explanation": "Each of those is evidence, and each rests on a model. A step test on the real joint is one test too, but it is of the thing itself."
     }
   ]
 }

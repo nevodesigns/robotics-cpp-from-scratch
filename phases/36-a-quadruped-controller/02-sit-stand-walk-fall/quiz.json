@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is most of the controller's work deciding what it may do next?",
       "options": [
-        "It is simple",
+        "The legs' motion is hard to compute, and the state machine computes it",
         "Each mode has things it may and must not do, and the robot damages itself otherwise",
-        "It is lazy",
-        "It is slow"
+        "A state machine is the fastest structure on a small processor",
+        "Without one the operator could not tell which gait is in use"
       ],
       "correct": 1,
-      "explanation": "A state machine with a check at every step."
+      "explanation": "Walking, standing, rising and lying fallen each allow different things. The machine is what stops a robot from walking while it is still rising, or rising with hot knees."
     },
     {
       "stage": "check",
       "question": "With knees at 0.85 of their limit the robot:",
       "options": [
-        "Rose",
-        "Walked",
-        "Fell",
+        "Rose, but more slowly than usual",
+        "Rose and went to fault 2 once it was standing",
+        "Went to the fallen state",
         "Refused to rise (1)"
       ],
       "correct": 3,
-      "explanation": "Under 0.8 is needed."
+      "explanation": "Rising needs the knees under 0.8 of their limit. At 0.85 the machine stays in sit, which is what a refusal is: a state that does nothing."
     },
     {
       "stage": "check",
       "question": "Told to sit while walking at 0.6 m/s it:",
       "options": [
-        "Fell",
-        "Ignored it",
+        "Lowered at once, since sit outranks walk",
+        "Went to a fault, because sit is not allowed from walk",
         "Slowed to a stop first and then lowered",
-        "Lowered at once"
+        "Stood still and waited for the operator to ask again"
       ],
       "correct": 2,
-      "explanation": "A robot that lowers at speed falls."
+      "explanation": "It stays in walk until the walk reports that it has stopped, then goes to stand and then lowers. A robot that lowers at speed falls."
     },
     {
       "stage": "check",
       "question": "A robot that fell 3 times and still tried ended in fault:",
       "options": [
         "5, out of tries",
-        "2",
-        "1",
-        "0"
+        "4, a move that took too long",
+        "2, the knees at their limit",
+        "1, the link lost while up"
       ],
       "correct": 0,
-      "explanation": "A limited number of tries."
+      "explanation": "Getting up is limited to three tries. A fourth request ends in fault 5, because a robot that tries for ever wears out its motors on a leg that is broken."
     },
     {
       "stage": "post",
       "question": "Why does a fault go to sit and not to the old state?",
       "options": [
         "So the operator sees the reset",
-        "It is required",
-        "It is easier",
-        "No reason"
+        "So that the knees cool before the next try",
+        "Because the old state has been forgotten by then",
+        "So that the battery is not drained by standing"
       ],
       "correct": 0,
-      "explanation": "A fault stays until it is reset."
+      "explanation": "A fault stays until someone resets it, and the reset always lands in sit. The operator then has to ask for the stand again, which is how they know a fault happened."
     },
     {
       "stage": "post",
       "question": "What is not in this lesson?",
       "options": [
-        "The faults",
-        "The checks",
+        "The time limit on a rise or a lowering",
+        "The refusal to rise on a low battery",
         "The motion of the legs between them",
-        "The states"
+        "The count of tries after a fall"
       ],
       "correct": 2,
-      "explanation": "The machine is told when they finish."
+      "explanation": "The machine is told when the legs have reached the stand or the sit; it does not move them. The trajectories between are other lessons."
     }
   ]
 }

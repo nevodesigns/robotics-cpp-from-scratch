@@ -7,72 +7,72 @@
       "question": "What does the capstone report when a walk cannot be done?",
       "options": [
         "The first requirement that failed, with the figures of all",
-        "Nothing",
-        "A random reason",
-        "Only a number"
+        "Every requirement that failed, in order",
+        "A single yes or no",
+        "The requirement that failed by the most"
       ],
       "correct": 0,
-      "explanation": "1 for the fast walk."
+      "explanation": "The first failure in the list is named, because it is the one to deal with first. The figures of the others are still worked out, so it can be seen how far each is from passing."
     },
     {
       "stage": "check",
       "question": "A speed of 2.0 m/s failed at requirement:",
       "options": [
-        "5",
+        "5, the battery, since speed costs power",
         "1, the speed the legs allow (1.60 m/s)",
-        "None",
-        "3"
+        "4, the knees",
+        "None: 2.0 m/s is within what the stick allows"
       ],
       "correct": 1,
-      "explanation": "The first in the list."
+      "explanation": "The legs allow 1.60 m/s, the longest step over the shortest stance. That is the first requirement, so the check stops there."
     },
     {
       "stage": "check",
       "question": "30 kg of load failed at:",
       "options": [
-        "1",
+        "1, the speed",
         "4, the knees and getting up",
-        "None",
-        "6"
+        "5, the battery",
+        "3, the push it can answer"
       ],
       "correct": 1,
-      "explanation": "Heat in the trot and the rise from a crouch."
+      "explanation": "Requirement 4 is the knees' temperature in the trot with the load, and whether the loaded robot can still get up from a crouch."
     },
     {
       "stage": "check",
       "question": "A person 0.3 m from the route failed at:",
       "options": [
-        "5",
-        "None",
+        "1, because the robot must slow down",
+        "3, the push",
         "6",
-        "1"
+        "None: a person is not part of the walk"
       ],
       "correct": 2,
-      "explanation": "The speed the person allows was under the useful minimum."
+      "explanation": "The speed that the nearest person allows fell below the least speed that is useful, and that is the sixth requirement."
     },
     {
       "stage": "post",
       "question": "Is a walk that passes proved to work?",
       "options": [
-        "Yes",
-        "Never",
-        "Always",
+        "Yes, for the speed and load that were checked",
+        "Yes, if every figure passes with a margin of 20 percent",
+        "Only on level ground",
         "No: a screen with simple models and typical numbers; the robot has to be tried"
       ],
       "correct": 3,
-      "explanation": "Measure the real delay, heat and stop (36-07)."
+      "explanation": "The models are simple and the numbers typical. What it says is that nothing known rules the walk out; the real delay, heat and stopping still have to be measured."
     },
     {
       "stage": "post",
       "question": "Why is the order what it is?",
       "options": [
-        "Chance",
-        "Longest first",
-        "Alphabetical",
+        "From the most dangerous to the least",
+        "From the quickest to compute to the slowest",
+        "In the order the lessons were taught",
         "From what is cheapest to change last: the operator's speed, the job's ground, then the robot's own limits"
       ],
       "correct": 3,
-      "explanation": "A robot limit cannot be fixed by a setting."
+      "explanation": "The operator can change the speed, the job fixes the ground and the push, and the knees and the battery are the robot's. When the first failure is the robot's own limit, no setting helps."
     }
   ]
 }

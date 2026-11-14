@@ -7,72 +7,72 @@
       "question": "How does a foot with no camera for the ground deal with a step down?",
       "options": [
         "It lands where expected and keeps reaching down until the contact sense says it is down",
-        "It jumps",
-        "It waits",
-        "It cannot"
+        "It lowers the whole body until all four feet report contact",
+        "It ends the swing higher, so that it always lands with a margin",
+        "It uses the height the last foot found and steps to that"
       ],
       "correct": 0,
-      "explanation": "A little at a time."
+      "explanation": "The foot is taken to where the ground was expected and then reaches down at a bounded rate until the contact sense of 34-07 says it is down."
     },
     {
       "stage": "check",
       "question": "A step down of 5 cm took an extension of:",
       "options": [
         "0.060 m, in 0.24 s",
-        "0.000 m",
-        "0 m",
-        "1 m"
+        "0.050 m, in 0.20 s",
+        "0.010 m, in 0.04 s",
+        "0.100 m, in 0.40 s, the most the leg may reach"
       ],
       "correct": 0,
-      "explanation": "At 0.25 m/s."
+      "explanation": "The swing ends 1 cm above where the ground was expected, so a 5 cm step down needs 6 cm of reaching, which at 0.25 m/s takes 0.24 s."
     },
     {
       "stage": "check",
       "question": "What did a hole deeper than the leg may reach give?",
       "options": [
-        "A normal landing",
-        "A bump",
-        "A fall",
+        "A landing, 0.60 s late",
+        "A touch reported at the limit of reach, as if the ground were there",
+        "A fault, and the machine went to sit",
         "A report of a hole after 0.40 s"
       ],
       "correct": 3,
-      "explanation": "Do not put weight on that leg."
+      "explanation": "The search stops at 10 cm below the planned place. Having found nothing by then (0.40 s at 0.25 m/s) it reports a hole, and the leg is brought back instead of being loaded."
     },
     {
       "stage": "check",
       "question": "Why is the ground estimate moved by a gain?",
       "options": [
-        "It is not",
-        "To save time",
+        "Because the contact sense is noisy and the gain filters the force",
+        "So that the estimate is ready before the foot lands",
         "One stone should not lift the body, while a real change is followed",
-        "To be slow"
+        "Because the feet are at different heights and the gain averages them"
       ],
       "correct": 2,
-      "explanation": "6.0 mm after one landing."
+      "explanation": "With a gain of 0.2 one landing on a 3 cm bump moved the estimate 6.0 mm, and ten moved it 26.8 mm. A single stone hardly moves the body; ground that stays higher is followed."
     },
     {
       "stage": "post",
       "question": "What must a swing do when the foot touches early?",
       "options": [
-        "Speed up",
-        "Go on",
+        "Finish its path, so that the timing of the gait is kept",
+        "Lift again and search for the ground from the top",
         "Stop, or the foot pushes into the bump",
-        "Reverse"
+        "Speed up, so that the weight comes on sooner"
       ],
       "correct": 2,
-      "explanation": "The contact sense of 34-07."
+      "explanation": "The foot is already on the ground. A swing that carries on drives the foot into the bump and lifts that corner of the body."
     },
     {
       "stage": "post",
       "question": "What is not covered?",
       "options": [
-        "The gain",
+        "The limit on how far the search may reach",
         "Looking ahead, soft ground and the slip of the foot",
-        "The hole",
-        "The search"
+        "The body's height over ground that is not level",
+        "What happens when the foot touches before the swing ends"
       ],
       "correct": 1,
-      "explanation": "A camera would let the robot choose the foot place."
+      "explanation": "The feet here find the ground by touch, one landing at a time. Choosing where to step needs a sensor that sees ahead, and soft or slippery ground needs more than a contact threshold."
     }
   ]
 }

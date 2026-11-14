@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What does a predictive controller know that a fixed gain law does not?",
       "options": [
-        "How to walk",
-        "More physics",
-        "Nothing",
+        "The exact model of the pendulum, where the fixed law uses an approximation",
+        "The body's velocity as well as its position",
+        "A larger bound on the ZMP than the fixed law is allowed",
         "What it will be able to do later (here, the bound on the ZMP), and that what it does now decides that"
       ],
       "correct": 3,
-      "explanation": "It looks ahead."
+      "explanation": "Both laws use the same pendulum and the same state. The predictive one also has the schedule of the bound for the steps ahead, so it can act in a wide window knowing that a narrow one follows."
     },
     {
       "stage": "check",
       "question": "The largest push recovered:",
       "options": [
-        "10 m/s",
-        "0",
+        "0.70 m/s by the fixed law and 0.90 m/s by the predictive one, the capture point limit",
+        "0.35 m/s by the fixed law and 0.71 m/s by the predictive one: twice as much",
         "0.70 m/s by the fixed law and 0.71 m/s by the predictive controller: about the same",
-        "Twice as much"
+        "0.71 m/s by the fixed law and 0.70 m/s by the predictive one, which gives some up to plan"
       ],
       "correct": 2,
-      "explanation": "A saturating law with high gain already uses all the push."
+      "explanation": "A clipped law with high gains already pushes as hard as the bound allows, so there is little left to gain in strength. Neither reaches the 0.90 m/s that a bound that was always wide would allow."
     },
     {
       "stage": "check",
       "question": "For a push of 0.6 m/s the body was back at the middle:",
       "options": [
-        "Never",
-        "After a minute",
+        "After 0.65 s (fixed law) and 1.05 s (predictive)",
+        "After 1.05 s for both, since the bound is the same",
         "After 1.05 s (fixed law) and 0.65 s (predictive)",
-        "At once"
+        "Only by the predictive one; the fixed law fell"
       ],
       "correct": 2,
-      "explanation": "Speed is where it wins."
+      "explanation": "Both recover. The predictive controller is quicker because it spends the wide windows knowing when they end."
     },
     {
       "stage": "check",
       "question": "For a small push the quieter controller was:",
       "options": [
-        "The predictive one",
+        "The predictive one: 0.05 s against 0.40 s",
         "The fixed gain law: 0.05 s against 0.40 s",
-        "Both the same",
-        "Neither"
+        "Both the same, since neither reaches the bound",
+        "Neither settled within the test"
       ],
       "correct": 1,
-      "explanation": "A plan has a cost."
+      "explanation": "For a push the fixed law can absorb at once there is nothing to plan for, and the predictive controller's weighing of the whole horizon makes it slower to come to rest."
     },
     {
       "stage": "post",
       "question": "Why is only the first command used?",
       "options": [
-        "The others are wrong",
-        "It is required",
-        "It is cheaper",
+        "The later commands break the bound, so they cannot be used",
+        "The solver only converges for the first one",
+        "The later ones are kept and used if the next solve fails to finish in time",
         "The state changes and the problem is solved again at the next step: a receding horizon"
       ],
       "correct": 3,
-      "explanation": "Every step has new information."
+      "explanation": "By the next step the state has been measured again, so the problem is solved afresh from there. The rest of the old plan was made with older information."
     },
     {
       "stage": "post",
       "question": "What is a real controller's solver, unlike this one?",
       "options": [
         "A proper QP solver with a warm start and a check that it converged",
-        "A table",
-        "A lookup",
-        "The same"
+        "The same method with more iterations",
+        "A table of answers worked out beforehand for every state",
+        "A fixed gain law, with the predictive one as a check"
       ],
       "correct": 0,
-      "explanation": "This one is a plain projected gradient with fixed iterations."
+      "explanation": "Three hundred fixed iterations of a projected gradient is what could be written in a lesson. A real controller starts from the last answer and checks that it converged before using it."
     }
   ]
 }
