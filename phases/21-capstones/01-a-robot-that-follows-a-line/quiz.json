@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What is different about the line follower built here?",
       "options": [
-        "It uses a real camera",
-        "It is faster",
-        "It has no PID",
+        "It uses a real camera in place of a rendered picture",
+        "It follows the line with no PID controller at all",
+        "It is tuned to be faster than the usual kind",
         "It knows when it has lost the line and stops, through the supervisor of phase 19"
       ],
       "correct": 3,
-      "explanation": "Every capstone uses the safety primitives."
+      "explanation": "The controller is the PID of 14-01 on a blob measured from a picture. What is added is the supervisor, which turns a lost line into a stop."
     },
     {
       "stage": "check",
       "question": "Doubling the gain from 5 to 8 did what to the error?",
       "options": [
-        "Stopped the robot",
-        "Halved it",
-        "Nothing",
+        "Halved it, from 0.0152 to 0.0076",
+        "Left it at 0.0152 exactly",
+        "Made the loop unstable, and the supervisor stopped the robot",
         "Raised it, from 0.0152 to 0.0182: past a point more gain does not help"
       ],
       "correct": 3,
-      "explanation": "The error fell by about three from 1.5 to 3 and again to 5."
+      "explanation": "From 1.5 to 3 and from 3 to 5 the error fell by about a factor of three each time. Past 5 it turned and rose a little."
     },
     {
       "stage": "check",
       "question": "At 0.8 m/s a 400 ms camera delay did what?",
       "options": [
-        "Reduced the error",
+        "Nothing: delay only matters above one second",
         "The loop became unstable, the line left the picture, and the supervisor stopped the robot at x 1.69 m",
-        "Nothing",
-        "Raised the speed"
+        "Raised the error by half, to 0.0669, with no stop",
+        "Slowed the robot to half speed"
       ],
       "correct": 1,
-      "explanation": "Up to 200 ms it hardly mattered."
+      "explanation": "Up to 200 ms the error hardly moved, and at 300 ms it was 1.5 times worse. At 400 ms the robot swung out until the line left the picture."
     },
     {
       "stage": "check",
       "question": "A gap of 0.6 m in the line was crossed with which debounce?",
       "options": [
-        "None",
+        "3 frames (60 ms)",
         "50 frames (1000 ms): a shorter debounce stopped the robot at the gap",
-        "3 frames",
-        "10 frames"
+        "10 frames (200 ms)",
+        "25 frames (500 ms)"
       ],
       "correct": 1,
-      "explanation": "The debounce is a distance, not a number of frames."
+      "explanation": "The gap empties the picture for about a second at this speed. Shorter debounces stopped the robot at the gap; the cost of a long one is a second of driving blind."
     },
     {
       "stage": "post",
       "question": "Why did the first version of the code stop at the start line with a delay of three frames or more?",
       "options": [
         "The empty pipe at the start was counted as lost line frames, and three of them are a fault",
-        "A crash",
-        "The fence",
-        "The camera was dead"
+        "The camera was not yet switched on",
+        "The PID's integral was not reset",
+        "The fence was loaded after the first frame"
       ],
       "correct": 0,
-      "explanation": "No data yet is not a lost line."
+      "explanation": "With a delay, the first frames have nothing in the pipe. That is no data yet, and counting it as a lost line stopped the robot before it had moved."
     },
     {
       "stage": "post",
       "question": "What should the portfolio show for a project like this?",
       "options": [
-        "A video",
-        "The code only",
+        "A video of the robot following the line",
+        "The source code and nothing else",
         "The table, the failure and a black box number, each with the command that makes it",
-        "The price"
+        "The top speed it reached"
       ],
       "correct": 2,
-      "explanation": "A reader trusts a robot that stops at 400 ms more than one that has only been seen to work."
+      "explanation": "A table anyone can reproduce, with the case where it fails and what the black box held, says more about the work than a run that went well."
     }
   ]
 }

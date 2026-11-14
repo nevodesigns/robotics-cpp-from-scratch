@@ -6,61 +6,61 @@
       "stage": "pre",
       "question": "Which line of the day's report is the one a reader trusts it for?",
       "options": [
-        "The totals",
-        "The version",
+        "The totals, which show how many jobs were delivered",
+        "The version line, which shows the gate passed",
         "The last: the hazards with no scenario, which says what nobody has shown, where a report ending on the good news is a report of a good day",
-        "The black box"
+        "The black box line, which shows the log is intact"
       ],
       "correct": 2,
-      "explanation": "G3, G5, G6 and G7 are open."
+      "explanation": "A report that ended on the good news would be a report of a good day. The last line says which hazards nobody has shown anything about."
     },
     {
       "stage": "check",
       "question": "The unsafe rover had the better day by one measure. Which, and what were the others?",
       "options": [
-        "Battery",
-        "Bumps",
-        "Speed: it was faster",
+        "Bumps: it had fewer",
+        "Battery: it used less",
+        "Operator resets: it needed more",
         "Deliveries, 5 of 5 against 3, with 288 bumps, no stops where two were needed and no resets"
       ],
       "correct": 3,
-      "explanation": "A robot is judged by deliveries until the first time somebody is hurt."
+      "explanation": "It delivered all five, including the two jobs where stopping was right, and was in contact for 288 ticks. By the first number a customer sees, it won."
     },
     {
       "stage": "check",
       "question": "Why does the day have two operator resets?",
       "options": [
-        "The black box",
+        "The gate was run twice",
         "Two jobs ended in a latched stop by the supervisor (link and sensors), and a latched stop needs a person",
-        "A bug",
-        "The gate"
+        "The black box filled up twice",
+        "Two jobs took too long"
       ],
       "correct": 1,
-      "explanation": "Lesson 19-02."
+      "explanation": "The link was lost in one job and the sensor died in another. Each is a latched stop, and a latched stop is cleared by a person."
     },
     {
       "stage": "check",
       "question": "The gate refused the release. What was the robot's day?",
       "options": [
-        "A bad one",
+        "A bad one: nothing was delivered",
         "The same as before: still on 1.4.2, 3 delivered, 2 stopped, 0 bumps",
-        "Unsafe",
-        "Idle"
+        "An idle one: the robot waited for a release",
+        "An unsafe one, on the refused policy"
       ],
       "correct": 1,
-      "explanation": "A refused release is not a bad day."
+      "explanation": "Nothing was written to the robot. It ran the policy it already had and had the same day as before."
     },
     {
       "stage": "post",
       "question": "What does 'chain verified' on the black box line tell a reader?",
       "options": [
-        "The log is long",
         "The robot is safe",
+        "The log is complete to the last event",
         "The log has not been edited between the robot and the report: a missing, reordered or altered event would be found",
-        "The time is right"
+        "The clock was right all day"
       ],
       "correct": 2,
-      "explanation": "Lesson 19-12."
+      "explanation": "Each event carries a hash of itself and the one before. A change, a removal or a reordering between the robot and the report would break the chain."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "Reliability: it is one day of five jobs in one simulated building, and it can only show what the suite tries",
         "How many jobs were delivered",
-        "The causes of the stops",
-        "The version"
+        "Why each stop happened",
+        "Which release ran"
       ],
       "correct": 0,
-      "explanation": "A sample and not a measure."
+      "explanation": "Five jobs in one simulated building is a sample. It shows what happened on this day in these cases, and nothing about the days and cases it did not have."
     }
   ]
 }

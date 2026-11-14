@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "At 2 m/s and 1.5 m/s^2 of braking, what timeout stops the robot within a metre of the link going?",
       "options": [
-        "0.1 s",
+        "0.667 s",
         "None: the braking alone is 1.333 m, so the answer is a lower speed",
-        "0.5 s",
-        "1 s"
+        "0.3 s",
+        "0.1 s"
       ],
       "correct": 1,
-      "explanation": "max_timeout is zero."
+      "explanation": "At 2 m/s the braking distance alone is 2 squared over twice 1.5, 1.333 m. No timeout can make that less than a metre."
     },
     {
       "stage": "check",
       "question": "The link comes back after a stop, with no reset pressed. What does the robot do?",
       "options": [
-        "Goes on",
-        "Resets itself",
+        "Goes on from where it stopped",
+        "Resets itself after a second of good link",
         "Stays stopped: the link coming back is not permission, and a person presses reset after a second of good link",
-        "Slows"
+        "Goes on at half speed"
       ],
       "correct": 2,
-      "explanation": "The latch is the point."
+      "explanation": "The stop is latched. With no reset it was still stopped at 40 s; with a person pressing reset after a second of good link it went on."
     },
     {
       "stage": "check",
       "question": "A link that delays every packet by one second. How much farther does a robot at 1 m/s go after the link fails?",
       "options": [
-        "Nothing",
-        "Ten metres",
+        "Nothing: a delayed packet is still a packet",
+        "Ten metres more",
         "One metre more (1.598 m against 0.598 m): the delay is added at the speed",
-        "0.1 m"
+        "0.3 m more, the timeout"
       ],
       "correct": 2,
-      "explanation": "Plan for the timeout plus the delay."
+      "explanation": "Old commands keep arriving for a second after the link has really failed, and the robot keeps obeying them at 1 m/s."
     },
     {
       "stage": "check",
       "question": "On a link that loses 20 percent, a timeout of 0.1 s did what over an hour?",
       "options": [
         "1198 false stops, with the robot stopped for 52.1 percent of the hour",
-        "Nothing",
-        "3 false stops",
-        "Stopped it once"
+        "3 false stops, stopped for 0.1 percent of the hour",
+        "No false stops",
+        "185 false stops, stopped for 5.5 percent"
       ],
       "correct": 0,
-      "explanation": "The operator gives up, and the safety function is switched off."
+      "explanation": "Two heartbeats lost in a row has a chance of 0.04, and there are 72000 heartbeats in an hour. The robot spent more time stopped than moving."
     },
     {
       "stage": "post",
       "question": "The robot's timeout is too short for the loss and too long for the distance. What is the answer?",
       "options": [
-        "Pick the middle",
-        "Remove the timeout",
-        "A longer reset",
+        "A timeout half way between the two",
+        "No timeout at all",
+        "A longer wait before reset",
         "Neither: a better link, or a lower speed"
       ],
       "correct": 3,
-      "explanation": "The two terms did not meet."
+      "explanation": "The distance sets the longest timeout and the loss sets the shortest. When the first is below the second, no timeout satisfies both."
     },
     {
       "stage": "post",
       "question": "Why does real radio make loss to the power k a poor guide?",
       "options": [
         "Real loss comes in bursts: false stops are rarer and real outages longer than the independent model says",
-        "Radio never loses packets",
-        "It does not",
-        "The heartbeat is slower"
+        "Real radio never loses packets",
+        "It is a good guide: losses are independent",
+        "The heartbeat rate changes with the loss"
       ],
       "correct": 0,
-      "explanation": "A limit of the model."
+      "explanation": "The table assumes each packet is lost independently. A real link loses them in runs, so the same average loss gives fewer false stops and longer silences."
     }
   ]
 }

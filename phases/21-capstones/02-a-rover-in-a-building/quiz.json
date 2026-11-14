@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "The supervisor was on and the limiter off, and somebody stepped into the path. What happened?",
       "options": [
-        "It stopped the rover",
-        "It slowed down",
+        "The supervisor stopped the rover when the person appeared",
+        "The rover slowed to half speed",
         "Nothing: the supervisor decides from what it is told, and with no limiter nothing told it about the person (144 ticks in contact)",
-        "The fence stopped it"
+        "The fence stopped the rover"
       ],
       "correct": 2,
-      "explanation": "A supervisor is not a sensor."
+      "explanation": "The supervisor acts on what its monitors tell it. With the limiter off, no monitor reported the person, so its cap stayed at the top speed."
     },
     {
       "stage": "check",
       "question": "How long was the rover with neither the limiter nor the supervisor in contact with the person?",
       "options": [
         "144 ticks of 0.05 s, 7.2 seconds, pushing against them until they left",
-        "The whole run",
-        "Not at all",
-        "1 tick"
+        "Not at all: it steered round them",
+        "1 tick, before it backed off",
+        "For the whole run"
       ],
       "correct": 0,
-      "explanation": "And then it reached the goal, which is the worst way for a test to pass."
+      "explanation": "It pressed against the person until they walked away and then drove on to the goal. A test that only checked arrival would have passed."
     },
     {
       "stage": "check",
       "question": "Why did a rover that never forgets wait for 120 s at a doorway that had been clear since 20 s?",
       "options": [
-        "The planner failed",
-        "The person came back",
-        "The door closed",
+        "The planner had run out of iterations",
+        "The person came back at 20 s",
+        "The map marked the doorway as a wall for good",
         "It was waiting out of sight of the doorway, so nothing on the map could change: a belief nobody can check does not go away"
       ],
       "correct": 3,
-      "explanation": "Forgetting lets it go and look again."
+      "explanation": "From where it waited the doorway was out of view, so no beam could clear it. Forgetting after 4 s made it go and look, and it arrived 7 s after the person left."
     },
     {
       "stage": "check",
       "question": "The link was lost at 5 s and came back at 9 s. Why did the rover stay stopped?",
       "options": [
-        "The sensor",
-        "A bug",
-        "The planner",
+        "The planner had no path while the link was down",
+        "The range sensor failed at the same time",
+        "The battery monitor derated it to zero",
         "The supervisor latches, and a reset is a person's decision: cause link, still at the end"
       ],
       "correct": 3,
-      "explanation": "With no supervisor it drove on through."
+      "explanation": "A stop for a lost link is latched. The link's return does not restart the rover; only a reset does, and nobody gave one."
     },
     {
       "stage": "post",
       "question": "What is the difference between the limiter alone and the supervisor with it, when the sensor dies?",
       "options": [
-        "None",
-        "The supervisor is slower",
+        "None: both stop and both record the cause",
+        "The limiter alone does not stop",
         "Both stop, but the limiter alone does it with no cause on record and would restart when the sensor came back; the supervisor gives a cause, a latch and a reset",
-        "The limiter is faster"
+        "The supervisor stops later, after 4.8 m"
       ],
       "correct": 2,
-      "explanation": "Both stopped after 2.4 m."
+      "explanation": "The limiter reads a NaN as a blocked path and sets the speed to zero. The supervisor adds what a person needs afterwards: why it stopped, and that it stays stopped."
     },
     {
       "stage": "post",
       "question": "What should the README of a project like this show?",
       "options": [
-        "The video",
+        "A video of the rover reaching the goal",
         "The table of what each layer does, including the row where a layer on its own does nothing, and the rover waiting at a door that is open",
-        "The code",
-        "The map"
+        "Only the map of the building",
+        "The fastest run"
       ],
       "correct": 1,
-      "explanation": "The interviewer learns that you have run it."
+      "explanation": "The rows where a layer alone did nothing, and where the rover sat at an open door, are the ones that show the system was really exercised."
     }
   ]
 }

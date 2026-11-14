@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is 'all tests pass' not enough to hand to somebody deciding whether to trust the robot?",
       "options": [
-        "Tests lie",
+        "Tests can pass by mistake, so a second run is always needed",
         "It does not say which hazards were tried: four of the eight had no scenario at all",
-        "Tests are slow",
-        "It is too short"
+        "A pass says nothing about how long the tests took",
+        "It is too short to print in a report"
       ],
       "correct": 1,
-      "explanation": "The report names G3, G5, G6 and G7."
+      "explanation": "A suite can only pass on what it tries. The report lists every hazard of class medium or worse and says which had a scenario, so the untested ones are in plain sight."
     },
     {
       "stage": "check",
       "question": "For the link scenario S4, what is the pass?",
       "options": [
         "Not reaching it: stopped with cause link and still at the end",
-        "Speed",
-        "A short time",
-        "Reaching the goal"
+        "Reaching the goal after the link returns",
+        "Reaching the goal faster than without the link",
+        "Slowing to half speed while the link is down"
       ],
       "correct": 0,
-      "explanation": "A safety scenario passed by completing the task is not testing safety."
+      "explanation": "For a safety scenario the right outcome is the stop. A rover that finished the route through a lost link would have failed it."
     },
     {
       "stage": "check",
       "question": "The limiter and supervisor are taken out. Which scenarios still pass?",
       "options": [
-        "All",
-        "None",
+        "All five: the building and the people are the same",
+        "None: every scenario needs the supervisor",
         "The empty building and the doorway: the functional tests pass and the three safety scenarios fail",
-        "Only S4"
+        "Only S4 and S5, which have no person in them"
       ],
       "correct": 2,
-      "explanation": "failing: G1, G2, G4, G8."
+      "explanation": "The rover without its safety layer still drives through an empty building and past an empty doorway. The three scenarios with something wrong all fail."
     },
     {
       "stage": "check",
       "question": "The link scenario is left out of the suite. What does the suite say?",
       "options": [
-        "Nothing",
-        "Amber",
-        "Red",
+        "Red: a missing scenario fails the suite",
+        "Amber, with a warning",
+        "Nothing: the suite refuses to run",
         "Green, and the report lists G2, the unacceptable hazard, as NOT COVERED"
       ],
       "correct": 3,
-      "explanation": "An uncovered hazard is a gap, not a failure of what was tested."
+      "explanation": "Every scenario that was run passed, so the suite is green. The report still shows the worst hazard in the log with no evidence, which is the line a reviewer reads first."
     },
     {
       "stage": "post",
       "question": "Why was the layout of the report tested with results made by hand?",
       "options": [
-        "It is a rule",
-        "Speed",
+        "The simulation gives different results on each run",
+        "Hand made results are faster to compute",
         "So a change to the physics cannot break the report, and a change to the report is one somebody has to look at",
-        "The simulation is random"
+        "A rule of the report format"
       ],
       "correct": 2,
-      "explanation": "The text is checked to the character."
+      "explanation": "Testing the text with fixed inputs separates two things. The physics can change without touching the layout, and the layout cannot change unnoticed."
     },
     {
       "stage": "post",
       "question": "What can the report not tell?",
       "options": [
-        "Which scenarios passed",
+        "How many scenarios were run",
         "Whether a scenario's rule would really catch the hazard, and whether the link between scenario and hazard is true: both are claims a person made",
-        "How many tests ran",
-        "The time"
+        "Which hazards had no scenario",
+        "Whether the suite was green"
       ],
       "correct": 1,
-      "explanation": "A covered hazard was tried once, in one building."
+      "explanation": "That a scenario is evidence for a hazard is something a person decided. The report repeats the claim and cannot test it, and covered means tried once in one building."
     }
   ]
 }

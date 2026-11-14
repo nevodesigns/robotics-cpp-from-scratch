@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why must the battery cover the round trip and a reserve before the mission starts?",
       "options": [
-        "To keep warm",
-        "The reserve is a fee",
-        "Tradition",
+        "The reserve is a charge made by the fleet's owner",
+        "A full battery keeps the motors warm",
+        "Because the check is cheapest to write there",
         "A robot that cannot get home has made a delivery and then become a hazard on the road: the cheapest place to find out is before it leaves"
       ],
       "correct": 3,
-      "explanation": "25 Wh for 20 Wh of round trip and 5 of reserve."
+      "explanation": "A robot that runs out on the way back blocks the road with nobody near. Refusing at the start costs one delivery and nothing else."
     },
     {
       "stage": "check",
       "question": "At 0.12 Wh/m used against 0.1 expected, what did checking on the way do?",
       "options": [
-        "Nothing",
-        "Saved the robot",
+        "Saved a robot that would have been stranded",
+        "Nothing: both robots delivered",
         "Turned back a delivery that would have made it: 3.07 Wh left, not delivered, where the unchecking robot delivered with 1.98 left",
-        "Stranded it"
+        "Stranded the robot 26.7 m out"
       ],
       "correct": 2,
-      "explanation": "The check judges by the expected rate."
+      "explanation": "The check uses the rate the robot expects, 0.1, and is cautious. At 0.12 the other robot got home with 1.98 Wh, so this caution cost a delivery."
     },
     {
       "stage": "check",
       "question": "At 0.15 Wh/m, what did the robot that checked only at the start do?",
       "options": [
-        "Refused",
-        "Turned back",
-        "Delivered and came home",
+        "Refused to start",
+        "Turned back before the drop",
+        "Delivered and got home with 0.79 Wh",
         "Delivered and was stranded 26.7 m from home, unable to come back, where the checking robot got home with 0.79 Wh"
       ],
       "correct": 3,
-      "explanation": "A check on the way costs deliveries and saves robots."
+      "explanation": "It had no way to notice it was using more than planned. The one that checked gave up the delivery and came home."
     },
     {
       "stage": "check",
       "question": "A road is blocked both ways. What state does the mission end in, and why not wait?",
       "options": [
-        "aborted",
+        "aborted, back at home with the load",
         "needs help: stopped where it is, since there is no safe place to go and waiting for ever or doing something clever are both worse",
-        "to home",
-        "done"
+        "done, after waiting for the road to clear",
+        "to home, by another route"
       ],
       "correct": 1,
-      "explanation": "A state machine gives every combination an answer."
+      "explanation": "With the road blocked ahead and behind there is nowhere to go. The mission ends in a state of its own, so that a person is called."
     },
     {
       "stage": "post",
       "question": "The link was lost for 30 s. What did the pause cost?",
       "options": [
         "31.0 s of time, the whole difference (435 s against 404 s), and no energy: the state, position and timers were kept",
-        "A restart",
-        "The load",
-        "The mission"
+        "A restart from the beginning of the road",
+        "The delivery, which was aborted",
+        "31.0 s of time and 3 Wh of energy"
       ],
       "correct": 0,
-      "explanation": "A pause does not start over."
+      "explanation": "The mission holds while the supervisor has the robot stopped. Nothing times out, and it carries on from where it was."
     },
     {
       "stage": "post",
       "question": "A margin of 1.5 on the rate stranded none in 72 worlds. What did it cost?",
       "options": [
-        "Nothing",
+        "Nothing: it only removed the stranded ones",
         "54 of 72 missions refused and half as many delivered: safety bought with work, for the owner to choose",
-        "A bigger battery",
-        "Speed"
+        "A larger battery in every robot",
+        "5 more stranded robots"
       ],
       "correct": 1,
-      "explanation": "Same code, one number different."
+      "explanation": "Planning for half as much energy again strands nobody and turns down most of the work. Which to prefer is the fleet owner's choice."
     }
   ]
 }

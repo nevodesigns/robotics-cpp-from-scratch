@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What does the gate add to the pipeline of lesson 20-12?",
       "options": [
-        "Another check of the manifest",
-        "A signature",
-        "Speed",
+        "A second check of the manifest's hash",
+        "A signature on the release",
+        "A faster install",
         "A stage that asks whether the release is safe, before the first stage: the pipeline does not know what the release does"
       ],
       "correct": 3,
-      "explanation": "The gate comes first."
+      "explanation": "The pipeline of 20-12 checks that a release is for this robot, intact, newer and small enough. It has no idea whether the policy inside drives into people."
     },
     {
       "stage": "check",
       "question": "The candidate has the limiter and supervisor taken out. Which scenario passed?",
       "options": [
-        "None",
-        "S4",
+        "None: an unsafe rover fails everything",
+        "S4, the lost link",
         "S1, the empty building: it drives perfectly, and only the three scenarios with something in the way failed",
-        "All"
+        "All five"
       ],
       "correct": 2,
-      "explanation": "failing: S2, S4, S5; hazards G1, G2, G4, G8."
+      "explanation": "With nothing in the way the unsafe candidate is a perfectly good rover. That is why a functional test alone proves so little."
     },
     {
       "stage": "check",
       "question": "Why is there no flag to skip the gate?",
       "options": [
-        "It is faster",
-        "The compiler",
+        "A flag would slow the gate down",
+        "The compiler cannot express an optional stage",
         "A gate that can be switched off with an argument will be, on the day it matters",
-        "Tradition"
+        "Because the pipeline already has one"
       ],
       "correct": 2,
-      "explanation": "A design decision."
+      "explanation": "The day somebody wants to skip the gate is the day a release is late and looks fine. Leaving no switch is the decision."
     },
     {
       "stage": "check",
       "question": "A candidate fails only S3, which is for no hazard of the log. Does the gate pass it?",
       "options": [
-        "Only with a warning",
+        "Yes: no hazard is failing",
         "No: S3 is a functional scenario the robot must pass, and a robot that is safe because it never moves is not a product",
-        "Yes",
-        "Yes, no hazard is failing"
+        "Yes, with a warning in the report",
+        "Only if S1 also failed"
       ],
       "correct": 1,
-      "explanation": "The gate is the whole suite."
+      "explanation": "The candidate that never forgets waits for ever at a clear doorway. The gate is the whole suite, and a robot that does not do its job does not ship either."
     },
     {
       "stage": "post",
       "question": "A candidate passes the gate and the release crashes 2 s after starting on the robot. What catches it?",
       "options": [
-        "The gate again",
+        "The gate, run again on the robot",
         "The trial of 20-06: the gate tests the policy in a simulation, the trial tests the release on a robot",
-        "Nothing",
-        "The manifest"
+        "The manifest check",
+        "Nothing: once past the gate a release is trusted"
       ],
       "correct": 1,
-      "explanation": "Neither can do the other's job."
+      "explanation": "A crash at start is a fault of the build or the image, which the simulation does not contain. The trial on the robot found it and rolled back to 1.4.2."
     },
     {
       "stage": "post",
       "question": "Twenty robots are offered the unsafe rover. How many run it with and without the gate?",
       "options": [
         "0 with the gate and 20 without: the pipeline checks everything it knows to check, and the release is valid",
-        "0 and 0",
-        "20 and 20",
+        "20 with the gate and 20 without",
+        "0 with either: the pipeline refuses it",
         "10 and 10"
       ],
       "correct": 0,
-      "explanation": "The pipeline did not know what the release does."
+      "explanation": "The release was valid, fitted and booted, so the pipeline passed it to all twenty. Only the gate knew what the policy did."
     }
   ]
 }

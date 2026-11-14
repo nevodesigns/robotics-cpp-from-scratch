@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "The wheel base is 5 percent out. What does it cost when driving straight?",
       "options": [
-        "A metre in 30",
+        "5 percent of the distance",
         "Nothing: it only divides the difference between the wheels",
-        "5 percent",
-        "The heading"
+        "The heading, which drifts 5 percent",
+        "About a metre in 30"
       ],
       "correct": 1,
-      "explanation": "0.00 at 10, 20 and 30 m."
+      "explanation": "The wheel base only enters where the wheels' distances differ. Going straight they are equal, and the error was 0.00 at 10, 20 and 30 m."
     },
     {
       "stage": "check",
       "question": "A wheel 1 percent big gave 1.66 m at 10 m. What was the error at 20 m and 30 m?",
       "options": [
-        "3.3 and 5",
+        "3.32 and 4.98: in proportion to the distance",
         "6.55 and 14.49: about four and nine times, since the error goes as the square of the distance",
-        "1.66",
-        "Zero"
+        "1.66 at both: the error does not grow",
+        "0.83 and 0.55: fixes average it down"
       ],
       "correct": 1,
-      "explanation": "A centimetre a metre at the start is a metre at 100 m."
+      "explanation": "A wheel that is a little big turns the robot steadily, so the heading error grows with distance and the position error with its square."
     },
     {
       "stage": "check",
       "question": "Why do fixes every 2 s leave an error of 1.42 m when each fix is good to 0.1 m?",
       "options": [
-        "The filter",
-        "The beacon is bad",
+        "The filter is tuned too slowly",
+        "The beacon's 0.1 m is optimistic",
         "The error is set by the time between fixes: the drift between them, and the fix does not correct the heading, which is what is wrong",
-        "The wheel"
+        "The wheel is 10 percent big"
       ],
       "correct": 2,
-      "explanation": "Bounded by the interval, not by the fix."
+      "explanation": "A fix resets the position and leaves the heading wrong, so the drift starts again at once. How far it gets is set by how long until the next fix."
     },
     {
       "stage": "check",
       "question": "A fence on the believed position was given no buffer. What happened to the robot whose truth left the corridor after 9.6 m?",
       "options": [
-        "It turned",
-        "It slowed",
-        "It stopped",
+        "It stopped at the edge",
+        "It slowed as it neared the edge",
+        "It turned back toward the axis",
         "It never stopped: the belief stays on the axis, so the fence never trips, and the robot ended at y = -18.3 m"
       ],
       "correct": 3,
-      "explanation": "A fence with the right polygon and the wrong position is not a fence."
+      "explanation": "The fence was checked against where the robot believed it was. That belief stayed in the middle of the corridor while the robot left it."
     },
     {
       "stage": "post",
       "question": "Which assumed drifts stopped the robot before the truth left the corridor?",
       "options": [
         "0.20 and 0.40 m per metre: 0.05 and 0.10 stopped it after the truth was outside, and the real drift at the edge was 0.156 and growing",
-        "Only 0.05",
-        "None",
-        "All"
+        "All four",
+        "None of them",
+        "Only 0.05, the smallest"
       ],
       "correct": 0,
-      "explanation": "Assume the drift for the longest distance between fixes."
+      "explanation": "By the time the truth reached the edge it had drifted 1.5 m in 9.6 m, and the rate was rising. A buffer built on less than that stops too late."
     },
     {
       "stage": "post",
       "question": "What do fixes every 5 s add to the safety argument?",
       "options": [
         "Range: with the same assumed drift the robot went 8.7 m before it had to stop, against 5.1 m without",
-        "Safety",
-        "A smaller buffer",
-        "Nothing"
+        "Safety: with fixes no buffer is needed",
+        "A smaller stopping distance",
+        "Nothing measurable"
       ],
       "correct": 0,
-      "explanation": "The beacon buys distance, not safety."
+      "explanation": "The buffer grows with the distance since the last fix. Fixes keep that distance short, so the robot can go further before the buffer fills the corridor."
     }
   ]
 }
