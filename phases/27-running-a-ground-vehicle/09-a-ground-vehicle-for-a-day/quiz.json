@@ -7,72 +7,72 @@
       "question": "How are the limits on the speed joined?",
       "options": [
         "The least of them, with the field having the last word",
-        "Averaged",
-        "Added",
-        "The first one wins"
+        "They are averaged, with weights",
+        "The mission's speed is used unless a field objects",
+        "The largest that any layer allows"
       ],
       "correct": 0,
-      "explanation": "combine_speed."
+      "explanation": "The mission's speed is cut to the mode's cap, and then the protective field can cut it to a creep or a stop. Nothing can raise it."
     },
     {
       "stage": "check",
       "question": "With the layers the vehicle completed how many of the 4 legs, and touched how many people?",
       "options": [
-        "4 and 1",
-        "2 and 5",
         "2 and 1",
+        "4 and 1",
+        "3 and 0",
         "4 and 0"
       ],
       "correct": 3,
-      "explanation": "The whole day, and no one."
+      "explanation": "It did all four legs in 470 s. The field held it for 11.4 s at the person, and it took two tries to get past the snag."
     },
     {
       "stage": "check",
       "question": "Without the layers the vehicle:",
       "options": [
-        "Did the whole day",
+        "Finished late, with no contact",
         "Drove into the person, skipped two legs and ran out of charge 150 m from the dock",
-        "Went home early",
-        "Never left the dock"
+        "Stayed at the dock on the checklist",
+        "Did three legs and came home"
       ],
       "correct": 1,
-      "explanation": "It did what it was told."
+      "explanation": "Same vehicle, same events, none of the layers. It was not broken; nothing told it to stop, slow or turn back."
     },
     {
       "stage": "check",
       "question": "The release offered in the middle of a job was:",
       "options": [
         "Refused, and taken at the dock",
-        "Taken",
-        "Lost",
-        "Refused at the dock too"
+        "Taken at once, mid job",
+        "Refused both times",
+        "Taken after the job's current leg"
       ],
       "correct": 0,
-      "explanation": "The vehicle was not parked."
+      "explanation": "In the middle of a job the vehicle was not parked and had a mission under way. Parked at the charger the same release was accepted."
     },
     {
       "stage": "post",
       "question": "Why is the field applied before the unsticking ladder?",
       "options": [
-        "It is faster",
-        "No reason",
+        "The ladder is slower to compute",
+        "The field only works going forward",
         "A vehicle backing up must not back into the person who made it stop",
-        "Habit"
+        "So that the mode's cap is applied last"
       ],
       "correct": 2,
-      "explanation": "The order is the decision."
+      "explanation": "The ladder overrides the command to back the vehicle off a snag. With the field checked first, that override is still stopped by a person behind."
     },
     {
       "stage": "post",
       "question": "What is the main thing this simulation does not tell you?",
       "options": [
-        "How fast it is",
+        "Whether the layers work together at all",
         "What a real day on a real vehicle is like: it is one dimension, a point, scripted",
-        "Nothing",
-        "The battery"
+        "Which layer handles which event",
+        "How much charge the day used"
       ],
       "correct": 1,
-      "explanation": "Everything here ran against fakes."
+      "explanation": "It is one road, a point for a vehicle and a script of events, all against fakes. It shows how the parts fit, not how a day goes."
     }
   ]
 }

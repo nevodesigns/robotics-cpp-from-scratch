@@ -6,61 +6,61 @@
       "stage": "pre",
       "question": "Why not just stop when anything fails?",
       "options": [
-        "Stopping is dangerous",
-        "Law",
+        "A stopped vehicle uses more power",
+        "The checklist would refuse the next run",
         "A vehicle that stops needs a person to walk to it, for a fault a slower vehicle could live with",
-        "Motors cannot stop"
+        "Stopping wears the brakes"
       ],
       "correct": 2,
-      "explanation": "Do less, not nothing."
+      "explanation": "Most faults leave a vehicle that can still do something safely. Dropping to a slower mode keeps it working and saves the walk."
     },
     {
       "stage": "check",
       "question": "A lost scanner asked for which mode?",
       "options": [
-        "1",
-        "2",
-        "Full",
+        "1, reduced",
+        "2, a creep",
+        "0, full: the other sensors cover it",
         "3, a safe stop"
       ],
       "correct": 3,
-      "explanation": "Nothing sees obstacles."
+      "explanation": "With no scanner nothing sees obstacles and the protective fields are blind, so no speed is safe."
     },
     {
       "stage": "check",
       "question": "A lost GNSS and a lost link together asked for:",
       "options": [
         "2, a creep: a second fault costs more",
-        "A stop",
-        "1",
-        "Full"
+        "1, reduced, as for either alone",
+        "3, a safe stop",
+        "0, full"
       ],
       "correct": 0,
-      "explanation": "It has lost the thing that would have caught it."
+      "explanation": "Either alone asks for reduced. Together, the vehicle has a poorer position and nobody to ask, and the mode drops a step further."
     },
     {
       "stage": "check",
       "question": "A requirement flapping every 2 s changed the mode raw and through the manager:",
       "options": [
-        "0 and 0",
+        "60 times both",
         "1 and 60 times",
         "60 and 1 times",
-        "The same"
+        "0 and 60 times"
       ],
       "correct": 2,
-      "explanation": "The dwell stops it."
+      "explanation": "A worse requirement is taken at once and a better one only after 10 s of being better. The flapping never lasted that long, so the mode went down once and stayed."
     },
     {
       "stage": "post",
       "question": "How long did the vehicle take to be back at full speed once the scanner came back?",
       "options": [
-        "Never",
+        "10 s, one dwell",
         "30 s, one step per dwell",
-        "1 s",
-        "At once"
+        "At once: the fault had cleared",
+        "120 s"
       ],
       "correct": 1,
-      "explanation": "Safe stop, creep, reduced, full."
+      "explanation": "Up is one step for each dwell of 10 s: from safe stop to creep, to reduced, to full."
     },
     {
       "stage": "post",
@@ -68,11 +68,11 @@
       "options": [
         "468 m",
         "10 m",
-        "1 m",
-        "As far as it likes"
+        "1.5 m",
+        "As far as it likes: the gyro holds the heading"
       ],
       "correct": 0,
-      "explanation": "d = (limit squared - sigma0 squared) / k squared."
+      "explanation": "The uncertainty grows as the root of the distance. From 0.05 m, at the growth the course measured, it reaches 1.5 m after 468 m, stepping the mode down on the way."
     }
   ]
 }

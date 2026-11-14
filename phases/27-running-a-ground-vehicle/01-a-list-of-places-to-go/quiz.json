@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "When is a leg of a waypoint mission reached?",
       "options": [
-        "When the battery is low",
-        "When the path is planned",
+        "When the vehicle first comes within the tolerance",
+        "When the vehicle has stopped, wherever it is",
         "When the vehicle is within the tolerance and has stood for the dwell time",
-        "When the timer runs out"
+        "When the leg's timeout has passed"
       ],
       "correct": 2,
-      "explanation": "Tolerance, then dwell."
+      "explanation": "Coming within the tolerance starts the dwell, with the speed held at zero. The leg is done when the dwell is over."
     },
     {
       "stage": "check",
       "question": "How long did the vehicle stand at the waypoint that asked for a dwell?",
       "options": [
-        "60 s",
+        "0.0 s: a dwell only slows it",
         "4.1 s",
-        "0 s",
-        "It did not stop"
+        "10.0 s, the timeout of the leg",
+        "40 s"
       ],
       "correct": 1,
-      "explanation": "Speed is zero while dwelling."
+      "explanation": "The waypoint asked for a dwell, and the vehicle stood for 4.1 s with its speed at zero before the next leg began."
     },
     {
       "stage": "check",
       "question": "With the abort policy the mission ended after:",
       "options": [
-        "1 s",
-        "120 s",
-        "Never",
+        "40 s, when the list ran out",
+        "0 s: it refused to start",
+        "After the skip policy had tried each leg once",
         "10.0 s, the timeout of the leg"
       ],
       "correct": 3,
-      "explanation": "The leg timed out."
+      "explanation": "The vehicle could not move, the first leg ran out of time at 10.0 s, and the abort policy ended the mission there. Skip would have gone on to the next leg."
     },
     {
       "stage": "check",
       "question": "After a restart at the third leg of four, the vehicle drove on the rest of the list:",
       "options": [
         "19.4 m, against 38.4 m starting again",
-        "38.4 m",
-        "0 m",
-        "The same"
+        "38.4 m, the whole list again",
+        "0 m: the mission was already done",
+        "19.0 m, half of the whole list"
       ],
       "correct": 0,
-      "explanation": "Restored progress does not repeat legs."
+      "explanation": "The leg number and the results were read back from the flash, so legs one and two were not driven again."
     },
     {
       "stage": "post",
       "question": "Why did the car circle the waypoint with a tolerance of 0.10 m?",
       "options": [
-        "A bug in the mission",
+        "The waypoint was outside the map",
         "A car cannot hit a point finer than its turning circle from any heading",
-        "Pure pursuit is wrong",
-        "The waypoint moved"
+        "The speed set for the leg was too high",
+        "The dwell time was too short"
       ],
       "correct": 1,
-      "explanation": "It reached it within 0.70 m in 1.8 s."
+      "explanation": "The point was inside the car's smallest circle, which passes no nearer than 0.68 m. With a tolerance of 0.70 m the car was there in 1.8 s."
     },
     {
       "stage": "post",
       "question": "What happens to the timer of a leg on restore?",
       "options": [
-        "The mission aborts",
-        "It is restored",
-        "It is doubled",
+        "It carries on from where it was",
+        "It is set to the timeout, so the leg ends at once",
+        "It is saved with the leg number",
         "It starts again: only the leg and the results are saved"
       ],
       "correct": 3,
-      "explanation": "Only the leg and the results."
+      "explanation": "Only the leg number and each leg's result are written down. A restarted leg gets its full time again."
     }
   ]
 }

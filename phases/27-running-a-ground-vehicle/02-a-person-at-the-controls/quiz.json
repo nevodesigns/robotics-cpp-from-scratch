@@ -7,12 +7,12 @@
       "question": "What does the delay of an operator add to the stopping distance?",
       "options": [
         "The vehicle goes on at its speed for the whole delay before it starts to brake",
-        "Only the braking",
-        "It halves it",
-        "Nothing"
+        "It lengthens the braking itself",
+        "Nothing, if the vehicle's brakes are good",
+        "A fixed 0.5 m, whatever the speed"
       ],
       "correct": 0,
-      "explanation": "v times T, plus the braking distance."
+      "explanation": "The picture is old, the person takes time, and the command takes time to arrive. All that while the vehicle keeps its speed, and only then brakes."
     },
     {
       "stage": "check",
@@ -20,59 +20,59 @@
       "options": [
         "4.00 m/s and 2.32 m/s",
         "2.32 m/s and 4.00 m/s",
-        "The same",
-        "2 m/s both"
+        "4.00 m/s with either: the brakes set it",
+        "3.29 m/s and 1.0 m/s"
       ],
       "correct": 0,
-      "explanation": "Falls with the delay."
+      "explanation": "For a sight line of 6 m and 2 m/s2 of braking: the more delay, the more of the 6 m is used up before braking starts."
     },
     {
       "stage": "check",
       "question": "After the commands stopped, a vehicle at 2 m/s went on with a timeout of 0.5 s:",
       "options": [
-        "0 m",
+        "1.00 m",
         "1.99 m",
-        "10 m",
-        "4.99 m"
+        "4.99 m",
+        "0.99 m: the braking alone"
       ],
       "correct": 1,
-      "explanation": "v times timeout, plus the braking."
+      "explanation": "A metre during the half second before the governor acts, and a metre of braking from 2 m/s at 2 m/s2. With a timeout of 2.0 s it was 4.99 m."
     },
     {
       "stage": "check",
       "question": "With the obstacle sensed and the operator at full speed, the vehicle stopped:",
       "options": [
-        "At the start",
-        "On it",
-        "58.7 m past it",
+        "At the obstacle, with nothing to spare",
+        "58.7 m past where it was",
+        "20 m short, where it was first sensed",
         "0.50 m short of it"
       ],
       "correct": 3,
-      "explanation": "A cap from the vehicle's own sensor."
+      "explanation": "The governor caps the speed so the vehicle can always stop within what it senses, less a margin of 0.5 m, whatever the stick says."
     },
     {
       "stage": "post",
       "question": "Why does the governor ramp the speed?",
       "options": [
-        "It is slower",
-        "Law",
+        "The link is too slow to carry a step",
+        "The operator's stick is noisy",
         "A step in the request is not a step in the wheels: it throws the load and spins them",
-        "To save the battery only"
+        "So that the dead man's timeout has time to act"
       ],
       "correct": 2,
-      "explanation": "1.33 s to reach 2 m/s."
+      "explanation": "The governor raises the speed no faster than the acceleration limit, so a request for 2 m/s was reached after 1.33 s."
     },
     {
       "stage": "post",
       "question": "What does a dead man's timeout add to?",
       "options": [
-        "Nothing",
-        "The battery",
-        "The latency of the video",
+        "The video delay",
+        "The acceleration limit",
+        "The margin kept from an obstacle",
         "The stopping distance: v times the timeout"
       ],
       "correct": 3,
-      "explanation": "It is part of the distance."
+      "explanation": "Until the timeout has passed the vehicle acts on the last request. At 2 m/s, each half second of timeout is another metre."
     }
   ]
 }

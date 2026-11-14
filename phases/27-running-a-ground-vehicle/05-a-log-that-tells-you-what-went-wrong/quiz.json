@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is the span of a finding marked from the start of its window?",
       "options": [
-        "It is not",
+        "So that every span is at least three seconds long",
         "The window needs time to see the fault, so the span would start late",
-        "For looks",
-        "To make it longer"
+        "Because the rows are stored in windows",
+        "To line the spans up with whole seconds"
       ],
       "correct": 1,
-      "explanation": "A span starts when the fault did."
+      "explanation": "A stuck vehicle is only known to be stuck after three seconds of not moving. Marking every row of the window puts the start where the fault began."
     },
     {
       "stage": "check",
       "question": "In the run with five faults, how many were found?",
       "options": [
-        "10",
-        "0",
-        "2",
+        "4: the gap was missed",
+        "3",
+        "6, one of them false",
         "5"
       ],
       "correct": 3,
-      "explanation": "Each within 1.8 s."
+      "explanation": "Stuck, slipping, off the path, draining and a gap were put in at known times, and each was found within 1.8 s of its true start and end."
     },
     {
       "stage": "check",
       "question": "Twenty clean runs with noise gave how many false findings?",
       "options": [
         "0",
-        "20",
+        "20, one in each run",
         "5",
-        "100"
+        "2"
       ],
       "correct": 0,
-      "explanation": "The shortest spans are dropped."
+      "explanation": "Marks closer than a second are joined and spans shorter than 2 s are dropped, which is what keeps noise from being reported."
     },
     {
       "stage": "check",
       "question": "A slip that left the ground at 80 percent of the wheels was:",
       "options": [
-        "Fatal",
-        "Reported",
+        "Reported as slipping",
+        "Reported as stuck",
         "Not reported: the threshold is 70 percent",
-        "A gap"
+        "Reported as off the path"
       ],
       "correct": 2,
-      "explanation": "50 percent was."
+      "explanation": "The test is ground speed under 70 percent of wheel speed. 80 percent is over the line and 50 percent was reported."
     },
     {
       "stage": "post",
       "question": "Where does the ground speed come from, when judging slip?",
       "options": [
+        "The wheels' encoders",
         "The commanded speed",
-        "The battery",
         "The position of the vehicle",
-        "The wheels"
+        "The motor currents"
       ],
       "correct": 2,
-      "explanation": "The wheels are the thing being judged."
+      "explanation": "Slip is the wheels saying one thing and the ground another. The ground's side has to come from somewhere other than the wheels."
     },
     {
       "stage": "post",
       "question": "Why is a gap a finding?",
       "options": [
-        "The clock is wrong",
+        "It makes the file hard to read",
         "The other tests say nothing about the time that is missing",
-        "It is not",
-        "The disk is full"
+        "It shows the battery was low",
+        "It always means the vehicle was switched off"
       ],
       "correct": 1,
-      "explanation": "The vehicle may have done anything in it."
+      "explanation": "With 20 s of rows gone nobody knows what happened in them. The other four tests are silent about that time, so the gap is reported by itself."
     }
   ]
 }

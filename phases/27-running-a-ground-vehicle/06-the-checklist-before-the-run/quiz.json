@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What is the difference between a block and a warning?",
       "options": [
-        "Warnings are louder",
-        "None",
-        "Colour",
+        "A block is for hardware and a warning for software",
+        "A warning is checked first and a block last",
+        "A block can be overridden with a reason, a warning with none",
         "A block stops the run; a warning may be overridden with a reason"
       ],
       "correct": 3,
-      "explanation": "A block cannot be argued with."
+      "explanation": "Which checks are blocks is a decision made beforehand. Six of the ten here stop the vehicle outright, and four leave the choice to a person who has to say why."
     },
     {
       "stage": "check",
       "question": "Making each check fail alone blocked the run how many times?",
       "options": [
-        "0",
+        "10: every failed check blocks",
         "6",
-        "10",
-        "4"
+        "4",
+        "1: only the energy check blocks"
       ],
       "correct": 1,
-      "explanation": "And warned 4 times."
+      "explanation": "Energy, emergency stop, position, scan, geofence and release are blocks. Link, log space, clock and motor temperature are warnings, which is the other four."
     },
     {
       "stage": "check",
       "question": "A state in which every number was not a number failed how many checks?",
       "options": [
         "8",
-        "2",
-        "0",
-        "10"
+        "10, every check",
+        "0: a comparison with it is always true",
+        "6, the blocks only"
       ],
       "correct": 0,
-      "explanation": "A value that is not a number fails."
+      "explanation": "Eight of the ten checks read a number. The geofence and the release are not numbers, so they were unaffected."
     },
     {
       "stage": "check",
       "question": "With 5.00 Wh left, 4.50 needed and a reserve of 0.50, the energy check:",
       "options": [
-        "Warned",
-        "Failed",
+        "Failed; 5.01 would pass",
+        "Warned, and a person overrode it",
         "Passed; 4.99 failed",
-        "Was skipped"
+        "Passed, as did 4.99"
       ],
       "correct": 2,
-      "explanation": "The check is >=, tested at the edge."
+      "explanation": "5.00 is exactly 4.50 plus 0.50, and the check is at least, not more than. The test is made at the edge, where the two differ."
     },
     {
       "stage": "post",
       "question": "Why is every check written as 'ok when within the limit'?",
       "options": [
-        "Law",
-        "Speed",
+        "It reads more naturally",
+        "It is faster to evaluate",
         "A comparison with a number that is not a number is false, so it fails",
-        "Style"
+        "So that a block and a warning look alike"
       ],
       "correct": 2,
-      "explanation": "age <= limit is false for NaN."
+      "explanation": "Any comparison with a value that is not a number is false. Written as ok when within the limit, a failed sensor fails the check; written the other way it would pass."
     },
     {
       "stage": "post",
       "question": "What happens to an override of a block?",
       "options": [
         "It is refused and reported",
-        "It counts as a warning",
-        "It is accepted",
-        "It is ignored without a word"
+        "It is accepted if a reason is given",
+        "It turns the block into a warning",
+        "It is ignored and the run goes ahead"
       ],
       "correct": 0,
-      "explanation": "A checklist with an override for everything is a suggestion."
+      "explanation": "Blocks cannot be argued with. The attempt is kept in the report as refused, so it can be seen that someone tried."
     }
   ]
 }

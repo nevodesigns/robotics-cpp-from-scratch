@@ -7,72 +7,72 @@
       "question": "How long is a protective field?",
       "options": [
         "As long as the vehicle needs to stop at its speed, plus a margin",
-        "As long as the vehicle",
-        "10 m",
-        "The sensor's range"
+        "A fixed length, the same at every speed",
+        "As long as the scanner can see",
+        "Twice the vehicle's length"
       ],
       "correct": 0,
-      "explanation": "v latency + v squared / 2a + margin."
+      "explanation": "The vehicle travels at its speed for the latency, then brakes. The field has to reach at least that far, with a margin on top."
     },
     {
       "stage": "check",
       "question": "A vehicle that stopped when something entered its field stopped:",
       "options": [
-        "10 m short",
+        "At the thing, with no room",
         "0.20 m short of it, the margin",
-        "On it",
-        "0.25 m past it"
+        "0.25 m past it",
+        "1.5 m short of it"
       ],
       "correct": 1,
-      "explanation": "The margin and no more."
+      "explanation": "The field is the stopping distance plus the margin, so when it is right the margin is what remains."
     },
     {
       "stage": "check",
       "question": "With the latency left out of the field, the vehicle stopped:",
       "options": [
-        "0.20 m short",
-        "Short",
+        "0.20 m short, as before",
+        "0.45 m short",
         "0.25 m past where the thing was",
-        "At the thing"
+        "Exactly at the thing"
       ],
       "correct": 2,
-      "explanation": "The field was too short."
+      "explanation": "A latency of 0.3 s at 1.5 m/s is 0.45 m the field did not allow for. The margin of 0.20 m covered some of it and the rest was a collision."
     },
     {
       "stage": "check",
       "question": "At 1.1 m/s, the field of the set designed for 1.5 m/s was how many times as long as needed?",
       "options": [
         "1.46",
-        "0.5",
-        "1",
-        "10"
+        "1.00: sets are made for every speed",
+        "0.73",
+        "2.00"
       ],
       "correct": 0,
-      "explanation": "The smallest safe set is longer than needed."
+      "explanation": "A device holds a few sets. At 1.1 m/s the smallest set that is safe is the one for 1.5 m/s, and its field is longer than 1.1 m/s needs."
     },
     {
       "stage": "post",
       "question": "Why does the field bend in a turn?",
       "options": [
-        "It does not",
+        "The scanner is mounted off centre",
         "The vehicle sweeps an arc, and a straight field misses a thing on it",
-        "Lidars are curved",
-        "For looks"
+        "Its range is shorter to the sides",
+        "The margin is larger on the inside of a turn"
       ],
       "correct": 1,
-      "explanation": "A ring round the arc."
+      "explanation": "Something on the arc and to one side of straight ahead was outside the straight field and inside the swept one."
     },
     {
       "stage": "post",
       "question": "What does a vehicle do at a speed for which the device has no field set?",
       "options": [
-        "Stops for ever",
-        "Uses the largest",
-        "Goes on",
+        "It uses the largest set it has",
+        "It works a field out for that speed on the spot",
+        "It carries on with a warning",
         "It has to be slowed to one it has a set for"
       ],
       "correct": 3,
-      "explanation": "No set is big enough."
+      "explanation": "At 2.1 m/s with sets up to 2.0 every field is too short. The only safe thing is to come down to a speed that has one."
     }
   ]
 }

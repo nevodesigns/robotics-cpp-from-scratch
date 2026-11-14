@@ -7,72 +7,72 @@
       "question": "Why is the computer part of the energy of a route?",
       "options": [
         "It draws power all the time, for as long as the route takes",
-        "It heats the motors",
-        "It is not",
-        "It is heavy"
+        "It makes the motors less efficient",
+        "Its weight adds to the rolling resistance",
+        "It is not: only the motors draw from the battery"
       ],
       "correct": 0,
-      "explanation": "79 percent of a metre of tarmac."
+      "explanation": "The computer and sensors drew 8 W the whole time. On tarmac at 1 m/s that was 79 percent of the 10.1 J each metre cost."
     },
     {
       "stage": "check",
       "question": "A metre of sand cost, against a metre of tarmac:",
       "options": [
-        "The same",
         "10.1 J against 22.0 J",
-        "0",
+        "22.0 J for both: the computer dominates",
+        "79 J against 10.1 J",
         "22.0 J against 10.1 J"
       ],
       "correct": 3,
-      "explanation": "Work, over the efficiency, plus the computer."
+      "explanation": "Sand's rolling resistance is several times tarmac's, so the motors' share grows while the computer's 8 J a metre stays the same."
     },
     {
       "stage": "check",
       "question": "The vehicle that took the way home as flat turned back at 16.8 m and was:",
       "options": [
-        "Exactly home",
+        "Home with 71 J to spare",
         "25 J short of getting home",
-        "Home with 71 J spare",
-        "Stuck at the start"
+        "Home with nothing to spare",
+        "Stopped at the turn, with no way back"
       ],
       "correct": 1,
-      "explanation": "The sand band was not in the estimate."
+      "explanation": "It priced the return as flat ground and went too far. The one that priced the return over the sand turned at 12.0 m and got home with 71 J."
     },
     {
       "stage": "check",
       "question": "A slope of 20 degrees reached the motor's limit in:",
       "options": [
-        "1 s",
-        "1 hour",
+        "Never: it settled under the limit",
+        "6.2 s",
         "62 s",
-        "Never"
+        "31 s"
       ],
       "correct": 2,
-      "explanation": "A slope of 14 degrees could be held for ever."
+      "explanation": "The steady temperature at 20 degrees is over the 75 K limit, so there is a time, 62 s. At 14 degrees it settled at 71 K."
     },
     {
       "stage": "post",
       "question": "What does the closed form of the time to the limit say when the steady rise is under the limit?",
       "options": [
-        "Zero",
-        "An error",
+        "The limit is reached at once",
+        "A time longer than the route",
         "Never: it settles below the limit",
-        "Infinity of heat"
+        "A negative time, which is an error"
       ],
       "correct": 2,
-      "explanation": "-Rth Cth ln(1 - limit/steady) has no answer."
+      "explanation": "The winding settles at the power times the thermal resistance. If that is under the limit, the limit is never reached."
     },
     {
       "stage": "post",
       "question": "Why does speed matter twice for the energy of a route?",
       "options": [
-        "Drag",
+        "Air drag grows with the square of the speed",
         "The work is the same and the computer runs for longer at a lower speed",
-        "It does not",
-        "Weight"
+        "The motors are less efficient when fast",
+        "Faster wheels slip more"
       ],
       "correct": 1,
-      "explanation": "Idle power times time."
+      "explanation": "The work against the ground depends on the distance. The 8 W of electronics is paid by the second, so a slower run of the same route costs more."
     }
   ]
 }
