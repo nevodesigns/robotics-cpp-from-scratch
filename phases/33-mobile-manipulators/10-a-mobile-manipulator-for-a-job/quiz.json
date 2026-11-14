@@ -7,72 +7,72 @@
       "question": "What does the capstone report when a job cannot be done?",
       "options": [
         "The first requirement that failed, with the figures of all",
-        "A random reason",
-        "Nothing",
-        "Only a number"
+        "Every requirement that failed",
+        "A yes or a no, and nothing else",
+        "The requirement with the worst figure"
       ],
       "correct": 0,
-      "explanation": "3 for the heavy job."
+      "explanation": "The first in the order that fails is the one to deal with first, so it is named. The others are still worked out."
     },
     {
       "stage": "check",
       "question": "A job of 8 kg failed at requirement:",
       "options": [
-        "None",
+        "1, parking",
         "3, the payload",
-        "7",
-        "2"
+        "6, the travel speed",
+        "4, the grasp"
       ],
       "correct": 1,
-      "explanation": "The budget was 4.3 kg."
+      "explanation": "The least of the arm, tipping and traction limits was 4.3 kg, and the job asked for 8."
     },
     {
       "stage": "check",
       "question": "A base that stops to 15 cm failed at:",
       "options": [
-        "5",
-        "None",
+        "1, parking",
+        "4, the grasp",
         "2, the stopping",
-        "6"
+        "None: 15 cm is inside the ring's 35 cm"
       ],
       "correct": 2,
-      "explanation": "The tolerance of the ring was 35 cm."
+      "explanation": "The ring's tolerance has to be three times the sigma of the stop. 35 cm is not three times 15."
     },
     {
       "stage": "check",
       "question": "A person 0.45 m from the route failed at:",
       "options": [
         "7",
-        "4",
-        "None",
-        "5"
+        "6, the travel speed",
+        "1, parking",
+        "None: the person is not on the route"
       ],
       "correct": 0,
-      "explanation": "The speed the person allows was below the useful minimum."
+      "explanation": "At 0.45 m the speed a person allows fell below the least speed that is useful, which is the seventh requirement."
     },
     {
       "stage": "post",
       "question": "Is a job that passes proved to work?",
       "options": [
-        "Always",
-        "Never",
-        "Yes",
+        "Yes, for the payload and route that were checked",
+        "Yes, when every figure has a margin",
+        "Only if the camera is on the hand",
         "No: the checks are simple models with typical numbers, a screen, and the real robot has to be tried"
       ],
       "correct": 3,
-      "explanation": "The trial on the real robot is the release."
+      "explanation": "Passing means nothing known rules it out. The release is a trial on the real robot."
     },
     {
       "stage": "post",
       "question": "Why are the figures of the other requirements kept?",
       "options": [
-        "For tidiness",
-        "They are not",
-        "Waste",
+        "So that the report is the same length every time",
+        "They are needed to compute the first failure",
+        "To be averaged into one score",
         "They show how far each is from passing"
       ],
       "correct": 3,
-      "explanation": "Only the first failure is reported."
+      "explanation": "A job that fails at 3 may be close to failing at 6 as well. Seeing all the figures saves fixing one thing and meeting the next."
     }
   ]
 }

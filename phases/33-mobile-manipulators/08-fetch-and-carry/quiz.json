@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why must the base not drive with the arm out?",
       "options": [
-        "It is noisy",
+        "The arm's joints overheat while the base is moving",
         "It tips (33-05) and the hand is hard to control",
-        "It is slower",
-        "It is allowed"
+        "The camera on the hand cannot see the route",
+        "The wheels slip under the extra weight"
       ],
       "correct": 1,
-      "explanation": "The interlock holds the base."
+      "explanation": "With the arm out the centre of mass is forward and the tipping limit is lower, and every bump of the base swings the hand."
     },
     {
       "stage": "check",
       "question": "A mission that went to plan took:",
       "options": [
-        "a minute",
+        "113 ticks",
         "97 ticks",
-        "0 ticks",
-        "113 ticks"
+        "100 ticks",
+        "15 ticks"
       ],
       "correct": 1,
-      "explanation": "With one miss and a retry: 113."
+      "explanation": "97 ticks with nothing going wrong. One missed grasp and a retry brought it to 113."
     },
     {
       "stage": "check",
       "question": "A battery of 4.5 Wh for a mission needing 4.0 Wh:",
       "options": [
-        "Was ignored",
-        "Doubled the speed",
+        "Started, and stopped in fault 4 half way",
+        "Ran to the end with nothing to spare",
         "Stopped at the start, in fault 4",
-        "Started and ran down on the way"
+        "Was allowed, since 4.5 is more than 4.0"
       ],
       "correct": 2,
-      "explanation": "A margin of 1.2 times."
+      "explanation": "The mission needs 1.2 times its energy before it starts, 4.8 Wh here. Refusing at the start is better than stopping half way to the table."
     },
     {
       "stage": "check",
       "question": "The faulty plan with the interlock had how many unsafe ticks?",
       "options": [
         "0",
-        "1",
-        "100",
-        "15"
+        "15",
+        "97",
+        "3"
       ],
       "correct": 0,
-      "explanation": "Without it 15."
+      "explanation": "The interlock held the base whenever the arm was out, so the faulty plan never moved unsafely. Without it the same plan drove with the arm out for 15 ticks."
     },
     {
       "stage": "post",
       "question": "What did the interlock turn the bug into?",
       "options": [
-        "A faster robot",
-        "Nothing",
+        "A mission that finished late",
+        "A robot that drove slowly with the arm out",
         "A stopped robot (a timeout)",
-        "A tipped robot"
+        "A fault 1, no part"
       ],
       "correct": 2,
-      "explanation": "Fault 3."
+      "explanation": "The base was never allowed to drive, the step ran out of time, and the mission ended in fault 3. Nothing moved that should not have."
     },
     {
       "stage": "post",
       "question": "Why is the interlock separate from the state machine?",
       "options": [
-        "It is shorter",
-        "It is required",
-        "For style",
+        "So that it can be switched off for testing",
+        "Because the state machine has no room for more states",
+        "So that it runs on the arm's controller",
         "It holds even when the state machine is wrong"
       ],
       "correct": 3,
-      "explanation": "A separate, simple rule."
+      "explanation": "The state machine is long and can have a bug, as the plan that skipped the stow did. The rule is two lines applied to every command, whatever asked for it."
     }
   ]
 }

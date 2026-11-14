@@ -7,72 +7,72 @@
       "question": "Why does the whole body have eight columns and not nine?",
       "options": [
         "A differential drive base cannot slide sideways, so it has two rates",
-        "Chance",
-        "Cameras",
-        "It has nine"
+        "The arm has only five joints that move the hand",
+        "Two of the nine columns are always equal",
+        "The base's height is fixed, which removes one"
       ],
       "correct": 0,
-      "explanation": "Driving and turning."
+      "explanation": "Six columns are the arm's joints. The base adds driving along its heading and turning about its centre, and nothing sideways."
     },
     {
       "stage": "check",
       "question": "The arm alone ended how far short of a line of 1.5 m?",
       "options": [
-        "10 m",
+        "0.32 m",
         "1.18 m",
-        "0.000 m",
-        "0 m"
+        "1.43 m",
+        "0.000 m: it reached the end"
       ],
       "correct": 1,
-      "explanation": "At full stretch, its manipulability was 0.0000."
+      "explanation": "The arm stretched to its full length and stopped there, 1.18 m from the end of the line, with its manipulability at zero."
     },
     {
       "stage": "check",
       "question": "Arm and base together:",
       "options": [
-        "Did not move",
-        "Fell over",
-        "Fell short",
+        "Reached it, but with the arm at full stretch",
+        "Fell 0.07 m short",
+        "Reached it only with the base made cheap",
         "Reached it to 0.000 m"
       ],
       "correct": 3,
-      "explanation": "The base drove 1.43 m."
+      "explanation": "The base drove 1.43 m and the arm's manipulability never fell below 0.0316. The base covered the distance and the arm stayed in the middle of its range."
     },
     {
       "stage": "check",
       "question": "What does a dearer base do?",
       "options": [
-        "Stops the arm",
-        "Moves more",
+        "Moves more, to get it over with",
+        "Moves the same, and the arm slows down",
         "Moves less, and the arm more",
-        "Nothing at all"
+        "Stops, and leaves the arm to finish"
       ],
       "correct": 2,
-      "explanation": "1.20 m against 1.50 m for a cheap one."
+      "explanation": "The weights are prices in a least squares problem. Raise the price of the base's rates and the answer uses more arm: 1.20 m of driving against 1.50 m."
     },
     {
       "stage": "post",
       "question": "Why did the price on the base change the travel so little?",
       "options": [
         "The base has to cover the distance the arm cannot, whatever the price",
-        "A bug",
-        "It cannot",
-        "Chance"
+        "The weights were too close to each other to matter",
+        "The damping swamps the weights",
+        "The arm is always preferred, whatever the price"
       ],
       "correct": 0,
-      "explanation": "The weight shifts the share, not the total."
+      "explanation": "The line was 1.5 m and the arm reaches a fraction of that. Whatever the weights, the base had to drive most of it."
     },
     {
       "stage": "post",
       "question": "What is not in this model?",
       "options": [
-        "The weights",
-        "The line",
+        "The two rates of the base",
+        "The weights on the base and the arm",
         "The base's acceleration and slip, the joint speed limits and obstacles",
-        "The Jacobian"
+        "The arm's manipulability along the line"
       ],
       "correct": 2,
-      "explanation": "Those are other lessons."
+      "explanation": "The rates come out of a formula with no limits in it. A real base has its own acceleration and slip, and real joints have speed limits."
     }
   ]
 }

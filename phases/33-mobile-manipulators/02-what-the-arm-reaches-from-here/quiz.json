@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What does an arm reach, tool down, at one height?",
       "options": [
-        "A disc",
+        "A full disc, out to the arm's length",
         "A ring between an inner and an outer radius from its axis",
-        "A point",
-        "A line"
+        "A sphere about its shoulder",
+        "A square the width of the base"
       ],
       "correct": 1,
-      "explanation": "There is a hole in the middle."
+      "explanation": "With the tool pointing down the arm cannot always reach close to its own axis and cannot reach past its length, and the shoulder turns the same reach all the way round."
     },
     {
       "stage": "check",
       "question": "At -0.10 m below the mount the ring ran from:",
       "options": [
-        "0 to 0.72 m",
-        "36.0 to 1 m",
+        "0.00 to 0.63 m",
+        "0.36 to 0.72 m",
         "0.00 to 0.72 m",
-        "1 to 2 m"
+        "0.10 to 0.72 m"
       ],
       "correct": 2,
-      "explanation": "An inner and an outer radius."
+      "explanation": "At that height the inner radius was 0.00, so the ring had no hole. At a target 0.20 m lower it ran only to 0.63 m."
     },
     {
       "stage": "check",
       "question": "The quick test agreed with the full inverse kinematics on:",
       "options": [
-        "Only one",
-        "Nothing",
-        "10 percent",
+        "About 90 percent: it missed places near the edges",
+        "All places straight ahead of the base and none to the side",
+        "576 places, but only when the base faced the target",
         "100 percent of places"
       ],
       "correct": 3,
-      "explanation": "576 places, varied in heading too."
+      "explanation": "The quick test is two comparisons of a distance against the radii. It gave the full inverse kinematics' answer at every one of 576 base places and headings."
     },
     {
       "stage": "check",
       "question": "The tolerance for the base's stopping place was:",
       "options": [
-        "0 cm",
-        "10 m",
+        "72 cm, the width of the ring",
+        "31.5 cm",
         "36.0 cm",
-        "1 mm"
+        "15.7 mm"
       ],
       "correct": 2,
-      "explanation": "Half the width of the ring."
+      "explanation": "A base aimed at the middle of the ring may be out by half its width and still reach. At the lower target it was 31.5 cm."
     },
     {
       "stage": "post",
       "question": "Why can the ring be found along one line?",
       "options": [
-        "The mount",
+        "The mount is on the base's centre line",
         "The shoulder turns all the way round, so the reach is the same in every direction",
-        "Luck",
-        "It cannot"
+        "The inverse kinematics is the same for every arm",
+        "The base always faces the target"
       ],
       "correct": 1,
-      "explanation": "Symmetry about the vertical axis."
+      "explanation": "Turning the shoulder carries the whole arm round its vertical axis, so what it reaches at one bearing it reaches at all."
     },
     {
       "stage": "post",
       "question": "What is not checked by the ring?",
       "options": [
         "The whole path to it, and targets that need the tool horizontal",
-        "The mount",
-        "The radius",
-        "The end pose"
+        "Whether the target is between the two radii",
+        "The mount's offset from the base's centre",
+        "Targets lower than the mount"
       ],
       "correct": 0,
-      "explanation": "Those are other questions."
+      "explanation": "The ring says the arm can be at the end pose. Getting there without hitting anything, or holding the tool level, is asked elsewhere."
     }
   ]
 }

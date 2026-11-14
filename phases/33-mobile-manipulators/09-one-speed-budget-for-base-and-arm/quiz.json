@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "Why does the person's budget count the base and the hand together?",
       "options": [
-        "It is simpler",
+        "The base and the hand are driven by one controller",
         "A person near the robot cares about the speed of whatever is coming at them",
-        "It does not",
-        "The hand is slow"
+        "The hand's speed is too small to measure alone",
+        "The standard only gives one number"
       ],
       "correct": 1,
-      "explanation": "The speeds add."
+      "explanation": "What reaches the person is whichever part is nearest, moving at the base's speed plus its own. A hand swinging forward on a driving base is faster than either."
     },
     {
       "stage": "check",
@@ -20,59 +20,59 @@
       "options": [
         "2.04 m/s to stop in 0.5 m",
         "1.23 m/s",
-        "10 m/s",
-        "0 m/s"
+        "5.19 m/s",
+        "2.28 m/s, with no margin"
       ],
       "correct": 0,
-      "explanation": "A margin of 0.8 on the tipping deceleration."
+      "explanation": "Braking at 0.8 of the tipping deceleration of 5.19 m/s2, the speed from which it stops in 0.5 m is the root of twice 0.8 times 5.19 times 0.5: 2.04 m/s."
     },
     {
       "stage": "check",
       "question": "A person 1.0 m away allowed what in all?",
       "options": [
         "1.23 m/s",
-        "Any speed",
-        "Nothing",
-        "2.04 m/s"
+        "2.04 m/s",
+        "1.5 m/s, what was asked",
+        "0.82 m/s"
       ],
       "correct": 0,
-      "explanation": "Base and hand were scaled by one factor."
+      "explanation": "The person's distance allowed 1.23 m/s for base and hand together. The 1.0 and 0.5 asked were scaled to 0.82 and 0.41, which add to that."
     },
     {
       "stage": "check",
       "question": "A person at 0.2 m (inside the distance for standing still):",
       "options": [
-        "Halved them",
-        "Doubled them",
-        "Left the speeds",
+        "Scaled both to a fifth",
+        "Stopped the base and let the hand finish",
+        "Left them, since the robot was already slow",
         "Stopped both"
       ],
       "correct": 3,
-      "explanation": "Status 2."
+      "explanation": "Inside the distance the robot would need just to stand still, nothing may move toward the person. That is status 2."
     },
     {
       "stage": "post",
       "question": "Why scale base and hand by the same factor?",
       "options": [
-        "It is required",
-        "Chance",
+        "The base is always the faster of the two",
+        "The hand cannot be slowed without the base",
         "Neither is starved and the motion keeps its shape",
-        "It is easy"
+        "It gives the lowest total speed"
       ],
       "correct": 2,
-      "explanation": "The ratio is kept."
+      "explanation": "Scaling only one would stop the hand or stall the base, and the hand's path over the ground would change. One factor keeps the ratio."
     },
     {
       "stage": "post",
       "question": "What did the unsupervised robot do against the person walking at it?",
       "options": [
-        "Slowed",
-        "Stopped",
-        "Went round",
+        "Stopped 0.14 m away",
+        "Slowed to 1.23 m/s",
+        "Turned away from them",
         "Met them, closing at 3.1 m/s"
       ],
       "correct": 3,
-      "explanation": "The supervised one stopped 0.14 m away."
+      "explanation": "With nothing limiting it the robot kept its speed and the two closed at 3.1 m/s. The supervised one stopped 0.14 m short, though 28 mm inside the margin it was meant to keep."
     }
   ]
 }

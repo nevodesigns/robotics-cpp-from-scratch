@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What moves when the arm moves?",
       "options": [
-        "The floor",
-        "Nothing",
+        "The base's wheelbase and track",
+        "Only the load on the front wheels",
         "The centre of mass of the whole, and so the tipping limits",
-        "The wheels"
+        "The friction of the floor"
       ],
       "correct": 2,
-      "explanation": "Every kilogram at the end of the arm moves it."
+      "explanation": "The arm's links and whatever it holds are part of the mass. Reaching 0.65 m forward moved the centre of the whole from -0.006 m to 0.069 m."
     },
     {
       "stage": "check",
       "question": "The braking limit with the arm tucked was:",
       "options": [
         "11.01 m/s2",
+        "8.88 m/s2",
         "5.19 m/s2",
-        "100 m/s2",
-        "0"
+        "5.89 m/s2"
       ],
       "correct": 0,
-      "explanation": "Reaching: 8.88; loaded: 5.19."
+      "explanation": "Tucked, the centre is low and near the middle. Reaching it was 8.88, and with 5 kg in the hand 5.19; 5.89 is what the wheels grip on a dry floor."
     },
     {
       "stage": "check",
       "question": "With 5 kg in the hand the braking limit was:",
       "options": [
-        "11.01 m/s2",
-        "The same as tucked",
+        "8.88 m/s2, still above what the wheels grip",
+        "5.89 m/s2, set by the wheels",
         "5.19 m/s2, below what the wheels would grip",
-        "Unlimited"
+        "11.01 m/s2, unchanged, since the load is at the hand"
       ],
       "correct": 2,
-      "explanation": "It tipped before it skidded."
+      "explanation": "The wheels would allow 5.89 m/s2 on a dry floor. With the load the base tips at 5.19, so tipping comes before skidding."
     },
     {
       "stage": "check",
       "question": "What does a centred mass give?",
       "options": [
-        "A tilt",
-        "Nothing",
-        "An error",
+        "A limit twice that of 19-09",
+        "No limit: a centred mass cannot tip",
+        "The same limit forward as sideways",
         "The formula of 19-09: g times half the track over the height"
       ],
       "correct": 3,
-      "explanation": "The test checks it."
+      "explanation": "With no offset the general rule reduces to the simple one, which is how the test checks it."
     },
     {
       "stage": "post",
       "question": "Why is a limit chosen for the tucked arm unsafe?",
       "options": [
-        "It is too low",
+        "The wheels grip less when the arm is out",
         "The loaded or extended arm has a lower limit",
-        "It is not",
-        "Arms do not move"
+        "The tucked limit is for braking only",
+        "It is safe, as long as the floor is dry"
       ],
       "correct": 1,
-      "explanation": "11.01 against 5.19 m/s2."
+      "explanation": "A braking limit of 11.01 m/s2 holds for the tucked arm. With 5 kg at full reach the base tips at 5.19, less than half."
     },
     {
       "stage": "post",
       "question": "Which turn is the dangerous one?",
       "options": [
         "Towards the side the arm is reaching to",
-        "A stop",
-        "A straight line",
-        "A turn with the arm tucked"
+        "Away from the side the arm is reaching to",
+        "Any turn at more than 4.22 m/s2",
+        "A turn while braking"
       ],
       "correct": 0,
-      "explanation": "4.22 against 7.92 m/s2."
+      "explanation": "The arm out to one side moves the centre toward the wheels on that side, so there is less lever to hold the base down: 4.22 against 7.92 m/s2."
     }
   ]
 }

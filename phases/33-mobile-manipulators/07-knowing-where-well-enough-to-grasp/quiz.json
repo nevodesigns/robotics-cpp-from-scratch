@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "How do independent errors combine?",
       "options": [
-        "They multiply",
-        "They add",
-        "The largest only",
+        "They add: the worst case of each, summed",
+        "Only the largest matters, and the rest can be dropped",
+        "They average, since they are independent",
         "In quadrature: the square root of the sum of squares"
       ],
       "correct": 3,
-      "explanation": "Variances add."
+      "explanation": "For independent errors the variances add, so the standard deviations combine as the root of the sum of squares. The largest dominates but the others are still in it."
     },
     {
       "stage": "check",
       "question": "The hand's sigma came to:",
       "options": [
-        "2 mm",
-        "0 mm",
-        "0.1 mm",
+        "16 mm, the heading at 0.9 m",
+        "20 mm, the base's position",
+        "36 mm, the two added",
         "25.6 mm, dominated by the base"
       ],
       "correct": 3,
-      "explanation": "The arm is repeatable to a tenth of a millimetre."
+      "explanation": "20 mm of position and 16 mm from a degree of heading at 0.9 m, in quadrature with the small terms, is 25.6 mm. The arm's 0.1 mm does not show."
     },
     {
       "stage": "check",
       "question": "The chance of a good grasp with a tolerance of 10 mm was:",
       "options": [
         "0.30",
-        "0.99",
-        "1.000",
-        "0"
+        "0.68, one sigma",
+        "0.95",
+        "0.10"
       ],
       "correct": 0,
-      "explanation": "About one grasp in three."
+      "explanation": "A tolerance of 10 mm is about 0.4 of the hand's sigma of 25.6 mm. 20000 simulated grasps gave the same 0.30."
     },
     {
       "stage": "check",
       "question": "With a camera on the hand the chance was:",
       "options": [
-        "0.5",
+        "0.30, as before",
         "1.000",
-        "0.30",
-        "0"
+        "0.95",
+        "0.99"
       ],
       "correct": 1,
-      "explanation": "The base's errors drop out."
+      "explanation": "With the camera's 2 mm and the arm's 0.1 mm the sigma was 2.0 mm, a fifth of the tolerance, and the chance rounds to 1.000."
     },
     {
       "stage": "post",
       "question": "Why does the camera help so much?",
       "options": [
-        "Chance",
+        "Its error is smaller than the arm's repeatability",
         "It measures the part relative to the hand, so the base's errors are not in it",
-        "It is better than the arm",
-        "It is faster"
+        "It lets the base stop more accurately",
+        "It averages many pictures of the part"
       ],
       "correct": 1,
-      "explanation": "Measure at the hand."
+      "explanation": "The camera sees the part from the hand. Where the base stopped and how it was turned no longer enter the measurement."
     },
     {
       "stage": "post",
       "question": "How many sigmas make 99 percent?",
       "options": [
-        "10",
-        "1",
+        "1.96",
+        "3.00",
         "2.58",
-        "0.5"
+        "1.00"
       ],
       "correct": 2,
-      "explanation": "1.96 make 95 percent."
+      "explanation": "1.96 sigmas give 95 percent and 2.58 give 99. For 99 percent of grasps within 10 mm the sigma has to be 3.9 mm."
     }
   ]
 }

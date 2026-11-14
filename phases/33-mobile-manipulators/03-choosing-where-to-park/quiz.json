@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is the margin in the ring part of the score?",
       "options": [
-        "It is the travel",
-        "It is required by law",
+        "It is the distance the base has to drive",
+        "It is the clearance from the nearest obstacle",
         "It is the room the base has to stop short or long and still reach",
-        "To look tidy"
+        "It is how far the arm is from a singularity"
       ],
       "correct": 2,
-      "explanation": "1 in the middle of the ring."
+      "explanation": "A base that parks in the middle of the ring can miss by the whole tolerance. One that parks at the edge reaches only if it stops exactly."
     },
     {
       "stage": "check",
       "question": "With travel weighted most the base travelled:",
       "options": [
-        "10 m",
-        "0 m",
+        "2.56 m",
+        "0.36 m",
         "1.24 m",
-        "2.56 m"
+        "0 m: it reached from where it stood"
       ],
       "correct": 2,
-      "explanation": "Against 2.56 m with no weight on travel."
+      "explanation": "It stopped at the near edge of the ring after 1.24 m. With no weight on travel it went 2.56 m to the place with the most margin."
     },
     {
       "stage": "check",
       "question": "With obstacles all round the target, how many places were free?",
       "options": [
         "0",
-        "36",
-        "1",
-        "252"
+        "252, all of them",
+        "36, one distance all the way round",
+        "7, one bearing"
       ],
       "correct": 0,
-      "explanation": "The answer was none."
+      "explanation": "Every one of the 252 candidates put the base within its radius and the clearance of some obstacle, so the answer was none."
     },
     {
       "stage": "check",
       "question": "Where did the base go when a row of obstacles blocked the near side?",
       "options": [
-        "Through them",
-        "Back to the start",
-        "Nowhere",
+        "To the near edge of the ring, between two obstacles",
+        "To a bearing of -170 degrees, as with nothing in the way",
+        "Nowhere: it said none",
         "Round to a bearing of -30 degrees"
       ],
       "correct": 3,
-      "explanation": "Every choice kept the clearance."
+      "explanation": "The candidates on the blocked side were rejected before scoring, and the best of the rest was on the far side."
     },
     {
       "stage": "post",
       "question": "What do the weights decide?",
       "options": [
-        "The arm's length",
+        "How many candidates are tried",
         "Whether to arrive soon, with room, or clear of things",
-        "The colour",
-        "Nothing"
+        "Which candidates are rejected for obstacles",
+        "How wide the ring is"
       ],
       "correct": 1,
-      "explanation": "The trade between travel and margin."
+      "explanation": "Margin, travel and clearance pull different ways, and no place is best at all three. The weights are where that choice is written down."
     },
     {
       "stage": "post",
       "question": "What must a choice be able to say?",
       "options": [
-        "Yes always",
+        "The nearest place, even if it is not free",
         "None",
-        "Maybe",
-        "Nothing"
+        "The best of the rejected places",
+        "The place it chose the last time"
       ],
       "correct": 1,
-      "explanation": "A choice that returns something anyway sends the base into a wall."
+      "explanation": "When no candidate is free the caller has to hear that, and then ask for less margin, another approach, or stop."
     }
   ]
 }

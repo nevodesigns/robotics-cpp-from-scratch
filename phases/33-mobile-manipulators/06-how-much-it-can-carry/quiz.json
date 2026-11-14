@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is the arm's rated payload not the robot's?",
       "options": [
-        "Arms lie",
-        "It is too low",
+        "The rating is for a fixed arm on a rigid table, so it is always too high by half",
+        "The gripper's weight has to be taken off it first",
         "The base also has to carry, stop and accelerate with it",
-        "It is"
+        "It is: the arm is the weakest part of any mobile manipulator"
       ],
       "correct": 2,
-      "explanation": "Three judges."
+      "explanation": "Three things have to agree: the arm can hold the load, the base does not tip when it stops, and the wheels can still accelerate it. The least of the three is the robot's figure."
     },
     {
       "stage": "check",
       "question": "Which limit was binding with the arm reaching 0.65 m?",
       "options": [
         "Tipping (4.3 kg)",
-        "Traction (130.7 kg)",
-        "The arm (5.0 kg)",
-        "None"
+        "The arm, at 5.0 kg",
+        "Traction, at 130.7 kg",
+        "The battery, through the rolling resistance"
       ],
       "correct": 0,
-      "explanation": "The binding limit was number 1."
+      "explanation": "The arm could hold 5.0 kg and the wheels could move 130.7 kg, but with more than 4.3 kg an emergency stop tips the base. Tipping was the binding limit, number 1."
     },
     {
       "stage": "check",
       "question": "The emergency stop needed what deceleration?",
       "options": [
         "5.62 m/s2",
-        "100 m/s2",
-        "0",
-        "0.5 m/s2"
+        "0.5 m/s2, the acceleration wanted",
+        "5.19 m/s2",
+        "3.75 m/s2"
       ],
       "correct": 0,
-      "explanation": "v squared over twice the distance."
+      "explanation": "From 1.5 m/s in 0.20 m: 1.5 squared over twice 0.20. A stop in 0.6 m needs a third of that, and allows more payload."
     },
     {
       "stage": "check",
       "question": "With 10 kg aboard the range went from 15509 m to:",
       "options": [
-        "No change at all",
-        "Twice as far",
+        "15509 m, unchanged: most of the energy goes to the electronics",
+        "7750 m, about half",
         "13838 m",
-        "0 m"
+        "14500 m"
       ],
       "correct": 2,
-      "explanation": "Through the rolling resistance."
+      "explanation": "Rolling resistance grows with mass, so the load costs range, about a tenth here. The loss is modest because 15 W of idle electronics takes most of the energy."
     },
     {
       "stage": "post",
       "question": "If more payload is wanted, what should change?",
       "options": [
-        "The camera",
+        "A stronger arm, rated for the load wanted",
         "A wider base, a lower arm, a longer stop or a slower approach: the binding limit",
-        "A stronger arm only",
-        "Nothing"
+        "More drive force at the wheels",
+        "A larger battery"
       ],
       "correct": 1,
-      "explanation": "Change the one that says no first."
+      "explanation": "The limit that says no first is the one to change. Here that is tipping, so the answer is in the base's width, the arm's height or how hard the stop is."
     },
     {
       "stage": "post",
       "question": "What gave no traction budget?",
       "options": [
-        "A heavy base",
-        "A fast base",
-        "A short arm",
+        "A drive force larger than the grip",
+        "A load heavier than the arm's rating",
+        "A wanted acceleration of zero",
         "A floor with too little friction to give the wanted acceleration"
       ],
       "correct": 3,
-      "explanation": "The test uses a friction of 0.03."
+      "explanation": "If friction times g is less than the acceleration wanted, the wheels spin whatever the load. The test's floor has a friction of 0.03."
     }
   ]
 }
