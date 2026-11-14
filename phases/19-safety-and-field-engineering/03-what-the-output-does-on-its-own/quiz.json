@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "The controller dies. What does an output stage do with a channel if nobody chose?",
       "options": [
-        "Stops it",
-        "Beeps",
-        "Resets it",
+        "Sets it to zero, which is what a dead controller would send",
+        "Sets it to a safe value from its data sheet",
+        "Switches the channel off and raises a fault",
         "Holds the last command, which for a motor at 80 percent is the opposite of a stop"
       ],
       "correct": 3,
-      "explanation": "The default decides."
+      "explanation": "Unless told otherwise an output stage keeps doing the last thing it was told. For a drive motor that means carrying on."
     },
     {
       "stage": "check",
       "question": "Five channels left on hold: which were unsafe when the controller died?",
       "options": [
-        "None",
+        "All five, since none had a policy",
         "drive_left, drive_right, steering and brake_coil; the horn was at its safe value (0) and is fine",
-        "All",
-        "Only the drives"
+        "Only the two drives, which move the robot",
+        "None: hold is a safe default"
       ],
       "correct": 1,
-      "explanation": "Holding a safe value is safe."
+      "explanation": "A channel is unsafe if it ends somewhere other than its safe value. The horn was already off, so holding it changed nothing."
     },
     {
       "stage": "check",
       "question": "Why was an ESC channel unsafe on the zero policy?",
       "options": [
         "Its neutral is a 1500 us pulse, and a pulse of 0 is no signal, which the ESC may treat as anything",
-        "The ESC is broken",
-        "Zero is too small",
-        "It needs 24 V"
+        "Its pulse must be at least 1000 us, and zero is below that",
+        "An ESC needs 24 V and zero volts switches it off",
+        "Zero is the ESC's full reverse"
       ],
       "correct": 0,
-      "explanation": "A zero is safe only where zero means stopped."
+      "explanation": "A pulse of zero width is the absence of a signal. What a speed controller does then is up to its maker, so the channel needs its own safe value, 1500."
     },
     {
       "stage": "check",
       "question": "With the robot moving, how many of the four failures engaged a spring applied brake, and a power applied one?",
       "options": [
-        "0 and 3",
-        "4 and 4",
+        "4 and 4: any brake engages when something fails",
+        "0 and 3: the power applied brake is the one that acts",
         "3 and 0: for the spring, a lost supply, a cut wire and a dead controller driving zero are the command to stop",
         "2 and 2"
       ],
       "correct": 2,
-      "explanation": "The fourth, an output stage that holds, is the gap."
+      "explanation": "A spring holds the brake on unless a coil is powered. Loss of supply, a cut wire and a zero output all remove the power, so they are stops. A power applied brake needs all three to work."
     },
     {
       "stage": "post",
       "question": "What closes the case of an output stage that holds the coil at 24 V?",
       "options": [
-        "A bigger spring",
-        "A longer wire",
-        "Nothing",
+        "A stronger spring in the brake",
+        "A second brake of the power applied kind",
+        "Nothing can: the spring cannot overcome a driven coil",
         "A safe-value policy on the coil channel (0 V), so the stage drives the coil to where the spring applies the brake"
       ],
       "correct": 3,
-      "explanation": "4 of 4 with both ideas."
+      "explanation": "The coil is a channel like any other, with a safe value of 0 V. With the stage set to drive it there on failure, the spring applies the brake in all four cases."
     },
     {
       "stage": "post",
       "question": "How is the real behaviour of an output stage found?",
       "options": [
         "By killing the controller on the bench and watching the output: the model is as true as the data sheet it came from",
-        "From the data sheet only",
-        "From the compiler",
-        "By asking the supplier"
+        "By reading the data sheet, which is always right",
+        "By asking the application what it last sent",
+        "By checking that the model's tests pass"
       ],
       "correct": 0,
-      "explanation": "No header can do it."
+      "explanation": "The model says what the data sheet says. Whether the real stage holds, zeros or does something else is found by killing the controller and measuring."
     }
   ]
 }

@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why keep a hazard log from the start of a project and not at the end?",
       "options": [
-        "It is required",
-        "It looks professional",
-        "It is faster",
+        "A log started late has fewer entries, and a short log is quicker to review",
+        "The standard requires the log to be dated before the first line of code",
+        "Hazards cannot be scored until the machine has been built and measured",
         "A safeguard nobody wrote a hazard for cannot be shown to cover anything, and hazards found late are expensive to answer"
       ],
       "correct": 3,
-      "explanation": "A team that says it has an emergency stop cannot say what it is for."
+      "explanation": "Each safeguard is an answer to a hazard. Without the hazard written down first, nobody can say what a safeguard is for, or what has been left with none."
     },
     {
       "stage": "check",
       "question": "Severity 4 with likelihood 1 scores 4. By the product alone that is low. What does the log class it as?",
       "options": [
         "Medium: a catastrophic outcome is never classed below medium, because the likelihood is a guess and the outcome is not",
-        "Low",
-        "High",
-        "Unacceptable"
+        "Low: 4 is in the low band, and the class follows the score",
+        "High: any severity 4 is at least high",
+        "Unacceptable: a possible death can never be accepted"
       ],
       "correct": 0,
-      "explanation": "Severity 3 with likelihood 1 is still low: the floor is for catastrophe only."
+      "explanation": "The likelihood is an estimate made by people who hope it is small. The severity is what happens. So one rule overrides the product: severity 4 never classes below medium."
     },
     {
       "stage": "check",
       "question": "A hazard is added with no id, severity 9 and no owner. What does add answer?",
       "options": [
         "no_id: the checks are made in a fixed order and the first failure is the answer, and nothing is kept",
-        "ok",
-        "bad_severity",
-        "no_owner"
+        "bad_severity: the worst fault is reported first",
+        "no_owner: the owner is checked before anything else",
+        "ok, with the missing fields filled by defaults"
       ],
       "correct": 0,
-      "explanation": "A refused hazard is not kept half way."
+      "explanation": "The checks run in a fixed order, id first, and the first failure is the answer. A refused hazard is not kept half way."
     },
     {
       "stage": "check",
       "question": "Two hazards both score 12, one at severity 4 and likelihood 3 and one at severity 3 and likelihood 4. Which is ranked first?",
       "options": [
-        "Alphabetical only",
-        "The second",
+        "The second: a likelihood of 4 means it will happen sooner",
+        "Either: equal scores have no order",
         "The first: ties break by severity, then by id, so the catastrophic one leads and the order is always the same",
-        "Either"
+        "Whichever was added to the log first"
       ],
       "correct": 2,
-      "explanation": "Equal scores are not equal risks."
+      "explanation": "Two hazards at 12 are not equal risks. The tie goes to the higher severity, and then to the id, so the list is the same on every machine."
     },
     {
       "stage": "post",
       "question": "unaddressed() lists a severity 4, likelihood 1 fire with no mitigation but not a severity 2, likelihood 1 pinch with none. Why?",
       "options": [
-        "The pinch has an owner",
+        "The pinch has an owner and the fire has none",
         "The fire is medium by the floor and so is not low, while the pinch is low: a low risk with nothing done is allowed, a catastrophe with nothing done is not",
-        "The list is random",
-        "A mistake"
+        "The fire scores higher than the pinch by the product",
+        "The pinch has a mitigation that the log does not show"
       ],
       "correct": 1,
-      "explanation": "The three open ones were U4, U1, U5."
+      "explanation": "Both score low by the product. The floor lifts the fire to medium, and anything that is not low needs something done about it."
     },
     {
       "stage": "post",
       "question": "Eight ground vehicle hazards scored 1 unacceptable, 3 high and 4 medium. Which was the unacceptable one?",
       "options": [
-        "Rollover",
+        "Running into a person, scoring 12",
         "Keeping on driving when the link is lost, scoring 16: the reason for an independent stop path",
-        "Overheating",
-        "Battery failure"
+        "Rolling over on a slope, scoring 9",
+        "A sensor failing with nothing noticing, scoring 12"
       ],
       "correct": 1,
-      "explanation": "The next lesson answers it."
+      "explanation": "A machine that drives on with nothing in control of it was the only one at 15 or more. The next lesson is its answer."
     }
   ]
 }
