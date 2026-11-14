@@ -6,37 +6,37 @@
       "stage": "pre",
       "question": "What are the three kinds of torque in an arm's motion?",
       "options": [
-        "Motor, gear and load",
-        "Fast, slow and still",
-        "Static, dynamic and thermal",
+        "The motor's, the gear's and the load's",
+        "Friction, play and stiffness",
+        "Position, velocity and acceleration terms of a PID",
         "Holding it up, speeding it up, and what the joints throw at each other"
       ],
       "correct": 3,
-      "explanation": "g(q), M(q) qdd and C qd."
+      "explanation": "Gravity depends on the pose, inertia on the acceleration, and the velocity products on one joint's motion acting on another. Every joint torque is the sum of the three."
     },
     {
       "stage": "check",
       "question": "The torque to hold a 2 kg rod of 0.4 m out horizontally was:",
       "options": [
-        "100 N m",
-        "0",
-        "0.000000 N m",
+        "7.848 N m, which is m g L",
+        "0.000000 N m, since the rod is balanced",
+        "1.962 N m",
         "3.924 N m, which is m g L over 2"
       ],
       "correct": 3,
-      "explanation": "And nothing when it stands up."
+      "explanation": "The weight of 19.62 N acts at the middle of the rod, 0.2 m out. Standing upright the same rod needs nothing."
     },
     {
       "stage": "check",
       "question": "What check can a sign error in the recursion not survive?",
       "options": [
-        "A time test",
-        "A unit test only",
+        "Comparing with a second run of the same code",
+        "Checking that the torques are finite",
         "The torque of gravity must be the slope of the potential energy",
-        "A visual check"
+        "Checking that the mass matrix is symmetric"
       ],
       "correct": 2,
-      "explanation": "Matched to 0.00000001 N m."
+      "explanation": "Gravity's torque is the rate at which the potential energy changes with the joint angle. A slope taken numerically from m g z knows nothing of the recursion, so a wrong sign cannot agree with it."
     },
     {
       "stage": "check",
@@ -44,35 +44,35 @@
       "options": [
         "0.000000000496 and 0.03723",
         "0.03723 and 0.000000000496",
-        "The same",
-        "None of it in either"
+        "Both about 0.037, since the model is the same",
+        "None with either: energy is conserved"
       ],
       "correct": 0,
-      "explanation": "The integrator is part of the model."
+      "explanation": "With no torque and no friction the energy should not change. The first order step lost nearly four percent of it in a second, which a controller tuned in that simulation would learn from."
     },
     {
       "stage": "post",
       "question": "How does the velocity torque grow with speed?",
       "options": [
         "With the square of the speed: doubling gave four times",
-        "Not at all",
-        "Linearly",
-        "With the cube"
+        "In proportion to the speed",
+        "Not at all: they depend on the pose only",
+        "With the cube of the speed"
       ],
       "correct": 0,
-      "explanation": "Coriolis and centripetal."
+      "explanation": "The terms are products of two joint rates. Doubling every rate quadrupled them."
     },
     {
       "stage": "post",
       "question": "What must be true of the mass matrix?",
       "options": [
-        "Constant",
+        "Diagonal, with one inertia for each joint",
         "Symmetric and positive: kinetic energy is never negative",
-        "Nothing",
-        "Diagonal"
+        "The same in every pose",
+        "Symmetric, with zeros where joints are far apart"
       ],
       "correct": 1,
-      "explanation": "x transpose M x > 0."
+      "explanation": "Kinetic energy is half of the rates times the matrix times the rates, and it cannot be negative. A mass matrix that fails the test is a mistake in the model."
     }
   ]
 }

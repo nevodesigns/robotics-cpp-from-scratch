@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why does a plain PD controller sag under the arm's weight?",
       "options": [
-        "The model is wrong",
-        "Friction",
+        "Its derivative term fights the weight",
+        "The motor saturates under the weight",
         "It holds the arm up only with its error: the error times the gain equals the weight",
-        "Gains are low"
+        "Its gain falls as the arm sags"
       ],
       "correct": 2,
-      "explanation": "Droop is the weight over the gain."
+      "explanation": "With no motion the derivative gives nothing, so only the gain times the error is left to carry the weight. There has to be an error for there to be a torque."
     },
     {
       "stage": "check",
       "question": "At the shoulder the arm sagged, and the weight over the gain said:",
       "options": [
-        "0.000000000 rad",
-        "0 rad",
+        "0.1093 rad, against 0.1113 predicted",
+        "0.0646 rad, against 0.1093 predicted",
         "0.1113 rad, against 0.1093 predicted",
-        "1 rad"
+        "0.000000000 rad, since the gain is 300 N m/rad"
       ],
       "correct": 2,
-      "explanation": "To within the pose changing as it sags."
+      "explanation": "The torque of gravity over the gain predicted 0.1093 rad and the arm ended 0.1113 rad off. The small difference is the pose changing as it sags."
     },
     {
       "stage": "check",
       "question": "A payload of 2 kg the controller did not know about left an error of:",
       "options": [
         "0.0646 rad",
-        "0.000000000 rad",
-        "0.00010 rad",
-        "0 rad"
+        "0.1113 rad, as with no compensation",
+        "0.000000000 rad: the compensation covers any load",
+        "0.00010 rad"
       ],
       "correct": 0,
-      "explanation": "The compensation covered the arm only."
+      "explanation": "The model held the arm's own weight and the controller's gain had to hold the 2 kg. Once the mass was estimated and added, the error was 0.00010 rad."
     },
     {
       "stage": "check",
       "question": "The mass estimated from six poses with noise was:",
       "options": [
-        "2.000000 kg exactly",
+        "1.90 kg",
         "2.00 kg (it was 2)",
-        "10 kg",
-        "0 kg"
+        "2.60 kg",
+        "Not found: six poses are too few"
       ],
       "correct": 1,
-      "explanation": "Linear in the one unknown: least squares."
+      "explanation": "The extra torque is linear in the one unknown mass, so six poses with 0.1 N m of noise on each were plenty for least squares."
     },
     {
       "stage": "post",
       "question": "Why is the torque for a payload linear in its mass?",
       "options": [
         "It is the Jacobian's transpose times the weight, and the weight is mass times g",
-        "Luck",
-        "It is not",
-        "Gravity is linear in position"
+        "The arm is held still while it is measured",
+        "The payload is small beside the arm",
+        "Six poses average the noise out"
       ],
       "correct": 0,
-      "explanation": "One unknown, many equations."
+      "explanation": "The Jacobian's transpose turns a force at the tool into joint torques, and the force is the mass times g. The mass comes out as a factor."
     },
     {
       "stage": "post",
       "question": "How does a payload go into the model?",
       "options": [
-        "Replace the link",
-        "Add the mass and leave the centre",
-        "Ignore it",
+        "As a larger mass on the last link, with its centre unchanged",
+        "As a constant torque added at the shoulder",
+        "As a higher gain on the last three joints",
         "The sum of the masses, the weighted mean of the centres, and the inertia by the parallel axis rule"
       ],
       "correct": 3,
-      "explanation": "Otherwise the weight is in the wrong place."
+      "explanation": "The weight has to act where it is. Adding the mass and leaving the centre of the link alone puts it too far in, and the compensation then looks like that of a smaller payload."
     }
   ]
 }

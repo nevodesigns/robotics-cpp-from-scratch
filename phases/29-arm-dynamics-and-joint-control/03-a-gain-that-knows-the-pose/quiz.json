@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is a joint's gain not one number for an arm?",
       "options": [
-        "Motors differ",
-        "Gains are random",
+        "The motor's constant changes with temperature",
+        "The gear ratio is different at each joint",
         "The inertia the joint sees depends on the pose",
-        "Arms are heavy"
+        "Gravity is larger in some poses"
       ],
       "correct": 2,
-      "explanation": "It changes several fold."
+      "explanation": "The diagonal term of the mass matrix is what the joint has to accelerate, and it is several times larger with the arm stretched out than folded."
     },
     {
       "stage": "check",
       "question": "The shoulder's inertia went from 0.691 to 2.091 kg m2, a ratio of:",
       "options": [
-        "1",
-        "1.8",
-        "100",
+        "3.0, and through a 100:1 gear still 3.0",
+        "1.8, and through a 100:1 gear 3.0",
+        "2.1, and through a 100:1 gear 0.7",
         "3.0, and through a 100:1 gear 1.8"
       ],
       "correct": 3,
-      "explanation": "A geared joint sees less of the change."
+      "explanation": "2.091 over 0.691 is 3.0. The rotor behind the gear adds 1.0 kg m2 to both, and 3.091 over 1.691 is 1.8."
     },
     {
       "stage": "check",
       "question": "With gains for the heaviest pose, the overshoot at the lightest pose was:",
       "options": [
-        "The same",
+        "0.0 percent, as at the heaviest",
         "13909338 percent, against 0.0 at the heaviest",
-        "0 percent",
-        "0.0 percent"
+        "About three times the heaviest pose's",
+        "19.0 percent"
       ],
       "correct": 1,
-      "explanation": "The velocity loop's bandwidth is Kv over J."
+      "explanation": "The loop's bandwidth is the gain over the inertia, so at a third of the inertia it is three times as fast, past what the drive's delay allows. The number only says how far it had swung when the run ended."
     },
     {
       "stage": "check",
       "question": "With gains that follow the inertia, the overshoot at the lightest was:",
       "options": [
-        "Unstable",
-        "13909338 percent",
-        "50 percent",
+        "13909338 percent, as before",
+        "19.0 percent",
+        "186 percent",
         "0.0 percent"
       ],
       "correct": 3,
-      "explanation": "Kv = J times the bandwidth."
+      "explanation": "With the gain set to the inertia times the wanted bandwidth, the loop is the same speed in every pose, and the step looked the same at both ends."
     },
     {
       "stage": "post",
       "question": "What does an integral do when the torque is at its limit?",
       "options": [
-        "Nothing",
+        "It is reset to zero, and the arm stops short",
         "It keeps adding up the error: it winds up and overshoots: 186 percent, against 19.0 held",
-        "It stops the arm",
-        "It resets"
+        "It holds the torque at the limit, which is what is wanted",
+        "Nothing: the limit comes after the integral"
       ],
       "correct": 1,
-      "explanation": "Hold it while saturated."
+      "explanation": "The error stays large while the motor is flat out, and the integral grows the whole time. It then has to be unwound by going past the target: 186 percent, against 19.0 with the integral held."
     },
     {
       "stage": "post",
       "question": "Why does a geared joint need the pose in its gains less?",
       "options": [
         "Most of the inertia it sees is its own rotor through the gear squared",
-        "It does not",
-        "It is slower",
-        "Gears are stiff"
+        "The gear's friction damps the loop",
+        "A geared motor has a faster current loop",
+        "The gear hides gravity from the motor"
       ],
       "correct": 0,
-      "explanation": "The gear ratio squared."
+      "explanation": "A rotor of 1e-4 kg m2 behind 100:1 is 1.0 kg m2 at the joint, the same in every pose. The arm's changing share is a smaller part of the total."
     }
   ]
 }
