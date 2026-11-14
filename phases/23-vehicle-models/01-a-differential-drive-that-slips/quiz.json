@@ -7,72 +7,72 @@
       "question": "Which loss takes a fraction of every turn?",
       "options": [
         "Turn efficiency",
-        "Gravity",
-        "Backlash",
-        "Longitudinal slip"
+        "Longitudinal slip",
+        "Rolling resistance",
+        "The step size of the integration"
       ],
       "correct": 0,
-      "explanation": "Slip is in the direction of travel."
+      "explanation": "Slip shortens the distance travelled, which on a straight line is only a scale error. Turn efficiency shortens every turn, and a short turn misdirects everything after it."
     },
     {
       "stage": "check",
       "question": "10 m of wheel travel with 5 percent slip was how far on the ground?",
       "options": [
-        "10 m",
-        "9 m",
+        "10.00 m: slip only matters in turns",
+        "9.05 m",
         "9.50 m",
-        "5 m"
+        "10.50 m"
       ],
       "correct": 2,
-      "explanation": "The fraction is taken off."
+      "explanation": "The ground distance is the wheel travel times one less the slip: 10 m times 0.95."
     },
     {
       "stage": "check",
       "question": "A turn the wheels say is 90 degrees, at an efficiency of 0.8, was:",
       "options": [
-        "80 degrees",
+        "90 degrees: efficiency acts on distance",
         "72.0 degrees",
-        "45 degrees",
-        "90 degrees"
+        "80 degrees",
+        "112.5 degrees"
       ],
       "correct": 1,
-      "explanation": "0.8 of 90."
+      "explanation": "The body's turn is the efficiency times what the wheel difference says: 0.8 of 90 degrees."
     },
     {
       "stage": "check",
       "question": "How much more wheel travel does a turn need at efficiency 0.8?",
       "options": [
         "25 percent",
+        "20 percent",
         "80 percent",
-        "None",
-        "5 percent"
+        "None: the controller corrects it"
       ],
       "correct": 0,
-      "explanation": "One over 0.8 less one."
+      "explanation": "To get the full turn the wheels must ask for one over 0.8 of it, which is a quarter more."
     },
     {
       "stage": "post",
       "question": "Why does the square not close?",
       "options": [
-        "Chance",
-        "The wheels are loose",
-        "The floor is round",
+        "The slip shortens each side by a different amount",
+        "The integration uses the heading at the start of the step",
+        "The wheels are of different sizes",
         "Each turn is short, so the next side points the wrong way, and the error grows with the side"
       ],
       "correct": 3,
-      "explanation": "The efficiency does the damage."
+      "explanation": "With turns 10 percent short the second side is already misdirected, and the miss grows with the side's length. With 2 percent slip and 0.9 efficiency it ended 4.64 m from home."
     },
     {
       "stage": "post",
       "question": "How can the efficiency be found?",
       "options": [
-        "By guessing",
-        "From the data sheet",
-        "It cannot",
+        "From the tyre maker's data sheet",
+        "From the motor's current",
+        "By driving a straight line and timing it",
         "From a measured turn: the body's turn over the turn the wheels ask for"
       ],
       "correct": 3,
-      "explanation": "It is a ratio of two things that can be measured."
+      "explanation": "It depends on floor, tyres and weight, so it has to be measured. A turn made with an efficiency of 0.8 read back as 0.800."
     }
   ]
 }

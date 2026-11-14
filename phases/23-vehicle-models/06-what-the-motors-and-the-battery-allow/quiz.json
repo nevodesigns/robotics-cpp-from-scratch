@@ -7,72 +7,72 @@
       "question": "What gives a brushed motor its force at the wheel?",
       "options": [
         "The torque-speed line, through the gearbox, over the wheel radius",
-        "Friction",
-        "The battery only",
-        "Its colour"
+        "The battery's capacity in watt hours",
+        "The friction of the tyres",
+        "The driver's current limit alone"
       ],
       "correct": 0,
-      "explanation": "Stall torque at rest, none at the no load speed."
+      "explanation": "The motor gives its stall torque at rest and none at its no load speed, on a straight line between. The gearbox multiplies it and the wheel's radius turns it into force."
     },
     {
       "stage": "check",
       "question": "A battery of 0.5 ohm cut the standing acceleration from 4.54 to:",
       "options": [
-        "0",
+        "4.54 m/s2, unchanged",
         "3.32 m/s2",
-        "10 m/s2",
-        "The same"
+        "2.27 m/s2, half",
+        "1.67 m/s2"
       ],
       "correct": 1,
-      "explanation": "The bus sags under the standing current."
+      "explanation": "A standing start draws the most current, and 0.5 ohm of internal resistance dropped the bus below three quarters of its voltage."
     },
     {
       "stage": "check",
       "question": "The top speed on level gravel was:",
       "options": [
-        "0",
+        "1.83 m/s, the no load speed",
         "1.67 m/s, under the no load speed",
-        "1.83 m/s",
-        "10 m/s"
+        "0.99 m/s",
+        "4.54 m/s"
       ],
       "correct": 1,
-      "explanation": "The rolling resistance takes the rest."
+      "explanation": "The motors' force falls to zero at 1.83 m/s, and rolling resistance and drag stop the vehicle a little short of that. On a 10 degree slope it was 0.99 m/s."
     },
     {
       "stage": "check",
       "question": "On gravel the limit on the acceleration was the:",
       "options": [
-        "motors in every case",
-        "Colour",
-        "Battery",
+        "motors",
+        "battery",
+        "driver's current limit",
         "grip"
       ],
       "correct": 3,
-      "explanation": "Grip runs out before the motors."
+      "explanation": "Gravel holds a slope of 22.3 degrees and the motors can start on 25.6, so the tyres give out first. On tarmac, which holds 38.1, it was the motors."
     },
     {
       "stage": "post",
       "question": "Why is it money wasted to buy stronger motors for a grip limited robot?",
       "options": [
-        "Motors are heavy",
-        "It is not",
+        "Stronger motors drain the battery faster",
+        "Stronger motors are less efficient",
         "The tyres cannot hold the extra force, so the acceleration does not change",
-        "Batteries"
+        "It is not wasted: more force is always more acceleration"
       ],
       "correct": 2,
-      "explanation": "Raise the limit that binds."
+      "explanation": "The force that reaches the ground is capped by the grip. Past that cap the wheels spin, whatever the motor could give."
     },
     {
       "stage": "post",
       "question": "Why was the vehicle tuned on a fresh battery wrong on a tired one?",
       "options": [
         "A tired battery sags more under the standing current",
-        "Motors age",
-        "It was not",
-        "Wheels shrink"
+        "Its capacity is lower",
+        "Its voltage is higher at rest",
+        "The motors draw less from it"
       ],
       "correct": 0,
-      "explanation": "Internal resistance rises."
+      "explanation": "As a battery ages its internal resistance rises, so the same standing current pulls the bus down further and the acceleration with it."
     }
   ]
 }

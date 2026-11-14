@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why must a track slip to give thrust?",
       "options": [
-        "It is worn",
-        "It need not",
+        "Its links stretch under load",
+        "The motor cannot hold a steady speed",
         "The thrust is the reaction to shearing the soil, and shearing is a slip",
-        "Bad design"
+        "Soil always moves under any load"
       ],
       "correct": 2,
-      "explanation": "No push, no thrust."
+      "explanation": "The soil pushes back only as much as it is sheared, so thrust is zero at no slip and rises with it toward the most the soil can give."
     },
     {
       "stage": "check",
       "question": "On the loose sand, half the largest thrust came at a slip of:",
       "options": [
-        "1 percent",
         "50 percent",
-        "90 percent",
+        "1 percent",
+        "100 percent",
         "10.0 percent"
       ],
       "correct": 3,
-      "explanation": "Most of the thrust is got for the first few percent."
+      "explanation": "The curve is steep at first and flat at the end. Half of the most the sand can give came at a tenth of slip."
     },
     {
       "stage": "check",
       "question": "A pivot needed how much a track?",
       "options": [
-        "Nothing",
-        "1000 N",
+        "81.8 N, the same as four wheels",
+        "7.7 N",
         "32.7 N, against 81.8 N for four wheels",
-        "The same as wheels"
+        "98 N, its whole load"
       ],
       "correct": 2,
-      "explanation": "The weight is spread nearer the middle."
+      "explanation": "A track's weight is spread along its length, nearer the middle on average than four wheels at the corners, so less of it has to be dragged far."
     },
     {
       "stage": "check",
       "question": "Slips of 10 and 20 percent on the two tracks turned a straight command by:",
       "options": [
-        "1 degree",
-        "180 degrees",
-        "0",
+        "Nothing: equal commands go straight",
+        "4.4 degrees in 10 s",
+        "90 degrees in 1 s",
         "44.1 degrees in 10 s"
       ],
       "correct": 3,
-      "explanation": "The track that slips more is slower over the ground."
+      "explanation": "Both tracks were driven at 0.3 m/s. The one slipping 20 percent covered less ground and the vehicle turned toward it."
     },
     {
       "stage": "post",
       "question": "Why can a heading not be held by sending equal commands to two tracks?",
       "options": [
-        "It can",
+        "The two motors are never identical",
         "The slips need not be equal: ground varies from side to side",
-        "Tracks are loose",
-        "Motors differ only"
+        "Tracks stretch as they warm",
+        "The controller is too slow"
       ],
       "correct": 1,
-      "explanation": "Hold a heading by feedback."
+      "explanation": "A rut or a wet patch under one track changes its slip. Equal commands then give unequal ground speeds, so the heading has to be measured and fed back."
     },
     {
       "stage": "post",
       "question": "Why are the soil values of the lesson marked typical?",
       "options": [
         "They are textbook values for a kind of soil, not those of the soil the robot will drive on",
-        "Laziness",
-        "Wrong",
-        "Secret"
+        "They were measured on another vehicle",
+        "They are rounded to two digits",
+        "They change with the track's speed"
       ],
       "correct": 0,
-      "explanation": "Measure the soil in use."
+      "explanation": "Cohesion, friction angle and shear modulus are the figures for a kind of soil. The ground under a real robot has to be measured."
     }
   ]
 }

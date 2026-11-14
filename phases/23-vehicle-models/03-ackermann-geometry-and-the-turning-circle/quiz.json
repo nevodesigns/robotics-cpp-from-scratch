@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why can a car not turn on the spot?",
       "options": [
-        "Heavy",
+        "Its steering angle is limited to 24 degrees",
         "The turn rate is the speed times tan(steer) over the wheelbase: no speed, no turn",
-        "Bad tyres",
-        "It can"
+        "Its tyres cannot slide sideways",
+        "Its motor drives only the rear wheels"
       ],
       "correct": 1,
-      "explanation": "Its rear wheels point where it points."
+      "explanation": "In the bicycle model the heading changes at the speed times the tangent of the steering angle over the wheelbase. At rest that is zero whatever the steering."
     },
     {
       "stage": "check",
       "question": "The smallest circle of the car was:",
       "options": [
-        "0.1 m",
-        "5 m",
+        "0.3302 m, the wheelbase",
         "1.81 m",
+        "0.904 m",
         "0.742 m"
       ],
       "correct": 3,
-      "explanation": "L over tan of the largest angle."
+      "explanation": "The wheelbase over the tangent of the largest steering angle: 0.3302 over tan 24 degrees."
     },
     {
       "stage": "check",
       "question": "At the smallest circle the inner and the outer front wheels differed by:",
       "options": [
         "5.8 degrees",
-        "0.1 degrees",
-        "Nothing",
-        "45 degrees"
+        "Nothing: both point the same way",
+        "24 degrees",
+        "0.1 degrees"
       ],
       "correct": 0,
-      "explanation": "They point at right angles to the lines to the centre."
+      "explanation": "The inner wheel is on a smaller circle and must be turned more: 27.2 degrees against 21.4."
     },
     {
       "stage": "check",
       "question": "The lane a car needs at its smallest circle is:",
       "options": [
-        "Half its width",
+        "Exactly the car's width",
         "0.062 m wider than the car",
-        "Its width",
-        "Twice its length"
+        "Twice the car's width",
+        "0.904 m wider than the car"
       ],
       "correct": 1,
-      "explanation": "The outer front wheel sweeps further out."
+      "explanation": "The outer front wheel is ahead of the rear axle and sweeps a larger circle than the car's side. A corridor only as wide as the car cannot be turned in."
     },
     {
       "stage": "post",
       "question": "What sets the fastest speed round a circle on gravel?",
       "options": [
-        "The colour",
-        "The wheelbase only",
+        "The motor's power",
+        "The steering's speed",
         "The friction: sqrt(mu g R)",
-        "The motor"
+        "The wheelbase"
       ],
       "correct": 2,
-      "explanation": "The tyres can give mu g sideways."
+      "explanation": "The tyres can give at most the friction times g sideways, so the speed is the root of friction times g times the radius: 1.81 m/s on its smallest circle."
     },
     {
       "stage": "post",
       "question": "Why is the Ackermann difference invisible on a big circle?",
       "options": [
-        "It is hidden",
-        "It is zero",
+        "The steering linkage removes it",
+        "It only exists at low speed",
         "On a large radius the two angles are nearly equal",
-        "Cars cheat"
+        "The tyres hide it by sliding"
       ],
       "correct": 2,
-      "explanation": "On 20 m the difference is under a tenth of a degree."
+      "explanation": "The two front wheels are on circles whose radii differ by the track. On 20 m that is a tenth of a degree; at full lock on a small car, 5.8 degrees."
     }
   ]
 }

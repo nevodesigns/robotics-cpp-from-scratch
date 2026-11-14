@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "How is the effective track found?",
       "options": [
-        "From the data sheet",
-        "Measured with a ruler",
+        "From the distance between the wheels' centres",
+        "From a straight run of known length",
         "The wheels' difference over the heading change, in a spin in place",
-        "By guessing"
+        "From the motor currents in a turn"
       ],
       "correct": 2,
-      "explanation": "A ratio of two measurements."
+      "explanation": "Over a spin the wheels' travel differs by the effective track times the heading change. Dividing one total by the other gives the track."
     },
     {
       "stage": "check",
       "question": "A single spin with a gyro bias gave an error of:",
       "options": [
         "0.31 percent",
-        "0",
-        "50 percent",
-        "5 percent"
+        "0.000 percent",
+        "3.1 percent",
+        "0.01 percent"
       ],
       "correct": 0,
-      "explanation": "The bias adds to a heading that did not happen."
+      "explanation": "A bias of 0.01 rad/s adds a little turn that did not happen to the heading change, so the ratio comes out a little wrong."
     },
     {
       "stage": "check",
       "question": "A spin each way gave an error of:",
       "options": [
-        "10 percent",
-        "1 percent",
-        "0.31 percent",
+        "0.31 percent, the same",
+        "0.62 percent, twice",
+        "0.15 percent, half",
         "0.000 percent"
       ],
       "correct": 3,
-      "explanation": "The bias adds to one and subtracts from the other."
+      "explanation": "The bias makes a left spin read too much and a right spin too little by the same amount. Adding the sizes cancels it with no model of the bias."
     },
     {
       "stage": "check",
       "question": "More spins narrow the spread because:",
       "options": [
         "Scatter is averaged, not cancelled",
-        "The gyro improves",
-        "Magic",
-        "The floor changes"
+        "The bias is cancelled better",
+        "The wheels slip less each time",
+        "The gyro warms up"
       ],
       "correct": 0,
-      "explanation": "Four spins gave 0.0019 m against 0.0034 m."
+      "explanation": "Noise is random from one spin to the next, so more spins average it down: 0.0019 m with four each way against 0.0034 m with one."
     },
     {
       "stage": "post",
       "question": "Why must the calibration be repeated for a different floor?",
       "options": [
-        "The gyro depends on it",
+        "The gyro's bias depends on the floor",
         "The efficiency depends on the floor",
-        "Law",
-        "It need not"
+        "The wheels wear differently on each floor",
+        "The ruler's track changes"
       ],
       "correct": 1,
-      "explanation": "The effective track is a property of the vehicle on a surface."
+      "explanation": "How much a turn falls short depends on how the wheels scrub on that surface. The number belongs to the vehicle on that floor."
     },
     {
       "stage": "post",
       "question": "What does the scale need?",
       "options": [
-        "A gyro",
+        "A spin each way",
         "A tape: a measured stretch and the wheel travel that made it",
-        "A camera",
-        "Nothing"
+        "A stopwatch",
+        "A second gyro"
       ],
       "correct": 1,
-      "explanation": "Ground over wheel."
+      "explanation": "Drive a stretch, measure it on the ground, and divide by what the wheels counted. 10.00 m counted as 10.21 m gave 0.9794."
     }
   ]
 }

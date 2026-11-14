@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What is the first thing to do when a model and a simulator disagree?",
       "options": [
-        "Change the simulator",
+        "Fit the model's parameters to the simulator",
         "Find which of the two the disagreement is a measurement of",
-        "Ignore it",
-        "Fit the model"
+        "Trust the simulator, which has more physics",
+        "Average the two"
       ],
       "correct": 1,
-      "explanation": "Do not fit before you know there is something to fit."
+      "explanation": "A gap says one of them is wrong about something. A fit will hide it with a number before anyone knows what it was."
     },
     {
       "stage": "check",
       "question": "A model fitted to another model of efficiency 0.8 found:",
       "options": [
-        "0.5",
-        "0",
-        "1.1",
+        "1.02",
+        "0.68",
+        "1.00",
         "0.80"
       ],
       "correct": 3,
-      "explanation": "A fit finds a parameter that is there."
+      "explanation": "The reference had an efficiency of 0.8 and the fit recovered it with a worst gap of 0.0000 m. A fit finds a parameter when the parameter exists."
     },
     {
       "stage": "check",
       "question": "A backend whose turn is short after a drive made turn ratios of:",
       "options": [
-        "2, 2, 2",
+        "0.80, 0.80, 0.80",
         "0.97, 0.68, 0.68",
-        "1, 1, 1",
-        "0, 0, 0"
+        "1.01, 0.74, 0.85",
+        "0.68, 0.97, 0.97"
       ],
       "correct": 1,
-      "explanation": "Different in different contexts."
+      "explanation": "From rest, after driving, and after driving and a pause. A real efficiency gives the same ratio in all three; this backend did not."
     },
     {
       "stage": "check",
       "question": "Why can no efficiency fit a context dependent backend?",
       "options": [
         "The efficiency is one number and the behaviour depends on what came before",
-        "Rounding",
-        "It can",
-        "The grid is coarse"
+        "The fit's search is too coarse",
+        "The backend's efficiency is above one",
+        "The cases are too short"
       ],
       "correct": 0,
-      "explanation": "The worst gap stayed at 0.013 m."
+      "explanation": "A turn that is right from rest and 30 percent short after driving cannot be matched by one constant. The best fit still left 0.013 m."
     },
     {
       "stage": "post",
       "question": "Why was scrubbing wheels the wrong explanation for the short turn in Gazebo?",
       "options": [
-        "Gazebo has no friction",
-        "It was right",
+        "Gazebo's wheels have no width",
+        "The turn was too slow to scrub",
         "Scrubbing would have shortened the turn from rest too, and changing the friction changed nothing",
-        "Wheels cannot scrub"
+        "Scrubbing only happens on gravel"
       ],
       "correct": 2,
-      "explanation": "An explanation must predict more than the symptom."
+      "explanation": "Scrubbing does not depend on what the robot did before. The turn from rest was right, and changing the friction of ground, wheels and caster moved nothing."
     },
     {
       "stage": "post",
       "question": "What was the cause?",
       "options": [
-        "Friction",
-        "The battery",
+        "The wheels' friction",
+        "The lag of the wheel speeds",
         "The weight over the axle: the robot rocked on two wheels and a caster",
-        "The motors"
+        "A slip of 2 percent"
       ],
       "correct": 2,
-      "explanation": "Balance depended on whether it had driven."
+      "explanation": "With the weight over the axle the body rocked on two wheels and a caster after driving. Moving the weight behind the axle gave 0.99, 1.01 and 1.02."
     }
   ]
 }

@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "How does a skid steer vehicle turn?",
       "options": [
-        "By turning its front wheels",
+        "By steering one axle, as a car does",
         "By driving the sides at different speeds and dragging the wheels sideways",
-        "It cannot",
-        "By leaning"
+        "By braking the inner wheels only",
+        "By tilting its wheels into the turn"
       ],
       "correct": 1,
-      "explanation": "Its wheels are fixed to the chassis."
+      "explanation": "All four wheels point straight along the chassis. Turning means one side goes faster than the other and every wheel is dragged partly sideways."
     },
     {
       "stage": "check",
       "question": "A chassis of 0.30 m by 0.25 m slides its front wheels in a pivot at:",
       "options": [
-        "0 degrees",
-        "10 degrees",
+        "45 degrees",
+        "39.8 degrees",
         "50.2 degrees",
         "90 degrees"
       ],
       "correct": 2,
-      "explanation": "atan(L over B)."
+      "explanation": "The angle of the slide at the front wheels is the arctangent of the wheelbase over the track: atan of 0.30 over 0.25. A square chassis would be 45 degrees."
     },
     {
       "stage": "check",
       "question": "At chi 1.5 against 1.0, the centre of rotation for the same wheels was:",
       "options": [
         "1.5 times as far",
-        "The same",
-        "At the centre",
-        "Half as far"
+        "Two thirds as far",
+        "The same distance",
+        "At infinity"
       ],
       "correct": 0,
-      "explanation": "0.625 m and 0.938 m."
+      "explanation": "The vehicle turns 1.5 times less for the same wheel speeds, so the point it turns about is 1.5 times further: 0.938 m against 0.625 m."
     },
     {
       "stage": "check",
       "question": "Could two gear motors a side pivot a 10 kg vehicle on gravel?",
       "options": [
         "No: it needed 34.5 N a side against 28.0 N",
-        "Only on ice",
-        "Yes, easily",
-        "Never needed"
+        "Yes: it needed 7.7 N a side",
+        "Yes, with 28.0 N to spare",
+        "No: it needed 81.8 N a side"
       ],
       "correct": 0,
-      "explanation": "The motors can drive it forward and not turn it."
+      "explanation": "Scrubbing four wheels sideways on gravel takes 34.5 N from each side, and two gear motors a side give 28.0 N. On ice it took 7.7 N."
     },
     {
       "stage": "post",
       "question": "Why are skid steer machines built short?",
       "options": [
-        "Looks",
+        "A short chassis is lighter",
         "A short, wide chassis slides its wheels at a smaller angle and needs less force to turn",
-        "Cost",
-        "No reason"
+        "Short machines have a lower centre of mass",
+        "To fit more wheels on each side"
       ],
       "correct": 1,
-      "explanation": "atan(L over B) and the diagonal."
+      "explanation": "The slide angle is atan of length over width, and the scrubbing force grows with the diagonal over the track. Long and narrow scrubs hardest."
     },
     {
       "stage": "post",
       "question": "What does the ICR coefficient do to a differential drive model?",
       "options": [
-        "Speeds it up",
-        "Nothing",
-        "Adds mass",
+        "Shortens the distance travelled",
+        "Adds a sideways velocity",
+        "Changes the wheel radius",
         "Makes the turn smaller by one over the coefficient, as if the track were wider"
       ],
       "correct": 3,
-      "explanation": "It is a turn efficiency."
+      "explanation": "A skid steer of coefficient 1.4 and a differential drive with an efficiency of one over 1.4 followed the same path to rounding."
     }
   ]
 }
