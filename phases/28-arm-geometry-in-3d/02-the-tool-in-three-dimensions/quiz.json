@@ -7,72 +7,72 @@
       "question": "What is the tool's pose in forward kinematics?",
       "options": [
         "The base, then every row of the table for its joint angle, then the tool offset",
-        "A sum of joint angles",
-        "The first row",
-        "The last joint angle"
+        "The pose of the last row alone",
+        "The sum of the rows' translations",
+        "The base turned by the sum of the joint angles"
       ],
       "correct": 0,
-      "explanation": "Multiplication."
+      "explanation": "Each row becomes a pose for its joint angle, and the poses are multiplied in order from the base, with the tool's offset last."
     },
     {
       "stage": "check",
       "question": "With every joint at zero the UR5's tool was at:",
       "options": [
-        "(0, 0, 0)",
-        "(1, 1, 1)",
-        "Nowhere",
+        "(0.81725, 0.19145, 0.00549) m",
+        "(0.088, 0.000, 0.926) m",
+        "(0, 0, 0.089159) m",
         "(-0.81725, -0.19145, -0.00549) m, the sums of its table"
       ],
       "correct": 3,
-      "explanation": "x = a2 + a3, y = -(d4 + d6), z = d1 - d5."
+      "explanation": "x is a2 plus a3, y is minus d4 plus d6, and z is d1 less d5, read off the table by hand. The code gave exactly those."
     },
     {
       "stage": "check",
       "question": "The Panda's zero pose, within the limits (1) or not (0)?",
       "options": [
-        "Both",
-        "1",
+        "1: all zeros is always allowed",
+        "1, but only with the flange offset removed",
         "0: it is not a pose the arm can take",
-        "Only for joint 4"
+        "It depends on the tool"
       ],
       "correct": 2,
-      "explanation": "Joint 4 may not be zero."
+      "explanation": "The fourth joint's range is about -3.07 to -0.07 rad, which does not include zero. The table describes geometry; the limits say which poses exist."
     },
     {
       "stage": "check",
       "question": "A tool offset of 0.15 m moved the tool how far, and along whose axis?",
       "options": [
-        "0 m",
-        "0.15 m along the base's y",
+        "0.150 m along the base's z axis",
+        "0.150 m along the last link's x axis",
         "0.150 m along the flange's own axis",
-        "1 m along the base's"
+        "Nothing: the offset only turns the tool"
       ],
       "correct": 2,
-      "explanation": "A gripper's tip is not the flange."
+      "explanation": "The offset is composed after the flange's pose, so it points wherever the flange points. Leaving it out puts every pick 0.15 m off."
     },
     {
       "stage": "post",
       "question": "Where do roll and yaw stop being separate?",
       "options": [
-        "Never",
-        "At a half turn of roll",
-        "At zero",
+        "Where the roll is a quarter turn",
+        "Where the yaw is a half turn",
+        "Where all three are zero",
         "Where the pitch is a quarter turn"
       ],
       "correct": 3,
-      "explanation": "The hole of roll pitch yaw."
+      "explanation": "With the pitch at a quarter turn the roll and yaw axes line up, and only their difference is fixed. Near there a tiny motion gave a 57 degree jump in roll."
     },
     {
       "stage": "post",
       "question": "Why is a test that compares the code with the code useless for forward kinematics?",
       "options": [
-        "It is too exact",
+        "The code is too slow to run twice",
         "It proves nothing about the table: use values read off by hand",
-        "It is slow",
-        "It is circular only in C++"
+        "Floating point makes the two runs differ",
+        "It only tests the last joint"
       ],
       "correct": 1,
-      "explanation": "Sums of the table's numbers."
+      "explanation": "If the table or the product is wrong, both sides are wrong the same way. The zero pose's sums can be read off the table without the code."
     }
   ]
 }

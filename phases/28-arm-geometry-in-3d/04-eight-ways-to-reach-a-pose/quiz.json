@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why does a spherical wrist make inverse kinematics easy?",
       "options": [
-        "It has fewer joints",
-        "It is light",
+        "Its three joints can be solved by a table",
+        "It removes the elbow from the problem",
         "The point where the last three axes meet is fixed by the first three joints alone",
-        "It is faster"
+        "It makes every pose have one solution"
       ],
       "correct": 2,
-      "explanation": "Split the arm in two."
+      "explanation": "The wrist centre does not move when the wrist turns. So the first three joints are found from its position, and the last three from the orientation that is left."
     },
     {
       "stage": "check",
       "question": "How many solutions did the solver give on average for a reachable pose?",
       "options": [
-        "1",
+        "1.0",
         "8.0",
-        "0",
-        "100"
+        "4.0",
+        "6.0"
       ],
       "correct": 1,
-      "explanation": "Two shoulders, two elbows, two wrists."
+      "explanation": "The arm can face the point or reach back over its shoulder, with the elbow up or down, and the wrist one way or flipped: two times two times two."
     },
     {
       "stage": "check",
       "question": "A pose 1.5 m from the base gave how many solutions?",
       "options": [
-        "8",
-        "4",
-        "1",
+        "8, all at the limit of reach",
+        "1, the nearest reachable pose",
+        "4, with the elbow straight",
         "0: out of reach, an empty list"
       ],
       "correct": 3,
-      "explanation": "Say so."
+      "explanation": "The arm is not that long. An empty list is the honest answer; the 4 was at the very edge of reach, where elbow up and down coincide."
     },
     {
       "stage": "check",
       "question": "Is the UR5's wrist spherical (1) or not (0)?",
       "options": [
-        "Yes at the elbow",
+        "1: its last three axes meet",
         "0: its fifth joint is offset",
-        "1",
-        "Only at zero"
+        "1, when the fifth joint is at zero",
+        "It depends on the tool offset"
       ],
       "correct": 1,
-      "explanation": "d5 is not zero."
+      "explanation": "The table's d5 is 0.09465 m, so the last three axes do not meet at a point and the split into position and orientation does not apply."
     },
     {
       "stage": "post",
       "question": "What is the test that matters for an inverse kinematics solver?",
       "options": [
         "That every solution put through forward kinematics reaches the pose",
-        "That it returns the angles you started with",
-        "That it is fast",
-        "That it returns one answer"
+        "That it gives eight answers every time",
+        "That it gives back the angles the pose was made from",
+        "That its answers are within the joint limits"
       ],
       "correct": 0,
-      "explanation": "0.0000000000 m for all."
+      "explanation": "Several sets of angles reach one pose, so matching the starting angles proves little. Every answer put back through forward kinematics reached the pose."
     },
     {
       "stage": "post",
       "question": "Which of the eight does the solver pick?",
       "options": [
-        "The smallest",
-        "The first",
+        "The one with the elbow up",
+        "The one with the smallest joint angles",
         "None: it gives all, and the caller picks within the limits, nearest the present angles",
-        "A random one"
+        "The one nearest the zero pose"
       ],
       "correct": 2,
-      "explanation": "1 of 8 were allowed with limits."
+      "explanation": "All eight are correct. With limits of 120 degrees only 1 of the 8 was allowed, and which of the allowed ones to take depends on where the arm is now."
     }
   ]
 }

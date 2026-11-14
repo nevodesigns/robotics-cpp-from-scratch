@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is the arm on the bench not its table?",
       "options": [
-        "Tables are wrong",
-        "Software",
-        "Arms are bent",
+        "The table is rounded to too few digits",
+        "The encoders drift with temperature",
+        "The controller adds its own offsets",
         "Links and joint zeros are made to a tolerance, and every error is in the tool"
       ],
       "correct": 3,
-      "explanation": "A third of a degree at the shoulder is millimetres at the tool."
+      "explanation": "Each link length, twist and zero is made to a tolerance. A third of a degree at the shoulder, a metre from the tool, is millimetres there."
     },
     {
       "stage": "check",
       "question": "After calibrating, the error on poses it had not seen was:",
       "options": [
-        "0",
-        "3.39 mm",
+        "3.39 mm, unchanged",
+        "0.00000000 mm",
         "0.100 mm, against 3.39 mm before",
-        "The same"
+        "0.83 mm"
       ],
       "correct": 2,
-      "explanation": "Down to the size of the noise."
+      "explanation": "Fitted to 60 poses measured to 0.05 mm, the table predicted 30 other poses to 0.100 mm, where the uncorrected one was 3.39 mm out."
     },
     {
       "stage": "check",
       "question": "Fitted to only 4 poses, the error on others was:",
       "options": [
-        "0.100 mm",
+        "0.00000000 mm, as on its own poses",
         "0.83 mm, though it was 0.00000000 mm on its own",
-        "0.00000000 mm",
-        "0"
+        "3.39 mm, as before calibrating",
+        "0.100 mm"
       ],
       "correct": 1,
-      "explanation": "Fewer equations than corrections."
+      "explanation": "Four poses give 12 equations for 24 corrections, so they can be matched exactly without the arm being right. Elsewhere the error was 0.83 mm."
     },
     {
       "stage": "check",
       "question": "Moving joint 2's offset or joint 3's by 1 mm gave tool places that differed by:",
       "options": [
         "0.000000000000 m",
-        "10 mm",
-        "1 m",
-        "1 mm"
+        "1 mm",
+        "2 mm",
+        "0.100 mm"
       ],
       "correct": 0,
-      "explanation": "The data cannot say which."
+      "explanation": "Their axes are parallel, so a shift along either is the same shift of the tool. No set of poses can tell the two apart."
     },
     {
       "stage": "post",
       "question": "What is the test of a calibration?",
       "options": [
-        "Its error on its own poses",
+        "How many corrections it fitted",
         "Its error on poses it was not fitted to",
-        "Its length",
-        "Its speed"
+        "How small its damping was",
+        "How many iterations it took"
       ],
       "correct": 1,
-      "explanation": "Keep poses back."
+      "explanation": "A fit can always do well on what it was fitted to. Poses held back show whether it found the arm or only matched the data."
     },
     {
       "stage": "post",
       "question": "Why do the fitted corrections not have to be the true ones?",
       "options": [
-        "Noise only",
-        "They do",
+        "The measurements were too few",
+        "The damping biased them",
         "Some give the same tool place whatever the joints do, so the measurements cannot separate them",
-        "Rounding"
+        "Levenberg-Marquardt stops early"
       ],
       "correct": 2,
-      "explanation": "Parallel axes."
+      "explanation": "Along parallel axes two corrections have the same effect. The fit gets the tool's place right and the split between them is arbitrary."
     }
   ]
 }

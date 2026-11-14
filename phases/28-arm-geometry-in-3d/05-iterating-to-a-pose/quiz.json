@@ -6,13 +6,13 @@
       "stage": "pre",
       "question": "What does damping do to the step near a singularity?",
       "options": [
-        "Stops the arm",
-        "Nothing",
-        "Makes it larger",
+        "Removes the singularity",
+        "Makes the step exact",
+        "Makes the iteration take fewer steps everywhere",
         "Limits it, at a little cost in accuracy"
       ],
       "correct": 3,
-      "explanation": "lambda squared on the diagonal."
+      "explanation": "Adding lambda squared to the diagonal keeps the inverse from blowing up. The step is a little less accurate in the easy directions and bounded in the hard one."
     },
     {
       "stage": "check",
@@ -20,59 +20,59 @@
       "options": [
         "0.021 and 20.61 rad",
         "20.61 and 0.021 rad",
-        "0 and 0",
-        "The same"
+        "20.61 rad for both",
+        "0.3 and 0.021 rad"
       ],
       "correct": 1,
-      "explanation": "An enormous one, and a limited one."
+      "explanation": "With the elbow 0.002 rad from straight a centimetre of error asked for more than three turns. Damped, the same error asked for 0.021 rad."
     },
     {
       "stage": "check",
       "question": "From a start of all zeros the UR5 converged in how many of 40 poses?",
       "options": [
         "31",
-        "All",
-        "None",
-        "37"
+        "40, all of them",
+        "37",
+        "0: a zero start is singular"
       ],
       "correct": 0,
-      "explanation": "It is a local method."
+      "explanation": "It only improves the error locally, and from far away it can stop where no small step helps. From starts near the answer it reached 37."
     },
     {
       "stage": "check",
       "question": "What did a pose out of reach do?",
       "options": [
         "Stopped at the limit of steps, 0.64 m away, with ok false",
-        "Looped for ever",
-        "Converged",
-        "Crashed"
+        "Returned the nearest pose with ok true",
+        "Took larger and larger steps",
+        "Stopped at once with zero steps"
       ],
       "correct": 0,
-      "explanation": "Give up, and say so."
+      "explanation": "The error cannot reach zero, so the step limit ends it and the result says it did not converge."
     },
     {
       "stage": "post",
       "question": "Why did the Panda's solutions differ from the joint angles that made the pose?",
       "options": [
-        "Damping",
-        "Rounding",
-        "A bug",
+        "The damping changed the answer",
+        "The joint limits moved it",
+        "The iteration stopped early",
         "It has seven joints: a family of angles reaches the same pose"
       ],
       "correct": 3,
-      "explanation": "28-07 uses the family."
+      "explanation": "Seven joints for six numbers of pose leaves one freedom over. The iteration lands on whichever member of the family is near its start."
     },
     {
       "stage": "post",
       "question": "On the typical arm which of the eight did the iteration find?",
       "options": [
-        "None",
-        "Always the first",
+        "All eight, one after another",
+        "The one with the elbow up, every time",
         "One of them, depending on the start: 29 of 40 were among the eight",
-        "All"
+        "None: iteration finds poses the closed form misses"
       ],
       "correct": 2,
-      "explanation": "It finds the solution nearest the start."
+      "explanation": "A local method ends at a solution near where it began. 29 of 40 were among the eight; the rest did not converge."
     }
   ]
 }

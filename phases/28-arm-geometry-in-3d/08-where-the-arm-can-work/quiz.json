@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "How do you find the reach of an arm by sampling?",
       "options": [
-        "Measure it",
-        "Invert the Jacobian",
+        "Solve the inverse kinematics on a grid of poses",
+        "Add up the link lengths",
         "Draw random joint angles, run forward kinematics and mark the cell of the tool",
-        "Read the data sheet"
+        "Sweep each joint in turn with the others fixed"
       ],
       "correct": 2,
-      "explanation": "Ask, do not assume."
+      "explanation": "Random angles inside the limits, forward kinematics, and a mark in the cell the tool lands in. It needs no inverse and no guess at the shape."
     },
     {
       "stage": "check",
       "question": "With 2 thousand poses the volume was how much against 200 thousand?",
       "options": [
-        "The same",
+        "2.958 m3 against 2.958 m3",
         "1.081 m3 against 2.958 m3",
-        "Twice as much",
-        "2.958 m3 against 1.081 m3"
+        "2.958 m3 against 1.081 m3",
+        "2.581 m3 against 2.958 m3"
       ],
       "correct": 1,
-      "explanation": "Edge poses are rare."
+      "explanation": "Places near the edge are reached by very few combinations of angles, so a small sample misses them. A count still rising with the sample is not yet a volume."
     },
     {
       "stage": "check",
       "question": "How far out at table height did the tool reach in any orientation, and pointing down?",
       "options": [
-        "The same",
-        "0.1 m and 1 m",
         "0.74 m and 0.86 m",
+        "0.86 m both",
+        "1.05 m and 0.86 m",
         "0.86 m and 0.74 m"
       ],
       "correct": 3,
-      "explanation": "The orientation shortens the reach."
+      "explanation": "Asking for the tool to point down uses up some of the arm. That 0.12 m is the gap between the data sheet's reach and the task's."
     },
     {
       "stage": "check",
       "question": "What share of the reachable volume were the dexterous poses?",
       "options": [
-        "None",
+        "All of it",
         "62 percent",
-        "Half exactly",
-        "All"
+        "96 percent",
+        "About a tenth"
       ],
       "correct": 1,
-      "explanation": "Smallest singular value of 0.1 or more."
+      "explanation": "The rest is reachable but close to a singularity: the arm can be put there and cannot then move well in every direction."
     },
     {
       "stage": "post",
       "question": "Why does a table need the joint limits in the question?",
       "options": [
-        "It does not",
-        "Colour",
-        "Speed",
+        "The closed form fails without limits",
+        "Limits make the table lower",
+        "Limits change the tool's orientation",
         "The closed form gives all the solutions; the arm can take only those inside its limits: 96 percent against 78 with plus and minus 60 degrees"
       ],
       "correct": 3,
-      "explanation": "Limits shrink the working area, once they are tight."
+      "explanation": "Limits of 120 degrees cost nothing here, which was measured and not assumed. Limits of 60 degrees took the coverage from 96 to 78 percent."
     },
     {
       "stage": "post",
       "question": "Why is the reach on a data sheet not the working area?",
       "options": [
         "It is the outside of a sphere; the useful region is shorter once the orientation is asked for and smaller where the arm cannot move well",
-        "It is exact",
-        "It is for another arm",
-        "It is wrong"
+        "It is measured with no payload",
+        "It is rounded up by the maker",
+        "It is given for the flange and not the tool"
       ],
       "correct": 0,
-      "explanation": "A smaller shape."
+      "explanation": "Reach is the furthest the tool gets in any orientation. With the tool pointing down, and only where the arm still moves well, the region is smaller."
     }
   ]
 }

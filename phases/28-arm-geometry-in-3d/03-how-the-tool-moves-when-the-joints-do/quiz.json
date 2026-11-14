@@ -6,25 +6,25 @@
       "stage": "pre",
       "question": "What is a column of the Jacobian?",
       "options": [
-        "A joint's limits",
-        "A torque",
+        "The joint's own velocity and acceleration",
+        "The tool's position for that joint angle",
         "The tool's linear and angular velocity for a unit rate of that joint",
-        "A link length"
+        "The torque that joint needs for a unit force"
       ],
       "correct": 2,
-      "explanation": "z cross (p - o), and z."
+      "explanation": "A revolute joint turning at a unit rate turns the tool about its axis and carries it round at the axis crossed with the lever to the tool."
     },
     {
       "stage": "check",
       "question": "Built with the other convention's rule, the Panda's Jacobian was out by:",
       "options": [
-        "0",
         "0.000000000144",
+        "0.170",
         "1.29",
-        "Nothing"
+        "Nothing: the conventions agree for the Jacobian"
       ],
       "correct": 2,
-      "explanation": "With its own rule it was 0.000000000144 out."
+      "explanation": "The axis of joint i is the z of the frame before its row in one convention and after it in the other. Using the wrong one gave an error of 1.29."
     },
     {
       "stage": "check",
@@ -32,47 +32,47 @@
       "options": [
         "0.000 N m: its axis is vertical",
         "10 N m",
-        "1 N m",
-        "A great deal"
+        "8.17 N m, the force times the reach",
+        "A torque that depends on the pose"
       ],
       "correct": 0,
-      "explanation": "It cannot lift anything."
+      "explanation": "The first joint turns about the vertical, so a vertical force has no lever about it. The second joint carried the load."
     },
     {
       "stage": "check",
       "question": "What does a tool offset change in the Jacobian?",
       "options": [
-        "Both parts",
-        "Nothing",
-        "Only the angular part",
+        "Nothing: the Jacobian is for the flange",
+        "The angular part; the linear part stays",
+        "Both parts, in proportion to the offset",
         "The linear part; the angular part stays"
       ],
       "correct": 3,
-      "explanation": "A longer lever arm."
+      "explanation": "Every point of a rigid tool turns at the same rate, but a point further out moves faster. A Jacobian for the flange used at the tip is wrong by that lever."
     },
     {
       "stage": "post",
       "question": "Why is the transpose the force gearbox?",
       "options": [
         "The joints and the tool do the same work: torque times rate equals wrench times velocity",
-        "Gravity",
-        "Matrices",
-        "Luck"
+        "The transpose is the inverse of the Jacobian",
+        "Forces and velocities have the same units",
+        "The Jacobian is symmetric"
       ],
       "correct": 0,
-      "explanation": "The powers agreed to 0.000000000000000 W."
+      "explanation": "Power in equals power out. From torque times rate equal to wrench times velocity, with velocity the Jacobian times rate, the torques are the transpose times the wrench."
     },
     {
       "stage": "post",
       "question": "Why keep the finite difference Jacobian as a test?",
       "options": [
-        "Style",
+        "It is more accurate than the exact one",
         "A sign error in the fast one is subtle and nothing else would show it",
-        "It is exact",
-        "It is faster"
+        "It is the one the controller uses",
+        "It needs no forward kinematics"
       ],
       "correct": 1,
-      "explanation": "It differs by the right check."
+      "explanation": "It is slow and a little noisy, but it comes straight from the forward kinematics and knows nothing of axes and conventions."
     }
   ]
 }

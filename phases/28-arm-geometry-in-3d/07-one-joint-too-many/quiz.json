@@ -7,72 +7,72 @@
       "question": "What is the null space of a seven joint arm's Jacobian?",
       "options": [
         "Joint motions that the tool does not feel",
-        "Its singularities",
-        "Its limits",
-        "Its inverse"
+        "The poses it cannot reach",
+        "The joint motions that move the tool most",
+        "The set of poses with one solution"
       ],
       "correct": 0,
-      "explanation": "One joint too many."
+      "explanation": "Seven joint rates map to six tool velocities, so one combination of joint rates maps to nothing. The elbow can swing while the hand stays."
     },
     {
       "stage": "check",
       "question": "A joint motion put through the null space was felt by the tool at:",
       "options": [
-        "All of it",
-        "Half",
+        "0.0000002311 of its size",
+        "A tenth of its size",
         "0.0000000001 of its size",
         "1.244 m/s"
       ],
       "correct": 2,
-      "explanation": "Not at all."
+      "explanation": "For the seven joint Panda the projected motion left the tool still to ten decimal places. For the six joint UR5 almost nothing is left over to project."
     },
     {
       "stage": "check",
       "question": "Starting 0.086 of its range from its limit, the margin became:",
       "options": [
-        "0",
-        "Negative",
-        "0.086",
+        "0.086, unchanged",
+        "0.500, the middle of its range",
+        "0.156, but the tool moved 0.66 m",
         "0.156 while the tool stayed within 0.00037 m"
       ],
       "correct": 3,
-      "explanation": "The elbow moved, the hand did not."
+      "explanation": "The joints moved 0.66 rad toward the middle of their ranges through the null space, and the tool stayed within 0.37 mm."
     },
     {
       "stage": "check",
       "question": "Without a correction on the tool, it drifted:",
       "options": [
         "0.00037 m",
-        "100 m",
-        "Not at all",
+        "Not at all: the null space is exact",
+        "0.66 m",
         "0.00076 m"
       ],
       "correct": 3,
-      "explanation": "The null space is a first order promise."
+      "explanation": "The null space is that of the Jacobian at one pose. Over finite steps the arm's curvature shows, and the tool creeps unless its error is corrected each step."
     },
     {
       "stage": "post",
       "question": "Why must a preferred joint motion be projected?",
       "options": [
-        "It is law",
+        "Projection makes it larger",
         "Added directly, it moves the tool: 1.244 m/s against 0.00000000",
-        "To save memory",
-        "It is faster"
+        "Unprojected, it has no effect on the joints",
+        "Projection keeps the joints inside their limits"
       ],
       "correct": 1,
-      "explanation": "The standard mistake."
+      "explanation": "Any joint motion moves the tool unless the part the tool feels is taken out. Added raw it moved the tool at 1.244 m/s; projected, not at all."
     },
     {
       "stage": "post",
       "question": "What is wrong with an unclamped solution that reaches the pose?",
       "options": [
-        "Nothing",
+        "It took more steps than the clamped one",
         "It may need a joint outside its limit, which the arm cannot do: 0.283 rad outside",
-        "It is slow",
-        "It is exact"
+        "Its tool error is larger",
+        "It ignores the null space"
       ],
       "correct": 1,
-      "explanation": "Accurate and impossible."
+      "explanation": "It reached the pose with joint 6 0.283 rad past its limit. An answer the arm cannot take is wrong however small its error."
     }
   ]
 }
