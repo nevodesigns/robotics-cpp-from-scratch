@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What is the one parameter that decides a clustering by distance?",
       "options": [
-        "The colour",
-        "The sensor",
-        "The number of points",
+        "How many points a cluster must have",
+        "How many beams the sensor has",
+        "How far the scene is from the sensor",
         "How close two points must be to be one thing"
       ],
       "correct": 3,
-      "explanation": "The radius."
+      "explanation": "Points closer than the radius are joined, and chains of joined points are one group. Everything else follows from that distance."
     },
     {
       "stage": "check",
       "question": "At a radius of 0.2 m the scene gave:",
       "options": [
-        "0 clusters",
-        "7 clusters",
+        "3 clusters",
+        "1 cluster",
         "4 clusters",
-        "1 cluster"
+        "0 clusters"
       ],
       "correct": 2,
-      "explanation": "Four objects, three scattered points dropped."
+      "explanation": "The post, the person and the two posts 0.8 m apart came out as four, and the three scattered points were dropped for having too few neighbours."
     },
     {
       "stage": "check",
       "question": "At a radius of 5 m the scene gave:",
       "options": [
         "4 clusters",
-        "0",
+        "3 clusters",
         "1 cluster",
-        "7"
+        "0 clusters"
       ],
       "correct": 2,
-      "explanation": "Everything joins."
+      "explanation": "At 5 m every point is within reach of some other, so the whole scene is one object. At 0.6 m the two posts had already joined."
     },
     {
       "stage": "check",
       "question": "A fixed radius of 0.15 m on a wall 11 m away found how many objects?",
       "options": [
-        "100",
-        "0",
         "1",
-        "12"
+        "0",
+        "4",
+        "2"
       ],
       "correct": 1,
-      "explanation": "The points are 0.19 m apart."
+      "explanation": "At 11 m with one degree between beams the points are 0.19 m apart. With a radius of 0.15 m no two join, and single points are dropped."
     },
     {
       "stage": "post",
       "question": "Why does the radius grow with range?",
       "options": [
         "The points of a far thing are further apart",
-        "Style",
-        "To be fast",
-        "Noise"
+        "Far things are larger",
+        "Noise grows with range",
+        "The sensor's beams are wider at range"
       ],
       "correct": 0,
-      "explanation": "Spacing is range times the beam step."
+      "explanation": "The spacing of the points is the range times the beam step. A radius of a base plus one and a half times that spacing held the far wall together."
     },
     {
       "stage": "post",
       "question": "What does a radius that is the same at every range do near the sensor?",
       "options": [
         "It joins things that are close together, like two posts with a gap between them",
-        "It speeds up",
-        "Nothing",
-        "It splits walls"
+        "It drops the nearest points",
+        "It finds nothing at all",
+        "It splits one object into many"
       ],
       "correct": 0,
-      "explanation": "Big enough for the far is too big for the near."
+      "explanation": "Two posts 0.35 m apart at 2 m became one object with a radius of 0.4 m. A radius that grows with range kept them as two."
     }
   ]
 }

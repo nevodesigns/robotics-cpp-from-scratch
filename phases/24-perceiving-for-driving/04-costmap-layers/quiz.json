@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What question is a costmap built to answer?",
       "options": [
-        "How fast",
-        "Where is the sensor",
+        "Is there an obstacle in this cell?",
+        "How far is the nearest wall?",
         "May the centre of the vehicle be here?",
-        "What colour is it"
+        "Which sensor saw this cell last?"
       ],
       "correct": 2,
-      "explanation": "The vehicle's size is folded into the map by inflation."
+      "explanation": "After inflation a cell's cost says whether the vehicle's centre may be there, so the planner need not know the vehicle's size."
     },
     {
       "stage": "check",
       "question": "A wall of 4 m at 0.05 m resolution was how many lethal cells?",
       "options": [
-        "1",
-        "400",
-        "4",
+        "80",
+        "32",
+        "16",
         "81"
       ],
       "correct": 3,
-      "explanation": "Length over the cell size."
+      "explanation": "4 m over cells of 0.05 m, counting both ends. The post of 0.15 m radius was 32 cells."
     },
     {
       "stage": "check",
       "question": "At 0.50 m from a post, with an inscribed radius of 0.25 m and a scale of 3, the cost was:",
       "options": [
         "253",
-        "254",
-        "0",
+        "216",
+        "30",
         "119"
       ],
       "correct": 3,
-      "explanation": "252 exp(-3 times 0.25)."
+      "explanation": "Inside 0.25 m it is 253. Beyond, it falls as 252 times e to the minus 3 times the distance past 0.25 m: 216 at 0.30 m, 119 at 0.50 m, 30 at 1 m."
     },
     {
       "stage": "check",
       "question": "The layer that only marks left how many ghost cells when the obstacle went?",
       "options": [
         "7",
-        "100",
         "0",
+        "81",
         "1"
       ],
       "correct": 0,
-      "explanation": "Nothing ever cleared them."
+      "explanation": "The beams to the wall behind passed through where the obstacle had been. The layer that clears along each beam left 0 ghost cells."
     },
     {
       "stage": "post",
       "question": "Why can the planner treat the vehicle as a point after inflation?",
       "options": [
-        "It can't",
-        "Speed",
+        "The planner's grid is coarser than the vehicle",
+        "The gradient keeps it in the middle of free space",
         "The inscribed radius already keeps the centre far enough from every obstacle",
-        "Points are small"
+        "The vehicle is small beside the cells"
       ],
       "correct": 2,
-      "explanation": "The footprint is in the map."
+      "explanation": "Every cell within the vehicle's own radius of an obstacle is 253. A centre in any cell below that cannot be touching anything."
     },
     {
       "stage": "post",
       "question": "Why was a gap of 0.40 m closed for a vehicle 0.50 m wide?",
       "options": [
-        "The posts moved",
+        "The gradient made it too costly",
         "The inflation of both posts covers it, so no cell across it is below 253",
-        "Noise",
-        "Bug"
+        "The posts were merged into one obstacle",
+        "The grid was too coarse to show it"
       ],
       "correct": 1,
-      "explanation": "The map knows the vehicle's width."
+      "explanation": "With an inscribed radius of 0.25 m each post closes a quarter of a metre on its side. A gap of 0.60 m left two free cells and one of 0.40 m none."
     }
   ]
 }

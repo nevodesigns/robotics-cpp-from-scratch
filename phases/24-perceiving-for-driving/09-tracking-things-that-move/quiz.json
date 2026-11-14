@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why does a planner need a velocity as well as a position of a person?",
       "options": [
-        "It does not",
-        "For the log",
+        "To identify the person again later",
+        "To filter the noise of the position",
         "It needs where they will be, and a position alone is where they were",
-        "To be tidy"
+        "To know how large the person is"
       ],
       "correct": 2,
-      "explanation": "A plan is for the future."
+      "explanation": "By the time the vehicle acts, the person has moved. The velocity is what turns a position now into a position then."
     },
     {
       "stage": "check",
       "question": "The velocity error of the difference of two positions was:",
       "options": [
-        "10 m/s",
         "0.122 m/s",
-        "0",
+        "0.05 m/s",
+        "0.7 m/s exactly",
         "1.073 m/s"
       ],
       "correct": 3,
-      "explanation": "A position error of 5 cm over 0.1 s is 0.7 m/s."
+      "explanation": "Two positions each good to 5 cm, 0.1 s apart, give a velocity good to no better than 0.7 m/s. The filter, using all the past, got 0.122 m/s."
     },
     {
       "stage": "check",
       "question": "A track was confirmed after how many frames?",
       "options": [
         "3",
-        "10",
         "1",
-        "never"
+        "2",
+        "8"
       ],
       "correct": 0,
-      "explanation": "Three hits."
+      "explanation": "A track is tentative until it has been seen three times. A single false detection was a tentative track for one frame and then gone."
     },
     {
       "stage": "check",
       "question": "A target hidden for 8 frames came out with:",
       "options": [
-        "No id",
+        "The same id, having coasted",
         "A new id: the track had been dropped",
-        "The same id",
-        "Two ids"
+        "No track at all",
+        "The id of the nearest other track"
       ],
       "correct": 1,
-      "explanation": "Three misses is the limit."
+      "explanation": "A confirmed track coasts on its prediction for a few missed frames. Two frames behind a post kept the id; eight were too many."
     },
     {
       "stage": "post",
       "question": "How well was the position 2 s ahead of a walking person predicted?",
       "options": [
-        "To a metre",
-        "Not at all",
+        "To within 0.02 m",
+        "To within 1.4 m",
         "To within 0.20 m",
-        "Exactly"
+        "To within 2.8 m, the distance walked"
       ],
       "correct": 2,
-      "explanation": "The track's velocity times two seconds."
+      "explanation": "At 1.4 m/s the person moved 2.8 m in that time, and the track's velocity put them within 0.20 m of where they were."
     },
     {
       "stage": "post",
       "question": "Why can two targets that stop side by side swap ids?",
       "options": [
         "When they are close the detections of one are nearer the prediction of the other",
-        "Chance",
-        "Noise only",
-        "The filter is broken"
+        "The filter's velocity is reset when they stop",
+        "Their detections merge into one",
+        "The tracker runs out of ids"
       ],
       "correct": 0,
-      "explanation": "Nearest neighbour keeps one hypothesis."
+      "explanation": "Standing 5 cm apart with 5 cm of noise, a detection is as near one prediction as the other. In 20 runs that swapped the ids 5 times."
     }
   ]
 }

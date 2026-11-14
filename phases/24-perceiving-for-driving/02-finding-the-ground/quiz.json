@@ -7,72 +7,72 @@
       "question": "Why is a least squares plane fitted to every point a poor ground?",
       "options": [
         "The things standing on the ground pull it up towards them",
-        "It needs a camera",
-        "It is too exact",
-        "It is slow"
+        "It cannot be computed for more than a few points",
+        "It ignores the points far from the sensor",
+        "It only works on level ground"
       ],
       "correct": 0,
-      "explanation": "Squared distances give the outliers a big vote."
+      "explanation": "The fit minimises squared heights, so points a metre up on a box pull it hard. The more there is standing on the ground, the worse the ground comes out."
     },
     {
       "stage": "check",
       "question": "With boxes on the ground, the least squares plane was tilted:",
       "options": [
         "5.00 degrees",
-        "0 degrees",
+        "5.08 degrees",
         "6.57 degrees",
-        "45 degrees"
+        "90 degrees"
       ],
       "correct": 2,
-      "explanation": "True tilt is 5.00."
+      "explanation": "On the bare ground it found the 5 degree tilt to a tenth of a degree. With 450 points on boxes at the far end it tilted up to meet them."
     },
     {
       "stage": "check",
       "question": "RANSAC found:",
       "options": [
-        "0",
         "6.57 degrees",
+        "5.00 degrees exactly",
         "5.08 degrees",
-        "90 degrees"
+        "0.2 degrees"
       ],
       "correct": 2,
-      "explanation": "The obstacles are not corrected for, only not counted."
+      "explanation": "The plane with the most points within 3 cm of it had 82 percent of them. The boxes' points were not near it, so they did not count."
     },
     {
       "stage": "check",
       "question": "How many draws made a clean sample 99 percent likely at a share of 85 percent?",
       "options": [
         "5",
+        "200",
         "1",
-        "1000",
-        "50"
+        "500"
       ],
       "correct": 0,
-      "explanation": "Log of one minus the confidence over log of one minus the share cubed."
+      "explanation": "A draw is clean when all three points are on the ground, with probability 0.85 cubed. Five draws make at least one clean with 99 percent confidence."
     },
     {
       "stage": "post",
       "question": "Why was the wall taken for the ground?",
       "options": [
-        "RANSAC is random",
-        "It was the ground",
-        "The tolerance",
+        "The tolerance of 3 cm was too tight",
+        "The seed was unlucky",
+        "The wall was closer to the sensor",
         "It held the most points, and nothing said the ground is level"
       ],
       "correct": 3,
-      "explanation": "Refuse planes tilted beyond what the vehicle drives on."
+      "explanation": "The wall had 1200 points and the ground 600. An unconstrained search returned the wall; refusing planes tilted more than 30 degrees gave the ground."
     },
     {
       "stage": "post",
       "question": "Why can the same seed be relied on?",
       "options": [
-        "It cannot",
+        "A random method gives the same answer for any seed",
         "The draws are repeatable, so a test gives the same answer",
-        "Random numbers are fixed",
-        "It is a hash"
+        "The points are sorted first",
+        "Three points always define the same plane"
       ],
       "correct": 1,
-      "explanation": "A deterministic generator makes a test of a random method possible."
+      "explanation": "The generator is deterministic, so a given seed draws the same triples. That is what lets a test of a random method have one right answer."
     }
   ]
 }

@@ -7,72 +7,72 @@
       "question": "Why is a scan not a photograph?",
       "options": [
         "The beams are fired one after another, and the sensor moves between them",
-        "It is in colour",
-        "It is slow",
-        "It is flat"
+        "Its points have no colour",
+        "It covers only one plane",
+        "Its ranges are noisy"
       ],
       "correct": 0,
-      "explanation": "A sweep takes time."
+      "explanation": "A sweep takes 0.1 s, and the first and last beams are fired from different places if the vehicle moves. A photograph is taken at one instant."
     },
     {
       "stage": "check",
       "question": "A turn of 1 rad/s over a sweep of 0.1 s turned the sensor:",
       "options": [
-        "0.1 degrees",
+        "0.57 degrees",
         "5.7 degrees",
-        "0",
-        "57 degrees"
+        "1 degree",
+        "10 degrees"
       ],
       "correct": 1,
-      "explanation": "Rate times time."
+      "explanation": "One radian a second for a tenth of a second is 0.1 rad, which is 5.7 degrees. The last beam is aimed that far from where the cloud assumes."
     },
     {
       "stage": "check",
       "question": "A wall straight ahead read 0.119 m from straight. After deskewing:",
       "options": [
-        "0.5 m",
-        "1 m",
+        "0.119 m, unchanged",
+        "0.06 m, about half",
         "0.0000 m",
-        "0.119 m"
+        "0.101 m"
       ],
       "correct": 2,
-      "explanation": "Each beam is put in the world from its own pose."
+      "explanation": "Each beam's point is placed with the pose its beam was fired from and then put in the frame of the start of the sweep. The wall came out straight."
     },
     {
       "stage": "check",
       "question": "At 5 m/s a sweep of 0.1 s skews the cloud by:",
       "options": [
-        "0",
-        "5 m",
         "0.05 m",
+        "5 m",
+        "0.25 m",
         "0.50 m"
       ],
       "correct": 3,
-      "explanation": "Speed times time."
+      "explanation": "Speed times the sweep time. At walking pace it hardly shows; at 5 m/s it is half a metre from one side of the cloud to the other."
     },
     {
       "stage": "post",
       "question": "Why do the far points move most in a turn?",
       "options": [
-        "They are older",
-        "They are lighter",
+        "They are measured less accurately",
+        "They are fired later in the sweep",
         "A point moves by range times turn rate times time",
-        "Noise"
+        "The beams spread with range"
       ],
       "correct": 2,
-      "explanation": "2.00 m for a point 20 m away."
+      "explanation": "A turn swings every point through the same angle, and a point's shift is that angle times its range: 2.00 m at 20 m for 1 rad/s."
     },
     {
       "stage": "post",
       "question": "Why must the two poses of the sweep come from something fast?",
       "options": [
         "A localiser at 1 Hz cannot give the pose at the start and end of 0.1 s",
-        "No reason",
-        "They must be exact",
-        "Style"
+        "The scan itself gives them",
+        "They are only needed to a metre",
+        "A map gives them directly"
       ],
       "correct": 0,
-      "explanation": "Odometry or an inertial sensor."
+      "explanation": "The correction needs the pose at both ends of a tenth of a second. Only wheel odometry or an inertial sensor reports that often."
     }
   ]
 }

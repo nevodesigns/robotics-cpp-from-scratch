@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Where does the distance to a point on the floor come from in a single image?",
       "options": [
-        "Luck",
+        "The size of the object in pixels",
         "The height and tilt of the camera, and the floor being flat",
-        "The lens",
-        "The colour"
+        "The focus of the lens",
+        "Two images taken a moment apart"
       ],
       "correct": 1,
-      "explanation": "A ray meets the floor at a fixed distance."
+      "explanation": "A pixel is a ray. Knowing how high the camera is and how far it is tipped, the ray meets a flat floor at one place."
     },
     {
       "stage": "check",
       "question": "The horizon of the camera tipped down 15 degrees with a focal length of 500 pixels was at row:",
       "options": [
         "106",
-        "480",
-        "240",
-        "0"
+        "240, the centre row",
+        "140",
+        "0, the top row"
       ],
       "correct": 0,
-      "explanation": "cy minus fy tan(pitch)."
+      "explanation": "The horizon is above the centre row by the focal length times the tangent of the pitch: 240 less 500 times tan 15 degrees is 106."
     },
     {
       "stage": "check",
       "question": "One row at row 140 spanned how much ground?",
       "options": [
-        "1 m",
-        "0.001 m",
+        "0.0090 m",
+        "0.82 m",
         "0.139 m",
-        "0.0090 m"
+        "4.65 m"
       ],
       "correct": 2,
-      "explanation": "It grows as the square of the range."
+      "explanation": "At the centre row a row is 9 mm of floor. At row 140, looking 4.65 m ahead, it is 0.139 m, and at row 120 most of a metre."
     },
     {
       "stage": "check",
       "question": "A pitch a degree wrong put row 140 out in range by:",
       "options": [
         "1 percent",
-        "0 percent",
-        "100 percent",
+        "10 percent",
+        "Nothing: pitch only shifts the horizon",
         "37 percent"
       ],
       "correct": 3,
-      "explanation": "Far rays are nearly level."
+      "explanation": "A ray to 4.65 m is only a few degrees below level, so a degree is a large share of its angle. Close to the camera the same error mattered under 10 percent."
     },
     {
       "stage": "post",
       "question": "Why does a height error of 10 percent give a 10 percent error in range?",
       "options": [
         "The ground distance is proportional to the height",
-        "Luck",
-        "Gravity",
-        "Pixels"
+        "The focal length scales with height",
+        "The horizon moves with the height",
+        "Height errors only matter far away"
       ],
       "correct": 0,
-      "explanation": "t = height over the ray's drop."
+      "explanation": "The ray's direction does not change with the height. It is followed until it has dropped by the camera's height, so the distance scales with it."
     },
     {
       "stage": "post",
       "question": "Why is the head of a person placed wrongly by the ground plane?",
       "options": [
-        "It isn't",
-        "Heads are dark",
-        "Cameras are slow",
+        "A head is smaller than a pixel far away",
+        "The lens distorts things near the top of the image",
+        "It moves faster than the feet",
         "It is above the floor, so its ray meets the floor further away than the head is"
       ],
       "correct": 3,
-      "explanation": "Only things on the floor are placed right."
+      "explanation": "The method assumes the pixel shows the floor. A point above the floor is seen along a ray that would hit the floor far behind it."
     }
   ]
 }

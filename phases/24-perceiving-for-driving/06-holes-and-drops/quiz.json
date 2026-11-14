@@ -7,72 +7,72 @@
       "question": "How is a hole seen by a lidar?",
       "options": [
         "As ground that should be there and is not",
-        "By its colour",
-        "Directly",
-        "It cannot be"
+        "As a return that is weaker than the ground's",
+        "As points lower than the sensor",
+        "As a gap in the angles of the scan"
       ],
       "correct": 0,
-      "explanation": "You expect the ground."
+      "explanation": "A tipped lidar should meet level ground at a known range. A beam that comes back longer than that, or not at all, means the ground is lower or missing."
     },
     {
       "stage": "check",
       "question": "A lidar 0.25 m up, tipped down 5 degrees, meets level ground how far ahead?",
       "options": [
-        "0",
+        "0.25 m",
         "2.86 m",
-        "10 m",
-        "0.25 m"
+        "1.42 m",
+        "2.868 m, the range of the beam straight ahead"
       ],
       "correct": 1,
-      "explanation": "h over tan(pitch)."
+      "explanation": "The height over the tangent of the pitch: 0.25 over tan 5 degrees. Tipped down 10 degrees it was 1.42 m."
     },
     {
       "stage": "check",
       "question": "A beam that returns nothing where the ground should be is:",
       "options": [
-        "Noise only",
-        "Ground",
+        "An obstacle",
+        "Level ground at the edge of range",
         "A hole",
-        "Raised"
+        "A fault in that beam"
       ],
       "correct": 2,
-      "explanation": "Longer, or none."
+      "explanation": "The ground should have returned it. Nothing coming back is treated as the ground not being there, which is the safe reading."
     },
     {
       "stage": "check",
       "question": "At 5 m/s with a scan every 0.1 s, how far does the vehicle go between scans?",
       "options": [
-        "5 m",
         "0.05 m",
-        "0.1 m",
+        "5 m",
+        "2.86 m",
         "0.5 m"
       ],
       "correct": 3,
-      "explanation": "A hole narrower than that can fall between them."
+      "explanation": "Speed over the scan rate: 5 m/s for a tenth of a second. A hole narrower than that can lie wholly between two scan lines."
     },
     {
       "stage": "post",
       "question": "What was the fastest speed from which the vehicle could stop before ground first seen 2.86 m away?",
       "options": [
-        "1 m/s",
+        "5 m/s",
         "2.49 m/s",
-        "0",
-        "10 m/s"
+        "2.86 m/s",
+        "1.5 m/s"
       ],
       "correct": 1,
-      "explanation": "Latency and braking."
+      "explanation": "The vehicle travels for the 0.2 s of latency and then brakes at 1.5 m/s2, and must stop 0.3 m short. That gives 2.49 m/s."
     },
     {
       "stage": "post",
       "question": "What happens to the safe speed if the sensor is tipped down further?",
       "options": [
-        "It is infinite",
-        "Nothing",
-        "It rises",
+        "It rises: the sensor sees the hole better",
+        "It does not change: only braking matters",
+        "It doubles",
         "It falls: the ground is seen nearer"
       ],
       "correct": 3,
-      "explanation": "The ground is seen at h over tan(pitch)."
+      "explanation": "The line where the scan meets the ground moves closer. Less distance to stop in is a lower safe speed."
     }
   ]
 }

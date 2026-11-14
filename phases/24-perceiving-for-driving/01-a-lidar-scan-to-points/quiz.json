@@ -7,72 +7,72 @@
       "question": "What should a beam that saw nothing give?",
       "options": [
         "No point at all",
-        "A point at random",
-        "A point at zero",
-        "A point at the maximum range"
+        "A point at the sensor's maximum range",
+        "A point at the origin",
+        "The same point as the beam before it"
       ],
       "correct": 0,
-      "explanation": "A number the next stage believes is a wall."
+      "explanation": "Any point is a claim that something is there. A beam with no return, or one outside the sensor's limits, has to give nothing, or the next stage sees a wall."
     },
     {
       "stage": "check",
       "question": "A scan of 360 beams of a room gave how many points?",
       "options": [
-        "0",
-        "720",
+        "325",
+        "180",
         "360",
-        "100"
+        "361"
       ],
       "correct": 2,
-      "explanation": "One for each valid beam."
+      "explanation": "Every beam had a range inside the limits, so each gave a point. With a tenth of the beams lost the same scan gave 325."
     },
     {
       "stage": "check",
       "question": "With one degree between beams, at 10 m the points were:",
       "options": [
-        "1 m apart",
+        "0.0175 m apart",
         "0.175 m apart",
-        "10 m apart",
-        "1 mm apart"
+        "1.75 m apart",
+        "0.1 m apart"
       ],
       "correct": 1,
-      "explanation": "Range times the step."
+      "explanation": "One degree is 0.01745 rad, and neighbouring points are the range times that apart: 0.175 m at 10 m."
     },
     {
       "stage": "check",
       "question": "A post 0.3 m wide is hit by two beams at most how far away?",
       "options": [
-        "5 m",
-        "100 m",
+        "8.6 m",
+        "34.4 m",
         "17.2 m",
-        "1 m"
+        "10 m"
       ],
       "correct": 2,
-      "explanation": "Width over the step."
+      "explanation": "Two beams hit it while the points are no further apart than its width. 0.3 m over 0.01745 rad is 17.2 m."
     },
     {
       "stage": "post",
       "question": "Why are the points of a flat wall at different heights when the sensor is tipped?",
       "options": [
-        "The wall leans",
-        "Gravity",
-        "Noise",
+        "The wall is not flat at that scale",
+        "The beams are refracted near the floor",
+        "The ranges are noisier for a tipped sensor",
         "The sensor's plane is tilted, so beams to the front are lowered and beams behind raised"
       ],
       "correct": 3,
-      "explanation": "Transform the points through the mount."
+      "explanation": "Tipped down 5 degrees, the scan plane cuts the wall ahead lower and the wall behind higher. Taken through the mount's transform the heights ran from -0.19 to 0.69 m."
     },
     {
       "stage": "post",
       "question": "Why is a sensor's range on its data sheet not the range at which a post is seen?",
       "options": [
         "It is for a large flat target; a narrow thing needs two beams, and they spread with range",
-        "It is",
-        "Data sheets lie",
-        "Posts are dark"
+        "The data sheet is for indoor use",
+        "A post reflects less light than a wall",
+        "The range depends on the beam's power, not the target"
       ],
       "correct": 0,
-      "explanation": "Width over the step is the limit."
+      "explanation": "The quoted range is for something large. A post has to be hit by two beams to be seen, and beyond 17.2 m a one degree lidar hits it with one or none."
     }
   ]
 }
