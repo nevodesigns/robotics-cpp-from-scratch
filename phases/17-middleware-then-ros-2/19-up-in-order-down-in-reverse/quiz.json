@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why not start every node at once and let them find each other?",
       "options": [
-        "It is faster",
-        "It uses less memory",
-        "It is not possible",
+        "Starting them all at once uses too much memory at start up",
+        "The bus cannot register more than one node at a time",
+        "Nodes started together get the same incarnation number",
         "The robot works when the machine is fast and fails when it is not, and when one node does not come up the others are left running without it"
       ],
       "correct": 3,
-      "explanation": "Start up order decided by timing is luck."
+      "explanation": "A node that starts before what it needs may or may not cope, depending on how fast the machine is that day. An order worked out from the needs does not depend on luck."
     },
     {
       "stage": "check",
       "question": "Planner, controller, filter, driver, logger and viewer are listed in that order, each needing the one it follows in the chain. What is the start order?",
       "options": [
         "driver filter planner controller logger viewer: every node after what it needs, ties going to the one listed first",
-        "Random",
-        "Alphabetical",
-        "As listed"
+        "planner controller filter driver logger viewer, as listed",
+        "controller driver filter logger planner viewer, alphabetical",
+        "viewer logger controller planner filter driver, the reverse of the needs"
       ],
       "correct": 0,
-      "explanation": "The choice depends on nothing but the list."
+      "explanation": "The driver needs nothing, the filter needs the driver, and so on up. Among nodes that could go next, the one listed first goes."
     },
     {
       "stage": "check",
       "question": "What does a circle of needs do to the start order?",
       "options": [
         "The list is refused with the reason: a needing b needing c needing a has no start order",
-        "They all start",
-        "The first one starts",
-        "It is ignored"
+        "The nodes are started in the order listed, and the circle is ignored",
+        "The first node in the circle is started and the others wait for it",
+        "They are all started together, since none can go first"
       ],
       "correct": 0,
-      "explanation": "Finding out by trying would be a robot that hangs at start up."
+      "explanation": "No order can put each of three nodes after the one it needs when the needs go round. The list is refused and the reason given."
     },
     {
       "stage": "check",
       "question": "Why configure every node before activating any?",
       "options": [
-        "The API requires it",
-        "To save threads",
-        "It is faster",
+        "Activating is slower than configuring, so it is done last",
+        "The bus needs every topic to exist before any message is sent",
+        "So that the nodes can be activated in any order",
         "Nothing produces until it is known that everything which consumes it exists, so a failed configure has not yet sent a single message"
       ],
       "correct": 3,
-      "explanation": "Configure opens devices and can fail; activate makes it run."
+      "explanation": "Configuring is where devices are opened and things fail. Doing all of it first means that a failure is found before anything has started producing."
     },
     {
       "stage": "post",
       "question": "The planner will not configure. What does the log show?",
       "options": [
-        "Nothing",
-        "Everything restarted",
+        "planner:configure and nothing else: the failure is found before anything is touched",
+        "driver:configure filter:configure planner:configure driver:activate filter:activate: what could run was started",
         "driver:configure filter:configure planner:configure filter:cleanup driver:cleanup: the ones that did configure are cleaned up in reverse and nothing was activated",
-        "planner:cleanup"
+        "driver:configure filter:configure planner:configure planner:cleanup: only the one that failed is cleaned up"
       ],
       "correct": 2,
-      "explanation": "The report says failed planner."
+      "explanation": "The planner is required, so the bring up stops. The filter and the driver had configured and are undone, newest first."
     },
     {
       "stage": "post",
       "question": "An optional logger fails and a plotter needs it. What is running?",
       "options": [
-        "Everything",
+        "Nothing: any failure stops the bring up",
         "Driver, filter and controller: logger and plotter are left out, and the report says which were skipped",
-        "Nothing",
-        "Only the driver"
+        "Driver, filter, controller and plotter: only the logger is left out",
+        "Everything, with the logger marked as failed"
       ],
       "correct": 1,
-      "explanation": "A degraded robot is up, and says so."
+      "explanation": "An optional node's failure is not worth the robot. What needed it cannot run either, and the report names both."
     }
   ]
 }

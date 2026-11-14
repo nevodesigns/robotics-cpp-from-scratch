@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "A call gets no answer. What can the caller conclude?",
       "options": [
-        "That the server is dead",
+        "That the request never reached the server, so it is safe to assume nothing was done",
         "Nothing: the request may not have arrived, or may have been done with the answer lost, or the answer may be late",
-        "That it failed",
-        "That it is done"
+        "That the server is dead, since a live server always answers",
+        "That the work was done and only the answer was lost, so the call can be treated as complete"
       ],
       "correct": 1,
-      "explanation": "Three possibilities look the same."
+      "explanation": "Lost on the way there, done with the answer lost, or merely late: the three look the same from the caller's side. A timeout is not knowing."
     },
     {
       "stage": "check",
       "question": "Why does each call carry a number?",
       "options": [
-        "For ordering the server",
-        "To count",
-        "For logging",
+        "So the server can do the calls in the order they were made",
+        "So the client can count how many calls it has made in total",
+        "So a lost call can be detected by a gap in the numbers",
         "So an answer is matched to the call it answers: two calls answered in the other order each got their own answer"
       ],
       "correct": 3,
-      "explanation": "Whichever is waiting is the wrong match."
+      "explanation": "With two calls in flight, the next answer to arrive need not be for the older one. The number is what ties each answer to its own call."
     },
     {
       "stage": "check",
       "question": "A call timed out and its answer arrives. What happens?",
       "options": [
-        "The call is sent again",
+        "The call completes after all, since the answer is the truth",
         "The answer is unwanted: counted and discarded, and the call stays timed out",
-        "The server is told",
-        "The call completes"
+        "The call is sent again, so that the answer can be matched to a fresh attempt",
+        "The server is asked to undo the work"
       ],
       "correct": 1,
-      "explanation": "A late answer does not revive a call."
+      "explanation": "The caller has already acted on the timeout. Letting a late answer change the call's state would give it a result it has already treated as a failure."
     },
     {
       "stage": "check",
       "question": "With no retries, 155 of 300 calls timed out. How many times did the work run?",
       "options": [
         "214: for 69 calls the work was done and the client was told it had failed",
-        "155",
-        "145",
-        "300"
+        "145, once for each call that completed",
+        "155, once for each call that timed out",
+        "300, once for each call made"
       ],
       "correct": 0,
-      "explanation": "A timeout is not a failure, it is not knowing."
+      "explanation": "A request that arrives is carried out even if its answer is then lost. So the work ran more often than the client was told it had."
     },
     {
       "stage": "post",
       "question": "What keeps a retried call from doing the work twice?",
       "options": [
-        "A longer timeout",
-        "A shorter timeout",
+        "A longer timeout, so that fewer calls are retried: 300 runs for 300 calls",
+        "A limit of one retry for each call: 300 runs for 300 calls, against 446 with six retries",
         "A server that remembers the answers it gave by (client, number) and returns the remembered one for a repeat: 300 runs for 300 calls, against 446 for a server that forgot",
-        "More retries"
+        "Sending each retry with a new number: 300 runs for 300 calls, against 446 with the same number"
       ],
       "correct": 2,
-      "explanation": "Retrying is safe only if asking again does not do it again."
+      "explanation": "A retry is the same request again. If the server keeps the answer under the client and the number, a repeat gets the old answer and the work is not done twice."
     },
     {
       "stage": "post",
       "question": "Why is a repeated gripper command harmless and a repeated dispense command not?",
       "options": [
         "The gripper closing twice leaves it closed, and dispensing twice gives two: the first is idempotent and the second is not, so the second needs the server to remember",
-        "It is not",
-        "The gripper is slower",
-        "Dispensing is reliable"
+        "The gripper's server remembers its answers and the dispenser's does not",
+        "Closing takes longer than dispensing, so the repeat arrives too late to matter",
+        "A dispense command is sent best effort and a gripper command reliable"
       ],
       "correct": 0,
-      "explanation": "Know which of your services are safe to repeat."
+      "explanation": "Closing a closed gripper changes nothing. Dispensing again gives a second dose, so that service must not be run twice for one request."
     }
   ]
 }

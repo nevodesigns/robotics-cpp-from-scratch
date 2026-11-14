@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "A laser sees an obstacle 1 m ahead of itself. What must be known to put it on the map?",
       "options": [
-        "The laser's range",
-        "Nothing",
+        "Only the laser's range and bearing to the obstacle",
+        "The map's resolution and origin",
         "The chain of frames from the laser up to the map, each a transform: the laser on the base, the base in odom, odom in the map",
-        "The map's resolution"
+        "The robot's speed at the time of the scan"
       ],
       "correct": 2,
-      "explanation": "The obstacle was at (12.00, 6.30) in the map in the test."
+      "explanation": "The obstacle is known in the laser's frame. Each link up the tree turns it into the next frame's coordinates until it is in the map's."
     },
     {
       "stage": "check",
       "question": "Halfway between headings of 170 and -170 degrees. What is it?",
       "options": [
         "180: the short way round, where averaging as plain numbers would give 0 and point the opposite way",
-        "0",
-        "-170",
-        "90"
+        "0, the average of the two numbers",
+        "-170, the later of the two",
+        "90, a quarter turn from each"
       ],
       "correct": 0,
-      "explanation": "The blend takes the difference, wraps it, then goes part of the way."
+      "explanation": "170 and -170 degrees are 20 degrees apart across the half turn. The blend takes the wrapped difference, so halfway is 180."
     },
     {
       "stage": "check",
       "question": "How does a lookup relate two frames on different branches?",
       "options": [
-        "By taking their average",
+        "It cannot: only a frame and its own ancestor can be related",
         "Via the nearest frame they both hang from, compose(inverse(target_from_common), source_from_common)",
-        "Through the map only",
-        "It cannot"
+        "By adding the two frames' positions in the map",
+        "By going through the root every time, whatever the frames"
       ],
       "correct": 1,
-      "explanation": "The arm in the laser's frame was found at (-0.4, 0.2)."
+      "explanation": "Both frames are worked out as seen from the nearest frame they share, and one is inverted. That is how a laser and an arm on the same base are related."
     },
     {
       "stage": "check",
       "question": "A robot drives at 0.6 m/s and a scan stamped 0.5 s ago is placed with the latest transform. How far out is every obstacle?",
       "options": [
-        "0.6 m",
-        "Not at all",
-        "0.5 m",
+        "0.60 m, the speed for one second",
+        "0.05 m, one step of the lookup",
+        "Nothing: the scan's ranges do not depend on the robot's motion",
         "0.30 m, speed times delay, in the direction of travel"
       ],
       "correct": 3,
-      "explanation": "The transform at the stamp placed the post at 2.60 and the latest at 2.90."
+      "explanation": "The scan was taken where the robot was half a second ago. Placed with where it is now, every obstacle is moved 0.6 times 0.5 metres along the direction of travel."
     },
     {
       "stage": "post",
       "question": "A frame was reported until 1.0 s and a lookup asks about 1.5 s. What should happen?",
       "options": [
-        "Return the last report",
-        "Extend it at its last speed",
+        "Return the last report, which is the best that is known",
+        "Extend the motion at its last speed to 1.5 s",
         "extrapolation: a refusal, since nobody measured the robot then and a guess would look like data",
-        "Return zero"
+        "Return the identity, so that the caller can carry on"
       ],
       "correct": 2,
-      "explanation": "The lookup says which of three things is wrong."
+      "explanation": "Extending the last motion is a guess that would be handed on as if it were measured. The lookup says extrapolation and leaves the decision to the caller."
     },
     {
       "stage": "post",
       "question": "What does a static frame mean?",
       "options": [
-        "It is the root",
-        "It moves slowly",
-        "It is not in the tree",
+        "It is the root of the tree and has no parent",
+        "It was reported once and may have moved since",
+        "It is reported at a lower rate than the others",
         "It does not move relative to its parent, such as a sensor mount, and is known at every time"
       ],
       "correct": 3,
-      "explanation": "The laser and the arm were static."
+      "explanation": "A sensor bolted to the base is in the same place on the base at every time, so it can be looked up at any stamp."
     }
   ]
 }

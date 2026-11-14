@@ -7,72 +7,72 @@
       "question": "Why write a component against an interface instead of directly against rclcpp?",
       "options": [
         "Written against rclcpp it can be tested only where ROS 2 is installed and processes can talk; against an interface it runs in a test in microseconds and a ROS 2 adapter is one class",
-        "It is shorter",
-        "It is required",
-        "It is faster at run time"
+        "An interface is faster to call than rclcpp, since it avoids the middleware for every message",
+        "rclcpp cannot run more than one node in a process, and an interface can",
+        "Written against an interface the component needs no tests, because the adapter is tested by ROS 2"
       ],
       "correct": 0,
-      "explanation": "A planner against rclcpp cannot be built on a CI lane without ROS 2."
+      "explanation": "The component asks its node for publishers, subscriptions, timers and the time, and nothing else. In a test those come from an in-process node, and on a robot from one class over rclcpp."
     },
     {
       "stage": "check",
       "question": "Two nodes run the same component, one in /robot1 and one in /robot2. A number is sent to robot1's input. Who handles it?",
       "options": [
-        "Robot 2",
-        "Neither",
+        "Both: they run the same component, so they share its topics",
+        "Only robot 2, which was created later and took over the name",
         "Only robot 1: it handled 2 messages and robot 2 handled 0, because relative names resolve in each node's namespace",
-        "Both"
+        "Neither: a relative name is not delivered until it is remapped"
       ],
       "correct": 2,
-      "explanation": "Names resolve against the node's namespace."
+      "explanation": "The component writes in, and each node resolves that in its own namespace: /robot1/in and /robot2/in are different topics."
     },
     {
       "stage": "check",
       "question": "A node is destroyed while its subscription is still registered on the bus. What goes wrong?",
       "options": [
-        "Nothing",
+        "Nothing: the bus drops subscriptions whose node has gone",
         "The next message calls into a component that no longer exists",
-        "The bus slows down",
-        "The topic is deleted"
+        "The bus stops delivering that topic to every subscriber",
+        "The message is queued until a node with that name is created again"
       ],
       "correct": 1,
-      "explanation": "An in-process node unsubscribes its tokens when destroyed."
+      "explanation": "The subscription is a function that captures the component. If it outlives the node, the bus calls a function whose object is gone."
     },
     {
       "stage": "check",
       "question": "What did the test measure after a node with a subscription and a timer was destroyed?",
       "options": [
         "Nodes alive 1, subscribers to its topic 0, and 0 calls into it in the 5 s and 10 messages after",
-        "The same as before",
-        "One call",
-        "Nothing"
+        "Nodes alive 0, subscribers to its topic 1, and 10 calls into it afterwards",
+        "Nodes alive 1, subscribers to its topic 1, and 2 calls into it afterwards",
+        "Nodes alive 2, subscribers to its topic 0, and 1 call into it, from its timer"
       ],
       "correct": 0,
-      "explanation": "Before it died, two calls had been made into it."
+      "explanation": "On destruction the node took back every subscription and timer and removed itself from the world. Before that it had been called twice; after, never."
     },
     {
       "stage": "post",
       "question": "Why is a node's timer armed when it is created and not at its first poll?",
       "options": [
-        "It is required by DDS",
-        "For memory",
-        "For speed",
+        "So that timers fire in the order the nodes were created",
+        "Because a timer armed at its first poll would fire twice in its first period",
+        "So that the timer's first firing is at time zero",
         "A timer made at 0 and first polled at 0.6 s would have lost the whole of its first period"
       ],
       "correct": 3,
-      "explanation": "The status timer fired 3 times in 3.5 s."
+      "explanation": "The period starts when the timer is made. Over 3.5 s the status timer fired 3 times, at 1, 2 and 3 s."
     },
     {
       "stage": "post",
       "question": "What does this lesson not claim about ROS 2?",
       "options": [
-        "That tests run",
+        "That names resolve by the rules of 17-11, which were only checked for one namespace",
         "That an adapter satisfies the interface: the sketch is not built or tested by this repository's CI, which has no ROS 2 lane, and has to be checked wherever ROS 2 is installed",
-        "That names resolve",
-        "That the seam is the right shape"
+        "That the component's tests pass, which needs ROS 2 to confirm",
+        "That a node cleans up after itself, which only rclcpp can show"
       ],
       "correct": 1,
-      "explanation": "The seam is checked here and the adapter has to be checked elsewhere."
+      "explanation": "The lesson checks that the seam has the right shape. Whether an rclcpp class really implements it has to be checked on a machine with ROS 2."
     }
   ]
 }

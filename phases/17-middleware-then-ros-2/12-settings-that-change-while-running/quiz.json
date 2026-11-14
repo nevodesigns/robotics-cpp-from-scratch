@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why must a set of a name that was never declared be refused?",
       "options": [
-        "It uses memory",
-        "It is slow",
-        "Names are case sensitive",
+        "Undeclared names are slower to look up than declared ones",
+        "A new setting would have no type, and every setting needs one",
+        "Because two nodes might then create the same name",
         "A mistyped name would create a setting the node never reads, and the operator would believe it had changed something"
       ],
       "correct": 3,
-      "explanation": "ki: not declared."
+      "explanation": "The node only reads the settings it declared. Accepting ki when the node reads kp would report success for a change that did nothing."
     },
     {
       "stage": "check",
       "question": "A parameter is declared as a real. A client sets it to the integer 5. What happens?",
       "options": [
         "It is refused: wrong type, because 1 is not 1.0 and a silent conversion hides which side was wrong",
-        "It becomes 5.0",
-        "It is converted",
-        "It is deleted"
+        "It is converted to 5.0 and accepted, since no information is lost",
+        "It is accepted and the parameter becomes an integer from then on",
+        "It is accepted with a warning in the log"
       ],
       "correct": 0,
-      "explanation": "Nothing converts."
+      "explanation": "A setting's type is fixed when it is declared. Converting quietly would hide the fact that one side has the wrong idea of what the setting is."
     },
     {
       "stage": "check",
       "question": "kp is limited to 0 to 100. Which of these is accepted?",
       "options": [
-        "250",
+        "Only values strictly between 0 and 100, so neither end was accepted",
         "0 and 100, the ends of the range, while 250 and -1 were refused as out of range",
-        "-1",
-        "None"
+        "250, clamped down to 100",
+        "-1, clamped up to 0"
       ],
       "correct": 1,
-      "explanation": "The ends are inside the range."
+      "explanation": "A range includes its limits. Outside it the set is refused and the gain stays as it was; nothing is clamped."
     },
     {
       "stage": "check",
       "question": "Three changes are requested and the last has the wrong type. What state are the settings in afterwards?",
       "options": [
-        "Two applied",
-        "Three applied",
+        "The first two are applied and the third refused, so kp had changed and enabled had too",
+        "All three are applied, and the wrong typed one is converted",
         "As they were: all or none, so kp was still 2.0 and enabled still true",
-        "Undefined"
+        "None are applied and all three settings are reset to their defaults"
       ],
       "correct": 2,
-      "explanation": "The server works on a copy and applies only when all have passed."
+      "explanation": "A client that changes three things means all three. Checking them on a copy and applying only if every one passes avoids running with half a change."
     },
     {
       "stage": "post",
       "question": "min_speed 0.1 and max_speed 1.0 must become 2.0 and 3.0, with the rule min below max. What happens one at a time and together?",
       "options": [
-        "Both work",
+        "Both are refused: the rule compares each new value with the old one",
         "One at a time the first step breaks the rule and is refused, and together the rule sees the end and passes",
-        "Together is refused",
-        "Both are refused"
+        "One at a time works, and together is refused because two changes conflict",
+        "Both work: the rule is only checked when the node restarts"
       ],
       "correct": 1,
-      "explanation": "The rule is checked on how the settings would end up."
+      "explanation": "Raising the minimum to 2.0 while the maximum is still 1.0 breaks the rule on the way. Asked for together, only the end state is judged."
     },
     {
       "stage": "post",
       "question": "What does a read only setting protect against?",
       "options": [
-        "Large values",
-        "Unsafe types",
+        "A value outside its range, such as a gain of 250",
+        "A value of the wrong type, such as an integer for a real",
         "A change from outside to something that must not change while running, such as a serial number: the set was refused and the value stayed A-1001",
-        "Typos"
+        "A name that was never declared"
       ],
       "correct": 2,
-      "explanation": "A refused set changes nothing."
+      "explanation": "Some settings describe the node and are not controls. Declared read only, a set from outside is refused and the value is unchanged."
     }
   ]
 }

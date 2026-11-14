@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What makes replaying a recording useful for finding a bug?",
       "options": [
-        "It is recorded",
-        "It is faster",
+        "A recording is smaller than a live run, so it can be searched faster",
+        "A recording contains the node's internal state at every step",
         "A node's behaviour depends only on the messages it gets, so the same messages at the same pace give the same output: a running average gave 2.000 3.000 2.333 3.250 3.000 live and from the file",
-        "It shows the robot"
+        "Replaying runs the node more slowly, so the bug can be watched"
       ],
       "correct": 2,
-      "explanation": "The file is the bug."
+      "explanation": "If the node sees the same messages at the same times it does the same thing. So a failure that was recorded can be made to happen again, at a desk."
     },
     {
       "stage": "check",
       "question": "Why is a payload written with its length and not as a C string?",
       "options": [
         "A payload is bytes and may contain a zero: one with a zero byte in it round trips because its length is written",
-        "Speed",
-        "Alignment",
-        "Compression"
+        "A C string would be slower to write for long payloads",
+        "A length keeps the payload aligned to eight bytes",
+        "A C string cannot hold characters above 127"
       ],
       "correct": 0,
-      "explanation": "A zero byte would end a string early."
+      "explanation": "A string ends at its first zero byte, and binary payloads are full of them. Written with its length, a payload comes back whole."
     },
     {
       "stage": "check",
       "question": "A recording was cut by a power failure. What should the reader do, at any length the file could be cut to?",
       "options": [
-        "Guess the rest",
+        "Read the complete messages and stop at the cut",
         "Refuse it, and leave the bag empty: all 92 prefixes of the test file were refused and none left half a bag behind",
-        "Read the last message again",
-        "Read what is there"
+        "Read what is there and fill the rest with zeros",
+        "Read up to the cut and mark the last message as partial"
       ],
       "correct": 1,
-      "explanation": "A caller that ignores the status must not replay half a file."
+      "explanation": "A cut file is not the recording. Refusing it, and handing back an empty bag, means a caller who forgets to check the status does not replay half a run as if it were all of it."
     },
     {
       "stage": "check",
       "question": "A header says 4 billion messages in a 27 byte file. What should happen?",
       "options": [
-        "Reserve space for them",
-        "Crash",
-        "Read one",
+        "Reserve space for 4 billion messages and then read what is there",
+        "Read 27 bytes and report however many messages that made",
+        "Treat the count as zero and return an empty bag with no error",
         "Refuse it at once as too_many: each message takes at least 12 bytes, so the count could not be true"
       ],
       "correct": 3,
-      "explanation": "A reader that trusts a count allocates for it."
+      "explanation": "A count from a file is a claim. Checked against how many messages the rest of the file could possibly hold, an impossible one is refused before anything is allocated."
     },
     {
       "stage": "post",
       "question": "Time in a replay is counted from where?",
       "options": [
-        "From the last message",
-        "From the clock",
+        "From 0 s of the stamps, so a bag that started at 100.0 s waits 100 s first",
+        "From the time the recording was made, by the wall clock",
         "From the first message, whatever its stamp: a bag that started at 100.0 s replays from 0",
-        "From 0 s of the stamp"
+        "From the last message, counting backward"
       ],
       "correct": 2,
-      "explanation": "Each message appeared at the step it came due."
+      "explanation": "What matters in a replay is the spacing between the messages. The first one is published at once and the rest follow at their original intervals."
     },
     {
       "stage": "post",
       "question": "What does a rate of 4 do to the one second of the bag?",
       "options": [
-        "Nothing",
+        "The last message came at 4.00 s",
         "The last message came at 0.25 s: and a node with its own timers needs its clock sped up with it",
-        "Halves it",
-        "Doubles it"
+        "Nothing: the rate only applies to the node's timers",
+        "Every fourth message was published and the rest skipped"
       ],
       "correct": 1,
-      "explanation": "At 0.5 it came at 2.00 s."
+      "explanation": "A rate of 4 plays the bag's second in a quarter of a second. A node with timers of its own must have its clock sped up to match, or it falls out of step."
     }
   ]
 }

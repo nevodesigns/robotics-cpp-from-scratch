@@ -7,72 +7,72 @@
       "question": "A planner callback takes 50 ms and a control callback runs every 10 ms on the same single thread. What happens to the control loop?",
       "options": [
         "It is held up by up to 45 ticks while the planner runs, and a planner of 200 ticks held it up by 195",
-        "Nothing",
-        "It is dropped",
-        "It runs faster"
+        "It is dropped while the planner runs, and 5 control callbacks never happen",
+        "It preempts the planner, so the planner takes 45 ticks longer",
+        "It runs on time, since a 10 ms callback is queued ahead of a 50 ms one"
       ],
       "correct": 0,
-      "explanation": "The slow callback holds up every other callback on the thread."
+      "explanation": "One thread runs one callback at a time, in the order they became ready. The control callback waits for whatever is in front of it."
     },
     {
       "stage": "check",
       "question": "What does two threads with the control and the planner in separate groups give the control callback?",
       "options": [
-        "The same wait",
-        "A worse wait",
-        "Half the wait",
+        "A worst wait of 45 ticks, as with one thread",
+        "A worst wait of 22 ticks, half of one thread's",
+        "A worst wait of 5 ticks, the planner's start time",
         "0: it runs on time, while the planner runs beside it"
       ],
       "correct": 3,
-      "explanation": "Threads and groups together."
+      "explanation": "With a thread free and nothing in its group to exclude it, the control callback starts the moment it is ready."
     },
     {
       "stage": "check",
       "question": "Everything is in one mutually exclusive group and the executor has two threads. What is the worst wait?",
       "options": [
-        "90",
+        "0: a second thread always removes the wait",
         "45, exactly what one thread gave: callbacks in one exclusive group never overlap, and the second thread sits idle",
-        "0",
-        "22"
+        "22, half of what one thread gave",
+        "90, twice what one thread gave, from contention"
       ],
       "correct": 1,
-      "explanation": "More threads do nothing for callbacks that share an exclusive group."
+      "explanation": "A mutually exclusive group runs one of its callbacks at a time however many threads there are. The planner still blocks the control."
     },
     {
       "stage": "check",
       "question": "What does making the group reentrant cost?",
       "options": [
-        "Memory",
+        "Nothing: reentrant is exclusive with the waiting removed",
         "The callbacks of that group can now run at once, so whatever they share needs a lock: the race the exclusive group was preventing",
-        "Threads",
-        "Nothing"
+        "A thread for each callback in the group",
+        "The order of delivery within a topic"
       ],
       "correct": 1,
-      "explanation": "Reentrant moves the burden to the callbacks."
+      "explanation": "The exclusive group was what guaranteed its callbacks never touched shared data together. Remove it and the callbacks have to protect that data themselves."
     },
     {
       "stage": "post",
       "question": "Four 10 tick callbacks are ready together in a reentrant group on two threads. When do they start?",
       "options": [
         "0 0 10 10: a group that allows overlap still has only as many threads as there are",
-        "All at 0",
-        "0 10 20 30",
-        "0 5 10 15"
+        "0 0 0 0: reentrant means no waiting",
+        "0 10 20 30: one at a time, in order",
+        "0 5 10 15: the threads share each callback"
       ],
       "correct": 0,
-      "explanation": "With three threads the third started at once."
+      "explanation": "Two threads run two callbacks. The other two start when those finish; with three threads the third started at once."
     },
     {
       "stage": "post",
       "question": "A callback blocked by its group is ahead of one in another group in the queue. What happens to the second?",
       "options": [
-        "It is dropped",
-        "It is delayed by 1",
+        "It waits too, since the queue is served strictly in order",
+        "It is dropped, to keep the queue from growing",
         "It runs at once: a blocked callback does not hold up those behind it, and one that never started is reported as having waited the whole time",
-        "It waits too"
+        "It is moved into the blocked callback's group"
       ],
       "correct": 2,
-      "explanation": "Leaving the never started ones out of the measure would say the worst wait was 0."
+      "explanation": "A callback that cannot run because of its group is passed over for the next one that can. And one that never started is counted as waiting until the end, or the measure would hide it."
     }
   ]
 }

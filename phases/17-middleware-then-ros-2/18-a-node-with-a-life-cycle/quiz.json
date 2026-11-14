@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is a managed node's start up several steps and not one?",
       "options": [
-        "Style",
+        "Each step runs on its own thread, so they cannot be merged",
         "Each can fail, and between them there are states a supervisor can see and act on: an inactive node has its device open and is not publishing, so it can be paused without closing it",
-        "Threads",
-        "Speed"
+        "ROS 2 nodes cannot open a device and publish in the same function",
+        "So that the constructor can never throw"
       ],
       "correct": 1,
-      "explanation": "Configure, activate, deactivate, cleanup and shutdown."
+      "explanation": "Opening the device and starting to publish are different things that can each go wrong. Between them is inactive, where the device is open and nothing is sent."
     },
     {
       "stage": "check",
       "question": "Activate is requested of an unconfigured node. What happens?",
       "options": [
-        "It is configured first",
-        "The device is started",
-        "It fails",
+        "The node is configured first and then activated",
+        "The activate callback runs and returns failure",
+        "The node goes to error processing",
         "The request is refused and its callback is not run: six requests out of order were all refused and only the two legal callbacks ran"
       ],
       "correct": 3,
-      "explanation": "A callback must not run from a state it was not written for."
+      "explanation": "A transition is legal only from certain states. Refusing it before the callback runs means the callback never has to cope with a device that was never opened."
     },
     {
       "stage": "check",
       "question": "A configure callback returns failure. Where is the node?",
       "options": [
-        "Finalized",
-        "Inactive",
-        "Error processing",
+        "Inactive: the device is half open and must be cleaned up",
+        "Error processing, where its recovery decides",
+        "Finalized: a node that cannot configure is of no use",
         "Unconfigured, as it was: and a retry after the device came back took it to inactive"
       ],
       "correct": 3,
-      "explanation": "Failure changes nothing."
+      "explanation": "Failure means it did not happen and nothing changed. The same request can be made again when the device is back."
     },
     {
       "stage": "check",
       "question": "A deactivate callback fails. What state is the node in?",
       "options": [
-        "Finalized",
+        "Inactive: the request was made, so the state follows it",
         "Active: it was asked to stop and could not, and a failed shutdown likewise did not finalize it",
-        "Inactive",
-        "Unconfigured"
+        "Error processing: a node that cannot stop is broken",
+        "Unconfigured, so that it can be started afresh"
       ],
       "correct": 1,
-      "explanation": "A node does not change state because it was asked and could not comply."
+      "explanation": "The state says what the node is doing, not what it was told. It could not stop, so it is still active."
     },
     {
       "stage": "post",
       "question": "What is the difference between failure and error?",
       "options": [
         "Failure leaves the node as it was and retryable, error says its state can no longer be trusted and sends it to error processing, where its recovery chooses unconfigured or finalized",
-        "Error is louder",
-        "None",
-        "Failure is final"
+        "Failure is reported to the log and error to the supervisor",
+        "Failure sends the node to finalized and error leaves it where it was",
+        "There is none: both leave the node where it was"
       ],
       "correct": 0,
-      "explanation": "One recovered and was brought up again, the other was finalized."
+      "explanation": "After a failure the node is intact and can be asked again. After an error the node itself may be inconsistent, so its recovery callback decides its fate."
     },
     {
       "stage": "post",
       "question": "Five messages are sent over the life of a node, two of them while it was active. What happened to the other three?",
       "options": [
-        "Queued",
-        "They were sent",
+        "Queued, and sent when the node was next active: sent 5, dropped 0",
+        "Sent like the others: sent 5, dropped 0",
         "Dropped and counted: sent 2, dropped 3, because a lifecycle publisher speaks only while active",
-        "Delayed"
+        "Dropped without being counted: sent 2, dropped 0"
       ],
       "correct": 2,
-      "explanation": "A node that published while inactive would send readings from a device that was not open."
+      "explanation": "One was sent while unconfigured, one while inactive and one after deactivating. A lifecycle publisher only sends while the node is active, and it counts what it drops."
     }
   ]
 }

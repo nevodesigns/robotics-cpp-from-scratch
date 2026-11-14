@@ -7,72 +7,72 @@
       "question": "Two robots each run a lidar driver that publishes scan. What puts them on different topics?",
       "options": [
         "Each node's name is resolved against its own namespace: /robot1/scan and /robot2/scan, apart, while an absolute /scan would be the same for both",
-        "A random suffix",
-        "Different code",
-        "The network"
+        "Each driver adds a random suffix to its topics when it starts, so /scan_a1 and /scan_b7 are apart",
+        "The bus keeps a separate set of topics for every machine on the network",
+        "The two drivers are built with different topic names for each robot"
       ],
       "correct": 0,
-      "explanation": "The name in the node is not the name on the bus."
+      "explanation": "The node writes scan, and the bus name is the namespace plus that. Give each robot its own namespace and one program serves both."
     },
     {
       "stage": "check",
       "question": "For node lidar_driver in /robot1, what does ~/status mean?",
       "options": [
-        "/status",
+        "/robot1/status: a private name is put in the node's namespace",
         "/robot1/lidar_driver/status: a private name goes inside a namespace named for the node",
-        "~/status",
-        "/robot1/status"
+        "/lidar_driver/status: a private name ignores the namespace",
+        "/status: the tilde stands for the root"
       ],
       "correct": 1,
-      "explanation": "A private name is where the node puts what is its own."
+      "explanation": "The tilde is the node's own corner: its namespace and then its name. Status and parameters belong there."
     },
     {
       "stage": "check",
       "question": "Which of these is not a valid topic name?",
       "options": [
         "a//b, which has an empty part, and so do names with a trailing slash, a space, or a part starting with a digit",
-        "scan",
-        "~/status",
-        "/a/b"
+        "/a/b, because an absolute name may not have two parts",
+        "~/status, because a tilde is not a letter, digit or underscore",
+        "_hidden, because a name may not start with an underscore"
       ],
       "correct": 0,
-      "explanation": "The test rejected all 16 bad names and accepted all 9 good ones."
+      "explanation": "The rules allow letters, digits, underscores and slashes, with no empty part, no leading digit in a part, and a tilde only at the very start."
     },
     {
       "stage": "check",
       "question": "What is wrong with a node that publishes to /scan?",
       "options": [
-        "Nothing",
-        "It is too short",
+        "Nothing: an absolute name is the safest, since it cannot be changed by a namespace",
+        "It is private, so no other node can subscribe to it",
         "The name is absolute and ignores the namespace, so two robots share one topic with two publishers",
-        "It is private"
+        "It cannot be remapped from outside"
       ],
       "correct": 2,
-      "explanation": "Write relative names in a node and leave absolute ones for things that are truly global."
+      "explanation": "A leading slash means the name is taken as written. Run on two robots, both publish to the same topic and their scans are mixed."
     },
     {
       "stage": "post",
       "question": "What does a remap rule apply to?",
       "options": [
-        "Every topic",
-        "Only private names",
-        "The written name",
+        "The name as written in the node, before the namespace is added",
+        "Every topic whose last part matches, in any namespace",
+        "Only private names, since those are the node's own",
         "The resolved name: the same rule in a node in /robot2 is about /robot2/scan and does not apply to /robot1/scan"
       ],
       "correct": 3,
-      "explanation": "A rule is read the same way as any name."
+      "explanation": "The rule is resolved in the node's namespace like any other name, and compared with the resolved topic. So a node in /robot2 does not touch /robot1's topics."
     },
     {
       "stage": "post",
       "question": "What does the root namespace contribute to a name?",
       "options": [
-        "An error",
+        "One slash, so scan in the root is //scan",
         "Nothing, so scan in the root is /scan and not //scan",
-        "A slash",
-        "A node name"
+        "The node's name, so scan in the root is /lidar_driver/scan",
+        "An error: a node must be given a namespace"
       ],
       "correct": 1,
-      "explanation": "The namespace is made to look the same however it was written."
+      "explanation": "robot1/, /robot1 and /robot1/ are one namespace, and the empty one is the root. The root adds nothing in front of the name."
     }
   ]
 }

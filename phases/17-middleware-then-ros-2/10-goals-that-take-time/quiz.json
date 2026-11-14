@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is an action not just a service with a long timeout?",
       "options": [
-        "It uses less memory",
-        "It is faster",
-        "It is",
+        "A service cannot carry a goal as large as a trajectory",
+        "A service has no timeout at all, so the client would wait for ever",
+        "An action is delivered reliably and a service is not",
         "A service that blocks for 90 seconds gives no progress and no way to stop it, and a timeout there means 'I do not know' for the whole time"
       ],
       "correct": 3,
-      "explanation": "An action adds feedback, cancel and a result."
+      "explanation": "A move takes long enough that the caller wants to see how it is going and to be able to stop it. A blocked call offers neither."
     },
     {
       "stage": "check",
       "question": "What does a cancel do to a running goal?",
       "options": [
-        "Deletes it",
-        "Makes it canceled",
+        "Makes it canceled at once, since the client has decided",
+        "Makes it aborted, since the goal did not finish",
         "Moves it to canceling: only the server's confirmation, after the arm has actually stopped, makes it canceled",
-        "Makes it aborted"
+        "Returns it to accepted, so that it can be started again"
       ],
       "correct": 2,
-      "explanation": "A cancel is a request."
+      "explanation": "Asking to stop is not stopping. An arm takes time to decelerate, and the goal is canceling until the server says it has."
     },
     {
       "stage": "check",
       "question": "The client cancels in the same moment the arm arrives. What does the goal end as?",
       "options": [
-        "executing",
-        "canceled",
+        "canceled: the client's request came first and takes priority",
+        "aborted: a goal that was both canceled and finished is in conflict",
         "succeeded: the work finished before the cancel took effect, and a client that assumed the cancel worked would be wrong",
-        "aborted"
+        "canceling: it stays there until the client asks again"
       ],
       "correct": 2,
-      "explanation": "A cancel can lose a race."
+      "explanation": "The arm arrived before the cancel took effect, so what the robot did was complete the move. The state says what happened, not what was asked."
     },
     {
       "stage": "check",
       "question": "What happens to every call on a goal that has finished?",
       "options": [
-        "It aborts",
+        "It is applied if it would move the goal to a worse state, such as aborted",
         "Nothing: 0 changed across succeeded, canceled and aborted goals, so a reported result cannot be overwritten",
-        "It changes state",
-        "It is reopened"
+        "It reopens the goal, so a finished goal can be run again",
+        "It raises an error and the server stops"
       ],
       "correct": 1,
-      "explanation": "Finished is final."
+      "explanation": "The test called every method on a succeeded, a canceled and an aborted goal and none changed. A result that can change after it was reported cannot be trusted."
     },
     {
       "stage": "post",
       "question": "Feedback arrives for a goal that was canceled. What should the goal do?",
       "options": [
         "Drop it and count it: 2 kept while executing, 3 dropped after",
-        "Keep it",
-        "Restart the goal",
-        "Raise an error"
+        "Keep it, so that the client can show the last progress: 5 kept",
+        "Restart the goal from that progress: 2 kept, then executing again",
+        "Mark the goal aborted, since feedback after a cancel is a fault: 2 kept, then aborted"
       ],
       "correct": 0,
-      "explanation": "Progress is only meaningful while the goal runs."
+      "explanation": "Progress describes a goal that is running. For one that is not, showing it would display a move that is no longer happening."
     },
     {
       "stage": "post",
       "question": "A second goal arrives while the first runs. What are the two rules, and what does preempt old do to the first?",
       "options": [
         "Reject the new one, or accept it and ask the old one to cancel, which leaves the old one canceling and not yet stopped",
-        "Abort both",
-        "Merge them",
-        "Queue and ignore"
+        "Queue the new one behind the old, or run both together, and preempt old runs both",
+        "Reject the new one, or accept it and mark the old one canceled at once",
+        "Accept the new one and abort the old, or abort both, and preempt old aborts the first"
       ],
       "correct": 0,
-      "explanation": "The server decides whether the second waits for the confirmation."
+      "explanation": "One arm does one thing. Under preempt old the second goal is accepted while the first is still stopping, so the server must decide whether to wait for the confirmation."
     }
   ]
 }
