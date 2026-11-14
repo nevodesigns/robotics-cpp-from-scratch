@@ -16,17 +16,17 @@ A path from a planner is a chain of points, and the chain has kinks: a corner of
 
 ### Pull towards the neighbours, hold near the plan
 
-Put the points an even distance apart (**resampling**), keep the two ends where they are, and then, again and again, move each interior point by two pulls: one **towards the midpoint of its two neighbours**, which straightens the chain, and one **back towards where the plan had it**, which stops the chain from sliding away from the route it was meant to follow. The weights, 0.3 for the first and 0.1 for the second here, decide how smooth and how faithful the result is. The loop stops when nothing moves more than a tolerance.
+Put the points an even distance apart (resampling), keep the two ends where they are, and then, again and again, move each interior point by two pulls: one towards the midpoint of its two neighbours, which straightens the chain, and one back towards where the plan had it, which stops the chain from sliding away from the route it was meant to follow. The weights, 0.3 for the first and 0.1 for the second here, decide how smooth and how faithful the result is. The loop stops when nothing moves more than a tolerance.
 
-The curvature of three points in a row (the circle through them, **Menger curvature**) measures it. A corner of 90 degrees with points 0.2 m apart had a sharpest curvature of **7.1 per metre**; after smoothing it was **3.64**, in **65 sweeps**: about half, and still several times the car's limit of **1.35**. See `E-VEH-0088`.
+The curvature of three points in a row (the circle through them, Menger curvature) measures it. A corner of 90 degrees with points 0.2 m apart had a sharpest curvature of 7.1 per metre; after smoothing it was 3.64, in 65 sweeps: about half, and still several times the car's limit of 1.35. See `E-VEH-0088`.
 
 ### Faithful or smooth: one knob
 
-A light smoother (the plan pulled hard, the neighbours softly) stayed within **0.04 m** of the plan; a heavy one (the opposite) moved up to **0.63 m**, and **even that** left a sharpest curvature of **1.55**, still over the car's **1.35**. More smoothing means more distance from what the planner checked, and the planner checked the plan, not the result. Rounding a corner of 90 degrees to the car's own radius takes more room than a smoother that holds the plan will give. See `E-VEH-0089`.
+A light smoother (the plan pulled hard, the neighbours softly) stayed within 0.04 m of the plan; a heavy one (the opposite) moved up to 0.63 m, and even that left a sharpest curvature of 1.55, still over the car's 1.35. More smoothing means more distance from what the planner checked, and the planner checked the plan, not the result. Rounding a corner of 90 degrees to the car's own radius takes more room than a smoother that holds the plan will give. See `E-VEH-0089`.
 
 ### Do not smooth into the wall
 
-A small block just inside a corner is exactly where a smoother wants to go, because the shortcut inside the corner is the straightest chain. With no grid, **5 points** ended inside the inflated block. With the grid, a move into a cell that is inscribed or worse is simply refused, and **0** ended there. See `E-VEH-0090`.
+A small block just inside a corner is exactly where a smoother wants to go, because the shortcut inside the corner is the straightest chain. With no grid, 5 points ended inside the inflated block. With the grid, a move into a cell that is inscribed or worse is simply refused, and 0 ended there. See `E-VEH-0090`.
 
 ## Build It
 

@@ -10,7 +10,7 @@
 
 ## The Problem
 
-A skid steer vehicle has no steering. It turns by driving the wheels on one side faster than the other, and the wheels on a side have to **slide sideways** to let it. Two things follow that a car does not have. The turn it gets from a difference in wheel speeds is **less than the plain geometry says** (lesson 23-02: the effective track is `chi` times the real one, with chi from 1 up to 1.5 or more on a floor that grips). And the **sliding is the turning**, so the ground decides how hard a turn may be (lesson 23-05) at a given speed.
+A skid steer vehicle has no steering. It turns by driving the wheels on one side faster than the other, and the wheels on a side have to slide sideways to let it. Two things follow that a car does not have. The turn it gets from a difference in wheel speeds is less than the plain geometry says (lesson 23-02: the effective track is `chi` times the real one, with chi from 1 up to 1.5 or more on a floor that grips). And the sliding is the turning, so the ground decides how hard a turn may be (lesson 23-05) at a given speed.
 
 ## The Concept
 
@@ -23,13 +23,13 @@ sum of the wheel speeds        = 2 v / (r (1 - slip))
 difference of the wheel speeds = w chi B / r
 ```
 
-with `B` the track and `r` the wheel radius. A controller that takes `chi = 1` and `slip = 0` asks for a turn that the body makes **only 1/chi as sharply**: on tarmac, with the real chi of 1.5 and a slip of 0.05, the controller that knew both held the path to **0.042 m** at most, and the one that did not strayed **0.115 m**, sliding wide of every bend. See `E-VEH-0097`.
+with `B` the track and `r` the wheel radius. A controller that takes `chi = 1` and `slip = 0` asks for a turn that the body makes only 1/chi as sharply: on tarmac, with the real chi of 1.5 and a slip of 0.05, the controller that knew both held the path to 0.042 m at most, and the one that did not strayed 0.115 m, sliding wide of every bend. See `E-VEH-0097`.
 
 ### The speed the ground allows in the turn
 
-The sideways acceleration of a turn is `v squared times the curvature`, and the surface grips only so much, `mu g`. On a straight there is no limit to speak of. In the bend, the controller caps the speed at a **margin of 0.7** of the speed at which the tyres let go, and never lets it fall below a floor (a vehicle that stops in every turn is not following anything). At the same curvature the ground allowed **2.12 times** the speed on gravel as on ice.
+The sideways acceleration of a turn is `v squared times the curvature`, and the surface grips only so much, `mu g`. On a straight there is no limit to speak of. In the bend, the controller caps the speed at a margin of 0.7 of the speed at which the tyres let go, and never lets it fall below a floor (a vehicle that stops in every turn is not following anything). At the same curvature the ground allowed 2.12 times the speed on gravel as on ice.
 
-On ice at 1.2 m/s the plain controller let go in **51 steps** (a vehicle that has let go goes where its momentum takes it, not where the wheels point) and finished in **4.6 s**; the one that limited its speed let go in **0** steps and finished in **5.4 s**: slower, and on the path. See `E-VEH-0098`.
+On ice at 1.2 m/s the plain controller let go in 51 steps (a vehicle that has let go goes where its momentum takes it, not where the wheels point) and finished in 4.6 s; the one that limited its speed let go in 0 steps and finished in 5.4 s: slower, and on the path. See `E-VEH-0098`.
 
 ### A floor, or the controller stops
 

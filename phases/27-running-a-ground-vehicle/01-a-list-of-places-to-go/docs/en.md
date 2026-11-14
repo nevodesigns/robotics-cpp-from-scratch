@@ -10,25 +10,25 @@
 
 ## The Problem
 
-A ground vehicle on a job has a **list of places to go**: the gate, the pump, the far fence, back to the charger. It is not a path (the planner and the follower of phase 26 make the path between two places) but a **promise**: be at each of these places, stay a while at some, and say what happened. And a promise has to say what to do when it cannot be kept: the pump is blocked; the vehicle has been rebooted halfway round.
+A ground vehicle on a job has a list of places to go: the gate, the pump, the far fence, back to the charger. It is not a path (the planner and the follower of phase 26 make the path between two places) but a promise: be at each of these places, stay a while at some, and say what happened. And a promise has to say what to do when it cannot be kept: the pump is blocked; the vehicle has been rebooted halfway round.
 
 ## The Concept
 
 ### A leg, a tolerance, a dwell, a timeout
 
-Each waypoint says where, **how near counts as there** (the tolerance), **how long to stand** (the dwell), **how long the leg may take** (the timeout) and how fast to go there. The mission is told the time and the vehicle's position each tick and answers with the place to aim for and a speed. A leg is **reached** when the vehicle has come within the tolerance and the dwell time has passed (the speed is zero while dwelling). A list of four waypoints was reached in order, standing **4.1 s** at the one that asked for it.
+Each waypoint says where, how near counts as there (the tolerance), how long to stand (the dwell), how long the leg may take (the timeout) and how fast to go there. The mission is told the time and the vehicle's position each tick and answers with the place to aim for and a speed. A leg is reached when the vehicle has come within the tolerance and the dwell time has passed (the speed is zero while dwelling). A list of four waypoints was reached in order, standing 4.1 s at the one that asked for it.
 
 ### When a leg cannot be done
 
-A leg that has taken longer than its timeout is marked **timed out**, and the **policy** decides: **skip** it and go on to the next, or **abort**. Here the vehicle could not move on leg 0; with the abort policy the mission ended after **10.0 s**, with the skip policy it went on to the next leg and the first one stayed in the record as timed out. Which is right depends on the job: a patrol skips a blocked point, a delivery that cannot reach the customer does not go on to the next one. See `E-VEH-0112`.
+A leg that has taken longer than its timeout is marked timed out, and the policy decides: skip it and go on to the next, or abort. Here the vehicle could not move on leg 0; with the abort policy the mission ended after 10.0 s, with the skip policy it went on to the next leg and the first one stayed in the record as timed out. Which is right depends on the job: a patrol skips a blocked point, a delivery that cannot reach the customer does not go on to the next one. See `E-VEH-0112`.
 
 ### Saving the progress
 
-The mission's progress is a leg number and a result for each leg, small enough to write as text to the flash after every leg. A vehicle that **restarts** reads it back (`restore`) and goes on from the leg it was on: after a restart at the third leg of four it drove **19.4 m** on the rest of the list; one that began again drove **38.4 m**, doing the first two legs a second time. The timer of the leg starts again on restore (it is not saved), and text that does not fit the list (a different number of legs, a leg that does not exist) is refused, and leaves the mission at the start. See `E-VEH-0113`.
+The mission's progress is a leg number and a result for each leg, small enough to write as text to the flash after every leg. A vehicle that restarts reads it back (`restore`) and goes on from the leg it was on: after a restart at the third leg of four it drove 19.4 m on the rest of the list; one that began again drove 38.4 m, doing the first two legs a second time. The timer of the leg starts again on restore (it is not saved), and text that does not fit the list (a different number of legs, a leg that does not exist) is refused, and leaves the mission at the start. See `E-VEH-0113`.
 
 ### A tolerance the vehicle cannot keep
 
-A car cannot be at any point facing any way (lesson 26-01), and a waypoint with a tolerance **finer than the car can hit** from where it is circles the point and never arrives. A car with a smallest radius of 0.742 m, facing east, with a waypoint 0.8 m to its left (inside its smallest circle, whose nearest pass is 0.68 m from the point) to reach within 0.10 m, was still circling after **40 s** (the timeout, and the mission aborted); with a tolerance of 0.70 m it was there in **1.8 s**. The tolerance has to be at least what the vehicle can do from where it is: here 0.68 m, the nearest its smallest circle passes the point. See `E-VEH-0114`.
+A car cannot be at any point facing any way (lesson 26-01), and a waypoint with a tolerance finer than the car can hit from where it is circles the point and never arrives. A car with a smallest radius of 0.742 m, facing east, with a waypoint 0.8 m to its left (inside its smallest circle, whose nearest pass is 0.68 m from the point) to reach within 0.10 m, was still circling after 40 s (the timeout, and the mission aborted); with a tolerance of 0.70 m it was there in 1.8 s. The tolerance has to be at least what the vehicle can do from where it is: here 0.68 m, the nearest its smallest circle passes the point. See `E-VEH-0114`.
 
 ## Build It
 

@@ -10,23 +10,23 @@
 
 ## The Problem
 
-Lesson 21-07 sent a delivery robot home when its battery fell short of the way back, and 19-08 watched a battery and a motor and cut the power when they were in trouble. Both left out what makes a **field** vehicle's energy and heat hard: the way home is over **ground**, the computer does not stop when the wheels do, and a motor on a slope has a clock on it.
+Lesson 21-07 sent a delivery robot home when its battery fell short of the way back, and 19-08 watched a battery and a motor and cut the power when they were in trouble. Both left out what makes a field vehicle's energy and heat hard: the way home is over ground, the computer does not stop when the wheels do, and a motor on a slope has a clock on it.
 
 ## The Concept
 
 ### The energy of a route, over its ground
 
-The energy of a route is the work against rolling resistance and the slope along each step (lesson 26-09: `m g (crr cos a + sin a)`), divided by the efficiency of the drive (0.7 here), **plus the computer and the sensors, which draw their power all the time**: 8 W for the time the route takes. A metre of tarmac cost **10.1 J** for a 10 kg vehicle at 1 m/s, of which the computer was **79 percent**; a metre of sand cost **22.0 J**. Speed matters twice: a slower vehicle does the same work and the computer runs for longer. See `E-VEH-0121`.
+The energy of a route is the work against rolling resistance and the slope along each step (lesson 26-09: `m g (crr cos a + sin a)`), divided by the efficiency of the drive (0.7 here), plus the computer and the sensors, which draw their power all the time: 8 W for the time the route takes. A metre of tarmac cost 10.1 J for a 10 kg vehicle at 1 m/s, of which the computer was 79 percent; a metre of sand cost 22.0 J. Speed matters twice: a slower vehicle does the same work and the computer runs for longer. See `E-VEH-0121`.
 
 ### The way home is over that ground
 
-A vehicle turns back when what is left would not cover the way home and a reserve. The **way home** has to be worked out over the ground it will cross. A vehicle that took it as flat turned back **16.8 m** out, because the way home looked cheap, and was **25 J short** of getting home over the sand band in between. One that planned the way home over the terrain (the planner of 26-09 and the energy of the route) turned back at **12.0 m** and got home with **71 J** to spare. (A test battery of 0.14 Wh is used to keep the field small; scale the battery and the field together.) See `E-VEH-0122`.
+A vehicle turns back when what is left would not cover the way home and a reserve. The way home has to be worked out over the ground it will cross. A vehicle that took it as flat turned back 16.8 m out, because the way home looked cheap, and was 25 J short of getting home over the sand band in between. One that planned the way home over the terrain (the planner of 26-09 and the energy of the route) turned back at 12.0 m and got home with 71 J to spare. (A test battery of 0.14 Wh is used to keep the field small; scale the battery and the field together.) See `E-VEH-0122`.
 
 ### The motor on a slope has a clock
 
-A slope asks a force `m g (sin a + crr cos a)`; each of the four motors gives a share of it through its gearbox, and carries the current for it (`I = F r / (n eta kt)`); the winding heats as `I squared R`. Its temperature rises towards `P times Rth` with a time constant `Rth times Cth`: that is a single lump, and the time to a limit has a closed form: `-Rth Cth ln(1 - limit / steady)`, or **never** if the steady rise is under the limit.
+A slope asks a force `m g (sin a + crr cos a)`; each of the four motors gives a share of it through its gearbox, and carries the current for it (`I = F r / (n eta kt)`); the winding heats as `I squared R`. Its temperature rises towards `P times Rth` with a time constant `Rth times Cth`: that is a single lump, and the time to a limit has a closed form: `-Rth Cth ln(1 - limit / steady)`, or never if the steady rise is under the limit.
 
-For the reference vehicle (the motor values are **typical**, not measured) a slope of 14 degrees gave a steady rise of **71 K**, under the limit of 75 K, and could be held for ever. A slope of 20 degrees reached the limit in **62 s**: at 0.5 m/s that is **31 m** of climb, and then the motor must rest or the vehicle must derate (19-08 does the derating). A slope that is fine for a minute is a trap for a route that is 100 m of it. See `E-VEH-0123`.
+For the reference vehicle (the motor values are typical, not measured) a slope of 14 degrees gave a steady rise of 71 K, under the limit of 75 K, and could be held for ever. A slope of 20 degrees reached the limit in 62 s: at 0.5 m/s that is 31 m of climb, and then the motor must rest or the vehicle must derate (19-08 does the derating). A slope that is fine for a minute is a trap for a route that is 100 m of it. See `E-VEH-0123`.
 
 ## Build It
 

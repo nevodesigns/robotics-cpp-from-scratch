@@ -10,30 +10,30 @@
 
 ## The Problem
 
-A plan is true when it is made and starts going out of date at once. The wall was not on the map; the person walked in front; the vehicle was pushed off the line. The question is **when to plan again**, and it has two bad answers. **Never**: the plan is followed into the wall. **Every tick**: the planner runs for ever, the path changes from one tick to the next, and the vehicle spends its time on what it is about to do and none on doing it.
+A plan is true when it is made and starts going out of date at once. The wall was not on the map; the person walked in front; the vehicle was pushed off the line. The question is when to plan again, and it has two bad answers. Never: the plan is followed into the wall. Every tick: the planner runs for ever, the path changes from one tick to the next, and the vehicle spends its time on what it is about to do and none on doing it.
 
 ## The Concept
 
 ### Reasons, not a timer
 
-Plan again for a **reason**, checked each tick, in this order:
+Plan again for a reason, checked each tick, in this order:
 
 1. **The goal changed.**
-2. **The path ahead is blocked** by something the latest grid knows: the cells along the next **3 m** of the path are looked at, not all of it (a wall 20 m away is not yet a problem).
-3. **The vehicle is off the path** by more than 0.6 m.
-4. **The plan is old**: 10 s, whatever else.
+2. The path ahead is blocked by something the latest grid knows: the cells along the next 3 m of the path are looked at, not all of it (a wall 20 m away is not yet a problem).
+3. The vehicle is off the path by more than 0.6 m.
+4. The plan is old: 10 s, whatever else.
 
-A **cooldown** (1 s between plans) holds back 3 and 4, so a vehicle that is wandering does not plan every tick. A blocked path is allowed to **bypass** the cooldown, because waiting costs a stop or a crash.
+A cooldown (1 s between plans) holds back 3 and 4, so a vehicle that is wandering does not plan every tick. A blocked path is allowed to bypass the cooldown, because waiting costs a stop or a crash.
 
-In a field with a wall found when the vehicle was 4 m from it, the vehicle that **never replanned** stood in front of it and **never arrived**. The one that planned for the reasons arrived in **20.9 s** with **5** plans. The one that planned every 0.2 s arrived in **21.4 s** with **86** plans: no quicker, and the planner never stopped. See `E-VEH-0109`.
+In a field with a wall found when the vehicle was 4 m from it, the vehicle that never replanned stood in front of it and never arrived. The one that planned for the reasons arrived in 20.9 s with 5 plans. The one that planned every 0.2 s arrived in 21.4 s with 86 plans: no quicker, and the planner never stopped. See `E-VEH-0109`.
 
 ### Look ahead far enough to hide the planning time
 
-A plan takes time: the planner runs and the new path arrives, say, **2 s** later. The vehicle drives the old path meanwhile, if it can. If the blocked point is only noticed 0.6 m ahead, the vehicle has to stand still for the plan: it waited **2.1 s**. If it is noticed 3 m ahead, it keeps moving until the plan arrives: it waited **0.3 s**. The look-ahead has to be at least the speed times the planning time, and the safety stop (0.5 m here) is for when it is not. See `E-VEH-0110`.
+A plan takes time: the planner runs and the new path arrives, say, 2 s later. The vehicle drives the old path meanwhile, if it can. If the blocked point is only noticed 0.6 m ahead, the vehicle has to stand still for the plan: it waited 2.1 s. If it is noticed 3 m ahead, it keeps moving until the plan arrives: it waited 0.3 s. The look-ahead has to be at least the speed times the planning time, and the safety stop (0.5 m here) is for when it is not. See `E-VEH-0110`.
 
 ### Plan from where the vehicle will be
 
-A plan that takes 1 s and starts where the vehicle **was** arrives 1 s later, 1 m behind it: the new path starts **1.16 m** behind the vehicle, which has to turn round or cut back to it. That is more than the 0.6 m of the off-path reason, so the vehicle is **off its new path the moment it arrives**, and plans again, and again: **83 plans in 90 s, and it never arrived**. (The author did not expect this; the first run of the test failed to arrive and the count of plans showed why.) A plan started from where the vehicle **will be** (`predicted_pose`: the path, advanced by speed times the planning time) started **0.06 m** from it when it arrived, and the vehicle was at the goal in **20.1 s** with **5** plans. See `E-VEH-0111`.
+A plan that takes 1 s and starts where the vehicle was arrives 1 s later, 1 m behind it: the new path starts 1.16 m behind the vehicle, which has to turn round or cut back to it. That is more than the 0.6 m of the off-path reason, so the vehicle is off its new path the moment it arrives, and plans again, and again: 83 plans in 90 s, and it never arrived. (The author did not expect this; the first run of the test failed to arrive and the count of plans showed why.) A plan started from where the vehicle will be (`predicted_pose`: the path, advanced by speed times the planning time) started 0.06 m from it when it arrived, and the vehicle was at the goal in 20.1 s with 5 plans. See `E-VEH-0111`.
 
 ## Build It
 

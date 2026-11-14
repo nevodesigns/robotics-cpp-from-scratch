@@ -10,25 +10,25 @@
 
 ## The Problem
 
-Phases 28 to 30 got the arm's hand to a place without hitting anything. A hand has to **pick something up**, and what holds a thing in two fingers is not the squeeze alone but the **friction** the squeeze makes at the pads. A grip that is too weak lets the thing slip, and one that is too strong crushes it and heats the motor. The first question is a number: **how hard to squeeze**.
+Phases 28 to 30 got the arm's hand to a place without hitting anything. A hand has to pick something up, and what holds a thing in two fingers is not the squeeze alone but the friction the squeeze makes at the pads. A grip that is too weak lets the thing slip, and one that is too strong crushes it and heats the motor. The first question is a number: how hard to squeeze.
 
 ## The Concept
 
 ### A hand as numbers
 
-A parallel gripper has a **stroke** (how far it opens), a **force range**, a **finger speed** and the **friction** between pad and thing. The model here has a stroke of **0.085 m** and a squeeze of up to **235 N**; these are typical of a hand of this class (a published hand's own sheet gives its numbers, and the lesson's say "typical"). See `E-ARM-0076`.
+A parallel gripper has a stroke (how far it opens), a force range, a finger speed and the friction between pad and thing. The model here has a stroke of 0.085 m and a squeeze of up to 235 N; these are typical of a hand of this class (a published hand's own sheet gives its numbers, and the lesson's say "typical"). See `E-ARM-0076`.
 
 ### What friction holds
 
-Each pad can resist a pull along it of at most **mu times the squeeze**. Two pads give **2 mu F**. To hold a mass the weight, **m times (g plus the acceleration)**, must be at most that, and a **safety factor** goes on top: F = safety m (g + a) / (2 mu). A kilogram at rest took **9.81 N** at a friction of **0.5**; lifted at **5 m/s2** it took **14.81 N**, because the hand's acceleration adds to the weight. See `E-ARM-0077`.
+Each pad can resist a pull along it of at most mu times the squeeze. Two pads give 2 mu F. To hold a mass the weight, m times (g plus the acceleration), must be at most that, and a safety factor goes on top: F = safety m (g + a) / (2 mu). A kilogram at rest took 9.81 N at a friction of 0.5; lifted at 5 m/s2 it took 14.81 N, because the hand's acceleration adds to the weight. See `E-ARM-0077`.
 
 ### The heaviest thing
 
-Turned round: the heaviest mass is 2 mu F over safety (g + a). With the full squeeze and a safety factor of 1.5 the hand held at most **16.0 kg**; with pads at half the friction (wet or oily) it held **8.0 kg**. Friction is the part that is not known: a pad that is dirty is a smaller hand. See `E-ARM-0078`.
+Turned round: the heaviest mass is 2 mu F over safety (g + a). With the full squeeze and a safety factor of 1.5 the hand held at most 16.0 kg; with pads at half the friction (wet or oily) it held 8.0 kg. Friction is the part that is not known: a pad that is dirty is a smaller hand. See `E-ARM-0078`.
 
 ### Does it fit, and how long does it take
 
-A width must lie between closed and open. Closing takes the **distance over the finger speed**, which is a part of every pick's time.
+A width must lie between closed and open. Closing takes the distance over the finger speed, which is a part of every pick's time.
 
 ## Build It
 
@@ -48,7 +48,7 @@ const double f = rc::arm::required_force(hand, mass, accel, 1.5);
 if (f > hand.f_max) refuse_the_pick();
 ```
 
-**What this does not do.** Friction is a **single coefficient** and the pads are a **point contact each**; a real grip has a pad that deforms, a thing that is not a box, and a friction that depends on speed and on what is on the pads. The two fingers move **together** (a parallel hand). The squeeze is **commanded**, not measured: whether it is reached is a matter for the contact lessons later in the phase.
+**What this does not do.** Friction is a single coefficient and the pads are a point contact each; a real grip has a pad that deforms, a thing that is not a box, and a friction that depends on speed and on what is on the pads. The two fingers move together (a parallel hand). The squeeze is commanded, not measured: whether it is reached is a matter for the contact lessons later in the phase.
 
 ## What Breaks First
 

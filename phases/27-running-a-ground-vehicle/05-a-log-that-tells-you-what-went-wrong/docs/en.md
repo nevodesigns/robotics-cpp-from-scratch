@@ -10,29 +10,29 @@
 
 ## The Problem
 
-A vehicle comes back from a day in the field with a log of a million rows. Nobody reads it. If something went wrong, someone searches it for the time it happened, which they have to guess, and plots the columns they think matter. A log is only as good as the questions it can answer **without** a person working through it. Lesson 22-09 made the log, 19-12 kept the seconds before a stop. This lesson **reads** it, for the faults that a ground vehicle has.
+A vehicle comes back from a day in the field with a log of a million rows. Nobody reads it. If something went wrong, someone searches it for the time it happened, which they have to guess, and plots the columns they think matter. A log is only as good as the questions it can answer without a person working through it. Lesson 22-09 made the log, 19-12 kept the seconds before a stop. This lesson reads it, for the faults that a ground vehicle has.
 
 ## The Concept
 
 ### Five questions of a run
 
-Each is a test on a window of rows, and each gives a **span** with a start, an end and a size:
+Each is a test on a window of rows, and each gives a span with a start, an end and a size:
 
 1. **Stuck.** For a 3 s window the vehicle was commanded to move (more than 0.1 m/s) and moved less than 0.1 m. (The test of 26-08, here read after the fact.)
-2. **Slipping.** The wheels reported a speed (at least 0.2 m/s) and the ground under the vehicle went by at less than **70 percent** of it. The ground speed comes from the position, not the wheels.
+2. **Slipping.** The wheels reported a speed (at least 0.2 m/s) and the ground under the vehicle went by at less than 70 percent of it. The ground speed comes from the position, not the wheels.
 3. **Off the path.** The distance from the path beyond 0.6 m.
-4. **Draining.** The charge fell more than **2.5 times** as fast as its median rate over a short window.
+4. **Draining.** The charge fell more than 2.5 times as fast as its median rate over a short window.
 5. **A gap.** The time between rows jumped, which means the logger, the disk or the vehicle itself stopped for a while.
 
-The rows of a flagged window are all marked, so a span starts **when the fault did**, not three seconds after (the length of the window needed to see it). Marks closer than a second are one span, and a span shorter than 2 s is dropped: that is what keeps a bump in the noise from being a finding.
+The rows of a flagged window are all marked, so a span starts when the fault did, not three seconds after (the length of the window needed to see it). Marks closer than a second are one span, and a span shorter than 2 s is dropped: that is what keeps a bump in the noise from being a finding.
 
 ### Checked by putting faults in
 
-A run of 300 s with **five faults** put in at known times: stuck from 100 to 108 s, slipping from 150 to 160, off the path from 200 to 206, draining four times as fast from 250 to 262, and 20 s of rows missing from 270. All **5** were found, each within **1.8 s** of where it began and ended. See `E-VEH-0124`.
+A run of 300 s with five faults put in at known times: stuck from 100 to 108 s, slipping from 150 to 160, off the path from 200 to 206, draining four times as fast from 250 to 262, and 20 s of rows missing from 270. All 5 were found, each within 1.8 s of where it began and ended. See `E-VEH-0124`.
 
 ### And not crying wolf
 
-**20 clean runs** with noise on every column gave **0 false findings**. A slip that left the ground at 80 percent of the wheels was **not** reported, and one at 50 percent was: the threshold is a choice, and the lesson shows where it sits. A vehicle told to stand still, with zero commanded speed, is not stuck. See `E-VEH-0125`.
+20 clean runs with noise on every column gave 0 false findings. A slip that left the ground at 80 percent of the wheels was not reported, and one at 50 percent was: the threshold is a choice, and the lesson shows where it sits. A vehicle told to stand still, with zero commanded speed, is not stuck. See `E-VEH-0125`.
 
 ### A log that is missing time
 

@@ -10,9 +10,9 @@
 
 ## The Problem
 
-A vehicle goes out on a job with a flat battery, a stale scan, a release from last week, and an emergency stop nobody has tried since the day it was fitted, because the person who sent it out had other things in their head. A checklist on paper is a list of things to remember to look at. A checklist in **code** looks at them, every time, and says **no**.
+A vehicle goes out on a job with a flat battery, a stale scan, a release from last week, and an emergency stop nobody has tried since the day it was fitted, because the person who sent it out had other things in their head. A checklist on paper is a list of things to remember to look at. A checklist in code looks at them, every time, and says no.
 
-(Lesson 22-16 was the bring-up checklist of a board, from nothing. This is the shorter check before **each** run of a vehicle that is already working.)
+(Lesson 22-16 was the bring-up checklist of a board, from nothing. This is the shorter check before each run of a vehicle that is already working.)
 
 ## The Concept
 
@@ -33,19 +33,19 @@ Each check reads one fact about the vehicle and compares it to a limit. They com
 | clock | warning | the clock is within 0.1 s (a log with the wrong time is a log that cannot be read, 27-05) |
 | motor temperature | warning | under 60 degrees |
 
-A **block** means the vehicle does not go. A **warning** means a person may decide to go, and says so. On a good state all **10** passed. Making each fail alone blocked the run **6** times and warned **4** times, which is the 6 and 4 of the table.
+A block means the vehicle does not go. A warning means a person may decide to go, and says so. On a good state all 10 passed. Making each fail alone blocked the run 6 times and warned 4 times, which is the 6 and 4 of the table.
 
 ### A block cannot be argued with
 
-A person can **override a warning**, but must give a **reason**, and the reason is kept: an override of the link check with the reason "line of sight, no teleoperation today" went. An override with **no reason** was refused. An override of a **block** was refused: it is in the report as refused. The checklist that has an override for everything is the paper one again. See `E-VEH-0127`.
+A person can override a warning, but must give a reason, and the reason is kept: an override of the link check with the reason "line of sight, no teleoperation today" went. An override with no reason was refused. An override of a block was refused: it is in the report as refused. The checklist that has an override for everything is the paper one again. See `E-VEH-0127`.
 
 ### A number that is not a number
 
-A sensor that has failed gives a number that is not a number, and in C++ **a comparison with it is false**: `age <= limit` is false, which is good (it fails) for that way round, but `age > limit` is false too, which would **pass** a check written the other way. Every check here is written as "ok when the value is within the limit", so that a value that is not a number fails. A state in which all of the numbers were not numbers failed **8** checks (eight of them are numbers; the geofence and the release are not). See `E-VEH-0128`.
+A sensor that has failed gives a number that is not a number, and in C++ a comparison with it is false: `age <= limit` is false, which is good (it fails) for that way round, but `age > limit` is false too, which would pass a check written the other way. Every check here is written as "ok when the value is within the limit", so that a value that is not a number fails. A state in which all of the numbers were not numbers failed 8 checks (eight of them are numbers; the geofence and the release are not). See `E-VEH-0128`.
 
 ### Exactly at the edge
 
-A vehicle with 5.00 Wh left and a mission that needs 4.50 Wh and a reserve of 0.50 **passed**, and one with 4.99 **failed**. The check is `>=`, not `>`, and the test is run at the edge. See `E-VEH-0129`.
+A vehicle with 5.00 Wh left and a mission that needs 4.50 Wh and a reserve of 0.50 passed, and one with 4.99 failed. The check is `>=`, not `>`, and the test is run at the edge. See `E-VEH-0129`.
 
 ## Build It
 
