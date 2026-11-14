@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What is the capture point?",
       "options": [
-        "The centre of mass",
-        "The hip",
+        "The place where the body's centre of mass is now",
+        "The furthest place the swinging foot can reach",
         "The place on the ground over which the body would come to rest, x plus v times the time constant",
-        "The foot"
+        "The place where the centre of pressure is"
       ],
       "correct": 2,
-      "explanation": "A foot put there catches it."
+      "explanation": "It is the pendulum's own stopping place: put the support there and the body comes to rest over it. Nearer, and the body carries on over the foot."
     },
     {
       "stage": "check",
       "question": "A push of 0.30 m/s put the capture point how far out?",
       "options": [
-        "25 cm",
-        "5.0 cm",
         "24.5 cm",
-        "0 cm"
+        "5.0 cm",
+        "30 cm, the speed times one second",
+        "16.6 cm, the time constant"
       ],
       "correct": 1,
-      "explanation": "And the foot had to land 24.5 cm out, after a swing of 0.25 s."
+      "explanation": "0.30 m/s times a time constant of 0.166 s. That is where a foot would need to be if it could land at once."
     },
     {
       "stage": "check",
       "question": "Why must the foot land further than the capture point of the push?",
       "options": [
-        "The ground is soft",
-        "It need not",
-        "For luck",
+        "Because the foot slides after it lands",
+        "Because the leg is longest when stretched out to the side",
+        "To leave room for the next step",
         "The capture point runs away exponentially while the foot is in the air"
       ],
       "correct": 3,
-      "explanation": "xi0 e^(t / T)."
+      "explanation": "The swing takes time, and in 0.25 s the capture point had gone from 5.0 cm to more than 22 cm. The foot has to be aimed at where it will be, plus a margin."
     },
     {
       "stage": "check",
       "question": "The largest push that could be answered with a swing of 0.35 s:",
       "options": [
         "0.17 m/s",
+        "0.31 m/s",
         "0.56 m/s",
-        "1 m/s",
-        "0 m/s"
+        "0.30 m/s, the push of the test"
       ],
       "correct": 0,
-      "explanation": "With 0.15 s it was 0.56 m/s."
+      "explanation": "Reach is fixed at 25 cm, and the longer the swing the further the capture point has run. 0.56 m/s at 0.15 s, 0.31 at 0.25 s, 0.17 at 0.35 s."
     },
     {
       "stage": "post",
       "question": "Why is a fast swing worth so much?",
       "options": [
         "The capture point grows exponentially with the swing time",
-        "It is quiet",
-        "It is not",
-        "It saves energy"
+        "A fast swing puts the foot down harder, which brakes the body",
+        "A fast swing uses less of the servos' heat",
+        "The leg reaches further in a fast swing"
       ],
       "correct": 0,
-      "explanation": "Each tenth of a second costs a large share."
+      "explanation": "The target moves away exponentially, 2.7 times for each time constant, so time saved in the air is worth more than length added to the leg."
     },
     {
       "stage": "post",
       "question": "When is a step the right answer?",
       "options": [
-        "Always",
-        "For small pushes",
+        "For every push, since a step always works",
+        "Only when the body is already standing still",
         "When the push is beyond what the feet's moments can answer (35-05)",
-        "Never"
+        "When the push is small enough for the leg to reach its target"
       ],
       "correct": 2,
-      "explanation": "Small pushes by forces, large ones by a step."
+      "explanation": "The feet's forces answer small pushes without moving a foot. A step is for what they cannot supply, and it has its own limit in reach and swing time."
     }
   ]
 }

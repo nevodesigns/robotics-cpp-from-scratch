@@ -7,12 +7,12 @@
       "question": "Why is a trot always falling?",
       "options": [
         "With two feet down there is no support polygon, only a line, and the body falls toward one side until the other pair lands",
-        "Gravity is odd",
-        "It is heavy",
-        "It is slow"
+        "The body's speed carries it past the feet at every step",
+        "The legs are too short to hold the body level",
+        "The diagonal feet slip sideways under the load"
       ],
       "correct": 0,
-      "explanation": "An inverted pendulum."
+      "explanation": "Two feet make a line, not an area. The centre of mass is never exactly over a line, so the body is always turning about it, and the gait works by landing the other pair in time."
     },
     {
       "stage": "check",
@@ -20,59 +20,59 @@
       "options": [
         "0.41 s",
         "0.22 s",
-        "0 s",
-        "0.166 s"
+        "0.166 s, one time constant",
+        "0.15 s"
       ],
       "correct": 0,
-      "explanation": "With 30 mm it was 0.22 s."
+      "explanation": "It starts slowly because the push away from the line is proportional to the distance from it. From 30 mm it took 0.22 s, and 0.15 s if it was already moving away."
     },
     {
       "stage": "check",
       "question": "What does a taller body do?",
       "options": [
-        "Nothing",
-        "Falls faster",
+        "Falls faster, because it has further to go",
+        "Falls in the same time: the time depends only on the offset",
         "Falls more slowly: 0.50 s for 0.40 m",
-        "Cannot trot"
+        "Falls more slowly, in proportion to its height"
       ],
       "correct": 2,
-      "explanation": "T is sqrt(h / g)."
+      "explanation": "The time constant is the square root of the height over g, so a taller body is slower, but only by the square root: 0.50 s at 0.40 m against 0.41 s at 0.27 m."
     },
     {
       "stage": "check",
       "question": "A stance of 0.25 s with the centre 30 mm off the line was:",
       "options": [
-        "Impossible to say",
+        "Short enough, with a margin of 0.7",
         "Too long (it falls first)",
-        "Fine",
-        "Free"
+        "Short enough, but with no margin",
+        "Too long for either offset"
       ],
       "correct": 1,
-      "explanation": "0 for that offset."
+      "explanation": "From 30 mm the body is 6 cm out after 0.22 s, before a 0.25 s stance ends. From 10 mm the same stance was short enough."
     },
     {
       "stage": "post",
       "question": "What does a negative time mean?",
       "options": [
-        "The past",
-        "A bug",
-        "Zero",
+        "The body has already fallen past the limit",
+        "The quadratic has no real root, so there is no answer",
+        "The offset was measured from the wrong side of the line",
         "The centre is moving back toward the line fast enough that it never gets there"
       ],
       "correct": 3,
-      "explanation": "It stops first."
+      "explanation": "A body moving back toward the line can stop and turn before it gets out to the limit. The closed form marks that case with a negative time."
     },
     {
       "stage": "post",
       "question": "What is not in the model?",
       "options": [
-        "The closed form",
-        "The pendulum",
-        "The time constant",
+        "The height of the body",
+        "The speed the centre already has",
+        "The distance at which the swing feet must be down",
         "Where the swing feet land and the body's rotation"
       ],
       "correct": 3,
-      "explanation": "35-07 for the step."
+      "explanation": "The model is one point mass falling sideways about a line. It says how long there is, not where the next pair of feet should go; that is 35-07."
     }
   ]
 }

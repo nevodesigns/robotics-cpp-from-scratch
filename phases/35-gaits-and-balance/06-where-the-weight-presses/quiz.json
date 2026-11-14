@@ -6,25 +6,25 @@
       "stage": "pre",
       "question": "Where does a body that accelerates forward press on the ground?",
       "options": [
-        "Nowhere",
-        "In front of it",
+        "Ahead of its centre of mass, by h over g times the acceleration",
+        "Directly under its centre of mass, whatever the acceleration",
         "Behind its centre of mass, by h over g times the acceleration",
-        "Under its centre of mass"
+        "Behind its centre of mass, by the acceleration times the time step"
       ],
       "correct": 2,
-      "explanation": "83 mm behind for 3 m/s2."
+      "explanation": "To accelerate forward the ground has to push from behind. On a body 0.27 m high, 3 m/s2 moved the point 83 mm back."
     },
     {
       "stage": "check",
       "question": "The centre of pressure must be:",
       "options": [
-        "At the front",
-        "Anywhere",
-        "Under the head",
+        "Under the centre of mass",
+        "Under the foot carrying the most",
+        "At the centre of the feet",
         "Inside the polygon of the feet on the ground"
       ],
       "correct": 3,
-      "explanation": "A foot cannot pull."
+      "explanation": "It is an average of the feet's places weighted by pushes that are all zero or more, and such an average cannot lie outside them."
     },
     {
       "stage": "check",
@@ -32,47 +32,47 @@
       "options": [
         "5.45 m/s2",
         "6.90 m/s2",
-        "100 m/s2",
-        "0"
+        "3.0 m/s2",
+        "9.81 m/s2"
       ],
       "correct": 0,
-      "explanation": "g times the half width over the height."
+      "explanation": "g times the distance to the edge over the height. The feet are closer together side to side than fore and aft, so sideways gives less: 5.45 against 6.90."
     },
     {
       "stage": "check",
       "question": "With two diagonal feet down:",
       "options": [
-        "Any is safe",
-        "Half is safe",
+        "5.45 m/s2 is still allowed, across the line",
+        "Half the four footed figure is allowed",
         "No acceleration is safe: the support is a line",
-        "6.90 m/s2 is allowed"
+        "Any acceleration along the line is allowed"
       ],
       "correct": 2,
-      "explanation": "A trot is caught, not balanced."
+      "explanation": "A line has no inside, so the margin is zero at best. A trot is not balanced in this sense; it is caught by the next pair of feet."
     },
     {
       "stage": "post",
       "question": "What does a taller body do to the greatest acceleration?",
       "options": [
         "Lowers it, since it goes as 1 over h",
-        "Doubles it",
-        "Nothing",
-        "Raises it"
+        "Raises it, since the feet have more leverage",
+        "Leaves it the same: only the feet's spread matters",
+        "Lowers it, in proportion to the square of the height"
       ],
       "correct": 0,
-      "explanation": "g times the distance over the height."
+      "explanation": "The shift of the point is h over g times the acceleration, so for the same feet a body twice as high may accelerate half as hard."
     },
     {
       "stage": "post",
       "question": "What does the body not do in this model?",
       "options": [
-        "Accelerate",
+        "Accelerate sideways",
         "Turn, and change height",
-        "Stand",
-        "Press"
+        "Stand on three feet",
+        "Press unevenly on its feet"
       ],
       "correct": 1,
-      "explanation": "A turning body adds a term."
+      "explanation": "The formula assumes the body keeps its height and does not rotate. A body that turns has angular momentum that adds a term."
     }
   ]
 }

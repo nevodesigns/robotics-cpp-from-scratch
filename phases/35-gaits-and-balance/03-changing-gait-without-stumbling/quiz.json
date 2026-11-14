@@ -7,72 +7,72 @@
       "question": "What is a gait, as the controller sees it?",
       "options": [
         "A table of phase offsets, one for each leg",
-        "A sound",
-        "A leg length",
-        "A speed"
+        "A list of foot positions, one for each instant",
+        "A speed and a step length",
+        "A duty and a period, the same for every leg"
       ],
       "correct": 0,
-      "explanation": "34-04's phase."
+      "explanation": "The legs share one clock, and each is ahead of it by its own fraction of a cycle. A walk, a trot, a pace and a bound differ only in those four fractions."
     },
     {
       "stage": "check",
       "question": "Why is a phase difference wrapped before it is limited?",
       "options": [
-        "It is faster",
-        "It is not",
+        "Because a phase above 1 makes the leg skip a step",
+        "So that all four legs change by the same amount",
         "0.95 and 0.05 are 0.1 apart on the circle, not 0.9",
-        "Tradition"
+        "Because the rate limit only works on positive numbers"
       ],
       "correct": 2,
-      "explanation": "The offset goes forward through the wrap."
+      "explanation": "A phase is a place on a circle. Without the wrap an offset at 0.95 with a target of 0.05 would go back by 0.9 when the target is 0.1 ahead."
     },
     {
       "stage": "check",
       "question": "The abrupt change jumped a leg's phase by:",
       "options": [
-        "0.0002",
-        "10 cycles",
-        "0",
+        "0.0002 of a cycle in one tick",
+        "0.5 of a cycle, a whole stance",
+        "Nothing: the offsets are only read at touchdown",
         "0.250 of a cycle in one tick"
       ],
       "correct": 3,
-      "explanation": "The bounded rate moved it 0.0002 a tick."
+      "explanation": "A quarter of a cycle in one tick tells a foot in stance that it is in swing. At a bounded rate the same change was spread over 1.25 s."
     },
     {
       "stage": "check",
       "question": "A speed hovering at 0.5 m/s flapped how many times with one switch speed?",
       "options": [
         "175",
-        "1",
-        "0",
-        "0"
+        "0 times",
+        "400 times, once a reading",
+        "Twice: once up and once down"
       ],
       "correct": 0,
-      "explanation": "With the gap: 0."
+      "explanation": "With one threshold every reading that crosses it changes the gait: 175 of 400. With a gap between the speed to go up and the speed to come back down it did not flap at all."
     },
     {
       "stage": "post",
       "question": "Why does the count of feet down not show the danger of an abrupt change?",
       "options": [
-        "It is wrong",
-        "It does",
-        "No feet are counted",
+        "The count is only taken once a cycle",
+        "The abrupt change left fewer feet down, but only for a tick",
+        "The bounded change left fewer feet down than the abrupt one",
         "Both changes kept 2 or more feet down; the harm is the phase jump"
       ],
       "correct": 3,
-      "explanation": "A leg cannot follow a jump."
+      "explanation": "Counting feet says both are fine. The danger is what a single leg is asked to do: follow a phase that jumps."
     },
     {
       "stage": "post",
       "question": "What is held fixed in this lesson?",
       "options": [
-        "The tables",
+        "The rate at which the offsets move",
         "The duty and period during a change",
-        "The offsets",
-        "The speed"
+        "The four tables of offsets",
+        "The gap between the two switch speeds"
       ],
       "correct": 1,
-      "explanation": "They too would be moved at a bounded rate."
+      "explanation": "Only the offsets were moved. A real change of gait usually changes the duty and the period as well, and they would be eased the same way."
     }
   ]
 }

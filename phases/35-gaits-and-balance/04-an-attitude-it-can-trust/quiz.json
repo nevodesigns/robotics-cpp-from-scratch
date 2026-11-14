@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What is the gyro good for and bad for?",
       "options": [
-        "Good for the angle over a minute",
+        "Good over a minute and noisy over a moment",
         "Good over a moment and drifting over a minute, from its bias",
-        "Bad over a moment",
-        "Good for nothing"
+        "Good while the body is still and useless once it walks",
+        "Good for roll and pitch, with no error that grows"
       ],
       "correct": 1,
-      "explanation": "23.1 degrees wrong after 60 s."
+      "explanation": "Adding up the rate adds up the bias with it. At 0.5 degrees per second the gyro alone was 23.1 degrees out after a minute."
     },
     {
       "stage": "check",
       "question": "The accelerometer alone was wrong by how much in the walk?",
       "options": [
         "10.2 degrees (rms)",
-        "90 degrees",
-        "0 degrees",
-        "1.02 degrees"
+        "1.02 degrees (rms)",
+        "23.1 degrees (rms)",
+        "0.40 degrees (rms)"
       ],
       "correct": 0,
-      "explanation": "Shaken by 2.5 m/s2."
+      "explanation": "The accelerometer cannot tell gravity from the body's own acceleration, and a walk shakes it by 2.5 m/s2 at every step."
     },
     {
       "stage": "check",
       "question": "How much did the gate on the size of the acceleration reject?",
       "options": [
-        "All of it",
-        "Half",
-        "Most of the shake",
+        "About half, the readings taken while a foot was landing",
+        "Nearly all, which left too few readings to use",
+        "Only the readings more than 15 percent below g",
         "Almost nothing: it accepted 100 percent, as a sideways shake barely changes the size"
       ],
       "correct": 3,
-      "explanation": "It catches vertical jolts, not sideways shake."
+      "explanation": "Gravity with a sideways 2.5 m/s2 added has a size of 10.1, three percent above g, well inside a gate of 15 percent. The gate stops vertical jolts and lets through the shake that tilts the answer."
     },
     {
       "stage": "check",
       "question": "With the feet as well, in a walk, the error was:",
       "options": [
-        "23.1 degrees",
+        "1.02 degrees",
         "10.2 degrees",
         "0.40 degrees",
-        "0"
+        "Zero, since the feet do not drift"
       ],
       "correct": 2,
-      "explanation": "Without the feet 1.02."
+      "explanation": "The plane through three or more feet has no drift and no shake, so a second gentle pull toward it took the error from 1.02 to 0.40 degrees."
     },
     {
       "stage": "post",
       "question": "Why can the feet not be used in a trot?",
       "options": [
-        "They are noisy",
-        "They are slow",
+        "Their contact sense is too slow at a trot's pace",
+        "The legs' angles are not known during the swing",
         "Only two are down, so there is no plane",
-        "They are heavy"
+        "The plane they give is shaken by the landing"
       ],
       "correct": 2,
-      "explanation": "1.02 degrees without them."
+      "explanation": "A plane needs three points. With two feet down there is only a line, so the filter is back to the gyro and the accelerometer: 1.02 degrees."
     },
     {
       "stage": "post",
       "question": "What is not estimated?",
       "options": [
         "The gyro's bias and the heading",
-        "Pitch",
-        "Roll",
-        "The gain"
+        "The roll and the pitch",
+        "The pull toward the accelerometer",
+        "The feet's plane in a walk"
       ],
       "correct": 0,
-      "explanation": "25-07 estimated the bias at rest."
+      "explanation": "The filter leaves the bias in, which is where its steady error of about a degree comes from. Heading cannot come from gravity or from the feet at all."
     }
   ]
 }

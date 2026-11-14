@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What makes a body statically stable?",
       "options": [
-        "A flat floor only",
-        "Slow legs",
+        "Its centre of mass is lower than its hips",
+        "At least three feet are on the ground, wherever the centre of mass is",
         "Its centre of mass, projected down, is inside the polygon of the feet on the ground",
-        "A heavy body"
+        "The forces on its feet are equal"
       ],
       "correct": 2,
-      "explanation": "And the margin is how far inside."
+      "explanation": "Three feet down are not enough on their own: the centre of mass, seen from above, has to be inside the triangle they make. How far inside is the margin."
     },
     {
       "stage": "check",
       "question": "With the body centred and a foot lifted the margin was:",
       "options": [
-        "0.031 m",
-        "0.078 m",
-        "1 m",
+        "0.078 m, the same as after a shift",
+        "0.031 m, since three feet still surround the centre",
+        "Negative: the centre was outside the triangle",
         "0.000 m, on the diagonal"
       ],
       "correct": 3,
-      "explanation": "A centred body has no margin."
+      "explanation": "With a foot lifted, the diagonal between two of the remaining feet passes exactly under the centre of a centred body. It is on an edge, with no room at all."
     },
     {
       "stage": "check",
       "question": "After moving the centre of mass to the middle of the three feet the margin was:",
       "options": [
-        "0.5 m",
-        "0.000 m",
+        "0.031 m",
+        "0.081 m, the same as the shift",
         "0.078 m",
-        "negative"
+        "0.150 m, the distance of the feet from the centre line"
       ],
       "correct": 2,
-      "explanation": "A shift of up to 8.1 cm."
+      "explanation": "Over the middle of the triangle the nearest edge was 0.078 m away, for a shift of up to 8.1 cm. The 0.031 m was a 5 cm shift forward with a hind foot lifted."
     },
     {
       "stage": "check",
       "question": "A shift forward with a front foot lifted:",
       "options": [
         "Goes toward the foot that is leaving and does not help",
-        "Is unnecessary",
-        "Is the best",
-        "Helps"
+        "Gives the same margin as with a hind foot lifted",
+        "Gives the largest margin, since the weight goes over the front",
+        "Makes no difference, because the shift is along the body"
       ],
       "correct": 0,
-      "explanation": "It depends on which leg is going up."
+      "explanation": "With a front foot going up, forward is toward the missing corner. The same shift that helped with a hind foot lifted now moves the centre out of the triangle."
     },
     {
       "stage": "post",
       "question": "Why is zero margin not safe?",
       "options": [
-        "It is heavy",
+        "The legs' torque is at its highest there",
         "A push, a bump or the swing of the leg itself tips it",
-        "It is slow",
-        "It is"
+        "The margin is only measured to a centimetre",
+        "Three legs cannot carry the weight for long"
       ],
       "correct": 1,
-      "explanation": "The body is on an edge."
+      "explanation": "Zero margin means the centre of mass is exactly over an edge, so any disturbance toward that edge starts the body tipping, and the lifted leg's own swing is one."
     },
     {
       "stage": "post",
       "question": "What does the margin not say?",
       "options": [
-        "The room inside",
-        "The edge",
-        "The polygon",
+        "Which foot is lifted",
+        "Which edge of the triangle is nearest",
+        "Whether the centre of mass is inside or outside",
         "Anything about acceleration or the swing of the lifted leg"
       ],
       "correct": 3,
-      "explanation": "35-02 and 35-06."
+      "explanation": "It is a static measure: a picture from above with nothing moving. A body that accelerates presses somewhere else (35-06), and a trot has no polygon at all (35-02)."
     }
   ]
 }

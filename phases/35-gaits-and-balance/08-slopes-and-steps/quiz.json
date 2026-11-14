@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Which three things can limit a robot on a slope?",
       "options": [
-        "Battery",
-        "Colour, size, weight",
+        "Speed, battery and the weight of the load",
+        "The gyro's drift, the gait and the step length",
         "Grip, tipping and the legs' reach",
-        "Speed"
+        "Friction alone: the others follow from it"
       ],
       "correct": 2,
-      "explanation": "The lowest is the first to give."
+      "explanation": "The feet slip, the body tips over the downhill feet, or a body kept level runs out of leg. Whichever angle is lowest is the one that gives."
     },
     {
       "stage": "check",
       "question": "On a wet floor (friction 0.3) the feet slipped at:",
       "options": [
-        "35.1 degrees",
         "31.0 degrees",
-        "0 degrees",
+        "27.8 degrees",
+        "35.1 degrees",
         "16.7 degrees"
       ],
       "correct": 3,
-      "explanation": "Dry: 31.0."
+      "explanation": "The feet slip when the tangent of the slope exceeds the friction. For 0.3 that is 16.7 degrees; dry, at 0.6, it was 31.0."
     },
     {
       "stage": "check",
       "question": "Which limit was the first to give for these legs?",
       "options": [
         "Number 2, the reach of a body kept level",
-        "Friction",
-        "Nothing",
-        "Colour"
+        "Number 0, friction, at 31.0 degrees",
+        "Number 1, tipping, at 35.1 degrees",
+        "All three at the same angle"
       ],
       "correct": 0,
-      "explanation": "0 friction, 1 tipping, 2 reach."
+      "explanation": "Reach gave out at 27.8 degrees, before friction at 31.0 and tipping at 35.1, so on a dry floor these legs are what limits a level body."
     },
     {
       "stage": "check",
       "question": "The highest step by geometry and by the servos in 0.20 s:",
       "options": [
-        "The same",
-        "0 m",
+        "0.033 m and 0.229 m",
+        "0.229 m by both",
         "0.229 m and 0.033 m",
-        "0.033 m and 0.229 m"
+        "0.168 m and 0.033 m"
       ],
       "correct": 2,
-      "explanation": "The servos give a fraction."
+      "explanation": "The leg can fold far enough to put the foot 0.229 m up. Swinging it there in 0.20 s with servos of 8 rad/s is another matter: 0.033 m."
     },
     {
       "stage": "post",
       "question": "What lets a robot climb a steeper slope than its reach allows with a level body?",
       "options": [
-        "Nothing",
+        "Shortening the stance",
         "Tilting the body to follow the slope",
-        "A faster gait",
-        "Lighter legs"
+        "Walking straight up it and never across",
+        "Putting more weight on the uphill legs"
       ],
       "correct": 1,
-      "explanation": "The attitude of 35-04 set to the slope's."
+      "explanation": "A body that follows the slope needs the same length from every leg. The limits of grip and tipping remain."
     },
     {
       "stage": "post",
       "question": "What must a robot do to climb stairs with these servos?",
       "options": [
         "Slow down: a longer swing allows a higher step",
-        "Speed up",
-        "Nothing",
-        "Turn"
+        "Take longer steps, to cross each stair in one",
+        "Trot, so that fewer feet are in the way",
+        "Nothing: the geometric limit is what counts"
       ],
       "correct": 0,
-      "explanation": "The servos set the height at that pace."
+      "explanation": "The height the foot can be swung to is set by the joint rates and the time allowed. More time, more height."
     }
   ]
 }

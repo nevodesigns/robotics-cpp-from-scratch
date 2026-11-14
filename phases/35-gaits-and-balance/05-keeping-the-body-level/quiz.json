@@ -7,72 +7,72 @@
       "question": "Why can the forces on four feet be chosen?",
       "options": [
         "Four feet are more than the three conditions (weight, roll moment, pitch moment) need",
-        "Feet are free",
-        "They cannot",
-        "Gravity helps"
+        "Each leg has three joints, which is more than a force needs",
+        "The weight can be put on any one foot",
+        "The floor's friction takes up whatever is left over"
       ],
       "correct": 0,
-      "explanation": "The least norm solution is one choice."
+      "explanation": "Three equations, four unknown vertical forces. The least norm solution is the one with the smallest sum of squares, and with three feet down there is no choice left."
     },
     {
       "stage": "check",
       "question": "What did each foot carry with no moment wanted?",
       "options": [
-        "46.1 N",
+        "117.7 N",
         "29.4 N",
-        "0 N",
-        "17.7 N"
+        "39.2 N",
+        "12.8 N"
       ],
       "correct": 1,
-      "explanation": "A quarter of the weight each."
+      "explanation": "The weight of 12 kg is 117.7 N, and with nothing else asked the least norm solution shares it equally among the four feet."
     },
     {
       "stage": "check",
       "question": "What is the largest roll moment that can be given?",
       "options": [
-        "Anything",
-        "25 N m",
+        "10 N m, the largest that was tried",
+        "25 N m, limited by the motors",
         "17.7 N m, the weight times the half width",
-        "0"
+        "117.7 N m, the weight times one metre"
       ],
       "correct": 2,
-      "explanation": "Beyond it a foot would have to pull."
+      "explanation": "At 17.7 N m the feet on one side carry everything and those on the other nothing. Any more would need a foot to pull on the floor."
     },
     {
       "stage": "check",
       "question": "A push of 25 N m, with the feet's limit of 17.7 N m:",
       "options": [
-        "Was halved",
-        "Was ignored",
+        "Was answered, with a larger peak roll",
+        "Was answered in part, and the body settled at an angle",
         "Rolled the body over (1)",
-        "Was answered"
+        "Was scaled down, so the body stayed level"
       ],
       "correct": 2,
-      "explanation": "No controller can give what the feet cannot."
+      "explanation": "The feet can supply 17.7 N m and the push was 25. The difference turns the body whatever the gains are."
     },
     {
       "stage": "post",
       "question": "What happens to a moment beyond the limit?",
       "options": [
         "It is scaled down, keeping its direction, to the most that can be given",
-        "It is cut off",
-        "It is doubled",
-        "Nothing"
+        "The negative forces are set to zero and the rest are kept",
+        "The request is refused and the forces are left as they were",
+        "It is given in full by putting more weight on the outer feet"
       ],
       "correct": 0,
-      "explanation": "Otherwise the forces would add to more than the weight."
+      "explanation": "Setting negative forces to zero leaves forces that add to more than the weight. Scaling the whole moment keeps the sum right and the direction as asked."
     },
     {
       "stage": "post",
       "question": "Why does a trot need a different controller?",
       "options": [
-        "It is faster",
-        "It is not different",
-        "It is heavier",
+        "Its feet are down for too short a time to use",
+        "The moments needed in a trot are larger",
+        "The least norm solution is too slow at a trot's pace",
         "Two feet cannot give the three conditions"
       ],
       "correct": 3,
-      "explanation": "35-02."
+      "explanation": "Two feet on a diagonal give two forces, and three conditions cannot be met with two unknowns. The trot is balanced by where the next feet land."
     }
   ]
 }
