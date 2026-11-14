@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What problem does a topic solve?",
       "options": [
-        "Speed",
+        "Two threads writing one variable at once, which a topic serialises through a lock",
         "The publisher and subscriber need to know a name and not each other, so a part can be replaced or a second consumer added without changing the first",
-        "Thread safety",
-        "Memory use"
+        "Messages arriving out of order, which a topic sorts by the time they were sent",
+        "A slow consumer holding up a fast producer, which a topic prevents by copying the payload"
       ],
       "correct": 1,
-      "explanation": "Every new part otherwise changes every old one."
+      "explanation": "With direct calls every new consumer means editing the producer. With a name between them, the producer never learns who is listening, so parts can be swapped or added without touching it."
     },
     {
       "stage": "check",
       "question": "A message is published to a topic with no subscribers. What should happen?",
       "options": [
         "It is dropped and counted: two such messages gave a dropped count of 2, and a subscriber who came later heard only 1 of 3",
-        "An exception",
-        "It waits",
-        "It is delivered to every topic"
+        "It is kept until the first subscriber arrives, so that the subscriber who came later heard all 3 of 3",
+        "The publish fails with an error, because a message with nobody to receive it is a bug in the program",
+        "It is delivered to the subscribers of every other topic, so that it is not lost without a trace"
       ],
       "correct": 0,
-      "explanation": "A publisher cannot know who is listening."
+      "explanation": "A publisher cannot know who is listening and should not have to. The bus counts what it drops, and what was published before a subscriber arrived is gone."
     },
     {
       "stage": "check",
       "question": "A handler unsubscribes a later subscriber during delivery. What does the bus do?",
       "options": [
-        "Calls it anyway",
+        "Calls it anyway, since the list was fixed when the message went out, so the first message reached all 3 subscribers",
         "Skips it: the tokens are copied when the message goes out and each is checked before its call, so b was not called and the first message reached 2 subscribers",
-        "Calls it twice",
-        "Crashes"
+        "Stops the delivery at once, so the first message reached only the 1 subscriber that had already been called",
+        "Defers the removal until the delivery has finished, so b was called once more and was gone for the second message"
       ],
       "correct": 1,
-      "explanation": "Erasing from a list being walked skips or overruns."
+      "explanation": "The list changes under the loop that walks it. Copying the tokens and checking each before its call means a removed subscriber is skipped and nothing is read past the end."
     },
     {
       "stage": "check",
       "question": "A handler publishes a message while handling one. When is it delivered?",
       "options": [
-        "At once, inside the handler",
-        "Before the first",
-        "Never",
+        "At once, inside the handler, so the log showed out heard 7 before second heard 7 and the publish returned 1",
+        "Only when the next message is published from outside, so it waited and the publish returned 0",
+        "Before the rest of the first message's subscribers, since a newer message is more urgent than an older one",
         "After every subscriber of the first message has been called: the publish returned 0 and the log showed second heard 7 before out heard 7"
       ],
       "correct": 3,
-      "explanation": "A queue keeps the order sensible."
+      "explanation": "A message published from a handler waits in a queue. Every subscriber of the first message is called before the second starts, and the stack does not deepen with each hop."
     },
     {
       "stage": "post",
       "question": "Why does the queue stop a ping and a pong that answer each other from overflowing the stack?",
       "options": [
-        "It slows them",
-        "It rejects them",
+        "It limits how many times a topic may publish to another: 5000 each and then it stops them",
+        "It runs each handler on its own thread, so neither waits for the other to return",
         "It turns the recursion into a loop: 5000 each ran with no nesting",
-        "It drops half"
+        "It drops a message whose topic is already being delivered, so the loop never forms"
       ],
       "correct": 2,
-      "explanation": "It is still a loop with no end if nothing stops it."
+      "explanation": "Each publish from a handler returns at once and the message is delivered later from the queue, so nothing nests. The bus cannot tell that the two will never stop."
     },
     {
       "stage": "post",
       "question": "What does this bus not do yet?",
       "options": [
         "It is one thread with a string payload and no loss or delay: threads, typed payloads and a network are the later lessons",
-        "Order messages",
-        "Unsubscribe",
-        "Deliver messages"
+        "It cannot deliver in order: messages on one topic may overtake each other until a later lesson adds a sequence number",
+        "It cannot unsubscribe: a handler stays registered for the life of the bus",
+        "It cannot have two subscribers on one topic: fan out is a later lesson"
       ],
       "correct": 0,
-      "explanation": "Each of those is a question every middleware has to answer."
+      "explanation": "This first bus is the smallest that shows the idea. What a real one adds, threads, typed payloads, loss and delay, each gets a lesson."
     }
   ]
 }

@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "A camera driver publishes best effort and a node subscribes with the default profile, reliable. What happens?",
       "options": [
-        "Images arrive, slowly",
+        "Images arrive, but some are missing, because best effort does not resend",
         "They are never connected, nothing is delivered, and the only report is a warning in a log: the most common cause of a subscriber that gets no data",
-        "An exception is thrown",
-        "Images arrive with gaps"
+        "The subscriber is downgraded to best effort without a word and images arrive",
+        "The publisher is upgraded to reliable and slows down to acknowledge each image"
       ],
       "correct": 1,
-      "explanation": "The middleware cannot give reliable delivery from a publisher that sends once."
+      "explanation": "The offer must be at least as strong as the request. A publisher that sends once cannot promise delivery, so the two are never connected."
     },
     {
       "stage": "check",
       "question": "Is the compatibility rule symmetric?",
       "options": [
         "No: a reliable offer meets either request and a best effort offer only best effort, so the order of offer and request matters",
-        "Yes",
-        "Only for durability",
-        "Only for deadlines"
+        "Yes: any two profiles that share a reliability setting are connected",
+        "Yes for reliability, and no only for the deadline",
+        "No: a best effort offer meets either request and a reliable offer only reliable"
       ],
       "correct": 0,
-      "explanation": "Strength has an order and the offer must be at least the request."
+      "explanation": "Reliable delivery includes best effort, so a stronger offer serves a weaker request. The other way round has nothing to give."
     },
     {
       "stage": "check",
       "question": "An offer of a message every 0.5 s meets which request?",
       "options": [
-        "None",
-        "One for every 0.1 s",
-        "Any",
+        "One for every 0.1 s, since the publisher is at least that fast",
+        "Only one for exactly 0.5 s",
+        "Any request at all: a publisher with a deadline meets every subscriber",
         "One for every 0.5 s or longer, or no deadline at all, but not every 0.1 s"
       ],
       "correct": 3,
-      "explanation": "A faster promise meets a slower demand."
+      "explanation": "The deadline is the longest gap. A promise of a message within 0.5 s satisfies anyone who needs one within 0.5 s or more, and not someone who needs one within 0.1 s."
     },
     {
       "stage": "check",
       "question": "A subscriber requests a deadline and the publisher offers none. Compatible?",
       "options": [
-        "Yes",
-        "Only if reliable",
+        "Yes: a publisher with no deadline is free to meet any",
+        "Yes, as long as the publisher is reliable",
         "No: silence is not a promise, so a demand cannot be met by offering nothing",
-        "Only for lease"
+        "It depends on how fast the publisher happens to send"
       ],
       "correct": 2,
-      "explanation": "A request of no deadline is met by anything."
+      "explanation": "Offering no deadline is making no promise. A subscriber that asks for none is satisfied by anything; one that asks for one needs it promised."
     },
     {
       "stage": "post",
       "question": "Why does the check name each property that does not fit?",
       "options": [
-        "It is slower",
-        "For logging style",
-        "It is required by DDS",
+        "The middleware requires a reason string for every refusal",
+        "So that the check can be repeated for each property in turn",
+        "Because a yes or no cannot be logged",
         "A yes or no leaves a person guessing which of five properties differed: the camera against the demanding node gave three named reasons"
       ],
       "correct": 3,
-      "explanation": "A person fixing it knows what to change."
+      "explanation": "The camera against the demanding node differed in reliability, durability and deadline. Named, each is a line to change; unnamed, it is a guessing game."
     },
     {
       "stage": "post",
       "question": "What did the matcher do with the detector, subscribing with the default profile to the camera's image?",
       "options": [
         "Did not connect it and reported one reason, reliability, while the best effort viewer was connected",
-        "Dropped the camera",
-        "Changed the camera",
-        "Connected it"
+        "Connected it, and delivered images with gaps",
+        "Connected it after changing the detector's request to best effort",
+        "Refused the camera, so the viewer lost its images as well"
       ],
       "correct": 0,
-      "explanation": "Three links and one mismatch in the test."
+      "explanation": "The detector asked for reliable and the camera offers best effort. The viewer asked for best effort and was connected, which is why the camera looks fine from elsewhere."
     }
   ]
 }

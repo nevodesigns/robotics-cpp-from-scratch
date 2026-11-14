@@ -7,72 +7,72 @@
       "question": "There is no registry to ask who is on the bus. How does a node know the planner is there?",
       "options": [
         "The planner announces itself over and over and the others keep a table of who has said so lately",
-        "It asks the operating system",
-        "By the topic name",
-        "It assumes"
+        "It asks a central registry, which every node signs in to when it starts",
+        "It looks for a subscriber on the planner's topics, which only exist while the planner runs",
+        "It sends the planner a message and waits for a reply before every use"
       ],
       "correct": 0,
-      "explanation": "Discovery is announcements and leases."
+      "explanation": "There is no registry. Each participant says it is there, repeatedly, and each of the others keeps a table of who has said so within the lease."
     },
     {
       "stage": "check",
       "question": "A node announced at time 0 with a lease of 3 s. What does the table say at 2.9 s, 3.0 s and 3.1 s?",
       "options": [
-        "Alive at 3.1",
+        "Alive at 2.9, gone at exactly 3.0, and a second gone event at 3.1",
         "Alive at 2.9 and at exactly 3.0, and one gone event at 3.1, said once",
-        "Gone at 3.0",
-        "Gone throughout"
+        "Alive at all three: a node is only gone when it says so",
+        "Gone at 2.9 already, since no heartbeat followed the first announcement"
       ],
       "correct": 1,
-      "explanation": "Silence longer than the lease means gone."
+      "explanation": "An announcement is good for the lease, up to and including its last instant. After that the table reports gone once and does not repeat it."
     },
     {
       "stage": "check",
       "question": "What does an incarnation number tell the table?",
       "options": [
-        "The time",
-        "The topic",
+        "How many heartbeats the node has sent, so a missed one can be counted",
+        "Which machine the node runs on, so two nodes with one name can be told apart",
         "Each start has a new one, so a restart inside the lease can be told from a heartbeat: restarted against nothing",
-        "The node's priority"
+        "How long the node's lease is, so each node can choose its own"
       ],
       "correct": 2,
-      "explanation": "A subscriber that held state for the old one needs to know."
+      "explanation": "A node that restarts faster than its lease never goes silent. Only a new incarnation number shows that it is not the same process that held the old state."
     },
     {
       "stage": "check",
       "question": "The node dies and the lease is 3.5 s with a heartbeat every second. When is it noticed?",
       "options": [
-        "Never",
+        "After one heartbeat period, 1.0 s, when the next heartbeat fails to arrive",
         "After about one lease, 3.6 s in the test, plus the polling interval",
-        "Immediately",
-        "After 1 s"
+        "At once, because the node's last message says it is leaving",
+        "After two leases, 7.0 s, to be sure it is not a lost heartbeat"
       ],
       "correct": 1,
-      "explanation": "A death is noticed after about one lease."
+      "explanation": "The table can only notice silence, and silence is only meaningful once it has lasted longer than the lease. So a death is seen about one lease late."
     },
     {
       "stage": "post",
       "question": "With 10 percent of heartbeats lost, how often is a node that never dies declared gone at a lease of 1.5 s, and at 5.5 s?",
       "options": [
-        "Once each",
-        "The same for both",
-        "Never at either",
+        "Never at 1.5 s and 172 times at 5.5 s",
+        "17 times at both: the loss rate decides it, not the lease",
+        "Once at 1.5 s and never at 5.5 s",
         "172 times in 2000 s at 1.5 s and never at 5.5 s"
       ],
       "correct": 3,
-      "explanation": "One lost heartbeat is enough to cross a short lease."
+      "explanation": "At 1.5 s a single lost heartbeat crosses the lease, and one in ten is lost. At 5.5 s five in a row would have to be lost."
     },
     {
       "stage": "post",
       "question": "What is the lease a trade between?",
       "options": [
         "How soon a real death is noticed and how often a live node is wrongly declared gone, which the robot has to weigh",
-        "Memory and speed",
-        "Time zones",
-        "Names and numbers"
+        "How much memory the table uses and how many nodes it can hold",
+        "How often heartbeats are sent and how large each one is",
+        "How many incarnations a node may have and how fast it may restart"
       ],
       "correct": 0,
-      "explanation": "The right number is where the two costs cross."
+      "explanation": "A short lease sees a real death quickly and cries wolf on a lossy link. A long one never cries wolf and is slow. Which cost is worse depends on the robot."
     }
   ]
 }

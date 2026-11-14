@@ -7,72 +7,72 @@
       "question": "Why give each subscriber its own queue?",
       "options": [
         "So a slow subscriber holds up neither the publisher nor the other subscribers: ten messages, the fast one lost 0 and the slow one lost 8",
-        "To order messages",
-        "To use more memory",
-        "To make delivery faster"
+        "So that messages reach every subscriber in the same order: ten messages, both subscribers took 10 in order",
+        "So that the publisher can wait for the slowest one: ten messages, neither subscriber lost any",
+        "So that a message is stored once and shared: ten messages used the memory of one queue"
       ],
       "correct": 0,
-      "explanation": "A shared queue would let the slowest set the pace for all."
+      "explanation": "With one shared queue the slowest subscriber sets the pace for everyone. With one each, the slow one loses its own messages and nobody else notices."
     },
     {
       "stage": "check",
       "question": "Depth 3 and five messages. What does keeping the newest leave, and keeping what is waiting?",
       "options": [
-        "1 2 3 for both",
-        "The same",
+        "3 4 5 for both rules, and 2 lost either way",
+        "1 2 3 for the first and 3 4 5 for the second, and 2 lost either way",
         "3 4 5 for the first and 1 2 3 for the second, and 2 lost either way",
-        "Nothing"
+        "4 5 for the first and 1 2 3 for the second, with 3 lost by the first"
       ],
       "correct": 2,
-      "explanation": "It matters which message is lost."
+      "explanation": "Both rules lose two of five at depth 3. They differ in which two, and that is the whole decision."
     },
     {
       "stage": "check",
       "question": "Which rule suits a controller that wants the position now?",
       "options": [
-        "Both",
-        "Keep what is waiting",
-        "Neither",
+        "Drop the newest and keep what is waiting: the first position seen is the one to act on",
+        "Keep everything in a queue deep enough to hold them all, and work through it in order",
+        "Either: a controller reads whatever comes out first",
         "Drop the oldest and keep the newest: the old positions are history"
       ],
       "correct": 3,
-      "explanation": "A log being copied wants the opposite."
+      "explanation": "A controller acts on where the robot is, not where it was. A log being written to a file wants the opposite, the oldest first with no hole at the start."
     },
     {
       "stage": "check",
       "question": "A burst of 8 messages arrives and the subscriber then takes them all. How many are lost at depths 1, 4, 8 and 10?",
       "options": [
-        "1, 4, 8, 10",
+        "1, 4, 8 and 8: a queue loses as many as it holds",
         "7, 4, 0 and 0: a queue as deep as the burst loses nothing",
-        "0 for all",
-        "8, 8, 8, 8"
+        "7, 4, 1 and 0: only a queue deeper than the burst loses nothing",
+        "0, 0, 0 and 0: a burst is always absorbed"
       ],
       "correct": 1,
-      "explanation": "Depth is a buffer for bursts."
+      "explanation": "A burst is a temporary excess, and a buffer as deep as the burst holds all of it. Depth 1 keeps one of eight."
     },
     {
       "stage": "post",
       "question": "A publisher at 100 Hz and a subscriber that takes 10 Hz. What did a depth of 100 do?",
       "options": [
-        "Doubled the rate",
-        "Lost nothing",
-        "Saved everything",
+        "It lost nothing: 0 of 1000 against 900 at depth 1",
+        "It halved the loss: 450 lost of 1000 against 900 at depth 1",
+        "It made no difference at all: 900 lost of 1000 at either depth",
         "It saved 99 messages, which is what it holds: 801 lost of 1000 against 900 at depth 1"
       ],
       "correct": 3,
-      "explanation": "A rate mismatch is not cured by depth."
+      "explanation": "A subscriber slower than the publisher loses the difference whatever the depth. The deeper queue holds 99 more messages once, and after that only delays the loss."
     },
     {
       "stage": "post",
       "question": "What does a deep queue cost besides memory?",
       "options": [
-        "Nothing",
+        "The order of delivery, which a deep queue can no longer guarantee",
         "The age of what it delivers: a subscriber that is always behind takes old data that looks like new",
-        "Speed of the publisher",
-        "Order"
+        "The publisher's speed, since it must wait for room in the queue",
+        "Nothing else: memory is the only cost of depth"
       ],
       "correct": 1,
-      "explanation": "The bus has no clock yet, so it cannot say how old a message is."
+      "explanation": "What comes out of a deep queue that is always full was published long ago. This bus has no clock, so the subscriber cannot tell how old it is."
     }
   ]
 }

@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "A map is published once, then a node starts. Why does the node never see it on an ordinary topic?",
       "options": [
-        "The node is too slow",
-        "The topic is full",
+        "The map is too large for one message and the pieces are dropped: 0 of 3 late nodes had it",
+        "The node subscribes to the wrong incarnation of the publisher: 1 of 3 late nodes had it",
         "Nothing is kept: a subscriber hears what is published after it subscribes, and the map was published once before: 0 of 3 late nodes had it",
-        "The map is too big"
+        "The queue of a new subscriber starts full, so the first message is lost: 0 of 3 late nodes had it"
       ],
       "correct": 2,
-      "explanation": "The next message is never coming."
+      "explanation": "An ordinary topic keeps nothing. Whatever was published before a subscriber arrived is gone, and a map published once is never published again."
     },
     {
       "stage": "check",
       "question": "What does a transient local topic do for a subscriber that arrives late?",
       "options": [
-        "Gives it all messages ever",
-        "Nothing",
-        "Gives it the newest only",
+        "Gives it every message ever published, in order: keep 3 with five published gave 1 2 3 4 5 and then 6",
+        "Gives it only the newest remembered message: keep 3 with five published gave 5 and then 6",
+        "Gives it the remembered messages after the next live one: keep 3 with five published gave 6 and then 3 4 5",
         "Gives it the remembered messages first, oldest first, then what follows: keep 3 with five published gave 3 4 5 and then 6"
       ],
       "correct": 3,
-      "explanation": "Durability is a bounded memory."
+      "explanation": "The topic holds its latest few messages. A newcomer gets those first, oldest first, so it catches up before the live stream continues."
     },
     {
       "stage": "check",
       "question": "1000 messages are published to a topic that keeps 1. What is remembered, and what did an early subscriber hear?",
       "options": [
         "1 remembered, and the early subscriber heard all 1000 once, with no repeats from the late replay",
-        "1000 and 1000",
-        "1000 and 1",
-        "0 and 0"
+        "1000 remembered, and the early subscriber heard all 1000 once",
+        "1 remembered, and the early subscriber heard 1001, the last one twice",
+        "1 remembered, and the early subscriber heard only the last"
       ],
       "correct": 0,
-      "explanation": "The replay goes to the new subscriber only."
+      "explanation": "The memory is a queue of fixed size, so only the last is kept. A replay is for the subscriber that just arrived and is not repeated to those already there."
     },
     {
       "stage": "check",
       "question": "Why might a subscriber refuse a remembered message?",
       "options": [
-        "It is too long",
+        "It was sent best effort and may be corrupt",
         "It is too old to be true any more: a goal from a minute and a half ago may be cancelled",
-        "It is a duplicate",
-        "It has no payload"
+        "It was published by an earlier incarnation of the node",
+        "It is larger than the subscriber's queue"
       ],
       "correct": 1,
-      "explanation": "For a map age does not matter and for a goal it does."
+      "explanation": "A remembered map is as good as when it was made. A remembered goal may have been replaced or cancelled, so a subscriber can set how old a replay it will take."
     },
     {
       "stage": "post",
       "question": "With remembered messages from 0 s and 98 s, what did a limit of 5 s do at 100 s?",
       "options": [
-        "Nothing",
-        "Heard none",
-        "Skipped both",
+        "Heard 2, since both were remembered, and skipped none",
+        "Heard none, since the limit applies to the whole replay",
+        "Heard 1 and skipped none: the old one had already been dropped by the bus",
         "Heard 1 and skipped 1, where no limit heard 2"
       ],
       "correct": 3,
-      "explanation": "The skip is counted, so a subscriber can tell it was given less."
+      "explanation": "The message from 98 s was 2 s old and the one from 0 s was 100 s old. The skipped one is counted, so the subscriber knows it was given less than was remembered."
     },
     {
       "stage": "post",
       "question": "What is durability here not?",
       "options": [
-        "A queue",
+        "A guarantee that every subscriber gets every message: that is reliability, and it is included",
         "Persistence across a restart: the memory is in the bus and is lost with it, which is a different feature",
-        "A memory",
-        "A topic option"
+        "A memory of more than one message: keep is always 1",
+        "A property of the topic: it is set for each subscriber"
       ],
       "correct": 1,
-      "explanation": "Transient local lasts while the publisher lives."
+      "explanation": "The memory lives in the bus. When the bus stops it is gone, and surviving a restart needs storage, which is another feature."
     }
   ]
 }

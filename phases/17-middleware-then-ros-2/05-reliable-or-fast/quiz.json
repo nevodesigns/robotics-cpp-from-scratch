@@ -7,72 +7,72 @@
       "question": "What does an acknowledgement of 3 tell the sender?",
       "options": [
         "The next one the receiver expects is 3: everything below it has arrived",
-        "Packet 3 arrived",
-        "Send 3 again",
-        "Packet 3 was lost"
+        "Packet 3 has arrived, and nothing is known about the ones before it",
+        "Packet 3 was lost and should be sent again at once",
+        "Three packets have arrived in total, in whatever order"
       ],
       "correct": 0,
-      "explanation": "The acknowledgement is cumulative, so a lost one is covered by the next."
+      "explanation": "The number is the first one still missing. Because it covers everything below it, a lost acknowledgement is made good by the next one."
     },
     {
       "stage": "check",
       "question": "A receiver gets packets 2, 0, 1, 1, 0. What does it deliver?",
       "options": [
-        "2 0 1 1 0",
-        "Only 0",
-        "Nothing",
+        "c a b b a, in the order they came, with nothing held back",
+        "a b c, and then b and a again, since repeats may carry new data",
+        "Only a, since 2 arrived out of order and the stream was abandoned",
         "a b c, once each and in order, with 2 duplicates counted: 2 waited until 0 and 1 had come"
       ],
       "correct": 3,
-      "explanation": "Early packets wait and repeats are ignored but still acknowledged."
+      "explanation": "An early packet waits for the gap before it to fill, and a repeat is ignored but still acknowledged, because the sender may have lost the first acknowledgement."
     },
     {
       "stage": "check",
       "question": "What does the window do?",
       "options": [
-        "Sets the timeout",
+        "Sets how long the sender waits before resending: window 4 means four ticks",
         "Limits how many unacknowledged packets are on the wire: window 4 with ten messages sent 4, then nothing until an acknowledgement freed room",
-        "Orders packets",
-        "Drops packets"
+        "Orders the packets at the receiver: window 4 holds four early packets until the gap fills",
+        "Limits the size of each packet: window 4 with ten messages split them into four packets"
       ],
       "correct": 1,
-      "explanation": "A window of one sends one message per round trip."
+      "explanation": "Without a limit a sender could flood a slow link. With one, new packets go out only as acknowledgements make room."
     },
     {
       "stage": "check",
       "question": "500 messages over a link that loses 20 percent each way. What did sending once deliver, and what did reliable cost?",
       "options": [
         "398 delivered at 1.00 packets per message, against 500 delivered at 1.79 packets per message",
-        "500 and 1.0",
-        "500 and 500",
-        "250 and 3"
+        "500 delivered at 1.00 packets per message by both: reliable costs nothing when it works",
+        "398 delivered at 1.79 packets per message, against 500 at 1.00",
+        "320 delivered at 1.00 packets per message, against 500 at 2.50"
       ],
       "correct": 0,
-      "explanation": "Reliable put almost twice the traffic on a link that was already struggling."
+      "explanation": "A fifth of single sends are lost. Reliable loses none, and pays in resends, some of them for packets that did arrive but whose acknowledgement did not."
     },
     {
       "stage": "post",
       "question": "With a one way delay of 50 ticks, how long did 100 messages take at a window of 1 and of 10?",
       "options": [
-        "The same",
-        "1000 and 10000",
+        "1000 ticks and 10000 ticks: a wider window has more to wait for",
+        "10000 ticks for both: the delay sets the time, not the window",
         "10000 ticks and 1000 ticks: a window of one is one message per round trip",
-        "500 and 500"
+        "5000 ticks and 500 ticks"
       ],
       "correct": 2,
-      "explanation": "The time falls in proportion to the window until the link is full."
+      "explanation": "A window of 1 waits a full round trip of 100 ticks for each message. Ten at a time is ten per round trip."
     },
     {
       "stage": "post",
       "question": "When is reliable the wrong choice for a topic?",
       "options": [
-        "For parameters",
+        "For a command such as stop, which must not be delayed by waiting for an acknowledgement",
         "For a stream such as scans that is replaced by the next message: it spends the retransmissions on data that is already stale and adds load to a link in trouble",
-        "Never",
-        "For commands"
+        "For a parameter that is set once, since one message is not worth the bookkeeping",
+        "Never: a message that was worth sending is worth delivering"
       ],
       "correct": 1,
-      "explanation": "A lost pose is replaced a moment later."
+      "explanation": "A lost scan is replaced by the next one a moment later. Resending the old one adds load exactly when the link is in trouble, for data nobody wants any more."
     }
   ]
 }

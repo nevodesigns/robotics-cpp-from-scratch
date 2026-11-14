@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why not send a struct by copying its memory?",
       "options": [
-        "It is slow",
-        "It uses too much memory",
-        "It cannot be done",
+        "Copying memory is slower than writing fields one at a time: a struct of 11 bytes took 24 copies",
+        "A struct cannot contain a string, so most messages could not be sent that way",
+        "The receiver would need the same variable names as the sender, which a second program does not have",
         "The size, padding and byte order are the compiler's and the machine's: a struct of 11 bytes of fields was 24 bytes in memory"
       ],
       "correct": 3,
-      "explanation": "The wire layout has to be written down and not inherited."
+      "explanation": "Padding and byte order are decided by the compiler and the machine. A layout that goes over a wire has to be written down field by field so both ends agree."
     },
     {
       "stage": "check",
       "question": "How is the integer 0x1234 written as a u16, little endian?",
       "options": [
-        "12 34",
-        "00 12",
+        "12 34, the high byte first",
+        "34 12 00 00, padded to four bytes",
         "34 12, the low byte first",
-        "12"
+        "21 43, each byte's digits reversed"
       ],
       "correct": 2,
-      "explanation": "The test wrote AB 34 12 EF BE AD DE."
+      "explanation": "Little endian puts the least significant byte first. The test's bytes were AB, then 34 12, then EF BE AD DE."
     },
     {
       "stage": "check",
       "question": "A string's length field says 500 and 2 bytes follow. What should the reader do?",
       "options": [
-        "Read 500 bytes",
-        "Ask again",
-        "Read 2",
+        "Read the 2 bytes that are there and return them as the string",
+        "Read 500 bytes, since the sender knows the length better than the reader",
+        "Wait until the other 498 bytes arrive",
         "Fail the read and return an empty string, rather than read on into whatever lies after the message"
       ],
       "correct": 3,
-      "explanation": "A reader must not trust a length that came from outside."
+      "explanation": "A length that came from outside may be wrong or hostile. A reader that believes it walks 498 bytes past the end of the message."
     },
     {
       "stage": "check",
       "question": "Why does the reader keep failing after the first failed read?",
       "options": [
         "A byte that happens to be there after a failed read is not data: what follows a failure is nonsense that looks like data",
-        "To save time",
-        "A bug",
-        "To count errors"
+        "So that the caller can count how many reads failed in one message",
+        "Because the buffer is cleared on the first failure and nothing is left to read",
+        "To give the sender time to send the message again"
       ],
       "correct": 0,
-      "explanation": "The flag stays set."
+      "explanation": "Once a read has run out, the reader no longer knows where it is in the message. Handing out the next byte would be handing out a guess."
     },
     {
       "stage": "post",
       "question": "How does a receiver tell that a frame is for another type?",
       "options": [
-        "It cannot",
-        "By its length",
+        "By the frame's length, which is different for every type",
+        "It cannot: the two programs must be built from the same source",
         "The frame starts with a type id worked out from the message's name, and unframe answers wrong_type if it differs",
-        "By trying to read it"
+        "By reading the payload and seeing whether the fields make sense"
       ],
       "correct": 2,
-      "explanation": "Changing the layout of a message means changing its name."
+      "explanation": "The id is a hash of the type's name and version, so Pose2D and Pose2D/v2 differ. A mismatch is reported as a status before any field is read."
     },
     {
       "stage": "post",
       "question": "What is the published FNV-1a value for the string a, and what is it used for?",
       "options": [
-        "0xFFFFFFFF",
+        "0x811C9DC5, the starting value, which is what an empty string hashes to",
         "0xE40C292C, which is how to test an implementation of the id function against a known answer",
-        "1",
-        "0"
+        "0x00000061, the character itself, used as a short id for one letter names",
+        "0xDEADBEEF, the value the test writes as a u32, used to check the byte order"
       ],
       "correct": 1,
-      "explanation": "Test against known answers."
+      "explanation": "A hash function is only right if it gives the published answers. Checking one known value catches a wrong constant or a wrong order of operations."
     }
   ]
 }

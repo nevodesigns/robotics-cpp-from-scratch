@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "A lidar driver is running, its heartbeat is fine, and no scans arrive. Which watch notices?",
       "options": [
-        "The lifespan",
-        "The discovery lease alone",
+        "The discovery lease, which notices any node that has stopped working",
+        "A lifespan on the scan topic, which expires the scans that did not come",
         "A deadline on the scan topic: the node is alive and the data is stalled, and only a watch on the stream sees that",
-        "Nothing can"
+        "Nothing: a node whose heartbeat arrives is working"
       ],
       "correct": 2,
-      "explanation": "Alive is not the same as delivering."
+      "explanation": "The heartbeat says the process is running. Only a deadline on the scans themselves says that scans have stopped."
     },
     {
       "stage": "check",
       "question": "A silence has gone on for five deadlines. How many misses does the monitor report?",
       "options": [
         "One: it is reported once per silence and not again until a message re-arms it",
-        "Five",
-        "Zero",
-        "Fifty"
+        "Five, one for each deadline that passed",
+        "One for every check made during the silence",
+        "None, until a message arrives to end the silence"
       ],
       "correct": 0,
-      "explanation": "One dead lidar would otherwise be a thousand log lines."
+      "explanation": "A miss is an event, the start of a silence. Reporting it at every check would turn one dead lidar into a thousand lines."
     },
     {
       "stage": "check",
       "question": "What does a monitor say before any message has arrived?",
       "options": [
-        "An error",
+        "A miss, since no message has arrived within the deadline",
         "Nothing: a stream that has not begun has no promise yet to break",
-        "A miss",
-        "Waiting"
+        "An error, since a monitor with no stream is misconfigured",
+        "A miss after one deadline has passed from when it was created"
       ],
       "correct": 1,
-      "explanation": "Nothing is missed before the first message."
+      "explanation": "The promise is about the gap between messages. Before the first message there is no gap to measure."
     },
     {
       "stage": "check",
       "question": "A message every 0.10 s, up to 0.03 s early or late. What does a deadline of 0.10 s do, and what does 0.17 s do?",
       "options": [
         "992 misses in 2000 messages at 0.10 s, and none at 0.17 s",
-        "Both nothing",
-        "Both 992",
-        "None at 0.10"
+        "No misses at 0.10 s, and 992 at 0.17 s",
+        "992 misses at both: jitter breaks any deadline",
+        "441 misses at 0.10 s, and 124 at 0.17 s"
       ],
       "correct": 0,
-      "explanation": "The worst gap is the period plus both jitters."
+      "explanation": "The longest gap is the period plus the jitter at both ends, 0.16 s. A deadline equal to the period is broken about every other message by jitter alone."
     },
     {
       "stage": "post",
       "question": "A consumer takes half as fast as messages are published, with no lifespan. How old is the data it is served, by the end of ten seconds?",
       "options": [
-        "The same as published",
-        "1 s",
+        "0.02 s, the consumer's own period",
+        "0.10 s: a queue never holds more than a few messages",
         "5.00 s: the queue only gets longer and each message served is older than the last",
-        "About 20 ms"
+        "10.00 s, the whole run"
       ],
       "correct": 2,
-      "explanation": "A lifespan put a ceiling of 0.1 s on it."
+      "explanation": "It takes one message for every two published, so the backlog grows by half the elapsed time. After ten seconds it is acting on data five seconds old."
     },
     {
       "stage": "post",
       "question": "What does a lifespan cost?",
       "options": [
-        "Nothing",
-        "Time",
-        "Memory",
+        "Latency: each message waits for its lifespan before delivery",
+        "Memory: expired messages are kept for inspection",
+        "Nothing: only messages nobody wanted are dropped",
         "Messages: 490 of 500 expired at a lifespan of 0.1 s, and the count says how many"
       ],
       "correct": 3,
-      "explanation": "The consumer sees less of the world and knows how much less."
+      "explanation": "The consumer is just as slow. It no longer sees a stale world; it sees less of the world, and the count says how much less."
     }
   ]
 }
