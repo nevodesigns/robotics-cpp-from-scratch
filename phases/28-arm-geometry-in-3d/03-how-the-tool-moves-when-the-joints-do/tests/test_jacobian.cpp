@@ -17,8 +17,7 @@ struct Pin {
 };
 static const Pin kPins[] = {
     {"poses", 40.0},
-    {"err_ur5", 1.4374385015614166e-10},
-    {"err_panda", 1.4375522994214407e-10},
+    // err_ur5 and err_panda are not held: they are rounding error of about 1e-10 and differ from one compiler to the next
     {"err_wrong", 1.2850518791206829},
     {"power_err", 0.0},
     {"tau1", 0.0},
