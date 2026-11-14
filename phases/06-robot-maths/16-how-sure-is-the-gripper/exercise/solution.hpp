@@ -60,7 +60,12 @@ inline Cov2 sampled_tool_covariance(double l1, double l2, double q1, double q2, 
   rc::core::Rng rng(seed);
   std::vector<Point2> pts;
   pts.reserve(static_cast<std::size_t>(n));
-  for (int i = 0; i < n; ++i) pts.push_back(tool_position(l1, l2, q1 + s1 * rng.gaussian(), q2 + s2 * rng.gaussian()));
+  for (int i = 0; i < n; ++i) {
+    // One draw at a time, in a written order: the order in which a call's arguments are evaluated is the compiler's choice.
+    const double e2 = s2 * rng.gaussian();
+    const double e1 = s1 * rng.gaussian();
+    pts.push_back(tool_position(l1, l2, q1 + e1, q2 + e2));
+  }
   return rc::math::covariance(pts);
 }
 

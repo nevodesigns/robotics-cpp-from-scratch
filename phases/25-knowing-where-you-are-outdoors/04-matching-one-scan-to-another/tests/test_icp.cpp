@@ -1,4 +1,6 @@
 #include <rc/test/rc_test.hpp>
+#include <sstream>
+#include <cstring>
 
 #include <cmath>
 #include <iostream>
@@ -9,9 +11,39 @@
 #include <iomanip>
 #include <iostream>
 
+// The numbers this lesson publishes: its page, its header and its quiz quote them, so each is held here as it was
+// measured. A change that moves one by more than half a unit of its last printed digit fails the suite.
+struct Pin {
+  const char* key;
+  double value;
+};
+static const Pin kPins[] = {
+    {"err_xy", 0.0007162737160506111},
+    {"err_theta", 0.00010126013061154127},
+    {"iters", 16.0},
+    {"basin", 0.5},
+    {"fail_angle", 0.8},
+    {"corridor_x_err", 0.09890464943053379},
+    {"post_x_err", 3.508642598865075e-05},
+    {"pull_ungated", 0.04226263869969543},
+    {"pull_gated", 0.0004143493953226225},
+    {"iters_blind", 16.0},
+    {"iters_odom", 5.0},
+};
+
 static void rec(const char* key, double value, int digits = 3) {
   std::cout << "@" << key << " " << std::fixed << std::setprecision(digits) << value << std::endl;
   std::cout.unsetf(std::ios::floatfield);
+  for (const Pin& pin : kPins) {
+    if (std::strcmp(pin.key, key) != 0) continue;
+    double allowed = 0.5;
+    for (int i = 0; i < digits; ++i) allowed /= 10.0;
+    if (!(std::fabs(value - pin.value) <= allowed)) {
+      std::ostringstream message;
+      message << "the published number " << key << " was " << pin.value << " and is now " << value;
+      rc::test::record(__FILE__, __LINE__, message.str());
+    }
+  }
 }
 [[maybe_unused]] static void recs(const char* key, const std::string& value) { std::cout << "@" << key << " " << value << std::endl; }
 

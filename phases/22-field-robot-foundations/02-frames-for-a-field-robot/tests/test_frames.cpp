@@ -1,4 +1,6 @@
 #include <rc/test/rc_test.hpp>
+#include <sstream>
+#include <cstring>
 
 #include <algorithm>
 #include <cmath>
@@ -8,9 +10,34 @@
 #include <iomanip>
 #include <iostream>
 
+// The numbers this lesson publishes: its page, its header and its quiz quote them, so each is held here as it was
+// measured. A change that moves one by more than half a unit of its last printed digit fails the suite.
+struct Pin {
+  const char* key;
+  double value;
+};
+static const Pin kPins[] = {
+    {"identity_gap", 0.2220446049250313},
+    {"order_gap", 1.414213562373095},
+    {"mx", 6.381017929380061},
+    {"my", 4.579135606086458},
+    {"moved", 1.990008330556051},
+    {"ground_range", 2.857513075690336},
+};
+
 static void rec(const char* key, double value, int digits = 3) {
   std::cout << "@" << key << " " << std::fixed << std::setprecision(digits) << value << std::endl;
   std::cout.unsetf(std::ios::floatfield);
+  for (const Pin& pin : kPins) {
+    if (std::strcmp(pin.key, key) != 0) continue;
+    double allowed = 0.5;
+    for (int i = 0; i < digits; ++i) allowed /= 10.0;
+    if (!(std::fabs(value - pin.value) <= allowed)) {
+      std::ostringstream message;
+      message << "the published number " << key << " was " << pin.value << " and is now " << value;
+      rc::test::record(__FILE__, __LINE__, message.str());
+    }
+  }
 }
 
 

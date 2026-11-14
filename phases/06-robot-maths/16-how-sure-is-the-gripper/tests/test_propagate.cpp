@@ -117,7 +117,9 @@ RC_TEST("the ellipse from the propagated doubt holds the share of random trials 
   int inside = 0;
   const int n = 20000;
   for (int i = 0; i < n; ++i) {
-    const Point2 p = tool_position(kL1, kL2, q1 + s * rng.gaussian(), q2 + s * rng.gaussian());
+    const double e2 = s * rng.gaussian();   // one draw at a time: the order of a call's arguments is the compiler's choice
+    const double e1 = s * rng.gaussian();
+    const Point2 p = tool_position(kL1, kL2, q1 + e1, q2 + e2);
     if (rc::math::inside_ellipse(p, centre, lin, rc::math::kInside95)) ++inside;
   }
   const double share = static_cast<double>(inside) / n;

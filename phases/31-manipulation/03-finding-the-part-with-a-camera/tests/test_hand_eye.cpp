@@ -1,4 +1,6 @@
 #include <rc/test/rc_test.hpp>
+#include <sstream>
+#include <cstring>
 
 #include <cmath>
 
@@ -6,9 +8,42 @@
 #include <iomanip>
 #include <iostream>
 
+// The numbers this lesson publishes: its page, its header and its quiz quote them, so each is held here as it was
+// measured. A change that moves one by more than half a unit of its last printed digit fails the suite.
+struct Pin {
+  const char* key;
+  double value;
+};
+static const Pin kPins[] = {
+    {"du", 60.0},
+    {"z", 0.5},
+    {"x_bp", 0.05},
+    {"fx", 600.0},
+    {"n_few", 5.0},
+    {"n_many", 40.0},
+    {"noise_mm", 2.0},
+    {"err_few", 3.4509976772834676},
+    {"rot_few", 0.6422272119598252},
+    {"err_many", 1.1143636863425102},
+    {"rot_many", 0.1973826234749069},
+    {"tilt", 1.0},
+    {"reach", 0.6},
+    {"tip_err", 10.47184259804875},
+};
+
 static void rec(const char* key, double value, int digits = 3) {
   std::cout << "@" << key << " " << std::fixed << std::setprecision(digits) << value << std::endl;
   std::cout.unsetf(std::ios::floatfield);
+  for (const Pin& pin : kPins) {
+    if (std::strcmp(pin.key, key) != 0) continue;
+    double allowed = 0.5;
+    for (int i = 0; i < digits; ++i) allowed /= 10.0;
+    if (!(std::fabs(value - pin.value) <= allowed)) {
+      std::ostringstream message;
+      message << "the published number " << key << " was " << pin.value << " and is now " << value;
+      rc::test::record(__FILE__, __LINE__, message.str());
+    }
+  }
 }
 [[maybe_unused]] static void recs(const char* key, const std::string& value) { std::cout << "@" << key << " " << value << std::endl; }
 
@@ -36,7 +71,10 @@ void make_clouds(int n, double noise, bool flat, Cloud3& cam, Cloud3& base) {
     const double b[3] = {0.35 + 0.30 * uni(), -0.25 + 0.5 * uni(), flat ? 0.20 : 0.10 + 0.30 * uni()};
     double c[3];
     apply(inv, b, c);
-    cam.add(c[0] + noise * gauss(), c[1] + noise * gauss(), c[2] + noise * gauss());
+    const double nz = noise * gauss();   // one draw at a time: the order of a call's arguments is the compiler's choice
+    const double ny = noise * gauss();
+    const double nx = noise * gauss();
+    cam.add(c[0] + nx, c[1] + ny, c[2] + nz);
     base.add(b[0], b[1], b[2]);
   }
 }

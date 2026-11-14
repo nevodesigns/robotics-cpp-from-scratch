@@ -27,7 +27,10 @@ bool reads_back(const std::string& text, double value) { return std::strtod(text
 
 // A mixed set of readings: ordinary sizes, tiny ones and huge ones, with a full random mantissa.
 double reading(Rng& rng) {
-  const double mantissa = 1.0 + rng.uniform() + rng.uniform() * 1e-8 + rng.uniform() * 1e-16;
+  const double m0 = rng.uniform();   // one draw at a time: the order in which the terms of a sum are evaluated is the compiler's choice
+  const double m1 = rng.uniform();
+  const double m2 = rng.uniform();
+  const double mantissa = 1.0 + m0 + m1 * 1e-8 + m2 * 1e-16;
   const int exponent = static_cast<int>(rng.next() % 41) - 20;
   const double sign = (rng.next() & 1u) ? 1.0 : -1.0;
   return sign * mantissa * std::pow(10.0, exponent);

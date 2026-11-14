@@ -1,4 +1,6 @@
 #include <rc/test/rc_test.hpp>
+#include <sstream>
+#include <cstring>
 
 #include <cmath>
 #include <iostream>
@@ -9,9 +11,38 @@
 #include <iomanip>
 #include <iostream>
 
+// The numbers this lesson publishes: its page, its header and its quiz quote them, so each is held here as it was
+// measured. A change that moves one by more than half a unit of its last printed digit fails the suite.
+struct Pin {
+  const char* key;
+  double value;
+};
+static const Pin kPins[] = {
+    {"kf_err", 0.12182446034619833},
+    {"fd_err", 1.0726619458046178},
+    {"confirm_frames", 3.0},
+    {"gap_short", 2.0},
+    {"gap_long", 8.0},
+    {"closest_far", 1.0},
+    {"closest_close", 0.05},
+    {"swaps_far", 0.0},
+    {"swaps_close", 5.0},
+    {"ahead_err", 0.20334479244531387},
+};
+
 static void rec(const char* key, double value, int digits = 3) {
   std::cout << "@" << key << " " << std::fixed << std::setprecision(digits) << value << std::endl;
   std::cout.unsetf(std::ios::floatfield);
+  for (const Pin& pin : kPins) {
+    if (std::strcmp(pin.key, key) != 0) continue;
+    double allowed = 0.5;
+    for (int i = 0; i < digits; ++i) allowed /= 10.0;
+    if (!(std::fabs(value - pin.value) <= allowed)) {
+      std::ostringstream message;
+      message << "the published number " << key << " was " << pin.value << " and is now " << value;
+      rc::test::record(__FILE__, __LINE__, message.str());
+    }
+  }
 }
 [[maybe_unused]] static void recs(const char* key, const std::string& value) { std::cout << "@" << key << " " << value << std::endl; }
 
@@ -19,7 +50,11 @@ static void rec(const char* key, double value, int digits = 3) {
 namespace {
 
 // Detections of a target moving at a constant velocity, with noise.
-Point2d detection(rc::core::Rng& rng, double x, double y, double sigma) { return Point2d(x + sigma * rng.gaussian(), y + sigma * rng.gaussian()); }
+Point2d detection(rc::core::Rng& rng, double x, double y, double sigma) {
+  const double ey = sigma * rng.gaussian();   // one draw at a time: the order of a call's arguments is the compiler's choice
+  const double ex = sigma * rng.gaussian();
+  return Point2d(x + ex, y + ey);
+}
 
 const Track* nearest(const Tracker& t, double x, double y) {
   const Track* best = nullptr;

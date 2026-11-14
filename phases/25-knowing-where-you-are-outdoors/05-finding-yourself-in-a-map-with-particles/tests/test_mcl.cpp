@@ -1,4 +1,6 @@
 #include <rc/test/rc_test.hpp>
+#include <sstream>
+#include <cstring>
 
 #include <cmath>
 #include <iostream>
@@ -7,9 +9,34 @@
 #include <iomanip>
 #include <iostream>
 
+// The numbers this lesson publishes: its page, its header and its quiz quote them, so each is held here as it was
+// measured. A change that moves one by more than half a unit of its last printed digit fails the suite.
+struct Pin {
+  const char* key;
+  double value;
+};
+static const Pin kPins[] = {
+    {"steps", 5.0},
+    {"err_final", 0.02076397344734374},
+    {"lost_50", 10.0},
+    {"lost_enough", 0.0},
+    {"sym_modes", 2.0},
+    {"asym_modes", 0.0},
+};
+
 static void rec(const char* key, double value, int digits = 3) {
   std::cout << "@" << key << " " << std::fixed << std::setprecision(digits) << value << std::endl;
   std::cout.unsetf(std::ios::floatfield);
+  for (const Pin& pin : kPins) {
+    if (std::strcmp(pin.key, key) != 0) continue;
+    double allowed = 0.5;
+    for (int i = 0; i < digits; ++i) allowed /= 10.0;
+    if (!(std::fabs(value - pin.value) <= allowed)) {
+      std::ostringstream message;
+      message << "the published number " << key << " was " << pin.value << " and is now " << value;
+      rc::test::record(__FILE__, __LINE__, message.str());
+    }
+  }
 }
 [[maybe_unused]] static void recs(const char* key, const std::string& value) { std::cout << "@" << key << " " << value << std::endl; }
 
@@ -64,7 +91,9 @@ Outcome localise(const rc::field::World2& map, int count, unsigned int seed, boo
     tx += ahead * std::cos(tth + 0.5 * t);
     ty += ahead * std::sin(tth + 0.5 * t);
     tth += t;
-    mc.predict(ahead + 0.01 * noise.gaussian(), t + 0.01 * noise.gaussian(), 0.02, 0.02);
+    const double turn_noise = 0.01 * noise.gaussian();   // one draw at a time: the order of a call's arguments is the compiler's choice
+    const double ahead_noise = 0.01 * noise.gaussian();
+    mc.predict(ahead + ahead_noise, t + turn_noise, 0.02, 0.02);
     std::vector<double> ranges;
     for (std::size_t b = 0; b < angles.size(); ++b) ranges.push_back(rc::field::cast_ray(map, tx, ty, tth + angles[b], 12.0) + 0.05 * noise.gaussian());
     McMeasure m;

@@ -223,7 +223,9 @@ RC_TEST("what each costs, on a slow signal with noise and one reading in a hundr
     truth[i] = std::sin(2.0 * kPi * static_cast<double>(i) / 200.0);
     raw[i] = truth[i] + 0.05 * rng.gaussian();
     if (rng.uniform() < 0.01) {
-      raw[i] += (rng.uniform() < 0.5 ? -1.0 : 1.0) * (50.0 + 50.0 * rng.uniform());
+      const double side = rng.uniform() < 0.5 ? -1.0 : 1.0;   // one draw at a time: the order of a product's two sides is the compiler's choice
+      const double size = 50.0 + 50.0 * rng.uniform();
+      raw[i] += side * size;
       ++spikes;
     }
   }

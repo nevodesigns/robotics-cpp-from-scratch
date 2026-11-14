@@ -1,4 +1,6 @@
 #include <rc/test/rc_test.hpp>
+#include <sstream>
+#include <cstring>
 
 #include <cmath>
 #include <iostream>
@@ -8,9 +10,39 @@
 #include <iomanip>
 #include <iostream>
 
+// The numbers this lesson publishes: its page, its header and its quiz quote them, so each is held here as it was
+// measured. A change that moves one by more than half a unit of its last printed digit fails the suite.
+struct Pin {
+  const char* key;
+  double value;
+};
+static const Pin kPins[] = {
+    {"pairs", 200.0},
+    {"max_pos_err", 1.0367366991496098e-14},
+    {"max_head_err", 2.021286199229721e-15},
+    {"words_used", 6.0},
+    {"curv_limit", 1.3492540115317775},
+    {"curv_small_r", 2.5002590581840134},
+    {"tail_gap", 0.07324712688178923},
+    {"tail_len", 4.696604359359277},
+    {"tail_head", 2.7678724222398685},
+    {"best_tail", 1.246872600204355},
+    {"ratio_behind", 10.324246995854507},
+};
+
 static void rec(const char* key, double value, int digits = 3) {
   std::cout << "@" << key << " " << std::fixed << std::setprecision(digits) << value << std::endl;
   std::cout.unsetf(std::ios::floatfield);
+  for (const Pin& pin : kPins) {
+    if (std::strcmp(pin.key, key) != 0) continue;
+    double allowed = 0.5;
+    for (int i = 0; i < digits; ++i) allowed /= 10.0;
+    if (!(std::fabs(value - pin.value) <= allowed)) {
+      std::ostringstream message;
+      message << "the published number " << key << " was " << pin.value << " and is now " << value;
+      rc::test::record(__FILE__, __LINE__, message.str());
+    }
+  }
 }
 [[maybe_unused]] static void recs(const char* key, const std::string& value) { std::cout << "@" << key << " " << value << std::endl; }
 
@@ -18,6 +50,16 @@ static void rec(const char* key, double value, int digits = 3) {
 namespace {
 
 const double kPi = 3.14159265358979323846;
+
+CarPose pose(double x, double y, double th);
+double unit();
+// the draws are taken one at a time, in a written order: the order in which the arguments of a call are evaluated is the compiler's choice, and the numbers must not depend on it
+CarPose random_pose() {
+  const double th = 2.0 * kPi * unit();
+  const double y = 10.0 * unit();
+  const double x = 10.0 * unit();
+  return pose(x, y, th);
+}
 
 CarPose pose(double x, double y, double th) {
   CarPose p;
@@ -51,8 +93,8 @@ RC_TEST("the walked end of the shortest word is the goal, for many pairs of pose
   std::set<int> used;
   int found = 0;
   for (int i = 0; i < 200; ++i) {
-    const CarPose a = pose(10.0 * unit(), 10.0 * unit(), 2.0 * kPi * unit());
-    const CarPose b = pose(10.0 * unit(), 10.0 * unit(), 2.0 * kPi * unit());
+    const CarPose a = random_pose();
+    const CarPose b = random_pose();
     const Dubins d = dubins_shortest(a, b, r);
     RC_CHECK(d.ok);
     if (!d.ok) continue;
@@ -77,8 +119,8 @@ RC_TEST("a goal straight ahead is a straight line, and no path is shorter than t
   RC_CHECK(d.ok);
   RC_CHECK_NEAR(d.length, 5.0, 1e-9);
   for (int i = 0; i < 100; ++i) {
-    const CarPose a = pose(10.0 * unit(), 10.0 * unit(), 2.0 * kPi * unit());
-    const CarPose b = pose(10.0 * unit(), 10.0 * unit(), 2.0 * kPi * unit());
+    const CarPose a = random_pose();
+    const CarPose b = random_pose();
     const Dubins e = dubins_shortest(a, b, 0.742);
     RC_CHECK(e.length >= std::hypot(b.x - a.x, b.y - a.y) - 1e-9);
   }

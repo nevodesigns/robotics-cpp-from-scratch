@@ -18,7 +18,11 @@ struct Noise {
     s = s * 6364136223846793005ULL + 1442695040888963407ULL;
     return (static_cast<double>(s >> 11) + 0.5) / 9007199254740992.0;
   }
-  double gauss(double sigma) { return sigma * std::sqrt(-2.0 * std::log(uniform())) * std::cos(6.283185307179586 * uniform()); }
+  double gauss(double sigma) {
+    const double u1 = uniform();   // one draw at a time: the order of a product's two sides is the compiler's choice
+    const double u2 = uniform();
+    return sigma * std::sqrt(-2.0 * std::log(u1)) * std::cos(6.283185307179586 * u2);
+  }
 };
 
 const double kNaN = std::numeric_limits<double>::quiet_NaN();
@@ -36,7 +40,9 @@ int false_trips(double tol, int debounce) {
   Noise n(12345);
   int trips = 0;
   for (int i = 0; i < 100000; ++i) {
-    if (ck.update(1.0 + n.gauss(0.02), 1.0 + n.gauss(0.02)).state == CheckState::faulted) {
+    const double nb = n.gauss(0.02);   // one draw at a time: the order of a call's arguments is the compiler's choice
+    const double na = n.gauss(0.02);
+    if (ck.update(1.0 + na, 1.0 + nb).state == CheckState::faulted) {
       ++trips;
       ck.reset();
     }
@@ -53,7 +59,9 @@ int detect_samples(double tol, int debounce) {
     int found = 2000;
     for (int i = 0; i < 2000; ++i) {
       const double drift = 0.005 * i;
-      if (ck.update(1.0 + n.gauss(0.02), 1.0 + drift + n.gauss(0.02)).state == CheckState::faulted) {
+      const double nb = n.gauss(0.02);   // one draw at a time: the order of a call's arguments is the compiler's choice
+      const double na = n.gauss(0.02);
+      if (ck.update(1.0 + na, 1.0 + drift + nb).state == CheckState::faulted) {
         found = i;
         break;
       }

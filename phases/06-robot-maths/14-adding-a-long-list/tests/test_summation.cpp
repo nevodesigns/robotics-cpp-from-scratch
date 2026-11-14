@@ -28,7 +28,9 @@ Data make_data(unsigned seed, int n) {
   std::uint64_t total = 0;
   for (int i = 0; i < n; ++i) {
     // A 40 bit integer from two draws.
-    const std::uint64_t k = (static_cast<std::uint64_t>(rng.next()) << 8 ^ rng.next()) & ((1ULL << 40) - 1);
+    const std::uint64_t high = rng.next();   // one draw at a time: the order of the two sides of ^ is the compiler's choice
+    const std::uint64_t low = rng.next();
+    const std::uint64_t k = (high << 8 ^ low) & ((1ULL << 40) - 1);
     total += k;
     d.values.push_back(std::ldexp(static_cast<double>(k), -40));
   }
