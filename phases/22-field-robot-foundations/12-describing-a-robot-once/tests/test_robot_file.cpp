@@ -177,3 +177,9 @@ RC_TEST("the weight is put behind the axle, towards the caster, so that the robo
   RC_CHECK(to_sdf(on_axle.robot).find("<inertial><pose>0.00118681 0 0 0 0 0</pose>") != std::string::npos);
   RC_CHECK(parse_robot(kBurger).numbers == 11);
 }
+
+RC_TEST("the kind of the robot is read from its line, and not the word before it") {
+  const RobotParse p = parse_robot(kBurger);
+  RC_CHECK(p.robot.kind == "diff_drive");
+  RC_CHECK(p.robot.name == "burger");
+}

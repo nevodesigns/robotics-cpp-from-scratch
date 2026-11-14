@@ -159,3 +159,11 @@ RC_TEST("the report is a table with a row for each hazard, and says how many pro
   for (std::size_t i = 0; i < ground.size(); ++i) ground_lines += ground[i] == '\n' ? 1 : 0;
   rec("ground_lines", static_cast<double>(ground_lines), 0);
 }
+
+RC_TEST("a filled case names its controls in the report, and never says none for a hazard that has one") {
+  const SafetyCase good = filled(RobotKind::arm);
+  const std::string text = to_markdown(good);
+  RC_CHECK(!good.controls.empty());
+  for (std::size_t i = 0; i < good.controls.size(); ++i) RC_CHECK(text.find(good.controls[i].id + " (") != std::string::npos);
+  RC_CHECK(text.find("| none |") == std::string::npos);
+}
