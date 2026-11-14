@@ -2,6 +2,7 @@ id: E-FIELD-0010
 title: A controller tuned without the time constant of the motor
 match: a speed loop overshoots because the motor lags by its electromechanical time constant
 match: the simulated motor reaches 63 percent in the time the formula gives
+match: the time constant from the constants is the time a step takes to reach 63 percent
 platforms: linux, windows
 teaches: 22-04-motors-gearboxes-and-backlash
 ---

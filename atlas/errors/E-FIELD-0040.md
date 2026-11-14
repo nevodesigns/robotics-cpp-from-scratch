@@ -2,6 +2,7 @@ id: E-FIELD-0040
 title: A wall laid along the x axis whatever its direction
 match: only the walls parallel to an axis are in the right place
 match: a box for a wall is not turned by the angle of the segment
+match: a wall becomes a box along it: its middle, its length and its angle
 platforms: linux, windows
 teaches: 22-13-a-world-for-gazebo
 ---

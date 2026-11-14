@@ -2,6 +2,8 @@ id: E-FIELD-0033
 title: A clamp that turns a NaN into the limit
 match: a command that is not a number made the robot go at full speed
 match: std::min with a NaN returns the limit
+match: each broken drive is caught, by the promise it breaks
+match: the joint buses: the real ones keep the promises and three broken ones are caught
 platforms: linux, windows
 teaches: 22-11-the-contract-test-for-an-interface
 ---

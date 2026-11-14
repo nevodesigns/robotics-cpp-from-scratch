@@ -2,6 +2,7 @@ id: E-FIELD-0031
 title: A mean time that hides the slow trials
 match: the average cycle time is fine and the cell misses its deadline
 match: a failed trial counted as a fast one
+match: manipulation trials: the mean hides the slow ones and a failed trial does not count as fast
 platforms: linux, windows
 teaches: 22-10-scoring-a-run
 ---

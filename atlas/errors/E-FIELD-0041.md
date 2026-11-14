@@ -2,6 +2,8 @@ id: E-FIELD-0041
 title: A slope that tilts the wrong way
 match: the hill goes down where the scenario says it goes up
 match: a positive pitch lowers the x axis
+match: a grade along x lowers the front of the slab and a grade along y raises the left
+match: the world has a model for everything in the scenario, with its friction, and the robot at its start
 platforms: linux, windows
 teaches: 22-13-a-world-for-gazebo
 ---

@@ -2,6 +2,8 @@ id: E-FIELD-0008
 title: A cap on speed that ignores the turn
 match: a vehicle that is safe on a straight line slides in a tight turn
 match: speed times turn rate exceeds the lateral acceleration limit
+match: a fast turn at speed is cut by speed times turn rate, and a straight line is not
+match: a command beyond the limits is flagged as clamped
 platforms: linux, windows
 teaches: 22-03-units-and-limits-that-cannot-be-mixed
 ---

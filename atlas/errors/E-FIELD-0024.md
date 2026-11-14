@@ -2,6 +2,8 @@ id: E-FIELD-0024
 title: A run that cannot be compared with another
 match: two runs differ and nobody can say where
 match: the same seed should give the same log
+match: the same seed gives the same run, and another seed differs from the first sample
+match: entries are found by time and by channel
 platforms: linux, windows
 teaches: 22-08-recording-and-replaying-a-run
 ---

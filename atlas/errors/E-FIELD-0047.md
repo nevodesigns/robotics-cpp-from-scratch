@@ -2,6 +2,7 @@ id: E-FIELD-0047
 title: A gap read as one simulator being wrong
 match: the two simulators disagree so one of them must have a bug
 match: calibrating one simulator to the other and calling it validated
+match: two built in models with different lags differ, the lag is read from the slower one, and set in the faster one they agree
 platforms: linux, windows
 teaches: 22-15-two-simulators-and-the-gap
 ---

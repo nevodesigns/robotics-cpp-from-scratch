@@ -2,6 +2,7 @@ id: E-FIELD-0038
 title: An inertia left at the default
 match: the simulated robot spins up too fast or turns like a tanker
 match: the link inertia is the default
+match: the inertias are the ones of the shapes
 platforms: linux, windows
 teaches: 22-12-describing-a-robot-once
 ---

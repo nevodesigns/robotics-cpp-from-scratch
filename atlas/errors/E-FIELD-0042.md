@@ -2,6 +2,7 @@ id: E-FIELD-0042
 title: A program tested on one simulator
 match: the program works in the simulator and not in the other one
 match: the behaviour depends on a habit of the simulator
+match: the program is written against Backend and is the same program for any of them
 platforms: linux, windows
 teaches: 22-14-the-same-program-another-simulator
 ---

@@ -2,6 +2,8 @@ id: E-FIELD-0002
 title: A stop that is taken to be instant
 match: a stop command is followed by motion for the time constant of the base
 match: the base coasted after stop
+match: a command is limited, answered with a lag of the time constant, and held
+match: a base that stops hearing commands stops itself, and a stop coasts for the time constant
 platforms: linux, windows
 teaches: 22-01-a-robot-as-an-interface
 ---

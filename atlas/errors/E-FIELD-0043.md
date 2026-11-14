@@ -2,6 +2,7 @@ id: E-FIELD-0043
 title: A comparison of runs of different lengths
 match: the two simulators ended in different places because one ran for longer
 match: the run is as long as the computer took
+match: the program is written against Backend and is the same program for any of them
 platforms: linux, windows
 teaches: 22-14-the-same-program-another-simulator
 ---

@@ -2,6 +2,7 @@ id: E-FIELD-0014
 title: A slope treated as the same in every direction
 match: the vehicle climbs a slope sideways but not up it
 match: the grade along the heading is not the steepest grade
+match: a slope helps one way and hurts the other, and costs nothing across it
 platforms: linux, windows
 teaches: 22-05-terrain-and-friction
 ---

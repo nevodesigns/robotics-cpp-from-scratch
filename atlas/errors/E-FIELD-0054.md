@@ -2,6 +2,7 @@ id: E-FIELD-0054
 title: A robot with its weight over the axle
 match: the simulated robot turns short after it has driven
 match: the caster only touches the floor when the body rocks
+match: the weight is put behind the axle, towards the caster, so that the robot rests on three points and does not rock
 platforms: linux, windows
 teaches: 22-12-describing-a-robot-once
 ---

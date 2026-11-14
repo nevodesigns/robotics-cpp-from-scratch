@@ -2,6 +2,7 @@ id: E-FIELD-0035
 title: A watchdog that nobody tested
 match: the robot kept driving after the link to the computer was cut
 match: no watchdog on the drive
+match: each broken drive is caught, by the promise it breaks
 platforms: linux, windows
 teaches: 22-11-the-contract-test-for-an-interface
 ---

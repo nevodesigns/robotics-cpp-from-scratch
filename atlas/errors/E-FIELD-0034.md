@@ -2,6 +2,9 @@ id: E-FIELD-0034
 title: An interface with no contract
 match: the program works on the simulator and not on the board
 match: two implementations of one interface disagree about what stop does
+match: the fake drive of lesson 22-01 keeps every promise
+match: each broken drive is caught, by the promise it breaks
+match: a change in what is expected changes the verdict: a drive that is slower than asked for is caught
 platforms: linux, windows
 teaches: 22-11-the-contract-test-for-an-interface
 ---

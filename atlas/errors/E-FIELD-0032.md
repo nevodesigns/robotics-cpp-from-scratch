@@ -2,6 +2,7 @@ id: E-FIELD-0032
 title: A gait judged by its average
 match: the average stride period is right and the robot stumbles
 match: a missed step is hidden in the mean
+match: gait metrics: duty factor, stride period and how irregular a stumble is
 platforms: linux, windows
 teaches: 22-10-scoring-a-run
 ---

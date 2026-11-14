@@ -2,6 +2,7 @@ id: E-FIELD-0006
 title: A missing frame answered with the identity
 match: a lookup for a frame that was never added puts the robot at the origin
 match: between returns false for an unknown frame, two trees or a loop
+match: an unknown frame, two separate trees and a loop all give no transform instead of a wrong one
 platforms: linux, windows
 teaches: 22-02-frames-for-a-field-robot
 ---

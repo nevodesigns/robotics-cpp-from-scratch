@@ -2,6 +2,7 @@ id: E-FIELD-0050
 title: A new board with no watchdog
 match: the robot keeps driving after the program on the laptop crashed
 match: the wheels do not stop when the commands stop
+match: each fault fails the check of its own, and no check that is not its consequence
 platforms: linux, windows
 teaches: 22-16-a-bring-up-checklist-for-a-board
 ---

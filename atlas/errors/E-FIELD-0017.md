@@ -2,6 +2,7 @@ id: E-FIELD-0017
 title: A gyro bias taken to be zero
 match: the heading drifts steadily while the robot is at rest
 match: a gyro bias of 0.01 rad/s turns the heading by 34 degrees in a minute
+match: a gyro with a bias of 0\.01 rad/s turns the heading by about 34 degrees a minute while the robot sits still
 platforms: linux, windows
 teaches: 22-06-sensors-that-fail-like-the-field
 ---

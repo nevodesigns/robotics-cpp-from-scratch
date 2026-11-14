@@ -2,6 +2,7 @@ id: E-FIELD-0025
 title: A log that is lost when the power is
 match: the log of the failure cannot be read because it ends in the middle of a line
 match: a truncated last line stops the reader
+match: a log cut by a power failure still reads, and a bad line stops the read with its number
 platforms: linux, windows
 teaches: 22-08-recording-and-replaying-a-run
 ---

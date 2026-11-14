@@ -2,6 +2,7 @@ id: E-FIELD-0026
 title: A picture that is the mirror image of the run
 match: a left turn on the field is drawn as a right turn on the screen
 match: svg y axis points down
+match: a run with no poses still draws the world and the robot at its start
 platforms: linux, windows
 teaches: 22-09-watching-a-run
 ---

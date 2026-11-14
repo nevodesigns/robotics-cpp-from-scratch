@@ -2,6 +2,8 @@ id: E-FIELD-0020
 title: A parser that stops at the first mistake
 match: fixing one mistake in a file reveals the next, six times over
 match: the parser reports every problem with its line number
+match: every mistake in a bad file is reported once, with the line it is on
+match: a file with no start and no duration says so, and a fault past the end is a problem
 platforms: linux, windows
 teaches: 22-07-a-field-scenario-file
 ---

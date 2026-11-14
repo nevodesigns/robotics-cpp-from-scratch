@@ -2,6 +2,8 @@ id: E-FIELD-0048
 title: A first drive with no direction check
 match: the robot spins on the spot at full power the first time it is given a speed
 match: one motor runs the wrong way
+match: a healthy board passes the ten checks, in the order that costs least first
+match: the numbers measured are the ones the fault set, and the advice says what to do about it
 platforms: linux, windows
 teaches: 22-16-a-bring-up-checklist-for-a-board
 ---

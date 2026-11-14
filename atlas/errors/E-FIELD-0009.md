@@ -2,6 +2,7 @@ id: E-FIELD-0009
 title: Braking assumed equal to acceleration
 match: the stopping distance is planned with the acceleration limit
 match: braking is stronger than accelerating
+match: a limit read in the wrong unit makes the stopping distance thirteen times as long
 platforms: linux, windows
 teaches: 22-03-units-and-limits-that-cannot-be-mixed
 ---

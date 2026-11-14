@@ -2,6 +2,7 @@ id: E-FIELD-0018
 title: A GNSS jump believed
 match: the position jumps by metres for one fix and the filter follows it
 match: multipath makes a good fix jump
+match: a GNSS receiver is a few metres off alone and a couple of centimetres when fixed, and sometimes jumps
 platforms: linux, windows
 teaches: 22-06-sensors-that-fail-like-the-field
 ---

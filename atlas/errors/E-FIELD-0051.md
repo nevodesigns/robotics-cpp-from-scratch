@@ -2,6 +2,8 @@ id: E-FIELD-0051
 title: A control that nothing proves
 match: the safety case says the supervisor stops the robot and no test shows it
 match: a control with no test or a test that does not pass
+match: a template with nothing filled in has a problem for every hazard, and a filled one has none
+match: five deliberate holes are each found, in words
 platforms: linux, windows
 teaches: 22-17-a-safety-case-per-robot-type
 ---

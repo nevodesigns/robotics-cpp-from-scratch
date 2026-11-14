@@ -2,6 +2,7 @@ id: E-FIELD-0015
 title: A planner that sends a robot where it cannot climb
 match: the robot stalls halfway up a slope that the motors could drive
 match: the slope is steeper than the surface allows
+match: there is a steepest slope a surface can be climbed or held on
 platforms: linux, windows
 teaches: 22-05-terrain-and-friction
 ---

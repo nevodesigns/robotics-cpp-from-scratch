@@ -2,6 +2,7 @@ id: E-FIELD-0049
 title: A tick count taken from the data sheet
 match: the robot goes 15 percent too far every time
 match: the ticks a metre are not the documented ones
+match: the numbers measured are the ones the fault set, and the advice says what to do about it
 platforms: linux, windows
 teaches: 22-16-a-bring-up-checklist-for-a-board
 ---

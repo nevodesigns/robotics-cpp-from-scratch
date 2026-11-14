@@ -2,6 +2,8 @@ id: E-FIELD-0027
 title: A view sized to the walls
 match: the robot leaves the picture and the failure cannot be seen
 match: the bounds do not include the path
+match: the bounds hold everything that is drawn
+match: the picture is well formed, has one element for each thing in the scenario, and one point for each pose
 platforms: linux, windows
 teaches: 22-09-watching-a-run
 ---

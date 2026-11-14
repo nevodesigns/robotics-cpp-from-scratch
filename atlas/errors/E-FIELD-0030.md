@@ -2,6 +2,7 @@ id: E-FIELD-0030
 title: Collisions counted in samples
 match: the collision count changes when the log rate changes
 match: a stretch of samples inside an obstacle is one collision
+match: a stretch of samples inside a post is one collision, and the clearance says how far inside
 platforms: linux, windows
 teaches: 22-10-scoring-a-run
 ---

@@ -2,6 +2,7 @@ id: E-FIELD-0016
 title: A lost lidar beam read as a range
 match: a beam that returned nothing is stored as zero or the maximum range and becomes an obstacle
 match: the lidar reports infinity for a beam that saw nothing
+match: a ray finds the nearest wall or post, and nothing when there is none in range
 platforms: linux, windows
 teaches: 22-06-sensors-that-fail-like-the-field
 ---
