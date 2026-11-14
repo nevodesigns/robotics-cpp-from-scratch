@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why are two measures of the gap used, the largest and the end?",
       "options": [
-        "They are always equal",
-        "One would do",
+        "The largest is always at the end",
+        "The end is easier to compute",
         "The end can be right while the way there was wrong",
-        "For speed"
+        "Two numbers average out the noise"
       ],
       "correct": 2,
-      "explanation": "How it gets there is a different difference from where it arrives."
+      "explanation": "Two runs can finish in the same place having taken different ways there. A gap that peaks in the middle points to how the robot moves, not where it stops."
     },
     {
       "stage": "check",
       "question": "On first order responses made with time constants of 0.05, 0.20 and 0.35 s, the reader got them back to within:",
       "options": [
         "0.012 s",
-        "Exactly",
-        "0.5 s",
-        "10 percent"
+        "0.12 s",
+        "Exactly, to rounding",
+        "Half their value"
       ],
       "correct": 0,
-      "explanation": "A trace is enough to read a time constant."
+      "explanation": "The speed is taken from the distance moved in each sample, and the time it first reaches 63.2 percent of its final value is read off, interpolating between samples."
     },
     {
       "stage": "check",
       "question": "Two built in models with lags of 0.05 and 0.30 s differed at the worst by:",
       "options": [
-        "Nothing",
-        "100 m",
         "0.0001 m",
+        "0.25 m, the difference of the lags",
+        "0.036 m",
         "0.050 m"
       ],
       "correct": 3,
-      "explanation": "That is the size of the setting's effect."
+      "explanation": "Over the five cases the worst distance between the two traces was 5 cm. That is what a quarter of a second of lag is worth on these moves."
     },
     {
       "stage": "check",
       "question": "After setting the lag read from the slower model, the gap was:",
       "options": [
-        "Infinite",
-        "Larger",
+        "0.050 m, unchanged",
+        "0.025 m, half",
         "0.0001 m, much smaller",
-        "The same"
+        "0.299 m"
       ],
       "correct": 2,
-      "explanation": "Calibration is judged by the gap falling."
+      "explanation": "The slower model's lag was read as 0.299 s and given to the faster one. The gap fell from 0.050 m to 0.0001 m, which is how a calibration is judged."
     },
     {
       "stage": "post",
       "question": "Does calibrating one simulator to the other show which is right?",
       "options": [
         "No: it shows what the difference is, and only the robot says which is right",
-        "Never useful",
-        "Yes",
-        "Always"
+        "Yes: the one calibrated to is right",
+        "Yes, if the gap goes to zero",
+        "Only for the straight case"
       ],
       "correct": 0,
-      "explanation": "Agreement is not truth."
+      "explanation": "Two simulators made to agree can both be wrong. The procedure names the difference; the real robot decides."
     },
     {
       "stage": "post",
       "question": "Why is each case run from rest on a freshly started world?",
       "options": [
-        "Speed",
+        "Gazebo cannot be reset",
         "A run that starts where the last ended compares the end of one case with the start of the next",
-        "Habit",
-        "Gazebo requires it"
+        "To keep the logs short",
+        "The built in model needs it"
       ],
       "correct": 1,
-      "explanation": "Cases must be independent."
+      "explanation": "Each case is meant to show one thing from rest. Carrying on from the previous case's end mixes them."
     }
   ]
 }

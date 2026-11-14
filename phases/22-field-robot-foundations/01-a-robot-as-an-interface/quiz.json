@@ -7,72 +7,72 @@
       "question": "Why write the interface before the hardware?",
       "options": [
         "So that the program is written against the class and the simulator, a fake and a board are interchangeable",
-        "To avoid testing",
-        "It is shorter",
-        "Boards have no classes"
+        "So that the hardware can be chosen later, to fit the code",
+        "Because an interface runs faster than a concrete class",
+        "So that the fake needs no tests"
       ],
       "correct": 0,
-      "explanation": "The program should not know which robot it is on."
+      "explanation": "A program that talks to Drive runs unchanged on a fake, a simulator or a board. The interface is the one place the three have to agree."
     },
     {
       "stage": "check",
       "question": "A base with a limit of 1 m/s was told to go 5 m/s. After 10 s it was doing:",
       "options": [
-        "5 m/s",
-        "2.5 m/s",
+        "5.000 m/s, as told",
+        "0.632 m/s",
         "1.000 m/s",
-        "0 m/s"
+        "0 m/s: an impossible command is refused"
       ],
       "correct": 2,
-      "explanation": "A fake that does not limit teaches a program to ask for the impossible."
+      "explanation": "The fake clamps a command to the base's limit, as the hardware does. One that obeyed would let a program rely on speeds no base has."
     },
     {
       "stage": "check",
       "question": "What did a stop at 1 m/s cost in distance for a time constant of 0.2 s?",
       "options": [
-        "1 m",
+        "Nothing: a stop is immediate",
         "0.200 m, the speed times the time constant",
-        "Nothing",
-        "5 m"
+        "1.000 m, the speed times one second",
+        "0.632 m"
       ],
       "correct": 1,
-      "explanation": "A stop is not instant."
+      "explanation": "The speed decays with the time constant, and the distance covered while it does is the speed times that constant: 1 m/s times 0.2 s."
     },
     {
       "stage": "check",
       "question": "How long did three joints at 0.5 rad/s take to move 1 rad, and twelve at 2 rad/s?",
       "options": [
-        "10 s",
+        "0.500 s and 2.000 s",
         "2.000 s and 0.500 s",
-        "Both 1 s",
-        "0 s"
+        "2.000 s for both",
+        "1.000 s and 1.000 s"
       ],
       "correct": 1,
-      "explanation": "The time is the distance over the rate."
+      "explanation": "Each joint moves toward its target at no more than its rate. A radian at 0.5 rad/s is two seconds, and at 2 rad/s half a second."
     },
     {
       "stage": "post",
       "question": "A controller is tuned on a fake that answers instantly. What happens on the real base?",
       "options": [
-        "It stops",
-        "It runs faster",
-        "Nothing",
+        "It is too slow on the real base",
+        "It works: a real base is faster than a fake",
+        "The watchdog stops it",
         "It is tuned for a robot that does not exist and overshoots on the real one"
       ],
       "correct": 3,
-      "explanation": "A fake that is too kind teaches bad habits."
+      "explanation": "A real base answers in a time constant, 0.2 s here. Gains chosen against an instant answer are too high for a plant that lags."
     },
     {
       "stage": "post",
       "question": "Why are ArmBus and LegBus separate types when they are the same row of joints?",
       "options": [
         "So a program cannot hand an arm's targets to a leg",
-        "For speed",
-        "They differ in speed",
-        "C++ needs two"
+        "An arm has more joints than a leg",
+        "They use different units",
+        "The compiler needs two names to link"
       ],
       "correct": 0,
-      "explanation": "A type is a mistake that cannot be made."
+      "explanation": "Both are a row of joints with targets and rates. Making them different types turns handing one's targets to the other into a compile error."
     }
   ]
 }

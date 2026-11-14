@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is the bring-up written at a lower level than the Drive?",
       "options": [
-        "Drive cannot be tested",
-        "It is faster",
+        "The Drive is too slow to test",
+        "The board has no Drive yet",
         "Its job is to find out whether the numbers the higher level will trust are right",
-        "Habit"
+        "Lower level code is easier to write"
       ],
       "correct": 2,
-      "explanation": "You cannot check a foundation from above it."
+      "explanation": "The Drive reports metres and a pose worked out from ticks and a scale. If the scale or a wire is wrong, only a test below the Drive can see it."
     },
     {
       "stage": "check",
       "question": "The healthy fake passed how many of the checks?",
       "options": [
         "10 of 10",
-        "One",
-        "Half",
-        "None"
+        "5 of 10, the ones that need no motion",
+        "9 of 10",
+        "0: a fake cannot pass"
       ],
       "correct": 0,
-      "explanation": "A board with nothing wrong passes all."
+      "explanation": "It read 1200 ticks a metre against the 1200 documented and passed every check."
     },
     {
       "stage": "check",
       "question": "A tick count 15 percent off read as how many ticks a metre?",
       "options": [
-        "0",
-        "100",
-        "1200",
+        "1200, as documented",
+        "1020",
+        "138",
         "1378"
       ],
       "correct": 3,
-      "explanation": "1200 times 1.15."
+      "explanation": "1200 times 1.15 is 1380, and the check measured 1378. The advice is to check the wheel, the gear ratio and the decoder."
     },
     {
       "stage": "check",
       "question": "Why does a reversed left motor fail three checks?",
       "options": [
         "The wheel counts down for a left command and cancels the other in the scale: the checks behind the cause fail with it",
-        "It is broken twice",
-        "Chance",
-        "A bug"
+        "Three wires are wrong",
+        "The checks are run three times",
+        "The motor is weaker in reverse"
       ],
       "correct": 0,
-      "explanation": "A consequence is not a second fault."
+      "explanation": "One cause, three failures: direction, then sides, then scale. The first line of the report is the cause and the others follow from it."
     },
     {
       "stage": "post",
       "question": "Why should a failed check say what to do?",
       "options": [
-        "Style",
-        "To be longer",
-        "It is required",
+        "So that the report is the same length every time",
+        "Because the board cannot fix itself",
+        "To make the fake easier to write",
         "A line that can be acted on saves the search that a bare failure starts"
       ],
       "correct": 3,
-      "explanation": "Advice is part of the check."
+      "explanation": "Swap the encoder's A and B wires is something a person can do. Direction failed sends them looking."
     },
     {
       "stage": "post",
       "question": "Why is the direction check made before the scale check?",
       "options": [
-        "Alphabet",
+        "Direction is the cheapest check",
         "A reversed motor makes the scale meaningless",
-        "No reason",
-        "Speed"
+        "The scale check needs the watchdog",
+        "Because the encoders are read in that order"
       ],
       "correct": 1,
-      "explanation": "Order the checks by what depends on what."
+      "explanation": "With one wheel counting backward the two encoders cancel, and the ticks a metre come out as nonsense."
     }
   ]
 }

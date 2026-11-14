@@ -7,72 +7,72 @@
       "question": "Why is reached the goal not a score?",
       "options": [
         "It says nothing about the way there: collisions, time, rhythm",
-        "It is too long",
-        "It is, completely",
-        "Goals are optional"
+        "It cannot be computed from a log",
+        "It is true of every run",
+        "It depends on the log's rate"
       ],
       "correct": 0,
-      "explanation": "A score is a set of numbers with thresholds."
+      "explanation": "Two runs that both arrive can differ in everything that matters: one clean and quick, the other through two posts and twice as long."
     },
     {
       "stage": "check",
       "question": "A V shaped detour, 2 m off a 10 m line, had a straightness of:",
       "options": [
-        "2",
-        "0",
-        "1.0",
+        "1.0000",
+        "0.8000",
+        "0.5000",
         "0.9285"
       ],
       "correct": 3,
-      "explanation": "10 over the 10.77 m walked."
+      "explanation": "The straight distance over the distance walked: 10 m over 10.77 m. A straight run scores 1."
     },
     {
       "stage": "check",
       "question": "Why are collisions counted as events?",
       "options": [
-        "Events are faster",
-        "It is tidier",
-        "No reason",
+        "Events are easier to draw",
+        "A sample cannot be inside an obstacle",
+        "To make the score larger",
         "Samples inside an obstacle depend on the log's rate, not on the mistake"
       ],
       "correct": 3,
-      "explanation": "Count mistakes, not samples."
+      "explanation": "Driving through two posts was 110 samples and two mistakes. At twice the logging rate it would be 220 samples and still two."
     },
     {
       "stage": "check",
       "question": "20 trials with two failures gave a success rate of:",
       "options": [
-        "10",
-        "50",
+        "80.0 percent",
+        "95.0 percent",
         "90.0 percent",
-        "100"
+        "18 percent"
       ],
       "correct": 2,
-      "explanation": "Success is over all trials."
+      "explanation": "Eighteen of twenty succeeded. The failed trials count against the rate and are left out of the times."
     },
     {
       "stage": "post",
       "question": "The mean time was 4.72 s and the 95th percentile 9.00 s. Which matters to a cell with a deadline?",
       "options": [
-        "The minimum",
-        "Neither",
+        "The mean, which uses every trial",
+        "The fastest trial",
         "The 95th percentile, which shows the slow ones",
-        "The mean"
+        "The success rate alone"
       ],
       "correct": 2,
-      "explanation": "A deadline is met by the slow ones."
+      "explanation": "One slow trial pulled the 95th percentile to 9.00 s while the mean stayed at 4.72 s. A cycle time is broken by the slow ones."
     },
     {
       "stage": "post",
       "question": "What does the irregularity of a gait measure?",
       "options": [
-        "Speed",
+        "The fraction of time a foot is down",
         "The spread of the stride periods over their mean",
-        "Noise",
-        "Weight"
+        "How fast the robot walks",
+        "The length of a stride"
       ],
       "correct": 1,
-      "explanation": "A missed step shows as a long period."
+      "explanation": "A steady gait gave 0.000 and one with a single missed step 0.222."
     }
   ]
 }

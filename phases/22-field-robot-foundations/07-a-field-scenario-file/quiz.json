@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is a test better as a file than as a function?",
       "options": [
-        "Files cannot fail",
-        "It runs faster",
+        "A file is parsed faster than code is compiled",
+        "A function cannot hold walls and patches",
         "It can be kept, shared, repeated and given to another simulator",
-        "It is shorter"
+        "A file needs no checking"
       ],
       "correct": 2,
-      "explanation": "A test must outlive the run."
+      "explanation": "The same file gives the built in simulator its terrain and, later, Gazebo its world. A test written as code belongs to one program."
     },
     {
       "stage": "check",
       "question": "A file with six mistakes gave how many reports?",
       "options": [
-        "0",
-        "1",
+        "6, one for each mistake",
+        "1, the first",
         "8, with their lines, six for lines and two for the whole file",
-        "6 only"
+        "15, one for each line"
       ],
       "correct": 2,
-      "explanation": "All the mistakes at once."
+      "explanation": "Each bad line was reported with its number, and the two rules about the whole file, a duration and a start, were reported after the last line."
     },
     {
       "stage": "check",
       "question": "Where is the check that a file has a start made?",
       "options": [
-        "On each line",
-        "Never",
-        "In the simulator",
+        "On the first line",
+        "When the start line is read",
+        "When the simulator loads the file",
         "After the last line, because it concerns the whole file"
       ],
       "correct": 3,
-      "explanation": "Some rules are about the whole."
+      "explanation": "A missing start is not a fault of any one line. It can only be known once every line has been read."
     },
     {
       "stage": "check",
       "question": "What is the result of parsing, writing, parsing and writing?",
       "options": [
-        "Different text",
+        "The second text is shorter",
         "The same text twice",
-        "An empty file",
-        "An error"
+        "The numbers lose a digit each time",
+        "The comments move to the top"
       ],
       "correct": 1,
-      "explanation": "Nothing is lost on the round trip."
+      "explanation": "Written in a fixed order, a scenario that is parsed and written again comes out the same. That shows nothing is lost between the file and the structure."
     },
     {
       "stage": "post",
       "question": "Why report a line number and the word that was wrong?",
       "options": [
         "So the mistake can be found and fixed in one pass",
-        "It is shorter",
-        "To avoid tests",
-        "For style"
+        "To make the parser longer",
+        "So the file can be rejected sooner",
+        "Because the keywords are in English"
       ],
       "correct": 0,
-      "explanation": "A message must point at the thing."
+      "explanation": "Six mistakes found one at a time are six runs. Reported together, each with its line and the offending word, they are fixed in one."
     },
     {
       "stage": "post",
       "question": "Why are angles in a scenario in degrees but in code in radians?",
       "options": [
-        "Degrees are faster",
-        "No reason",
-        "Radians are illegal",
+        "Degrees are more exact",
+        "The parser cannot read a decimal point",
+        "Radians cannot express a right angle",
         "A person writes 90, and the conversion is made once at the edge"
       ],
       "correct": 3,
-      "explanation": "Convert at the boundary."
+      "explanation": "A person types 90 without thinking and 1.5708 with a calculator. The file is for the person and the code for the arithmetic."
     }
   ]
 }

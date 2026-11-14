@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "How many digits does a double need to be given back exactly?",
       "options": [
-        "100",
-        "3",
         "6",
+        "15",
+        "20",
         "17"
       ],
       "correct": 3,
-      "explanation": "Seventeen significant digits are enough and fewer are not."
+      "explanation": "Seventeen significant digits are enough to recover any double exactly, and sixteen are not always. The log writes 17."
     },
     {
       "stage": "check",
       "question": "Written with 6 digits, a ten second run read back off by:",
       "options": [
-        "Exactly 0",
+        "Nothing: 6 digits are exact",
         "Up to 0.0000050",
-        "Wildly",
-        "Nothing could be read"
+        "Up to 0.5",
+        "Up to 0.02"
       ],
       "correct": 1,
-      "explanation": "Small, and enough to hide a difference."
+      "explanation": "Each value is rounded to six digits. That is small, and it is also enough to make two logs of the same run differ, or to hide a real difference."
     },
     {
       "stage": "check",
       "question": "Two runs with different seeds first differed at:",
       "options": [
-        "Never",
-        "5 s",
+        "5.00 s, the middle",
+        "10.00 s, the end",
         "0.02 s, the first sample",
-        "The end"
+        "They never differed"
       ],
       "correct": 2,
-      "explanation": "The noise differs from the start."
+      "explanation": "The noise is drawn from the seed from the first sample on. The same seed twice gave no difference at all."
     },
     {
       "stage": "check",
       "question": "A log cut in the middle of a line read as:",
       "options": [
-        "Nothing",
+        "1000 entries, as written",
         "999 entries with the truncated flag set",
-        "A crash",
-        "An error"
+        "An error at the last line",
+        "0 entries: the file was refused"
       ],
       "correct": 1,
-      "explanation": "The stump of a write is dropped."
+      "explanation": "The half written last line is dropped and flagged, and the rest is read. A wrong line in the middle is different: that stops the read at its line number."
     },
     {
       "stage": "post",
       "question": "Why does the log carry its scenario?",
       "options": [
         "So the record holds both the question and the answer",
-        "To make it bigger",
-        "Habit",
-        "For the version"
+        "To make the file self checking",
+        "So the scenario file can be deleted",
+        "Because the format needs a header"
       ],
       "correct": 0,
-      "explanation": "A log must say what it was."
+      "explanation": "A log that holds only numbers cannot say what was asked of the robot. With the scenario in it, the run can be repeated from the log alone."
     },
     {
       "stage": "post",
       "question": "How does the parser know the last line was cut?",
       "options": [
-        "It counts",
-        "A checksum",
-        "It cannot",
+        "It counts the entries against a header",
+        "Every line carries a checksum",
+        "The last time stamp is before the duration",
         "The writer ends every line with a newline, and the text does not end in one"
       ],
       "correct": 3,
-      "explanation": "A fixed convention gives a test."
+      "explanation": "A complete write always ends in a newline. If the text does not, the last line was never finished."
     }
   ]
 }

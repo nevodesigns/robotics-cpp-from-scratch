@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What makes a safety claim worth anything?",
       "options": [
-        "Its author",
-        "Its length",
+        "The number of hazards it lists",
+        "A statement that the robot was tested",
         "The structure behind it: every hazard has a control, and every control has a test",
-        "Its date"
+        "The standard it names"
       ],
       "correct": 2,
-      "explanation": "A sentence that says safe is not a case."
+      "explanation": "A case is a table that can be checked: no hazard without a control, no control without a test that passes."
     },
     {
       "stage": "check",
       "question": "How many hazards did the template of the ground vehicle start with?",
       "options": [
-        "1",
-        "3",
-        "20",
+        "7",
+        "6",
+        "16",
         "8"
       ],
       "correct": 3,
-      "explanation": "Eight, against seven for an arm and six for a legged robot."
+      "explanation": "A collision with a person, a runaway, tipping, a slope, the battery, a trapped limb, a lost position and motion during maintenance."
     },
     {
       "stage": "check",
       "question": "The empty ground template had how many problems?",
       "options": [
-        "100",
-        "0",
+        "8, one for each hazard",
+        "0: an empty case has nothing wrong",
         "16, two for each hazard",
-        "1"
+        "6"
       ],
       "correct": 2,
-      "explanation": "No control and no stated residual for each."
+      "explanation": "Every hazard lacked a control and a stated residual risk, which is two holes each."
     },
     {
       "stage": "check",
       "question": "Why is a control with no test a hole?",
       "options": [
         "Nothing shows that it works: it is a hope",
-        "Style",
-        "Tests are optional",
-        "It is too short"
+        "It makes the report longer",
+        "The checker cannot read it",
+        "It counts as information only"
       ],
       "correct": 0,
-      "explanation": "A control that has never been made to fail is unproven."
+      "explanation": "A control whose test does not pass is a known failure, and one with no test has never been tried."
     },
     {
       "stage": "post",
       "question": "Why is a high risk controlled only by a sign refused?",
       "options": [
-        "Signs are bad",
+        "A sign is not a control at all",
         "Information relies on a person doing the right thing, and a high risk needs a function that does not",
-        "It is allowed",
-        "Cost"
+        "Signs are too cheap",
+        "Information controls have no tests"
       ],
       "correct": 1,
-      "explanation": "Protective and design controls come before information."
+      "explanation": "A sign works only if someone reads and obeys it. For a high risk the case needs a design change or a safety function."
     },
     {
       "stage": "post",
       "question": "Does a case with no holes mean the robot is safe?",
       "options": [
-        "Only on Tuesdays",
+        "Yes, if every test passes",
         "No: it means the table has none, and the review and the hardware still have to say the rest",
-        "Always",
-        "Yes"
+        "Yes, for the hazards in the template",
+        "Only for a ground vehicle"
       ],
       "correct": 1,
-      "explanation": "The checker finds holes in a table, not in the world."
+      "explanation": "The checker reads a table. Whether the hazards are the right ones, and whether the robot behaves as the tests say, is for a review and the hardware."
     }
   ]
 }

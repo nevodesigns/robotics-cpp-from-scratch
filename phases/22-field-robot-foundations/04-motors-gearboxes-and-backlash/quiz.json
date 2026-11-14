@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Which data sheet numbers are enough to build a brushed motor model?",
       "options": [
-        "Only the price",
-        "None",
+        "The rotor inertia and the backlash",
+        "The stall current only",
         "Voltage, no load speed, stall torque and the gear ratio",
-        "Only the weight"
+        "The power rating and the weight"
       ],
       "correct": 2,
-      "explanation": "From them come the back voltage constant and the resistance."
+      "explanation": "The back voltage constant is the voltage over the no load speed, and the resistance follows from the stall torque. The rest of the model is marked typical."
     },
     {
       "stage": "check",
       "question": "At half the stall torque the output ran at:",
       "options": [
-        "Zero",
-        "Twice the speed",
-        "The full speed",
+        "350.0 rpm, the no load speed",
+        "87.5 rpm, a quarter",
+        "0 rpm: it stalled",
         "175.0 rpm, about half"
       ],
       "correct": 3,
-      "explanation": "The torque-speed line is straight."
+      "explanation": "The line from no load speed to stall torque is straight, so half the torque is half the speed."
     },
     {
       "stage": "check",
       "question": "The formula for the time constant gave 0.246 s. The simulated step took:",
       "options": [
-        "1 s",
-        "0 s",
+        "0.123 s, half",
+        "0.492 s, twice",
         "0.246 s",
-        "10 s"
+        "It never reached 63 percent"
       ],
       "correct": 2,
-      "explanation": "Simulation and algebra must agree."
+      "explanation": "The step response reached 63 percent in the time the algebra gave. That agreement is the check on the simulation."
     },
     {
       "stage": "check",
       "question": "After a reversal the output did not move until the gear side had crossed:",
       "options": [
         "2.02 degrees, the whole gap",
-        "Nothing",
-        "90 degrees",
-        "1 degree"
+        "1.00 degree, half the gap",
+        "Nothing: the encoder showed no gap",
+        "0.20 degrees"
       ],
       "correct": 0,
-      "explanation": "Backlash is lost motion."
+      "explanation": "On reversing, the gear has to cross the whole gap before it touches the output's other face. Until then the output stays where it was."
     },
     {
       "stage": "post",
       "question": "Why does an encoder on the motor not see backlash?",
       "options": [
-        "It is too slow",
+        "Its resolution is too coarse",
         "It measures the gear side, and the gap is between that and the output",
-        "It is broken",
-        "It sees only speed"
+        "The gap closes at speed",
+        "It only counts in one direction"
       ],
       "correct": 1,
-      "explanation": "The sensor is on the wrong side of the gap."
+      "explanation": "The encoder says where the motor's side of the gear is. The output sat a degree either side of the target, depending on which way it had come."
     },
     {
       "stage": "post",
       "question": "Why does a heavy load feel light behind a gearbox?",
       "options": [
         "Its inertia is divided by the square of the ratio at the motor",
-        "Gears are lubricated",
-        "It is not",
-        "It is lighter"
+        "The gearbox carries the load's weight",
+        "Friction in the gears holds it",
+        "The motor's torque constant rises"
       ],
       "correct": 0,
-      "explanation": "Reflected inertia is the load over the ratio squared."
+      "explanation": "Through a ratio of n the load turns n times slower, and its inertia seen at the motor is divided by n squared."
     }
   ]
 }

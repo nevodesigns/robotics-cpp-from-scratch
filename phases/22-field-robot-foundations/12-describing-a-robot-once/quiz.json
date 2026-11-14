@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What does the word typical in a robot file mean?",
       "options": [
-        "The number is exact",
-        "The number is wrong",
+        "The number is an average of several sources",
+        "The number was measured on a typical robot",
         "The number was not found; it is a value for a robot of this class",
-        "It is a unit"
+        "The number may be ignored"
       ],
       "correct": 2,
-      "explanation": "Honesty about what is measured."
+      "explanation": "Where a figure could be found the file says where. Where it could not, the file says typical, so a reader knows which numbers to check first."
     },
     {
       "stage": "check",
       "question": "How many of the 11 numbers of the reference robot are typical?",
       "options": [
-        "Half",
-        "All",
+        "0",
+        "11",
         "3",
-        "None"
+        "8"
       ],
       "correct": 2,
-      "explanation": "A reader can see which."
+      "explanation": "Eight carry a source and three are marked typical. The file makes it plain which are which."
     },
     {
       "stage": "check",
       "question": "The masses of the links in the SDF added up to:",
       "options": [
-        "0",
+        "1.060 kg, the body plus the wheels",
         "1.000 kg, the robot's mass",
-        "2 kg",
-        "10 kg"
+        "0.940 kg",
+        "3.000 kg"
       ],
       "correct": 1,
-      "explanation": "The body gets the mass that is left after the wheels."
+      "explanation": "The body is given what is left after the wheels and the caster. A body that took the whole mass and then had wheels added would weigh too much."
     },
     {
       "stage": "check",
       "question": "What is a line with a number and no source?",
       "options": [
         "Refused at its line",
-        "Ignored",
-        "A warning",
-        "Fine"
+        "Accepted, and marked typical",
+        "Accepted with a warning",
+        "Read as zero"
       ],
       "correct": 0,
-      "explanation": "No source, no number."
+      "explanation": "The parser refuses it and names the line. A number nobody can trace is one whose difference from the real robot cannot be found."
     },
     {
       "stage": "post",
       "question": "Why generate both models from one file?",
       "options": [
-        "It is shorter",
+        "One file is easier to read",
         "Two copies of a dimension will eventually disagree, and neither simulator will say so",
-        "Files are faster",
-        "SDF needs it"
+        "The simulators require the same format",
+        "It halves the build time"
       ],
       "correct": 1,
-      "explanation": "One place to be wrong."
+      "explanation": "Kept in two places, the track width gets changed in one. Both simulators run happily on their own copy and disagree with each other."
     },
     {
       "stage": "post",
       "question": "Why compute inertias from the shapes?",
       "options": [
-        "To save typing only",
-        "It is required",
-        "Gazebo cannot",
+        "Gazebo refuses a model without them",
+        "Shapes are easier to type than numbers",
+        "To make the model heavier",
         "A default inertia is a robot that spins or turns wrongly"
       ],
       "correct": 3,
-      "explanation": "Wrong inertia is silently wrong dynamics."
+      "explanation": "A box of 1 kg with these sides has an Ixx of 0.00511 kg m2. A made up inertia gives a robot that turns too easily or too stiffly, with no error."
     }
   ]
 }

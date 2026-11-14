@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why draw a run as an SVG?",
       "options": [
-        "It is the fastest",
-        "It is secret",
+        "It is the smallest format there is",
+        "It is the only format with animation",
         "It is text that any browser opens and animates, with no library",
-        "Robots need it"
+        "It needs a viewer to be installed"
       ],
       "correct": 2,
-      "explanation": "A picture with no dependencies is one that gets looked at."
+      "explanation": "The file is plain text with the numbers still in it, it opens in a browser, and it can be compared with diff."
     },
     {
       "stage": "check",
       "question": "A 10 s run of 500 poses came to how much SVG?",
       "options": [
-        "0",
+        "2.45 MB",
         "24.5 kB",
-        "10 bytes",
-        "1 GB"
+        "72.7 kB",
+        "500 bytes"
       ],
       "correct": 1,
-      "explanation": "Text is small."
+      "explanation": "About fifty bytes a pose, and some fifty times smaller than a video of the same run."
     },
     {
       "stage": "check",
       "question": "At four times the speed the animation lasted:",
       "options": [
-        "0 s",
-        "9.98 s",
+        "9.98 s, unchanged",
+        "39.92 s",
         "2.50 s",
-        "40 s"
+        "0.25 s"
       ],
       "correct": 2,
-      "explanation": "The duration is the span divided by the speed."
+      "explanation": "The run's 9.98 s divided by four."
     },
     {
       "stage": "check",
       "question": "What must a robot picture do about the y axis?",
       "options": [
         "Flip it, because SVG's points down and the robot's up",
-        "Nothing",
-        "Double it",
-        "Rotate it"
+        "Nothing: the two agree",
+        "Swap it with x",
+        "Scale it by the picture's height"
       ],
       "correct": 0,
-      "explanation": "A mirrored run is a lie."
+      "explanation": "Drawn without the flip, a left turn on the field is a right turn on the screen, and nothing looks wrong until it is compared with the robot."
     },
     {
       "stage": "post",
       "question": "Why are the key times taken from the log's time stamps?",
       "options": [
-        "To save memory",
-        "No reason",
-        "For speed",
+        "Time stamps are smaller than indices",
+        "The browser needs them in seconds",
+        "So that every run lasts the same",
         "So a log with a gap plays with a gap"
       ],
       "correct": 3,
-      "explanation": "Index is not time."
+      "explanation": "Spacing the frames by index would close up a gap in the log. Using the stamps keeps the pause where it happened."
     },
     {
       "stage": "post",
       "question": "Why must the bounds include the poses?",
       "options": [
-        "To make it large",
-        "They don't",
-        "For colour",
+        "So the picture is always square",
+        "Because walls may be missing",
+        "To leave room for a legend",
         "A robot that leaves the room is the run that most needs to be seen"
       ],
       "correct": 3,
-      "explanation": "Do not cut off the failure."
+      "explanation": "A view sized to the walls shows nothing of a robot that drove out through them."
     }
   ]
 }

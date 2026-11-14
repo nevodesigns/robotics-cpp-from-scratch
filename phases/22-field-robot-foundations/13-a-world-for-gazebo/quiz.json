@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why make the Gazebo world from the scenario file?",
       "options": [
-        "Gazebo cannot read anything else",
-        "It is faster",
+        "The scenario format is simpler than SDF",
+        "Gazebo runs faster on generated worlds",
         "Two copies of a wall will disagree, and the simulators then disagree about something never in dispute",
-        "Habit"
+        "So that Gazebo's physics can be switched off"
       ],
       "correct": 2,
-      "explanation": "One file, two worlds."
+      "explanation": "If each simulator had its own copy of the yard, a wall moved in one would be a difference between the simulators that has nothing to do with either."
     },
     {
       "stage": "check",
       "question": "A wall from (0,0) to (3,4) became a box of length:",
       "options": [
-        "4",
+        "3.000 m, along x",
         "5.000 m, turned 0.927295 rad",
-        "3",
-        "7"
+        "4.000 m, along y",
+        "5.000 m, laid along x"
       ],
       "correct": 1,
-      "explanation": "The length of the segment, the angle of its direction."
+      "explanation": "The box is as long as the segment and turned to its direction: the root of 3 squared plus 4 squared, at atan2(4, 3)."
     },
     {
       "stage": "check",
       "question": "A grade of 0.1 rising along +x is a pitch of:",
       "options": [
-        "0",
-        "+0.0997 rad",
+        "+0.0996687 rad",
+        "-0.1 rad exactly",
         "-0.0996687 rad",
-        "0.1 degrees"
+        "-5.7 rad"
       ],
       "correct": 2,
-      "explanation": "A positive rotation about y turns x downwards."
+      "explanation": "A positive rotation about y tips the x axis down, so a rise along +x needs a negative pitch of the arctangent of the grade."
     },
     {
       "stage": "check",
       "question": "Why is a goal a marker with no collision?",
       "options": [
         "It is a place, not a thing, and a robot must be able to drive onto it",
-        "Gazebo requires it",
-        "It is invisible",
-        "It is cheaper"
+        "A marker with collision would be too heavy",
+        "Gazebo cannot make a ring collide",
+        "So that the lidar ignores it"
       ],
       "correct": 0,
-      "explanation": "A place is not an obstacle."
+      "explanation": "The goal marks where the robot should end up. If it could be bumped into, the robot could never stand on it."
     },
     {
       "stage": "post",
       "question": "Why are faults not in the world?",
       "options": [
-        "Gazebo has none",
-        "They are",
-        "They are optional",
+        "They are in it, as plugins",
+        "Gazebo cannot simulate a GNSS outage",
+        "They would slow the physics",
         "They concern what the sensors report, so they belong between the world and the program"
       ],
       "correct": 3,
-      "explanation": "The world is physical."
+      "explanation": "A GNSS outage or a lost beam is something the robot's sensors report. The adapter between the world and the program applies them."
     },
     {
       "stage": "post",
       "question": "What hides the mistake of laying every wall along x?",
       "options": [
-        "The robot",
-        "Nothing",
-        "The ground",
+        "A world with no walls",
+        "Walls longer than the ground slab",
+        "Walls written from the other end",
         "Axis aligned walls, which are the common ones"
       ],
       "correct": 3,
-      "explanation": "Test a wall that is neither."
+      "explanation": "A box laid along x is right for every wall that already runs along x. A test needs a wall at an angle to show the mistake."
     }
   ]
 }

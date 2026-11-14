@@ -7,72 +7,72 @@
       "question": "Why make a speed from a named constructor and not a number?",
       "options": [
         "The unit is said once, where the number is written",
-        "It is faster",
-        "Doubles are inexact",
-        "It is shorter"
+        "A named constructor is checked at run time",
+        "A double cannot hold a speed exactly",
+        "It lets the compiler convert units for you"
       ],
       "correct": 0,
-      "explanation": "The compiler cannot know a unit, but it can make you state it."
+      "explanation": "from_kmh(5.0) and from_mps(5.0) are different words for different speeds. After construction everything is in one unit, at no cost when running."
     },
     {
       "stage": "check",
       "question": "A stop from 1 m/s at 1.5 m/s2 took:",
       "options": [
-        "0.1 s",
-        "1 s and 1 m",
-        "2 s",
+        "2.000 s and 1.000 m",
+        "0.667 s and 0.667 m",
+        "1.500 s and 0.333 m",
         "0.667 s and 0.333 m"
       ],
       "correct": 3,
-      "explanation": "Time is speed over braking, distance is v squared over twice that."
+      "explanation": "The time is the speed over the braking, 1 over 1.5. The distance is the speed squared over twice the braking, 1 over 3."
     },
     {
       "stage": "check",
       "question": "1 m/s with a turn rate of 2 rad/s at a lateral limit of 1.5 m/s2 became:",
       "options": [
         "0.750 m/s",
-        "1 m/s",
-        "0 m/s",
-        "2 m/s"
+        "1.000 m/s: the limits are separate",
+        "0.375 m/s",
+        "Zero: the command is refused"
       ],
       "correct": 0,
-      "explanation": "Speed times turn rate is held to the limit."
+      "explanation": "Speed times turn rate is the sideways acceleration. To keep it at 1.5 m/s2 with a turn rate of 2 rad/s the speed is cut to 0.75 m/s."
     },
     {
       "stage": "check",
       "question": "A limit of 5 read as m/s when it was km/h made the stopping distance:",
       "options": [
-        "Half",
-        "The same",
+        "3.6 times as long",
+        "The same: the brakes are the same",
         "13.0 times as long",
-        "Zero"
+        "5 times as long"
       ],
       "correct": 2,
-      "explanation": "The error is the square of the unit ratio."
+      "explanation": "The speeds differ by 3.6 and the stopping distance goes with the square: 8.331 m against 0.642 m."
     },
     {
       "stage": "post",
       "question": "Why is braking allowed to be stronger than accelerating?",
       "options": [
-        "It is not",
+        "It is a rule of the standard",
         "Motors brake harder than they accelerate, and stopping is the safe direction",
-        "For looks",
-        "To save power"
+        "Braking uses no energy",
+        "To make the ramp up smoother"
       ],
       "correct": 1,
-      "explanation": "The limits should say what the vehicle can do."
+      "explanation": "A stop from 1 m/s took a third of the time and distance of the ramp up to it. Limits should describe the vehicle, and stopping sooner is the safe direction."
     },
     {
       "stage": "post",
       "question": "What does the lateral limit protect against?",
       "options": [
-        "Battery",
-        "Slow speed",
+        "The motors overheating",
+        "The wheels slipping on a straight",
         "Tipping or sliding in a turn",
-        "Noise"
+        "The battery sagging"
       ],
       "correct": 2,
-      "explanation": "Speed times turn rate is the sideways acceleration."
+      "explanation": "The sideways acceleration in a turn is the speed times the turn rate. Capping it is what keeps a fast, tight turn from tipping or sliding the vehicle."
     }
   ]
 }

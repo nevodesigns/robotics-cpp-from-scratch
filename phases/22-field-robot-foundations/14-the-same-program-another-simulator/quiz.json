@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why a second simulator behind the same interface?",
       "options": [
-        "Licensing",
-        "Gazebo is better",
+        "The built in one is too slow",
+        "To run two robots at once",
         "A program tested on one has learnt that simulator's habits; two let the answers be compared",
-        "Speed"
+        "Gazebo needs a reference to start"
       ],
       "correct": 2,
-      "explanation": "The comparison is the test."
+      "explanation": "With one simulator a program can come to depend on its quirks. With two behind one interface, the same script's answers can be laid side by side."
     },
     {
       "stage": "check",
       "question": "Driving straight 5 s at 0.2 m/s from y = 2 ended on the built in backend at:",
       "options": [
-        "y = 5",
+        "y = 3.000 exactly",
         "y = 2.990, a little short of 3 because of the lag",
-        "y = 3.0 exactly",
-        "y = 2"
+        "y = 2.887",
+        "y = 2.220"
       ],
       "correct": 1,
-      "explanation": "Speed times time less speed times time constant."
+      "explanation": "A metre is 0.2 m/s for 5 s. The lag of 0.05 s costs 0.05 times 0.2, a centimetre."
     },
     {
       "stage": "check",
       "question": "A command of 5 m/s with a limit of 0.22 in the robot file gave:",
       "options": [
         "0.22 m/s",
-        "2.5 m/s",
-        "0",
-        "5 m/s"
+        "5 m/s, as commanded",
+        "2.84 m/s",
+        "0 m/s: it was refused"
       ],
       "correct": 0,
-      "explanation": "The limits come from the file."
+      "explanation": "The built in backend takes its limits from the robot file, 0.22 m/s and 2.84 rad/s."
     },
     {
       "stage": "check",
       "question": "How is the Gazebo run made as long as it was asked to be?",
       "options": [
         "The server is paused and stepped by the world control service until the clock gets there",
-        "It is not",
-        "A sleep",
-        "It runs in real time"
+        "It runs in real time and is timed with a clock",
+        "The program sleeps for the run's length",
+        "The run is cut when enough samples have arrived"
       ],
       "correct": 0,
-      "explanation": "Time is advanced, not waited for."
+      "explanation": "The run lasts as long in simulated time as was asked, however long the computer takes. Without that the two simulators could not be compared."
     },
     {
       "stage": "post",
       "question": "Why does the Gazebo backend put itself in a partition of its own?",
       "options": [
-        "For logging",
-        "For speed",
-        "It is required",
+        "To use less memory",
+        "Because the world file needs a unique name",
+        "So the server starts paused",
         "So that two runs, or two tests, never hear each other's messages"
       ],
       "correct": 3,
-      "explanation": "Transport is shared by default."
+      "explanation": "gz-transport is shared between every process on the machine unless told otherwise. A private partition keeps one run's commands out of another's."
     },
     {
       "stage": "post",
       "question": "What happens to the lesson on a machine without Gazebo?",
       "options": [
-        "It is skipped",
+        "It does not build",
         "It builds and passes without the Gazebo test",
-        "It fails",
-        "It asks to install it"
+        "It builds, and its tests are all skipped",
+        "It downloads Gazebo first"
       ],
       "correct": 1,
-      "explanation": "Every lesson passes without what it cannot assume."
+      "explanation": "The Gazebo backend and its test are built only where Gazebo is installed. Everything else in the lesson builds and passes without it."
     }
   ]
 }
