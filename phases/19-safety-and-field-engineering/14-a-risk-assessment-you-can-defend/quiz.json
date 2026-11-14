@@ -7,72 +7,72 @@
       "question": "What is the difference between an assessment and a spreadsheet of mitigations?",
       "options": [
         "The assessment checks its own claims: a mitigation gets credit only if its mechanism exists and its evidence passes, and a claim with nothing under it is worth zero",
-        "Length",
-        "Nothing",
-        "Colour"
+        "An assessment is longer and has a signature",
+        "An assessment uses probabilities and a spreadsheet does not",
+        "Nothing, if the spreadsheet lists every hazard"
       ],
       "correct": 0,
-      "explanation": "A document can be a promise."
+      "explanation": "A mitigation here names a mechanism that must exist and carries evidence that is run. One that fails either earns no credit at all."
     },
     {
       "stage": "check",
       "question": "Two software mitigations are listed for G7. What is the combined pfd compared with one?",
       "options": [
-        "Zero",
-        "The product",
-        "Half",
+        "The product of the two, 1.33e-05",
+        "Half, 1.82e-03",
+        "Zero: two mitigations cover every failure",
         "The same: within a group only the best counts, because they can fail for the same reason (3.64e-03 before and after)"
       ],
       "correct": 3,
-      "explanation": "Across groups they are redundant with a common-cause share."
+      "explanation": "Both are software and can fail for the same reason, so only the better one counts. Redundancy is credited across groups, with a common cause share."
     },
     {
       "stage": "check",
       "question": "Why are G1, G2 and G4 medium after, with a pfd of 1.03e-05?",
       "options": [
-        "A mistake",
-        "Their pfd is large",
+        "Their pfd is too large for anything lower",
+        "The arithmetic gives a score of 8",
         "The floor: a severity of 4 is never classed below medium, and the residual risk has to be accepted by a named person",
-        "The arithmetic"
+        "A mistake in the table"
       ],
       "correct": 2,
-      "explanation": "The product would have said low."
+      "explanation": "A likelihood of 1 with a severity of 4 scores 4, which the product would call low. Severity 4 is never classed below medium."
     },
     {
       "stage": "check",
       "question": "The brake is changed to one applied by power. What does the assessment say?",
       "options": [
         "The evidence fails in G1, G2 and G4, which relied on it: 3 evidence failures and 9 findings, with the credit, the second group and the residual class all following",
-        "Nothing",
-        "It passes",
-        "One finding"
+        "Nothing: the brake's pfd is unchanged",
+        "One finding, for the brake itself",
+        "It passes, since the software stop still works"
       ],
       "correct": 0,
-      "explanation": "Change the line, and the assessment follows."
+      "explanation": "The brake's evidence cuts its wire and expects it to engage, which a power applied brake does not. Every hazard that leaned on it loses the credit, its second group and its class."
     },
     {
       "stage": "post",
       "question": "A mitigation's pfd is a NaN. What happens?",
       "options": [
-        "Ignored",
-        "Zero",
+        "It is treated as 0 and the mitigation gets full credit",
+        "The entry is skipped with a warning",
         "It counts as 1, and G5's residual risk became high: not knowing is not a small chance",
-        "An error"
+        "The assessment stops with an error"
       ],
       "correct": 2,
-      "explanation": "The finding was residual risk is high or worse."
+      "explanation": "An unknown chance of failure is counted as certain failure. G5 then had nothing behind it, and its residual risk rose to high."
     },
     {
       "stage": "post",
       "question": "What does defensible not mean?",
       "options": [
-        "That it is certified",
+        "That the evidence was run",
         "That nothing can go wrong: three catastrophes remain at medium, a person has put their name to that, and the hazards never written down are not in the report",
-        "That it is fast",
-        "That the tests ran"
+        "That every hazard has an owner",
+        "That a mechanism was named for each mitigation"
       ],
       "correct": 1,
-      "explanation": "A tool for keeping an assessment honest, not a certificate."
+      "explanation": "It means each claim has something under it. Three catastrophes are still medium by the floor, and a hazard nobody wrote down is not assessed at all."
     }
   ]
 }
