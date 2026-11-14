@@ -112,3 +112,19 @@ RC_TEST("one track slipping more than the other turns a vehicle that was told to
   for (int i = 0; i < 10000; ++i) even.step(w, w, 0.15, 0.15, 0.001);
   RC_CHECK_NEAR(even.pose().theta, 0.0, 1e-12);
 }
+
+RC_TEST("a tracked vehicle facing north goes north, and an arc is the arc its speeds say") {
+  TrackedDrive north(0.05, 0.30, 1.0);
+  Pose2 start;
+  start.theta = 0.5 * 3.14159265358979323846;
+  north.reset(start);
+  for (int i = 0; i < 100; ++i) north.step(10.0, 10.0, 0.0, 0.0, 0.01);   // 0.5 m/s for 1 s
+  RC_CHECK_NEAR(north.pose().x, 0.0, 1e-9);
+  RC_CHECK_NEAR(north.pose().y, 0.5, 1e-9);
+  TrackedDrive arc(0.05, 0.30, 1.0);
+  const double v = 0.5, w = (0.6 - 0.4) / 0.30;   // sprockets at 8 and 12 rad/s
+  for (int i = 0; i < 40; ++i) arc.step(8.0, 12.0, 0.0, 0.0, 0.05);       // 2 s
+  RC_CHECK_NEAR(arc.pose().theta, w * 2.0, 1e-9);
+  RC_CHECK_NEAR(arc.pose().x, v / w * std::sin(w * 2.0), 1e-3);
+  RC_CHECK_NEAR(arc.pose().y, v / w * (1.0 - std::cos(w * 2.0)), 1e-3);
+}

@@ -120,3 +120,15 @@ RC_TEST("a curvature becomes a steering angle within the limit, and the surface 
   RC_CHECK_NEAR(vmax, std::sqrt(0.45 * 9.81 * r), 1e-12);
   RC_CHECK(max_speed_in_turn(0.1, r) < max_speed_in_turn(0.8, r));
 }
+
+RC_TEST("a quarter of the smallest circle to the left ends a radius ahead and a radius to the left") {
+  CarGeometry g;
+  BicycleCar car(g);
+  const double r = g.wheelbase / std::tan(g.max_steer);
+  const double t = 0.5 * 3.14159265358979323846 * r;   // a quarter of the circumference at 1 m/s
+  const int n = 500;
+  for (int i = 0; i < n; ++i) car.step(1.0, g.max_steer, t / n);
+  RC_CHECK_NEAR(car.x(), r, 1e-4);
+  RC_CHECK_NEAR(car.y(), r, 1e-4);    // to the left: y is positive
+  RC_CHECK_NEAR(car.theta(), 0.5 * 3.14159265358979323846, 1e-9);
+}

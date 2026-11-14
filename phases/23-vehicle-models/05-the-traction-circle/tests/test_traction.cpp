@@ -125,3 +125,15 @@ RC_TEST("near the edge there is almost nothing left to brake with, and a slope t
   RC_CHECK(hill_turn.brake > flat_turn.brake - 0.5);
   RC_CHECK_NEAR(hill_turn.brake - hill_turn.drive, 2.0 * (9.81 * std::sin(std::atan(0.2)) + 9.81 * 0.04 * std::cos(std::atan(0.2))), 1e-9);
 }
+
+RC_TEST("on a slope the grip is less by the cosine of the slope, and the turn's share of it is more") {
+  const rc::field::Cell slope = on(rc::field::gravel(), 0.2);
+  const rc::field::Cell flat = on(rc::field::gravel());
+  const double v = 1.0, kappa = 1.0;
+  const double cosine = std::cos(std::atan(0.2));
+  const TractionBudget up = traction_budget(slope, 0.0, v, kappa);
+  const TractionBudget level = traction_budget(flat, 0.0, v, kappa);
+  RC_CHECK_NEAR(level.share, 1.0 / (rc::field::gravel().mu * 9.81), 1e-9);
+  RC_CHECK_NEAR(up.share, level.share / cosine, 1e-9);
+  RC_CHECK(up.share > level.share);
+}
