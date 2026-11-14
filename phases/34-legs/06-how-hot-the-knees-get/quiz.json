@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why does a trot heat the knees more than standing?",
       "options": [
-        "It is not so",
-        "Air",
-        "It is faster",
+        "The legs swing faster, and the swing is what heats them",
+        "The body is higher in a trot",
+        "The servos are less efficient at a trot's pace",
         "Only two feet are down, so each carries twice the load and heat goes as the square"
       ],
       "correct": 3,
-      "explanation": "28.1 K against 14.0 K."
+      "explanation": "Two feet share the weight where four did, so the stance torque doubles and the heat while it is on quadruples: 28.1 K against 14.0 K."
     },
     {
       "stage": "check",
       "question": "The knee's stance torque in the trot was:",
       "options": [
-        "0 N m",
-        "60 N m",
+        "4.33 N m",
+        "6.12 N m",
         "8.65 N m",
-        "4.33 N m"
+        "17.3 N m"
       ],
       "correct": 2,
-      "explanation": "Twice standing's."
+      "explanation": "Standing on four feet the knee gave 4.33 N m; with two down it carries twice the load. 6.12 N m is the rms over the cycle, swing included."
     },
     {
       "stage": "check",
       "question": "Which torque sets the heating over a cycle?",
       "options": [
-        "The peak",
+        "The largest torque in the cycle",
         "The root mean square",
-        "The swing torque",
-        "The mean"
+        "The average torque over the cycle",
+        "The torque in the stance alone"
       ],
       "correct": 1,
-      "explanation": "Heat goes as the square."
+      "explanation": "Heat goes as the square of the current, so the squares are averaged and then rooted. In the trot that gave 6.12 N m from 8.65 in the stance and 0.3 in the swing."
     },
     {
       "stage": "check",
       "question": "The heaviest body the knees could trot with at 0.30 m:",
       "options": [
-        "12 kg",
+        "12 kg, what it was built for",
         "17.5 kg",
-        "0 kg",
-        "1000 kg"
+        "35 kg, twice the trot's figure",
+        "40 kg, the robot of the crouch test"
       ],
       "correct": 1,
-      "explanation": "Less when crouched."
+      "explanation": "By halving an interval, the heaviest body whose knees settle at or under the 60 K limit. Crouched lower the figure is much less."
     },
     {
       "stage": "post",
       "question": "What happens to a heavy robot held in a crouch?",
       "options": [
         "The windings pass their limit in time, here 25 s, and the legs go limp",
-        "It cools",
-        "Nothing",
-        "It gets lighter"
+        "It settles at a temperature under the limit, as any pose does",
+        "The battery runs down before the knees warm",
+        "The torque falls as the windings heat, so it sinks slowly"
       ],
       "correct": 0,
-      "explanation": "29-08's time to the limit."
+      "explanation": "A pose whose settling temperature is over the limit can only be held for a time. The 40 kg robot crouched on four feet had 25 s."
     },
     {
       "stage": "post",
       "question": "What is not in this model?",
       "options": [
-        "The heat",
-        "The stance torque",
+        "The swing's small torque",
+        "The number of feet on the ground",
         "Impact peaks at touchdown, and the controller that cuts current",
-        "The rms"
+        "The thermal resistance of the motor"
       ],
       "correct": 2,
-      "explanation": "It is a steady, single lump model."
+      "explanation": "The model is one lump of heat and a steady cycle. The jolt of each landing, and a drive that cuts the current when hot, are not in it."
     }
   ]
 }

@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why do the feet give a second opinion on the body's tilt?",
       "options": [
-        "They do not",
+        "They carry force sensors that measure the slope",
         "On level ground they lie in one plane, which, seen from the body, is its tilt and height",
-        "They weigh the body",
-        "They are accurate"
+        "Their joint angles are more accurate than a gyro",
+        "Each foot's height gives the tilt on its own"
       ],
       "correct": 1,
-      "explanation": "And they do not drift."
+      "explanation": "The feet are on the floor, so the plane through them is the floor as the body sees it. It comes from the joint angles alone and does not drift."
     },
     {
       "stage": "check",
       "question": "How many feet on the ground does the fit need at least?",
       "options": [
-        "Two",
+        "Two, on a diagonal",
         "Three, not in a line",
-        "Four",
-        "One"
+        "Four, one at each corner",
+        "One, with its three joint angles"
       ],
       "correct": 1,
-      "explanation": "Fewer, or a line, give no plane."
+      "explanation": "A plane has three unknowns. Two feet, or any number on one line, leave it free to turn about that line."
     },
     {
       "stage": "check",
       "question": "With 5 mm of noise the roll was uncertain by:",
       "options": [
-        "1 mm",
-        "90 degrees",
-        "0 degrees",
+        "0.92 degrees with either, since noise does not depend on the count",
+        "1.29 degrees with four feet and 0.92 with three",
+        "2.5 degrees with four feet and 3.6 with three",
         "0.92 degrees with four feet and 1.29 with three"
       ],
       "correct": 3,
-      "explanation": "A fourth foot averages some noise out."
+      "explanation": "Three feet fit a plane exactly, noise included. A fourth gives the fit something to average, which brought the roll's uncertainty from 1.29 to 0.92 degrees."
     },
     {
       "stage": "check",
       "question": "Why is the tilt so uncertain for so little noise?",
       "options": [
         "The feet are only about 0.4 m apart: a small base is a poor tilt sensor",
-        "Bad luck",
-        "The ground",
-        "The joints"
+        "The joint angles are read only a few times a second",
+        "Cramer's rule loses accuracy on a matrix this small",
+        "The feet slip a little at every step"
       ],
       "correct": 0,
-      "explanation": "Tilt is height difference over distance."
+      "explanation": "5 mm of height error across about 0.4 m of base is already most of a degree. A wider stance would measure tilt better."
     },
     {
       "stage": "post",
       "question": "What must be left out of the fit?",
       "options": [
-        "The front feet",
-        "Nothing",
+        "The foot with the largest joint torque",
+        "The foot furthest from the body's centre",
         "A swing foot, which is not on the ground",
-        "The stance feet"
+        "Any foot whose height differs from the others"
       ],
       "correct": 2,
-      "explanation": "Otherwise the plane tilts."
+      "explanation": "A foot in the air is not a point of the floor. Put into the fit it drags the plane up at its corner."
     },
     {
       "stage": "post",
       "question": "What does the plane give on a slope?",
       "options": [
-        "The heading",
-        "Nothing",
-        "The tilt relative to gravity",
+        "The tilt relative to gravity, as an IMU would",
+        "Nothing: the fit fails on a slope",
+        "The slope's angle and the body's tilt separately",
         "The tilt relative to the ground, not gravity"
       ],
       "correct": 3,
-      "explanation": "35-04 brings in the IMU."
+      "explanation": "The plane is the ground's. On a ramp a body parallel to the ramp reads as level, which is what the legs need and not what balance needs."
     }
   ]
 }

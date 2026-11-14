@@ -7,72 +7,72 @@
       "question": "How many answers has the inverse kinematics of a leg for a place within reach?",
       "options": [
         "Two, with the knee bent one way or the other",
-        "Infinitely many",
-        "Four",
-        "One"
+        "One: three joints and three coordinates leave no choice",
+        "Four: two for the knee and two for the lean",
+        "As many as there are leans, since the offset can turn either way"
       ],
       "correct": 0,
-      "explanation": "Plus or minus the arccosine."
+      "explanation": "The lean is fixed by the foot's place across the body, and the thigh and shank are then a two link problem with the knee angle plus or minus an arccosine. A robot picks one sign and keeps it."
     },
     {
       "stage": "check",
       "question": "Over a grid of 756 places, how many were reachable?",
       "options": [
-        "1",
-        "0",
+        "756, every place on the grid",
+        "378, half, since only one knee direction counts",
         "680",
-        "756"
+        "76, the ones directly under the hip"
       ],
       "correct": 2,
-      "explanation": "A place nearer the lean axis than the offset, or beyond the leg's length, is refused."
+      "explanation": "The 76 refused were nearer the lean axis than the hip's offset or further away than the leg is long. Each of the 680 came back to the place asked."
     },
     {
       "stage": "check",
       "question": "A place 0.50 m below the hip:",
       "options": [
-        "Was reached",
-        "Needed the other knee",
-        "Was reached with a lean",
+        "Was reached with the knee straight",
+        "Was reached by leaning the leg sideways",
+        "Was reached, but only with the knee bent forward",
         "Was out of reach"
       ],
       "correct": 3,
-      "explanation": "The leg is 0.42 m long."
+      "explanation": "The thigh and shank are 0.21 m each, so the foot can be at most 0.42 m from the hip's pitch axis. The function says false and makes nothing up."
     },
     {
       "stage": "check",
       "question": "The knee was -89 degrees for the foot 0.30 m below the hip, which is:",
       "options": [
-        "Straight",
-        "Folded flat",
-        "Unreachable",
+        "Nearly straight, as at full stretch",
+        "Bent forward, as a person's knee",
+        "Folded as far as it goes",
         "Bent back, as a standing dog's"
       ],
       "correct": 3,
-      "explanation": "Lower stands bend more."
+      "explanation": "With two links of 0.21 m and the foot 0.30 m below, the knee is close to a right angle, bent back. A lower stand bends it more."
     },
     {
       "stage": "post",
       "question": "Why is the straight leg a singularity?",
       "options": [
         "The foot cannot move farther along the leg and the joint rates grow without bound near it",
-        "It is weak",
-        "It is slow",
-        "It is not"
+        "The motors have no torque left when the leg is straight",
+        "The inverse kinematics has no answer for a straight leg",
+        "The two knee answers are furthest apart there"
       ],
       "correct": 0,
-      "explanation": "As in 32-01."
+      "explanation": "At full stretch the two knee answers become one, and no joint motion moves the foot further out. Near it a small foot movement along the leg needs a very large joint rate."
     },
     {
       "stage": "post",
       "question": "What is not in this model?",
       "options": [
-        "The two knees",
+        "The sideways offset of the hip's pitch axis",
         "Joint limits, backlash and the true zeros of the joints",
-        "The forward kinematics",
-        "The offset"
+        "The difference between a left leg and a right one",
+        "The places the leg cannot reach"
       ],
       "correct": 1,
-      "explanation": "34-08 measures the zeros."
+      "explanation": "The model is the ideal geometry. A real leg has angles it cannot reach, play in its gears, and zeros that are not where the model says, which 34-08 measures."
     }
   ]
 }

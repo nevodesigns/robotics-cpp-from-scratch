@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Where does a joint offset come from?",
       "options": [
-        "The floor",
-        "The battery",
+        "The servo's gears wear, and the zero moves with them",
+        "The link lengths differ a little from the drawing",
         "The servo's zero is wherever the horn was pressed on the shaft",
-        "Gravity"
+        "The foot's place is measured with noise"
       ],
       "correct": 2,
-      "explanation": "A tooth of the spline, a few degrees."
+      "explanation": "The horn goes on the spline one tooth one way or the other, so the servo's zero is a few degrees from the model's. It is a fixed error for each joint."
     },
     {
       "stage": "check",
       "question": "The foot was how far from where it was commanded before the fit?",
       "options": [
-        "1 m",
         "3.4 mm",
-        "0 mm",
+        "2 mm, the noise of one axis",
+        "35 mm",
         "14.6 mm"
       ],
       "correct": 3,
-      "explanation": "And 3.4 mm after."
+      "explanation": "Offsets of 2, -3 and 4 degrees moved the foot 14.6 mm on average. After the fit 3.4 mm was left."
     },
     {
       "stage": "check",
       "question": "What was left after the fit?",
       "options": [
-        "Nothing",
+        "An offset in the knee, which cannot be fitted",
         "The noise of the measurements",
-        "The offsets",
-        "Everything"
+        "Nothing: the foot was at the commanded place",
+        "The error of the link lengths"
       ],
       "correct": 1,
-      "explanation": "3.5 mm in all three axes."
+      "explanation": "Noise of 2 mm in each of three axes is 3.5 mm in all, and 3.4 mm is what remained. The fit removed everything it could."
     },
     {
       "stage": "check",
       "question": "Why does a leg straight in every pose give no fit?",
       "options": [
-        "It is too slow",
+        "The leg cannot be measured accurately at full stretch",
         "The knee's offset cannot be told from the hip's",
-        "It is a bug",
-        "It is heavy"
+        "A straight leg is out of the jig's range",
+        "The lean's offset has no effect on a straight leg"
       ],
       "correct": 1,
-      "explanation": "The normal equations are singular."
+      "explanation": "With the leg straight a little more knee and a little less hip move the foot the same way, so the equations are singular. The function says false."
     },
     {
       "stage": "post",
       "question": "What does a large residual after the fit say?",
       "options": [
-        "Nothing",
-        "The fit is perfect",
+        "More poses are needed",
+        "The measurements were taken in the wrong order",
         "The model, not only the zeros, is wrong (for example a link length)",
-        "The servos are good"
+        "The offsets found are larger than a spline tooth"
       ],
       "correct": 2,
-      "explanation": "3.6 mm for a thigh 10 mm too long."
+      "explanation": "With a thigh 10 mm longer than the model says the fit ran and left 3.6 mm that no offsets could explain. Fit or measure the lengths; do not accept the calibration."
     },
     {
       "stage": "post",
       "question": "Why use a dozen poses and not one?",
       "options": [
         "Noise has nothing to average against with one",
-        "It is the rule",
-        "For fun",
-        "Time"
+        "One pose gives three numbers, too few for three offsets",
+        "The fit only converges with ten poses or more",
+        "To check that the servos repeat"
       ],
       "correct": 0,
-      "explanation": "One bent pose fixes the offsets, but noisily."
+      "explanation": "One bent pose gives three coordinates for three unknowns, so it has an answer, but the answer carries all the noise of that one measurement."
     }
   ]
 }

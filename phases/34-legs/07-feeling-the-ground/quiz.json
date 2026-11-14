@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "How does a foot with no sensor know it is on the ground?",
       "options": [
-        "It cannot",
-        "From the timetable",
-        "From the camera",
+        "From the gait's timetable, which says when it should be down",
+        "From the joint angles, which stop changing",
+        "From the body's accelerometer",
         "From the torque at the joints, turned into the force at the foot"
       ],
       "correct": 3,
-      "explanation": "34-02's inverse of the transpose."
+      "explanation": "The joint torques, through the inverse of the Jacobian's transpose, give the force at the foot. The timetable only says when it ought to be down."
     },
     {
       "stage": "check",
       "question": "Why two thresholds, on and off?",
       "options": [
-        "To save time",
-        "It is required",
+        "So that touchdown is found sooner than lift-off",
+        "Because the force is larger at touchdown than at lift-off",
         "A force that hovers near one makes the state flap",
-        "Tradition"
+        "To allow for the weight of the leg itself"
       ],
       "correct": 2,
-      "explanation": "10 changes with one, 0 with two."
+      "explanation": "With one threshold at 8 N a force of 8 plus or minus 2 changed the state 10 times in 0.4 s. On at 8 and off at 4, it changed 0 times."
     },
     {
       "stage": "check",
       "question": "What is the blank after the foot is told to lift for?",
       "options": [
         "The leg's own acceleration gives a spike that is not the ground",
-        "Speed",
-        "The battery",
-        "Noise"
+        "To give the servo time to reach its speed",
+        "To let the noise of the current settle",
+        "To save the processor's time during the swing"
       ],
       "correct": 0,
-      "explanation": "24 changes without it, 12 with."
+      "explanation": "Lifting the leg accelerates it, and that shows as a 12 N spike in the estimated force for 30 ms. Without the blank it is read as a touchdown: 24 changes where there should be 12."
     },
     {
       "stage": "check",
       "question": "Touchdown was found how long after the force began to rise?",
       "options": [
-        "1 s",
+        "2 ms",
         "12 ms",
-        "0 ms",
-        "2 s"
+        "30 ms",
+        "6 ms, three readings"
       ],
       "correct": 1,
-      "explanation": "A run of 3 readings."
+      "explanation": "The force has to climb past the threshold and then stay there for three readings at 500 Hz. The 2 ms was lift-off, where the force had already been falling."
     },
     {
       "stage": "post",
       "question": "What does a foot down earlier than the gait says mean?",
       "options": [
-        "Nothing",
+        "A hole: keep reaching down",
         "A bump: hold the swing and take the load",
-        "A hole",
-        "A fault"
+        "Slipping: the foot is down and moving",
+        "A fault in the contact sense"
       ],
       "correct": 1,
-      "explanation": "Late would be a hole."
+      "explanation": "The ground was higher than expected. The swing has to stop and the leg take its share of the weight; a foot that is late is the hole."
     },
     {
       "stage": "post",
       "question": "What is not decided here?",
       "options": [
-        "The run",
-        "Whether the foot is down",
-        "The thresholds",
+        "How many readings in a row are needed",
+        "What force counts as on the ground",
+        "How long the blank lasts",
         "Slip, and early or late touchdown"
       ],
       "correct": 3,
-      "explanation": "Those come in 35-08 and 36-03."
+      "explanation": "This lesson only answers whether the foot is down. What to do when that disagrees with the gait is left to later lessons."
     }
   ]
 }

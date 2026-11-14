@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why should the foot land at rest?",
       "options": [
-        "It is faster",
-        "It is required",
-        "It looks nice",
+        "A foot at rest uses less of the servos' rate",
+        "The contact sense needs the foot still to work",
+        "So that the swing takes the least time",
         "A foot that lands with speed hits the ground and the body feels it"
       ],
       "correct": 3,
-      "explanation": "A jolt at touchdown."
+      "explanation": "The ground is not moving. Whatever speed the foot has when it meets it is taken out in an instant, and the body feels that at every step."
     },
     {
       "stage": "check",
       "question": "The foot's landing speed was:",
       "options": [
-        "1 m/s",
-        "0.000 m/s",
         "0.80 m/s",
-        "0.87 m/s"
+        "0.000 m/s",
+        "0.87 m/s, the peak of the swing",
+        "0.40 m/s, the body's speed"
       ],
       "correct": 1,
-      "explanation": "The straight up-and-down path lands at 0.80."
+      "explanation": "The curves along the ground and in height both have zero speed at the ends. A path that goes straight up and down lands at 0.80 m/s."
     },
     {
       "stage": "check",
       "question": "Doubling the swing time did what to the peak acceleration?",
       "options": [
         "Quartered it",
-        "Doubled it",
-        "Nothing",
-        "Halved it"
+        "Halved it",
+        "Left it the same, and halved the speed",
+        "Doubled it"
       ],
       "correct": 0,
-      "explanation": "Speed halves, acceleration quarters."
+      "explanation": "The same path over twice the time: speeds are divided by two and accelerations by four."
     },
     {
       "stage": "check",
       "question": "The joints needed up to 4.7 rad/s over 0.25 s and over 0.125 s:",
       "options": [
         "9.4 rad/s",
-        "0",
-        "4.7 rad/s",
-        "8 rad/s"
+        "4.7 rad/s, the same",
+        "2.4 rad/s",
+        "18.8 rad/s"
       ],
       "correct": 0,
-      "explanation": "The rate is inversely proportional to the time."
+      "explanation": "Half the time, twice the rate. 9.4 rad/s is more than the 8 rad/s a typical hobby servo gives, so that step would lag."
     },
     {
       "stage": "post",
       "question": "What does the height h cost?",
       "options": [
-        "Weight",
+        "Reach: a higher path shortens the step that can be taken",
         "Speed: a higher clearance is a faster path for the same time",
-        "Accuracy",
-        "Nothing"
+        "Nothing, so it should be as high as the leg allows",
+        "Accuracy of the landing place"
       ],
       "correct": 1,
-      "explanation": "It is a clearance you choose."
+      "explanation": "A higher arc is a longer path in the same time, so the foot and the joints move faster. The step cleared a 0.04 m obstacle by 10 mm; more clearance costs more speed."
     },
     {
       "stage": "post",
       "question": "What does the function say when a point on the path cannot be reached?",
       "options": [
-        "A random angle",
-        "True",
+        "True, with the nearest reachable angles",
+        "True, with the rate set to zero",
         "False",
-        "Nothing"
+        "The largest rate found before that point"
       ],
       "correct": 2,
-      "explanation": "A step beyond the leg's reach."
+      "explanation": "A step that leaves the leg's reach has no joint angles at that point. The function refuses and leaves the choice to its caller."
     }
   ]
 }

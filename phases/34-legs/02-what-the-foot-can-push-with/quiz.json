@@ -6,37 +6,37 @@
       "stage": "pre",
       "question": "What connects the foot's force to the joints' torques?",
       "options": [
-        "The battery",
-        "Nothing",
+        "The inverse kinematics, solved once for each force",
+        "The motor constant and the gear ratio",
         "The Jacobian's transpose, by virtual work",
-        "The knee alone"
+        "The leg's mass matrix"
       ],
       "correct": 2,
-      "explanation": "The same work seen from two ends."
+      "explanation": "The work done at the foot equals the work done at the joints, which makes the torques the transpose of the Jacobian times the force. No dynamics are needed for a leg that is standing."
     },
     {
       "stage": "check",
       "question": "The knee's torque for the crouch was:",
       "options": [
-        "0 N m",
         "1.88 N m",
+        "4.33 N m",
         "5.43 N m",
-        "29.4 N m"
+        "0.00 N m, since the foot is under the hip"
       ],
       "correct": 2,
-      "explanation": "With the leg nearly straight it was 1.88."
+      "explanation": "With the foot 0.20 m below the hip the knee gave 5.43 N m; at 0.30 m it was 4.33, and nearly straight at 0.40 m only 1.88. The zero belongs to the hip's pitch joint."
     },
     {
       "stage": "check",
       "question": "Why does a straight leg need less torque?",
       "options": [
-        "It is lighter",
-        "It is not true",
-        "It is stronger metal",
+        "The foot carries less of the body's weight when the leg is long",
+        "The thigh and shank share the load equally when in line",
+        "The motor's constant is larger near full stretch",
         "The force goes along the bones, so the shank's lean from the vertical is small"
       ],
       "correct": 3,
-      "explanation": "Torque is weight times the lean."
+      "explanation": "The knee's torque is the load times the horizontal distance from the knee to the line of the force. Straighten the leg and that distance shrinks to nothing."
     },
     {
       "stage": "check",
@@ -44,35 +44,35 @@
       "options": [
         "15.5 rad/s",
         "3.4 rad/s",
-        "0",
-        "1000 rad/s"
+        "0.5 rad/s, the same as the foot",
+        "5.43 rad/s"
       ],
       "correct": 0,
-      "explanation": "It grows as the leg straightens."
+      "explanation": "The same foot speed needed 3.4 rad/s at 0.30 m and 15.5 rad/s at 0.40 m. The closer to straight, the more the knee has to turn for each millimetre."
     },
     {
       "stage": "post",
       "question": "What does the inverse of the transpose give?",
       "options": [
-        "Nothing",
+        "The joint rates for a foot velocity",
         "The force at the foot from the torques measured at the joints",
-        "The mass",
-        "The rates"
+        "The torques that hold a force at the foot",
+        "The foot's place from the joint angles"
       ],
       "correct": 1,
-      "explanation": "A way to feel the ground without a force sensor."
+      "explanation": "The transpose turns a foot force into torques, so its inverse turns measured torques back into the force. It fails, and says so, where the leg is singular."
     },
     {
       "stage": "post",
       "question": "What is not in this model?",
       "options": [
-        "The force",
+        "The share of the weight on each foot",
         "Friction, the legs' own weight, and acceleration",
-        "The Jacobian",
-        "The sign"
+        "The difference between a left and a right leg",
+        "The lever of the weight about the knee"
       ],
       "correct": 1,
-      "explanation": "It is static."
+      "explanation": "The torques are those of a leg at rest holding a load. The leg's own mass, friction in the gears and the torque to accelerate are all left out."
     }
   ]
 }
