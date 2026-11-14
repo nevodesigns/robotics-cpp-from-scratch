@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What does Cartesian impedance make the tool?",
       "options": [
-        "A rigid rod",
+        "A point that holds its position whatever pushes on it",
         "A spring and damper about the target, in the task's own space",
-        "A filter",
-        "A motor"
+        "A mass with no stiffness, free to be pushed",
+        "A force source that presses with a fixed force"
       ],
       "correct": 1,
-      "explanation": "Stiffness times error, minus damping times velocity."
+      "explanation": "The wrench at the tool is the stiffness times the pose error less the damping times the velocity, and the Jacobian's transpose turns that into joint torques."
     },
     {
       "stage": "check",
       "question": "With the target 2 cm below the surface, the settled force with stiffnesses 200, 500 and 1000 N/m was:",
       "options": [
         "4.02, 9.75, 19.00 N: the stiffness times 2 cm",
-        "Zero",
-        "2 N",
-        "The same for all"
+        "19.00, 9.75 and 4.02 N",
+        "20 N for all three, set by the surface",
+        "0.02 N for all three"
       ],
       "correct": 0,
-      "explanation": "The stiffness is the force you will press with."
+      "explanation": "The force settled to is nearly the stiffness times the 2 cm the target is below the surface. A little less, because the surface itself gives."
     },
     {
       "stage": "check",
       "question": "Peak force on coming down on the surface, stiff against soft:",
       "options": [
         "27.6 N and 68.6 N",
-        "0 N",
-        "The same",
+        "68.6 N for both, since the speed was the same",
+        "4.02 N and 19.00 N",
         "68.6 N and 27.6 N"
       ],
       "correct": 3,
-      "explanation": "A stiff arm is a stiff impact."
+      "explanation": "A stiffness of 2000 N/m peaked at 68.6 N and one of 200 N/m at 27.6 N. In the first moment of contact nothing has been measured yet, and the stiffness is all there is."
     },
     {
       "stage": "check",
       "question": "On the stiff surface the admittance with a damper of 100 N s/m was steady (1) or not (0)?",
       "options": [
-        "Only on a soft one",
-        "1",
+        "1, steady",
+        "1, but only after ringing for a second",
         "0",
-        "Always"
+        "It could not be told"
       ],
       "correct": 2,
-      "explanation": "With 1500 it was 1."
+      "explanation": "On a surface of 20 000 N/m a damper of 100 N s/m rang. With 1500 N s/m it was steady, and on a soft surface even 100 was."
     },
     {
       "stage": "post",
       "question": "Why is admittance trouble on a stiff surface?",
       "options": [
-        "Gravity",
-        "It is not",
+        "The force sensor saturates on a stiff surface",
+        "The virtual mass is too small",
         "The delay and the inner loop's lag are inside the loop, and a stiff surface turns a millimetre into a big force",
-        "Gears"
+        "A stiff surface gives no force to measure"
       ],
       "correct": 2,
-      "explanation": "The damper must be about stiffness over bandwidth."
+      "explanation": "A millimetre of motion changes the force by 20 N. With the measurement and a slow inner loop inside the loop, that gain is too much unless the virtual damper is large."
     },
     {
       "stage": "post",
       "question": "Which is the arm that is torque controlled suited to?",
       "options": [
-        "Neither",
-        "Both equally",
-        "Admittance",
+        "Admittance, which needs torque control",
+        "Either: they are the same law",
+        "Neither: torque control needs a force sensor",
         "Impedance, which is stable on stiff surfaces"
       ],
       "correct": 3,
-      "explanation": "Force out, not position out."
+      "explanation": "Impedance sends torques, so it needs a torque controlled arm, and it is steady on stiff surfaces. An arm that only takes positions has to use admittance."
     }
   ]
 }

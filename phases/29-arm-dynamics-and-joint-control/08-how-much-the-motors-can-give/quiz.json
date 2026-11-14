@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What are the two torque limits of a motor?",
       "options": [
-        "Cold and hot",
+        "The stall torque and the no load torque",
         "The peak, for an instant, and the continuous, for ever without overheating",
-        "Static and dynamic",
-        "Input and output"
+        "The motor's and the gear's",
+        "The torque at rest and the torque at speed"
       ],
       "correct": 1,
-      "explanation": "And between them is a question of time."
+      "explanation": "A motor can give its peak briefly and its continuous torque indefinitely. Anything between is allowed for a time, which the winding's heat decides."
     },
     {
       "stage": "check",
       "question": "A joint holding the arm stretched out reached its limit in:",
       "options": [
-        "Never in either",
+        "293 s, and folded in 2930 s",
         "293 s, and folded it never did",
-        "293 s",
-        "1 s"
+        "Never, stretched out or folded",
+        "37.7 s"
       ],
       "correct": 1,
-      "explanation": "Holding a pose is a current."
+      "explanation": "37.7 N m at the shoulder heats the winding past its limit in under five minutes. Folded, it needs 2.1 N m and settles below the limit."
     },
     {
       "stage": "check",
       "question": "The payload at the tool with the arm out and folded was:",
       "options": [
         "2.50 kg and 10.00 kg",
-        "The same",
-        "0 and 0",
-        "10.00 kg and 2.50 kg"
+        "10.00 kg and 2.50 kg",
+        "10.00 kg in both, the structure's rating",
+        "2.50 kg in both"
       ],
       "correct": 0,
-      "explanation": "The rated payload is for the best pose."
+      "explanation": "Stretched out the arm's own weight uses most of the continuous torque. Folded, the joints had room for more than the structure's 10 kg rating."
     },
     {
       "stage": "check",
       "question": "A move of 0.7 rad by the peak limits and by the continuous limits took:",
       "options": [
         "0.39 s and 0.29 s",
-        "The same",
+        "0.29 s by both",
         "0.29 s and 0.39 s",
-        "0 s each"
+        "0.29 s and 0.58 s"
       ],
       "correct": 2,
-      "explanation": "The rms heats."
+      "explanation": "The peak torque allows a faster move than the heat does. The rms over the move has to stay inside the continuous limit."
     },
     {
       "stage": "post",
       "question": "Why can a move be fine once and not all day?",
       "options": [
         "The rms heat accumulates: 118 K steady with no wait against 27 K with a wait of 4 s",
-        "Gears wear",
-        "It cannot",
-        "Noise"
+        "The gears wear a little on each move",
+        "The battery sags as the day goes on",
+        "The bus rate falls when the servos are warm"
       ],
       "correct": 0,
-      "explanation": "The limit is 75 K."
+      "explanation": "Each move leaves heat behind. With no wait the winding settled 118 K up, over its 75 K limit; with 4 s between moves, 27 K."
     },
     {
       "stage": "post",
       "question": "How does the inertia part of the torque change as a move is made faster?",
       "options": [
-        "It falls",
-        "Not at all",
-        "Linearly",
+        "In proportion to one over the duration",
+        "Not at all: only the weight matters",
+        "As the inverse cube of the duration",
         "As the inverse square of the duration: halving it asked 4.0 times"
       ],
       "correct": 3,
-      "explanation": "The weight does not change."
+      "explanation": "Accelerations scale as one over the time squared. The part of the torque that holds the weight is the same however fast the move."
     }
   ]
 }

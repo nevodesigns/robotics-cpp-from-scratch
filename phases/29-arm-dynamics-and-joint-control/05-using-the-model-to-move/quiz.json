@@ -7,72 +7,72 @@
       "question": "What does computed torque do with the model?",
       "options": [
         "Asks it for the torque that gives the wanted acceleration, so the joints act as independent unit masses",
-        "Simulates a sensor",
-        "Draws the arm",
-        "Filters the encoder"
+        "Runs it ahead of time to plan the move",
+        "Uses it to estimate the joint velocities",
+        "Compares it with the arm and adapts its masses"
       ],
       "correct": 0,
-      "explanation": "The model's own inverse."
+      "explanation": "The torque sent is the mass matrix times the wanted acceleration, plus the velocity and gravity terms. If the model is right the arm's acceleration is the wanted one, in every joint separately."
     },
     {
       "stage": "check",
       "question": "The rms error on the fast move with an exact model, for PD with gravity and computed torque:",
       "options": [
-        "0 and 0",
         "0.000056948 and 0.04293 rad",
+        "0.04293 rad for both, since the gains are the same",
         "0.04293 and 0.000056948 rad",
-        "The same"
+        "0.00467 and 0.000056948 rad"
       ],
       "correct": 2,
-      "explanation": "The model removes the error."
+      "explanation": "PD with gravity leaves the inertia and velocity terms to the feedback. Computed torque supplies them, and what is left is the integration error."
     },
     {
       "stage": "check",
       "question": "Computed torque at 20 rad/s from 0.1 rad out crossed zero how many times?",
       "options": [
-        "Several",
-        "Once",
-        "Always",
+        "Once, by a small overshoot",
+        "Three times, ringing down",
+        "Twice: out and back",
         "0: it is critically damped"
       ],
       "correct": 3,
-      "explanation": "Kp = wn squared, Kv = 2 wn."
+      "explanation": "With Kp the bandwidth squared and Kv twice the bandwidth, each joint's error is a critically damped second order system. It came within a hundredth of the start in 0.33 s."
     },
     {
       "stage": "check",
       "question": "With every mass 10, 20 and 40 percent too big the rms error was:",
       "options": [
-        "0.01455, 0.00853, 0.00467",
+        "0.01455, 0.00853 and 0.00467 rad",
         "0.00467, 0.00853 and 0.01455 rad",
-        "0 at all three",
-        "The same at all three"
+        "0.000056948 rad at all three",
+        "0.00467, 0.01868 and 0.07472 rad, four times at each doubling"
       ],
       "correct": 1,
-      "explanation": "In proportion to the model's error."
+      "explanation": "The error grew roughly with the model's error. Ten percent wrong still tracked far better than the 0.04293 rad of PD with gravity."
     },
     {
       "stage": "post",
       "question": "Why is a model that is too light worse than one that is too heavy by the same amount?",
       "options": [
-        "Heavier is safer by law",
+        "A light model makes the gains too high",
         "It gives torques that fall short, and the feedback has to make up the rest: 0.03469 against 0.01455 rad",
-        "Rounding",
-        "It is not"
+        "A heavy model is slower, and slow is always more accurate",
+        "Only the heavy model includes gravity"
       ],
       "correct": 1,
-      "explanation": "Underestimating the arm."
+      "explanation": "Torques that are too small leave the arm behind the reference, and only the feedback closes the gap. 40 percent light gave 0.03469 rad against 0.01455 rad for 40 percent heavy."
     },
     {
       "stage": "post",
       "question": "What must a reference be for computed torque?",
       "options": [
-        "Anything",
-        "Slow",
-        "Linear",
+        "A step, so that the error is seen at once",
+        "A straight line in joint space at constant speed",
+        "Slow enough for the velocity terms to vanish",
         "Smooth to the second derivative: a jump in acceleration asks for a jump in torque"
       ],
       "correct": 3,
-      "explanation": "A quintic."
+      "explanation": "The reference's acceleration is fed forward as a torque. A quintic starts and ends at rest with no jump in acceleration."
     }
   ]
 }
