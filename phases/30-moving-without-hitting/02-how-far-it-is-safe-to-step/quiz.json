@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "How far can a point of the arm move for a turn of a joint?",
       "options": [
-        "Not at all",
-        "As far as it likes",
-        "The length of one link",
+        "As far as the arm's full reach, whatever the turn",
+        "Exactly the turn times the length of the next link",
+        "By an amount that depends on the pose and cannot be bounded",
         "No further than the turn times its distance from the axis, which is at most the length of everything beyond it"
       ],
       "correct": 3,
-      "explanation": "A circle about the axis."
+      "explanation": "The point moves on a circle about the joint's axis. Its radius is no more than everything outboard stretched straight, so the turn times that length is a bound that holds in any pose."
     },
     {
       "stage": "check",
       "question": "A sphere of 5 mm on the path was found by steps of 0.5 rad:",
       "options": [
         "0: 1 is found and 0 is missed",
-        "Always",
-        "In 14 poses",
-        "1"
+        "1, found",
+        "Found in 70 poses",
+        "Found only when a margin was added"
       ],
       "correct": 0,
-      "explanation": "Fixed steps miss thin things."
+      "explanation": "None of the checked poses happened to touch a 5 mm sphere, so the motion was called free. Steps of 0.01 rad found it, at 70 poses."
     },
     {
       "stage": "check",
       "question": "Conservative advancement found it in how many poses, against 70 for steps of 0.01 rad?",
       "options": [
-        "70",
+        "70, the same",
         "14",
-        "1000000",
-        "1"
+        "201",
+        "2"
       ],
       "correct": 1,
-      "explanation": "Steps shrink near the obstacle."
+      "explanation": "The steps are long while the arm is far from the sphere and shorten as the clearance shrinks, so 14 poses were enough and none could jump it."
     },
     {
       "stage": "check",
       "question": "On an edge far from everything, conservative advancement looked at:",
       "options": [
-        "201 poses and fixed steps 2",
-        "None",
+        "201 poses, the same as fixed steps",
+        "14 poses against 70",
         "2 poses against 201 for fixed steps",
-        "The same number"
+        "More poses than fixed steps, to be safe"
       ],
       "correct": 2,
-      "explanation": "Large steps where it is safe."
+      "explanation": "With a large clearance the whole edge is within one safe step, so only its two ends are looked at."
     },
     {
       "stage": "post",
       "question": "Why can conservative advancement not step over an obstacle?",
       "options": [
-        "Obstacles are big",
-        "It is lucky",
+        "It checks ten times as many poses as fixed steps",
+        "It treats every obstacle as larger than it is",
         "Each step is at most the clearance over the bound, and no point can move further than the bound says",
-        "It looks at every pose"
+        "Its steps are always shorter than 0.01 rad"
       ],
       "correct": 2,
-      "explanation": "A guarantee."
+      "explanation": "The clearance says how far the nearest thing is and the bound says how far anything can move. A step sized from the two cannot reach the obstacle, let alone pass it."
     },
     {
       "stage": "post",
       "question": "Where does the margin belong?",
       "options": [
-        "In the planner's goal",
-        "Nowhere",
-        "In the obstacle",
+        "In the obstacle's radius",
+        "In the arm's capsule radii",
+        "In the planner's step length",
         "In the check: how much room the arm should keep"
       ],
       "correct": 3,
-      "explanation": "3 cm is free with none and not with 5 cm."
+      "explanation": "The same scene needs different room for a person, for a tracking error or for a rough model. Put in the check, it can be changed without touching the shapes."
     }
   ]
 }

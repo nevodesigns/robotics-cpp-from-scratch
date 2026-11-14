@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "How does a track get a velocity?",
       "options": [
-        "It is told",
+        "From the arm's own trajectory",
         "From the difference between successive sightings over the time, smoothed",
-        "From one sighting",
-        "From the camera"
+        "From the object's size",
+        "From a single sighting and its time stamp"
       ],
       "correct": 1,
-      "explanation": "Seen twice, it has a velocity."
+      "explanation": "Two places and the time between them. A share of 0.7 of each new difference smooths it: 0.499 m/s for a true 0.5 after six sightings."
     },
     {
       "stage": "check",
       "question": "An arm that did not look was how far from the obstacle at the closest?",
       "options": [
-        "0.135 m",
         "0.031 m",
+        "0.135 m",
         "-0.112 m, through it",
-        "1 m"
+        "0.000 m, just touching"
       ],
       "correct": 2,
-      "explanation": "It went through it."
+      "explanation": "The sphere rose into the path as the tool reached it. The arm that stopped kept 0.031 m, and the one that went round 0.135 m."
     },
     {
       "stage": "check",
       "question": "Waiting and planning round took:",
       "options": [
-        "1.50 s each",
         "4.20 s and 2.15 s",
-        "The same",
+        "1.50 s and 2.15 s",
+        "2.15 s both",
         "2.15 s and 4.20 s"
       ],
       "correct": 3,
-      "explanation": "Going round was slower than waiting."
+      "explanation": "Stopping and going on when clear cost 0.65 s over the free move. Planning a way round and taking it cost far more."
     },
     {
       "stage": "check",
       "question": "A meeting with an obstacle 1 m away coming at 0.5 m/s was predicted how far away?",
       "options": [
-        "0 s",
-        "1 s",
-        "10 s",
+        "2.00 s, the distance over the speed",
+        "0.50 s",
+        "Never: it was going away",
         "1.78 s"
       ],
       "correct": 3,
-      "explanation": "1 m less the radii, over 0.5 m/s."
+      "explanation": "The gap that has to close is the metre less the radii and the margin, at half a metre a second."
     },
     {
       "stage": "post",
       "question": "Why does the monitor go on looking after a new plan?",
       "options": [
-        "It is wasteful",
-        "It does not",
+        "The new plan may be longer than the old",
+        "The track's velocity needs more sightings",
         "The obstacle may run into the new plan too: a plan is a promise about a world that moves",
-        "To save time"
+        "The planner may not have finished"
       ],
       "correct": 2,
-      "explanation": "A plan made against where it is now."
+      "explanation": "The new path was made for where the obstacle was. It keeps moving, and may move into the new path as well."
     },
     {
       "stage": "post",
       "question": "When is waiting better than going round?",
       "options": [
         "When the thing is about to go away; a long detour is for nothing",
-        "Always",
-        "Never",
-        "When it is bigger"
+        "When the obstacle is large",
+        "When the arm is far from its goal",
+        "When a new plan would be shorter"
       ],
       "correct": 0,
-      "explanation": "A monitor cannot tell: wait a moment, then plan."
+      "explanation": "Waiting cost 0.65 s and going round 2.70 s. For something passing through, the detour is the worse choice; the trouble is knowing which it is."
     }
   ]
 }

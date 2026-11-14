@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What is a roadmap for?",
       "options": [
-        "Avoiding people",
+        "Replanning quickly when the scene changes",
         "Finding the free space of a fixed scene once, so each query is a search of a graph",
-        "Timing a move",
-        "Drawing"
+        "Finding a path through a narrow gap",
+        "Shortening a path a tree has found"
       ],
       "correct": 1,
-      "explanation": "Plan once, ask many times."
+      "explanation": "Building it is the expensive part, 56406 poses here, and it is done once. After that each request is a shortest path in a graph."
     },
     {
       "stage": "check",
       "question": "Five queries took 858 poses each on average against RRT-Connect's:",
       "options": [
         "2432",
-        "0",
-        "858",
-        "1"
+        "858, the same",
+        "56406",
+        "429, half"
       ],
       "correct": 0,
-      "explanation": "The free space was found once."
+      "explanation": "RRT-Connect explores the free space again for every query. The roadmap already holds it, so a query only joins two ends and searches."
     },
     {
       "stage": "check",
       "question": "With 40 and 300 nodes the graph had how many pieces?",
       "options": [
-        "None",
-        "One each",
+        "1 and 1",
+        "5 and 6",
         "6 and 5",
-        "5 and 6"
+        "40 and 300"
       ],
       "correct": 2,
-      "explanation": "More nodes join the pieces."
+      "explanation": "More samples link up pieces of the graph. In this roomy scene the queries were answered either way, because the ends joined the large pieces."
     },
     {
       "stage": "check",
       "question": "After a box was put in the scene, what share of the roadmap's edges were not free?",
       "options": [
         "34 percent",
-        "100 percent",
-        "1 percent",
-        "0"
+        "0 percent: the box was away from the nodes",
+        "12 percent",
+        "100 percent"
       ],
       "correct": 0,
-      "explanation": "A query on the old map gave 12 bad edges."
+      "explanation": "A third of the edges now passed through the box, and a query on the old map returned paths with 12 edges that were no longer free."
     },
     {
       "stage": "post",
       "question": "Why are the roadmap's paths shorter than RRT's?",
       "options": [
-        "They are not",
-        "Luck",
+        "The roadmap's nodes lie on straight lines",
+        "The roadmap ignores the joint limits",
         "Dijkstra finds the shortest path through the graph, not the first a tree found: 0.74 times the length",
-        "Roadmaps cut corners"
+        "They are not: both wander equally"
       ],
       "correct": 2,
-      "explanation": "A search, not a stumble."
+      "explanation": "A tree returns the first path it finds. The graph search returns the shortest one the roadmap contains, which was 0.74 times as long."
     },
     {
       "stage": "post",
       "question": "What must be done with a stored roadmap when the scene may have changed?",
       "options": [
-        "Delete the start node",
-        "Nothing",
-        "Make it bigger",
+        "Add more nodes to it",
+        "Use it as it is: the nodes are still free",
+        "Halve the length of its edges",
         "Check its edges against the scene as it is now, or rebuild it"
       ],
       "correct": 3,
-      "explanation": "It is a statement about a scene."
+      "explanation": "Each edge was free in the scene it was built for. In another scene that is only a guess until it is checked."
     }
   ]
 }

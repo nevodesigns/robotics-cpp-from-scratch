@@ -7,72 +7,72 @@
       "question": "Why are links modelled as capsules?",
       "options": [
         "A segment and a radius fit a long link well and cost almost nothing to check",
-        "They are exact",
-        "They are pretty",
-        "Capsules are standard in law"
+        "A capsule is the exact shape of a link",
+        "Capsules are the only shape with a signed distance",
+        "A capsule never overlaps its neighbour at a joint"
       ],
       "correct": 0,
-      "explanation": "Cheap and a good fit."
+      "explanation": "A link is a long thing between two joints. One segment and one radius cover it closely, and the distance to a segment is a standard, cheap calculation."
     },
     {
       "stage": "check",
       "question": "The distance of a capsule of radius 0.1 to a sphere of radius 0.2 with centres 1 m apart was:",
       "options": [
-        "0.300 m",
+        "0.300 m clear",
         "0.700 m clear",
-        "1 m",
-        "0 m"
+        "1.000 m clear, since the centres are what count",
+        "0.800 m clear, the larger radius taken off"
       ],
       "correct": 1,
-      "explanation": "1 - 0.1 - 0.2."
+      "explanation": "The distance between the segment and the sphere's centre, less both radii: 1 less 0.1 less 0.2."
     },
     {
       "stage": "check",
       "question": "With the floor raised to 0.4 m the arm's signed distance was:",
       "options": [
-        "0.140 m",
-        "0",
+        "0.140 m, as before",
+        "0.000 m: just touching",
         "-0.160 m: negative, through it",
-        "1 m"
+        "0.160 m, clear"
       ],
       "correct": 2,
-      "explanation": "It says by how much."
+      "explanation": "Raising the floor by 0.3 m took the clearance from 0.140 m to 0.160 m below zero. The sign says the arm is through it and the size says how far to push it out."
     },
     {
       "stage": "check",
       "question": "How many pairs of links does the self check ask about, for four capsules?",
       "options": [
-        "6",
-        "0",
+        "6, every pair",
+        "4, one for each capsule",
         "3",
-        "12"
+        "2, the base against the last two"
       ],
       "correct": 2,
-      "explanation": "Those that share a joint are not asked."
+      "explanation": "Neighbours share a joint and always touch there, so asking about them would always say collision. Of the 6 pairs, the 3 that are more than one apart are asked."
     },
     {
       "stage": "post",
       "question": "Why is a collision model that is a little too big better than one that is a little too small?",
       "options": [
-        "It is exact",
+        "It is cheaper to compute than an exact one",
         "It keeps the planner a little further away than it needs to; too small hits things",
-        "It is not",
-        "It is faster"
+        "The planner finds shorter paths with larger shapes",
+        "A larger model lets the checker take larger steps"
       ],
       "correct": 1,
-      "explanation": "Err on the side of distance."
+      "explanation": "Both are wrong, in different directions. Too big costs a little room; too small lets a path through that the real arm cannot take."
     },
     {
       "stage": "post",
       "question": "Why does a segment to box distance work by a ternary search?",
       "options": [
-        "Luck",
-        "Boxes are round",
-        "It is closed form",
+        "A box has too many faces to test one by one",
+        "The closed form exists but is slower",
+        "The segment may pass through the box",
         "The distance of a point to a convex set is convex along a line: one minimum"
       ],
       "correct": 3,
-      "explanation": "No closed form, but convex."
+      "explanation": "There is no formula, but along the segment the distance to a convex shape has a single low point, and a search that narrows on it cannot be fooled by a second one."
     }
   ]
 }

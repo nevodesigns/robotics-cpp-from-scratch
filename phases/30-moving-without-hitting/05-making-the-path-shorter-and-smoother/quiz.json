@@ -6,37 +6,37 @@
       "stage": "pre",
       "question": "What is a shortcut?",
       "options": [
-        "A smaller arm",
-        "A faster robot",
+        "Removing every vertex that is closer than the margin",
+        "Replacing the whole path by the line from start to goal",
         "Replacing the part of a path between two random points by the straight edge, if it is free",
-        "A smaller scene"
+        "Running the planner again with a smaller step"
       ],
       "correct": 2,
-      "explanation": "Skip the detour."
+      "explanation": "Two points are picked at random along the path. If the straight edge between them is free, everything between them is thrown away."
     },
     {
       "stage": "check",
       "question": "The path was how many times the straight line before and after shortcutting?",
       "options": [
         "4.83 then 1.85",
-        "1 and 1",
         "1.85 then 4.83",
-        "The same"
+        "4.83 then 1.00, the straight line",
+        "4.83 then 4.83: only the corners changed"
       ],
       "correct": 0,
-      "explanation": "Free and bad, then free and better."
+      "explanation": "150 tries took most of the wandering out. It cannot reach 1.00 here, because the straight line goes through the wall."
     },
     {
       "stage": "check",
       "question": "The sharpest turn went from 2.25 rad to:",
       "options": [
-        "3 rad",
-        "0",
-        "2.25 rad",
+        "0.00 rad: a straight path",
+        "2.25 rad, unchanged, since corners are vertices",
+        "1.85 rad",
         "0.60 rad after cutting the corners twice"
       ],
       "correct": 3,
-      "explanation": "A corner is a place the arm must stop and turn."
+      "explanation": "Each round replaces a vertex by two points and one checked edge, which blunts the turn. Two rounds brought the sharpest from 2.25 to 0.60 rad."
     },
     {
       "stage": "check",
@@ -44,35 +44,35 @@
       "options": [
         "0.0001 and 0.0202 m",
         "0.0202 and 0.0001 m",
-        "The same",
-        "Negative both"
+        "0.02 and 0.02 m: the planner's margin is kept either way",
+        "0.0001 and 0.0001 m"
       ],
       "correct": 0,
-      "explanation": "The margin must go through every pass."
+      "explanation": "A smoother that checks with no margin will hug an obstacle to a tenth of a millimetre. Given the planner's 0.02 m, it kept 0.0202 m."
     },
     {
       "stage": "post",
       "question": "Why must a corner cut be checked only for the middle edge?",
       "options": [
-        "The others are short",
+        "The outer pieces are too short to hit anything",
         "The two outer pieces lie on the old segments, which were free",
-        "Corners are free",
-        "It is cheaper only"
+        "The middle edge is the only one near an obstacle",
+        "Checking all three would take three times as long"
       ],
       "correct": 1,
-      "explanation": "They are parts of what was checked."
+      "explanation": "The new points sit on the old segments, so the pieces up to them are parts of edges already known to be free. Only the edge across the corner is new."
     },
     {
       "stage": "post",
       "question": "Why are random shortcuts a good first pass?",
       "options": [
-        "They are slow",
-        "They avoid the margin",
-        "They are exact",
+        "They find the shortest path there is",
+        "They need no collision checks",
+        "They never move the path closer to obstacles",
         "A random path is full of detours that a straight edge skips, and a hundred tries find most"
       ],
       "correct": 3,
-      "explanation": "Cheap and effective."
+      "explanation": "A tree's path doubles back in many places. Almost any pair of points either side of a detour gives a free straight edge that removes it."
     }
   ]
 }

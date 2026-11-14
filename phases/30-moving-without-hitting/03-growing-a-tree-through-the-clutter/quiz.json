@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why can a planner for an arm not use a grid?",
       "options": [
-        "Grids are slow only",
-        "Grids are old",
+        "A grid cannot represent angles",
+        "A grid would need the arm's dynamics",
         "Six dimensions are too many cells, and the obstacles are not simple in joint space: the only way to know is to ask the collision model",
-        "Arms are heavy"
+        "A grid only works for convex obstacles"
       ],
       "correct": 2,
-      "explanation": "A million cells at ten steps a side."
+      "explanation": "Ten steps a side in six dimensions is a million cells, each needing a collision check, and it is still coarse. Sampling asks only where the tree goes."
     },
     {
       "stage": "check",
       "question": "Across 6 seeds, how many did RRT-Connect and RRT find?",
       "options": [
         "6 and 3",
-        "All of each",
-        "None",
-        "3 and 6"
+        "3 and 6",
+        "6 and 6",
+        "6 and 0"
       ],
       "correct": 0,
-      "explanation": "With 23 nodes against 58."
+      "explanation": "With a wall between the start and the goal, the two trees met on every seed. The single tree found the goal on half of them, with 58 nodes against 23."
     },
     {
       "stage": "check",
       "question": "How long were the paths against the straight line in joint space?",
       "options": [
-        "Half",
+        "1.05 times: nearly straight",
         "2.90 times",
-        "Exactly twice",
-        "The same"
+        "0.74 times",
+        "Ten times"
       ],
       "correct": 1,
-      "explanation": "Free, not good."
+      "explanation": "The tree goes where its samples take it. The path is free of collisions and nearly three times as long as the straight line in joint space."
     },
     {
       "stage": "check",
       "question": "With the goal inside the wall the planner:",
       "options": [
-        "Ran for ever",
+        "Stopped after its limit of iterations",
         "Said so at once: no path, 0 iterations",
-        "Found a path through the wall",
-        "Moved the wall"
+        "Returned the nearest free pose",
+        "Found a path that touched the wall"
       ],
       "correct": 1,
-      "explanation": "A goal that fails the pose check."
+      "explanation": "The goal pose itself fails the collision check, so no search can succeed and none is started."
     },
     {
       "stage": "post",
       "question": "Why does a second tree from the goal help so much?",
       "options": [
-        "Luck",
-        "It doubles the nodes",
+        "It halves the step length",
+        "It samples only between the two trees",
         "Each tree reaches out and they meet, where one tree has to hit a small goal in a large space",
-        "It does not"
+        "It removes the need for a collision check"
       ],
       "correct": 2,
-      "explanation": "RRT-Connect."
+      "explanation": "One tree has to stumble on a small target. Two trees each present the other with a large one, and a path exists the moment they touch."
     },
     {
       "stage": "post",
       "question": "What does the goal bias do?",
       "options": [
-        "Smooths the path",
-        "Chooses the shortest path",
-        "Avoids the wall",
+        "Shortens the path once found",
+        "Keeps samples away from obstacles",
+        "Sets how far each step goes",
         "Samples the goal one time in ten to pull the tree towards it"
       ],
       "correct": 3,
-      "explanation": "A small pull."
+      "explanation": "Without it the tree spreads evenly. Offering the goal as the sample now and then makes it grow that way when the way is clear."
     }
   ]
 }

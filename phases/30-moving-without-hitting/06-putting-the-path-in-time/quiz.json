@@ -7,72 +7,72 @@
       "question": "What does the jerk limit of an S curve prevent?",
       "options": [
         "A step in the acceleration, which shakes the arm and its gearboxes",
-        "Rounding",
-        "Friction",
-        "Slow moves"
+        "The speed passing its limit",
+        "The arm stopping at a vertex",
+        "A move taking longer than it need"
       ],
       "correct": 0,
-      "explanation": "Rate of change of acceleration."
+      "explanation": "The acceleration ramps up and down and never jumps. A jump in acceleration is a jump in torque, which the gears and the links feel as a knock."
     },
     {
       "stage": "check",
       "question": "The S curve and the trapezoid for a move of 1 rad took:",
       "options": [
-        "The same",
         "1.000 s and 1.220 s",
-        "0 s",
+        "1.000 s both",
+        "2.440 s and 1.000 s",
         "1.220 s and 1.000 s"
       ],
       "correct": 3,
-      "explanation": "A little longer: the price of the jerk limit."
+      "explanation": "Ramping the acceleration costs about the ramp's time. The trapezoid is quicker because it is allowed what the arm cannot do well."
     },
     {
       "stage": "check",
       "question": "The trapezoid's jerk over a millisecond step was:",
       "options": [
-        "1000 rad/s3 exactly",
-        "0",
+        "20 rad/s3, the limit",
+        "4 rad/s3",
         "4000 rad/s3",
-        "20 rad/s3"
+        "Zero: a trapezoid has no jerk"
       ],
       "correct": 2,
-      "explanation": "Against a limit of 20."
+      "explanation": "Its acceleration goes from nothing to 4 rad/s2 in one step. Over a millisecond that is 4000 rad/s3, two hundred times the limit."
     },
     {
       "stage": "check",
       "question": "The wandering path of 17 points took 14.33 s and its straight shortcut:",
       "options": [
         "1.45 s",
-        "0 s",
-        "14.33 s",
-        "The same"
+        "14.33 s, the same: the limits are the same",
+        "7.2 s, about half",
+        "12.9 s"
       ],
       "correct": 0,
-      "explanation": "A stop at every vertex."
+      "explanation": "Every vertex is a stop and a start. Seventeen points are sixteen moves from rest to rest, where the shortcut was one."
     },
     {
       "stage": "post",
       "question": "How are a joint's limits turned into limits along a segment?",
       "options": [
-        "They are not",
+        "The limit of the joint that moves the most, alone",
         "The smallest, over the joints, of the joint's limit over its share of the direction",
-        "The largest",
-        "Averaged"
+        "The average of the joints' limits",
+        "The largest, over the joints, of limit over share"
       ],
       "correct": 1,
-      "explanation": "The limiting joint sets it."
+      "explanation": "Each joint takes a share of the motion along the segment. The speed along it may rise until the first joint reaches its own limit."
     },
     {
       "stage": "post",
       "question": "Why did halving the speed limits not change a short move?",
       "options": [
-        "It did",
+        "The override applies only to long moves",
         "A short move never reaches its cruise speed: acceleration and jerk limit it",
-        "Speeds are ignored",
-        "Rounding"
+        "A short move is limited by the jerk alone",
+        "It did change, by less than the rounding"
       ],
       "correct": 1,
-      "explanation": "Only the long move cruises."
+      "explanation": "A short move spends all its time speeding up and slowing down. Halving a cruise speed it never reaches changes nothing; the long move went from 3.70 to 6.45 s."
     }
   ]
 }

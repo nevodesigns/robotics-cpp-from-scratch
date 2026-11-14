@@ -16,7 +16,7 @@ RRT (30-03) plans one motion by growing a tree, and throws the tree away. An arm
 
 ### A graph of free configurations
 
-A roadmap (the probabilistic roadmap, PRM) is built in two steps. Sample a few hundred random configurations and keep the ones that are free. Connect each to its nearest few with an edge, kept if the straight line between them in joint space is free (conservative advancement, 30-02). The result is a graph: nodes are poses the arm can be in; edges are motions it can make. Building it costs a lot of poses looked at (here 56406 for 250 nodes and 8 neighbours) and it is done once. The graph fell into 5 piece1; if it is one piece, any node can reach any other. See `E-ARM-0061`.
+A roadmap (the probabilistic roadmap, PRM) is built in two steps. Sample a few hundred random configurations and keep the ones that are free. Connect each to its nearest few with an edge, kept if the straight line between them in joint space is free (conservative advancement, 30-02). The result is a graph: nodes are poses the arm can be in; edges are motions it can make. Building it costs a lot of poses looked at (here 56406 for 250 nodes and 8 neighbours) and it is done once. The graph fell into 5 pieces; if it is one piece, any node can reach any other. See `E-ARM-0061`.
 
 ### A query is a search
 

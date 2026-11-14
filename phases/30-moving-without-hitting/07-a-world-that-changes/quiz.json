@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What is the version of a planning scene for?",
       "options": [
-        "Speed",
+        "To count how many objects are in the scene",
         "To say that a plan made at an earlier version may be out of date",
-        "Printing",
-        "Colour"
+        "To order the objects by when they were seen",
+        "To tell the planner which objects moved"
       ],
       "correct": 1,
-      "explanation": "Recheck, not necessarily replan."
+      "explanation": "A plan remembers the version it was made at. If the scene has moved on, the plan is checked again before it is trusted."
     },
     {
       "stage": "check",
       "question": "The version went from 0 to:",
       "options": [
         "4 after four changes",
-        "100",
-        "0",
-        "0"
+        "2, the two additions",
+        "1: only a move counts",
+        "3: a removal does not count"
       ],
       "correct": 0,
-      "explanation": "Every add, move and remove raises it."
+      "explanation": "Adding, moving and removing each raise it by one, so four changes gave version 4."
     },
     {
       "stage": "check",
       "question": "An object seen 2.0 s ago at 0.5 m/s was how much bigger in its radius?",
       "options": [
-        "2.0 m",
+        "1.00 m, the speed times the age",
         "0.50 m, up to the cap",
-        "10 m",
-        "0 m"
+        "0.25 m",
+        "Nothing: it was last seen in the clear"
       ],
       "correct": 1,
-      "explanation": "Speed times age, capped."
+      "explanation": "Half a metre a second for two seconds would be a metre, and the cap held it at 0.5 m."
     },
     {
       "stage": "check",
       "question": "A part in the gripper took a pose from 0.090 m clear to:",
       "options": [
         "-0.090 m",
-        "0.090 m",
-        "10 m",
-        "The same"
+        "0.090 m, unchanged",
+        "0.000 m, just touching",
+        "-0.250 m, the part's whole length"
       ],
       "correct": 0,
-      "explanation": "The arm is longer with a part in its hand."
+      "explanation": "A part 0.25 m long makes the tool that much longer. The pose that cleared by 0.090 m with an empty hand was 0.090 m into the obstacle with a full one."
     },
     {
       "stage": "post",
       "question": "Does a stale plan have to be wrong?",
       "options": [
-        "Only for spheres",
-        "Never",
-        "Always",
+        "Yes: any change makes the path unsafe",
+        "Yes, unless the change was a removal",
+        "Only if the object grew",
         "No: the object may have moved away, and the check says whether the path is still free"
       ],
       "correct": 3,
-      "explanation": "Recheck it."
+      "explanation": "Moved 0.5 m away, the object left the path free. Moved onto it, it did not. The version says look again, and the check gives the answer."
     },
     {
       "stage": "post",
       "question": "Why does the scene make an unseen object bigger?",
       "options": [
-        "It cannot",
-        "To save memory",
+        "To make up for capsules that are too thin",
+        "To keep the version from rising too often",
         "It could have moved by speed times the time since it was seen: ignorance made into room",
-        "It looks nicer"
+        "Because sensors measure radius badly"
       ],
       "correct": 2,
-      "explanation": "A wide berth for what cannot be seen."
+      "explanation": "Not having seen it lately means not knowing where it is. Growing it by how far it could have gone turns that into room the planner keeps."
     }
   ]
 }
