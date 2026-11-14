@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What is most of the work of choosing a robot?",
       "options": [
-        "Buying it",
-        "Reading catalogues",
-        "Programming it",
+        "Comparing the prices of the families",
+        "Measuring each robot's reach volume",
+        "Finding the fastest robot of each family",
         "Writing the task down as numbers"
       ],
       "correct": 3,
-      "explanation": "A task in words fits every robot."
+      "explanation": "A job put as pick and place, fast, rules nothing out. Area, payload, tilt, accuracy and cycle as numbers rule out most families at once."
     },
     {
       "stage": "check",
       "question": "A SCARA over the middle of the work reached what share of it?",
       "options": [
-        "All of it",
         "1.00",
-        "None",
+        "0.33",
+        "0.89",
         "0.48"
       ],
       "correct": 3,
-      "explanation": "It cannot reach under itself; beside the work it reached 1.00."
+      "explanation": "A SCARA cannot reach the ground close to its own column. Mounted beside the work the same robot reached all of it."
     },
     {
       "stage": "check",
       "question": "Which robot did the job needing a tilt, a payload and the larger reach go to?",
       "options": [
-        "3",
+        "2, the Stewart platform",
         "4, the arm",
-        "1",
-        "None"
+        "1, the delta",
+        "3, the gantry"
       ],
       "correct": 1,
-      "explanation": "The Stewart platform also tilts but its reach is small."
+      "explanation": "Only the arm and the Stewart platform can tilt and carry it, and the platform's reach is too small for the area."
     },
     {
       "stage": "check",
       "question": "What was the answer for a job of 500 kg?",
       "options": [
         "-1: no robot",
-        "The arm",
-        "The gantry",
-        "The delta"
+        "3, the gantry, as the strongest",
+        "4, the arm, with a longer cycle",
+        "The family that failed by the least"
       ],
       "correct": 0,
-      "explanation": "Saying none is a result."
+      "explanation": "Every family failed the payload. The function returns -1 and does not offer the least bad."
     },
     {
       "stage": "post",
       "question": "Why is the figure for each family not trusted?",
       "options": [
-        "It is wrong",
-        "It is old",
+        "It was measured on one robot only",
+        "It leaves out the hand's time",
         "It is typical, and a real robot differs from it by a large factor",
-        "It is secret"
+        "It is the best any robot of the family can do"
       ],
       "correct": 2,
-      "explanation": "Use a data sheet and a trial."
+      "explanation": "The figures are typical of a family, and two robots of one family can differ several times over. The choice is a first screen."
     },
     {
       "stage": "post",
       "question": "What is not in the choice?",
       "options": [
-        "The cycle",
-        "The area",
+        "The time the hand takes",
+        "Whether the tool must tilt",
         "Cost, floor space, life and people near the cell",
-        "The payload"
+        "The lengths of the short and long moves"
       ],
       "correct": 2,
-      "explanation": "Only the shortest cycle among those that pass."
+      "explanation": "Among the families that pass, the shortest cycle wins. What the cell costs and where people stand are not asked."
     }
   ]
 }

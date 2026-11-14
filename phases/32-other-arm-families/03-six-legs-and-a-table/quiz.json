@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "For a parallel platform, which direction of kinematics has a formula?",
       "options": [
-        "Pose from leg lengths",
-        "Neither",
-        "Both",
+        "Pose from leg lengths, as for a serial arm",
+        "Both, since the platform is rigid",
+        "Neither: both need an iteration",
         "Leg lengths from a pose"
       ],
       "correct": 3,
-      "explanation": "The opposite of a serial arm."
+      "explanation": "Give the pose and each leg is the distance between two known points. Going from lengths to a pose is the hard direction, the reverse of a serial arm."
     },
     {
       "stage": "check",
       "question": "At home the legs were all:",
       "options": [
         "0.343 m",
-        "0 m",
+        "0.300 m, the height of the platform",
         "0.366 m",
         "0.410 m"
       ],
       "correct": 0,
-      "explanation": "A symmetric hexapod."
+      "explanation": "The layout is symmetric, so with the platform level and centred every leg is the same. 0.366 to 0.410 m was the range a raise and a tilt needed."
     },
     {
       "stage": "check",
       "question": "How is the pose found from the lengths?",
       "options": [
-        "By luck",
-        "By a formula",
+        "By the formula used the other way round",
+        "By trying every pose on a grid",
         "By Newton's iteration from a guess",
-        "By a table"
+        "By trilateration, as for the delta"
       ],
       "correct": 2,
-      "explanation": "4 steps from a guess."
+      "explanation": "There is no simple formula. From a guess the lengths' sensitivity to the pose gives a correction, and four rounds of that found the pose."
     },
     {
       "stage": "check",
       "question": "What limits a platform's reach?",
       "options": [
-        "The weight",
+        "The torque of the motors",
         "Leg stroke (and joint cones, not modelled)",
-        "Joint angles only",
-        "The camera"
+        "The radius of the base",
+        "The number of legs"
       ],
       "correct": 1,
-      "explanation": "0.366 to 0.410 m for that motion."
+      "explanation": "A raise of 50 mm and a tilt of 10 degrees already needed legs from 0.366 to 0.410 m. Run out of stroke and the pose cannot be had."
     },
     {
       "stage": "post",
       "question": "What is dangerous about a parallel singularity?",
       "options": [
-        "Nothing",
-        "It is slow",
-        "It is noisy",
+        "The legs need an infinite speed there",
+        "The pose can no longer be computed",
+        "The platform locks and cannot be moved",
         "The platform can give way under a load"
       ],
       "correct": 3,
-      "explanation": "It loses the ability to resist a force."
+      "explanation": "A serial arm at a singularity cannot move in some direction. A parallel platform at one can move with its legs fixed, so it cannot hold a force that way."
     },
     {
       "stage": "post",
       "question": "What is a good starting guess in a controller?",
       "options": [
-        "A random pose",
+        "The home pose, every time",
         "The last pose",
-        "Zero",
-        "The home pose always"
+        "A pose chosen at random",
+        "The middle of the legs' stroke"
       ],
       "correct": 1,
-      "explanation": "That is why the iteration converges so fast."
+      "explanation": "The platform has barely moved since the last cycle, so the last pose is already close and a few steps finish it."
     }
   ]
 }

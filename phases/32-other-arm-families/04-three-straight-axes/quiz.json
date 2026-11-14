@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why does a gantry need no inverse kinematics?",
       "options": [
-        "It is small",
-        "It does",
-        "It is slow",
+        "Its controller solves it in hardware",
+        "Each axis has its own encoder",
+        "It only ever moves one axis at a time",
         "The tool's place is the axes' positions"
       ],
       "correct": 3,
-      "explanation": "Three straight axes at right angles."
+      "explanation": "x, y and z are each one slide. The tool is where the slides are, with nothing to solve."
     },
     {
       "stage": "check",
       "question": "Which took longer for the move of 0.4 m and 0.4 m?",
       "options": [
         "A straight line, 0.900 s",
-        "Each axis on its own, 0.825 s",
-        "Neither",
-        "The same"
+        "Each axis on its own, 0.900 s",
+        "They took the same, 0.825 s",
+        "A straight line, 1.650 s"
       ],
       "correct": 0,
-      "explanation": "z sets the speed and x the acceleration."
+      "explanation": "On a line every axis must keep its share, so the slowest axis in speed and the slowest in acceleration both limit the path. Here those were different axes, and the line took longer."
     },
     {
       "stage": "check",
       "question": "Twice the span made the sag how many times as great?",
       "options": [
-        "4",
-        "16",
+        "2 times",
+        "4 times",
         "8",
-        "2"
+        "16 times"
       ],
       "correct": 2,
-      "explanation": "L cubed."
+      "explanation": "The sag of a beam loaded in the middle goes as the cube of its length, and two cubed is eight."
     },
     {
       "stage": "check",
       "question": "The first resonance for 5 kg was:",
       "options": [
         "71 Hz",
-        "0",
-        "1 Hz",
-        "10 kHz"
+        "7.1 Hz",
+        "710 Hz",
+        "50 Hz, the mains"
       ],
       "correct": 0,
-      "explanation": "sqrt(k/m) over 2 pi."
+      "explanation": "A stiffness of 1.0 MN/m and 5 kg: the root of 200000 is 447 rad/s, which is 71 Hz. A heavier head lowers it."
     },
     {
       "stage": "post",
       "question": "What does a skew of the two ends give?",
       "options": [
-        "Less sag",
+        "A sag in the middle of the beam",
         "An error that grows with the lever, from the beam turning",
-        "Nothing",
-        "A faster axis"
+        "A lower resonance",
+        "An error that is the same everywhere on the beam"
       ],
       "correct": 1,
-      "explanation": "60 micrometres at 0.3 m."
+      "explanation": "The beam turns by the skew over the span, and a tool out on a lever moves by that angle times the lever: 0.2 mm over 1.0 m gave 60 micrometres at 0.3 m."
     },
     {
       "stage": "post",
       "question": "What makes a bigger gantry less accurate?",
       "options": [
-        "Its software",
-        "Its motors",
-        "Its colour",
+        "Its motors, which lose steps on long travels",
+        "Its belts, which stretch in proportion to length",
+        "Its encoders, whose error adds along the travel",
         "Its beams, whose sag grows with the cube of the length unless the section grows"
       ],
       "correct": 3,
-      "explanation": "L cubed."
+      "explanation": "Doubling a span with the same section makes the sag eight times as great. The section has to grow with the length to keep the accuracy."
     }
   ]
 }

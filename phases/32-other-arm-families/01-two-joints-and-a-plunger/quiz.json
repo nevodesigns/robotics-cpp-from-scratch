@@ -7,72 +7,72 @@
       "question": "Why are a SCARA's first two joints cheap to hold up?",
       "options": [
         "Their axes are vertical, so gravity puts no torque on them",
-        "They are small",
-        "They are slow",
-        "Magic"
+        "Their links are short, so the lever of the load is small",
+        "A spring in each joint balances the weight",
+        "The slide carries half the load and they share the rest"
       ],
       "correct": 0,
-      "explanation": "0.0 N m against 7.85 N m."
+      "explanation": "Gravity acts along a vertical axis and so has no lever about it. A 2 kg payload put 0.0 N m on those joints, against 7.85 N m on the shoulder of a six axis arm holding it 0.4 m out."
     },
     {
       "stage": "check",
       "question": "How many elbow solutions has a point within reach?",
       "options": [
-        "Four",
-        "Eight",
+        "One, since the slide fixes the height",
+        "Four: two elbows for each direction of the roll",
         "Two, plus or minus the arccosine",
-        "One"
+        "As many as there are headings of the tool"
       ],
       "correct": 2,
-      "explanation": "Left and right."
+      "explanation": "It is the two link problem in a plane: the cosine of the second joint is fixed by the distance, and the angle is plus or minus its arccosine. Left elbow and right."
     },
     {
       "stage": "check",
       "question": "The determinant when straight was:",
       "options": [
-        "1",
-        "0.0000",
         "0.0506",
-        "Infinite"
+        "0.0000",
+        "1.0000",
+        "0.2250, the length of a link"
       ],
       "correct": 1,
-      "explanation": "l1 l2 sin q2 is zero at q2 = 0."
+      "explanation": "The determinant is l1 l2 times the sine of the second joint, which is zero when the arm is straight and when it is folded. It was 0.0506 at a right angle."
     },
     {
       "stage": "check",
       "question": "A point 0.5 m out for these links was:",
       "options": [
-        "Reached",
+        "Reached with the arm straight",
         "Refused",
-        "Reached by the other elbow",
-        "Slow"
+        "Reached with the left elbow only",
+        "Reached by using the slide"
       ],
       "correct": 1,
-      "explanation": "Out of reach."
+      "explanation": "Two links of 0.225 m reach 0.45 m at most. The function says so and does not return the nearest point."
     },
     {
       "stage": "post",
       "question": "What task suits a SCARA?",
       "options": [
-        "Reaching under a car",
-        "Anything",
-        "A tilted weld",
+        "Welding along a tilted seam",
+        "Reaching into a box from the side",
+        "Carrying a heavy part between two heights",
         "Pick and place on a flat table, from above"
       ],
       "correct": 3,
-      "explanation": "A flat job."
+      "explanation": "It moves fast in a plane, is stiff vertically and cannot tilt. That is a part picked from above and put down flat."
     },
     {
       "stage": "post",
       "question": "What does a SCARA not do?",
       "options": [
-        "Move in a plane",
-        "Move vertically",
+        "Turn its tool about the vertical",
+        "Move its tool up and down",
         "Tilt its tool",
-        "Roll"
+        "Reach the same point with either elbow"
       ],
       "correct": 2,
-      "explanation": "No tilt axes."
+      "explanation": "Its four joints give x, y, height and a roll about the vertical. There is nothing to tip the tool away from straight down."
     }
   ]
 }

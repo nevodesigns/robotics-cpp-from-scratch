@@ -6,37 +6,37 @@
       "stage": "pre",
       "question": "Why ask every robot the same question?",
       "options": [
-        "To hide differences",
+        "So that the fastest robot is found",
         "Their reaches are described in different terms and cannot be compared otherwise",
-        "It is faster",
-        "It is required"
+        "Because each maker measures reach in its own units",
+        "To make the test code shorter"
       ],
       "correct": 1,
-      "explanation": "Can you put the tool here, level?"
+      "explanation": "Joint ranges, leg strokes and travels are not comparable. Whether the tool can be put at a point, level, is something every robot can answer."
     },
     {
       "stage": "check",
       "question": "How was the volume found?",
       "options": [
-        "By a table",
-        "By measuring",
+        "From each maker's data sheet",
+        "By a formula for each family's shape",
         "By asking the question at random points and counting the yes answers",
-        "By a formula"
+        "By slicing the reach into layers and adding their areas"
       ],
       "correct": 2,
-      "explanation": "40000 points."
+      "explanation": "The shapes have no formula. 40000 random points in a box, and the share that can be reached times the box's volume is the estimate."
     },
     {
       "stage": "check",
       "question": "Which had the largest reach volume?",
       "options": [
-        "The SCARA, 0.084 m3",
+        "The gantry, whose box is all usable",
         "The six axis arm, 1.731 m3",
-        "The gantry",
-        "The delta"
+        "The SCARA, at 0.084 m3",
+        "The delta, at 0.072 m3"
       ],
       "correct": 1,
-      "explanation": "A ball, against the SCARA's slab."
+      "explanation": "The arm's reach is most of a ball. The SCARA's is a slab 0.15 m thick, because a flat table is its job."
     },
     {
       "stage": "check",
@@ -44,35 +44,35 @@
       "options": [
         "0.07",
         "0.98",
-        "0",
-        "1"
+        "0.33",
+        "0.47"
       ],
       "correct": 0,
-      "explanation": "Its base and legs are large for a small stroke."
+      "explanation": "Its base and legs take up far more room than the small volume its platform moves in."
     },
     {
       "stage": "post",
       "question": "Does the largest volume make the best robot?",
       "options": [
         "No: volume leaves out speed, payload, stiffness, accuracy and the shape of the work",
-        "Only for arms",
-        "Yes",
-        "Always"
+        "Yes, for any task that fits inside it",
+        "Yes, since reach is what a robot is bought for",
+        "Only when two robots have the same payload"
       ],
       "correct": 0,
-      "explanation": "The task chooses."
+      "explanation": "The arm's volume was twenty times the SCARA's and most of it is no use to a table job. The task decides what counts."
     },
     {
       "stage": "post",
       "question": "Why is the standard error of use?",
       "options": [
-        "It is not",
-        "It is decoration",
-        "It speeds the sampling",
+        "It corrects the estimate's bias",
+        "It makes the random points repeatable",
+        "It gives the volume's exact value in the limit",
         "It says how many points the estimate needs and is the square root of n small"
       ],
       "correct": 3,
-      "explanation": "Sixteen times the points, a quarter of the error."
+      "explanation": "It shrinks as the square root of the number of points, so it says what an estimate is worth: about 0.4 percent for the SCARA at 40000 points."
     }
   ]
 }

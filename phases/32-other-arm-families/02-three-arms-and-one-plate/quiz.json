@@ -7,72 +7,72 @@
       "question": "What keeps a delta's platform from tilting?",
       "options": [
         "The parallelograms of rods",
-        "The motors",
-        "A sensor",
-        "Gravity"
+        "A fourth motor in the middle",
+        "The weight of the platform itself",
+        "A controller that corrects the tilt it measures"
       ],
       "correct": 0,
-      "explanation": "Three movements, no tilt."
+      "explanation": "Each arm is joined to the platform by a pair of equal rods. A parallelogram keeps its two ends parallel, and three of them leave the platform free to move but not to tilt."
     },
     {
       "stage": "check",
       "question": "How is each arm solved?",
       "options": [
-        "By a table",
+        "All three together, as six equations",
         "On its own, in its own frame, as two circles meeting",
-        "All together",
-        "By search"
+        "By Newton's iteration from the last pose",
+        "By a search over the motor angles"
       ],
       "correct": 1,
-      "explanation": "Rotate the target into the arm's frame."
+      "explanation": "The platform does not tilt, so turning the target by 120 degrees for each arm gives three copies of one plane problem with a closed answer."
     },
     {
       "stage": "check",
       "question": "At -0.40 m the reach was:",
       "options": [
-        "The whole box",
-        "1 m",
-        "0 m",
+        "0.460 m, the length of the rods",
+        "0.120 m, the radius of the base",
+        "The same at every height",
         "0.310 m out from the axis"
       ],
       "correct": 3,
-      "explanation": "A dome."
+      "explanation": "The reach is widest part way down and narrows below, a dome and not a box. At -0.40 m it was 0.310 m from the axis."
     },
     {
       "stage": "check",
       "question": "The moving parts weighed:",
       "options": [
-        "Nothing",
-        "18 kg",
+        "18 kg, as for any arm of that reach",
+        "7.8 kg",
         "0.78 kg, against 18 for a six axis arm",
-        "The same"
+        "0.20 kg, the platform alone"
       ],
       "correct": 2,
-      "explanation": "The motors stay on the base."
+      "explanation": "The motors are fixed to the base and only the arms, rods and platform move. With the same torque that is many times the acceleration."
     },
     {
       "stage": "post",
       "question": "What is a delta for?",
       "options": [
-        "Welding",
-        "Reaching under things",
-        "Slow heavy lifting",
+        "Heavy parts moved slowly",
+        "Work that needs the tool tilted",
+        "A large table of boxes",
         "Fast, light pick and place from above"
       ],
       "correct": 3,
-      "explanation": "Light parts, high rate."
+      "explanation": "It trades reach and payload for speed, and its platform stays level. That is small parts taken from a belt at a high rate."
     },
     {
       "stage": "post",
       "question": "What is not checked here?",
       "options": [
-        "The forward kinematics",
+        "That the forward kinematics returns the pose asked for",
         "The rods colliding and the limits of their ball joints",
-        "The inverse kinematics",
-        "The symmetry"
+        "That each arm is solved in its own frame",
+        "That a point out of reach is refused"
       ],
       "correct": 1,
-      "explanation": "Real joints limit the usable angles."
+      "explanation": "The geometry is of ideal rods and joints. Real ball joints have a cone they cannot leave and real rods can touch."
     }
   ]
 }
