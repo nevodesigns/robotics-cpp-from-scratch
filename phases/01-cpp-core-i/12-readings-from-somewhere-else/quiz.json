@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A log field contains 1,5 because it was written where the decimal separator is a comma. What does std::stod give you?",
       "options": [
-        "1, silently, having used only the first character",
+        "nan",
         "1.5, since it understands both separators",
         "It throws, because the field is malformed",
-        "nan"
+        "1, silently, having used only the first character"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "stod answers whether a field starts with a number, not whether it is one. Measured across seven fields it accepted all seven, including 1.5abc and 1.5.7. The decimal comma is the one that costs money: every reading in the file becomes a whole number and the result is believable."
     },
     {
@@ -19,8 +19,8 @@
       "question": "What single check separates 1.5 from 1,5 when parsing?",
       "options": [
         "Whether strtod consumed the whole field, by comparing its end pointer against the end of the text",
-        "Whether the field contains a comma",
         "Whether the result is finite",
+        "Whether the field contains a comma",
         "Catching the exception stod throws"
       ],
       "correct": 0,
@@ -30,36 +30,36 @@
       "stage": "check",
       "question": "Why reject nan and inf, when strtod parses them happily?",
       "options": [
-        "A sensor cannot read either, and one nan poisons every average computed from the file",
         "Because they are not valid C++ doubles",
+        "A sensor cannot read either, and one nan poisons every average computed from the file",
         "Because strtod sets errno for them",
         "There is no reason to: they should be kept"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "They are spellings strtod accepts. Refusing them where the data comes in is much cheaper than finding one later in an average, which is lesson 01-08's territory."
     },
     {
       "stage": "check",
       "question": "A three column log contains the row 0.4,1,70,2.45, a decimal comma written in a comma separated file. What happens when each field is checked?",
       "options": [
-        "Nothing: it splits into four fields and every one of them is a valid number",
         "The second field fails to parse",
+        "strtod reports ERANGE on the third field",
         "The row is rejected because it has a comma in it",
-        "strtod reports ERANGE on the third field"
+        "Nothing: it splits into four fields and every one of them is a valid number"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Which is why field checking is not enough. Measured on a log with three bad lines, one was caught by parsing a field and two were caught only by counting columns: this row, and a row cut short when the logger was killed."
     },
     {
       "stage": "post",
       "question": "Why does read_log report unparsable and wrong_width as two separate counts?",
       "options": [
-        "They are different problems: unparsable fields suggest a sensor fault, wrong widths suggest a format or locale mismatch",
+        "So the caller can add them together",
         "To make the report longer",
-        "Because wrong width rows are warnings rather than errors",
-        "So the caller can add them together"
+        "They are different problems: unparsable fields suggest a sensor fault, wrong widths suggest a format or locale mismatch",
+        "Because wrong width rows are warnings rather than errors"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Reporting one number for both leaves the reader guessing which. A file consistently one column too wide is a file written with a decimal comma, and the fix is to read it with a different separator rather than to patch the rows."
     },
     {
@@ -68,8 +68,8 @@
       "options": [
         "A test can hand it a string with no file and no cleanup, and a program can hand it an ifstream",
         "Because opening files is slow",
-        "So it can read from a network socket",
-        "To avoid needing a path type that works on Windows"
+        "To avoid needing a path type that works on Windows",
+        "So it can read from a network socket"
       ],
       "correct": 0,
       "explanation": "Depend on the interface, not the device: the same idea as the replay sensor in 05-02 and the injectable clock in 03-05. A filename ties the parsing to the filesystem, and the awkward test cases are then the ones nobody writes."

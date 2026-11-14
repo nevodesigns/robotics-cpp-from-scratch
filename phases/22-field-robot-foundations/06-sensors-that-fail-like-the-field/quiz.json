@@ -6,36 +6,36 @@
       "stage": "pre",
       "question": "How should a lidar report a beam that saw nothing?",
       "options": [
-        "As zero",
         "As the maximum range",
         "As infinity, which no later stage will mistake for a distance",
-        "As a random number"
+        "As a random number",
+        "As zero"
       ],
-      "correct": 2,
+      "correct": 1,
       "explanation": "A value the next stage believes is a bug."
     },
     {
       "stage": "check",
       "question": "A bias of 0.01 rad/s in a gyro at rest gave in one minute:",
       "options": [
-        "Nothing",
         "34.1 degrees of heading",
         "1 degree",
+        "Nothing",
         "360 degrees"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Bias integrates into drift."
     },
     {
       "stage": "check",
       "question": "What fraction of GNSS fixes jumped by metres?",
       "options": [
-        "None",
         "About 1.03 percent",
-        "Half",
-        "All"
+        "None",
+        "All",
+        "Half"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Multipath is rare and large."
     },
     {
@@ -44,8 +44,8 @@
       "options": [
         "Exactly right",
         "0.20 m long",
-        "2 m long",
-        "Short"
+        "Short",
+        "2 m long"
       ],
       "correct": 1,
       "explanation": "A scale error is the same direction every time."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "Why does adding Gaussian noise to a model not prepare a controller for the field?",
       "options": [
+        "Noise is illegal",
         "It is too slow",
         "The field's errors are biases, dropouts and jumps, which are not Gaussian",
-        "Noise is illegal",
         "It does"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Test against the failures that actually happen."
     },
     {
       "stage": "post",
       "question": "Why does slip make an encoder read long?",
       "options": [
-        "The wheel turns more than the vehicle moves",
-        "The wheel turns less",
         "Ticks are lost",
-        "The battery is low"
+        "The wheel turns less",
+        "The battery is low",
+        "The wheel turns more than the vehicle moves"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "The wheel counts its own travel, not the ground's."
     }
   ]

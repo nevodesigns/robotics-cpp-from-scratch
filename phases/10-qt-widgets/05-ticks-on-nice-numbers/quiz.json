@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "0.1 is added to a total ten times. What is the total?",
       "options": [
-        "1",
         "0.99999999999999989, which is not 1",
-        "1.1",
-        "0.9"
+        "1",
+        "0.9",
+        "1.1"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Each addition rounds, and the errors do not cancel."
     },
     {
@@ -19,21 +19,21 @@
       "question": "How does a tick avoid the drift?",
       "options": [
         "It adds the step carefully",
-        "It is a whole number times the step, rounded to the decimals of the axis",
         "It uses float instead of double",
-        "It prints with more digits"
+        "It prints with more digits",
+        "It is a whole number times the step, rounded to the decimals of the axis"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Tick k is (first_index + k) times step, rounded."
     },
     {
       "stage": "check",
       "question": "What is the step for a span of 7.3 with about 5 ticks?",
       "options": [
-        "1.46",
+        "5",
         "2: the raw step 1.46 is rounded up to 1, 2, 5 or 10 times a power of ten",
-        "1",
-        "5"
+        "1.46",
+        "1"
       ],
       "correct": 1,
       "explanation": "The step is the smallest nice number that is at least the raw step."
@@ -42,36 +42,36 @@
       "stage": "check",
       "question": "Why does tick_label take a minus sign off a zero?",
       "options": [
-        "Minus zero is not a number",
         "-0.004 with two decimals prints as -0.00, and an axis should not say it",
-        "Qt requires it",
-        "It saves a character"
+        "Minus zero is not a number",
+        "It saves a character",
+        "Qt requires it"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The label is for a person, and a person reads -0.00 as a value below zero."
     },
     {
       "stage": "post",
       "question": "A range of 5 to 5 has how many ticks?",
       "options": [
+        "5",
         "0",
         "1, at 5: a steady signal is one value",
-        "5",
         "An error"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Dividing by a span of zero is what the steady case avoids."
     },
     {
       "stage": "post",
       "question": "What is the target in ticks_for?",
       "options": [
-        "The exact number of ticks",
-        "About how many: the step is a nice number, so the count is near it",
+        "The number of decimals",
         "The step",
-        "The number of decimals"
+        "About how many: the step is a nice number, so the count is near it",
+        "The exact number of ticks"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "42 ranges gave a count between 2 and 13 for a target of 6."
     }
   ]

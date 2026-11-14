@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "Headings 3.14 and -3.14. What is their difference the short way round?",
       "options": [
-        "6.28",
         "About -0.003: nearly the same direction",
+        "6.28",
         "3.14",
         "0"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The difference of the numbers is 6.28 and the short way round is -0.00318531."
     },
     {
@@ -30,22 +30,22 @@
       "stage": "check",
       "question": "A point is inside the total reach of the arm. Can every heading be reached there?",
       "options": [
-        "Yes",
-        "No: the wrist, the tool less the last link, has to be within reach of the first two",
+        "It depends on the base",
         "Only the first",
-        "It depends on the base"
+        "Yes",
+        "No: the wrist, the tool less the last link, has to be within reach of the first two"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "(2.9, 0) was reachable along x and not back along it."
     },
     {
       "stage": "check",
       "question": "What has to be within reach for a pose, the tool or the wrist?",
       "options": [
-        "The tool",
-        "The wrist: it is what the first two links reach",
         "Both",
-        "The base"
+        "The wrist: it is what the first two links reach",
+        "The base",
+        "The tool"
       ],
       "correct": 1,
       "explanation": "The test of a pose is the test of the wrist."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "How many whole-degree headings could be reached at (1.5, 0) with links 1, 1, 1?",
       "options": [
-        "360",
         "209 of 360",
         "180",
+        "360",
         "90"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The wrist must be within 2 of the base: cos(phi) at least -0.25."
     },
     {
       "stage": "post",
       "question": "What does the third angle of a solution do?",
       "options": [
+        "Sets the elbow",
         "Reaches the wrist",
         "Turns the heading into the one that was asked for",
-        "Sets the elbow",
         "Nothing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "q3 = phi - q1 - q2, wrapped."
     }
   ]

@@ -7,23 +7,23 @@
       "question": "What does the work per metre over a cell depend on, besides the surface?",
       "options": [
         "The colour",
-        "The slope along the heading the vehicle takes",
+        "Nothing",
         "The time of day",
-        "Nothing"
+        "The slope along the heading the vehicle takes"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Up costs more than across."
     },
     {
       "stage": "check",
       "question": "A metre up a slope of 14 degrees cost, against across it:",
       "options": [
-        "1.47 J against 25.2 J",
         "25.2 J against 1.47 J",
-        "The same",
-        "0"
+        "0",
+        "1.47 J against 25.2 J",
+        "The same"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "m g sin(a) is added."
     },
     {
@@ -31,23 +31,23 @@
       "question": "The shortest path across the sand band cost, and the cheapest:",
       "options": [
         "66 J and 90 J",
-        "90 J and 66 J, at 16.0 m and 31.2 m",
         "The same",
+        "90 J and 66 J, at 16.0 m and 31.2 m",
         "0"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Longer, and cheaper."
     },
     {
       "stage": "check",
       "question": "Crossing the patch of risk, the worst cell cost was:",
       "options": [
-        "0 with no weight",
-        "200 with no weight and 0 with one",
         "255 both",
-        "0 both"
+        "0 with no weight",
+        "0 both",
+        "200 with no weight and 0 with one"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The weight sent it round."
     },
     {
@@ -66,9 +66,9 @@
       "stage": "post",
       "question": "What does a goal in a ring of blocked cells give?",
       "options": [
-        "The nearest cell",
-        "found = false and an empty path, after 6476 expansions",
         "A crash",
+        "found = false and an empty path, after 6476 expansions",
+        "The nearest cell",
         "A path through the ring"
       ],
       "correct": 1,

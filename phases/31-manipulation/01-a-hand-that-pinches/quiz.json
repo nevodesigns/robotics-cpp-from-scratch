@@ -6,72 +6,72 @@
       "stage": "pre",
       "question": "What holds a thing between two fingers?",
       "options": [
-        "The squeeze itself",
-        "Friction at the pads, which the squeeze makes",
         "Glue",
-        "The thing's weight"
+        "The thing's weight",
+        "The squeeze itself",
+        "Friction at the pads, which the squeeze makes"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Friction, mu times the squeeze at each pad."
     },
     {
       "stage": "check",
       "question": "A kilogram at rest needed what squeeze at a friction of 0.5?",
       "options": [
+        "235 N",
         "9.81 N",
-        "14.81 N",
         "1 N",
-        "235 N"
+        "14.81 N"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "The weight over two pads of friction."
     },
     {
       "stage": "check",
       "question": "Lifting it at 5 m/s2 needed:",
       "options": [
-        "9.81 N",
         "14.81 N",
+        "Nothing",
         "The same",
-        "Nothing"
+        "9.81 N"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The acceleration adds to the weight."
     },
     {
       "stage": "check",
       "question": "Pads at half the friction hold:",
       "options": [
+        "The same",
         "Twice as much",
         "8.0 kg against 16.0 kg",
-        "The same",
         "Nothing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Half."
     },
     {
       "stage": "post",
       "question": "Why does a safety factor go on the force?",
       "options": [
-        "For luck",
         "Friction and the acceleration are not known exactly",
+        "It does not",
         "To use the motor",
-        "It does not"
+        "For luck"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A pad that is dirty is a smaller hand."
     },
     {
       "stage": "post",
       "question": "What is the closing time of a hand a part of?",
       "options": [
-        "Nothing",
-        "Every pick's cycle time",
+        "The stroke",
         "The friction",
-        "The stroke"
+        "Every pick's cycle time",
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Distance over the finger speed."
     }
   ]

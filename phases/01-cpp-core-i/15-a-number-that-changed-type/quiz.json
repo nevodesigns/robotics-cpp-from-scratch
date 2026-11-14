@@ -7,11 +7,11 @@
       "question": "What does static_cast<int>(-2.9) give, and what does static_cast<int>(-2.9 + 0.5) give?",
       "options": [
         "-3 and -2, since the cast rounds to the nearest whole number",
-        "-2 and -2, since a cast throws the fraction away toward zero and adding a half first does not help below zero",
         "-3 and -3, since the cast rounds away from zero",
-        "-2 and -3, since adding a half moves it further from zero"
+        "-2 and -3, since adding a half moves it further from zero",
+        "-2 and -2, since a cast throws the fraction away toward zero and adding a half first does not help below zero"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A cast to int truncates toward zero: -2.9 becomes -2. Adding 0.5 gives -2.4, which truncates to -2. The trick is right for positives only: over 601 values from -3 to 3 it disagreed with correct rounding on 251, all negative."
     },
     {
@@ -19,9 +19,9 @@
       "question": "A robot's map has one metre cells, and a position is turned into a cell with static_cast<int>(x). Of twenty positions from -1.0 to 0.9, how many land in cell 0?",
       "options": [
         "10, the ones from 0.0 to 0.9",
-        "20, since every position is within a metre of zero",
+        "1, since only 0.0 is exactly zero",
         "19, because everything from -0.9 to 0.9 truncates to 0, so the origin cell is twice the size of the others",
-        "1, since only 0.0 is exactly zero"
+        "20, since every position is within a metre of zero"
       ],
       "correct": 2,
       "explanation": "Measured: 19 in cell 0 and 1 in cell -1 by cast, and 10 and 10 by floor. The cell of -0.5 should be the one below zero, which is what floor_to_int gives."
@@ -32,8 +32,8 @@
       "options": [
         "Zero for all three, since an int cannot hold them",
         "-2147483648 for all of them, the same value as a real reading of the most negative int, and it is undefined behaviour",
-        "An exception for nan and the largest int for the other two",
-        "Whatever the platform's maximum is, clamped by the compiler"
+        "Whatever the platform's maximum is, clamped by the compiler",
+        "An exception for nan and the largest int for the other two"
       ],
       "correct": 1,
       "explanation": "Measured at -O0 and -O2 on both compilers. Not a number, infinity and a number too large are indistinguishable from each other and from a real reading afterwards, which is why the check has to come before the conversion."
@@ -42,22 +42,22 @@
       "stage": "check",
       "question": "A timestamp in microseconds is a long long, and is stored into an int. After how long does it first go negative?",
       "options": [
-        "About 36 minutes, since 2147483647 microseconds is 2147 seconds",
         "About 71 minutes, since an int holds 4294967295",
         "About 24 days, since an int counts milliseconds",
+        "About 36 minutes, since 2147483647 microseconds is 2147 seconds",
         "Never, since a long long converts safely to an int"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "It reads 2147000000 at 2147 seconds and -2146967296 at 2148, which is 35.8 minutes. Converting down is defined by the implementation, so it wraps quietly instead of crashing, and a robot that has been up for 36 minutes has a negative time."
     },
     {
       "stage": "post",
       "question": "Why does IntResult keep ok separate from value, instead of returning a special int when the conversion fails?",
       "options": [
-        "Because a struct is faster than an int",
+        "So that value can be negative",
         "Because every int is a reading some sensor could legitimately produce, so no int can stand for 'it did not fit'",
         "Because the standard requires conversions to return a pair",
-        "So that value can be negative"
+        "Because a struct is faster than an int"
       ],
       "correct": 1,
       "explanation": "A sentinel is a number that now cannot be a result. -2147483648 is exactly the value the raw cast gives for nan, so a sentinel would be the same silent wrong answer under a different name."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "int x{d} and int y = d are written for a double d. What do the compilers do with each?",
       "options": [
+        "The braced form is refused on every compiler as a narrowing conversion, and the plain assignment is accepted silently under -Wall -Wextra",
         "Both are accepted, since the fraction is simply dropped",
         "Both are refused, since a double cannot become an int",
-        "The braced form is refused on every compiler as a narrowing conversion, and the plain assignment is accepted silently under -Wall -Wextra",
         "The plain assignment is refused, and the braced form is accepted"
       ],
-      "correct": 2,
+      "correct": 0,
       "explanation": "Brace initialisation is the one place C++ checks whether a conversion loses information, which is what checks/ proves. The plain assignment compiles silently on gcc and clang under -Wall -Wextra, and is reported only by -Wconversion."
     }
   ]

@@ -7,33 +7,33 @@
       "question": "Why is the arm on the bench not its table?",
       "options": [
         "Tables are wrong",
-        "Links and joint zeros are made to a tolerance, and every error is in the tool",
+        "Software",
         "Arms are bent",
-        "Software"
+        "Links and joint zeros are made to a tolerance, and every error is in the tool"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A third of a degree at the shoulder is millimetres at the tool."
     },
     {
       "stage": "check",
       "question": "After calibrating, the error on poses it had not seen was:",
       "options": [
+        "0",
         "3.39 mm",
         "0.100 mm, against 3.39 mm before",
-        "0",
         "The same"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Down to the size of the noise."
     },
     {
       "stage": "check",
       "question": "Fitted to only 4 poses, the error on others was:",
       "options": [
-        "0.00000000 mm",
+        "0.100 mm",
         "0.83 mm, though it was 0.00000000 mm on its own",
-        "0",
-        "0.100 mm"
+        "0.00000000 mm",
+        "0"
       ],
       "correct": 1,
       "explanation": "Fewer equations than corrections."
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "Moving joint 2's offset or joint 3's by 1 mm gave tool places that differed by:",
       "options": [
-        "1 mm",
         "0.000000000000 m",
+        "10 mm",
         "1 m",
-        "10 mm"
+        "1 mm"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The data cannot say which."
     },
     {
@@ -56,8 +56,8 @@
       "options": [
         "Its error on its own poses",
         "Its error on poses it was not fitted to",
-        "Its speed",
-        "Its length"
+        "Its length",
+        "Its speed"
       ],
       "correct": 1,
       "explanation": "Keep poses back."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why do the fitted corrections not have to be the true ones?",
       "options": [
+        "Noise only",
         "They do",
         "Some give the same tool place whatever the joints do, so the measurements cannot separate them",
-        "Rounding",
-        "Noise only"
+        "Rounding"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Parallel axes."
     }
   ]

@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "Why is a scan not a photograph?",
       "options": [
-        "It is in colour",
         "The beams are fired one after another, and the sensor moves between them",
-        "It is flat",
-        "It is slow"
+        "It is in colour",
+        "It is slow",
+        "It is flat"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A sweep takes time."
     },
     {
@@ -20,8 +20,8 @@
       "options": [
         "0.1 degrees",
         "5.7 degrees",
-        "57 degrees",
-        "0"
+        "0",
+        "57 degrees"
       ],
       "correct": 1,
       "explanation": "Rate times time."
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "A wall straight ahead read 0.119 m from straight. After deskewing:",
       "options": [
-        "0.119 m",
-        "0.0000 m",
+        "0.5 m",
         "1 m",
-        "0.5 m"
+        "0.0000 m",
+        "0.119 m"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Each beam is put in the world from its own pose."
     },
     {
       "stage": "check",
       "question": "At 5 m/s a sweep of 0.1 s skews the cloud by:",
       "options": [
-        "0.05 m",
-        "0.50 m",
+        "0",
         "5 m",
-        "0"
+        "0.05 m",
+        "0.50 m"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Speed times time."
     },
     {
       "stage": "post",
       "question": "Why do the far points move most in a turn?",
       "options": [
+        "They are older",
         "They are lighter",
         "A point moves by range times turn rate times time",
-        "Noise",
-        "They are older"
+        "Noise"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "2.00 m for a point 20 m away."
     },
     {
       "stage": "post",
       "question": "Why must the two poses of the sweep come from something fast?",
       "options": [
-        "Style",
         "A localiser at 1 Hz cannot give the pose at the start and end of 0.1 s",
+        "No reason",
         "They must be exact",
-        "No reason"
+        "Style"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Odometry or an inertial sensor."
     }
   ]

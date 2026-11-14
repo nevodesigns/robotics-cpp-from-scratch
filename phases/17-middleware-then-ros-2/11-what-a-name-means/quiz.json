@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "Two robots each run a lidar driver that publishes scan. What puts them on different topics?",
       "options": [
-        "Different code",
         "Each node's name is resolved against its own namespace: /robot1/scan and /robot2/scan, apart, while an absolute /scan would be the same for both",
-        "The network",
-        "A random suffix"
+        "A random suffix",
+        "Different code",
+        "The network"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The name in the node is not the name on the bus."
     },
     {
@@ -20,8 +20,8 @@
       "options": [
         "/status",
         "/robot1/lidar_driver/status: a private name goes inside a namespace named for the node",
-        "/robot1/status",
-        "~/status"
+        "~/status",
+        "/robot1/status"
       ],
       "correct": 1,
       "explanation": "A private name is where the node puts what is its own."
@@ -30,12 +30,12 @@
       "stage": "check",
       "question": "Which of these is not a valid topic name?",
       "options": [
+        "a//b, which has an empty part, and so do names with a trailing slash, a space, or a part starting with a digit",
         "scan",
         "~/status",
-        "a//b, which has an empty part, and so do names with a trailing slash, a space, or a part starting with a digit",
         "/a/b"
       ],
-      "correct": 2,
+      "correct": 0,
       "explanation": "The test rejected all 16 bad names and accepted all 9 good ones."
     },
     {
@@ -43,33 +43,33 @@
       "question": "What is wrong with a node that publishes to /scan?",
       "options": [
         "Nothing",
-        "The name is absolute and ignores the namespace, so two robots share one topic with two publishers",
         "It is too short",
+        "The name is absolute and ignores the namespace, so two robots share one topic with two publishers",
         "It is private"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Write relative names in a node and leave absolute ones for things that are truly global."
     },
     {
       "stage": "post",
       "question": "What does a remap rule apply to?",
       "options": [
-        "The written name",
-        "The resolved name: the same rule in a node in /robot2 is about /robot2/scan and does not apply to /robot1/scan",
         "Every topic",
-        "Only private names"
+        "Only private names",
+        "The written name",
+        "The resolved name: the same rule in a node in /robot2 is about /robot2/scan and does not apply to /robot1/scan"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A rule is read the same way as any name."
     },
     {
       "stage": "post",
       "question": "What does the root namespace contribute to a name?",
       "options": [
-        "A slash",
+        "An error",
         "Nothing, so scan in the root is /scan and not //scan",
-        "A node name",
-        "An error"
+        "A slash",
+        "A node name"
       ],
       "correct": 1,
       "explanation": "The namespace is made to look the same however it was written."

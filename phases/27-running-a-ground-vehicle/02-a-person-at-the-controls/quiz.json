@@ -6,34 +6,34 @@
       "stage": "pre",
       "question": "What does the delay of an operator add to the stopping distance?",
       "options": [
-        "Nothing",
         "The vehicle goes on at its speed for the whole delay before it starts to brake",
+        "Only the braking",
         "It halves it",
-        "Only the braking"
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "v times T, plus the braking distance."
     },
     {
       "stage": "check",
       "question": "The speed allowed with 0.5 s of delay in all and with 2.0 s was:",
       "options": [
-        "2.32 m/s and 4.00 m/s",
         "4.00 m/s and 2.32 m/s",
+        "2.32 m/s and 4.00 m/s",
         "The same",
         "2 m/s both"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Falls with the delay."
     },
     {
       "stage": "check",
       "question": "After the commands stopped, a vehicle at 2 m/s went on with a timeout of 0.5 s:",
       "options": [
-        "4.99 m",
-        "1.99 m",
         "0 m",
-        "10 m"
+        "1.99 m",
+        "10 m",
+        "4.99 m"
       ],
       "correct": 1,
       "explanation": "v times timeout, plus the braking."
@@ -42,24 +42,24 @@
       "stage": "check",
       "question": "With the obstacle sensed and the operator at full speed, the vehicle stopped:",
       "options": [
-        "58.7 m past it",
-        "0.50 m short of it",
+        "At the start",
         "On it",
-        "At the start"
+        "58.7 m past it",
+        "0.50 m short of it"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A cap from the vehicle's own sensor."
     },
     {
       "stage": "post",
       "question": "Why does the governor ramp the speed?",
       "options": [
-        "To save the battery only",
-        "A step in the request is not a step in the wheels: it throws the load and spins them",
         "It is slower",
-        "Law"
+        "Law",
+        "A step in the request is not a step in the wheels: it throws the load and spins them",
+        "To save the battery only"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "1.33 s to reach 2 m/s."
     },
     {
@@ -67,11 +67,11 @@
       "question": "What does a dead man's timeout add to?",
       "options": [
         "Nothing",
-        "The stopping distance: v times the timeout",
         "The battery",
-        "The latency of the video"
+        "The latency of the video",
+        "The stopping distance: v times the timeout"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It is part of the distance."
     }
   ]

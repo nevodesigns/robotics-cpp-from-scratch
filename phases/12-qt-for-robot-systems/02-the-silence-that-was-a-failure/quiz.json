@@ -7,35 +7,35 @@
       "question": "A TCP connection to a robot has been silent for an hour. What does the socket say?",
       "options": [
         "It has been closed",
-        "Nothing: it is still connected",
         "It is late",
-        "An error"
+        "An error",
+        "Nothing: it is still connected"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A server that said nothing for 300 ms left the socket connected, and so would an hour."
     },
     {
       "stage": "check",
       "question": "What is the evidence that a robot is alive?",
       "options": [
-        "The socket is open",
         "It said something recently",
+        "The station has not crashed",
         "Its address answers a ping",
-        "The station has not crashed"
+        "The socket is open"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The watchdog judges by the age of the last sign."
     },
     {
       "stage": "check",
       "question": "The wall clock is put back by a second. What is the age of the last heartbeat if it is taken as now minus then?",
       "options": [
-        "Zero",
-        "Negative, which is never late and never lost",
         "A second",
-        "Infinity"
+        "Infinity",
+        "Negative, which is never late and never lost",
+        "Zero"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The watchdog clamps it at 0, and the monitor uses a clock that goes forward."
     },
     {
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "Why is a beat news at once?",
       "options": [
-        "It saves a timer",
-        "A sign of life should not wait for the next look to be reported",
         "Qt requires it",
-        "It is a bug"
+        "It saves a timer",
+        "It is a bug",
+        "A sign of life should not wait for the next look to be reported"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A beat made the monitor alive without waiting."
     },
     {
       "stage": "post",
       "question": "What must the limits be longer than?",
       "options": [
+        "The reconnect wait",
         "The poll interval",
         "The longest gap that a healthy robot leaves between messages",
-        "One second",
-        "The reconnect wait"
+        "One second"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The lesson says a measurement gives it and a guess does not."
     }
   ]

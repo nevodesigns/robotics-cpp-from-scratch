@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "A recursive function died with the shell reporting status 139. What is that number?",
       "options": [
-        "128 plus signal 11, SIGSEGV, so the program did not choose to stop",
         "An exit code the program returned to mean out of memory",
-        "The number of frames it managed before failing",
-        "A CMake error code for a crashed test"
+        "A CMake error code for a crashed test",
+        "128 plus signal 11, SIGSEGV, so the program did not choose to stop",
+        "The number of frames it managed before failing"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Lesson 00-09 has the arithmetic. A status above 128 almost always means a signal, which is why that range is not yours to use: a tool returning 139 on purpose cannot be told from one that crashed."
     },
     {
       "stage": "check",
       "question": "A local one call deeper was at a lower address than its caller's, by 48 bytes. What does that tell you?",
       "options": [
-        "The stack grows downwards, so deeper means numerically smaller",
-        "The compiler reordered the locals, so addresses say nothing",
         "The second local was on the heap",
-        "48 bytes is the size of the local, not the frame"
+        "48 bytes is the size of the local, not the frame",
+        "The stack grows downwards, so deeper means numerically smaller",
+        "The compiler reordered the locals, so addresses say nothing"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Which is the opposite of what the word deeper suggests. It is a property of the processor and holds on every toolchain this curriculum claims."
     },
     {
@@ -32,8 +32,8 @@
       "options": [
         "It has about an eighth of the room, since the Windows default stack is 1 MiB, so roughly 10900 safe levels instead of 87000",
         "Nothing; the stack limit is a property of C++ and is the same everywhere",
-        "It will be faster, since Windows frames are smaller",
-        "It is unaffected, because Windows grows the stack on demand without limit"
+        "It is unaffected, because Windows grows the stack on demand without limit",
+        "It will be faster, since Windows frames are smaller"
       ],
       "correct": 0,
       "explanation": "The limit is a setting, not a property of the language: ulimit -s on Linux, fixed at link time on Windows. A recursion comfortable on one can end the program on the other."
@@ -43,8 +43,8 @@
       "question": "A 15625 KiB array was declared in main beside a branch that only used a std::vector. That branch crashed. Why?",
       "options": [
         "The frame is allocated when the function is entered, not when the declaration is reached, so an unused local costs its full space",
-        "The vector allocated on the stack because the array was nearby",
         "The compiler initialised the array before choosing the branch",
+        "The vector allocated on the stack because the array was nearby",
         "It was a compiler bug; moving the array should change nothing"
       ],
       "correct": 0,
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "double samples[n]; with n a runtime value. What do gcc and clang do under -Wall -Wextra?",
       "options": [
+        "Both warn about it, which -Werror would turn into an error",
         "Both accept it silently, as a C99 extension; -Wvla or -pedantic-errors rejects it on both",
         "Both reject it, since C++ has no variable length arrays",
-        "gcc rejects it and clang accepts it",
-        "Both warn about it, which -Werror would turn into an error"
+        "gcc rejects it and clang accepts it"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "C++ has no VLAs; both compilers offer the C99 feature as an extension. The danger is not portability, it is that the size comes from the input, so the function is one input away from a stack overflow."
     },
     {
       "stage": "post",
       "question": "Why does DepthGuard decrement in its destructor rather than at the end of the recursive function?",
       "options": [
-        "An early return, a break or a throw all skip a line at the bottom and none of them skips a destructor; a counter that leaks reports a limit never reached",
-        "Destructors run faster than an explicit decrement",
         "So the guard can be copied safely between calls",
-        "Because the counter must be decremented before the recursive call returns"
+        "Destructors run faster than an explicit decrement",
+        "Because the counter must be decremented before the recursive call returns",
+        "An early return, a break or a throw all skip a line at the bottom and none of them skips a destructor; a counter that leaks reports a limit never reached"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "This is lesson 02-03's point applied to recursion. The guard also deletes its copy operations, and checks/ proves it: copying one would count a level once and give it back twice."
     }
   ]

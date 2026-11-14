@@ -7,8 +7,8 @@
       "question": "A driver writes if (status & kOverTemp != 0). The over temperature bit is set. Does the branch fire?",
       "options": [
         "No: != binds tighter than &, so it parses as status & 1 and asks about bit zero",
-        "Yes: the parentheses are optional and the meaning is clear",
         "Yes, but only when exactly one fault is set",
+        "Yes: the parentheses are optional and the meaning is clear",
         "No, because & cannot be used in an if condition"
       ],
       "correct": 0,
@@ -18,60 +18,60 @@
       "stage": "check",
       "question": "Why does that precedence mistake survive testing so often?",
       "options": [
-        "It agrees with the correct form whenever the flag being tested is bit zero, which is usually the first flag in a data sheet",
-        "Because most test suites do not read the status register",
         "Because it only fails in optimised builds",
-        "Because the compiler silently corrects it"
+        "Because the compiler silently corrects it",
+        "Because most test suites do not read the status register",
+        "It agrees with the correct form whenever the flag being tested is bit zero, which is usually the first flag in a data sheet"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "It is not always wrong, which is worse than always wrong. The first flag anybody writes a test for is bit zero, and for that flag the mistaken expression is correct. Testing a flag that is not bit zero separates them."
     },
     {
       "stage": "check",
       "question": "A std::uint8_t holds 0x80. What is narrow << 1, and what is it after being stored back into the same type?",
       "options": [
-        "256 as an expression with sizeof 4, and 0 once stored, with no warning either way",
-        "0 both times: the bit is lost in the shift",
         "256 both times: uint8_t arithmetic is done at 8 bits",
+        "0 both times: the bit is lost in the shift",
+        "256 as an expression with sizeof 4, and 0 once stored, with no warning either way",
         "Undefined behaviour, because the bit is shifted off the end"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Narrow types promote to int before anything happens to them, so the expression is wider than the variable. The shift did not lose the bit; the assignment did, and -Wall -Wextra says nothing about it on either compiler."
     },
     {
       "stage": "check",
       "question": "For a std::uint8_t mask of 0x02, what is ~mask?",
       "options": [
-        "-3, a signed int of sizeof 4, with the whole top of the word set",
+        "Undefined, because ~ is not defined for narrow types",
         "0xFD, a std::uint8_t",
         "253, an unsigned int",
-        "Undefined, because ~ is not defined for narrow types"
+        "-3, a signed int of sizeof 4, with the whole top of the word set"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "It gives the right answer when used immediately in an and, because the and discards the top again, and the wrong one when stored or compared. Fixing the register type at 32 bits unsigned removes the question rather than answering it at each use."
     },
     {
       "stage": "post",
       "question": "has_any and has_all differ by one comparison. When can a test not tell them apart?",
       "options": [
-        "Whenever the mask is a single bit, where both give the same answer always",
         "Whenever the register is zero",
-        "Never: they always differ",
-        "Only when the mask is empty"
+        "Whenever the mask is a single bit, where both give the same answer always",
+        "Only when the mask is empty",
+        "Never: they always differ"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "(value & mask) != 0 and (value & mask) == mask agree for every single bit mask. They diverge as soon as the mask covers two bits, so a suite written against single flags cannot distinguish the right expression from the wrong one."
     },
     {
       "stage": "post",
       "question": "bit(99) returns 0 rather than refusing loudly. Why is zero the right answer to choose?",
       "options": [
-        "It is the identity for or and absorbing for and, so a bad index cannot corrupt a register or match a test",
-        "Because 0 is the only value that is never a valid mask",
         "To keep the function constexpr",
+        "Because 0 is the only value that is never a valid mask",
+        "It is the identity for or and absorbing for and, so a bad index cannot corrupt a register or match a test",
         "It is not: it should wrap the index around to 99 % 32"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "value | bit(99) leaves value alone and has_any(value, bit(99)) is false, so a wrong index produces a flag that is never set and never clears anything. Wrapping the index would silently address a different, real bit, which is the corruption this avoids."
     }
   ]

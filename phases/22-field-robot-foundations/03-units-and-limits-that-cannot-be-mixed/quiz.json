@@ -6,48 +6,48 @@
       "stage": "pre",
       "question": "Why make a speed from a named constructor and not a number?",
       "options": [
-        "It is faster",
         "The unit is said once, where the number is written",
+        "It is faster",
         "Doubles are inexact",
         "It is shorter"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The compiler cannot know a unit, but it can make you state it."
     },
     {
       "stage": "check",
       "question": "A stop from 1 m/s at 1.5 m/s2 took:",
       "options": [
-        "2 s",
-        "0.667 s and 0.333 m",
         "0.1 s",
-        "1 s and 1 m"
+        "1 s and 1 m",
+        "2 s",
+        "0.667 s and 0.333 m"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Time is speed over braking, distance is v squared over twice that."
     },
     {
       "stage": "check",
       "question": "1 m/s with a turn rate of 2 rad/s at a lateral limit of 1.5 m/s2 became:",
       "options": [
-        "1 m/s",
         "0.750 m/s",
+        "1 m/s",
         "0 m/s",
         "2 m/s"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Speed times turn rate is held to the limit."
     },
     {
       "stage": "check",
       "question": "A limit of 5 read as m/s when it was km/h made the stopping distance:",
       "options": [
+        "Half",
         "The same",
         "13.0 times as long",
-        "Half",
         "Zero"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The error is the square of the unit ratio."
     },
     {
@@ -56,8 +56,8 @@
       "options": [
         "It is not",
         "Motors brake harder than they accelerate, and stopping is the safe direction",
-        "To save power",
-        "For looks"
+        "For looks",
+        "To save power"
       ],
       "correct": 1,
       "explanation": "The limits should say what the vehicle can do."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What does the lateral limit protect against?",
       "options": [
+        "Battery",
         "Slow speed",
         "Tipping or sliding in a turn",
-        "Noise",
-        "Battery"
+        "Noise"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Speed times turn rate is the sideways acceleration."
     }
   ]

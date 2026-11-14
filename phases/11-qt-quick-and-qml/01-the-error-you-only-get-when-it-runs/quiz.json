@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "A QML file contains Item { widht: 100 }, a typo on the property name. When do you find out?",
       "options": [
-        "When the file loads: QML can read that the property does not exist, so it refuses, at line 2 column 8",
-        "When you build: moc checks QML property names",
         "Never: unknown properties are ignored",
-        "When the item is first drawn"
+        "When you build: moc checks QML property names",
+        "When the item is first drawn",
+        "When the file loads: QML can read that the property does not exist, so it refuses, at line 2 column 8"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "An unknown property on a known type is visible in the document, so QML refuses the load and reports a line and a column. What it cannot check by reading is what a binding computes."
     },
     {
       "stage": "check",
       "question": "A binding reads robto.speed, misspelling a context property named robot. What happens?",
       "options": [
-        "The file loads, the property keeps its default of 0, and the only trace is a warning nothing is connected to",
-        "The load fails with an error naming the line",
         "The binding is skipped and the property is left unset, which QML reports as an error at first use",
-        "It resolves to an empty object, so the property becomes an empty string"
+        "It resolves to an empty object, so the property becomes an empty string",
+        "The file loads, the property keeps its default of 0, and the only trace is a warning nothing is connected to",
+        "The load fails with an error naming the line"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Whether a name resolves is not knowable by reading the file, only by running the binding. So the object is created, the interface draws, and the width is zero. QQmlEngine emits a warnings signal, and nothing is connected to it unless you connect it."
     },
     {
@@ -42,24 +42,24 @@
       "stage": "check",
       "question": "You load a QML file with QQmlApplicationEngine and rootObjects() comes back empty. What have you been told?",
       "options": [
-        "One bit, when QQmlComponent::errors() would have given a url, a description, a line and a column",
         "Everything available: QML reports failures as a boolean",
-        "That the file is missing, since a present file always produces a root object",
-        "That the file loaded but the root type was not a visual item"
+        "One bit, when QQmlComponent::errors() would have given a url, a description, a line and a column",
+        "That the file loaded but the root type was not a visual item",
+        "That the file is missing, since a present file always produces a root object"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "QQmlComponent is the primitive underneath, and it keeps the full error list. Checking rootObjects().isEmpty() discards a line number that the engine already computed."
     },
     {
       "stage": "post",
       "question": "Summarise when QML checks a mistake.",
       "options": [
-        "It checks what it can read in the document, and runs everything else",
-        "It checks everything at load, so a file that loads is correct",
+        "It checks types at build time through moc, and names at load time",
         "It checks nothing until the property is first read",
-        "It checks types at build time through moc, and names at load time"
+        "It checks everything at load, so a file that loads is correct",
+        "It checks what it can read in the document, and runs everything else"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "A string literal where a number goes is refused at load. A binding that computes a string where a number goes is not, because the document does not say what the binding will produce. That one sentence predicts all twelve cases in this lesson."
     },
     {

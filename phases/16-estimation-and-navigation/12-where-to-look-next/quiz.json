@@ -7,11 +7,11 @@
       "question": "A rover is dropped into an unknown building. Where should it go first?",
       "options": [
         "Anywhere",
-        "To where what is known meets what is not: a free cell with an unseen cell beside it",
         "To the wall",
-        "Home"
+        "Home",
+        "To where what is known meets what is not: a free cell with an unseen cell beside it"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "That is a frontier."
     },
     {
@@ -19,33 +19,33 @@
       "question": "Which of these is a frontier cell?",
       "options": [
         "A wall next to an unknown cell",
-        "A free cell with an unknown cell directly beside it, up, down, left or right",
         "An unknown cell",
-        "Any cell at the edge of the map"
+        "Any cell at the edge of the map",
+        "A free cell with an unknown cell directly beside it, up, down, left or right"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A wall is known and an unknown cell cannot be stood in."
     },
     {
       "stage": "check",
       "question": "Why choose the nearest opening by the way the rover would drive?",
       "options": [
-        "It is faster to compute",
-        "The straight line can go through a wall: from (5,5) the nearest in a line was 34 steps to drive and the chosen one 24",
         "It is more accurate to the metre",
-        "It uses less memory"
+        "It uses less memory",
+        "The straight line can go through a wall: from (5,5) the nearest in a line was 34 steps to drive and the chosen one 24",
+        "It is faster to compute"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The test checked the choice against its own search."
     },
     {
       "stage": "check",
       "question": "What does a minimum size for an opening do?",
       "options": [
-        "Nothing",
-        "Keeps the rover from driving across the room to look at a single missed cell: a minimum of 5 went to the real opening and a minimum of 1 to the speck",
         "Makes the map bigger",
-        "Sets the rover's width"
+        "Keeps the rover from driving across the room to look at a single missed cell: a minimum of 5 went to the real opening and a minimum of 1 to the speck",
+        "Sets the rover's width",
+        "Nothing"
       ],
       "correct": 1,
       "explanation": "A speck made a second opening of 4 cells."
@@ -54,12 +54,12 @@
       "stage": "post",
       "question": "What are the three answers when choosing a frontier?",
       "options": [
-        "Yes, no and maybe",
         "Found, finished (nothing left of that size) and unreachable (some left and no route over free cells)",
+        "Yes, no and maybe",
         "Near, far and wall",
         "Left, right and straight"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A rover shut in is not finished."
     },
     {

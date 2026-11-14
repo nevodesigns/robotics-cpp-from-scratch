@@ -7,9 +7,9 @@
       "question": "A grid planner charges one for every step, diagonal included. It reports a route of 59. How long is that route?",
       "options": [
         "81.4, and it is also 11 percent longer than the shortest route actually available",
+        "83.4, but it is still the shortest route",
         "59, since the cost is the number of cells",
-        "About 59, give or take rounding",
-        "83.4, but it is still the shortest route"
+        "About 59, give or take rounding"
       ],
       "correct": 0,
       "explanation": "The cost function is what the search optimises. If it does not describe the world, the answer is optimal for a world that does not exist, and the reported number is not metres."
@@ -18,12 +18,12 @@
       "stage": "check",
       "question": "How should a planner's reported cost and the true length of its path relate?",
       "options": [
-        "They should agree to floating point when the cost is pure distance, and a test should assert it",
         "The cost should always be smaller, since it is a lower bound",
+        "They should agree to floating point when the cost is pure distance, and a test should assert it",
         "They are unrelated quantities",
         "The cost should always be larger, since it includes the heuristic"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "They are two computations of the same quantity, one by the search and one from the cells it returned. When they stop agreeing the cost has picked up something that is not distance, which may be deliberate, and then it should stop being reported as metres."
     },
     {
@@ -42,36 +42,36 @@
       "stage": "check",
       "question": "You forbid diagonal movement. What happens to the heuristic?",
       "options": [
-        "Manhattan becomes correct and octile now underestimates, which is safe but slower",
-        "Nothing, the heuristic is independent of the movement model",
         "Octile stays correct and Manhattan is still inadmissible",
-        "Both become inadmissible"
+        "Manhattan becomes correct and octile now underestimates, which is safe but slower",
+        "Both become inadmissible",
+        "Nothing, the heuristic is independent of the movement model"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "The heuristic and the step cost are one design, not two. Change one and the other is wrong."
     },
     {
       "stage": "post",
       "question": "Unknown cells cost the same as free ones. Why does the planner prefer unexplored space rather than merely tolerating it?",
       "options": [
-        "There are no obstacles in it, because nothing has looked, so it is always the cheapest way through",
+        "It does not prefer it; the effect is neutral",
         "Because unknown cells are cheaper to expand",
         "Because the heuristic favours straight lines",
-        "It does not prefer it; the effect is neutral"
+        "There are no obstacles in it, because nothing has looked, so it is always the cheapest way through"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Measured on a partially surveyed corridor, the unknown route was 55.00 against 57.49 and crossed 25 cells nothing had seen. It was shorter for that reason alone."
     },
     {
       "stage": "post",
       "question": "Unknown is set to expensive, with a multiplier. How much does the multiplier matter?",
       "options": [
-        "It is where the decision actually lives, and it is sharp: on one map everything at 1.10 and over took the surveyed route and everything below took the shortcut",
-        "Very little, since any value above 1 discourages unknown space",
         "It only matters when no known route exists",
-        "It should be set to the sensor's reliability"
+        "It should be set to the sensor's reliability",
+        "It is where the decision actually lives, and it is sharp: on one map everything at 1.10 and over took the surveyed route and everything below took the shortcut",
+        "Very little, since any value above 1 discourages unknown space"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Sweep it on your own map rather than guessing. Blocked is the right default for anything carrying a load or moving near people; expensive is for when exploring is part of the job."
     }
   ]

@@ -19,32 +19,32 @@
       "question": "The smallest circle of the car was:",
       "options": [
         "0.1 m",
-        "0.742 m",
         "5 m",
-        "1.81 m"
+        "1.81 m",
+        "0.742 m"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "L over tan of the largest angle."
     },
     {
       "stage": "check",
       "question": "At the smallest circle the inner and the outer front wheels differed by:",
       "options": [
-        "Nothing",
         "5.8 degrees",
-        "45 degrees",
-        "0.1 degrees"
+        "0.1 degrees",
+        "Nothing",
+        "45 degrees"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "They point at right angles to the lines to the centre."
     },
     {
       "stage": "check",
       "question": "The lane a car needs at its smallest circle is:",
       "options": [
-        "Its width",
-        "0.062 m wider than the car",
         "Half its width",
+        "0.062 m wider than the car",
+        "Its width",
         "Twice its length"
       ],
       "correct": 1,
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "What sets the fastest speed round a circle on gravel?",
       "options": [
-        "The motor",
-        "The friction: sqrt(mu g R)",
         "The colour",
-        "The wheelbase only"
+        "The wheelbase only",
+        "The friction: sqrt(mu g R)",
+        "The motor"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The tyres can give mu g sideways."
     },
     {
       "stage": "post",
       "question": "Why is the Ackermann difference invisible on a big circle?",
       "options": [
+        "It is hidden",
         "It is zero",
         "On a large radius the two angles are nearly equal",
-        "It is hidden",
         "Cars cheat"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "On 20 m the difference is under a tenth of a degree."
     }
   ]

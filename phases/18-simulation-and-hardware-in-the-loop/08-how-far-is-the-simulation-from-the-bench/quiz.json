@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "Why is plotting the two traces on the same axes not enough?",
       "options": [
-        "It is slow",
-        "It finds a gross error and misses a small one that matters, and it cannot go in a test: a model 17 percent out looks fine and scores nearly three times the noise floor",
+        "It needs a screen",
         "Plots are inaccurate",
-        "It needs a screen"
+        "It is slow",
+        "It finds a gross error and misses a small one that matters, and it cannot go in a test: a model 17 percent out looks fine and scores nearly three times the noise floor"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Turn the look into numbers."
     },
     {
       "stage": "check",
       "question": "A simulated trace is 0.05 too high everywhere. What are its bias and its lag?",
       "options": [
-        "0 and 5",
+        "0 and 0",
         "A bias of 0.0500 and a lag of 0: the shift is judged by the variance of the differences, so a constant offset does not move it",
         "0.05 and 1",
-        "0 and 0"
+        "0 and 5"
       ],
       "correct": 1,
       "explanation": "Judged by plain error, the shift came out 1."
@@ -30,34 +30,34 @@
       "stage": "check",
       "question": "A sensor is 5 samples late in an open loop. What does compare find, and what does it find inside a closed loop?",
       "options": [
-        "5 in both",
         "Open loop: shift 5 and an error of 0.0000 at it; closed loop: shift 4 and an error that barely fell, 0.1396 from 0.1553, since the controller reacts to the late reading and the dynamics change",
         "0 in both",
+        "5 in both",
         "4 in both"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A late sensor in a loop is not a late copy of the same trace."
     },
     {
       "stage": "check",
       "question": "What is the noise floor, and how is it found?",
       "options": [
-        "The sensor's resolution",
         "The rms noise on one real run, found from two real runs of the same thing: their rms difference over the square root of two: 0.0102 for noise 0.01",
-        "The model's error",
-        "The smallest reading"
+        "The smallest reading",
+        "The sensor's resolution",
+        "The model's error"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A perfect model scored 0.0105."
     },
     {
       "stage": "post",
       "question": "A model's time constant is 17 percent below the real motor's. What does its error look like?",
       "options": [
-        "Zero",
+        "Half",
         "Nearly three times the floor: 0.0272 against 0.0098, in a loop that plots much the same",
         "Ten times",
-        "Half"
+        "Zero"
       ],
       "correct": 1,
       "explanation": "The error was smallest at the true value."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What does the name of an exceeded limit tell you?",
       "options": [
+        "The time",
         "Nothing",
         "What to look at: a model that exceeds only lag is missing a delay, and one that exceeds rmse and max has the wrong dynamics",
-        "The time",
         "The sign"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The wrong motor and no sensor delay exceeded rmse, max and lag."
     }
   ]

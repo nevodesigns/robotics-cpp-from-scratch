@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "A gyro reads 0.02 rad/s too high and its rate is added up to give an angle. What happens to the angle?",
       "options": [
-        "Nothing, the noise averages out",
+        "It saturates",
         "It walks away at 0.02 rad/s for ever: 0.764 rad rms over 60 s on a still joint, against 0.757 predicted for a ramp",
-        "It oscillates",
-        "It saturates"
+        "Nothing, the noise averages out",
+        "It oscillates"
       ],
       "correct": 1,
       "explanation": "A bias is the one error that averaging does not remove."
@@ -18,24 +18,24 @@
       "stage": "check",
       "question": "What does the complementary filter do each step?",
       "options": [
+        "Integrates twice",
         "Averages the two sensors",
         "Moves the estimate on with the gyro, and pulls a small share of the way toward the accelerometer's angle",
-        "Picks the better sensor",
-        "Integrates twice"
+        "Picks the better sensor"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The gyro for short times, the accelerometer for long ones."
     },
     {
       "stage": "check",
       "question": "With tau of 1 s, what error did the filter have on the swinging joint, against the sensors alone?",
       "options": [
+        "Zero",
         "The same as the gyro",
         "0.021 rad rms against 0.761 for the gyro and 0.050 for the accelerometer",
-        "Zero",
         "0.5"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Better than either alone."
     },
     {
@@ -43,35 +43,35 @@
       "question": "A gyro bias b meets a complementary filter of time constant tau. What steady error is left?",
       "options": [
         "None",
-        "b times tau: 0.0200 rad for 0.02 rad/s and 1 s, 0.0800 at 4 s",
         "b over tau",
-        "b squared"
+        "b squared",
+        "b times tau: 0.0200 rad for 0.02 rad/s and 1 s, 0.0800 at 4 s"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A longer tau lets more of the bias through."
     },
     {
       "stage": "post",
       "question": "Why is no single tau best?",
       "options": [
-        "The maths forbids it",
         "A short tau passes the accelerometer's noise and a long one passes the gyro's bias and lag: the swinging error went 0.0144 at 0.05 s, 0.0082 at 0.2 s and 0.3202 at 20 s",
+        "The gyro is too slow",
         "Taus must be integers",
-        "The gyro is too slow"
+        "The maths forbids it"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Measure both errors for the machine and choose between."
     },
     {
       "stage": "post",
       "question": "What does a complementary filter not do?",
       "options": [
-        "Anything useful",
-        "It bounds the bias to b times tau but does not estimate or remove it, and it believes the accelerometer is measuring gravity alone",
         "Run at 100 Hz",
-        "Fuse two sensors"
+        "Fuse two sensors",
+        "Anything useful",
+        "It bounds the bias to b times tau but does not estimate or remove it, and it believes the accelerometer is measuring gravity alone"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A Kalman filter estimates the bias; phase 16 returns to it."
     }
   ]

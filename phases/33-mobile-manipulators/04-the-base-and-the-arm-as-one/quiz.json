@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "Why does the whole body have eight columns and not nine?",
       "options": [
-        "It has nine",
         "A differential drive base cannot slide sideways, so it has two rates",
+        "Chance",
         "Cameras",
-        "Chance"
+        "It has nine"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Driving and turning."
     },
     {
       "stage": "check",
       "question": "The arm alone ended how far short of a line of 1.5 m?",
       "options": [
-        "0.000 m",
+        "10 m",
         "1.18 m",
-        "0 m",
-        "10 m"
+        "0.000 m",
+        "0 m"
       ],
       "correct": 1,
       "explanation": "At full stretch, its manipulability was 0.0000."
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "Arm and base together:",
       "options": [
-        "Fell short",
-        "Reached it to 0.000 m",
+        "Did not move",
         "Fell over",
-        "Did not move"
+        "Fell short",
+        "Reached it to 0.000 m"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The base drove 1.43 m."
     },
     {
       "stage": "check",
       "question": "What does a dearer base do?",
       "options": [
+        "Stops the arm",
         "Moves more",
         "Moves less, and the arm more",
-        "Stops the arm",
         "Nothing at all"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "1.20 m against 1.50 m for a cheap one."
     },
     {
       "stage": "post",
       "question": "Why did the price on the base change the travel so little?",
       "options": [
-        "It cannot",
         "The base has to cover the distance the arm cannot, whatever the price",
         "A bug",
+        "It cannot",
         "Chance"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The weight shifts the share, not the total."
     },
     {
       "stage": "post",
       "question": "What is not in this model?",
       "options": [
-        "The Jacobian",
-        "The base's acceleration and slip, the joint speed limits and obstacles",
         "The weights",
-        "The line"
+        "The line",
+        "The base's acceleration and slip, the joint speed limits and obstacles",
+        "The Jacobian"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Those are other lessons."
     }
   ]

@@ -7,11 +7,11 @@
       "question": "Which controller failed on the real joint?",
       "options": [
         "The gentle one",
-        "The stiff one that looked quickest in the simulator",
+        "Both",
         "Neither",
-        "Both"
+        "The stiff one that looked quickest in the simulator"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It rang and did not settle."
     },
     {
@@ -19,45 +19,45 @@
       "question": "The stiff gains with 20 ms of delay and a 10 ms lag:",
       "options": [
         "Settled in 0.24 s",
-        "Overshot 23.5 percent and did not settle",
+        "Overshot 0 percent",
         "Were unchanged",
-        "Overshot 0 percent"
+        "Overshot 23.5 percent and did not settle"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The delay adds phase lag and a quick loop has less margin."
     },
     {
       "stage": "check",
       "question": "The largest delay the stiff gains could stand was:",
       "options": [
-        "43 ms",
         "19 ms",
+        "1 s",
         "0 ms",
-        "1 s"
+        "43 ms"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The gentle ones stood 43 ms."
     },
     {
       "stage": "check",
       "question": "Over 100 random robots the gentle gains settled on:",
       "options": [
-        "46 percent",
         "97 percent",
-        "0 percent",
-        "All"
+        "All",
+        "46 percent",
+        "0 percent"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The stiff ones on 46."
     },
     {
       "stage": "post",
       "question": "How does the sim-to-real gap shrink?",
       "options": [
-        "By hope",
+        "By a faster computer",
         "By measuring the real robot's delay and lag and putting them into the simulation and the margin",
-        "By stiffer gains",
-        "By a faster computer"
+        "By hope",
+        "By stiffer gains"
       ],
       "correct": 1,
       "explanation": "Measurement."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What is the last word on a controller?",
       "options": [
+        "The plan",
         "The simulator",
         "The robot",
-        "The plan",
         "The margin"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A step test is one test."
     }
   ]

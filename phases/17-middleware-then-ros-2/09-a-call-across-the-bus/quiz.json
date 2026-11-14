@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "A call gets no answer. What can the caller conclude?",
       "options": [
-        "That it failed",
+        "That the server is dead",
         "Nothing: the request may not have arrived, or may have been done with the answer lost, or the answer may be late",
-        "That it is done",
-        "That the server is dead"
+        "That it failed",
+        "That it is done"
       ],
       "correct": 1,
       "explanation": "Three possibilities look the same."
@@ -18,22 +18,22 @@
       "stage": "check",
       "question": "Why does each call carry a number?",
       "options": [
-        "For logging",
-        "So an answer is matched to the call it answers: two calls answered in the other order each got their own answer",
+        "For ordering the server",
         "To count",
-        "For ordering the server"
+        "For logging",
+        "So an answer is matched to the call it answers: two calls answered in the other order each got their own answer"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Whichever is waiting is the wrong match."
     },
     {
       "stage": "check",
       "question": "A call timed out and its answer arrives. What happens?",
       "options": [
-        "The call completes",
-        "The answer is unwanted: counted and discarded, and the call stays timed out",
         "The call is sent again",
-        "The server is told"
+        "The answer is unwanted: counted and discarded, and the call stays timed out",
+        "The server is told",
+        "The call completes"
       ],
       "correct": 1,
       "explanation": "A late answer does not revive a call."
@@ -42,36 +42,36 @@
       "stage": "check",
       "question": "With no retries, 155 of 300 calls timed out. How many times did the work run?",
       "options": [
-        "155",
         "214: for 69 calls the work was done and the client was told it had failed",
-        "300",
-        "145"
+        "155",
+        "145",
+        "300"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A timeout is not a failure, it is not knowing."
     },
     {
       "stage": "post",
       "question": "What keeps a retried call from doing the work twice?",
       "options": [
+        "A longer timeout",
         "A shorter timeout",
         "A server that remembers the answers it gave by (client, number) and returns the remembered one for a repeat: 300 runs for 300 calls, against 446 for a server that forgot",
-        "A longer timeout",
         "More retries"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Retrying is safe only if asking again does not do it again."
     },
     {
       "stage": "post",
       "question": "Why is a repeated gripper command harmless and a repeated dispense command not?",
       "options": [
-        "It is not",
         "The gripper closing twice leaves it closed, and dispensing twice gives two: the first is idempotent and the second is not, so the second needs the server to remember",
+        "It is not",
         "The gripper is slower",
         "Dispensing is reliable"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Know which of your services are safe to repeat."
     }
   ]

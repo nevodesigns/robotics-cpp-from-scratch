@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A function returns an int local it never wrote to. The same source gave 1405118043 compiled at -O0 and 0 at -O2. What happened?",
       "options": [
+        "The stack happened to hold different leftovers in the two builds",
         "Reading it is undefined behaviour, so the compiler may assume it cannot happen and is free to answer differently at each optimisation level",
-        "The optimiser has a bug that should be reported",
         "-O2 zeroes locals as a safety measure and -O0 does not",
-        "The stack happened to hold different leftovers in the two builds"
+        "The optimiser has a bug that should be reported"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "There was no correct answer to give. This is why uninitialised reads produce the works-in-debug-fails-in-release pattern in both directions."
     },
     {
@@ -19,8 +19,8 @@
       "question": "32 bytes were allocated, filled with 0x7e, freed, and 32 bytes allocated again. 16 of the 32 still held 0x7e. What was in the other 16?",
       "options": [
         "The allocator's own bookkeeping for the freed block, which differed between runs",
-        "Zeros, because the operating system cleared the page",
         "Data from another process on the machine",
+        "Zeros, because the operating system cleared the page",
         "The same 0x7e, misread because of alignment"
       ],
       "correct": 0,
@@ -30,36 +30,36 @@
       "stage": "check",
       "question": "The same lesson's test suite saw only 27 of 32 bytes read as zero on the first allocation, where a program doing nothing else saw all 32. Why does that matter more than the 16?",
       "options": [
-        "Because new memory reads as zero only while the page is genuinely new, and nothing is the first allocation for long",
+        "Because zeroing is a debug build feature that release builds omit",
         "Because 27 is close enough to 32 that the difference is measurement noise",
-        "Because the test suite leaks memory, which is what dirtied the page",
-        "Because zeroing is a debug build feature that release builds omit"
+        "Because new memory reads as zero only while the page is genuinely new, and nothing is the first allocation for long",
+        "Because the test suite leaks memory, which is what dirtied the page"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "A fresh page is zero because the kernel must not leak another process's data, which is a property of the page and not of new. Once your own program has used the heap, that stops being true, so a zeroed buffer during testing proves nothing about the next one."
     },
     {
       "stage": "check",
       "question": "Pose has three doubles and no member defaults. Which of these leaves a member unwritten?",
       "options": [
-        "Pose p;",
         "Pose p = {};",
         "Pose p = {1.5};",
-        "Both Pose p; and Pose p = {1.5};"
+        "Both Pose p; and Pose p = {1.5};",
+        "Pose p;"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Braces check the count in one direction only. Too many initialisers is an error everywhere; too few is accepted and the rest are value initialised to zero, so a short brace is the fix rather than a smaller version of the problem."
     },
     {
       "stage": "post",
       "question": "Why does poisoning storage before reading it change the situation and not just the number you see?",
       "options": [
+        "It makes the compiler emit the -Wuninitialized warning it otherwise misses",
         "Every byte has now been written, so the read is ordinary defined behaviour that yields a NaN, instead of one the optimiser could invent an answer for",
         "It makes the uninitialised read legal, so the code is now correct",
-        "It tells the sanitizer to report the read",
-        "It makes the compiler emit the -Wuninitialized warning it otherwise misses"
+        "It tells the sanitizer to report the read"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "Poisoning does not make the bug legal. It converts an undefined read into a defined and loud one, which is the difference between a value in a log and a value the compiler was entitled to make up."
     },
     {
@@ -67,9 +67,9 @@
       "question": "A filler wrote two of a Pose's three doubles and returned true. bytes_still_poisoned reported 8 of 24. On an eight byte frame where every byte was written, it reported 2. What does that pair of results tell you about the tool?",
       "options": [
         "It is exact for a struct of doubles and a lower bound for raw bytes, because a byte deliberately written to the pattern cannot be told from one never touched",
+        "The second result is a bug in the counting loop",
         "It is unreliable, since it reported unwritten bytes in a fully written buffer",
-        "It only works on types whose size is a multiple of eight",
-        "The second result is a bug in the counting loop"
+        "It only works on types whose size is a multiple of eight"
       ],
       "correct": 0,
       "explanation": "No correct code writes a repeated 0xff into a double, because that is a NaN, so for a struct of doubles the count names the field exactly. A byte buffer can legitimately contain the pattern, so there the count is a floor on what was written."

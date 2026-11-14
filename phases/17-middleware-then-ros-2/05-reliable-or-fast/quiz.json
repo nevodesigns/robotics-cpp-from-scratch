@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "What does an acknowledgement of 3 tell the sender?",
       "options": [
-        "Packet 3 arrived",
         "The next one the receiver expects is 3: everything below it has arrived",
-        "Packet 3 was lost",
-        "Send 3 again"
+        "Packet 3 arrived",
+        "Send 3 again",
+        "Packet 3 was lost"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The acknowledgement is cumulative, so a lost one is covered by the next."
     },
     {
@@ -19,11 +19,11 @@
       "question": "A receiver gets packets 2, 0, 1, 1, 0. What does it deliver?",
       "options": [
         "2 0 1 1 0",
-        "a b c, once each and in order, with 2 duplicates counted: 2 waited until 0 and 1 had come",
         "Only 0",
-        "Nothing"
+        "Nothing",
+        "a b c, once each and in order, with 2 duplicates counted: 2 waited until 0 and 1 had come"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Early packets wait and repeats are ignored but still acknowledged."
     },
     {
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "500 messages over a link that loses 20 percent each way. What did sending once deliver, and what did reliable cost?",
       "options": [
-        "500 and 1.0",
         "398 delivered at 1.00 packets per message, against 500 delivered at 1.79 packets per message",
-        "250 and 3",
-        "500 and 500"
+        "500 and 1.0",
+        "500 and 500",
+        "250 and 3"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Reliable put almost twice the traffic on a link that was already struggling."
     },
     {
@@ -55,21 +55,21 @@
       "question": "With a one way delay of 50 ticks, how long did 100 messages take at a window of 1 and of 10?",
       "options": [
         "The same",
+        "1000 and 10000",
         "10000 ticks and 1000 ticks: a window of one is one message per round trip",
-        "500 and 500",
-        "1000 and 10000"
+        "500 and 500"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The time falls in proportion to the window until the link is full."
     },
     {
       "stage": "post",
       "question": "When is reliable the wrong choice for a topic?",
       "options": [
-        "Never",
+        "For parameters",
         "For a stream such as scans that is replaced by the next message: it spends the retransmissions on data that is already stale and adds load to a link in trouble",
-        "For commands",
-        "For parameters"
+        "Never",
+        "For commands"
       ],
       "correct": 1,
       "explanation": "A lost pose is replaced a moment later."

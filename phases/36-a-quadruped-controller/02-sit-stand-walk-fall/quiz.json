@@ -6,9 +6,9 @@
       "stage": "pre",
       "question": "Why is most of the controller's work deciding what it may do next?",
       "options": [
-        "It is lazy",
-        "Each mode has things it may and must not do, and the robot damages itself otherwise",
         "It is simple",
+        "Each mode has things it may and must not do, and the robot damages itself otherwise",
+        "It is lazy",
         "It is slow"
       ],
       "correct": 1,
@@ -19,59 +19,59 @@
       "question": "With knees at 0.85 of their limit the robot:",
       "options": [
         "Rose",
-        "Refused to rise (1)",
         "Walked",
-        "Fell"
+        "Fell",
+        "Refused to rise (1)"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Under 0.8 is needed."
     },
     {
       "stage": "check",
       "question": "Told to sit while walking at 0.6 m/s it:",
       "options": [
-        "Lowered at once",
-        "Slowed to a stop first and then lowered",
         "Fell",
-        "Ignored it"
+        "Ignored it",
+        "Slowed to a stop first and then lowered",
+        "Lowered at once"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A robot that lowers at speed falls."
     },
     {
       "stage": "check",
       "question": "A robot that fell 3 times and still tried ended in fault:",
       "options": [
-        "1",
         "5, out of tries",
         "2",
+        "1",
         "0"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A limited number of tries."
     },
     {
       "stage": "post",
       "question": "Why does a fault go to sit and not to the old state?",
       "options": [
-        "No reason",
         "So the operator sees the reset",
+        "It is required",
         "It is easier",
-        "It is required"
+        "No reason"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A fault stays until it is reset."
     },
     {
       "stage": "post",
       "question": "What is not in this lesson?",
       "options": [
-        "The states",
-        "The motion of the legs between them",
+        "The faults",
         "The checks",
-        "The faults"
+        "The motion of the legs between them",
+        "The states"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The machine is told when they finish."
     }
   ]

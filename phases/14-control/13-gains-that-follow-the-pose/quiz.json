@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "Gains were tuned with the arm folded. What happens when it reaches out?",
       "options": [
-        "Nothing, a loop is a loop",
-        "The inertia grows, so the same gains give less natural frequency and less damping: overshoot went from 0.087 to 0.444 and settling from 0.74 s to 4.32 s",
+        "The loop gets quieter",
         "The loop gets faster",
-        "The loop gets quieter"
+        "Nothing, a loop is a loop",
+        "The inertia grows, so the same gains give less natural frequency and less damping: overshoot went from 0.087 to 0.444 and settling from 0.74 s to 4.32 s"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The test arm's inertia went from 0.50 to 3.00."
     },
     {
       "stage": "check",
       "question": "What gains put a joint of inertia J at natural frequency w and damping ratio zeta?",
       "options": [
+        "kp = J / w",
         "kp = w and kd = zeta",
         "kp = J w squared and kd = 2 zeta J w",
-        "kp = J / w",
         "Any positive pair"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "All the pose dependence is in J."
     },
     {
@@ -32,8 +32,8 @@
       "options": [
         "Got worse",
         "Stayed the same: 0.74 s settling at every extension, overshoot between 0.087 and 0.093, with kp rising from 32 to 192",
-        "Became unstable",
-        "Became instantaneous"
+        "Became instantaneous",
+        "Became unstable"
       ],
       "correct": 1,
       "explanation": "That is gain scheduling."
@@ -42,33 +42,33 @@
       "stage": "check",
       "question": "What should a lookup do beyond the ends of its table?",
       "options": [
-        "Extrapolate the last line",
         "Hold the end value, so a pose outside the table gets the nearest designed gains and not a guess",
         "Return zero",
+        "Extrapolate the last line",
         "Throw"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A pose beyond the last knot should get the last knot's gains."
     },
     {
       "stage": "post",
       "question": "Why do two knots do worse than five?",
       "options": [
-        "Lines are slower",
-        "The inertia is curved and the lines are straight: with two knots the settling time ranged from 0.35 to 0.74 s over 21 poses, a spread of 0.394 s, against 0.022 s with five",
+        "Five is always exact",
         "Two is not allowed",
-        "Five is always exact"
+        "Lines are slower",
+        "The inertia is curved and the lines are straight: with two knots the settling time ranged from 0.35 to 0.74 s over 21 poses, a spread of 0.394 s, against 0.022 s with five"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Put more knots where the table is most curved."
     },
     {
       "stage": "post",
       "question": "What does a one number schedule not cover?",
       "options": [
-        "Anything",
-        "The dependence on other joints, and the gravity and friction that also change with the pose, and the sensor noise that bigger gains amplify",
         "The reach",
+        "The dependence on other joints, and the gravity and friction that also change with the pose, and the sensor noise that bigger gains amplify",
+        "Anything",
         "The target"
       ],
       "correct": 1,

@@ -6,60 +6,60 @@
       "stage": "pre",
       "question": "What does a unit quaternion store?",
       "options": [
-        "An axis and an angle, with the angle halved and the axis scaled by the sine of that half",
         "Three angles and a scale factor",
         "Four independent rotation angles",
+        "An axis and an angle, with the angle halved and the axis scaled by the sine of that half",
         "The four columns of a rotation matrix"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "The vector part points along the axis and the scalar part records how far around. Everything else about quaternions follows from that arrangement."
     },
     {
       "stage": "check",
       "question": "A quarter turn about z. What is w?",
       "options": [
-        "cos(45 degrees), about 0.707, because the angle is halved",
         "cos(90 degrees), which is zero",
         "1.0, because it is a unit quaternion",
+        "cos(45 degrees), about 0.707, because the angle is halved",
         "sin(90 degrees), which is one"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Forgetting the half angle is the most common quaternion bug there is, and the symptom is a rotation of exactly twice or half what was intended."
     },
     {
       "stage": "check",
       "question": "How do you undo a rotation stored as a unit quaternion?",
       "options": [
-        "Take the conjugate: keep w, negate the other three",
-        "Negate all four numbers",
+        "Invert a four by four matrix",
         "Divide each number by the norm",
-        "Invert a four by four matrix"
+        "Negate all four numbers",
+        "Take the conjugate: keep w, negate the other three"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "It is the same bargain the transpose gave for a rotation matrix, and it holds for the same reason: the thing has unit length."
     },
     {
       "stage": "check",
       "question": "What is true of q and its negation?",
       "options": [
+        "They differ by half a turn",
         "They are different quaternions describing exactly the same rotation",
         "They describe opposite rotations",
-        "The negation is not a valid quaternion",
-        "They differ by half a turn"
+        "The negation is not a valid quaternion"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "The representation covers each rotation twice. Code comparing quaternions directly works perfectly until an orientation crosses the boundary."
     },
     {
       "stage": "post",
       "question": "Measured over a hundred thousand compositions, how does quaternion drift compare with matrix drift?",
       "options": [
-        "About the same, 4.3e-12 against 4.0e-12",
-        "Quaternions drift far less",
+        "Quaternions drift considerably more",
         "Quaternions do not drift at all",
-        "Quaternions drift considerably more"
+        "Quaternions drift far less",
+        "About the same, 4.3e-12 against 4.0e-12"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "The common claim that quaternions are more stable does not survive measurement. The advantage is the cost of repair, not the amount of drift."
     },
     {
@@ -67,8 +67,8 @@
       "question": "Why do attitude estimators hold their state as a quaternion?",
       "options": [
         "Repair is one division by the norm and is exact, against orthogonalising three columns",
-        "Because quaternions cannot drift",
         "Because they use less memory than three angles",
+        "Because quaternions cannot drift",
         "Because rotating a single vector is faster with a quaternion"
       ],
       "correct": 0,

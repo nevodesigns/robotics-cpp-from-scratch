@@ -8,8 +8,8 @@
       "options": [
         "A disc",
         "A ring between an inner and an outer radius from its axis",
-        "A line",
-        "A point"
+        "A point",
+        "A line"
       ],
       "correct": 1,
       "explanation": "There is a hole in the middle."
@@ -19,45 +19,45 @@
       "question": "At -0.10 m below the mount the ring ran from:",
       "options": [
         "0 to 0.72 m",
+        "36.0 to 1 m",
         "0.00 to 0.72 m",
-        "1 to 2 m",
-        "36.0 to 1 m"
+        "1 to 2 m"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "An inner and an outer radius."
     },
     {
       "stage": "check",
       "question": "The quick test agreed with the full inverse kinematics on:",
       "options": [
-        "100 percent of places",
-        "10 percent",
+        "Only one",
         "Nothing",
-        "Only one"
+        "10 percent",
+        "100 percent of places"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "576 places, varied in heading too."
     },
     {
       "stage": "check",
       "question": "The tolerance for the base's stopping place was:",
       "options": [
-        "36.0 cm",
         "0 cm",
         "10 m",
+        "36.0 cm",
         "1 mm"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Half the width of the ring."
     },
     {
       "stage": "post",
       "question": "Why can the ring be found along one line?",
       "options": [
-        "It cannot",
+        "The mount",
         "The shoulder turns all the way round, so the reach is the same in every direction",
         "Luck",
-        "The mount"
+        "It cannot"
       ],
       "correct": 1,
       "explanation": "Symmetry about the vertical axis."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What is not checked by the ring?",
       "options": [
-        "The end pose",
         "The whole path to it, and targets that need the tool horizontal",
+        "The mount",
         "The radius",
-        "The mount"
+        "The end pose"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Those are other questions."
     }
   ]

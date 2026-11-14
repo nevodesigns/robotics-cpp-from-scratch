@@ -18,60 +18,60 @@
       "stage": "check",
       "question": "How big is a class that keeps its data behind a unique_ptr, before and after a field is added behind it?",
       "options": [
-        "8 bytes and 104 bytes",
-        "8 bytes and 8 bytes: the size of one pointer, whatever is inside",
+        "0 and 8",
         "24 and 104",
-        "0 and 8"
+        "8 bytes and 104 bytes",
+        "8 bytes and 8 bytes: the size of one pointer, whatever is inside"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A Smoother was 8 bytes."
     },
     {
       "stage": "check",
       "question": "The destructor of a class with a unique_ptr to a hidden type is left to the compiler. What happens?",
       "options": [
-        "It works",
         "The compiler writes it where the type is still incomplete, and the build fails with an invalid use of sizeof on an incomplete type",
+        "It is deleted",
         "It leaks",
-        "It is deleted"
+        "It works"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The lesson's checks/ snippet is expected to fail to compile, and it does."
     },
     {
       "stage": "check",
       "question": "Where must the destructor be defined?",
       "options": [
-        "In a header only",
         "Declared in the class and defined, even as = default, where the hidden type is complete",
-        "Nowhere",
-        "Inside the Impl"
+        "Inside the Impl",
+        "In a header only",
+        "Nowhere"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The move operations need the same."
     },
     {
       "stage": "post",
       "question": "A filter at 15 is copied and the copy is given a reading of 20. What does the original give for a reading of 0?",
       "options": [
-        "17.5",
-        "7.5: the copy has its own state, so the original had not moved",
+        "15",
         "0",
-        "15"
+        "7.5: the copy has its own state, so the original had not moved",
+        "17.5"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The copy constructor made a new Impl from the old one."
     },
     {
       "stage": "post",
       "question": "What does hiding the inside cost?",
       "options": [
-        "Nothing",
-        "A heap allocation per object, an extra step to reach each field, and no inlining across the boundary",
+        "It stops it being copied",
         "It makes the class bigger",
-        "It stops it being copied"
+        "A heap allocation per object, an extra step to reach each field, and no inlining across the boundary",
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "For objects made in a fast loop, lesson 02-14's pool is the answer."
     }
   ]

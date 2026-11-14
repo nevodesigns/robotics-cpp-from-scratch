@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A planner callback takes 50 ms and a control callback runs every 10 ms on the same single thread. What happens to the control loop?",
       "options": [
-        "Nothing",
         "It is held up by up to 45 ticks while the planner runs, and a planner of 200 ticks held it up by 195",
-        "It runs faster",
-        "It is dropped"
+        "Nothing",
+        "It is dropped",
+        "It runs faster"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The slow callback holds up every other callback on the thread."
     },
     {
@@ -19,21 +19,21 @@
       "question": "What does two threads with the control and the planner in separate groups give the control callback?",
       "options": [
         "The same wait",
-        "0: it runs on time, while the planner runs beside it",
+        "A worse wait",
         "Half the wait",
-        "A worse wait"
+        "0: it runs on time, while the planner runs beside it"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Threads and groups together."
     },
     {
       "stage": "check",
       "question": "Everything is in one mutually exclusive group and the executor has two threads. What is the worst wait?",
       "options": [
-        "0",
+        "90",
         "45, exactly what one thread gave: callbacks in one exclusive group never overlap, and the second thread sits idle",
-        "22",
-        "90"
+        "0",
+        "22"
       ],
       "correct": 1,
       "explanation": "More threads do nothing for callbacks that share an exclusive group."
@@ -42,10 +42,10 @@
       "stage": "check",
       "question": "What does making the group reentrant cost?",
       "options": [
-        "Nothing",
+        "Memory",
         "The callbacks of that group can now run at once, so whatever they share needs a lock: the race the exclusive group was preventing",
         "Threads",
-        "Memory"
+        "Nothing"
       ],
       "correct": 1,
       "explanation": "Reentrant moves the burden to the callbacks."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "Four 10 tick callbacks are ready together in a reentrant group on two threads. When do they start?",
       "options": [
-        "All at 0",
         "0 0 10 10: a group that allows overlap still has only as many threads as there are",
+        "All at 0",
         "0 10 20 30",
         "0 5 10 15"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "With three threads the third started at once."
     },
     {
       "stage": "post",
       "question": "A callback blocked by its group is ahead of one in another group in the queue. What happens to the second?",
       "options": [
-        "It waits too",
-        "It runs at once: a blocked callback does not hold up those behind it, and one that never started is reported as having waited the whole time",
         "It is dropped",
-        "It is delayed by 1"
+        "It is delayed by 1",
+        "It runs at once: a blocked callback does not hold up those behind it, and one that never started is reported as having waited the whole time",
+        "It waits too"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Leaving the never started ones out of the measure would say the worst wait was 0."
     }
   ]

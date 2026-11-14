@@ -7,11 +7,11 @@
       "question": "A command struct has a kind number and a field for everything any kind needs. What can it hold that makes no sense?",
       "options": [
         "Nothing",
-        "A stop with wheel speeds left in it, a drive whose speeds were never set, and a kind that is none of the three",
         "Only a negative speed",
+        "A stop with wheel speeds left in it, a drive whose speeds were never set, and a kind that is none of the three",
         "A very large struct"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Nothing says which fields belong to which kind."
     },
     {
@@ -19,11 +19,11 @@
       "question": "What does a default-constructed std::variant<Stop, Drive, SetLimit> hold?",
       "options": [
         "Nothing",
-        "The first alternative, Stop, which is why Stop must be constructible without arguments",
+        "The largest one",
         "A random one",
-        "The largest one"
+        "The first alternative, Stop, which is why Stop must be constructible without arguments"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The test saw index 0."
     },
     {
@@ -32,8 +32,8 @@
       "options": [
         "Both return garbage",
         "get_if gives nullptr and get throws std::bad_variant_access",
-        "Both throw",
-        "Both give nullptr"
+        "Both give nullptr",
+        "Both throw"
       ],
       "correct": 1,
       "explanation": "One is a polite question and one is asking as if sure."
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "A fourth kind is added to the variant and the visitor is not changed. What happens?",
       "options": [
-        "It builds and does nothing",
         "It does not compile: there is no function for the new kind",
-        "It crashes at runtime",
-        "The new kind is ignored with a warning"
+        "It builds and does nothing",
+        "The new kind is ignored with a warning",
+        "It crashes at runtime"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The lesson's checks/ snippet is expected to fail to compile, and it does."
     },
     {
@@ -56,8 +56,8 @@
       "options": [
         "0.8 and -0.4",
         "0.5 and -0.4: the limit clamps what is happening now, not only the next drive",
-        "0.5 and -0.5",
-        "0 and 0"
+        "0 and 0",
+        "0.5 and -0.5"
       ],
       "correct": 1,
       "explanation": "A drive of 3 and -3 afterwards gave 0.5 and -0.5."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What is sizeof a variant, compared with its alternatives?",
       "options": [
-        "The sum of all of them",
         "The largest alternative plus a tag: 24 against Drive's 16 on the machine measured",
-        "The smallest",
-        "Always 8"
+        "The sum of all of them",
+        "Always 8",
+        "The smallest"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The three added up came to 25."
     }
   ]

@@ -6,48 +6,48 @@
       "stage": "pre",
       "question": "Lesson 01-07 showed unsigned arithmetic wrapping. How is signed overflow different?",
       "options": [
-        "Unsigned wrapping is defined and gives the same wrong answer everywhere; signed overflow is undefined, and the compiler may assume it never happens",
+        "Signed overflow always crashes, which makes it easier to find",
         "They are the same: both wrap around to the other end of the range",
-        "Signed overflow wraps too, but only on two's complement machines, which is all of them",
-        "Signed overflow always crashes, which makes it easier to find"
+        "Unsigned wrapping is defined and gives the same wrong answer everywhere; signed overflow is undefined, and the compiler may assume it never happens",
+        "Signed overflow wraps too, but only on two's complement machines, which is all of them"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Undefined does not mean unpredictable. It means the standard places no requirement on the program, so the compiler optimises on the assumption that it cannot occur. That is why a defined wrong answer is far easier to live with than an undefined one."
     },
     {
       "stage": "check",
       "question": "A loop doubles an int from 1 while i > 0, with a counter bounded at 200. It counts 31 at -O0 and -O1. What does it count at -O2 on gcc and clang?",
       "options": [
-        "201, the bound: both compilers deleted the exit test",
         "31, the same: optimisation does not change behaviour",
-        "32, one more because of a rounding difference",
-        "0, because the loop is removed entirely"
+        "201, the bound: both compilers deleted the exit test",
+        "0, because the loop is removed entirely",
+        "32, one more because of a rounding difference"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "An int doubling from 1 is positive unless it overflows, and overflow is assumed not to occur, so i > 0 is provably true and the test is dead code. Without the bound the loop does not end, and the source did not change between those rows."
     },
     {
       "stage": "check",
       "question": "Why can you not write the guard as int total = a + b; if (total < a) return too_big();?",
       "options": [
-        "The overflow has already happened, and the compiler may delete the test because it is provably false without overflow",
-        "Because total should be declared const",
+        "Because a + b is evaluated in a wider type first",
         "It works, but only for positive values of b",
-        "Because a + b is evaluated in a wider type first"
+        "The overflow has already happened, and the compiler may delete the test because it is provably false without overflow",
+        "Because total should be declared const"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "There is no answer to inspect after the fact. The question has an answer only while both operands are still ordinary numbers, which is why rc::core::add_overflows takes a and b rather than a result."
     },
     {
       "stage": "check",
       "question": "Why is subtract_overflows(a, b) not the same as add_overflows(a, -b)?",
       "options": [
-        "Negating b is itself undefined when b is INT_MIN, so the check contains the defect it exists to prevent",
-        "They are the same; writing it twice is only for clarity",
+        "Because -b promotes to a wider type and changes the comparison",
         "Because subtraction is not commutative",
-        "Because -b promotes to a wider type and changes the comparison"
+        "They are the same; writing it twice is only for clarity",
+        "Negating b is itself undefined when b is INT_MIN, so the check contains the defect it exists to prevent"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Two's complement holds one more negative number than positive, so INT_MIN has no positive counterpart. The suite asks specifically whether 1 - INT_MIN overflows, and it does."
     },
     {
@@ -55,9 +55,9 @@
       "question": "In multiply_overflows, why must the zero and minus one cases be handled before any division?",
       "options": [
         "Dividing by zero is undefined, and INT_MIN / -1 overflows, so both would be undefined behaviour inside the guard",
+        "They do not have to be; the order is a style preference",
         "For speed, since those cases are the most common",
-        "Because division truncates towards zero and would give a wrong answer",
-        "They do not have to be; the order is a style preference"
+        "Because division truncates towards zero and would give a wrong answer"
       ],
       "correct": 0,
       "explanation": "Each special case exists because the general case is undefined without it. Once zero and minus one are out of the way, every remaining division is in range. A guard that commits undefined behaviour on the way to the right answer is reported by the sanitizer and nowhere else."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "A sweep of every pair in [-600, 600] reports zero wrong predictions. What has it proved?",
       "options": [
-        "Very little: no pair in that window overflows, so a function that always answers no would also score zero",
-        "That the predicates are correct, since four million cases is a thorough test",
         "That the predicates are correct for addition, but not multiplication",
-        "Nothing, because exhaustive sweeps cannot test undefined behaviour"
+        "That the predicates are correct, since four million cases is a thorough test",
+        "Nothing, because exhaustive sweeps cannot test undefined behaviour",
+        "Very little: no pair in that window overflows, so a function that always answers no would also score zero"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "That window produced zero positive answers, and the lesson prints that column so you can see it. The sweeps that matter are placed against the limits and around the square root of the limit, where the answer actually turns over."
     }
   ]

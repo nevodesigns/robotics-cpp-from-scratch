@@ -6,70 +6,70 @@
       "stage": "pre",
       "question": "Why replan for reasons and not on a timer alone?",
       "options": [
-        "Timers are slow",
         "A timer plans too often or too late; a reason is a thing that went wrong",
-        "Reasons are cheaper only",
-        "No reason"
+        "Timers are slow",
+        "No reason",
+        "Reasons are cheaper only"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A blocked path, off the path, a changed goal."
     },
     {
       "stage": "check",
       "question": "The vehicle that never replanned:",
       "options": [
-        "Arrived in 20.9 s",
         "Stood in front of the wall and never arrived",
+        "Arrived late",
         "Went round",
-        "Arrived late"
+        "Arrived in 20.9 s"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It followed the plan into the wall."
     },
     {
       "stage": "check",
       "question": "Planning every 0.2 s used how many plans, against the reasons' 5?",
       "options": [
-        "5",
-        "86, and no quicker (21.4 s against 20.9 s)",
+        "1",
         "None",
-        "1"
+        "5",
+        "86, and no quicker (21.4 s against 20.9 s)"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The planner never stops."
     },
     {
       "stage": "check",
       "question": "How long did the vehicle stand and wait with the look-ahead of 0.6 m, against 3 m?",
       "options": [
+        "Never",
         "0.3 s against 2.1 s",
         "2.1 s against 0.3 s",
-        "The same",
-        "Never"
+        "The same"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "An early look-ahead hides the planning time."
     },
     {
       "stage": "post",
       "question": "Where should a plan that takes a second begin?",
       "options": [
-        "Where the vehicle is",
-        "Where it will be when the plan arrives: 0.06 m off, and it arrived in 20.1 s",
         "At the goal",
-        "At the start"
+        "At the start",
+        "Where the vehicle is",
+        "Where it will be when the plan arrives: 0.06 m off, and it arrived in 20.1 s"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Begun from where it was, it started 1.16 m behind and planned 83 times without arriving."
     },
     {
       "stage": "post",
       "question": "Why may a blocked path bypass the cooldown?",
       "options": [
-        "It is a bug",
-        "Waiting costs a stop or a crash",
         "Cooldowns are broken",
-        "Speed"
+        "Waiting costs a stop or a crash",
+        "Speed",
+        "It is a bug"
       ],
       "correct": 1,
       "explanation": "The other reasons can wait."

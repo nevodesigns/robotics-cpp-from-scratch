@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "A loop does 2 ms of work and then sleep_for(10 ms), meaning to run at 100 Hz. What rate does it run at?",
       "options": [
-        "100 Hz, since it sleeps for the period",
-        "About 83 Hz, since each cycle takes the work plus the period, 12 ms: measured at 82.6 Hz on real threads",
         "200 Hz",
-        "It depends on the operating system's tick"
+        "About 83 Hz, since each cycle takes the work plus the period, 12 ms: measured at 82.6 Hz on real threads",
+        "It depends on the operating system's tick",
+        "100 Hz, since it sleeps for the period"
       ],
       "correct": 1,
       "explanation": "A cycle is work plus sleep. Simulated, the 100th cycle started at 1188 ms where 990 was wanted. The line looks right, which is why it ships."
@@ -18,24 +18,24 @@
       "stage": "check",
       "question": "The repair is sleep_for(period - work), measured per cycle. Over 300 cycles of a 10 ms period, how far off is it?",
       "options": [
-        "Exact, since it accounts for the work",
-        "About 105 to 110 us late per cycle, 1.1 percent slow: every sleep overshoots a little and nothing corrects it, so the error is added up",
         "Off by exactly the work time",
-        "It fails to compile"
+        "Exact, since it accounts for the work",
+        "It fails to compile",
+        "About 105 to 110 us late per cycle, 1.1 percent slow: every sleep overshoots a little and nothing corrects it, so the error is added up"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Measured 3032 ms against 3000. sleep_until a fixed grid was 3000.1 to 3000.3 ms, about 1 us per cycle, because the deadline is computed from the start and so the error of one cycle is gone by the next."
     },
     {
       "stage": "check",
       "question": "A fixed grid of deadlines is hit by one 45 ms cycle in a 10 ms loop. What does a plain fixed deadline do next?",
       "options": [
-        "Waits for the next full period",
-        "Runs the missed cycles back to back with no sleep until it has caught up: measured 5 cycles started late, and a shortest interval of 2 ms",
         "Stops the loop",
-        "Doubles the period"
+        "Waits for the next full period",
+        "Doubles the period",
+        "Runs the missed cycles back to back with no sleep until it has caught up: measured 5 cycles started late, and a shortest interval of 2 ms"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The total time came out right, 300.06 ms, and the spacing was lost. A controller sees several updates a couple of milliseconds apart, each with a dt far below the period, then silence."
     },
     {
@@ -43,11 +43,11 @@
       "question": "Work of 8, 14, 35, 2, 2 ms in a 10 ms loop with the Pacer. When did the cycles start, and how many slots were dropped?",
       "options": [
         "0, 10, 20, 30, 40 and none",
-        "0, 10, 30, 70, 80 and 4 slots dropped: one for the 14 ms cycle and three for the 35",
         "0, 8, 22, 57, 59 and none",
+        "0, 10, 30, 70, 80 and 4 slots dropped: one for the 14 ms cycle and three for the 35",
         "0, 10, 30, 70, 80 and none"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Every start is on the grid, and the sleeping loop that adds a period after the work started them at 0, 18, 42, 87 and 99. The count is what tells you the loop was running below its rate."
     },
     {
@@ -55,23 +55,23 @@
       "question": "A cycle finishes at 40 ms and 1 ns when its slot was due at 40 ms. What does the Pacer do?",
       "options": [
         "Sleeps 0 and runs at once",
-        "Drops the whole slot and waits until 50 ms, because it never runs missed cycles in a burst",
         "Rounds down and treats it as on time",
+        "Drops the whole slot and waits until 50 ms, because it never runs missed cycles in a burst",
         "Throws"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Late by any amount loses the slot, with the sleep 10 ms minus 1 ns. That is the price of never bursting, and it is written down so it is a decision and not a surprise."
     },
     {
       "stage": "post",
       "question": "Why does the Pacer take the time as an argument instead of reading the clock itself?",
       "options": [
-        "Reading the clock is slow",
         "A loop that reads the time itself cannot be tested without waiting, and one that is handed it can be tested in no time at all, with a stall of any length, which is lesson 03-05's idea",
-        "Because steady_clock is not available",
-        "So it can be used on Windows"
+        "So it can be used on Windows",
+        "Reading the clock is slow",
+        "Because steady_clock is not available"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The whole suite is pure arithmetic: 100 cycles, a 45 ms stall, a clock that went backwards. None of it sleeps, and the answers are exact."
     }
   ]

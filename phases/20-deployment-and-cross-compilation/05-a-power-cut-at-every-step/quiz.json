@@ -8,8 +8,8 @@
       "options": [
         "The copy is slow",
         "For the time it takes the slot is half old and half new, with the old hash, and there is no other slot to boot",
-        "Flash wears",
-        "The files are signed"
+        "The files are signed",
+        "Flash wears"
       ],
       "correct": 1,
       "explanation": "8 of 10 cuts bricked."
@@ -18,34 +18,34 @@
       "stage": "check",
       "question": "In the two slot install, what is the last step and why last?",
       "options": [
-        "The first chunk",
         "The move of the boot pointer: nothing before it changes what boots, and it is one write",
+        "The reboot",
         "The hash",
-        "The reboot"
+        "The first chunk"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "After nine of ten steps the robot still boots release 1."
     },
     {
       "stage": "check",
       "question": "After the ninth of ten steps, which release does the robot boot?",
       "options": [
-        "Release 2",
-        "Release 1: release 2 is complete and valid in the other slot but the pointer has not moved",
         "Neither",
-        "Both"
+        "Both",
+        "Release 1: release 2 is complete and valid in the other slot but the pointer has not moved",
+        "Release 2"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The old release is untouched until the last step."
     },
     {
       "stage": "check",
       "question": "Why can a cut install simply be run again?",
       "options": [
-        "It is lucky",
+        "It checks for a lock",
         "The plan is made from what boots now and not from where the last attempt stopped, so it needs no memory of the failure",
-        "It is slow",
-        "It checks for a lock"
+        "It is lucky",
+        "It is slow"
       ],
       "correct": 1,
       "explanation": "11 of 11 ended on release 2."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "A chunk of the new release is damaged after the switch. What boots?",
       "options": [
-        "Nothing",
-        "The release before, from the other slot: the slot is invalid and the fallback is the design",
+        "A blank screen",
         "Release 2 with an error",
-        "A blank screen"
+        "Nothing",
+        "The release before, from the other slot: the slot is invalid and the fallback is the design"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Release 1 from slot 0."
     },
     {
       "stage": "post",
       "question": "What does this scheme assume about the hardware that you must test on the real robot?",
       "options": [
+        "That it is fast",
         "Nothing",
         "That a single write is atomic, so that a power cut falls between steps and never inside one: pull the real power hundreds of times",
-        "That it has two disks",
-        "That it is fast"
+        "That it has two disks"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Flash that tears a write breaks the whole argument."
     }
   ]

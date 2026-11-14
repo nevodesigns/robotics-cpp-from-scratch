@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "Ring<T, Capacity> has two template parameters. What is different about Capacity?",
       "options": [
-        "It is a non type parameter, a number known at compile time, which is what lets the storage be a plain array inside the object",
         "Nothing: both are types, and Capacity happens to be std::size_t",
+        "It is a non type parameter, a number known at compile time, which is what lets the storage be a plain array inside the object",
         "It is optional, and defaults to whatever the first push needs",
         "It is a runtime argument, passed to the constructor"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "Because the capacity is known while the code compiles, the array can be a member rather than a heap allocation. Measured: 1000 pushes into a Ring<double, 64> performed 0 allocations, and sizeof is 528 bytes of which 512 are the doubles."
     },
     {
@@ -19,8 +19,8 @@
       "question": "In a ring buffer, why is slot(index) not just index?",
       "options": [
         "Positions count from the oldest element, and the oldest moves as the buffer is reused",
-        "Because arrays in C++ are one based",
         "To leave room for the bookkeeping at the start of the array",
+        "Because arrays in C++ are one based",
         "It is the same, and the function exists only for readability"
       ],
       "correct": 0,
@@ -30,36 +30,36 @@
       "stage": "check",
       "question": "A Ring<double, 4> has had 1 to 7 pushed into it. What does oldest() return?",
       "options": [
-        "4, because it is the oldest reading still held, not the first one ever pushed",
-        "1, the first thing that was pushed",
         "7, since the oldest slot now holds the newest value",
-        "An error, because three readings were discarded"
+        "An error, because three readings were discarded",
+        "1, the first thing that was pushed",
+        "4, because it is the oldest reading still held, not the first one ever pushed"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "The ring holds 4 5 6 7. Overwriting the oldest rather than refusing the push is the decision that makes this a history: a sensor does not stop producing readings because your buffer is full."
     },
     {
       "stage": "check",
       "question": "Are Ring<double, 4> and Ring<int, 4> the same class?",
       "options": [
-        "No: they share a definition and nothing else, so each has its own code and its own statics",
-        "Yes, with the element type erased at runtime",
         "Yes, since the capacity is the same",
+        "Yes, with the element type erased at runtime",
+        "No: they share a definition and nothing else, so each has its own code and its own statics",
         "Only if double and int are the same size"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Each instantiation is separate code. Pushing into one leaves the other at size zero, and sizeof(Ring<double, 8>) is 80 against 48 for Ring<double, 4>. It is also why a template in a header costs compile time per type and per translation unit."
     },
     {
       "stage": "post",
       "question": "Calling std::sort on a vector of a type with no operator< gave 113 lines of error on gcc. Adding a static_assert to your own template changed that to 5. What did it do on clang?",
       "options": [
-        "It went up, to 254 lines from 224, because clang reports the assertion and then instantiates the rest anyway",
         "It went down to about 5 lines as well",
         "It had no effect at all",
+        "It went up, to 254 lines from 224, because clang reports the assertion and then instantiates the rest anyway",
         "It became a warning rather than an error"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "So the obvious conclusion is half wrong. What a static_assert reliably fixes on both compilers is the first error line, which becomes a sentence you wrote naming your own file, instead of a libstdc++ header 21 instantiation frames deep."
     },
     {
@@ -67,8 +67,8 @@
       "question": "Where should the static_assert constraining a template go?",
       "options": [
         "In your own template, at the edge of your code, so the first error names your file",
-        "As deep as possible, nearest the operation that actually fails",
         "In the caller, before the call",
+        "As deep as possible, nearest the operation that actually fails",
         "It does not matter: the compiler reports the same thing either way"
       ],
       "correct": 0,

@@ -6,58 +6,58 @@
       "stage": "pre",
       "question": "The motion library needs a maths library in [1.0, 3.0) and the sensor library needs it in [1.5, 2.5). Which versions of maths are acceptable?",
       "options": [
-        "1.0 up to 3.0",
-        "The overlap: from 1.5 up to but not including 2.5",
         "Whatever was installed first",
-        "Only 2.5"
+        "Only 2.5",
+        "The overlap: from 1.5 up to but not including 2.5",
+        "1.0 up to 3.0"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The larger low end up to the smaller high end."
     },
     {
       "stage": "check",
       "question": "Why do [1.0, 2.0) and [2.0, 3.0) have nothing in common?",
       "options": [
-        "They are the same",
         "The high end is excluded, so 2.0 is in the second only and the ranges touch without overlapping",
+        "They are the same",
         "2.0 is in neither",
         "A bug"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "intersect gave an empty range and is_empty said so."
     },
     {
       "stage": "check",
       "question": "C is available as 1.0, 1.4, 1.8, 2.4, 2.9 and 3.1. Ranges [1.0, 3.0) and [1.5, 2.5) apply. Which does the resolver choose?",
       "options": [
-        "1.0",
         "2.4.0: the newest inside the overlap",
+        "2.9",
         "3.1",
-        "2.9"
+        "1.0"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "2.9 suits the first and not the second."
     },
     {
       "stage": "check",
       "question": "The newest A cannot live with B. What does a resolver that backs up do?",
       "options": [
+        "Ignores B",
         "Reports a conflict",
-        "Gives that A up, puts back what it had asked for, and tries the next older: here A 1.0.0, B 1.0.0 and C 1.7.0",
         "Installs both",
-        "Ignores B"
+        "Gives that A up, puts back what it had asked for, and tries the next older: here A 1.0.0, B 1.0.0 and C 1.7.0"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It took 6 steps."
     },
     {
       "stage": "post",
       "question": "What should a conflict message contain?",
       "options": [
-        "The word failed",
+        "The date",
         "The package and each requirement with who asked for it, such as C: no version satisfies everyone, since A 1.0 needs [1.0.0, 2.0.0), B 1.0 needs [2.0.0, 3.0.0)",
         "A stack trace",
-        "The date"
+        "The word failed"
       ],
       "correct": 1,
       "explanation": "Without the names nobody can fix it."
@@ -67,11 +67,11 @@
       "question": "A needs B and B needs A. Why does the resolver not go round for ever?",
       "options": [
         "It stops after 10 steps",
-        "Each package is chosen once and a chosen package is not chosen again: it resolved in 3 steps",
         "Cycles are rejected",
+        "Each package is chosen once and a chosen package is not chosen again: it resolved in 3 steps",
         "It guesses"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The steps were under 10 and both packages were chosen."
     }
   ]

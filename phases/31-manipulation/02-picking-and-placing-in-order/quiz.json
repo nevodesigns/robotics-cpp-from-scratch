@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "Why is a pick a state machine and not a script?",
       "options": [
-        "It is shorter",
-        "Each step can fail and the next step depends on whether it did",
         "Scripts are slow",
-        "Robots need it"
+        "Each step can fail and the next step depends on whether it did",
+        "Robots need it",
+        "It is shorter"
       ],
       "correct": 1,
       "explanation": "A check after each step."
@@ -18,48 +18,48 @@
       "stage": "check",
       "question": "A hand closed on nothing has a gap:",
       "options": [
-        "Near the part's width",
-        "Near zero",
+        "Unknown",
         "Fully open",
-        "Unknown"
+        "Near zero",
+        "Near the part's width"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "That is how a miss is seen."
     },
     {
       "stage": "check",
       "question": "A hand that missed every time stopped in fault:",
       "options": [
-        "2",
         "1",
-        "3",
-        "0"
+        "0",
+        "2",
+        "3"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "After 3 tries."
     },
     {
       "stage": "check",
       "question": "A part that fell on the way was noticed:",
       "options": [
+        "By the camera",
         "At the end",
-        "At once, from the gap",
         "Never",
-        "By the camera"
+        "At once, from the gap"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The gap is watched while carrying."
     },
     {
       "stage": "post",
       "question": "Why does every state have a time limit?",
       "options": [
+        "To save power",
         "For speed",
-        "A move that never arrives would hold the machine for ever",
         "It does not",
-        "To save power"
+        "A move that never arrives would hold the machine for ever"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Fault 3."
     },
     {
@@ -67,11 +67,11 @@
       "question": "Does the machine know where the part is?",
       "options": [
         "Yes",
-        "No: a target is a number that a planner turns into a motion",
         "Always",
+        "No: a target is a number that a planner turns into a motion",
         "Sometimes"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It is a function from sensed to commanded."
     }
   ]

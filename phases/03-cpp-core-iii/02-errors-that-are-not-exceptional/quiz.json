@@ -18,60 +18,60 @@
       "stage": "check",
       "question": "Which kind of failure should be handled with an assertion rather than a return value?",
       "options": [
-        "A bug, such as indexing past the end of an array",
-        "A file that is missing",
+        "Input that does not parse",
         "A serial port that is busy",
-        "Input that does not parse"
+        "A file that is missing",
+        "A bug, such as indexing past the end of an array"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "A bug is not to be handled, it is to be fixed, so it should fail loudly in testing. The other three are expected failures that a correct program meets in normal operation."
     },
     {
       "stage": "check",
       "question": "When is std::optional the right return type rather than expected?",
       "options": [
-        "When something may simply be absent and the reason adds nothing",
-        "Whenever the function can fail",
         "Only when the value is a number",
+        "Whenever the function can fail",
+        "When something may simply be absent and the reason adds nothing",
         "When the caller is going to ignore the result"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Looking up a setting that was never configured has one obvious reason. Parsing has five, and an operator needs to know which, so that one returns expected."
     },
     {
       "stage": "check",
       "question": "Why does the reference check both in.fail() and in.eof() after reading a number?",
       "options": [
-        "Without the eof check, 1.5kg parses as 1.5 and the rest is silently discarded",
         "Because eof is set before fail",
-        "To detect an empty string",
-        "Because streams throw on failure otherwise"
+        "Without the eof check, 1.5kg parses as 1.5 and the rest is silently discarded",
+        "Because streams throw on failure otherwise",
+        "To detect an empty string"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "The failure check catches text that is not a number at all. The end of input check catches text that begins with one and continues."
     },
     {
       "stage": "post",
       "question": "Why do many robotics and embedded codebases build with exceptions disabled?",
       "options": [
-        "Throwing allocates and unwinds with no stateable bound, which a loop with a deadline cannot accept",
         "Because exceptions are slower in every case",
         "Because C++ exceptions do not work on ARM",
-        "Because error codes are easier to read"
+        "Because error codes are easier to read",
+        "Throwing allocates and unwinds with no stateable bound, which a loop with a deadline cannot accept"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "The objection is the unbounded worst case rather than the average cost. Some safety standards effectively require it, and a returned error is also handled where the context still exists."
     },
     {
       "stage": "post",
       "question": "What remains a good use of throwing, even in this style?",
       "options": [
-        "A constructor that cannot produce a valid object",
         "A file that does not exist",
-        "A value that fails validation",
-        "A device that is already in use"
+        "A constructor that cannot produce a valid object",
+        "A device that is already in use",
+        "A value that fails validation"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "A constructor has no return value, so throwing is the only way to refuse to create an object that would break its own invariants. The other three are ordinary outcomes."
     }
   ]

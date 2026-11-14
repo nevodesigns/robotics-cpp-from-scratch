@@ -6,9 +6,9 @@
       "stage": "pre",
       "question": "A proportional controller is told to hold a 0.5 kg payload stretched out horizontally. Where does the tool end up?",
       "options": [
-        "At the commanded pose, because the controller drives the error to zero",
-        "About a third of a metre below it, because the torque gravity demands is the gain times the error, so the error cannot be zero",
         "Above it, from the integral term",
+        "About a third of a metre below it, because the torque gravity demands is the gain times the error, so the error cannot be zero",
+        "At the commanded pose, because the controller drives the error to zero",
         "It oscillates for ever"
       ],
       "correct": 1,
@@ -18,48 +18,48 @@
       "stage": "check",
       "question": "Why is the sag zero when the arm points straight up?",
       "options": [
-        "The controller is better there",
         "The torque is the weight times the cosine of the angle to the horizontal, and the cosine of a right angle is zero",
-        "Gravity is weaker upwards",
-        "The payload is lighter"
+        "The payload is lighter",
+        "The controller is better there",
+        "Gravity is weaker upwards"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The holding torque follows the horizontal distance of each weight from the joint. At vertical that distance is nothing, so no torque is needed and the sag is nothing."
     },
     {
       "stage": "check",
       "question": "Why does the test compare the torque formula with the slope of the potential energy?",
       "options": [
-        "It is faster",
-        "It shares no algebra with the formula, so the same mistake in both cannot pass; they agreed to 4.8e-09 N m over 507 poses",
         "The formula is not exact",
-        "Energy is easier to compute"
+        "It is faster",
+        "Energy is easier to compute",
+        "It shares no algebra with the formula, so the same mistake in both cannot pass; they agreed to 4.8e-09 N m over 507 poses"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A check built from the same reasoning as the code can only confirm the reasoning. The energy slope is a different route to the same torque."
     },
     {
       "stage": "check",
       "question": "Motors of 20 and 8 N m hold 0.776 kg stretched out and 2.283 kg with the elbow bent. What does a payload rating of 2.2 kg mean?",
       "options": [
+        "It is the worst case",
         "It is the rating of the arm",
-        "It is the best case: true in the bent pose and nearly three times too high for the longest lever",
         "It is the average over the workspace",
-        "It is the worst case"
+        "It is the best case: true in the bent pose and nearly three times too high for the longest lever"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The torque is a straight line in the payload with different coefficients at every pose, so each pose has its own heaviest payload."
     },
     {
       "stage": "post",
       "question": "An arm standing upright is nudged and falls with a gain of 10 and holds with a gain of 50. What changed?",
       "options": [
-        "Nothing physical; the simulation is noisy",
-        "At the top gravity pushes the shoulder over by 17.6 N m per radian, so a gain below that cannot bring it back and one above can",
         "The inertia increased",
-        "The payload changed"
+        "The payload changed",
+        "At the top gravity pushes the shoulder over by 17.6 N m per radian, so a gain below that cannot bring it back and one above can",
+        "Nothing physical; the simulation is noisy"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Upright is a hilltop: the torque falls as the arm leans, so gravity adds to the lean. The gain has to exceed the slope."
     },
     {
@@ -68,8 +68,8 @@
       "options": [
         "Doubles cannot be compared with zero",
         "cos(pi / 2) is 6e-17 and not zero, so an exact comparison reports a payload in the millions for a pose that should have no limit",
-        "Zero is not a valid payload",
-        "It makes the function faster"
+        "It makes the function faster",
+        "Zero is not a valid payload"
       ],
       "correct": 1,
       "explanation": "The pose is exactly upright in the mathematics and a rounding error away from it in the machine. A tolerance says what is meant."

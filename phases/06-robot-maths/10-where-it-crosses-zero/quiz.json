@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A function is negative at 0 and positive at 1. What does halving guarantee?",
       "options": [
-        "Nothing",
-        "A crossing between them, found in about log2(width over tolerance) steps, since it cannot fail while there is a sign change",
         "The fastest answer",
-        "An exact root"
+        "Nothing",
+        "An exact root",
+        "A crossing between them, found in about log2(width over tolerance) steps, since it cannot fail while there is a sign change"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "bisect took 40 steps for cos(x) - x over [0, 1] to 1e-12."
     },
     {
@@ -19,33 +19,33 @@
       "question": "Both ends of a function are above zero. What does bisect report?",
       "options": [
         "The middle",
-        "Not converged: with the same sign at both ends there may be no crossing",
         "The first end",
+        "Not converged: with the same sign at both ends there may be no crossing",
         "An error message"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Halving has nothing to follow without a sign change."
     },
     {
       "stage": "check",
       "question": "Newton on cos(x) - x from 1.0 took 4 steps. How did the error behave?",
       "options": [
-        "Halved each step",
         "Roughly squared each step: the correct digits doubled, 2.6e-01, 1.1e-02, 2.8e-05, 1.7e-10",
+        "Halved each step",
         "Stayed the same",
         "Grew"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "That speed is why it is used."
     },
     {
       "stage": "check",
       "question": "Why does Newton run away on the cube root from 1?",
       "options": [
-        "The root is missing",
-        "The tangent crosses further from zero than the point it started from, doubling the distance each step: 1.1e+12 after 40 steps",
         "The slope is zero",
-        "The tolerance is too small"
+        "The tangent crosses further from zero than the point it started from, doubling the distance each step: 1.1e+12 after 40 steps",
+        "The tolerance is too small",
+        "The root is missing"
       ],
       "correct": 1,
       "explanation": "The arctangent from 2 ran to -2.3e+10 in 5."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "How does the bracketed method choose between a Newton step and halving?",
       "options": [
-        "It alternates",
-        "It takes the Newton step only if it lands inside the bracket and at least halves the value of the function, and otherwise takes the middle",
         "It always halves",
-        "It always takes Newton"
+        "It always takes Newton",
+        "It alternates",
+        "It takes the Newton step only if it lands inside the bracket and at least halves the value of the function, and otherwise takes the middle"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The bracket shrinks on every step either way."
     },
     {
       "stage": "post",
       "question": "On the cube root over [-1, 2] the bracketed method took 32 steps, the same as halving. Why?",
       "options": [
-        "A bug",
         "Every Newton step was refused, so it was halving throughout, which is what the safeguard is for",
-        "It is slower",
-        "The function is flat"
+        "The function is flat",
+        "A bug",
+        "It is slower"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "On cos(x) - x it took 4, like Newton."
     }
   ]

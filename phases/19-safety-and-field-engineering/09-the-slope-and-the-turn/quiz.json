@@ -7,33 +7,33 @@
       "question": "What most often tips a ground vehicle over?",
       "options": [
         "A slope the robot was told to climb",
-        "A turn at a speed its geometry does not allow, or a payload that raised its centre of gravity",
         "The wind",
-        "A bad sensor"
+        "A bad sensor",
+        "A turn at a speed its geometry does not allow, or a payload that raised its centre of gravity"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Sideways acceleration is v squared times curvature."
     },
     {
       "stage": "check",
       "question": "A payload lifts the centre of gravity from 0.3 m to 0.5 m on a track of 0.5 m. What happens to the tipping acceleration?",
       "options": [
-        "Nothing",
         "It falls from 8.18 to 4.91 m/s^2, 40 percent less, and the slope it tips on from 39.8 to 26.6 degrees",
         "It doubles",
+        "Nothing",
         "It halves"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A radius 1 m turn went from 2.02 to 1.57 m/s."
     },
     {
       "stage": "check",
       "question": "Why does an accelerometer alone give 27 degrees of roll in a steady turn on level ground?",
       "options": [
-        "It is broken",
+        "The gyro drifted",
         "It feels the sideways acceleration of the turn as well as gravity and cannot tell them apart",
-        "The ground is tilted",
-        "The gyro drifted"
+        "It is broken",
+        "The ground is tilted"
       ],
       "correct": 1,
       "explanation": "A 4 m/s^2 turn adds up to atan(4/9.81) of apparent lean."
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "Why did a gate of 15 percent of g not help in a turn at 4 m/s^2?",
       "options": [
+        "Gyro bias",
         "It is too tight",
         "The magnitude is only about 8 percent over g, which is inside the gate, so the filter trusted the accelerometer",
-        "The filter is broken",
-        "Gyro bias"
+        "The filter is broken"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "22.1 degrees against 5.1 at 3 percent."
     },
     {
@@ -56,8 +56,8 @@
       "options": [
         "Nothing",
         "The gyro's bias built up because few samples passed: 4.1 degrees after 60 s against 1.2 at 15 percent",
-        "A crash",
-        "Memory"
+        "Memory",
+        "A crash"
       ],
       "correct": 1,
       "explanation": "No single gate is right for both."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why does the tilt monitor need a debounce on its stop level but not on its warning?",
       "options": [
-        "It is faster",
-        "A single bump past the stop level should not stop the robot, and a warning costs nothing to give early",
         "The warning is rarer",
-        "No reason"
+        "No reason",
+        "A single bump past the stop level should not stop the robot, and a warning costs nothing to give early",
+        "It is faster"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A NaN is the exception: stop at once."
     }
   ]

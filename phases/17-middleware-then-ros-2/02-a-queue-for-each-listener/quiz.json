@@ -6,46 +6,46 @@
       "stage": "pre",
       "question": "Why give each subscriber its own queue?",
       "options": [
-        "To use more memory",
         "So a slow subscriber holds up neither the publisher nor the other subscribers: ten messages, the fast one lost 0 and the slow one lost 8",
-        "To make delivery faster",
-        "To order messages"
+        "To order messages",
+        "To use more memory",
+        "To make delivery faster"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A shared queue would let the slowest set the pace for all."
     },
     {
       "stage": "check",
       "question": "Depth 3 and five messages. What does keeping the newest leave, and keeping what is waiting?",
       "options": [
+        "1 2 3 for both",
         "The same",
         "3 4 5 for the first and 1 2 3 for the second, and 2 lost either way",
-        "1 2 3 for both",
         "Nothing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It matters which message is lost."
     },
     {
       "stage": "check",
       "question": "Which rule suits a controller that wants the position now?",
       "options": [
+        "Both",
         "Keep what is waiting",
-        "Drop the oldest and keep the newest: the old positions are history",
         "Neither",
-        "Both"
+        "Drop the oldest and keep the newest: the old positions are history"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A log being copied wants the opposite."
     },
     {
       "stage": "check",
       "question": "A burst of 8 messages arrives and the subscriber then takes them all. How many are lost at depths 1, 4, 8 and 10?",
       "options": [
-        "8, 8, 8, 8",
+        "1, 4, 8, 10",
         "7, 4, 0 and 0: a queue as deep as the burst loses nothing",
         "0 for all",
-        "1, 4, 8, 10"
+        "8, 8, 8, 8"
       ],
       "correct": 1,
       "explanation": "Depth is a buffer for bursts."
@@ -54,12 +54,12 @@
       "stage": "post",
       "question": "A publisher at 100 Hz and a subscriber that takes 10 Hz. What did a depth of 100 do?",
       "options": [
-        "Saved everything",
-        "It saved 99 messages, which is what it holds: 801 lost of 1000 against 900 at depth 1",
+        "Doubled the rate",
         "Lost nothing",
-        "Doubled the rate"
+        "Saved everything",
+        "It saved 99 messages, which is what it holds: 801 lost of 1000 against 900 at depth 1"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A rate mismatch is not cured by depth."
     },
     {

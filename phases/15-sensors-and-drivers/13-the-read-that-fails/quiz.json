@@ -8,8 +8,8 @@
       "options": [
         "Nothing, it is rejected",
         "A wrong number that looks like any other reading",
-        "An error",
-        "A zero"
+        "A zero",
+        "An error"
       ],
       "correct": 1,
       "explanation": "A flipped bit changes a value and nothing says so."
@@ -18,22 +18,22 @@
       "stage": "check",
       "question": "What is the CRC-8 of the ASCII string 123456789 with polynomial 0x07 and start zero?",
       "options": [
-        "0x00",
         "0xF4, the standard figure to test an implementation against",
         "0xFF",
-        "0x31"
+        "0x31",
+        "0x00"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Test against known answers."
     },
     {
       "stage": "check",
       "question": "Why is a CRC better than a plain sum of the bytes?",
       "options": [
-        "It is cheaper",
+        "It uses less memory",
         "It sees a change of order: on a five byte frame it missed 0 of 6 swapped pairs of bytes and a sum missed all 6",
         "It is longer",
-        "It uses less memory"
+        "It is cheaper"
       ],
       "correct": 1,
       "explanation": "A sum does not care about order."
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "What should a bounded retry report beyond whether it worked?",
       "options": [
-        "Nothing",
         "How many attempts it took, and how many were timeouts and how many were bad frames, because those are different faults",
+        "Nothing",
         "The time of day",
         "The CRC"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Counts are the driver's health."
     },
     {
@@ -55,11 +55,11 @@
       "question": "Each attempt fails with probability 0.28. What fraction of reads give up after 3 attempts?",
       "options": [
         "0.28",
-        "About 0.022, which is 0.28 cubed, measured 0.0223",
+        "0.84",
         "0.5",
-        "0.84"
+        "About 0.022, which is 0.28 cubed, measured 0.0223"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Independent failures multiply."
     },
     {
@@ -67,11 +67,11 @@
       "question": "A bus fails nine reads in ten. What does the arithmetic say?",
       "options": [
         "Add one retry",
-        "It needs 44 attempts for 99 percent success, which means it needs fixing and not retrying",
         "Nothing",
+        "It needs 44 attempts for 99 percent success, which means it needs fixing and not retrying",
         "Use a sum"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A failure rate of one cannot be met by any number of attempts."
     }
   ]

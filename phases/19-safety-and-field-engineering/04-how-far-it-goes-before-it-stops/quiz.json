@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "The stop path waits 0.3 s. Why is that more than a software detail?",
       "options": [
-        "It is not",
         "At 2 m/s it is 0.6 m the robot travels before the brakes are even asked",
+        "It is not",
         "It uses memory",
         "It is a network setting"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Every timeout is a distance."
     },
     {
       "stage": "check",
       "question": "The sight line doubles from 5 m to 10 m. By how much does the allowed speed grow in the table?",
       "options": [
-        "Double",
-        "From 3.654 to 5.512 m/s, about 1.5 times: speed grows with the square root of the room",
         "Not at all",
-        "Four times"
+        "From 3.654 to 5.512 m/s, about 1.5 times: speed grows with the square root of the room",
+        "Four times",
+        "Double"
       ],
       "correct": 1,
       "explanation": "Room is not a speed."
@@ -30,33 +30,33 @@
       "stage": "check",
       "question": "What does a second of latency cost on a 3 m sight line with a deceleration of 2?",
       "options": [
-        "Nothing",
-        "43 percent of the speed: 1.899 m/s against 3.347",
         "10 percent",
-        "Half"
+        "Nothing",
+        "Half",
+        "43 percent of the speed: 1.899 m/s against 3.347"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Half a second costs a quarter."
     },
     {
       "stage": "check",
       "question": "On wet ground with brakes of 3 and a 17 degree downhill slope, what is the deceleration?",
       "options": [
-        "3",
         "0: friction gives 0.3 g cos(slope), gravity takes g sin(slope), and nothing is left, so the robot cannot stop by braking",
         "1",
-        "2.94"
+        "2.94",
+        "3"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The stopping distance is infinite."
     },
     {
       "stage": "post",
       "question": "Which friction and slope go into the speed limit?",
       "options": [
-        "The ones the brake was tested at",
-        "The worst the machine will meet",
         "The average",
+        "The worst the machine will meet",
+        "The ones the brake was tested at",
         "Whatever the data sheet says"
       ],
       "correct": 1,
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why is the formula a bound to be tested and not a number to be believed?",
       "options": [
-        "It is wrong",
-        "It assumes constant deceleration, one friction and a known latency, and the real brake, load and surface vary: the robot must be stopped for real at the speed it gives",
         "It is too slow",
-        "It is only for simulation"
+        "It is only for simulation",
+        "It assumes constant deceleration, one friction and a known latency, and the real brake, load and surface vary: the robot must be stopped for real at the speed it gives",
+        "It is wrong"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A person standing in front of it is not a test."
     }
   ]

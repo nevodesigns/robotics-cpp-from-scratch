@@ -18,12 +18,12 @@
       "stage": "check",
       "question": "What does `alpha = dt / (tf + dt)` set?",
       "options": [
-        "The sensor's resolution",
         "The share of each new raw derivative that is let into the filtered value; a small alpha is a slow filter",
         "The loop gain",
-        "The sample rate"
+        "The sample rate",
+        "The sensor's resolution"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A tf of zero gives alpha of one and the raw derivative."
     },
     {
@@ -32,8 +32,8 @@
       "options": [
         "3.000, instantly",
         "About 63 percent of it, 1.869, and 3.000 after ten",
-        "Zero",
-        "6"
+        "6",
+        "Zero"
       ],
       "correct": 1,
       "explanation": "First order lags reach 63 percent after one time constant."
@@ -42,36 +42,36 @@
       "stage": "check",
       "question": "What did a tf of 0.02 s do to the noise in the derivative?",
       "options": [
-        "Nothing",
         "Cut it from 1.4067 to 0.0480 rad/s rms, under 4 percent of the raw value",
+        "Removed it entirely",
         "Doubled it",
-        "Removed it entirely"
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The same filter's cost is lag, not noise."
     },
     {
       "stage": "post",
       "question": "What does the filter cost on a joint that really is moving?",
       "options": [
-        "Nothing",
-        "Lag of about tf: the derivative's rms error on a noise free swing rose from 0 to 0.2769 rad/s at tf of 0.02 s",
+        "Memory",
         "A higher sensor noise",
-        "Memory"
+        "Nothing",
+        "Lag of about tf: the derivative's rms error on a noise free swing rose from 0 to 0.2769 rad/s at tf of 0.02 s"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The error grew almost in proportion to tf, so noise and lag trade against each other."
     },
     {
       "stage": "post",
       "question": "In a loop with kp 40 and kd 4, what did filtering the derivative do to the motor?",
       "options": [
+        "Nothing",
         "It made the joint miss the target",
         "Cut the step to step change in force from 9.373 N to 0.317 N, and the joint still ended 0.0000 rad away",
-        "Nothing",
         "Made it unstable"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Choose tf from Td / N and check both the chatter and the settling."
     }
   ]

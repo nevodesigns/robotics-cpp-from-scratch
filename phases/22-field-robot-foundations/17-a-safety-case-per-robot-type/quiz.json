@@ -6,48 +6,48 @@
       "stage": "pre",
       "question": "What makes a safety claim worth anything?",
       "options": [
+        "Its author",
         "Its length",
         "The structure behind it: every hazard has a control, and every control has a test",
-        "Its author",
         "Its date"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A sentence that says safe is not a case."
     },
     {
       "stage": "check",
       "question": "How many hazards did the template of the ground vehicle start with?",
       "options": [
+        "1",
         "3",
-        "8",
         "20",
-        "1"
+        "8"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Eight, against seven for an arm and six for a legged robot."
     },
     {
       "stage": "check",
       "question": "The empty ground template had how many problems?",
       "options": [
+        "100",
         "0",
         "16, two for each hazard",
-        "1",
-        "100"
+        "1"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "No control and no stated residual for each."
     },
     {
       "stage": "check",
       "question": "Why is a control with no test a hole?",
       "options": [
-        "Style",
         "Nothing shows that it works: it is a hope",
+        "Style",
         "Tests are optional",
         "It is too short"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A control that has never been made to fail is unproven."
     },
     {
@@ -56,8 +56,8 @@
       "options": [
         "Signs are bad",
         "Information relies on a person doing the right thing, and a high risk needs a function that does not",
-        "Cost",
-        "It is allowed"
+        "It is allowed",
+        "Cost"
       ],
       "correct": 1,
       "explanation": "Protective and design controls come before information."
@@ -66,10 +66,10 @@
       "stage": "post",
       "question": "Does a case with no holes mean the robot is safe?",
       "options": [
-        "Yes",
+        "Only on Tuesdays",
         "No: it means the table has none, and the review and the hardware still have to say the rest",
         "Always",
-        "Only on Tuesdays"
+        "Yes"
       ],
       "correct": 1,
       "explanation": "The checker finds holes in a table, not in the world."

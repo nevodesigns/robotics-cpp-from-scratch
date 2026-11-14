@@ -6,46 +6,46 @@
       "stage": "pre",
       "question": "Why use many guesses instead of one estimate with an error bar?",
       "options": [
+        "Memory",
         "Speed",
-        "A robot that does not know where it is may be in many places at once, which one estimate cannot say",
         "Fashion",
-        "Memory"
+        "A robot that does not know where it is may be in many places at once, which one estimate cannot say"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The cloud can have several clumps."
     },
     {
       "stage": "check",
       "question": "A thousand particles found the robot to:",
       "options": [
-        "5 m",
         "0.021 m after 5 steps",
+        "5 m",
         "10 m",
         "Never"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "From a cloud over the whole room."
     },
     {
       "stage": "check",
       "question": "Of 10 runs, 50 particles lost the robot how many times?",
       "options": [
-        "0",
         "10",
+        "5",
         "10",
-        "5"
+        "0"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The cloud must be thick enough."
     },
     {
       "stage": "check",
       "question": "In a room with nothing in it, the mirror image was taken for the robot in how many of 8 runs?",
       "options": [
-        "0",
+        "1",
         "2",
         "10",
-        "1"
+        "0"
       ],
       "correct": 1,
       "explanation": "It looks the same turned half a turn."
@@ -54,12 +54,12 @@
       "stage": "post",
       "question": "Why is there a uniform share in the likelihood of a beam?",
       "options": [
+        "To add noise",
         "Tradition",
-        "One wild beam (a person walking by) must not give a good particle a weight of zero",
         "Speed",
-        "To add noise"
+        "One wild beam (a person walking by) must not give a good particle a weight of zero"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Robustness to what the map does not contain."
     },
     {
@@ -67,11 +67,11 @@
       "question": "Why can the mean of a cloud with two clumps be nowhere?",
       "options": [
         "It is right",
-        "It lies between them",
         "Rounding",
+        "It lies between them",
         "It cannot"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Look at the spread and the modes."
     }
   ]

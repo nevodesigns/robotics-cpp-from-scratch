@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "Why write the interface before the hardware?",
       "options": [
-        "It is shorter",
         "So that the program is written against the class and the simulator, a fake and a board are interchangeable",
-        "Boards have no classes",
-        "To avoid testing"
+        "To avoid testing",
+        "It is shorter",
+        "Boards have no classes"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The program should not know which robot it is on."
     },
     {
@@ -19,20 +19,20 @@
       "question": "A base with a limit of 1 m/s was told to go 5 m/s. After 10 s it was doing:",
       "options": [
         "5 m/s",
+        "2.5 m/s",
         "1.000 m/s",
-        "0 m/s",
-        "2.5 m/s"
+        "0 m/s"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A fake that does not limit teaches a program to ask for the impossible."
     },
     {
       "stage": "check",
       "question": "What did a stop at 1 m/s cost in distance for a time constant of 0.2 s?",
       "options": [
-        "Nothing",
-        "0.200 m, the speed times the time constant",
         "1 m",
+        "0.200 m, the speed times the time constant",
+        "Nothing",
         "5 m"
       ],
       "correct": 1,
@@ -42,10 +42,10 @@
       "stage": "check",
       "question": "How long did three joints at 0.5 rad/s take to move 1 rad, and twelve at 2 rad/s?",
       "options": [
-        "Both 1 s",
+        "10 s",
         "2.000 s and 0.500 s",
-        "0 s",
-        "10 s"
+        "Both 1 s",
+        "0 s"
       ],
       "correct": 1,
       "explanation": "The time is the distance over the rate."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "A controller is tuned on a fake that answers instantly. What happens on the real base?",
       "options": [
-        "Nothing",
-        "It is tuned for a robot that does not exist and overshoots on the real one",
+        "It stops",
         "It runs faster",
-        "It stops"
+        "Nothing",
+        "It is tuned for a robot that does not exist and overshoots on the real one"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A fake that is too kind teaches bad habits."
     },
     {
       "stage": "post",
       "question": "Why are ArmBus and LegBus separate types when they are the same row of joints?",
       "options": [
-        "They differ in speed",
         "So a program cannot hand an arm's targets to a leg",
-        "C++ needs two",
-        "For speed"
+        "For speed",
+        "They differ in speed",
+        "C++ needs two"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A type is a mistake that cannot be made."
     }
   ]

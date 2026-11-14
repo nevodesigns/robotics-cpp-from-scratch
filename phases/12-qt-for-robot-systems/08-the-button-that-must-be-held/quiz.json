@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "A key is held and the system repeats it. What does a handler that takes each release as the end of the hold see?",
       "options": [
-        "One hold",
+        "An error",
         "The key let go again and again: the repeats arrive as release and press pairs",
-        "Nothing",
-        "An error"
+        "One hold",
+        "Nothing"
       ],
       "correct": 1,
       "explanation": "It saw the key let go 5 times."
@@ -18,12 +18,12 @@
       "stage": "check",
       "question": "What marks a release that is only a repeat?",
       "options": [
-        "Its key code",
         "isAutoRepeat() is true",
+        "Its modifiers",
         "Its time",
-        "Its modifiers"
+        "Its key code"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "DeadmanKey ignores events marked as auto-repeat."
     },
     {
@@ -31,47 +31,47 @@
       "question": "The window loses focus while the key is held. What happens to the hold?",
       "options": [
         "It continues",
-        "It is over: the release will go to another window",
         "It doubles",
-        "It is paused"
+        "It is paused",
+        "It is over: the release will go to another window"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "After on_focus_lost the key was not held."
     },
     {
       "stage": "check",
       "question": "The link is lost and comes back with the key still held. What is the allowed speed?",
       "options": [
-        "The last speed",
-        "Zero: only a press arms, and only while the link is alive",
         "The limit",
-        "Half the limit"
+        "Half the limit",
+        "Zero: only a press arms, and only while the link is alive",
+        "The last speed"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It did not start by itself."
     },
     {
       "stage": "post",
       "question": "The emergency stop is pressed and let go. What is the state?",
       "options": [
-        "Cleared",
         "Latched: letting go does not clear it",
+        "Cleared",
         "Armed",
         "Paused"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It stayed latched and the speed stayed 0."
     },
     {
       "stage": "post",
       "question": "Why is a reset refused while the key is held?",
       "options": [
+        "The key is slow",
         "Qt requires it",
         "A reset must not be a start: the person must let go and press again",
-        "The key is slow",
         "It saves memory"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "After the key was let go the reset worked, and did not arm."
     }
   ]

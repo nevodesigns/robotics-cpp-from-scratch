@@ -7,23 +7,23 @@
       "question": "Why describe a test as text and not as code?",
       "options": [
         "Speed",
-        "A person who has never built the repository can read and change it, the same file runs against simulation and bench, and a bug from the robot is reproduced by adding lines",
         "It is shorter",
-        "Compilers like it"
+        "Compilers like it",
+        "A person who has never built the repository can read and change it, the same file runs against simulation and bench, and a bug from the robot is reproduced by adding lines"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A test written in C++ can be changed only by someone who can build C++."
     },
     {
       "stage": "check",
       "question": "A script has a mistake on lines 2, 3, 4 and 5. What should the parser do?",
       "options": [
+        "Report the last",
         "Stop at line 2",
         "Report all of them with their line numbers and leave the scenario empty: a half read script that runs is worse than none",
-        "Skip them",
-        "Report the last"
+        "Skip them"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "11 bad lines were all found in the test."
     },
     {
@@ -42,10 +42,10 @@
       "stage": "check",
       "question": "Which events does the step from t0 to t1 take?",
       "options": [
-        "Those from t0 to t1 including both ends",
+        "Those at t1 only",
         "Those after t0 and up to and including t1: so consecutive steps cover the line with no gap and no overlap",
         "Those before t1",
-        "Those at t1 only"
+        "Those from t0 to t1 including both ends"
       ],
       "correct": 1,
       "explanation": "The event at 2.5 arrived at the step that ends at 2.5."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "The first target is at time 0. Why might a simulation never apply it?",
       "options": [
-        "It is ignored",
-        "The first interval starts at 0, and an interval that excludes its start has no place for an event at 0: events_between(0, 0.01) gave nothing and events_between(-1, 0.01) gave it",
         "It is too early",
-        "Zero is not a time"
+        "It is ignored",
+        "Zero is not a time",
+        "The first interval starts at 0, and an interval that excludes its start has no place for an event at 0: events_between(0, 0.01) gave nothing and events_between(-1, 0.01) gave it"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Start the first interval before zero."
     },
     {
       "stage": "post",
       "question": "An event at 1.0 s and steps of 0.1 s arrives at step 11 in one run and 10 in another. What differs?",
       "options": [
-        "The event",
         "How the step's time was worked out: adding 0.1 ten times gives 0.9999999999999999, short of 1.0, and the step number times 0.1 gives 1.0",
         "The parser",
+        "The event",
         "The scenario"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Use the step count and not a running sum."
     }
   ]

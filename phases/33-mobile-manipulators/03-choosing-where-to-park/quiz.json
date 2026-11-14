@@ -6,36 +6,36 @@
       "stage": "pre",
       "question": "Why is the margin in the ring part of the score?",
       "options": [
-        "To look tidy",
-        "It is the room the base has to stop short or long and still reach",
+        "It is the travel",
         "It is required by law",
-        "It is the travel"
+        "It is the room the base has to stop short or long and still reach",
+        "To look tidy"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "1 in the middle of the ring."
     },
     {
       "stage": "check",
       "question": "With travel weighted most the base travelled:",
       "options": [
-        "2.56 m",
-        "1.24 m",
+        "10 m",
         "0 m",
-        "10 m"
+        "1.24 m",
+        "2.56 m"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Against 2.56 m with no weight on travel."
     },
     {
       "stage": "check",
       "question": "With obstacles all round the target, how many places were free?",
       "options": [
-        "252",
         "0",
+        "36",
         "1",
-        "36"
+        "252"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The answer was none."
     },
     {
@@ -43,21 +43,21 @@
       "question": "Where did the base go when a row of obstacles blocked the near side?",
       "options": [
         "Through them",
-        "Round to a bearing of -30 degrees",
+        "Back to the start",
         "Nowhere",
-        "Back to the start"
+        "Round to a bearing of -30 degrees"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Every choice kept the clearance."
     },
     {
       "stage": "post",
       "question": "What do the weights decide?",
       "options": [
-        "Nothing",
+        "The arm's length",
         "Whether to arrive soon, with room, or clear of things",
         "The colour",
-        "The arm's length"
+        "Nothing"
       ],
       "correct": 1,
       "explanation": "The trade between travel and margin."

@@ -6,45 +6,45 @@
       "stage": "pre",
       "question": "A position sensor is good to 0.001 rad and read at 1 kHz. What does subtracting two readings and dividing by the time do to its noise?",
       "options": [
-        "Nothing, the noise cancels",
-        "It multiplies it by about a thousand: each reading is wrong by a little, and dividing by a millisecond turns a thousandth of a radian into about a radian a second",
+        "It removes it",
         "It halves it",
-        "It removes it"
+        "It multiplies it by about a thousand: each reading is wrong by a little, and dividing by a millisecond turns a thousandth of a radian into about a radian a second",
+        "Nothing, the noise cancels"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The lesson measured 1.422 rad/s rms from the difference against 0.006 from the observer."
     },
     {
       "stage": "check",
       "question": "What are the two steps an observer takes each cycle?",
       "options": [
-        "Filter and differentiate",
         "Predict from the model and the commanded acceleration, then correct both position and speed by the position error",
         "Integrate and clamp",
+        "Filter and differentiate",
         "Read and discard"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The noise only enters through the correction, which is small each step."
     },
     {
       "stage": "check",
       "question": "What gains put both observer poles at minus w?",
       "options": [
-        "w and w",
-        "2 w for the position and w squared for the speed, the expansion of (s + w) squared",
         "w over 2 and w over 4",
-        "Any positive pair"
+        "Any positive pair",
+        "2 w for the position and w squared for the speed, the expansion of (s + w) squared",
+        "w and w"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "That is a critically damped pair: as fast as w allows, no ringing."
     },
     {
       "stage": "check",
       "question": "The observer is given no acceleration on a noise free swing. What happens?",
       "options": [
-        "Nothing, the sensor is exact",
-        "The estimate is smooth and late: 0.543 rad/s of error against 1.70e-03 when told, because every change in speed has to arrive through the correction",
         "It diverges",
+        "The estimate is smooth and late: 0.543 rad/s of error against 1.70e-03 when told, because every change in speed has to arrive through the correction",
+        "Nothing, the sensor is exact",
         "It is exact"
       ],
       "correct": 1,
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "An unmodelled acceleration d acts on a joint with an observer at bandwidth w. What speed error does it leave?",
       "options": [
-        "None, the correction removes it",
         "A steady error of 2 d / w, measured 0.0395 rad/s against 0.0400 predicted for 1 rad/s^2 at 50",
         "d times w",
+        "None, the correction removes it",
         "An error that grows without limit"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A higher bandwidth shrinks it, and passes more noise."
     },
     {
       "stage": "post",
       "question": "Why can no single bandwidth be both quiet and quick?",
       "options": [
-        "The maths is wrong",
-        "The same correction that follows the truth also follows the noise: noise rose from 0.0002 to 0.1675 rad/s as the bandwidth went from 5 to 400 while the lag fell from 2.55 to 0.063",
         "The sensor is too slow",
-        "Gains must be integers"
+        "Gains must be integers",
+        "The maths is wrong",
+        "The same correction that follows the truth also follows the noise: noise rose from 0.0002 to 0.1675 rad/s as the bandwidth went from 5 to 400 while the lag fell from 2.55 to 0.063"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Choose w from the machine's noise and the accelerations the model misses, and measure both."
     }
   ]

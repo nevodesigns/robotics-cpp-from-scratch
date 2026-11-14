@@ -7,35 +7,35 @@
       "question": "A QML handler throws a ReferenceError. What happens to the load?",
       "options": [
         "It fails with an error",
+        "Nothing, ever",
         "It succeeds, and a warning is printed",
-        "It crashes",
-        "Nothing, ever"
+        "It crashes"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The component created its object and the scope kept one warning."
     },
     {
       "stage": "check",
       "question": "Where does a Qt warning go by default?",
       "options": [
-        "Into the test result",
         "To standard error, where a test run does not look",
-        "To a file",
-        "Nowhere"
+        "Into the test result",
+        "Nowhere",
+        "To a file"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A suite can pass with forty warnings in its log."
     },
     {
       "stage": "check",
       "question": "Why does the scope restore the previous handler?",
       "options": [
-        "It is polite",
         "A handler that stays installed after the scope is a function writing into a destroyed object",
+        "It is polite",
         "Qt requires one handler",
         "To count twice"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "After the scopes the old handler was back and saw 2."
     },
     {
@@ -43,11 +43,11 @@
       "question": "Two scopes are nested. Where does a message printed between them go?",
       "options": [
         "Both",
-        "The outer one only",
         "The inner one only",
+        "The outer one only",
         "Neither"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The outer kept the messages printed outside the inner scope."
     },
     {
@@ -55,20 +55,20 @@
       "question": "Why is the list of messages guarded by a mutex?",
       "options": [
         "Habit",
-        "Qt calls the handler from whichever thread printed",
         "QString needs it",
-        "The vector is slow"
+        "The vector is slow",
+        "Qt calls the handler from whichever thread printed"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "8 threads of 1000 messages kept all 8000."
     },
     {
       "stage": "post",
       "question": "What does forward do?",
       "options": [
-        "Sends messages to the future",
-        "Passes each message to the previous handler as well as keeping it",
         "Hides them",
+        "Passes each message to the previous handler as well as keeping it",
+        "Sends messages to the future",
         "Counts them twice"
       ],
       "correct": 1,

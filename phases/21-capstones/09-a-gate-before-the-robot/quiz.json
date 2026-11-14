@@ -7,11 +7,11 @@
       "question": "What does the gate add to the pipeline of lesson 20-12?",
       "options": [
         "Another check of the manifest",
-        "A stage that asks whether the release is safe, before the first stage: the pipeline does not know what the release does",
+        "A signature",
         "Speed",
-        "A signature"
+        "A stage that asks whether the release is safe, before the first stage: the pipeline does not know what the release does"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The gate comes first."
     },
     {
@@ -19,11 +19,11 @@
       "question": "The candidate has the limiter and supervisor taken out. Which scenario passed?",
       "options": [
         "None",
+        "S4",
         "S1, the empty building: it drives perfectly, and only the three scenarios with something in the way failed",
-        "All",
-        "S4"
+        "All"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "failing: S2, S4, S5; hazards G1, G2, G4, G8."
     },
     {
@@ -31,21 +31,21 @@
       "question": "Why is there no flag to skip the gate?",
       "options": [
         "It is faster",
-        "A gate that can be switched off with an argument will be, on the day it matters",
         "The compiler",
+        "A gate that can be switched off with an argument will be, on the day it matters",
         "Tradition"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A design decision."
     },
     {
       "stage": "check",
       "question": "A candidate fails only S3, which is for no hazard of the log. Does the gate pass it?",
       "options": [
-        "Yes, no hazard is failing",
-        "No: S3 is a functional scenario the robot must pass, and a robot that is safe because it never moves is not a product",
         "Only with a warning",
-        "Yes"
+        "No: S3 is a functional scenario the robot must pass, and a robot that is safe because it never moves is not a product",
+        "Yes",
+        "Yes, no hazard is failing"
       ],
       "correct": 1,
       "explanation": "The gate is the whole suite."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Twenty robots are offered the unsafe rover. How many run it with and without the gate?",
       "options": [
-        "20 and 20",
         "0 with the gate and 20 without: the pipeline checks everything it knows to check, and the release is valid",
-        "10 and 10",
-        "0 and 0"
+        "0 and 0",
+        "20 and 20",
+        "10 and 10"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The pipeline did not know what the release does."
     }
   ]

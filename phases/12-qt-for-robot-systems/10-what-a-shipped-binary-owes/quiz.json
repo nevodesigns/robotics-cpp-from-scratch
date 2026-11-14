@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "Most Qt modules a control station uses are offered under which open source licence?",
       "options": [
-        "MIT",
         "The LGPL 3.0, with conditions about how they are linked and what is shipped",
-        "Public domain",
-        "None"
+        "MIT",
+        "None",
+        "Public domain"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Core, Gui, Widgets, Network, Qml and Quick were LGPL in the table."
     },
     {
       "stage": "check",
       "question": "A program links Charts and is given to a customer. What follows?",
       "options": [
-        "Nothing",
+        "Only a notice",
         "It is the GPL 3.0 as a whole, with its source, or needs a commercial licence",
-        "It must be static",
-        "Only a notice"
+        "Nothing",
+        "It must be static"
       ],
       "correct": 1,
       "explanation": "Charts is offered under the GPL 3.0 only or a commercial licence."
@@ -31,33 +31,33 @@
       "question": "Why must the LGPL modules be linked dynamically?",
       "options": [
         "It is faster",
-        "The person who has the program must be able to replace Qt with another build",
         "Qt requires it for plugins",
-        "It is smaller"
+        "It is smaller",
+        "The person who has the program must be able to replace Qt with another build"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A static link was a finding."
     },
     {
       "stage": "check",
       "question": "A module is not in the table. What does licence_of say?",
       "options": [
-        "LGPL",
-        "Unknown: it does not guess",
         "GPL only",
-        "An error"
+        "An error",
+        "Unknown: it does not guess",
+        "LGPL"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Multimedia and Quick3D were unknown."
     },
     {
       "stage": "post",
       "question": "Qt6Charts, Charts and QtCharts are in one list. How many findings do they make?",
       "options": [
-        "Three",
-        "One: the name is the same once it is made lowercase and its prefix taken off",
         "Zero",
-        "Two"
+        "One: the name is the same once it is made lowercase and its prefix taken off",
+        "Two",
+        "Three"
       ],
       "correct": 1,
       "explanation": "A module spelt three ways was one finding."
@@ -67,11 +67,11 @@
       "question": "Is this lesson legal advice?",
       "options": [
         "Yes",
-        "No: it is a table to start from, and the licence of the Qt that is shipped is what counts",
         "Only for Qt 6.2",
+        "No: it is a table to start from, and the licence of the Qt that is shipped is what counts",
         "Only in the United States"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The lesson says so at the top and under what it does not do."
     }
   ]

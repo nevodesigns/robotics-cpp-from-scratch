@@ -6,70 +6,70 @@
       "stage": "pre",
       "question": "A loop is tuned on the bench and then a filter adds 10 ms of delay. The gains are unchanged. What happens?",
       "options": [
+        "The gain halves",
         "Nothing, a delay does not change the gain",
-        "It may become unstable: a delay adds no gain but adds lag that grows with frequency, and it uses up the phase margin",
         "It only gets slower",
-        "The gain halves"
+        "It may become unstable: a delay adds no gain but adds lag that grows with frequency, and it uses up the phase margin"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "At a proportional gain of 3000 the margin went from 71.8 degrees to -19.6 at 10 ms, and the step response grew without bound."
     },
     {
       "stage": "check",
       "question": "Ten milliseconds of delay at fifty hertz is how many degrees of phase?",
       "options": [
+        "It depends on the gain",
         "10",
-        "180: a delay is a time, and a time at a frequency is a fraction of a turn, so it is exactly backwards at fifty hertz",
         "36",
-        "It depends on the gain"
+        "180: a delay is a time, and a time at a frequency is a fraction of a turn, so it is exactly backwards at fifty hertz"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "360 times the frequency times the delay. It grows with frequency, which is why a fast loop is hit first."
     },
     {
       "stage": "check",
       "question": "Each doubling of the delay cut the largest stable gain about fourfold: 3.6, 3.8, 3.9. What law is that?",
       "options": [
-        "Linear in the delay",
         "The gain a loop can stand goes as the inverse square of its delay",
         "Exponential",
+        "Linear in the delay",
         "No law; it is noise"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A loop twice as late has a quarter of the gain, and one with ten times the delay has a hundredth."
     },
     {
       "stage": "check",
       "question": "The model predicted no limit for a loop with no delay, and the simulated loop was unstable above 341737. Why?",
       "options": [
+        "Numbers overflow",
         "The simulation was wrong",
         "Sampling is a delay of its own, which a continuous model with a pure delay does not describe well, so with no delay it is an upper bound and not a figure",
-        "Numbers overflow",
         "The inertia was too small"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A command is held between samples, on average half a sample late. With any real delay added, the prediction was within 4.5 percent."
     },
     {
       "stage": "post",
       "question": "Why does the test compare phase margins round the circle and not directly?",
       "options": [
-        "Doubles cannot be compared directly",
         "An angle is a direction: minus 293 degrees and plus 67 are the same one, so a direct comparison fails on a correct answer",
+        "Doubles cannot be compared directly",
         "To loosen the tolerance",
         "The complex number is inexact"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The argument of a complex number is reduced to one turn and a margin computed from a formula is not. The difference is taken modulo 360."
     },
     {
       "stage": "post",
       "question": "A delay line writes the new value before reading the oldest. What does it return?",
       "options": [
-        "The value from n samples ago, correctly",
-        "The value it has just stored, which is no delay at all",
         "Zero",
-        "It crashes"
+        "The value it has just stored, which is no delay at all",
+        "It crashes",
+        "The value from n samples ago, correctly"
       ],
       "correct": 1,
       "explanation": "Read before writing. The error shows only at the edges, which is why the test checks the first outputs, a single sample gone round many times, and the wire."

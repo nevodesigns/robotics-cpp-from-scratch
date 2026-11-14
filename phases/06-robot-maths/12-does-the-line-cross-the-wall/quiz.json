@@ -7,59 +7,59 @@
       "question": "Three points are on a line on paper but stored as doubles. Why is cross == 0 the wrong test for 'in a line'?",
       "options": [
         "It is slower",
-        "Rounding leaves a tiny nonzero number of either sign: the suite saw -2.22e-16 for points on y = 3x, so the test must allow for rounding",
+        "The cross product is always positive",
         "Doubles cannot be zero",
-        "The cross product is always positive"
+        "Rounding leaves a tiny nonzero number of either sign: the suite saw -2.22e-16 for points on y = 3x, so the test must allow for rounding"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "orientation compares the cross product with the size of the triangle's sides."
     },
     {
       "stage": "check",
       "question": "Two segments lie on one line with a gap between them. Do they intersect?",
       "options": [
-        "Yes, they are collinear",
         "No: the case a quick test gets wrong, and the answer comes from asking whether an end lies between the ends of the other",
         "Only if they touch",
+        "Yes, they are collinear",
         "It depends on the direction"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "All four orientations are zero, so 'opposite sides' means nothing."
     },
     {
       "stage": "check",
       "question": "A point is 13 along a segment of length 10 and 4 across. How far is it from the segment?",
       "options": [
+        "9",
         "4",
         "5: the nearest point is the end, 3 along and 4 across",
-        "13",
-        "9"
+        "13"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A point 4 along and 3 across was 3 from the segment."
     },
     {
       "stage": "check",
       "question": "Why does the obvious ray casting test fail at some positions?",
       "options": [
-        "It is slow",
-        "A ray through a corner crosses two edges at once and is counted twice, flipping the answer back",
         "It cannot count",
-        "The polygon is too big"
+        "The polygon is too big",
+        "It is slow",
+        "A ray through a corner crosses two edges at once and is counted twice, flipping the answer back"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "On a diamond and 625 grid points it was wrong for 17."
     },
     {
       "stage": "post",
       "question": "What does the half-open rule count?",
       "options": [
-        "Every edge",
         "An edge only if one end is strictly above the ray and the other is not, so a corner on the ray belongs to one of the two edges that meet there",
+        "Every edge",
         "Only horizontal edges",
         "Edges to the left"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The half-open test was wrong for 0 of the 625 points."
     },
     {
@@ -68,8 +68,8 @@
       "options": [
         "A positive number",
         "A negative number: the area is positive for anticlockwise corners and negative for clockwise",
-        "Zero",
-        "An error"
+        "An error",
+        "Zero"
       ],
       "correct": 1,
       "explanation": "A 4 by 3 rectangle was 12, and -12 reversed."

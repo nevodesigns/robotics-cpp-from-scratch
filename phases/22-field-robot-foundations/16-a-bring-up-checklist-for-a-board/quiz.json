@@ -6,48 +6,48 @@
       "stage": "pre",
       "question": "Why is the bring-up written at a lower level than the Drive?",
       "options": [
+        "Drive cannot be tested",
         "It is faster",
         "Its job is to find out whether the numbers the higher level will trust are right",
-        "Drive cannot be tested",
         "Habit"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "You cannot check a foundation from above it."
     },
     {
       "stage": "check",
       "question": "The healthy fake passed how many of the checks?",
       "options": [
-        "None",
         "10 of 10",
+        "One",
         "Half",
-        "One"
+        "None"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A board with nothing wrong passes all."
     },
     {
       "stage": "check",
       "question": "A tick count 15 percent off read as how many ticks a metre?",
       "options": [
-        "1200",
-        "1378",
+        "0",
         "100",
-        "0"
+        "1200",
+        "1378"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "1200 times 1.15."
     },
     {
       "stage": "check",
       "question": "Why does a reversed left motor fail three checks?",
       "options": [
-        "It is broken twice",
         "The wheel counts down for a left command and cancels the other in the scale: the checks behind the cause fail with it",
-        "A bug",
-        "Chance"
+        "It is broken twice",
+        "Chance",
+        "A bug"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A consequence is not a second fault."
     },
     {
@@ -55,11 +55,11 @@
       "question": "Why should a failed check say what to do?",
       "options": [
         "Style",
-        "A line that can be acted on saves the search that a bare failure starts",
+        "To be longer",
         "It is required",
-        "To be longer"
+        "A line that can be acted on saves the search that a bare failure starts"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Advice is part of the check."
     },
     {
@@ -68,8 +68,8 @@
       "options": [
         "Alphabet",
         "A reversed motor makes the scale meaningless",
-        "Speed",
-        "No reason"
+        "No reason",
+        "Speed"
       ],
       "correct": 1,
       "explanation": "Order the checks by what depends on what."

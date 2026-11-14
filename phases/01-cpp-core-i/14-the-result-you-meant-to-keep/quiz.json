@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A program opens a stream on a path in a folder that does not exist, writes a line, and carries on. What happens?",
       "options": [
-        "Nothing visible: no exception, the stream sets a failure flag, and every write is silently dropped",
+        "The line is written to the nearest folder that does exist",
         "An exception is thrown at the line that opened the stream",
         "The folder is created, because opening for writing creates what is missing",
-        "The line is written to the nearest folder that does exist"
+        "Nothing visible: no exception, the stream sets a failure flag, and every write is silently dropped"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Measured: no exception, is_open false, good false after the write. The program exits with status 0 having saved nothing, which is why the stream has to be checked."
     },
     {
@@ -20,8 +20,8 @@
       "options": [
         "27 bytes, since nothing was written",
         "0 bytes, because opening for writing empties the file at the open",
-        "27 bytes, but marked as unreadable",
-        "It depends on whether the stream was flushed"
+        "It depends on whether the stream was flushed",
+        "27 bytes, but marked as unreadable"
       ],
       "correct": 1,
       "explanation": "Measured: 0 bytes the moment the stream existed. From that line until the last byte is written there is no old file and no new one, which is why the new contents are written beside the old file instead."
@@ -30,12 +30,12 @@
       "stage": "check",
       "question": "A program writes 1000 rows, 7000 bytes, through a stream and then calls abort(). How much is on disk afterwards, and what changes it?",
       "options": [
-        "All 7000 bytes, since write calls go straight to the disk",
         "0 bytes with plain writes and 7000 with std::endl after each row, because the rows were waiting in the stream's buffer",
+        "All 7000 bytes, since write calls go straight to the disk",
         "Half of them, because the buffer is flushed when it is half full",
         "0 bytes however it is written, because abort discards everything"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The buffer belongs to the process and dies with it. endl flushes after each row, which is right for a log that must survive a crash and costs a write per row. It does nothing for a file that must be replaced whole."
     },
     {
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "Why does save_text write to a temporary file and rename it, instead of writing the destination directly?",
       "options": [
+        "Because std::ofstream cannot open an existing file",
         "Renaming is faster than writing",
         "So the old file is untouched until the new one is complete, and a reader sees the old file or the new one and never half of either",
-        "Because std::ofstream cannot open an existing file",
         "So the file can be written by two programs at once"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The destination is only changed by the rename, which replaces it in one step on Linux and Windows. A failure before that point leaves the old file exactly as it was. It does not make two writers safe, since they would share the temporary name."
     },
     {
       "stage": "post",
       "question": "Why does exact_text start at 15 digits and widen, rather than always writing 17?",
       "options": [
-        "Seventeen digits is not enough for every double",
-        "Fifteen is the most a stream will print",
         "Seventeen is always correct but writes 0.1 as 0.10000000000000001, so it starts at the 15 digits any typed decimal survives and widens only if the value does not read back",
+        "Fifteen is the most a stream will print",
+        "Seventeen digits is not enough for every double",
         "Because 17 digits is slower to write than 15"
       ],
-      "correct": 2,
+      "correct": 0,
       "explanation": "digits10 is 15, so a decimal that long survives being a double. max_digits10 is 17, so a double that long survives being a decimal. Trying 15, 16, 17 gives the shortest text that reads back identically: 2.45 stays 2.45 and 0.1 + 0.2 becomes 0.30000000000000004."
     }
   ]

@@ -6,36 +6,36 @@
       "stage": "pre",
       "question": "What does a pointer actually hold?",
       "options": [
+        "A reference count for the object",
         "The address of some object, that is, where it lives in memory",
         "A copy of the object it refers to",
-        "The size of the object it refers to",
-        "A reference count for the object"
+        "The size of the object it refers to"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "A pointer is a variable holding an address. It says where something is, and nothing about how long it will stay there."
     },
     {
       "stage": "check",
       "question": "In an expression, what does the star in *p mean?",
       "options": [
-        "The value living at the address p holds",
+        "That p may be null",
         "The address of p",
-        "Multiplication by p",
-        "That p may be null"
+        "The value living at the address p holds",
+        "Multiplication by p"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "In a type, the star means pointer to. In an expression it dereferences, giving the object at that address. The same symbol doing two jobs is a genuine wart."
     },
     {
       "stage": "check",
       "question": "Why return nullptr rather than an index of minus one for not found?",
       "options": [
-        "nullptr is a value the language itself understands as nothing, so it needs no convention",
-        "Because indexes cannot be negative",
         "Because pointers are faster than integers",
-        "Because minus one is a valid index in C++"
+        "Because indexes cannot be negative",
+        "Because minus one is a valid index in C++",
+        "nullptr is a value the language itself understands as nothing, so it needs no convention"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Every codebase invents a different sentinel index and somebody eventually forgets to check it. nullptr means nothing found in a way the compiler and the reader both recognise."
     },
     {
@@ -43,8 +43,8 @@
       "question": "Why does the reference guard against a null array before looping?",
       "options": [
         "Reading through a null pointer is undefined behaviour, and a null array with a positive count is a caller mistake",
-        "Because looping over zero elements is a compile error",
         "To make the function faster",
+        "Because looping over zero elements is a compile error",
         "Because the count might overflow"
       ],
       "correct": 0,
@@ -54,12 +54,12 @@
       "stage": "post",
       "question": "What is the one rule that makes pointers safe?",
       "options": [
+        "A pointer must always be freed",
         "A pointer is only as valid as the thing it points at",
-        "A pointer must always be const",
         "A pointer must never be null",
-        "A pointer must always be freed"
+        "A pointer must always be const"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "An address keeps nothing alive. Whenever you hold a pointer you must be able to say what keeps its target alive and for how long."
     },
     {

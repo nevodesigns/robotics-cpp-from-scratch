@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "A ten bit converter reads 1.2345 V a thousand times with no noise on the input, and the readings are averaged. How much better is the result than one reading?",
       "options": [
-        "About thirty times, a square root of a thousand",
+        "A thousand times",
         "Not at all: every reading is the same code, so their mean is that code's value",
         "Ten times",
-        "A thousand times"
+        "About thirty times, a square root of a thousand"
       ],
       "correct": 1,
       "explanation": "The rms error was 0.2817 of a step for one reading, for the average of 100 and for the average of 1000."
@@ -18,36 +18,36 @@
       "stage": "check",
       "question": "Why is the range divided by 2^bits and not by 2^bits - 1?",
       "options": [
-        "A convention with no effect",
-        "The converter has 2^bits steps, so the highest code is 2^bits - 1 and the top of the range is the top edge of the last step; dividing by one fewer makes the steps too big and every reading wrong",
         "It saves a division",
-        "The top code is reserved"
+        "A convention with no effect",
+        "The top code is reserved",
+        "The converter has 2^bits steps, so the highest code is 2^bits - 1 and the top of the range is the top edge of the last step; dividing by one fewer makes the steps too big and every reading wrong"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Three bits over 0 to 8 V is eight steps of 1 V. Divided by seven the code for 1.0 V is 0 where it should be 1."
     },
     {
       "stage": "check",
       "question": "A single reading is wrong by 0.2817 of a step rms. What predicts about that number?",
       "options": [
-        "A step over 2",
         "A step over the square root of twelve, which is the standard deviation of an error spread evenly over one step",
         "A step over 4",
+        "A step over 2",
         "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "0.2887 predicted, 0.2817 measured. The error is no more than half a step either way, and uniformly spread."
     },
     {
       "stage": "check",
       "question": "With noise of one step added to the input, the average of 1000 readings had an rms error of 0.0348 step. Why does noise make averaging work?",
       "options": [
-        "It cancels the converter's error",
-        "It moves the input across the boundaries between codes from reading to reading, so the fraction of readings in each code follows where the input really is within the step",
         "It makes the converter more accurate",
-        "It increases the number of bits"
+        "It increases the number of bits",
+        "It moves the input across the boundaries between codes from reading to reading, so the fraction of readings in each code follows where the input really is within the step",
+        "It cancels the converter's error"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Without anything moving the input the same code comes every time. With noise the average carries the information below one step."
     },
     {
@@ -55,11 +55,11 @@
       "question": "A signal moves by a third of a step. With no noise the average of 1000 readings noticed it 31.17 percent of the time. Why only then?",
       "options": [
         "The converter is slow",
-        "It is seen only when the change happens to carry the voltage across a boundary between codes, which is a third of the time, and it then shows as a whole step",
         "The average hides it",
-        "Randomly"
+        "Randomly",
+        "It is seen only when the change happens to carry the voltage across a boundary between codes, which is a third of the time, and it then shows as a whole step"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A quieter sensor is worse at seeing a small change than a noisier one. With a step of noise it was noticed 100 percent of the time."
     },
     {
@@ -68,8 +68,8 @@
       "options": [
         "Nothing",
         "The single reading's accuracy: one reading is now wrong by about the noise and not by 0.29 of a step, and it buys resolution only in an average, so it needs a signal that holds still while it is averaged",
-        "Extra bits",
-        "A faster converter"
+        "A faster converter",
+        "Extra bits"
       ],
       "correct": 1,
       "explanation": "At noise of 1 step a single reading was wrong by 1.0489. It is a trade, not a free gain."

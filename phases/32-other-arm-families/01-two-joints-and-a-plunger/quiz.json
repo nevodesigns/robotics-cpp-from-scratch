@@ -6,33 +6,33 @@
       "stage": "pre",
       "question": "Why are a SCARA's first two joints cheap to hold up?",
       "options": [
-        "They are small",
         "Their axes are vertical, so gravity puts no torque on them",
+        "They are small",
         "They are slow",
         "Magic"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "0.0 N m against 7.85 N m."
     },
     {
       "stage": "check",
       "question": "How many elbow solutions has a point within reach?",
       "options": [
-        "One",
-        "Two, plus or minus the arccosine",
         "Four",
-        "Eight"
+        "Eight",
+        "Two, plus or minus the arccosine",
+        "One"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Left and right."
     },
     {
       "stage": "check",
       "question": "The determinant when straight was:",
       "options": [
-        "0.0506",
-        "0.0000",
         "1",
+        "0.0000",
+        "0.0506",
         "Infinite"
       ],
       "correct": 1,
@@ -54,12 +54,12 @@
       "stage": "post",
       "question": "What task suits a SCARA?",
       "options": [
-        "A tilted weld",
-        "Pick and place on a flat table, from above",
         "Reaching under a car",
-        "Anything"
+        "Anything",
+        "A tilted weld",
+        "Pick and place on a flat table, from above"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A flat job."
     },
     {
@@ -67,11 +67,11 @@
       "question": "What does a SCARA not do?",
       "options": [
         "Move in a plane",
-        "Tilt its tool",
         "Move vertically",
+        "Tilt its tool",
         "Roll"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "No tilt axes."
     }
   ]

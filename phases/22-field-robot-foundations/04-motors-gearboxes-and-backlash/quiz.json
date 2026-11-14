@@ -6,57 +6,57 @@
       "stage": "pre",
       "question": "Which data sheet numbers are enough to build a brushed motor model?",
       "options": [
+        "Only the price",
         "None",
         "Voltage, no load speed, stall torque and the gear ratio",
-        "Only the price",
         "Only the weight"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "From them come the back voltage constant and the resistance."
     },
     {
       "stage": "check",
       "question": "At half the stall torque the output ran at:",
       "options": [
-        "The full speed",
-        "175.0 rpm, about half",
         "Zero",
-        "Twice the speed"
+        "Twice the speed",
+        "The full speed",
+        "175.0 rpm, about half"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The torque-speed line is straight."
     },
     {
       "stage": "check",
       "question": "The formula for the time constant gave 0.246 s. The simulated step took:",
       "options": [
+        "1 s",
         "0 s",
         "0.246 s",
-        "10 s",
-        "1 s"
+        "10 s"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Simulation and algebra must agree."
     },
     {
       "stage": "check",
       "question": "After a reversal the output did not move until the gear side had crossed:",
       "options": [
-        "Nothing",
         "2.02 degrees, the whole gap",
+        "Nothing",
         "90 degrees",
         "1 degree"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Backlash is lost motion."
     },
     {
       "stage": "post",
       "question": "Why does an encoder on the motor not see backlash?",
       "options": [
-        "It is broken",
-        "It measures the gear side, and the gap is between that and the output",
         "It is too slow",
+        "It measures the gear side, and the gap is between that and the output",
+        "It is broken",
         "It sees only speed"
       ],
       "correct": 1,
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why does a heavy load feel light behind a gearbox?",
       "options": [
-        "It is lighter",
         "Its inertia is divided by the square of the ratio at the motor",
         "Gears are lubricated",
-        "It is not"
+        "It is not",
+        "It is lighter"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Reflected inertia is the load over the ratio squared."
     }
   ]

@@ -6,33 +6,33 @@
       "stage": "pre",
       "question": "Why is the computer part of the energy of a route?",
       "options": [
-        "It is not",
         "It draws power all the time, for as long as the route takes",
-        "It is heavy",
-        "It heats the motors"
+        "It heats the motors",
+        "It is not",
+        "It is heavy"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "79 percent of a metre of tarmac."
     },
     {
       "stage": "check",
       "question": "A metre of sand cost, against a metre of tarmac:",
       "options": [
-        "10.1 J against 22.0 J",
-        "22.0 J against 10.1 J",
         "The same",
-        "0"
+        "10.1 J against 22.0 J",
+        "0",
+        "22.0 J against 10.1 J"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Work, over the efficiency, plus the computer."
     },
     {
       "stage": "check",
       "question": "The vehicle that took the way home as flat turned back at 16.8 m and was:",
       "options": [
-        "Home with 71 J spare",
-        "25 J short of getting home",
         "Exactly home",
+        "25 J short of getting home",
+        "Home with 71 J spare",
         "Stuck at the start"
       ],
       "correct": 1,
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "A slope of 20 degrees reached the motor's limit in:",
       "options": [
-        "Never",
-        "62 s",
         "1 s",
-        "1 hour"
+        "1 hour",
+        "62 s",
+        "Never"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A slope of 14 degrees could be held for ever."
     },
     {
@@ -55,20 +55,20 @@
       "question": "What does the closed form of the time to the limit say when the steady rise is under the limit?",
       "options": [
         "Zero",
+        "An error",
         "Never: it settles below the limit",
-        "Infinity of heat",
-        "An error"
+        "Infinity of heat"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "-Rth Cth ln(1 - limit/steady) has no answer."
     },
     {
       "stage": "post",
       "question": "Why does speed matter twice for the energy of a route?",
       "options": [
-        "It does not",
-        "The work is the same and the computer runs for longer at a lower speed",
         "Drag",
+        "The work is the same and the computer runs for longer at a lower speed",
+        "It does not",
         "Weight"
       ],
       "correct": 1,

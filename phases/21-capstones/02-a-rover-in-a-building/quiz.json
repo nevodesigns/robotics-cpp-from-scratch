@@ -7,23 +7,23 @@
       "question": "The supervisor was on and the limiter off, and somebody stepped into the path. What happened?",
       "options": [
         "It stopped the rover",
+        "It slowed down",
         "Nothing: the supervisor decides from what it is told, and with no limiter nothing told it about the person (144 ticks in contact)",
-        "The fence stopped it",
-        "It slowed down"
+        "The fence stopped it"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A supervisor is not a sensor."
     },
     {
       "stage": "check",
       "question": "How long was the rover with neither the limiter nor the supervisor in contact with the person?",
       "options": [
-        "Not at all",
         "144 ticks of 0.05 s, 7.2 seconds, pushing against them until they left",
-        "1 tick",
-        "The whole run"
+        "The whole run",
+        "Not at all",
+        "1 tick"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "And then it reached the goal, which is the worst way for a test to pass."
     },
     {
@@ -31,23 +31,23 @@
       "question": "Why did a rover that never forgets wait for 120 s at a doorway that had been clear since 20 s?",
       "options": [
         "The planner failed",
-        "It was waiting out of sight of the doorway, so nothing on the map could change: a belief nobody can check does not go away",
         "The person came back",
-        "The door closed"
+        "The door closed",
+        "It was waiting out of sight of the doorway, so nothing on the map could change: a belief nobody can check does not go away"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Forgetting lets it go and look again."
     },
     {
       "stage": "check",
       "question": "The link was lost at 5 s and came back at 9 s. Why did the rover stay stopped?",
       "options": [
+        "The sensor",
         "A bug",
-        "The supervisor latches, and a reset is a person's decision: cause link, still at the end",
         "The planner",
-        "The sensor"
+        "The supervisor latches, and a reset is a person's decision: cause link, still at the end"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "With no supervisor it drove on through."
     },
     {
@@ -55,11 +55,11 @@
       "question": "What is the difference between the limiter alone and the supervisor with it, when the sensor dies?",
       "options": [
         "None",
+        "The supervisor is slower",
         "Both stop, but the limiter alone does it with no cause on record and would restart when the sensor came back; the supervisor gives a cause, a latch and a reset",
-        "The limiter is faster",
-        "The supervisor is slower"
+        "The limiter is faster"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Both stopped after 2.4 m."
     },
     {

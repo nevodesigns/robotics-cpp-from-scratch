@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "How does a foot with no camera for the ground deal with a step down?",
       "options": [
-        "It cannot",
         "It lands where expected and keeps reaching down until the contact sense says it is down",
         "It jumps",
-        "It waits"
+        "It waits",
+        "It cannot"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A little at a time."
     },
     {
       "stage": "check",
       "question": "A step down of 5 cm took an extension of:",
       "options": [
-        "0.000 m",
         "0.060 m, in 0.24 s",
+        "0.000 m",
         "0 m",
         "1 m"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "At 0.25 m/s."
     },
     {
@@ -31,45 +31,45 @@
       "question": "What did a hole deeper than the leg may reach give?",
       "options": [
         "A normal landing",
-        "A report of a hole after 0.40 s",
+        "A bump",
         "A fall",
-        "A bump"
+        "A report of a hole after 0.40 s"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Do not put weight on that leg."
     },
     {
       "stage": "check",
       "question": "Why is the ground estimate moved by a gain?",
       "options": [
+        "It is not",
         "To save time",
         "One stone should not lift the body, while a real change is followed",
-        "To be slow",
-        "It is not"
+        "To be slow"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "6.0 mm after one landing."
     },
     {
       "stage": "post",
       "question": "What must a swing do when the foot touches early?",
       "options": [
+        "Speed up",
         "Go on",
         "Stop, or the foot pushes into the bump",
-        "Speed up",
         "Reverse"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The contact sense of 34-07."
     },
     {
       "stage": "post",
       "question": "What is not covered?",
       "options": [
-        "The search",
+        "The gain",
         "Looking ahead, soft ground and the slip of the foot",
         "The hole",
-        "The gain"
+        "The search"
       ],
       "correct": 1,
       "explanation": "A camera would let the robot choose the foot place."

@@ -6,34 +6,34 @@
       "stage": "pre",
       "question": "What does a computer send to a smart serial servo?",
       "options": [
-        "A torque",
-        "A position goal, to a small controller of the servo's own",
         "A current",
-        "A voltage"
+        "A voltage",
+        "A position goal, to a small controller of the servo's own",
+        "A torque"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Over a shared wire."
     },
     {
       "stage": "check",
       "question": "A step of 4096 to a turn is:",
       "options": [
-        "1.07 rad",
         "0.00153 rad, which is 1.07 mm at 0.7 m",
+        "0",
         "1 degree",
-        "0"
+        "1.07 rad"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The error is at most half a step."
     },
     {
       "stage": "check",
       "question": "The bus took how long for six servos at 1 Mbit/s and at 115 200 bit/s?",
       "options": [
-        "14.3 ms and 2.98 ms",
+        "1 s each",
         "2.98 ms and 14.3 ms",
         "The same",
-        "1 s each"
+        "14.3 ms and 2.98 ms"
       ],
       "correct": 1,
       "explanation": "Ten bit times to a byte, plus each return delay."
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "A load of 2 N m drooped the joint by:",
       "options": [
-        "0",
-        "0.133 rad: load over stiffness; a shifted goal left it 0.0002 rad off",
         "1 rad",
-        "0.00153 rad"
+        "0.00153 rad",
+        "0",
+        "0.133 rad: load over stiffness; a shifted goal left it 0.0002 rad off"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The servo's own error is the droop."
     },
     {
@@ -55,11 +55,11 @@
       "question": "Why is the lag larger at 20 Hz than at 100 Hz?",
       "options": [
         "It is not",
+        "Heat",
         "The goals arrive as a staircase and the spring follows it late: 97 ms against 77 ms",
-        "Gravity",
-        "Heat"
+        "Gravity"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Part of the delay in the loop."
     },
     {
@@ -67,11 +67,11 @@
       "question": "What limits how fast a large step is covered?",
       "options": [
         "The bus",
-        "The servo's speed limit: 0.39 s for 1 rad at 3 rad/s",
         "The load only",
-        "Rounding"
+        "Rounding",
+        "The servo's speed limit: 0.39 s for 1 rad at 3 rad/s"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It is not followed at once."
     }
   ]

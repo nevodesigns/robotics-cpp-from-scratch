@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A tool finds 256 problems and ends with return 256. What does a shell see?",
       "options": [
-        "0, which means success, because only the low eight bits of the number survive",
-        "256, since main returns int and an int holds far more than that",
         "1, because any non-zero return is normalised to 1",
-        "255, the largest status a program may return"
+        "255, the largest status a program may return",
+        "0, which means success, because only the low eight bits of the number survive",
+        "256, since main returns int and an int holds far more than that"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Measured in this lesson: 256 arrived as 0 and 257 as 1. This is lesson 00-04's truncation in a place nobody looks for it, and no warning is available because it happens when the process ends rather than in any expression the compiler can see."
     },
     {
@@ -19,9 +19,9 @@
       "question": "Why does rc::core::status_for collapse a count of problems into one of two values instead of returning the count?",
       "options": [
         "A shell asks one question, whether to carry on, and a count passed through would be truncated at every multiple of 256",
-        "Because counting problems is unreliable",
         "To keep the status under 128, which is reserved for signals",
-        "Because returning large values from main is undefined behaviour"
+        "Because returning large values from main is undefined behaviour",
+        "Because counting problems is unreliable"
       ],
       "correct": 0,
       "explanation": "One problem and a thousand problems are the same answer to that question. The quantity is interesting to a person, so it belongs in a message on stderr where it is not truncated."
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "Four lines were printed before a deliberate crash, into a pipe: printf, cout, cerr, then cout again. Three arrived and the last was lost. Why did the first two survive?",
       "options": [
-        "The write to std::cerr flushed them, because std::cerr is tied to std::cout, so the unbuffered line dragged the waiting ones out with it",
-        "printf and the first cout had already filled the buffer",
         "Only the final write of a program is ever lost",
-        "The crash handler flushed everything written before it"
+        "The crash handler flushed everything written before it",
+        "The write to std::cerr flushed them, because std::cerr is tied to std::cout, so the unbuffered line dragged the waiting ones out with it",
+        "printf and the first cout had already filled the buffer"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "So which diagnostics you see depends on where the unbuffered one happened to be, and the line you never saw is not the line it stopped at. With no cerr at all, both buffered lines were lost."
     },
     {
       "stage": "check",
       "question": "Why is std::cerr the right place for diagnostics?",
       "options": [
+        "It is the only stream that works before main begins",
         "It is not buffered, so it is the only output you still have when the program dies",
-        "It is faster than std::cout for short messages",
         "It cannot be redirected, so the user always sees it",
-        "It is the only stream that works before main begins"
+        "It is faster than std::cout for short messages"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "Redirection hygiene is the reason usually given and it is the less important one. stdout is block buffered when it is not a terminal, which is how it runs under every script and build server, and a program that crashes loses whatever is still in that buffer."
     },
     {
       "stage": "post",
       "question": "return std::cerr << \"failed\"; does not compile. What is the deeper problem with trying to report failure through printing alone?",
       "options": [
-        "A failed stream does not throw and does not say so; it sets a flag and silently discards, so a program can print nothing and still end with 0",
         "Streams are too slow to be checked on every write",
+        "The stream's return value is the number of characters written, which is the wrong number",
         "std::cerr is not available in a release build",
-        "The stream's return value is the number of characters written, which is the wrong number"
+        "A failed stream does not throw and does not say so; it sets a flag and silently discards, so a program can print nothing and still end with 0"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Each << hands back the stream so the next one has something to attach to, not a result. Two lines, always: the message for the human, the number for the machine."
     },
     {
       "stage": "post",
       "question": "A program ends with status 139. What does that most likely mean?",
       "options": [
-        "It did not choose to stop: 139 is 128 plus SIGSEGV's 11, so it died by signal",
-        "It returned 139 deliberately to signal a specific error",
         "It ran out of memory, which is the conventional meaning of 139",
-        "It succeeded, since 139 is above the failure range"
+        "It succeeded, since 139 is above the failure range",
+        "It returned 139 deliberately to signal a specific error",
+        "It did not choose to stop: 139 is 128 plus SIGSEGV's 11, so it died by signal"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Statuses above 128 are not yours to use. A tool returning 139 on purpose is indistinguishable from one that crashed, which is also why the exercise gate in this repository checks for exit 1 specifically rather than just non-zero."
     }
   ]

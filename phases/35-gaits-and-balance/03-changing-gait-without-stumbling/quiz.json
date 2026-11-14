@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "What is a gait, as the controller sees it?",
       "options": [
-        "A speed",
         "A table of phase offsets, one for each leg",
+        "A sound",
         "A leg length",
-        "A sound"
+        "A speed"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "34-04's phase."
     },
     {
       "stage": "check",
       "question": "Why is a phase difference wrapped before it is limited?",
       "options": [
-        "Tradition",
-        "0.95 and 0.05 are 0.1 apart on the circle, not 0.9",
         "It is faster",
-        "It is not"
+        "It is not",
+        "0.95 and 0.05 are 0.1 apart on the circle, not 0.9",
+        "Tradition"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The offset goes forward through the wrap."
     },
     {
@@ -31,45 +31,45 @@
       "question": "The abrupt change jumped a leg's phase by:",
       "options": [
         "0.0002",
-        "0.250 of a cycle in one tick",
+        "10 cycles",
         "0",
-        "10 cycles"
+        "0.250 of a cycle in one tick"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The bounded rate moved it 0.0002 a tick."
     },
     {
       "stage": "check",
       "question": "A speed hovering at 0.5 m/s flapped how many times with one switch speed?",
       "options": [
-        "0",
         "175",
+        "1",
         "0",
-        "1"
+        "0"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "With the gap: 0."
     },
     {
       "stage": "post",
       "question": "Why does the count of feet down not show the danger of an abrupt change?",
       "options": [
-        "It does",
-        "Both changes kept 2 or more feet down; the harm is the phase jump",
         "It is wrong",
-        "No feet are counted"
+        "It does",
+        "No feet are counted",
+        "Both changes kept 2 or more feet down; the harm is the phase jump"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A leg cannot follow a jump."
     },
     {
       "stage": "post",
       "question": "What is held fixed in this lesson?",
       "options": [
-        "The offsets",
+        "The tables",
         "The duty and period during a change",
-        "The speed",
-        "The tables"
+        "The offsets",
+        "The speed"
       ],
       "correct": 1,
       "explanation": "They too would be moved at a bounded rate."

@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "Three plain widgets in a vertical layout in a window 300 high. How tall is each?",
       "options": [
-        "Whatever their content needs",
         "100: the layout shares the room equally",
-        "300",
-        "30"
+        "30",
+        "Whatever their content needs",
+        "300"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "They were 100, 100 and 100."
     },
     {
       "stage": "check",
       "question": "What gives the plot the rest of the room?",
       "options": [
-        "Making it the last widget",
-        "A stretch factor on it, with the others fixed, and an Expanding size policy",
         "A large font",
-        "Nothing"
+        "Making it the last widget",
+        "Nothing",
+        "A stretch factor on it, with the others fixed, and an Expanding size policy"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The plot was 250 at 300 and 450 at 500."
     },
     {
@@ -31,11 +31,11 @@
       "question": "Why does the window refuse to be 60 by 40?",
       "options": [
         "The platform",
-        "The layout reports the least the widgets need, and sets that as the window minimum",
         "Qt rounds up",
-        "A bug"
+        "A bug",
+        "The layout reports the least the widgets need, and sets that as the window minimum"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It stayed 120 by 130."
     },
     {
@@ -43,21 +43,21 @@
       "question": "What is the smallest height of this panel?",
       "options": [
         "80",
+        "300",
         "130: toolbar 30, plot 80, status bar 20",
-        "100",
-        "300"
+        "100"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The minimumSizeHint was 120 by 130."
     },
     {
       "stage": "post",
       "question": "The status bar is hidden. What happens to its 20 pixels?",
       "options": [
-        "They stay empty",
+        "The window shrinks",
         "The plot takes them: 250 became 270",
         "The toolbar takes them",
-        "The window shrinks"
+        "They stay empty"
       ],
       "correct": 1,
       "explanation": "A hidden widget takes no room in a layout."

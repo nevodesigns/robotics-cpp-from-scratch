@@ -6,46 +6,46 @@
       "stage": "pre",
       "question": "A vendor gives a Denavit-Hartenberg table. What else must you know to use it?",
       "options": [
-        "Nothing",
         "Which convention it was written for: standard and modified are different arms for the same numbers",
-        "The weight of the arm",
-        "The motor type"
+        "Nothing",
+        "The motor type",
+        "The weight of the arm"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "One table gave tools 0.626211 m apart."
     },
     {
       "stage": "check",
       "question": "What is the standard convention for one row?",
       "options": [
-        "Rx Tx Rz Tz",
-        "Rz Tz Tx Rx",
         "Tx Rx Tz Rz",
-        "Rz Rx Tz Tx"
+        "Rz Rx Tz Tx",
+        "Rz Tz Tx Rx",
+        "Rx Tx Rz Tz"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The modified is Rx Tx Rz Tz."
     },
     {
       "stage": "check",
       "question": "A joint slides. Where does its variable go?",
       "options": [
-        "Into theta",
         "Into d: it is added to the offset along z",
+        "Into theta",
         "Into a",
         "Into alpha"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "0.2 and 0.5 gave z = 0.7."
     },
     {
       "stage": "check",
       "question": "Why does a SCARA table have a twist of pi on its second row?",
       "options": [
-        "A mistake",
+        "For the elbow",
         "It flips z, so that the slide of the third joint goes down",
         "To shorten a link",
-        "For the elbow"
+        "A mistake"
       ],
       "correct": 1,
       "explanation": "z = d1 less the slide."
@@ -55,23 +55,23 @@
       "question": "A flat table with no twists and no offsets, in the two conventions. Same arm?",
       "options": [
         "Yes",
+        "Only at zero",
         "No: 0.244589 m apart for these angles",
-        "Only for two joints",
-        "Only at zero"
+        "Only for two joints"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The modified convention puts the length before the angle."
     },
     {
       "stage": "post",
       "question": "The joint variables are all zero and there are no twists or offsets. Do the conventions agree?",
       "options": [
-        "No",
-        "Yes: the links are laid end to end along x",
         "Only the standard",
-        "Never"
+        "Never",
+        "No",
+        "Yes: the links are laid end to end along x"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The distance was under 1e-12."
     }
   ]

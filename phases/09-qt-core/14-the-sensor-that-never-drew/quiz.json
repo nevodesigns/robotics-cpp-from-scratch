@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "A sensor thread wants the interface to show a reading. What should it call?",
       "options": [
-        "The label's setText, directly",
         "Only the function that is safe from any thread, which hands the value to the interface's own thread",
         "processEvents()",
-        "Nothing: a thread cannot reach the interface"
+        "Nothing: a thread cannot reach the interface",
+        "The label's setText, directly"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The interface's objects are not protected against another thread."
     },
     {
       "stage": "check",
       "question": "What does requestInterruption() do?",
       "options": [
-        "Stops the thread at once",
-        "Sets a flag the thread must check: it does not stop anything by itself",
         "Waits for the thread",
-        "Destroys the thread"
+        "Destroys the thread",
+        "Stops the thread at once",
+        "Sets a flag the thread must check: it does not stop anything by itself"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Only wait() says the thread has finished."
     },
     {
@@ -31,11 +31,11 @@
       "question": "Why does the destructor call stop()?",
       "options": [
         "To print a message",
-        "A thread destroyed while running is a fatal error in Qt, and one that outlives the object it writes to is a use after free",
+        "Because QThread requires it to be public",
         "To save the readings",
-        "Because QThread requires it to be public"
+        "A thread destroyed while running is a fatal error in Qt, and one that outlives the object it writes to is a use after free"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "20 bridges destroyed while running shut down cleanly because of it."
     },
     {
@@ -43,21 +43,21 @@
       "question": "What bounds the sensor's rate in this lesson?",
       "options": [
         "The event loop",
+        "Nothing",
         "A sleep of one period after each reading, so it cannot run faster, though it can run slower",
-        "The mutex",
-        "Nothing"
+        "The mutex"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The rate is a ceiling and not a grid."
     },
     {
       "stage": "post",
       "question": "Readings produced were 100, updates 12. What does the skipped total have to be?",
       "options": [
-        "0",
+        "Unknown",
         "88: every reading is an update or counted as replaced",
         "12",
-        "Unknown"
+        "0"
       ],
       "correct": 1,
       "explanation": "Updates plus the sum of skipped equal the readings produced."
@@ -66,10 +66,10 @@
       "stage": "post",
       "question": "The rate must hold, not just be a ceiling. Where do you look?",
       "options": [
-        "A longer sleep",
+        "A second thread",
         "The pacer of lesson 07-08 or the ticker of lesson 09-11, which keep a grid",
         "A faster CPU",
-        "A second thread"
+        "A longer sleep"
       ],
       "correct": 1,
       "explanation": "Both aim at a deadline on a grid and report what they missed."

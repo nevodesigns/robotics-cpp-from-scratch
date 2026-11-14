@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "A robot fits y = m x + k to the points of a wall that runs straight ahead of it. What happens?",
       "options": [
-        "A good fit",
-        "A vertical line has no slope, so the sums divide by zero and there is no answer; the form a x + b y + c = 0 can describe it",
         "A fit with slope zero",
-        "A fit at 45 degrees"
+        "A vertical line has no slope, so the sums divide by zero and there is no answer; the form a x + b y + c = 0 can describe it",
+        "A fit at 45 degrees",
+        "A good fit"
       ],
       "correct": 1,
       "explanation": "Points on x = 3 gave a valid line at 90.0 degrees from fit_line, and no answer from the vertical distance fit."
@@ -18,60 +18,60 @@
       "stage": "check",
       "question": "Why is a x + b y + c useful when a and b are a unit vector?",
       "options": [
-        "It is shorter",
-        "It is the signed distance from the line to the point (x, y), which is what a fit should make small",
         "It is faster",
-        "It is always positive"
+        "It is always positive",
+        "It is the signed distance from the line to the point (x, y), which is what a fit should make small",
+        "It is shorter"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "distance_to_line is its absolute value."
     },
     {
       "stage": "check",
       "question": "A line has an angle of 179 degrees in one description and 1 in another. How far apart are they?",
       "options": [
-        "178",
         "2: a line has no direction, so the angle is taken modulo 180 and compared the smaller way round",
         "90",
-        "0"
+        "0",
+        "178"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The suite checked that 179 and 1 are 2 degrees apart."
     },
     {
       "stage": "check",
       "question": "100 points on a line and 30 wrong ones in a cluster. What was the mean error of the angle fitting everything, and with the random-sample fit?",
       "options": [
-        "20.69 and 0.03 degrees",
         "0.03 and 20.69",
+        "20.69 and 0.03 degrees",
         "2 and 2",
         "5 and 0.5"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "A least squares fit is pulled by a far point more than by a near one."
     },
     {
       "stage": "post",
       "question": "How does the random-sample fit choose its line?",
       "options": [
+        "It drops the farthest point",
         "It averages all points",
-        "It tries many lines through two random points, keeps the one most points are within the threshold of, and refits all those points",
         "It sorts the points",
-        "It drops the farthest point"
+        "It tries many lines through two random points, keeps the one most points are within the threshold of, and refits all those points"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The final answer uses everything that agreed, not just the two that chose it."
     },
     {
       "stage": "post",
       "question": "When can the random-sample fit fail?",
       "options": [
+        "When the points are exact",
         "Never",
         "When more than about half the points are wrong, or the threshold does not suit the sensor's noise",
-        "When the line is horizontal",
-        "When the points are exact"
+        "When the line is horizontal"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A threshold too large keeps the chair."
     }
   ]

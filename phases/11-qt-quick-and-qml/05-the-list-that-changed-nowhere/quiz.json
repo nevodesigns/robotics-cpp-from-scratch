@@ -6,9 +6,9 @@
       "stage": "pre",
       "question": "JavaScript pushes onto a QVariantList property. What does C++ see?",
       "options": [
-        "The new element",
-        "Nothing: the push went to a copy, and no signal was emitted",
         "An exception",
+        "Nothing: the push went to a copy, and no signal was emitted",
+        "The new element",
         "A reset"
       ],
       "correct": 1,
@@ -18,24 +18,24 @@
       "stage": "check",
       "question": "Does the same push onto a QStringList property reach C++?",
       "options": [
-        "Never",
         "On Qt 6.2 it did: a sequence type is a reference and is written back",
-        "Only with a signal",
-        "Only in C++"
+        "Never",
+        "Only in C++",
+        "Only with a signal"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The QStringList had 3, with 1 changed signal."
     },
     {
       "stage": "check",
       "question": "A model adds to its vector and does not call beginInsertRows. What does a Repeater show?",
       "options": [
+        "An error",
         "The new row",
         "The old rows: it was never told",
-        "An error",
         "Nothing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The silent model had 2 rows and its view 1 item."
     },
     {
@@ -43,35 +43,35 @@
       "question": "What does begin and end around a change tell a view?",
       "options": [
         "That a mutex is held",
-        "Which rows are new, so that it creates items for exactly those",
+        "To quit",
         "To repaint",
-        "To quit"
+        "Which rows are new, so that it creates items for exactly those"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Three appends were rows 0-0, 1-1 and 2-2."
     },
     {
       "stage": "post",
       "question": "A delegate wants to read the value of its row. What is needed?",
       "options": [
+        "A signal",
         "A role in roleNames, named value",
-        "The row number",
         "A property on the model",
-        "A signal"
+        "The row number"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The delegate read 20.5 through the name value."
     },
     {
       "stage": "post",
       "question": "What does clear emit?",
       "options": [
-        "One rowsRemoved for each row",
-        "One modelReset",
         "Nothing",
-        "dataChanged"
+        "dataChanged",
+        "One modelReset",
+        "One rowsRemoved for each row"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "clear was 1 reset and an empty Repeater."
     }
   ]

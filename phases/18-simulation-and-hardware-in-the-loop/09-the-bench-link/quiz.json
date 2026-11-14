@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "A plant emulator is sent one command of 6 and then nothing for a second. What should it do?",
       "options": [
-        "Hold the command: that is what a motor driver does",
         "Hold it for a moment and then act on zero: with no watchdog it ran at speed 12 to position 10.920, with one it stopped at 0.720",
-        "Stop at once",
-        "Ask for another"
+        "Ask for another",
+        "Hold the command: that is what a motor driver does",
+        "Stop at once"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A motor left running for a controller that has gone quiet is the dangerous way to fail."
     },
     {
       "stage": "check",
       "question": "Commands 2 and then 1 arrive, in that order. What does the emulator do with 1?",
       "options": [
-        "Acts on it",
-        "Ignores it and counts it: it was sent before 2 and was overtaken, and acting on it would undo the newest decision",
         "Queues it",
-        "Averages them"
+        "Ignores it and counts it: it was sent before 2 and was overtaken, and acting on it would undo the newest decision",
+        "Averages them",
+        "Acts on it"
       ],
       "correct": 1,
       "explanation": "The plant used command 2."
@@ -42,24 +42,24 @@
       "stage": "check",
       "question": "Measurements with ticks 5, 7, 6, 7 reach the controller. What is kept?",
       "options": [
-        "All four",
-        "5 and 7: 6 was overtaken and the second 7 was a repeat, so 2 were refused",
+        "Only 5",
         "Only 7",
-        "Only 5"
+        "5 and 7: 6 was overtaken and the second 7 was a repeat, so 2 were refused",
+        "All four"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The controller keeps the newest by the emulator's tick."
     },
     {
       "stage": "post",
       "question": "At 40 percent loss each way the loop still settled. Why?",
       "options": [
-        "The link was good",
         "Each command is built from the latest measurement and a lost one is replaced by the next: 115 of 300 ticks held a measurement that was not new and the error was still under a thousandth",
-        "The plant is slow",
-        "Loss does not matter"
+        "Loss does not matter",
+        "The link was good",
+        "The plant is slow"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A stream that supersedes itself does not need reliable delivery."
     },
     {
@@ -67,11 +67,11 @@
       "question": "Frames overtook each other 69 times. How much did a controller that took each as it arrived suffer?",
       "options": [
         "A lot",
-        "Little in this loop, 0.1611 against 0.1604, and acted on information 2.42 ticks old against 2.17: the harm would show in a velocity estimate more than in a proportional gain",
+        "It failed",
         "Nothing at all",
-        "It failed"
+        "Little in this loop, 0.1611 against 0.1604, and acted on information 2.42 ticks old against 2.17: the harm would show in a velocity estimate more than in a proportional gain"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The age of the information is the cost."
     }
   ]

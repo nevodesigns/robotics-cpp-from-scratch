@@ -6,48 +6,48 @@
       "stage": "pre",
       "question": "What does an interface not say?",
       "options": [
-        "Which functions exist",
         "What happens when they are called",
+        "Their arguments",
         "Their names",
-        "Their arguments"
+        "Which functions exist"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "That is the contract."
     },
     {
       "stage": "check",
       "question": "How many promises did the fake of 22-01 break once fixed?",
       "options": [
-        "0",
         "3",
         "11",
+        "0",
         "6"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "A contract test is passed or it is not."
     },
     {
       "stage": "check",
       "question": "What did std::min(limit, NaN) return?",
       "options": [
-        "NaN",
         "The limit, so a NaN became full speed",
-        "Zero",
-        "An error"
+        "NaN",
+        "An error",
+        "Zero"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "NaN is not less than anything."
     },
     {
       "stage": "check",
       "question": "Why does the contract make a fresh drive for each promise?",
       "options": [
-        "To be slow",
-        "So one promise's state cannot hide or cause another's failure",
+        "No reason",
         "Memory",
-        "No reason"
+        "To be slow",
+        "So one promise's state cannot hide or cause another's failure"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Independence."
     },
     {
@@ -67,11 +67,11 @@
       "question": "What is the use of passing the expected limits to the contract?",
       "options": [
         "None",
-        "The same function can judge a toy base and a heavy one",
         "Speed",
+        "The same function can judge a toy base and a heavy one",
         "It is required by C++"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Expectations belong to the drive, promises to the interface."
     }
   ]

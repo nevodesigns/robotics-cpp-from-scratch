@@ -20,8 +20,8 @@
       "options": [
         "The type of value the function hands back",
         "The number of arguments the function takes",
-        "The amount of memory the function is allowed to use",
-        "That the function can only be called with whole numbers"
+        "That the function can only be called with whole numbers",
+        "The amount of memory the function is allowed to use"
       ],
       "correct": 0,
       "explanation": "The type written before the function name is the type of its return value. The parameter types are the ones inside the parentheses."
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "Why does the worked solution handle 3000 and 4200 before doing any arithmetic?",
       "options": [
-        "So the rest of the function can never produce a value outside 0 to 100",
-        "Because arithmetic is slower than comparison",
         "Because C++ requires every function to start with an if statement",
-        "To avoid dividing by zero"
+        "Because arithmetic is slower than comparison",
+        "To avoid dividing by zero",
+        "So the rest of the function can never produce a value outside 0 to 100"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Clamping the ends first means the remaining code only ever deals with readings inside the range, so it cannot produce an out of range answer."
     },
     {
       "stage": "check",
       "question": "A reading of 3600 millivolts should report what percentage?",
       "options": [
-        "50, because it sits exactly halfway between 3000 and 4200",
-        "36, because the reading is 3600",
+        "0, because it is below the full voltage",
         "86, because 3600 divided by 4200 is about 0.86",
-        "0, because it is below the full voltage"
+        "50, because it sits exactly halfway between 3000 and 4200",
+        "36, because the reading is 3600"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "The range runs from 3000 to 4200, which is 1200 wide. A reading of 3600 is 600 above empty, exactly half of 1200."
     },
     {
       "stage": "post",
       "question": "Your program compiles and runs but reports the wrong percentage. What does that tell you?",
       "options": [
+        "The test file must be wrong",
         "The compiler accepted what you wrote, and what you wrote is not what you meant",
         "The compiler is broken and should be reinstalled",
-        "The test file must be wrong",
         "The program needs to be run with administrator permissions"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "A compiler checks whether your text is valid C++, not whether your logic is correct. Tests are what check the second thing."
     },
     {
       "stage": "post",
       "question": "Why does production firmware usually not use a straight line for battery percentage?",
       "options": [
+        "The compiler cannot optimise division by a constant",
         "A lithium cell does not discharge evenly, so a straight line misreports the middle",
         "Straight lines are too slow to compute on a microcontroller",
-        "Percentages are not allowed in safety critical code",
-        "The compiler cannot optimise division by a constant"
+        "Percentages are not allowed in safety critical code"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "Real cells have a discharge curve, so firmware uses a measured lookup table or counts charge in and out. The straight line is still an honest first answer."
     }
   ]

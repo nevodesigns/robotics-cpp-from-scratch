@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "What does a smallest singular value of zero mean?",
       "options": [
-        "The arm is broken",
         "The tool cannot move in one direction however the joints turn",
+        "The arm is broken",
         "The arm is at home",
         "A joint limit"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A direction is gone."
     },
     {
       "stage": "check",
       "question": "In a generic pose the smallest singular value was:",
       "options": [
-        "0.00000000",
         "0.172",
         "0",
+        "0.00000000",
         "100"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It fell to zero at each singularity."
     },
     {
@@ -31,33 +31,33 @@
       "question": "Passing 0.01 m from the shoulder axis, joint 1's peak rate was, undamped and damped:",
       "options": [
         "2.0 and 26.1 rad/s",
+        "0 and 0",
         "26.1 and 2.0 rad/s",
-        "The same",
-        "0 and 0"
+        "The same"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "An impossible rate, and a possible one."
     },
     {
       "stage": "check",
       "question": "What did the damped pass cost?",
       "options": [
-        "Nothing",
-        "The tool strayed 0.0448 m from the line, against 0.0006 m",
+        "A joint",
         "Time only",
-        "A joint"
+        "Nothing",
+        "The tool strayed 0.0448 m from the line, against 0.0006 m"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Slow and slightly wrong beats impossible."
     },
     {
       "stage": "post",
       "question": "Why is the smallest singular value only a number you choose to read?",
       "options": [
-        "It is random",
+        "It is a vector",
         "It mixes metres and radians, so its size depends on how the rows are scaled",
-        "It is exact",
-        "It is a vector"
+        "It is random",
+        "It is exact"
       ],
       "correct": 1,
       "explanation": "The weights are choices."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What is better than damping through a singularity?",
       "options": [
+        "Bigger arm",
         "Nothing",
-        "Planning so as not to go near it",
         "Faster joints",
-        "Bigger arm"
+        "Planning so as not to go near it"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A floor on the singular value."
     }
   ]

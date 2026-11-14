@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "What is the difference between std::string and std::string_view?",
       "options": [
-        "A string owns its characters, a view is a pointer and a length that owns nothing",
-        "A view is faster but holds fewer characters",
         "A string is mutable, a view is a constant string",
-        "There is no difference in C++17"
+        "There is no difference in C++17",
+        "A view is faster but holds fewer characters",
+        "A string owns its characters, a view is a pointer and a length that owns nothing"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "It is exactly the span from lesson 01-04, specialised for text, and it carries the same warning: it keeps nothing alive."
     },
     {
       "stage": "check",
       "question": "What does a failed find return, and why must it be checked?",
       "options": [
-        "npos, which is the largest possible size, so using it as a position reads far past the end",
-        "Zero, which would silently mean the first character",
         "A negative number, which is safe to use",
-        "It throws an exception"
+        "Zero, which would silently mean the first character",
+        "It throws an exception",
+        "npos, which is the largest possible size, so using it as a position reads far past the end"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "It is the same idea as nullptr and end(): a value that cannot be mistaken for a real answer, and that must never be used as one."
     },
     {
@@ -32,8 +32,8 @@
       "options": [
         "A text shorter than the prefix would be compared past its own end",
         "Because compare is slow",
-        "Because compare cannot handle empty strings",
-        "To make the function constant time"
+        "To make the function constant time",
+        "Because compare cannot handle empty strings"
       ],
       "correct": 0,
       "explanation": "The comparison is told how many characters to look at. If the text is shorter than that, the count runs off the end."
@@ -42,36 +42,36 @@
       "stage": "check",
       "question": "Why does split produce an empty piece for two separators in a row?",
       "options": [
+        "To keep the piece count even",
         "A parser needs to see that a field was blank rather than have it disappear",
         "Because the standard requires it",
-        "To keep the piece count even",
         "It is a bug that nobody has fixed"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "Silently dropping an empty field turns a malformed line into a plausible one, which is worse than reporting it."
     },
     {
       "stage": "post",
       "question": "What is wrong with std::string_view view = std::string(\"temporary\");",
       "options": [
-        "The string is destroyed at the end of the statement and the view points at released memory",
+        "Nothing, this is the recommended form",
         "A view cannot be created from a string",
-        "The string is copied unnecessarily",
-        "Nothing, this is the recommended form"
+        "The string is destroyed at the end of the statement and the view points at released memory",
+        "The string is copied unnecessarily"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "The temporary dies at the semicolon. It is the dangling span of lesson 01-04 in different clothing, and it is the one shape of this mistake that catches everybody."
     },
     {
       "stage": "post",
       "question": "What is the rule these helpers all follow?",
       "options": [
+        "Take and return views everywhere for speed",
         "Take a view, return a string",
         "Take a string, return a view",
-        "Take and return views everywhere for speed",
         "Take and return strings everywhere for safety"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "A view parameter copies nothing at the call site, and a string return leaves no question about who owns the result or how long it lives."
     }
   ]

@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "Why does a localiser that has found the robot not notice when the robot is picked up?",
       "options": [
-        "It does",
-        "The weights are normalised, so the cloud stays as sure as ever of the wrong place",
+        "The map changes",
         "It is asleep",
-        "The map changes"
+        "The weights are normalised, so the cloud stays as sure as ever of the wrong place",
+        "It does"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The normalising hides the fall in the likelihood."
     },
     {
       "stage": "check",
       "question": "A plain cloud after a carry of 5.6 m was out by:",
       "options": [
-        "0 m",
         "8.3 m",
+        "100 m",
         "0.1 m",
-        "100 m"
+        "0 m"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "And stays out."
     },
     {
@@ -31,33 +31,33 @@
       "question": "With the monitor the robot was found again after how many steps?",
       "options": [
         "Never",
-        "21 steps",
         "1000",
-        "0"
+        "0",
+        "21 steps"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The monitor called it lost after 1."
     },
     {
       "stage": "check",
       "question": "Before the robot was moved the monitor put in how much random?",
       "options": [
-        "20 percent",
         "0.1 percent",
         "100 percent",
+        "20 percent",
         "50 percent"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It must not throw away a good cloud."
     },
     {
       "stage": "post",
       "question": "What does the ratio of the fast to the slow average show?",
       "options": [
-        "The speed",
-        "Whether the scans are explained now as well as they usually are",
         "The battery",
-        "The map's age"
+        "Whether the scans are explained now as well as they usually are",
+        "The map's age",
+        "The speed"
       ],
       "correct": 1,
       "explanation": "A fall means the cloud no longer explains what is seen."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why is the share of random particles limited?",
       "options": [
+        "Law",
         "Style",
-        "One bad scan must not throw a good cloud away",
         "Memory",
-        "Law"
+        "One bad scan must not throw a good cloud away"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A cap on the doubt."
     }
   ]

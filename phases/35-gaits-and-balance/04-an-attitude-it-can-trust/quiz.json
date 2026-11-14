@@ -8,8 +8,8 @@
       "options": [
         "Good for the angle over a minute",
         "Good over a moment and drifting over a minute, from its bias",
-        "Good for nothing",
-        "Bad over a moment"
+        "Bad over a moment",
+        "Good for nothing"
       ],
       "correct": 1,
       "explanation": "23.1 degrees wrong after 60 s."
@@ -18,60 +18,60 @@
       "stage": "check",
       "question": "The accelerometer alone was wrong by how much in the walk?",
       "options": [
-        "1.02 degrees",
         "10.2 degrees (rms)",
+        "90 degrees",
         "0 degrees",
-        "90 degrees"
+        "1.02 degrees"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Shaken by 2.5 m/s2."
     },
     {
       "stage": "check",
       "question": "How much did the gate on the size of the acceleration reject?",
       "options": [
-        "Most of the shake",
-        "Almost nothing: it accepted 100 percent, as a sideways shake barely changes the size",
         "All of it",
-        "Half"
+        "Half",
+        "Most of the shake",
+        "Almost nothing: it accepted 100 percent, as a sideways shake barely changes the size"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It catches vertical jolts, not sideways shake."
     },
     {
       "stage": "check",
       "question": "With the feet as well, in a walk, the error was:",
       "options": [
+        "23.1 degrees",
         "10.2 degrees",
         "0.40 degrees",
-        "23.1 degrees",
         "0"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Without the feet 1.02."
     },
     {
       "stage": "post",
       "question": "Why can the feet not be used in a trot?",
       "options": [
+        "They are noisy",
         "They are slow",
         "Only two are down, so there is no plane",
-        "They are noisy",
         "They are heavy"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "1.02 degrees without them."
     },
     {
       "stage": "post",
       "question": "What is not estimated?",
       "options": [
-        "Roll",
         "The gyro's bias and the heading",
         "Pitch",
+        "Roll",
         "The gain"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "25-07 estimated the bias at rest."
     }
   ]

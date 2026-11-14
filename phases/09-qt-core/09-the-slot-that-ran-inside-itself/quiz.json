@@ -6,36 +6,36 @@
       "stage": "pre",
       "question": "A handler calls QCoreApplication::processEvents() in the middle of its work, and a second reading arrives for the same handler while it is working. What happens?",
       "options": [
-        "The second is dropped",
         "The second is delivered to the same handler from inside the call to processEvents, before the first has finished",
         "The first is cancelled",
-        "The second waits for ever"
+        "The second waits for ever",
+        "The second is dropped"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The log was begin 1, begin 2, end 2, begin 3, end 3, end 1."
     },
     {
       "stage": "check",
       "question": "With readings 2 and 3 arriving while 1 is in progress, how deep was the nesting?",
       "options": [
-        "1",
-        "2: Qt does not deliver an event again from a nested call while its own batch is being delivered, so 3 waited for 2",
         "3",
-        "0"
+        "0",
+        "1",
+        "2: Qt does not deliver an event again from a nested call while its own batch is being delivered, so 3 waited for 2"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Reading 1 came back to find the member holding 3."
     },
     {
       "stage": "check",
       "question": "Why does the corruption show under load and not on the bench?",
       "options": [
-        "Load changes the compiler",
         "It depends on whether a reading arrives while another is in progress, and on the bench they arrive slowly",
-        "The bench has a faster loop",
-        "Load changes the member's type"
+        "Load changes the compiler",
+        "Load changes the member's type",
+        "The bench has a faster loop"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Which reading is hit depends on the timing."
     },
     {
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "With the guard, what did the log look like, and how deep was the nesting?",
       "options": [
-        "begin 1, begin 2, begin 3, end 3, end 2, end 1 at depth 3",
-        "begin 1, end 1, begin 2, end 2, begin 3, end 3 at depth 1",
+        "The same as without",
         "begin 1, end 1 only",
-        "The same as without"
+        "begin 1, begin 2, begin 3, end 3, end 2, end 1 at depth 3",
+        "begin 1, end 1, begin 2, end 2, begin 3, end 3 at depth 1"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "200 queued readings were each handled once, in order."
     },
     {
       "stage": "post",
       "question": "What is the better fix for a handler that is too slow?",
       "options": [
-        "A bigger guard",
-        "Do the work somewhere else, on another thread (lesson 09-03), so that the handler returns to the loop on its own",
         "More processEvents calls",
-        "Make the member static"
+        "Make the member static",
+        "Do the work somewhere else, on another thread (lesson 09-03), so that the handler returns to the loop on its own",
+        "A bigger guard"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The guard makes the handler safe and does not make processEvents a good idea."
     }
   ]

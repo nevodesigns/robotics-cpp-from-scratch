@@ -6,48 +6,48 @@
       "stage": "pre",
       "question": "A Repeater has a model of 10000 rows. How many delegates does it make?",
       "options": [
-        "About 20",
         "10000",
+        "None until scrolled",
         "The visible ones",
-        "None until scrolled"
+        "About 20"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It made 10000 and all were alive."
     },
     {
       "stage": "check",
       "question": "A ListView of height 300 and rows of 30 shows a model of 10000 rows. How many delegates?",
       "options": [
-        "10000",
-        "About 21: the rows in view and a few beyond",
+        "300",
         "1",
-        "300"
+        "About 21: the rows in view and a few beyond",
+        "10000"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It made 21."
     },
     {
       "stage": "check",
       "question": "The ListView jumps to row 5000. What happens to the delegates?",
       "options": [
-        "All 10000 are made",
-        "A few new ones are made and the old ones are given up",
+        "They are all destroyed",
         "None change",
-        "They are all destroyed"
+        "All 10000 are made",
+        "A few new ones are made and the old ones are given up"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "11 more were made and 12 were alive afterwards."
     },
     {
       "stage": "check",
       "question": "Does a ListView over 1000000 rows have more delegates than over 100?",
       "options": [
-        "Yes, 10000 times more",
         "No: it depends on the height of the view",
         "Half as many",
+        "Yes, 10000 times more",
         "It fails"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "21, 21 and 21."
     },
     {
@@ -55,21 +55,21 @@
       "question": "What is peak for?",
       "options": [
         "Speed",
-        "The most delegates that existed at once, which the budget has to allow for",
         "The current count",
+        "The most delegates that existed at once, which the budget has to allow for",
         "The number made"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "After the jump the peak was 32 while 12 were alive."
     },
     {
       "stage": "post",
       "question": "A delegate reports that it went when the counter shows none alive. What does the counter do?",
       "options": [
-        "Goes negative",
+        "Ignores it",
         "Counts it as unmatched and keeps alive at nothing",
         "Crashes",
-        "Ignores it"
+        "Goes negative"
       ],
       "correct": 1,
       "explanation": "2 were unmatched and alive stayed at 0."

@@ -8,8 +8,8 @@
       "options": [
         "Never",
         "About a third of the time: the average itself varies by about 0.1, so a bound of one spread is exceeded 31.8 percent of the time",
-        "Once in a thousand",
-        "Always"
+        "Always",
+        "Once in a thousand"
       ],
       "correct": 1,
       "explanation": "3176 of 10000 failed."
@@ -19,59 +19,59 @@
       "question": "What is the spread of the average of n readings, each with noise of spread 1?",
       "options": [
         "1",
+        "1 over n",
         "About 1 divided by the square root of n: 0.1 for 100 readings",
-        "n",
-        "1 over n"
+        "n"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The suite measured 0.0997 over 10000 seeds."
     },
     {
       "stage": "check",
       "question": "How often did a bound of three spreads and of six spreads fail over 10000 seeds?",
       "options": [
-        "3176 and 26",
         "26 and 0",
         "0 and 0",
-        "3176 and 0"
+        "3176 and 0",
+        "3176 and 26"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Three spreads is about one in 400; six is about one in five hundred million."
     },
     {
       "stage": "check",
       "question": "Why is one in 400 not good enough for a test in a large suite?",
       "options": [
-        "It is slow",
         "A suite of three thousand such tests fails nearly every run, each on a different test",
-        "It uses memory",
-        "It is not random"
+        "It is not random",
+        "It is slow",
+        "It uses memory"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Each test on its own passes a thousand times in a row."
     },
     {
       "stage": "post",
       "question": "With 100 readings and a bound of 0.6, how often is a bias of 0.3 seen, and a bias of 1.0?",
       "options": [
-        "100 percent and 100 percent",
-        "0.1 percent and 100 percent: the bound is too wide for that bug at that length",
+        "0 and 0",
         "50 and 50",
-        "0 and 0"
+        "0.1 percent and 100 percent: the bound is too wide for that bug at that length",
+        "100 percent and 100 percent"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A bias of 0.5 was seen 15.1 percent of the time."
     },
     {
       "stage": "post",
       "question": "How many readings does a bias of 0.3 need, at noise 1 and six spreads, and what did the suite see?",
       "options": [
-        "100, seen half the time",
-        "1600, seen in 2000 of 2000 runs with 0 false alarms in 10000",
         "36, seen always",
-        "14400, seen never"
+        "100, seen half the time",
+        "14400, seen never",
+        "1600, seen in 2000 of 2000 runs with 0 false alarms in 10000"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Twice the noise needs four times the readings."
     }
   ]

@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "What information is in a GNSS fix besides the position?",
       "options": [
-        "Nothing",
         "The level of the fix, which says how much to believe it",
-        "The time only",
-        "The weather"
+        "Nothing",
+        "The weather",
+        "The time only"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Fixed, float, single or none."
     },
     {
@@ -30,10 +30,10 @@
       "stage": "check",
       "question": "The worst error with the gate was:",
       "options": [
-        "6.04 m",
+        "100 m",
         "2.29 m",
-        "0",
-        "100 m"
+        "6.04 m",
+        "0"
       ],
       "correct": 1,
       "explanation": "It refuses the jumps."
@@ -43,35 +43,35 @@
       "question": "The gate refused what share of the good fixes?",
       "options": [
         "0 percent",
+        "100 percent",
         "0.2 percent, near the 1 percent its threshold says",
-        "50 percent",
-        "100 percent"
+        "50 percent"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Chi-square, 99 percent point."
     },
     {
       "stage": "post",
       "question": "Why did a gate that never gives up find a carried robot so late?",
       "options": [
+        "The robot was heavy",
         "It is stupid",
-        "Every fix was refused until the filter's uncertainty had grown to admit 20 m",
         "Fixes were bad",
-        "The robot was heavy"
+        "Every fix was refused until the filter's uncertainty had grown to admit 20 m"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "68 fixes against 5."
     },
     {
       "stage": "post",
       "question": "What does max_refused do?",
       "options": [
-        "Nothing",
-        "After that many refusals in a row, the next fix is taken as a new start",
         "Counts fixes",
-        "Sets the sigma"
+        "Nothing",
+        "Sets the sigma",
+        "After that many refusals in a row, the next fix is taken as a new start"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A way back from being wrong."
     }
   ]

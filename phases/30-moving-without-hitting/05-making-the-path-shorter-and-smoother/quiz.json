@@ -6,48 +6,48 @@
       "stage": "pre",
       "question": "What is a shortcut?",
       "options": [
+        "A smaller arm",
         "A faster robot",
         "Replacing the part of a path between two random points by the straight edge, if it is free",
-        "A smaller scene",
-        "A smaller arm"
+        "A smaller scene"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Skip the detour."
     },
     {
       "stage": "check",
       "question": "The path was how many times the straight line before and after shortcutting?",
       "options": [
-        "1.85 then 4.83",
         "4.83 then 1.85",
-        "The same",
-        "1 and 1"
+        "1 and 1",
+        "1.85 then 4.83",
+        "The same"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Free and bad, then free and better."
     },
     {
       "stage": "check",
       "question": "The sharpest turn went from 2.25 rad to:",
       "options": [
-        "2.25 rad",
-        "0.60 rad after cutting the corners twice",
+        "3 rad",
         "0",
-        "3 rad"
+        "2.25 rad",
+        "0.60 rad after cutting the corners twice"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A corner is a place the arm must stop and turn."
     },
     {
       "stage": "check",
       "question": "The clearance along the path after shortcutting with no margin and with the margin kept was:",
       "options": [
-        "0.0202 and 0.0001 m",
         "0.0001 and 0.0202 m",
+        "0.0202 and 0.0001 m",
         "The same",
         "Negative both"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The margin must go through every pass."
     },
     {
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why are random shortcuts a good first pass?",
       "options": [
-        "They are exact",
-        "A random path is full of detours that a straight edge skips, and a hundred tries find most",
         "They are slow",
-        "They avoid the margin"
+        "They avoid the margin",
+        "They are exact",
+        "A random path is full of detours that a straight edge skips, and a hundred tries find most"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Cheap and effective."
     }
   ]

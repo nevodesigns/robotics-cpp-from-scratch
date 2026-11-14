@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A QML handler throws a ReferenceError while a file is loaded through the harness. What does the harness report?",
       "options": [
-        "Nothing: the load succeeded",
-        "A failure of kind warning, with the text of the error",
         "A crash",
-        "A load failure"
+        "Nothing: the load succeeded",
+        "A load failure",
+        "A failure of kind warning, with the text of the error"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Seven of the eight cases were a load failure or a warning; this one was a warning."
     },
     {
@@ -19,47 +19,47 @@
       "question": "A required property is not given. What kind of failure is it?",
       "options": [
         "warning",
+        "none",
         "load: create() gives no object",
-        "probe",
-        "none"
+        "probe"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It was a load failure with the text Required property."
     },
     {
       "stage": "check",
       "question": "What does ok() mean?",
       "options": [
+        "There are no warnings of kind probe",
         "The file loaded",
-        "No failure of any kind has been recorded or printed since the last clear",
         "The object exists",
-        "There are no warnings of kind probe"
+        "No failure of any kind has been recorded or printed since the last clear"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It is the one question a test asks at the end."
     },
     {
       "stage": "check",
       "question": "A test provokes a warning on purpose. What does it do?",
       "options": [
+        "Catch it in QML",
         "Ignore ok()",
         "Look for that failure by its text, and clear before the next step",
-        "Disable the harness",
-        "Catch it in QML"
+        "Disable the harness"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "clear forgets, so a test can look at what one step caused."
     },
     {
       "stage": "post",
       "question": "Item { width: 0 / 0 } is loaded. What does the harness say?",
       "options": [
-        "A failure",
         "Nothing: no message was printed or refused, and the width is 0",
         "A warning",
+        "A failure",
         "A load error"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It loaded with 0 failures and a width of 0."
     },
     {

@@ -18,21 +18,21 @@
       "stage": "check",
       "question": "Why does the test cut the same bytes 629 ways?",
       "options": [
-        "To make the test slow",
         "Because a device can cut a message anywhere, and the lines must come out the same each time",
         "Because Qt cuts at 629 bytes",
-        "To count the lines"
+        "To count the lines",
+        "To make the test slow"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Cutting at every position and into three chunks finds a bug that only some cuts show."
     },
     {
       "stage": "check",
       "question": "What does \"a\\r\\nb\".split('\\n').at(0) give?",
       "options": [
-        "a, 1 byte",
-        "a followed by a carriage return, 2 bytes",
         "a\\r\\nb",
+        "a followed by a carriage return, 2 bytes",
+        "a, 1 byte",
         "an empty array"
       ],
       "correct": 1,
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "Why is a line over the limit dropped and not just truncated?",
       "options": [
-        "Truncating is slower",
-        "A truncated line looks like a valid shorter line, and the rest of it would become the next one",
+        "It makes the output shorter",
         "Qt does not allow it",
-        "It makes the output shorter"
+        "A truncated line looks like a valid shorter line, and the rest of it would become the next one",
+        "Truncating is slower"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The assembler skips to the newline that ends it and counts it."
     },
     {
@@ -55,23 +55,23 @@
       "question": "100000 bytes of noise with no newline arrive. How many does the assembler hold?",
       "options": [
         "All 100000",
-        "None: it passed the limit, stopped keeping them and is skipping until a newline",
+        "Half",
         "Exactly 8, always",
-        "Half"
+        "None: it passed the limit, stopped keeping them and is skipping until a newline"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Its memory is bounded by the limit however much noise arrives."
     },
     {
       "stage": "post",
       "question": "A device sends half a line and stops. What does the assembler do?",
       "options": [
-        "Returns the half line after a timeout",
         "Holds it: it has no timeout, and a caller that needs one must add it",
-        "Drops it at once",
-        "Raises an error"
+        "Returns the half line after a timeout",
+        "Raises an error",
+        "Drops it at once"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Not timing out a stalled line is stated in what the lesson does not do."
     }
   ]

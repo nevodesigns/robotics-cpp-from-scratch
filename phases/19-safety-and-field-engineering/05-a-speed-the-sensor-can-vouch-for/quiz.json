@@ -7,69 +7,69 @@
       "question": "A lidar returns infinity for a direction. What does that most safely mean?",
       "options": [
         "The path is empty to the end of its reach",
-        "Nothing was returned: an empty hall and a black or glossy surface look the same, so it can vouch only for a modest distance",
         "An error",
-        "The sensor is off"
+        "The sensor is off",
+        "Nothing was returned: an empty hall and a black or glossy surface look the same, so it can vouch only for a modest distance"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The limiter takes it as 1.5 m."
     },
     {
       "stage": "check",
       "question": "A front reading is NaN and the command is 2 m/s. What does std::min(2.0, max_speed(NaN, ...)) return?",
       "options": [
+        "1.0",
         "0",
         "2.0: a comparison with NaN is false, so the first argument wins and the robot goes at full speed",
-        "NaN",
-        "1.0"
+        "NaN"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The limiter gave 0."
     },
     {
       "stage": "check",
       "question": "Why is a reading of 0.05 m, inside the blind zone, trusted as 0 and not as 0.05?",
       "options": [
+        "It is rounded",
         "It is too small",
         "The sensor cannot see there: it is not a measurement, and it is exactly where things about to be hit are",
-        "The robot is touching",
-        "It is rounded"
+        "The robot is touching"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A blind zone is not a short range."
     },
     {
       "stage": "check",
       "question": "A good reading of 4.0 m is 0.25 s old and the maximum age is 0.2 s. What speed is allowed?",
       "options": [
-        "2.0",
         "0: an old reading is a picture of where the robot was, and the age is part of the reading",
-        "1.0",
-        "4.0"
+        "4.0",
+        "2.0",
+        "1.0"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Exactly at 0.2 s is still fresh."
     },
     {
       "stage": "post",
       "question": "With the limiter on, how close did the robot come to a wall at a margin of 0.3 m?",
       "options": [
-        "0.0 m",
         "0.30 m: it slowed to a stop at the margin, with no sight of the wall except through the range",
+        "1 m",
         "5 m",
-        "1 m"
+        "0.0 m"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Without it, it hit at 2.00 m/s."
     },
     {
       "stage": "post",
       "question": "What does a range-based limiter not protect against?",
       "options": [
-        "Walls",
+        "People",
         "Anything the sensor cannot see: a drop, a glass door, a low bar, and a sensor that is the single point of failure",
-        "Boxes",
-        "People"
+        "Walls",
+        "Boxes"
       ],
       "correct": 1,
       "explanation": "A second kind of sensor covers a different failure."

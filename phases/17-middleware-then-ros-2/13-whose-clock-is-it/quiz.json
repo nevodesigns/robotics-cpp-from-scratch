@@ -7,21 +7,21 @@
       "question": "A simulator is paused and a node keeps commanding the robot. What went wrong?",
       "options": [
         "Nothing",
-        "Its timer follows the wall clock and not the simulator's: a timer on the clock that stood still fired 0 times in 1000 polls",
         "The robot is too fast",
-        "The message was lost"
+        "The message was lost",
+        "Its timer follows the wall clock and not the simulator's: a timer on the clock that stood still fired 0 times in 1000 polls"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Every node must follow the simulated time."
     },
     {
       "stage": "check",
       "question": "A timer of period 0.5 s runs on a clock at 10 times speed. How often does it fire per clock second and per wall second?",
       "options": [
-        "2 and 2",
+        "2 and 0.2",
         "2 per clock second and 20 per wall second: per clock second it is the same at every speed",
-        "20 and 20",
-        "2 and 0.2"
+        "2 and 2",
+        "20 and 20"
       ],
       "correct": 1,
       "explanation": "The controller was tuned for the clock's seconds."
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "The clock jumps forward 100 s over a 0.5 s period. What should the timer do?",
       "options": [
-        "Fire 200 times at once",
-        "Fire a bounded number of times and count the rest as skipped: once, with 199 skipped, where a catch-up timer fired 200 times at once",
         "Fire never",
-        "Stop"
+        "Fire 200 times at once",
+        "Stop",
+        "Fire a bounded number of times and count the rest as skipped: once, with 199 skipped, where a catch-up timer fired 200 times at once"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Two hundred commands in one instant are for a time that never happened."
     },
     {
       "stage": "check",
       "question": "The clock goes from 100 s back to 0. What does a timer with its old schedule do?",
       "options": [
-        "Fires as usual",
         "Is silent for the first 100 s of the new run, because it waits for the clock to reach its old next time: 0 firings against 199",
         "Fires twice as often",
-        "Crashes"
+        "Crashes",
+        "Fires as usual"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The clock changes its epoch and a timer that sees a new one starts again."
     },
     {
       "stage": "post",
       "question": "Is a time of 1.4999 arriving after 1.5 a jump back?",
       "options": [
-        "No, it is only a little",
-        "Yes: any step back counts, however small, while the same time twice or a small step forward does not",
+        "Only if the epoch is zero",
         "Only above 1 s",
-        "Only if the epoch is zero"
+        "Yes: any step back counts, however small, while the same time twice or a small step forward does not",
+        "No, it is only a little"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Epoch is how a timer knows to start over."
     },
     {
       "stage": "post",
       "question": "What does a jump back do to a lifespan or a lease remembered from before it?",
       "options": [
+        "It extends them",
         "Nothing",
         "It invalidates them: anything stamped in the future of the new time needs to be told, since the clock they measured against has gone back",
-        "It extends them",
         "It deletes them"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Time that goes back breaks every deadline measured with it."
     }
   ]

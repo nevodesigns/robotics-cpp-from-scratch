@@ -7,33 +7,33 @@
       "question": "A port is given on the command line as 9000 and in a config file as 8080, and the file is read after the arguments. Which does the program use?",
       "options": [
         "8080, the last read",
-        "9000, if the settings rank their sources: the command line is meant more than a file, whatever order they are read in",
         "Neither",
-        "The default"
+        "The default",
+        "9000, if the settings rank their sources: the command line is meant more than a file, whatever order they are read in"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The suite measured 9000 from the command line."
     },
     {
       "stage": "check",
       "question": "Why does each setting remember its source?",
       "options": [
-        "To save memory",
         "So a log can say log_level = debug (environment) and end the argument about which of four places set it",
+        "To save memory",
         "For speed",
         "It is required by C++"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "explain wrote timeout = 30 (default)."
     },
     {
       "stage": "check",
       "question": "speed_limt=0.5 is set and the robot goes at full speed. Why?",
       "options": [
-        "The value is wrong",
-        "A map accepts any key and the program reads only those it knows, so a misspelt key just sits there",
         "The limit is ignored on purpose",
-        "The command line is weaker"
+        "A map accepts any key and the program reads only those it knows, so a misspelt key just sits there",
+        "The command line is weaker",
+        "The value is wrong"
       ],
       "correct": 1,
       "explanation": "unknown_keys found 5 of the 6 keys set."
@@ -42,10 +42,10 @@
       "stage": "check",
       "question": "What is the edit distance between kitten and sitting?",
       "options": [
-        "1",
+        "0",
         "3: two letters changed and one added",
         "7",
-        "0"
+        "1"
       ],
       "correct": 1,
       "explanation": "It counts single-character changes: a letter changed, left out or added."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "Why does prot for port count as two edits, not one?",
       "options": [
+        "Short words are exempt",
         "A mistake",
         "A swap of two letters is two changes in this distance, one letter replaced and then the other",
-        "Letters are free",
-        "Short words are exempt"
+        "Letters are free"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The suggestion still found port, within two edits."
     },
     {
       "stage": "post",
       "question": "LOG_LEVEL is set and log_level is known. What does suggest give, and why?",
       "options": [
-        "log_level",
         "Nothing: the wrong case is eight edits, and a suggestion has to be within two",
+        "An error",
         "LOG",
-        "An error"
+        "log_level"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A person is shown a suggestion, so a poor one is worse than none."
     }
   ]

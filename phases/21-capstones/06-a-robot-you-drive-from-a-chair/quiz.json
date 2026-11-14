@@ -19,11 +19,11 @@
       "question": "The link comes back after a stop, with no reset pressed. What does the robot do?",
       "options": [
         "Goes on",
+        "Resets itself",
         "Stays stopped: the link coming back is not permission, and a person presses reset after a second of good link",
-        "Slows",
-        "Resets itself"
+        "Slows"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The latch is the point."
     },
     {
@@ -31,23 +31,23 @@
       "question": "A link that delays every packet by one second. How much farther does a robot at 1 m/s go after the link fails?",
       "options": [
         "Nothing",
+        "Ten metres",
         "One metre more (1.598 m against 0.598 m): the delay is added at the speed",
-        "0.1 m",
-        "Ten metres"
+        "0.1 m"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Plan for the timeout plus the delay."
     },
     {
       "stage": "check",
       "question": "On a link that loses 20 percent, a timeout of 0.1 s did what over an hour?",
       "options": [
-        "Nothing",
         "1198 false stops, with the robot stopped for 52.1 percent of the hour",
+        "Nothing",
         "3 false stops",
         "Stopped it once"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The operator gives up, and the safety function is switched off."
     },
     {
@@ -55,23 +55,23 @@
       "question": "The robot's timeout is too short for the loss and too long for the distance. What is the answer?",
       "options": [
         "Pick the middle",
-        "Neither: a better link, or a lower speed",
+        "Remove the timeout",
         "A longer reset",
-        "Remove the timeout"
+        "Neither: a better link, or a lower speed"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The two terms did not meet."
     },
     {
       "stage": "post",
       "question": "Why does real radio make loss to the power k a poor guide?",
       "options": [
-        "It does not",
         "Real loss comes in bursts: false stops are rarer and real outages longer than the independent model says",
         "Radio never loses packets",
+        "It does not",
         "The heartbeat is slower"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A limit of the model."
     }
   ]

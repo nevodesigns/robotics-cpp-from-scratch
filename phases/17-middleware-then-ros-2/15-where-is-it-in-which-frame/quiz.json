@@ -6,34 +6,34 @@
       "stage": "pre",
       "question": "A laser sees an obstacle 1 m ahead of itself. What must be known to put it on the map?",
       "options": [
+        "The laser's range",
         "Nothing",
         "The chain of frames from the laser up to the map, each a transform: the laser on the base, the base in odom, odom in the map",
-        "The laser's range",
         "The map's resolution"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The obstacle was at (12.00, 6.30) in the map in the test."
     },
     {
       "stage": "check",
       "question": "Halfway between headings of 170 and -170 degrees. What is it?",
       "options": [
-        "0",
         "180: the short way round, where averaging as plain numbers would give 0 and point the opposite way",
-        "90",
-        "-170"
+        "0",
+        "-170",
+        "90"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The blend takes the difference, wraps it, then goes part of the way."
     },
     {
       "stage": "check",
       "question": "How does a lookup relate two frames on different branches?",
       "options": [
-        "It cannot",
-        "Via the nearest frame they both hang from, compose(inverse(target_from_common), source_from_common)",
         "By taking their average",
-        "Through the map only"
+        "Via the nearest frame they both hang from, compose(inverse(target_from_common), source_from_common)",
+        "Through the map only",
+        "It cannot"
       ],
       "correct": 1,
       "explanation": "The arm in the laser's frame was found at (-0.4, 0.2)."
@@ -42,36 +42,36 @@
       "stage": "check",
       "question": "A robot drives at 0.6 m/s and a scan stamped 0.5 s ago is placed with the latest transform. How far out is every obstacle?",
       "options": [
+        "0.6 m",
         "Not at all",
-        "0.30 m, speed times delay, in the direction of travel",
         "0.5 m",
-        "0.6 m"
+        "0.30 m, speed times delay, in the direction of travel"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The transform at the stamp placed the post at 2.60 and the latest at 2.90."
     },
     {
       "stage": "post",
       "question": "A frame was reported until 1.0 s and a lookup asks about 1.5 s. What should happen?",
       "options": [
+        "Return the last report",
         "Extend it at its last speed",
         "extrapolation: a refusal, since nobody measured the robot then and a guess would look like data",
-        "Return the last report",
         "Return zero"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The lookup says which of three things is wrong."
     },
     {
       "stage": "post",
       "question": "What does a static frame mean?",
       "options": [
-        "It is not in the tree",
-        "It does not move relative to its parent, such as a sensor mount, and is known at every time",
+        "It is the root",
         "It moves slowly",
-        "It is the root"
+        "It is not in the tree",
+        "It does not move relative to its parent, such as a sensor mount, and is known at every time"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The laser and the arm were static."
     }
   ]

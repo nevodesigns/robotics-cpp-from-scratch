@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "How many digits does a double need to be given back exactly?",
       "options": [
-        "6",
-        "17",
+        "100",
         "3",
-        "100"
+        "6",
+        "17"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Seventeen significant digits are enough and fewer are not."
     },
     {
@@ -31,21 +31,21 @@
       "question": "Two runs with different seeds first differed at:",
       "options": [
         "Never",
+        "5 s",
         "0.02 s, the first sample",
-        "The end",
-        "5 s"
+        "The end"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The noise differs from the start."
     },
     {
       "stage": "check",
       "question": "A log cut in the middle of a line read as:",
       "options": [
-        "An error",
-        "999 entries with the truncated flag set",
         "Nothing",
-        "A crash"
+        "999 entries with the truncated flag set",
+        "A crash",
+        "An error"
       ],
       "correct": 1,
       "explanation": "The stump of a write is dropped."
@@ -54,12 +54,12 @@
       "stage": "post",
       "question": "Why does the log carry its scenario?",
       "options": [
-        "To make it bigger",
         "So the record holds both the question and the answer",
+        "To make it bigger",
         "Habit",
         "For the version"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A log must say what it was."
     },
     {
@@ -67,11 +67,11 @@
       "question": "How does the parser know the last line was cut?",
       "options": [
         "It counts",
-        "The writer ends every line with a newline, and the text does not end in one",
         "A checksum",
-        "It cannot"
+        "It cannot",
+        "The writer ends every line with a newline, and the text does not end in one"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A fixed convention gives a test."
     }
   ]

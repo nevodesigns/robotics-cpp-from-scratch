@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "What does computed torque do with the model?",
       "options": [
-        "Draws the arm",
         "Asks it for the torque that gives the wanted acceleration, so the joints act as independent unit masses",
         "Simulates a sensor",
+        "Draws the arm",
         "Filters the encoder"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The model's own inverse."
     },
     {
       "stage": "check",
       "question": "The rms error on the fast move with an exact model, for PD with gravity and computed torque:",
       "options": [
+        "0 and 0",
         "0.000056948 and 0.04293 rad",
         "0.04293 and 0.000056948 rad",
-        "The same",
-        "0 and 0"
+        "The same"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The model removes the error."
     },
     {
@@ -31,11 +31,11 @@
       "question": "Computed torque at 20 rad/s from 0.1 rad out crossed zero how many times?",
       "options": [
         "Several",
-        "0: it is critically damped",
+        "Once",
         "Always",
-        "Once"
+        "0: it is critically damped"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Kp = wn squared, Kv = 2 wn."
     },
     {
@@ -54,10 +54,10 @@
       "stage": "post",
       "question": "Why is a model that is too light worse than one that is too heavy by the same amount?",
       "options": [
-        "It is not",
-        "It gives torques that fall short, and the feedback has to make up the rest: 0.03469 against 0.01455 rad",
         "Heavier is safer by law",
-        "Rounding"
+        "It gives torques that fall short, and the feedback has to make up the rest: 0.03469 against 0.01455 rad",
+        "Rounding",
+        "It is not"
       ],
       "correct": 1,
       "explanation": "Underestimating the arm."
@@ -67,11 +67,11 @@
       "question": "What must a reference be for computed torque?",
       "options": [
         "Anything",
-        "Smooth to the second derivative: a jump in acceleration asks for a jump in torque",
         "Slow",
-        "Linear"
+        "Linear",
+        "Smooth to the second derivative: a jump in acceleration asks for a jump in torque"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A quintic."
     }
   ]

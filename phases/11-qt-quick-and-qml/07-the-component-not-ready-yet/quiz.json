@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "A QQmlComponent is loaded with Asynchronous on a file that has not been loaded before. What is its status when the constructor returns?",
       "options": [
-        "Ready",
+        "Error",
         "Loading",
-        "Null",
-        "Error"
+        "Ready",
+        "Null"
       ],
       "correct": 1,
       "explanation": "It was Loading, and create() gave null."
@@ -18,24 +18,24 @@
       "stage": "check",
       "question": "What does create() return on a component that is Loading?",
       "options": [
-        "The object, a little late",
         "A null pointer",
+        "It waits",
         "An empty object",
-        "It waits"
+        "The object, a little late"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The code written for a component that loads at once uses the null."
     },
     {
       "stage": "check",
       "question": "A file has a syntax error and is loaded asynchronously. What is the final status?",
       "options": [
-        "Ready",
         "Error, with the file and position of the error",
         "Loading for ever",
+        "Ready",
         "Null"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It became Error and create_when_ready returned the reason."
     },
     {
@@ -43,33 +43,33 @@
       "question": "Why does the wait have a timeout?",
       "options": [
         "Habit",
+        "To make tests slower",
         "A component that loads from a network or a file being written can stay Loading, and a test that waits for ever hangs",
-        "Qt requires it",
-        "To make tests slower"
+        "Qt requires it"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The wait is bounded by the time it is given."
     },
     {
       "stage": "post",
       "question": "Why did the first test load two different files?",
       "options": [
-        "To save time",
-        "The engine caches compiled files by URL, so a second component on the same file is ready at once",
         "Qt requires it",
-        "Windows needs it"
+        "To save time",
+        "Windows needs it",
+        "The engine caches compiled files by URL, so a second component on the same file is ready at once"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The comparison of modes needs two first loads."
     },
     {
       "stage": "post",
       "question": "What does wait_until_ready do while it waits?",
       "options": [
-        "Nothing: it sleeps",
+        "Polls every millisecond",
         "Runs the event loop, which delivers every other event as well",
-        "Blocks the whole program",
-        "Polls every millisecond"
+        "Nothing: it sleeps",
+        "Blocks the whole program"
       ],
       "correct": 1,
       "explanation": "It is a nested loop, which the lesson says under what it does not do."

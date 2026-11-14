@@ -6,46 +6,46 @@
       "stage": "pre",
       "question": "For a parallel platform, which direction of kinematics has a formula?",
       "options": [
-        "Neither",
-        "Leg lengths from a pose",
         "Pose from leg lengths",
-        "Both"
+        "Neither",
+        "Both",
+        "Leg lengths from a pose"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The opposite of a serial arm."
     },
     {
       "stage": "check",
       "question": "At home the legs were all:",
       "options": [
-        "0.366 m",
         "0.343 m",
         "0 m",
+        "0.366 m",
         "0.410 m"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A symmetric hexapod."
     },
     {
       "stage": "check",
       "question": "How is the pose found from the lengths?",
       "options": [
+        "By luck",
         "By a formula",
         "By Newton's iteration from a guess",
-        "By a table",
-        "By luck"
+        "By a table"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "4 steps from a guess."
     },
     {
       "stage": "check",
       "question": "What limits a platform's reach?",
       "options": [
-        "Joint angles only",
+        "The weight",
         "Leg stroke (and joint cones, not modelled)",
-        "The camera",
-        "The weight"
+        "Joint angles only",
+        "The camera"
       ],
       "correct": 1,
       "explanation": "0.366 to 0.410 m for that motion."
@@ -55,20 +55,20 @@
       "question": "What is dangerous about a parallel singularity?",
       "options": [
         "Nothing",
-        "The platform can give way under a load",
         "It is slow",
-        "It is noisy"
+        "It is noisy",
+        "The platform can give way under a load"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It loses the ability to resist a force."
     },
     {
       "stage": "post",
       "question": "What is a good starting guess in a controller?",
       "options": [
-        "Zero",
-        "The last pose",
         "A random pose",
+        "The last pose",
+        "Zero",
         "The home pose always"
       ],
       "correct": 1,

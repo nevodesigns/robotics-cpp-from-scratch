@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "What does the arm's inverse kinematics want its target in?",
       "options": [
-        "The world frame",
-        "The arm's own base frame",
         "The tool frame",
-        "Pixels"
+        "The world frame",
+        "Pixels",
+        "The arm's own base frame"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The world point goes through the inverse of the arm base's pose."
     },
     {
       "stage": "check",
       "question": "A heading error of 1 degree moved a hand 0.9 m out by:",
       "options": [
-        "5 mm",
-        "15.7 mm",
         "0 mm",
-        "1 m"
+        "5 mm",
+        "1 m",
+        "15.7 mm"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The error times the lever."
     },
     {
@@ -31,9 +31,9 @@
       "question": "A position error of 5 mm in the base moved the hand:",
       "options": [
         "5 mm, one for one",
-        "15.7 mm",
+        "Ten times as much",
         "Nothing",
-        "Ten times as much"
+        "15.7 mm"
       ],
       "correct": 0,
       "explanation": "It is carried over unchanged."
@@ -44,8 +44,8 @@
       "options": [
         "A tiny error",
         "A large steady error",
-        "No error",
-        "A timing error"
+        "A timing error",
+        "No error"
       ],
       "correct": 1,
       "explanation": "The two frames differ by the base's whole pose."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "Why does a mobile manipulator need its heading to a fraction of a degree?",
       "options": [
+        "Wheels need it",
         "It does not",
         "The hand is far from the base's centre and the error is multiplied by that",
-        "Wheels need it",
         "Cameras need it"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A degree at 0.9 m is 15.7 mm."
     },
     {
       "stage": "post",
       "question": "What is assumed about the ground?",
       "options": [
-        "It is a slope",
-        "It is flat: height, roll and pitch are zero",
+        "It moves",
         "It is soft",
-        "It moves"
+        "It is flat: height, roll and pitch are zero",
+        "It is a slope"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "33-05 breaks that."
     }
   ]

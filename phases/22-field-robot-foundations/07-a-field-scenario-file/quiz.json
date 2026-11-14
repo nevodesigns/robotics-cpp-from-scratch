@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "Why is a test better as a file than as a function?",
       "options": [
-        "It is shorter",
-        "It can be kept, shared, repeated and given to another simulator",
+        "Files cannot fail",
         "It runs faster",
-        "Files cannot fail"
+        "It can be kept, shared, repeated and given to another simulator",
+        "It is shorter"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A test must outlive the run."
     },
     {
       "stage": "check",
       "question": "A file with six mistakes gave how many reports?",
       "options": [
+        "0",
         "1",
         "8, with their lines, six for lines and two for the whole file",
-        "6 only",
-        "0"
+        "6 only"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "All the mistakes at once."
     },
     {
@@ -31,11 +31,11 @@
       "question": "Where is the check that a file has a start made?",
       "options": [
         "On each line",
-        "After the last line, because it concerns the whole file",
         "Never",
-        "In the simulator"
+        "In the simulator",
+        "After the last line, because it concerns the whole file"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Some rules are about the whole."
     },
     {
@@ -44,8 +44,8 @@
       "options": [
         "Different text",
         "The same text twice",
-        "An error",
-        "An empty file"
+        "An empty file",
+        "An error"
       ],
       "correct": 1,
       "explanation": "Nothing is lost on the round trip."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "Why report a line number and the word that was wrong?",
       "options": [
-        "For style",
         "So the mistake can be found and fixed in one pass",
         "It is shorter",
-        "To avoid tests"
+        "To avoid tests",
+        "For style"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A message must point at the thing."
     },
     {
       "stage": "post",
       "question": "Why are angles in a scenario in degrees but in code in radians?",
       "options": [
+        "Degrees are faster",
         "No reason",
-        "A person writes 90, and the conversion is made once at the edge",
         "Radians are illegal",
-        "Degrees are faster"
+        "A person writes 90, and the conversion is made once at the edge"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Convert at the boundary."
     }
   ]

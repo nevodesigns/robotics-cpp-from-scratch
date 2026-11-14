@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "What does the backward pass of a speed profile do?",
       "options": [
-        "Reverses the vehicle",
         "Limits each speed to what the vehicle could still slow down from to reach the next point",
+        "Reverses the vehicle",
         "Speeds up",
         "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It puts the brakes on before the bend."
     },
     {
@@ -19,32 +19,32 @@
       "question": "The capped speeds alone asked for a deceleration of:",
       "options": [
         "1.5 m/s2",
-        "20.0 m/s2, far over the limit",
         "0",
+        "20.0 m/s2, far over the limit",
         "1"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The brakes must start before the bend."
     },
     {
       "stage": "check",
       "question": "The profile asked for how much, against a limit of 1.5?",
       "options": [
-        "20.0",
-        "1.50 m/s2",
+        "0",
         "100",
-        "0"
+        "1.50 m/s2",
+        "20.0"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Within the limit."
     },
     {
       "stage": "check",
       "question": "How far before the stop line did the slowing begin?",
       "options": [
-        "0 m",
-        "1.30 m",
         "100 m",
+        "1.30 m",
+        "0 m",
         "At the line"
       ],
       "correct": 1,
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why did smoothing a corner save time?",
       "options": [
-        "Shorter path",
-        "The curvature at the corner point was lower, so the cap was higher: 8.6 s to 8.2 s",
+        "Faster motors",
         "Luck",
-        "Faster motors"
+        "Shorter path",
+        "The curvature at the corner point was lower, so the cap was higher: 8.6 s to 8.2 s"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A corner asks a crawl."
     }
   ]

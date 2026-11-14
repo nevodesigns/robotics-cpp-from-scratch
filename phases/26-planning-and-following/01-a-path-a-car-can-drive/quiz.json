@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "Why is a path through the cells of a grid not a path for a car?",
       "options": [
-        "Grids are slow",
+        "Cells are small",
         "It has corners, which need a curvature no car has",
-        "Cars are fast",
-        "Cells are small"
+        "Grids are slow",
+        "Cars are fast"
       ],
       "correct": 1,
       "explanation": "A car cannot be anywhere facing any way."
@@ -18,22 +18,22 @@
       "stage": "check",
       "question": "The hybrid path had a largest curvature of:",
       "options": [
-        "15.7",
         "1.35 per metre, within the limit of 1.35",
+        "100",
         "0",
-        "100"
+        "15.7"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Every part is an arc the car can drive."
     },
     {
       "stage": "check",
       "question": "The corner of the grid path needed a curvature of:",
       "options": [
-        "1.35",
+        "1",
         "15.7 per metre",
-        "0",
-        "1"
+        "1.35",
+        "0"
       ],
       "correct": 1,
       "explanation": "A 90 degree turn in 0.1 m."
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "A goal that was walled in was reported as:",
       "options": [
-        "Found at the nearest point",
         "Not found, with an empty path",
+        "A crash",
         "Found",
-        "A crash"
+        "Found at the nearest point"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Say so."
     },
     {
@@ -55,11 +55,11 @@
       "question": "What keeps the search from running for ever over continuous poses?",
       "options": [
         "A timer only",
-        "Nodes are kept one to a cell of a coarse grid of position and heading",
         "Luck",
+        "Nodes are kept one to a cell of a coarse grid of position and heading",
         "Memory"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The cheapest into each cell wins."
     },
     {
@@ -67,11 +67,11 @@
       "question": "What does a finer grid of headings cost?",
       "options": [
         "Nothing",
-        "More expansions: 1146 at 12 headings and 2675 at 48",
+        "A faster search",
         "Accuracy",
-        "A faster search"
+        "More expansions: 1146 at 12 headings and 2675 at 48"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Use the fewest that reach the goal heading."
     }
   ]

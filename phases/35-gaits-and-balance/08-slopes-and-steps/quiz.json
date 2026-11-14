@@ -6,48 +6,48 @@
       "stage": "pre",
       "question": "Which three things can limit a robot on a slope?",
       "options": [
+        "Battery",
         "Colour, size, weight",
         "Grip, tipping and the legs' reach",
-        "Speed",
-        "Battery"
+        "Speed"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The lowest is the first to give."
     },
     {
       "stage": "check",
       "question": "On a wet floor (friction 0.3) the feet slipped at:",
       "options": [
-        "31.0 degrees",
-        "16.7 degrees",
         "35.1 degrees",
-        "0 degrees"
+        "31.0 degrees",
+        "0 degrees",
+        "16.7 degrees"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Dry: 31.0."
     },
     {
       "stage": "check",
       "question": "Which limit was the first to give for these legs?",
       "options": [
-        "Friction",
         "Number 2, the reach of a body kept level",
+        "Friction",
         "Nothing",
         "Colour"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "0 friction, 1 tipping, 2 reach."
     },
     {
       "stage": "check",
       "question": "The highest step by geometry and by the servos in 0.20 s:",
       "options": [
-        "0.033 m and 0.229 m",
-        "0.229 m and 0.033 m",
         "The same",
-        "0 m"
+        "0 m",
+        "0.229 m and 0.033 m",
+        "0.033 m and 0.229 m"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The servos give a fraction."
     },
     {
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What must a robot do to climb stairs with these servos?",
       "options": [
-        "Nothing",
         "Slow down: a longer swing allows a higher step",
         "Speed up",
+        "Nothing",
         "Turn"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The servos set the height at that pace."
     }
   ]

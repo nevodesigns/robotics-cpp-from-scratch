@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "A function takes std::vector<double> samples by value and is given a vector of 1024 doubles. What does the callee see?",
       "options": [
-        "A new buffer: one was allocated and all 1024 elements copied into it",
         "The caller's buffer, since vectors are reference types",
+        "A new buffer: one was allocated and all 1024 elements copied into it",
         "The caller's buffer, unless the callee modifies it",
         "A new buffer, but only in a debug build"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "Measured by comparing the address of the data: by value arrives as a new buffer, by const reference and by span arrive as the same one. Nothing in the source says a copy happened."
     },
     {
       "stage": "check",
       "question": "The same vector is passed by value through two functions. How many buffers are allocated?",
       "options": [
-        "Two: the cost is per call, not once",
-        "One: the copy is shared between the two calls",
+        "Two, but only without optimisation",
         "None, because the compiler elides copies of parameters",
-        "Two, but only without optimisation"
+        "One: the copy is shared between the two calls",
+        "Two: the cost is per call, not once"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Measured at two, against zero for const reference. A chain of five reading functions allocates and copies five times, and each line looks innocent on its own."
     },
     {
@@ -31,9 +31,9 @@
       "question": "A function builds a std::vector of 1024 doubles in a local and returns it by value. What arrives at the caller?",
       "options": [
         "The same buffer the local held: it was handed over, not rebuilt",
-        "A copy of the buffer, which is why out parameters exist",
         "A copy at -O0, and the same buffer at -O2",
-        "An empty vector, because the local was destroyed"
+        "An empty vector, because the local was destroyed",
+        "A copy of the buffer, which is why out parameters exist"
       ],
       "correct": 0,
       "explanation": "The same address arrives, at -O0 as well as -O2. Whether the compiler elided the local or moved it, the buffer travelled out. The out parameter version computes the same thing and costs a declaration, a non const result and a half filled state on early return."
@@ -42,36 +42,36 @@
       "stage": "check",
       "question": "Why prefer rc::span<const double> over const std::vector<double>& for a function that only reads samples?",
       "options": [
-        "Neither copies, but the span also accepts a std::array or a pointer and a length from a driver, with no vector built",
-        "The span is faster to pass, being smaller",
         "The span allows the function to modify the data",
-        "There is no difference; it is a style preference"
+        "There is no difference; it is a style preference",
+        "Neither copies, but the span also accepts a std::array or a pointer and a length from a driver, with no vector built",
+        "The span is faster to pass, being smaller"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Measured against a vector, a std::array and a plain C array: the span took all three and copied none. A const vector reference would have required constructing a vector from the last two, which is the copy the signature was supposed to avoid."
     },
     {
       "stage": "post",
       "question": "At what string length do the characters stop living inside the std::string object itself?",
       "options": [
-        "It depends on the standard library: measured at 16 here, with sizeof(std::string) of 32, and it is not a language rule",
         "Always at 32, which is sizeof(std::string)",
+        "Never: a string's characters are always on the heap",
         "Always at 16, on every implementation",
-        "Never: a string's characters are always on the heap"
+        "It depends on the standard library: measured at 16 here, with sizeof(std::string) of 32, and it is not a language rule"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Characters were inside the object up to length 15 and on the heap from 16. That threshold is an implementation choice, so the suite prints the table and does not assert the number. It is why pass strings by const reference is advice about long strings."
     },
     {
       "stage": "post",
       "question": "Why is return std::move(local); worse than return local; when returning a container?",
       "options": [
-        "It is unnecessary and can prevent the compiler eliding the local altogether",
         "It copies instead of moving",
-        "It leaves the local in an undefined state the caller can observe",
-        "It is identical; both are fine"
+        "It is unnecessary and can prevent the compiler eliding the local altogether",
+        "It is identical; both are fine",
+        "It leaves the local in an undefined state the caller can observe"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "Returning a named local plainly is the form that lets the compiler leave out the local entirely. Wrapping it in std::move turns it into an expression the elision rules do not cover, so the move happens where nothing needed to."
     }
   ]

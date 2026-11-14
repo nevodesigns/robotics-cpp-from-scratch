@@ -6,9 +6,9 @@
       "stage": "pre",
       "question": "Settings, log, link and monitor were started in that order. In what order are they closed?",
       "options": [
-        "The same",
-        "The reverse: monitor, link, log, settings",
         "Alphabetical",
+        "The reverse: monitor, link, log, settings",
+        "The same",
         "Any"
       ],
       "correct": 1,
@@ -18,36 +18,36 @@
       "stage": "check",
       "question": "A step in the middle throws. What happens to the steps after it?",
       "options": [
-        "They are skipped",
         "They still run, and the failure is recorded",
-        "The program ends",
-        "They run twice"
+        "They run twice",
+        "They are skipped",
+        "The program ends"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "All 5 ran, including the last."
     },
     {
       "stage": "check",
       "question": "Why must the step that stops the robot not be skipped?",
       "options": [
-        "It is the biggest",
-        "It may come after a step that failed, and it is the one that matters most",
+        "It is first",
         "Qt requires it",
-        "It is first"
+        "It is the biggest",
+        "It may come after a step that failed, and it is the one that matters most"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The step after a failing one may be the one that stops the robot."
     },
     {
       "stage": "check",
       "question": "The program is asked to quit three times. How often does a step run?",
       "options": [
-        "Three times",
         "Once: the second and later requests do nothing",
-        "Never",
-        "Twice"
+        "Three times",
+        "Twice",
+        "Never"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The step ran 1 time and the later reports were empty."
     },
     {
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What delivers the deferred deletes of a program that is leaving?",
       "options": [
+        "The operating system",
         "Nothing",
         "flush_deferred_deletes, which sends them",
-        "The destructor of the application",
-        "The operating system"
+        "The destructor of the application"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "After the drain the object was gone."
     }
   ]

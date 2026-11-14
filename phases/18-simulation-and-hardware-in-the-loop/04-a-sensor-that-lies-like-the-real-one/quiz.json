@@ -7,11 +7,11 @@
       "question": "Why is a perfect simulated sensor dangerous?",
       "options": [
         "It is slow",
+        "It breaks",
         "A controller tested on it has never met a delay, noise or a step size: one that overshot by 0.19 with it overshot by 0.65 with a sensor 60 ms old",
-        "It is inaccurate",
-        "It breaks"
+        "It is inaccurate"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It is the one fake that is always wrong."
     },
     {
@@ -20,8 +20,8 @@
       "options": [
         "Any",
         "Truth plus bias plus noise, then the range, then the resolution, then the delay, and last the chance of the whole reading being lost",
-        "Delay first",
-        "Resolution first"
+        "Resolution first",
+        "Delay first"
       ],
       "correct": 1,
       "explanation": "The order is the order they happen in a real sensor."
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "A resolution of 0.1 gave an rms error of 0.02885. What predicts that?",
       "options": [
-        "The noise",
         "The step over the square root of twelve, 0.02887: the quantization error",
         "The range",
+        "The noise",
         "The delay"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Phase 15 predicted it."
     },
     {
       "stage": "check",
       "question": "A reading is lost. What should the model give?",
       "options": [
+        "The truth",
         "Zero",
-        "A reading marked invalid that carries the last good value, so a loop that ignores the mark does not jump to the origin",
         "An exception",
-        "The truth"
+        "A reading marked invalid that carries the last good value, so a loop that ignores the mark does not jump to the origin"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "2052 of 20000 were lost at a chance of 0.1."
     },
     {
       "stage": "post",
       "question": "Why does every reading draw its random numbers whatever the options?",
       "options": [
-        "Speed",
-        "So that switching one effect on does not change what another does: the delayed sensor read exactly what the plain one had read two samples before",
         "To use the generator",
-        "It is required"
+        "It is required",
+        "So that switching one effect on does not change what another does: the delayed sensor read exactly what the plain one had read two samples before",
+        "Speed"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Otherwise adding a delay to a test would change its noise."
     },
     {
       "stage": "post",
       "question": "The noise and coarse steps added almost nothing to the overshoot in the last test. What does that say?",
       "options": [
-        "They do not matter",
         "That for this controller the delay is what matters, and the way to find out which effects matter is to switch them on one at a time",
-        "The model is wrong",
-        "Noise is zero"
+        "Noise is zero",
+        "They do not matter",
+        "The model is wrong"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "0.6543 against 0.6574."
     }
   ]

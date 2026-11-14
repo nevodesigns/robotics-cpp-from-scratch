@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "Why not follow a grid planner's path cell by cell?",
       "options": [
-        "It is wrong",
         "It is legal but a staircase: 72 points and 7 turns for a path that needed 8 points, and the robot weaves along it",
+        "It is wrong",
         "It is too short",
         "It has gaps"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Most cells of a grid path are not needed."
     },
     {
       "stage": "check",
       "question": "What does a cell need to be for a straight line to cross it?",
       "options": [
+        "Any",
         "Unknown or free",
         "Free: the line must run over cells that have been seen to be free, and unknown does not count",
-        "Any",
         "Occupied"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A shortcut through what nobody has seen is a gamble."
     },
     {
@@ -31,32 +31,32 @@
       "question": "Two walls at (4,5) and (5,4) touch at their corners. The diagonal (3,3) to (6,6) crosses only free cells. Is it clear?",
       "options": [
         "Yes",
-        "No: a step on both axes must also have the two cells it passes between free, or the line has slipped through a shut gap",
+        "Yes if the grid is fine",
         "Only for a small robot",
-        "Yes if the grid is fine"
+        "No: a step on both axes must also have the two cells it passes between free, or the line has slipped through a shut gap"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The cells on the line were free, and the line was called blocked."
     },
     {
       "stage": "check",
       "question": "How does greedy shortening choose the next cell to keep?",
       "options": [
+        "Every tenth",
         "The nearest",
-        "The furthest later cell with a clear straight line from the last kept cell, searched from the end of the path backwards",
         "The middle",
-        "Every tenth"
+        "The furthest later cell with a clear straight line from the last kept cell, searched from the end of the path backwards"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The first and last are always kept."
     },
     {
       "stage": "post",
       "question": "How was the shortened path checked?",
       "options": [
-        "By the same function",
-        "By a separate sampler that walks each segment every tenth of a cell and asks which cell each sample is in",
         "By eye",
+        "By a separate sampler that walks each segment every tenth of a cell and asks which cell each sample is in",
+        "By the same function",
         "It was not"
       ],
       "correct": 1,
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "West and then south west is how many degrees of turn?",
       "options": [
+        "0",
         "315",
         "45: a heading difference over pi is 2 pi minus it, the short way round",
-        "90",
-        "0"
+        "90"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Headings are angles and must be wrapped."
     }
   ]

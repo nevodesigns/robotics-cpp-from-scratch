@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "What is the latency of a reading, in this lesson?",
       "options": [
-        "The loop's period",
         "The time from when the reading was MADE to when the consumer had it, measured with a stamp carried in the reading",
         "The time the consumer spends working on it",
+        "The loop's period",
         "The time between two consecutive readings being looked at"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A loop-time measurement would read 5000 microseconds for every design at 200 Hz. Stamping at the source is the only way to know how long a reading waited."
     },
     {
       "stage": "check",
       "question": "At 200 Hz for 2 seconds, a spinning consumer, a polling one (1 ms) and a sleeping one. Which has the lowest median latency, and what did it cost?",
       "options": [
-        "The sleeper, at no cost",
-        "The spinner, at 0.4 microseconds, which used 1999 ms of CPU in 2000: a whole core",
         "The poller, since 1 ms is short",
-        "They were all equal"
+        "The spinner, at 0.4 microseconds, which used 1999 ms of CPU in 2000: a whole core",
+        "They were all equal",
+        "The sleeper, at no cost"
       ],
       "correct": 1,
       "explanation": "The poller's median was 514 to 549 us and its CPU 31 to 32 ms; the sleeper's was 39 to 65 us and 4.7 to 8.9 ms. Nothing is free, and the right choice comes from the budget."
@@ -30,12 +30,12 @@
       "stage": "check",
       "question": "A 5 ms producer, a consumer taking 20 ms a reading, and a queue of 4. produced 60, delivered 19. What is dropped, and why must it be reported?",
       "options": [
+        "The queue's capacity",
         "Nothing; some readings are just late",
-        "41 of 60: a latency figure over the 19 that got through says nothing about the rest, so every reading must be delivered or dropped and the counts must add up",
         "19 readings",
-        "The queue's capacity"
+        "41 of 60: a latency figure over the 19 that got through says nothing about the rest, so every reading must be delivered or dropped and the counts must add up"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The 19 survivors looked healthy, since the queue never held more than four. Conservation, produced equals delivered plus dropped, is the first thing the suite checks."
     },
     {
@@ -43,20 +43,20 @@
       "question": "A slow consumer and a full queue. What should the producer do, and how is it checked?",
       "options": [
         "Wait until there is room",
+        "Double the queue",
         "Drop the reading, count it, and keep its rate: measured, produced plus missed slots stayed at about 60 so the slow consumer did not slow the producer",
-        "Stop",
-        "Double the queue"
+        "Stop"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A producer that blocks on a full queue has moved the loss from the queue to the sensor. The slots law checks that the producer's grid was kept."
     },
     {
       "stage": "post",
       "question": "A test asserted that a spinning consumer went round more than 100 times per reading, and failed in 3 of 10 runs with 12 busy loops competing. Why, and what replaced it?",
       "options": [
-        "The spinner has a bug",
-        "With every core busy the spinning thread is descheduled too and goes round far less, so the count depends on the CPU the scheduler grants; it is now printed, and only bounds a slower machine cannot break are asserted: a poller goes round at most about once a millisecond, a sleeper at most once per reading plus its timeouts",
         "The assertion was too strict by a few percent",
+        "With every core busy the spinning thread is descheduled too and goes round far less, so the count depends on the CPU the scheduler grants; it is now printed, and only bounds a slower machine cannot break are asserted: a poller goes round at most about once a millisecond, a sleeper at most once per reading plus its timeouts",
+        "The spinner has a bug",
         "Spinning does not work under load"
       ],
       "correct": 1,
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why report the 99th percentile and the worst, and count overflows, instead of a mean?",
       "options": [
+        "Percentiles are faster",
         "Means are hard to compute",
         "A timing distribution has a hard floor and a long tail, so a mean says almost nothing about the tail, which is the whole question: the sleeper's worst was 473 to 1548 us against a p99 of 167 to 245",
-        "Percentiles are faster",
         "Because the histogram cannot compute a mean"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Lesson 07-03's argument, with numbers: one reading in the sleeper's run took 1.5 ms, which was the scheduler and not the queue. A specification written as an average is not a specification."
     }
   ]

@@ -6,48 +6,48 @@
       "stage": "pre",
       "question": "Lesson 02-09 found that a struct member read before it was written produces no warning on gcc or clang and runs clean under the address sanitizer. What happens to the same read inside a constant expression?",
       "options": [
-        "Both compilers refuse to compile it, because undefined behaviour is not a constant expression",
         "It is folded to zero, since the compiler must pick some value",
         "It compiles, and the sanitizer catches it as before",
-        "It is a warning, which -Werror can turn into an error"
+        "It is a warning, which -Werror can turn into an error",
+        "Both compilers refuse to compile it, because undefined behaviour is not a constant expression"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "At runtime the compiler may assume undefined behaviour does not happen. In a constant expression it has to produce the value, and there is none to produce. That makes it the one place this bug is caught for free, with no tool and no flag."
     },
     {
       "stage": "check",
       "question": "constexpr on a function means what, exactly?",
       "options": [
-        "Permission: it may be evaluated during translation if used where a constant is required, and otherwise runs like any function",
-        "Instruction: every call is evaluated during translation",
+        "That it is inlined at every call site",
         "That it has no side effects and can be reordered freely",
-        "That it is inlined at every call site"
+        "Instruction: every call is evaluated during translation",
+        "Permission: it may be evaluated during translation if used where a constant is required, and otherwise runs like any function"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "The same function runs happily at runtime on a value the compiler does not know. To require compile-time evaluation you use the result where only a constant will do: a constexpr variable, a static_assert, an array bound or a template argument."
     },
     {
       "stage": "check",
       "question": "const int size = readings.size(); int buffer[size]; is refused. Why, when const int kCount = 8; int buffer[kCount]; is accepted?",
       "options": [
-        "const says nobody may change it, not that the value is known at build time; the second works only because an integral const initialised by a constant expression is itself usable as one",
         "Because size is a std::size_t and array bounds must be int",
+        "const says nobody may change it, not that the value is known at build time; the second works only because an integral const initialised by a constant expression is itself usable as one",
         "Because readings.size() might return zero",
         "Both are refused; C++ has no variable-length arrays at all"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "That C++98 rule covers integral types only, which is why the same thing with a const double fails on both compilers. The feature appears to work until the first time it matters."
     },
     {
       "stage": "check",
       "question": "The lesson's suite checks the table's values with RC_CHECK at runtime rather than with static_assert. Why, given that static_assert is the stronger check?",
       "options": [
-        "A static_assert on the answer would mean an unfinished exercise could not be built, and a suite that cannot run tells a learner nothing about which function to write",
         "static_assert cannot compare array elements",
-        "Because the values are not actually known at compile time",
-        "To keep compile times down on the Windows lane"
+        "To keep compile times down on the Windows lane",
+        "A static_assert on the answer would mean an unfinished exercise could not be built, and a suite that cannot run tells a learner nothing about which function to write",
+        "Because the values are not actually known at compile time"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "The compile-time property is proven separately, by constexpr variables at file scope that compile only if the compiler could work the values out. Proving when an evaluation happened and checking what it produced are two different jobs."
     },
     {
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Can a test prove that a given expression was NOT evaluated at compile time?",
       "options": [
-        "No. You can prove one happened, by putting it where a runtime value would be refused, and there is no portable way to assert the compiler declined to fold something",
         "Yes, by comparing the binary size with and without the constexpr keyword",
-        "Yes, by timing the first call against later ones",
-        "Yes, with std::is_constant_evaluated in C++17"
+        "Yes, with std::is_constant_evaluated in C++17",
+        "No. You can prove one happened, by putting it where a runtime value would be refused, and there is no portable way to assert the compiler declined to fold something",
+        "Yes, by timing the first call against later ones"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "So compile-time evaluation is not a property to check in a test. It is a property to require in the declaration, by making the variable constexpr, so a build that could not do the work fails."
     }
   ]

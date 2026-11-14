@@ -7,11 +7,11 @@
       "question": "What is the one parameter that decides a clustering by distance?",
       "options": [
         "The colour",
-        "How close two points must be to be one thing",
+        "The sensor",
         "The number of points",
-        "The sensor"
+        "How close two points must be to be one thing"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The radius."
     },
     {
@@ -19,11 +19,11 @@
       "question": "At a radius of 0.2 m the scene gave:",
       "options": [
         "0 clusters",
+        "7 clusters",
         "4 clusters",
-        "1 cluster",
-        "7 clusters"
+        "1 cluster"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Four objects, three scattered points dropped."
     },
     {
@@ -31,21 +31,21 @@
       "question": "At a radius of 5 m the scene gave:",
       "options": [
         "4 clusters",
-        "1 cluster",
         "0",
+        "1 cluster",
         "7"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Everything joins."
     },
     {
       "stage": "check",
       "question": "A fixed radius of 0.15 m on a wall 11 m away found how many objects?",
       "options": [
-        "1",
+        "100",
         "0",
-        "12",
-        "100"
+        "1",
+        "12"
       ],
       "correct": 1,
       "explanation": "The points are 0.19 m apart."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "Why does the radius grow with range?",
       "options": [
-        "Style",
         "The points of a far thing are further apart",
+        "Style",
         "To be fast",
         "Noise"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Spacing is range times the beam step."
     },
     {
       "stage": "post",
       "question": "What does a radius that is the same at every range do near the sensor?",
       "options": [
-        "Nothing",
         "It joins things that are close together, like two posts with a gap between them",
-        "It splits walls",
-        "It speeds up"
+        "It speeds up",
+        "Nothing",
+        "It splits walls"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Big enough for the far is too big for the near."
     }
   ]

@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "What does the capstone report when a walk cannot be done?",
       "options": [
-        "Nothing",
         "The first requirement that failed, with the figures of all",
-        "Only a number",
-        "A random reason"
+        "Nothing",
+        "A random reason",
+        "Only a number"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "1 for the fast walk."
     },
     {
       "stage": "check",
       "question": "A speed of 2.0 m/s failed at requirement:",
       "options": [
-        "3",
-        "1, the speed the legs allow (1.60 m/s)",
         "5",
-        "None"
+        "1, the speed the legs allow (1.60 m/s)",
+        "None",
+        "3"
       ],
       "correct": 1,
       "explanation": "The first in the list."
@@ -32,8 +32,8 @@
       "options": [
         "1",
         "4, the knees and getting up",
-        "6",
-        "None"
+        "None",
+        "6"
       ],
       "correct": 1,
       "explanation": "Heat in the trot and the rise from a crouch."
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "A person 0.3 m from the route failed at:",
       "options": [
-        "6",
-        "1",
         "5",
-        "None"
+        "None",
+        "6",
+        "1"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "The speed the person allows was under the useful minimum."
     },
     {
@@ -55,11 +55,11 @@
       "question": "Is a walk that passes proved to work?",
       "options": [
         "Yes",
-        "No: a screen with simple models and typical numbers; the robot has to be tried",
+        "Never",
         "Always",
-        "Never"
+        "No: a screen with simple models and typical numbers; the robot has to be tried"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Measure the real delay, heat and stop (36-07)."
     },
     {
@@ -67,11 +67,11 @@
       "question": "Why is the order what it is?",
       "options": [
         "Chance",
-        "From what is cheapest to change last: the operator's speed, the job's ground, then the robot's own limits",
+        "Longest first",
         "Alphabetical",
-        "Longest first"
+        "From what is cheapest to change last: the operator's speed, the job's ground, then the robot's own limits"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A robot limit cannot be fixed by a setting."
     }
   ]

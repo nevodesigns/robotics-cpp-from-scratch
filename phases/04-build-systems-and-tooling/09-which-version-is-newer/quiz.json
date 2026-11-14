@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "A script picks the newest of 1.9.0 and 1.10.0 by comparing them as text. Which does it pick?",
       "options": [
-        "1.10.0",
-        "1.9.0: as text '1.9' sorts after '1.10' because 9 is more than 1",
         "Both",
-        "Neither"
+        "Neither",
+        "1.10.0",
+        "1.9.0: as text '1.9' sorts after '1.10' because 9 is more than 1"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "As versions, compare gave -1: 1.9.0 is older."
     },
     {
       "stage": "check",
       "question": "Where does 1.0.0-rc.1 sit relative to 1.0.0?",
       "options": [
-        "After it",
+        "It depends on the alphabet",
         "Before it: a pre-release is older than the same numbers without a label",
-        "Equal",
-        "It depends on the alphabet"
+        "After it",
+        "Equal"
       ],
       "correct": 1,
       "explanation": "The release outranks its candidate."
@@ -31,21 +31,21 @@
       "question": "Of 1.0.0-beta.2 and 1.0.0-beta.11, which is newer, and what does text say?",
       "options": [
         "beta.2, and text agrees",
-        "beta.11, though as text beta.11 sorts first",
+        "Neither is valid",
         "They are equal",
-        "Neither is valid"
+        "beta.11, though as text beta.11 sorts first"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Identifiers that are numbers compare as numbers."
     },
     {
       "stage": "check",
       "question": "Why does compare number strings as digits, longer is bigger, and not turn them into integers?",
       "options": [
-        "It is faster",
+        "Text is always better",
         "A very long number would overflow an integer, and comparing as digits cannot",
-        "Integers are banned",
-        "Text is always better"
+        "It is faster",
+        "Integers are banned"
       ],
       "correct": 1,
       "explanation": "rc.99999999999999999999 against rc.100000000000000000000 gave -1."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "A project asks for 1.4.0. Is 2.0.0, which is newer, compatible?",
       "options": [
+        "Yes if the minor is higher",
         "Yes, newer is fine",
         "No: a new major version may break the interface, so the major numbers must match",
-        "Only on Tuesdays",
-        "Yes if the minor is higher"
+        "Only on Tuesdays"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "That is the SameMajorVersion rule."
     },
     {
       "stage": "post",
       "question": "Among 1.2.0, 1.9.4, 2.0.1, 1.10.0, 1.11.0-rc.1 and 0.9.0, which does a request for 1.4.0 get?",
       "options": [
-        "1.11.0-rc.1",
         "1.10.0: 1.2.0 is older, 2.0.1 and 0.9.0 have other majors, and the candidate is not offered to a request for a release",
-        "2.0.1",
-        "1.9.4"
+        "1.11.0-rc.1",
+        "1.9.4",
+        "2.0.1"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A pre-release is only offered to somebody who asked for one."
     }
   ]

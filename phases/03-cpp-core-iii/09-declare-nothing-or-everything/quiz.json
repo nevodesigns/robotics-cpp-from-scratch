@@ -19,8 +19,8 @@
       "question": "What did that one line cost when pushing 64 rows of 64 doubles into a vector?",
       "options": [
         "198 allocations where there had been 71, because every reallocation copies the rows instead of moving them",
-        "Nothing measurable: the destructor is empty so it is optimised away",
         "One extra allocation per row, so 64 more",
+        "Nothing measurable: the destructor is empty so it is optimised away",
         "It got faster, since a defaulted destructor is trivial"
       ],
       "correct": 0,
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "std::is_move_constructible returns true for a class with no move constructor at all. Why?",
       "options": [
-        "It asks whether a T can be built from an rvalue T, and a copy constructor can do that",
-        "It is a compiler bug in libstdc++",
+        "It returns true only for trivially copyable types",
         "Because the class is still destructible",
-        "It returns true only for trivially copyable types"
+        "It is a compiler bug in libstdc++",
+        "It asks whether a T can be built from an rvalue T, and a copy constructor can do that"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Binding a const T& to an rvalue is perfectly legal, so the trait is satisfied by copying. It answered yes for all three classes in the lesson, two of which have no move constructor. The nothrow variant matched the observed behaviour on every row."
     },
     {
       "stage": "check",
       "question": "Why is is_nothrow_move_constructible the right question rather than a stricter one picked arbitrarily?",
       "options": [
+        "Because throwing moves are undefined behaviour",
         "It is the condition the standard library itself branches on when a vector reallocates",
-        "Because noexcept functions are faster",
         "It is not: any move trait would do",
-        "Because throwing moves are undefined behaviour"
+        "Because noexcept functions are faster"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "A vector reallocating has already allocated the new buffer and is part way through relocating. If a move could throw it could not put the elements back, so it copies and keeps the strong exception guarantee. A class that is move constructible and not nothrow move constructible is copied by every container it enters."
     },
     {
       "stage": "post",
       "question": "Declaring all five as = default restored the behaviour exactly. So why is the advice to declare nothing?",
       "options": [
-        "Six lines that have to stay correct as the class changes, against nothing to keep in step",
         "Because = default is slower than an implicit operation",
-        "Because declaring all five is not actually equivalent",
-        "It is not: declaring all five is the recommended style"
+        "It is not: declaring all five is the recommended style",
+        "Six lines that have to stay correct as the class changes, against nothing to keep in step",
+        "Because declaring all five is not actually equivalent"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Measured identical on the trait, the buffer travel and the 71 allocations. The class that declared nothing adjusts automatically when a member is added; the one with six defaults has five more places that can drift from the member list, which is every bug 02-05 wrote the operations by hand to meet."
     },
     {
       "stage": "post",
       "question": "Declaring a move constructor suppresses the implicit copy, and declaring a destructor suppresses the implicit move. Why does only one of those get reported?",
       "options": [
+        "Neither is reported; the lesson measures both as silent",
         "Losing the copy is refused at the call site, because the caller tries to use what was taken away; losing the move takes away something the compiler was going to do for you, and nothing complains",
-        "Both are reported, with -Wdeprecated-copy",
         "Only the move case is reported, by the sanitizers",
-        "Neither is reported; the lesson measures both as silent"
+        "Both are reported, with -Wdeprecated-copy"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "That asymmetry is why the destructor case needs a static_assert. The copy case is in the lesson's checks directory as code that must not compile; the destructor case compiles perfectly and just gets slower."
     }
   ]

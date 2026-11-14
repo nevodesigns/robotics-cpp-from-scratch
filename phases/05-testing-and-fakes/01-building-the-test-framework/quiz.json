@@ -8,8 +8,8 @@
       "options": [
         "Each test creates an object at file scope whose constructor registers it before main",
         "The compiler scans for functions whose names begin with test",
-        "The build system generates a main that calls each one",
-        "The linker collects them automatically"
+        "The linker collects them automatically",
+        "The build system generates a main that calls each one"
       ],
       "correct": 0,
       "explanation": "File scope objects are constructed before main is entered, and the framework exists to exploit exactly that side effect."
@@ -18,36 +18,36 @@
       "stage": "check",
       "question": "Why is the registry a static local inside a function rather than a global variable?",
       "options": [
-        "The order of construction between translation units is undefined, so a registrar could run before a global was built",
         "Globals cannot hold vectors",
+        "So the registry can be reset between runs",
         "It makes the registry faster to access",
-        "So the registry can be reset between runs"
+        "The order of construction between translation units is undefined, so a registrar could run before a global was built"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "A static local is constructed the first time control reaches it, which is necessarily before its first use. That is the standard cure for the static initialisation order problem."
     },
     {
       "stage": "check",
       "question": "Why does MINI_TEST end without a closing brace?",
       "options": [
-        "So the block written after it becomes the body of the generated function",
-        "Because macros cannot contain braces",
         "To allow several tests to share a body",
-        "Because the preprocessor adds one automatically"
+        "So the block written after it becomes the body of the generated function",
+        "Because the preprocessor adds one automatically",
+        "Because macros cannot contain braces"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "The macro expands to a declaration, a registrar, and the start of a definition. The learner's braces complete the function."
     },
     {
       "stage": "check",
       "question": "What does #expr do inside a macro?",
       "options": [
-        "Turns the expression into a string literal, so a failure can print the code",
-        "Evaluates the expression twice",
         "Pastes it onto the previous token",
+        "Evaluates the expression twice",
+        "Turns the expression into a string literal, so a failure can print the code",
         "Marks it as a preprocessor directive"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Stringification is why a report can say expected this to be true: 1 == 2, rather than only reporting that something was false."
     },
     {
@@ -55,8 +55,8 @@
       "question": "Why must run_all clear the recorded failures before starting?",
       "options": [
         "So calling it twice reports the same result rather than accumulating",
-        "To free memory between runs",
         "Because failures are stored in a fixed size buffer",
+        "To free memory between runs",
         "So that tests can be run in a different order"
       ],
       "correct": 0,
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "When should a check be a require instead?",
       "options": [
+        "Only in tests that touch hardware",
         "When its failure makes the following lines meaningless or dangerous, such as a size before indexing",
         "Whenever the value is important",
-        "Only in tests that touch hardware",
         "Whenever the check involves a pointer"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "This rule came from a real bug in this repository: a size check failed, execution continued into the read, and the learner saw a crash instead of a sentence naming the problem."
     }
   ]

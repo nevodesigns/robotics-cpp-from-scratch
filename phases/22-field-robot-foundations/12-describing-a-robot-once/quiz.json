@@ -7,47 +7,47 @@
       "question": "What does the word typical in a robot file mean?",
       "options": [
         "The number is exact",
-        "The number was not found; it is a value for a robot of this class",
         "The number is wrong",
+        "The number was not found; it is a value for a robot of this class",
         "It is a unit"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Honesty about what is measured."
     },
     {
       "stage": "check",
       "question": "How many of the 11 numbers of the reference robot are typical?",
       "options": [
-        "None",
-        "3",
+        "Half",
         "All",
-        "Half"
+        "3",
+        "None"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A reader can see which."
     },
     {
       "stage": "check",
       "question": "The masses of the links in the SDF added up to:",
       "options": [
+        "0",
         "1.000 kg, the robot's mass",
         "2 kg",
-        "0",
         "10 kg"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "The body gets the mass that is left after the wheels."
     },
     {
       "stage": "check",
       "question": "What is a line with a number and no source?",
       "options": [
-        "Fine",
         "Refused at its line",
+        "Ignored",
         "A warning",
-        "Ignored"
+        "Fine"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "No source, no number."
     },
     {
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why compute inertias from the shapes?",
       "options": [
-        "Gazebo cannot",
-        "A default inertia is a robot that spins or turns wrongly",
         "To save typing only",
-        "It is required"
+        "It is required",
+        "Gazebo cannot",
+        "A default inertia is a robot that spins or turns wrongly"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Wrong inertia is silently wrong dynamics."
     }
   ]

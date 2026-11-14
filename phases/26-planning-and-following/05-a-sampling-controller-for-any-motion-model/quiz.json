@@ -6,69 +6,69 @@
       "stage": "pre",
       "question": "What does a sampling controller need to know about the vehicle?",
       "options": [
+        "Nothing",
         "Its whole design",
         "A function that says where one step of control takes it",
-        "Its colour",
-        "Nothing"
+        "Its colour"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It tries futures with that function."
     },
     {
       "stage": "check",
       "question": "How many samples did the car test use?",
       "options": [
-        "8",
-        "100",
         "1",
-        "1000"
+        "1000",
+        "100",
+        "8"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Each is a noisy copy of the nominal."
     },
     {
       "stage": "check",
       "question": "Planning with a unicycle for the car, tracking error against the car's own model:",
       "options": [
+        "It crashed",
         "Far worse",
-        "0.018 m against 0.047 m: hardly different, because it replans every 0.1 s",
         "Far better",
-        "It crashed"
+        "0.018 m against 0.047 m: hardly different, because it replans every 0.1 s"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The wrong model shows in the predictions, 0.67 m out over 2 s."
     },
     {
       "stage": "check",
       "question": "A controller given the grid made how many poses in blocked cells?",
       "options": [
-        "15",
         "0",
         "All",
-        "Half"
+        "Half",
+        "15"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The cost of the cell is in the score."
     },
     {
       "stage": "post",
       "question": "What does lambda do?",
       "options": [
-        "Sets the speed",
         "Sets how many of the worse rollouts still count in the weighted average",
-        "Sets the horizon",
-        "Nothing"
+        "Nothing",
+        "Sets the speed",
+        "Sets the horizon"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "exp(-(cost - least) / lambda)."
     },
     {
       "stage": "post",
       "question": "What is the price of more samples?",
       "options": [
-        "None",
-        "More rollouts every step, on the vehicle's processor: 0.152 m error at 8 samples against 0.077 m at 100",
         "Memory only",
+        "More rollouts every step, on the vehicle's processor: 0.152 m error at 8 samples against 0.077 m at 100",
+        "None",
         "Accuracy"
       ],
       "correct": 1,

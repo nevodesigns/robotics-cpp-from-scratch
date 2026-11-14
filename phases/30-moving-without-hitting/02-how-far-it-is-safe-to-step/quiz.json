@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "How far can a point of the arm move for a turn of a joint?",
       "options": [
+        "Not at all",
         "As far as it likes",
-        "No further than the turn times its distance from the axis, which is at most the length of everything beyond it",
         "The length of one link",
-        "Not at all"
+        "No further than the turn times its distance from the axis, which is at most the length of everything beyond it"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A circle about the axis."
     },
     {
       "stage": "check",
       "question": "A sphere of 5 mm on the path was found by steps of 0.5 rad:",
       "options": [
-        "1",
         "0: 1 is found and 0 is missed",
         "Always",
-        "In 14 poses"
+        "In 14 poses",
+        "1"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Fixed steps miss thin things."
     },
     {
@@ -32,8 +32,8 @@
       "options": [
         "70",
         "14",
-        "1",
-        "1000000"
+        "1000000",
+        "1"
       ],
       "correct": 1,
       "explanation": "Steps shrink near the obstacle."
@@ -43,35 +43,35 @@
       "question": "On an edge far from everything, conservative advancement looked at:",
       "options": [
         "201 poses and fixed steps 2",
+        "None",
         "2 poses against 201 for fixed steps",
-        "The same number",
-        "None"
+        "The same number"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Large steps where it is safe."
     },
     {
       "stage": "post",
       "question": "Why can conservative advancement not step over an obstacle?",
       "options": [
+        "Obstacles are big",
         "It is lucky",
         "Each step is at most the clearance over the bound, and no point can move further than the bound says",
-        "It looks at every pose",
-        "Obstacles are big"
+        "It looks at every pose"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A guarantee."
     },
     {
       "stage": "post",
       "question": "Where does the margin belong?",
       "options": [
-        "In the obstacle",
-        "In the check: how much room the arm should keep",
         "In the planner's goal",
-        "Nowhere"
+        "Nowhere",
+        "In the obstacle",
+        "In the check: how much room the arm should keep"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "3 cm is free with none and not with 5 cm."
     }
   ]

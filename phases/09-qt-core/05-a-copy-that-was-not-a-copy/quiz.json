@@ -6,33 +6,33 @@
       "stage": "pre",
       "question": "A handler reads a QByteArray with b[0] on a local copy of a frame, writing nothing. What does it cost?",
       "options": [
-        "Nothing",
         "A full copy of the bytes: on a non-const array operator[] is the version that can write, so it detaches first",
         "One byte",
-        "A signal"
+        "A signal",
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "b.at(0) and b.constData() did not copy."
     },
     {
       "stage": "check",
       "question": "What does a copy of a QByteArray cost until one of the copies is written to?",
       "options": [
+        "A lock",
         "The size of the array",
         "A pointer and a count: they share the bytes, and the writer takes its own copy",
-        "Nothing at all, ever",
-        "A lock"
+        "Nothing at all, ever"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "After b = a the two had the same bytes."
     },
     {
       "stage": "check",
       "question": "Which of b[0], b.at(0), b.data(), b.constData() and b.size() copied the bytes of a shared array?",
       "options": [
-        "All of them",
-        "b[0] and b.data(), the ones that can write",
         "Only b.size()",
+        "b[0] and b.data(), the ones that can write",
+        "All of them",
         "None"
       ],
       "correct": 1,
@@ -44,8 +44,8 @@
       "options": [
         "0 and 1000",
         "1000 and 0",
-        "1000 and 1000",
-        "1 and 1"
+        "1 and 1",
+        "1000 and 1000"
       ],
       "correct": 1,
       "explanation": "The loop's begin() is the writing version on a non-const array."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "Why does with_marker take the frame by value?",
       "options": [
-        "Habit",
         "It gets a shared copy that detaches on the first write, so there is exactly one copy and the caller's frame is untouched",
+        "Habit",
         "To avoid const",
         "It is faster than a reference"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The result's first byte was 77 and the caller's still 0."
     },
     {
       "stage": "post",
       "question": "What does the lesson not claim?",
       "options": [
+        "That a range-for reads",
         "That at() is cheaper",
-        "That the detail is the same in every Qt version: it is the behaviour of Qt 6.2 as measured, and other versions may differ",
         "That sharing is cheap",
-        "That a range-for reads"
+        "That the detail is the same in every Qt version: it is the behaviour of Qt 6.2 as measured, and other versions may differ"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Qt 6 made some old pitfalls disappear."
     }
   ]

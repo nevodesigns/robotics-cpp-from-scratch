@@ -6,34 +6,34 @@
       "stage": "pre",
       "question": "A sensor adds 10000 samples and calls update() for each, before the event loop runs. How many paints?",
       "options": [
-        "10000",
-        "1, after the loop runs",
         "0, ever",
-        "100"
+        "100",
+        "10000",
+        "1, after the loop runs"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "0 paints inside the calls and 1 after."
     },
     {
       "stage": "check",
       "question": "What does repaint() do that update() does not?",
       "options": [
+        "Clears the widget",
         "Nothing",
-        "Paints at once, every time it is called",
         "Paints in the background",
-        "Clears the widget"
+        "Paints at once, every time it is called"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "100 repaint() calls were 100 paints."
     },
     {
       "stage": "check",
       "question": "What does update(rect) tell Qt?",
       "options": [
-        "Where to draw next",
+        "To repaint twice",
         "Which part of the widget is out of date, and the paint event carries it",
-        "To scroll",
-        "To repaint twice"
+        "Where to draw next",
+        "To scroll"
       ],
       "correct": 1,
       "explanation": "The rectangle was 1 pixel wide and 100 high."
@@ -42,34 +42,34 @@
       "stage": "check",
       "question": "A paintEvent draws all 300 columns although the event is for one. What is wrong?",
       "options": [
-        "Nothing: Qt clips it",
         "The work is done and thrown away: the loop should go over only the columns in the event rectangle",
+        "It crashes",
         "It paints twice",
-        "It crashes"
+        "Nothing: Qt clips it"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "One sample went over 1 column, where a full update went over 300."
     },
     {
       "stage": "post",
       "question": "Columns 10 and 200 are updated before the loop runs. How many paints, over how many columns?",
       "options": [
+        "200, over 1",
         "2, over 2",
         "1, over 191: the event is the bounding rectangle",
-        "1, over 2",
-        "200, over 1"
+        "1, over 2"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The rectangle ran from x = 10 to x = 200."
     },
     {
       "stage": "post",
       "question": "Which thread may paint a widget?",
       "options": [
-        "Any",
+        "The main thread of the process only, never a widget thread",
         "The thread that owns it",
-        "A worker",
-        "The main thread of the process only, never a widget thread"
+        "Any",
+        "A worker"
       ],
       "correct": 1,
       "explanation": "Lesson 09-13 is about getting the data there."

@@ -7,44 +7,44 @@
       "question": "Why does a planner need a velocity as well as a position of a person?",
       "options": [
         "It does not",
+        "For the log",
         "It needs where they will be, and a position alone is where they were",
-        "To be tidy",
-        "For the log"
+        "To be tidy"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A plan is for the future."
     },
     {
       "stage": "check",
       "question": "The velocity error of the difference of two positions was:",
       "options": [
+        "10 m/s",
         "0.122 m/s",
-        "1.073 m/s",
         "0",
-        "10 m/s"
+        "1.073 m/s"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A position error of 5 cm over 0.1 s is 0.7 m/s."
     },
     {
       "stage": "check",
       "question": "A track was confirmed after how many frames?",
       "options": [
-        "1",
         "3",
         "10",
+        "1",
         "never"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Three hits."
     },
     {
       "stage": "check",
       "question": "A target hidden for 8 frames came out with:",
       "options": [
-        "The same id",
-        "A new id: the track had been dropped",
         "No id",
+        "A new id: the track had been dropped",
+        "The same id",
         "Two ids"
       ],
       "correct": 1,
@@ -55,23 +55,23 @@
       "question": "How well was the position 2 s ahead of a walking person predicted?",
       "options": [
         "To a metre",
+        "Not at all",
         "To within 0.20 m",
-        "Exactly",
-        "Not at all"
+        "Exactly"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The track's velocity times two seconds."
     },
     {
       "stage": "post",
       "question": "Why can two targets that stop side by side swap ids?",
       "options": [
-        "Chance",
         "When they are close the detections of one are nearer the prediction of the other",
-        "The filter is broken",
-        "Noise only"
+        "Chance",
+        "Noise only",
+        "The filter is broken"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Nearest neighbour keeps one hypothesis."
     }
   ]

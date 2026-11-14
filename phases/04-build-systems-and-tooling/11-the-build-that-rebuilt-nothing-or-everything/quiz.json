@@ -19,59 +19,59 @@
       "question": "A file is built, edited and reverted. How many compiles by timestamp and by content?",
       "options": [
         "2 and 3",
-        "3 and 2: the revert finds the object of the first build",
         "3 and 3",
-        "2 and 2"
+        "2 and 2",
+        "3 and 2: the revert finds the object of the first build"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "After a touch the timestamp said rebuild and the content key hit."
     },
     {
       "stage": "check",
       "question": "What does the build key contain, and why?",
       "options": [
+        "The compiler's name only",
         "Only the text",
-        "The name, the text and the flags, because an output depends on all three",
         "The timestamp",
-        "The compiler's name only"
+        "The name, the text and the flags, because an output depends on all three"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The same source with -O0 and -O2 are different builds."
     },
     {
       "stage": "check",
       "question": "Why are the three names multiplied by large constants before xor?",
       "options": [
-        "For speed",
         "So that two equal parts do not cancel to zero and swapping two fields does not give the same key",
-        "To make it shorter",
-        "It is required by C++"
+        "For speed",
+        "It is required by C++",
+        "To make it shorter"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "build_key(x, y, z) differs from build_key(y, x, z)."
     },
     {
       "stage": "post",
       "question": "Over 300 random builds with 4 versions and 2 sets of flags, how many compiles, hits and stale objects?",
       "options": [
+        "150, 150, 0",
         "300, 0, 0",
         "8 compiles, 292 hits, 0 stale",
-        "150, 150, 0",
         "8 compiles, 292 hits, 3 stale"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The compiled output contained its whole input so a stale one would be recognised."
     },
     {
       "stage": "post",
       "question": "Why do real tools hash the preprocessed text and not only the source file?",
       "options": [
+        "They do not",
         "It is shorter",
         "The output also depends on every header the file includes, which the source text does not show",
-        "Hashes are slower otherwise",
-        "They do not"
+        "Hashes are slower otherwise"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "This lesson's key is one file's text and flags, which the docs say it is."
     }
   ]

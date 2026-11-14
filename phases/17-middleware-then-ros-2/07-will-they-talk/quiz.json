@@ -8,8 +8,8 @@
       "options": [
         "Images arrive, slowly",
         "They are never connected, nothing is delivered, and the only report is a warning in a log: the most common cause of a subscriber that gets no data",
-        "Images arrive with gaps",
-        "An exception is thrown"
+        "An exception is thrown",
+        "Images arrive with gaps"
       ],
       "correct": 1,
       "explanation": "The middleware cannot give reliable delivery from a publisher that sends once."
@@ -18,24 +18,24 @@
       "stage": "check",
       "question": "Is the compatibility rule symmetric?",
       "options": [
-        "Yes",
         "No: a reliable offer meets either request and a best effort offer only best effort, so the order of offer and request matters",
+        "Yes",
         "Only for durability",
         "Only for deadlines"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Strength has an order and the offer must be at least the request."
     },
     {
       "stage": "check",
       "question": "An offer of a message every 0.5 s meets which request?",
       "options": [
-        "One for every 0.1 s",
-        "One for every 0.5 s or longer, or no deadline at all, but not every 0.1 s",
         "None",
-        "Any"
+        "One for every 0.1 s",
+        "Any",
+        "One for every 0.5 s or longer, or no deadline at all, but not every 0.1 s"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A faster promise meets a slower demand."
     },
     {
@@ -43,35 +43,35 @@
       "question": "A subscriber requests a deadline and the publisher offers none. Compatible?",
       "options": [
         "Yes",
-        "No: silence is not a promise, so a demand cannot be met by offering nothing",
         "Only if reliable",
+        "No: silence is not a promise, so a demand cannot be met by offering nothing",
         "Only for lease"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A request of no deadline is met by anything."
     },
     {
       "stage": "post",
       "question": "Why does the check name each property that does not fit?",
       "options": [
-        "For logging style",
-        "A yes or no leaves a person guessing which of five properties differed: the camera against the demanding node gave three named reasons",
         "It is slower",
-        "It is required by DDS"
+        "For logging style",
+        "It is required by DDS",
+        "A yes or no leaves a person guessing which of five properties differed: the camera against the demanding node gave three named reasons"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A person fixing it knows what to change."
     },
     {
       "stage": "post",
       "question": "What did the matcher do with the detector, subscribing with the default profile to the camera's image?",
       "options": [
-        "Connected it",
         "Did not connect it and reported one reason, reliability, while the best effort viewer was connected",
         "Dropped the camera",
-        "Changed the camera"
+        "Changed the camera",
+        "Connected it"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Three links and one mismatch in the test."
     }
   ]

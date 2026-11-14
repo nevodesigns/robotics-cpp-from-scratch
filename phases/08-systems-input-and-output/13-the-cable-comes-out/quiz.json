@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A cable is out for a minute and the program retries opening the port every millisecond. What happens?",
       "options": [
+        "The port opens by itself",
         "Nothing, it is the fastest way to reconnect",
         "About fifty thousand failed opens, a core at full load, and a log full of one line, for a cable that was never going to come back sooner",
-        "The port opens by itself",
         "The retries are rate limited by the system"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Measured, 53267 tries in about a minute, against 38 for a doubling wait. The prompt reconnect is bought with work that achieves nothing while the cable is out."
     },
     {
@@ -31,23 +31,23 @@
       "question": "Why is the delay built by multiplying one step at a time rather than as initial times factor to the power of the attempt?",
       "options": [
         "Powers are slow",
-        "For a long enough absence the power overflows to infinity, which then compares as no wait or never, so a step at a time stopped at the cap is safe",
+        "It gives a different answer",
         "The compiler rejects pow",
-        "It gives a different answer"
+        "For a long enough absence the power overflows to infinity, which then compares as no wait or never, so a step at a time stopped at the cap is safe"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The test calls it with a million failures in a row, a robot left in a cupboard, and requires exactly the cap."
     },
     {
       "stage": "check",
       "question": "The opener reports that the baud rate has no constant. What should the reconnecting port do?",
       "options": [
-        "Retry with a backoff like any other failure",
         "Stop, and report it, because no amount of trying fixes a mistake in the program and a retry loop hides it behind something that looks like patience",
-        "Try a different baud rate",
-        "Close the program"
+        "Close the program",
+        "Retry with a backoff like any other failure",
+        "Try a different baud rate"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A Failed state with a last_status is information. A loop that retries for ever is a robot that does not connect and says nothing."
     },
     {
@@ -67,11 +67,11 @@
       "question": "How does the code above the port know the connection is new?",
       "options": [
         "It guesses from a long silence",
-        "generation() goes up each time a connection is made, and the owner of the state compares it with the one it last saw",
         "The port throws",
-        "It reads a flag in the device"
+        "It reads a flag in the device",
+        "generation() goes up each time a connection is made, and the owner of the state compares it with the one it last saw"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The port is the only thing that knows it was reopened. Saying so with a counter keeps the owners of state independent of one another."
     }
   ]

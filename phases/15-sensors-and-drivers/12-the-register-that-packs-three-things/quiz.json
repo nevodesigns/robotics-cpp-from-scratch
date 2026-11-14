@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A 12 bit sensor reading of 0xFFF is read as an unsigned number. What does a driver think it is?",
       "options": [
-        "-1",
         "4095, the far end of the range, when the reading was -1",
-        "0",
-        "2047"
+        "-1",
+        "2047",
+        "0"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The joint resting just below level looks as if it is at full scale."
     },
     {
@@ -30,21 +30,21 @@
       "stage": "check",
       "question": "How is a 12 bit two's complement number made into an int?",
       "options": [
+        "Negate it",
         "Cast it",
         "Keep the low 12 bits, and if the top one is set subtract 2 to the twelfth: 0x800 becomes -2048 and 0xFFF becomes -1",
-        "Add 2048",
-        "Negate it"
+        "Add 2048"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Sign extension."
     },
     {
       "stage": "check",
       "question": "The chip holds a 12 bit reading in the top of two bytes. What must a driver do before sign extending?",
       "options": [
-        "Nothing",
-        "Shift the 16 bit word right by 4, so the reading is in the low twelve bits",
         "Swap the bytes twice",
+        "Shift the 16 bit word right by 4, so the reading is in the low twelve bits",
+        "Nothing",
         "Add 16"
       ],
       "correct": 1,
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "What does an overrun flag mean for the frame that carries it?",
       "options": [
-        "It is bad",
-        "The frame is good and an earlier one was lost, so it should be used and the loss recorded: it carried 0.1953 g in the test",
         "The chip failed",
-        "The range changed"
+        "The range changed",
+        "It is bad",
+        "The frame is good and an earlier one was lost, so it should be used and the loss recorded: it carried 0.1953 g in the test"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Throwing it away loses a good reading as well."
     },
     {
       "stage": "post",
       "question": "Why do the tests pack frames by hand?",
       "options": [
-        "To save time",
         "So the check is of the decoder against the chip's side of the wire and does not use the code it is checking: all 16384 frames decoded with no axis wrong",
+        "To test the bus",
         "Because the library is missing",
-        "To test the bus"
+        "To save time"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A test that shares the code under test shares its bugs."
     }
   ]

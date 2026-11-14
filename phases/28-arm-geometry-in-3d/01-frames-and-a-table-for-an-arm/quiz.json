@@ -7,21 +7,21 @@
       "question": "What is the inverse of a pose?",
       "options": [
         "Its matrix transposed",
-        "The rotation transposed and the translation turned round by it and negated",
+        "The same pose",
         "Its negative",
-        "The same pose"
+        "The rotation transposed and the translation turned round by it and negated"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A rotation and a translation."
     },
     {
       "stage": "check",
       "question": "An inverse that only transposed the rotation, for a pose 0.5 m from the origin, was out by:",
       "options": [
-        "0.0000000000000002",
+        "Nothing",
         "0.35 m",
         "0",
-        "Nothing"
+        "0.0000000000000002"
       ],
       "correct": 1,
       "explanation": "The translation is part of it."
@@ -30,21 +30,21 @@
       "stage": "check",
       "question": "The same row of a table in the two conventions gave frames:",
       "options": [
-        "The same",
-        "0.170 m apart",
         "1 km apart",
-        "Rotated only"
+        "Rotated only",
+        "0.170 m apart",
+        "The same"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The order of the four moves differs."
     },
     {
       "stage": "check",
       "question": "How high was the first frame of the UR5?",
       "options": [
-        "0",
-        "0.089159 m",
         "1 m",
+        "0.089159 m",
+        "0",
         "-0.089 m"
       ],
       "correct": 1,
@@ -54,12 +54,12 @@
       "stage": "post",
       "question": "Why does a table of numbers need its convention written with it?",
       "options": [
-        "Style",
         "The same numbers mean a different arm in the other convention",
-        "Law",
-        "Memory"
+        "Memory",
+        "Style",
+        "Law"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It is a claim in a convention."
     },
     {
@@ -67,11 +67,11 @@
       "question": "What fixes a rotation that has drifted from orthonormal?",
       "options": [
         "Nothing",
-        "Gram-Schmidt on its columns (orthonormalising)",
         "More precision always",
+        "Gram-Schmidt on its columns (orthonormalising)",
         "Transposing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "0.000000000126 to 0.0000000000000002."
     }
   ]

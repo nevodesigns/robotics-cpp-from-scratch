@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A signal is 5 plus or minus 1e-6. The chart scales the range to the data. What does it show?",
       "options": [
-        "A flat line",
-        "A storm: the range is 2e-6 wide, so the noise fills the chart",
         "Nothing",
-        "An error"
+        "An error",
+        "A storm: the range is 2e-6 wide, so the noise fills the chart",
+        "A flat line"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It marked 11 of 13 rows."
     },
     {
@@ -30,46 +30,46 @@
       "stage": "check",
       "question": "Why is the spike in row 1 and not row 0?",
       "options": [
-        "A bug",
         "The range has 5 percent of room above the highest value",
-        "Rows count from 1",
-        "The tick is there"
+        "A bug",
+        "The tick is there",
+        "Rows count from 1"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "padded adds room each side."
     },
     {
       "stage": "check",
       "question": "What does row_for do with a value above the range?",
       "options": [
-        "Returns a row past the top",
-        "Keeps it inside the chart: row 0",
         "Returns -1",
-        "Wraps round"
+        "Wraps round",
+        "Keeps it inside the chart: row 0",
+        "Returns a row past the top"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "row_for(99) on a range of 0 to 10 was row 0."
     },
     {
       "stage": "post",
       "question": "Why are labels put on tick rows rather than on every row?",
       "options": [
-        "Space only",
-        "A label says something only where a tick is: the value at that row is a nice number",
+        "Every row has a tick",
         "Qt requires it",
-        "Every row has a tick"
+        "Space only",
+        "A label says something only where a tick is: the value at that row is a nice number"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The 13 rows had 3 labels, on nice numbers."
     },
     {
       "stage": "post",
       "question": "What is min_span a choice about?",
       "options": [
-        "The size of the window",
+        "The number of columns",
         "What counts as steady for this signal: 0.1 suits a temperature and not a microvolt",
-        "The font",
-        "The number of columns"
+        "The size of the window",
+        "The font"
       ],
       "correct": 1,
       "explanation": "The chart cannot know the scale at which a signal stops being interesting."

@@ -18,22 +18,22 @@
       "stage": "check",
       "question": "What does one changed character do to a good hash?",
       "options": [
-        "Changes one bit",
-        "Changes about half of the bits wherever the change is: a mean of 32.4 of 64, between 16 and 44, over every place in a 200 character text",
         "Changes nothing",
-        "Changes the length"
+        "Changes the length",
+        "Changes about half of the bits wherever the change is: a mean of 32.4 of 64, between 16 and 44, over every place in a 200 character text",
+        "Changes one bit"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "That spread is why equal names can be trusted to mean equal content."
     },
     {
       "stage": "check",
       "question": "Why are a snapshot's file names combined with xor?",
       "options": [
-        "It is the fastest",
-        "Xor gives the same answer in whatever order, and a folder has no order, so a name that depended on one would change when nothing did",
         "It hides the files",
-        "It sorts them"
+        "Xor gives the same answer in whatever order, and a folder has no order, so a name that depended on one would change when nothing did",
+        "It sorts them",
+        "It is the fastest"
       ],
       "correct": 1,
       "explanation": "The same three files in two orders had the same snapshot name."
@@ -42,36 +42,36 @@
       "stage": "check",
       "question": "A file is renamed and its content is unchanged. What happens to its names?",
       "options": [
-        "Both change",
         "Its content name is the same and its name in the snapshot is different",
+        "The content name changes",
         "Neither changes",
-        "The content name changes"
+        "Both change"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A content name does not depend on what the file is called."
     },
     {
       "stage": "post",
       "question": "Two versions of a hundred files, one edited: how many different contents have to be stored?",
       "options": [
-        "200",
         "101: the ninety-nine unchanged files have the same name in both and are stored once",
+        "200",
         "1",
         "100"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "That is why a commit is quick and small, even for a large project."
     },
     {
       "stage": "post",
       "question": "Why is FNV-1a not enough for a tool that has to resist somebody trying to make two files collide?",
       "options": [
-        "It is too slow",
-        "It is not a cryptographic hash, and a 64 bit name could in a large enough store give two contents the same name",
+        "It cannot be repeated",
         "It only works on numbers",
-        "It cannot be repeated"
+        "It is too slow",
+        "It is not a cryptographic hash, and a 64 bit name could in a large enough store give two contents the same name"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The real tool uses a longer hash for that reason."
     }
   ]

@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A std::vector<double> is empty. What is readings.size() - 1?",
       "options": [
+        "Undefined behaviour, so anything at all",
         "18446744073709551615, the largest number a std::size_t can hold",
         "-1, since 0 minus 1 is minus one",
-        "0, because sizes cannot go below zero",
-        "Undefined behaviour, so anything at all"
+        "0, because sizes cannot go below zero"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "Sizes are unsigned, and unsigned arithmetic wraps rather than going negative. It is a defined result, not undefined behaviour, which is why it is so hard to find: the program carries on with a perfectly good number that is wrong."
     },
     {
@@ -20,8 +20,8 @@
       "options": [
         "Nothing unsigned is ever less than zero, so the condition cannot become false, and --i at zero wraps to the largest value",
         "Because v.size() is re-evaluated every pass and keeps changing",
-        "It does finish, but only after 2^64 passes",
-        "Because --i on an unsigned value is undefined behaviour"
+        "Because --i on an unsigned value is undefined behaviour",
+        "It does finish, but only after 2^64 passes"
       ],
       "correct": 0,
       "explanation": "Measured over a three element vector with a cap: still running after ten passes. The wrap at the bottom is the mechanism, and it is defined behaviour, so no sanitiser reports it either."
@@ -42,36 +42,36 @@
       "stage": "check",
       "question": "Under -Wall -Wextra, which of these does the compiler say nothing about?",
       "options": [
-        "v[v.size() - 1], on both gcc and clang",
-        "int i < v.size(), on both",
         "-1 < v.size(), on both",
-        "All of them warn on both compilers"
+        "All of them warn on both compilers",
+        "v[v.size() - 1], on both gcc and clang",
+        "int i < v.size(), on both"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "The diagnostics cover the comparisons, cover them inconsistently between compilers, and say nothing at all about the arithmetic. size() - 1 is the dangerous one and it is the one nothing mentions."
     },
     {
       "stage": "post",
       "question": "gcc reports the unsigned countdown through -Wtype-limits and clang does not. What follows from that?",
       "options": [
-        "A project that builds on one compiler is relying on a net with a known hole in it",
+        "Nothing: warnings are advisory and both are equally safe",
         "clang is wrong and should be reported upstream",
         "The code is only a bug when compiled with gcc",
-        "Nothing: warnings are advisory and both are equally safe"
+        "A project that builds on one compiler is relying on a net with a known hole in it"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "This is why the curriculum builds every lesson on gcc, clang and MSVC. The same code is not diagnosed the same way, and finding out which compiler notices what is not something to discover in a release."
     },
     {
       "stage": "post",
       "question": "You want the last element of a container that might be empty. What is the safest thing to write?",
       "options": [
-        "Check it is not empty, then use back(), which does no arithmetic at all",
-        "readings[readings.size() - 1], which is the standard idiom",
         "readings[last_index(readings.size())], which handles the empty case",
+        "readings[readings.size() - 1], which is the standard idiom",
+        "Check it is not empty, then use back(), which does no arithmetic at all",
         "readings.at(readings.size() - 1), which throws if it is wrong"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "last_index is right for driving a countdown loop, and it still gives -1 here, which is not an index. The version with no arithmetic in it cannot have an arithmetic bug, and that is worth more than any check bolted onto one that does."
     }
   ]

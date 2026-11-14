@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A loop takes 1000 microseconds and its four named sections come to 880. What is the 120 you cannot account for?",
       "options": [
-        "The code between the sections, which nobody thought was worth naming",
         "Measurement error in the clock",
         "The cost of the timing instrument itself",
+        "The code between the sections, which nobody thought was worth naming",
         "Rounding, since the sections are reported to one decimal place"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "The copying between stages, the logging, the bounds check, the thing added last month. It is unnamed precisely because nobody thought it mattered, which is why it is the usual place for a surprise. Suspect it before optimising the section that is already visible at 40 percent."
     },
     {
@@ -19,9 +19,9 @@
       "question": "An outer section contains an inner one. Outer measures 700 us, inner measures 500 us, and the loop took 700. What does unaccounted_for report, and why is it not clamped?",
       "options": [
         "Minus 500, and a negative answer is the only signal that the shares add to more than a hundred percent",
+        "500, counted once",
         "Zero, because the sections cover the whole loop",
-        "200, the part of the outer that was not the inner",
-        "500, counted once"
+        "200, the part of the outer that was not the inner"
       ],
       "correct": 0,
       "explanation": "The outer measured wall time, so it includes the inner, and the two together account for 1200 microseconds of a 700 microsecond loop. Clamping at zero would turn a detectable mistake into a report that is merely wrong."
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "Why is the section opened by a guard object rather than by a begin and end pair?",
       "options": [
-        "The destructor runs on every path out, so an early return cannot leave the section open",
         "It is faster, because the destructor is inlined",
+        "The destructor runs on every path out, so an early return cannot leave the section open",
         "Because begin and end would need two clock reads and the guard needs one",
         "Style only: the two are equivalent"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "Every exit that is not the bottom of the scope breaks a begin and end pair, and error paths are exactly where early returns live, so the instrument is most wrong when something is going wrong. The suite calls a function that gives up halfway and checks the section closed anyway."
     },
     {
       "stage": "check",
       "question": "Five iterations of a section have a mean of 282 microseconds and a worst of 900. Which number tells you whether a 1 millisecond deadline is at risk?",
       "options": [
-        "The worst: lateness is not an average, and four fast passes do not excuse one slow one",
-        "The mean, since the deadline applies to the loop on average",
+        "The mean, because the worst is an outlier",
         "Neither: you need the median",
-        "The mean, because the worst is an outlier"
+        "The mean, since the deadline applies to the loop on average",
+        "The worst: lateness is not an average, and four fast passes do not excuse one slow one"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Timing distributions have a floor and no ceiling, which lesson 05-05 measured directly. A mean under budget with a worst over it is a loop that fails occasionally, which is the hardest kind of failure to chase."
     },
     {
       "stage": "post",
       "question": "The instrument was measured at exactly two clock reads per section. Why can that be asserted exactly rather than measured as a time?",
       "options": [
+        "Because the compiler inlines the clock call",
         "A counting clock records how many times it was asked, which is an integer and the same on every machine",
         "Because clock reads take a fixed number of nanoseconds",
-        "It cannot be: the test uses a tolerance",
-        "Because the compiler inlines the clock call"
+        "It cannot be: the test uses a tolerance"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "The same reason every other assertion in this lesson is exact: the clock is injected. A 500 Hz loop with ten sections asks the clock 10000 times a second, which is arithmetic rather than opinion, and whether it matters is a question about your clock."
     },
     {
       "stage": "post",
       "question": "A reset that sets the section count back to zero but leaves the slot data alone. What goes wrong?",
       "options": [
-        "The next section registered lands in slot zero and inherits the previous run's calls and total",
         "Nothing: the count is what the report iterates over",
-        "The names leak, since they are const char pointers",
-        "The worst time is lost but the totals are correct"
+        "The worst time is lost but the totals are correct",
+        "The next section registered lands in slot zero and inherits the previous run's calls and total",
+        "The names leak, since they are const char pointers"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "This was a real bug in the lesson's own artifact, caught by its own suite. It is the same stale state failure as a section left open inheriting a start time: moving a counter is not the same as clearing the data behind it."
     }
   ]

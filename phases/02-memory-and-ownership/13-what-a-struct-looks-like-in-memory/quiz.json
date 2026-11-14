@@ -7,47 +7,47 @@
       "question": "A struct holds a uint64_t and a uint8_t, nine bytes of members. What is its sizeof?",
       "options": [
         "9",
-        "16: the struct is padded at the end to a multiple of its own alignment, so that the second element of an array keeps its uint64_t aligned",
         "12",
+        "16: the struct is padded at the end to a multiple of its own alignment, so that the second element of an array keeps its uint64_t aligned",
         "It depends on the order"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The size of a struct is never the sum of the sizes of its members."
     },
     {
       "stage": "check",
       "question": "A byte, a double and a byte are 24 bytes as written. What is the size with the double first?",
       "options": [
-        "24, the order does not matter",
-        "16: the bytes follow the double at 8 and 9, and the end is padded to 16",
+        "32",
         "10",
-        "32"
+        "16: the bytes follow the double at 8 and 9, and the end is padded to 16",
+        "24, the order does not matter"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Written the other way the double skips to 8, the second byte to 16, and the end is padded to 24."
     },
     {
       "stage": "check",
       "question": "How does align_up round an offset to a multiple of the alignment?",
       "options": [
+        "It masks the low bits of an odd number",
         "It adds the alignment",
-        "It adds alignment minus one and divides and multiplies back, where integer division throws the remainder away",
         "It uses a floating point round",
-        "It masks the low bits of an odd number"
+        "It adds alignment minus one and divides and multiplies back, where integer division throws the remainder away"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "align_up(9, 4) is 12 and align_up(17, 16) is 32."
     },
     {
       "stage": "check",
       "question": "The lesson tried every order of 400 random structs. What did that show about putting the most strictly aligned member first?",
       "options": [
-        "It was often best",
         "It gave the smallest size in all 400, so for alignments that are powers of two it is the best order there is",
-        "It was sometimes worse",
-        "It made no difference"
+        "It made no difference",
+        "It was often best",
+        "It was sometimes worse"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It saved up to 32 bytes against the order written."
     },
     {

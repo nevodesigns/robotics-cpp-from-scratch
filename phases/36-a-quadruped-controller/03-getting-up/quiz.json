@@ -6,33 +6,33 @@
       "stage": "pre",
       "question": "Where in the rise is the knee's torque greatest?",
       "options": [
-        "At the top",
         "At the bottom, with the legs most folded",
         "In the middle",
+        "At the top",
         "It is constant"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The shank leans most there."
     },
     {
       "stage": "check",
       "question": "The knee's peak torque in the rise for 12 kg was:",
       "options": [
-        "20 N m",
-        "5.9 N m",
         "0 N m",
-        "100 N m"
+        "100 N m",
+        "5.9 N m",
+        "20 N m"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Against a peak of 20 N m."
     },
     {
       "stage": "check",
       "question": "A rise in 6 s used what share of the thermal life compared with 1 s?",
       "options": [
-        "The same",
-        "Six times as much (0.202 against 0.034)",
         "Half",
+        "Six times as much (0.202 against 0.034)",
+        "The same",
         "None"
       ],
       "correct": 1,
@@ -42,24 +42,24 @@
       "stage": "check",
       "question": "A 65 kg robot:",
       "options": [
-        "Could rise",
-        "Could not rise at all",
         "Rose in a second",
-        "Rose slowly"
+        "Rose slowly",
+        "Could rise",
+        "Could not rise at all"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "0 for yes."
     },
     {
       "stage": "post",
       "question": "Why check the rise before trying?",
       "options": [
-        "It is tidy",
-        "A rise that overheats the knees or needs more than the peak wears out the motors for nothing",
+        "It is faster",
         "It is required",
-        "It is faster"
+        "A rise that overheats the knees or needs more than the peak wears out the motors for nothing",
+        "It is tidy"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "36-02's tries come from this."
     },
     {
@@ -67,11 +67,11 @@
       "question": "What is not covered?",
       "options": [
         "The torque",
-        "Getting up from upside down, and the rise's acceleration",
         "The heat",
-        "The mass"
+        "The mass",
+        "Getting up from upside down, and the rise's acceleration"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A different routine."
     }
   ]

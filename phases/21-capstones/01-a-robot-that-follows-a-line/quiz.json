@@ -6,34 +6,34 @@
       "stage": "pre",
       "question": "What is different about the line follower built here?",
       "options": [
-        "It is faster",
-        "It knows when it has lost the line and stops, through the supervisor of phase 19",
         "It uses a real camera",
-        "It has no PID"
+        "It is faster",
+        "It has no PID",
+        "It knows when it has lost the line and stops, through the supervisor of phase 19"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Every capstone uses the safety primitives."
     },
     {
       "stage": "check",
       "question": "Doubling the gain from 5 to 8 did what to the error?",
       "options": [
+        "Stopped the robot",
         "Halved it",
-        "Raised it, from 0.0152 to 0.0182: past a point more gain does not help",
         "Nothing",
-        "Stopped the robot"
+        "Raised it, from 0.0152 to 0.0182: past a point more gain does not help"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The error fell by about three from 1.5 to 3 and again to 5."
     },
     {
       "stage": "check",
       "question": "At 0.8 m/s a 400 ms camera delay did what?",
       "options": [
-        "Nothing",
+        "Reduced the error",
         "The loop became unstable, the line left the picture, and the supervisor stopped the robot at x 1.69 m",
-        "Raised the speed",
-        "Reduced the error"
+        "Nothing",
+        "Raised the speed"
       ],
       "correct": 1,
       "explanation": "Up to 200 ms it hardly mattered."
@@ -42,10 +42,10 @@
       "stage": "check",
       "question": "A gap of 0.6 m in the line was crossed with which debounce?",
       "options": [
-        "3 frames",
+        "None",
         "50 frames (1000 ms): a shorter debounce stopped the robot at the gap",
-        "10 frames",
-        "None"
+        "3 frames",
+        "10 frames"
       ],
       "correct": 1,
       "explanation": "The debounce is a distance, not a number of frames."
@@ -54,12 +54,12 @@
       "stage": "post",
       "question": "Why did the first version of the code stop at the start line with a delay of three frames or more?",
       "options": [
-        "A crash",
         "The empty pipe at the start was counted as lost line frames, and three of them are a fault",
-        "The camera was dead",
-        "The fence"
+        "A crash",
+        "The fence",
+        "The camera was dead"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "No data yet is not a lost line."
     },
     {
@@ -67,11 +67,11 @@
       "question": "What should the portfolio show for a project like this?",
       "options": [
         "A video",
-        "The table, the failure and a black box number, each with the command that makes it",
         "The code only",
+        "The table, the failure and a black box number, each with the command that makes it",
         "The price"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A reader trusts a robot that stops at 400 ms more than one that has only been seen to work."
     }
   ]

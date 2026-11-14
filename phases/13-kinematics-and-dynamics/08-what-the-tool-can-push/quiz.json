@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "The Jacobian J gives tool speed from joint speeds. What gives the joint torques for a force at the tool?",
       "options": [
-        "J itself",
         "The transpose of J: power is the same at both ends of a rigid arm, so torque is J transposed times force",
         "The inverse of J",
-        "The determinant of J"
+        "The determinant of J",
+        "J itself"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Using J instead of its transpose leaves the first row unchanged and the second wrong, and the elbow torque came out +4.89 where it should be -3.99."
     },
     {
       "stage": "check",
       "question": "Why does the test check the torques against the work done as each joint moves?",
       "options": [
-        "It is quicker",
-        "The principle of virtual work shares no algebra with the Jacobian, so a mistake in one cannot hide in both",
         "Work is always zero",
-        "The Jacobian is not exact"
+        "The principle of virtual work shares no algebra with the Jacobian, so a mistake in one cannot hide in both",
+        "The Jacobian is not exact",
+        "It is quicker"
       ],
       "correct": 1,
       "explanation": "It agreed to 1.9e-09 N m across 1014 poses and forces."
@@ -30,24 +30,24 @@
       "stage": "check",
       "question": "Near a straight arm, 0.1 N m of change in a torque changed the implied force by 20.0 N. Why?",
       "options": [
-        "The motors are noisy",
-        "Going from torques to force inverts a matrix whose determinant is l1 l2 sin(q2), which is nearly zero there, so the inverse is badly conditioned",
+        "A rounding error",
         "The tool is heavy",
-        "A rounding error"
+        "Going from torques to force inverts a matrix whose determinant is l1 l2 sin(q2), which is nearly zero there, so the inverse is badly conditioned",
+        "The motors are noisy"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A force along a straight arm puts almost no torque on either joint, so the torques say almost nothing about it."
     },
     {
       "stage": "check",
       "question": "Nearly straight, the arm could push 720 N along itself and 20 N across it. Why is the tool so strong along the arm?",
       "options": [
-        "The motors are stronger there",
         "The load goes down the structure of the arm, so the joints feel almost no torque from it, and the motors' limits are far away",
         "The links are heavier",
+        "The motors are stronger there",
         "A bug in the limit"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Exactly straight it is infinite. And along the arm it can hardly move at all, 0.02 m/s, so the direction it cannot move in is the direction it pushes hardest."
     },
     {
@@ -55,23 +55,23 @@
       "question": "What does strongest_push do to find the limit?",
       "options": [
         "Searches by trial pushes",
-        "Takes a unit force in the direction, finds the torque each joint needs for it, and scales it until the first joint reaches its limit",
+        "Uses the larger limit",
         "Averages the two limits",
-        "Uses the larger limit"
+        "Takes a unit force in the direction, finds the torque each joint needs for it, and scales it until the first joint reaches its limit"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The torque is linear in the force, so it is solved for. Exactly one joint ends on its limit, which the test checks over 24 directions."
     },
     {
       "stage": "post",
       "question": "A datasheet says an arm can push with 20 N. What is missing?",
       "options": [
+        "The payload only",
         "Nothing",
-        "The direction and the pose: across the arm it is limited by the motors, along it the structure carries the load, and it changes with the elbow",
         "The colour",
-        "The payload only"
+        "The direction and the pose: across the arm it is limited by the motors, along it the structure carries the load, and it changes with the elbow"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The same motors gave 20 N across a nearly straight arm and 720 N along it. A rating without a direction is the best case or the worst."
     }
   ]

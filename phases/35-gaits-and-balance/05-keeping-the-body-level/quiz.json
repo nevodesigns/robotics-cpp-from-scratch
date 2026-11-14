@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "Why can the forces on four feet be chosen?",
       "options": [
-        "They cannot",
         "Four feet are more than the three conditions (weight, roll moment, pitch moment) need",
         "Feet are free",
+        "They cannot",
         "Gravity helps"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The least norm solution is one choice."
     },
     {
@@ -31,35 +31,35 @@
       "question": "What is the largest roll moment that can be given?",
       "options": [
         "Anything",
-        "17.7 N m, the weight times the half width",
         "25 N m",
+        "17.7 N m, the weight times the half width",
         "0"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Beyond it a foot would have to pull."
     },
     {
       "stage": "check",
       "question": "A push of 25 N m, with the feet's limit of 17.7 N m:",
       "options": [
-        "Was answered",
-        "Rolled the body over (1)",
+        "Was halved",
         "Was ignored",
-        "Was halved"
+        "Rolled the body over (1)",
+        "Was answered"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "No controller can give what the feet cannot."
     },
     {
       "stage": "post",
       "question": "What happens to a moment beyond the limit?",
       "options": [
-        "Nothing",
         "It is scaled down, keeping its direction, to the most that can be given",
+        "It is cut off",
         "It is doubled",
-        "It is cut off"
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Otherwise the forces would add to more than the weight."
     },
     {
@@ -67,11 +67,11 @@
       "question": "Why does a trot need a different controller?",
       "options": [
         "It is faster",
-        "Two feet cannot give the three conditions",
+        "It is not different",
         "It is heavier",
-        "It is not different"
+        "Two feet cannot give the three conditions"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "35-02."
     }
   ]

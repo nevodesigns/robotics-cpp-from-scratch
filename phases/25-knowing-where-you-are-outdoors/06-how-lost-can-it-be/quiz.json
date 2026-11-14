@@ -8,8 +8,8 @@
       "options": [
         "Nothing",
         "A number for how wrong it can be",
-        "Its colour",
-        "Its name"
+        "Its name",
+        "Its colour"
       ],
       "correct": 1,
       "explanation": "An estimate without an error bar is a hope."
@@ -18,24 +18,24 @@
       "stage": "check",
       "question": "The 95 percent radius after 10 m, and after 100 m, were:",
       "options": [
-        "1 m and 10 m",
-        "0.22 m and 7.07 m: 31.6 times for ten times the distance",
         "The same",
-        "0 and 0"
+        "1 m and 10 m",
+        "0 and 0",
+        "0.22 m and 7.07 m: 31.6 times for ten times the distance"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A heading walk makes the error grow as the distance to the power of three halves."
     },
     {
       "stage": "check",
       "question": "95 percent of 400 noisy runs ended within:",
       "options": [
-        "0.01 m",
         "5.10 m, near the bound",
         "100 m",
-        "5 m"
+        "5 m",
+        "0.01 m"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The arithmetic agreed with a simulation."
     },
     {
@@ -43,35 +43,35 @@
       "question": "A fix of 5 cm brought the radius down to:",
       "options": [
         "No change",
-        "0.122 m",
+        "0",
         "10 m",
-        "0"
+        "0.122 m"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "And it grows again."
     },
     {
       "stage": "post",
       "question": "Why does doubling the distance between fixes more than double how lost the robot can be?",
       "options": [
-        "It does not",
-        "The heading wanders as it goes and the heading error becomes position error with the distance",
+        "Wheels wear",
         "Rounding",
-        "Wheels wear"
+        "The heading wanders as it goes and the heading error becomes position error with the distance",
+        "It does not"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Three halves power."
     },
     {
       "stage": "post",
       "question": "What does needs_fix say?",
       "options": [
-        "The battery is low",
         "The robot may now be further out than a limit",
+        "Nothing",
         "A fix exists",
-        "Nothing"
+        "The battery is low"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It is the bound against a limit."
     }
   ]

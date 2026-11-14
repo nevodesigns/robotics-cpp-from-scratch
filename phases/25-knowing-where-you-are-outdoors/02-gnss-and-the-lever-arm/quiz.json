@@ -6,9 +6,9 @@
       "stage": "pre",
       "question": "Why is a degree of longitude shorter than a degree of latitude?",
       "options": [
-        "It is not",
-        "The meridians meet at the poles, so it is shorter by the cosine of the latitude",
         "Longitude is slower",
+        "The meridians meet at the poles, so it is shorter by the cosine of the latitude",
+        "It is not",
         "Rounding"
       ],
       "correct": 1,
@@ -20,8 +20,8 @@
       "options": [
         "1 km",
         "111195 m",
-        "10 m",
-        "1000 km"
+        "1000 km",
+        "10 m"
       ],
       "correct": 1,
       "explanation": "R times the angle."
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "At 10 km the flat map was how far from the great circle?",
       "options": [
-        "0",
-        "3.55 m",
         "1 km",
-        "100 m"
+        "100 m",
+        "0",
+        "3.55 m"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It grows with distance."
     },
     {
       "stage": "check",
       "question": "A robot turning on the spot with an antenna 0.5 m from its centre had an antenna moving at:",
       "options": [
-        "0 m/s",
         "0.50 m/s",
-        "5 m/s",
-        "0.05 m/s"
+        "0.05 m/s",
+        "0 m/s",
+        "5 m/s"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The lever times the turn rate."
     },
     {
       "stage": "post",
       "question": "With the heading wrong by 5 degrees, what was left after the lever correction?",
       "options": [
-        "Nothing",
-        "0.044 m, the lever times the error",
+        "The whole lever",
         "1 m",
-        "The whole lever"
+        "0.044 m, the lever times the error",
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The correction needs the heading."
     },
     {
       "stage": "post",
       "question": "Why should the antenna be as near the reference point as the sky allows?",
       "options": [
-        "Looks",
         "The error of the correction is the lever times the heading error",
-        "Cable length",
-        "No reason"
+        "No reason",
+        "Looks",
+        "Cable length"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A short lever forgives a poor heading."
     }
   ]

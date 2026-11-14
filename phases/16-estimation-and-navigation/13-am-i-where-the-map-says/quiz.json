@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "What does a scan score against a map measure?",
       "options": [
+        "The sensor's noise",
         "How far the rover has driven",
-        "The share of the beams that hit something and end on a wall of the map, from a candidate pose",
         "The size of the room",
-        "The sensor's noise"
+        "The share of the beams that hit something and end on a wall of the map, from a candidate pose"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A perfect scan scored 1.000 from where it was taken."
     },
     {
@@ -20,8 +20,8 @@
       "options": [
         "As misses",
         "Left out: they say nothing about where the walls are, and counting them as misses lowers the score for a scan that is fine",
-        "As hits",
-        "Doubled"
+        "Doubled",
+        "As hits"
       ],
       "correct": 1,
       "explanation": "They are not in the share's denominator."
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "Ranges are noisy by 3 cm. What does a tolerance of zero cells do?",
       "options": [
+        "Improves the score",
         "Nothing",
         "Loses half the beams to noise: 0.492 at the true pose, against 0.951 at one cell and 0.984 at two",
-        "Improves the score",
         "Is the only correct choice"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A tolerance costs sharpness, so it is not simply made large."
     },
     {
       "stage": "check",
       "question": "A corridor 30 m long and 1 m wide is searched along its length. What does the tied count say?",
       "options": [
-        "1",
-        "41 poses scored within 0.005 of the best: every position along it fits equally well, so the scan does not say where along it you are",
+        "The corridor is too long",
         "0",
-        "The corridor is too long"
+        "1",
+        "41 poses scored within 0.005 of the best: every position along it fits equally well, so the scan does not say where along it you are"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The room with a block tied 1."
     },
     {
       "stage": "post",
       "question": "Poses are tied. What should the search do?",
       "options": [
-        "Pick one at random",
-        "Take the one nearest the guess, so a rover in a corridor stays where odometry put it and does not jump",
+        "Take the last",
         "Take the first",
-        "Take the last"
+        "Take the one nearest the guess, so a rover in a corridor stays where odometry put it and does not jump",
+        "Pick one at random"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A tie settled by chance is a jump by metres."
     },
     {
       "stage": "post",
       "question": "Why did the room with a block against one wall only just tell the true pose from its mirror?",
       "options": [
-        "The block was too small to see",
         "Most of a room's walls look alike from anywhere, so the mirror still scored 0.869 against 1.000: scoring finds that two poses fit and the map has to have something to choose between them",
+        "The block was too small to see",
         "The mirror is correct",
         "The search was wrong"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "An empty rectangular room scored both at 1.000."
     }
   ]

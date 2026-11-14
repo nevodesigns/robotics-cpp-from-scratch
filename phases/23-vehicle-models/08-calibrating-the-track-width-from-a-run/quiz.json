@@ -6,58 +6,58 @@
       "stage": "pre",
       "question": "How is the effective track found?",
       "options": [
+        "From the data sheet",
         "Measured with a ruler",
         "The wheels' difference over the heading change, in a spin in place",
-        "From the data sheet",
         "By guessing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A ratio of two measurements."
     },
     {
       "stage": "check",
       "question": "A single spin with a gyro bias gave an error of:",
       "options": [
-        "0",
         "0.31 percent",
+        "0",
         "50 percent",
         "5 percent"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The bias adds to a heading that did not happen."
     },
     {
       "stage": "check",
       "question": "A spin each way gave an error of:",
       "options": [
-        "0.31 percent",
-        "0.000 percent",
         "10 percent",
-        "1 percent"
+        "1 percent",
+        "0.31 percent",
+        "0.000 percent"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The bias adds to one and subtracts from the other."
     },
     {
       "stage": "check",
       "question": "More spins narrow the spread because:",
       "options": [
-        "Magic",
         "Scatter is averaged, not cancelled",
         "The gyro improves",
+        "Magic",
         "The floor changes"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Four spins gave 0.0019 m against 0.0034 m."
     },
     {
       "stage": "post",
       "question": "Why must the calibration be repeated for a different floor?",
       "options": [
-        "It need not",
-        "The efficiency depends on the floor",
         "The gyro depends on it",
-        "Law"
+        "The efficiency depends on the floor",
+        "Law",
+        "It need not"
       ],
       "correct": 1,
       "explanation": "The effective track is a property of the vehicle on a surface."

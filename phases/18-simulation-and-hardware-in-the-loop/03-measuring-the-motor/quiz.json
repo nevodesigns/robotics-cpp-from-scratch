@@ -18,33 +18,33 @@
       "stage": "check",
       "question": "What is the gain, read from a step?",
       "options": [
-        "The slope at the start",
-        "The speed it settled to over the command, taking the mean of the last tenth of the readings so one noisy sample does not decide it",
         "The peak speed",
-        "The time to settle"
+        "The time to settle",
+        "The slope at the start",
+        "The speed it settled to over the command, taking the mean of the last tenth of the readings so one noisy sample does not decide it"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "1.9991 against 2.0 in the clean test."
     },
     {
       "stage": "check",
       "question": "The clean fit gave a time constant of 0.0989 for a motor built with 0.1. Whose error is that?",
       "options": [
-        "The fit's",
         "The simulated motor's: Euler at 2 ms makes the effective time constant about half a step shorter, and a measurement of a simulation measures the simulation",
-        "The noise",
-        "The clock"
+        "The fit's",
+        "The clock",
+        "The noise"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The step size is part of the model."
     },
     {
       "stage": "check",
       "question": "At a noise of 0.5 the quick log fit gave 0.222 with a small spread. What does that mean?",
       "options": [
-        "It is right",
-        "It is confidently wrong: the logarithm of a noisy number does not average to the logarithm of the number, so the line leans, and the refined fit gave 0.0989",
         "The spread is the error",
+        "It is confidently wrong: the logarithm of a noisy number does not average to the logarithm of the number, so the line leans, and the refined fit gave 0.0989",
+        "It is right",
         "The noise is too small"
       ],
       "correct": 1,
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "A model fitted on a step of 1 predicts steps up to a command of 12 to within 0.01 and a command of 20 to within 14.4. Why?",
       "options": [
+        "The noise grows",
         "The fit is bad",
         "The motor clamps its command at 12 and the model has no limit: it is good where it was fitted and the limit is not found by the fit",
-        "The noise grows",
         "The time constant changes"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A model is good where it was fitted."
     },
     {
       "stage": "post",
       "question": "Which traces should a fit refuse?",
       "options": [
-        "None",
-        "Too few readings, different lengths, a zero command, a motor that never moved, and a speed already final from the first reading",
+        "Any over a second",
         "Any with noise",
-        "Any over a second"
+        "None",
+        "Too few readings, different lengths, a zero command, a motor that never moved, and a speed already final from the first reading"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Numbers with no meaning attached are worse than none."
     }
   ]

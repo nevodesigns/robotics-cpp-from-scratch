@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A robot wakes up in a corridor of identical doors. Why can one number and a spread not describe where it is?",
       "options": [
+        "The corridor is too long",
         "It can",
         "It might be at several separate places, and one number and a spread describe one lump: after one reading of a door the belief had 9 places near the top",
-        "The spread is too big",
-        "The corridor is too long"
+        "The spread is too big"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A belief over places can be at several at once."
     },
     {
@@ -19,33 +19,33 @@
       "question": "What does moving do to a belief?",
       "options": [
         "Sharpens it",
-        "Spreads it out by the slip: all of it at place 5, moved one place with 0.8, 0.1 and 0.1, gave 0.10, 0.80 and 0.10",
         "Nothing",
-        "Deletes it"
+        "Deletes it",
+        "Spreads it out by the slip: all of it at place 5, moved one place with 0.8, 0.1 and 0.1, gave 0.10, 0.80 and 0.10"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "And the ring wraps."
     },
     {
       "stage": "check",
       "question": "What does sensing do?",
       "options": [
+        "Moves it",
         "Spreads it",
         "Multiplies each place by how believable the reading makes it and normalises: after one door reading each door was 0.0938 and each wall 0.0104",
-        "Moves it",
         "Resets it"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The prediction was worked out by hand."
     },
     {
       "stage": "check",
       "question": "What happens to a belief whose places have all been ruled out?",
       "options": [
-        "It divides by zero",
+        "It picks place 0",
         "It goes back to knowing nothing, 1/24 each, rather than dividing by a sum of zero",
         "It stays",
-        "It picks place 0"
+        "It divides by zero"
       ],
       "correct": 1,
       "explanation": "Normalise guards against a sum that is zero or not a number."
@@ -54,10 +54,10 @@
       "stage": "post",
       "question": "A belief is told the sensor never errs and then gets one wrong reading. What happens?",
       "options": [
-        "Nothing",
+        "It crashes",
         "The true place is multiplied by zero, the belief is wiped out and resets: 0.042 of the true place and 5 steps to recover, against 1.000 and 1 step for a belief that allowed a 1 percent error",
         "It improves",
-        "It crashes"
+        "Nothing"
       ],
       "correct": 1,
       "explanation": "A probability of zero says something is impossible."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "In 200 trips with a sensor wrong 1 time in 20, which description of the sensor did best?",
       "options": [
-        "Never wrong",
         "About right, 0.05 to 0.10 for a wrong reading: 0.710 and 0.715 found the place, against 0.625 for never wrong and 0.050 for a sensor that says nothing",
+        "Half wrong",
         "Always wrong",
-        "Half wrong"
+        "Never wrong"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Too confident and too sceptical are both worse."
     }
   ]

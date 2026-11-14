@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "Two renderings of a chart look the same and differ in 150 pixels by at most 16 of 255. What does an exact comparison say?",
       "options": [
-        "Equal",
-        "Different: it counts any difference",
         "Nothing",
-        "An error"
+        "Different: it counts any difference",
+        "An error",
+        "Equal"
       ],
       "correct": 1,
       "explanation": "That is why a tolerance is needed."
@@ -18,22 +18,22 @@
       "stage": "check",
       "question": "What is wrong with a tolerance of 255?",
       "options": [
+        "It is slow",
         "It is too strict",
         "No channel can differ by more than 255, so it sees nothing",
-        "It crashes",
-        "It is slow"
+        "It crashes"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "At 255 the one red pixel was not found."
     },
     {
       "stage": "check",
       "question": "What does bounds give?",
       "options": [
-        "The size of the image",
+        "The tolerance",
         "The smallest rectangle holding every differing pixel",
-        "The first differing pixel",
-        "The tolerance"
+        "The size of the image",
+        "The first differing pixel"
       ],
       "correct": 1,
       "explanation": "Two pixels far apart gave a rectangle holding both."
@@ -42,24 +42,24 @@
       "stage": "check",
       "question": "Images of 100 by 50 and 100 by 51 are both white. Do they match?",
       "options": [
-        "Yes",
         "No: a size mismatch, at any tolerance or count",
+        "Yes",
         "Only at tolerance 255",
         "Only if the count is 51"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Comparing the pixels they share would call them equal."
     },
     {
       "stage": "post",
       "question": "Why does compare use QImage::pixel?",
       "options": [
-        "It is faster",
-        "It reads any format as the same colour value, so formats need not match",
         "It is the only way",
-        "It rounds"
+        "It rounds",
+        "It is faster",
+        "It reads any format as the same colour value, so formats need not match"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "ARGB32, RGB32, premultiplied and RGBA8888 gave 0 differences."
     },
     {
@@ -67,11 +67,11 @@
       "question": "A chart moved by one pixel differs in 170. Which guard catches it?",
       "options": [
         "The tolerance",
-        "The count of differing pixels",
         "The size",
-        "Nothing does"
+        "Nothing does",
+        "The count of differing pixels"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Stray pixels pass a count of 5; 170 does not."
     }
   ]

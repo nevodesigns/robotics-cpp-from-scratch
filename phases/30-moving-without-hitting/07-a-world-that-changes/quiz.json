@@ -6,9 +6,9 @@
       "stage": "pre",
       "question": "What is the version of a planning scene for?",
       "options": [
-        "Printing",
-        "To say that a plan made at an earlier version may be out of date",
         "Speed",
+        "To say that a plan made at an earlier version may be out of date",
+        "Printing",
         "Colour"
       ],
       "correct": 1,
@@ -18,22 +18,22 @@
       "stage": "check",
       "question": "The version went from 0 to:",
       "options": [
-        "0",
         "4 after four changes",
+        "100",
         "0",
-        "100"
+        "0"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Every add, move and remove raises it."
     },
     {
       "stage": "check",
       "question": "An object seen 2.0 s ago at 0.5 m/s was how much bigger in its radius?",
       "options": [
-        "0 m",
+        "2.0 m",
         "0.50 m, up to the cap",
         "10 m",
-        "2.0 m"
+        "0 m"
       ],
       "correct": 1,
       "explanation": "Speed times age, capped."
@@ -42,36 +42,36 @@
       "stage": "check",
       "question": "A part in the gripper took a pose from 0.090 m clear to:",
       "options": [
-        "0.090 m",
         "-0.090 m",
+        "0.090 m",
         "10 m",
         "The same"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The arm is longer with a part in its hand."
     },
     {
       "stage": "post",
       "question": "Does a stale plan have to be wrong?",
       "options": [
-        "Always",
-        "No: the object may have moved away, and the check says whether the path is still free",
+        "Only for spheres",
         "Never",
-        "Only for spheres"
+        "Always",
+        "No: the object may have moved away, and the check says whether the path is still free"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Recheck it."
     },
     {
       "stage": "post",
       "question": "Why does the scene make an unseen object bigger?",
       "options": [
-        "It looks nicer",
-        "It could have moved by speed times the time since it was seen: ignorance made into room",
+        "It cannot",
         "To save memory",
-        "It cannot"
+        "It could have moved by speed times the time since it was seen: ignorance made into room",
+        "It looks nicer"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A wide berth for what cannot be seen."
     }
   ]

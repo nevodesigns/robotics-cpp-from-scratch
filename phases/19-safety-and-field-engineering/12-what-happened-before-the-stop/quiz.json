@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "Why must recording to the black box never block, allocate or fail in the control loop?",
       "options": [
-        "It is faster",
         "A recorder that can stall the loop is a hazard of its own",
         "Memory is limited",
-        "It looks tidy"
+        "It looks tidy",
+        "It is faster"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "record is noexcept and the ring is allocated once."
     },
     {
@@ -19,20 +19,20 @@
       "question": "The ring has wrapped. A check that starts the chain at zero says what about the first event left?",
       "options": [
         "Fine",
-        "Altered: it has lost its predecessor, so the box keeps the chain value of the last event overwritten and verify starts from it",
         "Missing",
+        "Altered: it has lost its predecessor, so the box keeps the chain value of the last event overwritten and verify starts from it",
         "Late"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "12 dropped, from the kept link: yes."
     },
     {
       "stage": "check",
       "question": "An event is deleted from the middle of the log. What does verify report?",
       "options": [
-        "altered",
-        "gap: something is missing, and it is reported before the chain mismatch that the deletion also causes",
         "nothing",
+        "gap: something is missing, and it is reported before the chain mismatch that the deletion also causes",
+        "altered",
         "time error"
       ],
       "correct": 1,
@@ -42,10 +42,10 @@
       "stage": "check",
       "question": "The last five events are cut off. What does verify say, and what would catch it?",
       "options": [
-        "It finds it",
-        "It does not: the end of a chain has nothing after it to disagree, and it needs the latest chain value kept somewhere else",
         "A gap",
-        "Altered"
+        "It does not: the end of a chain has nothing after it to disagree, and it needs the latest chain value kept somewhere else",
+        "Altered",
+        "It finds it"
       ],
       "correct": 1,
       "explanation": "An external anchor."
@@ -54,12 +54,12 @@
       "stage": "post",
       "question": "The six events before the stop showed the range falling with the speed at 1.50 throughout. What does that tell you?",
       "options": [
-        "Nothing",
-        "The robot did not slow for the wall at all, which the stop event with its cause bits alone would not have shown",
+        "The wall moved",
         "The sensor failed",
-        "The wall moved"
+        "Nothing",
+        "The robot did not slow for the wall at all, which the stop event with its cause bits alone would not have shown"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Context, not just the result."
     },
     {
@@ -67,11 +67,11 @@
       "question": "Why order events by sequence number and not by the clock?",
       "options": [
         "Habit",
-        "The clock can be set back, and times 5, 4, 6 were kept in order by sequence and counted as one time going back",
         "Sequence is shorter",
-        "Clocks are slow"
+        "Clocks are slow",
+        "The clock can be set back, and times 5, 4, 6 were kept in order by sequence and counted as one time going back"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The order is a fact of the box, not of the clock."
     }
   ]

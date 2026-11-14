@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A plan of 200 ms is worked out in a slot. What happens to a 10 ms timer?",
       "options": [
-        "It keeps ticking",
-        "It does not tick for 200 ms: the loop is busy with the slot",
         "It ticks twice as fast afterwards",
-        "It stops for ever"
+        "It keeps ticking",
+        "It stops for ever",
+        "It does not tick for 200 ms: the loop is busy with the slot"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The largest gap was 210 ms."
     },
     {
@@ -31,47 +31,47 @@
       "question": "A second plan is started while one is running. What does start() do?",
       "options": [
         "Runs both",
-        "Returns false and leaves the first alone",
         "Cancels the first",
-        "Queues it silently"
+        "Queues it silently",
+        "Returns false and leaves the first alone"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It was refused, and the first one was not disturbed."
     },
     {
       "stage": "check",
       "question": "How does a cancel stop the plan?",
       "options": [
+        "It waits for the end",
         "It kills the thread",
         "It is a request that the plan looks at every step, so it stops at the next one",
-        "It frees the memory",
-        "It waits for the end"
+        "It frees the memory"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The plan checks promise.isCanceled() at every step."
     },
     {
       "stage": "post",
       "question": "What is the limit on how promptly a plan stops?",
       "options": [
-        "The cancel call",
         "The length of one step: a cancel cannot stop a step in the middle",
-        "The number of cores",
-        "The window size"
+        "The window size",
+        "The cancel call",
+        "The number of cores"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The lesson says so under what it does not do."
     },
     {
       "stage": "post",
       "question": "A runner is destroyed while its plan runs. What does the destructor do?",
       "options": [
-        "Nothing",
-        "Cancels it and waits for it, so that nothing is delivered after",
         "Detaches the thread",
-        "Deletes the function"
+        "Deletes the function",
+        "Cancels it and waits for it, so that nothing is delivered after",
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "No deliveries came afterwards."
     }
   ]

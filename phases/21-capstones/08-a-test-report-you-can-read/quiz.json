@@ -6,9 +6,9 @@
       "stage": "pre",
       "question": "Why is 'all tests pass' not enough to hand to somebody deciding whether to trust the robot?",
       "options": [
-        "Tests are slow",
-        "It does not say which hazards were tried: four of the eight had no scenario at all",
         "Tests lie",
+        "It does not say which hazards were tried: four of the eight had no scenario at all",
+        "Tests are slow",
         "It is too short"
       ],
       "correct": 1,
@@ -18,48 +18,48 @@
       "stage": "check",
       "question": "For the link scenario S4, what is the pass?",
       "options": [
-        "Reaching the goal",
         "Not reaching it: stopped with cause link and still at the end",
         "Speed",
-        "A short time"
+        "A short time",
+        "Reaching the goal"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A safety scenario passed by completing the task is not testing safety."
     },
     {
       "stage": "check",
       "question": "The limiter and supervisor are taken out. Which scenarios still pass?",
       "options": [
+        "All",
         "None",
         "The empty building and the doorway: the functional tests pass and the three safety scenarios fail",
-        "All",
         "Only S4"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "failing: G1, G2, G4, G8."
     },
     {
       "stage": "check",
       "question": "The link scenario is left out of the suite. What does the suite say?",
       "options": [
-        "Red",
-        "Green, and the report lists G2, the unacceptable hazard, as NOT COVERED",
         "Nothing",
-        "Amber"
+        "Amber",
+        "Red",
+        "Green, and the report lists G2, the unacceptable hazard, as NOT COVERED"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "An uncovered hazard is a gap, not a failure of what was tested."
     },
     {
       "stage": "post",
       "question": "Why was the layout of the report tested with results made by hand?",
       "options": [
+        "It is a rule",
         "Speed",
         "So a change to the physics cannot break the report, and a change to the report is one somebody has to look at",
-        "The simulation is random",
-        "It is a rule"
+        "The simulation is random"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The text is checked to the character."
     },
     {

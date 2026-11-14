@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "A category is off. A debug message from it has an argument that calls a function. What happens?",
       "options": [
-        "The function runs and the message is dropped",
-        "Neither: the message is not built, so the function does not run",
+        "An error",
         "The function runs twice",
-        "An error"
+        "Neither: the message is not built, so the function does not run",
+        "The function runs and the message is dropped"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The arguments were worked out 1 time, for the plan only."
     },
     {
       "stage": "check",
       "question": "Rules: *.debug=false and then station.link.debug=true. Is link debug on?",
       "options": [
-        "No",
-        "Yes: the last rule that matches wins",
         "Only for the first message",
-        "It depends on the thread"
+        "No",
+        "It depends on the thread",
+        "Yes: the last rule that matches wins"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The link gave 1 message and the plan 0."
     },
     {
@@ -42,21 +42,21 @@
       "stage": "check",
       "question": "What number is QtInfoMsg?",
       "options": [
-        "1",
         "4: above QtFatalMsg, which is 3",
+        "5",
         "0",
-        "5"
+        "1"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Information is numbered above a fatal error."
     },
     {
       "stage": "post",
       "question": "A filter says type >= QtWarningMsg. Which of debug, info, warning and critical does it keep?",
       "options": [
-        "Warning and critical",
-        "Info, warning and critical: the information got in by its number",
         "Only critical",
+        "Info, warning and critical: the information got in by its number",
+        "Warning and critical",
         "All four"
       ],
       "correct": 1,
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "A ring of 1000 receives 5000 messages. What does it hold?",
       "options": [
-        "The first 1000",
         "The last 1000, oldest first, and has counted 4000 dropped",
-        "All 5000",
-        "The loudest 1000"
+        "The first 1000",
+        "The loudest 1000",
+        "All 5000"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The oldest that was left was number 4000."
     }
   ]

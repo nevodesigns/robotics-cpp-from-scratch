@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "A task point passes the reach check, so the arm can put its tool there. Is that enough to place the work there?",
       "options": [
-        "Yes, reachable means usable",
-        "No: near the edges of the ring the arm is almost straight or folded, close to a singularity, and can be put there without being moved well",
+        "Only with a longer arm",
         "Only if it is on the x axis",
-        "Only with a longer arm"
+        "No: near the edges of the ring the arm is almost straight or folded, close to a singularity, and can be put there without being moved well",
+        "Yes, reachable means usable"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Reachable is a ring, and usable is a smaller one inside it."
     },
     {
       "stage": "check",
       "question": "The grid gave 2.5129 m^2 for a 0.5 and 0.4 m arm. What was it checked against?",
       "options": [
+        "The perimeter",
         "Nothing",
         "The area of the ring, pi times (0.9 squared minus 0.1 squared), which is 2.5133",
-        "A second grid",
-        "The perimeter"
+        "A second grid"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A grid is checked against a formula where one exists, before it is trusted where none does."
     },
     {
@@ -31,21 +31,21 @@
       "question": "Why does best_manipulability look at both elbows?",
       "options": [
         "To be slower",
-        "A limit can rule out one pose and not the other, and a map made from one branch reports holes that are not there",
         "The second elbow is always better",
-        "It does not"
+        "It does not",
+        "A limit can rule out one pose and not the other, and a map made from one branch reports holes that are not there"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It keeps the better legal one and returns a negative number only when neither is legal."
     },
     {
       "stage": "check",
       "question": "Demanding half of the best manipulability left 86.6 percent of the reachable area and 0.9 left 43.6. What does that show?",
       "options": [
-        "The edges are thick",
-        "A mild demand costs almost nothing and a strict one costs most of the ring, so the demand decides how much floor is usable",
         "Nothing changes",
-        "The grid was too coarse"
+        "A mild demand costs almost nothing and a strict one costs most of the ring, so the demand decides how much floor is usable",
+        "The grid was too coarse",
+        "The edges are thick"
       ],
       "correct": 1,
       "explanation": "The area never grows as the demand rises."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "A shoulder limited to the top half kept 70 percent of the area, not 50. Why?",
       "options": [
-        "A mistake in the grid",
         "The second link folds back over the shoulder's own side, so the arm reaches points below the shoulder's line",
+        "The grid is symmetric",
         "Joints do not matter",
-        "The grid is symmetric"
+        "A mistake in the grid"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Measure the area under the real limits and do not estimate it."
     },
     {
       "stage": "post",
       "question": "An elbow that bends only one way lost no reachable or usable area. Why, and what did it lose?",
       "options": [
-        "Nothing was lost",
         "The two elbow poses for a point are mirror images, so one is always legal; what is lost is the choice between them, which matters to a path and not to a map",
+        "Nothing was lost",
         "The map was wrong",
         "It lost half the area"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Lesson 13-09 showed why keeping a branch matters along a path."
     }
   ]

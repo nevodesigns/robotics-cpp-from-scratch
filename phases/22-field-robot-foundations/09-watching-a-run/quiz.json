@@ -7,71 +7,71 @@
       "question": "Why draw a run as an SVG?",
       "options": [
         "It is the fastest",
+        "It is secret",
         "It is text that any browser opens and animates, with no library",
-        "Robots need it",
-        "It is secret"
+        "Robots need it"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A picture with no dependencies is one that gets looked at."
     },
     {
       "stage": "check",
       "question": "A 10 s run of 500 poses came to how much SVG?",
       "options": [
-        "24.5 kB",
-        "1 GB",
         "0",
-        "10 bytes"
+        "24.5 kB",
+        "10 bytes",
+        "1 GB"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "Text is small."
     },
     {
       "stage": "check",
       "question": "At four times the speed the animation lasted:",
       "options": [
+        "0 s",
         "9.98 s",
         "2.50 s",
-        "40 s",
-        "0 s"
+        "40 s"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The duration is the span divided by the speed."
     },
     {
       "stage": "check",
       "question": "What must a robot picture do about the y axis?",
       "options": [
-        "Nothing",
         "Flip it, because SVG's points down and the robot's up",
-        "Rotate it",
-        "Double it"
+        "Nothing",
+        "Double it",
+        "Rotate it"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A mirrored run is a lie."
     },
     {
       "stage": "post",
       "question": "Why are the key times taken from the log's time stamps?",
       "options": [
-        "For speed",
-        "So a log with a gap plays with a gap",
+        "To save memory",
         "No reason",
-        "To save memory"
+        "For speed",
+        "So a log with a gap plays with a gap"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Index is not time."
     },
     {
       "stage": "post",
       "question": "Why must the bounds include the poses?",
       "options": [
-        "They don't",
-        "A robot that leaves the room is the run that most needs to be seen",
         "To make it large",
-        "For colour"
+        "They don't",
+        "For colour",
+        "A robot that leaves the room is the run that most needs to be seen"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Do not cut off the failure."
     }
   ]

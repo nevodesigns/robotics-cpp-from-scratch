@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "Why is the limit on forward and sideways speed an ellipse?",
       "options": [
-        "Tradition",
-        "A leg can step further forward than sideways, so the two are limited together",
         "It looks neat",
-        "It is required"
+        "It is required",
+        "Tradition",
+        "A leg can step further forward than sideways, so the two are limited together"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A box would allow a diagonal that is too fast."
     },
     {
@@ -19,21 +19,21 @@
       "question": "A command of 1.0 forward and 0.4 sideways became:",
       "options": [
         "1.0 and 0.4",
-        "0.71 and 0.28, the same direction",
         "0 and 0",
+        "0.71 and 0.28, the same direction",
         "1.0 and 0.4"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Scaled onto the ellipse."
     },
     {
       "stage": "check",
       "question": "A jump to 0.8 m/s took how long?",
       "options": [
-        "0 s",
-        "0.80 s at 1.0 m/s2",
         "10 s",
-        "1.60 s"
+        "0.80 s at 1.0 m/s2",
+        "1.60 s",
+        "0 s"
       ],
       "correct": 1,
       "explanation": "A bounded acceleration."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "What does a jump in the command do to the legs?",
       "options": [
-        "Nothing",
         "Tells the body to be where it is not, and the feet cannot follow",
-        "Helps",
-        "Speeds them"
+        "Speeds them",
+        "Nothing",
+        "Helps"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The gaits assume smooth commands."
     },
     {
       "stage": "post",
       "question": "What sets the top speed limit?",
       "options": [
-        "A hope",
         "The longest step over the shortest stance, from the legs",
+        "A hope",
         "The stick",
         "The colour"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Not from the stick."
     }
   ]

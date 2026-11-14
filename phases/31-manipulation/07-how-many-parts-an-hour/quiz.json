@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "What is a cycle time made of?",
       "options": [
-        "The arm's speed alone",
-        "The moves and the waits, added up",
         "The hand alone",
-        "The camera"
+        "The moves and the waits, added up",
+        "The camera",
+        "The arm's speed alone"
       ],
       "correct": 1,
       "explanation": "A sum of pieces."
@@ -18,12 +18,12 @@
       "stage": "check",
       "question": "At half the speed the cycle took:",
       "options": [
-        "Twice as long",
         "5.70 s against 3.68 s, less than twice",
+        "Twice as long",
         "The same",
         "Half as long"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The hand and the contact approach do not stretch."
     },
     {
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "A person 1.0 m away made the cycle:",
       "options": [
+        "3.68 s",
+        "Stopped",
         "3.77 s",
-        "3.68 s",
-        "3.68 s",
-        "Stopped"
+        "3.68 s"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "The speed cap of 31-06."
     },
     {
@@ -55,23 +55,23 @@
       "question": "Why is the override found by bisection?",
       "options": [
         "It is faster",
-        "The contact speed does not scale, so the cycle is not a simple function of k",
         "It is the only way",
-        "It is not"
+        "It is not",
+        "The contact speed does not scale, so the cycle is not a simple function of k"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The cycle falls as k rises."
     },
     {
       "stage": "post",
       "question": "Where is a cycle's time often spent?",
       "options": [
-        "Only in the carry",
-        "Often in the parts that do not depend on the arm's speed",
+        "Nowhere",
         "In the camera",
-        "Nowhere"
+        "Only in the carry",
+        "Often in the parts that do not depend on the arm's speed"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The hand and the contact approaches."
     }
   ]

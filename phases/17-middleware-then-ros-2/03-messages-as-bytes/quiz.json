@@ -7,11 +7,11 @@
       "question": "Why not send a struct by copying its memory?",
       "options": [
         "It is slow",
-        "The size, padding and byte order are the compiler's and the machine's: a struct of 11 bytes of fields was 24 bytes in memory",
+        "It uses too much memory",
         "It cannot be done",
-        "It uses too much memory"
+        "The size, padding and byte order are the compiler's and the machine's: a struct of 11 bytes of fields was 24 bytes in memory"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The wire layout has to be written down and not inherited."
     },
     {
@@ -19,11 +19,11 @@
       "question": "How is the integer 0x1234 written as a u16, little endian?",
       "options": [
         "12 34",
-        "34 12, the low byte first",
         "00 12",
+        "34 12, the low byte first",
         "12"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The test wrote AB 34 12 EF BE AD DE."
     },
     {
@@ -31,23 +31,23 @@
       "question": "A string's length field says 500 and 2 bytes follow. What should the reader do?",
       "options": [
         "Read 500 bytes",
-        "Fail the read and return an empty string, rather than read on into whatever lies after the message",
+        "Ask again",
         "Read 2",
-        "Ask again"
+        "Fail the read and return an empty string, rather than read on into whatever lies after the message"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A reader must not trust a length that came from outside."
     },
     {
       "stage": "check",
       "question": "Why does the reader keep failing after the first failed read?",
       "options": [
-        "A bug",
         "A byte that happens to be there after a failed read is not data: what follows a failure is nonsense that looks like data",
         "To save time",
+        "A bug",
         "To count errors"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The flag stays set."
     },
     {
@@ -55,21 +55,21 @@
       "question": "How does a receiver tell that a frame is for another type?",
       "options": [
         "It cannot",
-        "The frame starts with a type id worked out from the message's name, and unframe answers wrong_type if it differs",
         "By its length",
+        "The frame starts with a type id worked out from the message's name, and unframe answers wrong_type if it differs",
         "By trying to read it"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Changing the layout of a message means changing its name."
     },
     {
       "stage": "post",
       "question": "What is the published FNV-1a value for the string a, and what is it used for?",
       "options": [
-        "0",
+        "0xFFFFFFFF",
         "0xE40C292C, which is how to test an implementation of the id function against a known answer",
         "1",
-        "0xFFFFFFFF"
+        "0"
       ],
       "correct": 1,
       "explanation": "Test against known answers."

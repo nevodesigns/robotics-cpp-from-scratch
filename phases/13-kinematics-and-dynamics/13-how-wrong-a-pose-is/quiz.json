@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "A yaw of 359 degrees and one of -1 degree. What is the difference of the Euler angles, and the rotation error?",
       "options": [
-        "0 and 0",
-        "-360 degrees, and a rotation error of nearly 0: they are the same orientation",
         "1 degree and 1 degree",
-        "360 and 360"
+        "0 and 0",
+        "360 and 360",
+        "-360 degrees, and a rotation error of nearly 0: they are the same orientation"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The rotation error was 9.4e-16 rad."
     },
     {
       "stage": "check",
       "question": "What is the rotation vector?",
       "options": [
-        "The Euler angles",
-        "The axis of the turn from one orientation to the other, times its angle",
         "A quaternion",
-        "The pitch"
+        "The pitch",
+        "The axis of the turn from one orientation to the other, times its angle",
+        "The Euler angles"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It is zero for the same orientation."
     },
     {
@@ -31,33 +31,33 @@
       "question": "Why does the arc cosine of the trace fail for a turn of 1e-10?",
       "options": [
         "It is slow",
-        "(trace - 1) / 2 rounds to 1, so the angle is 0 and the answer is lost",
         "It is negative",
+        "(trace - 1) / 2 rounds to 1, so the angle is 0 and the answer is lost",
         "It is NaN"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The antisymmetric part gave 1e-10."
     },
     {
       "stage": "check",
       "question": "Where is the axis of a half turn?",
       "options": [
-        "In the antisymmetric part",
         "In the symmetric part: the antisymmetric part is zero there",
         "Nowhere",
+        "In the antisymmetric part",
         "In the trace"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "R is 2 k kT less I at a half turn."
     },
     {
       "stage": "post",
       "question": "A pose is right in position and 0.1 rad out in orientation. Is it converged?",
       "options": [
-        "Yes",
+        "Only in orientation",
         "No: it needs both to be within their tolerances",
-        "Only in position",
-        "Only in orientation"
+        "Yes",
+        "Only in position"
       ],
       "correct": 1,
       "explanation": "The position error was 0 m and the rotation error 0.1 rad."
@@ -66,10 +66,10 @@
       "stage": "post",
       "question": "What does swapping the order of target and transpose of current do to the vector?",
       "options": [
-        "Nothing",
+        "It makes it 0",
         "It gives the turn the other way, with the opposite sign",
         "It doubles it",
-        "It makes it 0"
+        "Nothing"
       ],
       "correct": 1,
       "explanation": "The error one way is minus the error the other."

@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "What is a staged rollout for?",
       "options": [
-        "Speed",
         "To learn about a bad release from a few robots before it reaches all of them",
-        "Saving bandwidth",
-        "Testing signatures"
+        "Testing signatures",
+        "Speed",
+        "Saving bandwidth"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "300 failed at once; 4 staged."
     },
     {
       "stage": "check",
       "question": "A release fails on one robot in two hundred. What is the chance a canary of 10 robots sees it?",
       "options": [
-        "Certain",
         "4.9 percent: 1 - (1 - 0.005)^10",
+        "Certain",
         "50 percent",
         "39 percent"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A hundred robots: 39.4 percent."
     },
     {
@@ -31,11 +31,11 @@
       "question": "How many robots must have the release for a 95 percent chance of seeing a fault in one robot in two hundred?",
       "options": [
         "10",
+        "50",
         "598, which is 60 percent of a fleet of 1000",
-        "100",
-        "50"
+        "100"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "99 percent needs 919."
     },
     {
@@ -43,33 +43,33 @@
       "question": "Why did the rollout with a threshold of 5 percent reach the whole fleet with 5 failures in 1000?",
       "options": [
         "A bug",
+        "The robots were silent",
         "0.5 percent is below 5 percent at every wave: the threshold never fires for a rare fault",
-        "The canary was too big",
-        "The robots were silent"
+        "The canary was too big"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A threshold of zero halts, by chance."
     },
     {
       "stage": "post",
       "question": "With 45 percent of the fleet silent, why must the rollout halt?",
       "options": [
-        "It is safer to be slow",
-        "There is not enough news to say it is safe, and a robot that crashed into a failed update is a silent robot",
         "The wave is too small",
-        "Silent robots are failed"
+        "It is safer to be slow",
+        "Silent robots are failed",
+        "There is not enough news to say it is safe, and a robot that crashed into a failed update is a silent robot"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The blind rollout gave it to all 1000."
     },
     {
       "stage": "post",
       "question": "What helps with a rare, severe fault, since a canary cannot see it?",
       "options": [
-        "A bigger threshold",
-        "Tests on the variants that exist before release, more robots and more time, and the hazard log: it belongs there and not in the rollout",
         "A faster rollout",
-        "Nothing"
+        "Tests on the variants that exist before release, more robots and more time, and the hazard log: it belongs there and not in the rollout",
+        "Nothing",
+        "A bigger threshold"
       ],
       "correct": 1,
       "explanation": "A staged rollout tells you how big the net is."

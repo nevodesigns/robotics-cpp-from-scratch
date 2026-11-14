@@ -7,57 +7,57 @@
       "question": "What gives the peg a sideways force on a chamfer?",
       "options": [
         "The camera",
+        "The hole",
         "The push down on a slope, less friction",
-        "Gravity",
-        "The hole"
+        "Gravity"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Push times (tan angle less mu)."
     },
     {
       "stage": "check",
       "question": "A peg 2 mm off needed what push from a hand of 300 N/m?",
       "options": [
-        "0.8 N",
         "279 N",
         "50 N",
+        "0.8 N",
         "0 N"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "k times the offset beyond the clearance over (tan less mu)."
     },
     {
       "stage": "check",
       "question": "The stiff hand (100000 N/m) at that offset:",
       "options": [
-        "Got it in",
-        "Jammed",
+        "Broke the peg",
         "Missed",
-        "Broke the peg"
+        "Got it in",
+        "Jammed"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It needed 279 N against 50 N."
     },
     {
       "stage": "check",
       "question": "At a friction of 1.2 on a 45 degree chamfer can the peg slide?",
       "options": [
-        "Yes",
         "No, whatever the push",
-        "Only softly",
-        "Only fast"
+        "Only fast",
+        "Yes",
+        "Only softly"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "tan 45 degrees is 1."
     },
     {
       "stage": "post",
       "question": "What helps a peg that cannot slide?",
       "options": [
-        "A bigger push",
-        "A steeper chamfer or less friction",
         "A stiffer hand",
-        "A faster approach"
+        "A steeper chamfer or less friction",
+        "A faster approach",
+        "A bigger push"
       ],
       "correct": 1,
       "explanation": "Not more force."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What is not in this model?",
       "options": [
-        "The chamfer",
         "The wedge: the peg touching at two points",
-        "The friction",
-        "The stiffness"
+        "The chamfer",
+        "The stiffness",
+        "The friction"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The classic jam."
     }
   ]

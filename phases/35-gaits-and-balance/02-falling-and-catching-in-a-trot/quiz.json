@@ -6,46 +6,46 @@
       "stage": "pre",
       "question": "Why is a trot always falling?",
       "options": [
-        "It is slow",
         "With two feet down there is no support polygon, only a line, and the body falls toward one side until the other pair lands",
+        "Gravity is odd",
         "It is heavy",
-        "Gravity is odd"
+        "It is slow"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "An inverted pendulum."
     },
     {
       "stage": "check",
       "question": "A body 10 mm off the line took how long to fall 6 cm?",
       "options": [
-        "0.22 s",
         "0.41 s",
+        "0.22 s",
         "0 s",
         "0.166 s"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "With 30 mm it was 0.22 s."
     },
     {
       "stage": "check",
       "question": "What does a taller body do?",
       "options": [
+        "Nothing",
         "Falls faster",
         "Falls more slowly: 0.50 s for 0.40 m",
-        "Nothing",
         "Cannot trot"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "T is sqrt(h / g)."
     },
     {
       "stage": "check",
       "question": "A stance of 0.25 s with the centre 30 mm off the line was:",
       "options": [
-        "Fine",
+        "Impossible to say",
         "Too long (it falls first)",
-        "Free",
-        "Impossible to say"
+        "Fine",
+        "Free"
       ],
       "correct": 1,
       "explanation": "0 for that offset."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "What does a negative time mean?",
       "options": [
-        "A bug",
-        "The centre is moving back toward the line fast enough that it never gets there",
         "The past",
-        "Zero"
+        "A bug",
+        "Zero",
+        "The centre is moving back toward the line fast enough that it never gets there"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It stops first."
     },
     {
       "stage": "post",
       "question": "What is not in the model?",
       "options": [
+        "The closed form",
         "The pendulum",
-        "Where the swing feet land and the body's rotation",
         "The time constant",
-        "The closed form"
+        "Where the swing feet land and the body's rotation"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "35-07 for the step."
     }
   ]

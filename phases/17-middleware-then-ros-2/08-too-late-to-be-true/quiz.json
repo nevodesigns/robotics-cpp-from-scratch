@@ -6,34 +6,34 @@
       "stage": "pre",
       "question": "A lidar driver is running, its heartbeat is fine, and no scans arrive. Which watch notices?",
       "options": [
+        "The lifespan",
         "The discovery lease alone",
         "A deadline on the scan topic: the node is alive and the data is stalled, and only a watch on the stream sees that",
-        "The lifespan",
         "Nothing can"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Alive is not the same as delivering."
     },
     {
       "stage": "check",
       "question": "A silence has gone on for five deadlines. How many misses does the monitor report?",
       "options": [
-        "Five",
         "One: it is reported once per silence and not again until a message re-arms it",
+        "Five",
         "Zero",
         "Fifty"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "One dead lidar would otherwise be a thousand log lines."
     },
     {
       "stage": "check",
       "question": "What does a monitor say before any message has arrived?",
       "options": [
-        "A miss",
+        "An error",
         "Nothing: a stream that has not begun has no promise yet to break",
-        "Waiting",
-        "An error"
+        "A miss",
+        "Waiting"
       ],
       "correct": 1,
       "explanation": "Nothing is missed before the first message."
@@ -42,24 +42,24 @@
       "stage": "check",
       "question": "A message every 0.10 s, up to 0.03 s early or late. What does a deadline of 0.10 s do, and what does 0.17 s do?",
       "options": [
-        "Both nothing",
         "992 misses in 2000 messages at 0.10 s, and none at 0.17 s",
-        "None at 0.10",
-        "Both 992"
+        "Both nothing",
+        "Both 992",
+        "None at 0.10"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The worst gap is the period plus both jitters."
     },
     {
       "stage": "post",
       "question": "A consumer takes half as fast as messages are published, with no lifespan. How old is the data it is served, by the end of ten seconds?",
       "options": [
-        "About 20 ms",
-        "5.00 s: the queue only gets longer and each message served is older than the last",
+        "The same as published",
         "1 s",
-        "The same as published"
+        "5.00 s: the queue only gets longer and each message served is older than the last",
+        "About 20 ms"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A lifespan put a ceiling of 0.1 s on it."
     },
     {
@@ -67,11 +67,11 @@
       "question": "What does a lifespan cost?",
       "options": [
         "Nothing",
-        "Messages: 490 of 500 expired at a lifespan of 0.1 s, and the count says how many",
         "Time",
-        "Memory"
+        "Memory",
+        "Messages: 490 of 500 expired at a lifespan of 0.1 s, and the count says how many"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The consumer sees less of the world and knows how much less."
     }
   ]

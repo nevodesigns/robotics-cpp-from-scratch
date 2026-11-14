@@ -6,34 +6,34 @@
       "stage": "pre",
       "question": "Where does a joint offset come from?",
       "options": [
-        "Gravity",
-        "The servo's zero is wherever the horn was pressed on the shaft",
+        "The floor",
         "The battery",
-        "The floor"
+        "The servo's zero is wherever the horn was pressed on the shaft",
+        "Gravity"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A tooth of the spline, a few degrees."
     },
     {
       "stage": "check",
       "question": "The foot was how far from where it was commanded before the fit?",
       "options": [
+        "1 m",
         "3.4 mm",
-        "14.6 mm",
         "0 mm",
-        "1 m"
+        "14.6 mm"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "And 3.4 mm after."
     },
     {
       "stage": "check",
       "question": "What was left after the fit?",
       "options": [
-        "Everything",
-        "The noise of the measurements",
         "Nothing",
-        "The offsets"
+        "The noise of the measurements",
+        "The offsets",
+        "Everything"
       ],
       "correct": 1,
       "explanation": "3.5 mm in all three axes."
@@ -44,8 +44,8 @@
       "options": [
         "It is too slow",
         "The knee's offset cannot be told from the hip's",
-        "It is heavy",
-        "It is a bug"
+        "It is a bug",
+        "It is heavy"
       ],
       "correct": 1,
       "explanation": "The normal equations are singular."
@@ -55,23 +55,23 @@
       "question": "What does a large residual after the fit say?",
       "options": [
         "Nothing",
-        "The model, not only the zeros, is wrong (for example a link length)",
         "The fit is perfect",
+        "The model, not only the zeros, is wrong (for example a link length)",
         "The servos are good"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "3.6 mm for a thigh 10 mm too long."
     },
     {
       "stage": "post",
       "question": "Why use a dozen poses and not one?",
       "options": [
-        "For fun",
         "Noise has nothing to average against with one",
         "It is the rule",
+        "For fun",
         "Time"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "One bent pose fixes the offsets, but noisily."
     }
   ]

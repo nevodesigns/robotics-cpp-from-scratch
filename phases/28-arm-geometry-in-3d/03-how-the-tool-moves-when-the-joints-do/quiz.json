@@ -7,69 +7,69 @@
       "question": "What is a column of the Jacobian?",
       "options": [
         "A joint's limits",
+        "A torque",
         "The tool's linear and angular velocity for a unit rate of that joint",
-        "A link length",
-        "A torque"
+        "A link length"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "z cross (p - o), and z."
     },
     {
       "stage": "check",
       "question": "Built with the other convention's rule, the Panda's Jacobian was out by:",
       "options": [
+        "0",
         "0.000000000144",
         "1.29",
-        "0",
         "Nothing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "With its own rule it was 0.000000000144 out."
     },
     {
       "stage": "check",
       "question": "A vertical force of 10 N asked of the first joint of the UR5:",
       "options": [
-        "10 N m",
         "0.000 N m: its axis is vertical",
+        "10 N m",
         "1 N m",
         "A great deal"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It cannot lift anything."
     },
     {
       "stage": "check",
       "question": "What does a tool offset change in the Jacobian?",
       "options": [
-        "Only the angular part",
-        "The linear part; the angular part stays",
+        "Both parts",
         "Nothing",
-        "Both parts"
+        "Only the angular part",
+        "The linear part; the angular part stays"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A longer lever arm."
     },
     {
       "stage": "post",
       "question": "Why is the transpose the force gearbox?",
       "options": [
-        "Luck",
         "The joints and the tool do the same work: torque times rate equals wrench times velocity",
+        "Gravity",
         "Matrices",
-        "Gravity"
+        "Luck"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The powers agreed to 0.000000000000000 W."
     },
     {
       "stage": "post",
       "question": "Why keep the finite difference Jacobian as a test?",
       "options": [
-        "It is faster",
+        "Style",
         "A sign error in the fast one is subtle and nothing else would show it",
         "It is exact",
-        "Style"
+        "It is faster"
       ],
       "correct": 1,
       "explanation": "It differs by the right check."

@@ -7,33 +7,33 @@
       "question": "Why can a planner for an arm not use a grid?",
       "options": [
         "Grids are slow only",
+        "Grids are old",
         "Six dimensions are too many cells, and the obstacles are not simple in joint space: the only way to know is to ask the collision model",
-        "Arms are heavy",
-        "Grids are old"
+        "Arms are heavy"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A million cells at ten steps a side."
     },
     {
       "stage": "check",
       "question": "Across 6 seeds, how many did RRT-Connect and RRT find?",
       "options": [
-        "3 and 6",
         "6 and 3",
+        "All of each",
         "None",
-        "All of each"
+        "3 and 6"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "With 23 nodes against 58."
     },
     {
       "stage": "check",
       "question": "How long were the paths against the straight line in joint space?",
       "options": [
-        "The same",
-        "2.90 times",
         "Half",
-        "Exactly twice"
+        "2.90 times",
+        "Exactly twice",
+        "The same"
       ],
       "correct": 1,
       "explanation": "Free, not good."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "Why does a second tree from the goal help so much?",
       "options": [
-        "It does not",
-        "Each tree reaches out and they meet, where one tree has to hit a small goal in a large space",
+        "Luck",
         "It doubles the nodes",
-        "Luck"
+        "Each tree reaches out and they meet, where one tree has to hit a small goal in a large space",
+        "It does not"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "RRT-Connect."
     },
     {
       "stage": "post",
       "question": "What does the goal bias do?",
       "options": [
+        "Smooths the path",
         "Chooses the shortest path",
-        "Samples the goal one time in ten to pull the tree towards it",
         "Avoids the wall",
-        "Smooths the path"
+        "Samples the goal one time in ten to pull the tree towards it"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A small pull."
     }
   ]

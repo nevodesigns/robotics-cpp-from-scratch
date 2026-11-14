@@ -8,8 +8,8 @@
       "options": [
         "To save space",
         "Messages do not arrive at a steady rate and what uses them wants equal steps",
-        "To change it",
-        "For colour"
+        "For colour",
+        "To change it"
       ],
       "correct": 1,
       "explanation": "Linear interpolation onto a grid."
@@ -18,12 +18,12 @@
       "stage": "check",
       "question": "Trimming the idle ends of the episode left:",
       "options": [
-        "5.0 s",
-        "2.8 s",
         "0 s",
-        "1 s"
+        "1 s",
+        "2.8 s",
+        "5.0 s"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The reaching."
     },
     {
@@ -31,11 +31,11 @@
       "question": "The follower lagged the leader by how much, as found?",
       "options": [
         "0 ms",
-        "100 ms",
         "1 s",
-        "100 s"
+        "100 s",
+        "100 ms"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "True value 100 ms."
     },
     {
@@ -43,35 +43,35 @@
       "question": "An episode that lost 20 frames in a row was:",
       "options": [
         "Kept",
-        "Refused: its longest gap was 0.70 s",
         "Trimmed",
-        "Resampled and kept"
+        "Resampled and kept",
+        "Refused: its longest gap was 0.70 s"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The good one was kept."
     },
     {
       "stage": "post",
       "question": "Why trim the idle ends?",
       "options": [
-        "To save space only",
         "They teach doing nothing, which is not the task",
+        "They are long",
         "They are noisy",
-        "They are long"
+        "To save space only"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The task is the motion."
     },
     {
       "stage": "post",
       "question": "What does the check not say?",
       "options": [
-        "The longest gap",
-        "Whether the demonstration was a good way to do the task",
+        "The idle share",
         "The duration",
-        "The idle share"
+        "Whether the demonstration was a good way to do the task",
+        "The longest gap"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A clumsy one that succeeded passes."
     }
   ]

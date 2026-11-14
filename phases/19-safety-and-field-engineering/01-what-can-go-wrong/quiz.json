@@ -7,57 +7,57 @@
       "question": "Why keep a hazard log from the start of a project and not at the end?",
       "options": [
         "It is required",
-        "A safeguard nobody wrote a hazard for cannot be shown to cover anything, and hazards found late are expensive to answer",
+        "It looks professional",
         "It is faster",
-        "It looks professional"
+        "A safeguard nobody wrote a hazard for cannot be shown to cover anything, and hazards found late are expensive to answer"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A team that says it has an emergency stop cannot say what it is for."
     },
     {
       "stage": "check",
       "question": "Severity 4 with likelihood 1 scores 4. By the product alone that is low. What does the log class it as?",
       "options": [
-        "Low",
         "Medium: a catastrophic outcome is never classed below medium, because the likelihood is a guess and the outcome is not",
+        "Low",
         "High",
         "Unacceptable"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Severity 3 with likelihood 1 is still low: the floor is for catastrophe only."
     },
     {
       "stage": "check",
       "question": "A hazard is added with no id, severity 9 and no owner. What does add answer?",
       "options": [
-        "bad_severity",
         "no_id: the checks are made in a fixed order and the first failure is the answer, and nothing is kept",
-        "no_owner",
-        "ok"
+        "ok",
+        "bad_severity",
+        "no_owner"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A refused hazard is not kept half way."
     },
     {
       "stage": "check",
       "question": "Two hazards both score 12, one at severity 4 and likelihood 3 and one at severity 3 and likelihood 4. Which is ranked first?",
       "options": [
+        "Alphabetical only",
         "The second",
         "The first: ties break by severity, then by id, so the catastrophic one leads and the order is always the same",
-        "Either",
-        "Alphabetical only"
+        "Either"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Equal scores are not equal risks."
     },
     {
       "stage": "post",
       "question": "unaddressed() lists a severity 4, likelihood 1 fire with no mitigation but not a severity 2, likelihood 1 pinch with none. Why?",
       "options": [
-        "A mistake",
+        "The pinch has an owner",
         "The fire is medium by the floor and so is not low, while the pinch is low: a low risk with nothing done is allowed, a catastrophe with nothing done is not",
         "The list is random",
-        "The pinch has an owner"
+        "A mistake"
       ],
       "correct": 1,
       "explanation": "The three open ones were U4, U1, U5."
@@ -68,8 +68,8 @@
       "options": [
         "Rollover",
         "Keeping on driving when the link is lost, scoring 16: the reason for an independent stop path",
-        "Battery failure",
-        "Overheating"
+        "Overheating",
+        "Battery failure"
       ],
       "correct": 1,
       "explanation": "The next lesson answers it."

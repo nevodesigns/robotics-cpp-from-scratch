@@ -7,45 +7,45 @@
       "question": "A single position loop with PID overshot a 2 radian move by 14.2 percent and took 3.18 seconds to settle. Why?",
       "options": [
         "The proportional gain was too high",
-        "The motor was saturated through the large move and the integral wound up, and had to be unwound on the far side",
         "The derivative gain was too low",
-        "Noise"
+        "Noise",
+        "The motor was saturated through the large move and the integral wound up, and had to be unwound on the far side"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The cascade did not overshoot and settled in 0.81 s, with the integral in the speed loop where a large move does not wind it up."
     },
     {
       "stage": "check",
       "question": "In a cascade, what does the outer loop output and what does the inner loop take as its setpoint?",
       "options": [
-        "A torque, which the inner loop limits",
-        "A speed: the outer loop is a gain times the position error clamped to a speed limit, and that is the inner loop's setpoint",
         "A position",
-        "An acceleration"
+        "An acceleration",
+        "A speed: the outer loop is a gain times the position error clamped to a speed limit, and that is the inner loop's setpoint",
+        "A torque, which the inner loop limits"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "That is why the speed limit is built in: the inner loop is never asked for more than the clamp allows."
     },
     {
       "stage": "check",
       "question": "The cascade peaked at 3.04 rad/s against a limit of 3. Why not exactly 3?",
       "options": [
-        "A rounding error",
         "The inner loop is a tracking loop and overshoots its setpoint a little, so a limit that must never be exceeded needs a hard stop behind it",
+        "A rounding error",
         "The limit is approximate by design",
         "The torque limit"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The limit is not enforced afterwards. It holds because the loop is not asked for more, to within what the inner loop tracks."
     },
     {
       "stage": "check",
       "question": "Why does the integral stop accumulating when the motor is saturated and the error is still pushing the same way?",
       "options": [
-        "To save computation",
+        "The error is zero then",
         "It would only grow without changing the torque, and then have to be unwound before the loop could respond: windup",
         "Integrals are unstable above a limit",
-        "The error is zero then"
+        "To save computation"
       ],
       "correct": 1,
       "explanation": "Five seconds against a stuck joint left the guarded integral at 0.000 where an unguarded one would be 15."
@@ -54,12 +54,12 @@
       "stage": "post",
       "question": "A load of 5 N m arrives. The P and D loop sagged 0.0250 rad for good, the PID reached 0.0208 rad worst, and the cascade 0.0051. Why is the cascade so much better?",
       "options": [
-        "A larger gain",
         "The speed loop is fast and has the integral, so a load is corrected at its rate and not at the position loop's, and it finishes on target",
         "A better motor",
-        "The load is smaller"
+        "The load is smaller",
+        "A larger gain"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The PID's integral is slow and shares its gain with the position loop. The cascade's is in the loop that feels the load first."
     },
     {
@@ -67,11 +67,11 @@
       "question": "Why must the inner loop be much faster than the outer one?",
       "options": [
         "It does not have to be",
+        "To save memory",
         "Otherwise the outer loop sees the inner loop's lag as a delay of its own, which cuts the gain it can have, as lesson 14-07 priced",
-        "The outer loop is slower by law",
-        "To save memory"
+        "The outer loop is slower by law"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Roughly a factor of ten or more. Here the inner loop's bandwidth is about 80 rad/s against the outer loop's 10."
     }
   ]

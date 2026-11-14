@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "Which container should be the default choice?",
       "options": [
-        "std::vector, because contiguous memory is what processors are fast at",
         "std::map, because lookup is logarithmic",
         "std::unordered_map, because lookup is constant",
-        "std::list, because inserting anywhere is cheap"
+        "std::list, because inserting anywhere is cheap",
+        "std::vector, because contiguous memory is what processors are fast at"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Reading one element pulls its neighbours into cache, so scanning a vector routinely beats a structure that scatters elements, even for lookup at small sizes."
     },
     {
@@ -19,8 +19,8 @@
       "question": "Why is a vector's amortised constant push a problem in a control loop?",
       "options": [
         "The individual push that reallocates is not constant, and it happens at a moment the loop did not choose",
-        "Because push_back is slow in general",
         "Because vectors cannot hold more than a few thousand elements",
+        "Because push_back is slow in general",
         "Because the amortised cost grows with size"
       ],
       "correct": 0,
@@ -30,12 +30,12 @@
       "stage": "check",
       "question": "What happens to a reference into a vector when the vector reallocates?",
       "options": [
-        "It dangles, and using it is undefined behaviour with no warning",
+        "Nothing, references into vectors are always stable",
         "It is updated to point at the new location",
-        "The compiler refuses to compile such code",
-        "Nothing, references into vectors are always stable"
+        "It dangles, and using it is undefined behaviour with no warning",
+        "The compiler refuses to compile such code"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "It works until the push happens to reallocate, which depends on the capacity, which depends on how many elements arrived earlier. That is why it surfaces late."
     },
     {
@@ -44,8 +44,8 @@
       "options": [
         "names() wants sorted order, and a map provides it for free",
         "Because unordered_map cannot hold strings",
-        "Because map lookup is faster",
-        "Because unordered_map does not allow assignment"
+        "Because unordered_map does not allow assignment",
+        "Because map lookup is faster"
       ],
       "correct": 0,
       "explanation": "Getting the ordering from the container beats sorting on every call. An unordered_map would also give an order that can change between runs, which makes output hard to compare."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "In a full ring buffer, where is the oldest entry?",
       "options": [
-        "At the position about to be overwritten next",
         "Always at index zero",
+        "At the position about to be overwritten next",
         "At the position written most recently",
         "At the midpoint of the buffer"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "Once the buffer has wrapped, the write position and the oldest entry are the same slot. Assuming index zero produces output that is correct only until the first wrap."
     },
     {
       "stage": "post",
       "question": "What does complexity notation not tell you?",
       "options": [
+        "Whether an operation is constant time",
         "How fast something actually is on real hardware",
         "How the cost grows with size",
-        "Whether an operation is constant time",
         "The worst case behaviour"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "A logarithmic lookup that follows pointers to scattered nodes can lose to a linear scan of memory already in cache. Start with a vector and change when a measurement says to."
     }
   ]

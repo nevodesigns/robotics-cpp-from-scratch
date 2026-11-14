@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "What keeps a delta's platform from tilting?",
       "options": [
-        "The motors",
         "The parallelograms of rods",
-        "Gravity",
-        "A sensor"
+        "The motors",
+        "A sensor",
+        "Gravity"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Three movements, no tilt."
     },
     {
       "stage": "check",
       "question": "How is each arm solved?",
       "options": [
-        "All together",
+        "By a table",
         "On its own, in its own frame, as two circles meeting",
-        "By search",
-        "By a table"
+        "All together",
+        "By search"
       ],
       "correct": 1,
       "explanation": "Rotate the target into the arm's frame."
@@ -30,24 +30,24 @@
       "stage": "check",
       "question": "At -0.40 m the reach was:",
       "options": [
-        "0.310 m out from the axis",
+        "The whole box",
         "1 m",
         "0 m",
-        "The whole box"
+        "0.310 m out from the axis"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "A dome."
     },
     {
       "stage": "check",
       "question": "The moving parts weighed:",
       "options": [
+        "Nothing",
         "18 kg",
         "0.78 kg, against 18 for a six axis arm",
-        "Nothing",
         "The same"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The motors stay on the base."
     },
     {
@@ -55,20 +55,20 @@
       "question": "What is a delta for?",
       "options": [
         "Welding",
-        "Fast, light pick and place from above",
         "Reaching under things",
-        "Slow heavy lifting"
+        "Slow heavy lifting",
+        "Fast, light pick and place from above"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Light parts, high rate."
     },
     {
       "stage": "post",
       "question": "What is not checked here?",
       "options": [
-        "The inverse kinematics",
-        "The rods colliding and the limits of their ball joints",
         "The forward kinematics",
+        "The rods colliding and the limits of their ball joints",
+        "The inverse kinematics",
         "The symmetry"
       ],
       "correct": 1,

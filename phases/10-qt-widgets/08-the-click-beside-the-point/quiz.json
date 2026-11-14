@@ -8,8 +8,8 @@
       "options": [
         "Up with the value",
         "Down: a higher value is a smaller y",
-        "Left",
-        "It depends on the chart"
+        "It depends on the chart",
+        "Left"
       ],
       "correct": 1,
       "explanation": "The highest value was at y = 10 and the lowest at y = 90."
@@ -18,10 +18,10 @@
       "stage": "check",
       "question": "Why is B picked and not A, when A is nearer in seconds and volts?",
       "options": [
-        "A bug",
+        "A is outside the tolerance",
         "Nearness is measured in pixels, and a second and a volt are not the same size on the screen",
-        "B is newer",
-        "A is outside the tolerance"
+        "A bug",
+        "B is newer"
       ],
       "correct": 1,
       "explanation": "A was 40 pixels away and B 9."
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "A click is exactly at the tolerance of 8 pixels. What happens?",
       "options": [
+        "An error",
         "Nothing is picked",
         "The sample is picked: the tolerance is inclusive",
-        "It depends on the sample",
-        "An error"
+        "It depends on the sample"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Exactly 8 picked it and 8.1 did not."
     },
     {
       "stage": "check",
       "question": "What does pick return for a click on empty chart?",
       "options": [
-        "The nearest sample",
         "-1: nothing is within the tolerance",
-        "0",
-        "A random sample"
+        "A random sample",
+        "The nearest sample",
+        "0"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A click on nothing should select nothing."
     },
     {
       "stage": "post",
       "question": "Why can a sample outside the time shown not be picked?",
       "options": [
+        "The tolerance",
         "It does not exist",
-        "It is not drawn: its pixel is off the chart, and a click there is not on the data",
         "It is too old",
-        "The tolerance"
+        "It is not drawn: its pixel is off the chart, and a click there is not on the data"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Samples at -5 s and 105 s would be at x = -50 and 1050."
     },
     {
       "stage": "post",
       "question": "What does from_pixel do with a usable width of zero?",
       "options": [
-        "Divides by zero",
-        "Returns t0 for the time, without dividing",
         "Returns t1",
-        "Returns 0"
+        "Returns 0",
+        "Divides by zero",
+        "Returns t0 for the time, without dividing"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It checks the size before dividing."
     }
   ]

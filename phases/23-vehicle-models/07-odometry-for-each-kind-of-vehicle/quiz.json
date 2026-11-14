@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "What is the effective track of a skid steer vehicle?",
       "options": [
-        "The ruler's number",
         "The real track times the ICR coefficient",
+        "The ruler's number",
         "The wheelbase",
         "Half the track"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The vehicle turns as if the track were wider."
     },
     {
@@ -19,47 +19,47 @@
       "question": "A track 3 percent too small made a full turn read how much too much?",
       "options": [
         "0",
-        "11.1 degrees",
         "3 degrees",
+        "11.1 degrees",
         "360 degrees"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The same fraction of every turn."
     },
     {
       "stage": "check",
       "question": "The ideal odometry on the lossy floor believed it had come home. The robot:",
       "options": [
+        "Had a bug",
         "Had",
         "Was more than 3 m away",
-        "Was lost",
-        "Had a bug"
+        "Was lost"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Consistent with itself, wrong about the world."
     },
     {
       "stage": "check",
       "question": "A steering sensor 1 degree off zero, over 20 m straight, made the car believe it had turned:",
       "options": [
-        "Nothing",
-        "61 degrees",
         "1 degree",
-        "5 degrees"
+        "Nothing",
+        "5 degrees",
+        "61 degrees"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Distance times tan(delta) over the wheelbase."
     },
     {
       "stage": "post",
       "question": "What is the first thing to calibrate on a car's odometry?",
       "options": [
+        "The motor",
         "The speed",
-        "The steering zero, with the car on a straight line",
         "The colour",
-        "The motor"
+        "The steering zero, with the car on a straight line"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A small angle error becomes a large position error."
     },
     {

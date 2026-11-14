@@ -6,34 +6,34 @@
       "stage": "pre",
       "question": "A race has a window of a few instructions. A test runs the racy code with two real threads 100 times and passes. What can you conclude?",
       "options": [
-        "The code is safe",
         "Very little: measured at about 0.07 percent of trials stranding a task, a suite that runs it 100 times passes with the bug in about 93 percent of the time",
-        "The code is racy",
-        "That 100 trials is enough"
+        "That 100 trials is enough",
+        "The code is safe",
+        "The code is racy"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The buggy version stranded a task in 2 to 28 of 20000 trials depending on the run, and the fixed one in 0 of 180000. A clean run proves nothing, which lessons 07-01 and 07-09 measured twice already."
     },
     {
       "stage": "check",
       "question": "submit counts a task under the lock, releases it, and pushes under the lock again. Shutdown runs in the gap between. What happens, and why?",
       "options": [
-        "The push is refused",
-        "The task is pushed into a queue shutdown has already drained, so it is accepted and counted and never processed: stranded",
+        "Nothing, since both halves are locked",
         "shutdown waits for the push",
-        "Nothing, since both halves are locked"
+        "The push is refused",
+        "The task is pushed into a queue shutdown has already drained, so it is accepted and counted and never processed: stranded"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Every access is locked and the whole is not atomic. It is the check-then-act race. The fix is one lock held across the check and the push."
     },
     {
       "stage": "check",
       "question": "A hook at submit.gap runs shutdown() on the same thread as the submit. What did the buggy version do across 300 trials, and what did running two real threads 300 times do?",
       "options": [
-        "Both stranded a task in every trial",
+        "The unaided run found it 300 times",
         "The forced hook stranded a task in 300 of 300, where the unaided run usually found 0 in 300: no timing is involved, so the failure is the same every time",
         "The forced hook found nothing",
-        "The unaided run found it 300 times"
+        "Both stranded a task in every trial"
       ],
       "correct": 1,
       "explanation": "Forcing the interleaving needs no second thread and no luck. The unaided count varies between 0 and a handful and is printed and not asserted."
@@ -43,11 +43,11 @@
       "question": "Shutdown is injected at each point of one submit: before, in the gap, after. For the buggy intake, how many strand a task?",
       "options": [
         "All three",
-        "Only the gap: before, the submit is refused; after, shutdown finds the task already queued and drains it",
         "None",
-        "Before and after, not the gap"
+        "Before and after, not the gap",
+        "Only the gap: before, the submit is refused; after, shutdown finds the task already queued and drains it"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Three places shutdown can run, two harmless and one not. The fixed version has no gap, so that hook never fires. Trying every point is a small exhaustive search of the interleavings of two steps."
     },
     {
@@ -55,11 +55,11 @@
       "question": "A race point is placed inside a locked section, and the hook calls an operation that takes the same lock. What happens, measured?",
       "options": [
         "It works, since the hook runs later",
-        "It hangs: one thread locking a std::mutex it holds waits for itself, and a 3 second timeout killed the program",
         "It throws",
+        "It hangs: one thread locking a std::mutex it holds waits for itself, and a 3 second timeout killed the program",
         "It deadlocks only on Windows"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Place points where no lock is held, and have hooks call the public operations. race_point also copies the action out and runs it after releasing its own table lock, for the same reason."
     },
     {
@@ -67,11 +67,11 @@
       "question": "What does a race point cost when no hook is installed?",
       "options": [
         "A mutex lock and a table search",
+        "A function call through std::function",
         "One atomic load that finds the installed count at zero, and a return, which is why it can stay in production code",
-        "Nothing, it is compiled out",
-        "A function call through std::function"
+        "Nothing, it is compiled out"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "hooks_installed() is atomic so the common case never takes the table's mutex. The suite checks that with nothing installed the point does nothing, and that it goes back to doing nothing when a hook is removed."
     }
   ]

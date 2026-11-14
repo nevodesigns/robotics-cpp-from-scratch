@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "A test compares a run's log with one saved from a good run. It passes on the author's machine and fails on every other. What is the likely cause?",
       "options": [
-        "The compiler",
-        "Every line carries a time or an address that is different in each run, and the comparison treats it as part of the answer",
+        "The robot is broken",
         "The file is too long",
-        "The robot is broken"
+        "The compiler",
+        "Every line carries a time or an address that is different in each run, and the comparison treats it as part of the answer"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "4 of 4 lines differed as written between two runs and 0 after normalising."
     },
     {
@@ -19,35 +19,35 @@
       "question": "What does normalize replace, and what must it leave alone?",
       "options": [
         "Every digit",
-        "Only the volatile parts, the time written t=... and an address written 0x..., leaving numbers that matter such as speed 0.5 at limit 1.0",
         "Every line",
-        "Nothing"
+        "Nothing",
+        "Only the volatile parts, the time written t=... and an address written 0x..., leaving numbers that matter such as speed 0.5 at limit 1.0"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Stripping all numbers would hide a change in the speed."
     },
     {
       "stage": "check",
       "question": "Why is soft=2.5 left unchanged?",
       "options": [
-        "It is not a number",
         "The t= inside the word soft is not at the start of a word, so it is not a time",
-        "It is too short",
-        "It has a dot"
+        "It is not a number",
+        "It has a dot",
+        "It is too short"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A t= with no number after it, as in target=3 t= none, is also left alone."
     },
     {
       "stage": "check",
       "question": "The saved log and this run differ only in the final speed, 1.0 against 1.25. What does the difference show?",
       "options": [
-        "Nothing",
         "Two changes: the line with speed 1.000000 removed and the line with speed 1.250000 added",
+        "One changed line",
         "Five changes",
-        "One changed line"
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A line that changed is one removed and one added."
     },
     {
@@ -56,8 +56,8 @@
       "options": [
         "Sorting",
         "Finding the most lines two logs have in common in order, so that what is left over is exactly what was removed and added",
-        "Counting lines",
-        "Hashing"
+        "Hashing",
+        "Counting lines"
       ],
       "correct": 1,
       "explanation": "table[i][j] is how many lines the first i and the first j have in common."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why is approving an update to a golden file without reading the difference dangerous?",
       "options": [
-        "It is slow",
-        "The test then passes for whatever the output has become, including the wrong output",
+        "It changes the time",
         "The file is lost",
-        "It changes the time"
+        "The test then passes for whatever the output has become, including the wrong output",
+        "It is slow"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The difference is how a person sees what the update really changes."
     }
   ]

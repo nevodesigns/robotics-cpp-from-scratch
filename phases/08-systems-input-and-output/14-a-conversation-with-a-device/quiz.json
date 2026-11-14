@@ -6,33 +6,33 @@
       "stage": "pre",
       "question": "A program asks a device a question by sending a request and polling the link until the answer arrives, discarding everything else. The device also streams telemetry on the same link. What happens to the telemetry?",
       "options": [
-        "Nothing, it is queued",
-        "Whatever arrives during the wait is read out of the port and thrown away: 38 frames lost in fifty requests",
+        "The device stops streaming while it is asked",
         "It is delivered to the telemetry code first",
-        "The device stops streaming while it is asked"
+        "Nothing, it is queued",
+        "Whatever arrives during the wait is read out of the port and thrown away: 38 frames lost in fifty requests"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Each request waits a few milliseconds and a frame arrives every ten. A session reads the link in exactly one place and routes each message, and lost none."
     },
     {
       "stage": "check",
       "question": "The sequence numbers counted 90 lost frames and 391 were missing. Where are the other 301?",
       "options": [
-        "Corrupted and delivered",
         "Lost while the cable was out, which the tracker cannot see because it is started over on every new connection",
         "Counted twice",
+        "Corrupted and delivered",
         "Still in the buffer"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Three seconds of outage at a hundred frames a second is 300. The loss counter is loss while connected, and it has to be reported next to the number of reconnects."
     },
     {
       "stage": "check",
       "question": "After the power cycle the device had done 177 moves and 177 were answered, though 40 requests were resent. Why were none done twice?",
       "options": [
-        "The resends never arrived",
-        "The requester kept the id across each resend and the device remembered the last id it answered, so a repeat was replayed and not repeated",
         "The checksum caught the repeats",
+        "The requester kept the id across each resend and the device remembered the last id it answered, so a repeat was replayed and not repeated",
+        "The resends never arrived",
         "The device ignores a second request"
       ],
       "correct": 1,
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "A session starts its clock map again on a new connection. What did that buy after a five second power cycle?",
       "options": [
-        "Nothing measurable",
         "An error of 12.0 ms over the next twenty seconds, where a map kept from before was out by the downtime, 5011 ms in lesson 08-12",
+        "A smaller map",
         "A faster fit",
-        "A smaller map"
+        "Nothing measurable"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The device's clock stepped, and a fit built before the step averages the old samples in with the new. Starting over is cheaper than waiting for them to leave the window."
     },
     {
@@ -55,21 +55,21 @@
       "question": "A request is in flight when the cable comes out. What should the session do with it on the new connection?",
       "options": [
         "Resend it, in case",
-        "Abandon it and count it, because its answer was on the old connection, and the caller asked for something that may or may not have happened",
         "Leave it waiting",
+        "Abandon it and count it, because its answer was on the old connection, and the caller asked for something that may or may not have happened",
         "Ignore it silently"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Left waiting, it blocks every new request until its attempts run out, and resent to a power cycled device it may be done twice. Counting it tells the caller to check."
     },
     {
       "stage": "post",
       "question": "The tests are all passing. What is the honest limit of what they show?",
       "options": [
-        "Nothing, passing tests prove the code is correct on any hardware",
+        "Only that Windows builds",
         "The faults are independent where real noise comes in bursts, the delay is generated, the pseudo terminal has no real timing, and the device never errs in its own firmware; real hardware will find something else, though not one of the problems this phase measured",
-        "Only that the code compiles",
-        "Only that Windows builds"
+        "Nothing, passing tests prove the code is correct on any hardware",
+        "Only that the code compiles"
       ],
       "correct": 1,
       "explanation": "Each simplification was chosen so a result could be counted and repeated. The tests establish that the known failures are handled, and they say so rather than claiming more."

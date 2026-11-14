@@ -6,36 +6,36 @@
       "stage": "pre",
       "question": "A settings file says robot/port=abc. What does QSettings::value(\"robot/port\").toInt() give?",
       "options": [
-        "An error",
         "0, and with no ok flag nothing says it was wrong",
+        "An error",
         "5000",
         "-1"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The port abc was 0 with ok false."
     },
     {
       "stage": "check",
       "question": "What type does a number have when QSettings reads it fresh from an INI file?",
       "options": [
-        "int",
         "QString: an INI file keeps text",
         "double",
-        "It depends on the number"
+        "It depends on the number",
+        "int"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The stored number was a QString."
     },
     {
       "stage": "check",
       "question": "A speed limit in the file is 99 and the allowed range is 0 to 5. What does the station use?",
       "options": [
+        "0",
         "99",
         "5, with a note that it was pulled to the end",
-        "0",
         "1.0"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It used 5 and noted it."
     },
     {
@@ -43,21 +43,21 @@
       "question": "When is a setting in the file?",
       "options": [
         "As soon as setValue is called",
-        "When it is synced: until then it is in memory, and a killed station has kept nothing",
+        "Never",
         "At exit only",
-        "Never"
+        "When it is synced: until then it is in memory, and a killed station has kept nothing"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Before save() the file did not exist."
     },
     {
       "stage": "post",
       "question": "Why is the migration done only once?",
       "options": [
-        "It is slow",
-        "Starting again would convert 1.5 m/s as if it were millimetres, giving 0.0015",
         "Qt forbids it",
-        "It is a style rule"
+        "Starting again would convert 1.5 m/s as if it were millimetres, giving 0.0015",
+        "It is a style rule",
+        "It is slow"
       ],
       "correct": 1,
       "explanation": "The version number, written after the migration, is how it knows."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "A value is missing from the file. Is it a problem?",
       "options": [
+        "Only on Windows",
         "Yes, always",
         "No: it is the default, and a note is for a value that is there and wrong",
-        "Only for the port",
-        "Only on Windows"
+        "Only for the port"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "An empty file had no notes."
     }
   ]

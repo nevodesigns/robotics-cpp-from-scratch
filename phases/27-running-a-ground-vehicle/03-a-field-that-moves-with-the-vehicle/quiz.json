@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "How long is a protective field?",
       "options": [
-        "10 m",
         "As long as the vehicle needs to stop at its speed, plus a margin",
-        "The sensor's range",
-        "As long as the vehicle"
+        "As long as the vehicle",
+        "10 m",
+        "The sensor's range"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "v latency + v squared / 2a + margin."
     },
     {
       "stage": "check",
       "question": "A vehicle that stopped when something entered its field stopped:",
       "options": [
-        "0.25 m past it",
+        "10 m short",
         "0.20 m short of it, the margin",
         "On it",
-        "10 m short"
+        "0.25 m past it"
       ],
       "correct": 1,
       "explanation": "The margin and no more."
@@ -31,33 +31,33 @@
       "question": "With the latency left out of the field, the vehicle stopped:",
       "options": [
         "0.20 m short",
+        "Short",
         "0.25 m past where the thing was",
-        "At the thing",
-        "Short"
+        "At the thing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The field was too short."
     },
     {
       "stage": "check",
       "question": "At 1.1 m/s, the field of the set designed for 1.5 m/s was how many times as long as needed?",
       "options": [
-        "1",
         "1.46",
-        "10",
-        "0.5"
+        "0.5",
+        "1",
+        "10"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The smallest safe set is longer than needed."
     },
     {
       "stage": "post",
       "question": "Why does the field bend in a turn?",
       "options": [
-        "For looks",
+        "It does not",
         "The vehicle sweeps an arc, and a straight field misses a thing on it",
         "Lidars are curved",
-        "It does not"
+        "For looks"
       ],
       "correct": 1,
       "explanation": "A ring round the arc."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What does a vehicle do at a speed for which the device has no field set?",
       "options": [
-        "Goes on",
-        "It has to be slowed to one it has a set for",
         "Stops for ever",
-        "Uses the largest"
+        "Uses the largest",
+        "Goes on",
+        "It has to be slowed to one it has a set for"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "No set is big enough."
     }
   ]

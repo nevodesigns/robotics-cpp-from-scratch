@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "Which loss takes a fraction of every turn?",
       "options": [
-        "Longitudinal slip",
         "Turn efficiency",
         "Gravity",
-        "Backlash"
+        "Backlash",
+        "Longitudinal slip"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Slip is in the direction of travel."
     },
     {
@@ -19,21 +19,21 @@
       "question": "10 m of wheel travel with 5 percent slip was how far on the ground?",
       "options": [
         "10 m",
+        "9 m",
         "9.50 m",
-        "5 m",
-        "9 m"
+        "5 m"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The fraction is taken off."
     },
     {
       "stage": "check",
       "question": "A turn the wheels say is 90 degrees, at an efficiency of 0.8, was:",
       "options": [
-        "90 degrees",
-        "72.0 degrees",
         "80 degrees",
-        "45 degrees"
+        "72.0 degrees",
+        "45 degrees",
+        "90 degrees"
       ],
       "correct": 1,
       "explanation": "0.8 of 90."
@@ -42,36 +42,36 @@
       "stage": "check",
       "question": "How much more wheel travel does a turn need at efficiency 0.8?",
       "options": [
-        "None",
         "25 percent",
-        "5 percent",
-        "80 percent"
+        "80 percent",
+        "None",
+        "5 percent"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "One over 0.8 less one."
     },
     {
       "stage": "post",
       "question": "Why does the square not close?",
       "options": [
-        "The floor is round",
-        "Each turn is short, so the next side points the wrong way, and the error grows with the side",
+        "Chance",
         "The wheels are loose",
-        "Chance"
+        "The floor is round",
+        "Each turn is short, so the next side points the wrong way, and the error grows with the side"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The efficiency does the damage."
     },
     {
       "stage": "post",
       "question": "How can the efficiency be found?",
       "options": [
+        "By guessing",
         "From the data sheet",
-        "From a measured turn: the body's turn over the turn the wheels ask for",
         "It cannot",
-        "By guessing"
+        "From a measured turn: the body's turn over the turn the wheels ask for"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It is a ratio of two things that can be measured."
     }
   ]

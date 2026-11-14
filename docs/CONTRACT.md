@@ -58,6 +58,7 @@ phases/NN-phase-slug/NN-lesson-slug/
 | L027 | A lesson may not require one that sorts after it, since a learner working in order could not start it |
 | L028 | The `**Platforms:**` line in `docs/en.md` names every toolchain `lesson.json` claims and no toolchain it does not, so the page a learner reads and the lane CI builds are the same set |
 | L029 | A lesson folder name is at most 48 characters, because the compiler writes an object file under a path that contains it twice and Windows refuses a path of 260 characters or more. For a Qt lesson the moc compilation sits one folder deeper under a hash, so its whole path, as the hosted runner writes it, must be at most 260 characters |
+| L030 | In a quiz no option position holds the right answer in more than 3 of the 6 questions, because a quiz whose right answer sits in one place can be passed by position. Before this rule the second option was right in 2041 of 2748 questions and the fourth in none |
 
 ## The six required sections
 

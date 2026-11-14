@@ -6,36 +6,36 @@
       "stage": "pre",
       "question": "What is the null space of a seven joint arm's Jacobian?",
       "options": [
-        "Its limits",
         "Joint motions that the tool does not feel",
         "Its singularities",
+        "Its limits",
         "Its inverse"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "One joint too many."
     },
     {
       "stage": "check",
       "question": "A joint motion put through the null space was felt by the tool at:",
       "options": [
-        "1.244 m/s",
-        "0.0000000001 of its size",
         "All of it",
-        "Half"
+        "Half",
+        "0.0000000001 of its size",
+        "1.244 m/s"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Not at all."
     },
     {
       "stage": "check",
       "question": "Starting 0.086 of its range from its limit, the margin became:",
       "options": [
-        "0.086",
-        "0.156 while the tool stayed within 0.00037 m",
         "0",
-        "Negative"
+        "Negative",
+        "0.086",
+        "0.156 while the tool stayed within 0.00037 m"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The elbow moved, the hand did not."
     },
     {
@@ -43,21 +43,21 @@
       "question": "Without a correction on the tool, it drifted:",
       "options": [
         "0.00037 m",
-        "0.00076 m",
+        "100 m",
         "Not at all",
-        "100 m"
+        "0.00076 m"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The null space is a first order promise."
     },
     {
       "stage": "post",
       "question": "Why must a preferred joint motion be projected?",
       "options": [
-        "It is faster",
+        "It is law",
         "Added directly, it moves the tool: 1.244 m/s against 0.00000000",
         "To save memory",
-        "It is law"
+        "It is faster"
       ],
       "correct": 1,
       "explanation": "The standard mistake."

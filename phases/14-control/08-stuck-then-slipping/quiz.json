@@ -6,70 +6,70 @@
       "stage": "pre",
       "question": "A joint with static friction is held by a proportional controller alone and stops short of its target. Why does it not close the last bit?",
       "options": [
-        "The gain is too low to ever matter",
-        "The force stops growing once the error is small, and below the breakaway force the mass stays stuck, so it rests anywhere inside the band the breakaway over the gain allows",
+        "Friction is random",
         "The sensor is wrong",
-        "Friction is random"
+        "The gain is too low to ever matter",
+        "The force stops growing once the error is small, and below the breakaway force the mass stays stuck, so it rests anywhere inside the band the breakaway over the gain allows"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "With a breakaway of 1.5 N and a gain of 20 the band is 0.075, and it stopped at 0.0623."
     },
     {
       "stage": "check",
       "question": "Why does adding an integral make the same joint hunt?",
       "options": [
-        "The integral adds noise",
         "It keeps pushing until the force passes the breakaway, the mass lets go with more force than it needs, overshoots, sticks on the far side, and the integral winds the other way",
+        "The sampling rate is too low",
         "The integral is unstable on its own",
-        "The sampling rate is too low"
+        "The integral adds noise"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A limit cycle between the controller and the friction. A gain of 5 settled and 20 and 50 hunted, by more the bigger the gain."
     },
     {
       "stage": "check",
       "question": "A force of 1.2 N will not start a mass whose breakaway is 1.5 N. What does it do to the same mass once it is moving?",
       "options": [
+        "Reverses it",
         "Stops it at once",
-        "Keeps it going, because the force that keeps a mass moving, the Coulomb force of 1.0 N, is less than the force that started it, and it settles at 0.4 m/s",
         "Accelerates it for ever",
-        "Reverses it"
+        "Keeps it going, because the force that keeps a mass moving, the Coulomb force of 1.0 N, is less than the force that started it, and it settles at 0.4 m/s"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Stiction is larger than Coulomb friction, so a range of forces keeps a mass going and will not start it."
     },
     {
       "stage": "check",
       "question": "Why is friction modelled as a stuck or slipping state and not as sign(velocity) times a force?",
       "options": [
-        "A state is faster",
-        "At exactly zero velocity the sign form gives no force, and a mass crossing zero in discrete time chatters from one side to the other and never stops",
+        "It uses less memory",
         "The sign function is not defined",
-        "It uses less memory"
+        "At exactly zero velocity the sign form gives no force, and a mass crossing zero in discrete time chatters from one side to the other and never stops",
+        "A state is faster"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The state form stops the mass when a step would carry it through zero, and then holds it exactly still."
     },
     {
       "stage": "post",
       "question": "Freezing the integral inside a band of 0.01 stopped the hunting with a final error of 0.0051, and a band of 0.08 left it 0.0367 off. What is the lesson?",
       "options": [
-        "Always use the widest band",
         "A band trades the hunting for a steady error about as large as the band, so it should be as narrow as the joint can resolve and no wider than the error you can tolerate",
+        "Always use the widest band",
         "Bands do not work",
         "The error does not depend on the band"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A wide band is quiet and wrong by more than the oscillation ever was."
     },
     {
       "stage": "post",
       "question": "A loop has a steady error of 0.5 that never changes. Does analyze_hunting report hunting?",
       "options": [
-        "Yes, the error is large",
+        "It cannot say",
         "No: hunting needs a swing and crossings of the signal's own mean, and a large steady offset has neither",
-        "Yes, because it never settles to zero",
-        "It cannot say"
+        "Yes, the error is large",
+        "Yes, because it never settles to zero"
       ],
       "correct": 1,
       "explanation": "Crossings are counted about the mean, not zero, so a loop that hunts about an offset is still hunting, and one sitting steadily off zero is not."

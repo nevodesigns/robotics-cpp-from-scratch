@@ -6,36 +6,36 @@
       "stage": "pre",
       "question": "Why does one model work out the range, rather than each view?",
       "options": [
-        "To save time",
-        "So the two charts cannot disagree: a steady signal is flat in both or storm in both",
         "Qt requires it",
-        "The range is expensive"
+        "The range is expensive",
+        "So the two charts cannot disagree: a steady signal is flat in both or storm in both",
+        "To save time"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The steady signal was 1 of 13 rows and 1 of 130 pixel rows."
     },
     {
       "stage": "check",
       "question": "A signal of 5 plus or minus 1e-6 has no minimum span. What do both charts show?",
       "options": [
-        "A flat line",
         "A storm: 11 of 13 rows of text and 119 of 130 pixel rows",
-        "Nothing",
-        "An error"
+        "An error",
+        "A flat line",
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "They lie together, because they share the range."
     },
     {
       "stage": "check",
       "question": "Where is a spike in a terminal chart of 50 columns and a window of 200 pixels?",
       "options": [
+        "The first column of both",
         "Different places",
-        "The same fraction across: column 35 of 50 and column 140 of 200",
         "The last column of both",
-        "The first column of both"
+        "The same fraction across: column 35 of 50 and column 140 of 200"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "0.71 and 0.70."
     },
     {
@@ -43,23 +43,23 @@
       "question": "Why does the window mark ticks and not write their labels?",
       "options": [
         "Labels are not needed",
-        "Text in a picture depends on fonts, which differ between platforms and make a picture hard to compare",
+        "Labels are in the terminal only by accident",
         "Qt cannot draw text offscreen",
-        "Labels are in the terminal only by accident"
+        "Text in a picture depends on fonts, which differ between platforms and make a picture hard to compare"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The lesson says so under what it does not do."
     },
     {
       "stage": "post",
       "question": "What does add_sample do to repaint?",
       "options": [
-        "Paints at once",
         "Asks for a repaint, which Qt does once when the loop is free",
         "Nothing",
-        "Paints twice"
+        "Paints twice",
+        "Paints at once"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Lesson 10-11: ten thousand updates are one paint."
     },
     {

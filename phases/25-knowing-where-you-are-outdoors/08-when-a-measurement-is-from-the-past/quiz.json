@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "What time should a measurement be stamped with?",
       "options": [
-        "The time it arrived",
-        "The time it was taken",
         "The time of the log",
-        "None"
+        "None",
+        "The time it arrived",
+        "The time it was taken"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Arrival is later by the delay."
     },
     {
@@ -19,21 +19,21 @@
       "question": "A late fix taken for the present left a steady error of:",
       "options": [
         "0",
-        "0.49 m",
         "10 m",
+        "0.49 m",
         "0.01 m"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Speed times delay."
     },
     {
       "stage": "check",
       "question": "Comparing the fix with the state of its own time gave an rms error of:",
       "options": [
-        "0.493 m",
-        "0.045 m",
         "1 m",
-        "10 m"
+        "0.045 m",
+        "10 m",
+        "0.493 m"
       ],
       "correct": 1,
       "explanation": "And the extrapolated way 0.035 m: the same to within the noise."
@@ -42,36 +42,36 @@
       "stage": "check",
       "question": "The lag between the gyro and the wheels was found as:",
       "options": [
-        "0 s",
-        "0.12 s",
         "1 s",
-        "0.5 s"
+        "0 s",
+        "0.5 s",
+        "0.12 s"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The shift of greatest correlation."
     },
     {
       "stage": "post",
       "question": "When does extrapolating by the velocity fail?",
       "options": [
-        "Never",
         "When the velocity changes during the delay, as when the robot brakes to a stop",
-        "At night",
-        "With noise"
+        "With noise",
+        "Never",
+        "At night"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "0.25 m beyond the robot."
     },
     {
       "stage": "post",
       "question": "What does the history method need that the others do not?",
       "options": [
-        "Nothing",
-        "A memory of the states long enough to reach back past the delay",
         "A faster computer",
-        "A magnetometer"
+        "A magnetometer",
+        "A memory of the states long enough to reach back past the delay",
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "StateHistory."
     }
   ]

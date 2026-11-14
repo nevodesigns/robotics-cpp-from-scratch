@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "Why record a whole session as a test instead of writing the expected value for each reply?",
       "options": [
-        "It is shorter to write",
+        "It needs no device",
         "It catches what a reply-at-a-time test misses: a firmware change that adds a byte to every reply, or a reordering, and it is recorded and not composed",
-        "It runs faster",
-        "It needs no device"
+        "It is shorter to write",
+        "It runs faster"
       ],
       "correct": 1,
       "explanation": "The conversation as a whole is what breaks."
@@ -18,22 +18,22 @@
       "stage": "check",
       "question": "A transcript file has a line `> 0102`. What should the reader do?",
       "options": [
+        "Skip it",
         "Read two bytes",
         "Refuse it: line 1, bytes are two hexadecimal digits each, since two bytes with no space look like one number",
-        "Read one byte",
-        "Skip it"
+        "Read one byte"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A half read golden file must never be used."
     },
     {
       "stage": "check",
       "question": "Why does compare report only the first difference?",
       "options": [
-        "Speed",
+        "Memory",
         "After the first one everything that follows is out of step, and a second report is noise",
         "The test would fail",
-        "Memory"
+        "Speed"
       ],
       "correct": 1,
       "explanation": "It names where: message and byte."
@@ -42,24 +42,24 @@
       "stage": "check",
       "question": "Replies carry a time of day at bytes 2 to 5 and it differs every run. What is the remedy?",
       "options": [
-        "Compare only lengths",
         "A mask over exactly those bytes of replies: without it the first difference was message 1 byte 2, with it none",
         "Fix the clock",
-        "Delete the test"
+        "Delete the test",
+        "Compare only lengths"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The test would otherwise fail every day."
     },
     {
       "stage": "post",
       "question": "A mask covers bytes 2 to 5 of replies. A request's byte 1 and a reply's byte 6 are changed. What happens?",
       "options": [
-        "Both pass",
         "Both are caught: the mask covers only the direction and the bytes it was given for",
         "Neither is caught",
-        "Only the reply"
+        "Only the reply",
+        "Both pass"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A reading one byte past the masked time was caught at message 1, byte 6."
     },
     {
@@ -67,11 +67,11 @@
       "question": "New firmware adds a byte to every reply. What does the golden transcript say?",
       "options": [
         "Content at message 0",
-        "Length, at message 1 and offset 8: the first reply is longer and the shorter one ended at 8",
         "Extra",
-        "Nothing"
+        "Nothing",
+        "Length, at message 1 and offset 8: the first reply is longer and the shorter one ended at 8"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A protocol change no one announced."
     }
   ]

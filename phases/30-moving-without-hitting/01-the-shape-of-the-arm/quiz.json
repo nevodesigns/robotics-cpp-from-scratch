@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "Why are links modelled as capsules?",
       "options": [
-        "They are pretty",
         "A segment and a radius fit a long link well and cost almost nothing to check",
-        "Capsules are standard in law",
-        "They are exact"
+        "They are exact",
+        "They are pretty",
+        "Capsules are standard in law"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Cheap and a good fit."
     },
     {
@@ -31,11 +31,11 @@
       "question": "With the floor raised to 0.4 m the arm's signed distance was:",
       "options": [
         "0.140 m",
-        "-0.160 m: negative, through it",
         "0",
+        "-0.160 m: negative, through it",
         "1 m"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It says by how much."
     },
     {
@@ -43,21 +43,21 @@
       "question": "How many pairs of links does the self check ask about, for four capsules?",
       "options": [
         "6",
-        "3",
         "0",
+        "3",
         "12"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Those that share a joint are not asked."
     },
     {
       "stage": "post",
       "question": "Why is a collision model that is a little too big better than one that is a little too small?",
       "options": [
-        "It is not",
+        "It is exact",
         "It keeps the planner a little further away than it needs to; too small hits things",
-        "It is faster",
-        "It is exact"
+        "It is not",
+        "It is faster"
       ],
       "correct": 1,
       "explanation": "Err on the side of distance."
@@ -67,11 +67,11 @@
       "question": "Why does a segment to box distance work by a ternary search?",
       "options": [
         "Luck",
-        "The distance of a point to a convex set is convex along a line: one minimum",
         "Boxes are round",
-        "It is closed form"
+        "It is closed form",
+        "The distance of a point to a convex set is convex along a line: one minimum"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "No closed form, but convex."
     }
   ]

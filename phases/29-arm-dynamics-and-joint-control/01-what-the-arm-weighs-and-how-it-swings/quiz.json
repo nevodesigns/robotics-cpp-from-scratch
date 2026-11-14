@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "What are the three kinds of torque in an arm's motion?",
       "options": [
-        "Static, dynamic and thermal",
-        "Holding it up, speeding it up, and what the joints throw at each other",
         "Motor, gear and load",
-        "Fast, slow and still"
+        "Fast, slow and still",
+        "Static, dynamic and thermal",
+        "Holding it up, speeding it up, and what the joints throw at each other"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "g(q), M(q) qdd and C qd."
     },
     {
       "stage": "check",
       "question": "The torque to hold a 2 kg rod of 0.4 m out horizontally was:",
       "options": [
-        "0.000000 N m",
-        "3.924 N m, which is m g L over 2",
         "100 N m",
-        "0"
+        "0",
+        "0.000000 N m",
+        "3.924 N m, which is m g L over 2"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "And nothing when it stands up."
     },
     {
@@ -31,45 +31,45 @@
       "question": "What check can a sign error in the recursion not survive?",
       "options": [
         "A time test",
-        "The torque of gravity must be the slope of the potential energy",
         "A unit test only",
+        "The torque of gravity must be the slope of the potential energy",
         "A visual check"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Matched to 0.00000001 N m."
     },
     {
       "stage": "check",
       "question": "An arm let fall for a second lost how much of its energy with a fourth order step and a first order one?",
       "options": [
-        "0.03723 and 0.000000000496",
         "0.000000000496 and 0.03723",
+        "0.03723 and 0.000000000496",
         "The same",
         "None of it in either"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The integrator is part of the model."
     },
     {
       "stage": "post",
       "question": "How does the velocity torque grow with speed?",
       "options": [
-        "Linearly",
         "With the square of the speed: doubling gave four times",
         "Not at all",
+        "Linearly",
         "With the cube"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Coriolis and centripetal."
     },
     {
       "stage": "post",
       "question": "What must be true of the mass matrix?",
       "options": [
-        "Nothing",
+        "Constant",
         "Symmetric and positive: kinetic energy is never negative",
-        "Diagonal",
-        "Constant"
+        "Nothing",
+        "Diagonal"
       ],
       "correct": 1,
       "explanation": "x transpose M x > 0."

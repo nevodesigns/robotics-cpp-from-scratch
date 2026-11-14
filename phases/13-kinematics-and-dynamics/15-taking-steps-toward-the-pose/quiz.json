@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "What does the Jacobian say?",
       "options": [
-        "Where the tool is",
+        "The limits",
         "How the pose of the tool changes when each angle changes",
         "The torque",
-        "The limits"
+        "Where the tool is"
       ],
       "correct": 1,
       "explanation": "It matched central differences to 1.5e-10."
@@ -20,8 +20,8 @@
       "options": [
         "To make it faster",
         "Near a singularity the plain step is enormous: 24496.8 rad for a tenth of a metre",
-        "Qt requires it",
-        "To avoid overshoot only"
+        "To avoid overshoot only",
+        "Qt requires it"
       ],
       "correct": 1,
       "explanation": "The damped step was 0.000163301 rad."
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "What is the price of damping?",
       "options": [
-        "None",
         "A little accuracy, and very slow progress in the direction the arm cannot move in",
-        "Memory",
-        "Nothing at a singularity"
+        "Nothing at a singularity",
+        "None",
+        "Memory"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Away from the singularity a small damping changed the step little."
     },
     {
       "stage": "check",
       "question": "A pose cannot be reached. What should the solver do?",
       "options": [
-        "Run for ever",
         "Stop at its iteration limit, say it did not converge, and report how near it got",
         "Return the start",
+        "Run for ever",
         "Crash"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It stopped at 300 iterations, 1.7661 m off."
     },
     {
       "stage": "post",
       "question": "Why are joint limits applied after every step?",
       "options": [
-        "Style",
-        "A step outside a limit is not a pose the arm can be in, and later steps start from where the arm is",
+        "Qt requires it",
         "Speed",
-        "Qt requires it"
+        "A step outside a limit is not a pose the arm can be in, and later steps start from where the arm is",
+        "Style"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The elbow held at 0.05 rad at every step."
     },
     {
       "stage": "post",
       "question": "With the elbow limited to bend one way the same pose was found, and with the other limit?",
       "options": [
+        "A third one",
         "Not found",
-        "The mirror solution, with the opposite sign of elbow angle: 2.55128 and -2.55128",
         "The same one",
-        "A third one"
+        "The mirror solution, with the opposite sign of elbow angle: 2.55128 and -2.55128"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Both ways, from 5 of 5 starts."
     }
   ]

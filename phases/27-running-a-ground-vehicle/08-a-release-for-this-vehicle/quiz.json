@@ -6,46 +6,46 @@
       "stage": "pre",
       "question": "Why is an update refused when the vehicle is not parked?",
       "options": [
-        "Rules",
-        "It is a reboot, and a reboot of a moving vehicle is a stop and a lost mission",
+        "Parking is free",
         "Updates are slow",
-        "Parking is free"
+        "Rules",
+        "It is a reboot, and a reboot of a moving vehicle is a stop and a lost mission"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It must be at rest."
     },
     {
       "stage": "check",
       "question": "A vehicle that was moving, in a mission and at 20 percent charge was refused for how many reasons?",
       "options": [
-        "1",
         "3",
+        "1",
         "7",
         "0"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Every reason is listed."
     },
     {
       "stage": "check",
       "question": "A track width of 0.40 m taken for 0.25 m makes a skid steer turn:",
       "options": [
-        "1.60 times too little",
-        "The same",
+        "Not at all",
         "Twice as much",
-        "Not at all"
+        "1.60 times too little",
+        "The same"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "The calibration of another vehicle."
     },
     {
       "stage": "check",
       "question": "A release that failed its self test was rolled back after how many boots?",
       "options": [
-        "1",
-        "4",
         "100",
-        "0"
+        "4",
+        "0",
+        "1"
       ],
       "correct": 1,
       "explanation": "Three tries, then the old slot."
@@ -54,10 +54,10 @@
       "stage": "post",
       "question": "What does only a self test pass do?",
       "options": [
-        "Nothing",
-        "Confirms the release",
         "Reboots",
-        "Updates the map"
+        "Confirms the release",
+        "Updates the map",
+        "Nothing"
       ],
       "correct": 1,
       "explanation": "The release does not get to say it is fine."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why is a charge that is not a number counted as low?",
       "options": [
-        "It is cheaper",
         "A comparison with it is false, so it must fail the check",
         "Batteries lie",
+        "It is cheaper",
         "Law"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Written as 'soc >= minimum', so NaN fails."
     }
   ]

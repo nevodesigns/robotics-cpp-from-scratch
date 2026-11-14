@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "Why write a component against an interface instead of directly against rclcpp?",
       "options": [
-        "It is shorter",
         "Written against rclcpp it can be tested only where ROS 2 is installed and processes can talk; against an interface it runs in a test in microseconds and a ROS 2 adapter is one class",
+        "It is shorter",
         "It is required",
         "It is faster at run time"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A planner against rclcpp cannot be built on a CI lane without ROS 2."
     },
     {
       "stage": "check",
       "question": "Two nodes run the same component, one in /robot1 and one in /robot2. A number is sent to robot1's input. Who handles it?",
       "options": [
-        "Both",
-        "Only robot 1: it handled 2 messages and robot 2 handled 0, because relative names resolve in each node's namespace",
+        "Robot 2",
         "Neither",
-        "Robot 2"
+        "Only robot 1: it handled 2 messages and robot 2 handled 0, because relative names resolve in each node's namespace",
+        "Both"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Names resolve against the node's namespace."
     },
     {
@@ -42,34 +42,34 @@
       "stage": "check",
       "question": "What did the test measure after a node with a subscription and a timer was destroyed?",
       "options": [
-        "Nothing",
         "Nodes alive 1, subscribers to its topic 0, and 0 calls into it in the 5 s and 10 messages after",
         "The same as before",
-        "One call"
+        "One call",
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Before it died, two calls had been made into it."
     },
     {
       "stage": "post",
       "question": "Why is a node's timer armed when it is created and not at its first poll?",
       "options": [
-        "For speed",
-        "A timer made at 0 and first polled at 0.6 s would have lost the whole of its first period",
         "It is required by DDS",
-        "For memory"
+        "For memory",
+        "For speed",
+        "A timer made at 0 and first polled at 0.6 s would have lost the whole of its first period"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The status timer fired 3 times in 3.5 s."
     },
     {
       "stage": "post",
       "question": "What does this lesson not claim about ROS 2?",
       "options": [
-        "That the seam is the right shape",
-        "That an adapter satisfies the interface: the sketch is not built or tested by this repository's CI, which has no ROS 2 lane, and has to be checked wherever ROS 2 is installed",
         "That tests run",
-        "That names resolve"
+        "That an adapter satisfies the interface: the sketch is not built or tested by this repository's CI, which has no ROS 2 lane, and has to be checked wherever ROS 2 is installed",
+        "That names resolve",
+        "That the seam is the right shape"
       ],
       "correct": 1,
       "explanation": "The seam is checked here and the adapter has to be checked elsewhere."

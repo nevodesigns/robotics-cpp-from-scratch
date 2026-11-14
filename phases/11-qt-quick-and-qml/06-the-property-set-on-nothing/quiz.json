@@ -6,34 +6,34 @@
       "stage": "pre",
       "question": "QObject::setProperty(\"widht\", 300) is called on an item whose property is width. What happens?",
       "options": [
-        "The width changes",
         "It returns false, creates a dynamic property named widht, and the width is unchanged",
+        "The program stops",
         "It throws",
-        "The program stops"
+        "The width changes"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The width was still 200."
     },
     {
       "stage": "check",
       "question": "property(\"nothingLikeThis\") is converted to a double. What is it?",
       "options": [
-        "An error",
-        "0, from an invalid QVariant: nothing says the name was wrong",
         "NaN",
-        "-1"
+        "-1",
+        "An error",
+        "0, from an invalid QVariant: nothing says the name was wrong"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It was invalid and converted to 0."
     },
     {
       "stage": "check",
       "question": "A bound width is assigned in JavaScript, and then its source changes. What does the width do?",
       "options": [
-        "Follows the source",
-        "Stays: the assignment replaced the binding",
         "Resets",
-        "Throws"
+        "Stays: the assignment replaced the binding",
+        "Throws",
+        "Follows the source"
       ],
       "correct": 1,
       "explanation": "After width = 10 and outer 400, inner was 10."
@@ -42,22 +42,22 @@
       "stage": "check",
       "question": "How is the binding put back?",
       "options": [
-        "Assign the old value",
         "Assign Qt.binding(function) so that it follows again",
+        "Assign the old value",
         "Reload the file",
         "It cannot be"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "After Qt.binding and outer 500, inner was 250."
     },
     {
       "stage": "post",
       "question": "What does evaluate return for an undefined name?",
       "options": [
-        "ok true and an empty value",
-        "ok false with the message ReferenceError: ... is not defined",
         "It throws",
-        "0"
+        "ok false with the message ReferenceError: ... is not defined",
+        "0",
+        "ok true and an empty value"
       ],
       "correct": 1,
       "explanation": "None of the failures was ok, and none threw."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why does the probe write through QQmlProperty and not setProperty?",
       "options": [
+        "setProperty is deprecated",
         "It is faster",
         "QQmlProperty knows what the object declares, and says so when a name is not one",
-        "setProperty is deprecated",
         "It is shorter"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A name that is not a property is an error and creates nothing."
     }
   ]

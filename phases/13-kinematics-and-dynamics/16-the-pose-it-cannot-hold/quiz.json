@@ -7,69 +7,69 @@
       "question": "An arm fails to go to a pose. What are the three reasons, and are the remedies the same?",
       "options": [
         "One reason; one remedy",
-        "Out of reach, outside the joint limits, too heavy to hold: three remedies",
+        "The same remedy",
         "Two reasons",
-        "The same remedy"
+        "Out of reach, outside the joint limits, too heavy to hold: three remedies"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The planner gave four different verdicts for four targets."
     },
     {
       "stage": "check",
       "question": "Which is tested first, and why?",
       "options": [
-        "Too heavy",
-        "Out of reach: with no angles there is nothing to check the limits or torques of",
         "The limits",
-        "The time"
+        "The time",
+        "Out of reach: with no angles there is nothing to check the limits or torques of",
+        "Too heavy"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The wrist has to be reachable before anything else means anything."
     },
     {
       "stage": "check",
       "question": "The arm straight out, payload 0.5 kg. Which motor is nearest its limit?",
       "options": [
-        "The wrist",
         "The shoulder: 71.1225 of 80 N m, 0.889031",
-        "The elbow",
-        "None"
+        "None",
+        "The wrist",
+        "The elbow"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The shoulder carries the whole arm."
     },
     {
       "stage": "check",
       "question": "A payload of 0.801648 kg at the pose straight out. What is true of the shoulder?",
       "options": [
+        "It is over",
         "It is at 0",
         "It is at its limit: 80 of 80 N m",
-        "It is at half",
-        "It is over"
+        "It is at half"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The elbow was at 37.8008 of 40."
     },
     {
       "stage": "post",
       "question": "Two ways of reaching a pose, both legal and both holdable. Which does the plan take?",
       "options": [
+        "The first it finds",
         "Elbow up always",
-        "The quicker from where the arm is",
         "The one with the lower torque",
-        "The first it finds"
+        "The quicker from where the arm is"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It took the elbow up from near the elbow up way and down from near the other."
     },
     {
       "stage": "post",
       "question": "Why is the torque a static check only?",
       "options": [
-        "It is easier",
-        "It is the torque to hold still: moving asks more, which lesson 13-07 is about",
         "Qt requires it",
-        "Motors only hold"
+        "It is the torque to hold still: moving asks more, which lesson 13-07 is about",
+        "Motors only hold",
+        "It is easier"
       ],
       "correct": 1,
       "explanation": "The lesson says so under what it does not do."

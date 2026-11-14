@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "A consumer needs to wait for a producer. It loops, calling try_pop and yield until an item arrives. What does that cost while nothing happens?",
       "options": [
-        "Nothing, since yield gives the CPU away",
+        "It depends only on the size of the queue",
         "A whole core: measured over 100 ms, a spinning consumer used 100.05 ms of CPU across more than 230,000 polls",
         "About one percent of a core",
-        "It depends only on the size of the queue"
+        "Nothing, since yield gives the CPU away"
       ],
       "correct": 1,
       "explanation": "yield gives up the time slice and the thread is immediately runnable again, so it finds out that nothing happened as fast as the machine allows. A condition variable waiter used 0.04 ms for the same 100 ms."
@@ -18,60 +18,60 @@
       "stage": "check",
       "question": "notify_one is called while no thread is waiting. A thread then calls wait_for(lock, 50 ms) with no condition checked. What happens?",
       "options": [
-        "It wakes at once, since a notification was sent",
-        "It times out: a condition variable does not remember a notification nobody heard",
         "It throws an exception",
-        "It waits for ever"
+        "It waits for ever",
+        "It wakes at once, since a notification was sent",
+        "It times out: a condition variable does not remember a notification nobody heard"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Measured: timed out. The same wait that first asked whether a flag was set returned at once. The thing waited for is state under the mutex, and the notification only says look again."
     },
     {
       "stage": "check",
       "question": "Why is the wait in pop_for a while loop (while items_.empty() && !closed_) and not an if?",
       "options": [
-        "Loops are faster",
-        "A wakeup only says look again: another consumer may have taken the item first, and the standard allows a wait to return with nobody having notified",
+        "To make the code shorter",
         "Because wait_until can only be called in a loop",
-        "To make the code shorter"
+        "A wakeup only says look again: another consumer may have taken the item first, and the standard allows a wait to return with nobody having notified",
+        "Loops are faster"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Measured with two consumers and one item: one took it and the other had to carry on waiting. A spurious wakeup is allowed even when nothing changed, so the condition is always rechecked."
     },
     {
       "stage": "check",
       "question": "Three consumers are asleep in pop_for. close() uses notify_one instead of notify_all. What happens?",
       "options": [
-        "All three wake, since the queue is closed",
         "One wakes and returns closed; the other two stay asleep until their deadlines, and a program waiting to join them cannot exit",
         "None of them wake",
+        "All three wake, since the queue is closed",
         "It does not compile"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Every waiter has to notice, so every waiter has to be woken. With notify_all, the measured result was all three returned closed within 1 ms of a 5000 ms wait."
     },
     {
       "stage": "post",
       "question": "The GCC 11 thread sanitizer reports a double lock inside a push, which is only a lock_guard, in a program that waits with wait_until(steady_clock). What is going on?",
       "options": [
-        "A real deadlock, fixed by using system_clock",
-        "A tool limitation: GCC 11's sanitizer does not intercept pthread_cond_clockwait, so it never sees the mutex released during the wait. clang 14's reports nothing",
         "A bug in lock_guard",
-        "A data race in the queue"
+        "A real deadlock, fixed by using system_clock",
+        "A data race in the queue",
+        "A tool limitation: GCC 11's sanitizer does not intercept pthread_cond_clockwait, so it never sees the mutex released during the wait. clang 14's reports nothing"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Measured on a twelve line program: 2 warnings on gcc 11, none on clang 14, and none for wait() or system_clock. Switching to system_clock would silence it and make the timeout jump when the clock is adjusted."
     },
     {
       "stage": "post",
       "question": "Why does every wait in this lesson's queue take a deadline?",
       "options": [
+        "To make the code slower on purpose",
         "Because wait_until requires one",
         "A control path that waits for ever on a producer that has died has stopped controlling, and a test that waits for ever on a queue nobody wrote to is a hung test",
-        "To make the code slower on purpose",
         "Deadlines let the queue be lock free"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A timeout is a result like any other, kTimeout beside kGot and kClosed. It is also the second line of defence for shutdown: a consumer that wakes at least occasionally can notice a stop request even if a notification is missed."
     }
   ]

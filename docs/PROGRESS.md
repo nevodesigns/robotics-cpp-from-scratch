@@ -77,7 +77,7 @@ starts with an entry of 13 November; the older entries below it are kept as they
 ## The lesson contract
 
 Every lesson directory holds exactly this, and `rcpp audit` enforces it with
-rules L001 to L029:
+rules L001 to L030:
 
 ```
 lesson.json        id, title, minutes, platforms, requires, artifact, breaks_first

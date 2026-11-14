@@ -7,71 +7,71 @@
       "question": "Why does a robot at rest need a protective distance?",
       "options": [
         "It does not",
+        "Noise",
         "The person is moving, and keeps moving while the system reacts",
-        "Gravity",
-        "Noise"
+        "Gravity"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "0.33 m at rest."
     },
     {
       "stage": "check",
       "question": "What must be added to the robot's stopping distance?",
       "options": [
-        "Nothing",
-        "The person's travel in the reaction and stopping time, and the robot's own travel before braking",
+        "The colour",
         "The weight",
-        "The colour"
+        "Nothing",
+        "The person's travel in the reaction and stopping time, and the robot's own travel before braking"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Those are the terms."
     },
     {
       "stage": "check",
       "question": "At 1.0 m the greatest speed was:",
       "options": [
-        "1.23 m/s",
         "2.49 m/s",
-        "0",
-        "Not limited"
+        "1.23 m/s",
+        "Not limited",
+        "0"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "At 2.0 m it was 2.49 m/s."
     },
     {
       "stage": "check",
       "question": "A robot designed as if people stood still came to rest at:",
       "options": [
-        "0.17 m",
         "-0.31 m, they met",
+        "10 m",
         "-0.09 m",
-        "10 m"
+        "0.17 m"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Negative separation."
     },
     {
       "stage": "post",
       "question": "Is this lesson a safety function?",
       "options": [
-        "Yes",
         "No: a model of the idea; real ones are validated against the standards",
-        "Almost",
-        "It replaces the standard"
+        "Yes",
+        "It replaces the standard",
+        "Almost"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Typical numbers, not certified."
     },
     {
       "stage": "post",
       "question": "What is a different method in the same standard?",
       "options": [
-        "Power and force limiting",
         "Speed control",
         "Colour coding",
-        "None"
+        "None",
+        "Power and force limiting"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Contact below limits for each part of the body."
     }
   ]

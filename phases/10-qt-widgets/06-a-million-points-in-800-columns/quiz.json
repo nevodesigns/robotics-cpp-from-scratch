@@ -6,21 +6,21 @@
       "stage": "pre",
       "question": "A million samples are drawn by taking every 1250th. What can be missing?",
       "options": [
-        "Nothing",
-        "A spike that is not on a multiple of 1250",
+        "Only the average",
         "The first sample only",
-        "Only the average"
+        "A spike that is not on a multiple of 1250",
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The every 1250th sample peaked at 0.001; the spike of 5 was not in it."
     },
     {
       "stage": "check",
       "question": "What does decimate keep for each column?",
       "options": [
-        "The average",
-        "The count, the lowest value and the highest value",
         "The first sample",
+        "The count, the lowest value and the highest value",
+        "The average",
         "Every sample"
       ],
       "correct": 1,
@@ -31,21 +31,21 @@
       "question": "Which column does a sample exactly at t1 go to?",
       "options": [
         "None",
+        "An extra column",
         "The last one: it is the end of the range and belongs to the final bin",
-        "The first",
-        "An extra column"
+        "The first"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Without that, the count is 999999 and the newest sample is not drawn."
     },
     {
       "stage": "check",
       "question": "How many points is a column of 400 equal samples drawn with?",
       "options": [
-        "400",
+        "0",
         "1: its low equals its high",
-        "2",
-        "0"
+        "400",
+        "2"
       ],
       "correct": 1,
       "explanation": "points_to_draw adds 1 for a flat column and 2 for one whose values differ."
@@ -54,12 +54,12 @@
       "stage": "post",
       "question": "A million samples are drawn in 800 columns. How many points at most?",
       "options": [
-        "1000000",
         "1600: two for each column, whatever the sample count",
         "800000",
-        "800"
+        "800",
+        "1000000"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The drawing cost depends on the width, not on the data."
     },
     {
@@ -67,11 +67,11 @@
       "question": "Which question does a decimated chart not answer?",
       "options": [
         "What was the highest value",
-        "Which order the samples in one column came in",
+        "How many samples fell in a column",
         "Was there a gap",
-        "How many samples fell in a column"
+        "Which order the samples in one column came in"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Only the range of each column is kept."
     }
   ]

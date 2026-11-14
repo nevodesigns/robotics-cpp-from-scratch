@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "Why is a least squares plane fitted to every point a poor ground?",
       "options": [
-        "It is slow",
         "The things standing on the ground pull it up towards them",
+        "It needs a camera",
         "It is too exact",
-        "It needs a camera"
+        "It is slow"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Squared distances give the outliers a big vote."
     },
     {
@@ -19,47 +19,47 @@
       "question": "With boxes on the ground, the least squares plane was tilted:",
       "options": [
         "5.00 degrees",
-        "6.57 degrees",
         "0 degrees",
+        "6.57 degrees",
         "45 degrees"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "True tilt is 5.00."
     },
     {
       "stage": "check",
       "question": "RANSAC found:",
       "options": [
+        "0",
         "6.57 degrees",
         "5.08 degrees",
-        "90 degrees",
-        "0"
+        "90 degrees"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The obstacles are not corrected for, only not counted."
     },
     {
       "stage": "check",
       "question": "How many draws made a clean sample 99 percent likely at a share of 85 percent?",
       "options": [
-        "1000",
         "5",
         "1",
+        "1000",
         "50"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Log of one minus the confidence over log of one minus the share cubed."
     },
     {
       "stage": "post",
       "question": "Why was the wall taken for the ground?",
       "options": [
-        "It was the ground",
-        "It held the most points, and nothing said the ground is level",
         "RANSAC is random",
-        "The tolerance"
+        "It was the ground",
+        "The tolerance",
+        "It held the most points, and nothing said the ground is level"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Refuse planes tilted beyond what the vehicle drives on."
     },
     {

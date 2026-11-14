@@ -6,33 +6,33 @@
       "stage": "pre",
       "question": "What is most of the work of choosing a robot?",
       "options": [
-        "Reading catalogues",
-        "Writing the task down as numbers",
         "Buying it",
-        "Programming it"
+        "Reading catalogues",
+        "Programming it",
+        "Writing the task down as numbers"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A task in words fits every robot."
     },
     {
       "stage": "check",
       "question": "A SCARA over the middle of the work reached what share of it?",
       "options": [
-        "1.00",
-        "0.48",
         "All of it",
-        "None"
+        "1.00",
+        "None",
+        "0.48"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It cannot reach under itself; beside the work it reached 1.00."
     },
     {
       "stage": "check",
       "question": "Which robot did the job needing a tilt, a payload and the larger reach go to?",
       "options": [
-        "1",
-        "4, the arm",
         "3",
+        "4, the arm",
+        "1",
         "None"
       ],
       "correct": 1,
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "What was the answer for a job of 500 kg?",
       "options": [
-        "The gantry",
         "-1: no robot",
         "The arm",
+        "The gantry",
         "The delta"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Saying none is a result."
     },
     {
@@ -55,11 +55,11 @@
       "question": "Why is the figure for each family not trusted?",
       "options": [
         "It is wrong",
+        "It is old",
         "It is typical, and a real robot differs from it by a large factor",
-        "It is secret",
-        "It is old"
+        "It is secret"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Use a data sheet and a trial."
     },
     {
@@ -67,11 +67,11 @@
       "question": "What is not in the choice?",
       "options": [
         "The cycle",
+        "The area",
         "Cost, floor space, life and people near the cell",
-        "The payload",
-        "The area"
+        "The payload"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Only the shortest cycle among those that pass."
     }
   ]

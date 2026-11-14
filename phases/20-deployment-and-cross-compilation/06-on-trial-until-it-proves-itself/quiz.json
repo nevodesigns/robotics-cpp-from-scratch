@@ -18,45 +18,45 @@
       "stage": "check",
       "question": "A release hangs: up, never healthy, never crashing. What rolls it back?",
       "options": [
-        "Nothing needed",
         "A supervisor that resets the robot at the health deadline: without one it is up for ever doing nothing",
+        "The boot counter alone",
         "The user",
-        "The boot counter alone"
+        "Nothing needed"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "4 boots, rolled back."
     },
     {
       "stage": "check",
       "question": "A release is healthy at 20 s and crashes at 40 s. It confirms itself when the program starts. What happens?",
       "options": [
+        "It confirms again",
         "Rolled back",
-        "Confirmed at second zero, then crashes with nothing to roll back to: a crash loop, 20 boots and not up",
         "Fine",
-        "It confirms again"
+        "Confirmed at second zero, then crashes with nothing to roll back to: a crash loop, 20 boots and not up"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Confirming early makes the trial a decoration."
     },
     {
       "stage": "check",
       "question": "With a crash at 120 s and a healthy time of 20 s, which soaks catch it?",
       "options": [
-        "All",
-        "100 s and longer: 20 plus the soak must come after the crash, so 90 s is not enough",
+        "None",
         "Only 0",
-        "None"
+        "All",
+        "100 s and longer: 20 plus the soak must come after the crash, so 90 s is not enough"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "110 s is before 120 s."
     },
     {
       "stage": "post",
       "question": "What can the code not know about the soak?",
       "options": [
-        "Its units",
-        "How long it takes the failure to show: a leak, a filling disk or a daily task is found from what the robot does",
         "Its sign",
+        "How long it takes the failure to show: a leak, a filling disk or a daily task is found from what the robot does",
+        "Its units",
         "Its type"
       ],
       "correct": 1,
@@ -67,11 +67,11 @@
       "question": "Why is a health check not a safety check?",
       "options": [
         "It is faster",
+        "Health checks are optional",
         "A release can be healthy by its own checks and dangerous: the first drive of a new release is with the wheels off the ground",
-        "They are the same",
-        "Health checks are optional"
+        "They are the same"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Lesson 19-10 is about the other kind of failure."
     }
   ]

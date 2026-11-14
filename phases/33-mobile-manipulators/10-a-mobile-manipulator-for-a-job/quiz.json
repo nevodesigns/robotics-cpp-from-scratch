@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "What does the capstone report when a job cannot be done?",
       "options": [
-        "Nothing",
         "The first requirement that failed, with the figures of all",
-        "Only a number",
-        "A random reason"
+        "A random reason",
+        "Nothing",
+        "Only a number"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "3 for the heavy job."
     },
     {
       "stage": "check",
       "question": "A job of 8 kg failed at requirement:",
       "options": [
-        "2",
+        "None",
         "3, the payload",
         "7",
-        "None"
+        "2"
       ],
       "correct": 1,
       "explanation": "The budget was 4.3 kg."
@@ -30,12 +30,12 @@
       "stage": "check",
       "question": "A base that stops to 15 cm failed at:",
       "options": [
-        "2, the stopping",
         "5",
-        "6",
-        "None"
+        "None",
+        "2, the stopping",
+        "6"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "The tolerance of the ring was 35 cm."
     },
     {
@@ -44,8 +44,8 @@
       "options": [
         "7",
         "4",
-        "5",
-        "None"
+        "None",
+        "5"
       ],
       "correct": 0,
       "explanation": "The speed the person allows was below the useful minimum."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "Is a job that passes proved to work?",
       "options": [
-        "Yes",
-        "No: the checks are simple models with typical numbers, a screen, and the real robot has to be tried",
         "Always",
-        "Never"
+        "Never",
+        "Yes",
+        "No: the checks are simple models with typical numbers, a screen, and the real robot has to be tried"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The trial on the real robot is the release."
     },
     {
       "stage": "post",
       "question": "Why are the figures of the other requirements kept?",
       "options": [
-        "Waste",
-        "They show how far each is from passing",
         "For tidiness",
-        "They are not"
+        "They are not",
+        "Waste",
+        "They show how far each is from passing"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Only the first failure is reported."
     }
   ]

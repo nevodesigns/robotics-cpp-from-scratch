@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "How do independent errors combine?",
       "options": [
-        "They add",
-        "In quadrature: the square root of the sum of squares",
         "They multiply",
-        "The largest only"
+        "They add",
+        "The largest only",
+        "In quadrature: the square root of the sum of squares"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Variances add."
     },
     {
       "stage": "check",
       "question": "The hand's sigma came to:",
       "options": [
-        "0.1 mm",
-        "25.6 mm, dominated by the base",
         "2 mm",
-        "0 mm"
+        "0 mm",
+        "0.1 mm",
+        "25.6 mm, dominated by the base"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The arm is repeatable to a tenth of a millimetre."
     },
     {
@@ -42,10 +42,10 @@
       "stage": "check",
       "question": "With a camera on the hand the chance was:",
       "options": [
-        "0.30",
+        "0.5",
         "1.000",
-        "0",
-        "0.5"
+        "0.30",
+        "0"
       ],
       "correct": 1,
       "explanation": "The base's errors drop out."
@@ -54,10 +54,10 @@
       "stage": "post",
       "question": "Why does the camera help so much?",
       "options": [
-        "It is better than the arm",
+        "Chance",
         "It measures the part relative to the hand, so the base's errors are not in it",
-        "It is faster",
-        "Chance"
+        "It is better than the arm",
+        "It is faster"
       ],
       "correct": 1,
       "explanation": "Measure at the hand."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "How many sigmas make 99 percent?",
       "options": [
+        "10",
         "1",
         "2.58",
-        "10",
         "0.5"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "1.96 make 95 percent."
     }
   ]

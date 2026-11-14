@@ -6,36 +6,36 @@
       "stage": "pre",
       "question": "Why is a move given a time?",
       "options": [
+        "To save energy",
         "To look smooth",
         "A joint told to be elsewhere at once is asked for infinite acceleration, and the motor trips or shakes",
-        "Qt needs it",
-        "To save energy"
+        "Qt needs it"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The trapezoid keeps the speed and acceleration within the limits."
     },
     {
       "stage": "check",
       "question": "A move is too short to reach the speed limit. What is its shape?",
       "options": [
-        "A trapezoid with a negative cruise",
-        "A triangle: the ramps meet, and the peak is the square root of acceleration times distance",
+        "A sine",
         "A rectangle",
-        "A sine"
+        "A triangle: the ramps meet, and the peak is the square root of acceleration times distance",
+        "A trapezoid with a negative cruise"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "0.25 gave a peak of 0.707107."
     },
     {
       "stage": "check",
       "question": "What is the total time of a move of 2 with speed limit 1 and acceleration limit 2?",
       "options": [
-        "2 s",
         "2.5 s: two ramps of 0.5 s and a cruise of 1.5 s",
         "1 s",
-        "4 s"
+        "4 s",
+        "2 s"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "0.5 + 1.5 + 0.5."
     },
     {
@@ -43,32 +43,32 @@
       "question": "Two joints take 2.5 s and 1.0 s alone. What does synchronise give them?",
       "options": [
         "1.0 s each",
-        "2.5 s each, the faster one at a lower peak speed",
         "1.75 s each",
-        "Their own times"
+        "Their own times",
+        "2.5 s each, the faster one at a lower peak speed"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The second went at a peak of 0.208712."
     },
     {
       "stage": "post",
       "question": "Does synchronising make the tool move in a straight line in joint space?",
       "options": [
-        "Yes",
         "No: joints finish together but are at different fractions on the way",
         "Only for two joints",
-        "Only with a triangle"
+        "Only with a triangle",
+        "Yes"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The lesson says so under what it does not do."
     },
     {
       "stage": "post",
       "question": "What is the position of the joint after the end of its move?",
       "options": [
-        "0",
-        "Its whole distance: it stays",
         "It goes on",
+        "Its whole distance: it stays",
+        "0",
         "Unknown"
       ],
       "correct": 1,

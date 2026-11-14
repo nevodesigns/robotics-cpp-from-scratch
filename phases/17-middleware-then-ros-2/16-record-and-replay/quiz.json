@@ -6,34 +6,34 @@
       "stage": "pre",
       "question": "What makes replaying a recording useful for finding a bug?",
       "options": [
+        "It is recorded",
         "It is faster",
         "A node's behaviour depends only on the messages it gets, so the same messages at the same pace give the same output: a running average gave 2.000 3.000 2.333 3.250 3.000 live and from the file",
-        "It is recorded",
         "It shows the robot"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The file is the bug."
     },
     {
       "stage": "check",
       "question": "Why is a payload written with its length and not as a C string?",
       "options": [
-        "Speed",
         "A payload is bytes and may contain a zero: one with a zero byte in it round trips because its length is written",
+        "Speed",
         "Alignment",
         "Compression"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A zero byte would end a string early."
     },
     {
       "stage": "check",
       "question": "A recording was cut by a power failure. What should the reader do, at any length the file could be cut to?",
       "options": [
-        "Read what is there",
-        "Refuse it, and leave the bag empty: all 92 prefixes of the test file were refused and none left half a bag behind",
         "Guess the rest",
-        "Read the last message again"
+        "Refuse it, and leave the bag empty: all 92 prefixes of the test file were refused and none left half a bag behind",
+        "Read the last message again",
+        "Read what is there"
       ],
       "correct": 1,
       "explanation": "A caller that ignores the status must not replay half a file."
@@ -43,23 +43,23 @@
       "question": "A header says 4 billion messages in a 27 byte file. What should happen?",
       "options": [
         "Reserve space for them",
-        "Refuse it at once as too_many: each message takes at least 12 bytes, so the count could not be true",
+        "Crash",
         "Read one",
-        "Crash"
+        "Refuse it at once as too_many: each message takes at least 12 bytes, so the count could not be true"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A reader that trusts a count allocates for it."
     },
     {
       "stage": "post",
       "question": "Time in a replay is counted from where?",
       "options": [
-        "From 0 s of the stamp",
-        "From the first message, whatever its stamp: a bag that started at 100.0 s replays from 0",
         "From the last message",
-        "From the clock"
+        "From the clock",
+        "From the first message, whatever its stamp: a bag that started at 100.0 s replays from 0",
+        "From 0 s of the stamp"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Each message appeared at the step it came due."
     },
     {
@@ -68,8 +68,8 @@
       "options": [
         "Nothing",
         "The last message came at 0.25 s: and a node with its own timers needs its clock sped up with it",
-        "Doubles it",
-        "Halves it"
+        "Halves it",
+        "Doubles it"
       ],
       "correct": 1,
       "explanation": "At 0.5 it came at 2.00 s."

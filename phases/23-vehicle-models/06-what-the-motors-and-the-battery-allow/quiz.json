@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "What gives a brushed motor its force at the wheel?",
       "options": [
-        "Its colour",
         "The torque-speed line, through the gearbox, over the wheel radius",
+        "Friction",
         "The battery only",
-        "Friction"
+        "Its colour"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Stall torque at rest, none at the no load speed."
     },
     {
       "stage": "check",
       "question": "A battery of 0.5 ohm cut the standing acceleration from 4.54 to:",
       "options": [
-        "The same",
-        "3.32 m/s2",
         "0",
-        "10 m/s2"
+        "3.32 m/s2",
+        "10 m/s2",
+        "The same"
       ],
       "correct": 1,
       "explanation": "The bus sags under the standing current."
@@ -30,10 +30,10 @@
       "stage": "check",
       "question": "The top speed on level gravel was:",
       "options": [
-        "1.83 m/s",
+        "0",
         "1.67 m/s, under the no load speed",
-        "10 m/s",
-        "0"
+        "1.83 m/s",
+        "10 m/s"
       ],
       "correct": 1,
       "explanation": "The rolling resistance takes the rest."
@@ -43,35 +43,35 @@
       "question": "On gravel the limit on the acceleration was the:",
       "options": [
         "motors in every case",
-        "grip",
+        "Colour",
         "Battery",
-        "Colour"
+        "grip"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Grip runs out before the motors."
     },
     {
       "stage": "post",
       "question": "Why is it money wasted to buy stronger motors for a grip limited robot?",
       "options": [
+        "Motors are heavy",
         "It is not",
         "The tyres cannot hold the extra force, so the acceleration does not change",
-        "Motors are heavy",
         "Batteries"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Raise the limit that binds."
     },
     {
       "stage": "post",
       "question": "Why was the vehicle tuned on a fresh battery wrong on a tired one?",
       "options": [
-        "It was not",
         "A tired battery sags more under the standing current",
         "Motors age",
+        "It was not",
         "Wheels shrink"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Internal resistance rises."
     }
   ]

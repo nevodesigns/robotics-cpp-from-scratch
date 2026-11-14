@@ -6,58 +6,58 @@
       "stage": "pre",
       "question": "Why is the arm's rated payload not the robot's?",
       "options": [
-        "It is",
-        "The base also has to carry, stop and accelerate with it",
         "Arms lie",
-        "It is too low"
+        "It is too low",
+        "The base also has to carry, stop and accelerate with it",
+        "It is"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Three judges."
     },
     {
       "stage": "check",
       "question": "Which limit was binding with the arm reaching 0.65 m?",
       "options": [
-        "The arm (5.0 kg)",
         "Tipping (4.3 kg)",
         "Traction (130.7 kg)",
+        "The arm (5.0 kg)",
         "None"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The binding limit was number 1."
     },
     {
       "stage": "check",
       "question": "The emergency stop needed what deceleration?",
       "options": [
-        "0.5 m/s2",
         "5.62 m/s2",
+        "100 m/s2",
         "0",
-        "100 m/s2"
+        "0.5 m/s2"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "v squared over twice the distance."
     },
     {
       "stage": "check",
       "question": "With 10 kg aboard the range went from 15509 m to:",
       "options": [
-        "13838 m",
-        "0 m",
+        "No change at all",
         "Twice as far",
-        "No change at all"
+        "13838 m",
+        "0 m"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Through the rolling resistance."
     },
     {
       "stage": "post",
       "question": "If more payload is wanted, what should change?",
       "options": [
-        "A stronger arm only",
+        "The camera",
         "A wider base, a lower arm, a longer stop or a slower approach: the binding limit",
-        "Nothing",
-        "The camera"
+        "A stronger arm only",
+        "Nothing"
       ],
       "correct": 1,
       "explanation": "Change the one that says no first."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What gave no traction budget?",
       "options": [
-        "A floor with too little friction to give the wanted acceleration",
         "A heavy base",
         "A fast base",
-        "A short arm"
+        "A short arm",
+        "A floor with too little friction to give the wanted acceleration"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "The test uses a friction of 0.03."
     }
   ]

@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "A std::thread is started and the function that started it returns without calling join or detach. What happens?",
       "options": [
-        "Nothing, the thread finishes by itself",
-        "The thread is destroyed while joinable, so the program calls std::terminate: measured as 'terminate called without an active exception' and exit status 134",
         "The thread is joined automatically",
-        "The thread is detached automatically"
+        "The thread is detached automatically",
+        "Nothing, the thread finishes by itself",
+        "The thread is destroyed while joinable, so the program calls std::terminate: measured as 'terminate called without an active exception' and exit status 134"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A started thread is a promise to join or detach it. Status 134 is 128 plus SIGABRT, as lesson 00-09 explained, and it arrives with no last line of output."
     },
     {
       "stage": "check",
       "question": "A function starts a thread, calls something that throws, and has t.join() on the next line. The caller has a try/catch around it. What happens?",
       "options": [
-        "The exception is caught and the thread is joined later",
-        "The exception unwinds the stack, t is destroyed while joinable, and std::terminate runs before the catch block can: measured, status 134 and the catch never ran",
         "The thread is cancelled",
-        "The join runs during unwinding"
+        "The exception is caught and the thread is joined later",
+        "The join runs during unwinding",
+        "The exception unwinds the stack, t is destroyed while joinable, and std::terminate runs before the catch block can: measured, status 134 and the catch never ran"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Code that is correct on the path that does not throw is not correct. The join has to be attached to the object, a destructor, and not to the line after the thread starts."
     },
     {
@@ -31,20 +31,20 @@
       "question": "A thread's body throws std::runtime_error(\"sensor lost\"). The code that started the thread has a try/catch around the line that creates it. Is the exception caught there?",
       "options": [
         "Yes, since it is thrown inside that try",
-        "No: the body runs in another thread, an exception escaping it cannot be caught by anyone, and the runtime calls std::terminate",
         "Yes, but only if the thread is joined inside the try",
+        "No: the body runs in another thread, an exception escaping it cannot be caught by anyone, and the runtime calls std::terminate",
         "Only for exceptions derived from std::exception"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Measured: terminate called after throwing an instance of std::runtime_error, what(): sensor lost, status 134. The body has to catch at its own top, and keep what it caught so someone can ask."
     },
     {
       "stage": "check",
       "question": "A thread is detached and reads a reference to a local of the function that started it, after that function has returned. What does the plain build do, measured?",
       "options": [
-        "Crashes with a segmentation fault",
-        "Runs to completion, exits with status 0, and prints the wrong number, 1 where 42 belonged",
         "Throws an exception",
+        "Runs to completion, exits with status 0, and prints the wrong number, 1 where 42 belonged",
+        "Crashes with a segmentation fault",
         "Prints the right number"
       ],
       "correct": 1,
@@ -54,10 +54,10 @@
       "stage": "post",
       "question": "ScopedThread's move assignment calls join() before taking the other thread. Why?",
       "options": [
-        "To make it faster",
+        "It is optional",
         "The defaulted assignment would destroy a joinable std::thread, and that is std::terminate",
-        "Because join resets the thread id",
-        "It is optional"
+        "To make it faster",
+        "Because join resets the thread id"
       ],
       "correct": 1,
       "explanation": "Assigning over a running thread must wait for it first. The suite checks that the first thread's work was finished after the assignment, so it was joined and not abandoned."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "failed() and error() on a ScopedThread call join() first. Why is that the right design?",
       "options": [
-        "Because the thread must be stopped before it can be asked",
         "The thread has to have finished for its result to exist, and join is the point where its writes become visible, which makes reading them safe without a lock",
         "To avoid a mutex in the class",
-        "Because join returns the error"
+        "Because join returns the error",
+        "Because the thread must be stopped before it can be asked"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The thread writes the failure state; the caller reads it. Reading before the join would be a data race, and the join is also what makes the answer final."
     }
   ]

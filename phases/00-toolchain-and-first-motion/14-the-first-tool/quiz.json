@@ -18,24 +18,24 @@
       "stage": "check",
       "question": "Why are all three numbers checked before anything is driven or drawn?",
       "options": [
+        "The robot needs all three at once",
         "To save time",
         "Output written before a problem is found cannot be taken back: a bad third number after the picture leaves half an answer, which a script reading the output cannot tell from a result",
-        "It is a rule of C++",
-        "The robot needs all three at once"
+        "It is a rule of C++"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "With 'fast' for the right speed: status 2, a message on the error stream and 0 characters of output."
     },
     {
       "stage": "check",
       "question": "A person types fast for the right speed. What does the tool do?",
       "options": [
-        "Crashes",
         "Writes right speed: not a number (allowed 0 to 2) to the error stream, nothing to the output, and returns the misused status 2",
+        "Asks again for ever",
         "Uses zero",
-        "Asks again for ever"
+        "Crashes"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The message names the value, the problem and the allowed range."
     },
     {
@@ -43,33 +43,33 @@
       "question": "Why does the message include the allowed range?",
       "options": [
         "To be longer",
-        "The person needs to know what would have been accepted, and a message like invalid input leaves them guessing which of three values is wrong",
+        "It is not included",
         "It is required by the standard",
-        "It is not included"
+        "The person needs to know what would have been accepted, and a message like invalid input leaves them guessing which of three values is wrong"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "duration: no input (allowed 0.1 to 60) is a message that can be acted on."
     },
     {
       "stage": "post",
       "question": "A straight drive has no height. What does the picture show?",
       "options": [
-        "Nothing",
         "A single row with S and E on it, because scale_to_fit scales by the axis that has an extent",
+        "A circle",
         "An error",
-        "A circle"
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A scale that divided by the height would have given not a number everywhere."
     },
     {
       "stage": "post",
       "question": "Why is the start of the path at the bottom left of the picture and the end at the top right?",
       "options": [
-        "A mistake",
-        "The robot's y grows upward and rows of text grow downward, so the picture has to flip it, and the quarter circle ends up about as wide as it is tall",
         "Left is zero",
-        "The order of the arguments"
+        "The robot's y grows upward and rows of text grow downward, so the picture has to flip it, and the quarter circle ends up about as wide as it is tall",
+        "The order of the arguments",
+        "A mistake"
       ],
       "correct": 1,
       "explanation": "E was in the top row and S in the bottom row, at column 0."

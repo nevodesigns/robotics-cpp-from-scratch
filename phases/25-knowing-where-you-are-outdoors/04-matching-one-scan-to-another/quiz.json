@@ -7,20 +7,20 @@
       "question": "What does a scan match give?",
       "options": [
         "A map",
-        "The rigid move that puts one scan on the other",
         "A speed",
-        "The colour"
+        "The colour",
+        "The rigid move that puts one scan on the other"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A rotation and a translation."
     },
     {
       "stage": "check",
       "question": "A scan moved by 0.3 m, 0.1 m and 0.15 rad was matched to:",
       "options": [
-        "10 m",
-        "0.0007 m and 0.0001 rad",
         "0",
+        "0.0007 m and 0.0001 rad",
+        "10 m",
         "1 rad"
       ],
       "correct": 1,
@@ -30,24 +30,24 @@
       "stage": "check",
       "question": "In a corridor the match left the move along it wrong by:",
       "options": [
-        "Nothing",
-        "0.10 m",
         "0.01 m",
-        "10 m"
+        "10 m",
+        "0.10 m",
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Every position along it looks the same."
     },
     {
       "stage": "check",
       "question": "A person in only one scan pulled the match by:",
       "options": [
-        "Nothing",
         "0.042 m without a limit, 0.000 m with one",
         "1 km",
-        "0.000 m without a limit"
+        "0.000 m without a limit",
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Points with no partner."
     },
     {
@@ -67,11 +67,11 @@
       "question": "Why is the rms of the match not a measure of how well it is determined?",
       "options": [
         "It is",
-        "It is small whether or not the geometry constrains the move",
+        "It is too noisy",
         "It is always zero",
-        "It is too noisy"
+        "It is small whether or not the geometry constrains the move"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A corridor matches well in every position along it."
     }
   ]

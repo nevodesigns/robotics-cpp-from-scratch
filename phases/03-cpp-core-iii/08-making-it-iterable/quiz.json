@@ -7,9 +7,9 @@
       "question": "How many iterator operations does a range-for loop actually require?",
       "options": [
         "Three: dereference, pre-increment and inequality",
-        "All of them, which is why writing an iterator is hard",
+        "One: operator* is enough, the loop handles the rest",
         "Five, matching the five iterator_traits typedefs",
-        "One: operator* is enough, the loop handles the rest"
+        "All of them, which is why writing an iterator is hard"
       ],
       "correct": 0,
       "explanation": "It expands to a loop that dereferences, advances and compares, and that is the whole requirement. A struct with size(), operator[] and those three operations iterated correctly in the lesson's suite. The algorithms ask for more, which is a separate question."
@@ -18,24 +18,24 @@
       "stage": "check",
       "question": "A ring of four has had 1 to 6 pushed into it. operator[] gives 3 4 5 6. What do the raw slots hold?",
       "options": [
-        "5 6 3 4: the right four readings in the wrong order",
         "3 4 5 6, the same, since the array is the container",
+        "6 5 4 3, reversed by the wrap",
         "1 2 3 4, the first four pushed",
-        "6 5 4 3, reversed by the wrap"
+        "5 6 3 4: the right four readings in the wrong order"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "Which is why an iterator must go through operator[] rather than the storage. The indexing already does the wrap arithmetic, so going through it is correct for free, and walking the array is wrong only after the buffer has wrapped."
     },
     {
       "stage": "check",
       "question": "An iterator over the raw slots gives a correct std::accumulate. Why is that dangerous rather than reassuring?",
       "options": [
-        "A sum does not depend on order, so every order independent check passes and the bug hides behind them",
+        "Because accumulate reads the container twice",
         "Because accumulate does not use iterators",
-        "It is not dangerous: if the sum is right the order is right",
-        "Because accumulate reads the container twice"
+        "A sum does not depend on order, so every order independent check passes and the bug hides behind them",
+        "It is not dangerous: if the sum is right the order is right"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "The mean and the maximum value are right too. What fails is anything about position: the oldest reading, the newest, a derivative, a plot. Comparing the walked sequence against the operator[] sequence is the one check that distinguishes the two implementations."
     },
     {
@@ -43,9 +43,9 @@
       "question": "What does a container itself have to declare before anything generic can use it?",
       "options": [
         "value_type, because something generic must be able to name the element type rather than be told it",
-        "Nothing: the iterator declares everything",
         "A size_type and a difference_type",
-        "An allocator_type"
+        "An allocator_type",
+        "Nothing: the iterator declares everything"
       ],
       "correct": 0,
       "explanation": "It is the first thing a container says about itself, and rc::core::Ring gained the line for exactly this reason. A container without it cannot be iterated, passed to an algorithm, or used by a template that needs a local of its element type."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "You declare std::random_access_iterator_tag and omit operator+=. When do you find out?",
       "options": [
-        "When something calls std::advance or std::lower_bound, as an error from inside a standard library header",
-        "Immediately, at the declaration",
         "Never: the tag is only documentation",
-        "At the first range-for loop"
+        "When something calls std::advance or std::lower_bound, as an error from inside a standard library header",
+        "At the first range-for loop",
+        "Immediately, at the declaration"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "The tag is a promise and the library holds you to all of it. std::distance subtracts instead of counting, std::advance uses +=, and lower_bound jumps. The error arrives where the missing operation is used, which is the same effect 03-07 measured 21 instantiation frames deep."
     },
     {
       "stage": "post",
       "question": "Your container hands out const references and std::sort is refused. What is the right response?",
       "options": [
+        "Declare a weaker iterator_category so sort stops asking",
         "Accept it: copy into a vector and sort that, because a history you have collected is not a thing to reorder in place",
-        "Add a non-const operator[] overload and a mutable reference typedef",
         "Cast away const inside operator*",
-        "Declare a weaker iterator_category so sort stops asking"
+        "Add a non-const operator[] overload and a mutable reference typedef"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "The refusal is the type system saying what the design already decided. A sorted copy is a different object from the history, and the allocation says so plainly. The lesson keeps that refusal in checks/ so it is met deliberately."
     }
   ]

@@ -6,34 +6,34 @@
       "stage": "pre",
       "question": "The joints are known to 0.02 rad. Is the tool known to the same accuracy?",
       "options": [
-        "Yes",
-        "No: an angle error becomes a length error through the Jacobian, which depends on the pose, and not equally in x and y",
         "Always better",
-        "Always worse"
+        "Always worse",
+        "Yes",
+        "No: an angle error becomes a length error through the Jacobian, which depends on the pose, and not equally in x and y"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "With the elbow at 90 degrees the tool's variances were 0.13 and 0.04 for joint spreads of 0.2 and 0.3."
     },
     {
       "stage": "check",
       "question": "What is the covariance of the tool, given the covariance C of the joints and the Jacobian J?",
       "options": [
-        "J + C",
         "J C J transposed: the tool moves by J times the joint error",
         "C J",
-        "J squared"
+        "J squared",
+        "J + C"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The formula is exact for small errors and a linear approximation otherwise."
     },
     {
       "stage": "check",
       "question": "How well does the formula agree with 20000 random trials for joint spreads of 0.01 and 0.3 rad?",
       "options": [
-        "Badly then well",
+        "Badly both times",
         "Well then badly: 5.02e-05 against 5.03e-05, then 4.52e-02 against 4.00e-02, because the arm's sines and cosines show for large errors",
-        "Well both times",
-        "Badly both times"
+        "Badly then well",
+        "Well both times"
       ],
       "correct": 1,
       "explanation": "For large errors use the trials themselves."
@@ -42,36 +42,36 @@
       "stage": "check",
       "question": "The 95 percent ellipse of the propagated doubt held what share of 20000 trials?",
       "options": [
-        "50 percent",
         "95.1 percent",
         "68 percent",
+        "50 percent",
         "100 percent"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "For joint errors of 0.02 rad."
     },
     {
       "stage": "post",
       "question": "Near a straight arm, what happens to the doubt at the tool?",
       "options": [
-        "It is round",
-        "It is nearly all along one direction: with the elbow at 0.05 rad the spread was 19.69 mm along and 0.20 across, a ratio of 97",
         "It vanishes",
-        "It doubles"
+        "It doubles",
+        "It is nearly all along one direction: with the elbow at 0.05 rad the spread was 19.69 mm along and 0.20 across, a ratio of 97",
+        "It is round"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The Jacobian loses a direction at the singularity of lesson 13-04."
     },
     {
       "stage": "post",
       "question": "Why is a single accuracy number for the tool not enough?",
       "options": [
-        "Numbers are inexact",
-        "It hides the shape: the tool may be known to a fraction of a millimetre across the arm and ten times worse along it, and a task needs the direction it works in",
+        "It changes each day",
         "It is always too small",
-        "It changes each day"
+        "It hides the shape: the tool may be known to a fraction of a millimetre across the arm and ten times worse along it, and a task needs the direction it works in",
+        "Numbers are inexact"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Report the ellipse and its axes."
     }
   ]

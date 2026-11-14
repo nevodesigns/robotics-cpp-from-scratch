@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "What is a roadmap for?",
       "options": [
-        "Drawing",
-        "Finding the free space of a fixed scene once, so each query is a search of a graph",
         "Avoiding people",
-        "Timing a move"
+        "Finding the free space of a fixed scene once, so each query is a search of a graph",
+        "Timing a move",
+        "Drawing"
       ],
       "correct": 1,
       "explanation": "Plan once, ask many times."
@@ -18,36 +18,36 @@
       "stage": "check",
       "question": "Five queries took 858 poses each on average against RRT-Connect's:",
       "options": [
-        "858",
         "2432",
         "0",
+        "858",
         "1"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The free space was found once."
     },
     {
       "stage": "check",
       "question": "With 40 and 300 nodes the graph had how many pieces?",
       "options": [
-        "5 and 6",
-        "6 and 5",
+        "None",
         "One each",
-        "None"
+        "6 and 5",
+        "5 and 6"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "More nodes join the pieces."
     },
     {
       "stage": "check",
       "question": "After a box was put in the scene, what share of the roadmap's edges were not free?",
       "options": [
-        "0",
         "34 percent",
         "100 percent",
-        "1 percent"
+        "1 percent",
+        "0"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A query on the old map gave 12 bad edges."
     },
     {
@@ -55,23 +55,23 @@
       "question": "Why are the roadmap's paths shorter than RRT's?",
       "options": [
         "They are not",
+        "Luck",
         "Dijkstra finds the shortest path through the graph, not the first a tree found: 0.74 times the length",
-        "Roadmaps cut corners",
-        "Luck"
+        "Roadmaps cut corners"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A search, not a stumble."
     },
     {
       "stage": "post",
       "question": "What must be done with a stored roadmap when the scene may have changed?",
       "options": [
+        "Delete the start node",
         "Nothing",
-        "Check its edges against the scene as it is now, or rebuild it",
         "Make it bigger",
-        "Delete the start node"
+        "Check its edges against the scene as it is now, or rebuild it"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It is a statement about a scene."
     }
   ]

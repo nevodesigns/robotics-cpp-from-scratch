@@ -18,48 +18,48 @@
       "stage": "check",
       "question": "What does the relay do?",
       "options": [
-        "Switches the loop off",
-        "Commands plus d below the target and minus d above it, so the plant swings about the target by itself",
         "Raises kp slowly",
-        "Reads the sensor twice"
+        "Reads the sensor twice",
+        "Commands plus d below the target and minus d above it, so the plant swings about the target by itself",
+        "Switches the loop off"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The swing's size and cycle time carry the answer."
     },
     {
       "stage": "check",
       "question": "The swing has amplitude a under a relay of d. What is the ultimate gain?",
       "options": [
-        "d times a",
-        "4 d / (pi a), with the time of a cycle as the ultimate period",
+        "d squared",
         "a / d",
-        "d squared"
+        "d times a",
+        "4 d / (pi a), with the time of a cycle as the ultimate period"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "On the test plant the relay gave 5.71 and 0.544 s against 6.42 and 0.513 s from its constants."
     },
     {
       "stage": "check",
       "question": "The relay was made 16 times bigger, from 0.25 to 4, on a linear plant. What happened to the ultimate gain?",
       "options": [
-        "It rose sixteenfold",
         "It stayed at 5.71, as the amplitude scaled with d",
+        "It rose sixteenfold",
         "It fell",
         "It became invalid"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Choose d for the machine's safe range and the sensor's noise."
     },
     {
       "stage": "post",
       "question": "What does a wide hysteresis margin do to the result?",
       "options": [
-        "Nothing",
         "Bends it: the reported gain fell from 5.71 to 2.64 as the margin went from 0.01 to 0.20",
         "Doubles it",
-        "Makes the relay faster"
+        "Makes the relay faster",
+        "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Keep the margin small against the swing and above the sensor's noise."
     },
     {
@@ -67,11 +67,11 @@
       "question": "Why measure a step after getting the gains from a rule?",
       "options": [
         "The rule is exact",
-        "The rule sets differ a lot: Ziegler-Nichols overshot by 0.597 and the gentler set by 0.376, and a loop is judged on rise time, overshoot, settling time and final error",
+        "To test the sensor",
         "Steps are required",
-        "To test the sensor"
+        "The rule sets differ a lot: Ziegler-Nichols overshot by 0.597 and the gentler set by 0.376, and a loop is judged on rise time, overshoot, settling time and final error"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Four numbers, not a feeling."
     }
   ]

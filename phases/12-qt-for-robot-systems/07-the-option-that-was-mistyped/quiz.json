@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "QCommandLineParser is given --port abc. What does parse() return?",
       "options": [
-        "false",
-        "true: to the parser every value is text",
         "An exception",
-        "It ends the program"
+        "It ends the program",
+        "false",
+        "true: to the parser every value is text"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Qt accepted it, and as a number it is 0."
     },
     {
@@ -30,22 +30,22 @@
       "stage": "check",
       "question": "Why is parse() used and not process()?",
       "options": [
-        "It is faster",
-        "process() prints the error and ends the program, which ends a test run",
+        "process() is deprecated",
         "parse() checks more",
-        "process() is deprecated"
+        "process() prints the error and ends the program, which ends a test run",
+        "It is faster"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "parse_station_args returns."
     },
     {
       "stage": "check",
       "question": "A message says: --port must be a whole number from 1 to 65535, not abc. What makes it good?",
       "options": [
-        "It is long",
+        "It is in capitals",
         "It names the option, the rule and the value",
         "It has a number in it",
-        "It is in capitals"
+        "It is long"
       ],
       "correct": 1,
       "explanation": "All 11 messages named what was wrong."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "--help is given with a bad port. Is the line good?",
       "options": [
+        "It exits",
         "No",
-        "Yes: help is asked for, and nothing else on the line is checked",
         "Only on Linux",
-        "It exits"
+        "Yes: help is asked for, and nothing else on the line is checked"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The help flag was set and the line was good."
     },
     {
       "stage": "post",
       "question": "Where does the default of an option appear in the help of Qt?",
       "options": [
-        "In brackets after the option",
         "Nowhere: the description has to say it",
         "In the version",
+        "In brackets after the option",
         "On the next line"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Each description says default 5000 and so on."
     }
   ]

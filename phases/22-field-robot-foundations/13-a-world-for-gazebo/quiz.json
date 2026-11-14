@@ -7,20 +7,20 @@
       "question": "Why make the Gazebo world from the scenario file?",
       "options": [
         "Gazebo cannot read anything else",
-        "Two copies of a wall will disagree, and the simulators then disagree about something never in dispute",
         "It is faster",
+        "Two copies of a wall will disagree, and the simulators then disagree about something never in dispute",
         "Habit"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "One file, two worlds."
     },
     {
       "stage": "check",
       "question": "A wall from (0,0) to (3,4) became a box of length:",
       "options": [
-        "3",
-        "5.000 m, turned 0.927295 rad",
         "4",
+        "5.000 m, turned 0.927295 rad",
+        "3",
         "7"
       ],
       "correct": 1,
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "A grade of 0.1 rising along +x is a pitch of:",
       "options": [
-        "-0.0996687 rad",
-        "+0.0997 rad",
         "0",
+        "+0.0997 rad",
+        "-0.0996687 rad",
         "0.1 degrees"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "A positive rotation about y turns x downwards."
     },
     {
       "stage": "check",
       "question": "Why is a goal a marker with no collision?",
       "options": [
-        "It is cheaper",
         "It is a place, not a thing, and a robot must be able to drive onto it",
         "Gazebo requires it",
-        "It is invisible"
+        "It is invisible",
+        "It is cheaper"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A place is not an obstacle."
     },
     {
       "stage": "post",
       "question": "Why are faults not in the world?",
       "options": [
-        "They are",
-        "They concern what the sensors report, so they belong between the world and the program",
         "Gazebo has none",
-        "They are optional"
+        "They are",
+        "They are optional",
+        "They concern what the sensors report, so they belong between the world and the program"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The world is physical."
     },
     {
       "stage": "post",
       "question": "What hides the mistake of laying every wall along x?",
       "options": [
+        "The robot",
         "Nothing",
-        "Axis aligned walls, which are the common ones",
         "The ground",
-        "The robot"
+        "Axis aligned walls, which are the common ones"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Test a wall that is neither."
     }
   ]

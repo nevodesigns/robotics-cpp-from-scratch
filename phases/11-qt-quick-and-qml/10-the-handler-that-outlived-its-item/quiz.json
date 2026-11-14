@@ -8,8 +8,8 @@
       "options": [
         "1",
         "3",
-        "0",
-        "It depends"
+        "It depends",
+        "0"
       ],
       "correct": 1,
       "explanation": "Plain connections are not unique."
@@ -18,24 +18,24 @@
       "stage": "check",
       "question": "What does connect_once return the second time?",
       "options": [
-        "true",
         "false: the connection exists, and nothing was made",
-        "An error",
-        "It crashes"
+        "true",
+        "It crashes",
+        "An error"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It made 1, then 0 and 0."
     },
     {
       "stage": "check",
       "question": "A QML item connects with signal.connect(function) and is later destroyed. What happens when the signal fires?",
       "options": [
-        "Nothing",
-        "The handler still runs, and throws because its names went with the item",
         "It runs normally",
-        "It is called twice"
+        "Nothing",
+        "It is called twice",
+        "The handler still runs, and throws because its names went with the item"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "3 warnings from 3 items that were gone, each a ReferenceError."
     },
     {
@@ -43,11 +43,11 @@
       "question": "What does a Connections element do differently?",
       "options": [
         "Connects faster",
+        "It ignores errors",
         "It is part of its item, so the connection ends with it",
-        "It connects twice",
-        "It ignores errors"
+        "It connects twice"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The same reloads gave 0 warnings."
     },
     {
@@ -55,23 +55,23 @@
       "question": "Why can connect_once not recognise a lambda connection?",
       "options": [
         "Lambdas are slow",
-        "A lambda is a new function each time, so there is nothing to compare",
         "Qt forbids it",
+        "A lambda is a new function each time, so there is nothing to compare",
         "Lambdas are unique"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It works for member function pointers."
     },
     {
       "stage": "post",
       "question": "A lambda is connected with a receiver, and the receiver is deleted. What happens?",
       "options": [
-        "The lambda is called on a dead object",
-        "The connection ends with the receiver",
         "The signal stops",
-        "An exception"
+        "The lambda is called on a dead object",
+        "An exception",
+        "The connection ends with the receiver"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "One more signal made no call."
     }
   ]

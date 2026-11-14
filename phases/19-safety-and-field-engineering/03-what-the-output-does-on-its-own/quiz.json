@@ -7,20 +7,20 @@
       "question": "The controller dies. What does an output stage do with a channel if nobody chose?",
       "options": [
         "Stops it",
-        "Holds the last command, which for a motor at 80 percent is the opposite of a stop",
+        "Beeps",
         "Resets it",
-        "Beeps"
+        "Holds the last command, which for a motor at 80 percent is the opposite of a stop"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The default decides."
     },
     {
       "stage": "check",
       "question": "Five channels left on hold: which were unsafe when the controller died?",
       "options": [
-        "All",
-        "drive_left, drive_right, steering and brake_coil; the horn was at its safe value (0) and is fine",
         "None",
+        "drive_left, drive_right, steering and brake_coil; the horn was at its safe value (0) and is fine",
+        "All",
         "Only the drives"
       ],
       "correct": 1,
@@ -30,24 +30,24 @@
       "stage": "check",
       "question": "Why was an ESC channel unsafe on the zero policy?",
       "options": [
-        "Zero is too small",
         "Its neutral is a 1500 us pulse, and a pulse of 0 is no signal, which the ESC may treat as anything",
         "The ESC is broken",
+        "Zero is too small",
         "It needs 24 V"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A zero is safe only where zero means stopped."
     },
     {
       "stage": "check",
       "question": "With the robot moving, how many of the four failures engaged a spring applied brake, and a power applied one?",
       "options": [
+        "0 and 3",
         "4 and 4",
         "3 and 0: for the spring, a lost supply, a cut wire and a dead controller driving zero are the command to stop",
-        "0 and 3",
         "2 and 2"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The fourth, an output stage that holds, is the gap."
     },
     {
@@ -55,23 +55,23 @@
       "question": "What closes the case of an output stage that holds the coil at 24 V?",
       "options": [
         "A bigger spring",
-        "A safe-value policy on the coil channel (0 V), so the stage drives the coil to where the spring applies the brake",
         "A longer wire",
-        "Nothing"
+        "Nothing",
+        "A safe-value policy on the coil channel (0 V), so the stage drives the coil to where the spring applies the brake"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "4 of 4 with both ideas."
     },
     {
       "stage": "post",
       "question": "How is the real behaviour of an output stage found?",
       "options": [
-        "From the data sheet only",
         "By killing the controller on the bench and watching the output: the model is as true as the data sheet it came from",
+        "From the data sheet only",
         "From the compiler",
         "By asking the supplier"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "No header can do it."
     }
   ]

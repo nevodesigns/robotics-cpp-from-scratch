@@ -6,58 +6,58 @@
       "stage": "pre",
       "question": "A controller runs once every 100 ms and holds its output between ticks. How does that compare with a controller that runs continuously?",
       "options": [
-        "Identical",
         "It acts on information that is on average half a period old, which acts like a delay in the loop",
-        "Faster",
-        "It uses less power and nothing else changes"
+        "Identical",
+        "It uses less power and nothing else changes",
+        "Faster"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "At kp 100 and kd 10 the overshoot went from 0.156 at 1 ms to 0.398 at 100 ms."
     },
     {
       "stage": "check",
       "question": "The gains stay at kp 100 and kd 10 and only the period changes. What happens to the overshoot?",
       "options": [
-        "Nothing",
-        "It rises, from 0.156 at 1 ms to 0.791 at 150 ms, and grows faster the slower it gets",
+        "It stays under 0.2",
         "It falls",
-        "It stays under 0.2"
+        "Nothing",
+        "It rises, from 0.156 at 1 ms to 0.791 at 150 ms, and grows faster the slower it gets"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The loop got worse only because it looked less often."
     },
     {
       "stage": "check",
       "question": "How is the largest stable period found?",
       "options": [
-        "By formula, with no need to run anything",
-        "By bisection: if the loop is stable at the midpoint the limit is longer, otherwise shorter",
         "By trying 1 ms only",
-        "By reading the datasheet"
+        "By reading the datasheet",
+        "By bisection: if the loop is stable at the midpoint the limit is longer, otherwise shorter",
+        "By formula, with no need to run anything"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It measured 0.1821 s at kp 100 and kd 10, stable at 97 percent of it and not at 105."
     },
     {
       "stage": "check",
       "question": "Quadrupling kp doubles the natural frequency. What does it do to the largest stable period?",
       "options": [
-        "Doubles it",
-        "Roughly halves it: 0.1821 s at kp 100 became 0.0950 s at kp 400, with the limit times the natural frequency near 1.8",
         "Nothing",
-        "Quarters it exactly"
+        "Quarters it exactly",
+        "Roughly halves it: 0.1821 s at kp 100 became 0.0950 s at kp 400, with the limit times the natural frequency near 1.8",
+        "Doubles it"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A joint twice as stiff needs a loop about twice as fast."
     },
     {
       "stage": "post",
       "question": "At a tenth of the limit, how much more overshoot did the loop have than at 1 ms?",
       "options": [
-        "None",
-        "About 12 percent more, 0.175 against 0.156, while a half of the limit gave 2.26 times",
         "Ten times",
-        "Half"
+        "About 12 percent more, 0.175 against 0.156, while a half of the limit gave 2.26 times",
+        "Half",
+        "None"
       ],
       "correct": 1,
       "explanation": "A tenth to a twentieth of the limit is a common place to start."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why not run the loop just under its largest stable period?",
       "options": [
-        "It would be slower",
         "It would work until a late tick or a plant with a little extra delay, because there is no margin left, and the overshoot there is already several times larger",
         "The sensor would fail",
-        "Bisection forbids it"
+        "Bisection forbids it",
+        "It would be slower"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The limit is for this plant and a steady period only."
     }
   ]

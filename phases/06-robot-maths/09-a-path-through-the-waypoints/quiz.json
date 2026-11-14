@@ -8,8 +8,8 @@
       "options": [
         "10.9 degrees",
         "90.0 degrees: the whole angle in a single step, which no machine can follow",
-        "0 degrees",
-        "180 degrees"
+        "180 degrees",
+        "0 degrees"
       ],
       "correct": 1,
       "explanation": "A curve through the same waypoints turned at most 10.9 degrees in a step."
@@ -18,12 +18,12 @@
       "stage": "check",
       "question": "What does the alpha of a Catmull-Rom curve set?",
       "options": [
-        "The speed of the robot",
-        "How the curve is timed along the way: 0 gives every waypoint the same time, 0.5 the square root of the distance, 1 the distance",
         "The number of points",
-        "The colour"
+        "The colour",
+        "The speed of the robot",
+        "How the curve is timed along the way: 0 gives every waypoint the same time, 0.5 the square root of the distance, 1 the distance"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The curve passes through every waypoint whatever alpha is."
     },
     {
@@ -31,23 +31,23 @@
       "question": "Waypoints spaced 10, 1 and 14.1. What is the sharpest turn in one step with alpha 0 and with alpha 0.5?",
       "options": [
         "9.1 and 178.2 degrees",
-        "178.2 and 9.1 degrees: uniform timing makes the curve turn back on itself",
         "10 and 10",
+        "178.2 and 9.1 degrees: uniform timing makes the curve turn back on itself",
         "0 and 0"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Chordal timing gave 8.7 degrees."
     },
     {
       "stage": "check",
       "question": "Why does uniform timing loop on uneven waypoints?",
       "options": [
-        "It is faster",
         "Every segment gets the same time, so the short step has to be crossed as slowly as the long runs and the curve rushes through it and turns back",
         "It uses more points",
-        "It is a bug"
+        "It is a bug",
+        "It is faster"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Timing by distance fixes it."
     },
     {
@@ -55,11 +55,11 @@
       "question": "What happens at a waypoint that is repeated?",
       "options": [
         "Nothing",
-        "A distance of zero gives a time interval of zero and a division by it, so repeated waypoints are taken once and the curve function goes straight on a zero interval",
         "It loops",
-        "It is skipped silently with a warning"
+        "It is skipped silently with a warning",
+        "A distance of zero gives a time interval of zero and a division by it, so repeated waypoints are taken once and the curve function goes straight on a zero interval"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Waypoints on a line with the last repeated stayed exactly on it."
     },
     {

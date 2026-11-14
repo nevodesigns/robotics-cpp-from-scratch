@@ -6,9 +6,9 @@
       "stage": "pre",
       "question": "The wheel base is 5 percent out. What does it cost when driving straight?",
       "options": [
-        "5 percent",
-        "Nothing: it only divides the difference between the wheels",
         "A metre in 30",
+        "Nothing: it only divides the difference between the wheels",
+        "5 percent",
         "The heading"
       ],
       "correct": 1,
@@ -30,48 +30,48 @@
       "stage": "check",
       "question": "Why do fixes every 2 s leave an error of 1.42 m when each fix is good to 0.1 m?",
       "options": [
+        "The filter",
         "The beacon is bad",
         "The error is set by the time between fixes: the drift between them, and the fix does not correct the heading, which is what is wrong",
-        "The filter",
         "The wheel"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Bounded by the interval, not by the fix."
     },
     {
       "stage": "check",
       "question": "A fence on the believed position was given no buffer. What happened to the robot whose truth left the corridor after 9.6 m?",
       "options": [
-        "It stopped",
-        "It never stopped: the belief stays on the axis, so the fence never trips, and the robot ended at y = -18.3 m",
+        "It turned",
         "It slowed",
-        "It turned"
+        "It stopped",
+        "It never stopped: the belief stays on the axis, so the fence never trips, and the robot ended at y = -18.3 m"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A fence with the right polygon and the wrong position is not a fence."
     },
     {
       "stage": "post",
       "question": "Which assumed drifts stopped the robot before the truth left the corridor?",
       "options": [
-        "All",
         "0.20 and 0.40 m per metre: 0.05 and 0.10 stopped it after the truth was outside, and the real drift at the edge was 0.156 and growing",
+        "Only 0.05",
         "None",
-        "Only 0.05"
+        "All"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Assume the drift for the longest distance between fixes."
     },
     {
       "stage": "post",
       "question": "What do fixes every 5 s add to the safety argument?",
       "options": [
-        "Safety",
         "Range: with the same assumed drift the robot went 8.7 m before it had to stop, against 5.1 m without",
+        "Safety",
         "A smaller buffer",
         "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The beacon buys distance, not safety."
     }
   ]

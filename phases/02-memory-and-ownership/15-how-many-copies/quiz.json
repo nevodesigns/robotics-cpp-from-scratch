@@ -18,46 +18,46 @@
       "stage": "check",
       "question": "What does a vector do when it grows, and the move constructor is not marked noexcept?",
       "options": [
+        "Refuses to grow",
         "Moves the elements anyway",
         "Copies every element, since a move that might throw half way cannot be undone",
-        "Refuses to grow",
         "Skips the elements"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "100 push_backs: 0 copies with noexcept, 127 without."
     },
     {
       "stage": "check",
       "question": "What does reserve(n) change about filling a vector with push_back of temporaries?",
       "options": [
-        "Nothing",
         "It removes the moves of growth, leaving one move per temporary, 100 for 100 packets",
-        "It removes all the moves",
-        "It adds copies"
+        "It adds copies",
+        "Nothing",
+        "It removes all the moves"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The growth part depends on the library, so a test checks that it goes and not its size."
     },
     {
       "stage": "check",
       "question": "What does emplace_back(i) do differently from push_back(Packet(i))?",
       "options": [
-        "It is slower",
         "It builds the object where it will live, so there is no temporary to move: 0 copies and 0 moves",
-        "It copies twice",
-        "Nothing"
+        "Nothing",
+        "It is slower",
+        "It copies twice"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It passes the arguments on to the constructor."
     },
     {
       "stage": "post",
       "question": "A vector of 50 is passed to a function by value from a variable. How many copies?",
       "options": [
-        "0",
-        "50: a parameter by value is a new vector and every element is copied",
         "1",
-        "25"
+        "50: a parameter by value is a new vector and every element is copied",
+        "25",
+        "0"
       ],
       "correct": 1,
       "explanation": "By const reference it was 0, and from std::move 0 copies and 0 element moves."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "A test finds 0 copies and 0 moves for a returned vector. What should a careful reader remember?",
       "options": [
-        "The code is perfect",
-        "The compiler can remove copies and moves altogether, so zero may be its work and not the code's",
+        "The count is wrong",
         "Returns never copy",
-        "The count is wrong"
+        "The code is perfect",
+        "The compiler can remove copies and moves altogether, so zero may be its work and not the code's"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Counts show what happened, not what the code guarantees."
     }
   ]

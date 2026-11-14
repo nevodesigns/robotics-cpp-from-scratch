@@ -6,12 +6,12 @@
       "stage": "pre",
       "question": "The application crashes while the robot drives. Which stop works?",
       "options": [
-        "The stop button in the application",
         "A stop on the robot, driven by the robot's own loop and clock, that treats the missing heartbeat as the signal",
-        "The operating system",
-        "None"
+        "The stop button in the application",
+        "None",
+        "The operating system"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Nothing in the stop path waits for the app."
     },
     {
@@ -19,11 +19,11 @@
       "question": "A guard compares the age of the last message when each message arrives. Messages stop. What does it do?",
       "options": [
         "Stops after the timeout",
-        "Nothing: with no messages nothing ever looks, and the last command stays (0.8 at 5 s in the test)",
+        "Restarts",
         "Raises an error",
-        "Restarts"
+        "Nothing: with no messages nothing ever looks, and the last command stays (0.8 at 5 s in the test)"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A watchdog fed by the thing it watches is not a watchdog."
     },
     {
@@ -32,8 +32,8 @@
       "options": [
         "Yes",
         "No: an unreported loop is an open loop, and the robot starts stopped",
-        "Only slowly",
-        "Only in reverse"
+        "Only in reverse",
+        "Only slowly"
       ],
       "correct": 1,
       "explanation": "Safe is the default."
@@ -42,12 +42,12 @@
       "stage": "check",
       "question": "The link comes back after the stop. What should the robot do?",
       "options": [
-        "Move at once",
         "Stay stopped until a deliberate reset, which needs a closed loop and a fresh heartbeat",
-        "Move slowly",
-        "Ask the app"
+        "Ask the app",
+        "Move at once",
+        "Move slowly"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The output was still 0 at 2.5 s."
     },
     {
@@ -55,11 +55,11 @@
       "question": "Why is a clock that goes backwards treated as a stale heartbeat?",
       "options": [
         "It is faster",
-        "now minus the last beat goes negative and would pass a greater-than-timeout test for as long as the clock stays behind",
+        "It saves memory",
         "The clock is wrong",
-        "It saves memory"
+        "now minus the last beat goes negative and would pass a greater-than-timeout test for as long as the clock stays behind"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "100 s then 50 s gave stale: yes."
     },
     {
@@ -67,11 +67,11 @@
       "question": "Why is this software not the whole answer for a machine that can hurt someone?",
       "options": [
         "It is slow",
-        "If the control loop that calls it hangs, nothing calls it: the same idea has to exist in hardware that does not run your code",
         "It is too simple",
+        "If the control loop that calls it hangs, nothing calls it: the same idea has to exist in hardware that does not run your code",
         "It needs a network"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A watchdog chip, a contactor and a brake that applies on loss of power."
     }
   ]

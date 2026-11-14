@@ -7,21 +7,21 @@
       "question": "How do you find the reach of an arm by sampling?",
       "options": [
         "Measure it",
-        "Draw random joint angles, run forward kinematics and mark the cell of the tool",
         "Invert the Jacobian",
+        "Draw random joint angles, run forward kinematics and mark the cell of the tool",
         "Read the data sheet"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Ask, do not assume."
     },
     {
       "stage": "check",
       "question": "With 2 thousand poses the volume was how much against 200 thousand?",
       "options": [
-        "2.958 m3 against 1.081 m3",
-        "1.081 m3 against 2.958 m3",
         "The same",
-        "Twice as much"
+        "1.081 m3 against 2.958 m3",
+        "Twice as much",
+        "2.958 m3 against 1.081 m3"
       ],
       "correct": 1,
       "explanation": "Edge poses are rare."
@@ -30,22 +30,22 @@
       "stage": "check",
       "question": "How far out at table height did the tool reach in any orientation, and pointing down?",
       "options": [
-        "0.74 m and 0.86 m",
-        "0.86 m and 0.74 m",
         "The same",
-        "0.1 m and 1 m"
+        "0.1 m and 1 m",
+        "0.74 m and 0.86 m",
+        "0.86 m and 0.74 m"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The orientation shortens the reach."
     },
     {
       "stage": "check",
       "question": "What share of the reachable volume were the dexterous poses?",
       "options": [
-        "All",
-        "62 percent",
         "None",
-        "Half exactly"
+        "62 percent",
+        "Half exactly",
+        "All"
       ],
       "correct": 1,
       "explanation": "Smallest singular value of 0.1 or more."
@@ -55,23 +55,23 @@
       "question": "Why does a table need the joint limits in the question?",
       "options": [
         "It does not",
-        "The closed form gives all the solutions; the arm can take only those inside its limits: 96 percent against 78 with plus and minus 60 degrees",
+        "Colour",
         "Speed",
-        "Colour"
+        "The closed form gives all the solutions; the arm can take only those inside its limits: 96 percent against 78 with plus and minus 60 degrees"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Limits shrink the working area, once they are tight."
     },
     {
       "stage": "post",
       "question": "Why is the reach on a data sheet not the working area?",
       "options": [
-        "It is wrong",
         "It is the outside of a sphere; the useful region is shorter once the orientation is asked for and smaller where the arm cannot move well",
         "It is exact",
-        "It is for another arm"
+        "It is for another arm",
+        "It is wrong"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A smaller shape."
     }
   ]

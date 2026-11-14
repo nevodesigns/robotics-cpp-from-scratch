@@ -6,45 +6,45 @@
       "stage": "pre",
       "question": "What is the surest way to keep a simulation and a robot from diverging?",
       "options": [
-        "Test them often",
         "Have no second controller: the controller is the same program, and the choice of what is on the other side is configuration made when it starts",
+        "Review the code",
         "Use the same compiler",
-        "Review the code"
+        "Test them often"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Two code bases diverge for a year."
     },
     {
       "stage": "check",
       "question": "A configuration has 8 lines, every one wrong. What should the parser do?",
       "options": [
+        "Use the defaults",
         "Stop at the first",
         "Report all 8 with their line numbers and leave the settings as they were: a program that starts with half a configuration is one no one can describe",
-        "Use the defaults",
         "Ignore them"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A missing backend is an error too."
     },
     {
       "stage": "check",
       "question": "The bench is set up with no delay and no loss, and the simulation is run on the same scenario. What should the difference be?",
       "options": [
-        "Small",
-        "Nothing: 0.0000 rms, since set up to be the same they must be the same, and if they differ the difference is a bug in a backend",
         "Half a percent",
-        "10 percent"
+        "10 percent",
+        "Nothing: 0.0000 rms, since set up to be the same they must be the same, and if they differ the difference is a bug in a backend",
+        "Small"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "This is the first test of a rig."
     },
     {
       "stage": "check",
       "question": "The bench has a link delay of 2 ticks each way. Which sensor delay in the simulation matched it best?",
       "options": [
-        "2",
-        "4, the round trip of the link, which cut the difference from 0.1901 to 0.0772",
         "8",
+        "4, the round trip of the link, which cut the difference from 0.1901 to 0.0772",
+        "2",
         "0"
       ],
       "correct": 1,
@@ -54,12 +54,12 @@
       "stage": "post",
       "question": "After matching the delay the gap was still 0.0772, far above the noise floor of 0.0053. What is left?",
       "options": [
-        "Noise",
-        "What the simulation still lacks: the 5 percent loss, which a delay cannot imitate",
+        "The plant",
         "The controller",
-        "The plant"
+        "Noise",
+        "What the simulation still lacks: the 5 percent loss, which a delay cannot imitate"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The number says how much the link cost and what remains to model."
     },
     {
@@ -67,11 +67,11 @@
       "question": "Why does the trace record the plant's true position and not the measured one?",
       "options": [
         "It is simpler",
-        "The judge and the comparison are about what the plant did, and the measurement is what the controller was told: a late or noisy sensor would otherwise hide in the answer",
+        "Speed",
         "The measurement is not available",
-        "Speed"
+        "The judge and the comparison are about what the plant did, and the measurement is what the controller was told: a late or noisy sensor would otherwise hide in the answer"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "truth() is for the test."
     }
   ]

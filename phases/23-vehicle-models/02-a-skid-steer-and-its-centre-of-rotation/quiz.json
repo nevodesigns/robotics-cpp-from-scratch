@@ -8,8 +8,8 @@
       "options": [
         "By turning its front wheels",
         "By driving the sides at different speeds and dragging the wheels sideways",
-        "By leaning",
-        "It cannot"
+        "It cannot",
+        "By leaning"
       ],
       "correct": 1,
       "explanation": "Its wheels are fixed to the chassis."
@@ -19,35 +19,35 @@
       "question": "A chassis of 0.30 m by 0.25 m slides its front wheels in a pivot at:",
       "options": [
         "0 degrees",
+        "10 degrees",
         "50.2 degrees",
-        "90 degrees",
-        "10 degrees"
+        "90 degrees"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "atan(L over B)."
     },
     {
       "stage": "check",
       "question": "At chi 1.5 against 1.0, the centre of rotation for the same wheels was:",
       "options": [
-        "The same",
         "1.5 times as far",
-        "Half as far",
-        "At the centre"
+        "The same",
+        "At the centre",
+        "Half as far"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "0.625 m and 0.938 m."
     },
     {
       "stage": "check",
       "question": "Could two gear motors a side pivot a 10 kg vehicle on gravel?",
       "options": [
-        "Yes, easily",
         "No: it needed 34.5 N a side against 28.0 N",
         "Only on ice",
+        "Yes, easily",
         "Never needed"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The motors can drive it forward and not turn it."
     },
     {
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What does the ICR coefficient do to a differential drive model?",
       "options": [
-        "Nothing",
-        "Makes the turn smaller by one over the coefficient, as if the track were wider",
         "Speeds it up",
-        "Adds mass"
+        "Nothing",
+        "Adds mass",
+        "Makes the turn smaller by one over the coefficient, as if the track were wider"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "It is a turn efficiency."
     }
   ]

@@ -6,24 +6,24 @@
       "stage": "pre",
       "question": "A test pins the response of a controller at one second to six decimal places. A harmless refactor halves the time step. What happens?",
       "options": [
-        "Nothing",
-        "The value moves in the fourth or fifth decimal place and the test fails, though nothing got worse",
+        "It is skipped",
         "The test improves",
-        "It is skipped"
+        "Nothing",
+        "The value moves in the fourth or fifth decimal place and the test fails, though nothing got worse"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "6 of 6 harmless changes broke the exact test."
     },
     {
       "stage": "check",
       "question": "Which numbers describe what a person asks of a step response?",
       "options": [
-        "Its length",
         "Overshoot, settling time and steady error, and whether it ran away",
+        "Its length",
         "Its mean",
         "Its first value"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A runaway is its own flag, since a value that is not a number fails every comparison quietly."
     },
     {
@@ -31,9 +31,9 @@
       "question": "Against the specification, how many harmless changes passed and how many bugs were caught?",
       "options": [
         "6 and 5",
-        "3 and 5",
         "6 and 3",
-        "0 and 5"
+        "0 and 5",
+        "3 and 5"
       ],
       "correct": 0,
       "explanation": "All six harmless changes passed and all five bugs were caught."
@@ -42,24 +42,24 @@
       "stage": "check",
       "question": "The integral term is too strong. What does the behaviour test see?",
       "options": [
+        "Divergence",
         "Nothing",
-        "An overshoot of 33.56 percent, over the 10 percent allowed",
         "A steady error",
-        "Divergence"
+        "An overshoot of 33.56 percent, over the 10 percent allowed"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Gains that were too high gave 18.29 percent."
     },
     {
       "stage": "post",
       "question": "The settling time bound is cut to 1.8 s because the current design settles in 1.865 s. What does that do?",
       "options": [
-        "Makes the test stricter and better",
-        "Fails 4 of 6 harmless changes: a bound copied from the last run is the pinned value again",
+        "Passes everything",
         "Nothing",
-        "Passes everything"
+        "Fails 4 of 6 harmless changes: a bound copied from the last run is the pinned value again",
+        "Makes the test stricter and better"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The requirement was 3 seconds."
     },
     {

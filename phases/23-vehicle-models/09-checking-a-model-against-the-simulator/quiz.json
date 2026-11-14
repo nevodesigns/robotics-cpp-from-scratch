@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "What is the first thing to do when a model and a simulator disagree?",
       "options": [
-        "Fit the model",
-        "Find which of the two the disagreement is a measurement of",
         "Change the simulator",
-        "Ignore it"
+        "Find which of the two the disagreement is a measurement of",
+        "Ignore it",
+        "Fit the model"
       ],
       "correct": 1,
       "explanation": "Do not fit before you know there is something to fit."
@@ -19,21 +19,21 @@
       "question": "A model fitted to another model of efficiency 0.8 found:",
       "options": [
         "0.5",
-        "0.80",
+        "0",
         "1.1",
-        "0"
+        "0.80"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A fit finds a parameter that is there."
     },
     {
       "stage": "check",
       "question": "A backend whose turn is short after a drive made turn ratios of:",
       "options": [
-        "1, 1, 1",
+        "2, 2, 2",
         "0.97, 0.68, 0.68",
-        "0, 0, 0",
-        "2, 2, 2"
+        "1, 1, 1",
+        "0, 0, 0"
       ],
       "correct": 1,
       "explanation": "Different in different contexts."
@@ -42,24 +42,24 @@
       "stage": "check",
       "question": "Why can no efficiency fit a context dependent backend?",
       "options": [
-        "It can",
         "The efficiency is one number and the behaviour depends on what came before",
-        "The grid is coarse",
-        "Rounding"
+        "Rounding",
+        "It can",
+        "The grid is coarse"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The worst gap stayed at 0.013 m."
     },
     {
       "stage": "post",
       "question": "Why was scrubbing wheels the wrong explanation for the short turn in Gazebo?",
       "options": [
+        "Gazebo has no friction",
         "It was right",
         "Scrubbing would have shortened the turn from rest too, and changing the friction changed nothing",
-        "Wheels cannot scrub",
-        "Gazebo has no friction"
+        "Wheels cannot scrub"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "An explanation must predict more than the symptom."
     },
     {
@@ -67,11 +67,11 @@
       "question": "What was the cause?",
       "options": [
         "Friction",
+        "The battery",
         "The weight over the axle: the robot rocked on two wheels and a caster",
-        "The motors",
-        "The battery"
+        "The motors"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Balance depended on whether it had driven."
     }
   ]

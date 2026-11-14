@@ -6,22 +6,22 @@
       "stage": "pre",
       "question": "A pose is read by 8 threads and written by 1. It is behind a mutex. What happens to the total read rate as readers are added, measured?",
       "options": [
-        "It rises with the number of readers",
-        "It falls: 8 readers got about a fifth of what one reader did, because every read takes the same lock",
+        "It doubles every time",
         "It stays the same",
-        "It doubles every time"
+        "It falls: 8 readers got about a fifth of what one reader did, because every read takes the same lock",
+        "It rises with the number of readers"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Measured 40774, 10093 and 8503 reads per millisecond at 1, 4 and 8 readers. A mutex serialises readers and moves its cache line between cores on every acquisition."
     },
     {
       "stage": "check",
       "question": "shared_mutex allows many readers at once. With 8 readers, how many writes did the writer manage, out of about 14,000 wanted?",
       "options": [
-        "About 14,000, since the writer is unaffected",
-        "92, and 71 in a second run: readers kept arriving before the last left, so the writer never got in",
         "About 7,000",
-        "Zero, always"
+        "92, and 71 in a second run: readers kept arriving before the last left, so the writer never got in",
+        "Zero, always",
+        "About 14,000, since the writer is unaffected"
       ],
       "correct": 1,
       "explanation": "It was also slower for readers than the plain mutex it replaced. The standard does not say whether a writer is preferred, so code must not depend on either. Count what the writer completes, not only what the readers do."
@@ -30,22 +30,22 @@
       "stage": "check",
       "question": "A reader's data copy overlaps a write. How does a seqlock reader know to throw the copy away?",
       "options": [
-        "It locks the writer out",
         "It reads the counter before and after: odd means a write is in progress, and a different value afterwards means one landed, so it retries",
         "It checks a checksum",
+        "It locks the writer out",
         "It compares the value with the last one"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Forced on one thread in the suite: a write landed between the data read and the second counter read, the reader retried once, and returned the new value whole."
     },
     {
       "stage": "check",
       "question": "The seqlock copied its data with memcpy produced 0 torn reads in 200000 writes. Why is it still wrong?",
       "options": [
-        "It is not wrong; it never failed",
+        "It leaks memory",
         "Reading memory another thread may be writing, without atomics, is a data race in C++ whatever the hardware does, and clang 14's thread sanitizer reported 20 in 5 runs",
-        "memcpy is slow",
-        "It leaks memory"
+        "It is not wrong; it never failed",
+        "memcpy is slow"
       ],
       "correct": 1,
       "explanation": "GCC 11's sanitizer reported nothing on the same code. A real race that works, which one tool finds and the other misses. The fix is the data held as atomic words with relaxed accesses between the fences."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "With the writer in a tight loop and no pause, 3 readers got 21,117 reads and 501,504 retries. What does that say about where a seqlock fits?",
       "options": [
-        "Nothing, it is a one-off",
-        "Readers starve against a value rewritten continuously, about 24 retries per read, so it suits a value that changes in bursts, not one rewritten as fast as possible",
+        "Retries are free",
         "It is broken",
-        "Retries are free"
+        "Nothing, it is a one-off",
+        "Readers starve against a value rewritten continuously, about 24 retries per read, so it suits a value that changes in bursts, not one rewritten as fast as possible"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Spaced writes, 20 microseconds apart, cost a few retries each. The number to watch in production is retries() against reads."
     },
     {
       "stage": "post",
       "question": "A Seqlock<std::string> is refused at compile time. Why?",
       "options": [
-        "Strings are too big",
-        "The reader copies raw bytes while a writer may be changing them; a string's bytes are a pointer to memory the writer could free, so a copy taken mid-write could be dereferenced before it is discarded. The type must be trivially copyable",
         "std::string has no default constructor",
-        "The compiler cannot hash a string"
+        "The compiler cannot hash a string",
+        "Strings are too big",
+        "The reader copies raw bytes while a writer may be changing them; a string's bytes are a pointer to memory the writer could free, so a copy taken mid-write could be dereferenced before it is discarded. The type must be trivially copyable"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A static_assert on std::is_trivially_copyable, proved by checks/. A refusal at compile time, where a run-time crash would have been the alternative."
     }
   ]

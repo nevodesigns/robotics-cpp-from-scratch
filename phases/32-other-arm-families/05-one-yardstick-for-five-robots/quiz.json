@@ -6,10 +6,10 @@
       "stage": "pre",
       "question": "Why ask every robot the same question?",
       "options": [
-        "It is faster",
+        "To hide differences",
         "Their reaches are described in different terms and cannot be compared otherwise",
-        "It is required",
-        "To hide differences"
+        "It is faster",
+        "It is required"
       ],
       "correct": 1,
       "explanation": "Can you put the tool here, level?"
@@ -18,12 +18,12 @@
       "stage": "check",
       "question": "How was the volume found?",
       "options": [
-        "By a formula",
-        "By asking the question at random points and counting the yes answers",
+        "By a table",
         "By measuring",
-        "By a table"
+        "By asking the question at random points and counting the yes answers",
+        "By a formula"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "40000 points."
     },
     {
@@ -44,8 +44,8 @@
       "options": [
         "0.07",
         "0.98",
-        "1",
-        "0"
+        "0",
+        "1"
       ],
       "correct": 0,
       "explanation": "Its base and legs are large for a small stroke."
@@ -54,12 +54,12 @@
       "stage": "post",
       "question": "Does the largest volume make the best robot?",
       "options": [
-        "Yes",
         "No: volume leaves out speed, payload, stiffness, accuracy and the shape of the work",
-        "Always",
-        "Only for arms"
+        "Only for arms",
+        "Yes",
+        "Always"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The task chooses."
     },
     {
@@ -67,11 +67,11 @@
       "question": "Why is the standard error of use?",
       "options": [
         "It is not",
-        "It says how many points the estimate needs and is the square root of n small",
         "It is decoration",
-        "It speeds the sampling"
+        "It speeds the sampling",
+        "It says how many points the estimate needs and is the square root of n small"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Sixteen times the points, a quarter of the error."
     }
   ]

@@ -7,33 +7,33 @@
       "question": "Which line of the day's report is the one a reader trusts it for?",
       "options": [
         "The totals",
-        "The last: the hazards with no scenario, which says what nobody has shown, where a report ending on the good news is a report of a good day",
         "The version",
+        "The last: the hazards with no scenario, which says what nobody has shown, where a report ending on the good news is a report of a good day",
         "The black box"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "G3, G5, G6 and G7 are open."
     },
     {
       "stage": "check",
       "question": "The unsafe rover had the better day by one measure. Which, and what were the others?",
       "options": [
-        "Speed: it was faster",
-        "Deliveries, 5 of 5 against 3, with 288 bumps, no stops where two were needed and no resets",
         "Battery",
-        "Bumps"
+        "Bumps",
+        "Speed: it was faster",
+        "Deliveries, 5 of 5 against 3, with 288 bumps, no stops where two were needed and no resets"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "A robot is judged by deliveries until the first time somebody is hurt."
     },
     {
       "stage": "check",
       "question": "Why does the day have two operator resets?",
       "options": [
-        "The gate",
-        "Two jobs ended in a latched stop by the supervisor (link and sensors), and a latched stop needs a person",
         "The black box",
-        "A bug"
+        "Two jobs ended in a latched stop by the supervisor (link and sensors), and a latched stop needs a person",
+        "A bug",
+        "The gate"
       ],
       "correct": 1,
       "explanation": "Lesson 19-02."
@@ -44,8 +44,8 @@
       "options": [
         "A bad one",
         "The same as before: still on 1.4.2, 3 delivered, 2 stopped, 0 bumps",
-        "Idle",
-        "Unsafe"
+        "Unsafe",
+        "Idle"
       ],
       "correct": 1,
       "explanation": "A refused release is not a bad day."
@@ -54,24 +54,24 @@
       "stage": "post",
       "question": "What does 'chain verified' on the black box line tell a reader?",
       "options": [
+        "The log is long",
         "The robot is safe",
         "The log has not been edited between the robot and the report: a missing, reordered or altered event would be found",
-        "The log is long",
         "The time is right"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Lesson 19-12."
     },
     {
       "stage": "post",
       "question": "What can this report not claim?",
       "options": [
-        "How many jobs were delivered",
         "Reliability: it is one day of five jobs in one simulated building, and it can only show what the suite tries",
-        "The version",
-        "The causes of the stops"
+        "How many jobs were delivered",
+        "The causes of the stops",
+        "The version"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "A sample and not a measure."
     }
   ]

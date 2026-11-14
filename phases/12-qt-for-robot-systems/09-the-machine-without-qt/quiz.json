@@ -7,23 +7,23 @@
       "question": "A station runs on the machine it was built on and not on a robot. What is the likely cause?",
       "options": [
         "A bug in the code",
-        "Something it needed was found on the build machine and was not shipped",
+        "The network",
         "The compiler",
-        "The network"
+        "Something it needed was found on the build machine and was not shipped"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The check reports what is missing from the folder."
     },
     {
       "stage": "check",
       "question": "What does the pattern platforms/*offscreen* mean?",
       "options": [
-        "Any folder",
         "A file in the platforms folder whose name has offscreen in it, on any system",
-        "A path from the root",
-        "A directory"
+        "Any folder",
+        "A directory",
+        "A path from the root"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "It matched libqoffscreen.so and qoffscreen.dll."
     },
     {
@@ -31,33 +31,33 @@
       "question": "A folder is missing two things. In what order are they reported?",
       "options": [
         "Alphabetical",
+        "The order on disk",
         "The order the patterns were asked for",
-        "Random",
-        "The order on disk"
+        "Random"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "*Qt6Core* came before platforms/*offscreen*."
     },
     {
       "stage": "check",
       "question": "A qt.conf says Prefix=/home/builder/Qt/6.2/gcc_64. Why is that a problem on a robot?",
       "options": [
-        "Qt forbids it",
-        "That path exists only on the builder, so Qt looks in a place that is not there",
+        "It is relative",
         "It is too long",
-        "It is relative"
+        "That path exists only on the builder, so Qt looks in a place that is not there",
+        "Qt forbids it"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "It was reported as a stray path."
     },
     {
       "stage": "post",
       "question": "Why does the check have to be run on a machine like the target?",
       "options": [
-        "It is faster",
+        "Windows needs it",
         "On the build machine every path exists, so no path looks stray",
-        "Qt requires it",
-        "Windows needs it"
+        "It is faster",
+        "Qt requires it"
       ],
       "correct": 1,
       "explanation": "The lesson says so under what it does not do."
@@ -66,10 +66,10 @@
       "stage": "post",
       "question": "A plugin is found in the folder. Does that mean it loads?",
       "options": [
-        "Yes",
+        "Yes, if it is the right size",
         "No: a plugin built for another version of Qt is refused when Qt starts",
         "Only on Linux",
-        "Yes, if it is the right size"
+        "Yes"
       ],
       "correct": 1,
       "explanation": "The check looks at names and not versions."

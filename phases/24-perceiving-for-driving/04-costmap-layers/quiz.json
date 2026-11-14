@@ -6,48 +6,48 @@
       "stage": "pre",
       "question": "What question is a costmap built to answer?",
       "options": [
+        "How fast",
         "Where is the sensor",
         "May the centre of the vehicle be here?",
-        "What colour is it",
-        "How fast"
+        "What colour is it"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The vehicle's size is folded into the map by inflation."
     },
     {
       "stage": "check",
       "question": "A wall of 4 m at 0.05 m resolution was how many lethal cells?",
       "options": [
-        "4",
-        "81",
+        "1",
         "400",
-        "1"
+        "4",
+        "81"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Length over the cell size."
     },
     {
       "stage": "check",
       "question": "At 0.50 m from a post, with an inscribed radius of 0.25 m and a scale of 3, the cost was:",
       "options": [
-        "0",
-        "119",
         "253",
-        "254"
+        "254",
+        "0",
+        "119"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "252 exp(-3 times 0.25)."
     },
     {
       "stage": "check",
       "question": "The layer that only marks left how many ghost cells when the obstacle went?",
       "options": [
-        "0",
         "7",
         "100",
+        "0",
         "1"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Nothing ever cleared them."
     },
     {
@@ -55,20 +55,20 @@
       "question": "Why can the planner treat the vehicle as a point after inflation?",
       "options": [
         "It can't",
+        "Speed",
         "The inscribed radius already keeps the centre far enough from every obstacle",
-        "Points are small",
-        "Speed"
+        "Points are small"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The footprint is in the map."
     },
     {
       "stage": "post",
       "question": "Why was a gap of 0.40 m closed for a vehicle 0.50 m wide?",
       "options": [
-        "Noise",
-        "The inflation of both posts covers it, so no cell across it is below 253",
         "The posts moved",
+        "The inflation of both posts covers it, so no cell across it is below 253",
+        "Noise",
         "Bug"
       ],
       "correct": 1,

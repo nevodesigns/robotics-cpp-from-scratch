@@ -6,58 +6,58 @@
       "stage": "pre",
       "question": "Two sensors disagree. What does that prove?",
       "options": [
+        "Nothing",
         "Sensor A is wrong",
-        "That they are not both right: which one is wrong is not known, and a safe design does not need to know",
         "Sensor B is wrong",
-        "Nothing"
+        "That they are not both right: which one is wrong is not known, and a safe design does not need to know"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The check proves disagreement, not which."
     },
     {
       "stage": "check",
       "question": "A fault has latched and then the two channels agree again. What is the state?",
       "options": [
-        "ok",
         "Still faulted: it has shown that it can disagree, and only reset() clears it",
+        "ok",
         "suspect",
         "unknown"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The value is NaN."
     },
     {
       "stage": "check",
       "question": "With noise of 0.02 on each channel, how many false trips did a tolerance of 0.04 and no debounce give in 100000 healthy samples?",
       "options": [
-        "0",
-        "15797: 1.4 sigma of the difference is exceeded once in six samples",
         "10",
-        "500"
+        "500",
+        "15797: 1.4 sigma of the difference is exceeded once in six samples",
+        "0"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "A debounce of 3 gave 303."
     },
     {
       "stage": "check",
       "question": "What does a wider tolerance and a longer debounce cost?",
       "options": [
-        "Memory",
         "Detection time: from 3 samples to 29 in the drift test, and time is stopping distance",
         "Speed",
+        "Memory",
         "Nothing"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The trade-off has no general answer."
     },
     {
       "stage": "post",
       "question": "Both channels read 1.5 m when the truth is 3.0 m. What does the check say?",
       "options": [
-        "fault",
+        "unknown",
         "ok, value 1.5: a common cause failure is invisible to a check between two channels that share it",
         "suspect",
-        "unknown"
+        "fault"
       ],
       "correct": 1,
       "explanation": "Make the second sensor differ in how it measures, its power and its wiring."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "Why is a check that trips on noise dangerous to safety?",
       "options": [
+        "It latches",
         "It is slow",
         "The machine stops for no reason, and the check is switched off, which leaves the machine with none",
-        "It uses power",
-        "It latches"
+        "It uses power"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Most safety checks die of nuisance trips."
     }
   ]

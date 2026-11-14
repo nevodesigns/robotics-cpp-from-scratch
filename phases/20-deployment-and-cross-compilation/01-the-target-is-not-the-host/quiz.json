@@ -6,60 +6,60 @@
       "stage": "pre",
       "question": "What does the target triple x86_64-w64-mingw32 name?",
       "options": [
+        "A library",
         "A compiler",
         "A target: architecture, vendor and system, with the system last since the second part is not an operating system",
-        "A library",
         "A board"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Three shapes of triple are accepted."
     },
     {
       "stage": "check",
       "question": "What is odd about long on 64 bit Windows?",
       "options": [
-        "Nothing",
-        "It is 32 bits, where it is 64 on 64 bit Linux, so code that uses long for a 64 bit value breaks only there",
+        "It is signed",
         "It is 128 bits",
-        "It is signed"
+        "Nothing",
+        "It is 32 bits, where it is 64 on 64 bit Linux, so code that uses long for a 64 bit value breaks only there"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "The two Windows rows."
     },
     {
       "stage": "check",
       "question": "The same struct was 40 bytes on x86_64, 32 on 32 bit ARM and 28 on i686. Why is i686 smaller than ARM?",
       "options": [
-        "A bug",
-        "32 bit x86 aligns an eight byte field to 4, and 32 bit ARM to 8",
         "It has fewer registers",
-        "Smaller pointers only"
+        "A bug",
+        "Smaller pointers only",
+        "32 bit x86 aligns an eight byte field to 4, and 32 bit ARM to 8"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Alignment is part of the ABI."
     },
     {
       "stage": "check",
       "question": "{ char, int64 } holds only fixed width types. Why is it not safe to send as it is?",
       "options": [
-        "It is",
         "It is 16 bytes on the 64 bit targets and 12 on 32 bit x86, because of the int64's alignment",
+        "It is too small",
         "The char is signed",
-        "It is too small"
+        "It is"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Write each field out in a defined order and width."
     },
     {
       "stage": "post",
       "question": "What should the parser do with a triple it cannot read?",
       "options": [
+        "Use the host",
         "Guess the closest",
         "Be invalid with no word sizes: a reader that guesses builds for the wrong machine without a word",
-        "Use the host",
         "Throw"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Nine malformed triples were all invalid."
     },
     {
@@ -68,8 +68,8 @@
       "options": [
         "Trust the model",
         "A static_assert on sizeof in the header, compiled by the cross compiler, since the model here was never run on that machine",
-        "Print it",
-        "Ask a colleague"
+        "Ask a colleague",
+        "Print it"
       ],
       "correct": 1,
       "explanation": "The numbers for ARM and i686 are the rules applied, not measured."

@@ -6,46 +6,46 @@
       "stage": "pre",
       "question": "What does the follower need that the leader does not give?",
       "options": [
+        "A map",
         "A target",
-        "A limit on what it may do",
         "A camera",
-        "A map"
+        "A limit on what it may do"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Never more than it safely can."
     },
     {
       "stage": "check",
       "question": "A jump of 1.0 rad in the leader was followed in:",
       "options": [
-        "One tick",
-        "0.48 s at the speed limit",
+        "0 s",
         "Never",
-        "0 s"
+        "One tick",
+        "0.48 s at the speed limit"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "At no more than 2.0 rad/s."
     },
     {
       "stage": "check",
       "question": "Which tracked the leader best?",
       "options": [
-        "20 Hz messages",
-        "100 Hz with no delay (0.059 rad)",
         "100 ms of delay",
-        "None"
+        "None",
+        "100 Hz with no delay (0.059 rad)",
+        "20 Hz messages"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Both rate and delay add to the error."
     },
     {
       "stage": "check",
       "question": "With the link lost, the follower with a watchdog:",
       "options": [
-        "Went on 0.398 rad",
+        "Reset",
         "Moved 0.000 rad more: it held",
         "Sped up",
-        "Reset"
+        "Went on 0.398 rad"
       ],
       "correct": 1,
       "explanation": "It holds."
@@ -56,8 +56,8 @@
       "options": [
         "Noise",
         "A constant offset between leader and follower",
-        "A delay",
-        "A faster follower"
+        "A faster follower",
+        "A delay"
       ],
       "correct": 1,
       "explanation": "Calibrate the pair in a pose."
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What protects a follower led into the table?",
       "options": [
-        "The leader",
         "Contact detection and the motor limits, not this lesson's follower",
-        "Nothing is needed",
-        "The map"
+        "The leader",
+        "The map",
+        "Nothing is needed"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "There is no collision check in the loop."
     }
   ]
