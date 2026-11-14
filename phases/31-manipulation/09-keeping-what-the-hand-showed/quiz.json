@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why resample an episode?",
       "options": [
-        "To save space",
+        "To make the episode shorter",
         "Messages do not arrive at a steady rate and what uses them wants equal steps",
-        "For colour",
-        "To change it"
+        "To remove the noise of the joints",
+        "To line the leader up with the follower"
       ],
       "correct": 1,
-      "explanation": "Linear interpolation onto a grid."
+      "explanation": "A nominal 30 Hz arrived with gaps of up to 0.039 s. Interpolating onto an even grid gives whatever replays or learns from it equal steps."
     },
     {
       "stage": "check",
       "question": "Trimming the idle ends of the episode left:",
       "options": [
-        "0 s",
-        "1 s",
+        "3.0 s, exactly the reach",
+        "5.0 s, nothing: the ends were kept",
         "2.8 s",
-        "5.0 s"
+        "1.0 s"
       ],
       "correct": 2,
-      "explanation": "The reaching."
+      "explanation": "A little under the three seconds of the reach, because the slow first and last moments of a smooth move are under the speed threshold."
     },
     {
       "stage": "check",
       "question": "The follower lagged the leader by how much, as found?",
       "options": [
-        "0 ms",
-        "1 s",
-        "100 s",
+        "39 ms, the longest gap",
+        "50 ms, one time constant",
+        "0 ms: they were already in step",
         "100 ms"
       ],
       "correct": 3,
-      "explanation": "True value 100 ms."
+      "explanation": "Sliding the follower's joint back until it best matches the leader's gave the true 100 ms, to within a sample."
     },
     {
       "stage": "check",
       "question": "An episode that lost 20 frames in a row was:",
       "options": [
-        "Kept",
-        "Trimmed",
-        "Resampled and kept",
+        "Kept, after interpolating across the gap",
+        "Kept, with the gap trimmed out",
+        "Refused for being too short",
         "Refused: its longest gap was 0.70 s"
       ],
       "correct": 3,
-      "explanation": "The good one was kept."
+      "explanation": "Twenty lost frames left 0.70 s with no data, and whatever happened in it would be a guess."
     },
     {
       "stage": "post",
       "question": "Why trim the idle ends?",
       "options": [
         "They teach doing nothing, which is not the task",
-        "They are long",
-        "They are noisy",
-        "To save space only"
+        "They hold the largest gaps",
+        "The follower lags most there",
+        "They make the delay harder to find"
       ],
       "correct": 0,
-      "explanation": "The task is the motion."
+      "explanation": "A learner copies what it is shown. Seconds of standing still at each end show it that standing still is part of the job."
     },
     {
       "stage": "post",
       "question": "What does the check not say?",
       "options": [
-        "The idle share",
-        "The duration",
+        "Whether frames were dropped",
+        "How long the episode lasted",
         "Whether the demonstration was a good way to do the task",
-        "The longest gap"
+        "How much of it was spent idle"
       ],
       "correct": 2,
-      "explanation": "A clumsy one that succeeded passes."
+      "explanation": "The check is about the recording. Whether the person did the task well is not something a gap or a duration can say."
     }
   ]
 }

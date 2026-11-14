@@ -6,25 +6,25 @@
       "stage": "pre",
       "question": "Why does a robot at rest need a protective distance?",
       "options": [
-        "It does not",
-        "Noise",
+        "Its brakes may fail and let it move",
+        "The sensor cannot tell a robot at rest from one moving",
         "The person is moving, and keeps moving while the system reacts",
-        "Gravity"
+        "It does not: the distance is zero when the robot's speed is zero"
       ],
       "correct": 2,
-      "explanation": "0.33 m at rest."
+      "explanation": "The person walks at 1.6 m/s through the reaction time, and the intrusion and uncertainty are added whatever the robot is doing: 0.33 m with the robot at rest."
     },
     {
       "stage": "check",
       "question": "What must be added to the robot's stopping distance?",
       "options": [
-        "The colour",
-        "The weight",
-        "Nothing",
+        "Only a fixed margin for the sensor's error",
+        "The length of the robot's arm",
+        "The distance the person can reach in one second",
         "The person's travel in the reaction and stopping time, and the robot's own travel before braking"
       ],
       "correct": 3,
-      "explanation": "Those are the terms."
+      "explanation": "The person keeps walking through the reaction and the braking, and the robot keeps its speed until the brakes begin. Then the intrusion and uncertainty terms go on top."
     },
     {
       "stage": "check",
@@ -32,47 +32,47 @@
       "options": [
         "2.49 m/s",
         "1.23 m/s",
-        "Not limited",
-        "0"
+        "0.85 m/s",
+        "1.6 m/s, the person's walking speed"
       ],
       "correct": 1,
-      "explanation": "At 2.0 m it was 2.49 m/s."
+      "explanation": "The speed at which the protective distance equals the separation. At 2.0 m it was 2.49 m/s; a robot at 1.0 m/s needed 0.85 m."
     },
     {
       "stage": "check",
       "question": "A robot designed as if people stood still came to rest at:",
       "options": [
         "-0.31 m, they met",
-        "10 m",
-        "-0.09 m",
-        "0.17 m"
+        "0.17 m, the margin it was meant to keep",
+        "-0.09 m: they met, a little later",
+        "0.33 m, as for a robot at rest"
       ],
       "correct": 0,
-      "explanation": "Negative separation."
+      "explanation": "Leaving out the person's travel is the largest omission. Leaving out the reaction time gave -0.09 m, also a meeting."
     },
     {
       "stage": "post",
       "question": "Is this lesson a safety function?",
       "options": [
         "No: a model of the idea; real ones are validated against the standards",
-        "Yes",
-        "It replaces the standard",
-        "Almost"
+        "Yes, once its tests pass",
+        "Yes, for the typical numbers it uses",
+        "Nearly: it only lacks a second sensor"
       ],
       "correct": 0,
-      "explanation": "Typical numbers, not certified."
+      "explanation": "It shows where each term of the formula comes from, with typical numbers. A real safety function is validated against the standard on the real cell."
     },
     {
       "stage": "post",
       "question": "What is a different method in the same standard?",
       "options": [
-        "Speed control",
-        "Colour coding",
-        "None",
+        "Running the robot only when the cell is empty",
+        "A fixed fence at the protective distance",
+        "Slowing the person down with a gate",
         "Power and force limiting"
       ],
       "correct": 3,
-      "explanation": "Contact below limits for each part of the body."
+      "explanation": "Speed and separation monitoring keeps the robot from reaching the person. Power and force limiting allows contact and keeps it below limits for each part of the body."
     }
   ]
 }

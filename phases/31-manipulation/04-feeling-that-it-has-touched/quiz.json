@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What is the residual?",
       "options": [
-        "The motor's current",
+        "The torque left when the arm has stopped",
         "The torque measured less the torque the model says free motion needs",
-        "The error in position",
-        "The noise"
+        "The filtered current of the motor",
+        "The difference between two joints' torques"
       ],
       "correct": 1,
-      "explanation": "Zero in free motion, the contact's torque when it touches."
+      "explanation": "The model says what torque the motion should need. Whatever is measured beyond that is either the model's error or something pushing on the arm."
     },
     {
       "stage": "check",
       "question": "A threshold of 0.05 N m gave how many false alarms with gravity 5 percent out?",
       "options": [
-        "Not known",
         "0",
-        "Exactly 1",
+        "5, one for each percent",
+        "One every tick",
         "1"
       ],
       "correct": 3,
-      "explanation": "Below the model's error."
+      "explanation": "The model's own error was larger than 0.05 N m, so contact was declared before the wall. A threshold of 0.8 N m gave none."
     },
     {
       "stage": "check",
       "question": "Which approach was a harder hit?",
       "options": [
-        "Neither",
-        "Both the same",
+        "0.2 rad/s, because it took longer to detect",
+        "Both the same, since the wall is the same",
         "0.6 rad/s",
-        "0.2 rad/s"
+        "Neither: both were detected before any torque built up"
       ],
       "correct": 2,
-      "explanation": "5.20 N m by the time it stopped."
+      "explanation": "At 0.6 rad/s the contact was found sooner, in 10 ms, but the arm was moving faster and the wall's torque reached 5.20 N m before it stopped."
     },
     {
       "stage": "check",
       "question": "Why is the detection delayed?",
       "options": [
-        "The motor is slow",
-        "It is not",
+        "The wall takes time to push back",
+        "The controller runs slower near a wall",
         "The residual is filtered and has to stay over the threshold for a count",
-        "The wall is slow"
+        "The joint's encoder lags the motor"
       ],
       "correct": 2,
-      "explanation": "Both are for noise."
+      "explanation": "A filter smooths the residual and a count of ticks keeps one bad reading from being believed. Each adds a little delay."
     },
     {
       "stage": "post",
       "question": "What does the count of ticks protect against?",
       "options": [
         "One noisy tick being taken as contact",
-        "Gravity",
-        "The wall",
-        "A slow motor"
+        "A model whose gravity term is wrong",
+        "A wall that is softer than expected",
+        "An approach that is too fast"
       ],
       "correct": 0,
-      "explanation": "Noise."
+      "explanation": "A model error is steady and is dealt with by the threshold. A single spike is over by the next tick, so it never reaches the count."
     },
     {
       "stage": "post",
       "question": "What is not covered?",
       "options": [
-        "The filter",
-        "The threshold",
-        "The residual",
+        "How fast the arm may approach",
+        "How large the threshold must be",
+        "How long detection takes",
         "The force at the tip from all the joints"
       ],
       "correct": 3,
-      "explanation": "That goes through the Jacobian."
+      "explanation": "This is one joint and its torque. Where on the arm the contact is, and with what force, needs every joint and the Jacobian."
     }
   ]
 }

@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What is a cycle time made of?",
       "options": [
-        "The hand alone",
+        "The carry between pick and place, and nothing else",
         "The moves and the waits, added up",
-        "The camera",
-        "The arm's speed alone"
+        "The arm's rated speed divided into the distance",
+        "The hand's closing time, twice"
       ],
       "correct": 1,
-      "explanation": "A sum of pieces."
+      "explanation": "Six moves and four waits. At the rated speed they came to 3.68 s, which is 977 parts an hour."
     },
     {
       "stage": "check",
       "question": "At half the speed the cycle took:",
       "options": [
         "5.70 s against 3.68 s, less than twice",
-        "Twice as long",
-        "The same",
-        "Half as long"
+        "7.36 s, exactly twice",
+        "3.68 s, the same, since the waits dominate",
+        "10.13 s"
       ],
       "correct": 0,
-      "explanation": "The hand and the contact approach do not stretch."
+      "explanation": "The hand's 0.8 s and the 1.07 s of approaches at contact speed do not change with the override, so only the rest of the cycle doubled."
     },
     {
       "stage": "check",
       "question": "What did a target of 2.95 s give?",
       "options": [
-        "An override of 1",
+        "An override of 1.25",
         "-1: refused, the rated speed is too slow",
-        "0.5",
-        "Any value"
+        "An override of 0.576",
+        "The rated cycle of 3.68 s, with a warning"
       ],
       "correct": 1,
-      "explanation": "Change the cell."
+      "explanation": "No override reaches a cycle shorter than the rated 3.68 s. The answer is minus one, and the cell has to change."
     },
     {
       "stage": "check",
       "question": "A person 1.0 m away made the cycle:",
       "options": [
-        "3.68 s",
-        "Stopped",
+        "3.68 s, unchanged",
+        "5.70 s, as at half speed",
         "3.77 s",
-        "3.68 s"
+        "Minus one: the robot stopped"
       ],
       "correct": 2,
-      "explanation": "The speed cap of 31-06."
+      "explanation": "At 1.0 m the tool was capped at 1.23 m/s, which lengthened only the fast moves. At 2.0 m the cap of 2.49 m/s made no difference."
     },
     {
       "stage": "post",
       "question": "Why is the override found by bisection?",
       "options": [
-        "It is faster",
-        "It is the only way",
-        "It is not",
+        "The cycle rises and falls as k rises",
+        "A formula would need the arm's dynamics",
+        "Bisection gives the exact answer in one step",
         "The contact speed does not scale, so the cycle is not a simple function of k"
       ],
       "correct": 3,
-      "explanation": "The cycle falls as k rises."
+      "explanation": "The cycle always falls as k rises, so halving an interval finds the k for a target. There is no neat formula because part of the cycle ignores k."
     },
     {
       "stage": "post",
       "question": "Where is a cycle's time often spent?",
       "options": [
-        "Nowhere",
-        "In the camera",
-        "Only in the carry",
+        "Almost all in the carry, the longest move",
+        "Equally in each of the six moves",
+        "In the two lifts, which fight gravity",
         "Often in the parts that do not depend on the arm's speed"
       ],
       "correct": 3,
-      "explanation": "The hand and the contact approaches."
+      "explanation": "Of 3.68 s, 0.8 s is the hand and 1.07 s the slow approaches. A faster arm shortens only what is left."
     }
   ]
 }

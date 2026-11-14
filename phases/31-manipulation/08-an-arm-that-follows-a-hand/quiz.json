@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What does the follower need that the leader does not give?",
       "options": [
-        "A map",
-        "A target",
-        "A camera",
+        "A model of the leader's dynamics",
+        "A faster link than the leader's",
+        "A copy of the leader's joint limits",
         "A limit on what it may do"
       ],
       "correct": 3,
-      "explanation": "Never more than it safely can."
+      "explanation": "The leader reports whatever the person does, including a slip. The follower has its own limits and a speed it must not exceed."
     },
     {
       "stage": "check",
       "question": "A jump of 1.0 rad in the leader was followed in:",
       "options": [
-        "0 s",
-        "Never",
-        "One tick",
+        "One tick, as a jump",
+        "0.05 s, one time constant",
+        "2.0 s",
         "0.48 s at the speed limit"
       ],
       "correct": 3,
-      "explanation": "At no more than 2.0 rad/s."
+      "explanation": "The follower's speed is clamped at 2.0 rad/s, so a radian takes about half a second however suddenly it was asked."
     },
     {
       "stage": "check",
       "question": "Which tracked the leader best?",
       "options": [
-        "100 ms of delay",
-        "None",
+        "100 Hz with 100 ms of delay (0.168 rad)",
+        "20 Hz with no delay (0.081 rad)",
         "100 Hz with no delay (0.059 rad)",
-        "20 Hz messages"
+        "All three tracked the same"
       ],
       "correct": 2,
-      "explanation": "Both rate and delay add to the error."
+      "explanation": "A slower rate holds the target between messages, and a delay shifts everything late. Both added to the 0.059 rad of the best case."
     },
     {
       "stage": "check",
       "question": "With the link lost, the follower with a watchdog:",
       "options": [
-        "Reset",
+        "Went on 0.398 rad toward the last message",
         "Moved 0.000 rad more: it held",
-        "Sped up",
-        "Went on 0.398 rad"
+        "Returned to its zero",
+        "Went limp"
       ],
       "correct": 1,
-      "explanation": "It holds."
+      "explanation": "After the timeout it stays where it is. The one without a watchdog went 0.398 rad on, toward where the leader had been."
     },
     {
       "stage": "post",
       "question": "What does a wrong zero give?",
       "options": [
-        "Noise",
+        "An error that grows with the leader's speed",
         "A constant offset between leader and follower",
-        "A faster follower",
-        "A delay"
+        "A follower that moves the opposite way",
+        "A scale that is wrong by the same factor"
       ],
       "correct": 1,
-      "explanation": "Calibrate the pair in a pose."
+      "explanation": "The zero is subtracted from every reading, so an error in it is the same at every pose. Putting both arms in one known pose finds it."
     },
     {
       "stage": "post",
       "question": "What protects a follower led into the table?",
       "options": [
         "Contact detection and the motor limits, not this lesson's follower",
-        "The leader",
-        "The map",
-        "Nothing is needed"
+        "The speed limit of the follower",
+        "The watchdog on the link",
+        "The zeros calibrated for the pair"
       ],
       "correct": 0,
-      "explanation": "There is no collision check in the loop."
+      "explanation": "The follower goes where it is led. Nothing in this loop knows where the table is, so other layers have to stop it."
     }
   ]
 }

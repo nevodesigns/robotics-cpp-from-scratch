@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why is a pick a state machine and not a script?",
       "options": [
-        "Scripts are slow",
+        "A script cannot be tested without a robot",
         "Each step can fail and the next step depends on whether it did",
-        "Robots need it",
-        "It is shorter"
+        "A state machine runs faster on a controller",
+        "The steps happen in a different order each time"
       ],
       "correct": 1,
-      "explanation": "A check after each step."
+      "explanation": "A script goes on to the next line whatever happened. After closing, the hand may hold the part, nothing, or the wrong thing, and what to do next differs."
     },
     {
       "stage": "check",
       "question": "A hand closed on nothing has a gap:",
       "options": [
-        "Unknown",
-        "Fully open",
+        "The same as the part's width",
+        "Half the part's width",
         "Near zero",
-        "Near the part's width"
+        "Whatever it was before it closed"
       ],
       "correct": 2,
-      "explanation": "That is how a miss is seen."
+      "explanation": "With nothing between them the fingers meet. A gap of the part's width, within a tolerance, is what says the grasp worked."
     },
     {
       "stage": "check",
       "question": "A hand that missed every time stopped in fault:",
       "options": [
         "1",
-        "0",
         "2",
-        "3"
+        "3",
+        "It did not stop: it went on trying"
       ],
       "correct": 0,
-      "explanation": "After 3 tries."
+      "explanation": "Three tries are allowed, and then the machine stops in fault 1, no part. Fault 2 is a dropped part and fault 3 a move that took too long."
     },
     {
       "stage": "check",
       "question": "A part that fell on the way was noticed:",
       "options": [
-        "By the camera",
-        "At the end",
-        "Never",
+        "When the hand opened at the place",
+        "After the time limit of the transit ran out",
+        "Only if it fell during the lift",
         "At once, from the gap"
       ],
       "correct": 3,
-      "explanation": "The gap is watched while carrying."
+      "explanation": "The gap is checked at every tick while the part is carried. The moment it closes to nothing the machine stops in fault 2."
     },
     {
       "stage": "post",
       "question": "Why does every state have a time limit?",
       "options": [
-        "To save power",
-        "For speed",
-        "It does not",
+        "So that the cycle time is the same every run",
+        "Because the hand overheats if held closed",
+        "To give the planner time to answer",
         "A move that never arrives would hold the machine for ever"
       ],
       "correct": 3,
-      "explanation": "Fault 3."
+      "explanation": "The machine waits for the arm to report that it has arrived. If that never comes, the limit is what ends the wait, in fault 3."
     },
     {
       "stage": "post",
       "question": "Does the machine know where the part is?",
       "options": [
-        "Yes",
-        "Always",
+        "Yes: it holds the part's position from the camera",
+        "Yes, once the first pick has succeeded",
         "No: a target is a number that a planner turns into a motion",
-        "Sometimes"
+        "Only while the hand is closed"
       ],
       "correct": 2,
-      "explanation": "It is a function from sensed to commanded."
+      "explanation": "It is given what was sensed and returns a target and a hand command. It holds no robot and no map, which is why a small test world is enough."
     }
   ]
 }

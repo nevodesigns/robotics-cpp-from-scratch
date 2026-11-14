@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What holds a thing between two fingers?",
       "options": [
-        "Glue",
-        "The thing's weight",
-        "The squeeze itself",
+        "The squeeze, which presses the thing against gravity",
+        "The fingers' stiffness, which wedges it in place",
+        "The shape of the pads, which hooks under it",
         "Friction at the pads, which the squeeze makes"
       ],
       "correct": 3,
-      "explanation": "Friction, mu times the squeeze at each pad."
+      "explanation": "The squeeze is horizontal and the weight is vertical, so the squeeze cannot carry the weight itself. What it does is make friction at each pad, up to mu times the squeeze."
     },
     {
       "stage": "check",
       "question": "A kilogram at rest needed what squeeze at a friction of 0.5?",
       "options": [
-        "235 N",
+        "4.9 N, since two pads share it",
         "9.81 N",
-        "1 N",
-        "14.81 N"
+        "19.6 N, the weight over the friction",
+        "235 N, the most the hand can give"
       ],
       "correct": 1,
-      "explanation": "The weight over two pads of friction."
+      "explanation": "Two pads give twice mu times the squeeze, and that must equal the weight: 9.81 N over 2 times 0.5 is 9.81 N."
     },
     {
       "stage": "check",
       "question": "Lifting it at 5 m/s2 needed:",
       "options": [
         "14.81 N",
-        "Nothing",
-        "The same",
-        "9.81 N"
+        "9.81 N, the same: friction does not depend on speed",
+        "19.6 N, twice as much",
+        "4.81 N, only the extra"
       ],
       "correct": 0,
-      "explanation": "The acceleration adds to the weight."
+      "explanation": "The hand has to supply the mass times g plus the acceleration. 1 kg times 14.81 m/s2 over 2 times 0.5 is 14.81 N."
     },
     {
       "stage": "check",
       "question": "Pads at half the friction hold:",
       "options": [
-        "The same",
-        "Twice as much",
+        "16.0 kg, the same, if the squeeze is doubled",
+        "4.0 kg against 16.0 kg",
         "8.0 kg against 16.0 kg",
-        "Nothing"
+        "12.0 kg against 16.0 kg"
       ],
       "correct": 2,
-      "explanation": "Half."
+      "explanation": "The heaviest mass is proportional to the friction. At full squeeze and a safety factor of 1.5 that was 16.0 kg, and 8.0 kg on wet or oily pads."
     },
     {
       "stage": "post",
       "question": "Why does a safety factor go on the force?",
       "options": [
         "Friction and the acceleration are not known exactly",
-        "It does not",
-        "To use the motor",
-        "For luck"
+        "The motor gives less force as it warms",
+        "The stroke is not known exactly",
+        "A larger force closes the hand sooner"
       ],
       "correct": 0,
-      "explanation": "A pad that is dirty is a smaller hand."
+      "explanation": "The formula is exact for numbers that are not. A dirty pad has less friction than the one written down, and the arm may accelerate harder than planned."
     },
     {
       "stage": "post",
       "question": "What is the closing time of a hand a part of?",
       "options": [
-        "The stroke",
-        "The friction",
+        "The safety factor",
+        "The heaviest mass it holds",
         "Every pick's cycle time",
-        "Nothing"
+        "The friction of the pads"
       ],
       "correct": 2,
-      "explanation": "Distance over the finger speed."
+      "explanation": "Closing takes the distance the fingers travel over their speed, and it is paid on every pick and again on every release."
     }
   ]
 }

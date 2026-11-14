@@ -7,72 +7,72 @@
       "question": "What does a depth camera give that a plain one does not?",
       "options": [
         "The distance along the optical axis, which turns a pixel into a point",
-        "Colour",
-        "Speed",
-        "A frame"
+        "A sharper picture, which makes the pixel more exact",
+        "The part's colour as well as its place",
+        "The camera's own position in the base frame"
       ],
       "correct": 0,
-      "explanation": "Depth makes a ray a point."
+      "explanation": "A pixel alone says only which direction the point is in. The depth says how far along that direction, which makes it one point."
     },
     {
       "stage": "check",
       "question": "A pixel 60 to the right at 0.5 m was how far to the side?",
       "options": [
-        "1 m",
-        "600 m",
+        "0.100 m",
+        "0.060 m",
         "0.050 m",
-        "0 m"
+        "0.005 m"
       ],
       "correct": 2,
-      "explanation": "(u - cx) z / fx."
+      "explanation": "The offset in pixels times the depth over the focal length: 60 times 0.5 over 600."
     },
     {
       "stage": "check",
       "question": "Why does the fit need points spread in three dimensions?",
       "options": [
-        "To be fast",
-        "It does not",
+        "The noise is larger for points that are close together",
+        "The camera's depth is only accurate off its axis",
         "In a plane the rotation about the normal is not determined",
-        "Cameras need it"
+        "With three points or fewer there is no rotation at all"
       ],
       "correct": 2,
-      "explanation": "A flat set gave no fit."
+      "explanation": "A flat set of points can be turned about its own normal and still fit. The fit notices and returns nothing."
     },
     {
       "stage": "check",
       "question": "More points (5 to 40) changed the translation error from:",
       "options": [
-        "Nothing",
+        "1.1 to 3.5 mm: more points, more noise",
         "3.5 to 1.1 mm",
-        "0 to 1 mm",
-        "1.1 to 3.5 mm"
+        "3.5 to 3.4 mm: hardly at all",
+        "2.0 to 0.25 mm, an eighth"
       ],
       "correct": 1,
-      "explanation": "Noise averages out."
+      "explanation": "Each point's 2 mm of noise is averaged over more of them. The rotation improved too, from 0.64 to 0.20 degrees."
     },
     {
       "stage": "post",
       "question": "A tilt of 1 degree at 0.6 m puts a part how far out?",
       "options": [
-        "1 m",
-        "0 mm",
-        "1 mm",
+        "1.0 mm",
+        "6.0 mm",
+        "105 mm",
         "10.5 mm"
       ],
       "correct": 3,
-      "explanation": "The angle times the distance."
+      "explanation": "One degree is 0.01745 rad, times 0.6 m. A millimetre of noise in a point is a millimetre; a degree in the rotation is ten."
     },
     {
       "stage": "post",
       "question": "What is not covered here?",
       "options": [
-        "Noise",
+        "The effect of a rotation error at the end of a reach",
         "A camera on the wrist, calibrated from motions",
-        "The fit",
-        "Back projection"
+        "Points that lie in a plane",
+        "Turning a pixel and a depth into a point"
       ],
       "correct": 1,
-      "explanation": "Eye in hand is A X = X B."
+      "explanation": "The camera here is fixed and looks at the arm. A camera carried on the wrist is found from pairs of motions, which is a different problem."
     }
   ]
 }

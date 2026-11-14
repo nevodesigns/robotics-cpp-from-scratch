@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "What gives the peg a sideways force on a chamfer?",
       "options": [
-        "The camera",
-        "The hole",
+        "The clearance between the peg and the hole",
+        "The stiffness of the hand",
         "The push down on a slope, less friction",
-        "Gravity"
+        "The peg's own weight"
       ],
       "correct": 2,
-      "explanation": "Push times (tan angle less mu)."
+      "explanation": "A push straight down onto a slope has a part along the slope. Friction takes some of it, and the rest moves the peg toward the hole."
     },
     {
       "stage": "check",
       "question": "A peg 2 mm off needed what push from a hand of 300 N/m?",
       "options": [
+        "5.6 N",
         "279 N",
-        "50 N",
         "0.8 N",
-        "0 N"
+        "50 N, all the hand had"
       ],
       "correct": 2,
-      "explanation": "k times the offset beyond the clearance over (tan less mu)."
+      "explanation": "The stiffness times the distance the peg has to move, over the tangent of the slope less the friction. The softer the hand, the less push."
     },
     {
       "stage": "check",
       "question": "The stiff hand (100000 N/m) at that offset:",
       "options": [
-        "Broke the peg",
-        "Missed",
-        "Got it in",
+        "Got it in, with 5.6 N",
+        "Got it in, with all of its 50 N",
+        "Missed the chamfer and landed on the flat",
         "Jammed"
       ],
       "correct": 3,
-      "explanation": "It needed 279 N against 50 N."
+      "explanation": "It would have needed 279 N to be pushed 2 mm sideways and had 50. The peg sat on the slope and went nowhere."
     },
     {
       "stage": "check",
       "question": "At a friction of 1.2 on a 45 degree chamfer can the peg slide?",
       "options": [
         "No, whatever the push",
-        "Only fast",
-        "Yes",
-        "Only softly"
+        "Yes, if the hand is soft enough",
+        "Yes, with a push of more than 279 N",
+        "Only if the peg lands near the bottom of the chamfer"
       ],
       "correct": 0,
-      "explanation": "tan 45 degrees is 1."
+      "explanation": "The tangent of 45 degrees is 1, less than the friction of 1.2. The slope is inside the friction cone, and pushing harder only presses harder."
     },
     {
       "stage": "post",
       "question": "What helps a peg that cannot slide?",
       "options": [
-        "A stiffer hand",
+        "A softer hand",
         "A steeper chamfer or less friction",
-        "A faster approach",
-        "A bigger push"
+        "A larger clearance in the hole",
+        "A slower approach"
       ],
       "correct": 1,
-      "explanation": "Not more force."
+      "explanation": "The sideways force is the push times the tangent less the friction. When that is zero or less, only changing the angle or the friction makes it positive."
     },
     {
       "stage": "post",
       "question": "What is not in this model?",
       "options": [
         "The wedge: the peg touching at two points",
-        "The chamfer",
-        "The stiffness",
-        "The friction"
+        "The width of the chamfer",
+        "The sideways stiffness of the hand",
+        "The friction on the slope"
       ],
       "correct": 0,
-      "explanation": "The classic jam."
+      "explanation": "The model stops when the peg is over the hole. A peg part way in that tilts and touches at two points is a different failure."
     }
   ]
 }
