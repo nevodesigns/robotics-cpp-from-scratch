@@ -68,8 +68,10 @@ struct JointController {
 };
 
 struct RampResult {
-  double mean_error = 0.0;  // rad, the mean absolute error of the load once the ramp is under way
+  double mean_error = 0.0;  // rad, the mean absolute error of the load once the ramp is under way (after 2 s)
   double max_error = 0.0;
+  double start_peak = 0.0;    // rad, the largest error in the first 2 s, while the joint breaks away
+  double start_settle = 0.0;  // s, the last moment in the first 2 s at which the error was over 0.1 mrad
 };
 
 // Follows a ramp of the load's position at a speed for some seconds; the controller runs at 1 kHz, the plant at 10 kHz.
@@ -84,15 +86,18 @@ inline RampResult track_ramp(TwoMass s, JointController c, double speed, double 
     const double t = k * 1e-3;
     const double tau = c.torque(s, speed * t, speed, 1e-3);
     for (int i = 0; i < sub; ++i) s.step(tau, dt);
+    const double e = std::fabs(speed * (t + 1e-3) - s.thl);
+    if (!(e < 1e6)) {
+      out.mean_error = out.max_error = out.start_peak = 1e9;  // the run blew up
+      return out;
+    }
     if (t > 2.0) {
-      const double e = std::fabs(speed * (t + 1e-3) - s.thl);
-      if (!(e < 1e6)) {
-        out.mean_error = out.max_error = 1e9;  // the run blew up
-        return out;
-      }
       sum += e;
       ++count;
       out.max_error = std::fmax(out.max_error, e);
+    } else {
+      out.start_peak = std::fmax(out.start_peak, e);
+      if (e > 1e-4) out.start_settle = t + 1e-3;
     }
   }
   out.mean_error = count ? sum / count : 0.0;

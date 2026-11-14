@@ -23,6 +23,10 @@ static const Pin kPins[] = {
     {"f_fast", 0.055},
     {"err_plain", 1.3344237737174735e-12},
     {"err_ff", 1.3196612590084469e-14},
+    {"start_plain_mrad", 0.905862},
+    {"start_ff_mrad", 0.38208},
+    {"settle_plain", 0.318},
+    {"settle_ff", 0.06},
     {"play_true", 0.01},
     {"play_meas", 0.010162009124059498},
     {"pp_load", 0.0012716254598015286},
@@ -80,7 +84,7 @@ RC_TEST("friction rises to a peak at a low speed, dips as the joint slides, and 
   RC_CHECK(peak_v < 0.06);
 }
 
-RC_TEST("feeding the friction forward makes a slow ramp followed much more closely") {
+RC_TEST("feeding the friction forward helps where the joint breaks away, and makes no difference once the ramp is under way") {
   TwoMass s;
   s.half_gap = 0.0;
   JointController plain, ff;
@@ -89,8 +93,16 @@ RC_TEST("feeding the friction forward makes a slow ramp followed much more close
   const RampResult b = track_ramp(s, ff, 0.03, 8.0);
   rec("err_plain", a.mean_error, 5);
   rec("err_ff", b.mean_error, 5);
-  RC_CHECK(a.mean_error > 2.0 * b.mean_error);
-  RC_CHECK(b.mean_error < 0.003);
+  rec("start_plain_mrad", a.start_peak * 1000.0, 2);
+  rec("start_ff_mrad", b.start_peak * 1000.0, 2);
+  rec("settle_plain", a.start_settle, 2);
+  rec("settle_ff", b.start_settle, 2);
+  // once the ramp is under way the integral has found the friction and neither is off
+  RC_CHECK(a.mean_error < 1e-6 && b.mean_error < 1e-6);
+  // at the start the plain controller has to wind its integral up to the friction, and is further off for longer
+  RC_CHECK(a.start_peak > 2.0 * b.start_peak);
+  RC_CHECK(a.start_settle > 3.0 * b.start_settle);
+  RC_CHECK(b.start_peak < 0.001);
 }
 
 RC_TEST("the gap of a gear is found from how far the motor goes before the load moves") {

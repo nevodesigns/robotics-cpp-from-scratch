@@ -2,9 +2,9 @@
 //
 // Friction and play in a joint, from lesson 29-04.
 //
-// friction_torque is the torque with which a joint resists motion at a speed: a Coulomb part (the same at any speed, with its sign smoothed over a small speed so that it does not chatter at zero), a Stribeck part that is added at the lowest speeds and falls away as the speed rises (the static friction is bigger than the sliding), and a viscous part in proportion to the speed. TwoMass is a motor and a load joined by a gear with a gap: no torque passes while the motor is within the gap of the load, and beyond it a stiff spring and damper do, with the friction on the load. JointController is a position loop, a velocity loop with an integral term and, if asked, a feedforward of the friction torque for the velocity of the reference; it takes its velocity from the motor and its position from the motor's encoder or the load's. track_ramp follows a slow ramp and gives the error; hold keeps a target and gives how far the load moved over the last second and where it was; measure_play pushes the motor one way with a torque above the friction and finds how far it travelled before the load moved.
+// friction_torque is the torque with which a joint resists motion at a speed: a Coulomb part (the same at any speed, with its sign smoothed over a small speed so that it does not chatter at zero), a Stribeck part that is added at the lowest speeds and falls away as the speed rises (the static friction is bigger than the sliding), and a viscous part in proportion to the speed. TwoMass is a motor and a load joined by a gear with a gap: no torque passes while the motor is within the gap of the load, and beyond it a stiff spring and damper do, with the friction on the load. JointController is a position loop, a velocity loop with an integral term and, if asked, a feedforward of the friction torque for the velocity of the reference; it takes its velocity from the motor and its position from the motor's encoder or the load's. track_ramp follows a slow ramp and gives the error at its start and once it is under way; hold keeps a target and gives how far the load moved over the last second and where it was; measure_play pushes the motor one way with a torque above the friction and finds how far it travelled before the load moved.
 //
-// With the friction of this joint (0.05 N m of Coulomb, 0.02 of Stribeck) the torque to resist motion peaked at 0.0559 N m at 0.017 rad/s, fell to 0.0503 N m at 0.05 rad/s, and was 0.0550 N m at 1 rad/s. Following a ramp of 0.03 rad/s the load was 0.00000 rad off on average and 0.00000 with the friction fed forward. The gap of 0.0100 rad was measured from the motor's travel as 0.0102. Holding a target with an integral on the position error and the position taken from the load's encoder, the load moved 0.0013 rad over the last second and ended 0.0006 rad off; with the position taken from the motor's encoder it moved 0.000000, which left it 0.0034 rad off.
+// With the friction of this joint (0.05 N m of Coulomb, 0.02 of Stribeck) the torque to resist motion peaked at 0.0559 N m at 0.017 rad/s, fell to 0.0503 N m at 0.05 rad/s, and was 0.0550 N m at 1 rad/s. Starting a ramp of 0.03 rad/s from rest the load was up to 0.91 mrad behind and took 0.32 s to come within 0.1 mrad, against 0.38 mrad and 0.06 s with the friction fed forward; once the ramp was under way it was 0.00000 rad off on average either way. The gap of 0.0100 rad was measured from the motor's travel as 0.0102. Holding a target with an integral on the position error and the position taken from the load's encoder, the load moved 0.0013 rad over the last second and ended 0.0006 rad off; with the position taken from the motor's encoder it moved 0.000000, which left it 0.0034 rad off.
 
 #ifndef RC_RC_ARM_JOINT_FRICTION_HPP
 #define RC_RC_ARM_JOINT_FRICTION_HPP
@@ -80,8 +80,10 @@ struct JointController {
 };
 
 struct RampResult {
-  double mean_error = 0.0;  // rad, the mean absolute error of the load once the ramp is under way
+  double mean_error = 0.0;  // rad, the mean absolute error of the load once the ramp is under way (after 2 s)
   double max_error = 0.0;
+  double start_peak = 0.0;    // rad, the largest error in the first 2 s, while the joint breaks away
+  double start_settle = 0.0;  // s, the last moment in the first 2 s at which the error was over 0.1 mrad
 };
 
 // Follows a ramp of the load's position at a speed for some seconds; the controller runs at 1 kHz, the plant at 10 kHz.
@@ -96,15 +98,18 @@ inline RampResult track_ramp(TwoMass s, JointController c, double speed, double 
     const double t = k * 1e-3;
     const double tau = c.torque(s, speed * t, speed, 1e-3);
     for (int i = 0; i < sub; ++i) s.step(tau, dt);
+    const double e = std::fabs(speed * (t + 1e-3) - s.thl);
+    if (!(e < 1e6)) {
+      out.mean_error = out.max_error = out.start_peak = 1e9;  // the run blew up
+      return out;
+    }
     if (t > 2.0) {
-      const double e = std::fabs(speed * (t + 1e-3) - s.thl);
-      if (!(e < 1e6)) {
-        out.mean_error = out.max_error = 1e9;  // the run blew up
-        return out;
-      }
       sum += e;
       ++count;
       out.max_error = std::fmax(out.max_error, e);
+    } else {
+      out.start_peak = std::fmax(out.start_peak, e);
+      if (e > 1e-4) out.start_settle = t + 1e-3;
     }
   }
   out.mean_error = count ? sum / count : 0.0;

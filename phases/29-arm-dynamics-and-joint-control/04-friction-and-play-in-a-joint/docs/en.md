@@ -20,7 +20,7 @@ A torque that opposes the motion has three parts: a Coulomb part (the same at an
 
 ### Feed it forward
 
-A joint that is to creep at 0.03 rad/s has to be given the friction torque for that speed, or the controller has to supply it from its error. A controller with an integral supplies it late (the integral has to wind up to it, and then the joint breaks free and overshoots: stick and slip). Adding the friction torque for the speed the reference asks for takes the work away from the error: following a ramp of 0.03 rad/s the load was 0.00000 rad off on average, and 0.00000 rad with the friction fed forward. The feedforward goes with the reference velocity, not the measured one: the measured one is noise near zero. See `E-ARM-0038`.
+A joint that is to creep at 0.03 rad/s has to be given the friction torque for that speed, or the controller has to supply it from its error. A controller with an integral supplies it late (the integral has to wind up to it, and then the joint breaks free and overshoots: stick and slip). Adding the friction torque for the speed the reference asks for takes the work away from the error. Where it shows is at the start. Starting a ramp of 0.03 rad/s from rest, the load under the plain controller was up to 0.91 mrad behind and took 0.32 s to come within 0.1 mrad of the ramp; with the friction fed forward it was at most 0.38 mrad behind and within 0.1 mrad after 0.06 s. Once the ramp was under way the two could not be told apart (0.00000 rad off on average, with or without): by then the integral has found the friction for itself. So the feedforward is worth having wherever the joint starts, stops or turns round, which in an arm is all the time, and is worth nothing on a long steady move. The feedforward goes with the reference velocity, not the measured one: the measured one is noise near zero. See `E-ARM-0038`.
 
 ### Play, and finding it
 
@@ -43,7 +43,7 @@ What to write, as the note beside the `TODO` puts it:
 As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
 
 - Friction rises to a peak at a low speed, dips as the joint slides, and then grows with the speed.
-- Feeding the friction forward makes a slow ramp followed much more closely.
+- Feeding the friction forward helps where the joint breaks away, and makes no difference once the ramp is under way.
 - With play in the gear the loop on the load's encoder hunts, and the loop on the motor's is steady but leaves the load off.
 
 The other one passes already, because it tests the parts that are given.

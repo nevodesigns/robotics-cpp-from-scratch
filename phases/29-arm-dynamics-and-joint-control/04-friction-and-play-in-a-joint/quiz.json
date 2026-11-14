@@ -6,73 +6,73 @@
       "stage": "pre",
       "question": "Why does a joint stick and then slip at low speed?",
       "options": [
-        "Noise",
-        "Gravity",
-        "The motor is weak",
+        "The encoder cannot resolve slow motion",
+        "The motor's torque ripples at low speed",
+        "Viscous friction grows as the joint slows",
         "Friction is higher at rest than when sliding (the Stribeck part), so it has to break free"
       ],
       "correct": 3,
-      "explanation": "More to start than to keep going."
+      "explanation": "It takes more to start the joint than to keep it sliding. The controller builds up torque until it breaks free, and by then has too much."
     },
     {
       "stage": "check",
       "question": "The friction torque peaked at 0.017 rad/s at 0.0559 N m, and then:",
       "options": [
         "Fell to 0.0503 N m at 0.05 rad/s, and grew again with the speed",
-        "Stayed",
-        "Rose for ever",
-        "Vanished"
+        "Rose steadily with the speed",
+        "Fell to zero once the joint was sliding",
+        "Stayed at 0.0559 N m at every speed"
       ],
       "correct": 0,
-      "explanation": "A Stribeck dip."
+      "explanation": "The Stribeck part fades as the joint starts to slide, so the torque dips, and then the viscous part takes it up again: 0.0550 N m at 1 rad/s."
     },
     {
       "stage": "check",
-      "question": "Following a slow ramp, the error without and with the friction fed forward was:",
+      "question": "Starting a slow ramp from rest, how far behind was the load, and for how long?",
       "options": [
-        "The same",
-        "0 and 0",
-        "0.00000 and 0.00000 rad",
-        "0.00000 and 0.00000 rad"
+        "0.91 mrad for 0.32 s with it, and 0.38 mrad for 0.06 s without",
+        "The same: 0.91 mrad for 0.32 s either way",
+        "0.91 mrad for 0.32 s without the friction fed forward, and 0.38 mrad for 0.06 s with it",
+        "Nothing without it, and 0.38 mrad with it"
       ],
       "correct": 2,
-      "explanation": "The feedforward does the work the integral did late."
+      "explanation": "At the start the plain controller has to wind its integral up to the friction. Once the ramp was under way both were 0.00000 rad off, because by then the integral has found it."
     },
     {
       "stage": "check",
       "question": "The play of 0.0100 rad was measured as:",
       "options": [
         "0.0102 rad",
-        "0.0013 rad",
-        "0",
-        "1 rad"
+        "0.0100 rad exactly",
+        "0.0050 rad, the half gap",
+        "0.0034 rad"
       ],
       "correct": 0,
-      "explanation": "The motor's travel before the load moves."
+      "explanation": "The motor's travel before the load moved was 0.0102 rad for a true gap of 0.0100. A gear with no gap measured nearly zero."
     },
     {
       "stage": "post",
       "question": "What does closing the position loop, with an integral, on the load's encoder do with play in the gear?",
       "options": [
-        "Nothing",
+        "Makes the loop steady, with the load left off target",
         "Puts the dead zone inside the loop: it hunts (0.0013 rad over a second)",
-        "Fixes it",
-        "Stops the motor"
+        "Removes the play, since the load is what is measured",
+        "Slows the loop without changing where it ends"
       ],
       "correct": 1,
-      "explanation": "Push, nothing, jump."
+      "explanation": "While the motor crosses the gap the load does not move, the integral builds, and then the load jumps. Holding a target it moved 1.3 mrad back and forth over a second."
     },
     {
       "stage": "post",
       "question": "What does closing it on the motor's encoder cost?",
       "options": [
-        "Nothing",
-        "Stability",
+        "A loop that hunts across the gap",
+        "A slower velocity loop",
         "The load is somewhere in the gap: 0.0034 rad off the target",
-        "Speed"
+        "Nothing: the motor's encoder sees the load through the gear"
       ],
       "correct": 2,
-      "explanation": "It controls the motor, not the load."
+      "explanation": "The loop is steady because the gap is outside it. The load is wherever the gear left it, about half the gap from the target."
     }
   ]
 }
