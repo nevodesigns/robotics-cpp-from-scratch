@@ -145,3 +145,17 @@ RC_TEST("a wall with more points than the ground is the biggest plane, and is th
   RC_CHECK(tilt_degrees(level.plane) < 2.0);
   RC_CHECK(level.inliers > 500 && level.inliers < free.inliers);
 }
+
+RC_TEST("the least squares plane is right for ground that is nowhere near the origin") {
+  // z = 0.1 x + 0.2 y + 0.5, sampled well away from the origin and off centre
+  std::vector<rc::field::Point3> pts;
+  for (int i = 0; i < 7; ++i)
+    for (int j = 0; j < 5; ++j) {
+      const double x = 3.0 + 0.5 * i, y = -2.0 + 0.7 * j;
+      pts.push_back(rc::field::Point3{x, y, 0.1 * x + 0.2 * y + 0.5});
+    }
+  const Plane pl = fit_plane_least_squares(pts);
+  RC_CHECK_NEAR(plane_distance(pl, rc::field::Point3{4.0, -1.0, 0.1 * 4.0 - 0.2 + 0.5}), 0.0, 1e-9);
+  RC_CHECK_NEAR(plane_distance(pl, rc::field::Point3{0.0, 0.0, 0.5}), 0.0, 1e-9);     // where it crosses the z axis
+  RC_CHECK_NEAR(plane_distance(pl, rc::field::Point3{10.0, 10.0, 3.5}), 0.0, 1e-9);
+}

@@ -159,3 +159,17 @@ RC_TEST("how far a sweep skews the cloud grows with speed, and a turn moves the 
   RC_CHECK_NEAR(far_displacement(20.0, 1.0, kSweep), 2.0, 1e-12);
   RC_CHECK(far_displacement(20.0, 1.0, kSweep) > far_displacement(5.0, 1.0, kSweep));
 }
+
+RC_TEST("a pose part of the way between two poses that are not at the origin is that part of the way, in x, in y and in heading") {
+  rc::field::Tf2 a, b;
+  a.x = 2.0;
+  a.y = 3.0;
+  a.theta = 0.1;
+  b.x = 4.0;
+  b.y = 7.0;
+  b.theta = 0.5;
+  const rc::field::Tf2 p = interpolate_pose(a, b, 0.25);
+  RC_CHECK_NEAR(p.x, 2.5, 1e-12);
+  RC_CHECK_NEAR(p.y, 4.0, 1e-12);
+  RC_CHECK_NEAR(p.theta, 0.2, 1e-12);
+}

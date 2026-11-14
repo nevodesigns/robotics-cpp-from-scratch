@@ -161,3 +161,44 @@ RC_TEST("an obstacle that has gone stays in a layer that only marks, and is forg
   RC_CHECK(marking.second == 7);
   RC_CHECK(clearing.second == 0);
 }
+
+RC_TEST("layers are joined cell by cell, the bottom row is part of the grid, and a wall or a beam that runs along y is drawn where it is") {
+  GridSpec s;
+  s.resolution = 0.1;
+  s.width = 20;
+  s.height = 20;
+  // the higher cost of two layers, in every cell
+  CostGrid a(s), b(s);
+  a.set(2, 3, kCostLethal);
+  b.set(5, 5, 100);
+  b.set(2, 3, 7);
+  a.merge_max(b);
+  RC_CHECK(a.at(5, 5) == 100);
+  RC_CHECK(a.at(2, 3) == kCostLethal);
+  RC_CHECK(a.at(9, 9) == kCostFree);
+  // row 0 is in bounds
+  CostGrid edge(s);
+  edge.set(3, 0, kCostLethal);
+  RC_CHECK(edge.at(3, 0) == kCostLethal);
+  // a wall that runs up the grid
+  CostGrid wall(s);
+  rc::field::World2 w;
+  w.walls.push_back(rc::field::Segment{0.25, 0.25, 0.25, 1.55});
+  rasterise_world(wall, w);
+  RC_CHECK(wall.at(2, 2) == kCostLethal);
+  RC_CHECK(wall.at(2, 8) == kCostLethal);
+  RC_CHECK(wall.at(2, 15) == kCostLethal);
+  RC_CHECK(wall.at(3, 8) == kCostFree);
+  // a sensor that is not at the origin clears the cells between itself and what it sees, up the grid and across it
+  CostGrid layer(s);
+  layer.set(10, 14, kCostLethal);   // something that was there and has gone
+  layer.set(14, 10, kCostLethal);
+  std::vector<rc::field::Point3> hits;
+  hits.push_back(rc::field::Point3{1.05, 1.85, 0.0});
+  hits.push_back(rc::field::Point3{1.85, 1.05, 0.0});
+  mark_and_clear(layer, 1.05, 1.05, hits, true);
+  RC_CHECK(layer.at(10, 14) == kCostFree);
+  RC_CHECK(layer.at(14, 10) == kCostFree);
+  RC_CHECK(layer.at(10, 18) == kCostLethal);
+  RC_CHECK(layer.at(18, 10) == kCostLethal);
+}
