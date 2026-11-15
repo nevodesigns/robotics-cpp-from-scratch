@@ -11,11 +11,13 @@ teaches: 22-10-scoring-a-run
 
 ## Symptom
 
-Every run passes and the robot is seen to scrape a wall.
+Every run passes and the robot is seen to scrape a wall. The test checked only that the goal was reached.
 
 ## Cause
 
 Only the final position was judged. A robot can reach its goal through a post.
+
+Reaching the goal says nothing about how. A run that went through a post and came out the other side reaches the goal as well as one that went round.
 
 ## Fix
 

@@ -9,11 +9,13 @@ teaches: 22-16-a-bring-up-checklist-for-a-board
 
 ## Symptom
 
-The robot drives on after the program commanding it has gone.
+The robot drives on after the program commanding it has gone. The board's firmware was used as shipped.
 
 ## Cause
 
 The new board had no watchdog. It holds its last command for ever unless its firmware drops it.
+
+A board that holds its last command is a drive with no watchdog. Unless the firmware stops the wheels when commands stop, a crashed program leaves the robot driving.
 
 ## Fix
 

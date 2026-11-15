@@ -9,11 +9,13 @@ teaches: 22-05-terrain-and-friction
 
 ## Symptom
 
-The robot stops or slides back on a slope with its motors at full effort.
+The robot stops or slides back on a slope with its motors at full effort. The planner treated slopes as a cost, not a limit.
 
 ## Cause
 
 The planner sent it where the surface could not hold it. The motors were not the limit; the grip was: gravel can be climbed up to 22.3 degrees and ice up to 5.1.
+
+A slope can be climbed only if the tyres grip enough to hold the vehicle on it. Past that angle the wheels spin whatever the motors do, and a planner that only adds a cost will still send the vehicle there.
 
 ## Fix
 

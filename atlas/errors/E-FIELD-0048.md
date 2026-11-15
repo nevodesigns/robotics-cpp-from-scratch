@@ -10,11 +10,13 @@ teaches: 22-16-a-bring-up-checklist-for-a-board
 
 ## Symptom
 
-The first command to a new board makes the robot spin, or drive off at full speed the wrong way.
+The first command to a new board makes the robot spin, or drive off at full speed the wrong way. A new board was driven straight from a program.
 
 ## Cause
 
 Nobody checked which way the encoders count when the wheels are driven forward.
+
+A motor wired backwards drives the wrong way, and an encoder wired backwards counts the wrong way. Either alone makes a speed loop push the wrong way and run away.
 
 ## Fix
 

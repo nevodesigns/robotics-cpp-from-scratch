@@ -9,11 +9,13 @@ teaches: 22-14-the-same-program-another-simulator
 
 ## Symptom
 
-A controller that is perfect in the simulator it was written in is wrong in the next.
+A controller that is perfect in the simulator it was written in is wrong in the next. It was developed in one simulator and moved to another.
 
 ## Cause
 
 It had only been run against one simulator, so the simulator's quirks were part of what it was tuned to.
+
+Each simulator has its own contact model, friction and timing. A controller developed in one is tuned to its quirks, and the second shows which of its behaviour was the controller's and which the simulator's.
 
 ## Fix
 

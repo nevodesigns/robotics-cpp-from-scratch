@@ -10,11 +10,13 @@ teaches: 22-04-motors-gearboxes-and-backlash
 
 ## Symptom
 
-The robot stalls on a slope the data sheet's torque says is easy.
+The robot stalls on a slope the data sheet's torque says is easy. The motor driver was set to protect the motor.
 
 ## Cause
 
 The driver limited the current, and the torque budget did not know. With a limit of 1 A the stall torque was 0.312 N m, not the sheet's 0.700.
+
+Torque is current times the torque constant. A driver that limits current also limits torque, below the stall torque on the data sheet, which assumes the full voltage over the winding.
 
 ## Fix
 

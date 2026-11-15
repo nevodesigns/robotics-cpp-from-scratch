@@ -10,11 +10,13 @@ teaches: 22-01-a-robot-as-an-interface
 
 ## Symptom
 
-The control program crashes or the link drops, and the robot carries on at its last speed until it hits something.
+The control program crashes or the link drops, and the robot carries on at its last speed until it hits something. It is found the day the laptop running the controller goes to sleep.
 
 ## Cause
 
 The base held its last command for ever. A drive that only does what it was last told has no way to notice that nobody is telling it anything.
+
+A drive receives speeds and applies them. Nothing in that contract says what happens when no more speeds come, and the simplest code keeps the last one. A program that dies does not send a stop.
 
 ## Fix
 

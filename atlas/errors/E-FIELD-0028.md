@@ -9,11 +9,13 @@ teaches: 22-09-watching-a-run
 
 ## Symptom
 
-A pause in the log does not show as a pause in the replay, and a replay takes the wrong time.
+A pause in the log does not show as a pause in the replay, and a replay takes the wrong time. The log has gaps or a varying rate.
 
 ## Cause
 
 The animation used the sample index as time. The run lasted 9.98 s, and should play in 2.50 s at four times.
+
+An animation keyed by sample index plays one sample per frame, so a gap of a second plays as one frame and a burst of samples plays slowly. The time stamps are the time.
 
 ## Fix
 

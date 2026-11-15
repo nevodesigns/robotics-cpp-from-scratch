@@ -10,11 +10,13 @@ teaches: 22-01-a-robot-as-an-interface
 
 ## Symptom
 
-The robot stops a hand's width too late every time, and the planner's margin is wrong by exactly that much.
+The robot stops a hand's width too late every time, and the planner's margin is wrong by exactly that much. The planner's stopping margin was set from the command, not from the base.
 
 ## Cause
 
 The stop was taken as instant. A base answers a command with a lag: a stop from 1 m/s coasted 0.200 m, the speed times a time constant of 0.2 s.
+
+Motors and their drivers answer a change of command over a time constant: the speed falls exponentially, not at once. In that time the base keeps moving, and the distance covered is about the speed times the time constant.
 
 ## Fix
 

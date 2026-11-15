@@ -9,11 +9,13 @@ teaches: 22-16-a-bring-up-checklist-for-a-board
 
 ## Symptom
 
-Odometry is long or short by the same fraction on every run.
+Odometry is long or short by the same fraction on every run. The driver used the encoder count from the board's manual.
 
 ## Cause
 
 The ticks per metre were taken from the data sheet, not from the board. A count 15 percent off read 1378 ticks a metre where the documents said 1200.
+
+Encoder resolution, gear ratio and wheel radius together set the ticks per metre. Any of them can differ from the manual on a particular board, and the error appears as a steady scale on every distance.
 
 ## Fix
 

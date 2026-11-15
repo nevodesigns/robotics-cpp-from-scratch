@@ -10,11 +10,13 @@ teaches: 22-08-recording-and-replaying-a-run
 
 ## Symptom
 
-A change makes the robot behave differently and nobody can find when the two runs first parted.
+A change makes the robot behave differently and nobody can find when the two runs first parted. Two runs looked alike and ended in different places.
 
 ## Cause
 
 There was no way to say when two logs first differ.
+
+Two runs with the same inputs should be identical. If they are not, the first moment they differ is where to look. Without a tool to find it, people compare plots by eye.
 
 ## Fix
 

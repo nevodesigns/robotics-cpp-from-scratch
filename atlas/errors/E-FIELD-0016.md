@@ -9,11 +9,13 @@ teaches: 22-06-sensors-that-fail-like-the-field
 
 ## Symptom
 
-A phantom wall appears in front of the robot for a moment, or a gap is filled with something that is not there.
+A phantom wall appears in front of the robot for a moment, or a gap is filled with something that is not there. It is near glass, black surfaces or the sky.
 
 ## Cause
 
 A lost lidar beam was read as a range. About 0.90 percent of the beams that should have returned did not, and the code turned them into a number.
+
+A beam that hits nothing has no range. If the code turns the missing value into a number, even zero or the maximum, it becomes a point that is not there.
 
 ## Fix
 

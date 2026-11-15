@@ -10,11 +10,13 @@ teaches: 22-13-a-world-for-gazebo
 
 ## Symptom
 
-The robot rolls back down a slope that the scenario says it should climb, or the reverse.
+The robot rolls back down a slope that the scenario says it should climb, or the reverse. The slope's sign was checked by eye in the simulator.
 
 ## Cause
 
 The slope tilted the wrong way. A rotation about y by a positive angle turns the x axis downward, so a rise along +x is a pitch of minus atan of the grade: -0.0996687 rad for 0.1.
+
+A positive rotation about y, by the right-hand rule, turns +x toward -z: downward. A slope that rises along +x therefore needs a negative pitch.
 
 ## Fix
 

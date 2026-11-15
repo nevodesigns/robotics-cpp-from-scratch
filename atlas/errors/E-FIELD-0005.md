@@ -9,11 +9,13 @@ teaches: 22-02-frames-for-a-field-robot
 
 ## Symptom
 
-The robot sees a wall ahead on flat ground, or misses a kerb, depending on how the sensor is mounted.
+The robot sees a wall ahead on flat ground, or misses a kerb, depending on how the sensor is mounted. The sensor was mounted with a downward tilt.
 
 ## Cause
 
 The scan was used as if the sensor looked along the ground. A sensor 0.25 m up and tipped 5 degrees down meets flat ground 2.858 m ahead, and a tilted scan read as flat puts that ground in the way.
+
+A tilted sensor's beams meet the ground ahead. In the sensor's frame those points are straight in front; only through the mount's pitch are they on the floor. Without it, the floor reads as a wall at the distance where the beams meet it.
 
 ## Fix
 

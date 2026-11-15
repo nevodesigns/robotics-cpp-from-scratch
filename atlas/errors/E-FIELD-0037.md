@@ -10,11 +10,13 @@ teaches: 22-12-describing-a-robot-once
 
 ## Symptom
 
-The two simulators give different results, and the difference is exactly a change someone made in one of them.
+The two simulators give different results, and the difference is exactly a change someone made in one of them. Someone changed the wheel radius in one model.
 
 ## Cause
 
 A dimension was written in two places: the track width, the wheel radius and the limits were typed into each model.
+
+A number typed in two places is two numbers. They agree until someone changes one, and then the two simulators model two different robots.
 
 ## Fix
 

@@ -9,11 +9,13 @@ teaches: 22-10-scoring-a-run
 
 ## Symptom
 
-The number of collisions doubles when the logging rate does, though the robot did the same thing.
+The number of collisions doubles when the logging rate does, though the robot did the same thing. The logging rate was raised.
 
 ## Cause
 
 Collisions were counted in samples. A path through two posts was 110 samples inside them.
+
+A robot inside an obstacle for a second is one collision whatever the logging rate. Counting the samples inside counts the duration times the rate.
 
 ## Fix
 

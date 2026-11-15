@@ -10,11 +10,13 @@ teaches: 22-13-a-world-for-gazebo
 
 ## Symptom
 
-The two simulators disagree, and the cause is a wall that was moved in one of them.
+The two simulators disagree, and the cause is a wall that was moved in one of them. The world file was made once and edited by hand since.
 
 ## Cause
 
 The world was typed out again by hand. A scenario of two patches, two walls, a post and a goal is 8 models, and each is a place to forget a change.
+
+A world typed from a scenario is a copy. Changes to the scenario must be made twice, and a copy that misses one models a different world.
 
 ## Fix
 

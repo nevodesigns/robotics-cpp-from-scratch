@@ -9,11 +9,13 @@ teaches: 22-08-recording-and-replaying-a-run
 
 ## Symptom
 
-The run that failed is the one whose log will not load.
+The run that failed is the one whose log will not load. The robot lost power in the middle of the run.
 
 ## Cause
 
 The write was cut by the loss of power, and the reader treated the stump as corruption and refused the whole log.
+
+A write that is cut leaves a partial last line. A reader that refuses the whole file for it loses every good line before it, which is exactly the record of what happened before the failure.
 
 ## Fix
 

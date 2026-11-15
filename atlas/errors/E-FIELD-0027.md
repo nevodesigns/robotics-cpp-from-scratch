@@ -10,11 +10,13 @@ teaches: 22-09-watching-a-run
 
 ## Symptom
 
-The run that went wrong is the one that cannot be seen, because the robot left the frame.
+The run that went wrong is the one that cannot be seen, because the robot left the frame. The robot left the walls.
 
 ## Cause
 
 The view was sized to the walls. A robot that went outside them was drawn off the picture.
+
+A view sized to the scenario's walls shows what was planned. The interesting runs are the ones where the robot went somewhere unplanned, which is outside that view.
 
 ## Fix
 

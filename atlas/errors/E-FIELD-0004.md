@@ -11,11 +11,13 @@ teaches: 22-02-frames-for-a-field-robot
 
 ## Symptom
 
-Everything is right while the robot drives straight and wrong the moment it turns.
+Everything is right while the robot drives straight and wrong the moment it turns. It is a chain of three or more transforms.
 
 ## Cause
 
 Two transforms were composed in the wrong order. Transforms do not commute: a shift and a turn of 90 degrees applied in the two orders put a point 1.414 m apart. Driving straight hides it, because a turn of zero commutes with everything.
+
+A transform from frame A to frame C through B is the one from B to C applied after the one from A to B. Swapping them applies the shift in the wrong frame. With no turn the frames are parallel and the order does not matter, which is why straight driving hides it.
 
 ## Fix
 

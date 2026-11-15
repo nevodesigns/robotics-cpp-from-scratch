@@ -9,11 +9,13 @@ teaches: 22-03-units-and-limits-that-cannot-be-mixed
 
 ## Symptom
 
-Stops are planned far longer than they need be, or shorter when braking is the weaker limit.
+Stops are planned far longer than they need be, or shorter when braking is the weaker limit. The limits were copied from a model that used one number for both.
 
 ## Cause
 
 One number was used for speeding up and for slowing down. Here a ramp to 1 m/s took 2.000 s and the stop from it 0.667 s: braking is three times the acceleration.
+
+Motors limit acceleration; brakes and the tyres' grip limit deceleration, and the two are rarely equal. One number for both is wrong for at least one of them.
 
 ## Fix
 

@@ -9,11 +9,13 @@ teaches: 22-14-the-same-program-another-simulator
 
 ## Symptom
 
-The simulators disagree by a different amount each time the comparison is run.
+The simulators disagree by a different amount each time the comparison is run. One simulator ran in real time.
 
 ## Cause
 
 One of them ran in real time, so a run's length depended on the machine. Runs of different lengths cannot be compared.
+
+A simulator running in real time advances by the wall clock, and a slow machine steps fewer times in a second. Two runs of five seconds of wall time are different lengths of simulated time.
 
 ## Fix
 

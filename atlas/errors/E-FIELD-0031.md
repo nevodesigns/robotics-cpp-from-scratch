@@ -9,11 +9,13 @@ teaches: 22-10-scoring-a-run
 
 ## Symptom
 
-The cell meets its average time and misses its deadline one cycle in twenty.
+The cell meets its average time and misses its deadline one cycle in twenty. The cell was signed off on its average time.
 
 ## Cause
 
 The mean hid the slow trials. The mean was 4.72 s and the 95th percentile 9.00 s. A failed trial must not enter the times at all, or it pulls the mean either way.
+
+A deadline is missed by the slow cycles, not the average ones. The mean hides a long tail; a high percentile shows it. A failed trial has no meaningful time and distorts both if it is counted.
 
 ## Fix
 

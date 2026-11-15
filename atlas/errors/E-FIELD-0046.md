@@ -11,11 +11,13 @@ teaches: 22-15-two-simulators-and-the-gap
 
 ## Symptom
 
-The built in model's robot answers a command faster or slower than the one in Gazebo, by a fixed lag.
+The built in model's robot answers a command faster or slower than the one in Gazebo, by a fixed lag. The time constant was set to a typical value.
 
 ## Cause
 
 The time constant was a round number taken from a data sheet, 0.05 s. Read from Gazebo's own step response it was 0.062 s.
+
+A simulator's response depends on its own joint and contact models. To match another, read the parameter from that one's run: here, a step response.
 
 ## Fix
 

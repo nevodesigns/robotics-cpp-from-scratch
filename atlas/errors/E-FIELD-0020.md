@@ -11,11 +11,13 @@ teaches: 22-07-a-field-scenario-file
 
 ## Symptom
 
-Each run of the tool reports one problem, and the file takes six runs to fix.
+Each run of the tool reports one problem, and the file takes six runs to fix. The file was written by hand.
 
 ## Cause
 
 The parser returned at the first bad line. A file with six mistakes gave 8 reports in one pass once they were collected (two whole-file rules failed as well).
+
+A file can have several independent mistakes. A parser that stops at the first finds them one run at a time, and the person fixing the file pays a run for each.
 
 ## Fix
 

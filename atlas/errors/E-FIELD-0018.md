@@ -9,11 +9,13 @@ teaches: 22-06-sensors-that-fail-like-the-field
 
 ## Symptom
 
-The robot lurches toward a position a few metres away for one cycle, then back.
+The robot lurches toward a position a few metres away for one cycle, then back. It is near buildings or under trees.
 
 ## Cause
 
 A GNSS jump was believed. About 1.03 percent of fixes jumped by metres even when the receiver reported a fixed solution, which is good to 0.020 m.
+
+A receiver computes a position from signals that may have bounced. A bounced signal gives a position metres away with no warning, and a filter that takes every fix follows it.
 
 ## Fix
 

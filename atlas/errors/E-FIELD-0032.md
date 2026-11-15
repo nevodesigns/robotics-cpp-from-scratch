@@ -9,11 +9,13 @@ teaches: 22-10-scoring-a-run
 
 ## Symptom
 
-The mean stride period and the duty factor look right, and the robot is seen to stumble.
+The mean stride period and the duty factor look right, and the robot is seen to stumble. The robot stumbles once in a long walk.
 
 ## Cause
 
 The gait was judged by its averages. One missed step is one long period among many, and barely moves the mean.
+
+A mean over many strides changes little when one stride is long. The spread of the periods is what one missed step changes.
 
 ## Fix
 

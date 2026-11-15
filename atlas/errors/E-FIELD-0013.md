@@ -10,11 +10,13 @@ teaches: 22-05-terrain-and-friction
 
 ## Symptom
 
-Stops that are exact on the test floor are metres long in the field.
+Stops that are exact on the test floor are metres long in the field. The limit was tuned on a dry floor indoors.
 
 ## Cause
 
 The speed limit was chosen for one surface. Stopping distance goes as one over the friction: from 2 m/s it was 0.250 m on tarmac and 1.853 m on ice.
+
+Braking is limited by the tyres' grip, which is the friction times the weight. Stopping distance is speed squared over twice the braking, so a surface with an eighth of the friction gives roughly eight times the distance.
 
 ## Fix
 

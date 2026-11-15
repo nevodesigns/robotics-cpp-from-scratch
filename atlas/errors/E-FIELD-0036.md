@@ -10,11 +10,13 @@ teaches: 22-12-describing-a-robot-once
 
 ## Symptom
 
-The simulated robot behaves differently from the real one, and nobody can say which of its numbers to doubt.
+The simulated robot behaves differently from the real one, and nobody can say which of its numbers to doubt. The model's numbers came from many places and nobody wrote down which.
 
 ## Cause
 
 The numbers had no record of where they came from.
+
+A typical value is a guess about a robot that is not this one. Without a source beside each number, nobody can tell the guesses from the measurements when the simulation and the robot disagree.
 
 ## Fix
 

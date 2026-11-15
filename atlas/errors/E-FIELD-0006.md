@@ -9,11 +9,13 @@ teaches: 22-02-frames-for-a-field-robot
 
 ## Symptom
 
-One sensor's points land on top of the robot, and nothing says why.
+One sensor's points land on top of the robot, and nothing says why. A frame was misspelt or not yet published.
 
 ## Cause
 
 A lookup that could not find a frame returned the identity transform, which looks like a valid answer.
+
+The identity transform is a valid transform: it says two frames are the same. Returning it for a frame that is not there gives the caller points in the right format and the wrong place.
 
 ## Fix
 

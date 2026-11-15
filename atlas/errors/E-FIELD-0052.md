@@ -11,11 +11,13 @@ teaches: 22-17-a-safety-case-per-robot-type
 
 ## Symptom
 
-The worst hazards in the case are controlled by a notice in the manual.
+The worst hazards in the case are controlled by a notice in the manual. The case was accepted because every hazard had a control.
 
 ## Cause
 
 A control of kind information was accepted against a high risk. It relies on a person doing the right thing every time.
+
+Controls differ in strength: a design change removes the hazard, a protective device guards it, information tells a person about it. A notice depends on someone reading and obeying it every time.
 
 ## Fix
 

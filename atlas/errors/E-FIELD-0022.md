@@ -9,11 +9,13 @@ teaches: 22-07-a-field-scenario-file
 
 ## Symptom
 
-Saving a scenario changes it, and a later run is not of the scenario that was loaded.
+Saving a scenario changes it, and a later run is not of the scenario that was loaded. Saving was added after loading worked.
 
 ## Cause
 
 The writer dropped or reordered something. Text that has been parsed and written once must come back the same after a second parse and write.
+
+A writer that drops a field, or prints a number with too few digits, makes a file that loads as a different scenario. The only check is to write, read and write again, and compare.
 
 ## Fix
 

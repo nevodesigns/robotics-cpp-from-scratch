@@ -10,11 +10,13 @@ teaches: 22-03-units-and-limits-that-cannot-be-mixed
 
 ## Symptom
 
-The vehicle is fine on the straight and tips or slides when a planner asks for a sharp turn at speed.
+The vehicle is fine on the straight and tips or slides when a planner asks for a sharp turn at speed. The vehicle has a high centre of mass.
 
 ## Cause
 
 Only the speed was limited. The sideways acceleration is the speed times the turn rate: 1 m/s at 2 rad/s is 2 m/s2.
+
+A vehicle turning at a rate w while moving at speed v has a sideways acceleration of v times w. That acceleration is what tips or slides it, and a speed limit alone does not bound it.
 
 ## Fix
 

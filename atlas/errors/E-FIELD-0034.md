@@ -11,11 +11,13 @@ teaches: 22-11-the-contract-test-for-an-interface
 
 ## Symptom
 
-A program that works on the simulator misbehaves on the board in a way nobody can explain.
+A program that works on the simulator misbehaves on the board in a way nobody can explain. The simulator's drive and the board's drive were written by different people.
 
 ## Cause
 
 The interface had no contract. It said what can be called and nothing about what happens: what a stale command does, what a NaN does, how fast speed may change.
+
+An interface lists functions. What they do in the odd cases, a stale command, a NaN, a step in speed, is not in the list. Two implementations can both match the interface and differ in exactly those cases.
 
 ## Fix
 

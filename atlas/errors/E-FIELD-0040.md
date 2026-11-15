@@ -9,11 +9,13 @@ teaches: 22-13-a-world-for-gazebo
 
 ## Symptom
 
-The room is right where the walls are axis aligned and wrong everywhere else.
+The room is right where the walls are axis aligned and wrong everywhere else. The test rooms were all axis aligned.
 
 ## Cause
 
 Every wall was laid along the x axis. The box was given the length and no angle: a wall from (0,0) to (3,4) is 5.000 m long, turned 0.927295 rad.
+
+A box is placed by its centre, its size and its rotation. A wall at an angle needs all three; given only its length along x, it lies along x.
 
 ## Fix
 

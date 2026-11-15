@@ -9,11 +9,13 @@ teaches: 22-11-the-contract-test-for-an-interface
 
 ## Symptom
 
-The program crashes and the robot drives on at its last speed.
+The program crashes and the robot drives on at its last speed. The drive passed every test of moving and stopping.
 
 ## Cause
 
 The drive had no watchdog, and nothing tested for one.
+
+A watchdog acts only when commands stop coming, and a test that keeps sending commands never sees it. Unless a test goes silent and checks the stop, the watchdog's absence is invisible.
 
 ## Fix
 

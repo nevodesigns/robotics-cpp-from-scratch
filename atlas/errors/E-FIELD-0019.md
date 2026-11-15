@@ -10,11 +10,13 @@ teaches: 22-06-sensors-that-fail-like-the-field
 
 ## Symptom
 
-Odometry is long by the same percentage on every run, or only on loose ground.
+Odometry is long by the same percentage on every run, or only on loose ground. The wheel radius was taken from the tyre's marking.
 
 ## Cause
 
 The encoder was trusted as the distance travelled. A wheel radius wrong by 2 percent read 0.20 m long over 10 m, and a slip of 5 percent read 0.50 m long.
+
+Encoder distance is ticks times the circumference over ticks per turn. A radius wrong by a few percent makes every metre wrong by the same share, and slip adds turns that went nowhere.
 
 ## Fix
 

@@ -12,11 +12,13 @@ teaches: 22-14-the-same-program-another-simulator
 
 ## Symptom
 
-The robot in Gazebo starts moving a moment later than the same program on the built in model.
+The robot in Gazebo starts moving a moment later than the same program on the built in model. The command was sent over a message bus.
 
 ## Cause
 
 The command was a message on a topic and the world was stepped at once, before it had arrived.
+
+A message on a topic takes time to be delivered. A world stepped at once after publishing steps before the command has arrived, and the first steps run on the old command.
 
 ## Fix
 

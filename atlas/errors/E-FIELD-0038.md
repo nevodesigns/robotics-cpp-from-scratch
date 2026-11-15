@@ -9,11 +9,13 @@ teaches: 22-12-describing-a-robot-once
 
 ## Symptom
 
-Turning in Gazebo is much quicker or slower than the same command in the built in model.
+Turning in Gazebo is much quicker or slower than the same command in the built in model. The robot description used the simulator's default inertia.
 
 ## Cause
 
 The inertia was left at the default, or was for another shape. A box of 1 kg with sides 0.138, 0.178 and 0.172 m has an Ixx of 0.00511 kg m2.
+
+A body's resistance to turning depends on how its mass is spread, which is its inertia. A default of 1 kg m2 for a small robot is hundreds of times too large; a robot with that inertia turns like a ship.
 
 ## Fix
 

@@ -9,11 +9,13 @@ teaches: 22-04-motors-gearboxes-and-backlash
 
 ## Symptom
 
-A gain that worked on a model with an instant motor rings or oscillates on the robot.
+A gain that worked on a model with an instant motor rings or oscillates on the robot. The controller was tuned in a model with an ideal motor.
 
 ## Cause
 
 The model had no motor lag. A motor answers a voltage with a time constant set by its inertia, resistance and constants: 0.246 s for this load.
+
+A motor's speed answers a voltage through its inertia and its electrical and mechanical constants. A controller tuned on a model with no lag has more gain than the real loop can take, and the lag turns the extra gain into oscillation.
 
 ## Fix
 

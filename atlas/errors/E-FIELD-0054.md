@@ -9,11 +9,13 @@ teaches: 22-12-describing-a-robot-once
 
 ## Symptom
 
-A turn from rest is right, the same turn after a drive is short by a quarter, and the simulator seems to be wrong about friction.
+A turn from rest is right, the same turn after a drive is short by a quarter, and the simulator seems to be wrong about friction. It is the simulator's model of a robot with two wheels and a caster.
 
 ## Cause
 
 The robot's weight was over its axle, so it rested on two wheels and a caster that touched the floor only when the body rocked, which driving and stopping do. Friction was not the cause: changing it changed nothing.
+
+Three points of contact make a stable base only if the weight is inside the triangle they make. With the weight on the axle line, the robot balances on its two wheels and the caster carries nothing until the body tips.
 
 ## Fix
 

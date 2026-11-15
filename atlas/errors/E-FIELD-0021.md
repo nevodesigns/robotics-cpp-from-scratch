@@ -10,11 +10,13 @@ teaches: 22-07-a-field-scenario-file
 
 ## Symptom
 
-Nobody can say exactly what was run last month, or run it in the other simulator.
+Nobody can say exactly what was run last month, or run it in the other simulator. The scenario was edited in code for each test.
 
 ## Cause
 
 The scenario lived in the source: the ground, the walls and the faults were written as code. A file of 15 lines holds all of them.
+
+A scenario written as code is mixed with the program, versioned with it and readable only by it. A file can be kept with the results, read by both simulators, and compared.
 
 ## Fix
 

@@ -9,11 +9,13 @@ teaches: 22-17-a-safety-case-per-robot-type
 
 ## Symptom
 
-The report that was reviewed is not the table that was tested.
+The report that was reviewed is not the table that was tested. The report was edited after the tests ran.
 
 ## Cause
 
 The report was typed by hand, so it can drift from the data.
+
+A hand-written report is a second copy of the case. Each edit to one must be made to the other, and a copy that is not regenerated drifts.
 
 ## Fix
 

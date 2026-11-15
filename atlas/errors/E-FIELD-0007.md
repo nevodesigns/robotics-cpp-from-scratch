@@ -12,11 +12,13 @@ teaches: 22-03-units-and-limits-that-cannot-be-mixed
 
 ## Symptom
 
-The robot overshoots every stop by metres, though the planner's margins look right.
+The robot overshoots every stop by metres, though the planner's margins look right. The limit came from a data sheet.
 
 ## Cause
 
 A limit from a data sheet in km/h was read as m/s. Stopping from 5 m/s took 8.331 m, where 5 km/h stops in 0.642 m.
+
+A number has no unit unless the code gives it one. 5 km/h is 1.39 m/s, and read as 5 m/s it is a speed more than three times too high, with a stopping distance more than twelve times too long.
 
 ## Fix
 

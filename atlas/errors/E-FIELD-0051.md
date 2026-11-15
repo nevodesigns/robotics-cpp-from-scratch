@@ -11,11 +11,13 @@ teaches: 22-17-a-safety-case-per-robot-type
 
 ## Symptom
 
-The safety case reads well and nobody can say which test shows that a control works.
+The safety case reads well and nobody can say which test shows that a control works. The safety case was written as a document.
 
 ## Cause
 
 A control was written down with no test, or with a test that fails.
+
+A control that is described but not tested is a claim. Only a test that exercises it and passes shows that it works, and only a checker that requires the test keeps the case honest as it changes.
 
 ## Fix
 

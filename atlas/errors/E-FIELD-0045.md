@@ -9,11 +9,13 @@ teaches: 22-15-two-simulators-and-the-gap
 
 ## Symptom
 
-The final poses agree, and the planner behaves differently in the two simulators.
+The final poses agree, and the planner behaves differently in the two simulators. The comparison printed only the final pose.
 
 ## Cause
 
 Only the end was compared. The way there can differ while the end is the same.
+
+Two traces can wander apart and come back together. The final gap is small; the largest is not. A planner sees the way, not only the end.
 
 ## Fix
 
