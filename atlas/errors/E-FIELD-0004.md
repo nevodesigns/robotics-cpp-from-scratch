@@ -15,12 +15,12 @@ Everything is right while the robot drives straight and wrong the moment it turn
 
 ## Cause
 
-Transforms do not commute. A shift and a turn of 90 degrees applied in the two orders put a point 1.414 m apart.
+Two transforms were composed in the wrong order. Transforms do not commute: a shift and a turn of 90 degrees applied in the two orders put a point 1.414 m apart. Driving straight hides it, because a turn of zero commutes with everything.
 
 ## Fix
 
-Compose right to left, check one chain against an independent calculation, and test with a turn.
+Compose right to left (the frame you have on the right, the one you want on the left), check one chain against an independent calculation, and test with a turn.
 
 ```cpp
-const Tf3 whole = compose(map_from_odom, compose(odom_from_base, base_from_lidar));
+const rc::field::Tf3 whole = rc::field::compose(map_from_odom, rc::field::compose(odom_from_base, base_from_lidar));
 ```

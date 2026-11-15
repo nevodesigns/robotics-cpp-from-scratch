@@ -13,12 +13,12 @@ A controller that is perfect in the simulator it was written in is wrong in the 
 
 ## Cause
 
-It had only been run against one. The same script now runs against any Backend, and the built in model ended 5 s at 0.2 m/s at y = 2.990.
+It had only been run against one simulator, so the simulator's quirks were part of what it was tuned to.
 
 ## Fix
 
-Write the program against an interface and run it on two backends.
+Write the program against an interface and run it on two backends. The same script runs against any Backend; on the built in model, 5 s at 0.2 m/s ended at y = 2.990.
 
 ```cpp
-Backend& backend = ...;  // a program takes this, never a concrete simulator
+std::vector<rc::field::BackendPose> trace = rc::field::run_script(backend, script, 0.01);   // backend is any Backend&
 ```

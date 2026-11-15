@@ -14,7 +14,7 @@ The robot rolls back down a slope that the scenario says it should climb, or the
 
 ## Cause
 
-A rotation about y by a positive angle turns the x axis downwards, so a rise along +x is a pitch of minus atan of the grade (-0.0996687 rad for 0.1).
+The slope tilted the wrong way. A rotation about y by a positive angle turns the x axis downward, so a rise along +x is a pitch of minus atan of the grade: -0.0996687 rad for 0.1.
 
 ## Fix
 

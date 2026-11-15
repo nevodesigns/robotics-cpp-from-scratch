@@ -9,11 +9,11 @@ teaches: 22-06-sensors-that-fail-like-the-field
 
 ## Symptom
 
-The heading from the gyro walks away while the robot is stationary, and gets worse with time.
+The heading from the gyro walks away while the robot stands still, and gets worse with time.
 
 ## Cause
 
-Integrating the gyro integrates its bias: 34.1 degrees in a minute at 0.01 rad/s.
+The gyro's bias was taken to be zero. Integrating the rate integrates the bias: 34.1 degrees in a minute at 0.01 rad/s.
 
 ## Fix
 

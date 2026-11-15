@@ -13,12 +13,13 @@ The number of collisions doubles when the logging rate does, though the robot di
 
 ## Cause
 
-A path through two posts was 110 samples inside them. Counted as events it was 2 collisions.
+Collisions were counted in samples. A path through two posts was 110 samples inside them.
 
 ## Fix
 
-Count a collision when the clearance first goes below zero and not again until it has recovered.
+Count a collision when the clearance first goes below zero, and not again until it has recovered. Counted as events it was 2.
 
 ```cpp
 if (clear < 0.0 && !inside) ++s.collisions;
+inside = clear < 0.0;
 ```

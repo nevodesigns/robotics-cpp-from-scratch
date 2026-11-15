@@ -10,16 +10,16 @@ teaches: 22-01-a-robot-as-an-interface
 
 ## Symptom
 
-The control program crashes or the link drops and the robot carries on at its last speed until something hits.
+The control program crashes or the link drops, and the robot carries on at its last speed until it hits something.
 
 ## Cause
 
-The base held its last command for ever. With a watchdog of 0.5 s a 0.5 m/s base was below 0.01 m/s after 1.265 s.
+The base held its last command for ever. A drive that only does what it was last told has no way to notice that nobody is telling it anything.
 
 ## Fix
 
-Give every drive a watchdog that drops the command when it is stale, and test it.
+Give every drive a watchdog that drops a stale command to a stop, and test it. With a watchdog of 0.5 s, a base at 0.5 m/s was below 0.01 m/s 1.265 s after the commands stopped: the watchdog's time plus the base's own slowing.
 
 ```cpp
-if (since_command_ > limits_.watchdog) target = DriveCommand();
+if (since_command_ > limits_.watchdog) target = DriveCommand();   // zero
 ```

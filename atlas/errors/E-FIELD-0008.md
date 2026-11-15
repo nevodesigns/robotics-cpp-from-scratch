@@ -14,12 +14,12 @@ The vehicle is fine on the straight and tips or slides when a planner asks for a
 
 ## Cause
 
-Only the speed was limited. 1 m/s at 2 rad/s is a lateral acceleration of 2 m/s2; the limit of 1.5 cut the speed to 0.750 m/s.
+Only the speed was limited. The sideways acceleration is the speed times the turn rate: 1 m/s at 2 rad/s is 2 m/s2.
 
 ## Fix
 
-Cut the speed so that speed times turn rate stays within the lateral limit.
+Cut the speed so that speed times turn rate stays within the lateral limit. With a limit of 1.5 m/s2 that command became 0.750 m/s.
 
 ```cpp
-v = std::copysign(lim.max_lateral / std::fabs(w), v);
+if (std::fabs(v * w) > lim.max_lateral) v = std::copysign(lim.max_lateral / std::fabs(w), v);
 ```

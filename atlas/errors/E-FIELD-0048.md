@@ -10,16 +10,16 @@ teaches: 22-16-a-bring-up-checklist-for-a-board
 
 ## Symptom
 
-The first command on a new board makes it spin, or drive off at full speed the wrong way.
+The first command to a new board makes the robot spin, or drive off at full speed the wrong way.
 
 ## Cause
 
-Nobody checked which way the encoders count when the wheels are driven forward. The direction check found a reversed left motor and a dead right encoder in the fake, each with its own advice.
+Nobody checked which way the encoders count when the wheels are driven forward.
 
 ## Fix
 
-Run the checks in order, cheapest first, with the wheels off the ground, before any program that uses speeds.
+Run the bring-up checks in order, cheapest first, with the wheels off the ground, before any program that uses speeds. On the fake board the direction check found a reversed left motor and a dead right encoder, each with its own advice.
 
 ```cpp
-const auto results = run_bringup(board, expectations, tape);
+const std::vector<rc::hal::BringUpResult> results = rc::hal::run_bringup(board, expectations, tape);
 ```

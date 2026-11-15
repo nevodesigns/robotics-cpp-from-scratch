@@ -15,12 +15,12 @@ Each run of the tool reports one problem, and the file takes six runs to fix.
 
 ## Cause
 
-The parser returned at the first bad line. A file with six mistakes gave 8 reports in one pass when they were collected.
+The parser returned at the first bad line. A file with six mistakes gave 8 reports in one pass once they were collected (two whole-file rules failed as well).
 
 ## Fix
 
-Collect the problems with their line numbers, check whole-file rules at the end, and return all of them.
+Collect the problems with their line numbers, check the whole-file rules at the end, and return all of them.
 
 ```cpp
-problems.push_back(ScenarioProblem{line, message});
+problems.push_back(rc::field::ScenarioProblem{line, message});
 ```

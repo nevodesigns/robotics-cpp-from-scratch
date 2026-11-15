@@ -9,15 +9,15 @@ teaches: 22-15-two-simulators-and-the-gap
 
 ## Symptom
 
-After the built in model is calibrated to Gazebo the two agree, and the claim is made that the model is validated.
+After the built in model is calibrated to Gazebo the two agree, and the model is said to be validated.
 
 ## Cause
 
-Agreement between two simulations is a statement about the two. The worst gap was 0.035 m after calibration; whether either matches the robot is a separate measurement.
+A gap between two simulations was read as one of them being wrong, and closing it as validation. Agreement between two simulations is a statement about the two: the worst gap after calibration was 0.035 m, and whether either matches the robot is a separate measurement.
 
 ## Fix
 
-Say what was calibrated, to what, and keep a hardware check for the claim about the robot.
+Say what was calibrated and to what, and keep a hardware check for any claim about the robot.
 
 ```cpp
 // calibrated to Gazebo's step response, not validated against the robot

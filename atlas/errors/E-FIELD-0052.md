@@ -19,8 +19,8 @@ A control of kind information was accepted against a high risk. It relies on a p
 
 ## Fix
 
-Require a design or a protective control against every high risk, with information in addition.
+Require a design or protective control against every high risk, with information only in addition.
 
 ```cpp
-if (risk_of(h) == "high" && protective == 0) problems.push_back(...);
+if (risk_of(h) == "high" && protective == 0) problems.push_back("hazard " + h.id + " is high and has no protective control");
 ```

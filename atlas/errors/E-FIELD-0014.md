@@ -13,7 +13,7 @@ The same slope is easy on one heading and impossible on another, and a planner t
 
 ## Cause
 
-The slope that matters is the one along the heading. On a grade of 0.2 the drive was 2.020 m/s2 up it and 4.022 across it.
+The slope was treated as the same in every direction. What matters is the slope along the heading: on a grade of 0.2 the drive could give 2.020 m/s2 up it and 4.022 across it.
 
 ## Fix
 

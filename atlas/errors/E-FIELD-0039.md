@@ -10,16 +10,16 @@ teaches: 22-13-a-world-for-gazebo
 
 ## Symptom
 
-The two simulators disagree about a result and the cause is a wall that was moved in one of them.
+The two simulators disagree, and the cause is a wall that was moved in one of them.
 
 ## Cause
 
-The world was typed, not made. A scenario of two patches, two walls, a post and a goal is 8 models; making them from the file leaves nothing to forget.
+The world was typed out again by hand. A scenario of two patches, two walls, a post and a goal is 8 models, and each is a place to forget a change.
 
 ## Fix
 
-Make the world from the scenario file every time, and edit the file.
+Make the world from the scenario file every time, and edit only the file.
 
 ```cpp
-write_file("yard.sdf", to_world(scenario, robot));
+write_file("yard.sdf", rc::field::to_world(scenario, robot));
 ```

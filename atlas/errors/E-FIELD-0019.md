@@ -14,7 +14,7 @@ Odometry is long by the same percentage on every run, or only on loose ground.
 
 ## Cause
 
-A wheel radius wrong by 2 percent read 0.20 m long over 10 m, and a slip of 5 percent read 0.50 m long.
+The encoder was trusted as the distance travelled. A wheel radius wrong by 2 percent read 0.20 m long over 10 m, and a slip of 5 percent read 0.50 m long.
 
 ## Fix
 

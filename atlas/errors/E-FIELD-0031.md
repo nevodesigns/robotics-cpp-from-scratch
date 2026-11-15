@@ -9,16 +9,16 @@ teaches: 22-10-scoring-a-run
 
 ## Symptom
 
-The cell meets its average time and misses the deadline one cycle in twenty.
+The cell meets its average time and misses its deadline one cycle in twenty.
 
 ## Cause
 
-The mean was 4.72 s and the 95th percentile 9.00 s. A failed trial must not enter the times either.
+The mean hid the slow trials. The mean was 4.72 s and the 95th percentile 9.00 s. A failed trial must not enter the times at all, or it pulls the mean either way.
 
 ## Fix
 
-Report the 95th percentile with the mean and keep failures out of the times.
+Report the 95th percentile with the mean, and keep failures out of the times.
 
 ```cpp
-const TrialSummary s = summarise_trials(trials);
+const rc::field::TrialSummary s = rc::field::summarise_trials(trials);
 ```

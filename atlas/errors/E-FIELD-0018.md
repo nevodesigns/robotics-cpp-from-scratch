@@ -9,16 +9,16 @@ teaches: 22-06-sensors-that-fail-like-the-field
 
 ## Symptom
 
-The robot lurches towards a position a few metres away for one cycle, then back.
+The robot lurches toward a position a few metres away for one cycle, then back.
 
 ## Cause
 
-About 1.03 percent of fixes jumped by metres even when the fix was fixed, which is good to 0.020 m.
+A GNSS jump was believed. About 1.03 percent of fixes jumped by metres even when the receiver reported a fixed solution, which is good to 0.020 m.
 
 ## Fix
 
 Gate each fix against the prediction before it is used, and treat an unlikely one as an outlier.
 
 ```cpp
-if (innovation_distance > gate) return;  // reject this fix
+if (innovation_distance > gate) return;   // reject this fix
 ```

@@ -15,12 +15,12 @@ Every run passes and the robot is seen to scrape a wall.
 
 ## Cause
 
-Only the final position was judged. The score now carries the clearance (down to -0.55 m inside a post) and the collisions.
+Only the final position was judged. A robot can reach its goal through a post.
 
 ## Fix
 
-Score the whole run: goals in order, clearance, collisions, time, straightness, and give thresholds to each.
+Score the whole run: goals in order, clearance, collisions, time and straightness, with a threshold for each. The score now carries the clearance (down to -0.55 m inside a post) and the collisions.
 
 ```cpp
-const NavScore s = score_navigation(scenario, log, robot_radius);
+const rc::field::NavScore s = rc::field::score_navigation(scenario, log, robot_radius);
 ```

@@ -10,15 +10,15 @@ teaches: 22-01-a-robot-as-an-interface
 
 ## Symptom
 
-The robot stops a hand's width too late every time, and the margin in the planner is wrong by exactly that much.
+The robot stops a hand's width too late every time, and the planner's margin is wrong by exactly that much.
 
 ## Cause
 
-The base answers a command with a lag. A stop at 1 m/s coasted 0.200 m, the speed times a time constant of 0.2 s.
+The stop was taken as instant. A base answers a command with a lag: a stop from 1 m/s coasted 0.200 m, the speed times a time constant of 0.2 s.
 
 ## Fix
 
-Plan with the stopping distance of the base, speed times time constant at least, and measure it on the real base.
+Plan with the base's stopping distance, at least the speed times its time constant, and measure the time constant on the real base.
 
 ```cpp
 const double coast = speed * limits.tau;

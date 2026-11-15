@@ -14,12 +14,12 @@ Nobody can say exactly what was run last month, or run it in the other simulator
 
 ## Cause
 
-The ground, the walls and the faults were written as code. A file of 15 lines holds all of them.
+The scenario lived in the source: the ground, the walls and the faults were written as code. A file of 15 lines holds all of them.
 
 ## Fix
 
 Keep the scenario as a file, build both simulators' worlds from it, and keep the file with the results.
 
 ```cpp
-const ScenarioParse p = parse_scenario(text);
+const rc::field::ScenarioParse p = rc::field::parse_scenario(text);
 ```

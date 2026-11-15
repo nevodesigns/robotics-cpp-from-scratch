@@ -10,16 +10,18 @@ teaches: 22-12-describing-a-robot-once
 
 ## Symptom
 
-The simulated robot behaves differently from the real one and nobody can say which of its numbers to doubt.
+The simulated robot behaves differently from the real one, and nobody can say which of its numbers to doubt.
 
 ## Cause
 
-The numbers had no record of where they came from. In the reference file 3 of 11 are typical, and that is written beside each.
+The numbers had no record of where they came from.
 
 ## Fix
 
-Refuse a number without a source or the word typical, and replace typical values with measured ones as they become known.
+Refuse a number without a source or the word typical, and replace typical values with measured ones as they become known. In the reference file 3 of 11 are typical, and it says so beside each.
 
 ```cpp
 track_width 0.160 source <where it came from>
 ```
+
+The line above is from the robot file of 22-12; parse_robot refuses it without a source.

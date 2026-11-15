@@ -13,12 +13,13 @@ One sensor's points land on top of the robot, and nothing says why.
 
 ## Cause
 
-A lookup that cannot find a frame returned the identity transform, which is a valid answer.
+A lookup that could not find a frame returned the identity transform, which looks like a valid answer.
 
 ## Fix
 
 Return a failure for an unknown frame, for frames in different trees and for a loop, and make the caller handle it.
 
 ```cpp
-if (!tree.between("lidar", "map", out)) return;
+rc::field::Tf3 out;
+if (!tree.between("lidar", "map", out)) return;   // no transform, no points
 ```

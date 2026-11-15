@@ -13,12 +13,12 @@ A gain that worked on a model with an instant motor rings or oscillates on the r
 
 ## Cause
 
-The motor answers a voltage with a lag of 0.246 s for this load, and the model had none.
+The model had no motor lag. A motor answers a voltage with a time constant set by its inertia, resistance and constants: 0.246 s for this load.
 
 ## Fix
 
-Compute the time constant from J, R and the constants, check it against a step, and tune with it.
+Work the time constant out from J, R and the constants, check it against a step on the motor, and tune with it in the model.
 
 ```cpp
-const double tau = motor.time_constant();
+const double tau = motor.time_constant();   // J R / (ke^2 + b R)
 ```

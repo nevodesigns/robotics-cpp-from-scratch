@@ -13,12 +13,13 @@ The run that failed is the one whose log will not load.
 
 ## Cause
 
-The write was cut by the loss of power and the reader treated the stump as corruption. A cut log read as 999 entries with the truncated flag.
+The write was cut by the loss of power, and the reader treated the stump as corruption and refused the whole log.
 
 ## Fix
 
-End every line with a newline, drop an unfinished last line, and say so.
+End every line with a newline, drop an unfinished last line, and say so. A log cut in the middle of a line read as 999 entries with the truncated flag.
 
 ```cpp
-if (!body.empty() && body.back() != '\n') out.truncated = true;
+const rc::field::LogParse p = rc::field::parse_log(text);
+if (p.truncated) note("the last line was cut short and dropped");
 ```

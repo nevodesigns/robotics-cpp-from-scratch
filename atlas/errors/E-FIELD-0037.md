@@ -10,16 +10,17 @@ teaches: 22-12-describing-a-robot-once
 
 ## Symptom
 
-The two simulators give different results and the difference is exactly the change someone made in one of them.
+The two simulators give different results, and the difference is exactly a change someone made in one of them.
 
 ## Cause
 
-The track width, the wheel radius and the limits were typed in the model of each. One file now gives both.
+A dimension was written in two places: the track width, the wheel radius and the limits were typed into each model.
 
 ## Fix
 
 Describe the robot once and make both models from the description.
 
 ```cpp
-const std::string sdf = to_sdf(p.robot);
+const std::string sdf = rc::field::to_sdf(p.robot);
+const rc::field::VehicleLimits lim = rc::field::limits_of(p.robot);
 ```

@@ -9,16 +9,16 @@ teaches: 22-02-frames-for-a-field-robot
 
 ## Symptom
 
-The robot sees a wall in front of it on flat ground, or misses a kerb, depending on the mounting of the sensor.
+The robot sees a wall ahead on flat ground, or misses a kerb, depending on how the sensor is mounted.
 
 ## Cause
 
-The scan was used as if the sensor looked along the ground. At 0.25 m and 5 degrees down the ground is at 2.858 m.
+The scan was used as if the sensor looked along the ground. A sensor 0.25 m up and tipped 5 degrees down meets flat ground 2.858 m ahead, and a tilted scan read as flat puts that ground in the way.
 
 ## Fix
 
-Put the mount in the tree, with its pitch, and take the points through it before they reach the planner.
+Put the mount in the frame tree, with its pitch, and take the points through it before they reach the planner.
 
 ```cpp
-tree.add("lidar", "base", from_rpy(0.0, 0.0, 0.25, 0, tilt, 0));
+tree.add("lidar", "base", rc::field::from_rpy(0.0, 0.0, 0.25, 0.0, tilt, 0.0));
 ```

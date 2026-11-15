@@ -13,7 +13,7 @@ The room is right where the walls are axis aligned and wrong everywhere else.
 
 ## Cause
 
-The box was given the length and no angle. A wall from (0,0) to (3,4) is 5.000 m long turned 0.927295 rad.
+Every wall was laid along the x axis. The box was given the length and no angle: a wall from (0,0) to (3,4) is 5.000 m long, turned 0.927295 rad.
 
 ## Fix
 

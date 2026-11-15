@@ -11,16 +11,16 @@ teaches: 22-17-a-safety-case-per-robot-type
 
 ## Symptom
 
-The case reads well and nobody can say which test shows that a control works.
+The safety case reads well and nobody can say which test shows that a control works.
 
 ## Cause
 
-A control was written down with no test, or with one that fails. The checker found 6 problems in a case with five deliberate holes.
+A control was written down with no test, or with a test that fails.
 
 ## Fix
 
-Make every control name a test and require the test to pass.
+Make every control name a test and require that test to pass. The checker found 6 problems in a case with five deliberate holes.
 
 ```cpp
-if (k.test.empty()) problems.push_back("control " + k.id + " has no test that proves it");
+const std::vector<std::string> problems = rc::field::check_case(c);
 ```

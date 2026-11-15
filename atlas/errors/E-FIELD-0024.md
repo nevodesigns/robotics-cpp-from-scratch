@@ -14,12 +14,12 @@ A change makes the robot behave differently and nobody can find when the two run
 
 ## Cause
 
-There was no way to say when two logs first differ. With one, the same seed twice gave none and another seed differed from 0.02 s.
+There was no way to say when two logs first differ.
 
 ## Fix
 
-Compare logs by the time of the first difference, and make determinism a test.
+Compare logs by the time of their first difference, and make determinism a test. The same seed twice gave none; another seed differed from 0.02 s.
 
 ```cpp
-const double t = first_difference(a, b, 1e-9);
+const double t = rc::field::first_difference(a, b, 1e-9);
 ```

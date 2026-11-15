@@ -9,15 +9,15 @@ teaches: 22-09-watching-a-run
 
 ## Symptom
 
-The plot looks fine and the robot's turn is the wrong way round compared with the robot.
+The plot looks fine, and the robot turns the other way from what it did.
 
 ## Cause
 
-The robot's y axis is up and an SVG's is down; the data was drawn as it was.
+The picture is the mirror image of the run: the robot's y axis points up and an SVG's points down, and the data was drawn as it was.
 
 ## Fix
 
-Draw the world in a group with scale(1,-1) and start the view box at minus the top.
+Draw the world in a group with scale(1,-1), and start the view box at minus the top.
 
 ```cpp
 o << "<g transform=\"scale(1,-1)\">";

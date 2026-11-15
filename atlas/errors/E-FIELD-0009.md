@@ -9,16 +9,16 @@ teaches: 22-03-units-and-limits-that-cannot-be-mixed
 
 ## Symptom
 
-Stops are planned far longer than they need to be, or the reverse when the braking limit is the weaker one.
+Stops are planned far longer than they need be, or shorter when braking is the weaker limit.
 
 ## Cause
 
-One number was used for both. A ramp to 1 m/s took 2.000 s and the stop from it 0.667 s.
+One number was used for speeding up and for slowing down. Here a ramp to 1 m/s took 2.000 s and the stop from it 0.667 s: braking is three times the acceleration.
 
 ## Fix
 
 Keep the two limits apart, and take each from a measurement of the vehicle.
 
 ```cpp
-const double allowed = (fabs(v) > fabs(prev_v) ? lim.max_accel : lim.max_decel) * dt;
+const double allowed = (std::fabs(v) > std::fabs(prev_v) ? lim.max_accel : lim.max_decel) * dt;
 ```

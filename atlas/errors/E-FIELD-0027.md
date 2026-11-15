@@ -14,12 +14,12 @@ The run that went wrong is the one that cannot be seen, because the robot left t
 
 ## Cause
 
-The view was sized from the walls. The picture of the yard was 16.0 m by 9.0 m because it held the poses too.
+The view was sized to the walls. A robot that went outside them was drawn off the picture.
 
 ## Fix
 
-Grow the bounds over everything drawn, including the path, and add a margin.
+Grow the bounds over everything drawn, the path included, and add a margin. The picture of the yard became 16.0 m by 9.0 m because it held the poses too.
 
 ```cpp
-Bounds b = bounds_of(scenario, log);
+const rc::field::Bounds b = rc::field::bounds_of(scenario, log);
 ```

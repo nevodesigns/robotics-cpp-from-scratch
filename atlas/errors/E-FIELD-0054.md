@@ -9,16 +9,18 @@ teaches: 22-12-describing-a-robot-once
 
 ## Symptom
 
-A turn from rest is right and the same turn after a drive is short by a quarter, and the simulator seems to be wrong about friction.
+A turn from rest is right, the same turn after a drive is short by a quarter, and the simulator seems to be wrong about friction.
 
 ## Cause
 
-The centre of mass was over the axle, so the robot rested on two wheels and a caster that touched only when the body rocked. Friction was not the cause: changing it changed nothing. Moving the weight 14.6 mm behind the axle fixed it.
+The robot's weight was over its axle, so it rested on two wheels and a caster that touched the floor only when the body rocked, which driving and stopping do. Friction was not the cause: changing it changed nothing.
 
 ## Fix
 
-Put the weight between the axle and the caster, and check with a turn after a drive, not only from rest.
+Put the weight between the axle and the caster, and check with a turn after a drive, not only from rest. The robot file now puts the whole robot's centre of mass 40 percent of the way to the caster, 14.4 mm behind the axle (the chassis' own centre is 14.6 mm behind it), and the turns after a drive came right.
 
 ```cpp
 com_back 0.0144 source typical
 ```
+
+The line above is the optional com_back line of the robot file. Lesson 23-09 writes com_back 0.001 to bring the fault back and measure it.

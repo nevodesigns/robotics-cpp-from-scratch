@@ -15,12 +15,12 @@ The built in model's robot answers a command faster or slower than the one in Ga
 
 ## Cause
 
-The time constant was a round number, 0.05 s. Read from Gazebo's own step response it was 0.062 s.
+The time constant was a round number taken from a data sheet, 0.05 s. Read from Gazebo's own step response it was 0.062 s.
 
 ## Fix
 
 Read the parameter from a run of the thing you want to match, and set it.
 
 ```cpp
-const double tau = response_time_constant(run_script(other, step, 0.01));
+const double tau = rc::field::response_time_constant(rc::field::run_script(other, step, 0.01));
 ```

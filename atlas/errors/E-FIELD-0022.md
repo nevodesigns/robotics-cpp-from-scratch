@@ -13,12 +13,12 @@ Saving a scenario changes it, and a later run is not of the scenario that was lo
 
 ## Cause
 
-The writer dropped or reordered something. The text after a parse, a write, a parse and a write has to equal the text after one.
+The writer dropped or reordered something. Text that has been parsed and written once must come back the same after a second parse and write.
 
 ## Fix
 
-Write in a fixed order, with enough digits, and test the round trip.
+Write in a fixed order with enough digits, and test the round trip.
 
 ```cpp
-RC_CHECK(write_scenario(parse_scenario(once).scenario) == once);
+RC_CHECK(rc::field::write_scenario(rc::field::parse_scenario(once).scenario) == once);
 ```

@@ -13,11 +13,11 @@ Odometry is long or short by the same fraction on every run.
 
 ## Cause
 
-The documented counts were not the board's. A tick count 15 percent off read as 1378 ticks a metre against 1200.
+The ticks per metre were taken from the data sheet, not from the board. A count 15 percent off read 1378 ticks a metre where the documents said 1200.
 
 ## Fix
 
-Drive a measured distance and read the ticks a metre; put the measured value in the driver.
+Drive a measured distance, read the ticks a metre, and put the measured value in the driver.
 
 ```cpp
 const double per_metre = ticks / measured_metres;

@@ -9,16 +9,16 @@ teaches: 22-15-two-simulators-and-the-gap
 
 ## Symptom
 
-The final poses agree and the planner behaves differently in the two simulators.
+The final poses agree, and the planner behaves differently in the two simulators.
 
 ## Cause
 
-Only the end was compared. The way there can differ while the end is the same; the gap has a largest and an rms as well as a final value.
+Only the end was compared. The way there can differ while the end is the same.
 
 ## Fix
 
-Compare the whole trace, sample against sample, and keep all three numbers.
+Compare the whole trace sample against sample, and keep the largest gap and the rms as well as the final one.
 
 ```cpp
-const TraceGap g = compare_traces(a, b);  // max_position, rms_position, final_position
+const rc::field::TraceGap g = rc::field::compare_traces(a, b);   // max_position, rms_position, final_position
 ```

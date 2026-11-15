@@ -9,16 +9,16 @@ teaches: 22-16-a-bring-up-checklist-for-a-board
 
 ## Symptom
 
-The robot drives on after the program that was commanding it has gone.
+The robot drives on after the program commanding it has gone.
 
 ## Cause
 
-The board holds its last command for ever unless its firmware drops it. The watchdog check gives one command and then silence, and found the board that had none.
+The new board had no watchdog. It holds its last command for ever unless its firmware drops it.
 
 ## Fix
 
-Turn on the watchdog in the firmware, and test it with the cable pulled.
+Turn on the watchdog in the firmware, and test it with the cable pulled. The bring-up's watchdog check gives one command and then silence, and it found the board that had none.
 
 ```cpp
-if (since_command_ > watchdog) wheels = 0;
+if (since_command_ > watchdog) wheels = 0;   // in the firmware
 ```

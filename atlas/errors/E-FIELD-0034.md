@@ -15,12 +15,12 @@ A program that works on the simulator misbehaves on the board in a way nobody ca
 
 ## Cause
 
-The interface said what can be called and nothing about what happens. Six drives that each break one promise were all caught by one contract.
+The interface had no contract. It said what can be called and nothing about what happens: what a stale command does, what a NaN does, how fast speed may change.
 
 ## Fix
 
-Write the contract as a test that takes any implementation, and run it on every one.
+Write the contract as a test that takes any implementation, and run it on every one. Six drives that each broke one promise were all caught by one contract.
 
 ```cpp
-const auto broken = check_drive_contract(make_my_drive, expectations);
+const std::vector<std::string> broken = rc::hal::check_drive_contract(make_my_drive, expectations);
 ```

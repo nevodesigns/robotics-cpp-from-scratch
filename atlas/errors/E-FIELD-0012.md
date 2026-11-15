@@ -14,12 +14,12 @@ A position that is exact in the log is a little off on the robot, and the error 
 
 ## Cause
 
-The encoder is on the motor side of the gearbox. The output rested at the edge of the gap, -1.00 degrees from below and 1.00 degrees from above.
+The encoder is on the motor's side of the gearbox, and the gear has play. The output rested at the edge of the gap: -1.00 degree approached from below and 1.00 degree from above.
 
 ## Fix
 
-Put a sensor on the output, or always approach a position from one side, or model the gap.
+Put a sensor on the output, or always approach a position from the same side, or model the gap.
 
 ```cpp
-const double where = motor.output_angle();  // not gear_angle()
+const double where = motor.output_angle();   // not the motor's angle through the ratio
 ```

@@ -10,11 +10,11 @@ teaches: 22-11-the-contract-test-for-an-interface
 
 ## Symptom
 
-A sensor fault or a division by zero upstream produces a NaN command, and the robot sets off at its maximum speed.
+A sensor fault or a division by zero upstream makes a NaN command, and the robot sets off at full speed.
 
 ## Cause
 
-std::max(-limit, std::min(limit, x)) returns the limit when x is NaN, because NaN is not less than anything. The fake of 22-01 did this until the contract found it (2 promises broken by the plain clamp).
+The clamp turned the NaN into the limit. std::max(-limit, std::min(limit, x)) returns the limit when x is NaN, because NaN is not less than anything. The fake drive of 22-01 did this until the contract found it: the plain clamp broke 2 promises.
 
 ## Fix
 

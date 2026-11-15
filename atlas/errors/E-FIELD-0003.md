@@ -9,16 +9,16 @@ teaches: 22-01-a-robot-as-an-interface
 
 ## Symptom
 
-Some joints move and some do not after a command built for a different robot.
+After a command built for another robot, some joints move and some do not.
 
 ## Cause
 
-A command with the wrong number of joints was applied as far as it went. JointBus refuses it as a whole.
+A command with the wrong number of joints was applied as far as it went. Half a command is worse than none: the robot is in a pose nobody asked for.
 
 ## Fix
 
-Check the size, refuse the whole command, and use separate types for separate robots.
+Check the size, refuse the whole command, and use separate types for separate robots. JointBus refuses it as a whole.
 
 ```cpp
-if (targets.size() != target_.size()) return false;
+if (targets.size() != target_.size()) return false;   // nothing applied
 ```

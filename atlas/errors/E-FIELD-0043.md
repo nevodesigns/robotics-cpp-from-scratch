@@ -13,12 +13,12 @@ The simulators disagree by a different amount each time the comparison is run.
 
 ## Cause
 
-One of them ran in real time, so the length of the run depended on the machine. The Gazebo backend is paused and stepped, so a run is as long as it was asked to be.
+One of them ran in real time, so a run's length depended on the machine. Runs of different lengths cannot be compared.
 
 ## Fix
 
-Advance simulated time explicitly in both and compare at equal times.
+Advance simulated time explicitly in both and compare at equal times. The Gazebo backend is paused and stepped, so a run is as long as it was asked to be.
 
 ```cpp
-request.set_multi_step(steps);  // then wait for the clock
+request.set_multi_step(steps);   // then wait for the clock
 ```

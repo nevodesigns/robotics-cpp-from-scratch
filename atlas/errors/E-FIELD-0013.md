@@ -10,16 +10,16 @@ teaches: 22-05-terrain-and-friction
 
 ## Symptom
 
-Stops that are exact on the test floor are metres long on the field.
+Stops that are exact on the test floor are metres long in the field.
 
 ## Cause
 
-The stopping distance goes as the inverse of the friction. At 2 m/s it was 0.250 m on tarmac and 1.853 m on ice.
+The speed limit was chosen for one surface. Stopping distance goes as one over the friction: from 2 m/s it was 0.250 m on tarmac and 1.853 m on ice.
 
 ## Fix
 
 Take the braking limit from the surface under the vehicle, and plan the stop with it.
 
 ```cpp
-const double stop = stopping_distance(speed, traction(world.at(x, y), heading).brake);
+const double stop = rc::field::stopping_distance(speed, rc::field::traction(world.at(x, y), heading).brake);
 ```

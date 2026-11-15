@@ -13,11 +13,11 @@ The program crashes and the robot drives on at its last speed.
 
 ## Cause
 
-The drive had no watchdog and nothing tested for one. The contract's watchdog promise caught it (1 broken).
+The drive had no watchdog, and nothing tested for one.
 
 ## Fix
 
-Make the watchdog a promise in the contract and test every implementation for it.
+Make the watchdog a promise in the contract and test every implementation for it. The contract's watchdog promise caught the drive without one (1 broken).
 
 ```cpp
 if (since_command_ > limits_.watchdog) target = DriveCommand();

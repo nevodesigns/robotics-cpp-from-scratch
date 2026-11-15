@@ -16,11 +16,11 @@ The robot in Gazebo starts moving a moment later than the same program on the bu
 
 ## Cause
 
-The command was a message on a topic and the world was stepped at once. The backend waits a moment after publishing.
+The command was a message on a topic and the world was stepped at once, before it had arrived.
 
 ## Fix
 
-Let the message arrive before stepping, and check it by comparing the start of the trace on both backends.
+Let the message arrive before stepping; the backend waits a moment after publishing. Check it by comparing the start of the trace on both backends.
 
 ```cpp
 std::this_thread::sleep_for(std::chrono::milliseconds(50));

@@ -9,16 +9,16 @@ teaches: 22-10-scoring-a-run
 
 ## Symptom
 
-The mean stride period and the duty factor look right and the robot is seen to stumble.
+The mean stride period and the duty factor look right, and the robot is seen to stumble.
 
 ## Cause
 
-One missed step is one long period among many. The irregularity went from 0.000 to 0.222.
+The gait was judged by its averages. One missed step is one long period among many, and barely moves the mean.
 
 ## Fix
 
-Score the spread of the periods as well as their mean.
+Score the spread of the periods as well as their mean. The missed step took the irregularity from 0.000 to 0.222.
 
 ```cpp
-const GaitMetrics g = gait_metrics(contact, dt);
+const rc::field::GaitMetrics g = rc::field::gait_metrics(contact, dt);
 ```
