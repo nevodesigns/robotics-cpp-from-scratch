@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "38-04-training-without-fooling-yourself",
+  "title": "Training Without Fooling Yourself: The Step Size, a Network That Learns the Noise, and Stopping on a Validation Set",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "38-03-a-small-network-and-its-gradient",
+    "38-02-a-policy-that-is-a-straight-line",
+    "38-01-a-dataset-you-can-trust"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/train.hpp",
+    "note": "training the network of 38-03 on the demonstrations: one step of gradient descent on one sample, an epoch that visits every training sample once in an order shuffled from a seed, the mean squared error of a network on a set (with the training part's scale), and training that keeps the weights with the lowest error on a validation set and stops when that error has not improved for a number of epochs; with the step size too small, right and too large, a network that over-fits a small noisy set, and the network against the straight line on the same split"
+  },
+  "breaks_first": [
+    "E-LRN-0010",
+    "E-LRN-0011",
+    "E-LRN-0012"
+  ]
+}

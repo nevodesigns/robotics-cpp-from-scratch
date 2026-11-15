@@ -1,0 +1,78 @@
+{
+  "lesson": "38-04-training-without-fooling-yourself",
+  "title": "Training Without Fooling Yourself: The Step Size, a Network That Learns the Noise, and Stopping on a Validation Set",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is the training error the wrong thing to judge a network by?",
+      "options": [
+        "It is always zero",
+        "It is too noisy to read",
+        "It goes on falling while the network learns the noise of its training set",
+        "It is measured in the wrong units"
+      ],
+      "correct": 2,
+      "explanation": "A network with enough weights can fit its training samples, noise and all. Only data it has not seen says whether it learned the task."
+    },
+    {
+      "stage": "check",
+      "question": "With a step of 1.0, what happened to the weights?",
+      "options": [
+        "They grew without bound and the error became NaN",
+        "They stayed where they started",
+        "They reached the best error fastest",
+        "They learned the noise"
+      ],
+      "correct": 0,
+      "explanation": "Each step overshot the minimum by more than the last. A NaN in training is nearly always a step that is too large."
+    },
+    {
+      "stage": "check",
+      "question": "On 30 noisy samples, where was the validation error lowest and where did it end?",
+      "options": [
+        "Lowest at the last epoch, 0.0448",
+        "0.0280 at epoch 346, and 0.0448 at the end",
+        "0.00012 at the end",
+        "It fell all the way, like the training error"
+      ],
+      "correct": 1,
+      "explanation": "After epoch 346 the network fitted the noise of its 30 samples, and the validation error rose."
+    },
+    {
+      "stage": "check",
+      "question": "Training stopped with a patience of 200. At which epoch, and whose weights did it keep?",
+      "options": [
+        "At epoch 3000, keeping the last weights",
+        "At epoch 346, keeping the last weights",
+        "At epoch 200, keeping the first weights",
+        "At epoch 546, keeping the weights of epoch 346"
+      ],
+      "correct": 3,
+      "explanation": "It went on for 200 epochs without improvement, then gave back the best weights it had seen."
+    },
+    {
+      "stage": "post",
+      "question": "Why are the samples shuffled from a seed each epoch?",
+      "options": [
+        "So each episode does not pull the network in turn, and so the run can be repeated exactly",
+        "Because the gradient is wrong otherwise",
+        "To make training faster per step",
+        "To hide which samples are in the test set"
+      ],
+      "correct": 0,
+      "explanation": "Shuffling breaks the order of the episodes; the seed makes the shuffle, and so the weights, the same every time."
+    },
+    {
+      "stage": "post",
+      "question": "Which set should the stopping epoch be chosen on?",
+      "options": [
+        "The test set, since that is what is reported",
+        "The training set",
+        "A validation set kept apart from both",
+        "Whichever set gives the lowest number"
+      ],
+      "correct": 2,
+      "explanation": "Choosing on the test set makes it part of training. The test set is looked at once, at the end."
+    }
+  ]
+}
