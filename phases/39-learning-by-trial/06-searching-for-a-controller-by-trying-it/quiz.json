@@ -1,0 +1,78 @@
+{
+  "lesson": "39-06-searching-for-a-controller-by-trying-it",
+  "title": "Searching for a Controller by Trying It: A Pole on a Cart, Four Gains, and Random Changes Kept When They Help",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why can the Q table of 39-03 not be used to balance a pole on a cart?",
+      "options": [
+        "The state is continuous, so there is no cell for every state",
+        "The pole has no reward",
+        "The cart has only two actions",
+        "The table would be too accurate"
+      ],
+      "correct": 0,
+      "explanation": "A table needs a cell per state; a controller with a few numbers does not."
+    },
+    {
+      "stage": "check",
+      "question": "With every gain zero, how long did the pole balance, and after 300 tries of random search?",
+      "options": [
+        "500.0 and then 36.9 steps",
+        "36.9 steps, and then 500.0",
+        "Both 500",
+        "Zero both times"
+      ],
+      "correct": 1,
+      "explanation": "From falling at once to balancing almost the whole limit of 500 steps."
+    },
+    {
+      "stage": "check",
+      "question": "From 100 starts the search never saw, how long did the found gains balance?",
+      "options": [
+        "497.9 steps on average",
+        "36.9 steps",
+        "They failed at once",
+        "64.0 steps"
+      ],
+      "correct": 0,
+      "explanation": "It learned the task, not the twenty starts it was scored on."
+    },
+    {
+      "stage": "check",
+      "question": "How many trial runs did the search take?",
+      "options": [
+        "20",
+        "300",
+        "6000",
+        "One"
+      ],
+      "correct": 2,
+      "explanation": "300 tries of 20 runs each, every one a pole that may fall on a real cart."
+    },
+    {
+      "stage": "post",
+      "question": "When should a controller be learned by trial rather than designed from the equations?",
+      "options": [
+        "Always, since learning is better",
+        "Never",
+        "When the equations are not known or not to be trusted",
+        "Only when the controller has one gain"
+      ],
+      "correct": 2,
+      "explanation": "With good equations, design (phase 14); use learning to check or tune."
+    },
+    {
+      "stage": "post",
+      "question": "Why are the found gains tested on starts the search never used?",
+      "options": [
+        "To check it learned the task and not the particular starts it was scored on",
+        "To make the score higher",
+        "Because the search used no starts",
+        "To save time"
+      ],
+      "correct": 0,
+      "explanation": "Scored on fixed starts, a search can fit them; held-out starts say whether it generalises."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "39-06-searching-for-a-controller-by-trying-it",
+  "title": "Searching for a Controller by Trying It: A Pole on a Cart, Four Gains, and Random Changes Kept When They Help",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "39-03-learning-from-trying",
+    "35-05-keeping-the-body-level",
+    "14-04-choosing-the-gains"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/cartpole_search.hpp",
+    "note": "learning by trial for a continuous state: the classic pole on a cart (a cart pushed by a limited force along a track, a pole hinged on it), a controller that is four gains on the cart's position and speed and the pole's angle and rate, a score that is the mean number of steps it balances from random small starts, and random search, which tries a random change to the gains and keeps it when the score is higher; the score before any learning, after ten, fifty and three hundred tries, and on starts the search never saw"
+  },
+  "breaks_first": [
+    "E-LRN-0040",
+    "E-LRN-0041",
+    "E-LRN-0042"
+  ]
+}
