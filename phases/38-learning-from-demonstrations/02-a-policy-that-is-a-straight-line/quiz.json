@@ -1,0 +1,78 @@
+{
+  "lesson": "38-02-a-policy-that-is-a-straight-line",
+  "title": "A Policy That Is a Straight Line: Least Squares on the Demonstrations, the Gains It Finds, and the Limit It Cannot Fit",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why fit a straight-line policy before a network?",
+      "options": [
+        "A network cannot be fitted until a line has been",
+        "A line is always more accurate than a network",
+        "It is the baseline: a network that does no better has learned nothing the line did not",
+        "A line needs no data"
+      ],
+      "correct": 2,
+      "explanation": "The line costs one solve and no tuning, and its error is the number every more complex learner has to beat."
+    },
+    {
+      "stage": "check",
+      "question": "From demonstrations that never reached the car's limit, what did least squares find?",
+      "options": [
+        "The expert's own gains, -2.000 and -3.000",
+        "Gains about half the expert's",
+        "-1.044 and -1.576",
+        "Zero, since the data had no noise"
+      ],
+      "correct": 0,
+      "explanation": "Within its linear range the expert is a straight line, and the fit recovered it with an error of 0.000000."
+    },
+    {
+      "stage": "check",
+      "question": "With 8.4 percent of the actions at the limit, what did the line do?",
+      "options": [
+        "It found the expert's gains again",
+        "Its weights shrank to -1.044 and -1.576 and an error of 0.01816 was left",
+        "It failed to solve",
+        "It fitted the limit exactly"
+      ],
+      "correct": 1,
+      "explanation": "A line cannot stop growing where the expert's turn does. The best line is a compromise that is wrong at both ends."
+    },
+    {
+      "stage": "check",
+      "question": "A ridge of 100 was added. What happened?",
+      "options": [
+        "The error fell",
+        "The constant was pulled to zero",
+        "The weights grew",
+        "The weights shrank to -0.592 and -0.614 and the error rose to 0.04677"
+      ],
+      "correct": 3,
+      "explanation": "The ridge trades error for steadiness. It is worth it with few or collinear samples, not here."
+    },
+    {
+      "stage": "post",
+      "question": "Why does fit_linear give the zero policy for a set in which one state was seen ten times?",
+      "options": [
+        "Ten samples are too few for any fit",
+        "The normal equations are singular: one state cannot fix two weights and a constant",
+        "The ridge was zero",
+        "Zero is the least squares answer for one state"
+      ],
+      "correct": 1,
+      "explanation": "With no variation in the features, many lines fit equally well. Returning one of them as if it were learned would be a guess."
+    },
+    {
+      "stage": "post",
+      "question": "How should the ridge be chosen?",
+      "options": [
+        "By its error on a validation set kept apart from the test set",
+        "As large as possible",
+        "By its error on the test set",
+        "Always zero"
+      ],
+      "correct": 0,
+      "explanation": "A ridge chosen on the test set makes the test set part of the training, the leak of 38-01 in another form."
+    }
+  ]
+}

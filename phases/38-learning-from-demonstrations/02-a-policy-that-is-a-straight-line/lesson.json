@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "38-02-a-policy-that-is-a-straight-line",
+  "title": "A Policy That Is a Straight Line: Least Squares on the Demonstrations, the Gains It Finds, and the Limit It Cannot Fit",
+  "type": "build",
+  "minutes": 80,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "38-01-a-dataset-you-can-trust",
+    "06-07-solving-a-system",
+    "06-08-the-fit-the-outliers-pulled"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/linear_policy.hpp",
+    "note": "the simplest learned policy: a turn rate that is a weighted sum of the offset and the heading error plus a constant, fitted to the demonstrations by least squares (the normal equations, three by three, solved by elimination with pivoting), with a ridge term that pulls the weights toward zero; it finds the expert's gains exactly where the expert never reached its limit, and shrunk, with an error it cannot remove, where the expert's turn was clipped"
+  },
+  "breaks_first": [
+    "E-LRN-0004",
+    "E-LRN-0005",
+    "E-LRN-0006"
+  ]
+}
