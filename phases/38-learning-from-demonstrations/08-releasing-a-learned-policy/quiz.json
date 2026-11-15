@@ -1,0 +1,78 @@
+{
+  "lesson": "38-08-releasing-a-learned-policy",
+  "title": "Releasing a Learned Policy: Every Check of Phase 38 Run Against One Job, and the First That Fails Named",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why is beating the straight line the first requirement?",
+      "options": [
+        "A network that does no better than a line has earned nothing, and the line can be read by a person",
+        "Because lines are always worse",
+        "Because it is the quickest check to code",
+        "Because the line is the expert"
+      ],
+      "correct": 0,
+      "explanation": "If the network does not beat the baseline, ship the baseline."
+    },
+    {
+      "stage": "check",
+      "question": "The DAgger policy: what were its test error, success and handover?",
+      "options": [
+        "0.01240, 73 percent and 12 percent",
+        "0.00022 against the line's 0.01240, 98 percent, and 3.2 percent",
+        "0.00056, 95 percent and 5 percent",
+        "It was not tested"
+      ],
+      "correct": 1,
+      "explanation": "Every requirement passed, so it was released."
+    },
+    {
+      "stage": "check",
+      "question": "Where did the plain clone fail, and why?",
+      "options": [
+        "At requirement 3 only, since its guard handed over on 12 percent",
+        "At requirement 6, it could not be trained again",
+        "At requirement 1: on the job's episodes its error, 0.01618, was worse than the line's 0.01240",
+        "It passed"
+      ],
+      "correct": 2,
+      "explanation": "Taught only near the centre, it extrapolates worse than a line. Its guard's 12 percent would have failed it at 3 as well."
+    },
+    {
+      "stage": "check",
+      "question": "The DAgger policy given starts within 0.95 m and 1.2 rad failed at requirement 2. What does that say?",
+      "options": [
+        "The policy is bad",
+        "The line should be shipped",
+        "The job asks for starts some of which no controller can recover from; the policy still beats the line",
+        "The guard is broken"
+      ],
+      "correct": 2,
+      "explanation": "It succeeded on 73 percent. The verdict says the job is the problem, not the network."
+    },
+    {
+      "stage": "post",
+      "question": "A network of one hidden unit trained for 2 epochs passed every requirement. Why?",
+      "options": [
+        "The expert is a line clipped at the car's limit, and one tanh unit is almost exactly a clipped line",
+        "The check is too easy",
+        "Two epochs is always enough",
+        "It was lucky with its seed"
+      ],
+      "correct": 0,
+      "explanation": "A network the size of the task's shape is enough. The line comparison is what shows a small one has earned its place."
+    },
+    {
+      "stage": "post",
+      "question": "Why must a released policy carry the data and settings it was trained with?",
+      "options": [
+        "So that it can be trained again, to fix it or to show it was made the way it says",
+        "To make the file larger",
+        "Because the guard needs the data at run time",
+        "So that the test set can be recovered"
+      ],
+      "correct": 0,
+      "explanation": "A policy that cannot be made again cannot be audited or repaired."
+    }
+  ]
+}

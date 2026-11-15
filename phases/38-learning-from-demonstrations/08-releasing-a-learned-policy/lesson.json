@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "id": "38-08-releasing-a-learned-policy",
+  "title": "Releasing a Learned Policy: Every Check of Phase 38 Run Against One Job, and the First That Fails Named",
+  "type": "build",
+  "minutes": 110,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "38-07-a-learned-policy-behind-a-guard",
+    "38-06-asking-the-expert-where-the-learner-goes",
+    "38-02-a-policy-that-is-a-straight-line",
+    "36-08-a-quadruped-for-a-job",
+    "33-10-a-mobile-manipulator-for-a-job"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/policy_release.hpp",
+    "note": "the capstone of the learning-from-demonstrations phase: a job written as numbers (the spread of starts the policy must handle, the share it must succeed on, the largest share of steps the guard may hand over) and a learned policy written as its network, its guard and how it was trained; a check that it beats the straight line on new episodes (38-02), succeeds from the job's starts behind its guard (38-05, 38-07), hands over rarely, survives an input that is not a number, never commands past the car's limit, and comes out the same when trained again from the same seed (38-04), and says which requirement is the first to fail"
+  },
+  "breaks_first": [
+    "E-LRN-0022",
+    "E-LRN-0023",
+    "E-LRN-0024"
+  ],
+  "timeout": 240
+}
