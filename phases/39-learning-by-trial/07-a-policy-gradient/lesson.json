@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "39-07-a-policy-gradient",
+  "title": "A Policy Gradient: Trying Noisy Actions, Weighing Each by What It Earned, and What a Baseline Does to the Noise",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "39-06-searching-for-a-controller-by-trying-it",
+    "38-03-a-small-network-and-its-gradient",
+    "14-04-choosing-the-gains"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/policy_gradient.hpp",
+    "note": "the policy gradient (REINFORCE) on the smallest control task that shows it: a state driven to zero by a gain, x next = x + u, with a cost on the state and on the effort over ten steps; a stochastic policy whose action is minus the gain times the state plus normal noise; for each run, the return and the sum over its steps of how the log chance of each action changes with the gain; the gradient estimated from a batch of runs as the mean of the two multiplied, with and without the batch's mean return subtracted (a baseline); the gain it learns against the best gain found by scanning, and the spread of its gradient estimates with and without the baseline"
+  },
+  "breaks_first": [
+    "E-LRN-0043",
+    "E-LRN-0044",
+    "E-LRN-0045"
+  ]
+}

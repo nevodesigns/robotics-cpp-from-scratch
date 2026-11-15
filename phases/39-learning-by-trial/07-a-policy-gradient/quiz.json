@@ -1,0 +1,78 @@
+{
+  "lesson": "39-07-a-policy-gradient",
+  "title": "A Policy Gradient: Trying Noisy Actions, Weighing Each by What It Earned, and What a Baseline Does to the Noise",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does a policy gradient need in order to learn which way to change a controller?",
+      "options": [
+        "The equations of the task",
+        "An expert's actions",
+        "Runs of a policy that adds noise to its actions, and their returns",
+        "A table of every state"
+      ],
+      "correct": 2,
+      "explanation": "The noise is how it tries other actions; the returns say which tries were better."
+    },
+    {
+      "stage": "check",
+      "question": "What did the policy gradient reach from k = 0, against the best gain by scanning?",
+      "options": [
+        "0.898 without a baseline, against a best of 0.916",
+        "Exactly zero",
+        "0.916 in one step",
+        "It diverged"
+      ],
+      "correct": 0,
+      "explanation": "Near the best, learned from runs alone."
+    },
+    {
+      "stage": "check",
+      "question": "Over the first 50 steps, what was the spread of the gradient estimates?",
+      "options": [
+        "The same with and without the baseline",
+        "13.7 without the baseline and 29.2 with it",
+        "Zero with the baseline",
+        "29.2 without the baseline and 13.7 with it"
+      ],
+      "correct": 3,
+      "explanation": "Subtracting the mean return removes the large common part of every return."
+    },
+    {
+      "stage": "check",
+      "question": "Why can the batch's mean return be subtracted without making the estimate wrong on average?",
+      "options": [
+        "Because the returns are all negative",
+        "Because the score's mean over runs is zero, so a constant times it averages to nothing",
+        "Because the baseline is small",
+        "Because the learning rate is small"
+      ],
+      "correct": 1,
+      "explanation": "It changes the noise, not what the estimate tends to."
+    },
+    {
+      "stage": "post",
+      "question": "Why does a less noisy gradient estimate matter on a robot?",
+      "options": [
+        "Because every run is a trial, and less noise means fewer runs for the same progress",
+        "Because noise damages the motors",
+        "It does not matter",
+        "Because the gain must be exact"
+      ],
+      "correct": 0,
+      "explanation": "The baseline buys learning with fewer trials."
+    },
+    {
+      "stage": "post",
+      "question": "What happens if the noise in the actions is set to zero?",
+      "options": [
+        "Learning is faster",
+        "The best gain is found at once",
+        "The policy never tries other actions, and the score is zero, so it cannot learn",
+        "Nothing changes"
+      ],
+      "correct": 2,
+      "explanation": "The noise is how a policy gradient explores."
+    }
+  ]
+}
