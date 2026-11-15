@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "38-01-a-dataset-you-can-trust",
+  "title": "A Dataset You Can Trust: Demonstrations as Samples, a Scale Taken from the Training Part, and a Split by Episode",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "31-09-keeping-what-the-hand-showed",
+    "26-04-following-a-path-pure-pursuit-and-stanley",
+    "18-07-one-seed-many-streams",
+    "00-12-dice-you-can-replay"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/dataset.hpp",
+    "note": "the data a learned policy is made from: a car keeping to a lane (its offset from the centre line and its heading error, steered by a turn rate) and an expert that steers it with a proportional law limited to the largest turn; demonstrations as samples of the state the expert saw and the action it chose, each tagged with its episode, with the expert's execution made a little noisy; a scale (mean and spread of each input) taken from the training part only; two ways to split a dataset into a training and a test part, by sample and by episode; and a nearest-neighbour predictor that shows how a split by sample makes the test look better than it is"
+  },
+  "breaks_first": [
+    "E-LRN-0001",
+    "E-LRN-0002",
+    "E-LRN-0003"
+  ]
+}

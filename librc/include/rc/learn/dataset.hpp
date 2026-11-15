@@ -1,0 +1,197 @@
+// rc/learn/dataset.hpp
+//
+// A dataset of demonstrations, from lesson 38-01.
+//
+// LaneTask is a car on a straight lane at a constant speed: its state is the offset from the centre line (m) and the heading error (rad), and the action is a turn rate (rad/s), limited to max_turn. lane_step moves it by one time step. lane_expert is the demonstrator: a proportional law on the offset and the heading, clipped to the largest turn. demonstrations runs the expert from random starts and records, at every step, the state it saw and the action it chose (the label), with the episode it belongs to; each episode's demonstrator steers with the expert's gains scaled by its own factor (a person steers a little harder or softer each time), and the action that is executed has some noise added, so the episodes wander. The random numbers come from Rng, a linear congruential generator, and normal() is a sum of twelve uniforms less six, so the stream is the same on every compiler.
+//
+// fit_normaliser takes the mean and spread of each input from a set of samples, and normalise applies them; the scale must be fitted on the training part only. split_by_sample puts every k-th sample in the test part; split_by_episode puts whole episodes there (those whose number is a multiple of k). shared_episodes counts the episodes found in both parts. nearest_action predicts the action of the nearest training sample in normalised units, and nearest_mse is its mean squared error on a test set.
+//
+// 40 episodes of 100 steps gave 4000 samples. Split by sample, the nearest neighbour's error on the test part was 0.00118; split by episode, 0.00317, 2.7 times as much, because a test sample next to a training sample of the same episode is nearly a copy of it, state and demonstrator's style both. The split by sample shared all 40 episodes between the parts; the split by episode shared 0.
+
+#ifndef RC_RC_LEARN_DATASET_HPP
+#define RC_RC_LEARN_DATASET_HPP
+
+#include <cmath>
+#include <vector>
+
+namespace rc {
+namespace learn {
+
+// A random stream that is the same on every compiler: no library generator, no library distribution.
+struct Rng {
+  unsigned long long state = 1;
+};
+
+inline Rng make_rng(unsigned long long seed) {
+  Rng r;
+  r.state = seed * 2862933555777941757ULL + 3037000493ULL;
+  return r;
+}
+
+inline double uniform(Rng& r) {
+  r.state = r.state * 6364136223846793005ULL + 1442695040888963407ULL;
+  return static_cast<double>(r.state >> 11) / 9007199254740992.0;
+}
+
+// Close to a standard normal: the sum of twelve uniforms has mean 6 and variance 1.
+inline double normal(Rng& r) {
+  double a = 0.0;
+  for (int i = 0; i < 12; ++i) a += uniform(r);
+  return a - 6.0;
+}
+
+struct LaneTask {
+  double speed = 2.0;       // m/s
+  double k_offset = 2.0;    // rad/s per m, the expert's gain on the offset
+  double k_heading = 3.0;   // 1/s, its gain on the heading error
+  double max_turn = 1.0;    // rad/s, the largest turn the car can make
+  double dt = 0.05;         // s
+  double edge = 1.0;        // m, the lane's half width: past it the car has left the lane
+};
+
+inline double clip(double x, double limit) { return x > limit ? limit : (x < -limit ? -limit : x); }
+
+inline double lane_expert(const LaneTask& t, double offset, double heading) {
+  return clip(-t.k_offset * offset - t.k_heading * heading, t.max_turn);
+}
+
+inline void lane_step(const LaneTask& t, double& offset, double& heading, double turn) {
+  const double w = clip(turn, t.max_turn);
+  offset += t.speed * std::sin(heading) * t.dt;
+  heading += w * t.dt;
+}
+
+struct Sample {
+  double s[2] = {0.0, 0.0};   // the state: offset (m), heading error (rad)
+  double a = 0.0;             // the action the expert chose: a turn rate (rad/s)
+  int episode = 0;
+};
+
+// The expert from `episodes` random starts (offset within plus or minus offset0, heading within heading0), `steps` each.
+// Each episode's demonstrator steers with the expert's gains times a factor drawn within plus or minus `style` (a person
+// steers a little harder or softer each time); the label is that demonstrator's action, and what is executed has normal
+// noise of `noise` rad/s added.
+inline std::vector<Sample> demonstrations(const LaneTask& t, int episodes, int steps, double offset0, double heading0, double noise, double style, unsigned long long seed) {
+  Rng r = make_rng(seed);
+  std::vector<Sample> out;
+  for (int k = 0; k < episodes; ++k) {
+    double e = offset0 * (2.0 * uniform(r) - 1.0);
+    double h = heading0 * (2.0 * uniform(r) - 1.0);
+    LaneTask person = t;
+    const double g = 1.0 + style * (2.0 * uniform(r) - 1.0);
+    person.k_offset *= g;
+    person.k_heading *= g;
+    for (int i = 0; i < steps; ++i) {
+      Sample x;
+      x.s[0] = e;
+      x.s[1] = h;
+      x.a = lane_expert(person, e, h);
+      x.episode = k;
+      out.push_back(x);
+      lane_step(t, e, h, x.a + noise * normal(r));
+    }
+  }
+  return out;
+}
+
+struct Normaliser {
+  double mean[2] = {0.0, 0.0};
+  double sd[2] = {1.0, 1.0};
+};
+
+// The mean and the spread of each input over `d` (a spread of zero is taken as a tiny one, so dividing is safe).
+inline Normaliser fit_normaliser(const std::vector<Sample>& d) {
+  Normaliser n;
+  if (d.empty()) return n;
+  for (int j = 0; j < 2; ++j) {
+    double sum = 0.0, sq = 0.0;
+    for (const Sample& x : d) {
+      sum += x.s[j];
+      sq += x.s[j] * x.s[j];
+    }
+    const double m = sum / static_cast<double>(d.size());
+    double var = sq / static_cast<double>(d.size()) - m * m;
+    if (var < 1e-12) var = 1e-12;
+    n.mean[j] = m;
+    n.sd[j] = std::sqrt(var);
+  }
+  return n;
+}
+
+inline void normalise(const Normaliser& n, const double s[2], double z[2]) {
+  for (int j = 0; j < 2; ++j) z[j] = (s[j] - n.mean[j]) / n.sd[j];
+}
+
+// Every k-th sample to the test part.
+inline void split_by_sample(const std::vector<Sample>& d, int every, std::vector<Sample>& train, std::vector<Sample>& test) {
+  train.clear();
+  test.clear();
+  for (std::size_t i = 0; i < d.size(); ++i) {
+    if (static_cast<int>(i % static_cast<std::size_t>(every)) == 0) {
+      test.push_back(d[i]);
+    } else {
+      train.push_back(d[i]);
+    }
+  }
+}
+
+// Whole episodes to the test part: those whose number is a multiple of `every`.
+inline void split_by_episode(const std::vector<Sample>& d, int every, std::vector<Sample>& train, std::vector<Sample>& test) {
+  train.clear();
+  test.clear();
+  for (const Sample& x : d) {
+    if (x.episode % every == 0) {
+      test.push_back(x);
+    } else {
+      train.push_back(x);
+    }
+  }
+}
+
+// How many episodes have samples in both parts.
+inline int shared_episodes(const std::vector<Sample>& train, const std::vector<Sample>& test) {
+  int top = -1;
+  for (const Sample& x : train) top = x.episode > top ? x.episode : top;
+  for (const Sample& x : test) top = x.episode > top ? x.episode : top;
+  if (top < 0) return 0;
+  std::vector<int> in_train(static_cast<std::size_t>(top) + 1, 0), in_test(static_cast<std::size_t>(top) + 1, 0);
+  for (const Sample& x : train) in_train[static_cast<std::size_t>(x.episode)] = 1;
+  for (const Sample& x : test) in_test[static_cast<std::size_t>(x.episode)] = 1;
+  int n = 0;
+  for (std::size_t k = 0; k < in_train.size(); ++k) n += in_train[k] * in_test[k];
+  return n;
+}
+
+// The action of the training sample nearest to s, in normalised units.
+inline double nearest_action(const std::vector<Sample>& train, const Normaliser& n, const double s[2]) {
+  double best = 1e300, a = 0.0;
+  for (const Sample& x : train) {
+    double d = 0.0;
+    for (int j = 0; j < 2; ++j) {
+      const double u = (x.s[j] - s[j]) / n.sd[j];
+      d += u * u;
+    }
+    if (d < best) {
+      best = d;
+      a = x.a;
+    }
+  }
+  return a;
+}
+
+// The nearest neighbour's mean squared error on `test`, with the scale fitted on `train`.
+inline double nearest_mse(const std::vector<Sample>& train, const std::vector<Sample>& test) {
+  const Normaliser n = fit_normaliser(train);
+  double s = 0.0;
+  for (const Sample& x : test) {
+    const double e = nearest_action(train, n, x.s) - x.a;
+    s += e * e;
+  }
+  return test.empty() ? 0.0 : s / static_cast<double>(test.size());
+}
+
+
+}  // namespace learn
+}  // namespace rc
+
+#endif

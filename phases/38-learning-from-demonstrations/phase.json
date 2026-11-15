@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "title": "Learning from Demonstrations",
+  "ends_with": "A driving policy learned from an expert's demonstrations and checked before it is trusted: a dataset split so the test means something, a straight-line policy and what it cannot fit, a small network with its gradient written out and checked, training that stops before it over-fits, behaviour cloning and the drift away from what was shown, the expert asked where the learner goes, a guard round the learned policy, and a release check"
+}

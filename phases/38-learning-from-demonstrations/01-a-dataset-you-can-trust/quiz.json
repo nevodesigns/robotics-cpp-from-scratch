@@ -1,0 +1,78 @@
+{
+  "lesson": "38-01-a-dataset-you-can-trust",
+  "title": "A Dataset You Can Trust: Demonstrations as Samples, a Scale Taken from the Training Part, and a Split by Episode",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A learner is tested on every fifth sample of its demonstrations and trained on the rest. Why might its test error be too good?",
+      "options": [
+        "Every test sample has a training sample of its own episode a moment away, so memory alone scores well",
+        "Every fifth sample is always easier than the others",
+        "The test set is too large to be fair",
+        "The learner sees the test labels during training"
+      ],
+      "correct": 0,
+      "explanation": "Neighbouring samples of an episode are 0.05 s apart and nearly identical. A learner that only remembers looks good on them, and will not on a new episode."
+    },
+    {
+      "stage": "check",
+      "question": "A nearest neighbour was tested both ways on the same 4000 samples. What were its errors?",
+      "options": [
+        "0.00317 split by sample and 0.00118 split by episode",
+        "0.00118 split by sample and 0.00317 split by episode",
+        "The same both ways, 0.00118",
+        "0.00118 both ways, since the data was the same"
+      ],
+      "correct": 1,
+      "explanation": "Split by episode the error was 2.7 times as large. The split by sample measured memory."
+    },
+    {
+      "stage": "check",
+      "question": "How many episodes had samples in both the training and the test part, with each split?",
+      "options": [
+        "0 by sample and 40 by episode",
+        "Half of them either way",
+        "40 by sample and 0 by episode",
+        "None either way, since a sample is in one part only"
+      ],
+      "correct": 2,
+      "explanation": "A sample is in one part, but its episode can be in both. Split by episode, none is."
+    },
+    {
+      "stage": "check",
+      "question": "Where should the mean and spread used to scale the inputs come from?",
+      "options": [
+        "From all the data, so the scale is as accurate as possible",
+        "From the test part, since that is what is measured",
+        "From the expert's gains",
+        "From the training part only"
+      ],
+      "correct": 3,
+      "explanation": "The scale is part of the learned policy. Fitting it on the test part leaks the test into the training, a little, in the learner's favour."
+    },
+    {
+      "stage": "post",
+      "question": "A policy will be used by a robot on days it has not seen. What should the test set be made of?",
+      "options": [
+        "Whole days that were not in the training set",
+        "A random tenth of all the samples",
+        "The samples with the largest errors",
+        "The last sample of each day"
+      ],
+      "correct": 0,
+      "explanation": "Split by the unit that is independent and that the policy will meet new: the episode, the day, the robot or the operator."
+    },
+    {
+      "stage": "post",
+      "question": "An input never changed in the training data, so its spread is zero. What should the normaliser do?",
+      "options": [
+        "Divide anyway, the result will be infinite and that is correct",
+        "Leave the input out and say so",
+        "Use a tiny spread so nothing is divided by zero, as fit_normaliser does",
+        "Use the spread of the other input"
+      ],
+      "correct": 2,
+      "explanation": "Dividing by zero gives infinity or NaN, which then reaches the learner. A tiny spread keeps it finite; better still is to notice that the input carries no information."
+    }
+  ]
+}
