@@ -131,7 +131,10 @@ RC_TEST("a consumer too slow for the producer loses readings, counts them, and n
   // The thresholds are deliberately loose. A coarse timer, such as the 15.6 ms default on Windows, makes
   // a 5 ms producer produce about a third as many readings, and the consumer is so much slower than
   // even that that most are still dropped.
-  RC_CHECK(report.dropped > 8);
+  // As a share and not a count: on a hosted Windows runner one run produced too few readings for 8 drops
+  // (a stalled thread and the coarse timer), and the property is that most readings are lost.
+  RC_CHECK(report.dropped > 0);
+  RC_CHECK(report.dropped > report.delivered);
   RC_CHECK(report.delivered >= 3);
   RC_CHECK_EQ(report.produced, report.delivered + report.dropped);
 
