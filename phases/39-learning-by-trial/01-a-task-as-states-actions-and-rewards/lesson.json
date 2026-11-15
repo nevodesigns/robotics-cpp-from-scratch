@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "39-01-a-task-as-states-actions-and-rewards",
+  "title": "A Task as States, Actions and Rewards: A Grid with a Pit, Moves That Slip, and the Value of Following a Policy",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "38-01-a-dataset-you-can-trust",
+    "16-06-a-path-through-what-you-know",
+    "06-11-the-shape-of-the-doubt"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/grid_task.hpp",
+    "note": "a task for learning by trial, written as a Markov decision process: a grid of cells with walls, a goal and a pit, four moves that go where they are meant to most of the time and slip sideways otherwise, a reward for every step and for arriving; the outcomes of a move with their chances; a policy as a move for every cell; its value (the expected discounted sum of rewards from each cell) found by sweeping the Bellman equation until it settles; and the same value estimated by running the policy many times, to show what the number means"
+  },
+  "breaks_first": [
+    "E-LRN-0025",
+    "E-LRN-0026",
+    "E-LRN-0027"
+  ]
+}

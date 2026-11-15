@@ -1,0 +1,78 @@
+{
+  "lesson": "39-01-a-task-as-states-actions-and-rewards",
+  "title": "A Task as States, Actions and Rewards: A Grid with a Pit, Moves That Slip, and the Value of Following a Policy",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does learning by trial need that learning from demonstrations did not?",
+      "options": [
+        "A way to say how good an outcome was: a reward",
+        "An expert's answers for every state",
+        "A larger network",
+        "A test set split by episode"
+      ],
+      "correct": 0,
+      "explanation": "Without an expert, the reward is what tells the learner which outcomes to make more of."
+    },
+    {
+      "stage": "check",
+      "question": "What was the random policy worth at the start, and what was always moving east worth?",
+      "options": [
+        "-5.852 and -13.276",
+        "Both -4.042",
+        "-13.276 and -5.852",
+        "Zero, since no reward is certain"
+      ],
+      "correct": 2,
+      "explanation": "The random policy pays for every step and finds the pit as often as the goal."
+    },
+    {
+      "stage": "check",
+      "question": "20000 runs of the east policy gave a mean discounted return of -5.836. What does that show?",
+      "options": [
+        "That the swept value, -5.852, is the average of what running the policy gets",
+        "That the sweep was wrong",
+        "That every run gets -5.836",
+        "That the policy never falls in a pit"
+      ],
+      "correct": 0,
+      "explanation": "A value is an expectation over outcomes. 47.7 percent of those runs still ended in a pit."
+    },
+    {
+      "stage": "check",
+      "question": "With slip 0.1, what happens when the robot moves east along the row above the pits?",
+      "options": [
+        "It always goes east",
+        "It goes east, or slips north or south with chance 0.1 each, and south is a pit",
+        "It stays put",
+        "It goes back west"
+      ],
+      "correct": 1,
+      "explanation": "The same action in the same state does not always lead to the same place, which is what makes the corridor risky."
+    },
+    {
+      "stage": "post",
+      "question": "Why are future rewards discounted by gamma?",
+      "options": [
+        "To make the far future count less and keep the sum finite",
+        "To make the rewards positive",
+        "Because the robot's battery runs down",
+        "To speed up each sweep"
+      ],
+      "correct": 0,
+      "explanation": "A discount below one makes a never-ending run's sum finite and says how much the future matters; 39-02 shows it changes the answer."
+    },
+    {
+      "stage": "post",
+      "question": "The outcome of a move turns out to depend on how fast the robot was going, which the state does not include. What is wrong?",
+      "options": [
+        "The rewards are too small",
+        "Nothing, the chances will average it out",
+        "The discount is too high",
+        "The state is missing something that decides the outcome, so the task is not Markov as written"
+      ],
+      "correct": 3,
+      "explanation": "Add the missing quantity to the state; values and policies computed without it are averages over situations that need different actions."
+    }
+  ]
+}
