@@ -129,3 +129,12 @@ RC_TEST("with play in the gear the loop on the load's encoder hunts, and the loo
   RC_CHECK(a.load_pp > 10.0 * b.load_pp + 1e-4);
   RC_CHECK(b.load_pp < 1e-3);
 }
+
+RC_TEST("a motor spinning freely is slowed by its own viscous friction, and not sped up by it") {
+  TwoMass s;
+  s.half_gap = 10.0;   // never in contact with the load
+  s.wm = 10.0;
+  for (int i = 0; i < 1000; ++i) s.step(0.0, 0.001);
+  RC_CHECK_NEAR(s.wm, 10.0 * std::exp(-s.bm / s.jm * 1.0), 1e-3);
+  RC_CHECK(s.wm < 10.0);
+}

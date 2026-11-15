@@ -138,3 +138,26 @@ RC_TEST("the legs control the platform well at home and lose a direction elsewhe
   RC_CHECK(cond_min <= cond_home + 1e-12);
   RC_CHECK(cond_flat < cond_home);
 }
+
+RC_TEST("the leg lengths are right for a platform that is rolled, pitched and turned at once") {
+  Stewart s;
+  StewartPose p;
+  p.v[2] = 0.30;
+  p.v[3] = 0.10;   // roll
+  p.v[4] = -0.05;  // pitch
+  p.v[5] = 0.20;   // yaw
+  double len[6];
+  stewart_lengths(s, p, len);
+  // R = Rz Ry Rx worked out as three separate turns of each platform joint
+  for (int i = 0; i < 6; ++i) {
+    double x = s.px[i], y = s.py[i], z = 0.0;
+    double y1 = std::cos(p.v[3]) * y - std::sin(p.v[3]) * z, z1 = std::sin(p.v[3]) * y + std::cos(p.v[3]) * z;
+    y = y1; z = z1;
+    double x2 = std::cos(p.v[4]) * x + std::sin(p.v[4]) * z, z2 = -std::sin(p.v[4]) * x + std::cos(p.v[4]) * z;
+    x = x2; z = z2;
+    double x3 = std::cos(p.v[5]) * x - std::sin(p.v[5]) * y, y3 = std::sin(p.v[5]) * x + std::cos(p.v[5]) * y;
+    x = x3; y = y3;
+    const double expect = std::sqrt((x - s.bx[i]) * (x - s.bx[i]) + (y - s.by[i]) * (y - s.by[i]) + (z + p.v[2]) * (z + p.v[2]));
+    RC_CHECK_NEAR(len[i], expect, 1e-12);
+  }
+}

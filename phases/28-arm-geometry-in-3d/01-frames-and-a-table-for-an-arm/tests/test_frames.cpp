@@ -124,3 +124,12 @@ RC_TEST("the Panda has seven joints, in the modified convention, and every joint
   for (std::size_t i = 0; i < t.rows.size(); ++i) RC_CHECK(t.rows[i].lo < t.rows[i].hi);
   RC_CHECK(!t.source.empty());
 }
+
+RC_TEST("every joint of the UR5 table may turn a whole turn either way") {
+  const ArmTable t = ur5();
+  RC_CHECK(t.rows.size() == 6u);
+  for (std::size_t i = 0; i < t.rows.size(); ++i) {
+    RC_CHECK_NEAR(t.rows[i].lo, -2.0 * kPi, 1e-12);
+    RC_CHECK_NEAR(t.rows[i].hi, 2.0 * kPi, 1e-12);
+  }
+}

@@ -179,3 +179,14 @@ RC_TEST("reaching to one side cuts the limit on turning towards it, and a centre
   RC_CHECK_NEAR(c.right_turn, c.left_turn, 1e-12);
   RC_CHECK_NEAR(c.brake, c.accel, 1e-12);
 }
+
+RC_TEST("a centre of mass straight over a base that is away from the origin is over the middle of its wheels") {
+  BasePose b;
+  b.x = 2.0;
+  b.y = 3.0;
+  b.heading = 0.7;
+  const double com[3] = {2.0, 3.0, 0.3};
+  const TipLimits t = tip_limits(b, com, 0.25, 0.22);
+  RC_CHECK_NEAR(t.com_x, 0.0, 1e-12);
+  RC_CHECK_NEAR(t.com_y, 0.0, 1e-12);
+}

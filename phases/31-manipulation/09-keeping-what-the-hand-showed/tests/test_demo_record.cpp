@@ -146,3 +146,18 @@ RC_TEST("an episode that lost frames is refused, and a good one kept") {
   RC_CHECK(idle.ok);
   RC_CHECK(cg.idle_fraction > idle.idle_fraction);
 }
+
+RC_TEST("the gripper's reading is resampled between its neighbours, as the joints are") {
+  Episode in;
+  Sample a, b;
+  a.t = 0.0;
+  a.grip = 0.0;
+  b.t = 1.0;
+  b.grip = 0.5;
+  in.push_back(a);
+  in.push_back(b);
+  const Episode out = resample(in, 4.0);
+  RC_CHECK(out.size() == 5u);
+  RC_CHECK_NEAR(out[1].grip, 0.125, 1e-12);
+  RC_CHECK_NEAR(out[2].grip, 0.25, 1e-12);
+}

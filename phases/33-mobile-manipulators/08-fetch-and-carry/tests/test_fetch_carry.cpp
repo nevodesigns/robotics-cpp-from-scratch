@@ -207,3 +207,17 @@ RC_TEST("a dropped part, a low battery and a faulty plan are each stopped, and t
   rec("unsafe_noguard", wn.unsafe, 0);
   RC_CHECK(wn.unsafe > 0);
 }
+
+RC_TEST("the grasp is judged only when the hand has stopped moving, and then by the gap") {
+  Mission m;
+  m.s = kMClose;
+  MissionIn in;
+  in.arm_at = 3;
+  in.gap = m.obj_width;      // looks like a part, but the fingers are still moving
+  in.settled = false;
+  mission_step(m, in);
+  RC_CHECK(m.s == kMClose);
+  in.settled = true;
+  mission_step(m, in);
+  RC_CHECK(m.s == kMVerify);
+}

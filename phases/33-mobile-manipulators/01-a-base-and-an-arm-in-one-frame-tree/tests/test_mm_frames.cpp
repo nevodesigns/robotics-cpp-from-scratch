@@ -123,3 +123,11 @@ RC_TEST("a heading error is multiplied by the reach, and a position error is not
   RC_CHECK_NEAR(hand_error_from_base(b, hand, 0.0, dh), 0.9 * dh, 1e-12);
   RC_CHECK(hand_error_from_base(b, hand, dpos, dh) > hand_error_from_base(b, hand, dpos, 0.0));
 }
+
+RC_TEST("the lever of a heading error is measured from where the base is, not from the origin") {
+  BasePose b;
+  b.x = 3.0;
+  b.y = -2.0;
+  const double hand[3] = {3.9, -2.0, 0.5};
+  RC_CHECK_NEAR(hand_error_from_base(b, hand, 0.0, 0.01), 0.009, 1e-12);
+}

@@ -105,3 +105,9 @@ RC_TEST("the determinant of the planar Jacobian is zero straight and folded, and
   rec("g_six", m * 9.81 * reach, 2);
   RC_CHECK_NEAR(gravity_torque(m), 0.0, 1e-12);
 }
+
+RC_TEST("the tool's heading is the sum of both arm joints and the roll") {
+  Scara s;
+  const ScaraTool t = scara_fk(s, 0.3, 0.5, 0.1, 0.2);
+  RC_CHECK_NEAR(t.yaw, 1.0, 1e-12);
+}

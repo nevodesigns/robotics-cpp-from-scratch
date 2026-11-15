@@ -196,3 +196,22 @@ RC_TEST("a part in the gripper makes the arm longer and a pose that was clear is
   RC_CHECK_NEAR(h.radii.back(), 0.04, 1e-12);
   RC_CHECK_NEAR(held_arm(r, 0.10, 0.25, 0.01).radii.back(), r.back(), 1e-12);
 }
+
+RC_TEST("a box that is moved is moved whole: its centre and both of its corners") {
+  PlanningScene scene;
+  SceneObject box;
+  box.id = 4;
+  box.kind = 1;
+  box.c[0] = 1.0; box.c[1] = 0.0; box.c[2] = 0.5;
+  box.lo[0] = 0.8; box.lo[1] = -0.2; box.lo[2] = 0.3;
+  box.hi[0] = 1.2; box.hi[1] = 0.2; box.hi[2] = 0.7;
+  scene.add(box);
+  const double by[3] = {0.5, -0.3, 0.1};
+  RC_CHECK(scene.move(4, by, 1.0));
+  const SceneObject& o = scene.objects()[0];
+  RC_CHECK_NEAR(o.lo[0], 1.3, 1e-12);
+  RC_CHECK_NEAR(o.hi[0], 1.7, 1e-12);
+  RC_CHECK_NEAR(o.hi[1], -0.1, 1e-12);
+  RC_CHECK_NEAR(o.hi[2], 0.8, 1e-12);
+  RC_CHECK_NEAR(o.hi[0] - o.lo[0], 0.4, 1e-12);   // the same size as before
+}

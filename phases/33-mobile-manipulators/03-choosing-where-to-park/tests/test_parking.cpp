@@ -142,3 +142,21 @@ RC_TEST("obstacles move the choice round them, and obstacles all round give none
   RC_CHECK(!none.found);
   RC_CHECK(none.free_places == 0);
 }
+
+RC_TEST("with travel weighted heavily the base parks on the side of the target it is coming from, above or below") {
+  const MobileManipulator m = make();
+  const Annulus ring = reach_annulus(m, -0.10, 0.01);
+  const double target[2] = {2.0, 0.5};
+  ParkParams p;
+  p.w_travel = 5.0;
+  BasePose above, below;
+  above.x = 2.0;
+  above.y = 4.0;
+  below.x = 2.0;
+  below.y = -3.0;
+  const ParkChoice a = choose_park(m, ring, target, above, nullptr, 0, p);
+  const ParkChoice b = choose_park(m, ring, target, below, nullptr, 0, p);
+  RC_CHECK(a.found && b.found);
+  RC_CHECK(a.base.y > target[1]);
+  RC_CHECK(b.base.y < target[1]);
+}
