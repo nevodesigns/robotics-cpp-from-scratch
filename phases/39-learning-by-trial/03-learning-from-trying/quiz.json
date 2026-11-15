@@ -1,0 +1,78 @@
+{
+  "lesson": "39-03-learning-from-trying",
+  "title": "Learning from Trying: Q-Learning, One Update at a Time, and What the Trials Cost on the Way",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does Q-learning need that value iteration did not, and what does it not need?",
+      "options": [
+        "It needs the chances and not the rewards",
+        "It needs to try moves and see what happens, and does not need the chances",
+        "It needs an expert's demonstrations",
+        "It needs nothing at all"
+      ],
+      "correct": 1,
+      "explanation": "It learns from observed outcomes, so the model of the task is never given to it."
+    },
+    {
+      "stage": "check",
+      "question": "Q(s, m) is 0 and a move led to a cell whose best Q is 4, with reward -1, alpha 0.5 and gamma 0.9. What is Q(s, m) after the update?",
+      "options": [
+        "0.5 times (-1 + 0.9 times 4), which is 1.3",
+        "4",
+        "-1",
+        "0.9 times 4"
+      ],
+      "correct": 0,
+      "explanation": "It moves half the way from 0 to the target of -1 + 3.6 = 2.6."
+    },
+    {
+      "stage": "check",
+      "question": "How many of the 17 cells did the learned policy agree with the optimum after 100 and after 2000 episodes?",
+      "options": [
+        "All of them both times",
+        "17 and then 12",
+        "12 and then 17",
+        "None, since it never saw the chances"
+      ],
+      "correct": 2,
+      "explanation": "The cells it is still wrong about after many episodes are the ones it rarely reaches."
+    },
+    {
+      "stage": "check",
+      "question": "While learning for 2000 episodes, how many times did the learner fall into a pit?",
+      "options": [
+        "None",
+        "759",
+        "One",
+        "17"
+      ],
+      "correct": 1,
+      "explanation": "Every lesson the learner takes is a real run, the bad ones included."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the learner take a random move with a small chance epsilon?",
+      "options": [
+        "To make the table smaller",
+        "To find out whether moves its table does not rate highest are in fact better",
+        "Because the greedy move is often illegal",
+        "To slow learning down"
+      ],
+      "correct": 1,
+      "explanation": "A learner that only exploits what it believes never corrects a wrong belief."
+    },
+    {
+      "stage": "post",
+      "question": "Where should a robot first learn by trial, and why?",
+      "options": [
+        "In simulation, because each trial's failure is real on the robot",
+        "On the robot, since the simulator is wrong",
+        "Nowhere; it should be given the model",
+        "On the robot, but only at night"
+      ],
+      "correct": 0,
+      "explanation": "The 759 falls are why; 39-08 is about carrying what was learned in simulation to the robot."
+    }
+  ]
+}

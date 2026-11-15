@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "39-03-learning-from-trying",
+  "title": "Learning from Trying: Q-Learning, One Update at a Time, and What the Trials Cost on the Way",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "39-02-the-best-policy-when-the-model-is-known",
+    "39-01-a-task-as-states-actions-and-rewards"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/q_learning.hpp",
+    "note": "tabular Q-learning: a table of the value of every move in every cell, a move chosen greedily from it most of the time and at random with a small chance (epsilon), one step taken in the task without knowing its chances, and the move's value nudged toward the reward plus the discounted best value of where it led; episodes of that from the start; the policy the table gives; how close it comes to the optimum of 39-02 after a hundred, five hundred and two thousand episodes; and how many times the learner fell into a pit while it learned"
+  },
+  "breaks_first": [
+    "E-LRN-0031",
+    "E-LRN-0032",
+    "E-LRN-0033"
+  ]
+}
