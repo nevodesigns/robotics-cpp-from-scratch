@@ -1,0 +1,78 @@
+{
+  "lesson": "38-05-behaviour-cloning-and-the-drift",
+  "title": "Behaviour Cloning and the Drift: A Copy of the Expert That Is Good Where the Expert Went and Lost Where It Did Not",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A cloned policy matches the expert's actions closely on new demonstrations. Why might it still fail when it drives?",
+      "options": [
+        "Its small mistakes take it to states the expert never visited, where it was never taught",
+        "The demonstrations were too long",
+        "The network has too many weights to drive",
+        "Driving uses a different scale"
+      ],
+      "correct": 0,
+      "explanation": "When it drives, the policy decides what it sees next. The demonstrations covered the expert's states, not the clone's."
+    },
+    {
+      "stage": "check",
+      "question": "From starts like the demonstrations', how did the clone and the expert do?",
+      "options": [
+        "The clone 87 percent, the expert 98",
+        "Both near zero",
+        "The clone 100 percent and the expert 100 percent",
+        "The clone better than the expert"
+      ],
+      "correct": 2,
+      "explanation": "Where the demonstrations were, the clone is as good as the expert. The test that finds the problem starts elsewhere."
+    },
+    {
+      "stage": "check",
+      "question": "From wider starts, how did they do?",
+      "options": [
+        "The expert 98 percent and the clone 87 percent",
+        "Both 98 percent",
+        "The clone 98 and the expert 87",
+        "Both 100 percent"
+      ],
+      "correct": 0,
+      "explanation": "The expert knows to turn hard near the edge; the clone was never shown that."
+    },
+    {
+      "stage": "check",
+      "question": "How much of their time did the clone's runs spend in unseen states?",
+      "options": [
+        "None, since it was trained",
+        "12 percent in failed runs and 100 percent in successful ones",
+        "The same in both",
+        "100 percent in failed runs against 12 percent in successful ones"
+      ],
+      "correct": 3,
+      "explanation": "The failures happen out where nobody demonstrated anything."
+    },
+    {
+      "stage": "post",
+      "question": "Why are the network and its scale kept together as one Learner?",
+      "options": [
+        "The network means nothing without the scale its inputs were trained with",
+        "To save memory",
+        "Because the scale is trained by gradient descent",
+        "So that the expert can use it"
+      ],
+      "correct": 0,
+      "explanation": "The same weights with another scale are another policy."
+    },
+    {
+      "stage": "post",
+      "question": "What is the right test of a cloned policy?",
+      "options": [
+        "Its error on the training samples",
+        "Its error on single answers from new demonstrations",
+        "Driving with it from a spread of starts wider than the demonstrations'",
+        "The number of hidden units"
+      ],
+      "correct": 2,
+      "explanation": "Rollouts let its own mistakes compound, which is what happens in use."
+    }
+  ]
+}

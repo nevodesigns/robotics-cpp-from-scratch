@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "38-05-behaviour-cloning-and-the-drift",
+  "title": "Behaviour Cloning and the Drift: A Copy of the Expert That Is Good Where the Expert Went and Lost Where It Did Not",
+  "type": "build",
+  "minutes": 100,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "38-04-training-without-fooling-yourself",
+    "38-01-a-dataset-you-can-trust",
+    "26-04-following-a-path-pure-pursuit-and-stanley"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/cloning.hpp",
+    "note": "behaviour cloning: a network trained on the expert's demonstrations and its scale, kept together as a Learner; driving with it (a rollout) from a start, and saying whether the car stayed in the lane and came to the centre line, how far out it went, and how many of its steps were in states far outside the demonstrations; and the share of a spread of starts from which a policy succeeds, for the expert and for the clone, from starts like the demonstrations' and from wider ones"
+  },
+  "breaks_first": [
+    "E-LRN-0013",
+    "E-LRN-0014",
+    "E-LRN-0015"
+  ]
+}
