@@ -11,21 +11,21 @@ disagree.
 [BUILD-LOG.md](BUILD-LOG.md) is the long version: the runbook, the commit by
 commit record, every mistake made while building and what caught it.
 
-Last updated 14 November 2026, after stage 4 of the specialisation course and the review of the whole repository that followed it (docs/BUILD-LOG.md, "Review of 14 November 2026"). The recovery point near the end, "Where this left off",
+Last updated 15 November 2026, after phase 38 (learning from demonstrations), the first of the two phases of the learning course the owner asked for on 15 November; before that, stage 4 of the specialisation course and the review of 14 November (docs/BUILD-LOG.md). The recovery point near the end, "Where this left off",
 starts with an entry of 13 November; the older entries below it are kept as they were because they record the reasoning of their days.
 
 ## Snapshot
 
 | | |
 |---|---|
-| lessons built | 458: 320 of 320 planned for the original course, 100 percent, and 138 of 138 planned for the specialisation course apart from the paused humanoid phase (phases 22 to 36: stage 1, the base and the ground track, stage 2, the arm course, stage 3, the mobile manipulators, and stage 4, the legged robots; phase 37, the humanoid basics, 8 lessons, is paused) |
-| phases opened | 37 (the 22 of the original plan, and phases 22 to 36 of the specialisation course) |
-| phases finished to plan | 37 (phases 00 to 21 of the original plan, and 22 to 36 of the specialisation course) |
-| hours of material | 898 (the sum of the minutes in the lesson files, which is what the README counts) |
-| Failure Atlas entries | 1326 |
-| librc headers | 444 across 28 modules (rc::hal, rc::field, rc::gz, rc::vehicle, rc::perceive, rc::locate, rc::drive, rc::arm, rc::mobile and rc::legged are new) |
+| lessons built | 466: 320 of 320 planned for the original course, 100 percent, 138 of 138 planned for the specialisation course apart from the paused humanoid phase (phases 22 to 36; phase 37, the humanoid basics, 8 lessons, is paused), and 8 of the 17 of the learning course (phase 38 built, phase 39 next) |
+| phases opened | 38 (the 22 of the original plan, phases 22 to 36 of the specialisation course, and phase 38 of the learning course) |
+| phases finished to plan | 38 (phases 00 to 21 of the original plan, 22 to 36 of the specialisation course, and 38 of the learning course) |
+| hours of material | 911 (the sum of the minutes in the lesson files, which is what the README counts) |
+| Failure Atlas entries | 1350 |
+| librc headers | 452 across 29 modules (rc::hal, rc::field, rc::gz, rc::vehicle, rc::perceive, rc::locate, rc::drive, rc::arm, rc::mobile, rc::legged and rc::learn are new) |
 | toolchains claimed | 4 |
-| gate tests | 508 (a reference test for each of the 458 lessons, the checks that code which must not compile is refused, and the tests of the library itself), green on every claimed toolchain |
+| gate tests | 516 (a reference test for each of the 466 lessons, the checks that code which must not compile is refused, and the tests of the library itself), green on every claimed toolchain |
 
 ## Phase by phase
 
@@ -71,6 +71,7 @@ starts with an entry of 13 November; the older entries below it are kept as they
 | 34 Legs (the specialisation course, phase 13 of 16, the first of the legged track) | 8 | 8 | A leg modelled well enough to stand on and step with: its geometry both ways, the forces it can give and the torque they cost, the body's pose from the feet, the timing and the path of a step, the load and heat of its servos, the sense that the foot has touched, and the calibration that makes the numbers true |
 | 35 Gaits and balance (the specialisation course, phase 14 of 16) | 9 | 9 | A quadruped that walks and trots without falling over: the support it has at each moment, the timing of its gaits and the change from one to another, an attitude it can trust, forces from the feet that keep the body level, the centre of pressure kept inside the feet, a step that answers a push, slopes and steps, and a fall that does the least harm |
 | 36 A quadruped controller (the specialisation course, phase 15 of 16, the last of the legged track) | 8 | 8 | A quadruped that does what it is told and keeps itself safe: a velocity command turned into a gait, a state machine that stands, walks, sits and gets up, feet that adapt to the ground, a short horizon controller for the body, a safety layer that can take the power away, an honest account of what changes on the real robot, and a walk that is checked before it is released |
+| 38 Learning from demonstrations (the learning course, phase 1 of 2) | 8 | 8 | A driving policy learned from an expert's demonstrations and checked before it is trusted: a dataset split so the test means something, a straight-line policy and what it cannot fit, a small network with its gradient written out and checked, training that stops before it over-fits, behaviour cloning and the drift away from what was shown, the expert asked where the learner goes, a guard round the learned policy, and a release check |
 
 **Where the gap is.** The plan of 320 lessons is built, and what is thin is no longer the front. It is what the curriculum cannot check from inside this repository: nothing is cross compiled (there is no cross compiler on any lane, so phase 20 teaches what a deployment is made of in tested code and says so), nothing was run on a real robot or a real board (hardware tier 2 is two lessons, 08-05 and 08-14, each with a pseudo terminal fallback, and tier 3 is none), ROS 2 is a labelled sketch (no lesson uses rclcpp), and the capstones are simulations. 21-10's last line says the same of the robot: four hazards of the log have no scenario. The accepted gaps from the review of the repository (hardware drivers, a lidar pipeline, SLAM, field validation, vehicle dynamics) belong to the specialisation course that is to be planned next, not to this repository.
 
@@ -192,7 +193,7 @@ twice.
 1326 entries under `atlas/errors/`, each with a `match:` pattern that
 `rcpp explain` searches, and Symptom, Cause and Fix sections. By prefix:
 
-`E-VEH` 138, `E-QT` 125, `E-ARM` 120, `E-CPP` 99, `E-LEG` 74, `E-FIELD` 54, `E-BUS` 48, `E-IO` 48, `E-NAV` 46, `E-KIN` 43, `E-SAFE` 42, `E-CTRL` 38, `E-SENSE` 37, `E-DEPLOY` 36, `E-MATH` 36, `E-NUM` 36, `E-SIM` 36, `E-TEST` 32, `E-MEM` 31, `E-CAP` 30, `E-MOB` 30, `E-BUILD` 25, `E-PLOT` 24, `E-THREAD` 24, `E-DEBUG` 14, `E-RT` 14, `E-ROS` 12, `E-VIS` 12, `E-TIME` 7, `E-LNK` 6, `E-CMAKE` 5, `E-TSAN` 4.
+`E-VEH` 138, `E-QT` 125, `E-ARM` 120, `E-CPP` 99, `E-LEG` 74, `E-FIELD` 54, `E-LRN` 24, `E-BUS` 48, `E-IO` 48, `E-NAV` 46, `E-KIN` 43, `E-SAFE` 42, `E-CTRL` 38, `E-SENSE` 37, `E-DEPLOY` 36, `E-MATH` 36, `E-NUM` 36, `E-SIM` 36, `E-TEST` 32, `E-MEM` 31, `E-CAP` 30, `E-MOB` 30, `E-BUILD` 25, `E-PLOT` 24, `E-THREAD` 24, `E-DEBUG` 14, `E-RT` 14, `E-ROS` 12, `E-VIS` 12, `E-TIME` 7, `E-LNK` 6, `E-CMAKE` 5, `E-TSAN` 4.
 
 L025 requires every `match:` pattern to be ASCII, because build output is
 normalised to ASCII quotes before matching, so a pattern with a typographic
@@ -551,7 +552,7 @@ libstdc++ issue on that version rather than anything in this repository.
 
 **What phase 22 holds.** `rc::hal` (the Drive, ArmBus and LegBus interfaces and their fakes, the contract test every implementation must pass, the bring-up checklist and a fake board), `rc::field` (frames, limits, a gear motor, terrain and friction, field sensors, the scenario file, the run log, the SVG viewer, scoring, the robot file with a source for every number, the Gazebo world, the backend interface and the gap between simulators, the safety case), and `rc::gz` (the Gazebo Sim backend over gz-transport, built only where Gazebo is installed). Details and every mistake are in docs/BUILD-LOG.md, "Phase 22".
 
-**What is next.** Nothing is queued. Phase 37 and the learning based control course wait for the owner, as said above. The review of 14 November 2026 (docs/BUILD-LOG.md) lists what was found weak in phases 22 to 36 and what was done about it.
+**What is next (15 November 2026).** The owner said to leave the humanoid (phase 37) paused and to build the rest: the learning based control course, planned in docs/SPECIALISATION-PLAN.md section 9b as phases 38 and 39, and the wrong answers of the quizzes of phases 00 to 16. Phase 38 (learning from demonstrations, 8 lessons, module rc::learn, atlas LRN 0001 to 0024) is built; phase 39 (learning by trial, 9 lessons) is next, then the quizzes. A local website for reading the course, `rcpp site`, was added on the owner's request the same day (docs/BUILD-LOG.md). The review of 14 November 2026 (docs/BUILD-LOG.md) lists what was found weak in phases 22 to 36 and what was done about it.
 
 ### Written 13 November 2026, all 320 lessons built and the hardening pass done
 
