@@ -1,0 +1,78 @@
+{
+  "lesson": "38-06-asking-the-expert-where-the-learner-goes",
+  "title": "Asking the Expert Where the Learner Goes: DAgger, Labels for the States the Clone Reaches, and a Policy That No Longer Drifts",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why do more of the expert's own demonstrations not reliably fix a clone that drifts?",
+      "options": [
+        "The expert's episodes go where the expert goes, not where the learner's mistakes take it",
+        "More data always makes over-fitting worse",
+        "The expert gets tired",
+        "The network cannot hold more samples"
+      ],
+      "correct": 0,
+      "explanation": "The learner needs the expert's answers in the learner's states, and only the learner's own runs reach them."
+    },
+    {
+      "stage": "check",
+      "question": "In a DAgger run, which action moves the car, and which is recorded as the label?",
+      "options": [
+        "The expert's moves it and the expert's is recorded",
+        "The learner's moves it and the learner's is recorded",
+        "The learner's moves it, and the expert's is recorded",
+        "The expert's moves it and the learner's is recorded"
+      ],
+      "correct": 2,
+      "explanation": "The expert is asked, not obeyed: the car follows the learner, so the samples land where the learner goes."
+    },
+    {
+      "stage": "check",
+      "question": "From the wide starts, how did the learner do before and after two rounds?",
+      "options": [
+        "98 percent before and 87 after",
+        "87 percent before and 98 percent after, against the expert's 98",
+        "98 percent both times",
+        "It got worse, as the data grew"
+      ],
+      "correct": 1,
+      "explanation": "Round 1 alone took it to 98 percent."
+    },
+    {
+      "stage": "check",
+      "question": "On the states the learner visits, how far were its actions from the expert's?",
+      "options": [
+        "0.00009 before and 0.01082 after",
+        "The same before and after",
+        "Zero after the first round",
+        "0.01082 before and 0.00009 after"
+      ],
+      "correct": 3,
+      "explanation": "The new samples are exactly in the states where the old learner was wrong."
+    },
+    {
+      "stage": "post",
+      "question": "What limits DAgger in practice?",
+      "options": [
+        "An expert who must label states they did not choose, and a learner that must be allowed to make mistakes safely",
+        "The arithmetic, which is very expensive",
+        "It only works on straight lanes",
+        "It needs a larger network than cloning"
+      ],
+      "correct": 0,
+      "explanation": "Labelling a recording of someone else's mistake is harder than driving, and the learner's runs need a simulator or a safety driver."
+    },
+    {
+      "stage": "post",
+      "question": "Why does a run that leaves the lane stop being collected?",
+      "options": [
+        "Because the expert cannot label it",
+        "Because states past the edge are no use to a policy that must never reach them, and keep growing",
+        "Because the network crashes",
+        "Because the seed runs out"
+      ],
+      "correct": 1,
+      "explanation": "Collecting there would fill the data with states the policy is meant to avoid."
+    }
+  ]
+}

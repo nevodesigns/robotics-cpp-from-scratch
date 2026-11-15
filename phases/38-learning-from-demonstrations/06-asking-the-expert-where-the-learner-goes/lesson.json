@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "38-06-asking-the-expert-where-the-learner-goes",
+  "title": "Asking the Expert Where the Learner Goes: DAgger, Labels for the States the Clone Reaches, and a Policy That No Longer Drifts",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "38-05-behaviour-cloning-and-the-drift",
+    "38-04-training-without-fooling-yourself"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/dagger.hpp",
+    "note": "dataset aggregation (DAgger): the learner drives, the expert labels every state the learner reaches with the action it would have taken, those samples are added to the demonstrations, and the learner is trained again on all of them; the samples gathered in each round, the learner's success from a spread of starts after each round, and how far the learner's actions are from the expert's on the states the learner itself visits, before and after"
+  },
+  "breaks_first": [
+    "E-LRN-0016",
+    "E-LRN-0017",
+    "E-LRN-0018"
+  ]
+}
