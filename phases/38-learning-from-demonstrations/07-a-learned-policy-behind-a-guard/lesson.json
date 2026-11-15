@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "38-07-a-learned-policy-behind-a-guard",
+  "title": "A Learned Policy Behind a Guard: Inputs Nobody Trained On, Outputs Past the Limit, and a Controller to Hand Over To",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "38-06-asking-the-expert-where-the-learner-goes",
+    "38-05-behaviour-cloning-and-the-drift",
+    "19-10-one-place-that-says-stop"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/guard.hpp",
+    "note": "a guard round a learned policy: it hands over to a plain hand-written controller when an input is not a number, when the state is further from the training data than a set number of spreads, or when the network's output is not a number, and it clips an output past the car's limit; why it acted, the share of steps it handed over, and what the guarded clone of 38-05 does from wide starts and from narrow ones, with the threshold set tight, right and loose"
+  },
+  "breaks_first": [
+    "E-LRN-0019",
+    "E-LRN-0020",
+    "E-LRN-0021"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "38-07-a-learned-policy-behind-a-guard",
+  "title": "A Learned Policy Behind a Guard: Inputs Nobody Trained On, Outputs Past the Limit, and a Controller to Hand Over To",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "A sensor sends a NaN for the heading. What should a guarded policy do?",
+      "options": [
+        "Pass it to the network, which will ignore it",
+        "Hand over to the fall-back with that input taken as zero, and record why",
+        "Stop the program",
+        "Use the last heading for ever"
+      ],
+      "correct": 1,
+      "explanation": "A NaN through a network comes out as anything. The guard keeps it out and says it did."
+    },
+    {
+      "stage": "check",
+      "question": "From the wide starts, how did the clone do without and with the guard?",
+      "options": [
+        "98 percent without and 87 with",
+        "98 percent both times",
+        "87 percent without and 98 percent with, the guard handing over on 12 percent of the steps",
+        "The same, since the network is unchanged"
+      ],
+      "correct": 2,
+      "explanation": "The guard hands over near the edges, where the clone was never taught."
+    },
+    {
+      "stage": "check",
+      "question": "From the narrow starts, on what share of the steps did the guard hand over?",
+      "options": [
+        "2.4 percent",
+        "12 percent",
+        "All of them",
+        "20 percent"
+      ],
+      "correct": 0,
+      "explanation": "Where the network was taught, the guard lets it drive."
+    },
+    {
+      "stage": "check",
+      "question": "With a threshold of 1 spread, what happened?",
+      "options": [
+        "The guard handed over on 0 percent and the clone failed as before",
+        "Nothing changed",
+        "The success fell to zero",
+        "The guard handed over on 20 percent of the steps, taking that much of the driving from the network, and succeeded on 98 percent"
+      ],
+      "correct": 3,
+      "explanation": "The fall-back here is as good as the expert, so success held; the cost was driving the network was trained to do."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the fall-back a plain controller written by hand?",
+      "options": [
+        "Because it can be checked by reading it, which is why it is trusted where the network is not",
+        "Because it is always better than the network",
+        "Because networks cannot be used twice",
+        "Because it was trained on more data"
+      ],
+      "correct": 0,
+      "explanation": "Its job is to be predictable where the network may not be, not to be the best everywhere."
+    },
+    {
+      "stage": "post",
+      "question": "What is the weakness of a box of spreads round the training data as a test of unseen states?",
+      "options": [
+        "It costs too much to compute",
+        "A state inside the box can still be far from any sample, in a corner the data never reached",
+        "It rejects every state",
+        "It only works with two inputs"
+      ],
+      "correct": 1,
+      "explanation": "A box is the simplest test. Distance to the nearest samples is a better one, and none is perfect."
+    }
+  ]
+}
