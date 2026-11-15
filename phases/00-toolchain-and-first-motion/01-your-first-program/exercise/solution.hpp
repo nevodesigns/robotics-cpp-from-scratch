@@ -14,10 +14,15 @@
 //   4200 millivolts or more  ->  100
 //   3600 millivolts          ->   50
 //
-// Right now it always answers zero, which is why the tests fail.
+// Calculates battery percentage from a millivolt reading.
 inline int battery_percent(int millivolts) {
-  // TODO: replace this line with the real conversion.
+if(millivolts <= 3000){
   return 0;
+}else if (millivolts >=4200) {
+return 100;
+} else{
+  return ((millivolts-3000)*100)/1200;
+}
 }
 
 #endif  // LESSON_SOLUTION_HPP
