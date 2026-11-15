@@ -171,3 +171,19 @@ RC_TEST("a first guess from the odometry saves rounds") {
   RC_CHECK(odom.rounds < blind.rounds);
   RC_CHECK(icp(std::vector<P2>(), target, pose(0, 0, 0), 10, 1.0, 1e-6).rounds == 0);
 }
+
+RC_TEST("a turned scan of points far from the sensor in y is matched as well as one near it") {
+  // an uneven shape, all of it 20 m to the side of the sensor
+  std::vector<P2> target;
+  for (int i = 0; i < 40; ++i) target.push_back(P2(0.1 * i, 20.0 + 0.02 * i * i));
+  for (int i = 0; i < 15; ++i) target.push_back(P2(4.0, 20.0 + 0.2 * i));
+  // the source is the target moved by the inverse of (0.2, -0.1, 0.05)
+  const rc::field::Tf2 truth = pose(0.2, -0.1, 0.05);
+  const rc::field::Tf2 inv = rc::field::inverse(truth);
+  std::vector<P2> source;
+  for (std::size_t i = 0; i < target.size(); ++i) source.push_back(move_point(inv, target[i]));
+  const IcpResult r = icp(source, target, pose(0, 0, 0), 80, 1.0, 1e-9);
+  RC_CHECK_NEAR(r.move.theta, 0.05, 1e-6);
+  RC_CHECK_NEAR(r.move.x, 0.2, 1e-5);
+  RC_CHECK_NEAR(r.move.y, -0.1, 1e-5);
+}
