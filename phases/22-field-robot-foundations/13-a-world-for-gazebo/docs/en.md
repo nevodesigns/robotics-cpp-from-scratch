@@ -52,11 +52,12 @@ What to write, as the notes beside each `TODO` put it:
 - The centre is the middle of the two ends, the long side is the length of the wall, and the box is turned by the angle of the wall.
 - A rise along +x is a negative pitch, a rise along +y is a positive roll.
 
-As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
 
 - A wall becomes a box along it: its middle, its length and its angle.
 - A grade along x lowers the front of the slab and a grade along y raises the left.
 - The world has a model for everything in the scenario, with its friction, and the robot at its start.
+- A wall that does not start at the origin is as long as it is and sits at its own middle.
 
 The other one passes already, because it tests the parts that are given.
 

@@ -44,12 +44,12 @@ What to write, as the note beside the `TODO` puts it:
 
 - Find the first and the last sample at which leader_speed is over thr; keep from pad samples before the first to pad after the last (within the episode); an episode that never moves gives an empty one.
 
-As shipped, 2 of the 4 tests fail, and these are the ones your code has to turn green:
+As shipped, 2 of the 5 tests fail, and these are the ones your code has to turn green:
 
 - The idle ends are trimmed to the motion with a little padding.
 - An episode that lost frames is refused, and a good one kept.
 
-The other 2 pass already, because they test the parts that are given.
+The other 3 pass already, because they test the parts that are given.
 
 ```
 rcpp verify 31-09

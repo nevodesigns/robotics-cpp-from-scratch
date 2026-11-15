@@ -44,12 +44,12 @@ What to write, as the note beside the `TODO` puts it:
 
 - For every cell within the inflation radius of this lethal cell, give it 253 if it is within the inscribed radius and 252 exp(-scale (d - inscribed)) beyond, unless it is lethal itself, keeping the higher cost.
 
-As shipped, 2 of the 5 tests fail, and these are the ones your code has to turn green:
+As shipped, 2 of the 6 tests fail, and these are the ones your code has to turn green:
 
 - The inflation is the footprint of the robot: inscribed inside its radius and a decay beyond it.
 - A gap between two posts is open to the centre of the robot only if it is wider than twice the radius, and the inflation shows it.
 
-The other 3 pass already, because they test the parts that are given.
+The other 4 pass already, because they test the parts that are given.
 
 ```
 rcpp verify 24-04

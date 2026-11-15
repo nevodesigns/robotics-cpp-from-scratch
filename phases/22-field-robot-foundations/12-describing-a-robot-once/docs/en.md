@@ -61,13 +61,15 @@ What to write, as the notes beside each `TODO` put it:
 - About x it is m / 12 times (sy squared plus sz squared), and likewise for the others.
 - About the axis it is half m r squared; about the other two m / 12 times (3 r squared plus length squared).
 
-As shipped, all 5 of the 5 tests fail. They are, in the order the suite runs them:
+As shipped, 5 of the 6 tests fail, and these are the ones your code has to turn green:
 
 - The reference robot parses, every number has its source, and the typical ones are counted.
 - A number with no source, a given twice, an unknown key and a missing one are all refused.
 - The inertias are the ones of the shapes.
 - The same file gives the built in limits and the SDF, with the same numbers in both.
 - The weight is put behind the axle, towards the caster, so that the robot rests on three points and does not rock.
+
+The other one passes already, because it tests the parts that are given.
 
 ```
 rcpp verify 22-12

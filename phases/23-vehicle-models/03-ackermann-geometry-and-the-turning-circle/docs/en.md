@@ -46,11 +46,11 @@ What to write, as the note beside the `TODO` puts it:
 
 - Each front wheel is at the end of a line at right angles to its own rolling, which meets the rear axle's line at the centre of the circle: the inner wheel is at atan(L / (R - B/2)), the outer at atan(L / (R + B/2)).
 
-As shipped, 1 of the 5 tests fail, and these are the ones your code has to turn green:
+As shipped, 1 of the 6 tests fail, and these are the ones your code has to turn green:
 
 - The two front wheels are at different angles, and the difference is what the Ackermann condition says.
 
-The other 4 pass already, because they test the parts that are given.
+The other 5 pass already, because they test the parts that are given.
 
 ```
 rcpp verify 23-03

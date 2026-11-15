@@ -42,13 +42,13 @@ What to write, as the note beside the `TODO` puts it:
 
 - For each draw pick three different points, make a plane, skip it if it is too tilted, count the points within the tolerance, and keep the plane with the most.
 
-As shipped, 3 of the 5 tests fail, and these are the ones your code has to turn green:
+As shipped, 3 of the 6 tests fail, and these are the ones your code has to turn green:
 
 - What stands on the ground pulls a least squares plane off it and does not move a plane of random samples.
 - The ground and what stands on it are split by height above the plane.
 - A wall with more points than the ground is the biggest plane, and is the ground only if nothing says the ground is level.
 
-The other 2 pass already, because they test the parts that are given.
+The other 3 pass already, because they test the parts that are given.
 
 ```
 rcpp verify 24-02

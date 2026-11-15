@@ -40,13 +40,13 @@ What to write, as the note beside the `TODO` puts it:
 
 - The Coulomb torque plus the Stribeck torque exp(-(v / stribeck_speed)^2) times its extra, both times tanh(v / smooth), plus viscous times v.
 
-As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+As shipped, 3 of the 5 tests fail, and these are the ones your code has to turn green:
 
 - Friction rises to a peak at a low speed, dips as the joint slides, and then grows with the speed.
 - Feeding the friction forward helps where the joint breaks away, and makes no difference once the ramp is under way.
 - With play in the gear the loop on the load's encoder hunts, and the loop on the motor's is steady but leaves the load off.
 
-The other one passes already, because it tests the parts that are given.
+The other 2 pass already, because they test the parts that are given.
 
 ```
 rcpp verify 29-04

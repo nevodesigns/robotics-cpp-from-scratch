@@ -40,12 +40,13 @@ What to write, as the note beside the `TODO` puts it:
 
 - Turn each platform joint (px, py, 0) by R = Rz(yaw) Ry(pitch) Rx(roll), add (x, y, z), and the leg length is the distance to its base joint (bx, by, 0).
 
-As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
+As shipped, all 5 of the 5 tests fail. They are, in the order the suite runs them:
 
 - The leg lengths at home are all equal for a symmetric hexapod, and a raise lengthens them.
 - A raise and a tilt need a range of leg lengths.
 - The pose is found again from the leg lengths, from a guess that is some way off.
 - The legs control the platform well at home and lose a direction elsewhere.
+- The leg lengths are right for a platform that is rolled, pitched and turned at once.
 
 ```
 rcpp verify 32-03

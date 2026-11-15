@@ -42,7 +42,7 @@ What to write, as the note beside the `TODO` puts it:
 
 - Cap each point by sqrt(a_lat / |k|) and the caps; set the start and end speeds; then a backward pass v[i] <= sqrt(v[i+1]^2 + 2 a_dec ds[i]) from the end, and a forward pass v[i+1] <= sqrt(v[i]^2 + 2 a_acc ds[i]) from the start.
 
-As shipped, all 6 of the 6 tests fail. They are, in the order the suite runs them:
+As shipped, 6 of the 7 tests fail, and these are the ones your code has to turn green:
 
 - No point is driven faster than the sideways limit allows.
 - The brakes are applied before the bend, within the braking limit, which the capped speeds alone do not give.
@@ -50,6 +50,8 @@ As shipped, all 6 of the 6 tests fail. They are, in the order the suite runs the
 - A stop line is reached at zero speed, with the slowing begun in time.
 - The same path is slower on ice than on tarmac.
 - A corner of 90 degrees costs time, and smoothing it gives some back.
+
+The other one passes already, because it tests the parts that are given.
 
 ```
 rcpp verify 26-07

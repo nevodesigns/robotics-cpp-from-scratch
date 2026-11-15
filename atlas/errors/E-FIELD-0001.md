@@ -3,6 +3,7 @@ title: A drive with no watchdog keeps driving when the commander is gone
 match: a base told to go 0.5 m/s once drives on after its commander has crashed
 match: the watchdog stops the base when no command has arrived for its time
 match: the same program drives any Drive, and a turn command turns
+match: a base that turns as it drives goes round a circle, in y as well as in x
 platforms: linux, windows
 teaches: 22-01-a-robot-as-an-interface
 ---

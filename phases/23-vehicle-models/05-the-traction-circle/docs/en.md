@@ -46,12 +46,13 @@ What to write, as the note beside the `TODO` puts it:
 
 - Share is lateral over grip; if it is 1 or more the tyres have let go; otherwise the grip left for the line of travel is grip * sqrt(1 - share^2); drive is that less gravity along the slope and the rolling resistance, brake is that plus both.
 
-As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
+As shipped, all 5 of the 5 tests fail. They are, in the order the suite runs them:
 
 - On a straight line the budget is the whole grip, less the rolling resistance.
 - A turn takes a share of the grip and the rest is what is left to speed up and to brake with.
 - Past the edge the tyres let go, and the speed at which that happens is the one the limit gives.
 - Near the edge there is almost nothing left to brake with, and a slope takes its share first.
+- On a slope the grip is less by the cosine of the slope, and the turn's share of it is more.
 
 ```
 rcpp verify 23-05

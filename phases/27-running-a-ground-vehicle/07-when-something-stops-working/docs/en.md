@@ -47,11 +47,12 @@ What to write, as the note beside the `TODO` puts it:
 
 - The scanner lost is a safe stop; the gyro lost a creep; the GNSS, wheels or link lost a reduced mode; two of those four (the gyro counts) a creep; and the sigma past its three steps makes it worse (a sigma that is not a number is a safe stop).
 
-As shipped, 3 of the 6 tests fail, and these are the ones your code has to turn green:
+As shipped, 4 of the 7 tests fail, and these are the ones your code has to turn green:
 
 - Each fault asks for the mode it should, and two faults ask for more than either.
 - The sigma of the position moves the mode on, and a sigma that is not a number is a stop.
 - With no GNSS the position goes as the square root of the distance, and the vehicle is stopped when it passes its limit.
+- Any two of the GNSS, the wheels, the link and the gyro lost is a creep.
 
 The other 3 pass already, because they test the parts that are given.
 

@@ -53,12 +53,12 @@ What to write, as the note beside the `TODO` puts it:
 
 - Drop an unfinished last line (and set truncated), check the first line, collect the scenario lines, read each entry with its time and values, and stop with fail() at the first line that is wrong.
 
-As shipped, 2 of the 4 tests fail, and these are the ones your code has to turn green:
+As shipped, 2 of the 5 tests fail, and these are the ones your code has to turn green:
 
 - A recorded run reads back exactly, scenario and all, and with too few digits it does not.
 - A log cut by a power failure still reads, and a bad line stops the read with its number.
 
-The other 2 pass already, because they test the parts that are given.
+The other 3 pass already, because they test the parts that are given.
 
 ```
 rcpp verify 22-08

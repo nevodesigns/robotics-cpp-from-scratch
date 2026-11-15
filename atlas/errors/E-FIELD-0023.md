@@ -3,6 +3,7 @@ title: A log written with too few digits
 match: two logs of the same run differ in the sixth digit
 match: the replay is off by a small amount after the round trip
 match: a recorded run reads back exactly, scenario and all, and with too few digits it does not
+match: a log that stops early differs from the longer one at the first entry it lacks, whichever is given first
 platforms: linux, windows
 teaches: 22-08-recording-and-replaying-a-run
 ---

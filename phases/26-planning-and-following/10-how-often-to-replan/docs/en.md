@@ -45,13 +45,14 @@ What to write, as the note beside the `TODO` puts it:
 
 - A changed goal first; then a blocked path (which may bypass the cooldown); then, if the last plan was not too recent, being off the path, then the period.
 
-As shipped, 5 of the 6 tests fail, and these are the ones your code has to turn green:
+As shipped, 6 of the 7 tests fail, and these are the ones your code has to turn green:
 
 - The reasons come in order, and a blocked cell beyond the look-ahead is not a reason yet.
 - The cooldown holds back everything but a blocked path, which can be made to wait too.
 - Never replanning stops at the wall, planning for the reasons arrives, planning every tick arrives but plans a great deal.
 - An early look-ahead hides the time a plan takes, a late one makes the vehicle stand and wait.
 - A plan begun where the vehicle will be starts near it when it arrives, and one begun where it was sends the vehicle chasing its own plan.
+- Off the path, a plan made half a second ago is not remade until the interval has passed, at any time of day.
 
 The other one passes already, because it tests the parts that are given.
 

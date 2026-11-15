@@ -5,6 +5,7 @@ match: the stopping distance is many times longer than the plan says
 match: a unit is part of the type, and the conversions are right
 match: speed up slowly, brake harder, and the numbers are the ones the limits say
 match: a limit read in the wrong unit makes the stopping distance thirteen times as long
+match: the turn rate is eased as the speed is, and a change within the limit is not called limited
 platforms: linux, windows
 teaches: 22-03-units-and-limits-that-cannot-be-mixed
 ---

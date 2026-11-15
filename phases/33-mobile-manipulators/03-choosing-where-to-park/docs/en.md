@@ -44,11 +44,12 @@ What to write, as the note beside the `TODO` puts it:
 
 - The arm's axis is the target plus d at the bearing phi; the base faces the target (heading phi + pi), its centre from base_for_axis; drop it if its clearance to any obstacle (centre distance less the obstacle's radius and the base's) is under p.clearance; else score = w_margin * margin - w_travel * travel + w_clear * min(clearance, cap), the margin being the smaller of d - r_in and r_out - d over the tolerance; keep the best (and count the free places).
 
-As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+As shipped, all 4 of the 4 tests fail. They are, in the order the suite runs them:
 
 - With nothing in the way the base is put on the near side, in the middle of the ring when margin counts most.
 - Weighting travel puts the base at the near edge of the ring, weighting margin in the middle.
 - Obstacles move the choice round them, and obstacles all round give none.
+- With travel weighted heavily the base parks on the side of the target it is coming from, above or below.
 
 ```
 rcpp verify 33-03

@@ -44,10 +44,11 @@ What to write, as the note beside the `TODO` puts it:
 
 - In the arm's frame the motor axis is at y = -rb and the platform joint at y0 - rp; the elbow is on the circle of radius rf round the axis and on the circle of radius sqrt(re squared - x0 squared) round the joint, in the plane x = 0; take the intersection farther out (smaller y) and measure the angle with atan2.
 
-As shipped, 2 of the 3 tests fail, and these are the ones your code has to turn green:
+As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
 
 - The platform is put back where it was asked, from the angles the inverse kinematics gave.
 - The three arms are symmetric: a point on the axis gives equal angles, and the reach is a dome.
+- The forward kinematics gives back a point that is off the axis in every direction.
 
 The other one passes already, because it tests the parts that are given.
 

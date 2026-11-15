@@ -48,14 +48,15 @@ What to write, as the note beside the `TODO` puts it:
 
 - Find the two states either side of t (the first with a time not before t, and the one before it), and take the point the same fraction of the way between them; the heading is interpolated as it is.
 
-As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
+As shipped, 5 of the 7 tests fail, and these are the ones your code has to turn green:
 
 - The state at a past time is found between the states either side of it, and not at all outside the history.
 - A fix is compared with where the robot was then, and the correction is carried to now.
 - A late fix taken for the present leaves a steady error of speed times delay; carrying the correction forward removes it.
 - When the robot stops during the delay, moving the fix on by the velocity puts it a quarter of a metre beyond the robot, and the history does not.
+- A past state is found between its neighbours in y as it is in x.
 
-The other one passes already, because it tests the parts that are given.
+The other 2 pass already, because they test the parts that are given.
 
 ```
 rcpp verify 25-08

@@ -36,12 +36,12 @@ What to write, as the note beside the `TODO` puts it:
 
 - The arm's forward kinematics with the arm's base frame in the world (the base's pose composed with the mount) as its base.
 
-As shipped, 2 of the 4 tests fail, and these are the ones your code has to turn green:
+As shipped, 2 of the 5 tests fail, and these are the ones your code has to turn green:
 
 - With the base at the origin the tool is where the arm alone says, shifted by the mount.
 - Moving the base moves the tool with it, and turning the base turns the tool about the base's centre.
 
-The other 2 pass already, because they test the parts that are given.
+The other 3 pass already, because they test the parts that are given.
 
 ```
 rcpp verify 33-01

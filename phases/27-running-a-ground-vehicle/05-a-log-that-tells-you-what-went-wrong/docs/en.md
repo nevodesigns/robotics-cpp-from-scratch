@@ -48,13 +48,14 @@ What to write, as the note beside the `TODO` puts it:
 
 - Walk the rows; a marked row starts a span or, if the last marked row was within `merge` seconds, extends it; a span is kept only if it lasts at least min_span.
 
-As shipped, 3 of the 5 tests fail, and these are the ones your code has to turn green:
+As shipped, 4 of the 7 tests fail, and these are the ones your code has to turn green:
 
 - Spans join near marks, split far ones and drop short ones.
 - A run with five faults put in gives five findings, each where it began.
 - A slip that leaves the ground at 80 percent of the wheels is not reported and one at 50 percent is.
+- A vehicle that is commanded and does not move is stuck wherever it is on the map.
 
-The other 2 pass already, because they test the parts that are given.
+The other 3 pass already, because they test the parts that are given.
 
 ```
 rcpp verify 27-05

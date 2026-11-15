@@ -40,11 +40,13 @@ What to write, as the note beside the `TODO` puts it:
 
 - The mean, weighted by mass, of the base's centre (in the world), the middle of each link (between the previous frame, the arm's base for the first, and its own) and the tool for the payload.
 
-As shipped, all 3 of the 3 tests fail. They are, in the order the suite runs them:
+As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
 
 - With no arm mass and no load the centre of mass is the base's, and masses pull it by their moments.
 - Reaching and carrying take the centre of mass towards the edge and cut the braking limit.
 - Reaching to one side cuts the limit on turning towards it, and a centred mass gives the 19-09 value.
+
+The other one passes already, because it tests the parts that are given.
 
 ```
 rcpp verify 33-05

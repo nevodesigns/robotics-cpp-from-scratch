@@ -44,11 +44,12 @@ What to write, as the note beside the `TODO` puts it:
 
 - Age the command, apply the watchdog, lag v and w towards the target, then move the pose.
 
-As shipped, 3 of the 4 tests fail, and these are the ones your code has to turn green:
+As shipped, 4 of the 5 tests fail, and these are the ones your code has to turn green:
 
 - A command is limited, answered with a lag of the time constant, and held.
 - A base that stops hearing commands stops itself, and a stop coasts for the time constant.
 - The same program drives any Drive, and a turn command turns.
+- A base that turns as it drives goes round a circle, in y as well as in x.
 
 The other one passes already, because it tests the parts that are given.
 

@@ -36,12 +36,12 @@ What to write, as the note beside the `TODO` puts it:
 
 - If the command drives the base (drive_to is not 0) while the arm is not tucked (arm_at is not 1), cancel the driving; if it sends the arm out or down (arm_goal over 1) while the base has not stopped, hold the arm (arm_goal 0); set *blocked if either was done.
 
-As shipped, 2 of the 4 tests fail, and these are the ones your code has to turn green:
+As shipped, 2 of the 5 tests fail, and these are the ones your code has to turn green:
 
 - The interlock holds the base while the arm is out and the arm while the base moves.
 - A dropped part, a low battery and a faulty plan are each stopped, and the interlock is what stops the last.
 
-The other 2 pass already, because they test the parts that are given.
+The other 3 pass already, because they test the parts that are given.
 
 ```
 rcpp verify 33-08

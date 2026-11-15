@@ -45,11 +45,11 @@ What to write, as the note beside the `TODO` puts it:
 
 - The rotation is the transpose of a's; the translation is minus that rotation times a's translation.
 
-As shipped, 1 of the 6 tests fail, and these are the ones your code has to turn green:
+As shipped, 1 of the 7 tests fail, and these are the ones your code has to turn green:
 
 - The inverse of a pose undoes it, and one that only transposes the rotation does not.
 
-The other 5 pass already, because they test the parts that are given.
+The other 6 pass already, because they test the parts that are given.
 
 ```
 rcpp verify 28-01

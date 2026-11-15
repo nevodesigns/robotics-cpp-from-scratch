@@ -3,6 +3,7 @@ title: A number with no source
 match: nobody knows whether the track width was measured or guessed
 match: a model number with no source
 match: the reference robot parses, every number has its source, and the typical ones are counted
+match: the kind of the robot is read from its line, and not the word before it
 platforms: linux, windows
 teaches: 22-12-describing-a-robot-once
 ---

@@ -3,6 +3,7 @@ title: A world typed out again by hand
 match: the wall is in a different place in the two simulators
 match: the Gazebo world was edited and the scenario file was not
 match: the goal is a marker with nothing to collide with
+match: a wall that does not start at the origin is as long as it is and sits at its own middle
 platforms: linux, windows
 teaches: 22-13-a-world-for-gazebo
 ---

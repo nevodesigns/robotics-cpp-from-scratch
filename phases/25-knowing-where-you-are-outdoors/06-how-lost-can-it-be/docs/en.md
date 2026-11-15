@@ -40,13 +40,15 @@ What to write, as the note beside the `TODO` puts it:
 
 - P' = F P F^T + G diag(var_ds, var_dth) G^T, with F = [[1,0,-ds sin],[0,1,ds cos],[0,0,1]] and G = [[cos, -ds sin / 2],[sin, ds cos / 2],[0,1]] at the middle heading.
 
-As shipped, all 5 of the 5 tests fail. They are, in the order the suite runs them:
+As shipped, 5 of the 6 tests fail, and these are the ones your code has to turn green:
 
 - With no noise there is no bound, and with the noise of the distance alone the bound grows as the square root of the distance.
 - With a heading that wanders the bound grows faster than the distance, as its three halves power.
 - A Monte Carlo of noisy runs agrees with the bound.
 - Turning adds to the bound, and a fix takes it back and it grows again.
 - The distance a robot may go before it might be 1 m out, or 5 m, is worked out before it sets off.
+
+The other one passes already, because it tests the parts that are given.
 
 ```
 rcpp verify 25-06

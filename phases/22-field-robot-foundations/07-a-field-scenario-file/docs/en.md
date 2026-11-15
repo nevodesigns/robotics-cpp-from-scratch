@@ -56,13 +56,14 @@ What to write, as the note beside the `TODO` puts it:
 
 - One branch per keyword: check the count of values (count), read the numbers (numbers), check what must hold (a surface that exists, x1 > x0, a positive radius), and fill the scenario or call bad(); an unknown keyword is a problem too.
 
-As shipped, all 5 of the 5 tests fail. They are, in the order the suite runs them:
+As shipped, all 6 of the 6 tests fail. They are, in the order the suite runs them:
 
 - A good file is read into the scenario, comments and blank lines and all.
 - Every mistake in a bad file is reported once, with the line it is on.
 - Writing a scenario and reading it back repeats it exactly.
 - The terrain, the lidar world and the faults come out of the scenario.
 - A file with no start and no duration says so, and a fault past the end is a problem.
+- What is written back has every patch and every fault in it, not only the same text twice.
 
 ```
 rcpp verify 22-07
