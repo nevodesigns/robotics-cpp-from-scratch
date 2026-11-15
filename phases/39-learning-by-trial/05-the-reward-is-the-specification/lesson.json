@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "39-05-the-reward-is-the-specification",
+  "title": "The Reward Is the Specification: A Hint That Speeds Learning, and a Bonus That Is Gamed",
+  "type": "build",
+  "minutes": 90,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "39-04-exploring-enough",
+    "39-03-learning-from-trying"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/reward_design.hpp",
+    "note": "the reward as the specification of a learned behaviour: on an open grid with only a reward at the goal, Q-learning with three rewards, the plain one, the plain one plus a hint shaped from a potential (gamma times the potential of where the move led less the potential of where it started, with the potential minus the distance to the goal), and the plain one plus a bonus for every step that gets closer; how many steps the learned policy takes to the goal after few and after many episodes, and the bonus learner that circles for ever to collect it"
+  },
+  "breaks_first": [
+    "E-LRN-0037",
+    "E-LRN-0038",
+    "E-LRN-0039"
+  ]
+}

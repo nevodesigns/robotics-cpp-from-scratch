@@ -1,0 +1,78 @@
+{
+  "lesson": "39-05-the-reward-is-the-specification",
+  "title": "The Reward Is the Specification: A Hint That Speeds Learning, and a Bonus That Is Gamed",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What does a learner by trial do with its reward?",
+      "options": [
+        "It treats it as a rough guide",
+        "It does whatever the reward pays for, exactly and only",
+        "It ignores it once it has a policy",
+        "It averages it with the expert's actions"
+      ],
+      "correct": 1,
+      "explanation": "The reward is the whole specification of what to learn."
+    },
+    {
+      "stage": "check",
+      "question": "With a bonus of 1 for every step that ends closer to the goal, what did the learner learn?",
+      "options": [
+        "The shortest way, sooner",
+        "Nothing at all",
+        "To step away and back for ever, collecting 101 in bonus over 200 steps and never arriving",
+        "To reach the goal in 4 steps"
+      ],
+      "correct": 2,
+      "explanation": "It was paid for being closer, not for arriving, and going back and forth pays."
+    },
+    {
+      "stage": "check",
+      "question": "After 20 episodes, how many steps did the plain reward's policy and the potential's take?",
+      "options": [
+        "200 and 4",
+        "4 and 200",
+        "Both 4",
+        "Both never arrived"
+      ],
+      "correct": 0,
+      "explanation": "The potential's hint pointed the way before the goal had ever been found."
+    },
+    {
+      "stage": "check",
+      "question": "Along a run, what do the discounted hints from a potential add up to?",
+      "options": [
+        "Always zero",
+        "The number of steps taken",
+        "The bonus of the closer reward",
+        "Gamma to the power of the length times the potential at the end, less the potential at the start, whatever the route"
+      ],
+      "correct": 3,
+      "explanation": "They telescope, so the route in between does not appear in the total."
+    },
+    {
+      "stage": "post",
+      "question": "Why does a hint from a potential not change which route is best?",
+      "options": [
+        "Because over a whole run it adds up to the potential at the end less the potential at the start, whatever the route",
+        "Because it is small",
+        "Because it is only paid at the goal",
+        "Because gamma is near one"
+      ],
+      "correct": 0,
+      "explanation": "The same total is added to every route, so the ranking of routes is unchanged; it only shows the way sooner."
+    },
+    {
+      "stage": "post",
+      "question": "How should a learned behaviour be checked?",
+      "options": [
+        "By the reward it collects",
+        "Against what was wanted, by running it and looking, not against the reward",
+        "By the number of episodes",
+        "By its value at the start"
+      ],
+      "correct": 1,
+      "explanation": "A gamed reward is collected in full; only checking the behaviour itself catches it."
+    }
+  ]
+}
