@@ -247,3 +247,11 @@ RC_TEST("a past state is found between its neighbours in y as it is in x") {
   RC_CHECK_NEAR(out.y, 1.0 - 3.0 * 0.45, 1e-12);
   RC_CHECK_NEAR(out.theta, 0.225, 1e-12);
 }
+
+RC_TEST("the lag is found for signals that sit far from zero, since the means are taken off") {
+  std::vector<double> a, b;
+  for (int i = 0; i < 400; ++i) a.push_back(10.0 + 3.0 * std::sin(0.05 * i) + std::sin(0.31 * i));
+  // late by 7, with another offset, and before it starts a value well above its mean (a sensor warming up)
+  for (int i = 0; i < 400; ++i) b.push_back(i >= 7 ? a[static_cast<std::size_t>(i - 7)] + 5.0 : 25.0);
+  RC_CHECK(estimate_lag(a, b, 20) == 7);
+}
