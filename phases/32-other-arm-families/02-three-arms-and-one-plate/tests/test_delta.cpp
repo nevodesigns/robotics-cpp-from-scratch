@@ -97,3 +97,12 @@ RC_TEST("the moving parts of a delta are much lighter than those of a six axis a
   rec("m_six", m_six, 0);
   RC_CHECK(m_delta < 0.1 * m_six);
 }
+
+RC_TEST("the forward kinematics gives back a point that is off the axis in every direction") {
+  Delta d;
+  const double target[3] = {0.07, -0.05, -0.35};
+  double th[3], back[3];
+  RC_CHECK(delta_ik(d, target[0], target[1], target[2], th));
+  RC_CHECK(delta_fk(d, th, back));
+  for (int k = 0; k < 3; ++k) RC_CHECK_NEAR(back[k], target[k], 1e-9);
+}

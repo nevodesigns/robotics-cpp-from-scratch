@@ -162,3 +162,37 @@ RC_TEST("a vehicle that was told to stand still is not called stuck") {
   }
   RC_CHECK(analyse_log(rows, DoctorConfig()).empty());
 }
+
+RC_TEST("a gap is reported with its length, and a vehicle that moves sideways is not stuck") {
+  std::vector<LogRow> rows;
+  for (int i = 0; i <= 200; ++i) {
+    LogRow r;
+    r.t = 0.1 * i + (i > 100 ? 20.0 : 0.0);   // 20 s of rows missing after 10 s
+    r.x = 1.0;
+    r.y = 0.5 * r.t;                          // driving along y at 0.5 m/s
+    r.cmd_v = 0.5;
+    r.odom_v = 0.5;
+    r.soc_wh = 100.0 - 0.01 * r.t;
+    rows.push_back(r);
+  }
+  const std::vector<Finding> found = analyse_log(rows, DoctorConfig());
+  const Finding* gap = find(found, kFindGap);
+  RC_CHECK(gap != nullptr);
+  if (gap) RC_CHECK_NEAR(gap->size, 20.1, 1e-9);
+  RC_CHECK(find(found, kFindStuck) == nullptr);
+}
+
+RC_TEST("a vehicle that is commanded and does not move is stuck wherever it is on the map") {
+  std::vector<LogRow> rows;
+  for (int i = 0; i <= 100; ++i) {
+    LogRow r;
+    r.t = 0.1 * i;
+    r.x = 4.0;
+    r.y = 6.0;          // not at the origin, and not moving
+    r.cmd_v = 0.5;
+    r.odom_v = 0.0;
+    r.soc_wh = 100.0;
+    rows.push_back(r);
+  }
+  RC_CHECK(find(analyse_log(rows, DoctorConfig()), kFindStuck) != nullptr);
+}

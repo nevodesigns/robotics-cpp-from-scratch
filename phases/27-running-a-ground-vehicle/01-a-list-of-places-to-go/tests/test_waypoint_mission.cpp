@@ -188,3 +188,19 @@ RC_TEST("a tolerance finer than the turning circle can be reached keeps a car ci
   RC_CHECK(got[0] > 1e8);
   RC_CHECK(got[1] < 20.0);
 }
+
+RC_TEST("what was saved is what is restored: the leg and every result") {
+  std::vector<Waypoint> legs;
+  legs.push_back(wp(5.0, 0.0, 0.3, 0.0, 30.0));
+  legs.push_back(wp(5.0, 5.0, 0.3, 0.0, 30.0));
+  legs.push_back(wp(0.0, 5.0, 0.3, 0.0, 30.0));
+  WaypointMission m(legs, kSkipOnTimeout);
+  RC_CHECK(m.restore("leg=2;r=1,2,0"));
+  RC_CHECK(m.results().size() == 3u);
+  RC_CHECK(m.results()[0] == kReached);
+  RC_CHECK(m.results()[1] == kTimedOut);
+  RC_CHECK(m.results()[2] == kPending);
+  WaypointMission again(legs, kSkipOnTimeout);
+  RC_CHECK(again.restore(m.save()));
+  RC_CHECK(again.save() == m.save());
+}

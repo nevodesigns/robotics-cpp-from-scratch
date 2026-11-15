@@ -159,3 +159,14 @@ RC_TEST("the speed caps fall with the mode and a safe stop is zero") {
   RC_CHECK(mode_speed_cap(kReduced, p) > mode_speed_cap(kCreep, p));
   RC_CHECK_NEAR(mode_speed_cap(kSafeStop, p), 0.0, 1e-12);
 }
+
+RC_TEST("any two of the GNSS, the wheels, the link and the gyro lost is a creep") {
+  VehicleHealth h;
+  h.gnss_ok = false;
+  h.wheels_ok = false;
+  RC_CHECK(required_mode(h, ModePolicy()) == kCreep);
+  VehicleHealth g;
+  g.wheels_ok = false;
+  g.link_ok = false;
+  RC_CHECK(required_mode(g, ModePolicy()) == kCreep);
+}

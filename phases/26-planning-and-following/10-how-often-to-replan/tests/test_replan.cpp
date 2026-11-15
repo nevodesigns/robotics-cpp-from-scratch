@@ -238,3 +238,12 @@ RC_TEST("the predicted pose is on the path, the right distance along it") {
   const CarPose end = predicted_pose(pt(9.0, 0.0), path, 90, 5.0, 5.0);
   RC_CHECK_NEAR(end.x, 10.0, 1e-9);
 }
+
+RC_TEST("off the path, a plan made half a second ago is not remade until the interval has passed, at any time of day") {
+  ReplanConfig cfg;   // min_interval 1 s, off_path 0.6 m
+  const rc::perceive::CostGrid grid(field());
+  const std::vector<CarPose> path = line(0.0, 10.0, 5.0);
+  const CarPose pose = pt(3.0, 6.0);   // 1 m off the path
+  RC_CHECK(should_replan(cfg, 100.5, 100.0, pose, path, 3, grid, false) == kNoReplan);
+  RC_CHECK(should_replan(cfg, 101.5, 100.0, pose, path, 3, grid, false) == kOffPath);
+}

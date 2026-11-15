@@ -153,3 +153,12 @@ RC_TEST("a corner of 90 degrees costs time, and smoothing it gives some back") {
   rec("t_corner_smooth", ts, 1);
   RC_CHECK(ts < tr);
 }
+
+RC_TEST("the hardest speeding up is found along any direction of the path") {
+  std::vector<CarPose> path;
+  path.push_back(pt(1.0, 1.0));
+  path.push_back(pt(1.6, 1.8));   // 1 m away, up and to the right
+  path.push_back(pt(1.6, 2.8));   // 1 m further, straight up
+  const std::vector<double> v = {0.0, 1.0, 2.0};
+  RC_CHECK_NEAR(max_accel(path, v), 1.5, 1e-9);   // (4 - 1) / (2 * 1)
+}
