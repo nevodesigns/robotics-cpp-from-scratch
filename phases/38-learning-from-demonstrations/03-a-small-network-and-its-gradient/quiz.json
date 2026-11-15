@@ -1,0 +1,78 @@
+{
+  "lesson": "38-03-a-small-network-and-its-gradient",
+  "title": "A Small Network and Its Gradient: One Hidden Layer, Backpropagation Written Out, and a Check by Finite Differences",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What happens when a network is trained with a gradient that has a mistake in it?",
+      "options": [
+        "It crashes at the first step",
+        "Training runs, and the error falls little or not at all, with nothing saying why",
+        "The compiler refuses the code",
+        "The weights become NaN at once"
+      ],
+      "correct": 1,
+      "explanation": "A wrong gradient is a direction that is not downhill. Nothing in the arithmetic notices, which is why it must be checked."
+    },
+    {
+      "stage": "check",
+      "question": "How many weights does a network with 8 hidden units, two inputs and one output have?",
+      "options": [
+        "33",
+        "8",
+        "Twice 8",
+        "One per sample"
+      ],
+      "correct": 0,
+      "explanation": "Two input weights and a bias per unit, an output weight per unit, and one output bias: 4 times 8 plus 1."
+    },
+    {
+      "stage": "check",
+      "question": "What did the finite difference check find, for the right gradient and for one with 1 - tanh squared left out?",
+      "options": [
+        "0.123, and less than one part in a million",
+        "Both about 0.123",
+        "Zero both times",
+        "Less than one part in a million, and 0.123"
+      ],
+      "correct": 3,
+      "explanation": "The right gradient agreed to better than one part in a million; the slip was off by 0.123, far beyond what rounding explains."
+    },
+    {
+      "stage": "check",
+      "question": "What is the gradient of the output bias, for one sample?",
+      "options": [
+        "The output itself",
+        "The target",
+        "The error, output less target",
+        "Zero"
+      ],
+      "correct": 2,
+      "explanation": "The bias adds to the output directly, so the derivative of half the squared error is the error."
+    },
+    {
+      "stage": "post",
+      "question": "Why must the starting weights not all be equal?",
+      "options": [
+        "Units that start the same get the same gradient and stay the same, so the layer acts as one unit",
+        "Equal weights cannot be stored",
+        "tanh of equal numbers is zero",
+        "The seed requires them to differ"
+      ],
+      "correct": 0,
+      "explanation": "Symmetry is never broken by gradient descent, so random starting weights are needed."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the finite difference check a test and not part of training?",
+      "options": [
+        "It is less accurate than backpropagation in every case",
+        "It costs two forward passes per weight, where backpropagation gives every weight for about one",
+        "It only works for one hidden unit",
+        "It changes the weights"
+      ],
+      "correct": 1,
+      "explanation": "For a network of thousands of weights the check is thousands of times dearer. It is run when the gradient code changes."
+    }
+  ]
+}
