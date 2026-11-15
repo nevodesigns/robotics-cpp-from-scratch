@@ -102,13 +102,22 @@ anything missing, for your operating system. When it says you are ready:
 ./build/default/bin/rcpp start
 ```
 
-If you would rather read the course in a web browser than in markdown files, write it out as web pages and open them:
+### Reading the course in a web browser
+
+If you would rather read the lessons in a web browser than open markdown files, the course can write itself out as web pages. From the top folder of the course:
 
 ```bash
+cd robotics-cpp-from-scratch
+cmake --build build/default --target rcpp
 ./build/default/bin/rcpp site
 ```
 
-That makes a folder `site/` with a page for every phase, lesson and Failure Atlas entry, and the quizzes to try. Open `site/index.html` in any browser; nothing is installed or downloaded, and it works offline. Run it again after an update, or after passing lessons, to refresh the pages. The code is still written in the lesson's files and checked with `rcpp verify`.
+That makes a folder `site/`. Open `site/index.html` in any browser (double-click it). Nothing is installed or downloaded, and it works offline. It has a page for every phase and lesson, the quizzes to click through, and the Failure Atlas with a search box.
+
+Two things the pages do not do:
+
+- They do not run code. A browser cannot compile C++. You still write your part of each lesson in its `exercise/solution.hpp` with any editor, and check it in a terminal with `rcpp verify` and the lesson's number (the lesson page shows the exact file and command). The website is for reading.
+- They do not update themselves. The pages are a snapshot made when you ran `rcpp site`. After you pass lessons, or after you pull a new version of the course, run `./build/default/bin/rcpp site` again so the pages show the new lessons and your passed lessons.
 
 On Ubuntu, everything the first phases need is one command:
 
