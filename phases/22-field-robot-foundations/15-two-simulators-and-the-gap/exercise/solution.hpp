@@ -10,7 +10,12 @@
 #include <string>
 #include <vector>
 
-using namespace rc::field;
+using rc::field::Backend;
+using rc::field::BackendPose;
+using rc::field::FieldScenario;
+using rc::field::RobotModel;
+using rc::field::ScriptStep;
+using rc::field::run_script;
 
 // How far apart two traces are, sample against sample.
 struct TraceGap {

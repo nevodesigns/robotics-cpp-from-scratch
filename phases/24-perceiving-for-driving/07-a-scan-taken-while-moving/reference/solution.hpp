@@ -8,7 +8,7 @@
 #include <rc/perceive/scan.hpp>
 #include <vector>
 
-using namespace rc::perceive;
+using rc::perceive::LidarScan;
 
 // The pose at a fraction u (0 to 1) of the way from a to b: position linearly, heading by the shorter way round.
 inline rc::field::Tf2 interpolate_pose(const rc::field::Tf2& a, const rc::field::Tf2& b, double u) {

@@ -10,6 +10,7 @@
 #include <rc/vehicle/diff_slip.hpp>
 
 #include "solution.hpp"
+using rc::vehicle::DiffSlip;
 #include <iomanip>
 #include <iostream>
 

@@ -6,6 +6,11 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::field::FieldGoal;
+using rc::field::FieldScenario;
+using rc::field::RunLog;
+using rc::field::ScenarioParse;
+using rc::field::parse_scenario;
 #include <iomanip>
 #include <iostream>
 

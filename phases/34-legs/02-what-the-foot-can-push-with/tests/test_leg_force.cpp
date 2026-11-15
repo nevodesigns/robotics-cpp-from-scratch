@@ -5,6 +5,10 @@
 #include <cmath>
 
 #include "solution.hpp"
+using rc::legged::FootPos;
+using rc::legged::LegGeom;
+using rc::legged::leg_fk;
+using rc::legged::leg_ik;
 #include <iomanip>
 #include <iostream>
 

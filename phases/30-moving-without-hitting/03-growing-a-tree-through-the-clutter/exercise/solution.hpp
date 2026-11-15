@@ -6,7 +6,11 @@
 #include <rc/arm/motion_check.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmCheck;
+using rc::arm::ArmTable;
+using rc::arm::EdgeResult;
+using rc::arm::edge_conservative;
+using rc::arm::free_pose;
 
 struct PlanRng {
   unsigned long long s;

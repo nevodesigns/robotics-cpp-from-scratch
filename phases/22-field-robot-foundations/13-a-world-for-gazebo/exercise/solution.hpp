@@ -10,7 +10,20 @@
 #include <sstream>
 #include <string>
 
-using namespace rc::field;
+using rc::field::Circle;
+using rc::field::FieldGoal;
+using rc::field::FieldPatch;
+using rc::field::FieldScenario;
+using rc::field::RobotModel;
+using rc::field::Segment;
+using rc::field::Surface;
+using rc::field::grass;
+using rc::field::gravel;
+using rc::field::ice;
+using rc::field::sand;
+using rc::field::sdf_model;
+using rc::field::surface_by_name;
+using rc::field::tarmac;
 
 // A box in the world: where its centre is, its sides, and how it is turned.
 struct WorldBox {

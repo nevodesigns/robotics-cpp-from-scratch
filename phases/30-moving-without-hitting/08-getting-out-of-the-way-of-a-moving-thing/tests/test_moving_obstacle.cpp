@@ -7,6 +7,19 @@
 
 #include "rc/arm/ik_closed.hpp"
 #include "solution.hpp"
+using rc::arm::ArmTable;
+using rc::arm::Capsule;
+using rc::arm::JointLimits;
+using rc::arm::Pose;
+using rc::arm::TrajSeg;
+using rc::arm::arm_capsules;
+using rc::arm::elbow_arm;
+using rc::arm::ik_spherical;
+using rc::arm::min_clearance;
+using rc::arm::plan_trajectory;
+using rc::arm::sample_trajectory;
+using rc::arm::trajectory_duration;
+using rc::arm::trans;
 #include <iomanip>
 #include <iostream>
 

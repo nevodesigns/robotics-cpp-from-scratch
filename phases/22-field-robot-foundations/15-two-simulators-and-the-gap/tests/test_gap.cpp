@@ -4,6 +4,15 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::field::BackendPose;
+using rc::field::BuiltinBackend;
+using rc::field::FieldScenario;
+using rc::field::RobotModel;
+using rc::field::ScriptStep;
+using rc::field::gravel;
+using rc::field::parse_robot;
+using rc::field::parse_scenario;
+using rc::field::run_script;
 #include <iomanip>
 #include <iostream>
 

@@ -6,7 +6,7 @@
 #include <rc/legged/leg_kin.hpp>
 #include <rc/legged/leg_load.hpp>
 
-using namespace rc::legged;
+using rc::legged::LegGeom;
 
 using rc::arm::JointMotor;
 using rc::arm::time_to_limit;

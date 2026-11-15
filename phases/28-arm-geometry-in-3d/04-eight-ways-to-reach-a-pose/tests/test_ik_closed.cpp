@@ -6,6 +6,12 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::arm::ArmTable;
+using rc::arm::Pose;
+using rc::arm::forward;
+using rc::arm::panda;
+using rc::arm::trans;
+using rc::arm::ur5;
 #include <iomanip>
 #include <iostream>
 

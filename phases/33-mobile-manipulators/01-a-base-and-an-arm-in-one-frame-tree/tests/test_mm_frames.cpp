@@ -5,6 +5,11 @@
 #include <cmath>
 
 #include "solution.hpp"
+using rc::arm::Pose;
+using rc::arm::apply;
+using rc::arm::elbow_arm;
+using rc::arm::forward;
+using rc::arm::trans;
 #include <iomanip>
 #include <iostream>
 

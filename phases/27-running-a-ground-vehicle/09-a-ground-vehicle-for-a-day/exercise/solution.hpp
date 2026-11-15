@@ -15,7 +15,47 @@
 #include <string>
 #include <vector>
 
-using namespace rc::drive;
+using rc::drive::Bundle;
+using rc::drive::CarPose;
+using rc::drive::CheckLimits;
+using rc::drive::CheckResult;
+using rc::drive::DoctorConfig;
+using rc::drive::DriveCmd;
+using rc::drive::DrivePower;
+using rc::drive::FieldConfig;
+using rc::drive::FieldPoint;
+using rc::drive::FieldResult;
+using rc::drive::Finding;
+using rc::drive::LogRow;
+using rc::drive::MissionStatus;
+using rc::drive::Mode;
+using rc::drive::ModeManager;
+using rc::drive::ModePolicy;
+using rc::drive::OnBoard;
+using rc::drive::TerrainGrid;
+using rc::drive::Unstick;
+using rc::drive::UnstickConfig;
+using rc::drive::UpdatePolicy;
+using rc::drive::VehicleHealth;
+using rc::drive::VehicleState;
+using rc::drive::Waypoint;
+using rc::drive::WaypointMission;
+using rc::drive::analyse_log;
+using rc::drive::can_go;
+using rc::drive::check_update;
+using rc::drive::energy_per_metre;
+using rc::drive::evaluate_field;
+using rc::drive::kBlock;
+using rc::drive::kClear;
+using rc::drive::kFull;
+using rc::drive::kReached;
+using rc::drive::kSkipOnTimeout;
+using rc::drive::kStop;
+using rc::drive::kind_name;
+using rc::drive::mode_speed_cap;
+using rc::drive::required_mode;
+using rc::drive::route_wh;
+using rc::drive::run_checks;
 
 // The one rule that joins the limits on the speed.
 inline double combine_speed(double wanted, double mode_cap, FieldResult field, double creep) {

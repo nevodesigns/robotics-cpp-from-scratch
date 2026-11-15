@@ -7,7 +7,14 @@
 #include <rc/arm/ik_dls.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmTable;
+using rc::arm::Jacobian;
+using rc::arm::Pose;
+using rc::arm::dls_step;
+using rc::arm::forward;
+using rc::arm::ik_dls;
+using rc::arm::jacobian;
+using rc::arm::pose_error;
 
 // The joint margin: the least distance of any joint to a limit, as a share of that joint's range (negative if a joint is outside).
 inline double joint_margin(const ArmTable& t, const std::vector<double>& q) {

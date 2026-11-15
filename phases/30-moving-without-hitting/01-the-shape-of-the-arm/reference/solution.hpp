@@ -7,7 +7,9 @@
 #include <rc/arm/dynamics3d.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmTable;
+using rc::arm::Pose;
+using rc::arm::link_frames;
 
 struct Capsule {
   double a[3];

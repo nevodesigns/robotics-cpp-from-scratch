@@ -6,7 +6,9 @@
 #include <rc/arm/ssm.hpp>
 #include <rc/arm/time_param.hpp>
 
-using namespace rc::arm;
+using rc::arm::SsmParams;
+using rc::arm::max_speed;
+using rc::arm::trapezoid_time;
 
 struct CycleParams {
   double d_app = 0.10;       // m, the vertical move at the pick and at the place

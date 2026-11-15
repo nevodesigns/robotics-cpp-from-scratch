@@ -4,7 +4,6 @@
 #include <cmath>
 #include <rc/arm/pick_place.hpp>
 
-using namespace rc::arm;
 
 using rc::arm::holding;
 

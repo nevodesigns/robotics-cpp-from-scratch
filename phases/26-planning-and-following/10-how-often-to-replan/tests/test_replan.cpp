@@ -7,6 +7,13 @@
 
 #include "rc/drive/offroad.hpp"
 #include "solution.hpp"
+using rc::drive::CarPose;
+using rc::drive::CostGrid;
+using rc::drive::OffroadPath;
+using rc::drive::OffroadWeights;
+using rc::drive::TerrainGrid;
+using rc::drive::nearest_index;
+using rc::drive::plan_offroad;
 #include <iomanip>
 #include <iostream>
 

@@ -10,7 +10,17 @@
 #include <rc/arm/scara.hpp>
 #include <rc/arm/stewart.hpp>
 
-using namespace rc::arm;
+using rc::arm::ArmTable;
+using rc::arm::Delta;
+using rc::arm::Pose;
+using rc::arm::Scara;
+using rc::arm::Stewart;
+using rc::arm::StewartPose;
+using rc::arm::delta_ik;
+using rc::arm::scara_ik;
+using rc::arm::stewart_lengths;
+using rc::arm::tool_down_reachable;
+using rc::arm::volume;
 
 struct ReachBox {
   double lo[3];

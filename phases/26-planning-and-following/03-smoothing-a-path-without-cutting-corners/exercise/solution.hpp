@@ -7,7 +7,9 @@
 #include <rc/drive/hybrid_astar.hpp>
 #include <vector>
 
-using namespace rc::drive;
+using rc::drive::CarPose;
+using rc::drive::CostGrid;
+using rc::drive::hybrid_astar;
 
 struct SmoothConfig {
   double data_weight = 0.1;    // how hard each point is pulled back to the plan

@@ -6,7 +6,19 @@
 #include <rc/arm/compare.hpp>
 #include <rc/arm/cycle_time.hpp>
 
-using namespace rc::arm;
+using rc::arm::ArmReach;
+using rc::arm::CycleParams;
+using rc::arm::Delta;
+using rc::arm::DeltaReach;
+using rc::arm::GantryReach;
+using rc::arm::Pose;
+using rc::arm::ReachTest;
+using rc::arm::Scara;
+using rc::arm::ScaraReach;
+using rc::arm::Stewart;
+using rc::arm::StewartReach;
+using rc::arm::cycle_time;
+using rc::arm::elbow_arm;
 
 struct TaskSpec {
   double half_x = 0.2;      // m, the work lies in a rectangle of half widths half_x and half_y

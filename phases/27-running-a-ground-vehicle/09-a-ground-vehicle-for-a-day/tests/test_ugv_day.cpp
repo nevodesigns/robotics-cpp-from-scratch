@@ -6,6 +6,14 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::drive::FindingKind;
+using rc::drive::kClear;
+using rc::drive::kFindGap;
+using rc::drive::kFindOffPath;
+using rc::drive::kFindStuck;
+using rc::drive::kStop;
+using rc::drive::kWarn;
+using rc::drive::report;
 #include <iomanip>
 #include <iostream>
 

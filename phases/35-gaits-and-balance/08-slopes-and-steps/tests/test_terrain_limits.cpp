@@ -5,6 +5,8 @@
 #include <cmath>
 
 #include "solution.hpp"
+using rc::legged::LegGeom;
+using rc::legged::leg_ik;
 #include <iomanip>
 #include <iostream>
 

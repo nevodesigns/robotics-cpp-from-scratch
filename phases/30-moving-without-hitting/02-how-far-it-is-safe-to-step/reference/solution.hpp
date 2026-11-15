@@ -7,7 +7,12 @@
 #include <rc/arm/collision.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmTable;
+using rc::arm::Pose;
+using rc::arm::Scene;
+using rc::arm::arm_capsules;
+using rc::arm::link_frames;
+using rc::arm::scene_distance;
 
 // How far the farthest point of the arm can move for a radian of each joint: the lengths of the links from that joint outward, the tool and the largest radius.
 inline std::vector<double> sweep_bounds(const ArmTable& t, const std::vector<double>& radii, double tool_length) {

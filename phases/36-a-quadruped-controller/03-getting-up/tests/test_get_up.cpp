@@ -5,6 +5,9 @@
 #include <cmath>
 
 #include "solution.hpp"
+using rc::legged::JointMotor;
+using rc::legged::LegGeom;
+using rc::legged::stance_torques;
 #include <iomanip>
 #include <iostream>
 

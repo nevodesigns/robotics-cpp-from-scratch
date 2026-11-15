@@ -10,8 +10,13 @@
 #include <rc/mobile/tip_margin.hpp>
 #include <vector>
 
-using namespace rc::arm;
-using namespace rc::mobile;
+using rc::mobile::BaseDrive;
+using rc::mobile::MassModel;
+using rc::mobile::MobileManipulator;
+using rc::mobile::Obstacle;
+using rc::mobile::ParkParams;
+using rc::mobile::Requirements;
+using rc::mobile::Sigmas;
 
 using rc::arm::ArmModel;
 using rc::arm::SsmParams;

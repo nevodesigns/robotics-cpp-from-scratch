@@ -7,7 +7,6 @@
 #include <rc/arm/ik_closed.hpp>
 #include <vector>
 
-using namespace rc::arm;
 
 using rc::arm::apply;
 using rc::arm::ArmTable;

@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::field::VehicleLimits;
 #include <iomanip>
 #include <iostream>
 

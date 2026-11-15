@@ -7,7 +7,7 @@
 #include <rc/field/terrain.hpp>
 #include <rc/vehicle/traction.hpp>
 
-using namespace rc::vehicle;
+using rc::vehicle::traction_budget;
 
 // A drive train: identical motors driving the wheels through a gearbox, from a battery that sags under load.
 struct DriveTrain {

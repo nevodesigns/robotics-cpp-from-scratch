@@ -7,6 +7,13 @@
 #include <set>
 
 #include "solution.hpp"
+using rc::drive::CarPose;
+using rc::drive::CostGrid;
+using rc::drive::HybridConfig;
+using rc::drive::HybridResult;
+using rc::drive::hybrid_astar;
+using rc::drive::max_curvature;
+using rc::drive::wrap_pi;
 #include <iomanip>
 #include <iostream>
 

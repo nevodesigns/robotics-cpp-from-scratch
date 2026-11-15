@@ -6,7 +6,14 @@
 #include <rc/arm/computed_torque.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmModel;
+using rc::arm::Pose;
+using rc::arm::Quintic;
+using rc::arm::computed_torque;
+using rc::arm::gravity_torques;
+using rc::arm::inverse_dynamics;
+using rc::arm::payload_torque;
+using rc::arm::quintic_at;
 
 struct JointMotor {
   double kt_out = 4.0;       // N m per ampere at the output shaft (typical of a geared joint)

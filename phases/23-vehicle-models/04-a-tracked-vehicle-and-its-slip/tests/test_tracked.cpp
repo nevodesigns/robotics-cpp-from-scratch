@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::vehicle::Pose2;
 #include <iomanip>
 #include <iostream>
 

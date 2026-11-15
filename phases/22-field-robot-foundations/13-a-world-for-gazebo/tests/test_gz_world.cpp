@@ -6,6 +6,15 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::field::FieldPatch;
+using rc::field::RobotParse;
+using rc::field::ScenarioParse;
+using rc::field::Segment;
+using rc::field::gravel;
+using rc::field::ice;
+using rc::field::parse_robot;
+using rc::field::parse_scenario;
+using rc::field::sand;
 #include <iomanip>
 #include <iostream>
 

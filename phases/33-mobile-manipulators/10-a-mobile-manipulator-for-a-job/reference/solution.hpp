@@ -10,8 +10,27 @@
 #include <rc/mobile/tip_margin.hpp>
 #include <vector>
 
-using namespace rc::arm;
-using namespace rc::mobile;
+using rc::mobile::Annulus;
+using rc::mobile::BaseDrive;
+using rc::mobile::BasePose;
+using rc::mobile::Budget;
+using rc::mobile::MassModel;
+using rc::mobile::MobileManipulator;
+using rc::mobile::Obstacle;
+using rc::mobile::ParkParams;
+using rc::mobile::Requirements;
+using rc::mobile::Sigmas;
+using rc::mobile::TipLimits;
+using rc::mobile::choose_park;
+using rc::mobile::com_world;
+using rc::mobile::grasp_probability;
+using rc::mobile::park_tolerance;
+using rc::mobile::payload_budget;
+using rc::mobile::range_m;
+using rc::mobile::reach_annulus;
+using rc::mobile::sigma_after_servo;
+using rc::mobile::tip_limits;
+using rc::mobile::tip_speed_limit;
 
 using rc::arm::ArmModel;
 using rc::arm::SsmParams;

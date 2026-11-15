@@ -6,8 +6,10 @@
 #include <rc/arm/reach3d.hpp>
 #include <rc/mobile/mm_frames.hpp>
 
-using namespace rc::arm;
-using namespace rc::mobile;
+using rc::mobile::BasePose;
+using rc::mobile::MobileManipulator;
+using rc::mobile::arm_base_in_world;
+using rc::mobile::world_to_arm;
 
 using rc::arm::ArmTable;
 using rc::arm::Pose;

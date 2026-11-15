@@ -8,6 +8,17 @@
 #include "rc/arm/ik_closed.hpp"
 #include "rc/arm/motion_check.hpp"
 #include "solution.hpp"
+using rc::arm::ArmCheck;
+using rc::arm::ArmTable;
+using rc::arm::Capsule;
+using rc::arm::Pose;
+using rc::arm::Scene;
+using rc::arm::arm_capsules;
+using rc::arm::edge_conservative;
+using rc::arm::elbow_arm;
+using rc::arm::forward;
+using rc::arm::scene_distance;
+using rc::arm::sweep_bounds;
 #include <iomanip>
 #include <iostream>
 

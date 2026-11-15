@@ -6,6 +6,10 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::drive::CarPose;
+using rc::drive::SmoothConfig;
+using rc::drive::resample;
+using rc::drive::smooth_path;
 #include <iomanip>
 #include <iostream>
 

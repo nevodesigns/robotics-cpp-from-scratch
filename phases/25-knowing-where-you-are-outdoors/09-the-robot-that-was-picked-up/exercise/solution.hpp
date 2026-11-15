@@ -7,7 +7,8 @@
 #include <rc/core/random.hpp>
 #include <rc/locate/mcl.hpp>
 
-using namespace rc::locate;
+using rc::locate::MonteCarlo;
+using rc::locate::Particle;
 
 struct RecoverySettings {
   double alpha_slow = 0.05;   // the slow average moves this share of the way to each new likelihood

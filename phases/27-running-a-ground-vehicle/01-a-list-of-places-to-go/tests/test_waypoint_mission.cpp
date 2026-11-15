@@ -6,6 +6,10 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::drive::CarPose;
+using rc::drive::FollowConfig;
+using rc::drive::drive_arc;
+using rc::drive::pure_pursuit_steer;
 #include <iomanip>
 #include <iostream>
 

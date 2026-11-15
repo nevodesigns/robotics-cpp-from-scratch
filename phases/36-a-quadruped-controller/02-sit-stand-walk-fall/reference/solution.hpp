@@ -4,7 +4,8 @@
 #include <cmath>
 #include <rc/legged/fall_safety.hpp>
 
-using namespace rc::legged;
+using rc::legged::kFallNone;
+using rc::legged::kFallen;
 
 enum DogState { kDSit, kDRising, kDStand, kDWalk, kDLowering, kDFallen, kDFault };
 enum Want { kWantSit = 0, kWantStand = 1, kWantWalk = 2 };

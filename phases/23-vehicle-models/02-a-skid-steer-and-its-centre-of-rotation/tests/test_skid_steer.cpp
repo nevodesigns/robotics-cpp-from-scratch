@@ -9,6 +9,7 @@
 #include <rc/field/terrain.hpp>
 
 #include "solution.hpp"
+using rc::vehicle::DiffSlip;
 #include <iomanip>
 #include <iostream>
 

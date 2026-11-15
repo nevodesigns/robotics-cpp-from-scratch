@@ -5,7 +5,6 @@
 #include <cstddef>
 #include <vector>
 
-using namespace rc::vehicle;
 
 // One spin in place: how far apart the right and left wheels rolled in total (metres, positive when the right ones went further), and the heading change a gyro measured over it (radians).
 struct TurnRun {

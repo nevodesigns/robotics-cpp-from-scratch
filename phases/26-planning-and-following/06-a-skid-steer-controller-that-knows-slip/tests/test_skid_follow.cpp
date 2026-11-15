@@ -6,6 +6,11 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::drive::CarPose;
+using rc::vehicle::SkidGeometry;
+using rc::vehicle::SkidMotion;
+using rc::vehicle::max_speed_for_curvature;
+using rc::vehicle::skid_motion;
 #include <iomanip>
 #include <iostream>
 

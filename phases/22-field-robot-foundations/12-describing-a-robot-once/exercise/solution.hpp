@@ -11,7 +11,11 @@
 #include <string>
 #include <vector>
 
-using namespace rc::field;
+using rc::field::Rate;
+using rc::field::ScenarioProblem;
+using rc::field::Speed;
+using rc::field::VehicleLimits;
+using rc::field::split_words;
 
 // A number and where it came from. "typical" means: I did not find it, this is a value of the class.
 struct Sourced {

@@ -4,7 +4,7 @@
 #include <cmath>
 #include <rc/legged/leg_kin.hpp>
 
-using namespace rc::legged;
+using rc::legged::LegGeom;
 
 // The matrix that gives the foot's velocity (hip's frame) for the three joint rates.
 inline void leg_jacobian(const LegGeom& g, double q0, double q1, double q2, double j[3][3]) {

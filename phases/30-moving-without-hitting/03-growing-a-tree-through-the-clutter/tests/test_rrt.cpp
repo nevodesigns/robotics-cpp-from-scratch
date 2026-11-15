@@ -7,6 +7,15 @@
 
 #include "rc/arm/ik_closed.hpp"
 #include "solution.hpp"
+using rc::arm::ArmTable;
+using rc::arm::Box;
+using rc::arm::Pose;
+using rc::arm::Scene;
+using rc::arm::edge_conservative;
+using rc::arm::elbow_arm;
+using rc::arm::ik_spherical;
+using rc::arm::sweep_bounds;
+using rc::arm::trans;
 #include <iomanip>
 #include <iostream>
 

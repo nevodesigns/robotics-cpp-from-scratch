@@ -7,6 +7,11 @@
 
 #include "rc/arm/ik_closed.hpp"
 #include "solution.hpp"
+using rc::arm::ArmTable;
+using rc::arm::Pose;
+using rc::arm::elbow_arm;
+using rc::arm::ik_spherical;
+using rc::arm::trans;
 #include <iomanip>
 #include <iostream>
 

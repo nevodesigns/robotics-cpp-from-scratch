@@ -7,7 +7,9 @@
 #include <rc/arm/collision.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::Box;
+using rc::arm::Scene;
+using rc::arm::Sphere;
 
 struct SceneObject {
   int id = 0;

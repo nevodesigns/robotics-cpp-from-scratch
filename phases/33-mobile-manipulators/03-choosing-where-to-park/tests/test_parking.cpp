@@ -5,6 +5,15 @@
 #include <cmath>
 
 #include "solution.hpp"
+using rc::arm::elbow_arm;
+using rc::arm::trans;
+using rc::mobile::Annulus;
+using rc::mobile::BasePose;
+using rc::mobile::MobileManipulator;
+using rc::mobile::arm_base_in_world;
+using rc::mobile::arm_can_reach;
+using rc::mobile::reach_annulus;
+using rc::mobile::trans;
 #include <iomanip>
 #include <iostream>
 

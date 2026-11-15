@@ -8,7 +8,11 @@
 #include <rc/drive/follow.hpp>
 #include <vector>
 
-using namespace rc::drive;
+using rc::drive::CarPose;
+using rc::drive::CostGrid;
+using rc::drive::cross_track;
+using rc::drive::nearest_index;
+using rc::drive::wrap_pi;
 
 struct MotionModel {
   bool bicycle = false;       // false: a unicycle that can turn on the spot

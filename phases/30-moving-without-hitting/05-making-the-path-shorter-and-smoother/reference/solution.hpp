@@ -7,7 +7,13 @@
 #include <rc/arm/rrt.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::PlanProblem;
+using rc::arm::PlanRng;
+using rc::arm::clearance_at;
+using rc::arm::edge_conservative;
+using rc::arm::joint_distance;
+using rc::arm::path_length;
+using rc::arm::rrt;
 
 // The angle between two neighbouring segments of a path: zero for straight on, pi for turning right back.
 inline double turning(const std::vector<double>& a, const std::vector<double>& b, const std::vector<double>& c) {

@@ -4,7 +4,7 @@
 #include <cmath>
 #include <rc/legged/fall_safety.hpp>
 
-using namespace rc::legged;
+using rc::legged::kFallNone;
 
 enum SafeMode { kSafeNormal = 0, kSafeDerated = 1, kSafeSoft = 2, kSafeOff = 3 };
 

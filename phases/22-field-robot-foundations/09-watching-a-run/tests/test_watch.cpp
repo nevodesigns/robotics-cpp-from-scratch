@@ -9,6 +9,11 @@
 #include <rc/hal/interfaces.hpp>
 
 #include "solution.hpp"
+using rc::field::RunLog;
+using rc::field::ScenarioParse;
+using rc::field::gravel;
+using rc::field::parse_scenario;
+using rc::field::sand;
 #include <iomanip>
 #include <iostream>
 

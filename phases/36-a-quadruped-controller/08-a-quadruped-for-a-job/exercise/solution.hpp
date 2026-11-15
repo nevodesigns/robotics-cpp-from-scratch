@@ -11,12 +11,12 @@
 #include <rc/legged/terrain_limits.hpp>
 #include <rc/legged/velocity_cmd.hpp>
 
-using namespace rc::legged;
-using namespace rc::arm;
+using rc::legged::LegGeom;
 
 using rc::arm::heat_watts;
 using rc::arm::JointMotor;
 using rc::arm::max_speed;
+using rc::legged::max_speed;
 using rc::arm::SsmParams;
 
 struct Job {

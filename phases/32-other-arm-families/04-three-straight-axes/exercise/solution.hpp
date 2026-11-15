@@ -4,7 +4,7 @@
 #include <cmath>
 #include <rc/arm/time_param.hpp>
 
-using namespace rc::arm;
+using rc::arm::trapezoid_time;
 
 struct Gantry {
   double v[3] = {3.0, 3.0, 0.5};     // m/s for x, y, z (typical: belts on the long axes, a screw on z)

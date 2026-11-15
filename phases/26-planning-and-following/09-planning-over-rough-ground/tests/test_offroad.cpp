@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::drive::CostGrid;
 #include <iomanip>
 #include <iostream>
 

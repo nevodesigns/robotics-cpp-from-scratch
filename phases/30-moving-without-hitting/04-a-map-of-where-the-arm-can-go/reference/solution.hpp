@@ -10,7 +10,14 @@
 #include <utility>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::EdgeResult;
+using rc::arm::PlanProblem;
+using rc::arm::PlanRng;
+using rc::arm::edge_conservative;
+using rc::arm::free_pose;
+using rc::arm::joint_distance;
+using rc::arm::rrt;
+using rc::arm::sample_config;
 
 struct Roadmap {
   std::vector<std::vector<double> > q;

@@ -8,7 +8,16 @@
 #include <string>
 #include <vector>
 
-using namespace rc::field;
+using rc::field::Backend;
+using rc::field::BackendPose;
+using rc::field::FieldScenario;
+using rc::field::GapCase;
+using rc::field::RobotModel;
+using rc::field::ScriptStep;
+using rc::field::gaps_of;
+using rc::field::run_all;
+using rc::field::run_script;
+using rc::field::worst_gap;
 
 // A differential drive with its losses, behind the rc::field::Backend interface: commands are turned into wheel speeds by the ideal geometry of the robot, the wheel speeds follow them with a lag, and the body moves by the ground speed less the slip and turns by the efficiency of the wheels' difference.
 class ModelBackend : public rc::field::Backend {

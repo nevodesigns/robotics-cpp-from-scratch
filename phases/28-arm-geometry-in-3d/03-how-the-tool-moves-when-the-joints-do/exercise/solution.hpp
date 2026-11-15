@@ -6,7 +6,13 @@
 #include <rc/arm/fk.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmTable;
+using rc::arm::DhConvention;
+using rc::arm::Pose;
+using rc::arm::compose;
+using rc::arm::forward;
+using rc::arm::kStandard;
+using rc::arm::row_pose;
 
 struct Axis {
   double o[3];  // a point on the axis, in the base frame

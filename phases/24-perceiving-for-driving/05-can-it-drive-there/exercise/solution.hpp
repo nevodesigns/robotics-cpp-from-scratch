@@ -10,7 +10,12 @@
 #include <rc/vehicle/drive_train.hpp>
 #include <vector>
 
-using namespace rc::perceive;
+using rc::perceive::CostGrid;
+using rc::perceive::GridSpec;
+using rc::perceive::kCostFree;
+using rc::perceive::kCostInscribed;
+using rc::perceive::kCostLethal;
+using rc::perceive::kCostUnknown;
 
 // The height of the ground in each cell of a grid. NaN where it is not known.
 struct HeightGrid {

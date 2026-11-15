@@ -4,7 +4,7 @@
 #include <cmath>
 #include <rc/vehicle/diff_slip.hpp>
 
-using namespace rc::vehicle;
+using rc::vehicle::Pose2;
 
 // Odometry for a vehicle that steers by driving its sides at different speeds.
 class WheelOdometry {

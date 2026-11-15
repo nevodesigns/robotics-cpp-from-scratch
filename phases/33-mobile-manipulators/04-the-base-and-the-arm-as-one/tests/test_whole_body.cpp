@@ -6,6 +6,16 @@
 
 #include "rc/arm/ik_closed.hpp"
 #include "solution.hpp"
+using rc::arm::Jacobian;
+using rc::arm::Pose;
+using rc::arm::elbow_arm;
+using rc::arm::ik_spherical;
+using rc::arm::trans;
+using rc::mobile::BasePose;
+using rc::mobile::MobileManipulator;
+using rc::mobile::Pose;
+using rc::mobile::tool_in_world;
+using rc::mobile::trans;
 #include <iomanip>
 #include <iostream>
 

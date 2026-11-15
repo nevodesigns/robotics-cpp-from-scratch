@@ -6,7 +6,10 @@
 #include <rc/legged/leg_force.hpp>
 #include <rc/legged/leg_kin.hpp>
 
-using namespace rc::legged;
+using rc::legged::LegGeom;
+using rc::legged::leg_ik;
+using rc::legged::leg_jacobian;
+using rc::legged::stand_torques;
 
 using rc::arm::heat_watts;
 using rc::arm::JointMotor;

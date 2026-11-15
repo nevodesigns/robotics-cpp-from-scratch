@@ -7,7 +7,8 @@
 #include <rc/drive/smooth.hpp>
 #include <vector>
 
-using namespace rc::drive;
+using rc::drive::CarPose;
+using rc::drive::menger_curvature;
 
 struct SpeedLimits {
   double v_max = 2.0;    // m/s

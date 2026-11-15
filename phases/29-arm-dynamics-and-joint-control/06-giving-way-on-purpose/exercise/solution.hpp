@@ -8,7 +8,17 @@
 #include <rc/arm/jacobian.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmModel;
+using rc::arm::Jacobian;
+using rc::arm::Pose;
+using rc::arm::forward;
+using rc::arm::gravity_torques;
+using rc::arm::ik_dls;
+using rc::arm::jacobian;
+using rc::arm::joint_torques;
+using rc::arm::pose_error;
+using rc::arm::step_dynamics;
+using rc::arm::tool_twist;
 
 struct Surface {
   double z = 0.0;       // the height of the plane

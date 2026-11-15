@@ -5,6 +5,8 @@
 #include <cmath>
 
 #include "solution.hpp"
+using rc::arm::SsmParams;
+using rc::arm::max_speed;
 #include <iomanip>
 #include <iostream>
 

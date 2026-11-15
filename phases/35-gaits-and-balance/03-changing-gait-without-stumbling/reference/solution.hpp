@@ -4,7 +4,8 @@
 #include <cmath>
 #include <rc/legged/stance_swing.hpp>
 
-using namespace rc::legged;
+using rc::legged::GaitTiming;
+using rc::legged::count_stance;
 
 enum GaitKind { kWalk = 0, kTrot = 1, kPace = 2, kBound = 3 };
 

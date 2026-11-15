@@ -5,7 +5,11 @@
 #include <rc/legged/leg_force.hpp>
 #include <rc/legged/leg_kin.hpp>
 
-using namespace rc::legged;
+using rc::legged::FootPos;
+using rc::legged::LegGeom;
+using rc::legged::det3;
+using rc::legged::leg_fk;
+using rc::legged::leg_jacobian;
 
 // Solves a 3 by 3 system by Cramer's rule with a relative test for singularity (the determinant against the size of the matrix).
 inline bool solve3_rel(const double m[3][3], const double b[3], double x[3]) {

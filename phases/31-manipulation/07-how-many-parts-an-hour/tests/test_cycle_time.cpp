@@ -5,6 +5,9 @@
 #include <cmath>
 
 #include "solution.hpp"
+using rc::arm::SsmParams;
+using rc::arm::max_speed;
+using rc::arm::trapezoid_time;
 #include <iomanip>
 #include <iostream>
 

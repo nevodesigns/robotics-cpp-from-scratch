@@ -6,6 +6,11 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::arm::ArmTable;
+using rc::arm::Pose;
+using rc::arm::elbow_arm;
+using rc::arm::panda;
+using rc::arm::ur5;
 #include <iomanip>
 #include <iostream>
 

@@ -6,6 +6,8 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::drive::CarPose;
+using rc::drive::wrap_pi;
 #include <iomanip>
 #include <iostream>
 

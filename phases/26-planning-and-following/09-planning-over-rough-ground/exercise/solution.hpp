@@ -9,7 +9,9 @@
 #include <rc/field/terrain.hpp>
 #include <vector>
 
-using namespace rc::drive;
+using rc::drive::CarPose;
+using rc::drive::CostGrid;
+using rc::drive::hybrid_astar;
 
 struct TerrainGrid {
   rc::perceive::GridSpec spec;

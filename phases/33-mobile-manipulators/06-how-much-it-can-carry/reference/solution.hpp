@@ -7,8 +7,11 @@
 #include <rc/mobile/tip_margin.hpp>
 #include <vector>
 
-using namespace rc::arm;
-using namespace rc::mobile;
+using rc::mobile::BasePose;
+using rc::mobile::MassModel;
+using rc::mobile::MobileManipulator;
+using rc::mobile::com_world;
+using rc::mobile::tip_limits;
 
 using rc::arm::ArmModel;
 using rc::arm::max_payload;

@@ -7,7 +7,13 @@
 #include <rc/arm/singular.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmTable;
+using rc::arm::Pose;
+using rc::arm::forward;
+using rc::arm::ik_spherical;
+using rc::arm::jacobian;
+using rc::arm::smallest_singular;
+using rc::arm::within_limits_only;
 
 struct VoxelGrid {
   double res;

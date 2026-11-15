@@ -8,6 +8,12 @@
 #include <rc/core/random.hpp>
 
 #include "solution.hpp"
+using rc::perceive::CostGrid;
+using rc::perceive::GridSpec;
+using rc::perceive::kCostFree;
+using rc::perceive::kCostInscribed;
+using rc::perceive::kCostLethal;
+using rc::perceive::kCostUnknown;
 #include <iomanip>
 #include <iostream>
 

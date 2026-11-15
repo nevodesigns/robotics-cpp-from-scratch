@@ -6,7 +6,10 @@
 #include <rc/arm/gravity_comp.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmModel;
+using rc::arm::PdGains;
+using rc::arm::pd_torque;
+using rc::arm::step_dynamics;
 
 struct Quintic {
   std::vector<double> q0, q1;

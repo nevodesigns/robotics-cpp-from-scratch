@@ -5,6 +5,8 @@
 #include <cmath>
 
 #include "solution.hpp"
+using rc::legged::GaitTiming;
+using rc::legged::count_stance;
 #include <iomanip>
 #include <iostream>
 

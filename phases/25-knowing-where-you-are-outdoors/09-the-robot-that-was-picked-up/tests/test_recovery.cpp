@@ -6,6 +6,9 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::locate::McMeasure;
+using rc::locate::MonteCarlo;
+using rc::locate::Particle;
 #include <iomanip>
 #include <iostream>
 

@@ -7,8 +7,14 @@
 #include <rc/safety/tilt.hpp>
 #include <vector>
 
-using namespace rc::arm;
-using namespace rc::mobile;
+using rc::arm::Pose;
+using rc::arm::apply;
+using rc::arm::forward;
+using rc::arm::link_frames;
+using rc::mobile::BasePose;
+using rc::mobile::MobileManipulator;
+using rc::mobile::arm_base_in_world;
+using rc::mobile::base_pose;
 
 struct MassModel {
   double base_mass = 20.0;                 // kg (typical)

@@ -5,7 +5,8 @@
 #include <cmath>
 #include <rc/legged/leg_kin.hpp>
 
-using namespace rc::legged;
+using rc::legged::LegGeom;
+using rc::legged::leg_ik;
 
 // The foot's place at a fraction tau (0 to 1) of the swing from p0 to p1, with a top h above the straight line between them.
 inline void swing_position(const double p0[3], const double p1[3], double h, double tau, double out[3]) {

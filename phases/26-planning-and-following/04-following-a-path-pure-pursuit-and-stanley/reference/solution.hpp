@@ -7,7 +7,10 @@
 #include <rc/drive/smooth.hpp>
 #include <vector>
 
-using namespace rc::drive;
+using rc::drive::CarPose;
+using rc::drive::drive_arc;
+using rc::drive::hybrid_astar;
+using rc::drive::wrap_pi;
 
 enum FollowMethod { kPurePursuit = 0, kStanley = 1 };
 

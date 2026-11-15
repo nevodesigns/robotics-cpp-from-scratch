@@ -6,7 +6,8 @@
 #include <rc/arm/frames.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::Pose;
+using rc::arm::apply;
 
 struct Intrinsics {
   double fx = 600.0;

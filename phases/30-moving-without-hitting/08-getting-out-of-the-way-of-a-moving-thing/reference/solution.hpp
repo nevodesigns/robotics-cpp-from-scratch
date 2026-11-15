@@ -9,7 +9,25 @@
 #include <rc/arm/time_param.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmTable;
+using rc::arm::Capsule;
+using rc::arm::JointLimits;
+using rc::arm::PlanProblem;
+using rc::arm::PlanResult;
+using rc::arm::Scene;
+using rc::arm::Sphere;
+using rc::arm::TrajSeg;
+using rc::arm::arm_capsules;
+using rc::arm::joint_distance;
+using rc::arm::min_clearance;
+using rc::arm::plan_trajectory;
+using rc::arm::rrt;
+using rc::arm::rrt_connect;
+using rc::arm::sample_trajectory;
+using rc::arm::scene_distance;
+using rc::arm::shortcut;
+using rc::arm::sweep_bounds;
+using rc::arm::trajectory_duration;
 
 struct Track {
   double p[3] = {0.0, 0.0, 0.0};

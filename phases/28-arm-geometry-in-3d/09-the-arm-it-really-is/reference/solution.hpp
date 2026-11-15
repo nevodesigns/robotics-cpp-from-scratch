@@ -6,7 +6,9 @@
 #include <rc/arm/fk.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmTable;
+using rc::arm::Pose;
+using rc::arm::forward;
 
 // A correction is four numbers per joint: 4 * i + 0 offset of the angle, +1 d, +2 a, +3 alpha.
 inline ArmTable perturbed(const ArmTable& t, const std::vector<double>& c) {

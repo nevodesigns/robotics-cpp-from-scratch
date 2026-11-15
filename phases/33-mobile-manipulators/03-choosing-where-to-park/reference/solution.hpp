@@ -5,8 +5,10 @@
 #include <rc/mobile/base_reach.hpp>
 #include <rc/mobile/mm_frames.hpp>
 
-using namespace rc::arm;
-using namespace rc::mobile;
+using rc::mobile::Annulus;
+using rc::mobile::BasePose;
+using rc::mobile::MobileManipulator;
+using rc::mobile::park_tolerance;
 
 struct Obstacle {
   double x = 0.0;

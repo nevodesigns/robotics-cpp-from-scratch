@@ -4,7 +4,8 @@
 #include <cmath>
 #include <rc/vehicle/diff_slip.hpp>
 
-using namespace rc::vehicle;
+using rc::vehicle::DiffSlip;
+using rc::vehicle::Pose2;
 
 // The geometry and weight of a four wheel vehicle with fixed wheels.
 struct SkidGeometry {

@@ -6,6 +6,18 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::arm::ArmTable;
+using rc::arm::DlsConfig;
+using rc::arm::IkResult;
+using rc::arm::Jacobian;
+using rc::arm::Pose;
+using rc::arm::forward;
+using rc::arm::ik_dls;
+using rc::arm::jacobian;
+using rc::arm::panda;
+using rc::arm::tool_twist;
+using rc::arm::ur5;
+using rc::arm::within_limits;
 #include <iomanip>
 #include <iostream>
 

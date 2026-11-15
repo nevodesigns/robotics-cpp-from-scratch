@@ -8,7 +8,6 @@
 #include <rc/perceive/scan.hpp>
 #include <vector>
 
-using namespace rc::perceive;
 
 // An object: the indices of its points, the centre of them, and the size of the box round them.
 struct Cluster {

@@ -5,7 +5,7 @@
 #include <cmath>
 #include <rc/vehicle/diff_slip.hpp>
 
-using namespace rc::vehicle;
+using rc::vehicle::Pose2;
 
 // The soil under a track: how much it holds together (c, Pa), how much it grips under load (phi, radians) and how far it shears before it gives its full strength (K, metres).
 struct Soil {

@@ -9,8 +9,13 @@
 #include <rc/mobile/mm_frames.hpp>
 #include <vector>
 
-using namespace rc::arm;
-using namespace rc::mobile;
+using rc::arm::ik_dls;
+using rc::arm::manipulability;
+using rc::arm::pose_error;
+using rc::arm::solve6;
+using rc::mobile::BasePose;
+using rc::mobile::MobileManipulator;
+using rc::mobile::arm_base_in_world;
 
 using rc::arm::Jacobian;
 using rc::arm::Pose;

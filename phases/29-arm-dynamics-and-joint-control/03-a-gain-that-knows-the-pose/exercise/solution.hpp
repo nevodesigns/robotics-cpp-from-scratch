@@ -6,7 +6,8 @@
 #include <rc/arm/dynamics3d.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmModel;
+using rc::arm::mass_matrix;
 
 struct CascadeGains {
   double kp_pos = 0.0;  // 1/s: the velocity asked for per radian of error

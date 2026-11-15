@@ -5,6 +5,8 @@
 #include <cmath>
 
 #include "solution.hpp"
+using rc::legged::kFallSoft;
+using rc::legged::kFallen;
 #include <iomanip>
 #include <iostream>
 

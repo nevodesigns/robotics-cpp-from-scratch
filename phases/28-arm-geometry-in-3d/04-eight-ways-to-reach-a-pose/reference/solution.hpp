@@ -6,7 +6,15 @@
 #include <rc/arm/fk.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmTable;
+using rc::arm::JointRow;
+using rc::arm::Pose;
+using rc::arm::compose;
+using rc::arm::inverse;
+using rc::arm::kPi;
+using rc::arm::kStandard;
+using rc::arm::row_pose;
+using rc::arm::within_limits;
 
 // A typical six joint arm with an elbow and a spherical wrist: standard convention, dimensions typical.
 inline ArmTable elbow_arm() {

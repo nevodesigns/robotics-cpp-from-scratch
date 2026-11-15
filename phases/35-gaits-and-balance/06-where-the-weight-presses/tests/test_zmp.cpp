@@ -6,6 +6,7 @@
 
 #include "rc/legged/balance_force.hpp"
 #include "solution.hpp"
+using rc::legged::foot_forces;
 #include <iomanip>
 #include <iostream>
 

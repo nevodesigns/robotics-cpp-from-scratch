@@ -6,7 +6,11 @@
 #include <rc/arm/ik_dls.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmTable;
+using rc::arm::Pose;
+using rc::arm::ik_dls;
+using rc::arm::link_frames;
+using rc::arm::solve6;
 
 struct LinkInertia {
   double mass = 0.0;

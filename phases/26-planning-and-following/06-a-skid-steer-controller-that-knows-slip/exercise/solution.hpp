@@ -10,8 +10,16 @@
 #include <rc/vehicle/traction.hpp>
 #include <vector>
 
-using namespace rc::drive;
-using namespace rc::vehicle;
+using rc::drive::CarPose;
+using rc::drive::cross_track;
+using rc::drive::nearest_index;
+using rc::drive::wrap_pi;
+using rc::vehicle::Pose2;
+using rc::vehicle::SkidGeometry;
+using rc::vehicle::SkidSteer;
+using rc::vehicle::TractionBudget;
+using rc::vehicle::max_speed_for_curvature;
+using rc::vehicle::traction_budget;
 
 struct SkidCommand {
   double v = 0.0;   // the speed asked for, m/s

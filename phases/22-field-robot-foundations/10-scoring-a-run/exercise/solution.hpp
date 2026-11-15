@@ -10,7 +10,9 @@
 #include <string>
 #include <vector>
 
-using namespace rc::field;
+using rc::field::FieldScenario;
+using rc::field::RunLog;
+using rc::field::Segment;
 
 struct NavScore {
   int goals_reached = 0;       // goals reached in the order they were given

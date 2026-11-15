@@ -6,6 +6,13 @@
 #include <iostream>
 
 #include "solution.hpp"
+using rc::hal::ArmBus;
+using rc::hal::Drive;
+using rc::hal::DriveCommand;
+using rc::hal::DriveLimits;
+using rc::hal::DriveState;
+using rc::hal::FakeDrive;
+using rc::hal::LegBus;
 #include <iomanip>
 #include <iostream>
 

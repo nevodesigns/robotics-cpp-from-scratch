@@ -7,7 +7,12 @@
 #include <rc/arm/jacobian.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmTable;
+using rc::arm::Jacobian;
+using rc::arm::Pose;
+using rc::arm::forward;
+using rc::arm::jacobian;
+using rc::arm::kPi;
 
 // The rotation as an axis times an angle.
 inline void rotation_vector(const Pose& r, double w[3]) {

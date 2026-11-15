@@ -10,7 +10,14 @@
 #include <sstream>
 #include <string>
 
-using namespace rc::field;
+using rc::field::FieldPatch;
+using rc::field::FieldScenario;
+using rc::field::LogEntry;
+using rc::field::RunLog;
+using rc::field::grass;
+using rc::field::gravel;
+using rc::field::ice;
+using rc::field::sand;
 
 struct Bounds {
   double x0 = 0.0;

@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 
-using namespace rc::drive;
 
 struct Waypoint {
   double x = 0.0;

@@ -6,7 +6,9 @@
 #include <rc/drive/hybrid_astar.hpp>
 #include <vector>
 
-using namespace rc::drive;
+using rc::drive::CarPose;
+using rc::drive::hybrid_astar;
+using rc::drive::wrap_pi;
 
 struct DriveCmd {
   double v = 0.0;  // m/s, negative to reverse

@@ -5,6 +5,14 @@
 #include <cmath>
 
 #include "solution.hpp"
+using rc::arm::Pose;
+using rc::arm::apply;
+using rc::arm::compose;
+using rc::arm::inverse;
+using rc::arm::rot_x;
+using rc::arm::rot_y;
+using rc::arm::rot_z;
+using rc::arm::trans;
 #include <iomanip>
 #include <iostream>
 

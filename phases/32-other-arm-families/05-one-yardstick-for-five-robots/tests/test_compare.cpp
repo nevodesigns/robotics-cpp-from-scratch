@@ -5,6 +5,14 @@
 #include <cmath>
 
 #include "solution.hpp"
+using rc::arm::ArmTable;
+using rc::arm::Delta;
+using rc::arm::Pose;
+using rc::arm::Scara;
+using rc::arm::Stewart;
+using rc::arm::elbow_arm;
+using rc::arm::kPi;
+using rc::arm::volume;
 #include <iomanip>
 #include <iostream>
 

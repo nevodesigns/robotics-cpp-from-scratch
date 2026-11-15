@@ -7,6 +7,9 @@
 
 #include "rc/arm/ik_closed.hpp"
 #include "solution.hpp"
+using rc::arm::JointRow;
+using rc::arm::elbow_arm;
+using rc::arm::kPi;
 #include <iomanip>
 #include <iostream>
 

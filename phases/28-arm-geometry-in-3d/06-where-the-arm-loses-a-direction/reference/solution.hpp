@@ -8,7 +8,14 @@
 #include <rc/arm/ik_dls.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmTable;
+using rc::arm::Jacobian;
+using rc::arm::Pose;
+using rc::arm::dls_step;
+using rc::arm::forward;
+using rc::arm::ik_dls;
+using rc::arm::jacobian;
+using rc::arm::pose_error;
 
 // The singular values of a Jacobian, largest first: the square roots of the eigenvalues of J J^T (Jacobi's method on the 6 by 6).
 inline void singular_values(const Jacobian& j, double s[6]) {

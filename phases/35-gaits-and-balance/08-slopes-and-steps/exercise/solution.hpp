@@ -5,7 +5,8 @@
 #include <rc/legged/foot_path.hpp>
 #include <rc/legged/leg_kin.hpp>
 
-using namespace rc::legged;
+using rc::legged::LegGeom;
+using rc::legged::swing_peak_joint_rate;
 
 inline double max_slope_friction(double mu) { return std::atan(mu); }
 

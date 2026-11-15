@@ -4,7 +4,7 @@
 #include <cmath>
 #include <rc/legged/static_gait.hpp>
 
-using namespace rc::legged;
+using rc::legged::polygon_margin;
 
 // The mean of the feet's places (x, y) weighted by the vertical forces on them.
 inline bool cop_from_forces(const double feet[4][2], const double f[4], double out[2]) {

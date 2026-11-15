@@ -6,7 +6,9 @@
 #include <rc/drive/offroad.hpp>
 #include <vector>
 
-using namespace rc::drive;
+using rc::drive::CarPose;
+using rc::drive::TerrainGrid;
+using rc::drive::path_energy;
 
 struct DrivePower {
   double mass = 10.0;      // kg

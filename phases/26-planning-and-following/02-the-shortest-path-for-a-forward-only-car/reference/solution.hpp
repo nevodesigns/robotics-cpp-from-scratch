@@ -5,7 +5,8 @@
 #include <rc/drive/hybrid_astar.hpp>
 #include <vector>
 
-using namespace rc::drive;
+using rc::drive::CarPose;
+using rc::drive::hybrid_astar;
 
 enum DubinsWord { kLSL = 0, kRSR = 1, kLSR = 2, kRSL = 3, kRLR = 4, kLRL = 5 };
 

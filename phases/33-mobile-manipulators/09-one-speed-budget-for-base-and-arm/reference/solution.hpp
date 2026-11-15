@@ -4,7 +4,6 @@
 #include <cmath>
 #include <rc/arm/ssm.hpp>
 
-using namespace rc::arm;
 
 using rc::arm::max_speed;
 using rc::arm::SsmParams;

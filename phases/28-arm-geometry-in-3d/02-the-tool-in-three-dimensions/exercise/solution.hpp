@@ -6,7 +6,16 @@
 #include <rc/arm/frames.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmTable;
+using rc::arm::JointRow;
+using rc::arm::Pose;
+using rc::arm::compose;
+using rc::arm::dh_modified;
+using rc::arm::dh_standard;
+using rc::arm::kStandard;
+using rc::arm::rot_x;
+using rc::arm::rot_y;
+using rc::arm::rot_z;
 
 // One row of the table for a joint angle: the angle plus the row's offset, in the table's convention.
 inline Pose row_pose(const ArmTable& t, std::size_t i, double q) {

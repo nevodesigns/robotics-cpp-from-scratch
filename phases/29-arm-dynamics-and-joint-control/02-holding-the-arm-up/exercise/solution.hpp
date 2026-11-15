@@ -7,7 +7,13 @@
 #include <rc/arm/jacobian.hpp>
 #include <vector>
 
-using namespace rc::arm;
+using rc::arm::ArmModel;
+using rc::arm::ArmTable;
+using rc::arm::Jacobian;
+using rc::arm::LinkInertia;
+using rc::arm::Pose;
+using rc::arm::jacobian;
+using rc::arm::step_dynamics;
 
 struct PdGains {
   std::vector<double> kp;  // N m per rad

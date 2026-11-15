@@ -7,6 +7,13 @@
 
 #include "rc/arm/ik_closed.hpp"
 #include "solution.hpp"
+using rc::arm::ArmModel;
+using rc::arm::PdGains;
+using rc::arm::elbow_arm;
+using rc::arm::mass_matrix;
+using rc::arm::rod_links;
+using rc::arm::settle;
+using rc::arm::step_dynamics;
 #include <iomanip>
 #include <iostream>
 

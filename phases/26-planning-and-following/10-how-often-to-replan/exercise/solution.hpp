@@ -7,7 +7,10 @@
 #include <rc/drive/hybrid_astar.hpp>
 #include <vector>
 
-using namespace rc::drive;
+using rc::drive::CarPose;
+using rc::drive::CostGrid;
+using rc::drive::cross_track;
+using rc::drive::hybrid_astar;
 
 enum ReplanReason { kNoReplan = 0, kBlocked = 1, kOffPath = 2, kPeriodic = 3, kGoalChanged = 4 };
 

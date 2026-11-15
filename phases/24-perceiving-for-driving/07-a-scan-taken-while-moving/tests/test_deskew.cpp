@@ -8,6 +8,8 @@
 #include <rc/field/sensors.hpp>
 
 #include "solution.hpp"
+using rc::perceive::LidarScan;
+using rc::perceive::scan_to_points;
 #include <iomanip>
 #include <iostream>
 

@@ -9,7 +9,9 @@
 #include <string>
 #include <vector>
 
-using namespace rc::hal;
+using rc::hal::Drive;
+using rc::hal::DriveCommand;
+using rc::hal::DriveState;
 
 // What a drive is expected to be, so that the contract can tell a promise kept from one broken.
 struct DriveExpect {
