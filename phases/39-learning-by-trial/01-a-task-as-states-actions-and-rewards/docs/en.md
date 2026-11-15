@@ -24,11 +24,11 @@ The grid of this phase has a corridor straight to the goal along a row of pits, 
 
 A policy says which move to make in every cell. Its value at a cell, V(s), is the expected sum of the rewards from there on, each step's discounted by gamma (0.95 here) so that the far future counts less and the sum stays finite. It satisfies an equation: V(s) is, over the three outcomes of the policy's move, the chance times (the reward on arrival plus gamma times V of where it arrives). Sweeping that equation over every cell again and again, from all zeros, settles on the value. See `E-LRN-0026`.
 
-The random policy, each move a quarter of the time, was worth -13.276 at the start (settled in 221 sweeps): it wanders, pays for every step, and finds the pit as often as the goal. Always moving east, along the pits, was worth -5.852. Going round above was worth -4.042. Which is better is a matter of arithmetic once the task is written down, and 39-02 does that arithmetic for every policy at once.
+The random policy, each move a quarter of the time, was worth -13.357 at the start (settled in 242 sweeps): it wanders, pays for every step, and finds the pit as often as the goal. Always moving east, along the pits, was worth -5.972. Going round above was worth -5.745. Which is better is a matter of arithmetic once the task is written down, and 39-02 does that arithmetic for every policy at once.
 
 ### What the number means
 
-The value is an expected discounted return, and running the policy shows it. 20000 runs of the east policy gave a mean discounted return of -5.836, close to its value of -5.852, and 47.7 percent of them ended in a pit. A value is an average over outcomes; it does not say that every run is fine. See `E-LRN-0027`.
+The value is an expected discounted return, and running the policy shows it. 20000 runs of the east policy gave a mean discounted return of -5.924, close to its value of -5.972, and 48.5 percent of them ended in a pit. A value is an average over outcomes; it does not say that every run is fine. See `E-LRN-0027`.
 
 ## Build It
 

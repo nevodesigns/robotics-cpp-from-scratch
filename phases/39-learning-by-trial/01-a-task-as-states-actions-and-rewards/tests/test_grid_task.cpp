@@ -18,13 +18,13 @@ static const Pin kPins[] = {
     {"slip", 0.1},
     {"step", -1.0},
     {"gamma", 0.95},
-    {"v_random", -13.275664670504755},
-    {"sweeps_random", 221.0},
-    {"v_east", -5.852030338142722},
-    {"v_round", -4.0415273311203395},
+    {"v_random", -13.356982344405983},
+    {"sweeps_random", 242.0},
+    {"v_east", -5.971763532176333},
+    {"v_round", -5.7453738533489656},
     {"runs", 20000.0},
-    {"mc_east", -5.835937079785723},
-    {"pit_share", 47.73},
+    {"mc_east", -5.923655515445374},
+    {"pit_share", 48.51},
 };
 
 static void rec(const char* key, double value, int digits = 3) {
@@ -48,6 +48,7 @@ static void rec(const char* key, double value, int digits = 3) {
 static GridTask pit_grid() {
   return make_grid({"#########",
                     "#.......#",
+                    "#.#####.#",
                     "#.#####.#",
                     "#S.....G#",
                     "#PPPPPPP#",
@@ -73,17 +74,17 @@ static std::vector<int> round_above(const GridTask& g) {
 
 RC_TEST("the grid is read from text: its size, its start, which cells end a run, and a move into a wall stays put") {
   const GridTask g = pit_grid();
-  RC_CHECK(g.width == 9 && g.height == 6);
-  RC_CHECK(start_of(g) == 3 * 9 + 1);
-  RC_CHECK(is_terminal(g, 3 * 9 + 7) && is_terminal(g, 4 * 9 + 3) && !is_terminal(g, start_of(g)));
+  RC_CHECK(g.width == 9 && g.height == 7);
+  RC_CHECK(start_of(g) == 4 * 9 + 1);
+  RC_CHECK(is_terminal(g, 4 * 9 + 7) && is_terminal(g, 5 * 9 + 3) && !is_terminal(g, start_of(g)));
   RC_CHECK(moved(g, start_of(g), kWest) == start_of(g));
   RC_CHECK(moved(g, start_of(g), kEast) == start_of(g) + 1);
-  RC_CHECK(reward_of(g, 3 * 9 + 7) == 10.0 && reward_of(g, 4 * 9 + 2) == -10.0);
+  RC_CHECK(reward_of(g, 4 * 9 + 7) == 10.0 && reward_of(g, 5 * 9 + 2) == -10.0);
   double c[3];
   int n[3];
   outcomes(g, start_of(g), kEast, c, n);
   RC_CHECK(std::fabs(c[0] + c[1] + c[2] - 1.0) < 1e-15);
-  RC_CHECK(n[1] == 4 * 9 + 1);   // a slip to the south from the start is a pit
+  RC_CHECK(n[1] == 5 * 9 + 1);   // a slip to the south from the start is a pit
   rec("slip", g.slip, 1);
   rec("step", g.step, 0);
 }

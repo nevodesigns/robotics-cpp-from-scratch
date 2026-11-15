@@ -18,9 +18,9 @@
       "stage": "check",
       "question": "What was the random policy worth at the start, and what was always moving east worth?",
       "options": [
-        "-5.852 and -13.276",
-        "Both -4.042",
-        "-13.276 and -5.852",
+        "-5.972 and -13.357",
+        "Both -5.745",
+        "-13.357 and -5.972",
         "Zero, since no reward is certain"
       ],
       "correct": 2,
@@ -28,15 +28,15 @@
     },
     {
       "stage": "check",
-      "question": "20000 runs of the east policy gave a mean discounted return of -5.836. What does that show?",
+      "question": "20000 runs of the east policy gave a mean discounted return of -5.924. What does that show?",
       "options": [
-        "That the swept value, -5.852, is the average of what running the policy gets",
+        "That the swept value, -5.972, is the average of what running the policy gets",
         "That the sweep was wrong",
-        "That every run gets -5.836",
+        "That every run gets -5.924",
         "That the policy never falls in a pit"
       ],
       "correct": 0,
-      "explanation": "A value is an expectation over outcomes. 47.7 percent of those runs still ended in a pit."
+      "explanation": "A value is an expectation over outcomes. 48.5 percent of those runs still ended in a pit."
     },
     {
       "stage": "check",
