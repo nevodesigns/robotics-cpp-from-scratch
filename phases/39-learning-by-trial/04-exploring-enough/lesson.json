@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "39-04-exploring-enough",
+  "title": "Exploring Enough: A Small Reward Near By, a Large One Down a Corridor, and Values That Start Optimistic",
+  "type": "build",
+  "minutes": 80,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "39-03-learning-from-trying"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/exploration.hpp",
+    "note": "exploration in learning by trial: a grid with a small reward next to the start and a larger one at the end of a corridor; Q-learning that also counts how often each cell was visited; the return of the greedy policy it learns; with no random moves, with a tenth of the moves random, with half of them random, and with the table started at a value higher than any the task can give (optimistic), which makes every untried move look worth trying until it has been tried"
+  },
+  "breaks_first": [
+    "E-LRN-0034",
+    "E-LRN-0035",
+    "E-LRN-0036"
+  ]
+}

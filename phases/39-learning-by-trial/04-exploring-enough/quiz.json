@@ -1,0 +1,78 @@
+{
+  "lesson": "39-04-exploring-enough",
+  "title": "Exploring Enough: A Small Reward Near By, a Large One Down a Corridor, and Values That Start Optimistic",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why can a Q-learner settle for a worse reward than the best?",
+      "options": [
+        "It only learns the value of moves it makes, and it keeps making the moves its table already rates highest",
+        "Its table cannot hold large values",
+        "The discount forbids long paths",
+        "It always takes the shortest path"
+      ],
+      "correct": 0,
+      "explanation": "What it never tries it never learns about."
+    },
+    {
+      "stage": "check",
+      "question": "With a tenth of the moves random, how often did the learner reach the large goal, and what did its greedy policy return?",
+      "options": [
+        "1970 times, 4",
+        "2 times, 1",
+        "Every episode, 4",
+        "Never, and -200"
+      ],
+      "correct": 1,
+      "explanation": "The greedy moves pull a random walk back to the lure before it gets down the corridor."
+    },
+    {
+      "stage": "check",
+      "question": "With the table started at 20 and no random moves, what happened?",
+      "options": [
+        "It never moved",
+        "It went to the small goal",
+        "It reached the large goal 1970 times and its greedy policy returned 4",
+        "It fell into a loop"
+      ],
+      "correct": 2,
+      "explanation": "Every untried move looked worth 20, so it tried them all, and found the corridor."
+    },
+    {
+      "stage": "check",
+      "question": "With half the moves random, the learner reached the large goal 27 times. What did its greedy policy return?",
+      "options": [
+        "1: found too seldom to overtake the lure",
+        "4, the best",
+        "Nothing, it never ended",
+        "-10"
+      ],
+      "correct": 0,
+      "explanation": "More random moves reach further, and the learner behaves at random that much more while it learns."
+    },
+    {
+      "stage": "post",
+      "question": "What does starting the values high (optimism) do?",
+      "options": [
+        "It makes the learner reckless for ever",
+        "It makes every untried move look best until it has been tried, so exploration is systematic",
+        "It speeds up each update",
+        "It removes the need for a reward"
+      ],
+      "correct": 1,
+      "explanation": "Each tried move is pulled down to what it gave; untried ones stay high and get their turn."
+    },
+    {
+      "stage": "post",
+      "question": "Why is optimism dangerous on a real robot without anything else?",
+      "options": [
+        "It needs too much memory",
+        "It only works in grids",
+        "Trying every move once includes the moves that hurt the robot",
+        "It makes the robot slower"
+      ],
+      "correct": 2,
+      "explanation": "It must be combined with a shield that refuses known dangerous moves (39-09)."
+    }
+  ]
+}
