@@ -16,6 +16,7 @@ add_executable(rcpp
   cmd_next.cpp
   cmd_platforms.cpp
   cmd_targets.cpp
+  cmd_site.cpp
   progress.cpp
 )
 

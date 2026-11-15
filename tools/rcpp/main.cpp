@@ -100,6 +100,7 @@ usage: rcpp <command> [options]
   platforms       the toolchains claimed, and the CI matrix generated from them
   targets         build target names for lessons, for any generator
   readme          check, or fix, the generated counts in README.md
+  site            write the course as web pages to read in a browser, offline
 
 examples
 
@@ -110,6 +111,7 @@ examples
   rcpp next --blocked
   rcpp explain E-RT-0001
   rcpp readme --check
+  rcpp site
 )";
   return 0;
 }
@@ -140,6 +142,7 @@ int main(int argc, char** argv) {
   if (command == "status") return cmd_status(args);
   if (command == "platforms") return cmd_platforms(args);
   if (command == "targets") return cmd_targets(args);
+  if (command == "site") return cmd_site(args);
 
   std::cerr << "rcpp: unknown command: " << command << "\n\n";
   usage();

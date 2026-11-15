@@ -39,6 +39,7 @@ int cmd_next(const Args& args);
 int cmd_status(const Args& args);
 int cmd_platforms(const Args& args);
 int cmd_targets(const Args& args);
+int cmd_site(const Args& args);
 
 // Reads a string option while keeping its three outcomes apart.
 //
