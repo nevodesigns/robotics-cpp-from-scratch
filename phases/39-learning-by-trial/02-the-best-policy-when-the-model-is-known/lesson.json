@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "39-02-the-best-policy-when-the-model-is-known",
+  "title": "The Best Policy When the Model Is Known: Value Iteration, the Greedy Move, and the Route the Discount Chooses",
+  "type": "build",
+  "minutes": 80,
+  "platforms": [
+    "ubuntu-22.04-gcc11",
+    "ubuntu-24.04-gcc13",
+    "ubuntu-22.04-clang14",
+    "windows-msvc2022"
+  ],
+  "hardware_tier": 0,
+  "requires": [
+    "39-01-a-task-as-states-actions-and-rewards"
+  ],
+  "cxx_standard": 17,
+  "qt": null,
+  "ros2": null,
+  "teaches": [],
+  "artifact": {
+    "module": "rc::learn",
+    "header": "rc/learn/value_iteration.hpp",
+    "note": "the best policy for a task whose model is known: value iteration, which sweeps V(s) = the best over the moves of the move's value until it settles; the greedy move and the greedy policy that the settled values give; a check that the greedy policy's own value is the optimum and beats the policies of 39-01; and the discount's effect on the answer, a low one going the long safe way round the pits and a high one taking the corridor beside them"
+  },
+  "breaks_first": [
+    "E-LRN-0028",
+    "E-LRN-0029",
+    "E-LRN-0030"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "39-02-the-best-policy-when-the-model-is-known",
+  "title": "The Best Policy When the Model Is Known: Value Iteration, the Greedy Move, and the Route the Discount Chooses",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "When the chances and rewards of a task are known, how is the best policy found?",
+      "options": [
+        "By trying every policy and keeping the best",
+        "By sweeping the equation for the best value until it settles, then taking the greedy move in each cell",
+        "By training a network on demonstrations",
+        "By choosing the shortest path"
+      ],
+      "correct": 1,
+      "explanation": "Value iteration finds the best value for every cell at once; the best policy is a lookup on it."
+    },
+    {
+      "stage": "check",
+      "question": "With gamma 0.95, what was the optimal value at the start, and how did it compare?",
+      "options": [
+        "-13.357, the same as the random policy",
+        "-5.245, worse than going round",
+        "-5.745, the same as going round",
+        "-5.245, at least as good as going round (-5.745) and the random policy (-13.357)"
+      ],
+      "correct": 3,
+      "explanation": "No policy beats the optimum, at the start or anywhere."
+    },
+    {
+      "stage": "check",
+      "question": "With gamma 0.80, what did the greedy policy do from the start, and how did it fare?",
+      "options": [
+        "It went the long way round; 95 percent of runs reached the goal",
+        "It took the corridor; 54 percent reached the goal",
+        "It stayed put",
+        "It fell in a pit every time"
+      ],
+      "correct": 0,
+      "explanation": "A low discount makes a pit on the next step count far more than the length of the way."
+    },
+    {
+      "stage": "check",
+      "question": "With gamma 0.95, what changed?",
+      "options": [
+        "Nothing",
+        "It took the corridor beside the pits: 54 percent reached the goal, with a mean return of -5.16",
+        "It refused to move",
+        "It reached the goal on every run"
+      ],
+      "correct": 1,
+      "explanation": "It weighs the whole path, and the short corridor is worth the risk of a pit to it."
+    },
+    {
+      "stage": "post",
+      "question": "Why is the discount an engineering decision and not a constant?",
+      "options": [
+        "Because it must always be 0.99",
+        "Because it only changes how fast value iteration runs",
+        "Because it changes which policy is best, here how much risk is taken",
+        "Because it sets the step cost"
+      ],
+      "correct": 2,
+      "explanation": "Leaving it at a usual value is choosing a route without looking."
+    },
+    {
+      "stage": "post",
+      "question": "The optimal policy reaches the goal on only half its runs, and the robot must almost never fall. What is the right fix?",
+      "options": [
+        "Make the falls a constraint the policy must meet, not just part of the average",
+        "Run more sweeps",
+        "Lower the reward of the goal",
+        "Use the random policy"
+      ],
+      "correct": 0,
+      "explanation": "The expected return can trade a fall for a shorter path. A limit on falls is a separate requirement (39-09)."
+    }
+  ]
+}
