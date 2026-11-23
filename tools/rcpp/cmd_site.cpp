@@ -1,10 +1,14 @@
 // rcpp site
 //
-// Writes the course as plain web pages, for anyone who would rather read it in a
-// browser than in markdown files: a home page with every phase, a page for every
-// lesson (its text, its files, the command that checks it and its quiz to try),
-// and a page for every entry of the Failure Atlas. Nothing is served and nothing
-// is downloaded: the pages are files, opened from disk, and they work offline.
+// Writes the course as a website: a home page, the roadmap of ten tracks, a page
+// for every phase (its lessons as a checklist), every lesson (its text, the file
+// to write, the command that checks it, what breaks first and its quiz), three
+// playgrounds that run in the browser, a self-check that says where to start,
+// setup, and the Failure Atlas with a search box. The pages are plain files with
+// relative links, so they open from disk and can be put on any static host;
+// --public leaves this machine's passed lessons out of them. Progress a reader
+// ticks is kept in their browser only. The stylesheet and scripts are the files
+// in tools/site/.
 //
 // Like the other commands, everything is read from the file system each time, so
 // the pages can never disagree with the lessons; run it again after a pull.
@@ -102,7 +106,20 @@ std::string emphasis(const std::string& t) {
     }
   }
   if (bold) out += "</strong>";
-  return out;
+  // *word* (a star touching a letter on the inside of each end) is emphasis; a star with space round it is left alone
+  std::string em;
+  for (std::size_t i = 0; i < out.size(); ++i) {
+    if (out[i] == '*' && i + 1 < out.size() && out[i + 1] != ' ' && out[i + 1] != '*' && (i == 0 || out[i - 1] == ' ' || out[i - 1] == '(')) {
+      const std::size_t end = out.find('*', i + 1);
+      if (end != std::string::npos && out[end - 1] != ' ' && end - i < 80) {
+        em += "<em>" + out.substr(i + 1, end - i - 1) + "</em>";
+        i = end;
+        continue;
+      }
+    }
+    em += out[i];
+  }
+  return em;
 }
 
 // One line of markdown text: `code`, **bold**, and the names that become links.
@@ -252,55 +269,162 @@ std::string markdown_to_html(const std::string& md, const Links& links) {
   return out.str();
 }
 
-const char* kStyle = R"(:root{--bg:#fbfbf8;--fg:#1d1d1b;--dim:#6b6b66;--line:#e2e1da;--box:#f1f0ea;--link:#1f5fa8;--ok:#2e7d32;--bad:#b3261e}
-@media (prefers-color-scheme:dark){:root{--bg:#18181a;--fg:#e8e6e1;--dim:#9a988f;--line:#333336;--box:#222225;--link:#7fb0ef;--ok:#7cc47f;--bad:#f08a80}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans","DejaVu Sans",Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6;font-style:normal}
-main{max-width:820px;margin:0 auto;padding:24px 16px 80px}
-a{color:var(--link)}
-nav.crumbs{font-size:14px;color:var(--dim);margin-bottom:12px}
-nav.crumbs a{color:var(--dim)}
-h1{font-size:28px;line-height:1.25;margin:8px 0 12px}
-h2{font-size:21px;margin-top:36px;border-top:1px solid var(--line);padding-top:20px}
-h3{font-size:18px;margin-top:26px}
-code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;background:var(--box);padding:1px 4px;border-radius:4px}
-pre{background:var(--box);padding:12px 14px;border-radius:6px;overflow-x:auto;line-height:1.45}
-pre code{background:none;padding:0}
-blockquote{margin:12px 0;padding:4px 16px;border-left:3px solid var(--line);color:var(--dim);font-style:italic}
-.table{overflow-x:auto}
-table{border-collapse:collapse;margin:12px 0;font-size:15px}
-th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
-th{background:var(--box)}
-.box{background:var(--box);border-radius:8px;padding:14px 16px;margin:18px 0}
-.dim{color:var(--dim)}
-.done{color:var(--ok);font-weight:600}
-ul.lessons{list-style:none;padding:0}
-ul.lessons li{padding:7px 0;border-bottom:1px solid var(--line)}
-ul.lessons .num{display:inline-block;min-width:3.4em;color:var(--dim);font-variant-numeric:tabular-nums}
-details{border-bottom:1px solid var(--line);padding:8px 0}
-summary{cursor:pointer;font-weight:600}
-input.filter{width:100%;font-size:16px;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);margin:8px 0 16px}
-.pager{display:flex;justify-content:space-between;gap:12px;margin-top:40px;font-size:15px}
-.q{margin:18px 0;padding:14px 16px;border:1px solid var(--line);border-radius:8px}
-.q button{display:block;width:100%;text-align:left;margin:6px 0;padding:8px 12px;font:inherit;font-size:16px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);cursor:pointer}
-.q button.right{border-color:var(--ok);color:var(--ok)}
-.q button.wrong{border-color:var(--bad);color:var(--bad)}
-.q .why{display:none;margin-top:8px;color:var(--dim)}
-.q.answered .why{display:block}
-)";
+// ---- the site's structure -------------------------------------------------------------------
 
-const char* kScript = R"(document.addEventListener('click',function(e){var b=e.target.closest('.q button');if(!b)return;var q=b.closest('.q');if(q.classList.contains('answered'))return;var right=q.getAttribute('data-right');q.querySelectorAll('button').forEach(function(x){if(x.getAttribute('data-i')===right)x.classList.add('right');});if(b.getAttribute('data-i')!==right)b.classList.add('wrong');q.classList.add('answered');});
-function filterList(box){var t=box.value.toLowerCase().trim();document.querySelectorAll('[data-text]').forEach(function(li){li.style.display=(!t||li.getAttribute('data-text').indexOf(t)>=0)?'':'none';});document.querySelectorAll('details').forEach(function(d){if(!t){d.open=false;return;}var any=false;d.querySelectorAll('[data-text]').forEach(function(li){if(li.style.display!=='none')any=true;});d.style.display=any?'':'none';d.open=any;});}
-)";
+// The phases grouped as a learner meets them.
+struct Track {
+  const char* name;
+  int from, to;
+  const char* blurb;
+  bool optional;
+};
 
-std::string page(const std::string& title, const std::string& up, const std::string& crumbs, const std::string& body) {
+const Track kTracks[] = {
+    {"C++ a robot can trust", 0, 5,
+     "The language, its memory, its build and its tests, taught on robot problems from the first lesson.", false},
+    {"Maths, time and the outside world", 6, 8,
+     "Frames and rotations, threads and deadlines, ports and bytes: what every robot program stands on.", false},
+    {"Interfaces with Qt", 9, 12,
+     "The control station a person uses: a sensor on its own thread, live charts, QML, a link that says when it drops. Skip it if you will never build an interface.", true},
+    {"The robot itself", 13, 16,
+     "Kinematics, control, sensors and estimation: how a robot moves, holds still, senses and knows where it is.", false},
+    {"Systems that ship", 17, 21,
+     "Middleware and ROS 2, simulation and the bench, safety, deployment, and capstones that run a whole robot with faults injected.", false},
+    {"Ground vehicles", 22, 27,
+     "Wheeled and tracked vehicles: their models, perception for driving, localisation outdoors, planning per vehicle, and a day of work.", false},
+    {"Robot arms", 28, 32,
+     "Arms in three dimensions: geometry, dynamics and joint control, collision-free motion, picking and placing, and the other arm families.", false},
+    {"Mobile manipulators", 33, 33,
+     "An arm on a wheeled base: where to park, the whole body as one, tipping, and a fetch-and-carry job checked before release.", false},
+    {"Legged robots", 34, 36,
+     "Legs, gaits and balance, and a quadruped controller that does what it is told and keeps itself safe.", false},
+    {"Robots that learn", 38, 39,
+     "Learning from demonstrations and learning by trial, at a size where every number can be checked, with the guards and release checks a robot needs.", false},
+};
+
+// The self-check: what a learner can already do, and the phase that teaches it.
+struct Can {
+  int phase;
+  const char* text;
+};
+const Can kCan[] = {
+    {0, "build and run a C++ program with CMake from a terminal"},
+    {1, "explain what a reference, a struct and an enum class are, and when each is the right tool"},
+    {2, "say who owns every allocation in a program, and use unique_ptr instead of new and delete"},
+    {3, "write a small class template, and use std::optional and std::chrono without guessing"},
+    {4, "make a CMake library that another project installs and links against"},
+    {5, "test code that talks to hardware by putting a fake in its place, and show the tests catch a bug"},
+    {6, "move a point between two frames with a rotation and a translation, composing them in the right order"},
+    {7, "share data between two threads without a race, and measure how late a loop runs"},
+    {8, "hold a framed, checksummed conversation with a device over a serial port"},
+    {13, "compute the forward and inverse kinematics of a two-link arm, and say where it is singular"},
+    {14, "tune a PID loop and explain overshoot, steady error and integral wind-up"},
+    {15, "filter a noisy sensor and say what the filter costs in delay"},
+    {16, "fuse two estimates of a position, and plan a path through a grid map"},
+    {17, "explain publish and subscribe, quality of service, and a node's life cycle"},
+    {18, "run the same controller against a simulator and against hardware, and measure the difference"},
+    {19, "write a risk assessment in which every hazard is tied to a test"},
+};
+
+// A playground and the lessons it mirrors.
+struct Play {
+  const char* slug;
+  const char* kicker;
+  const char* title;
+  const char* blurb;
+  const char* script;
+  const char* lessons[4];
+};
+const Play kPlays[] = {
+    {"arm", "phases 13 and 32 \xc2\xb7 kinematics", "Drag a robot arm",
+     "The two-link arm of 32-01: its closed-form inverse kinematics, both elbows, its reach, and the determinant that goes to zero at a singularity, live as you drag.",
+     "play-arm.js", {"13-02", "13-04", "32-01", "28-06"}},
+    {"pid", "phase 14 \xc2\xb7 control", "Tune a PID loop",
+     "A motor holding an angle. Turn Kp, Ki and Kd, push it, and watch overshoot, settling, saturation and the steady error that only the integral removes.",
+     "play-pid.js", {"14-01", "14-03", "14-04", "14-08"}},
+    {"rl", "phase 39 \xc2\xb7 learning by trial", "Train a robot by trial",
+     "Q-learning on the pit grid of phase 39. Change the slip, the discount and the exploring, and watch which way round the pits it learns to go.",
+     "play-q.js", {"39-01", "39-02", "39-03", "39-04"}},
+};
+
+std::string lesson_number(const Lesson& l) { return l.id.substr(0, 5); }
+
+std::string lower(std::string s) {
+  for (char& c : s) c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+  return s;
+}
+
+std::string hours_text(int minutes) {
+  const int h = (minutes + 30) / 60;
+  return "~" + std::to_string(h) + " h";
+}
+
+std::string two_digits(int n) { return (n < 10 ? "0" : "") + std::to_string(n); }
+
+struct Site {
+  const Catalog* catalog = nullptr;
+  const Atlas* atlas = nullptr;
+  const Progress* progress = nullptr;
+  std::vector<const Lesson*> all;
+  std::map<std::string, const Lesson*> by_id;
+  std::map<std::string, const Lesson*> by_number;     // "13-02"
+  std::map<std::string, const AtlasEntry*> atlas_by_id;
+  std::map<int, const Phase*> phase_of;
+  std::string repo_url = "https://github.com/nevodesigns/robotics-cpp-from-scratch";
+};
+
+std::string phase_page(const Phase& p) { return "p/" + p.slug + ".html"; }
+
+int phase_minutes(const Phase& p) {
+  int m = 0;
+  for (const Lesson& l : p.lessons) m += l.minutes;
+  return m;
+}
+
+std::string lesson_ids(const Phase& p) {
+  std::string s;
+  for (const Lesson& l : p.lessons) s += l.id + " ";
+  return s;
+}
+
+// The page frame: the bar along the top, the content, the footer.
+std::string page(const Site& site, const std::string& title, const std::string& description, const std::string& up,
+                 const std::string& active, const std::string& body, bool narrow) {
   std::ostringstream o;
   o << "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
     << "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
     << "<title>" << html_escape(title) << "</title>\n"
-    << "<link rel=\"stylesheet\" href=\"" << up << "style.css\">\n</head>\n<body>\n<main>\n";
-  if (!crumbs.empty()) o << "<nav class=\"crumbs\">" << crumbs << "</nav>\n";
-  o << body << "\n</main>\n<script src=\"" << up << "site.js\"></script>\n</body>\n</html>\n";
+    << "<meta name=\"description\" content=\"" << html_escape(description) << "\">\n"
+    << "<link rel=\"icon\" href=\"" << up << "assets/icon.svg\">\n"
+    << "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n"
+    << "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400&display=swap\">\n"
+    << "<link rel=\"stylesheet\" href=\"" << up << "assets/style.css\">\n"
+    << "<script>try{var t=localStorage.getItem('rcpp.theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>\n"
+    << "</head>\n<body>\n<header class=\"top\"><div class=\"in\">"
+    << "<a class=\"brand\" href=\"" << up << "index.html\">robotics<b>cpp</b><span class=\"long\"> from scratch</span></a>"
+    << "<nav class=\"links\">";
+  const char* items[][2] = {{"roadmap", "Roadmap"}, {"playground", "Playground"}, {"atlas", "Failure Atlas"}, {"setup", "Setup"}};
+  for (const auto& it : items)
+    o << "<a href=\"" << up << it[0] << ".html\"" << (active == it[0] ? " class=\"on\"" : "") << ">" << it[1] << "</a>";
+  o << "<a href=\"" << site.repo_url << "\">GitHub</a></nav></div></header>\n"
+    << "<main" << (narrow ? " class=\"narrow\"" : "") << ">\n" << body << "\n</main>\n"
+    << "<footer class=\"bottom\"><div class=\"in\"><div><p class=\"serif\">Every lesson is code you write, and a test that says whether it works.</p>"
+    << "Free and open source. Clone it, build it, and run <code>rcpp start</code>. "
+    << "<button class=\"theme-btn\" onclick=\"toggleTheme()\">light / dark</button></div>"
+    << "<div class=\"right\"><a href=\"" << site.repo_url << "\">The repository on GitHub</a> \xc2\xb7 <a href=\"" << up << "atlas.html\">Failure Atlas</a> \xc2\xb7 <a href=\"" << up << "setup.html\">Setup</a><br>"
+    << "Made from the lesson files by <code>rcpp site</code>, so the pages cannot disagree with the course.<br>"
+    << "Your progress is kept in this browser only.</div></div></footer>\n";
+  // lessons passed on this machine, when the pages are made locally
+  if (site.progress && !site.progress->passed.empty()) {
+    o << "<script>window.RCPP_PASSED=[";
+    bool first = true;
+    for (const std::string& id : site.progress->passed) {
+      o << (first ? "" : ",") << "\"" << html_escape(id) << "\"";
+      first = false;
+    }
+    o << "];</script>\n";
+  }
+  o << "<script src=\"" << up << "assets/site.js\"></script>\n</body>\n</html>\n";
   return o.str();
 }
 
@@ -312,7 +436,7 @@ std::string quiz_html(const fs::path& quiz_file, const Links& links) {
   const json::Array& questions = parsed.value.at("questions").as_array();
   if (questions.empty()) return "";
   std::ostringstream o;
-  o << "<h2>Try the quiz</h2>\n<p class=\"dim\">Choose an answer to see whether it is right, and why.</p>\n";
+  o << "<p class=\"label\">Check yourself</p>\n<p class=\"dim\">Choose an answer to see whether it is right, and why.</p>\n";
   int n = 0;
   for (const json::Value& q : questions) {
     ++n;
@@ -326,155 +450,428 @@ std::string quiz_html(const fs::path& quiz_file, const Links& links) {
   return o.str();
 }
 
-std::string lesson_number(const Lesson& l) { return l.id.substr(0, 5); }
+// ---- the pages ------------------------------------------------------------------------------
+
+std::string home_page(const Site& s) {
+  int minutes = 0;
+  for (const Lesson* l : s.all) minutes += l->minutes;
+  std::ostringstream b;
+  b << "<p class=\"eyebrow\">Robotics in C++ \xc2\xb7 " << s.all.size() << " lessons \xc2\xb7 $0</p>\n"
+    << "<h1>Learn robotics in the language robots actually run on.</h1>\n"
+    << "<p class=\"lede\">From your first compiled program to arms, ground vehicles, legged robots and robots that learn. "
+    << "Every lesson is real C++ you write yourself, and a test suite that tells you when it works. No GPU, no robot, no fee.</p>\n"
+    << "<div class=\"doors\">"
+    << "<a class=\"door\" href=\"" << (s.all.empty() ? "roadmap.html" : "l/" + s.all.front()->id + ".html") << "\"><div class=\"small\">start at phase 0</div>"
+    << "<div class=\"big\">I'm starting from zero \xe2\x86\x92</div><p>Install a compiler, build, and make a robot move in the terminal in the first hour.</p></a>"
+    << "<a class=\"door paper\" href=\"start.html\"><div class=\"small\">2-minute self-check</div>"
+    << "<div class=\"big\">I already code \xe2\x86\x92</div><p>Tick what you can already do, and it tells you which phase to start at.</p></a></div>\n";
+  int lesson_count = static_cast<int>(s.all.size());
+  b << "<div class=\"stats\">"
+    << "<div><b>" << lesson_count << "</b><span>lessons, each with tests</span></div>"
+    << "<div><b>" << s.catalog->phases.size() << "</b><span>phases in ten tracks</span></div>"
+    << "<div><b>" << hours_text(minutes) << "</b><span>of hands-on material</span></div>"
+    << "<div><b>" << s.atlas->entries.size() << "</b><span>errors explained</span></div>"
+    << "<div><b>4</b><span>toolchains tested on every change</span></div></div>\n";
+  b << "<a class=\"banner paper\" href=\"playground.html\"><div><div class=\"eyebrow\" style=\"margin:0 0 6px\">3 playgrounds in your browser</div>"
+    << "<div class=\"t\">Drag a robot arm, tune a PID loop, train a robot by trial: the same maths as lessons you will write</div></div><span class=\"go\">Open the playground \xe2\x86\x92</span></a>\n"
+    << "<a class=\"banner hot\" href=\"atlas.html\"><div><div class=\"eyebrow\" style=\"margin:0 0 6px\">The Failure Atlas</div>"
+    << "<div class=\"t\">" << s.atlas->entries.size() << " things that go wrong, why, and the fix: search it, or pipe a compiler error into rcpp explain</div></div><span class=\"go\">Search the atlas \xe2\x86\x92</span></a>\n";
+
+  // the path
+  std::string all_ids;
+  for (const Lesson* l : s.all) all_ids += l->id + " ";
+  b << "<div class=\"path-head\"><h2 class=\"serif\" style=\"margin:0\">The path</h2>"
+    << "<div class=\"prog\" data-progress=\"" << all_ids << "\"><div class=\"progress-head\"><span>your progress</span><span class=\"count\">0/" << lesson_count
+    << "</span></div><div class=\"bar\"><i></i></div></div></div>\n<div class=\"track\">\n";
+  int k = 0;
+  for (const Track& t : kTracks) {
+    int lessons = 0, mins = 0;
+    std::string ids;
+    for (const Phase& p : s.catalog->phases)
+      if (p.num >= t.from && p.num <= t.to) {
+        lessons += static_cast<int>(p.lessons.size());
+        mins += phase_minutes(p);
+        ids += lesson_ids(p);
+      }
+    if (lessons == 0) continue;
+    ++k;
+    b << "<a class=\"row\" href=\"roadmap.html#track-" << k << "\" data-progress=\"" << ids << "\"><span class=\"no\">T" << two_digits(k) << "</span>"
+      << "<span><span class=\"ti\">" << t.name << "</span>" << (t.optional ? "<span class=\"tag\">optional</span>" : "")
+      << "<br><span class=\"sub\">" << t.blurb << "</span></span>"
+      << "<span class=\"meta\"><span class=\"done-n\"></span>" << (t.from == t.to ? "phase " + two_digits(t.from) : "phases " + two_digits(t.from) + "\xe2\x80\x93" + two_digits(t.to))
+      << "<br>" << lessons << " lessons \xc2\xb7 " << hours_text(mins) << "</span></a>\n";
+  }
+  b << "</div>\n";
+
+  // the argument
+  b << "<div class=\"two\"><div><h2 class=\"serif\">Robotics is learned by building it, and the building is in C++.</h2>"
+    << "<p class=\"dim\">Robot software is written in C++ where it has to be fast, predictable and close to the hardware: drivers, control loops, planners, the cores of ROS 2 and of the simulators. "
+    << "This course teaches the language and the robotics together, on one robot problem after another, and checks every step with tests on four toolchains, Windows included.</p></div>"
+    << "<ul class=\"cross\">"
+    << "<li>Watch a lecture on kinematics, nod along, and never compute a Jacobian yourself.</li>"
+    << "<li>Learn C++ from a book with no robot in it, and robotics from a course with no C++ in it.</li>"
+    << "<li>Copy a tutorial that worked for its author, and spend the evening on an error it never mentioned.</li>"
+    << "</ul></div>\n";
+
+  // how a lesson works
+  b << "<p class=\"label\" style=\"margin-top:72px\">How every lesson works</p>\n"
+    << "<div class=\"steps\"><div><b>Read the problem</b><p>Each lesson starts from a robot problem, explains the idea, and quotes the numbers its own tests measured.</p></div>"
+    << "<div><b>Write the code</b><p>Your part is marked <code>TODO</code> in the lesson's <code>exercise/solution.hpp</code>. The rest is already there, so you write the part that matters.</p></div>"
+    << "<div><b>Let the tests judge it</b><p><code>rcpp verify</code> builds your code and runs the lesson's real tests. Green means it works; red names the test and the numbers.</p></div></div>\n"
+    << "<div class=\"term\"><div class=\"bar3\"><i></i><i></i><i></i></div><pre><code>"
+    << "<span class=\"c\">$</span> rcpp verify 13-02\n"
+    << "  <span class=\"no\">FAIL</span>  the elbow angle comes back from the hand's position\n"
+    << "        expected q2 = 1.047, got 0.000\n"
+    << "<span class=\"c\">$</span> <span class=\"c\"># ...write the inverse kinematics...</span>\n"
+    << "<span class=\"c\">$</span> rcpp verify 13-02\n"
+    << "  <span class=\"ok\">pass</span>  the elbow angle comes back from the hand's position\n"
+    << "  <span class=\"ok\">pass</span>  a point out of reach is refused, not stretched toward\n"
+    << "  <span class=\"ok\">passed</span>  13-02, next: rcpp next</code></pre></div>\n"
+    << "<p class=\"dim\" style=\"font-size:14px\">An illustration of the loop; each lesson's page shows its own tests.</p>\n";
+
+  // what is different
+  b << "<p class=\"label\" style=\"margin-top:60px\">What you get that a playlist cannot give you</p>\n<div class=\"cards four\">"
+    << "<div class=\"card\"><div class=\"k\">tested</div><div class=\"h\">Code that compiles everywhere</div><p>Every lesson builds and passes its tests on GCC, Clang and MSVC, under the sanitizers, on every change.</p></div>"
+    << "<div class=\"card\"><div class=\"k\">honest</div><div class=\"h\">Numbers that are measured</div><p>Every figure on a page is printed by the lesson's own test and pinned there, so the text cannot drift from the code.</p></div>"
+    << "<div class=\"card\"><div class=\"k\">kind to mistakes</div><div class=\"h\">An atlas of errors</div><p>" << s.atlas->entries.size()
+    << " entries: what you see, why it happens, and the fix, each linked to the lesson that teaches it.</p></div>"
+    << "<div class=\"card\"><div class=\"k\">yours</div><div class=\"h\">A library you built</div><p>What you write graduates into <code>librc</code>, a robotics library in plain C++ that the later lessons use.</p></div></div>\n";
+
+  b << "<div class=\"box hot\" style=\"margin-top:56px\"><p class=\"k\">Start in five minutes</p>"
+    << "<pre><code>git clone " << s.repo_url << ".git\ncd robotics-cpp-from-scratch\ncmake --preset default\ncmake --build build/default --target rcpp\n./build/default/bin/rcpp doctor     # checks your machine, prints the fix for anything missing\n./build/default/bin/rcpp start      # opens lesson 00-01</code></pre>"
+    << "<a class=\"btn\" href=\"setup.html\">Setup for Linux, Windows and macOS \xe2\x86\x92</a></div>\n";
+  return page(s, "Robotics C++ From Scratch: learn robotics in the language robots run on",
+              "A free course in robotics and C++: " + std::to_string(lesson_count) + " lessons of code you write yourself, each checked by tests, from a first program to arms, vehicles, legged robots and robots that learn.",
+              "", "", b.str(), false);
+}
+
+std::string roadmap_page(const Site& s) {
+  std::ostringstream b;
+  int minutes = 0;
+  for (const Lesson* l : s.all) minutes += l->minutes;
+  std::string all_ids;
+  for (const Lesson* l : s.all) all_ids += l->id + " ";
+  b << "<p class=\"eyebrow\">The full curriculum</p>\n<h1 class=\"page\">Ten tracks, one page</h1>\n"
+    << "<p class=\"lede\">" << s.all.size() << " lessons in " << s.catalog->phases.size() << " phases, about " << (minutes + 30) / 60
+    << " hours of hands-on work. Roughly an hour a day: read a lesson, write its code, run its tests.</p>\n"
+    << "<div data-progress=\"" << all_ids << "\" style=\"max-width:420px\"><div class=\"progress-head\"><span>whole path</span><span class=\"count\"></span></div><div class=\"bar\"><i></i></div></div>\n";
+  int k = 0;
+  for (const Track& t : kTracks) {
+    bool any = false;
+    for (const Phase& p : s.catalog->phases)
+      if (p.num >= t.from && p.num <= t.to && !p.lessons.empty()) any = true;
+    if (!any) continue;
+    ++k;
+    b << "<h2 class=\"serif\" id=\"track-" << k << "\" style=\"margin-top:56px\"><span class=\"mono dim\" style=\"font-size:15px;margin-right:10px\">T" << two_digits(k)
+      << "</span>" << t.name << (t.optional ? " <span class=\"tag\">optional</span>" : "") << "</h2>\n<p class=\"dim\" style=\"margin-top:-6px\">" << t.blurb
+      << "</p>\n<div class=\"track\">\n";
+    for (const Phase& p : s.catalog->phases) {
+      if (p.num < t.from || p.num > t.to || p.lessons.empty()) continue;
+      b << "<a class=\"row\" href=\"" << phase_page(p) << "\" data-progress=\"" << lesson_ids(p) << "\"><span class=\"no\">P" << two_digits(p.num) << "</span>"
+        << "<span><span class=\"ti\">" << html_escape(p.title) << "</span><br><span class=\"sub\">" << html_escape(p.ends_with) << ".</span></span>"
+        << "<span class=\"meta\"><span class=\"done-n\"></span>" << p.lessons.size() << " lessons<br>" << hours_text(phase_minutes(p)) << "</span></a>\n";
+    }
+    b << "</div>\n";
+  }
+  b << "<p class=\"label\" style=\"margin-top:64px\">How to actually finish this</p>\n<ul class=\"arrow\">"
+    << "<li>Never read two lessons without writing the code of one. The tests are the course; the text is support.</li>"
+    << "<li>When a test fails, read the failure before the code: it names the test and prints the number it expected beside the one it got.</li>"
+    << "<li>Stuck on an error message? Pipe it into <code>rcpp explain</code>, or search the <a href=\"atlas.html\">Failure Atlas</a>.</li>"
+    << "<li>Only after your version passes, read <code>reference/solution.hpp</code> beside it. Where the two differ and both pass, the difference is worth understanding.</li>"
+    << "<li>Run <code>rcpp next</code> to see what is unlocked by what you have passed, and <code>rcpp status</code> for how far you have come.</li></ul>\n";
+  return page(s, "Roadmap: Robotics C++ From Scratch", "The whole curriculum on one page: ten tracks from first C++ to robots that learn.", "", "roadmap", b.str(), false);
+}
+
+std::string phase_html(const Site& s, std::size_t index) {
+  const Phase& p = s.catalog->phases[index];
+  const Track* track = nullptr;
+  for (const Track& t : kTracks)
+    if (p.num >= t.from && p.num <= t.to) track = &t;
+  std::ostringstream b;
+  b << "<div class=\"crumbs\"><a href=\"../roadmap.html\">\xe2\x86\x90 all phases</a>" << (track ? std::string(" \xc2\xb7 ") + track->name : "") << "</div>\n"
+    << "<p class=\"eyebrow\">Phase " << two_digits(p.num) << " \xc2\xb7 " << p.lessons.size() << " lessons \xc2\xb7 " << hours_text(phase_minutes(p)) << "</p>\n"
+    << "<h1 class=\"page\">" << html_escape(p.title) << "</h1>\n";
+  if (!p.ends_with.empty())
+    b << "<p class=\"lede\"><span class=\"dim\">What you will have at the end:</span> " << html_escape(p.ends_with) << ".</p>\n";
+  b << "<div data-progress=\"" << lesson_ids(p) << "\"><div class=\"progress-head\"><span>phase " << two_digits(p.num)
+    << "</span><span class=\"count\"></span></div><div class=\"bar\"><i></i></div></div>\n";
+  b << "<p class=\"label\">The lessons</p>\n<ul class=\"checks\">\n";
+  for (const Lesson& l : p.lessons) {
+    b << "<li><input type=\"checkbox\" data-lesson-check=\"" << l.id << "\" aria-label=\"done\"><span class=\"n\">" << lesson_number(l) << "</span>"
+      << "<a href=\"../l/" << l.id << ".html\">" << html_escape(l.title) << "</a><span class=\"m\">" << l.minutes << " min</span></li>\n";
+  }
+  b << "</ul>\n";
+  // what graduates into the library
+  std::vector<std::string> headers;
+  for (const Lesson& l : p.lessons) {
+    const std::string h = l.raw.at("artifact").at("header").as_string_or("");
+    if (!h.empty()) headers.push_back(h);
+  }
+  if (!headers.empty()) {
+    b << "<p class=\"label\">What you build</p>\n<p class=\"dim\">Each lesson's finished code graduates into the course's library, where the later lessons use it:</p>\n<p>";
+    for (std::size_t i = 0; i < headers.size(); ++i) b << (i ? " " : "") << "<code>" << html_escape(headers[i]) << "</code>";
+    b << "</p>\n";
+  }
+  for (const Play& pl : kPlays)
+    for (const char* ln : pl.lessons)
+      if (std::string(ln).substr(0, 2) == two_digits(p.num)) {
+        b << "<a class=\"banner hot\" style=\"margin-top:28px\" href=\"../play/" << pl.slug << ".html\"><div><div class=\"eyebrow\" style=\"margin:0 0 6px\">Warm up in the playground</div>"
+          << "<div class=\"t\">" << pl.title << "</div></div><span class=\"go\">Open \xe2\x86\x92</span></a>\n";
+        goto played;
+      }
+played:
+  b << "<div class=\"pager\"><span>";
+  if (index > 0) {
+    const Phase& q = s.catalog->phases[index - 1];
+    b << "<a href=\"" << q.slug << ".html\">\xe2\x86\x90 P" << two_digits(q.num) << ": " << html_escape(q.title) << "</a>";
+  }
+  b << "</span><span>";
+  if (index + 1 < s.catalog->phases.size()) {
+    const Phase& q = s.catalog->phases[index + 1];
+    b << "<a href=\"" << q.slug << ".html\">P" << two_digits(q.num) << ": " << html_escape(q.title) << " \xe2\x86\x92</a>";
+  }
+  b << "</span></div>\n";
+  return page(s, "Phase " + two_digits(p.num) + ": " + p.title + " \xc2\xb7 Robotics C++ From Scratch", p.ends_with, "../", "roadmap", b.str(), true);
+}
+
+std::string lesson_html(const Site& s, std::size_t k, const Links& sub) {
+  const Lesson& l = *s.all[k];
+  const Phase* ph = s.phase_of.count(l.phase_num) ? s.phase_of.at(l.phase_num) : nullptr;
+  std::ostringstream b;
+  b << "<div class=\"crumbs\"><a href=\"../roadmap.html\">roadmap</a>";
+  if (ph) b << " / <a href=\"../" << phase_page(*ph) << "\">phase " << two_digits(ph->num) << ", " << html_escape(ph->title) << "</a>";
+  b << "</div>\n<p class=\"eyebrow\">Lesson " << lesson_number(l) << " \xc2\xb7 about " << l.minutes << " minutes</p>\n"
+    << "<h1 class=\"page\">" << html_escape(l.title) << "</h1>\n";
+  const auto docs = read_file(l.path / "docs" / "en.md");
+  b << "<div class=\"prose\">" << (docs ? markdown_to_html(*docs, sub) : "<p>This lesson has no page yet.</p>\n") << "</div>\n";
+  b << "<div class=\"box hot\"><p class=\"k\">Your turn</p>"
+    << "Write your part in <code>" << l.rel_path << "/exercise/solution.hpp</code>, then, from the top folder of the course:"
+    << "<pre><code>rcpp verify " << lesson_number(l) << "</code></pre>"
+    << "<span class=\"dim\">The finished version is in <code>reference/solution.hpp</code>; read it after yours passes. On GitHub: "
+    << "<a href=\"" << s.repo_url << "/blob/main/" << l.rel_path << "/exercise/solution.hpp\">the exercise</a>, "
+    << "<a href=\"" << s.repo_url << "/tree/main/" << l.rel_path << "/tests\">its tests</a>.</span><br><br>"
+    << "<label class=\"done-toggle\"><input type=\"checkbox\" data-lesson-check=\"" << l.id << "\"> I have done this lesson</label>";
+  if (s.progress && s.progress->has(l.id)) b << " <span class=\"passed\">passed with rcpp verify</span>";
+  b << "</div>\n";
+  if (!l.requires_ids.empty()) {
+    b << "<p class=\"label\">Before this one</p>\n<ul class=\"plain\">";
+    for (const std::string& r : l.requires_ids) {
+      if (s.by_id.count(r))
+        b << "<li><span class=\"num\">" << r.substr(0, 5) << "</span><a href=\"" << r << ".html\">" << html_escape(s.by_id.at(r)->title) << "</a></li>";
+      else
+        b << "<li>" << html_escape(r) << "</li>";
+    }
+    b << "</ul>\n";
+  }
+  if (!l.breaks_first.empty()) {
+    b << "<p class=\"label\">What breaks first here</p>\n<ul class=\"plain\">";
+    for (const std::string& id : l.breaks_first) {
+      if (!s.atlas_by_id.count(id)) continue;
+      b << "<li><span class=\"num\">" << id << "</span><a href=\"../e/" << id << ".html\">" << html_escape(s.atlas_by_id.at(id)->title) << "</a></li>";
+    }
+    b << "</ul>\n";
+  }
+  b << quiz_html(l.path / "quiz.json", sub);
+  b << "<div class=\"pager\"><span>";
+  if (k > 0) b << "<a href=\"" << s.all[k - 1]->id << ".html\">\xe2\x86\x90 " << lesson_number(*s.all[k - 1]) << " " << html_escape(s.all[k - 1]->title) << "</a>";
+  b << "</span><span>";
+  if (k + 1 < s.all.size()) b << "<a href=\"" << s.all[k + 1]->id << ".html\">" << lesson_number(*s.all[k + 1]) << " " << html_escape(s.all[k + 1]->title) << " \xe2\x86\x92</a>";
+  b << "</span></div>\n";
+  return page(s, lesson_number(l) + " " + l.title + " \xc2\xb7 Robotics C++ From Scratch", l.title, "../", "roadmap", b.str(), true);
+}
+
+std::string start_page(const Site& s) {
+  std::ostringstream b;
+  b << "<p class=\"eyebrow\">For people who already code</p>\n<h1 class=\"page\">Where should you start?</h1>\n"
+    << "<p class=\"lede\">Tick only what you could do today, without looking anything up. Be honest: skipping a phase you are not ready for costs more time than repeating one you know. "
+    << "The Qt phases (09 to 12) are left out: they are optional, and you can take them whenever you need an interface.</p>\n<ul class=\"checks\">\n";
+  for (const Can& c : kCan)
+    b << "<li><input type=\"checkbox\" data-can=\"" << two_digits(c.phase) << "\" aria-label=\"I can\"><span class=\"n\">P" << two_digits(c.phase)
+      << "</span><span>I can " << c.text << "</span><span></span></li>\n";
+  b << "</ul>\n<p style=\"margin-top:22px\"><button class=\"btn\" onclick=\"selfCheck()\">Show my starting phase</button></p>\n"
+    << "<div id=\"verdict\" class=\"box\" style=\"display:none\" data-last=\"22\"></div>\n";
+  b << "<p class=\"label\">Or pick a phase yourself</p>\n<ul class=\"plain\">";
+  for (const Phase& p : s.catalog->phases)
+    b << "<li><span class=\"num\">P" << two_digits(p.num) << "</span><a href=\"" << phase_page(p) << "\" data-phase-link=\"" << two_digits(p.num)
+      << "\" data-title=\"" << html_escape(p.title) << "\">" << html_escape(p.title) << "</a></li>";
+  b << "</ul>\n";
+  return page(s, "Where should you start? \xc2\xb7 Robotics C++ From Scratch", "A two-minute self-check that says which phase to start at.", "", "", b.str(), true);
+}
+
+std::string playground_page(const Site& s) {
+  std::ostringstream b;
+  b << "<p class=\"eyebrow\">Playgrounds \xc2\xb7 free \xc2\xb7 in your browser</p>\n<h1 class=\"page\">Robotics you can touch.</h1>\n"
+    << "<p class=\"lede\">Three ideas from the course, small enough to play with in a minute. Each runs the same maths as a lesson you will write in C++, so break it here, then go and build it there.</p>\n"
+    << "<div class=\"cards\">";
+  int i = 0;
+  for (const Play& p : kPlays)
+    b << "<a class=\"card\" href=\"play/" << p.slug << ".html\"><div class=\"big-no\">" << two_digits(++i) << "</div><div class=\"k\">" << p.kicker << "</div>"
+      << "<div class=\"h\">" << p.title << "</div><p>" << p.blurb << "</p><span class=\"open\">Open \xe2\x86\x92</span></a>";
+  b << "</div>\n";
+  return page(s, "Playground \xc2\xb7 Robotics C++ From Scratch", "Drag a robot arm, tune a PID loop, train a robot by trial, in your browser.", "", "playground", b.str(), false);
+}
+
+std::string play_html(const Site& s, const Play& p) {
+  std::ostringstream b;
+  b << "<div class=\"crumbs\"><a href=\"../playground.html\">\xe2\x86\x90 playground</a></div>\n<p class=\"eyebrow\">" << p.kicker << "</p>\n<h1 class=\"page\">" << p.title << "</h1>\n"
+    << "<p class=\"lede\">" << p.blurb << "</p>\n";
+  const std::string slug = p.slug;
+  if (slug == "arm") {
+    b << "<div class=\"play\"><canvas id=\"arm\"></canvas><div class=\"panel\"><p class=\"k\">Drag the target</p>"
+      << "<div class=\"read\"><div><span>x</span><span id=\"r-x\"></span></div><div><span>y</span><span id=\"r-y\"></span></div>"
+      << "<div><span>q1</span><span id=\"r-q1\"></span></div><div><span>q2</span><span id=\"r-q2\"></span></div>"
+      << "<div><span>det J = l1 l2 sin q2</span><span id=\"r-det\"></span></div></div>"
+      << "<p id=\"r-msg\" style=\"margin:12px 0 4px\"></p><button class=\"btn ghost\" id=\"elbow\">Elbow: right</button><button class=\"btn ghost\" id=\"straight\">Stretch it straight</button>"
+      << "<p class=\"k\">The arm</p><p class=\"dim\" style=\"margin:0\">Two links of 0.225 m, joint limits of 2.35 and 2.6 rad, as the SCARA of 32-01. Seen from above; the dashed circle is its reach.</p></div></div>\n";
+  } else if (slug == "pid") {
+    b << "<div class=\"play\"><canvas id=\"pid\"></canvas><div class=\"panel\"><p class=\"k\">The gains</p>"
+      << "<label>Kp <span class=\"mono\" id=\"v-kp\"></span></label><input type=\"range\" id=\"kp\" min=\"0\" max=\"8\" step=\"0.05\" value=\"3\">"
+      << "<label>Ki <span class=\"mono\" id=\"v-ki\"></span></label><input type=\"range\" id=\"ki\" min=\"0\" max=\"6\" step=\"0.05\" value=\"0\">"
+      << "<label>Kd <span class=\"mono\" id=\"v-kd\"></span></label><input type=\"range\" id=\"kd\" min=\"0\" max=\"0.6\" step=\"0.005\" value=\"0.02\">"
+      << "<label class=\"done-toggle\" style=\"margin-top:10px\"><input type=\"checkbox\" id=\"push\"> push it at 2 s</label>"
+      << "<p class=\"k\">What the step did</p><div class=\"read\"><div><span>overshoot</span><span id=\"r-os\"></span></div><div><span>settled within 2 %</span><span id=\"r-ts\"></span></div>"
+      << "<div><span>time at the torque limit</span><span id=\"r-sat\"></span></div><div><span>error left</span><span id=\"r-ss\"></span></div></div>"
+      << "<p id=\"r-msg\" style=\"margin:12px 0 4px\"></p><button class=\"btn ghost\" id=\"preset\">A tuned set</button></div></div>\n";
+  } else {
+    b << "<div class=\"play\"><canvas id=\"grid\"></canvas><div class=\"panel\"><p class=\"k\">The task</p>"
+      << "<label>slip <span class=\"mono\" id=\"v-slip\"></span></label><input type=\"range\" id=\"slip\" min=\"0\" max=\"0.3\" step=\"0.01\" value=\"0.1\">"
+      << "<label>discount <span class=\"mono\" id=\"v-gamma\"></span></label><input type=\"range\" id=\"gamma\" min=\"0.5\" max=\"0.99\" step=\"0.01\" value=\"0.95\">"
+      << "<p class=\"k\">The learner</p>"
+      << "<label>random moves (epsilon) <span class=\"mono\" id=\"v-eps\"></span></label><input type=\"range\" id=\"eps\" min=\"0\" max=\"0.6\" step=\"0.01\" value=\"0.1\">"
+      << "<label>starting values <span class=\"mono\" id=\"v-q0\"></span></label><input type=\"range\" id=\"q0\" min=\"0\" max=\"20\" step=\"1\" value=\"0\">"
+      << "<div><button class=\"btn ghost\" id=\"t1\">1 episode</button><button class=\"btn ghost\" id=\"t100\">100</button><button class=\"btn ghost\" id=\"t1000\">1000</button><button class=\"btn ghost\" id=\"reset\">Reset</button></div>"
+      << "<p class=\"k\">So far</p><div class=\"read\"><div><span>episodes</span><span id=\"r-ep\"></span></div><div><span>reached the goal</span><span id=\"r-goal\"></span></div>"
+      << "<div><span>fell into a pit</span><span id=\"r-pit\"></span></div><div><span>from the start it goes</span><span id=\"r-route\"></span></div></div></div></div>\n"
+      << "<p class=\"dim\">Every step costs 1, the goal is worth 10 and a pit costs 10. Each move slips to either side with the chance set above. Arrows show the move the learner rates best in each cell; the orange line is its last run. "
+      << "Every pit it falls into while learning is a real failure: on a robot, a fall.</p>\n";
+  }
+  b << "<p class=\"label\">Build it in C++</p>\n<ul class=\"plain\">";
+  for (const char* ln : p.lessons) {
+    if (!s.by_number.count(ln)) continue;
+    const Lesson* l = s.by_number.at(ln);
+    b << "<li><span class=\"num\">" << ln << "</span><a href=\"../l/" << l->id << ".html\">" << html_escape(l->title) << "</a></li>";
+  }
+  b << "</ul>\n<script src=\"../assets/" << p.script << "\"></script>\n";
+  return page(s, std::string(p.title) + " \xc2\xb7 Robotics C++ From Scratch", p.blurb, "../", "playground", b.str(), false);
+}
+
+std::string atlas_index(const Site& s) {
+  std::ostringstream b;
+  b << "<p class=\"eyebrow\">The Failure Atlas</p>\n<h1 class=\"page\">What went wrong, why, and the fix.</h1>\n"
+    << "<p class=\"lede\">" << s.atlas->entries.size() << " entries, each a mistake that real robot code makes, with what you see, the cause and the fix, and the lesson that teaches it. "
+    << "Type a word from your error or your symptom. From a terminal, <code>your-build 2&gt;&amp;1 | rcpp explain</code> finds the entry for you.</p>\n"
+    << "<input class=\"filter\" type=\"search\" placeholder=\"Search the atlas: a word from the error, the symptom or the title\" oninput=\"filterList(this)\" autofocus>\n<ul class=\"plain\">\n";
+  for (const AtlasEntry& e : s.atlas->entries)
+    b << "<li data-text=\"" << html_escape(lower(e.id + " " + e.title + " " + e.symptom)) << "\"><span class=\"num\">" << e.id << "</span><a href=\"e/" << e.id
+      << ".html\">" << html_escape(e.title) << "</a></li>\n";
+  b << "</ul>\n";
+  return page(s, "Failure Atlas \xc2\xb7 Robotics C++ From Scratch", "Mistakes robot code makes, why, and the fix, each linked to the lesson that teaches it.", "", "atlas", b.str(), true);
+}
+
+std::string atlas_entry(const Site& s, const AtlasEntry& e, const Links& sub) {
+  const auto text = read_file(e.path);
+  std::string body_md = text ? *text : "";
+  const std::size_t sep = body_md.find("\n---\n");
+  body_md = sep == std::string::npos ? "" : body_md.substr(sep + 5);
+  std::ostringstream b;
+  b << "<div class=\"crumbs\"><a href=\"../atlas.html\">\xe2\x86\x90 failure atlas</a></div>\n<p class=\"eyebrow\">" << e.id << "</p>\n<h1 class=\"page\">"
+    << html_escape(e.title) << "</h1>\n<div class=\"prose\">" << markdown_to_html(body_md, sub) << "</div>\n";
+  if (s.by_id.count(e.teaches))
+    b << "<div class=\"box\"><p class=\"k\">Taught in</p><a href=\"../l/" << e.teaches << ".html\">" << html_escape(e.teaches.substr(0, 5) + " " + s.by_id.at(e.teaches)->title)
+      << "</a><br><span class=\"dim\">From a terminal, <code>rcpp explain " << e.id << "</code> prints this entry.</span></div>\n";
+  return page(s, e.id + " " + e.title + " \xc2\xb7 Failure Atlas", e.title, "../", "atlas", b.str(), true);
+}
+
+std::string setup_page(const Site& s) {
+  std::ostringstream b;
+  b << "<p class=\"eyebrow\">Setup</p>\n<h1 class=\"page\">From nothing to your first passing test.</h1>\n"
+    << "<p class=\"lede\">You need a C++ compiler, CMake and Git. That is all the first phases ask for; later phases say what else they need, and every lesson runs in software first.</p>\n"
+    << "<p class=\"label\">Ubuntu 22.04 or 24.04</p>\n<pre><code>sudo apt update && sudo apt install -y build-essential cmake ninja-build git gdb</code></pre>\n"
+    << "<p class=\"label\">Windows 11</p>\n<p class=\"dim\">Install Visual Studio 2022 (the \"Desktop development with C++\" workload, which brings MSVC and CMake) and Git for Windows, then use the Developer PowerShell. "
+    << "WSL2 with Ubuntu also works, and is the route into ROS 2 on Windows.</p>\n"
+    << "<p class=\"label\">macOS</p>\n<p class=\"dim\">Install the Xcode command line tools (<code>xcode-select --install</code>) and CMake. macOS is not one of the four toolchains tested on every change, so expect to fix the odd thing yourself.</p>\n"
+    << "<p class=\"label\">Then, everywhere</p>\n<pre><code>git clone " << s.repo_url << ".git\ncd robotics-cpp-from-scratch\ncmake --preset default\ncmake --build build/default --target rcpp\n./build/default/bin/rcpp doctor</code></pre>\n"
+    << "<p class=\"dim\"><code>rcpp doctor</code> checks your machine and prints the exact command that fixes anything missing, for your operating system.</p>\n"
+    << "<p class=\"label\">The tool you will use every day</p>\n<div class=\"prose\"><div class=\"table\"><table>"
+    << "<tr><th>Command</th><th>What it does</th></tr>"
+    << "<tr><td><code>rcpp start</code></td><td>Says which lesson to open first</td></tr>"
+    << "<tr><td><code>rcpp verify 13-02</code></td><td>Builds your exercise and runs the lesson's real tests</td></tr>"
+    << "<tr><td><code>rcpp next</code></td><td>Shows what is unlocked by what you have passed</td></tr>"
+    << "<tr><td><code>rcpp status</code></td><td>Shows how far you have got, phase by phase</td></tr>"
+    << "<tr><td><code>rcpp explain</code></td><td>Looks an error up in the Failure Atlas: pipe a build into it</td></tr>"
+    << "<tr><td><code>rcpp site</code></td><td>Writes these pages to <code>site/</code>, with your own progress in them</td></tr>"
+    << "</table></div></div>\n"
+    << "<p class=\"label\">Hardware</p>\n<p class=\"dim\">None is needed. Every lesson passes in software or a simulator; about a third have an optional section for cheap hardware or a real robot, always with a fake of the device so the tests still run.</p>\n";
+  return page(s, "Setup \xc2\xb7 Robotics C++ From Scratch", "Install a compiler, CMake and Git, clone the course and run your first test.", "", "setup", b.str(), true);
+}
+
+const char* kIcon =
+    "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><rect width=\"32\" height=\"32\" rx=\"7\" fill=\"#121110\"/>"
+    "<path d=\"M8 23 L14 13 L22 10\" stroke=\"#eeeae2\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+    "<circle cx=\"8\" cy=\"23\" r=\"2.6\" fill=\"#f2804a\"/><circle cx=\"14\" cy=\"13\" r=\"2.6\" fill=\"#f2804a\"/></svg>\n";
 
 }  // namespace
 
 int cmd_site(const Args& args) {
-  if (!reject_unknown(args, {"--out"}, "site")) return 2;
+  if (!reject_unknown(args, {"--out", "--public"}, "site")) return 2;
   const auto root = find_repo_root();
   if (!root) { std::cerr << "rcpp site: run this from inside the repository\n"; return 2; }
   std::string out_text;
   if (!read_option(args, "--out", out_text, "site")) return 2;
   const fs::path out = out_text.empty() ? *root / "site" : fs::path(out_text);
+  // --public leaves this machine's progress out, for pages that will be put online
+  const bool is_public = args.has("--public");
 
   const Catalog catalog = load_catalog(*root);
   const Atlas atlas = load_atlas(*root);
-  const Progress progress = load_progress(*root);
+  const Progress progress = is_public ? Progress() : load_progress(*root);
+
+  Site site;
+  site.catalog = &catalog;
+  site.atlas = &atlas;
+  site.progress = &progress;
+  site.all = catalog.all();
+  for (const Lesson* l : site.all) {
+    site.by_id[l->id] = l;
+    site.by_number[lesson_number(*l)] = l;
+  }
+  for (const AtlasEntry& e : atlas.entries) site.atlas_by_id[e.id] = &e;
+  for (const Phase& p : catalog.phases) site.phase_of[p.num] = &p;
 
   Links top;
-  for (const Lesson* l : catalog.all()) top.lesson_by_prefix[lesson_number(*l)] = l->id;
+  for (const Lesson* l : site.all) top.lesson_by_prefix[lesson_number(*l)] = l->id;
   for (const AtlasEntry& e : atlas.entries) top.atlas_ids[e.id] = true;
   Links sub = top;
   sub.up = "../";
 
   std::error_code ec;
-  fs::create_directories(out / "l", ec);
-  fs::create_directories(out / "e", ec);
+  for (const char* d : {"l", "e", "p", "play", "assets"}) fs::create_directories(out / d, ec);
   if (ec) { std::cerr << "rcpp site: cannot create " << out.string() << ": " << ec.message() << "\n"; return 1; }
-  bool ok = write_file(out / "style.css", kStyle) && write_file(out / "site.js", kScript);
 
-  // the lessons, in course order, so each page can point to the one before and after
-  const std::vector<const Lesson*> all = catalog.all();
-  std::map<std::string, const Lesson*> by_id;
-  for (const Lesson* l : all) by_id[l->id] = l;
-  std::map<int, const Phase*> phase_of;
-  for (const Phase& p : catalog.phases) phase_of[p.num] = &p;
+  bool ok = true;
+  for (const char* asset : {"style.css", "site.js", "play-arm.js", "play-pid.js", "play-q.js"}) {
+    const auto text = read_file(*root / "tools" / "site" / asset);
+    if (!text) { std::cerr << "rcpp site: missing tools/site/" << asset << "\n"; return 1; }
+    ok = write_file(out / "assets" / asset, *text) && ok;
+  }
+  ok = write_file(out / "assets" / "icon.svg", kIcon) && ok;
 
   int pages = 0;
-  for (std::size_t k = 0; k < all.size(); ++k) {
-    const Lesson& l = *all[k];
-    const Phase* ph = phase_of[l.phase_num];
-    std::ostringstream b;
-    b << "<p class=\"dim\">Lesson " << lesson_number(l) << " &middot; about " << l.minutes << " minutes";
-    if (progress.has(l.id)) b << " &middot; <span class=\"done\">passed</span>";
-    b << "</p>\n";
-    const auto docs = read_file(l.path / "docs" / "en.md");
-    b << (docs ? markdown_to_html(*docs, sub) : "<h1>" + html_escape(l.title) + "</h1>\n<p>This lesson has no page yet.</p>\n");
-
-    b << "<div class=\"box\"><strong>Your files.</strong> Write your code in <code>" << l.rel_path
-      << "/exercise/solution.hpp</code>, then check it from the top folder of the course with<pre><code>rcpp verify "
-      << lesson_number(l) << "</code></pre>The finished version is in <code>" << l.rel_path
-      << "/reference/solution.hpp</code>; look at it after you have tried.";
-    if (!l.requires_ids.empty()) {
-      b << "<br><br><strong>Before this one:</strong> ";
-      for (std::size_t i = 0; i < l.requires_ids.size(); ++i) {
-        const std::string& r = l.requires_ids[i];
-        if (i) b << ", ";
-        if (by_id.count(r))
-          b << "<a href=\"" << r << ".html\">" << html_escape(r.substr(0, 5) + " " + by_id[r]->title) << "</a>";
-        else
-          b << html_escape(r);
-      }
-    }
-    b << "</div>\n";
-    b << quiz_html(l.path / "quiz.json", sub);
-    b << "<div class=\"pager\"><span>";
-    if (k > 0) b << "<a href=\"" << all[k - 1]->id << ".html\">&larr; " << html_escape(all[k - 1]->title) << "</a>";
-    b << "</span><span>";
-    if (k + 1 < all.size()) b << "<a href=\"" << all[k + 1]->id << ".html\">" << html_escape(all[k + 1]->title) << " &rarr;</a>";
-    b << "</span></div>\n";
-    const std::string crumbs = "<a href=\"../index.html\">Home</a> &rsaquo; " +
-                               (ph ? "<a href=\"../index.html#phase-" + std::to_string(ph->num) + "\">Phase " +
-                                         std::to_string(ph->num) + ", " + html_escape(ph->title) + "</a>"
-                                   : std::string());
-    ok = write_file(out / "l" / (l.id + ".html"), page(l.title, "../", crumbs, b.str())) && ok;
-    ++pages;
-  }
-
-  // the atlas entries
-  for (const AtlasEntry& e : atlas.entries) {
-    const auto text = read_file(e.path);
-    std::string body_md = text ? *text : "";
-    const std::size_t sep = body_md.find("\n---\n");
-    body_md = sep == std::string::npos ? "" : body_md.substr(sep + 5);
-    std::ostringstream b;
-    b << "<p class=\"dim\">Failure Atlas &middot; " << e.id << "</p>\n<h1>" << html_escape(e.title) << "</h1>\n"
-      << markdown_to_html(body_md, sub);
-    if (by_id.count(e.teaches))
-      b << "<div class=\"box\">Taught in <a href=\"../l/" << e.teaches << ".html\">"
-        << html_escape(e.teaches.substr(0, 5) + " " + by_id[e.teaches]->title) << "</a>. From a terminal, <code>rcpp explain "
-        << e.id << "</code> prints this page, and <code>rcpp explain</code> with an error message finds it.</div>\n";
-    ok = write_file(out / "e" / (e.id + ".html"),
-                    page(e.id + " " + e.title, "../", "<a href=\"../index.html\">Home</a> &rsaquo; <a href=\"../atlas.html\">Failure Atlas</a>", b.str())) && ok;
-    ++pages;
-  }
-
-  // the atlas index
-  {
-    std::ostringstream b;
-    b << "<h1>Failure Atlas</h1>\n<p>What goes wrong, why, and how to fix it: " << atlas.entries.size()
-      << " entries, each linked to the lesson that teaches it. Type a word from your error or symptom to narrow the list.</p>\n"
-      << "<input class=\"filter\" type=\"search\" placeholder=\"Search the atlas\" oninput=\"filterList(this)\">\n<ul class=\"lessons\">\n";
-    for (const AtlasEntry& e : atlas.entries) {
-      std::string text = e.id + " " + e.title + " " + e.symptom;
-      for (char& c : text) c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
-      b << "<li data-text=\"" << html_escape(text) << "\"><span class=\"num\">" << e.id << "</span> <a href=\"e/" << e.id
-        << ".html\">" << html_escape(e.title) << "</a></li>\n";
-    }
-    b << "</ul>\n";
-    ok = write_file(out / "atlas.html", page("Failure Atlas", "", "<a href=\"index.html\">Home</a>", b.str())) && ok;
-  }
-
-  // the home page
-  {
-    int passed = 0;
-    for (const Lesson* l : all) passed += progress.has(l->id) ? 1 : 0;
-    std::ostringstream b;
-    b << "<h1>Robotics C++ From Scratch</h1>\n"
-      << "<p>A course in C++ for robots, from a first program to arms, vehicles and legged robots. " << all.size()
-      << " lessons in " << catalog.phases.size() << " phases. Every lesson is a small piece of real code with tests that say whether it works.</p>\n"
-      << "<div class=\"box\"><strong>How to use it.</strong><ol>"
-      << "<li>Open the first lesson below and read it.</li>"
-      << "<li>Write your part in the lesson's <code>exercise/solution.hpp</code>, in any editor.</li>"
-      << "<li>Check it with <code>rcpp verify</code> and the lesson's number, from the top folder of the course. When it passes, go to the next lesson.</li>"
-      << "<li>Stuck on an error? Search the <a href=\"atlas.html\">Failure Atlas</a>.</li></ol>"
-      << "You have passed <strong>" << passed << "</strong> of " << all.size() << " lessons. Run <code>rcpp site</code> again to update these pages.</div>\n"
-      << "<input class=\"filter\" type=\"search\" placeholder=\"Search the lessons\" oninput=\"filterList(this)\">\n";
-    for (const Phase& p : catalog.phases) {
-      int done = 0;
-      for (const Lesson& l : p.lessons) done += progress.has(l.id) ? 1 : 0;
-      b << "<details id=\"phase-" << p.num << "\"><summary>Phase " << p.num << ", " << html_escape(p.title)
-        << " <span class=\"dim\">(" << p.lessons.size() << " lessons" << (done ? ", " + std::to_string(done) + " passed" : "")
-        << ")</span></summary>\n";
-      if (!p.ends_with.empty()) b << "<p class=\"dim\">" << html_escape(p.ends_with) << ".</p>\n";
-      b << "<ul class=\"lessons\">\n";
-      for (const Lesson& l : p.lessons) {
-        std::string text = lesson_number(l) + " " + l.title;
-        for (char& c : text) c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
-        b << "<li data-text=\"" << html_escape(text) << "\"><span class=\"num\">" << lesson_number(l) << "</span> <a href=\"l/"
-          << l.id << ".html\">" << html_escape(l.title) << "</a>" << (progress.has(l.id) ? " <span class=\"done\">passed</span>" : "")
-          << "</li>\n";
-      }
-      b << "</ul></details>\n";
-    }
-    b << "<p class=\"dim\" style=\"margin-top:28px\">These pages are made from the lesson files by <code>rcpp site</code>; the files are the course, and these pages are a way to read it.</p>\n";
-    ok = write_file(out / "index.html", page("Robotics C++ From Scratch", "", "", b.str())) && ok;
-    ++pages;
-  }
+  auto put = [&](const fs::path& p, const std::string& html) { ok = write_file(p, html) && ok; ++pages; };
+  put(out / "index.html", home_page(site));
+  put(out / "roadmap.html", roadmap_page(site));
+  put(out / "start.html", start_page(site));
+  put(out / "playground.html", playground_page(site));
+  put(out / "atlas.html", atlas_index(site));
+  put(out / "setup.html", setup_page(site));
+  for (const Play& p : kPlays) put(out / "play" / (std::string(p.slug) + ".html"), play_html(site, p));
+  for (std::size_t i = 0; i < catalog.phases.size(); ++i)
+    if (!catalog.phases[i].lessons.empty()) put(out / "p" / (catalog.phases[i].slug + ".html"), phase_html(site, i));
+  for (std::size_t k = 0; k < site.all.size(); ++k) put(out / "l" / (site.all[k]->id + ".html"), lesson_html(site, k, sub));
+  for (const AtlasEntry& e : atlas.entries) put(out / "e" / (e.id + ".html"), atlas_entry(site, e, sub));
 
   if (!ok) { std::cerr << "rcpp site: some pages could not be written under " << out.string() << "\n"; return 1; }
-  std::cout << "wrote " << pages + 1 << " pages to " << out.string() << "\n"
+  std::cout << "wrote " << pages << " pages to " << out.string() << (is_public ? " (without this machine's progress)" : "") << "\n"
             << "open " << (out / "index.html").string() << " in a web browser\n";
   return 0;
 }

@@ -114,7 +114,15 @@ cmake --build build/default --target rcpp
 ./build/default/bin/rcpp site
 ```
 
-That makes a folder `site/`. Open `site/index.html` in any browser (double-click it). Nothing is installed or downloaded, and it works offline. It has a page for every phase and lesson, the quizzes to click through, and the Failure Atlas with a search box.
+That makes a folder `site/`. Open `site/index.html` in any browser (double-click it). It is the course as a website: a home page, the roadmap of ten tracks, a page for every phase with its lessons as a checklist, every lesson with its quiz, a two-minute self-check that says where to start, three playgrounds that run in the browser (drag a robot arm, tune a PID loop, train a robot by trial), setup, and the Failure Atlas with a search box. Lessons you tick are remembered in your browser, and lessons you have passed with `rcpp verify` show as passed. The pages use web fonts when there is a connection and fall back to the system's fonts when there is not.
+
+To put the website online, build it without your own progress in it and upload the folder to any static host (GitHub Pages, Netlify, Vercel or a plain web server); every link is relative, so it works in any folder:
+
+```bash
+./build/default/bin/rcpp site --public --out public
+```
+
+The pages are made from the lesson files, so run it again after the course changes. The look and the playgrounds are the files in `tools/site/`.
 
 Two things the pages do not do:
 
@@ -188,7 +196,7 @@ contribute to it by phase 05.
 | `rcpp audit` | Enforces the lesson contract, which is what CI runs |
 | `rcpp catalog` | Writes the whole curriculum as JSON |
 | `rcpp readme` | Checks, or fixes, the generated counts above |
-| `rcpp site` | Writes the course as web pages, to read in a browser offline |
+| `rcpp site` | Writes the course as a website, to read offline or to put online with `--public` |
 
 ## What is here now
 

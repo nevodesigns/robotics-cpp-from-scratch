@@ -11,4 +11,4 @@ catalog.json
 .vscode/
 .idea/
 .rcpp-progress.json
-site/
+/site/
